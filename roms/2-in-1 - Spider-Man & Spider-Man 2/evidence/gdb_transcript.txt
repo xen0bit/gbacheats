@@ -1,0 +1,93 @@
+(gdb) (gdb) (gdb) The target architecture is set to "arm".
+(gdb) Remote debugging using :2345
+warning: No executable has been specified and target does not support
+determining executable automatically.  Try using the "file" command.
+0x00000000 in ?? ()
+(gdb) Continuing.
+
+Program received signal SIGINT, Interrupt.
+0x0902ff20 in ?? ()
+(gdb) 0x2038fe0:	0x9d	0x47	0x08	0x98
+(gdb) (gdb) (gdb) (gdb) (gdb) (gdb) (gdb) Continuing.
+
+Program received signal SIGINT, Interrupt.
+0x0903f172 in ?? ()
+(gdb) Hardware watchpoint 1: *(unsigned char*)0x02025ef6
+(gdb) Continuing.
+
+Hardware watchpoint 1: *(unsigned char*)0x02025ef6
+
+Old value = 0 '\000'
+New value = 1 '\001'
+0x0903c690 in ?? ()
+(gdb) pc             0x903c690           0x903c690
+lr             0x903ca59           151243353
+r0             0x2                 2
+r1             0x2025ef6           33709814
+r2             0x1                 1
+r3             0x2025ef4           33709812
+(gdb)    0x903c672:	mov	r0, r8
+   0x903c674:	cmp	r0, #0
+   0x903c676:	bne.n	0x903c6b4
+   0x903c678:	mov	r1, r10
+   0x903c67a:	cmp	r1, #2
+   0x903c67c:	bgt.n	0x903c6b4
+   0x903c67e:	ldr	r3, [pc, #48]	@ (0x903c6b0)
+   0x903c680:	adds	r1, r1, r3
+   0x903c682:	movs	r2, #0
+   0x903c684:	ldrb	r0, [r1, #0]
+   0x903c686:	cmp	r0, #0
+   0x903c688:	bne.n	0x903c68c
+   0x903c68a:	movs	r2, #1
+   0x903c68c:	strb	r2, [r1, #0]
+   0x903c68e:	mov	r0, r10
+=> 0x903c690:	cmp	r0, #1
+   0x903c692:	bgt.n	0x903c6a0
+   0x903c694:	cmp	r2, #0
+   0x903c696:	beq.n	0x903c6a0
+   0x903c698:	subs	r0, r4, r0
+   0x903c69a:	adds	r0, r0, r3
+   0x903c69c:	mov	r1, r8
+   0x903c69e:	strb	r1, [r0, #0]
+   0x903c6a0:	movs	r0, #10
+   0x903c6a2:	movs	r1, #255	@ 0xff
+   0x903c6a4:	movs	r2, #255	@ 0xff
+   0x903c6a6:	movs	r3, #255	@ 0xff
+   0x903c6a8:	bl	0x902b4f8
+   0x903c6ac:	b.n	0x903c75e
+   0x903c6ae:	movs	r0, r0
+(gdb) 0x2026134:	0x0001	0x0000	0x0000	0x0000
+(gdb) 0x2000680:	0xfc01	0x0000
+(gdb) 0x2025ef4:	0x00	0x00	0x01	0x00
+(gdb) Continuing.
+
+Hardware watchpoint 1: *(unsigned char*)0x02025ef6
+
+Old value = 1 '\001'
+New value = 0 '\000'
+0x0903c690 in ?? ()
+(gdb) Quit
+(gdb) 0x2026134:	0x0001	0x0000	0x0000	0x0000
+(gdb) 0x2000680:	0xfc01	0x0000
+(gdb) (gdb) Continuing.
+
+Program received signal SIGINT, Interrupt.
+0x0904029e in ?? ()
+(gdb) (gdb) Hardware assisted breakpoint 2 at 0x9009720
+(gdb) Hardware assisted breakpoint 3 at 0x90097a0
+(gdb) Continuing.
+
+Breakpoint 2, 0x09009720 in ?? ()
+(gdb) Continuing.
+
+Breakpoint 3, 0x090097a0 in ?? ()
+(gdb) pc             0x90097a0           0x90097a0
+r0             0x0                 0
+lr             0x9009725           151033637
+(gdb)    0x9009798:	smlsd	r12, r1, r4, r1
+   0x900979c:	cmp	r4, #0
+   0x900979e:	bne.n	0x9009770
+=> 0x90097a0:	add	sp, #36	@ 0x24
+   0x90097a2:	pop	{r4}
+   0x90097a4:	pop	{r0}
+(gdb) (gdb) Continuing.

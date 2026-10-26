@@ -1,0 +1,65 @@
+== identity ==
+size 8388608 0x800000
+md5 4d5bd1475fb898e5be99b85aa45f77fa
+sha1 aa4ee55f8bbb906edbec1761eccc067454a881f8
+sha256 764bb6781efd35986c01e70a230a1cec4b48c308febe6f3ffc0603ce802a818f
+title BATTLEBOTS
+game code ABEE maker 5G
+version 0 complement 0xd4
+GBA logo headers ['0x0']
+
+== text scan ==
+printable runs >=3 in ROM: 192992
+printable runs >=3 in UI bank: 668
+printable runs >=8 in UI bank: 403
+KW password      0 []
+KW passwd        0 []
+KW cheat         0 []
+KW debug         0 []
+KW secret        0 []
+KW unlock        1 [('0x426c8', 'UNLOCKED FOR THIS PLAYER!')]
+KW hidden        0 []
+KW code          0 []
+KW sound test    0 []
+KW stage select  0 []
+KW level select  0 []
+KW continue      0 []
+KW bonus         0 []
+KW extra         0 []
+KW config        0 []
+KW setup         0 []
+KW test          1 [('0x42b44', 'TESTING')]
+
+== re-release (Design & Destroy) password probes ==
+probe PASSWORD hits 0
+probe ENTER BOT PASSWORD hits 0
+probe ENTER TEAM PASSWORD hits 0
+probe INVALID TEAM PASSWORD hits 0
+probe BCDFGHJKLMNPQRSTVWXYZ-0123456789<> hits 0
+
+== pointer tables (short ROM strings) ==
+robot short names (16) 0x28619c ['BACKLASH', 'BIOHAZARD', 'CONTROL', 'DEADBLOW', 'DIABLO', 'DIESECTOR', 'HAZARD', 'JAWS', 'MINION', 'MOUSER', 'OVERKILL', 'SUNSHINE L.', 'TAZBOT', 'TOECRUSHER', 'TORO', 'ZIGGO', 'BACKLASH', 'BIOHAZARD', 'COMPLETE CONTROL', 'DEADBLOW', 'EL DIABLO GRANDE', 'DIESECTOR', 'HAZARD', 'JAWS OF DEATH', 'MINION']
+robot long names (16) 0x2861dc ['BACKLASH', 'BIOHAZARD', 'COMPLETE CONTROL', 'DEADBLOW', 'EL DIABLO GRANDE', 'DIESECTOR', 'HAZARD', 'JAWS OF DEATH', 'MINION']
+default team names 0x26550 ['ONEBOT  ', 'TWOBOT  ', 'THREEBOT', 'FOURBOT ']
+default names A-D 0x26564 ['AAAAAAAA', 'BBBBBBBB', 'CCCCCCCC', 'DDDDDDDD']
+arena names (5) 0x28a1ec ['BATTLEBOX', 'OIL RIG', 'AIRPLANE GRAVEYARD', 'VOLCANO', 'MACHINE PLANT']
+options strings 0x289fe8 ['TIME', 'BRIGHT', 'SOUND FX', 'MUSIC', 'CONTROL', 'PLAY', 'A BUTTON:', '2 MIN', '3 MIN', '5 MIN', '8 MIN', 'NO LIMIT', 'LEVEL: 1', 'LEVEL: 2', 'LEVEL: 3', 'LEVEL: 4', 'LEVEL: 5', 'VOL: 1', 'VOL: 2', 'VOL: 3', 'VOL: 4', 'VOL: 5', 'VOL: 6', 'VOL: 7', 'VOL: 8', 'NORMAL', 'REVERSE', 'ARCADE', 'SIM', 'SAVE', 'B BUTTON:', 'CANCEL']
+pit categories 0x28b56c ['DONE', 'ARMOR', 'WEAPON', 'MOTOR', 'BATTERY', 'TIRES', 'CHASSIS', 'FIX BOT']
+weight classes 0x28be38 ['RIGHT', 'LEFT', 'TOP', 'REAR', 'FRONT', 'BOTTOM', 'CENTER', 'LIGHTWEIGHT', 'MIDDLEWEIGHT', 'HEAVYWEIGHT', 'SUPER HEAVYWT.']
+
+== input + screen dispatch ==
+key poll (Thumb) 0x8003208
+key globals: held 0x03000194 pressed 0x03000196 released 0x03000198
+main loop (Thumb) 0x800430c
+state byte 0x030005AC, substate byte 0x030001A4
+state table 0x08288420: ['0x803f2b0', '0x803f2ba', '0x803f2c2', '0x803f2b0', '0x803f2cd', '0x803f2ac']
+update table 0x08288390: ['0x80203bd', '0x8000751', '0x8007931', '0x802299d', '0x8021289', '0x80236b1', '0x8023cc5', '0x80269b5', '0x8027bc1', '0x802d305', '0x802e9f1', '0x802f615', '0x802e615', '0x80301d9', '0x8030e29', '0x8031a61', '0x8032495', '0x8032759']
+draw table 0x082883D8: ['0x8004309', '0x8000805', '0x8001299', '0x8022d7d', '0x80218ed', '0x8023a55', '0x8026575', '0x8026d05', '0x8026d35', '0x802a135', '0x802f0cd', '0x802fded', '0x802e209', '0x8030c09', '0x8030df9', '0x8030f41', '0x8032725', '0x8032755']
+
+== name-entry alphabet (keyboard table) ==
+alphabet 47 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,*/-=+?!< ' -> names of up to 8 chars; 47**8 = 2.381e+13
+
+== SRAM ==
+observed save image size 512 bytes; 3 slots at 0x000/0x090/0x120 (0x90 each): 8-byte name at +0, slot check word at +8, 0x5203 at +0x0E
+configuration block at 0x1F0: B0 17 00 00 04 04 02 02 00 06 B0 0B B0 0B B0 0B
+result: password-system probes present = 0 (expected 0 for ABEE; BBDE has PASSWORD strings)

@@ -1,0 +1,25 @@
+a+Left: Select Gane To Play
+a+Right: Select Gane To Play
+s+Return: Select Gane To Play
+s+BackSpace: Select Gane To Play
+s+Up: Select Gane To Play
+s+Down: Select Gane To Play
+s+Left: Select Gane To Play
+s+Right: Select Gane To Play
+convert: improper image header `pp.png' @ error/png.c/ReadPNGImage/3943.
+convert: no images defined `ppc.png' @ error/deprecate.c/ConvertImageCommand/3371.
+Return+BackSpace: Select Gane To Play
+Return+Up: Select Gane To Play
+Return+Down: Select Gane To Play
+Return+Left: Change Gane Options
+Return+Right: Select Gane To Play
+BackSpace+Up: Change Gane Options
+BackSpace+Down: Change Gane Options
+BackSpace+Left: Select Gane To Play
+BackSpace+Right: Change Gane Options
+Up+Down: Select Gane To Play
+Up+Left: Select Gane To Play
+Up+Right: Select Gane To Play
+Down+Left: Select Gane To Play
+Down+Right: Change Gane Options
+Left+Right: Select Gane To Play

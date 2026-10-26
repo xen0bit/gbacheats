@@ -1,0 +1,4 @@
+set pagination off
+set confirm off
+target remote :2345
+set architecture arm

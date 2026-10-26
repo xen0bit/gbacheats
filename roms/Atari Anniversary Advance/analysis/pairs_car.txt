@@ -1,0 +1,45 @@
+x+z: PUSH START Ls
+x+a: PUSH START Ls
+x+s: PUSH START Ls
+x+Return: aad
+x+BackSpace: PUSH START Ls
+x+Up: PUSH START f2
+x+Down: PUSH START Ls
+x+Left: PUSH START Ls
+x+Right: PUSH START f2
+z+a: Select Gane To Play
+z+s: Select Gane To Play
+z+Return: Select Gane To Play
+z+BackSpace: Select Gane To Play
+z+Up: Change Gane Options
+z+Down: Change Gane Options
+z+Left: Select Gane To Play
+z+Right: Select Gane To Play
+a+s: Select Gane To Play
+a+Return: Select Gane To Play
+a+BackSpace: Select Gane To Play
+a+Up: Change Gane Options
+a+Down: Change Gane Options
+a+Left: Select Gane To Play
+a+Right: Change Gane Options
+s+Return: Change Gane Options
+s+BackSpace: Select Gane To Play
+s+Up: Select Gane To Play
+s+Down: Select Gane To Play
+s+Left: Select Gane To Play
+s+Right: Select Gane To Play
+Return+BackSpace: Select Gane To Play
+Return+Up: Select Gane To Play
+Return+Down: Select Gane To Play
+Return+Left: Select Gane To Play
+Return+Right: Select Gane To Play
+BackSpace+Up: Select Gane To Play
+BackSpace+Down: Select Gane To Play
+BackSpace+Left: Select Gane To Play
+BackSpace+Right: Select Gane To Play
+Up+Down: Select Gane To Play
+Up+Left: Select Gane To Play
+Up+Right: Select Gane To Play
+Down+Left: Select Gane To Play
+Down+Right: Select Gane To Play
+Left+Right: Select Gane To Play

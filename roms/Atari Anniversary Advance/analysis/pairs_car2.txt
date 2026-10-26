@@ -1,0 +1,28 @@
+a+s: Change Gane Options
+a+Return: Change Gane Options
+a+BackSpace: Select Gane To Play
+a+Up: Change Gane Options
+a+Down: Change Gane Options
+a+Left: Select Gane To Play
+a+Right: Select Gane To Play
+s+Return: Change Gane Options
+s+BackSpace: Select Gane To Play
+s+Up: Select Gane To Play
+s+Down: Select Gane To Play
+s+Left: Select Gane To Play
+s+Right: Select Gane To Play
+Return+BackSpace: Select Gane To Play
+Return+Up: Change Gane Options
+Return+Down: Select Gane To Play
+Return+Left: Select Gane To Play
+Return+Right: Select Gane To Play
+BackSpace+Up: Select Gane To Play
+BackSpace+Down: Change Gane Options
+BackSpace+Left: Select Gane To Play
+BackSpace+Right: Select Gane To Play
+Up+Down: Change Gane Options
+Up+Left: Select Gane To Play
+Up+Right: Select Gane To Play
+Down+Left: Change Gane Options
+Down+Right: Select Gane To Play
+Left+Right: Select Gane To Play

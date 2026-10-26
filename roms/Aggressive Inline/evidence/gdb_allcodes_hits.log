@@ -1,0 +1,17 @@
+The target architecture is set to "arm".
+warning: No executable has been specified and target does not support
+determining executable automatically.  Try using the "file" command.
+0x03001724 in ?? ()
+Breakpoint 1 at 0x803c944
+Breakpoint 2 at 0x803c948
+Breakpoint 3 at 0x803c9b8
+Breakpoint 4 at 0x803ca12
+Breakpoint 5 at 0x803ca6a
+CODE1_MASK_OLD r1=020119ac val=0000000f count_byte=0d
+CODE1_COUNT_OLD r1=020119ac byte11=0d
+CODE2_SKATER_OLD r0=02011c5e off=02b2 u16=0000
+CODE3_MASK_OLD r1=020119ac val=00003fff
+CODE4_MASK_OLD r1=020119ac val=000000ff
+Cannot execute this command while the target is running.
+Use the "interrupt" command to stop the target
+and then try again.
