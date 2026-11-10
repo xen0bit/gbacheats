@@ -1547,3 +1547,121 @@ A decoder that agrees with the ROM is not the deliverable. The deliverable is a
 code the game accepted on its own screen, with the resulting state observed.
 When an entry UI is gated, say which gate blocks it and what would advance it;
 do not substitute a debugger call for the screen without labelling it.
+
+### 16.11 The same title can be a different game on GBA
+
+Franchise names are not evidence. *Bratz: Forever Diamondz* on GBA (Barking
+Lizards) shares nothing with the Blitz console/PC build whose `SIZZLN` /
+`FLAUNT` style passwords are widely published; the GBA SKU has no code surface
+at all. The same happened with *Avatar: The Last Airbender* (the 5-digit codes
+are Wii/GC/PS2/Xbox) and the two *Bratz* engines (different code alphabets).
+
+Before testing a published list, confirm the SKU: header title, maker, engine
+strings, and whether the listed codes appear in the image under **any**
+encoding (ASCII, `+0x20`, UTF-16LE/BE, UTF-32, 5/6-bit packing, XOR/offset).
+A title-and-platform match is not enough.
+
+### 16.2b A text field is not a password field
+
+Word games and name-entry screens create convincing false positives
+(*Bookworm*: a 62-symbol 8-character profile name). Test the field by its
+consumer, not its alphabet:
+
+* count the ROM's `strcmp`/`strncmp`/`memcmp` call sites and see whether any
+  compares the entry buffer;
+* check whether the buffer is ever read outside the entry handler.
+
+If every comparison against user text is a parser constant (`"C"`, `"."`), the
+field is a label, not a validator.
+
+### 16.3b Enumerate the gate's return domain
+
+A dead hidden menu can be proven dead with arithmetic, not just breakpoints
+(*Boulder Dash EX*: both writers of screen state 73 require `0xFF` from one of
+two functions, whose complete return set is `{0xFE, 0x00, 0x62}`). When a gate
+compares against a sentinel, enumerate every `return`/`movs r0,imm` in the
+producing function; if the sentinel is absent, no input can reach the screen
+and a live breakpoint merely confirms it.
+
+### 16.4b Unused payload bits create aliases
+
+Two codes can be behaviourally identical (*Boxing Fever*: 16 unused payload
+bits → 65,536 spellings per match; *Barbie Horse Adventures*: 2 ignored bits →
+4 aliases). Do not report such pairs as distinct codes, and do not treat a
+published "duplicate" as a transcription error before checking the unused bits.
+Conversely, a checksum-valid code can still fail a semantic range check
+(`char % 11 > 7`, `flags > 4`); test the two layers separately.
+
+### 16.12 A title-screen code can expire before you press Start
+
+A button-code validator that runs on the title screen may share the screen's
+input-reset routine. In *Buffy the Vampire Slayer: Wrath of the Darkhul King*
+the flag word set by a code read back as `0x1` at ~4.5 s and `0x0` at ~5.2 s:
+the title reset the flag word and the 10-entry press history on a short cycle.
+The code is only "working" if Start is pressed inside that window; a delayed
+test looks like a rejected code. Measure the window instead of assuming it is
+unbounded: enter one code, write a savestate every ~0.5 s, and read the flag
+address from the uncompressed `gbAs` state. The same title also stores its
+code table **newest-first**, so a naive forward search for the published press
+order finds nothing; search for the reversed sequence (or find the table via
+the validator's PC-relative literal pointer) before concluding a code is
+absent. Both effects are generic and have produced false "code rejected" and
+false "code absent" results elsewhere.
+
+### 16.13 Diff savestates to read RAM when the GDB stub is unreliable
+
+mGBA's `.ss1` savestates are PNG files with a **zlib-compressed `gbAs` chunk**;
+`zlib.decompress` the chunk and you get a raw 397,312-byte state for a 4 MiB
+ROM. The layout is stable enough to diff: header/CPU at `0x00000`, VRAM at
+`0x1000`, IWRAM at `0x19000`, EWRAM at `0x21000`. Save a state before and after
+an action (enter a code, toggle a flag) and diff the raw bytes to find the
+changed flags without a debugger. This is the fallback when the GDB stub fails:
+some mGBA builds reject `continue` with "Cannot execute this command while the
+target is running", and a single-client stub can be blocked by another session.
+
+### 16.14 The generator can be narrower than the validator
+
+A password validator may accept a larger payload space than the in-game
+generator emits. In *Cartoon Network Speedway* the validator at `0x08015C94`
+accepts a 21-bit payload (2,097,152 codes), while the in-game generator at
+`0x0800C42C` masks the payload to 11 bits and cannot reproduce the published
+codes. Always reimplement the inverse from the **validator**, verify it against
+every published code, and treat a generator that cannot reproduce them as a
+separate (possibly buggy) code path, not as the definition of the space.
+
+### 16.15 Published stage labels lie; the payload field is the truth
+
+In *Classic NES Series: Bomberman* the published "Level 76" password
+(`BOFEDJJDDJGKEFOLFMIH`) actually starts stage 74 — two different labels in the
+published lists decode to the same code, because the lists were transcribed
+from the rendered stage banner rather than from the level byte. When you
+recover the validator, decode every published code to its numeric payload and
+compare that to what the game shows; report the payload, not the label. This
+also gives you the cheapest novel code: keep a published code's payload, change
+one field, recompute the checks, and you get a value that is provably absent
+from every published list.
+
+### 16.16 Emulated-NES ports keep the NES code, so search the NES image
+
+The Classic NES Series wrappers run a real NES ROM inside the GBA image. The
+password checks, cheat bytes and level tables live in 6502 code addressed by
+the NES memory map (`$DB7A`, `$E360`, zero-page `$58`), not in ARM code, and a
+GBA-side string or key-mask search will miss them entirely. Locate the NES
+payload (a contiguous 6502 image, often 24–64 KiB, with the iNES-style header
+absent), disassemble it as 6502, and read the wrapper only for the input path
+and the pause/reset combos it adds (here `L+R` system state, `Start+Select+A+B`
+reset). Verify a generated password by reading the zero-page level byte after
+entry rather than trusting the stage banner.
+### 16.17 The wrapper System Menu is per-title; count its slots in RAM
+
+Every Classic NES Series image carries the same look but not the same menu:
+*Dr. Mario*, *Donkey Kong*, *Ice Climber* and *Pac-Man* take `L+R` and expose
+five slots; *Castlevania* draws only `CONTINUE` and `RESET` but its selector is
+a four-slot ring whose slots 2 and 3 still install handlers and are simply not
+labelled; *Excitebike* draws only a dim panel with no text at all. Do not carry
+a slot count, gate mask or handler address from one title to the next. Read the
+selector byte (it moves while you press Down), take the ring size from the
+`AND`/`CMP` bound in the dispatch, and walk every index — the unlabelled ones
+are the only unpublished content most of these ROMs have. The gate itself is
+usually exact: `held == mask` plus `held & pressed`, so combinations like
+`L+R+Start` are rejected.
