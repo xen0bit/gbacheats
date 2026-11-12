@@ -13,3 +13,17 @@
 *.ss8
 *.ss9
 *.state
+
+# Emulator/agent scratch artifacts (pid files, logs, fifos, ad-hoc screenshots)
+*.pid
+*.log
+*.fifo
+/dbg*.png
+/shot*.png
+/ts*.png
+/k1.png
+/rt.png
+/BackSpace-*.png
+/Return-*.png
+/g.in
+/dbgpid
