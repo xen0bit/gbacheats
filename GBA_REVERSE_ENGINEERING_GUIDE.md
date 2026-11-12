@@ -1665,3 +1665,21 @@ selector byte (it moves while you press Down), take the ring size from the
 are the only unpublished content most of these ROMs have. The gate itself is
 usually exact: `held == mask` plus `held & pressed`, so combinations like
 `L+R+Start` are rejected.
+
+### 16.18 A save-bit unlock is not a code; prove it by the setter's callers
+
+Some games have no password at all but still have "unlockables" that look like
+a code system from the outside (*Crash Bandicoot 2: N-Tranced*: five hidden
+multiplayer characters, five "unlocked …" strings, a results screen). The
+state is a bitfield in the save record, tested with an `AND` helper and drawn
+by a branch per bit. Do not report it as a code and do not try to brute-force
+it: enumerate the test helper's call sites (that gives the bit→message map and
+the unused bits/aliases), then enumerate the **setter's** call sites. If every
+setter call sits inside the link/transfer receive routine, no controller input
+can reach the state and the negative result is closed. Bits not touched by any
+test branch are aliases, not hidden payload.
+
+A related trap: a context-filtered menu can share one table with a larger item
+count. Read the list pointer, count and selected index from the menu object
+during render (`+0x14/+0x18/+0x1C` here); the fixed table plus a small count
+proves which entries are unreachable in a given mode without pressing anything.
