@@ -1683,3 +1683,17 @@ A related trap: a context-filtered menu can share one table with a larger item
 count. Read the list pointer, count and selected index from the menu object
 during render (`+0x14/+0x18/+0x1C` here); the fixed table plus a small count
 proves which entries are unreachable in a given mode without pressing anything.
+
+### 16.19 Call the validator from the debugger and use it as an oracle
+
+When the accept path is tangled (checksum, PRNG, pointer map) it is faster to
+stop reasoning and ask the ROM. In *Disney Presents Home on the Range* the
+4-symbol password validator at `0x08003204` takes the packed code in `r0` and
+returns the stage pointer in `r0`. Calling it from mGBA's debugger with
+`IME=0`, `r0=code`, `lr` pointing at the idle loop, stepping once and reading
+`r0` gives a ground-truth accept/reject for any input without touching the UI.
+That turned a guessed alphabet (the first pass believed 25 letters; the real
+one is 16) into an exact enumeration of 165 accepted codes out of 65,536.
+Use the same trick for encoders: run the game's own generator function on a
+chosen state and read the code it produces. Always cross-check a handful of
+published codes, then mint and type one on the real screen.
