@@ -1,5 +1,16 @@
 # Mega Man Battle Network 4: Blue Moon (GBA) — Reverse Engineering Report
 
+> **SKIPPED / DEFERRED — entry systems found but not in-game confirmed (coordinator decision).**
+> Under §0.2 this report does **not** meet the dynamic-confirmation bar: two digit-password
+> systems were found with validator accept/reject branches dumped (PET-device 8-digit at
+> `0x77F900`, Higsby warehouse 4-digit at `0x7756BC`), and a ~45-command developer debug bank
+> was fully enumerated, but the PET/options/folder screens are **story-gated** (bedroom exit
+> blocked by the scripted "Lan! Take me with you!" event), so no code was entered in-game, no
+> novel code was minted, and no rejection bounds were produced. Per coordinator authorization,
+> MMBN titles whose validator/code-entry surface is blocked by a story gate are documented
+> here and **skipped rather than retried or indexed**. This report is intentionally absent
+> from `INDEX.md`.
+
 ## 1. Target identity
 
 | Field | Value |

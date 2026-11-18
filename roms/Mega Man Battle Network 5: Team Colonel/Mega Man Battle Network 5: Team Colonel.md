@@ -1,5 +1,15 @@
 # Mega Man Battle Network 5: Team Colonel (GBA) — Reverse Engineering Report
 
+> **SKIPPED / DEFERRED — entry system found but not in-game confirmed (coordinator decision).**
+> Under §0.2 this report does **not** meet the dynamic-confirmation bar: a genuine
+> Numberman/Number Trader lotto system was found with 51 published eight-digit codes (algorithmic,
+> no ROM literals), and the input reader / scene table / soft-reset gate were reversed, but the
+> shop screen is **story-gated behind the first Liberation Mission**, so no code was entered
+> in-game, the validator was not located, and no novel code or rejection bounds were produced.
+> Per coordinator authorization, MMBN titles whose validator/code-entry surface is blocked by a
+> story gate are documented here and **skipped rather than retried or indexed**. The 51 codes
+> and the exact gate are recorded below. This report is intentionally absent from `INDEX.md`.
+
 ## 1. Target identity
 
 | Field | Value |

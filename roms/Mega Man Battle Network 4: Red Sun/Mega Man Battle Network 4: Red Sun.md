@@ -1,5 +1,16 @@
 # Mega Man Battle Network 4: Red Sun (GBA) — Reverse Engineering Report
 
+> **SKIPPED / DEFERRED — entry systems found but not in-game confirmed (coordinator decision).**
+> Under §0.2 this report does **not** meet the dynamic-confirmation bar: a real system was
+> found (32-entry NumberMan/Number Trader lotto table, all 32 codes present literally in the
+> ROM's LZ77 text banks and cross-checked against the published list), but the Number Trader
+> screen is **story-gated behind the Castillo unlock**, so no code was entered in-game, the
+> validator was not isolated, and no novel code or rejection bounds were produced. Per
+> coordinator authorization, MMBN titles whose validator/code-entry surface is blocked by a
+> story gate are documented here and **skipped rather than retried or indexed**. The 32 codes
+> and the exact gate are recorded below for anyone continuing this work. This report is
+> intentionally absent from `INDEX.md`.
+
 Queue position 460. Analyst run on display `:315`, work dir `/tmp/opencode/mmbn4red`.
 
 ## 1. Target identity
