@@ -1697,3 +1697,17 @@ one is 16) into an exact enumeration of 165 accepted codes out of 65,536.
 Use the same trick for encoders: run the game's own generator function on a
 chosen state and read the code it produces. Always cross-check a handful of
 published codes, then mint and type one on the real screen.
+
+### 16.20 A CodeBreaker button-activator is not an in-game trigger
+
+When a hidden menu is published as "use CodeBreaker code `74........XXXX
+3.......0002`, then press L+R", the L+R belongs to the **cheat device's**
+activation condition, not to the game. In *Godzilla: Domination!* the gate is a
+plain scene-state byte at `0x030025F8`; writing `2` alone opens the 47-entry
+debug scene list on the next frame with no controller input at all. Test the
+predicate directly (write the value, screenshot *before* touching the pad)
+before recording a published button sequence as an in-game code. Enumerate the
+gate's return domain too: the byte is the general scene index, and none of the
+10 callers of the scene setter at `0x08017944` passes `2`, so no retail input
+path can reach the debug scene — a bounded gated-feature negative, not "not
+tested".
