@@ -49,10 +49,17 @@ RAM evidence: the typed string is stored as 12 ASCII bytes at IWRAM
 - Hold keys 50–100 ms with 100–200 ms gaps; shorter taps double-step or drop
   characters.
 
-### Menu path
+### Menu path (all reachable screens walked)
 1. Boot; wait through the Nickelodeon splash and title ("Press START").
 2. Press `Return` → Main Menu (Start Game / Options / Password).
-3. Cursor navigation: Down twice, then `x` → **Password** screen.
+3. **Options**: cursor Down once, `x` → Music Volume / Sound Effects Volume /
+   Ambient Sounds (Off / Low / High); `z` returns. Walked with screenshots and
+   savestate RAM diffs (the ambient setting byte changes in IWRAM).
+4. **Start Game**: from Main Menu `x` → 16-page story sequence (text scripts
+   64–74) → directly into Level 1 (Clock Work, Angelica). No hidden
+   character-select entry on this path; the password buffer at `0x03001E8E`
+   is untouched (`42 00 00…`) after this route.
+5. Cursor navigation: Down twice, then `x` → **Password** screen.
 4. The on-screen keyboard is a 21-letter grid `B C D F G H J K / L M N P Q R S T
    / V W X Y Z` plus a backspace cell. Cursor is a **linear index 0–20**:
    Right/Left = ±1 within a row (clamps at row ends), Down/Up = ±8.
@@ -103,8 +110,9 @@ All ROM addresses are `0x08000000 + file offset`.
 | `0x080083F0` | charset check: `('A'<=c<='Z') || c=='*'` |
 | `0x08008440` | pack 12 chars → 6 bytes (4 bits/char) |
 | `0x08008588` | `strchr` into alphabet `0x083D77F8`, returns index |
-| `0x080083D77F8` | alphabet string `BCFGJKLNPQRSTWXY*\0` |
-| `0x080081F8` (aliased `0x080082D8`) | per-nibble key add |
+| `0x083D77F8` | alphabet string `BCFGJKLNPQRSTWXY*\0` |
+| `0x080082D8` | per-nibble key **add** (`adds r1,r1,r2`); a near-duplicate at `0x080081F8` uses `subs` and is not on the validator path |
+| `0x080083B4` | pointer to key table at `0x083D7818` |
 | `0x083D7818` | 12×u32 key table |
 | `0x080080C4` | 9 parity checks (final accept/reject) |
 | IWRAM `0x03001E8E` | 12-byte ASCII password input buffer |
@@ -113,9 +121,14 @@ All ROM addresses are `0x08000000 + file offset`.
 
 Non-password UI strings (`STAGE 1`, `STAGE 2`, `SECRET AREA`, `PAUSE`,
 `WEEBLES`) are at file 0x1FB90–0x1FBB8; they are HUD labels, not cheat codes.
-Text-script enumeration shows no other hidden/developer screen (scripts 0–83
-cover main menu, options, password, character select, bonus, six level
-descriptions, credits, game over, story and endings).
+Text-script enumeration shows no other hidden/developer screen: 72 named
+scripts occupy IDs 0 and 13–83 (main menu, options, password entry/error/
+generator, character select, bonus, six level descriptions, credits, game
+over, story and endings). IDs 1–12 have no ASCII string anywhere in the image,
+in any case variant — they are control/placeholder scripts, not screens. No
+`debug`, `level select`, `unlock` or `cheat` literal exists. The battery save
+file is **0 bytes** — there is no battery-backed progress at all; passwords
+are the only persistence mechanism.
 
 ## 5. Algorithm
 
@@ -136,7 +149,7 @@ def validate(code):                       # 0x080083B8
     for c in code:
         if not (('A' <= c <= 'Z') or c == '*'): return False   # 0x080083F0
     nib = [char_to_nibble(c) for c in code]                    # 0x08008440
-    # 0x080081F8: per-nibble ADD with key table
+    # 0x080082D8: per-nibble ADD with key table
     t   = [(nib[i] + KEYS[i]) & 0xF for i in range(12)]
     bs  = bytes(t[i] | (t[i+1] << 4) for i in range(0, 12, 2)) # 6 bytes
     # 0x080080C4: nine parity checks
@@ -243,10 +256,10 @@ contain it.
 - `QGPCJNWXGWC*` — decoder accepts (`*` aliases `B`); not entered because the
   on-screen keypad has no `*` key. Statically derived alias, labelled
   **Derived**, not Observed.
-- Transform checked in both directions: subtraction (as the raw `subs`
-  instruction suggests) fails all published codes; addition with the stored
-  table succeeds for all 6 correct ones. The empirical addition form is the
-  one reported.
+- Transform direction resolved statically: the live path at `0x080082D8` uses
+  `adds r1,r1,r2`; a near-identical unused duplicate at `0x080081F8` uses
+  `subs`. Addition with the stored table reproduces all 6 correct published
+  codes; subtraction fails them.
 
 ## 7. Validation evidence
 
@@ -271,10 +284,8 @@ No images are attached; screenshots and raw artifacts remain in
   visually identical Level-2 spawns; `CSPLLQWPTWYJ` and the "End" code produce
   distinct characters. A full field decomposition would require reaching the
   in-game "Your Password Is" generator and varying progress state.
-- The +0x10 discrepancy between the `subs` opcode and the empirically required
-  addition with the stored key table is not explained; the table values may be
-  stored pre-negated or the literal pool may be aliased. The empirical model is
-  valid for all tested codes.
+- The unused `subs` duplicate at `0x080081F8` is a red herring; the live path
+  uses `adds`. This is now resolved, not an unknown.
 - The `*` character is accepted by the validator but unreachable from the
   keypad; no in-game proof of an accepted `*`-containing code was obtained.
 
