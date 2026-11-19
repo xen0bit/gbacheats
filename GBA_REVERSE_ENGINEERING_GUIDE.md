@@ -1711,3 +1711,17 @@ gate's return domain too: the byte is the general scene index, and none of the
 10 callers of the scene setter at `0x08017944` passes `2`, so no retail input
 path can reach the debug scene — a bounded gated-feature negative, not "not
 tested".
+
+### 16.21 A wiki's "cheat code to do" is a lead, not a fact
+
+When TCRF (or any wiki) says a working debug code exists but leaves the actual
+sequence as "To do: Cheat Code", do not report the feature as confirmed. Treat
+the claim as a search hint for the routine it describes. A debug overlay whose
+message strings and format fragments survive in the text bank can still be
+**dead code**: prove it with three independent counts — zero `BL` references,
+zero 32-bit pointers (including the Thumb-bit `addr|1` variant), and a private
+output flag whose only xrefs are the routine and its own literal pool. If all
+three are zero and every reachable screen was walked, the bounded negative
+stands even when an outside wiki asserts the opposite (*Frogger's Journey: The
+Forgotten Relic*).
+
