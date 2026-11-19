@@ -215,6 +215,6 @@ accepted because no code can be submitted.
 - Python/PIL — savestate `gbAs` zlib decode and EWRAM/IWRAM diff; screenshot image-diff
   detector for button-code probes; pointer/literal/xref scanners.
 - `arm-none-eabi-objdump -M force-thumb` — disassembly of input manager and data pools.
-- `strings -t x`, `grep -abo`, `xxd`, Python struct扫描 for header/literal/keyword sweeps.
+- `strings -t x`, `grep -abo`, `xxd`, Python struct scans for header/literal/keyword sweeps.
 - mGBA 0.10.5, Xvfb :317, openbox, xdotool, scrot (all preinstalled).
 - No Ghidra session was needed; no ROM or copyrighted asset was redistributed.
