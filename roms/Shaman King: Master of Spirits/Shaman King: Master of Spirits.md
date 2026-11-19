@@ -53,7 +53,7 @@ find nothing, because there are no in-game codes.
 The published collectible unlockables are documented in §6 with their ROM text
 addresses, but they are progression pickups, not codes. No code was minted
 because no code system exists to mint one from (guide §0.2 "no system" branch).
-The negative is bounded by counts (§6b), not by "did not test".
+The negative is bounded by counts and exhaustive table walks (§6b).
 
 ## 3. How to reproduce
 
