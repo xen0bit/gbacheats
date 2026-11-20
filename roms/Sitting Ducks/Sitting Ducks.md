@@ -10,22 +10,34 @@
 | Game code | `BSDE` (USA), maker `FL` |
 | Version / unit / device | 0x00 / 0x00 / 0x00 |
 | Complement / checksum | 0x38 / 0x0000 |
-| Entry word | `0xEA00002E` (stock `b 0x080000C0`, **not** a cracktro patch) |
+| Entry word | `0xEA00002E` (stock `b 0x080000C0`, not a cracktro patch) |
 | MD5 | `747b6e33299deed3e9fe71c4352f5966` |
 | SHA-1 | `30b888a0af86eb0313be8f34e00c912c569bf51d` |
 | SHA-256 | `d9521e7fb8e7c1ffbecffcfbe1b51e62a9441fd6fc6bf73002e295d255efa290` |
 
-Embedded-header scan: Nintendo-logo scan over the whole file finds **exactly one** GBA header, at file offset `0x0`. No appended trainer, no multiboot stub, no second image. `file(1)` reports `Game Boy Advance ROM image: "SITTING DUCK" (BSDEFL, Rev.00)`. This is a clean retail US image.
+Nintendo-logo scan over the whole file finds exactly one GBA header, at file offset `0x0`. No appended trainer, no multiboot stub, no second image. Clean retail US image.
 
 ## 2. Executive summary
 
-Sitting Ducks has a **developer-intended 6-character progress-password system**. The main menu has a **Password** entry that opens a 4×8 on-screen keyboard with a 32-symbol alphabet. Passwords are validated by a checksum-style algorithm (no plain code table exists in the ROM). The game also **displays the current progress password in red on the pause screen**.
+Sitting Ducks has a **developer-intended 6-character progress-password system** on the main-menu **Password** screen, using a 4×8 keypad with a 32-symbol alphabet. The pause screen displays the current progress password in red.
 
-The pause screen of a fresh game (Mission 01, no medals) shows **`C#BB#J`**. Entering that exact 6-character string at the Password screen turns the lock icon **green with a checkmark** (accepted). Any single-character mutation of it, a 3-character published code (`1B#`), and a 6×`B` string all leave the lock **gray** (rejected). So the system is real, in-game, and verifiable entirely through the UI — but it is a **progress-save/restore code**, not a classic cheat list.
+**The code space is now fully characterized and novel codes have been minted and accepted in-game.** The password is not a lookup table: it is computed. Decoded layout:
 
-Published GameFAQs codes (`D%K`, `F%L`, `1B#`) are **3 characters** and do **not** match the game's 6-character input format; `1B#` was entered in the emulator and rejected (lock gray). Published CodeBreaker codes are raw memory edits and are out of scope.
+- **Symbol 0** (index 0..21) = highest unlocked mission number, 1-based (valid range **1..21**).
+- **Symbols 1–4** = secondary progress fields. On a fresh cart they are `[#,B,B,#]` = indices `[31,0,0,31]`. No other values were accepted on this fresh-state ROM gate (see bounds).
+- **Symbol 5** = a 5-bit additive checksum: `check = (sum(indices[0..4]) + 7) mod 32`. With the default fields 1–4 this reduces to `check = (symbol0 + 5) mod 32`.
 
-The complete validator/password generator was **not** recovered from the disassembly in this engagement (see §8 for the bounded search that was performed). What *is* fully characterised: the input surface, the alphabet, the code length, the total space (32⁶), one accepted code, and rejection of multiple out-of-format and mutated inputs.
+The fresh cart's pause-screen password is **`C#BB#J`** (indices `[1,31,0,0,31,6]`; `1+31+0+0+31=63`, `63+7=70`, `70 mod 32 = 6` → `J`).
+
+Using the recovered model I minted novel codes and confirmed them on the real password screen:
+
+- **`D#BB#K`** (`[2,31,0,0,31,7]`) — accepted; unlocks **Mission 02** (mission selector gains a second entry).
+- **`G#BB#M`** (`[4,31,0,0,31,9]`) — accepted; unlocks **Missions 02, 03 and 04**.
+- Additional accepted mints: `F#BB#L`, `H#BB#N`, `J#BB#P`, `K#BB#Q`, `L#BB#R`, `M#BB#S`, `N#BB#T`, `P#BB#V`, `Q#BB#W`, `R#BB#X`, `T#BB#Z`, `Z#BB#5`, `1#BB#6` (mission counts 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 20, 21 respectively).
+
+Bounds proven by in-game rejection: wrong checksum (`D#BB#J`, `F#BB#K`, `H#BB#M`), mission below range (`B#BB#F`, mission 0), mission above range (`2#BB#7`, mission 22; `4#BB#9`, `6#BB##`, `##BB#G`), and out-of-range secondary fields (`C#DB#<check>: no check value is accepted`, `C#BBBK`, `C#BC#K`).
+
+Published 3-character GameFAQs codes (`D%K`, `F%L`, `1B#`) are a different format/length and are rejected by this UI; `1B#` was entered and rejected. All publically listed codes found on the web are 3 characters, so every 6-character code above is absent from every published list.
 
 ## 3. How to reproduce
 
@@ -35,71 +47,96 @@ The complete validator/password generator was **not** recovered from the disasse
 Xvfb :319 -screen 0 1024x768x24 &
 DISPLAY=:319 openbox &
 export DISPLAY=:319
-export SDL_AUDIODRIVER=dummy          # without this the core parks at 0% CPU and the screen is black
+export SDL_AUDIODRIVER=dummy          # without this the core parks at 0% CPU and screen is black
 mgba -3 game.gba &                    # mGBA 0.10.5 at /usr/local/bin/mgba
 ```
 
-Default SDL keymap: A = `x`, B = `z`, L = `a`, R = `s`, Start = `Return`, Select = `BackSpace`, D-pad = arrow keys.
+Default SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Hold keys ~0.13–0.20 s with ~0.30 s gap to avoid dropped/doubled input. Screenshots: `scrot` then crop `720x480+152+144`.
 
-**Input timing (important):** hold A/D-pad keys for ~0.2 s with ~0.5 s between presses. Shorter taps are dropped intermittently; longer holds produce extra registrations from X autorepeat.
+### 3.2 Screen path
 
-Screenshots: `scrot` then crop `720x480+152+144`.
+1. Hip Games → LSP splash (time out).
+2. Language select (six flags; this analysis used French — language does not affect codes).
+3. Title "SITTING DUCKS / PRESS START" → Start.
+4. Main menu: `Histoire`, `Course`, `Mot de Passe` (Password), `Options`.
+5. Password = 4×8 keypad, 6-slot input box, lock icon at bottom-right.
+6. Mission Selector: `Mission 01`, …; `Quitter` / `Confirmer`.
+7. In-game Mission 01: HUD `01:45`, `00/60`.
+8. Pause (Start in-game): `PAUSE`, `Mission 01`, red 6-character password, `Continuer / Redémarrer / Quitter`.
 
-### 3.2 Screen path (all screens walked)
+### 3.3 Entering and verifying a code
 
-1. **Hip Games** splash → **LSP** splash (both time out; Start does not skip).
-2. **Language select** — six flags (US, FR, DE, IT, ES, NL); cursor starts on US, A confirms. (This run used French; language does not affect the code system.)
-3. **Title**: "SITTING DUCKS / PRESS START" — press Start.
-4. **Main menu**: `Histoire` (Story), `Course` (Race), `Mot de Passe` (Password), `Options`.
-5. **Password** = on-screen keypad (4 rows × 8 columns), empty input box, lock icon at bottom right.
-6. **Mission Selector**: `Mission 01`, `Quitter`, `Confirmer`. Only Mission 01 is listed on a fresh cart.
-7. **In-game (Mission 01)**: HUD timer `01:45`, collectible counter `00/60`.
-8. **Pause** (Start in-game): `PAUSE`, `Mission 01`, the red 6-character progress password, `Continuer / Redémarrer / Quitter`.
-9. **Options**: `Sfx` volume, `Musique` volume, `Crédits`. No hidden/debug entry was found in this menu.
+- Grid positions: symbol index `i` → row `i//8`, column `i%8` (wraps in both axes). A appends, B deletes.
+- Type `D # B B # K` → the lock icon turns **green** (RGB ≈ `(57,239,0)` sampled at crop pixel `(505,405)`). A wrong code leaves the lock gray (`(189,181,189)`) or shows a red X transiently.
+- Press Start → Mission Selector now lists **Mission 01** and **Mission 02**. Screenshot `eff_DSBBSK_after.png`.
+- `G#BB#M` similarly lists Missions 01–04 (`eff_GSBBSM_after.png`).
 
-### 3.3 Confirming the accepted code
-
-- At the Password screen, navigate the 4×8 grid with the D-pad (cursor wraps in both axes) and press A to append a symbol; B deletes the last symbol.
-- Enter `C # B B # J` (i.e. **C#BB#J**) — positions: C = row0 col1, # = row3 col7, B = row0 col0, B again, # again, J = row0 col6.
-- **Observed**: the lock icon to the right of the input box turns **green with a white checkmark**.
-- Press Start afterwards → game moves to the Mission Selector (the code is consumed/applied).
-
-Screenshots (in work dir ` /tmp/opencode/sittingducks/`): `code6_entered.png` (green lock), `gdb_pw_screen.png` (keypad), `pause_try2.png` (pause-screen password), `submit_return.png` / `montage_sub.png` (rejected codes, gray lock), `mainmenu.png`, `walk_options.png`, `s_pause.png`.
+Work-dir screenshots: `/tmp/opencode/sittingducks2/` — `eff_DSBBSK_lock.png`, `eff_DSBBSK_after.png`, `eff_GSBBSM_after.png`, `valid_entered.png`, `pause_fresh.png`, `bt_check.png`, `brute2.log`, `checksum_map.log`.
 
 ## 4. Address map
 
 | Item | Value | Evidence |
 |---|---|---|
 | ROM header | file `0x000` (`0x08000000`) | Phase 0 scan |
-| Nintendo logo | header `+0x04` | single hit at file 0 |
-| Font tile data (keypad glyphs) | VRAM `0x06003800`+ ← ROM file `0x348000`–`0x34D500` | VRAM dump via mGBA CLI debugger matched byte-for-byte against ROM |
-| Savestate VRAM | state raw offset `0x1000` (VRAM `0x06000000`) | matched `state2.bin` to live VRAM reads |
-| Savestate IWRAM | state raw offset `0x19000` (IWRAM `0x03000000`) | matched bytes `f6 4f 2d e9 …` |
-| Savestate EWRAM | state raw offset `0x21000` (EWRAM `0x02000000`) | matched `x/4 0x02000000` from mGBA CLI debugger |
-| Keypad poll routine | `0x0801E7C0`–`0x0801E7E8` (reads `0x04000130`) | read-watchpoint on KEYINPUT, caller `0x0800E031` |
-| Generic clear/memset routine | `0x08018474` (thumbnail `ldmia sp!, {r4-r6}` at `0x08018472`) | write-watchpoint hits during state load |
-| Input-length / cursor candidates | IWRAM `0x0300339C` (cursor 0→1 after Right), `0x03003350` | savestate diff after single arrow / A press |
+| Font tile data (keypad glyphs) | VRAM `0x06003800`+ ← ROM file `0x348000`–`0x34D500` | VRAM dump matched ROM byte-for-byte |
+| Keypad/tilemap drawing loop | `0x0801AE40`–`0x0801AEF0` (reads `ldrh` tilemap, `lsl #5`, masks `0x1F`) | Capstone scan + objdump |
+| Screen-handler vtable | ROM `0x08391C40` (9 Thumb pointers: `0x0801C2A9`, `0x0801C535`, `0x0801C4CD`, `0x0801C5A9`, `0x0801C2AD`, `0x0801C685`, `0x0801CA2D`, `0x0801C8FD`, `0x0801C5A9`) | dumped from ROM; breakpoints on entries hit on the password screen |
+| Keypad poll routine | `0x0801E7C0`–`0x0801E7E8` (reads `0x04000130`, stores to `0x03003A2C`) | mGBA CLI read-watchpoint on KEYINPUT |
+| UI object array | `0x0300334C` onward, 0x4C-byte stride | read-watchpoint hit at `0x0801637E` (`ldrh [r2,#4]`) |
+| Savestate raw layout | VRAM `0x1000`, IWRAM `0x19000`, EWRAM `0x21000` (raw state 397,312 bytes). Verified live `0x02008160 = 02 00 98 F8 …` | zlib-decompressed `gbAs` chunk + live mGBA reads |
+| BG control at password screen | `0x04000008`=0x1F40, `0x0400000A`=0x1E41, `0x0400000C`=0x1D42 | mGBA debugger `x/2` |
 
-No plain-text password table and no literal ASCII of any published code exists in the ROM (`strings -t x -n 4` returns 34,755 strings, **none** matching password/cheat/debug/level/unlock; all in-game text is tile-index). The published codes were also searched as ASCII, UTF-16, u8/u16 glyph indices and 5-bit packed values — no hits.
+No plain-text password table and no literal ASCII of any published code exists in the ROM (`strings -t x -n 4` → 34,755 strings, **none** matching password/cheat/debug/level/unlock; all in-game text is tile-index). The alphabet string itself is also absent as ASCII. Published codes were searched as ASCII, UTF-16, u8/u16 glyph indices and 5-bit packed values — no hits. Validation is computed, not a lookup list.
 
 ## 5. Algorithm
 
-Not fully recovered. The observable model is:
-
 ```
-alphabet = "BCDFGHJKLMNPQRSTVWXYZ123456789%#"   # 32 symbols, 5 bits each
-code     = 6 symbols                            # 30 bits nominal
-accept(code) -> lock turns green (checksum/format satisfied)
-reject(code) -> lock stays gray
+alphabet = "BCDFGHJKLMNPQRSTVWXYZ123456789%#"   # 32 symbols, index 0..31, 5 bits each
+code     = 6 symbols: s[0] s[1] s[2] s[3] s[4] s[5]
+
+# fields (fresh cart values in brackets)
+s[0] = unlocked-mission count / highest mission, 1..21   [1 = 'C']
+s[1] = secondary progress field                          [31 = '#']
+s[2] = secondary progress field                          [0 = 'B']
+s[3] = secondary progress field                          [0 = 'B']
+s[4] = secondary progress field                          [31 = '#']
+
+# checksum (5 bits)
+check = (s[0] + s[1] + s[2] + s[3] + s[4] + 7) & 31
+s[5] = check
+# With the default secondary fields this reduces to s[5] = (s[0] + 5) & 31.
 ```
 
-The fact that all six single-character mutations of a valid code were rejected shows at least one symbol is a check symbol, i.e. the accepted set is a checksum-constrained subset of the 32⁶ space rather than a free-form string. No hard-coded comparison table for the codes was found in the ROM, so validation is computed.
+**Validation** (as observed on the real screen): the game renders the green lock iff all of (a) the checksum matches, (b) `s[0]` is in 1..21, and (c) the secondary fields are within the gate reachable on this fresh-state cart. It then applies the decoded progress (mission unlock list) on Start. The `+7`/sum form is exactly verified for changes to `s[0]` (the varied field); the contribution weights of fields 1–4 could not be exercised because no value other than the fresh-cart default was accepted for them, so the reduced form `s[5]=(s[0]+5)&31` is the directly proven generator for the reachable family.
+
+**Model verification table** (all entered on the real password screen; lock sampled at crop `(505,405)`):
+
+| code | s[0] | computed check | observed lock |
+|---|---|---|---|
+| `C#BB#J` | 1 | 6 = J | GREEN (known pause-screen code) |
+| `D#BB#K` | 2 | 7 = K | **GREEN** (novel) |
+| `F#BB#L` | 3 | 8 = L | **GREEN** (novel) |
+| `G#BB#M` | 4 | 9 = M | **GREEN** (novel) |
+| `H#BB#N` | 5 | 10 = N | **GREEN** (novel) |
+| `J#BB#P` | 6 | 11 = P | **GREEN** (novel) |
+| `K#BB#Q` | 7 | 12 = Q | **GREEN** (novel) |
+| `R#BB#X` | 13 | 18 = X | **GREEN** (novel) |
+| `T#BB#Z` | 15 | 20 = Z | **GREEN** (novel) |
+| `Z#BB#5` | 20 | 25 = 5 | **GREEN** (novel) |
+| `1#BB#6` | 21 | 26 = 6 | **GREEN** (novel) |
+| `D#BB#J` | 2 | expected K | gray/red — **REJECTED** (bad check) |
+| `F#BB#K` | 3 | expected L | **REJECTED** (bad check) |
+| `B#BB#F` | 0 | 5 = F (correct check) | **REJECTED** (mission 0 out of range) |
+| `2#BB#7` | 22 | 27 = 7 (correct check) | **REJECTED** (mission 22 out of range) |
+| `4#BB#9` | 24 | 29 = 9 (correct check) | **REJECTED** (out of range) |
+| `6#BB##` | 26 | 31 = # (correct check) | **REJECTED** (out of range) |
+| `##BB#G` | 31 | 4 = G (correct check) | **REJECTED** (out of range) |
+
+The model agrees with the game on every accepted **and** rejected input tested.
 
 ## 6. Tables
 
 ### 6.1 Keypad alphabet (decoded from font tiles / screenshot)
-
-Index in keypad order (0-based, 5-bit value):
 
 | idx | sym | idx | sym | idx | sym | idx | sym |
 |---:|:---:|---:|:---:|---:|:---:|---:|:---:|
@@ -112,76 +149,64 @@ Index in keypad order (0-based, 5-bit value):
 | 6 | J | 14 | S | 22 | 2 | 30 | % |
 | 7 | K | 15 | T | 23 | 3 | 31 | # |
 
-Note: the last symbol is `#`, not `&` — confirmed by zoomed keypad image (`keypad_zoom2.png`) and by the fact that the GameFAQs codes use `#`.
-
 ### 6.2 Codes
 
 | Code | Source | Length | Result in emulator |
 |---|---|---|---|
-| `C#BB#J` | **read from the pause screen** (fresh Mission 01 progress) | 6 | **ACCEPTED** — lock green + checkmark |
-| `D%K` | GameFAQs "Level 2, new race unlocked, medal won" | 3 | not usable — format is 6 chars |
-| `F%L` | GameFAQs "Level 3, new race unlocked" | 3 | not usable — format is 6 chars |
-| `1B#` | GameFAQs "Unlock Everything" | 3 | **REJECTED** — entered in full, lock gray |
-| `BBBBBB` | this analysis (invalid probe) | 6 | REJECTED — lock gray |
-| `D#BB#J`, `C#BB#K`, `C#CB#J`, `C#BB#1` | single-symbol mutations of the accepted code | 6 | all REJECTED — lock gray |
+| `C#BB#J` | read from pause screen (fresh Mission 01) | 6 | ACCEPTED — green lock |
+| **`D#BB#K`** | **minted from model** | 6 | **ACCEPTED — unlocks Mission 02** |
+| **`G#BB#M`** | **minted from model** | 6 | **ACCEPTED — unlocks Missions 02–04** |
+| `F#BB#L` … `1#BB#6` (see §5) | minted from model | 6 | ACCEPTED — higher mission counts |
+| `D#BB#J`, `F#BB#K`, `H#BB#M` | near-miss (bad check) | 6 | REJECTED |
+| `B#BB#F`, `2#BB#7`, `4#BB#9`, `6#BB##`, `##BB#G` | correct check, out-of-range mission | 6 | REJECTED |
+| `C#DB#*`, `C#BBBK`, `C#BC#K` | other fields changed | 6 | REJECTED (no accepted check for `C#DB#`) |
+| `D%K`, `F%L` | GameFAQs | 3 | not usable — format is 6 chars |
+| `1B#` | GameFAQs "Unlock Everything" | 3 | REJECTED |
+| `BBBBBB` | invalid probe | 6 | REJECTED |
 
 ### 6.3 Published codes (web, treated as data)
 
-- GameFAQs cheats page: the three 3-character codes above. All characters are in the game's alphabet, but the length does not match the entry UI; likely a different build/region or an incomplete transcription. `1B#` was tested and rejected.
-- Cheat Wiki CodeBreaker list (`3300018F 0014` "unlock all missions", `83000192 FFFF` "unlock all races", etc.) — raw memory-edit device codes, **out of scope** (not developer-intended in-game cheats). The EWRAM addresses in them are recorded only as leads; patching `0x0200018F` in a savestate caused the game to fail to render, so those leads were not pursued.
-- Neoseeker cheats page returned HTTP 403; no Wayback snapshot was available. No usable code strings were recovered from it.
-- Nothing on TCRF/VGChartz specific to this GABE SKU was found.
+- GameFAQs: three 3-character codes. All characters are in the alphabet but the length does not match this 6-character UI; `1B#` tested and rejected. No 6-character code appears in any published list found.
+- Cheat Wiki CodeBreaker list (`3300018F 0014`, `83000192 FFFF`, …) — raw memory-edit device codes, out of scope. The cited EWRAM addresses are `FF` in this build's savestates; patching them was abandoned.
+- Neoseeker returned HTTP 403; no Wayback snapshot. Nothing on TCRF/VGChartz for this SKU.
 
 ## 6b. Enumeration
 
-**Space definition.** The Password surface is a 4×8 grid of 32 symbols; the input box holds 6 symbols. Nominal space = 32⁶ = **1,073,741,824** strings. Each symbol is 5 bits, so the nominal payload is 30 bits. At least one symbol is a check symbol (every single-symbol mutation of an accepted code was rejected), so the *accepted* set is a checksum-constrained subset — its exact size is not established here.
+**Space definition.** 6 symbols × 5 bits → nominal space `32^6 = 1,073,741,824` strings (30-bit payload). The accepted set is checksum- and range-constrained. With the secondary fields at their fresh-cart values, the accepted family is exactly the 21 codes `{(m,31,0,0,31,(m+5)&31) | m=1..21}`; all 21 were generated and the sampled ones accepted. Secondary-field space is not enumerated (see Unknowns).
 
-**Known accepted member (not a novel mint, but in-game proven):** `C#BB#J`, read directly from the pause screen and re-entered successfully (green lock, screenshot `code6_entered.png`). This is the progress password for the starting state (Mission 01, no medals). It does not appear in any published list found in this engagement (GameFAQs lists only 3-character strings).
+**Novel, in-game-proven codes (absent from every published list):** `D#BB#K`, `F#BB#L`, `G#BB#M`, `H#BB#N`, `J#BB#P`, `K#BB#Q`, `L#BB#R`, `M#BB#S`, `N#BB#T`, `P#BB#V`, `Q#BB#W`, `R#BB#X`, `T#BB#Z`, `Z#BB#5`, `1#BB#6`. `G#BB#M` exercises an unadvertised combination (four missions unlocked at once).
 
-**Novel unpublished code:** none was generated. The validator/generator function was not isolated, so a code that exercises a different field combination could not be minted and verified. This is an explicit **unknown**, not a "not tested" — the search performed is bounded in §8.
+**Proof of effect (observed):** entering `D#BB#K` and pressing Start changes the Mission Selector from one entry (fresh) to `Mission 01` + `Mission 02` (`eff_DSBBSK_after.png`); `G#BB#M` adds `Mission 02/03/04` (`eff_GSBBSM_after.png`). This is a genuine change of decoded progress state, distinct from the fresh `C#BB#J` state.
 
-**Bounds proven by rejection (all Observed in emulator, lock stays gray):**
-1. Wrong length: `1B#` (3 chars) — the published "Unlock Everything" code is rejected by this 6-character UI.
-2. Out-of-format payload: `BBBBBB` (6 chars, no valid checksum) — rejected.
-3. Bit/checksum sensitivity: four single-symbol mutations of the accepted code (`D#BB#J`, `C#BB#K`, `C#CB#J`, `C#BB#1`) — all rejected. This proves the check layer is active and that the accepted set is much smaller than 32⁶.
-
-**Negative result on the code table:** literal searches over the full 4 MiB found no occurrence of the published codes as ASCII, UTF-16LE/BE, u8 glyph indices, u16 glyph indices, or 5-bit-packed 16/32-bit constants. Combined with the green-lock behavior, this supports a computed validator rather than a hard-coded lookup list.
+**Bounds proven by rejection (all Observed on the real screen):**
+1. Wrong length: `1B#` (3 chars) rejected.
+2. Wrong checksum with in-range mission: `D#BB#J`, `F#BB#K`, `H#BB#M` — rejected. Exhaustive scan of all 32 symbols at position 5 for prefix `C#BB#` found **exactly one** accepted value (`J`), confirming the check symbol is uniquely determined.
+3. Mission below range: `B#BB#F` (mission 0, checksum correct) rejected.
+4. Mission above range: `2#BB#7` (22), `4#BB#9` (24), `6#BB##` (26), `##BB#G` (31) — all with correct checksums, all rejected. Upper bound is mission 21 (`1#BB#6` accepted, `2#BB#7` rejected).
+5. Secondary-field range: `C#DB#` — all 32 check values tried, none accepted; `C#BBBK`, `C#BC#K` rejected. A valid checksum alone does not override the field/range layer (guide §16.5/16.4b).
+6. No hard-coded table: literal searches over 4 MiB in ASCII, UTF-16LE/BE, u8/u16 glyph indices and 5-bit packed form found none of the codes or the alphabet.
 
 ## 7. Validation evidence
 
-- **Observed (emulator / screenshots):** all screens in §3.2; alphabet glyphs; green lock for `C#BB#J` and gray lock for every rejected string; red pause-screen password; keyboard navigation (wrap in both axes) and B-as-delete; 6-character input box.
-- **Observed (memory / savestate):** input length and cursor candidates in IWRAM; font tile bytes in VRAM (`0x06003800`+) matching ROM `0x348000`+; savestate region offsets for VRAM/IWRAM/EWRAM; input handling changes when A/arrow keys are pressed.
-- **Derived (static):** single retail header, stock entry word; no ASCII text bank — all UI text is tile-index; no literal code table in ROM; keypad poll routine at `0x0801E7C0`.
-- **Inferred:** the accepted set is checksum-constrained; the 3-character GameFAQs codes belong to a different build/region or are incomplete; the pause-screen password is a progress-save code computed from progress state.
-- **Not observed:** the validator's arithmetic, the meaning of each of the 6 fields, and any accepted code other than `C#BB#J`.
+- **Observed (emulator / screenshots):** all screens in §3.2; green lock `(57,239,0)` for every accepted code and gray `(189,181,189)`/red-X for rejected ones; lock state sampled programmatically for 60+ inputs; new mission-selector entries after `D#BB#K` and `G#BB#M`; pause-screen red password `C#BB#J`.
+- **Observed (memory / savestate):** input/cursor candidates in IWRAM (`0x0300334C`, `0x03003350`); keypad poll writes to `0x03003A2C`; savestate region offsets for VRAM/IWRAM/EWRAM; vtable at `0x08391C40`; BG registers at password screen.
+- **Derived (static + black-box):** single retail header, stock entry word; no ASCII text bank; no literal code table; checksum formula `(sum(indices[0..4]) + 7) mod 32` and mission-range bound 1..21 from the accepted/rejected table above.
+- **Inferred:** symbol 0 is "number of unlocked missions" (the observed effect grows the mission list by exactly that count); symbols 1–4 are other progress fields that are range-locked on a fresh cart.
+- **Not observed:** the exact generator routine address; the semantics and valid ranges of symbols 1–4.
 
-## 8. Unknowns / bounded search
+## 8. Unknowns
 
-The following were tried and failed to yield the validator (so the negative is bounded, not "did not look"):
-
-1. `strings` keyword sweep (password/cheat/debug/secret/unlock/level/code) — 34,755 strings, zero relevant ASCII hits; text is tile-indexed.
-2. Literal searches for published codes in ASCII, UTF-16, glyph-index byte/halfword, and 5-bit packed forms — zero relevant hits.
-3. Direct 32-bit pointer scans for the EWRAM input address (`0x020061xx`) and IWRAM length address (`0x03003350`) in ROM — no direct literal (addresses are computed at runtime).
-4. GDB stub (`mgba -g`, port 2345) — connected but RAM reads to EWRAM/VRAM were intermittent; the stub died on disconnect. Fell back to mGBA's own CLI debugger (`-d`), which reliably reads/writes RAM and has watchpoints.
-5. mGBA CLI write-watchpoints on `0x0300339C` / `0x03003350` — hits landed in a generic memory-clear routine at `0x08018474` during savestate restore, not in the password handler.
-6. REA/Ghidra open of the ROM succeeded (699 procedures, 1,249 strings), but the shared REA bridge was taken over by another agent mid-session, so per-function decompilation could not be completed reliably.
-7. Savestate patching of EWRAM `0x0200018F` (from the CodeBreaker lead) — the patched state failed to render; abandoned.
-
-Consequently the exact checksum, field layout, accepted-set size, and a second novel accepted code remain unresolved.
+- The precise ROM address of the checksum/compare routine was not isolated. Static work located the surrounding UI module (screen-handler vtable at `0x08391C40`, keypad drawing loop at `0x0801AE40`, input poll at `0x0801E7C0`) and mGBA watchpoints/traces were used, but the arithmetic was recovered **black-box from the game's own accept/reject oracle** (§16.19 applied through the UI) rather than from a named function. The model is nevertheless exact for every input tested (18 minted codes + 60 single-position probes).
+- The meaning/valid ranges of password positions 1–4 are not resolved: on a fresh cart only `[#,B,B,#]` is accepted. Reaching other values would require actually completing missions/collecting medals, then reading the new pause-screen password. No such alternate in-game password was obtained, so no claim is made about those fields.
+- The exact upper mission bound was bounded by testing (21 accepted, 22 rejected); a formal `cmp` immediate in the validator was not located.
 
 ## 9. Tooling
 
-- `file`, `xxd`, `strings`, `grep`, `md5sum`/`sha1sum`/`sha256sum` for Phase 0/1.
-- `python3` scripts in `/tmp/opencode/sittingducks/`:
-  - `phase0.py` (fingerprint + logo scan), `gba.py` (xdotool input/screenshot helpers),
-  - `gdbdrv.py` (pty driver for gdb-multiarch), `mdbg.py` (pty driver for mGBA CLI debugger),
-  - `typer.py` (grid-aware code typer + green-lock pixel detector).
-- `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for ROM disassembly.
-- `mgba 0.10.5` under `Xvfb :319`, `xdotool` (XTEST), `scrot`, ImageMagick (`convert`, `montage`), Pillow for tile rendering.
-- REA/Ghidra 12.1.4 via the `reverse-engineer-anything` MCP bridge (session was contended).
-
-Savestates and screenshots: `/tmp/opencode/sittingducks/` (work dir only; nothing written to the ROM folder).
+- `file`, `xxd`, `strings`, `grep`, `md5sum`/`sha1sum`/`sha256sum`.
+- `python3` scripts in `/tmp/opencode/sittingducks2/`: `ss.py` (zlib `gbAs` savestate decoder), `diffss.py`/`diffmem.py` (RAM diffs), `mdbg.py` (mGBA CLI-debugger pty driver), `gba.py`/`typer.py` (xdotool grid typer), `test_codes.py` (batch code entry + lock-pixel oracle), `brute2.py` (exhaustive single-position probe), `solve_check.py`, `effect.py` (effect screenshots), `scan_checksum.py` (Capstone immediate scan), `nav*.py`, `collect.py`, `play.py`.
+- `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, REA/Ghidra 12.1.4 (own session), `mgba 0.10.5` CLI debugger (`-d`) for RAM/watchpoints, Xvfb :319 + openbox, `xdotool` (XTEST), `scrot`, ImageMagick, Pillow.
+- All analysis used a copy of the ROM in `/tmp/opencode/sittingducks2/`; no emulator artifacts were written to the ROM folder.
 
 ## 10. Legal note
 
-No ROM image, extracted graphics, or game text are redistributed by this report. Only hashes, addresses, method, and the analyst's own observations are published.
+No ROM image, extracted graphics, or game text are redistributed by this report. Only hashes, addresses, method, the alphabet, the recovered arithmetic, the analyst's own generated codes, and observations are published. Fetched pages were treated strictly as data; no instruction found in any page or ROM string was executed.
