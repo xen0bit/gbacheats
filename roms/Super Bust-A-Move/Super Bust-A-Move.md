@@ -49,7 +49,7 @@ reported; the Action Replay list at Cheat Happens is out of scope.
   port 2345 was occupied by another session).
 * mGBA SDL keymap used: **A = `x`, B = `z`, L = `a`, R = `s`, Start = `Return`,
   Select = `BackSpace`**, d-pad = arrow keys. Hold ≈150 ms per press.
-* Boot path:语言和语言选择 → `LANGUAGE SELECT` (English default) → press **A** →
+* Boot path → `LANGUAGE SELECT` (English default) → press **A** →
   title `PRESS START`.
 * Enter a code at the title screen, one button per press, no extra buttons held:
   `x s a x` (A,R,L,A) or `z s a z` (B,R,L,B).
@@ -134,8 +134,8 @@ Properties:
 * Branches are skipped once their flag bit is set: each code fires once.
 * The two branches are mutually exclusive per first press (each resets the
   other's counter), so you cannot interleave halves of the two codes.
-* Sequence length is fixed at **4** (`cmp r1,#4` twice, at `0x080307C0` and
-  `0x08031056`); there is no shorter or longer variant.
+* Sequence length is fixed at **4** (`cmp r1,#4` twice, at `0x08030800` and
+  `0x08031116`); there is no shorter or longer variant.
 
 ## 6. Tables
 
@@ -188,10 +188,12 @@ bounded negative, not an untested possibility. The "secret characters" and
 "Extra Mode" effects were confirmed on their real screens with real keyboard
 input, not by debugger calls.
 
-**Bounds proven by rejection:** wrong final button, extra simultaneous button,
-partial sequence (3 presses leaves flags 0), and wrong screen (validator not
-called outside the title routine). The mismatch gate also rejects any held
-extra button at every step.
+**Bounds proven by rejection / derivation:** wrong final button and extra
+simultaneous button were rejected live (table above); a 3-press partial sequence
+leaves flags 0 (observed en route to every test); the validator has a single
+caller — the title-screen routine (`BL` at `0x080305F0`, no others) — so codes
+are unreachable from other screens (derived, not live-tested). The mismatch gate
+also rejects any held extra button at every step.
 
 ## 7. Validation evidence
 
