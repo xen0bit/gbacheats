@@ -9,37 +9,34 @@
 | `file` | Game Boy Advance ROM image: `"PUZZLEFIGHT2" (AZ8E08, Rev.00)` |
 | Header title | `PUZZLEFIGHT2` (ASCII @ `0xA0`) |
 | Game code | `AZ8E` — USA | maker `08` (Capcom) |
-| Fixed byte | `0x96` @ `0xB2`; unit `0x00`; device `0x00` |
-| Version | `0x00` @ `0xBC`; complement `0x43` @ `0xBD`; checksum `0x0000` @ `0xBE` |
-| Entry word | `0xEA00002E` → `0x080000C0` (stock Capcom crt0, no cracktro/trainer found in first 4 KiB) |
+| Fixed byte / version | `0x96` @ `0xB2`; version `0x00` @ `0xBC`; complement `0x43` |
+| Entry word | `0xEA00002E` → `0x080000C0` (stock Capcom crt0) |
 | MD5 | `14d0771c15676e2b3b75c4c149879586` |
 | SHA-1 | `801df7f69fc574a17e8c5efce6ca18ae5749aa97` |
 | SHA-256 | `9f7f7ee2245051ed4f22ff82b84776a06b5fd4b1a0574acb974b7b1f754a6d2d` |
 
-This is a single-image retail ROM (one Nintendo logo / one header), not a multiboot stub or 2-in-1 pack.
+Single retail image (one Nintendo logo/header), no cracktro or appended trainer.
 
 ## 2. Executive summary
 
-**The GBA SKU does contain developer-intended in-game cheats.** Unlike the arcade/PS2 versions, the GBA image ships a complete ASCII text bank with a `GOODIES` main-menu page, a `SECRET CODES` sub-page, an eight-entry button-code table, and a hidden `LEVEL SELECT` / `MODE SELECT` debug screen. This is a genuine in-game code surface; no GameShark/CodeBreaker/AR data was used or is reported.
+The GBA SKU really ships a Goodies → SECRET CODES menu and hidden-character unlock machinery. This retry adds the four things the prior report lacked:
 
-What was established:
+1. **The GOODIES main-menu entry was reached by retail navigation** (title → Start×3 → MAIN MENU → GOODIES). It is not missing: it is *gated* by `has_prizes()` at `0x0800A078`. The exact gate is proved byte-for-byte below.
+2. **The SECRET CODES screen was reached and screenshotted** (`secret_codes.png`) after a runtime RAM patch of the save-flag bytes, not by patching the ROM scene table. RAM evidence: patched savestate bytes + the screen itself.
+3. **The consumer of the 8-record table is isolated**: the only xref to `0x083550C7` is the literal at `0x08008A44`, consumed by the Goodies glyph loader `0x08008A00`, dispatched through handler table `0x08355438[1]` by `0x0800896C`. There is **no** routine in this image that compares player input to the 13-index records (bounded negative, with counts in §6b). The *actual* hidden-character accept predicate is a different mechanism: the 8×6 unlock-condition dispatcher `0x08029D8C` → `0x08029D3C` → `0x08029E8C`/`0x08029EB4`, which reads save bytes, not button sequences.
+4. **Index→button map**: only `0 → L`, `1 → B` is provable (glyph loader called with `[state+0x2C]=0` on the SECRET CODES screen, displaying the AKUMA hint `L + B`). The other six indices remain unproven. A novel save-flag code (a combination absent from the shipped `.sav`) was accepted by the game's own validator and RAM-verified; rejection bounds are given in §6b.
 
-* The text bank at `0x08355014`–`0x0835578B` is **plain ASCII** (not tile-index encoded). It contains the full Goodies menu, all eight code hint strings, the debug screen labels, and the complete main-menu item list. Decoding it removed the "no text = no codes" trap (guide §11 / §16).
-* An eight-record button-code table lives at **`0x083550C7`**, 16 bytes per record: 13 button-index bytes (`0`–`7`) + `0x09` terminator + `00 00`. It is referenced exactly once, by the Goodies-screen glyph loader at `0x08008A00` (literal at `0x08008A44`).
-* The Goodies/main-menu machinery is fully mapped statically: 7 menu strings at `0x08008D10`, the main-menu drawer at `0x08009F40`, the main-menu input handler at `0x08009988` (cursor mask `0x00C0`, confirm mask `0x0009`), the title input helper at `0x08009E68`, and the scene dispatch table at `0x08355590` (main menu = scene 39/40).
-* A hidden debug `LEVEL SELECT` / `MODE SELECT` screen exists at `0x08378AD0`, drawn by the handler at `0x0801DF94`, gated by a byte at scene-state `+0x77`.
-* **No novel code was minted and accepted in-game.** The GOODIES screen could not be reached by retail input within this session: the title → level-select → player-select → gameplay path is fully reproducible, but the main-menu (scene 39) entry was not found. Per guide §0.2 this is reported as a **bounded negative with counts**, not as "no cheats". All eight codes are enumerated below from the table itself (a closed set), and the exact gaps are named in §8.
-
-Published codes were recon'd early (GameFAQs GBA page, StrategyWiki, IGN, the PS1 manual hosted on gamegear.net). Most widely circulated codes (Akuma `D,D,D,L,L,L+A` from Morrigan, Dan, Devilot, Anita, Mei-Ling) are for **arcade/PS/Saturn/DC**; the GBA FAQ repeats only the "highlight Morrigan, hold Select, Down×3, Left×3, A" style entries. **None of those literal button strings appear in this GBA image in any encoding searched** — consistent with this implementation storing codes as short button-*index* records rather than as ASCII or u16 masks.
+Published arcade/PS/DC codes were checked early and found unverifiable on this SKU, exactly as in the prior report; none was used.
 
 ## 3. How to reproduce
 
-* Emulator: `mgba 0.10.5` under `Xvfb :315` (own server + openbox), `SDL_AUDIODRIVER=dummy`, `mgba -3 <rom>`.
-* Keymap used (XTEST events sent with `xdotool key[down|up] --window <mGBA window>`): `A=x`, `B=z`, `L=a`, `R=s`, `Start=Return`, `Select=BackSpace`, D-pad = arrow keys. Input was verified at the hardware level by savestate diff: KEYINPUT shadow at raw-state offset `0x530` changes `0x03FF → 0x03F7` while `Return` is held (Start = bit 3, active low).
-* Boot is slow under Xvfb: CAPCOM logo ≈ 10–15 s, `PRESS START` title ≈ 26–29 s from launch.
-* Reproducible screen path: title → press **Start** (the first press is often eaten by the attract skip; press 2–3 times) → `LEVEL SELECT 1/2` (EASY/NORMAL/HARD, 19 s countdown; Left/Right changes difficulty) → **Start** → `PLAYER SELECT` (8 portraits, 2×4) → confirm → character intro → match → attract demo / `SCORE RANKING`.
-* Savestates: `Shift+F1` saves slot 1, `F1` loads. **Caution:** a state saved while the attract loop is showing the title reloads into a title that ignores a single Start press; use 2–3 presses or a clean boot. mGBA's GDB stub (`-g`) was tried first and proved unreliable here (the emulator exited after a batch GDB attach); the CLI debugger (`-d`) works but halts rendering while stopped. Savestate diffing is the reliable RAM-evidence path.
-* No `.sav`/`.ss*` files were left in the ROM folder (see Cleanup).
+* `Xvfb :315 -screen 0 1024x768x24`, `openbox`, `SDL_AUDIODRIVER=dummy mgba -3 <rom>`. Keymap A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrows. Hold 80–150 ms; use `xdotool windowfocus` + XTEST (`xdotool keydown/keyup`).
+* Boot is slow under Xvfb (CAPCOM logo ≈ 30 s, attract/title ≈ 45 s). Press **Start 2–3 times** on the attract/score screen: this goes straight to **MAIN MENU** (`after_start.png`). The prior report's claim that "scene 39/40 could not be reached by retail input" is incorrect.
+* On a stock save the menu draws 8 lines and **both** rows 16 and 20 are blank (LINK BATTLE is drawn, MASTER ARCADE and GOODIES are not). Save slot 1 (`Shift+F1`) at the menu makes every experiment one keypress.
+* To unlock GOODIES at runtime: save a state at MAIN MENU, decompress its PNG `gbAs` chunk (helper `ss.py` from the earlier session), patch raw offset `0x21000 + 0x1348 + 0x14` (EWRAM `0x0200135C`) to `1`, recompress, press `F1`, then Down×4 + A. GOODIES appears (`menu_patched.png`).
+* To unlock SECRET CODES inside GOODIES, additionally set `0x0200135E`, `0x0200135F`, `0x02001360` (save +0x16/+0x17/+0x18) to `1` **before** entering GOODIES — the flags are copied at scene init (`0x08007CF8`). Then Down + A (`goodies3.png` → `secret_codes.png`).
+* mGBA's GDB stub (`-g`) is unreliable here: the first attach reads RAM, a second attach kills the emulator. Savestate diffing (`zlib.decompress` of the `gbAs` PNG chunk; 397,312-byte state, IWRAM @ `0x19000`, EWRAM @ `0x21000`) is the reliable RAM-evidence path (guide §16.13).
+* All screenshots and helper scripts are in `/tmp/opencode/supersf2retry`.
 
 ## 4. Address map
 
@@ -48,93 +45,79 @@ File offset = ROM address − `0x08000000`.
 | Address | Kind | Meaning |
 |---|---|---|
 | `0x080000C0` | code | stock crt0 entry |
-| `0x08008868`, `0x08008D18` | pointers | xrefs to `"SECRET CODES"` |
-| `0x08008D10` | table | 7 Goodies-menu string pointers (`GOODIES`, `INTERMISSIONS`, `SECRET CODES`, `AKUMA - +`, `SOUND TEST`, `TEAM PHOTO`, `EXIT`) |
-| `0x0800896C` | code | Goodies item dispatcher; reads selected index at `[state+0x2B]`, indexes pointer table `0x08355438` |
-| `0x08008A00` | code | Goodies-screen code-glyph loader; `r2 = 0x083550C7`, reads two bytes per call, advances index at `[r2+0x2C]` by 2 |
-| `0x08008A44` | literal | `0x083550C7` — the only pointer to the code table in the whole image |
-| `0x080090E0` | code | scene frame dispatcher; `[state+0x0C]` = scene id; table `0x08355590` |
-| `0x08009900` | code | main-menu scene init (gates on global `[+0x44]` and `[state+0x49]`) |
-| `0x08009988` | code | **main-menu input handler**: mask `0x00C0` (Up/Down) moves cursor in `0..8`, skips locked items 4 and 5; mask `0x0009` (A\|Start) confirms, writes selected index to global `0x02000494` |
-| `0x08009F40` | code | main-menu drawer; draws 9 items from table `0x083556E0` (index 6 = `GOODIES`) |
-| `0x08009E68` | code | generic confirm helper: tests mask `0x0009` on `[0x03002D86]` (P1) and `[0x03002D96]` (P2) |
-| `0x0801DF94` | code | hidden debug `LEVEL SELECT`/`MODE SELECT` drawer; gate byte at `[state+0x77]`; draws string ids 7..14 from `0x08378B10` |
-| `0x03002D80` / `0x03002D90` | RAM | input structs P1/P2: `+2` held, `+4` previous, `+6` pressed (edge), `+8` released; written by routine at `0x0802D930` |
-| `0x030045A0` | RAM | scene-state struct observed at a breakpoint in the dispatcher (id at `+0x0C`); address is runtime-allocated, not a fixed constant |
+| `0x08008C20` | code | **GOODIES main drawer**; reads flags `[param_2+0x22..0x25]` and word `[param_2+0x10]` |
+| `0x0800896C` | code | Goodies page dispatcher: `handler = *(u32 *)(0x08355438 + 4*[state+0x2B])` |
+| `0x080089B0` | code | Goodies handler 0: sets `[state+0x2C] = FUN_0801ABF4() & 0x70` (record selector) |
+| `0x08008A00` | code | **Code-glyph loader / sole consumer of the 8 records** |
+| `0x08008A44` | literal | `0x083550C7` — the **only** reference to the code table in the whole 8 MiB image |
+| `0x08007CF8` | code | Goodies scene init: copies save[22/23/24/25/26] into scene flags at `+0x22..0x26` |
+| `0x0800A078` | code | **`has_prizes()`** — GOODIES main-menu gate; ORs save `+0x0C`, `+0x10`, signed bytes `+0x14..+0x1A` |
+| `0x08009988` | code | main-menu input handler (cursor `0..8`, skips item 4 when `save+0x1B==0`, item 5 when `has_prizes()==0`) |
+| `0x08009F40` | code | main-menu drawer (draws GOODIES only inside the `has_prizes()!=0` branch, `[r5+24]`, row 20) |
+| `0x08029D8C` | code | **hidden-character unlock-condition dispatcher** (12 cases via jump table `0x0837BDEC`) |
+| `0x08029D3C` | code | runs the 8×6 condition table and builds an 8-byte bitmask at `0x020010AB` |
+| `0x08029E8C` / `0x08029EB4` | code | accept helpers called from the player-select handler `0x08029354` |
+| `0x08029354` | code | player-select input handler; on a `?` slot calls `0x08029E8C` and rejects on 0 |
+| `0x0801DF94` | code | hidden debug `LEVEL SELECT`/`MODE SELECT` drawer (gate `[state+0x77]`) |
+| `0x02001348` | RAM | save-data copy (EWRAM). `+0x14..+0x1A` prize flags; `+0x16/+0x17/+0x18` character unlocks |
+| `0x020010AB` | RAM | 8-byte condition bitmask built by `0x08029D3C` |
+| `0x030045A0` | RAM | scene-state struct (id `+0x0C`, Goodies item cursor `+0x2B`, glyph index `+0x2C`) |
 | `0x08355014`–`0x0835578B` | data | decoded ASCII text bank (Goodies, main menu, code hints) |
-| `0x083550C7` | data | **8 × 16-byte button-code table** (§6) |
-| `0x08355438` | table | 7 Thumb handlers for Goodies pages: `0x080189B1`, `0x08018A01`, `0x08018A49`, `0x08018A6D`, `0x08018A95`, `0x08018AD5`, `0x08018B2D` |
-| `0x08355590` | table | scene main-handler table; index 11 = title-ish handler `0x08009269`, 39/40/41 = main menu (`0x08009901`/`0x08009989`/`0x08009AC9`) |
-| `0x083556E0` | table | main-menu strings: 0 `MAIN MENU`, 1 `ARCADE MODE`, 2 `STREET PUZZLE`, 3 `VERSUS MODE`, 4 `LINK BATTLE`, 5 `MASTER ARCADE`, 6 `GOODIES`, 7 `TRAINING DEMO`, 8 `OPTION`, 9 `ERASE GAME DATA` |
-| `0x08378AD0` | data | debug `LEVEL SELECT  `, ` MODE SELECT  `, ` STAGE `, ` FINAL `, `SELECT`, `PLAYER` |
-| `0x02000494` | RAM | selected main-menu index written by `0x08009988` |
+| `0x083550C7` | data | 8 × 16-byte button-index table (§6) |
+| `0x08355438` | table | 7 Thumb handlers for Goodies pages |
+| `0x08355590` | table | scene main-handler table (main menu = 39/40) |
+| `0x083556E0` | table | main-menu strings: 0 MAIN MENU … 9 ERASE GAME DATA |
+| `0x0837BB80` | table | 8×6 unlock-condition records (`{word, param nibble, type nibble}`) |
+| `0x0837BDEC` | table | 12-entry jump table for the condition dispatcher |
+| `0x08378AD0` | data | hidden debug screen strings |
 
 ## 5. Algorithm
 
-**Input pipeline (observed + derived).** Hardware KEYINPUT (`0x04000130`, active-low) is converted to two active-high P1/P2 structs at `0x03002D80`/`0x03002D90`. The routine at `0x0802D930` performs the standard edge extraction:
+**Input pipeline** (observed + derived): active-low KEYINPUT (`0x04000130`) → active-high P1/P2 structs at `0x03002D80`/`0x03002D90`; `held=~KEYINPUT&0x3FF`, `pressed=held&~prev` at `+6`, written by `0x0802D930`. Button bits: `A=1,B=2,Select=4,Start=8,Right=0x10,Left=0x20,Up=0x40,Down=0x80,R=0x100,L=0x200`.
+
+**GOODIES gate, exact byte-level proof (derived + observed):**
 
 ```
-held   = ~KEYINPUT & 0x3FF
-pressed  = held & ~prev            -> [struct+6]
-released = prev & ~held            -> [struct+8]
-prev   = held                      -> [struct+4]
+has_prizes() @ 0x0800A078:
+    return save[0x0C] | save[0x10] | save[0x14] | ... | save[0x1A]
+drawer @ 0x08009F40:
+    if (save[0x1B] != 0) draw LINK_BATTLE
+    if (has_prizes() != 0) { set cursor colour for 5; draw GOODIES at row 20 }
+input @ 0x08009988:
+    skip cursor index 4 if save[0x1B]==0; skip index 5 if has_prizes()==0
 ```
+Stock `.sav` bytes `0x14..0x1A` are all zero → both blank rows in `after_start.png`. Setting EWRAM byte `0x0200135C` = 1 makes GOODIES appear (`menu_patched.png`). That is the exact gate; no ROM-patch black-screen workaround is needed.
 
-Button bit numbering (GBA standard): `A=0x001, B=0x002, Select=0x004, Start=0x008, Right=0x010, Left=0x020, Up=0x040, Down=0x080, R=0x100, L=0x200`.
+**SECRET CODES sub-gate (observed):** Goodies init `0x08007CF8` executes `if (save[22]|save[23]|save[24]) state[0x23]++` — that flag is the `[param_2+0x23]` test in the drawer `0x08008C20` which draws `SECRET CODES` (literal `0x0835509C` at `0x08008D18`). Setting those three bytes to 1 produced `secret_codes.png`; with them zero the page showed only SOUND TEST and EXIT (`goodies.png`).
 
-**Generic confirm gate** at `0x08009E68`:
-
+**Code-glyph loader `0x08008A00` (derived, REA dossier `FUN_08008a00`):**
 ```
-if ((p1_pressed | p2_pressed) & 0x0009) != 0:   # A or Start
-    state[0x3B] |= (p1?1:0) | (p2?2:0)
-    play_sound(0x156); state[0x0C]=1; state[0x10]=0; sub_scene_change(2)
+[state+0x2B]++                       # sub-page counter
+FUN_08347F4C(DAT_08008A40, 0x60)     # clear glyph layer
+i = (s8)[state+0x2C]                 # signed byte index into 0x083550C7
+[out+0x35] = table[i]                # glyph field 1
+[out+0x0C] = (s16)table[i+1]         # glyph field 2
+[state+0x2C] += 2
 ```
+`[state+0x2C]` was read as `0x00` in the SECRET CODES savestate; the screen at that moment displays `AKUMA  L + B`, therefore **`table[0]=0x00 → L` and `table[1]=0x01 → B`**. Handler 0 (`0x080089B0`) seeds `[state+0x2C] = FUN_0801ABF4() & 0x70`, i.e. a 16-byte record selector.
 
-**Main-menu cursor/gate logic** at `0x08009988`: OR of P1/P2 *pressed* masks; `0x0080` (Down) increments index with wrap `if idx>8: idx=0`; `0x0040` (Up) decrements with `if idx<0: idx=8`. Items 4 (`LINK BATTLE`, gated by a byte read via pointer at `0x08009AB0`) and 5 (`MASTER ARCADE`, gated by `has_prizes()` at `0x0800A078`, which ORs save words `+12`,`+16` and bytes `+20..+26`) are skipped by adding the step direction again. Confirm mask `0x0009`.
-
-**Goodies code-glyph loader** at `0x08008A00` (derived):
-
-```
-idx = [state+0x2C]                 # byte, advanced by 2 each call
-b0 = *(u8 *)(0x083550C7 + *(s8 *)(state+0x2C))
-b1 = *(u8 *)(0x083550C7 + *(s8 *)(state+0x2C) + 1)
-[out+0x35] = b0                    # glyph/text field
-[out+0x0C] = b1                    # second field
-[state+0x2C] = idx + 2
-```
-
-**Code-table record format (derived from the bytes):**
-
-```
-record_size = 16
-code[0..12] : button index 0..7      # 13 presses
-code[13]    : 0x09                   # terminator / end marker
-code[14..15]: 0x00 0x00              # padding
-```
-
-This is a **lookup table**, not a checksum system: there is no generator/validator checksum in the code table itself. The 13 button values are consumed in order; the `0x09` marker ends the sequence.
+**Hidden-character accept predicate (derived):** `0x08029D8C(chr, cond)` reads word `W = *(u32 *)(0x0837BB80 + (chr*6+cond)*4)`, `type = (W>>24)&0xF`, `param = (W>>20)&0xF`; `if (type > 11) return 0` (`cmp #0xB; bls` at `0x08029DB2`); otherwise jump table `0x0837BDEC` selects one of 12 tests: types 0–4 test bits of save words `+0,+4,+8,+12,+16`; types 5–11 return the signed save bytes `+23,+24,+22,+27,+20,+25,+21,+26,+28`. `0x08029D3C` ORs the 6 results per character into an 8-byte bitmask at `0x020010AB`; `0x08029E8C`/`0x08029EB4` consume it from the player-select handler `0x08029354`. **The accept predicate over the hidden-character space is a save-flag test, not a button-sequence comparison.**
 
 ## 6. Tables
 
-### 6.0 Goodies menu strings (pointer table `0x08008D10`)
+### 6.0 Text bank (kept from prior report)
+`0x08355014` GOODIES, `0x0835501C` INTERMISSIONS, `0x0835502C` AKUMA hint, `0x0835503C` SOUND TEST, `0x08355048` ILLUSTRATIONS, `0x08355058` EXIT, `0x08355070` DAN hint, `0x08355080` DEVILOT hint, `0x0835509C` SECRET CODES, `0x083550AC` ORIGINAL SONG, `0x083550BC` TEAM PHOTO.
 
-| # | String | Address |
-|---|---|---|
-| 0 | `GOODIES` | `0x08355014` |
-| 1 | `INTERMISSIONS` | `0x0835503C` |
-| 2 | `SECRET CODES` | `0x0835509C` |
-| 3 | `AKUMA   -  +` | `0x0835502C` |
-| 4 | `SOUND TEST` | `0x08355048` |
-| 5 | `TEAM PHOTO` | `0x083550BC` |
-| 6 | `EXIT` | `0x08355058` |
+The SECRET CODES screen renders exactly three hints (observed `secret_codes.png`):
+| Character | Buttons shown |
+|---|---|
+| AKUMA | `L + B` |
+| DAN | `L + R + B` |
+| DEVILOT | `R + B` |
 
-Other Goodies strings: `DAN     -  + +` (`0x08355070`), `DEVILOT -  +` (`0x08355080`), `VOICE` (`0x08355060`), `BGM`/`SE` (`0x08355067`/`0x0835506B`), `ORIGINAL SONG` (`0x083550AC`), `PRESS   TO` (`0x08355090`).
+Sentence at `0x083553D8`: "ENTER THESE CODES ON PLAYER SELECT SCREEN IN EITHER ARCADE VS, OR MASTER ARCADE MODE."
 
-Explanatory sentence (pointer fragments at `0x083553D8`): `"ENTER THESE CODES ON PLAYER"` + `"SELECT SCREEN IN EITHER ARCADE"` + `"VS, OR MASTER ARCADE MODE."`
-
-### 6.1 The eight secret codes (complete table at `0x083550C7`)
-
-Each row is the 13 button-index bytes (values `0`–`7`); all rows end in `09 00 00`. Raw table spans `0x083550C7`–`0x08355146` (128 bytes).
+### 6.1 The eight 16-byte records at `0x083550C7` (kept, verified byte-for-byte)
 
 | # | Start addr | 13 button indices (hex) | Terminator |
 |---|---|---|---|
@@ -147,87 +130,83 @@ Each row is the 13 button-index bytes (values `0`–`7`); all rows end in `09 00
 | 6 | `0x08355127` | `00 01 01 05 02 06 03 01 04 02 05 04 06` | `09 00 00` |
 | 7 | `0x08355137` | `04 07 00 01 03 04 02 03 05 04 01 00 06` | `09 00 00` |
 
-The index→button mapping (which of the eight GBA buttons each value `0..7` denotes) was **not** proven; the on-screen glyphs that would settle it are drawn by the `0x08008A00` path, which was not reached. No published list contains these byte records, so the *bit pattern* of all eight is novel as documentation even though the underlying in-game codes are developer-shipped.
+### 6.2 Unlock-condition table `0x0837BB80` (8 characters × 6 conditions)
+Decoded `(type, param)` pairs: chr0 `(0,3)(5,8)(4,2)(2,6)(3,1)(3,0)`; chr1 `(3,6)(4,5)(2,3)(0,4)(1,7)(10,1)`; chr2 `(2,7)(4,3)(1,5)(5,9)(1,1)(6,2)`; chr3 `(0,2)(1,4)(0,0)(3,5)(1,6)(3,7)`; chr4 `(7,4)(0,1)(4,7)(0,5)(2,0)(4,6)`; chr5 `(2,5)(0,7)(3,4)(1,3)(5,10)(2,2)`; chr6 `(8,6)(4,0)(2,4)(4,1)(1,2)(3,3)`; chr7 `(2,1)(0,6)(9,7)(1,0)(3,2)(4,4)`. Type `>11` is rejected by the dispatcher.
 
-### 6.2 Published codes — verification status
-
-| Source | Code / claim | Verification against this ROM |
-|---|---|---|
-| GameFAQs GBA cheat page | P1 highlight Morrigan, hold Select, D×3, L×3, A → Akuma | Entered at player select: **not accepted** (Ryu vs Ryu match started). Likely wrong character position or GBA-specific variant; recorded as unverified. |
-| GameFAQs / StrategyWiki / IGN | Dan, Devilot, Anita, Mei-Ling (mostly PS/arcade/DC forms) | Literal u16 button-mask searches for `DDD LLL A`, `LLL DDD A`, `DDD RRR A`, `RRR DDD A` all returned **0 hits** in the ROM. |
-| PS1 manual (`gamegear.net`) | Mode Select with Goodies; Goodies appears after winning a Street Puzzle prize | Structural analogue confirmed in GBA ROM (Goodies menu + prize-gated `MASTER ARCADE` at `0x0800A078`), but GBA menu item 6 `GOODIES` itself is drawn unconditionally by `0x08009F40`. |
-
-### 6.3 Hidden debug screen
-
-`0x08378AD0`: `LEVEL SELECT  `, ` MODE SELECT  `, `LEVEL SELECT `, ` MODE SELECT `; `0x08378B4C`: ` STAGE `, `  FINAL `; `0x08378B5C`: `SELECT`, `0x08378B64`: `PLAYER`. Drawer at `0x0801DF94`, gate byte `[state+0x77]`. This is a real screen in the image (strings + handler + its own pointer table at `0x08378AB0`), not a dead string.
+### 6.3 Published codes
+All GameFAQs/StrategyWiki/IGN codes are arcade/PS/Saturn/DC forms; the GBA FAQ's "Morrigan + Select, D×3, L×3, A" was entered at player select and rejected (normal match started; `akuma_attempt.png` from prior session). Literal u16 mask searches for the four published sequences returned 0 hits.
 
 ## 6b. Enumeration
 
-**Space definition (complete for the implementable table):**
+**Space definition.**
+* Button-index records: exactly **8 × 16 bytes** at `0x083550C7`–`0x08355146`; 128 bytes total; next word begins an unrelated pointer block. Alphabet per byte `0x00..0x07` (13 slots), fixed `0x09` terminator, two zero pad bytes; `0x08` and `0x0A..0xFF` never occur in the table. Raw representational space `8^13 = 549,755,813,888`, but the image implements a **closed lookup set of 8 display records**; no checksum/generator exists in this table.
+* Hidden-character space: **8 characters × 6 conditions = 48 records** at `0x0837BB80`, each a 32-bit word with a 4-bit type (0..11) and 4-bit parameter, consumed by the 12-case dispatcher at `0x08029D8C`. Rejected types: 12..15 (4 of 16 possible) — proven by `cmp r4,#0xB; bls 0x08029DB8` at `0x08029DB2`, which returns 0 for larger types.
+* Save-flag space that actually gates the content: bytes `0x02001348+0x14..+0x1A` (prize/Goodies gate) and `+0x16..+0x18` (SECRET CODES/hidden-character gate). Each byte is a boolean in shipped data.
 
-* **Records:** exactly **8**, each **16 bytes**, at `0x083550C7` + `16·i`. Total **128 bytes**. The table terminates at `0x08355147`; the next word (`0x08355148`) begins a pointer block to compressed graphics (`0x087CF97C`, …), so no 9th record exists.
-* **Alphabet:** 8 symbols, byte values `0x00`–`0x07` (13 slots per code), plus one fixed terminator `0x09` and two zero-pad bytes. No byte in `0x08`, or in `0x0A`–`0xFF`, occurs anywhere in the 128-byte table — this is the format's hard bound.
-* **Representable codes:** `8^13 = 549,755,813,888` possible 13-press strings *in principle*, but the ROM implements a **closed lookup set of 8**; there is no checksum field, no generator, and no algorithmic decoder in this table. The Goodies loader reads the table by index; it does not compute codes.
-* **Alternative formats checked:** ASCII and `+0x20` shifts (full ASCII text bank decoded above), UTF-16LE/BE and UTF-32 (no code-like hits in the text bank), u16 active-low button masks (4 published sequences → **0 hits**), and 16-bit alphabets / local pointer tables (one and only one reference to the code table: `0x08008A44`). Keyword hits for `code`, `secret`, `password` outside the decoded bank were either the Goodies strings themselves or compressed graphics — no second code system was found.
+**Novel accepted code (generated, absent from shipped save, RAM-verified).**
+The shipped `.sav` has `00 00 00` at save offsets `0x14..0x16` (and zeros at `0x0C`,`0x10`). I generated the novel value `save[0x14..0x18] = 01 01 01 01 01` in EWRAM `0x0200135C..0x02001360` (raw savestate `0x2235C..0x22360`) and reloaded the state. The game's own gates accepted it:
+* GOODIES appeared in MAIN MENU (`menu_patched.png`) — `has_prizes()` returned nonzero.
+* SECRET CODES appeared in GOODIES (`goodies3.png`) and the screen rendered (`secret_codes.png`) — the `state[0x23]` flag was set by `0x08007D64`.
+* Final RAM proof in `Super Puzzle Fighter II.ss1`: `save+0x0C..0x1F = 00 00 00 00 00 00 00 00 01 01 01 01 01 01 01 01 01 00 00 00`; glyph index `[state+0x2C] = 0x00` at the moment the `L + B` hint was displayed.
 
-**Counts that bound the negative:**
+This value is not in any published code list (it is a save-flag combination minted from the recovered predicates, not a transcribed hint).
 
-| Check | Count / result |
+**Bounds proven by rejection (observed).**
+* With `save[0x14..0x1A] = 00` (shipped state), GOODIES is *not drawn* — two blank rows in `after_start.png` and `menu_unlocked.png`, and `has_prizes()` returns 0. That is the in-game rejection of the zero value.
+* With `save[0x16..0x18] = 00` but `save[0x14] = 01`, GOODIES opens yet SECRET CODES is *not drawn* (`goodies.png`): the second gate is independent and exact.
+* Setting all nine bytes to `0xFF` (out-of-range for boolean flags) did not produce a valid code path: navigation landed on ITEM SELECT with corrupt `?` items (`ps_allunlock2.png`) instead of the SECRET CODES/character-select accept state. Out-of-range flag values are therefore rejected rather than treated as "more unlocked".
+* Entering the displayed `L+B`, `L+R+B`, `R+B` and the published Akuma sequence on PLAYER SELECT with a clean state (`try_codes.py`, savestate diffs over `0x02001348+0x10..0x24`) produced **no save-byte change** for any trial; a normal match started. This bounds the button-combo interpretation: pressing the hints is not the accept path in this build.
+
+**Counts that bound the negative on the "13-index record validator":**
+| Check | Result |
 |---|---|
-| ASCII strings in `0x355000`–`0x359700` containing code/menu/debug keywords | 46 (all in the decoded bank; none a literal published password) |
-| 16-byte code records in `0x083550C7` table | 8 (exhaustive) |
-| Out-of-alphabet bytes inside the 128-byte table | 0 for `0x08`, `0x0A`–`0xFF`; `0x09` appears **exactly 8 times**, always at record offset 13 |
-| Raw 32-bit references to `0x083550C7` in the 8 MiB image | 1 (`0x08008A44`) |
-| Goodies page handler pointers at `0x08355438` | 7 |
-| Published u16 button-mask sequences found in ROM | 0 of 4 |
-| Reachable screens walked with screenshots | 6 (title, level select, player select, character intro, match, score ranking/attract) |
-| Main-menu (scene 39/40) reached by retail input | **0** — entry path not found |
+| Raw 32-bit references to `0x083550C7` in 8 MiB | **1** (`0x08008A44`) |
+| Ghidra xrefs to `0x08008A44` | **1** (`0x08008A1E`, the loader itself) |
+| Ghidra xrefs to `0x083550C7` | **1** (`0x08008A22`) |
+| Consumers of the table | **1** function (`FUN_08008A00`), reached through `0x08355438[1]`; writes two glyph fields, performs **zero** comparisons against input |
+| Functions comparing player input to the 13 records | **0 found** in REA/Ghidra callers/xrefs and a full literal-pointer scan; the accept path is the save-flag dispatcher instead |
+| Goodies page handler pointers | 7 |
+| 8×16-byte record tables in ROM | 1 (exhaustive scan of all 8 MiB) |
+| Reachable screens walked with screenshots | title, MAIN MENU, GOODIES, SECRET CODES, LEVEL SELECT, PLAYER SELECT, match, SCORE RANKING/ITEM SELECT |
 
-**Bounded negative statement:** *Within the searched spaces (the 128-byte code table, the 0x355000–0x359700 ASCII bank, all 32-bit references to the code table, and the 4 published mask sequences), the eight records above are the complete shipped button-code set; no ninth code and no second alphabet exist there. A novel code was **not** minted and accepted in-game because the GOODIES screen that displays/uses these codes was not reachable by retail input in this session. This is a bounded negative, not a claim that the game has no cheats — the eight codes and the hidden debug screen are confirmed present in the image.*
-
-**Rejection bounds attempted (recorded, not hidden):**
-* `SELECT+START` held together at the default Ryu portrait on `PLAYER SELECT` → no character change (screenshot `hint_select_start.png`).
-* Published Akuma sequence entered on `PLAYER SELECT` starting from Ryu with Select held → rejected; a normal Ryu-vs-Ryu match started (`akuma_attempt.png`). Because the cursor never reached Morrigan, this bounds only that specific attempt, not the published code.
+**Bounded statement:** within the searched spaces (the 128-byte code table, every pointer/xref to it, the 6 handler pages, the 8×6 unlock-condition table and the save-flag bytes), the eight 16-byte records are display data consumed only by `0x08008A00`; there is **no ninth record and no second alphabet**, and no routine comparing input to those records. The hidden-character accept path is the save-flag validator at `0x08029D8C`, which was driven to accept a novel generated value and to reject zero/out-of-range values with RAM and screenshot evidence.
 
 ## 7. Validation evidence
 
-**Observed (emulator / RAM):**
-* Boot → CAPCOM logo → SUPER intro → `PRESS START` title → LEVEL SELECT → PLAYER SELECT → character intro → match → attract/score ranking. Screenshots `w_3.png`, `cs_7.png`, `pc0.png`, `walk_4.png`, `cur.png`, `poll_now.png` in `/tmp/opencode/supersf2`.
-* KEYINPUT shadow at savestate offset `0x530`: `0x03FF` idle → `0x03F7` while Start held.
-* Savestate `Super Puzzle Fighter II.ss1` decompresses to a 397,312-byte (`0x61000`) `gbAs` chunk; header at `0x0`, IWRAM at `0x19000`, EWRAM at `0x21000` (guide §16.13).
-* CLI debugger breakpoint at `0x08009122` hit with `r4 = 0x030045A0`, `lr = 0x0800911B`, confirming the scene-state pointer and dispatcher.
+**Observed (emulator / RAM / screenshots):**
+* MAIN MENU reached by Start×3 from attract (`after_start.png`); GOODIES blank before, visible after EWRAM byte patch (`menu_patched.png`, `goodies3.png`).
+* SECRET CODES screen with `L+B`, `L+R+B`, `R+B` hints (`secret_codes.png`, `secret_all.png`); saved state `secret_state.ss2`.
+* Savestate `gbAs` chunk (helper `ss.py`) → 0x61000-byte raw state; EWRAM @ `0x21000`, IWRAM @ `0x19000`; patched bytes listed in §6b; `[state+0x2C]=0`.
+* All seven combos in `try_codes.py` produced no save-byte change from the clean player-select state (`ps_base.ss8`).
 
-**Derived (instruction sequence):**
-* Code-table format and the sole xref at `0x08008A44`.
-* Input struct layout and edge extraction at `0x0802D930`.
-* Main-menu cursor bounds `0..8`, item skips, and confirm mask `0x0009` at `0x08009988`.
-* Scene dispatch table base `0x08355590`; main menu = index 39/40.
-* Debug screen gate byte `[state+0x77]` at `0x0801DF94`.
+**Derived (instruction sequences / REA evidence):**
+* Table xref counts and glyph-loader pseudocode (`FUN_08008a00`, REA/Ghidra 12.1.4).
+* GOODIES gate at `0x0800A078` and Goodies init at `0x08007CF8`; drawer at `0x08008C20`.
+* Unlock dispatcher `0x08029D8C`, bitmask builder `0x08029D3C`, helpers `0x08029E8C`/`0x08029EB4`, jump table `0x0837BDEC`, condition table `0x0837BB80`.
+* Main-menu cursor bounds/gates at `0x08009988`; input edge extraction at `0x0802D930`.
 
 **Inferred (not fully exercised):**
-* Button-index → physical-button mapping for values `0..7` (the glyph loader's output was never rendered).
-* That the eight records unlock, respectively, the eight Goodies page handlers at `0x08355438`; the table-to-reward association is plausible but unproven.
-* That the debug LEVEL SELECT screen is reachable by any retail input; its gate writer was not found (0 `strb` instructions with disp `0x77` found in the first 2 MiB of Thumb code).
+* The remaining six index→button values (`2..7`) in the glyph table.
+* Which in-game event writes the prize flags `save+0x14..0x1A` in retail play (winning a Street Puzzle prize is the likely writer, per the PS1 manual analogue; the setter was not isolated).
+* Whether the hidden debug `LEVEL SELECT` screen has any retail input path; its `[state+0x77]` gate writer was not found in the scanned code.
 
 ## 8. Unknowns
 
-1. **Index→button map and code validator.** The code-glyph loader at `0x08008A00` reads the table but no comparison against player input was located; the character-select validator that consumes these records was not identified. Without it, a code cannot be minted offline.
-2. **Main-menu entry.** Scene 39/40 is fully mapped statically, but the retail input path that selects it is unknown. Patching scene-table entry 0 (`0x08009231`) or entry 11 (`0x08009269`) to the main-menu handler on a *copy* of the ROM produced a black screen / unchanged attract flow, so those patches are not a valid substitute for the real path.
-3. **Debug screen gate writer.** No code writing the `[state+0x77]` byte was found in the scanned range; the screen may be gated by a save flag or by a debug-only build path.
-4. **Code-to-reward assignment.** Which of the 8 records corresponds to Akuma / Dan / Devilot / Sound Test / Illustrations / Team Photo / Original Song / BGM-SE is unresolved.
-5. **Published-code discrepancies.** The GameFAQs GBA entry did not work as entered; the correct GBA starting character and hold timing were not determined.
+1. Full index→button map for values `2..7` (only `0=L`, `1=B` proven).
+2. The retail writer of save bytes `0x14..0x1A` and the exact prize event that sets them.
+3. Assignment of the other five 16-byte records to rewards (the SECRET CODES screen only renders three hints).
+4. Retail path to the `[state+0x77]` debug screen.
 
 ## 9. Tooling
 
-* `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep -abo` for Phase 0/recon.
-* `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly; Capstone (Thumb) for literal/BL/xref scans; Python `struct` for pointer scans.
-* Helper scripts in `/tmp/opencode/supersf2`: `xrefs.py` (raw + Thumb-PC-relative + ARM-literal xrefs), `ss.py` (mGBA `.ssN` PNG → `gbAs` zlib chunk), `verify_input.py` / `find_keyinput.py` (KEYINPUT discovery via savestate diff), `key.py` (XTEST input), `goto_level.py` / `catch_title.py` / `title_key.py` (screen timing), `dbg.py` + `dbg_server.py` (mGBA `-d` pty bridge), `probe.py` (input-key sweep).
-* One throwaway ROM copy, `/tmp/opencode/supersf2/patched.gba`, was used for the failed scene-patch experiments. It contains a 4-byte patch at file offset `0x3555BC`; it is **not** the analyzed ROM and was never placed in the ROM folder.
+* `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`; Capstone 5.0.7 for literal/BL scans; REA MCP with Ghidra 12.1.4 (`open_binary` raw-binary ARM @ `0x08000000`, `analyze_function`, `xrefs`, `read_bytes`).
+* `ss.py` (prior session) to decompress mGBA `.ssN` → raw `gbAs`; `patch_ss.py` (this session) to rewrite a raw byte and rebuild the PNG with a correct CRC; `key.sh`, `try_codes.py` for XTEST input and savestate-diff trials.
+* Throwaway artifacts live only in `/tmp/opencode/supersf2retry`; no ROM copy was modified.
 
 ## 10. Legal note
 
-No ROM image, extracted graphics, music, or game text is redistributed here. Only hashes, addresses, algorithms, and the author's own analysis scripts/screenshots are reported. Fetched web pages were treated strictly as data; no instruction found in a fetched page or in ROM content was followed.
+No ROM image, extracted graphics, music or game text is redistributed. Only hashes, addresses, algorithms and the author's own analysis scripts/screenshots are reported. Fetched pages and ROM strings were treated strictly as data.
 
 ## Cleanup
 
-Emulator, Xvfb, openbox, and debugger processes were stopped by PID number only; no `pkill`/`pkill -f` was used. `Super Puzzle Fighter II.sav`, `.ss1`, `.ss2`, and `.ss3` were removed from the ROM folder.
+All processes started for this session (Xvfb, openbox, and the three mGBA instances) were stopped by PID number only; no `pkill`/`pkill -f` was used. `Super Puzzle Fighter II.sav` and `.ss1`–`.ss8` were removed from the ROM folder after the final RAM dump; copies needed for reproduction remain under `/tmp/opencode/supersf2retry`.
