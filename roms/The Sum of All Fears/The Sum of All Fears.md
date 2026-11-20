@@ -220,6 +220,12 @@ space is exactly these 6 sequences — not merely "the 6 we found".
 * `0x0200283C` and `0x0200288C` are cleared as a side effect of the action
   dispatch; the exact writer was not isolated. Operationally, one code per
   mission session is enforced.
+* Lone Wolf mode reaches a Mission Selection screen whose only row is mission
+  `0`, with the modal message "Not yet available! You must unlock missions in
+  Campaign mode." (`lonewolf3.png`). Completing mission 1 with the level-skip
+  code unlocked mission 2 on the Campaign Mission Selection screen (`n1.png`),
+  but Lone Wolf remained unavailable on the deleted save; a fully unlocked
+  save was not produced. No code opens it directly.
 * The "Quick mission mode" unlock mentioned for the GameCube version was not
   observed on GBA; all 5 mission slots on the GBA Game Selection screen were
   present but only mission 1 was available on a fresh save.
