@@ -103,7 +103,7 @@ All addresses below are ROM addresses (`file offset + 0x08000000`) unless marked
 | `Cheat!` | `0x0835E3B4` | |
 | Text getter (ID→header) | `0x080C79EC` | `r0` = ID, returns length/char |
 | Text draw `0x80C364C(id, …)` | `0x080C364C` | calls getter + `0x080C799C` |
-| Alphabet used by initials UI | `0x08014D22`, `0x0801574FE`-area | 5-char entry, not code validator |
+| Alphabet used by initials UI | `0x08014D22`, `0x080574FE`, `0x08075A8E` | 5-char entry, not code validator |
 | SRAM save | `0x0E000000` (8192 bytes on host) | big-endian fields, checksum at `0x0E` |
 
 Save-file layout observed (host `.sav`, all integers **big-endian**):
@@ -184,7 +184,7 @@ code space:
 | Code-related text entries in bank | 17 (IDs above) | Derived from offset table |
 | Input alphabets in text bank | 1 (36 symbols) | Literal search: 1 copy of the alphabet string |
 | Code-table string copies in whole ROM | 0 (no second alphabet / ACCEPTED / REJECTED copy) | `rom.find` over all 4 MiB |
-| Words using text ID 791 in disassembly | ≥4 functions (`0x08014D22`, `0x080574FE`, `0x08075BA`, `0x0805ADBC`, `0x0805AF40`, `0x0807 5A8E`) | LDR-literal xref scan |
+| Words using text ID 791 in disassembly | 6 functions (`0x08014D22`, `0x080574FE`, `0x08075BA`, `0x0805ADBC`, `0x0805AF40`, `0x08075A8E`) | LDR-literal xref scan |
 | Debug level-menu entries | 6 (IDs 880–885) | Offset table |
 | Shell menu rows | 6 | Observed |
 | Gated shell rows | 2 (Arcade Parlor, Challenge Room) | Observed padlock sprites |
