@@ -6,178 +6,185 @@
 |---|---|
 | File | `roms/WinX Club/WinX Club.gba` |
 | Size | 16,777,216 bytes (0x01000000, 16 MiB) |
-| Header title | `WINXCLUB` |
-| Game code / maker | `BWIE` / `A4` (Konami) — `file(1)` reports "WINXCLUB (BWIEA4, Rev.00)" |
-| Version / fixed / main unit / device | 0x00 / 0x96 / 0x00 / 0x00 |
-| Complement / header checksum | 0x49 / 0x0000 (rebuilt-header artifact, cf. guide §16.1) |
-| Entry word | 0xEA00003E (ARM branch); crt0 branch at +0xC0 = 0xEA00000E |
+| Header title / code / maker | `WINXCLUB` / `BWIE` / `A4` (Konami) |
 | MD5 | `80acbed66f2f7a2fc88357f9a2028458` |
-| SHA-1 | `3b3f5c633f48ac218e9da6ac78305eab9c17ab21` |
 | SHA-256 | `a3d9b2461d5408f354a511716fdd586514ffe4af713e8d4e3a39e123a5151c65` |
-| External CRC32 | `1D6950A3` (GameHacking.org, AGB-BWIE-USA) |
 
-All addresses below are **file offsets**; add `0x08000000` for the GBA bus address unless stated. Work copy and all evidence: `/tmp/opencode/winxclub2/` (ROM folder untouched).
+All offsets below are **file offsets**; the GBA bus address is offset + `0x08000000` (code/ROM). Work copy and all evidence: `/tmp/opencode/winxclub3/`. **No patched ROM, savestate or screenshot was left in the ROM folder.**
 
-## 2. Executive summary
+## 2. Executive summary — what this pass established
 
-**Verdict on the central ambiguity: the GBA build DOES use digit entry.** This is now settled, not ambiguous. The decisive byte-level evidence is in the game's own five-language dialogue bank: Brandon's phone call says, in English, `"It is, but I'll give you the password so you can activate it. It's 0001."` at file `0xD9BD00`–`0xD9BD47`, with the literal ASCII digits `30 30 30 31` ("0001") at `0xD9BD41`, and the same sentence with `0001` in French (`0xD9BD4C`), Spanish (`0xD9BDB5`), German (`0xD9BDDC`) and Italian (`0xD9BE42`–`0xD9BE76`). A game that merely gates the case on an inventory flag would have no reason to speak a four-digit number to the player and explicitly tell them to use it. The GameFAQs GBA walkthrough (guide 65152, §10.3) confirms the mechanic: "Red Fountain's statue requires a code, which Brandon willingly gives to Bloom. The code is 0001 ... open the left trophy case." The Russian GBA walkthrough says "enter the code written on the sheet" (3921). The trophy case is therefore a **password-entry surface**, not an item gate.
+This pass **broke the progression gate** that stopped both earlier passes. The gate is not a story item: it is a one-byte **system handler selector** in IWRAM at `0x03003C80`. Writing `0x14` to it in a savestate makes the game call the warp-menu handler `0x08038D2D` on the next frame with no controller input. The warp menu's destination list is built from a flag array at `0x03003478`; setting flag `0x37` adds the Alfea destination **Learning Annex**, and pressing A teleports there. A second, independent state word — the **scene/destination byte at `0x02033C34`** — was also located; writing a scene ID there and forcing handler `0x0F` (teleport) loads **any** of the 39 scene IDs `0x00`–`0x26` directly. Both mechanisms were verified on screen with screenshots and RAM reads.
 
-**Accept-path structure (derived from the text bank at byte level).** The safe dialogue occupies five consecutive 5-language message groups, i.e. string indices 829, 834, 839, 844 and 849 when the packed, NUL-terminated, 4-byte-aligned bank is walked from `0xD7F124`:
+The trophy-case accept path is confirmed at byte level (two correct-code messages, zero wrong-code strings, spoken `0001` in five languages, no digit constant in either safe script), but **the native accept comparator itself was still not reached on screen**: the display cases visible in the forced Alfea scene did not produce a dialog on A/B at any tested position, and none of the 24 system handlers is a password keypad. This is reported as a bounded negative with the exact searched spaces, not as "progression blocked".
 
-| String idx | File offset | English text | Role |
-|---:|---:|---|---|
-| 829 | 0xD881A4 | "It seems this safe requires a password to open it." | reject / not-yet-solved path |
-| 834 | 0xD882C8 | "You have entered the correct code!" | **accept branch, Cloud Tower** |
-| 839 | 0xD88384 | "You found a miniature of Cloud Tower! Now where could this be used?" | miniature grant, Cloud Tower |
-| 844 | 0xD88504 | "You have entered the correct code!" | **accept branch, Red Fountain** |
-| 849 | 0xD885BC | "You found a miniature of Red Fountain! Now where could this be used?" | miniature grant, Red Fountain |
+## 3. The gate — exact byte-level proof (NEW)
 
-There is **no distinct "wrong code" string** in any language: the only rejection phrasing is idx 829. Each accept message is immediately followed (five strings later, i.e. the next dialogue line) by its own miniature-grant message — two independent accept branches, one per trophy case.
+### 3.1 Handler selector `0x03003C80`
 
-**Validator status: bounded negative on the script side; native accept predicate not isolated.** The safe handler scripts contain no digit or comparison constant at all (byte dumps below), and an exhaustive 16 MiB literal search finds no `3921` constant in ASCII, u16, u32, BCD or any digit permutation. Combined with the spoken `0001`, the accept test is necessarily **native code comparing a RAM input buffer** against per-case values; the script only selects which message pair to print. I could not reach the trophy room in the emulator (see §8), so I did not observe the native keypad routine, its RAM buffer, or a live accept/reject. This is reported as a **bounded negative**, not a solved validator, and no novel code is claimed accepted (§6b).
+`0x0801837C` registers a handler:
+```
+0801837C  0e4a  ldr r2,[pc,#0x38]     ; literal @0x080183B8 = 0x03003C84  (handler table base)
+08018380  5050  str r0,[r2,r1*4]      ; table[r1] = r0   (r1 = handler index)
+```
+`0x08018386` / `0x08018390` set/read the current handler index:
+```
+08018386  0c49  ldr r1,[pc,#0x30]     ; literal @0x080183B8 = 0x03003C84
+0801838A  subs r1,#4                  ; -> 0x03003C80
+0801838C  strb r0,[r1]                ; selector BYTE = index
+08018390  0948  ldr r0,[pc,#0x24]     ; -> 0x03003C84
+08018394  subs r0,#4                  ; -> 0x03003C80
+08018396  ldrb r0,[r0]                ; main loop reads selector
+```
+`0x08018398` is the main dispatch loop: it loads the selector byte, reads `handler_table[index]`, calls it, and loops while index != `0x18`.
 
-**Debug menu: gated, not dead.** The prior pass found `bgmenuwarp` with no xrefs. This pass found the live code: function `0x080389CC` resolves the resource **by name** (`"BgMenuWarp"` at `0x08038C88`, `adr` at file `0x389EA`, passed to `bl 0x08004FFC`) and builds a 7-entry menu. It is called once, from `0x08038D5C`, inside the scene/menu dispatcher whose handler pointer `0x08038D2D` sits in the handler table at file `0xED20`. The asset itself has no direct pointer because it is loaded through the generic name-based resource manager. The gate is therefore the runtime selector that dispatches to table entry `0xED20`; no observed title-menu or in-game input selects it.
+At boot, `0x0800EAB6` registers the warp-menu function:
+```
+0800EAB4  movs r1,#0x14              ; handler index 20
+0800EAB6  ldr  r0,[pc,#0x268]        ; literal @0x0800ED20 = 0x08038D2D
+0800EABA  bl   0x0801837C            ; register
+```
+Live RAM confirmation in the savestate: `0x03003C80 = 0x12` (in-game handler), `0x03003C84 = 0x08017DE7` (table[0]), and **`0x03003CD4 = 0x08038D2D`** (table[0x14]) — exactly the expected entry.
 
-## 3. How to reproduce
+**Forcing it:** patch savestate raw `0x1CC80` (`= 0x19000 + 0x3C80`) from `0x12` to `0x14`. On load, the DESTINATION menu appears immediately with zero input (`warp1.png`). This is the same class of gate as guide §16.20.
 
-* Emulator: mGBA 0.10.5 on Xvfb `:318`, `SDL_AUDIODRIVER=dummy`, working ROM `/tmp/opencode/winxclub2/game.gba`. Keymap: D-pad = arrows, A = `x`, B = `z`, Start = `Return`, Select = `BackSpace`.
-* Boot path reproduced: ~20 s Konami/ac Studios intro → title → New Game → slot 1 → Gardenia Park (2 hearts). Reached the in-game field and a save state.
-* Debugger: mGBA CLI (`-d`) held open by `/tmp/opencode/winxclub2/dbgserver.py` over a unix socket; `dbg.py` client. `status`, `r/4`, `w/4`, `save N`, `break`, `watch`, `continue`. **SIGINT to the mGBA PID halts into the debugger** (useful when no breakpoint is set); the CLI does not answer commands while the core is running.
-* Savestate RAM reads: `.ss1` is a PNG with a zlib `gbAs` chunk; decompressing gives 397,312 bytes (EWRAM at raw `0x21000` → `0x02000000`, IWRAM at raw `0x19000` → `0x03000000`). Diffed two states either side of moving Bloom right; player-motion changes confirmed at IWRAM `0x03003520`/`0x03003524` and a field at raw `0x55220`/`0x55224` (`0x02034220`).
-* All screenshots, savestates, extracted assets and scripts live in `/tmp/opencode/winxclub2/`, **not** in the ROM folder.
+### 3.2 Warp-menu construction and its flag gate
+
+`0x080389CC` is the menu builder. At `0x080389EA` it does `adr r1, ...` to the literal string `"BgMenuWarp"` (file `0x38C88`) and calls `0x08004FFC` (name-based resource lookup). It then builds a 7-entry menu (`movs r1,#7` at `0x080389F8`, `bl 0x0802EF0A`).
+
+Each destination is gated by a flag check `0x0803F708(flag)`:
+```
+0803F708  r2 = flag & 0x1F ; r1 = 1 << r2
+0803F714  r0 = flag >> 5
+0803F716  ldr r2,[pc,#0x10]   ; literal @0x0803F728 = 0x03003478  (flag array)
+0803F71A  ldr r0,[r2,r0*4]
+0803F71C  ands r0,r1         ; nonzero => destination enabled
+```
+Flags checked in the builder: `0x34,0x35,0x36,0x37,0x38,0x39,0x3A,0x3B`. In the untouched state only flag `0x34` is set (`0x0300347C = 0x00100000`), which is why only Gardenia Park is shown.
+
+**Flag → destination map** (proved by setting one flag at a time and reading the on-screen name, `flag_scan.png`):
+
+| Flag | Destination | Scene ID (from `tableA`) |
+|---:|---|---:|
+| 0x34 | Gardenia Park | 0x03 |
+| 0x35 | Black Mud Marsh | 0x07 |
+| 0x36 | Black Mud Glades | 0x09 |
+| 0x37 | **Learning Annex (Alfea)** | **0x16** |
+| 0x38 | Red Fountain Grounds | 0x0C |
+| 0x39 | Red Fountain 3rd years | 0x0E |
+| 0x3A | Ice Caverns | 0x13 |
+| 0x3B | Storage Area | 0x19 (derived; pressing A with only this flag fell back to Gardenia — the 8th entry is not teleportable) |
+
+Setting flag `0x37` alone (`0x0300347C = 0x00200000`) and forcing selector `0x14` makes the warp menu show only Learning Annex; pressing A loads Alfea (`alfea_scene.png`). This is how the trophy-room map was reached without any story progression.
+
+### 3.3 Scene/destination state byte `0x02033C34` (NEW)
+
+When A is pressed on a warp destination, the handler at `0x08038DC8` reads the menu selection, converts it through the u16 table at `0x080514B0`, and stores the resulting **scene ID**:
+```
+08038DD8  ldrb r0,[r0,#0xc]        ; dest code
+08038DDA  ldr  r1,[pc]             ; literal @0x08038E34 = 0x080514B0
+08038DDC  ldrb r1,[r1,r0]          ; scene ID from {3,7,9,0x16,0xc,0xe,0x13,0x19}
+08038DDE  ldr  r0,[pc]             ; literal @0x08038E38 = 0x03003D2C
+08038DE0  ldr  r0,[r0]             ; pointer = 0x02033BA4
+08038DE2  strb r1,[r2,r0]          ; r2=0x90 -> [0x02033C34] = scene ID
+```
+**`0x02033C34` is the scene-state byte.** Verified values: `0x03` in Gardenia, `0x16` in Learning Annex/Alfea.
+
+**Forcing an arbitrary scene:** patch that byte (savestate EWRAM raw `0x21000 + 0x33C34 = 0x54C34`) and set selector `0x03003C80 = 0x0F` (the registered teleport handler). On load the game warps to the patched scene. Verified: byte `0x03` + selector `0x0F` → Gardenia Park on screen (`force_scene_test.png`), byte left at `0x16` → Alfea. Scenes `0x00`–`0x26` were enumerated this way (`scenes_montage.png`); `0x16` is Learning Annex, `0x17` the adjoining Alfea room, `0x19` a library/stone room, `0x0E` a plant room, etc. A scene byte alone does **not** reload the room — the handler `0x0F` trigger is required (that is why the two earlier ROM patches failed).
 
 ## 4. Address map
 
-| Item | File offset | ROM address | Notes |
-|---|---:|---:|---|
-| Header / crt0 | 0x000000 | 0x08000000 | entry 0xEA00003E |
-| Resource manifest | 0x55CCC | 0x0855CCC | `[name NUL-padded][u32 size][u32 file offset]`; 29 entries |
-| — `txtpackage_all.bin` | 0xD7F128 (size 0x61B58) | 0x08D7F128 | 5-language text bank |
-| — `mapalfea.mmstr` | 0xD13844 (size 0x6B8E4) | 0x08D13844 | Alfea map/object/text data |
-| — `scriptdata.bin` | 0xF015C8 (size 0x32850) | 0x08F015C8 | script function table + bytecode |
-| — `bgmenupuzzle.bin` | 0xF5F004 (size 0x12C00) | 0x08F5F004 | full-frame compressed UI asset |
-| — `bgmenuwarp` | 0xF85094 (size 0x3904) | 0x08F85094 | warp-menu background; manifest ref at 0x55F6C only |
-| **Script-function table** | **0xF1D81E** | **0x08F1D81E** | 707 records × 0x20 bytes |
-| — `#AlfeaA00_Safe01_Open` | record 285 @ 0xF1FBBE | 0x08F1FBBE | bytecode rel `0x1FD44` → file `0xF3D562`, len `0x10` |
-| — `#AlfeaA00_Safe02_Open` | record 286 @ 0xF1FBDE | 0x08F1FBDE | bytecode rel `0x1FE4C` → file `0xF3D66A`, len `0x04` |
-| — `#AlfeaA00_GoCloudTower` | record 287 | 0x08F1FBFE | rel `0x1FE94`, len `0x01` |
-| Brandon password dialogue | 0xD9BD00–0xD9BE76 | 0x08D9BD00… | ASCII `0001` at 0xD9BD41 (and 4 other languages) |
-| Safe messages (5 languages) | 0xD881A4, 0xD882C8, 0xD88384, 0xD88504, 0xD885BC | 0x08D8… | string indices 829/834/839/844/849 |
-| Warp-menu builder | file 0x080389CC | 0x080389CC | `adr` to "BgMenuWarp" at file 0x389EA |
-| Warp-menu builder caller | file 0x08038D5C | 0x08038D5C | handler pointer 0x08038D2D @ file 0xED20 |
-| EWRAM player state (published raw patches) | 0x02033C50… | — | HP / WinX bar / helpers / fireflies |
-| IWRAM game globals | raw 0x19000+ | 0x03003400… | resource pointers, script/player state |
+| Item | Address / offset | Notes |
+|---|---|---|
+| Handler selector byte | `0x03003C80` (IWRAM raw `0x1CC80`) | set to `0x14` → warp menu, `0x0F` → teleport |
+| Handler pointer table | `0x03003C84`, 4 bytes per index | `table[0x14] = 0x08038D2D` at `0x03003CD4` |
+| Handler registration | `0x0801837C`; loop `0x08018398` | literal pool `0x080183B8 = 0x03003C84` |
+| Warp handler | `0x08038D2D` (builder `0x080389CC`) | registered at `0x0800EAB6` |
+| Warp resource name | `"BgMenuWarp"` at file `0x38C88` | ADR at `0x080389EA` |
+| Flag checker | `0x0803F708`; array `0x03003478` | flag N → word `N>>5`, bit `N&0x1F` |
+| Alfea warp flag | `0x0300347C` bit 21 (flag `0x37`) | set → Learning Annex |
+| Scene/destination byte | `0x02033C34` (IWRAM pointer `0x03003D2C` + `0x90`) | scene ID, see table in §3.3 |
+| Scene ID table | `0x080514B0` (u16) | dest code → scene ID |
+| Script-function table | file `0xF1D81E`, 707 × `0x20` | `#AlfeaA00_Safe01_Open` rec 285 @ `0xF1FBBE`; `Safe02` rec 286 |
+| Safe handler bytecode | file `0xF3D562` (16 B), `0xF3D66A` (4 B) | no digit/comparison constant |
+| Brandon `0001` dialogue | file `0xD9BD00`–`0xD9BE76` | ASCII `30 30 30 31` at `0xD9BD41` + 4 translations |
+| Safe messages | file `0xD881A4`, `0xD882C8`, `0xD88384`, `0xD88504`, `0xD885BC` | reject / 2 correct / 2 miniature grants |
+| Resource manifest | file `0x55CCC` | 33 entries, `[name][u32 size][u32 offset]` |
 
-## 5. Algorithm
+## 5. Algorithm / accept path (byte level, unchanged from prior passes)
 
-**Script-function record format (derived, verified on several records):**
-
-```
-struct ScriptFunc {          // 0x20 bytes
-    char name[26];           // '#' + identifier, NUL-padded
-    u32  bytecode_offset;    // relative to 0xF1D81E (file)
-    u16  bytecode_length;    // bytes
-    u16  unused;             // (part of the 0x20 stride; typically 0)
-};
-```
-
-* `#AlfeaA00_Safe01_Open` (idx 285) bytecode at `0xF3D562`:
-  `02 00 14 00 04 00 18 00 FE FF 01 00 02 00 03 00`
-  → u16 words `[0x0002, 0x0014, 0x0004, 0x0018, 0xFFFE, 0x0001, 0x0002, 0x0003]`.
-* `#AlfeaA00_Safe02_Open` (idx 286) bytecode at `0xF3D66A`: `10 00 00 00` → `[0x0010, 0x0000]`.
-* `#AlfeaA00_GoCloudTowerYes` (idx 289) and `#Safe02_Open` share `[0x0010, 0x0000]` — a warp/continuation primitive.
-* `#GardenA00_OpenChest01` (idx 264) at `0xF1EB48`: `02 00 2C 00 04 00 18 00 FE FF` — same `[2, A, 4, B, 0xFFFE]` skeleton with different operands.
-
-**Script-opcode semantics (bounded):** no digit, comparison, 3921 or 0001 constant appears in either safe script. The recurring `[0x0002, a, 0x0004, b, 0xFFFE]` skeleton is a "present message / set state / yield" chain used by chests, books and dialogs; the safe handler ends with the continuation words `[1, 2, 3]`. The accept decision is therefore not encoded in these scripts: it is performed by native code that selects which of the two accept-message groups (834/839 or 844/849) the script engine subsequently prints.
-
-**Text bank format (derived):** strings are NUL-terminated and each starts on a 4-byte boundary; there is no on-disk index table. Walking from `0xD7F124` gives 5,937 strings; every dialogue line occupies 5 consecutive strings (en/fr/es/de/it). The safe messages are groups 829, 834, 839, 844, 849 — three consecutive logical lines (reject, correct, miniature) for the Cloud Tower case and two for Red Fountain. This is the accept-path chain at byte level.
-
-**Password model (inferred, not decoded):** 4 decimal digits, `0`–`9`, `10^4 = 10,000` representable values. Two values known from published evidence (`3921`, `0001`); `0001` additionally confirmed as an in-game spoken value. No checksum, reserved bits or longer format observed.
+* Safe script `#AlfeaA00_Safe01_Open` bytecode `02 00 14 00 04 00 18 00 FE FF 01 00 02 00 03 00` and `#AlfeaA00_Safe02_Open` `10 00 00 00` contain **no digit constant, no compare, and no `3921`/`0001` literal**.
+* The text bank contains exactly **two** "You have entered the correct code!" strings (`0xD882C8` Cloud Tower branch, `0xD88504` Red Fountain branch), each followed five strings later by its miniature-grant line (`0xD88384`, `0xD885BC`), and **zero** distinct wrong-code strings. Reuse of the single "It seems this safe requires a password..." line (`0xD881A4`) is the reject path.
+* Therefore the accept predicate is native code comparing a RAM input buffer; the script only selects which message pair to print. All 16 MiB were searched for `3921` as ASCII/u16/u32/BCD and all 24 digit permutations; no code or script xref was found (§6b).
 
 ## 6. Tables
 
-**Published in-game passwords:**
+Published/accepted codes from walkthroughs and in-game dialogue:
 
-| Code | Unlocks | Source | In-ROM evidence |
-|---|---|---|---|
-| `3921` | Cloud Tower miniature → Cloud Tower portal | GameFAQs 65152/40418, PS2 FAQ 44483, Russian/Spanish GBA walkthroughs | dialogue present (safe strings); literal absent as a constant; code shown on the in-game plaque/sheet graphic, not as text |
-| `0001` | Red Fountain miniature → Red Fountain portal | GameFAQs GBA 65152 §10.3, supercheats Q&A | **spoken verbatim in all 5 languages at 0xD9BD41/0xD9BD4C/0xD9BDB5/0xD9BDDC/0xD9BE76** |
+| Code | Unlocks | In-ROM evidence |
+|---|---|---|
+| `3921` | Cloud Tower miniature | walkthroughs; plaque graphic, not a text literal |
+| `0001` | Red Fountain miniature | spoken verbatim in 5 languages, ASCII at `0xD9BD41` |
 
-**Safe-related text bank entries:**
-
-| Offset | English text |
-|---:|---|
-| 0xD881A4 | "It seems this safe requires a password to open it." |
-| 0xD882C8 | "You have entered the correct code!" (Cloud Tower case) |
-| 0xD88384 | "You found a miniature of Cloud Tower! Now where could this be used?" |
-| 0xD88504 | "You have entered the correct code!" (Red Fountain case) |
-| 0xD885BC | "You found a miniature of Red Fountain! Now where could this be used?" |
-| 0xD80E44 | "- Obtain the code to the Trophy Case from Faragonda's bookshelf in her office." |
-| 0xD92DB8 | "I think Faragonda keeps the code to the trophy case in a book in her office." |
-| 0xDC7C3C | "You found the code to the trophy case of Cloud Tower's miniature!" |
-| 0xDC8968 | "Plaque" (interactable object type, alongside Lever, Board, Glyph, Treasure Chest) |
-| 0xD9BD00 | "It is, but I'll give you the password so you can activate it. It's 0001." |
-
-**Menu enumeration (all reachable screens at game start):** Title (New Game / Load Game ×3 / Options), Options (Sound, Music, Text Speed), in-game Select menu (Inventory, Magic, Objectives, Favours — exactly 4 tabs, R cycles). No hidden entry observed during exhaustive cycling (prior pass, `montage_tabs2.png`).
+Warp destination names (text bank): `0xD79708` "Alfea Main Floor", `0xD79778` "Alfea Dorm Wing", `0xD7A0B8` "Learning Annex", `0xD7A10C` "Archives", `0xD7A148` "Cafeteria", `0xD7A180` "Storage Area", `0xD7A1F8` "Professorial Offices", `0xD7A6CC` "Mini Cloud Tower", `0xD7A76C` "Mini Red Fountain".
 
 ## 6b. Enumeration
 
-**Space definition.** 4-symbol decimal field, digits `0`–`9`; `10^4 = 10,000` strings `0000`–`9999`. Alphabet and width are corroborated by an *in-game* spoken value (`0001`, file `0xD9BD41`) and by two independent walkthroughs giving a 4-digit Cloud Tower value. No checksum field, reserved bits, or alternative length was found. The text bank has exactly **two** accept messages and **zero** distinct wrong-code messages, so the outcome domain is {reject, accept-CT, accept-RF}.
+**Space definition.** 4-symbol decimal field, digits `0`–`9`, `10^4 = 10,000` strings `0000`–`9999`; alphabet/width corroborated by the in-game spoken `0001` and two 4-digit walkthrough values. No checksum, reserved bits or alternative length observed. Outcome domain is {reject, accept-CT, accept-RF} — two correct-code messages, zero wrong-code messages.
 
-**Accepted set known:** `{3921, 0001}` — `0001` verified as a literal in the ROM dialogue; `3921` supported by walkthroughs but not present as a literal constant (it is presented graphically on the plaque/sheet). Unverified PS2-era claims `3941` and `2008` are from a different SKU and were not observed here.
+**Accepted set known:** `{3921, 0001}`. `0001` is a literal in the dialogue bank; `3921` is supported by walkthroughs but not present as a code literal (only as a graphic).
 
-**Novel codes generated and confirmed in-game: NONE.** §0.2 requires an accepted value absent from published lists for a solved code system. The native comparator/buffer was not isolated and the entry screen was not reached, so minting a value and claiming acceptance would be false. This remains the one unmet §0.2 deliverable and is stated plainly rather than glossed.
+**Novel codes generated and confirmed in-game: NONE.** The native comparator and the RAM input buffer were not isolated, so no value can honestly be claimed accepted. §0.2's novel-code deliverable remains unmet.
 
-**Bounds proven by rejection: not achieved dynamically.** No wrong-code submission was observed. The report therefore claims only that the published pair is the known accepted set; it does **not** claim the set is exactly that pair.
+**Bounds proven by rejection: not achieved dynamically.** No wrong-code submission was observed. The report does not claim the accepted set is exactly `{3921, 0001}`.
 
-**Static search bounds (bounded negative):**
+**Static search bounds (bounded negatives):**
 
 | Search | Space checked | Hits |
-|---|---:|---:|
-| `3921` as ASCII | 16,777,216 byte offsets × 1 | 0 |
-| `3921` as u16 LE (`51 0F`) | 16,777,216 offsets | 3 (all mid-instruction/data) |
-| `3921` as u32 LE | 16,777,216 offsets | 11 (compressed graphics, no xrefs) |
-| `3921` as BCD (`39 21`) | 16,777,216 offsets | 87 (none in code, Alfea map or script data) |
-| 24 permutations of `{3,9,2,1}` | 16,777,216 × 24 | 1 plausible hit at 0x4155B — disassembled, false positive |
+|---|---|---:|
+| `3921` as ASCII / u16 / u32 / BCD | 16,777,216 offsets each | 0 / 3 / 11 / 87 — all mid-instruction or compressed graphics, no code xref |
+| 24 permutations of `{3,9,2,1}` | 16,777,216 × 24 | 1 plausible hit at `0x4155B`, disassembled: false positive |
 | `0001` as ASCII in text bank | 400,216-byte bank | 5 (one per language, Brandon's dialogue) |
-| Script records containing any digit/comparison constant | 707 records | 0 for both safe handlers |
-| Distinct correct/wrong code strings | full text bank | 2 correct, 0 wrong |
-| Full-frame / keypad asset in manifest | 29 manifest entries | none named password/keypad; `bgmenupuzzle.bin` is a compressed full-frame UI asset |
-| `BgMenuWarp` / `bgmenuwarp` xrefs | u32 words, Thumb ADR, Thumb LDR literals over code `0x08000000`–`0x08100000` | 1 code ADR (`0x389EA` → name string) + 1 manifest ref; 0 direct asset pointers |
+| Digit/comparison constant in safe scripts | records 285, 286 | 0 |
+| Distinct correct / wrong code strings | full text bank | 2 correct, 0 wrong |
+| Handler brute-force (selectors `0x00`–`0x17`) | 24 savestates, screenshot each (`handlers_montage2.png`) | title, inventory, magic, objectives, options, save/load, scrapbook, version, credits, warp menu, field scenes — **no password keypad** |
+| Scene brute-force (`0x00`–`0x26`) | 39 savestates, screenshot each (`scenes_montage.png`) | 39 rooms identified; Alfea rooms `0x16`, `0x17`, `0x19`, `0x0E`, `0x00`, `0x01` inspected |
+| Alfea display cases at scene `0x16` | A/B pressed at 12 + 4 positions around both cases (`sweep*.png`, `caseup*.png`) | 0 dialogs |
 
-**Debug-menu / button-code finding (closed as gated):** the warp menu is **live code, not dead**: `0x080389CC` looks up `"BgMenuWarp"` by name and constructs a 7-entry menu; it is called from `0x08038D5C`, which reads a u16 selector from a global object (`ldr r2,[r0,#20]` / `ldrh r1,[r0,#6]` at `0x8038D60`–`0x8038D6C`) and branches on its bits to choose menu state. That function is reached only through the handler-table entry `0x08038D2D` at file `0xED20`; no observed menu input selects that entry, and no published activation sequence exists. Exact gate: **the runtime scene/menu-state word tested at `0x08038D62`–`0x08038DA8` must select handler index `0xED20`**; absent that, the warp menu is unreachable from the enumerated title/in-game menus.
+**Debug-menu / button-code finding (closed, not dead):** the warp menu is live code with an exact gate — selector `0x03003C80` must be `0x14` for `0x08038D2D` to run. No retail menu input sets it; the forced savestate patch is the proof. This supersedes the earlier "gated, selector not produced" statement: the selector address, value and dispatch routine are now fully identified.
 
 ## 7. Validation evidence
 
 | Claim | Evidence type | Evidence |
 |---|---|---|
-| ROM identity/hashes | Observed | `file`, `md5sum`, `sha1sum`, `sha256sum`, header hexdump |
-| **Digit entry exists** | **Observed (byte-level)** | `0001` ASCII at file 0xD9BD41 + four translations; walkthrough instructions to "enter the code" |
-| Script table 707 records, format | Derived | byte parse of 0xF1D81E onward; all records resolve to valid bytecode |
-| Safe scripts contain no password constant | Derived | byte dumps of 0xF3D562 (16 B) and 0xF3D66A (4 B) |
-| Accept-message chain | Derived | 5,937-string walk of text bank; indices 829/834/839/844/849, five languages each |
-| No literal `3921` anywhere | Derived | exhaustive byte searches + Capstone/objdump of the sole permutation hit |
-| Warp menu live and gated | Derived | ADR at 0x389EA, builder 0x080389CC, sole caller 0x08038D5C, handler pointer at file 0xED20, selector test 0x08038D62–0x08038DA8 |
-| Gardenia Park boot state, in-game movement | Observed | screenshots `screen3.png`, `ss_both.png`; savestate diff |
-| mGBA CLI debugger via PTY bridge; SIGINT halts core | Observed | `dbgserver.py`, `status` register dumps |
-| Codes `3921`/`0001` correct | Inferred (external) / `0001` also observed as spoken value | walkthroughs; **not** verified by entering them on the password screen |
+| Handler gate at `0x03003C80` | Derived + observed | disassembly `0x0801837C/86/90/98`; live savestate `0x03003CD4 = 0x08038D2D`; `warp1.png` after patching selector to `0x14` |
+| Warp destinations flag-gated | Derived + observed | `0x0803F708` flag reader; flag scan montage `flag_scan.png` |
+| Alfea reached without progression | Observed | `alfea_scene.png` (Learning Annex) after flag `0x37` + selector `0x14` + A |
+| Scene byte `0x02033C34` | Derived + observed | `0x08038DD8–DE2`; values `0x03`/`0x16` in savestates; `force_scene_test.png` |
+| 39 scene IDs enumerated | Observed | `sc0*.png` + `scenes_montage.png` |
+| Digit-entry password system | Observed (byte level) | `0001` ASCII at `0xD9BD41` + four translations; safe strings |
+| Native comparator not isolated | Bounded negative | §6b search table; exhaustive literal/script/handler search |
+| mGBA CLI debugger via PTY | Observed | `dc.py`, register dumps at BIOS halt |
 
 ## 8. Unknowns
 
-1. **Native keypad routine, RAM input buffer and accept comparator — not isolated.** Proven by exclusion not to be script- or literal-driven; the comparator must be native. Reaching it requires entering Alfea's trophy room, which needs the Gate Key / early-game progression.
-2. **Password screen not reached.** Navigation from Gardenia Park did not advance the level. Two ROM-patch experiments are recorded for reproducibility: (a) repointing script records 0/1 to the safe handler produced a black screen (crash — PC `0x1F8` in BIOS after SIGINT), and (b) repointing `#GardenA00_OpenChest01` (record 264 at `0xF1F91E`) to the safe bytecode did not yield a reachable trigger before the session ended. Neither patch is in the delivered ROM.
-3. **Exact input alphabet/terminator** — 4 decimal digits inferred from the spoken value and walkthroughs; no on-screen keypad glyph table decoded.
-4. **Whether a third accepted code exists** — not disproven dynamically; the two accept-branch messages bound the *outcome* domain to two cases but not the number of accepted inputs per case.
-5. **Warp-menu selector value** — the handler table entry and its state test are located; the exact selector value/key sequence that dispatches to `0xED20` was not produced by any observed input.
+1. **Native keypad routine, RAM input buffer and accept comparator — not isolated.** Excluded from scripts and literals; the only remaining implementation is native. Twenty-four system handlers and thirty-nine scenes were sampled without finding it.
+2. **The exact trophy-case interactable was not identified.** The display cases in the forced Alfea scene (ID `0x16`) did not respond to A/B at any tested position; a scene byte alone does not run the scene's TriggerInit scripts, so a forced scene may lack the runtime objects that make the safe interactable. This is the precise reason no code was entered — recorded as a bounded negative, not as a story gate.
+3. **Whether a third accepted code exists** — not disproven dynamically.
+4. **Input alphabet/terminator** — 4 decimal digits inferred from the spoken value; no keypad glyph table decoded.
 
-## 9. Tooling
+## 9. Tooling / how to reproduce
 
-* `file`, `xxd`, `strings -t x`, `md5sum`/`sha1sum`/`sha256sum`.
-* `arm-none-eabi-objdump -M force-thumb` and Capstone Python binding for literal, ADR, LDR-literal and BL scans.
-* Python 3 in `/tmp/opencode/winxclub2/`: `dbg.py`/`dbgserver.py` (mGBA CLI-debugger PTY bridge), `key.py` (XTEST), savestate `gbAs` zlib extractor, manifest/script-record/text-bank parsers, `xref.py`/`xref2.py` (ADR/LDR xref scans), `render.py` (asset decode attempt).
-* mGBA 0.10.5: `-3` display, `-d` CLI debugger; Xvfb `:318`, openbox, `SDL_AUDIODRIVER=dummy`, `xdotool`, `scrot`, ImageMagick.
-* Web recon: GameFAQs GBA 65152 / PS2 44483, supercheats Q&A, Russian and Spanish GBA walkthroughs — all treated as untrusted data (guide §16.8); no prompt-injection payload was encountered or followed.
+* ROM copy: `/tmp/opencode/winxclub3/game.gba`. Emulator: mGBA 0.10.5, Xvfb `:318`, `SDL_AUDIODRIVER=dummy`, `-3`. Keymap D-pad = arrows, A = `x`, B = `z`, Start = `Return`.
+* `ss.py` decodes/re-encodes mGBA's PNG `gbAs` zlib chunk (raw `0x19000` → IWRAM `0x03000000`, raw `0x21000` → EWRAM `0x02000000`). `save()` must write to an existing copy of the source state.
+* Minimal reproduction of the gate:
+  1. Boot to a reachable screen; save a state (mGBA Shift+F1).
+  2. Set raw `0x1CC80` (`0x03003C80`) to `0x14`; load → DESTINATION menu.
+  3. For Alfea, also set raw `0x1CD2C` (`0x0300347C`) to `0x00200000` (flag `0x37`) before forcing the menu; press A → Learning Annex.
+  4. For an arbitrary scene, set EWRAM raw `0x54C34` (`0x02033C34`) to the scene ID and raw `0x1CC80` to `0x0F`; load → teleport to that scene.
+* Scripts: `dis.py` (Capstone Thumb), `litref.py` (literal-pool xrefs), `scanflags.py`, `scanscenes.py`, `scanhandlers.py`, `key.py` (XTEST), `dc.py` (mGBA CLI debugger over PTY).
+* Static tools: `arm-none-eabi-objdump`, Capstone 5.0.7, `xxd`, `strings`, Python 3.
 
 ## 10. Cleanup
 
-All analysis artifacts live in `/tmp/opencode/winxclub2/`. The ROM folder `/mnt/gbacheats/roms/WinX Club/` contains only `WinX Club.gba` and this report — no `.sav`, `.ss1`–`.ss9`, `.state`, patched ROM or screenshots. Only this session's own PIDs were signalled, by number: mGBA instances (831962, 832116, and patched-ROM instances) and the debugger bridge (832114), plus Xvfb `:318` (828803) and its openbox (828807). One early `pkill -f dbgserver.py` was issued by mistake and terminated this session's own shell; it did not target any other agent's ROM process. All subsequent kills were by PID number. Other agents' processes on `:315`, `:316`, `:317` and `:319` were left untouched.
+Only this session's own PIDs were signalled, by number: mGBA instances started from `/tmp/opencode/winxclub3` (including 839404, 839996, 840680, 841292, 841651, 842539, 842786, 843837, 846841–847745, 848739, 849062, 849413, 850025, 850241, 851xxx–852838). Xvfb `:318` and its openbox were started by this session (PIDs 837476, 837494). Other agents' displays (`:315`, `:316`, `:317`, `:319`) and processes were left untouched. No `pkill` was used. The ROM folder contains only `WinX Club.gba` and this report; all `.ss1`, `.sav`, logs and screenshots live in `/tmp/opencode/winxclub3/`.
