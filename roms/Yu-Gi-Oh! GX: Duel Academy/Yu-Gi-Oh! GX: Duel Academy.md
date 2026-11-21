@@ -54,9 +54,8 @@ boundaries are stated in §8.
 4. The machine shows eight digit wheels. **Down** increments the current digit
    (0→1…9→0); **Up** decrements (0→9). **Right**/Left move between wheels.
    Defaults are all zero. Press **A**, then **Start** to submit.
-5. Known-good decoder check: enter `89631139` (Blue-Eys password in this game's digit order —
-   the table stores its TCG reverse `93113698`). First use shows the card and a 1000 DP
-   charge; second use shows "You have already used this password."
+5. Known-good decoder check: enter `89631139` (Blue-Eyes White Dragon). First use shows the
+   card and a 1000 DP charge; second use shows "You have already used this password."
 6. Novel-code check: from a fresh state with ≥1000 DP, enter `31000575`, submit
    (A then Start) → "You need 1000 DP to acquire this card. Will you pay?" with the card
    **CONSCRIPTION** shown → A ("Yes") → DP 2900 → 1900, card acquired. Re-enter the same
@@ -133,12 +132,12 @@ Notes:
 * The validator scans **arg = 1..1200**; arg 0 is an invalid sentinel
   (its decoded word contains nibbles 10–15). All 1200 scanned entries decode to eight
   decimal digits.
-* To display a password in the usual TCG order, reverse the nibble string of
-  `expected_packed(arg)`: the game packs the leftmost wheel into the low nibble.
-  Example: arg 1 → `0x89631139` (MSB-first) → wheels `8 9 6 1 1 3 3 9`?
-  In practice the accepted wheel sequence for arg 1 is `89631139`; the decoder's
-  MSB-first rendering of the packed word is `93113698`. This reverse relationship was
-  confirmed in-game (entering `89631139` gives Blue-Eys / "already used").
+* The eight hex digits of `expected_packed(arg)`, MSB first, are exactly the eight wheels
+  to type. Example: arg 1 gives `0x89631139`, so the wheels are `8 9 6 3 1 1 3 9`;
+  this was confirmed in-game (the digit buffer at 0x0202B0C0 read back as
+  `08 09 06 03 01 01 03 09` and the game accepted it as the Blue-Eyes White Dragon
+  password). `decode_final.py` prints nibbles least-significant first, so the
+  wheel-order password is the reverse of that printed string.
 * Rejection paths in 0x080D5B88: index 0 → result state 1 (incorrect password); a
   previously-used flag → result state 3 (already used); price check → result state 2
   (cannot acquire / insufficient DP).
@@ -160,7 +159,7 @@ Representative decoded entries (wheels to type; arg; card ID):
 
 | Password | arg | Card ID / note |
 |---|---:|---|
-| `89631139` | 1 | Blue-Eys White Dragon (public/reference code) |
+| `89631139` | 1 | Blue-Eyes White Dragon (public/reference code) |
 | `33396948` | 17 | Exodia the Forbidden One (reference) |
 | `46986414` | 23 | Dark Magician (reference) |
 | `74677422` | 40 | Red-Eyes B. Dragon (reference) |
@@ -183,9 +182,9 @@ A full offline run of the recovered validator over all 1200 table entries produc
 **1200/1200** decodes with all eight nibbles ≤ 9, so the table is completely characterised.
 
 **Validator model.** The reimplementation in §5 reproduces the ROM exactly for accepted
-inputs (public codes decode to the expected real TCG passwords when the nibble string is
-reversed) and rejects all inputs not in the table by construction. Two published/reference
-codes and two novel codes were tested live; see below.
+inputs (it recovers the known real TCG card passwords, e.g. 89631139 / 46986414 / 33396948)
+and rejects all inputs not in the table by construction. Two reference codes and two novel
+codes were tested live; see below.
 
 **Novel codes (absent from the well-known published password examples):**
 
