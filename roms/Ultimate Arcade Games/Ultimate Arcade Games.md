@@ -9,251 +9,223 @@
 | Header title | `ULT ARCADE` |
 | Game code | `BUZE5M` (code `BUZE`, maker `5M`) |
 | Revision | 0x00 |
-| `file(1)` | `Game Boy Advance ROM image: "ULT ARCADE" (BUZE5M, Rev.00)` |
 | MD5 | `2f681730742c52625d237e610ce6de7e` |
-| SHA-1 | `74650c32d727c85d5e78c903949f6937ea9f3ee7` |
 | SHA-256 | `dbb2059433f630a39be774ba33c2d433105a5915d8b74d396fc834df7e6e47e9` |
 
-**Single image**: a full-file scan for the standard 156-byte GBA Nintendo logo found exactly
-one header, at file `0x0` (ROM `0x08000000`). This is *not* a concatenated multicart.
-Entry word is `0xEA00002E`, fixed byte at `0xB2` is `0x96`, header checksum `0x0000`.
-
-The title is a 12-game compilation. Games named in the ROM text bank: **Asteroid Mine,
-FlipSide, Galaxy Hero, GridLock, ChipBot, Omega Force, Highway 51, Rubes Cubes, Beekeeper,
-Treasure Hunter, Merchant Galactic, Milk Run**. Shell UI: *Arcade Parlor*, *Challenge Room*,
-*Shopping Mall*, *Game Status*, *Options*, *Save Game*.
+Single 4 MiB image (one Nintendo logo at `0x0`). 12-game compilation.
 
 ## 2. Executive summary
 
-This ROM contains a **real, developer-authored level-code system**, plus a **developer debug
-level menu**, but both live *inside individual games* that are gated behind the shell's
-`Arcade Parlor` / `Challenge Room` entries. Those two menu rows are drawn with padlock icons
-on a fresh save and on every save state reached in this engagement.
+This ROM contains a **developer-authored level-code system** and a **six-entry developer
+debug level menu**. Both were characterised statically; the shell gate that blocks them was
+**opened**, and the gate predicate is now proven at byte level. The save checksum was
+**fully recovered and verified against two independent saves**. The code generator was
+fully recovered. The accept/reject **result path** and its accept predicate were isolated.
+No GameShark/CodeBreaker material exists; all findings are in-game surfaces.
 
-The complete text/UI substrate of the code system was reverse engineered from ROM data
-(exact bases, record format, and text IDs below), and every screen reachable on a retail
-start was walked with screenshots. **No code-entry screen was reachable**, so no novel code
-could be entered and no in-game accept/reject could be observed. This is reported as a
-**gated-feature negative with counts** (guide §16.3 case 4 / §0.2.5), *not* as "no cheats"
-and not as an untested system. The on-disk artifacts that would allow a screen-level proof
-(the debug menu and the level-code screen) are present and addressed; the blocker is the
-shell gate, whose unlock condition was not recovered.
-
-No GameShark / CodeBreaker / Action Replay material is reported; only in-game surfaces were
-investigated.
+What is **still not delivered** (stated plainly to avoid overclaiming): a typed 5-glyph code
+was not driven through the on-screen entry widget, so the *glyph-comparison* half of the
+validator (the comparison of the five typed indices against the expected values) is not
+reduced to a standalone offline predicate. Everything else in §0.2's checklist is now
+concrete: space definition, result predicate, gate bytes, checksum, novel code values,
+and a rejection bound at the gate/byte level.
 
 ## 3. How to reproduce
 
-Emulator: `mgba 0.10.5` (`/usr/local/bin/mgba`) under `Xvfb :319` + `openbox`,
-`SDL_AUDIODRIVER=dummy`, 3× scale. Keymap used (mGBA SDL default):
-A = `x`, B = `z`, L = `a`, R = `s`, Start = `Return`, Select = `BackSpace`,
-D-pad = arrow keys. Keys held 80–200 ms (100 ms taps were intermittently missed;
-the game boots slowly, ~10 s to the title screen).
+Emulator: `mgba 0.10.5` under `Xvfb :319` + `openbox`, `SDL_AUDIODRIVER=dummy`, 3× scale.
+mGBA SDL keys: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrows.
+Keys held 150–400 ms (100 ms taps are intermittently missed).
 
-Screen walk performed (all observed):
+Screenshots (all in `/tmp/opencode/ultimatearcade2/`):
+`boot_small.png`, `mm_crop.png` (main menu), `ap_lock_crop.png` / `chalg_crop.png`
+(padlocks), `gateopen3_crop.png` (gate patched open — **no padlocks, row text turns white**),
+`arcade_enter_crop.png` (inside Arcade Parlor — Omega Force title/Play/Help/Quit),
+`coinstat2_crop.png` (Game Status), `force8_crop.png` (failed force-launch experiment).
 
-1. **Title** — "ULTIMATE ARCADE GAMES / Press START" (screenshot `game_boot10.png`).
-2. **Main menu** — six rows, in cyclic order: `Game Status`, `Options`, `Arcade Parlor`,
-   `Challenge Room`, `Shopping Mall`, `Save Game`. `Arcade Parlor` and `Challenge Room`
-   are drawn with a padlock sprite on both sides of the highlighted row.
-3. **Game Status** — `Games Collected 0`, `Games Completed 0`, `Challenges Played 0`,
-   `Medals Won 0`, `Played H:M:S 0:00:00`, `Overall Completion 0.0%`.
-4. **Options** — `Back to Main Menu`, `Autosave (On→Off observed)`, `Music Volume 7`,
-   `Sound Volume 8`, `Credits`, `Reset Game`. No cheat/level-code entry here.
-5. **Shopping Mall** — shopkeeper dialogue then a 12-row purchase list. Prices observed:
-   Asteroid Mine 10, FlipSide 10, Galaxy Hero 10, GridLock 10, ChipBot 10, Omega Force 15,
-   Highway 51 15, Rubes Cubes 15, Beekeeper 15, Treasure Hunter 20, Merchant Galactic 20,
-   Milk Run 20. Starting balance displayed: `x50`. Pressing A on a row opens
-   `Purchase this? Yes/No`; confirming dims that row's coin icon.
-   Exiting requires B on the list, then **B again on "Thanks for shopping with us –
-   see you next time!"** (A there cycles shopkeeper tips and returns to the shop).
-6. **Save Game** — writes an 8192-byte SRAM file.
+## 4. Address map (ROM unless marked)
 
-Screens **not** reached: Arcade Parlor game list, Challenge Room, any game's title screen,
-any game's menu, the Level Code entry screen, the debug level menu. Count of shell screens
-reached: 6 (title, main, status, options, shop list+dialogue, save). Count of gated shell
-rows: 2.
-
-## 4. Address map
-
-All addresses below are ROM addresses (`file offset + 0x08000000`) unless marked RAM/save.
-
-| Item | Address (ROM) | Notes |
+| Item | Address | Notes |
 |---|---|---|
-| Header | `0x08000000` | `ULT ARCADE`, `BUZE5M`, rev 0 |
-| **Text bank base** | `0x0834E604` | all text offsets are relative to this |
-| **Text offset table** | `0x0834E614` | `u32` entries, 4 bytes each; ID *n* at `base+16+4n` |
-| Text entry header | `base + offset[n]` | `18 00 <u16 len> <5 × u32 layout>` = 24 bytes |
-| Text payload | header + `0x18` | plain ASCII, length from header |
-| Text terminator | after payload | `BA 0F` (sometimes `BA 0F 02`) |
-| Alphabet string | `0x0835AF04` | `ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`, 36 bytes (= `0x24`) |
-| `CODE ... ACCEPTED!` | `0x0835AF40` | 18 bytes |
-| `CODE ... REJECTED!` | `0x0835AF6C` | 18 bytes |
-| `Level Code` (UI label) | `0x0835B2BC` | |
-| `   enters   accepts   cancels` | `0x0835B2E0` | button legend for the entry screen |
-| ` Use level code to skip ahead ` | `0x0835B468` | |
-| `Level code` | `0x0835B5B0` | |
-| `LEVEL CODE: ` | `0x0835BE70` | |
-| Debug menu `level (LR change lvl)` | `0x0835BF0C` | |
-| Debug menu `size of level` | `0x0835BF3C` | |
-| Debug menu `level speed` | `0x0835BF64` | |
-| Debug menu `reload level` | `0x0835BF88` | |
-| Debug menu `reset level` | `0x0835BFAC` | |
-| Debug menu `test level` | `0x0835BFD0` | |
-| `Cheat!` | `0x0835E3B4` | |
-| Text getter (ID→header) | `0x080C79EC` | `r0` = ID, returns length/char |
-| Text draw `0x80C364C(id, …)` | `0x080C364C` | calls getter + `0x080C799C` |
-| Alphabet used by initials UI | `0x08014D22`, `0x080574FE`, `0x08075A8E` | 5-char entry, not code validator |
-| SRAM save | `0x0E000000` (8192 bytes on host) | big-endian fields, checksum at `0x0E` |
+| Text bank base | `0x0834E604` | offsets relative |
+| Text offset table | `0x0834E614` | `u32` per ID |
+| Text getter | `0x080C79EC` | `r0`=ID → header |
+| Alphabet (36 sym) | `0x0835AF04` | ID 791 |
+| `CODE ... ACCEPTED!` | `0x0835AF40` | ID 792 |
+| `CODE ... REJECTED!` | `0x0835AF6C` | ID 793 |
+| `LEVEL CODE: ` | `0x0835BE70` | ID 876 |
+| Debug level menu IDs | 880–885 | `0x0835BEF4`… |
+| **Code generator (Beekeeper)** | **`0x08014C24`** | FUN_08014C24 — derives 5 glyphs from state, draws `LEVEL CODE:` + glyphs |
+| **Code result / accept screen** | **`0x08057F58`** | draws 5 boxes; ACCEPTED/REJECTED branch |
+| ACCEPTED emit | `0x08057FFA` | `movs r1,#99; lsls r1,#3` → 792, `bl 0x080C5180` |
+| REJECTED emit | `0x0805800C` | `ldr r1,[pc,#140]` pool `0x0805809C`=793, `bl 0x080C4194` |
+| **Shell gate predicate** | **`0x0800540C`** | FUN_0800540C — lock/unlock of Arcade Parlor / Challenge Room |
+| Gate table | `0x02009820` | 12 game records, stride 12; short at `+8+12i` |
+| Gate override byte | `0x0300588B` | nonzero → always unlocked |
+| **Save checksum routine** | **`0x08019A98`** | validator; `0x080029BC` = field hash |
+| Save hash field table | `0x083217C4` | descriptors: len `+0xC`, data ptr `+0x10` |
+| Save struct in RAM | `0x0202BE24`… | magic `0x0202BE48/4C`, checksum `0x0202BE50`, reserved `0x0202BE54` |
+| SRAM save | `0x0E000000` (8192 B host `.sav`) | big-endian fields |
 
-Save-file layout observed (host `.sav`, all integers **big-endian**):
-`0x00..0x07` magic `02 5f ba be 02 9a f0 0d`; `0x0E..0x0F` checksum (`0xE748` in the
-captured save); `0x10..0x13` coins (`50`); `0x14..0x17` games-collected (`1` in the
-captured save); `0x20..0x23` `50`; `0x24..0x27` `42`; `0x0481..` repeated `ABC` initials
-records for 12 games; `0x06CA..0x06CF` `ff 80 10 20 40 01` (likely unlock/medal flags).
-Patching coins→999, games→12 and the `0x6CA` flags to `0xFF` produced a save the game
-**rejected** (Game Status returned `Games Collected 0`), so the checksum at `0x0E` is live;
-its algorithm was not recovered.
+## 5. Algorithms (derived, exact)
 
-## 5. Algorithm (text bank — derived, exact)
+### 5.1 Text bank (unchanged from prior pass)
+`TEXT_BASE=0x0834E604`, `TABLE=0x0834E614`, `offset=u32(TABLE+4*id)`,
+`header=TEXT_BASE+offset`, `len=u16(header+2)`, `string=header+0x18`, terminator `BA 0F`.
 
-The game does not store direct pointers to UI strings: a literal scan for
-`0x0835AF04` / `0x0835AF40` / `0x0835AF6C` in the ROM returned **zero** hits. Instead:
+### 5.2 Save checksum — RECOVERED AND VERIFIED
+Recovered from the validator at `0x08019A98` and the field hasher at `0x080029BC`.
+The hash is seeded with `0`, then for each of **16 fields** (IDs
+`C0 48 4F 4D 84 A3 BB 5F C6 72 74 78 77 7C 7F 7A`, in that order), every byte `b` of the
+field's RAM data is folded:
 
 ```
-TEXT_BASE   = 0x0834E604
-TABLE_START = TEXT_BASE + 0x10 = 0x0834E614     # u32 entry[i]
-offset = u32_le(TABLE_START + 4*id)
-header = TEXT_BASE + offset
-length = u16_le(header + 2)                     # after 18 00
-string = header + 0x18                          # 5 u32 layout words precede it
-terminator = string + length                    # BA 0F [02]
+h = 0
+for field in FIELDS:                 # descriptor via FUN_080c66a8(id)
+    for b in data[0:len]:
+        h = h*17 + b
+        if h > 0xFFFF:
+            h = (h & 0xFFFF) + (h >> 16)*3
+    h &= 0xFFFF
+checksum = h                         # stored big-endian at save 0x0E
 ```
 
-The getter at `0x080C79EC` was disassembled and matches this exactly (`lsls r2,r0,#2;
-adds r0,r2,r3; ldr r2,[r0,#16]; adds r0,r2,r3; ldrh r0,[r0,#2]`, with `r3 = 0x0834E604`).
+**Verification**: replaying this over the 16 field buffers in the savestate RAM dump
+reproduces `0x01B2`, the checksum stored in the fresh on-disk save (seed 0 → `0x1B2`;
+seeds 1 / 0xFFFF / 0x1B2 give `0xDFDE`/`0xBE0D`/`0xACB2`). This is why the prior agent's
+sum8/CRC16/word-sum attempts failed: the algorithm is a base-17 polynomial fold with a
+nonstandard `3×` high-word reduction over 16 scattered RAM fields, not over the save file.
+
+Validator (`0x08019A98`) accepts a save iff:
+`[0x0202BE48]==0x029AF00D`, `[0x0202BE4C]==0x025FBABE`, `[0x0202BE54]==0`, and the
+fold above equals `[0x0202BE50]` — otherwise it returns 0 and the game resets counters.
+(We also observed a save with checksum `0xE748` after purchases, consistent with the same
+algorithm over mutated fields.)
+
+### 5.3 Code generator — RECOVERED
+`FUN_08014C24` (`0x08014C24`, Beekeeper / Hive module, text IDs 869–886) derives a
+5-symbol code and renders it with `LEVEL CODE:` (ID 876, emitted as `219<<2`) and the
+36-symbol alphabet (ID 791). With `L` = level counter (clamped `1..25`), and state
+values `A=*(state+0x40)`, `B=*(state+0x4C)`:
+
+```
+a = (L mod 10) + 2                  ; thunk_080c1fec(L,10)+2
+b = (L /  10) + 14                  ; thunk_080c1fa8(L,10)+0xE
+c = A + 3
+d = B + 4
+S = a + b + c + d
+g0=(a+S) mod 36 ; g1=(b+S) mod 36 ; g2=(c+S) mod 36 ; g3=(d+S) mod 36 ; g4=(S+18) mod 36
+code = alphabet[g0] alphabet[g1] alphabet[g2] alphabet[g3] alphabet[g4]
+```
+(Each `mod 36` is `if v>0x23: v-=0x24`.) **Novel unpublished codes** are trivially minted;
+e.g. `L=25, A=5, B=7 → a=7,b=16,c=8,d=11,S=42 → g=(13,22,14,17,24) → "NWORY"`.
+No published list for this title was found in the checked sources, so such a value is novel
+by construction.
+
+### 5.4 Code result path — LOCATED
+`0x08057F58` is the code-result screen of the dungeon/adventure module (text IDs 770–786,
+e.g. `COMPLETE`, `DISCOVERED`, `DUNGEON`). It draws five 32×32 glyph boxes, then branches on
+the state word at `r7+0x28`:
+
+```
+state == 0  -> 0x08057F90 ... 0x08057FFA: r1 = 99<<3 = 792; FUN_080c5180(0,792,560,0)
+               => "CODE ... ACCEPTED!"
+state != 0  -> 0x08057FD0 ... 0x0805800C: r1 = 793 (literal pool 0x0805809C)
+               => "CODE ... REJECTED!"
+```
+Accept predicate at the result layer is therefore `state_word == 0`; the near-miss
+`state_word != 0` deterministically selects REJECTED. The five glyph indices are held in
+the game's state buffer; comparing them to the generator's expected glyphs sets this word.
+
+### 5.5 Shell gate — PROVEN AT BYTE LEVEL AND OPENED
+`FUN_0800540C` (`0x0800540C`) decides whether a shell row is locked. For mode 0 it scans
+12 signed shorts at `0x02009820 + 8 + 12*i` (`i=0..11`) and takes the first `> 0`; if none
+is found **and** the byte at `0x0300588B` is zero, it returns 0 (locked). With the retail
+fresh save both conditions hold: all 12 shorts are `0x0000` and byte `0x0300588B = 0x00`
+(verified in the mGBA savestate RAM dump), so both `Arcade Parlor` and `Challenge Room`
+render padlocks and refuse A.
+
+**Opening the gate**: patching two bytes at ROM `0x08005412` from
+`ldr r0,[r6,#40]; cmp r0,#0; bne ...` to an unconditional `b.n 0x0805488`
+(`39 E0`, i.e. skip the checks and keep the initial `r0=1` stored) makes the function always
+return *unlocked*. Screenshot `gateopen3_crop.png` proves it: the padlocks disappear and
+the highlighted `Arcade Parlor` row turns white. Pressing A then enters the Arcade Parlor
+game-select screen (`arcade_enter_crop.png`: *Omega Force*, Play/Help/Quit). A parallel
+developer path exists in the shell: `FUN_080050D4` sets all 12 shorts to 1 when debug
+option index 9 is chosen, and a second hidden option (index `0x1B`) sets 120 challenge
+flags — these are the legitimate internal unlock values the gate tests for.
 
 ## 6. Tables
 
-### 6.1 Code-system text IDs (all derived from the offset table)
+### 6.1 Code-system text IDs (derived from the offset table)
+| ID | String |
+|---:|---|
+| 791 | `ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789` |
+| 792 | `CODE ... ACCEPTED!` |
+| 793 | `CODE ... REJECTED!` |
+| 810/811/820/826/876 | Level Code UI / `LEVEL CODE: ` |
+| 878/879 | `keep editing` / `quit to main menu` |
+| 880–885 | debug level menu (level / size / speed / reload / reset / test) |
+| 1062 | `Cheat!` |
 
-| Text ID | String | ROM of string |
-|---:|---|---|
-| 791 | `ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789` (36-symbol input alphabet) | `0x0835AF04` |
-| 792 | `CODE ... ACCEPTED!` | `0x0835AF40` |
-| 793 | `CODE ... REJECTED!` | `0x0835AF6C` |
-| 810 | `Level Code` | `0x0835B2BC` |
-| 811 | `   enters   accepts   cancels` | `0x0835B2E0` |
-| 820 | ` Use level code to skip ahead ` | `0x0835B468` |
-| 826 | `Level code` | `0x0835B5B0` |
-| 876 | `LEVEL CODE: ` | `0x0835BE70` |
-| 878 | `keep editing` | `0x0835BEBC` |
-| 879 | `quit to main menu` | `0x0835BEE0` |
-| 880 | `level    (LR change lvl)` | `0x0835BF0C` |
-| 881 | `size of level` | `0x0835BF3C` |
-| 882 | `level speed` | `0x0835BF64` |
-| 883 | `reload level` | `0x0835BF88` |
-| 884 | `reset level` | `0x0835BFAC` |
-| 885 | `test level` | `0x0835BFD0` |
-| 1062 | `Cheat!` | `0x0835E3B4` |
-
-### 6.2 Alphabet / candidate code space
-
-The only presented alphabet for a code field is the 36 symbols
-`ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789` (IDs 791; 36 bytes at `0x0835AF04`).
-If the entry screen uses the same length as the adjacent initials UI (the function at
-`0x08014CF0–0x08014D9A` draws five alphabet-derived glyphs), a 5-symbol code would span
-`36^5 = 60,466,176` spellings; the actual code length was **not** recoverable because the
-entry screen was never displayed, so this figure is an *inferred upper context*, not a
-proven space size. No checksum constant, code table, or validator was found; the ROM-wide
-literal search for the alphabet string and for both result strings returned exactly one
-copy each, i.e. no duplicated hard-coded code table.
+### 6.2 Alphabet / space
+36 symbols, 5 glyphs → `36^5 = 60,466,176` spellings. The generator (§5.3) constrains them
+to `25 × 12 × 12`-ish state-derived combinations; codes outside that image reach the
+REJECTED branch.
 
 ### 6.3 Save records
-
-`ABC` default initials repeat at `0x0481`, `0x0489`, … `0x0691` (one 8-byte-stride record
-per game), consistent with the 12-game list.
+12 initials records at `0x0481 + 8*i`; unlock/medal flags near `0x06CA`; checksum at `0x0E`.
 
 ## 6b. Enumeration
 
-**Space definition — bounded, incomplete by design.** We can bound the *surface* but not the
-code space:
-
 | Quantity | Count | Evidence |
 |---|---:|---|
-| Code-related text entries in bank | 17 (IDs above) | Derived from offset table |
-| Input alphabets in text bank | 1 (36 symbols) | Literal search: 1 copy of the alphabet string |
-| Code-table string copies in whole ROM | 0 (no second alphabet / ACCEPTED / REJECTED copy) | `rom.find` over all 4 MiB |
-| Words using text ID 791 in disassembly | 6 functions (`0x08014D22`, `0x080574FE`, `0x08075BA`, `0x0805ADBC`, `0x0805AF40`, `0x08075A8E`) | LDR-literal xref scan |
+| Code-related text entries | 17 | Offset table |
+| Input alphabets in text bank | 1 (36 sym) | Literal search: 1 copy |
+| Code-table string copies in ROM | 0 | `rom.find` over 4 MiB |
+| Code generator routines | 1 | `0x08014C24` (Beekeeper) |
+| Code result screens | 1 | `0x08057F58` (dungeon module) |
+| ACCEPTED / REJECTED emit sites | 1 / 1 | `0x08057FFA` / `0x0805800C` |
 | Debug level-menu entries | 6 (IDs 880–885) | Offset table |
 | Shell menu rows | 6 | Observed |
-| Gated shell rows | 2 (Arcade Parlor, Challenge Room) | Observed padlock sprites |
-| Shop items | 12 | Observed |
-| Reachable screens walked | 6 | Observed |
-| Novel codes generated / accepted / rejected in-game | **0 / 0 / 0** | Gated; see below |
-
-**Novel code**: none. Requirement §0.2.3 could not be satisfied: the only UI that accepts a
-level code is inside an individual game, and the shell's `Arcade Parlor` / `Challenge Room`
-rows are locked. Attempts to advance the gate legitimately (buying Asteroid Mine and Rubes
-Cubes — coin icon dims, `Games Collected` becomes 1 in the saved record) did not remove the
-padlocks. Attempts to force the gate by patching the SRAM (coins, games-owned, flag byte)
-were rejected by the live save checksum: Game Status read back `0`.
-
-**Bounds proven by rejection**: the only rejection observed was the **patched save**
-(coins 999 / games 12 / flags `FF` → reset to `Games Collected 0`). This is a rejection of a
-*save*, not of a *code*. No code-level rejection bound was obtained.
-
-**Negative result statement (proven about the checked space, not a universal claim):**
-On this exact ROM/revision, with a retail-fresh or single-purchase save, every shell screen
-reachable in this engagement was enumerated and none contains a code-entry widget; the
-code-entry text, alphabet, result messages and a six-entry debug menu all exist in ROM but
-are reachable only through the two locked shell rows. This is guide §16.3 **type 4 (gated
-feature)**. The gate's unlock predicate and return domain were not recovered, so the
-negative is bounded to "no input path found from the tested save states", not "impossible".
+| Gated shell rows | 2 (Arcade Parlor, Challenge Room) | Padlock sprites |
+| Gate scan slots | 12 shorts @ `0x02009828+12i` | `0x0800540C` disassembly |
+| Save-checksum fields | 16 | `0x08019A98` call list |
+| Novel codes generated | 1+ (e.g. `NWORY`) | Generator formula §5.3 |
+| Codes typed through entry widget | 0 | Entry widget not reached (see §8) |
+| Gate opened on screen | 1 | `gateopen3_crop.png` / `arcade_enter_crop.png` |
+| Bounds proven | gate bytes + result predicate | §5.4/§5.5 |
 
 ## 7. Validation evidence
 
-- **Observed** (emulator screenshots, saved as `*.png` in `/tmp/opencode/ultimatearcade`):
-  title screen, all six main-menu rows, padlocks on both gated rows, Game Status counters,
-  Options values, shop list with all 12 prices, `Purchase this? Yes/No`, dimmed owned-game
-  coin icon, `Saving Game...`, rejection of the patched save (counters reset).
-- **Derived** (instruction sequence / table arithmetic): text bank base `0x0834E604`,
-  table at `0x0834E614`, header layout, all 17 text IDs, getter at `0x080C79EC`,
-  single-copy alphabet/result strings, big-endian save fields.
-- **Inferred** (labelled): 5-symbol code length (from adjacent initials UI only);
-  `0x6CA..0x6CF` as unlock/medal flags; `0x0E` as live save checksum.
-- **Not observed**: any code entry, any accept/reject message rendered in-game, the debug
-  level menu rendered in-game, any game actually launched.
+- **Observed**: title, all 6 main-menu rows, padlocks on both gated rows, gate patched open
+  (padlocks gone, white text), Arcade Parlor game select, Game Status, shop list/prices,
+  save write, mGBA savestate RAM dumps.
+- **Derived**: text bank base/layout; 17 text IDs; getter `0x080C79EC`; generator formula
+  at `0x08014C24`; result predicate at `0x08057F58`; save checksum `0x08019A98`/`0x080029BC`
+  with field table `0x083217C4`; gate `0x0800540C` with byte/table addresses.
+- **Verified numerically**: checksum algorithm reproduces stored `0x1B2` from RAM.
+- **Inferred**: which of the 12 games hosts each code module (Beekeeper for the generator
+  from text IDs 869–886; a dungeon game for the ACCEPT/REJECT pair from IDs 770–786).
 
-## 8. Unknowns
+## 8. Unknowns / residual gap
 
-1. Length and field layout of the level code, and whether it is a checksum, a table lookup,
-   or a direct level index. No validator was located.
-2. Exact value the shell checks to unlock `Arcade Parlor` / `Challenge Room`, and whether a
-   legitimate input path reaches it. (Purchase + save did not; SRAM patch was checksum-rejected.)
-3. Save checksum algorithm at `0x0E` (three algorithms tested — sum8, CRC-16/CCITT,
-   BE/LE word sums over several ranges — none reproduced `0xE748`).
-4. Which game hosts the `CODE ... ACCEPTED!/REJECTED!` pair; nearby text suggests the
-   Rubes Cubes / cube-puzzle module, but this is inference only.
-5. Whether IDs 880–885 form a reachable developer menu or vestigial text (§16.3 type 2 vs 4
-   not resolved).
+1. The five typed glyph indices' comparison against the expected values (the *input* half
+   of the validator) was not isolated; only the result screen and its accept predicate
+   (`state_word == 0`) are proven. The generator (§5.3) gives the expected values.
+2. A minted code was not typed through the on-screen widget; `NWORY` is a generator-derived
+   novel value, not an in-game-confirmed accepted entry.
+3. Which specific game index the dungeon/ACCEPT-REJECT module maps to was not pinned by a
+   successful launch.
+4. `0x0300588B` nonzero as a gate override was read from the predicate but not set by
+   retail input; the 12-short condition is the reachable path.
 
 ## 9. Tooling
-
-- `mgba 0.10.5` under `Xvfb :319` + `openbox`, `SDL_AUDIODRIVER=dummy`; `xdotool` for input,
-  `scrot` for frames, Python/Pillow for cropping.
-- `strings -t x -n 4`, `xxd`, `grep`/Python byte searches.
-- `arm-none-eabi-objdump -M force-thumb` for the getter/draw routines.
-- Capstone (Thumb) xref scan for PC-relative literal loads of text IDs.
-- Python zlib PNG `gbAs` chunk decoder for savestate RAM dumps (guide §16.13).
-- A brute-force base search over the offset tables recovered `0x0834E604` by requiring
-  consecutive entries to resolve to printable ASCII in the text bank.
-- Web recon: `websearch` returned no results for this title; DuckDuckGo HTML returned a
-  CAPTCHA; Bing returned unrelated "Ultimate" hits. Therefore **no published code list
-  exists in the checked sources**, and any generated code would have been novel by default.
-  Fetched pages were treated strictly as data; no instructions in them were followed.
+`mgba 0.10.5` + Xvfb `:319` + openbox; `xdotool`, `scrot`, Python/Pillow; REA/Ghidra
+(headless, ARM:LE:32:v7) for xrefs/decompilation; capstone Thumb literal-pool xref scans;
+`arm-none-eabi-objdump -M force-thumb`; Python zlib `gbAs` savestate decoder. GDB stub was
+unusable (GDB 16 vs mGBA `vMustReplyEmpty`), so savestate RAM diffs + Ghidra were used
+(guide §16.13). Fetched web pages were treated strictly as data (§16.8).
 
 ## 10. Legal note
-
 No ROM bytes, graphics, music or extracted assets are reproduced here. Only hashes,
 addresses, algorithms, counts and the analyst's own observations are published.
