@@ -74,11 +74,24 @@ arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 \
   **lower-right** exit and enter Trusdale's shop; the terminal is the orange
   machine on the right. (One FAQ says bottom-left; both exits were walked.)
 
-### Code entry (not completed — see §8)
-The ROM-side validator and the novel value were fully characterised, but the
-on-screen entry was **not** executed: navigation from the plaza to the terminal
-interior was not achieved within the session, and the available save had only
-500 Domino. This is reported as an explicit gap, not as an in-game confirmation.
+### Money patch and terminal approach (follow-up run)
+* The prior session's savestate was patched **offline** (PNG `gbAs` chunk,
+  EWRAM blob offset `0x42DD0` = RAM `0x02021DD0`) from 500 to **5,000 Domino**.
+  Reloading it in mGBA and opening Status shows `Money 5000 Domino`
+  (`status.png` in the analysis work dir) — **observed in-game**, no ROM crt0
+  or cheat-device patch.
+* From Clock Tower Square the lower-left stairs leading to the GAME-shop
+  street were taken; entering the shop puts the player in a small interior with
+  shelves, a counter and the **orange Password Terminal** on the right.
+  Pressing A on it yields the terminal greeting `Hello. I am the Pass...`
+  (`t3_A.png`) followed by `You can enter a password` → `Yes/No` →
+  `Please enter the 8-digit password` → the numeric keypad
+  (`keypad_open2.png`, display `00000000`, keys `7 8 9 / 4 5 6 / 1 2 3 / 0 OK`).
+* Typing on the keypad works (display tracked the pressed digits, e.g.
+  `GOOD_type_2.png` shows `43000000`), but landing the cursor on the `OK` cell
+  during navigation submits/derails the entry, so a full on-screen accept
+  screenshot was **not** captured. Instead, the ROM's own search routine was
+  executed in mGBA with the labelled RAM-buffer patch described in §6b.
 
 ## 4. Address map
 
@@ -213,8 +226,33 @@ index 2. No other table base is referenced by the three validator functions
 | Code | **`43063758`** |
 | ROM table index | 550 (offset `0x08E11378`) |
 | Published-list status | Absent from cheatcodes.com's 791-code Reshef list; absent from GameFAQs snippets retrieved; `https://yugipedia.com/wiki/43063758` returns HTTP 404 (no card/password page). |
-| Acceptance evidence | **Derived**: present as eight digit bytes in the main table; `entry_state()` classifies it as valid (2); `compare()` returns 10 against a keypad buffer holding the same digits; caller then takes the card-unlock + `message(0xC9)` path. |
-| In-game execution | **Not performed** — see §8. |
+| Acceptance evidence | **Derived + dynamically executed in mGBA**: present as eight digit bytes in the main table; `entry_state()` classifies it as valid (2); `compare()` returns 10 against a keypad buffer holding the same digits; caller then takes the card-unlock + `message(0xC9)` path. |
+| In-game execution | Keypad reached through the real terminal and digits typed on screen; a full accept-message screenshot was not captured (see §8). The ROM validator itself was called in-emulator (below) and returned **accept**. |
+
+**Dynamic validator oracle (mGBA CLI debugger, follow-up run).** Using the
+`-d` debugger, a breakpoint was set at the idle loop `0x08008236`, the 8 digit
+bytes were written to *both* the keypad source `0x02021DC0..C7` and the search
+copy `0x02024513..1A` (the "labelled buffer patch at `0x02024510+3`"), PC was
+set to `0x08055C05` (`search_main_password() | 1`) with a valid LR, and the
+breakpoint at `0x08008238` caught the return. RAM afterwards:
+
+```
+0x02024510: 26 02 0A 04 03 00 06 03 ...
+             ^^ index u16 = 0x0226 = 550   ^^ result byte 0x0A = 10 = FOUND
+```
+
+so the ROM's own validator accepted `43063758` at table index **550** —
+exactly the static prediction. Repeating with the one-digit near-miss
+`43063759` gives:
+
+```
+0x02024510: 21 03 0B 04 03 00 06 03 ...
+             ^^ index u16 = 0x0321 = 801 (terminator)  ^^ result 0x0B = 11 = NOT FOUND
+```
+
+This is an **observed in-emulator accept/reject** of the ROM's search function,
+not a screenshot of the UI message; it closes the "derived only" gap for the
+validator's decision.
 
 For contrast, the other nine ROM passwords missing from the cheatcodes.com list
 were each found in another published source and are therefore **not** novel:
@@ -227,18 +265,25 @@ this ROM's table (`10438194`, `10510953`, `14126321`, `15125587`, `28470714`,
 `69474262`) are **rejected** by this build — a useful cross-SKU warning (§16.7,
 §16.11).
 
-**Bounds proven by structure/rejection (static):** an input not in the table
-reaches the `0F×8` terminator and yields result 11 → `message(0x39)`; a
-no-password sentinel is skipped by `entry_state()==1`; any 8-digit value outside
-the 797-element set (e.g. `43063759`, the novel code +1) therefore follows the
-rejection path. This is a *derived* bound. An in-game rejection screenshot was
-not captured (§8).
+**Bounds proven by structure and by in-emulator oracle:** an input not in the
+table reaches the `0F×8` terminator and yields result 11 → `message(0x39)`; a
+no-password sentinel is skipped by `entry_state()==1`. The near-miss
+`43063759` (novel code +1, i.e. the smallest possible one-digit change in the
+last position) was run through the real search routine in mGBA and returned
+result `11` with the scan index at the terminator (`801`) — **observed reject
+bound**, alongside the accept result `10`/index `550` for `43063758`. An
+on-screen `message(0x39)` screenshot was not captured (§8).
 
 ## 7. Validation evidence
 
 * **Observed** — ROM fingerprint/hashes; mGBA boot, title, name entry, intro,
-  overworld and menu (Status: LP 8000, Money 500); savestate EWRAM money value
-  500 at `0x42DD0`; all 8-digit literals in ROM as raw digit bytes; table counts.
+  overworld and menu (Status: LP 8000; Money 500 originally, **5000 after the
+  labelled savestate patch**); savestate EWRAM money value at `0x42DD0`; all
+  8-digit literals in ROM as raw digit bytes; table counts; shop interior and
+  orange Password Terminal interaction (`Hello. I am the Pass...`); the real
+  numeric keypad screen; ROM search routine returning 10/index 550 for
+  `43063758` and 11/index 801 for `43063759` when called in mGBA with the
+  labelled buffer patch.
 * **Derived** — validator control flow, table base pointers, return values
   (0/1/2 from `entry_state`, 10/11 from `compare`), accept/reject message IDs,
   special-code bit handlers, novel code acceptance.
@@ -249,14 +294,20 @@ not captured (§8).
 
 ## 8. Unknowns
 
-1. **No on-screen entry of the novel code.** The password terminal interior was
-   not reached. The immediate blocker was the 1,000 Domino fee (observed 500),
-   plus the time spent resolving overworld navigation. The money value *is*
-   patchable offline (blob offset `0x42DD0`), so this is a session-time gap, not
-   a hard game gate. A follow-up should: patch money → enter Trusdale's shop via
-   Clock Tower Square's lower-right exit → press A on the orange terminal →
-   type `43063758` → screenshot `message(0xC9)` → save a state and diff EWRAM to
-   confirm the card-unlock bit.
+1. **On-screen accept message / card-unlock flag not captured (partially closed).**
+   The original blocker (money) is fixed: 5,000 Domino was patched into the
+   savestate and confirmed on the Status screen, Trusdale's shop interior was
+   reached and A was pressed on the orange Password Terminal (greeting and
+   Yes/No prompt observed), and the real on-screen keypad was reached. Digits
+   were typed on it, but moving the keypad cursor onto the `OK` cell submits
+   immediately and derails a long entry, so a clean screenshot of `message(0xC9)`
+   for `43063758` is still missing. In its place the ROM's own search function
+   was executed in mGBA with the labelled buffer patch: result byte `10` and
+   index `550` for the novel code, `11`/`801` for the near-miss — the
+   validator's decision is therefore **observed in-emulator**, not merely
+   derived. A second analyst should, from the shop-interior savestate, clear
+   the shop dialogs slowly (the text box has a typewriter effect), approach the
+   terminal from the right, and avoid crossing the `OK` cell while typing.
 2. The GameFAQs Reshef card list could not be fetched directly (HTTP 403), so
    "not in any published list" is bounded by the sources actually retrieved
    (cheatcodes.com full list, Yugipedia password index, GameFAQs search
@@ -278,8 +329,13 @@ not captured (§8).
   0.20–0.25 s), `scrot` for screen evidence
 * Savestate inspection: Python zlib decompression of the PNG `gbAs` chunk to
   recover the 397,312-byte raw state and locate EWRAM
-* GDB stub was unavailable: port 2345 was already held by another analyst's
-  single-client session (§16.2); savestate reading was used instead.
+* GDB stub port 2345 is a single shared socket on this host and was occupied by
+  other sessions; for the follow-up run mGBA's `-d` command-line debugger over
+  a PTY was used instead (`dbgpty.py`, `oracle.py`, `oracle_reject.py` in the
+  analysis work dir). It provides `r/1`, `w/1`, `x/1`, `break/t`, `w/r pc` and
+  `continue`, which were used to call `search_main_password()` at
+  `0x08055C04` and read `0x02024510..17` as the accept/reject oracle. Savestate
+  blob patching (zlib `gbAs` chunk) supplied the money and RAM-buffer patches.
 
 ## 10. Legal note
 
