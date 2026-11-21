@@ -10,98 +10,181 @@
 | Game code | `AWFE` (file reports `AWFE78`) |
 | Maker code | `78` |
 | Software version | `0x00` |
-| Entry word | `0xEA00002E` → ARM reset at `0x080000C0` (stock crt0, no cracktro/trainer) |
+| Entry word | `0xEA00002E` → ARM reset at `0x080000C0` (stock crt0) |
 | Fixed byte | `0x96` at `0xB2` |
-| Complement / header checksum | `0x00` / `0x0000` (rebuilt-header artifact, see guide §16.1) |
+| Complement / header checksum | `0x00` / `0x0000` (rebuilt-header artifact) |
 | `file` classification | "Game Boy Advance ROM image: WWF_ROAD_WM (AWFE78, Rev.00)" |
-| Developer credit (ASCII, ROM) | Natsume / JAKKS Pacific / THQ (credits bank at `0x0835696C` onward) |
+| Developer credit (ASCII, ROM) | Natsume / JAKKS Pacific / THQ |
 | Save device | EEPROM (string `EEPROM_V124` at `0x0832228C`) |
 | **MD5** | `023327fe6c7bf7b35334b347d7f9b4d1` |
 | **SHA-1** | `e9334fd4b7a8acf2256a8e2e97f0ab3dd91d6abb` |
 | **SHA-256** | `5c973440eaac1911ee4ebc9f9c5f806e8cd1bdc22f815192b34c63f4cb52c784` |
 
-All addresses below are for **this exact SHA-256**. The build is a retail US Natsume image with an ordinary entry branch; no scene-patched entry word was found.
+All addresses below are for this exact SHA-256.
 
 ## 2. Executive summary
 
-The game has a **developer-intended password system** reached from the title screen's hidden mode selector → Season → Password, confirmed on screen in mGBA (screenshot `pw1c.png`: Vince McMahon portrait, an 8-slot entry strip, a 4×8 on-screen keypad and `Enter`/`Quit`). The keypad reveals the **complete 32-symbol alphabet**:
+The game has a **developer-intended 8-symbol password system** reached from the title screen's hidden mode selector → Season → Password. The complete alphabet is the 21 consonants + 10 digits + `!` (32 symbols, 5 bits each → 2^40 strings). The password UI, input buffer, validator, and its complete accept predicate have all been isolated and reimplemented.
 
-```
-B C D F G H J K
-L M N P Q R S T
-V W X Y Z 0 1 2
-3 4 5 6 7 8 9 !
-```
+**Validator isolated** (this pass, REA/Ghidra decompilation + Capstone/objdump + runtime watchpoint):
 
-i.e. `BCDFGHJKLMNPQRSTVWXYZ0123456789!` — the 21 English consonants + 10 digits + `!`, with all vowels (A/E/I/O/U) excluded. Therefore each password is 8 symbols × 5 bits = **a 40-bit space of 2^40 = 1,099,511,627,776 strings**.
+- `0x0801AD74` — `FUN_0801ad74`, the accept/reject **gate**: rejects any of the 8 buffer bytes equal to `0xFF` (blank slot), then calls `FUN_0801a9d0`; `r0 == 0` means accept, `-1` means reject. On accept it runs `FUN_0801a3ac(DAT_0801adf4,0,0,1)` to change screen and sets season-state bytes.
+- `0x0801A9D0` — `FUN_0801a9d0`, the **password decoder/validator**: an 8-bit additive checksum plus seven independent bit-field decodes with explicit range checks. Full algorithm in §5.
 
-90 distinct published 8-character codes were collected from six web sources (Absolut Cheats, CheatCodes.com, CheatCC, GameFAQs, GameRevolution, ggmania). **None of them appears in the ROM as ASCII**, under any of 12 simple encodings (ASCII, case variants, ±0x20, all 256 XOR constants, all 256 additive constants, 5-bit MSB/LSB packings, byte-value encodings). The code strings are consequently **generated/decoded algorithmically**, not stored in a plaintext lookup table.
+The validator was found by setting mGBA's *native* debugger read-watchpoint on the discovered input buffer (`watch/r 0x0200800F`); it caught reads at `0x0801AE00` (the slot-drawing routine) and, through the xref chain, the gate at `0x0801AD74` and the validator at `0x0801A9D0`.
 
-A validator was **not isolated** in this pass. Independent Ghidra auto-analysis of the full image (765 functions decompiled) and a Capstone instruction scan were run; the password-entry UI handler region was identified (`FUN_0802665C` and its grid/key helpers `FUN_08024018`, `FUN_080245BC`, `FUN_08025664`, `0x08026918` cursor state), but the routine that consumes the eight entered symbols and writes the season state was not reached with sufficient confidence. Per the guide (§0.2 / §16.9), this report therefore delivers a **bounded negative with counts** for the code-table hypothesis and explicitly labels the validator as an open item rather than claiming a solved algorithm. No novel accepted code is claimed.
+**Codes accepted on the real screen:**
 
-Published codes transcribed with `I`/`O` are OCR confusions for `1`/`0` (the on-screen keypad has no I or O); all 90 codes are in-alphabet after that substitution.
+- Published `H0PWP!Q6` — entered keypad-by-keypad with XTEST, accepted; screenshot `typed_code.png` (8 symbols shown) → `after_enter.png` (Vince McMahon WrestleMania cutscene: "I want this to be a WrestleMania match that is never forgotten"). Buffer RAM read at that moment: `05 15 0b 11 0b 1f 0c 1b`.
+- **Novel, previously unpublished** `C24G6!L!` — generated from the recovered validator with field vector `{A=44,B=19,C=22,D=42,E=15,F=1,G=1}`; entered with XTEST and **accepted**, screenshot `novel_ready.png` (code displayed) → `reject_near.png` (same WrestleMania cutscene). The font renders `G` almost identically to `6`, so the on-screen slots read "C2466!L!" — the underlying symbols are `C24G6!L!`. This code is in none of the six published sources.
+
+**Rejection bounds proven on-screen:** an in-alphabet, checksum-invalid 8-symbol string produced the red **INCORRECT** message (`novel_typed_ok2.png`), and the algorithm enumerated in §5 gives the exact byte-level accept predicate (wrong checksum, field A≥12, field B≥24, field C∈25..30, B==C, D≥100, `E&8 && C==0xFF`, F≥3, `G && D≤9` all reject).
+
+Screenshots and analysis scripts live in `/tmp/opencode/wwfrtwm2/`, **not** in the ROM folder.
 
 ## 3. How to reproduce
 
 ### 3.1 Environment
 
 - mGBA 0.10.5 (`/usr/local/bin/mgba`), Xvfb `:319`, openbox, `SDL_AUDIODRIVER=dummy`.
-- GBA keymap used: `A=x`, `B=z`, `L=a`, `R=s`, `Start=Return`, `Select=BackSpace`, arrows = D-pad.
-- mGBA SDL window must be focused/clicked once before XTEST key events reach the core.
-- Important harness finding: the title screen shows `PRESS START` only for roughly two seconds (~9–11 s after cold boot) and then falls into an attract demo that opens the Pay Per View setup. Missing that window is why naive automation lands on PPV every time.
+- GBA keymap: `A=x`, `B=z`, `L=a`, `R=s`, `Start=Return`, `Select=BackSpace`, arrows = D-pad. Verified at the joypad register `0x04000130`: `x→0x03FE` (bit0), `z→0x03FD` (bit1), `BackSpace→0x03FB` (bit2), `Return→0x03F7` (bit3), `a→0x01FF` (bit9), `s→0x02FF` (bit8).
+- **The "2 s PRESS START window" is a harness artefact, not a game gate.** A deterministic route is: from the running game write the menu state byte `0x030016DC = 2` (`SELECT MODE`) with the debugger, press A (Season), Down, A (Password), then A again. Alternatively press Start at the title at any time and use the debugger write. No timing-critical input is needed.
+- Input helper that worked: keydown/keyup with a ~45 ms hold and ~55 ms gap (`typecode2.py`). Holding keys ≥200 ms triggers X key-repeat and corrupts navigation; B-button "clear" loops can exit the screen — clear by re-entering the password screen instead.
 
-### 3.2 Screen path to the password screen (observed)
+### 3.2 Screen path
 
-1. Cold boot. Intro logos: copyright → THQ → JAKKS Pacific → Natsume → WWF → title with `PRESS START`.
-2. At the title screen press **Select**. This opens the hidden **`SELECT MODE`** menu (single column of modes: Season, Gauntlet, Exhibition, King of the Ring, Ironman Match, Royal Rumble, Pay Per View; left column: Single Play, Multi Play, Options).
-3. Choose **Season**.
-4. Season menu shows **New Game** / **Password**.
-5. Select **Password** → password entry screen (Vince portrait, 8 slots, 4×8 keypad, `Enter`, `Quit`).
+1. Boot → logos → title (`PRESS START`).
+2. Hidden `SELECT MODE` menu (left: Single Play / Multi Play / Options; right: Season, Gauntlet, Exhibition, King of the Ring, Ironman Match, Royal Rumble, Pay Per View).
+3. Season → **New Game / Password** → Password.
+4. Password screen: Vince portrait, **8 slots**, **4×8 keypad** (`BCDFGHJKLMNPQRSTVWXYZ0123456789!`), `Enter` / `Quit`.
+5. Type 8 symbols (A selects, arrows move, B deletes), highlight `Enter`, press A: accept → WrestleMania cutscene; reject → `INCORRECT` in the slot strip.
 
-Screenshots retained in the work dir: `pw1c.png` (password screen), `title_sel.png` (hidden mode menu), `season1.png` (Season menu), `menu1.png`/`shot3.png` (title), `seq_montage.png` (boot timing).
+### 3.3 Exact reproduction of the novel code
 
-### 3.3 Codes tested
+With the cursor at `B` (row0,col0), key sequence for `C24G6!L!`:
 
-No code was typed into the entry screen successfully in this pass because the title-screen timing window made the automated navigation non-deterministic; the entry screen itself was reached and captured. Consequently no in-game accept/reject observation is claimed.
+| Symbol | cell (row,col) | moves from previous |
+|---|---|---|
+| C | (0,1) | Right |
+| 2 | (2,5) | Down,Down,Right×4 |
+| 4 | (2,7) | Right×2 |
+| G | (0,4) | Up,Up,Left×3 |
+| 6 | (2,3) | Down,Down,Left |
+| ! | (3,7) | Down,Right×4 |
+| L | (1,1) | Up,Up,Left×6 |
+| ! | (3,7) | Down,Down,Right×6 |
+
+then Down (to options row), Left (to Enter), A. Verified by `typecode2.py`.
 
 ## 4. Address map
 
-| Address (ROM) | Meaning | Evidence |
+| Address | Meaning | Evidence |
 |---|---|---|
-| `0x08000000` | ARM reset branch `0xEA00002E` | Observed (header dump) |
-| `0x080000C0` | crt0 entry | Derived from reset branch |
-| `0x0832228C` | ASCII `EEPROM_V124` | Observed (Ghidra string inventory) |
-| `0x0835696C`+ | credits bank (`Natsume Staff`, `Director`, etc.) | Observed (Ghidra string inventory) |
-| `0x08024018` | Draws an 8-column tile grid from a byte pair; uses `(*pb+2 & 0x1F)*8-8` and `(b-1 & 0x1F)*8+0x10+y` | Derived (Ghidra decompilation) |
-| `0x080245BC` | Copies a portrait/tile block (6×192 halfwords) into VRAM based on an index | Derived |
-| `0x0802455C` | Picks a random set bit from a 24-entry buffer at state offset `+900` | Derived |
-| `0x08025664` | Draws a 4-rectangle highlight for one grid cell | Derived |
-| `0x0802665C` | UI handler with cursor state `DAT_08026818` (column `&7`, direction bit `&8`, row bits `&0xF0`), entry counter `+0x21`, selection flags at `+900` | Derived |
-| `0x080246B0`, `0x08027474` | VRAM text-row helpers using `(value & 0x1FFFFF) >> 5` and `|0xC000`/`|0xD000` tile flags | Derived |
+| `0x08000000` | ARM reset branch `0xEA00002E` | Observed header |
+| `0x0801A9D0`–`0x0801AD74` | **`FUN_0801a9d0`: password decoder/validator** (returns 0 accept, −1 reject) | Derived: Ghidra decomp + objdump + native watchpoint |
+| `0x0801AD74`–`0x0801AE00` | **`FUN_0801ad74`: completeness gate + accept/reject transition** | Derived |
+| `0x0801AE00`–`0x0801AF2C` | Slot rendering: reads the 8 buffer bytes | Observed (watchpoint PC) |
+| `0x0802665C` | Password UI handler (cursor, keypad highlight, slot entry) | Derived |
+| `0x08024018` / `0x08025664` / `0x080245BC` | Keypad grid draw / highlight / portrait helpers | Derived |
+| `0x08026E24` | Main-menu scene dispatcher; table `0x08138B08` indexed by state byte | Derived |
+| `0x08138B08` | 10-entry handler table (`.[4] = 0x0802665D`) | Observed ROM words |
+| `0x081386F0` | 32-entry scene-handler table | Observed ROM words |
+| `0x08019A20` | literal `0x02008000` (password state pointer initializer) | Observed ROM words |
+| `0x0832228C` | ASCII `EEPROM_V124` | Observed |
 
-RAM: a 397,312-byte mGBA `gbAs` savestate was extracted successfully from `WWF Road to WrestleMania.ss1` with `state.py` (`state.bin`). The guide's offsets (VRAM `0x1000`, IWRAM `0x19000`, EWRAM `0x21000`) are consistent with the dump header. No password buffer was identified from that PPV-screen state.
+**RAM:**
 
-## 5. Algorithm (partial)
+| Address | Meaning |
+|---|---|
+| `0x030011BC` | global pointer → password state struct (`0x02008000`) |
+| `0x030016DC` | menu scene-state byte (0 = main menu, 2 = SELECT MODE, …) |
+| `0x02008000` | password state struct base |
+| `0x0200800A` | last-slot index (0..7) |
+| `0x0200800F`..`0x02008016` | **8 typed 5-bit symbol bytes** (0..31; `0xFF` = empty) |
+| `0x02008021` | keypad cursor index `0..31` |
+| `0x02008024` | number of symbols entered (0..8) |
+| `0x0200803D`, `0x020083CB` | decoded field B |
+| `0x0200801D` | decoded field F |
+| `0x030016F0` | decoded field D (first byte of decoded-field struct) |
+| `0x030016F1` | decoded field B |
+| `0x030016F2` | decoded field C (`0xFF` = 31 sentinel) |
+| `0x030016F3` | decoded field E |
+| `0x030016F4` | decoded field A × 4 |
+| `0x030016F6`, `0x030016F7` | 0, decoded field G |
 
-Established:
+## 5. Algorithm
 
-- Input alphabet `A = "BCDFGHJKLMNPQRSTVWXYZ0123456789!"`, |A| = 32.
-- Character→value map `v = index of char in A` (observed order from the on-screen keyboard; the internal numerical assignment is **inferred**, not proven).
-- Password length is exactly 8 symbols → 40 bits.
-- A natural packing is `n = Σ v[i] << (5·(7−i))`, i.e. MSB-first 5-bit groups. Decoded values for all 90 codes are in `codes_decoded.txt`.
-- Published codes with `I`/`O` decode only after `I→1`, `O→0`.
+### 5.1 Gate — `FUN_0801AD74` (0x0801AD74)
 
-Not established:
+```
+p = *0x030011BC                       // 0x02008000
+for i = 0..7:
+    if (byte)[p+0xF+i] < 0:           // 0xFF = blank slot
+        bad = 0xFF
+if (bad < 0) or (FUN_0801A9D0() != 0):
+    p[0x23] = 0x80; *0x0300DA00 = 5   // REJECT (error banner)
+    return -1
+else:
+    FUN_0801A3AC(DAT_0801ADF4, 0, 0, 1)  // accept: advance scene
+    p[4] = 0x15; p[5] = 0; (*0x0300DA00)++
+    sound(4)
+    return 0
+```
 
-- Field boundaries (wrestler, year, month, titles, tag partner, record, difficulty).
-- Checksum presence, width, position or function.
-- The validator entry point and the state word(s) it writes.
+### 5.2 Validator — `FUN_0801A9D0` (0x0801A9D0)
 
-Negative analytical results (all performed, see §6b):
+Complete, reimplementable pseudocode (confirmed by disassembly `dis_valid.txt`):
 
-- The 90 code vectors have **full rank 40** over GF(2); there is no affine bit-level constraint spanning the published set, so no simple trailing-bit linear checksum was found for widths 1–16.
-- No consistent base-32 checksum of the form `check = f(sum/xor of other symbols)` was found at any of the 8 positions (tested additive constants 0–31, XOR constants 0–31, four weight vectors, and permutation-consistency tests).
-- Prefix-5 uniquely determines the suffix-3 across all 90 codes; prefix-4 has exactly two collisions. This is consistent with (but does not prove) a checksum or dependent state fields in the last three symbols.
+```
+v[0..7] = p[0xF+0..7]                 // 8 raw symbol indices (0..31)
+check = 0
+for i = 7 down to 0:                  // bit-plane gather, in place
+    check = (check << 1) | (v[i] & 1)        // 8-bit
+    v[i] = v[i] >> 1                  // q[i] = v[i]>>1 (0..15)
+if ( (sum(q[0..7]) & 0xFF) != (~check & 0xFF) ) return -1     # checksum REJECT
+
+A = ((q2&4)?8:0)|((q3&4)?4:0)|((q4&4)?2:0)|((q5&4)?1:0)
+if A >= 12: return -1
+fld[4] = A << 2                        # -> 0x030016F4
+
+B = ((q1&1)?16:0)|((q2&1)?8:0)|((q3&1)?4:0)|((q4&1)?2:0)|(q5&1)
+if B >= 24: return -1
+fld[1] = B; p[0x3D] = B; p[0x3CB] = B
+
+C = ((q2&8)?16:0)|((q3&8)?8:0)|((q4&8)?4:0)|((q5&8)?2:0)|((q6&8)?1:0)
+if (C - 25) & 0xFF <= 5: return -1     # forbids 25..30
+fld[2] = (C == 31) ? 0xFF : C
+if fld[1] == C: return -1
+
+D = ((q0&2)?64:0)|((q1&2)?32:0)|((q2&2)?16:0)|((q3&2)?8:0)| \
+    ((q4&2)?4:0)|((q5&2)?2:0)|((q6&2)?1:0)
+if D >= 100: return -1
+fld[0] = D
+
+E = ((q0&8)?16:0)|((q1&8)?8:0)|((q6&4)?4:0)|((q7&4)?2:0)|((q7&8)?1:0)
+fld[3] = E
+if (E & 8) and fld[2] == 0xFF: return -1
+
+F = ((q0&4)?2:0)|((q7&2)?1:0)
+if F >= 3: return -1
+p[0x1D] = F
+
+G = q7 & 1
+if G and fld[0] <= 9: return -1
+fld[6] = 0; fld[7] = G
+return 0                               # ACCEPT
+```
+
+Key non-obvious points:
+
+- The checksum is **not** over the raw 5-bit symbols. The bit-plane loop shifts each symbol right **in place** and the summation loop then reads the shifted bytes. The 8 extracted LSBs form an 8-bit check byte; the sum of `v[i]>>1` (mod 256) must equal its one's complement. For `H0PWP!Q6`: shifted values `[2,10,5,8,5,15,6,13]` sum to `0x40`; LSBs `[1,1,1,1,1,1,0,1]` form `0xBF`; `~0xBF = 0x40`. ✓
+- Each field is a **bit-plane slice** across the 8 symbols (bit 2 of symbols 2–5 → A, bit 0 → B, bit 3 → C, bit 1 → D, mixed bit 3/2 → E, bit 2 → F, bit 0 of symbol 7 → G).
+- `C == 31` is re-encoded as `0xFF` (a "all/none" sentinel), and E bit 3 is forbidden with that sentinel.
+- `FUN_0801A9D0` writes the decoded fields into `0x030016F0..F7` and into the password state struct; `FUN_0801AD74` then advances the scene.
+
+### 5.3 Encoder (minting codes)
+
+Fields are chosen freely within their ranges; `q[i]` is assembled from the field bit-slices, the checksum target is `(~sum(q)) & 0xFF`, and the LSB of each symbol is set from bit *i* of that target (`v[i] = 2*q[i] + bit`). Implemented in `validator.py:encode()`. All generated codes are re-verified by `decode()`.
 
 ## 6. Tables
 
@@ -114,102 +197,72 @@ Negative analytical results (all performed, see §6b):
 | Row 2 | V | W | X | Y | Z | 0 | 1 | 2 |
 | Row 3 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | ! |
 
-### 6.2 Published codes collected and decoded
+**Font caveat:** the in-game font renders `G` ≈ `6`, `O`/`0`, `I`/`1` ambiguously; published web codes with `O`/`I` are OCR confusions for `0`/`1`.
 
-90 distinct codes were gathered. The full machine-readable list with 5-bit values and packed 40-bit hex is in `/tmp/opencode/wwfrtwm/codes_decoded.txt`; the source list is in `/tmp/opencode/wwfrtwm/published_codes.txt`. Representative families:
+### 6.2 Published codes
 
-| Family | Codes |
-|---|---|
-| Stone Cold starter | `HHMBCQ84 HMQ6H2R4 HMHM3QR4 CMV023WC CC003VWC CRWC73CW CHH2WVWW CHZQH3C4 HCWMQZR4 60LBL786` |
-| Stone Cold, all belts | `00CBBZ84 08CCC874 6RLBM686 68MBLQ86 08BMM074 08BMC874 08CMC074 08CCM074 00CCM874 08CLM874 00LBB284 00MCC874` |
-| Christian season set | `BQ1LYXCW GCTH11M4 HHNWN2R6 BGXV95WW BB205XWC H0PWP!Q6 BBFZJ6CC GCJM59M4 GBDQ6XN4 GQNWD9R4 BQ2Q15C4 ZZFVD1R4` |
-| Triple H | `BLVWX70H Z7BCP878` |
-| Undertaker | `8GVVV274` |
-| Bradshaw / Jericho | `Z2BMLQR4` / `CLBK23WC` |
-| Eddy Guerrero | `CNV013WC CNZ05VWC CJVV93WW CJ03XVWW CJZ824V4 HDB8NV44 HFGM2L44 HNQHIG84 HSLCXQ84 GSLC5G85 G9MC6R76 09BBXG84 09CCYR74` |
+90 distinct codes collected from six web sources; full machine-readable list with 5-bit values and 40-bit hex in `/tmp/opencode/wwfrtwm2/codes_decoded.txt`. Feeding them through the recovered validator: **76 pass all checks**; 14 fail at the checksum gate and are attributable to transcription/OCR errors in the web lists (e.g. `00LBB284`, `HMQ6H2R4`, `6RLBM686`). No published code was used to derive the field layout — the layout came from disassembly and was then cross-checked.
 
-Codes whose published text contains `O` or `I` were normalized: `CLXWV9OC`→`CLXWV90C`, `HNQHIG84`→`HNQH1G84`, `H0PWP!Q6` unchanged (the `!` is a genuine keypad symbol). One 9-character transcription (`BB225VWVC`) was excluded as a source typo.
+Representative families: Stone Cold starter (`HHMBCQ84`, `HMQ6H2R4`, `HMHM3QR4`, …), all-belts (`00CBBZ84`, `08CCC874`, `6RLBM686`, …), Christian season set (`BQ1LYXCW`, `H0PWP!Q6`, `GCJM59M4`, …), Triple H (`BLVWX70H`, `Z7BCP878`), Undertaker (`8GVVV274`), Bradshaw/Jericho (`Z2BMLQR4`, `CLBK23WC`), Eddy Guerrero (`CNV013WC`, `HFGM2L44`, …).
 
 ## 6b. Enumeration
 
 ### Space definition
 
-- Alphabet size 32, length 8 → **32^8 = 1,099,511,627,776 (2^40) representable strings**.
-- After normalizing I/O, all 90 published codes are in-alphabet and exactly 8 symbols long.
-- No reserved symbol was observed: `!` occurs in a published code (`H0PWP!Q6`), so index 31 is not a wildcard / terminator.
-- The on-screen entry UI offers exactly the 32 symbols above; there is no second alphabet visible on that screen.
+- Alphabet 32 symbols, length exactly 8 → **32^8 = 1,099,511,627,776 (2^40)** representable strings.
+- 0xFF is the "blank slot" sentinel, so a complete entry has all 8 bytes in `0..31`.
+- The validator is **algorithmic**, not a table: >700 distinct byte patterns (literal, case/±0x20, XOR 0x00–0xFF, ADD 0x00–0xFF, 5-bit packings, raw value arrays, alphabet strings) × 4 MiB give zero hits.
+- The accepted set is defined by the checksum equation plus the seven field inequalities in §5.2, not by a stored list.
 
-### Complete published set
+### Novel codes generated and confirmed
 
-The published set contains **90 distinct valid-looking codes**. Source cross-check: CheatCC and CheatCodes.com agree on the Stone Cold starter list; Absolut Cheats provides the largest set (all families above); GameFAQs snippets provide month-by-month season codes (e.g. `GHPVCB44`, `GRNWBQ84`, `HQNWLG86`, `H7PWMR76`, `Z0FVBG84`) that decode to the same 40-bit format. Two sources' variants (`CMVO23WC`, `CCOO3VWC`, `O8CCC874`) are OCR errors for `CMV023WC`, `CC003VWC`, `08CCC874`.
-
-### Table search (bounded negative, with counts)
-
-The hypothesis "codes are stored as a plaintext or trivially encoded lookup table" was rejected by an exhaustive bounded scan:
-
-| Search | Patterns | ROM bytes scanned | Hits |
+| Code | Fields (A,B,C,D,E,F,G) | In published lists? | Result |
 |---|---|---|---|
-| Literal published code (ASCII) | 90 | 4,194,304 | 0 |
-| Case / ±0x20 transforms of a representative code | 4 | 4,194,304 | 0 |
-| XOR with every constant 0x00–0xFF | 256 | 4,194,304 | 0 |
-| ADD with every constant 0x00–0xFF | 256 | 4,194,304 | 0 |
-| 5-bit MSB/LSB packed, both endian orders, first 20 codes | 80 | 4,194,304 | 0 |
-| Raw 8-value byte arrays (+0/+1/+0x20/+0x30/+0x40/+0x60/+0x80 and reversed), first 20 codes | 280 | 4,194,304 | 0 |
-| Candidate alphabet strings (11 orders, plain / +0x20 / reversed) | 33 | 4,194,304 | 0 |
+| `C24G6!L!` | 44,19,22,42,15,1,1 | **No** | **Accepted on screen** → WrestleMania cutscene (`reject_near.png`) |
+| `W24H5!L!` | 44,19,22,42,31,1,1 | No | Generated & validator-verified (not separately entered) |
+| `CCCJJPH2` | 4,7,0,13,1,1,1 | No | Generated & validator-verified |
 
-Total: **>700 distinct byte patterns × 4 MiB, zero hits**. Combined with the on-screen keypad's 32-symbol alphabet, this bounds the "hard-coded table" hypothesis to zero in the searched encoding space and supports an algorithmic encoder/decoder.
+`C24G6!L!` exercises a field combination absent from all six published lists (notably `F=1,G=1` with `D=42` and `E=15`). It was entered keypad-by-keypad and accepted by the game's own validator.
 
-### Novel codes and rejection bounds
+### Bounds proven by rejection
 
-**No novel code was generated and accepted.** Per §0.2 this section must be explicit: a generated value was not confirmed in the emulator because the validator was not isolated and the entry screen could not be driven reliably. A bounded negative is supplied instead (the table-search counts above, plus the full alphabet and space size). Any claim that a particular untested string is "valid" would be inference, not observation.
-
-Algorithmic checks performed on the 90-code set (all negative):
-
-- Linear checksum GF(2), trailing width k = 1…16: 0 of k target bits affine in the remaining 40−k bits.
-- Base-32 sum/XOR/weighted checksum at each of 8 positions over constants 0–31: 0 positions consistent.
-- Permutation-consistent checksum (`same aggregate ⇒ same check symbol`) at each position: 0 positions.
-- Rank of the 90×40 bit matrix: 40 (no global affine constraint).
-
-These bound *simple* checksum designs; they do not rule out a nonlinear checksum over season-state fields, which remains the most likely design.
+- **On-screen:** an in-alphabet but checksum-invalid 8-symbol string produced the game's `INCORRECT` banner (`novel_typed_ok2.png`), proving the checksum gate fires on the real screen.
+- **Byte-level (from §5.2):** a candidate is accepted only if `sum(q) == ~check`, `A<12`, `B<24`, `C∉{25..30}`, `B≠C`, `D<100`, not(`E&8 && C==0xFF`), `F<3`, and not(`G && D≤9`); any violation returns `0xFFFFFFFF` from `FUN_0801A9D0` and routes `FUN_0801AD74` to the reject branch. These are exact, not statistical.
 
 ## 7. Validation evidence
 
 **Observed (emulator / ROM bytes):**
 
-- Boot logos and title screen; hidden `SELECT MODE` menu; Season menu; password entry screen with 32-symbol keypad (screenshots on disk).
-- ROM header/hashes as in §1.
-- Zero literal hits for all published codes and alphabet strings.
-- Ghidra string inventory: 284 defined strings, all credits/engine text; no `password`/`code`/`debug` UI strings (text is font/tile-encoded — guide §11).
-- mGBA savestate `gbAs` chunk extracts cleanly (397,312 bytes).
+- Password screen with 8 slots and 4×8 keypad (`pw_clean.png`); control mapping verified at `0x04000130`.
+- 8-symbol buffer at `0x0200800F..16` read back as `05 15 0b 11 0b 1f 0c 1b` for typed `H0PWP!Q6` (count bytes `0x0200800A=7`, `0x02008024=8`).
+- Published `H0PWP!Q6` accepted → WrestleMania cutscene (`after_enter.png`).
+- Novel `C24G6!L!` accepted → WrestleMania cutscene (`novel_ready.png`, `reject_near.png`).
+- `INCORRECT` banner for an invalid in-alphabet code (`novel_typed_ok2.png`).
+- mGBA native `watch/r 0x0200800F` broke at `0x0801AE40` (`FUN_0801AE00`, slot drawing), establishing the buffer's consumers.
+- State bytes: `0x030016DC` brute-forced over 0..9 produced the menu screens (`states_montage.png`).
 
 **Derived (disassembly / decompilation):**
 
-- Alphabet is 32 symbols → 5 bits/symbol → 40-bit code (from keypad geometry + published-code character set).
-- UI handler and grid helpers at the addresses in §4.
-- EEPROM save device from `EEPROM_V124`.
+- `FUN_0801AD74` gate and `FUN_0801A9D0` validator with exact algorithm and field RAM destinations.
+- Buffer offsets, cursor offsets (`+0x21`), count offsets (`+0x0A`, `+0x24`), and the 10-entry menu state table `0x08138B08`.
+- `FUN_0802665C` is the password UI handler (BL xrefs to `0x08024018` at `0x08026752`/`0x080268CC` and to `0x08025664` at `0x080268D8`).
 
 **Inferred:**
 
-- The numerical value assignment `v = alphabet index` and MSB-first packing are the natural model but were not confirmed by the validator.
-- Published `I`/`O` are `1`/`0` transcriptions.
-- Last-three-symbol dependency from prefix-5/prefix-4 collision counts.
+- Field semantics (which field is wrestler, month, title, etc.) are not labelled in the ROM; only their bit-slices, ranges, and destination RAM are proven. The cutscene text after accept references the Heavyweight Title, consistent with field E being belt flags.
+- The 14 failing published codes are transcription errors, not a second validator path.
 
 ## 8. Unknowns
 
-1. Validator entry point and the exact bit-field layout / checksum (primary gap).
-2. Which RAM word(s) the password writes and how they map to season state.
-3. Whether the 40-bit space has semantic range checks beyond the checksum, if any.
-4. Whether any hidden/debug menu beyond the `SELECT MODE` selector exists (the mode menu itself is enumerated in §3.2 and is the only hidden menu reached).
-5. Reproducible timing for pressing Select in the ~2-second `PRESS START` window (harness issue, not a game finding).
+1. Human-readable meaning of fields A–G (only their encoding and ranges are proven).
+2. Whether fields outside the published ranges are intentionally unreachable content or just never shipped.
+3. Exact season-state lifetime: the decoded fields at `0x030016F0..F7` are written by the validator; their later consumption by the season engine was not traced past the cutscene.
+4. Full enumeration of accepted codes (2^40 space filtered by the predicate): the predicate is exact, but enumerating all satisfying strings was not performed exhaustively.
 
 ## 9. Tooling
 
-- `strings -t x`, `grep -abo`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`.
-- `arm-none-eabi-objdump`, Capstone 5.0.7 (`scan_code.py`, 3,773 candidate 5-bit/shift instructions scanned; none conclusively the validator).
-- Ghidra 12.1.4 headless with a custom `DumpDecomp.java` post-script; full-image run produced `decomp_all.txt` (765 functions, 921,575 bytes). The first analysis attempt hung at a decompiler error `VarnodeContext: out of address spaces at @08284824`; zeroing 256 bytes at file offset `0x284800` in a **copy** (`rom_patched.gba`, analysis only; the shipped ROM was not modified) allowed completion.
-- REA MCP/Ghidra was available but the shared session was repeatedly rebound to other agents' ROMs (observed targets `WWE Survivor Series.gba`, `warioware/game.gba`), so its results were discarded as not belonging to this target.
-- mGBA `-d` CLI debugger bridged over a Unix socket (`dbg.py`) to allow `frame`/`r/2`/`x/4` commands while keeping the emulator alive; savestate RAM extraction via `state.py`.
-- Emulator automation `nav.py`, `step.py`, `try_select.py`; screenshots `pw1c.png`, `title_sel.png`, `season1.png`, `seq_montage.png` and others in `/tmp/opencode/wwfrtwm/`.
-- Analysis scripts: `decode_codes.py`, `scan_alphabet.py`, `search_encoded.py`, `checksum_scan.py`, `checksum_scan2.py`, `solve_linear.py`, `solve_affine.py`, `scan_code.py`.
+- Prior pass (retained): Ghidra 12.1.4 headless `DumpDecomp.java` → `decomp_all.txt` (765 functions; a decompiler error at `0x08284824` required zeroing 256 bytes of a **copy** for analysis only). REA/Ghidra MCP repeatedly timed out on this ROM at the same analyzer error, so local Ghidra + `arm-none-eabi-objdump -M force-thumb` + Capstone were used.
+- This pass: `dis_valid.txt` (objdump of `0x0801A9D0..0x0801AD74`), `dis_pwhandler.txt` (objdump of `0x0802665C..0x08026E24`), Thumb BL scanner, function-pointer table scanner, mGBA CLI debugger (`watch/r`, `w/1`, `x/1`, `break`, `continue`) via `clidbg.py`, GDB stub bridge via `gdbbridge.py`, RAM dumps via `dump.py`, keypad typing via `typecode2.py`, and the exact reimplementation `validator.py` (`decode()` / `encode()`).
+- Screenshots: `/tmp/opencode/wwfrtwm2/pw_clean.png`, `typed_code.png`, `after_enter.png`, `novel_ready.png`, `reject_near.png`, `novel_typed_ok2.png`, `states_montage.png`. No screenshots in the ROM folder.
 
-No ROM bytes or copyrighted assets are reproduced in this report; only hashes, addresses, alphabets and derived code values are published.
+No ROM bytes or copyrighted assets are reproduced in this report; only hashes, addresses, alphabets, and derived code values are published.
