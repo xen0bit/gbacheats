@@ -379,7 +379,7 @@ and `Animal Snap - reject prefix 7 of 8.png`; the resumption is
 
 **Published-code verification.** The archived 3rd party cheat index cheat page
 (`https://web.archive.org/web/20251114043209/https://gamefaqs.gamespot.com/gba/583060-animal-snap/cheats`)
-lists exactly one unlockable, contributed by Caustickhan:
+lists exactly one unlockable:
 
 > At the title screen, hold the "L" shoulder button and press UP, DOWN, LEFT,
 > RIGHT, RIGHT, LEFT, DOWN, UP on the D-pad. — Block Blaster bonus game.

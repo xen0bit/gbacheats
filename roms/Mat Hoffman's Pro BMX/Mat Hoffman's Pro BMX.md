@@ -115,7 +115,7 @@ if published_button_code_present: # no such test exists in this image
 
 | Source | Effect | Code | Entry point |
 |---|---|---|---|
-| 3rd party cheat indexes (web.archive snapshot 2021-01-17), "Codes / Cheat Codes", contributor Starky27 | Unlock Everything | Hold L+R, press A, B, Right, Up, Left, Down | main menu |
+| 3rd party cheat indexes (web.archive snapshot 2021-01-17), "Codes / Cheat Codes" | Unlock Everything | Hold L+R, press A, B, Right, Up, Left, Down | main menu |
 | 3rd party cheat indexes GBA cheats page | "Unlock Everthing" | At the main menu hold L+R and press A, B, Right, Up, Left, Down | main menu |
 
 3rd party cheat index lists exactly **one** GBA cheat for this game. The 35 "cheats" on the 3rd party cheat indexes *Game Boy Color* page belong to a different SKU and were correctly excluded (§16.11). CodeBreaker/GameShark lists (3rd party cheat indexes) are memory-edit codes and are out of scope.

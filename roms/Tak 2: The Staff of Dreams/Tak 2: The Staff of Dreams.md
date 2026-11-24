@@ -147,7 +147,7 @@ not applicable for a code system; the equivalent negative bound is the exhaustiv
 mask-sequence enumeration above (zero candidates in the searched spaces).
 
 **Positive in-game trick (not a code system, recorded for completeness):** the sole published GBA
-cheat (3rd party cheat indexes, contributor supersid) is the *Yorbel Game* dial trick — at the `SPIN?` prompt
+cheat (3rd party cheat indexes) is the *Yorbel Game* dial trick — at the `SPIN?` prompt
 choose YES, and while the triangular dial revolves press A on the item **opposite** the desired
 one to stop it there. It is a gameplay timing exploit in a minigame, not a password/button code;
 it was not exercised because reaching the Yorbel game requires story progression (see §8).

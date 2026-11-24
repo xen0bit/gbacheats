@@ -65,7 +65,7 @@ Findings in order of importance:
    it (observed on both frontend and pause Extras); Card Collection shows all 63
    slots face-down; the in-game Statistics screen reads `Collectibles 000/150,
    Enemies 00/25, Cards 0/5` for level 1-1. The published documentation (Nintendo
-   manual, Shadio X's 3rd party cheat index FAQ) agrees: GJ Sim opens after finishing a level.
+   manual, a 3rd party cheat index FAQ) agrees: GJ Sim opens after finishing a level.
 5. **Published "codes" for this SKU are out of scope memory patches only.**
    3rd party cheat indexes/CodeBreaker/Action Replay pages list only GameShark/AR writes
    (`32011442 0096`, `3201144B 0005`, master code `000067CE 000A`, …) plus a

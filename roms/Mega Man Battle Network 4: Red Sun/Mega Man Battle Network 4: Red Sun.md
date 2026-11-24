@@ -145,7 +145,7 @@ Idle `KEYINPUT = 0x03FF`; holding `Return` gave `0x03F7`, confirming Start = bit
 | 29 | Recov300 J | 66703422 | ✓ 0x7AE4C0+0x29A |
 | 30 | ColorPt * | 19095677 | published only |
 | 31 | GunSolEX G | 74293099 | published only (omitted from JP guidebooks) |
-| 32 | Z Saver Z | 72794137 | published only (found 2022 by GreigaMaster; omitted from all guides) |
+| 32 | Z Saver Z | 72794137 | published only (found in 2022; omitted from all guides) |
 
 **Button command codes (3rd party cheat indexes "Command Codes"; documented, not ROM-verified):**
 

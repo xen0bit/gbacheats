@@ -55,7 +55,7 @@ The only text-entry field is the player **NAME ENTRY** screen (`A-Z 0-9 .`), whi
 
 * Input path ground truth (debugger used as oracle, guide §16.19): mGBA `.ss1` chunks parsed with `zlib.decompress(gbAs chunk)` → raw 397,312-byte state; **KEYINPUT lives at raw-state offset `0x530`** (little-endian u16): `0x03FF` with no key held, `0x01FF` with `A`/L held, `0x03F7` with `Return`/Start held. This proves the emulator delivered real GBA button events; the lack of any resulting hidden screen is a game property, not a harness failure.
 * Button codes tested on title/pause (15 combinations, `combo00.png`…`combo14.png`): `L+R`, `L+R+Start`, `A+B+Start+Select`, Konami sequence `↑↑↓↓←→←→BA`, `Start+A`, `Start+B`, `Select+A`, `Select+B`, `L+Up`, `R+Down`, `L+R+A`, `L+R+B`, `Select+Start`, `A A B B ↑ ↓`, `←→←→A`. Every combination either did nothing or advanced along the normal title→player-select→name-entry path; none produced a new screen.
-* Published codes tested: all of the PC/N64 literals above were searched in the ROM (§4) and none is present. GBA-specific sources (3rd party cheat index cheats page via web.archive 2018-11-26; 3rd party cheat indexes GBA Cheats snippet; GBA FAQ by Dubble_G) list **no password or button code at all** — only the Nugget unlock.
+* Published codes tested: all of the PC/N64 literals above were searched in the ROM (§4) and none is present. GBA-specific sources (3rd party cheat index cheats page via web.archive 2018-11-26; 3rd party cheat indexes GBA Cheats snippet; GBA FAQ) list **no password or button code at all** — only the Nugget unlock.
 
 ## 4. Address map
 
@@ -167,6 +167,6 @@ The one genuine hidden element, **Nugget**, is a save-bit unlock: its "bounds" a
 * `capstone` 5.0.7 (`dis2.py`), `arm-none-eabi-objdump` — Thumb/ARM disassembly; `scan_lit.py` for PC-relative literal xrefs.
 * Custom Python scripts in `/tmp/monstertruck/`: `header.py` (header + embedded-header scan), `mtools.py`/`nav.py`/`nav2.py`/`mg_nav.py` (Xvfb/XTEST input, screenshots, OCR state detection), `parse_ss.py` (mGBA `.ss1` `gbAs`-chunk zlib decode and RAM offset discovery), `restab.py` (resource-name pointer dump).
 * `tesseract` for screen-state detection; `python3-pillow`/`numpy` for image diffs; `Xvfb :318` + `openbox`; `mgba` 0.10.5 and `vba` 1.8.0 (installed via apt for cross-check); `gdb-multiarch` against VBA's `-G tcp:55555` stub and mGBA's stub.
-* Web: web.archive snapshots of 3rd party cheat indexes GBA cheats (2018-11-26), 3rd party cheat indexes GBA page (2023-02-25), 3rd party cheat indexes N64 + PC pages for wrong-SKU comparison, Dubble_G GBA FAQ PDF (pdftotext). Fetched pages were treated as data; no prompt-injection payload was encountered.
+* Web: web.archive snapshots of 3rd party cheat indexes GBA cheats (2018-11-26), 3rd party cheat indexes GBA page (2023-02-25), 3rd party cheat indexes N64 + PC pages for wrong-SKU comparison, GBA FAQ PDF (pdftotext). Fetched pages were treated as data; no prompt-injection payload was encountered.
 
 **Legal note:** no ROM image, extracted graphics, music, or game text is redistributed here; only addresses, hashes, algorithms and observations are published.

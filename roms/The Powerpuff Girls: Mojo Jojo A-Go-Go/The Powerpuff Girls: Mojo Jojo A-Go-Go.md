@@ -54,7 +54,7 @@ All CodeBreaker / GameShark / Action Replay codes found on the web are **out of 
   9. Pause menu (Start during gameplay): PAUSE MENU / CONTINUE / MUSIC ON / SFX ON / QUIT (4 entries).
   10. LINK GAME cable-check screen: "CHECK GAME BOY ADVANCE GAME LINK CABLE", "PRESS THE B BUTTON TO CANCEL".
   11. Level-complete / next-level, retry and game-over paths (strings `NEXT LEVEL`, `RETRY`, `ARE YOU SURE?`, `TIE GAME`, `*_WINS!`).
-* Published button codes tested (3rd party cheat indexes, user "Krunal", 2005-06-11):
+* Published button codes tested (3rd party cheat indexes, 2005-06-11):
   - `Left + B` ("Extra Points")
   - `Right` ("Power Up")
   - `Left + Down` ("New Life")

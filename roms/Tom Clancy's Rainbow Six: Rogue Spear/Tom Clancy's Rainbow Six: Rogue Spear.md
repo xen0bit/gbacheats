@@ -238,7 +238,7 @@ sequences and the two families, not to every possible controller string.
 * `ss.py` — decode mGBA `.ss1` PNG `gbAs` zlib chunk into a raw 397,312-byte state.
 * `stateutil.py`, `trycode.py`, `scan_codes.py`, `sweep.py` — savestate reload /
   code entry / outcome-classification harnesses (work dir `/tmp/roguespear`).
-* Web recon: 3rd party cheat indexes, eliteguias, and the GBA user manual hosted
+* Web recon: 3rd party cheat indexes and the GBA user manual hosted
   at device.report. Fetched pages were treated as data only.
 
 ## 10. Legal note

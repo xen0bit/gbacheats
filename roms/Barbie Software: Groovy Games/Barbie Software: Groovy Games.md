@@ -155,8 +155,7 @@ path.
 | 3rd party cheat indexes / emuinfo (Barbie Superpack 2-in-1) | Secret Agent level passwords: `BBBBCG`, `CBBDCX`, `DBBFCM`, `FBBFFQ`, `GBBPFH`, `HBBPKN`, `JCBPKQ`, `KCBTKC`, `LCGTKJ`, `MCHTKL`, `NCHTTC`, `PCRTTN`, `TTTTTS` | All 13 literals: **0 hits** in this standalone `AVBE` ROM. They belong to the Secret Agent half of the 2-in-1, not this cartridge. |
 
 The 3rd party cheat index page was read through an archive snapshot because direct fetching
-is blocked; the archived text is unambiguous (one cheat, contributed by
-`tiamold2`).
+is blocked; the archived text is unambiguous (one cheat).
 
 ---
 

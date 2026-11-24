@@ -323,7 +323,7 @@ ignored bits and are accepted with the same state.
 
 | Source | Code | Status in this ROM |
 |---|---|---|
-| 3rd party cheat indexes (GBA cheats page, archived 2018-11-26, contributed by ReyVGM) — "All horses and everything complete." | `BBBV8+SBB` | Verified accepted in mGBA; decodes to the complete state. |
+| 3rd party cheat indexes (GBA cheats page, archived 2018-11-26) — "All horses and everything complete." | `BBBV8+SBB` | Verified accepted in mGBA; decodes to the complete state. |
 | 3rd party cheat index wiki trivia — "Use the password BBBV8 SBB" | `BBBV8 SBB` (space) | Same code with a typo; the character set has no space, so the published form is not enterable. |
 
 Only these two published strings were found. No other GBA password appears in

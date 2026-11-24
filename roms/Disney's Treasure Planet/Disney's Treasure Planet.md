@@ -328,7 +328,7 @@ aliases, not distinct codes.
 literals in the image and all 138 are present at the table addresses above;
 all 23 English words are in both the 3rd party cheat indexes password list and 3rd party cheat indexes.
 The published FAQ's Italian-Docks duplicate is reproduced by the ROM's
-first-match loop. Sources: 3rd party cheat index FAQ 20558 (`Password List` by Shdwrlm3,
+first-match loop. Sources: 3rd party cheat index FAQ 20558 (`Password List`,
 v1.1, 15 Dec 2002, archived 30 Dec 2018) and the 3rd party cheat indexes GBA cheats page
 (archived 6 May 2023), plus the 3rd party cheat indexes GBA cheats page. 3rd party cheat indexes returned only
 its PlayStation 2 article for this title (direct GBA fetch 403; the PS2 page

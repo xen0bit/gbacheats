@@ -97,7 +97,7 @@ word is written on name commit (§6b).
 
 **Unlockables (not codes):** Aliens Arrived / Weirdness plot (50 pts), There Was This Mummy /
 Mystery plot (50 pts), It All Came to an End / Motorcycle plot (150 pts), A Very Special Reunion /
-GBA link cable (or 100 points on all other episodes, per community reports). Source: 3rd party cheat indexes, warfreak GBA walkthrough. These are save/flag-gated, not controller-input-gated.
+GBA link cable (or 100 points on all other episodes, per community reports). Source: 3rd party cheat indexes. These are save/flag-gated, not controller-input-gated.
 
 **`CheaterX`:** the single cheat-like literal in the image. It is the *source operand* of one
 unreferenced `strncpy` at `0x080211B8`; it is never a comparison operand and never read as input.

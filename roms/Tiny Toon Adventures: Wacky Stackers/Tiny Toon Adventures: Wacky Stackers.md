@@ -22,7 +22,7 @@ Analysed build is the exact file with the hashes above; all addresses below are 
 
 The game has **one developer-intended cheat**: a title-screen button sequence
 `Up / Down / Left / Right / R` that makes the text `01-10-05` appear in the
-top-left corner. It is documented in the 3rd party cheat index guide by Shy Ranger (§X,
+top-left corner. It is documented in the 3rd party cheat index guide (§X,
 "TITLE SCREEN CODE"). The sequence is **not** a password/checksum system: it is
 a 5-entry table of raw button masks compared against the freshly-pressed button
 mask with exact equality. The sole effect is drawing a fixed ASCII string; no
@@ -152,7 +152,7 @@ exactly — any extra button in the same frame would fail (Derived from
 
 **Result string**: `"01-10-05"` at `0x080308E0` (fixed; never recomputed).
 
-**Published-code verification**: 3rd party cheat index guide (Shy Ranger, 2003, recovered via
+**Published-code verification**: 3rd party cheat index guide (2003, recovered via
 Wayback) lists exactly this one sequence. It was verified literally against
 `0x08020A8C` and accepted in the emulator. No other published cheat list
 (3rd party cheat indexes have none for this SKU) was found.

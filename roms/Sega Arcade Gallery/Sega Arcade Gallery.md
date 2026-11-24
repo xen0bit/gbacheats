@@ -51,7 +51,7 @@ title-screen option:
 2. Select `SHOW CREDITS`. The credits scroll as letter-bubbles. During credit entries
    **1, 2 and 3** press the code; the game checks the *credit entry index* as well as
    the button mask.
-3. The published sequence (3rd party cheat indexes, contributor `slowdusted`) is
+3. The published sequence (3rd party cheat indexes) is
    **Left, Right, Left, Right → Up, Down → A**, which toggles a global flag: infinite
    time in Out Run / Super Hang-On, infinite continues in After Burner / Space Harrier.
    Entering it again disables it (different voice sample).

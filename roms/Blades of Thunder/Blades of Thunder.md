@@ -59,7 +59,7 @@ the title screen. It is a 4-digit decimal password screen with four slots.
   show none and `A` is a no-op.
 
 The 30 codes are also the complete list published on 3rd party cheat indexes (archived
-2018-11-26, contributor Cloud20390). The public list is **correct and complete**
+2018-11-26). The public list is **correct and complete**
 for the code values, with one labelling error: its three `Level F` rows are all
 marked `easy`. The ROM and RAM prove the actual assignment is:
 
@@ -246,8 +246,8 @@ is the decimal value itself.
 ### 6.3 Published list and the Level F correction
 
 Source: 3rd party cheat indexes `Blades of Thunder – Cheats`, archived 2018-11-26:
-`http://web.archive.org/web/20181126025226/https://gamefaqs.gamespot.com/gba/925884-blades-of-thunder/cheats`
-(contributor Cloud20390). Direct 3rd party cheat indexes access returns HTTP 403; the archive
+`http://web.archive.org/web/20181126025226/https://gamefaqs.gamespot.com/gba/925884-blades-of-thunder/cheats`.
+Direct 3rd party cheat indexes access returns HTTP 403; the archive
 snapshot was used.
 
 The page lists all 30 code values and labels Levels 1–9 correctly. Its last

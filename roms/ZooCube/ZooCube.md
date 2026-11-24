@@ -221,6 +221,6 @@ instead of red. Earlier, before the code, `spd_montage.png` showed those same sp
   savestates `ZooCube.ssN` parsed with a local `gbAs` PNG-chunk/zlib reader (IWRAM at state
   offset `0x19000`, EWRAM at `0x21000` — this game leaves EWRAM entirely zero).
 - xdotool exact key injection with 0.03 s holds / 0.15 s gaps; `scrot` + ImageMagick crops.
-- Web recon: 3rd party cheat indexes game pages and the GBA-specific FAQ by Lisanne.
+- Web recon: 3rd party cheat indexes game pages and a GBA-specific FAQ.
 - All evidence (screenshots, scripts, savestates, work ROM copy) was in `/tmp/zoocube`,
   not in the ROM folder. No ROM or copyrighted assets are redistributed by this report.

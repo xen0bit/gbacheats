@@ -140,7 +140,7 @@ mismatches), so that codec was not carried over unchanged.
 ### 6.1 Published codes verified against this ROM
 
 Sources: 3rd party cheat indexes ("Unlock ALL…", "Level passwords", "Alternative ending
-password") and the 3rd party cheat index walkthrough by Kaas (Passwords section). The two
+password") and the 3rd party cheat index walkthrough (Passwords section). The two
 lists use different level labels for the same strings (a one-level offset —
 guide §16.15); the strings themselves agree.
 

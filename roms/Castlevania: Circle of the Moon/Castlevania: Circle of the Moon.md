@@ -266,7 +266,7 @@ is a **proven closed set with no novel in-game code**:
 
 * 3rd party cheat index cheats page — “Play in Magician mode … enter FIREBALL as your name”, “… enter
   GRADIUS …”, “… enter CROSSBOW …”, “… enter DAGGER …”.
-* 3rd party cheat index walkthrough by Tarrun — “04.1 Magician … Password: FIREBALL”, “04.2 Fighter …
+* 3rd party cheat index walkthrough — “04.1 Magician … Password: FIREBALL”, “04.2 Fighter …
   Password: GRADIUS”, “04.3 Shooter … Password: CROSSBOW”, “04.4 Thief … Password: DAGGER”.
 * 3rd party cheat indexes and the Japanese
   guide at 3rd party cheat indexes all list the same four names.
@@ -320,7 +320,7 @@ proves the compare is byte-exact at the 8-byte boundary and that the alphabet is
   (`0x020224C6`). Key presses were confirmed in `KEYINPUT` but the menu selection never
   advanced (see §3 “Real name-entry screen attempt”), so the real name-entry keyboard was
   not reached.
-* Published status of the four names was checked against 3rd party cheat indexes (cheats page and Tarrun’s
+* Published status of the four names was checked against 3rd party cheat indexes (cheats page and walkthrough
   walkthrough), 3rd party cheat indexes; all four names appear in all of them (Section 6b).
 
 **Derived (disassembly).**

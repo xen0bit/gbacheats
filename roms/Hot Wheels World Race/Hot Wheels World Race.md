@@ -145,6 +145,6 @@ where `field[i] = (P >> (5*i)) & 31`.
 * Python 3 with `capstone` 5.0.7 (installed), plain `struct`/`zlib` for literal scans and savestate decoding.
 * `mgba` (SDL, `/usr/local/bin/mgba`) under `Xvfb :319` + `openbox`; `xdotool` XTEST input; `scrot`/`import` screenshots; `convert` crops.
 * `enter.py` (keypad navigator), `ssdiff.py` (gbAs savestate extractor/differ), `key.py` (XTEST key helper) in `/tmp/hwvr/`.
-* Web sources: 3rd party cheat indexes GBA cheats and FAQ by silver-wonder, 3rd party cheat indexes GBA level-password list, 3rd party cheat indexes, plus console-version pages used only to exclude non-GBA codes. Fetched pages were treated as data; no prompt-injection was encountered in this run.
+* Web sources: 3rd party cheat indexes GBA cheats and FAQ, 3rd party cheat indexes GBA level-password list, 3rd party cheat indexes, plus console-version pages used only to exclude non-GBA codes. Fetched pages were treated as data; no prompt-injection was encountered in this run.
 
 **Legal note:** no ROM bytes, graphics, audio, or extracted assets are redistributed here — only hashes, addresses, algorithms, and independently generated codes.

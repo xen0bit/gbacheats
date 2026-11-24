@@ -113,7 +113,7 @@ L=0x200`, with the active-high pressed copy at `0x03001832` / `0x0300164C`.
 
 | Source | Claim | Result here |
 |---|---|---|
-| 3rd party cheat indexes `gba/560785-backyard-baseball/cheats` (403 to fetch; content recovered via search snippets) and 3rd party cheat indexes user hint (GBA, "ryan fajdetich") | Options → press Select, R, L → noise → Cards → create player with unlimited stats | **Rejected**: no noise-driven state change, no flag, stat cap still 8 |
+| 3rd party cheat indexes `gba/560785-backyard-baseball/cheats` (403 to fetch; content recovered via search snippets) and 3rd party cheat indexes user hint (GBA) | Options → press Select, R, L → noise → Cards → create player with unlimited stats | **Rejected**: no noise-driven state change, no flag, stat cap still 8 |
 
 The 3rd party cheat index page itself returns HTTP 403 to automated fetches; the snippet
 text (`Create a Charater with Stats All the Way ... Go to options and press

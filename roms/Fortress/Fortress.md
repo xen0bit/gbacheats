@@ -55,7 +55,7 @@ through the dispatcher.
 **Published codes.** 3rd party cheat indexes' Fortress cheats page is empty (verified via
 web.archive.org capture `20230507151512`); no 3rd party cheat index page exists for this title;
 web searches for `<Fortress GBA> password / cheat / code / unlock` produced no
-code list — only the gameplay FAQ by mimicmasterax (3rd party cheat index FAQ 13620), which
+code list — only a gameplay FAQ (3rd party cheat index FAQ 13620), which
 documents controls and 4 eras and contains no password/cheat section. There are
 therefore no published codes to verify against the ROM; this is recorded, not
 silently omitted. One search result (`maje...games.com/fortress-gba`) contained

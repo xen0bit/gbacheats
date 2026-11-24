@@ -42,7 +42,7 @@ A complete **developer debug subsystem** is present in the retail ROM: five edit
 * there is no word-aligned `0x00000377` literal anywhere in the ROM (the only `0x377` byte patterns are unaligned data), and no code compares the key state against it;
 * in the emulator, `Down+START` during gameplay opens the **ordinary pause menu** (`CONTINUE / RETRY / EXIT`), not the debug menu (screenshot `078_pause_try.png`).
 
-The published access method (3rd party cheat indexes, credited to “Labmaster”) is a CodeBreaker code that *injects* an ARM/Thumb stub into IWRAM: when `KEYINPUT == 0x0377` it writes `0x503` into `[[0x0300287C]+0x1B4]` and then resumes the intercepted indirect jump. That is external code injection, not an in-game cheat, and is out of scope here; it is decoded and mapped in §5 only as evidence for the gate.
+The published access method (3rd party cheat indexes) is a CodeBreaker code that *injects* an ARM/Thumb stub into IWRAM: when `KEYINPUT == 0x0377` it writes `0x503` into `[[0x0300287C]+0x1B4]` and then resumes the intercepted indirect jump. That is external code injection, not an in-game cheat, and is out of scope here; it is decoded and mapped in §5 only as evidence for the gate.
 
 ## 3. How to reproduce
 

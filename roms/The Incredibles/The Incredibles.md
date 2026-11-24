@@ -200,7 +200,7 @@ distinct 2-byte payloads: 32768
 rejection rate          : 31/32
 ```
 
-Every published code from 3rd party cheat indexes and the Kaas walkthrough was decoded; 56 matched the checksum algorithm and 2 (`M!K3`, `J3FF`) matched the fallback table. The remaining few published variants that decode to out-of-range level bytes (`FXTV` → `75 00`, a likely transcription error) are recorded as unverified.
+Every published code from 3rd party cheat indexes and a walkthrough was decoded; 56 matched the checksum algorithm and 2 (`M!K3`, `J3FF`) matched the fallback table. The remaining few published variants that decode to out-of-range level bytes (`FXTV` → `75 00`, a likely transcription error) are recorded as unverified.
 
 ### Novel codes generated and accepted in-game
 
@@ -225,7 +225,7 @@ The `NNS6` result is the key bound: a correct checksum is **necessary but not su
 * `M!K3`, `J3FF`: accepted, but via the hard-coded table, not the checksum decoder.
 * `FXTV` ("final level" alternative): decodes to level byte `0x75`, out of range — unverified; likely an error in the published list.
 * `SNDF`, `ZYQ8`, `MSMC`, `YCP6` are all advertised as level select; only `ZYQ8` and `SNDF` decoded successfully (`MSMC` and `YCP6` are not checksum-valid; they may belong to a different revision).
-* Divergent level codes in the Kaas walkthrough (e.g. `NTX9` for 2-1-1 instead of `94HR`) decode to different payloads with the same level byte (different flag bits), or are unverified for this revision; the decoder is injective on accepted codes, so two different valid strings cannot share one payload.
+* Divergent level codes in that walkthrough (e.g. `NTX9` for 2-1-1 instead of `94HR`) decode to different payloads with the same level byte (different flag bits), or are unverified for this revision; the decoder is injective on accepted codes, so two different valid strings cannot share one payload.
 
 ## 7. Validation evidence
 
