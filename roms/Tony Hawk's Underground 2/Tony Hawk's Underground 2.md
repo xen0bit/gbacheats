@@ -1,5 +1,7 @@
 # Tony Hawk's Underground 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -15,7 +17,7 @@
 | SHA-256 | `04742b4beb1b777474860db2692c00d669241ca46edc8f7e816604bb32bd6304` |
 
 File offset = ROM address − `0x08000000` throughout. Work copy analysed at
-`/tmp/opencode/thug2/game.gba` (identical MD5) so emulator save artefacts never
+`/tmp/thug2/game.gba` (identical MD5) so emulator save artefacts never
 land in the ROM folder; the ROM folder contains only the `.gba`.
 
 ## 2. Executive summary
@@ -158,7 +160,7 @@ MATRIX MODE, MINI MODE ON; the other five OFF), re-entered the real Cheats
 screen, and read the word back:
 
 * **Observed (RAM, GDB):** `0x02008130 = 0x000002A5`.
-* **Observed (screenshots, `/tmp/opencode/thug2/novel_2a5*.png`):** top rows
+* **Observed (screenshots, `/tmp/thug2/novel_2a5*.png`):** top rows
   `STUD MODE: ON, RAIL BALANCE: OFF, ALWAYS SPECIAL: ON`; middle rows
   `LIP BALANCE: ON, JET PACK MODE: OFF`; bottom rows `MATRIX MODE: ON,
   TURBO MODE: OFF, MINI MODE: ON` — an exact bit-for-bit match.
@@ -183,7 +185,7 @@ screen, and read the word back:
 * **Observed** — emulator screenshots of every major screen: title/difficulty,
   name entry, outfit, story, gameplay, pause menu, pause-Options, main menu,
   main Options (all seven entries incl. CREDITS/CHEATS), Cheats (all ten rows),
-  Story/Free Skate/Head-2-Head submenus. Files kept in `/tmp/opencode/thug2/`.
+  Story/Free Skate/Head-2-Head submenus. Files kept in `/tmp/thug2/`.
 * **Observed** — GDB stub reads/writes of `0x02000008`, `0x0200812C`,
   `0x02008130`; breakpoint at `0x0800556C` fired exactly when entering
   Options, proving the Cheats screen is constructed there.
@@ -220,5 +222,5 @@ screen, and read the word back:
 * `gdb-multiarch` against mGBA's `-g` stub (port 2345), driven through a
   persistent FIFO so `interrupt`/`continue &` cycles allowed RAM reads while
   the game ran.
-* All work files in `/tmp/opencode/thug2/`; no ROM or extracted assets
+* All work files in `/tmp/thug2/`; no ROM or extracted assets
   redistributed.

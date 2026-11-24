@@ -1,5 +1,7 @@
 # Duel Masters: Kaijudo Showdown (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -158,7 +160,7 @@ These spellings appear on GameFAQs, VGChartz, TCRF, Freeola, SuperCheats, and th
 
 ## 7. Validation evidence
 
-- **Observed**: 11 names typed on the real keypad; name buffers read from IWRAM `0x030044F0` in mGBA savestates. Five deck flags and the money field changed exactly as predicted; two novel prefix codes and two rejected inputs were measured. Screenshots were captured at title, name entry, cutscene, and overworld (work dir `/tmp/opencode/duelmasters/shot_*.png`).
+- **Observed**: 11 names typed on the real keypad; name buffers read from IWRAM `0x030044F0` in mGBA savestates. Five deck flags and the money field changed exactly as predicted; two novel prefix codes and two rejected inputs were measured. Screenshots were captured at title, name entry, cutscene, and overworld (work dir `/tmp/duelmasters/shot_*.png`).
 - **Derived**: `memcmp` semantics at `0x081FAF08`; the 16 call sites and 11 literals; callback registration at `0x081524DC`; flag/effect addresses; the missing full-length check that enables prefix codes. `HONEY`, `XRAY`, `GAMER`, `DUALIST`, `DEV TEAM` effects are derived from their call paths — their trigger conditions were observed (name buffer accepted) but the downstream feature screens were not all visited.
 - **Inferred**: the community report that `DEV TEAM`'s alternate image requires forcing `0x03000F04=1`, `0x03000F05=2`; not independently reproduced. The reason `DUALIST` did not visibly enable the title-screen Duel Room in the tested save is unresolved (possibly written to EEPROM after a later save event, or the "Main Menu" in the unlock message refers to the in-game Pocket Gizmo).
 
@@ -174,6 +176,6 @@ These spellings appear on GameFAQs, VGChartz, TCRF, Freeola, SuperCheats, and th
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for validator disassembly.
 - Python `capstone` available but not required; raw BL scanner and literal-pointer scanner used instead.
 - mGBA (SDL) + Xvfb `:317` + xdotool; savestate RAM reads via a Python `gbAs`/zlib parser (`ss.py`), with IWRAM at raw `0x19000`.
-- Scripts: `/tmp/opencode/duelmasters/{k.py,enter_name.py,testname.py,batchtest.py,ss.py}`.
+- Scripts: `/tmp/duelmasters/{k.py,enter_name.py,testname.py,batchtest.py,ss.py}`.
 
 **Legal note**: no ROM bytes or copyrighted assets are reproduced here; only hashes, addresses, algorithms, and generated code strings are published.

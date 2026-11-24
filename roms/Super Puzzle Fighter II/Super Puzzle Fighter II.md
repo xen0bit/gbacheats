@@ -1,5 +1,7 @@
 # Super Puzzle Fighter II (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -8,7 +10,7 @@
 | Size | 8,388,608 bytes (8 MiB) |
 | `file` | Game Boy Advance ROM image: `"PUZZLEFIGHT2" (AZ8E08, Rev.00)` |
 | Header title | `PUZZLEFIGHT2` (ASCII @ `0xA0`) |
-| Game code | `AZ8E` — USA | maker `08` (Capcom) |
+| Game code | `AZ8E` — USA; maker `08` (Capcom) |
 | Fixed byte / version | `0x96` @ `0xB2`; version `0x00` @ `0xBC`; complement `0x43` |
 | Entry word | `0xEA00002E` → `0x080000C0` (stock Capcom crt0) |
 | MD5 | `14d0771c15676e2b3b75c4c149879586` |
@@ -36,7 +38,7 @@ Published arcade/PS/DC codes were checked early and found unverifiable on this S
 * To unlock GOODIES at runtime: save a state at MAIN MENU, decompress its PNG `gbAs` chunk (helper `ss.py` from the earlier session), patch raw offset `0x21000 + 0x1348 + 0x14` (EWRAM `0x0200135C`) to `1`, recompress, press `F1`, then Down×4 + A. GOODIES appears (`menu_patched.png`).
 * To unlock SECRET CODES inside GOODIES, additionally set `0x0200135E`, `0x0200135F`, `0x02001360` (save +0x16/+0x17/+0x18) to `1` **before** entering GOODIES — the flags are copied at scene init (`0x08007CF8`). Then Down + A (`goodies3.png` → `secret_codes.png`).
 * mGBA's GDB stub (`-g`) is unreliable here: the first attach reads RAM, a second attach kills the emulator. Savestate diffing (`zlib.decompress` of the `gbAs` PNG chunk; 397,312-byte state, IWRAM @ `0x19000`, EWRAM @ `0x21000`) is the reliable RAM-evidence path (guide §16.13).
-* All screenshots and helper scripts are in `/tmp/opencode/supersf2retry`.
+* All screenshots and helper scripts were in `/tmp/supersf2retry`.
 
 ## 4. Address map
 
@@ -201,7 +203,7 @@ This value is not in any published code list (it is a save-flag combination mint
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`; Capstone 5.0.7 for literal/BL scans; REA MCP with Ghidra 12.1.4 (`open_binary` raw-binary ARM @ `0x08000000`, `analyze_function`, `xrefs`, `read_bytes`).
 * `ss.py` (prior session) to decompress mGBA `.ssN` → raw `gbAs`; `patch_ss.py` (this session) to rewrite a raw byte and rebuild the PNG with a correct CRC; `key.sh`, `try_codes.py` for XTEST input and savestate-diff trials.
-* Throwaway artifacts live only in `/tmp/opencode/supersf2retry`; no ROM copy was modified.
+* Throwaway artifacts live only in `/tmp/supersf2retry`; no ROM copy was modified.
 
 ## 10. Legal note
 
@@ -209,4 +211,4 @@ No ROM image, extracted graphics, music or game text is redistributed. Only hash
 
 ## Cleanup
 
-All processes started for this session (Xvfb, openbox, and the three mGBA instances) were stopped by PID number only; no `pkill`/`pkill -f` was used. `Super Puzzle Fighter II.sav` and `.ss1`–`.ss8` were removed from the ROM folder after the final RAM dump; copies needed for reproduction remain under `/tmp/opencode/supersf2retry`.
+All processes started for this session (Xvfb, openbox, and the three mGBA instances) were stopped by PID number only; no `pkill`/`pkill -f` was used. `Super Puzzle Fighter II.sav` and `.ss1`–`.ss8` were removed from the ROM folder after the final RAM dump; copies needed for reproduction were left under `/tmp/supersf2retry`.

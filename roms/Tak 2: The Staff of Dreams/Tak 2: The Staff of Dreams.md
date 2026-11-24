@@ -1,5 +1,7 @@
 # Tak 2: The Staff of Dreams (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -180,6 +182,6 @@ it was not exercised because reaching the Yorbel game requires story progression
 * `arm-none-eabi-objdump -D -b binary -marm -M force-thumb --adjust-vma=0x08000000` for input code.
 * mGBA 0.10.5 under Xvfb `:316` + openbox; `xdotool` XTEST input; `scrot` screenshots;
   savestate `gbAs`/zlib parser (`parse_state.py`).
-* All artifacts and scripts are in `/tmp/opencode/tak2`; screenshots `s*.png`, `m2_*.png`.
+* All artifacts and scripts were in `/tmp/tak2`; screenshots `s*.png`, `m2_*.png`.
 * No ROM or copyrighted assets are redistributed; this report contains only hashes, addresses,
   algorithms and counts.

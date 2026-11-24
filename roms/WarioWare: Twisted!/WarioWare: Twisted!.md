@@ -1,5 +1,7 @@
 # WarioWare: Twisted! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -58,10 +60,10 @@ reimplemented, and the complete 15-stage unlock-gate chain located and decoded (
 
 * Emulator: mGBA 0.10.5 (`/usr/local/bin/mgba`), Xvfb `:315`, `SDL_AUDIODRIVER=dummy`,
   openbox window manager, `-3` scale. Work copy at
-  `/tmp/opencode/wariotwisted/game.gba` (ROM folder left untouched).
+  `/tmp/wariotwisted/game.gba` (ROM folder left untouched).
 * Keymap (mGBA SDL defaults): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
   D-pad = arrow keys. `xdotool` XTEST events to the focused window; 120–200 ms holds.
-* Path walked (screenshots in `/tmp/opencode/wariotwisted/`):
+* Path walked (screenshots in `/tmp/wariotwisted/`):
 
   | Step | Input | Screen / evidence |
   |---|---|---|
@@ -79,7 +81,7 @@ reimplemented, and the complete 15-stage unlock-gate chain located and decoded (
 * RAM evidence: `game.ss1` / `game.ss2` are mGBA `.ss1` PNG states. Per guide §16.13 the
   `gbAs` zlib chunk decompresses to 397,312 bytes; IWRAM starts at state offset `0x19000`,
   EWRAM at `0x21000`. EWRAM `0x21000` contains the live save mirror beginning `MIW\0`
-  (`ss.py`). The on-cartridge flash save is `/tmp/opencode/wariotwisted/game.sav`.
+  (`ss.py`). The on-cartridge flash save is `/tmp/wariotwisted/game.sav`.
 * **Harness limitation (important):** this game's cursor and all microgames are driven by
   the cartridge gyroscope. mGBA's SDL build maps the gyro only from physical controller
   axes; Xvfb exposes no gamepad, and mouse motion/arrow keys do not move the cursor
@@ -305,5 +307,5 @@ as untrusted data, **not executed**, and is recorded here per guide §16.8.
 
 No ROM bytes, graphics, audio, or extracted assets are redistributed. Only hashes,
 addresses, derived algorithms, counts, and original analysis scripts/screenshots are
-published. All analysis artifacts live in `/tmp/opencode/wariotwisted/`, outside the ROM
+published. All analysis artifacts were kept in `/tmp/wariotwisted/`, outside the ROM
 folder.

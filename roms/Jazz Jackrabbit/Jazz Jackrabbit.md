@@ -1,5 +1,7 @@
 # Jazz Jackrabbit (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -148,7 +150,7 @@ Note codes 2–4 are one-shot per save slot (flag at save+28), as published. Cod
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings` for Phase 0.
-* `python3` + `struct`/`zlib` to parse savestate `gbAs` chunks and read/diff EWRAM/IWRAM; helper scripts `snap.py`, `load.py`, `press.py`, `testcodes.py` in `/tmp/opencode/jazz`.
+* `python3` + `struct`/`zlib` to parse savestate `gbAs` chunks and read/diff EWRAM/IWRAM; helper scripts `snap.py`, `load.py`, `press.py`, `testcodes.py` in `/tmp/jazz`.
 * `arm-none-eabi-objdump -M force-thumb` for static Thumb disassembly; custom Python BL/pointer scanners.
 * mGBA `-d` CLI debugger driven over a Python PTY (`ptylaunch.py`, `dbg.py`) for `r/1|2|4`, `x/2`, `w/*`, `dis/t`, `watch/*`, `break`.
 * UI text bank (decoded from EWRAM, all ASCII): `MAIN MENU` (New Game / Continue / Tournament / Settings / Level Select), `LEVEL SELECT`, `SELECT DIFFICULTY` (CAKEWALK / NORMAL / PRETTY HARD / WAY TOO HARD), `TOURNAMENT`, `MULTI-PAK`, `SINGLE-PAK`, `NEW GAME`, `CONTINUE`, `MULTI-PAK SETTINGS`, `SINGLE-PAK SETTINGS`, `SETTINGS`, `LEVEL SETTINGS`, `CONTROL CONFIGURATION`, `WEAPONS/ITEMS SETUP`. Pause panel adds `PAUSED`, `KEYS:`, `SPACE CREDITS:`, `BRIGHTNESS:`, `CONTROL TYPE:`, `MUSIC VOL:`, `SFX VOL:`.

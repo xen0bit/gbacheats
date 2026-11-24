@@ -1,10 +1,12 @@
 # Mortal Kombat Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Mortal Kombat Advance/Mortal Kombat Advance.gba` |
+| File | `roms/Mortal Kombat Advance/Mortal Kombat Advance.gba` |
 | Size | 8,388,608 bytes (0x800000) |
 | Header title | `MK_ADVANCE` |
 | Game code | `AM5E` |
@@ -79,7 +81,7 @@ the RAM addresses.
 * Savestate RAM readback: mGBA `.ss1` is a PNG with a zlib-compressed `gbAs`
   chunk. `zlib.decompress(gbAs)` gives a 397,312-byte state for this 8 MiB ROM;
   EWRAM begins at raw offset `0x21000`, IWRAM at `0x19000`. States for every
-  screen are in `/tmp/opencode/mkadvance/st_*.ss1`.
+  screen were in `/tmp/mkadvance/st_*.ss1`.
 
 ## 4. Address map
 
@@ -280,7 +282,7 @@ TCRF injection recorded by this workflow.
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -abo`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 * Python 3 + capstone 5.0.7 / keystone for literal and BL scans; custom scripts
-  in `/tmp/opencode/mkadvance/` (`mk.py`, `walk.py`, `diffstate.py`, `gdbdrv.py`,
+  in `/tmp/mkadvance/` (`mk.py`, `walk.py`, `diffstate.py`, `gdbdrv.py`,
   `brute2.c`).
 * mGBA SDL 0.x under `Xvfb :319`, `xdotool` XTEST input, `scrot` +
   ImageMagick crop; savestate `gbAs` chunk decoded with Python `zlib`.

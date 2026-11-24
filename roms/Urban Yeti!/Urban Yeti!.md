@@ -1,5 +1,7 @@
 # Urban Yeti! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -35,7 +37,7 @@ Dynamic confirmation was obtained for the password *output* side: the in-game GA
   3. `Return` on the title (no menu) starts a game: intro cutscene (`x` to advance) → city gameplay with HUD (clock, +100 health).
   4. In gameplay `Return` opens `CONTINUE / QUIT`. `QUIT` → studio splash → title.
   5. `Select`+`Down`+`A` from gameplay produced a GAME OVER screen: `CREDITS: 1`, `CONTINUE`, `STATS`, `QUIT`, and the generated password `FOREWORD` rendered at bottom right. `CONTINUE` resumed play with one credit spent.
-* Static tools: `strings -t x`, literal/`u32` pointer scans, Thumb PC-relative literal scanner, BL scanner, `arm-none-eabi-objdump -M force-thumb`, Capstone. Work files and screenshots are in `/tmp/opencode/urbanyeti/`.
+* Static tools: `strings -t x`, literal/`u32` pointer scans, Thumb PC-relative literal scanner, BL scanner, `arm-none-eabi-objdump -M force-thumb`, Capstone. Work files and screenshots were in `/tmp/urbanyeti/`.
 
 ## 4. Address map
 
@@ -184,7 +186,7 @@ The `cat` field is the handler selector; `idx` is an unadvertised 1/2/3 slot (pu
 ## 7. Validation evidence
 
 * **Derived (disassembly).** Validator address, table base, record stride, loop bound, handler dispatch, input alphabet, input buffer address, `strcmp` identity — all read directly from Thumb code at `0x0803FF28`–`0x080546D8` and verified against raw bytes with `struct.unpack_from`.
-* **Observed (emulator).** Boot sequence, title attract, Select menu (`NEW GAME / CONTINUE`), NEW GAME cutscene and gameplay HUD, in-game pause (`CONTINUE / QUIT`), GAME OVER screen with `CREDITS: 1` and live-generated password `FOREWORD`, CONTINUE spending a credit. Screenshots saved under `/tmp/opencode/urbanyeti/` (`full_c.png`, `menu_hi_c.png`, `end1_c.png`, `eatlas.png`, …).
+* **Observed (emulator).** Boot sequence, title attract, Select menu (`NEW GAME / CONTINUE`), NEW GAME cutscene and gameplay HUD, in-game pause (`CONTINUE / QUIT`), GAME OVER screen with `CREDITS: 1` and live-generated password `FOREWORD`, CONTINUE spending a credit. Screenshots saved under `/tmp/urbanyeti/` (`full_c.png`, `menu_hi_c.png`, `end1_c.png`, `eatlas.png`, …).
 * **Observed (recon).** All 28 published code strings located verbatim; the 11 unverified published strings located zero times.
 * **Inferred (not observed).** The *visual* result of entering `PASSWORD`, `TONYGOLD` or `BSWSBSWS` on the entry screen: the handlers are identified and their calls listed, but the entry screen itself was not reached in the retail build (§8). Effects are labelled inferred, not confirmed.
 * **No prompt-injection content was found or followed** in ROM strings or fetched cheat pages; all fetched text was treated as data.

@@ -1,10 +1,12 @@
 # Fire Emblem (GBA, EU) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `roms/Fire Emblem/Fire Emblem.gba` (analysed copy `/tmp/opencode/fe1/fe.gba`) |
+| File | `roms/Fire Emblem/Fire Emblem.gba` (analysed copy `/tmp/fe1/fe.gba`) |
 | Size | 16,777,216 bytes (0x01000000) |
 | `file` | `Game Boy Advance ROM image: "FIREEMBLEME" (AE7E01, Rev.00)` |
 | Header title | `FIREEMBLEME` (11 chars + NUL) — international **FE7 / The Blazing Blade**, European build |
@@ -37,7 +39,7 @@ Text is **Huffman-compressed** (not ASCII and not a simple tile-index substituti
 * Emulator: mGBA (SDL), `DISPLAY=:318`, `SDL_AUDIODRIVER=dummy`, `mgba -3 <rom>`, Xvfb `:318` + openbox.
 * Keymap (verified): `A=x`, `B=z`, `L=a`, `R=s`, `Start=Return`, `Select=BackSpace`, D-pad=arrow keys. Hold 100–300 ms; savestates with `xdotool key shift+F1..F9`, load with `F1..F9`.
 * Soft reset: from any in-game screen, hold `x z BackSpace Return` for ~0.4 s → "2003 Nintendo Presents".
-* **Reaching the password screen requires a completed game** (Extras → Battle History is gated). For analysis only, a **copy** of the ROM (`/tmp/opencode/fe1/fe_test.gba`) was patched at file offsets `0xA6070`, `0xA6090`, `0xA60A4`, `0xA60B6`, `0xA60C8`, `0xA60D8`, `0xA60EA` (branch instructions → `0x0000`) to force all Extras entries. The original ROM was never modified. With that patched copy: title → main menu → `Extras` (4×Down, A) → `Battle History` (3×Down, A) → hold `BackSpace` ≈4 s.
+* **Reaching the password screen requires a completed game** (Extras → Battle History is gated). For analysis only, a **copy** of the ROM (`/tmp/fe1/fe_test.gba`) was patched at file offsets `0xA6070`, `0xA6090`, `0xA60A4`, `0xA60B6`, `0xA60C8`, `0xA60D8`, `0xA60EA` (branch instructions → `0x0000`) to force all Extras entries. The original ROM was never modified. With that patched copy: title → main menu → `Extras` (4×Down, A) → `Battle History` (3×Down, A) → hold `BackSpace` ≈4 s.
 * Reaching Battle History on an unmodified ROM requires first clearing the game once; that legitimate path was not played end-to-end (see §8).
 * To make the generator produce data, SRAM bytes at `0x7044` (148 bytes) of the save were set to a synthetic pattern and the sum+XOR checksum at `0x70D4` recomputed; with all-zero history, holding Select 3 s yields only the "Well done" dialogue.
 
@@ -145,10 +147,10 @@ QBM84 U9WYB SS
 ## 9. Tooling
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb|force-arm` for targeted disassembly; Python + `capstone` 5.0.7 for literal/BL/xref scans; `keystone` available.
-* Python helper `/tmp/opencode/fe1/drv.py` (mGBA XTEST keypress helper, screenshot crop `720x480+281+260`, savestate `gbAs` zlib parser + RAM diff at IWRAM `+0x19000` / EWRAM `+0x21000`), `gen_pw.py` (synthetic SRAM injection + boot/navigation).
+* Python helper `/tmp/fe1/drv.py` (mGBA XTEST keypress helper, screenshot crop `720x480+281+260`, savestate `gbAs` zlib parser + RAM diff at IWRAM `+0x19000` / EWRAM `+0x21000`), `gen_pw.py` (synthetic SRAM injection + boot/navigation).
 * GDB stub (`mgba -g`, `gdb-multiarch` on `:2345`) used for read-only verification; complex `call` sequences were rejected by the minimal stub, so savestate diffing was the primary RAM tool (§16.13).
 * Web sources (treated as **data**; no instructions followed): Fire Emblem Wiki (`FE7` trivia, Sound Room, unused content), Fire Emblem Universe (`Researches on Battle History Password` topic 17219 — function map and pseudocode; `Erase your save data at the start of the game`; prototype offset notes), GameFAQs cheat/walkthrough pages (403; snippets via search), The Cutting Room Floor mirror, Fire Emblem WoD. No prompt-injection payload was encountered in the fetched pages; all fetched text was read as data only.
-* Analysis-only patched ROM `fe_test.gba` and synthetic `fe_test.sav` live in `/tmp/opencode/fe1` and were removed from the deliverable (no ROM or assets redistributed).
+* Analysis-only patched ROM `fe_test.gba` and synthetic `fe_test.sav` were kept in `/tmp/fe1` and were removed from the deliverable (no ROM or assets redistributed).
 
 ## 10. Legal note
 

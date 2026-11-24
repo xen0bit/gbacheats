@@ -1,5 +1,7 @@
 # Jimmy Neutron: Boy Genius (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -279,7 +281,7 @@ and direct reads of the output struct.
   screenshots cropped to the 720×480 GBA viewport.
 * mGBA CLI debugger (`mgba -d`) with a FIFO command channel, `stdbuf -o0`, and a
   Thumb breakpoint at `0x080126E4` for RAM reads. Helper scripts created in
-  `/tmp/opencode/jimmy/`: `phase0.py`, `xrefs.py`, `ldrscan.py`, `decode.py`,
+  `/tmp/jimmy/`: `phase0.py`, `xrefs.py`, `ldrscan.py`, `decode.py`,
   `encode.py`, `keys.py`, `goto_code.py`, `enter_code.py`.
 * Web sources for published codes: GameFAQs (gamespot mirror), Freeola Retro Game
   Cheats, VGChartz search snippets. Fetched page content was treated strictly as

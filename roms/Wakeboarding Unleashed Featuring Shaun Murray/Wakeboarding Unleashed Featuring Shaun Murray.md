@@ -1,5 +1,7 @@
 # Wakeboarding Unleashed Featuring Shaun Murray (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -55,7 +57,7 @@ code list for this SKU**, so these words should be treated as the complete nativ
   with Right — `OCEAN WORLD` is now the 7th selectable landscape (baseline wraps from
   SAUSALITO back to LAKE TAHOE).
 
-### Screenshots captured (work dir `/tmp/opencode/wakeboarding`, not committed)
+### Screenshots captured (work dir `/tmp/wakeboarding`, not committed)
 `wordentry.png` (entry screen, 8 slots), `typed_lil2.png` (manual `LILBURNT` typed),
 `lil_manual_submitted.png` (flag after manual submit), `lil_unlocked_full.png` (LIL + P in
 rider select), `opts_unlocked.png` (CHEATS enabled) vs `s7.png` (CHEATS grey),

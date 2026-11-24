@@ -1,5 +1,7 @@
 # Turbo Turtle Adventure (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -167,7 +169,7 @@ static table/string space counted above.
 
 * **Observed (emulator):** Extras inert on fresh save; opens with crafted field; Bonus Track
   listed; three Extras entries; all sub-screens; rejections listed in §6b. Screenshots named
-  above are in `/tmp/opencode/turboturtle/`.
+  above were in `/tmp/turboturtle/`.
 * **Observed (RAM):** savestate `gbAs` chunks; EWRAM gate bytes at raw `0x60E18`
   (`0x0203FE18`); IWRAM/EWRAM diffs between accept and reject states.
 * **Derived (disassembly):** `0x0800E388` gate, `0x0800E10C` 2-bit field extraction,

@@ -1,5 +1,7 @@
 # Super Dodge Ball Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -52,7 +54,7 @@ such.
 - No screen in this path presents a code/password field. Savestate slot 1 was kept at the
   data-slot screen to make each experiment a single `F1`.
 
-Screenshots retained in `/tmp/opencode/superdodgeball/`: `shot_boot.png` (title),
+Screenshots retained in `/tmp/superdodgeball/`: `shot_boot.png` (title),
 `shot_data1_b.png` / `n03_after_a.png` (data-slot select), `w02_story_5.png` (story),
 `w03_after_story.png` / `i02_ff60.png` (match), `w05_start_demo.png` (pause),
 `f01_ff25.png` (manager intro), `g2_progress.png` (team setup).
@@ -196,14 +198,14 @@ bit/byte semantics remain **unknown** (§8) rather than claimed.
 ## 9. Tooling
 
 - `strings -t x -n 4/5/6`, `grep -abo`, `xxd`, Python 3 byte-pattern scanners
-  (`/tmp/opencode/superdodgeball/scan.py`).
+  (`/tmp/superdodgeball/scan.py`).
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 - Capstone 5.0.7 (available; final scans used objdump/REA instead).
 - Ghidra 12.1.4 via REA MCP (`open_binary` raw-binary/ARM/0x08000000; `binary_overview`,
   `list_strings`, `list_procedures`, `xrefs`, `procedure_info`, `procedure_pseudo_code`,
   `close_binary`).
 - mGBA 0.10.5 under Xvfb `:318` + openbox; `xdotool` XTEST input helper
-  (`/tmp/opencode/superdodgeball/sdb.py`); `scrot` screenshots.
+  (`/tmp/superdodgeball/sdb.py`); `scrot` screenshots.
 - GDB stub (`-g`) was attempted but returned protocol packet errors (guide §16.13); analysis
   used static evidence and save-file diffs instead.
 

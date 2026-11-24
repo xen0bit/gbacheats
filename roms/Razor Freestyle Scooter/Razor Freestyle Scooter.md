@@ -1,5 +1,7 @@
 # Razor Freestyle Scooter (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -75,7 +77,7 @@ state machine and renderer do all the work. A separate by-hand entry attempt
 code, which the game correctly rejected — this is an input-timing artifact,
 not a codec result.
 
-Reproduction artifacts (all in `/tmp/opencode/razorscooter/`):
+Reproduction artifacts (all in `/tmp/razorscooter/`):
 `codec.py` (encoder/validator), `dbg_pw2.py` (deterministic entry),
 `ss.py`/`try2.py` (savestate experiments), `alphabet.py` (alphabet recovery),
 `dbg.py`/`watch.py` (debugger helpers), screenshots `pub_QLY6.png`,

@@ -1,5 +1,7 @@
 # Pokémon FireRed (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -68,7 +70,7 @@ Key map: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
 D-pad = arrow keys. mGBA reset = `Ctrl+R` (its SDL reset path pauses briefly at a
 black frame; wait ~5 s for the intro / ~35 s for the title screen).
 
-Menu walk performed (all with screenshots saved in `/tmp/opencode/firered`):
+Menu walk performed (all with screenshots saved in `/tmp/firered`):
 boot → Game Freak intro → controls tutorial → New Game (gender, player name,
 rival name) → Pallet Town overworld → **Start menu** (`BAG / OSCAR / SAVE /
 OPTION / EXIT`, `s_menu.png`) → **OPTIONS** (`TEXT SPEED, BATTLE SCENE, BATTLE

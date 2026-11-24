@@ -1,14 +1,16 @@
 # XXX / xXx (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 > Queue 269. Analysis target is the scene-patched USA image of **xXx** (stylised `xXx`,
 > AGB-AX3E-USA), renamed `XXX` in this collection. All screenshots/evidence live in
-> `/tmp/opencode/xxx/`, **not** in the ROM folder. No ROM or game assets are redistributed.
+> `/tmp/xxx/`, **not** in the ROM folder. No ROM or game assets are redistributed.
 
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/XXX/XXX.gba` |
+| File | `roms/XXX/XXX.gba` |
 | Size | 8,388,608 bytes (8 MiB / 64 Mbit) |
 | `file` | Game Boy Advance ROM image: "XXX" (AX3E52, Rev.00) |
 | Header title | `XXX` (collection rename; see cracktro below) |
@@ -28,7 +30,7 @@ The reset vector is **not** the stock `0xEA00002E` (`b 0x080000C0`). ROM word 0 
 a small jump table keyed on bits of `0x04000200`.
 
 Emulation shows this is a **Team Venom cracktro** (Observed, screenshot
-`/tmp/opencode/xxx/t2c.png`):
+`/tmp/xxx/t2c.png`):
 
 ```
 VENOM BRINGING YOU:
@@ -148,7 +150,7 @@ LOAD GAME, OPTIONS, EXTRAS), FILE TRANSFER (3 save slots), TASKS briefing, gamep
 pause menu (5 items), View Statistics, Options (MUSIC/SOUND FX/CREDITS), Extras (7 rows:
 View Best Times, Play Race 1, 4× Locked) and the "Are you sure?" confirm. No code-entry
 surface, on-screen keyboard, cheat menu, debug menu or hidden text field appears on any of
-them. Evidence: `/tmp/opencode/xxx/*.png`.
+them. Evidence: `/tmp/xxx/*.png`.
 
 ### 6b.2 Button-sequence space and table search counts
 
@@ -197,7 +199,7 @@ not be generated; reporting one without ROM or emulator proof would be fabricate
 ## 7. Validation evidence
 
 * **Observed** — emulator screenshots of all 13 screens; Cracktro text read from
-  `/tmp/opencode/xxx/t2c.png`; live keypad `0x04000130 = 0x1FF` with L held and
+  `/tmp/xxx/t2c.png`; live keypad `0x04000130 = 0x1FF` with L held and
   `0x0300189C = 0xFE00`; single reader of `0x030018A0` from a read-watchpoint; write-watchpoint
   on `0x03000D40` never firing; savestate raw dumps and diffs; Extras remaining 4× Locked
   after every code attempt.
@@ -229,7 +231,7 @@ not be generated; reporting one without ROM or emulator proof would be fabricate
   `x/4`, `BREAK` (Ctrl+C).
 * Savestate parsing: PNG `gbAs` chunk → zlib → 397,312-byte raw state; scripts
   `readstate.py`, `diffstates.py`, `threeway.py`, `scan_ramhist.py`.
-* Search scripts in `/tmp/opencode/xxx/`: `scan_codes.py`, `scan_tables.py`, `scan_enc.py`,
+* Search scripts in `/tmp/xxx/`: `scan_codes.py`, `scan_tables.py`, `scan_enc.py`,
   `scan_cmp.py`, `scan_keypad.py`, `scan_inputrefs.py`, `scan_iwramrefs.py`,
   `scan_validator2.py`.
 * X11: Xvfb `:317`, openbox, xdotool (`key.py`), scrot; all evidence images in the work dir.

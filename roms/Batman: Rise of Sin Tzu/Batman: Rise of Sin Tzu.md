@@ -1,5 +1,7 @@
 # Batman: Rise of Sin Tzu (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -40,7 +42,7 @@ only so the patch is not mistaken for game behaviour. Restoring the entry word t
 `0xEA00002E` (`b 0x080000C0`) boots the untouched game (Ubisoft / DC Comics / title /
 language select), which proves the trainer replaces only the header entry and appends
 its own blob in the tail — the game itself is intact. All dynamic tests below used that
-clean-entry copy (`/tmp/opencode/sintzu/rom_clean.gba`, identical to the target except for
+clean-entry copy (`/tmp/sintzu/rom_clean.gba`, identical to the target except for
 bytes 0x00–0x03).
 
 The only "continue" path is the password screen: mGBA produced just a 0-byte `.sav` for
@@ -113,7 +115,7 @@ Pressing A submits from any cell. This is the "accept cell also carries a charac
 quirk: a six-symbol code cannot be finished by simply moving right and pressing A — the
 sixth symbol has to be dialled in on the `OK` cell.
 
-Savestate used for experiments: `/tmp/opencode/sintzu/rom_clean.ss1` (password screen,
+Savestate used for experiments: `/tmp/sintzu/rom_clean.ss1` (password screen,
 buffer all zero). `-t rom_clean.ss1` reloads it; **F1** loads, **Shift+F1** saves.
 
 Codes tested (all in §6/§6b): published list (see §6), `_NDTH_`, `_FLYM_`,
@@ -361,8 +363,8 @@ position and that the checksum model is right.
 
 | Code | Validator return | Flag written | Evidence |
 |---|---|---|---|
-| `_NDTH_` | 1 | `[0x03000F2C]+0x28 |= 0x0001` | breakpoint at `0x0806FCE2`, `r0=1`, store value `r2=1` |
-| `_FLYM_` | 2 | `[0x03000F2C]+0x28 |= 0x0002` | breakpoint at `0x0806FCD8`, bit-1 path reached |
+| `_NDTH_` | 1 | `[0x03000F2C]+0x28 \|= 0x0001` | breakpoint at `0x0806FCE2`, `r0=1`, store value `r2=1` |
+| `_FLYM_` | 2 | `[0x03000F2C]+0x28 \|= 0x0002` | breakpoint at `0x0806FCD8`, bit-1 path reached |
 | anything else | 0 | – | error beep, stays on screen |
 
 `_FLYM_` is the ROM's own 6-symbol literal; the widely copied `_FLYMF_` cannot be typed.
@@ -423,7 +425,7 @@ position and that the checksum model is right.
 
 ## 9. Tooling
 
-Everything is in `/tmp/opencode/sintzu/`:
+Everything was in `/tmp/sintzu/`:
 
 | File | Purpose |
 |---|---|

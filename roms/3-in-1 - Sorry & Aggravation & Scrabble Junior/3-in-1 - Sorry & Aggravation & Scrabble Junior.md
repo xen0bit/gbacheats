@@ -1,5 +1,7 @@
 # 3-in-1 – Sorry! & Aggravation & Scrabble Junior (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -418,7 +420,7 @@ Stating this as a bounded negative is the correct deliverable here per guide
   `ImageMagick`.
 * `arm-none-eabi-objdump` (`-M force-thumb`), Capstone 5.0.9,
   Python 3 (struct/re/Pillow/numpy).
-* Scripts (in `/tmp/opencode/sorry`): `scan_hdr.py`, `hdr_scan2.py`
+* Scripts (in `/tmp/sorry`): `scan_hdr.py`, `hdr_scan2.py`
   (header/logo scan), `shotmax.py` (blink-defeating screenshot composite),
   inline scans for mask runs / equal-length string tables / keyword contexts
   (`keyword_context.log`).

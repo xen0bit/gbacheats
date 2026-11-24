@@ -1,5 +1,7 @@
 # Woody Woodpecker in Crazy Castle 5 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -183,7 +185,7 @@ above.
 ## 7. Validation evidence
 
 * **Observed** — emulator screenshots of every screen listed in §6b item 1
-  (kept in `/tmp/opencode/woody5/`, not in the ROM folder); RAM reads of key
+  (kept in `/tmp/woody5/`, not in the ROM folder); RAM reads of key
   state `0x03000124/126/128/12A` and the listener-table pointer at
   `0x03001248`; the SRAM dump; image-diff tests of combos on the title.
 * **Derived** — disassembly of crt0/main, `0x0835A53C` input routine, the
@@ -213,7 +215,7 @@ above.
   -M force-thumb`, Xvfb `:317` + openbox, mGBA 0.10.5 (`-3`, `-d`), `xdotool`,
   ImageMagick `import`, Pillow for montages, mGBA pty debugger bridge
   (`dbg_server.py`, `dbg.py`, `ramdump.py`). All artifacts live in
-  `/tmp/opencode/woody5/`; no ROM or copyrighted asset is redistributed here.
+  `/tmp/woody5/`; no ROM or copyrighted asset is redistributed here.
 
 ## 10. Legal note
 

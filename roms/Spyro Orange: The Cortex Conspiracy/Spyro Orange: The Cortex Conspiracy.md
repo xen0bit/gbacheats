@@ -1,5 +1,7 @@
 # Spyro Orange: The Cortex Conspiracy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -116,7 +118,7 @@ Entry alphabet (on-screen keyboard, read from the rendered screen and decoded ag
 
 1. **Static count** — the validator contains exactly ten `BL strcmp` instructions (addresses listed in §4), each loading one of the ten table pointers from its own literal pool (`0x08028580`…`0x080287C0`), followed by one shared failure branch. No loop, table walk, checksum or second comparison path exists.
 2. **Table count** — the record run at `0x0805F0B8` is exactly `0x50` bytes = 10 × 8, bounded by unrelated u32 data at `0x0805F0B4` and `0x0805F108`. Both stub headers were scanned and contain no code strings.
-3. **Dynamic count** — all ten table strings were injected at the live breakpoint and produced `Code Accepted!` plus the expected effect (screenshots `t_SH33P.png` … `t_B41S0KV.png` in `/tmp/opencode/spyroorange3/`; `montage_codes.png`). Four out-of-set strings — `SHEEPXX`, `SH33PX` (valid prefix + one extra glyph), `AAAAAAA`, `1234567` — all produced `Invalid Code!` (`t_SHEEPXX.png`, `t_SH33PX.png`, `t_AAAAAAA.png`, `t_1234567.png`).
+3. **Dynamic count** — all ten table strings were injected at the live breakpoint and produced `Code Accepted!` plus the expected effect (screenshots `t_SH33P.png` … `t_B41S0KV.png` in `/tmp/spyroorange3/`; `montage_codes.png`). Four out-of-set strings — `SHEEPXX`, `SH33PX` (valid prefix + one extra glyph), `AAAAAAA`, `1234567` — all produced `Invalid Code!` (`t_SHEEPXX.png`, `t_SH33PX.png`, `t_AAAAAAA.png`, `t_1234567.png`).
 
 **Bounds proved by rejection.**
 
@@ -149,4 +151,4 @@ Entry alphabet (on-screen keyboard, read from the rendered screen and decoded ag
 
 ## 9. Tooling
 
-`file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, Python 3 (struct/re/Capstone 5.0.7), `arm-none-eabi-objdump -M force-thumb`, mGBA 0.10.5 under Xvfb `:319` with openbox, `xdotool`, `scrot`, ImageMagick `montage`, and a small GDB-Remote-Serial-Protocol client (`rsp.py`, `rspd.py`, `mg.py`, `entry.py`, `oracle.py`) held in `/tmp/opencode/spyroorange3/`. No GameShark/CodeBreaker/Action Replay codes were used; no ROM or copyrighted asset is redistributed here.
+`file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, Python 3 (struct/re/Capstone 5.0.7), `arm-none-eabi-objdump -M force-thumb`, mGBA 0.10.5 under Xvfb `:319` with openbox, `xdotool`, `scrot`, ImageMagick `montage`, and a small GDB-Remote-Serial-Protocol client (`rsp.py`, `rspd.py`, `mg.py`, `entry.py`, `oracle.py`) held in `/tmp/spyroorange3/`. No GameShark/CodeBreaker/Action Replay codes were used; no ROM or copyrighted asset is redistributed here.

@@ -1,5 +1,7 @@
 # Dave Mirra Freestyle BMX 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -399,7 +401,7 @@ unlock spells `R,R,L,L,B,B,L,R`.
   `zlib` (`gbAs` chunk) for RAM reads and diffs.
 * `arm-none-eabi-objdump -M force-thumb` for targeted disassembly.
 * Python 3 scripts: pointer/string scanner, mask-table scanner, savestate
-  loader/differ, code-sequence driver (kept in `/tmp/opencode/davemirra3`).
+  loader/differ, code-sequence driver (kept in `/tmp/davemirra3`).
 * Web sources checked for published literals: GameFAQs, Neoseeker,
   cheatingdome, ggmania, GameSpot; all listed only the 8-press T1/T2
   sequences (plus a rejected `L,R,L,R,B,B,R,L` variant).

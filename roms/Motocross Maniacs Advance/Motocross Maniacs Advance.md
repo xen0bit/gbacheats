@@ -39,7 +39,7 @@ glyph-indexed text searches with counts, (c) enumerating all 11 `KEYINPUT` refer
 and finding only generic input handlers, and (d) verifying the two published unlock
 conditions against the ROM strings, the locked UI, and the flag-setting code.
 
-The unlock system itself is fully characterised: the "you've unlocked <rider>" message
+The unlock system itself is fully characterised: the "you've unlocked &lt;rider&gt;" message
 routine is at `0x08014194`/`0x08014220`; its flag setter at `0x08013DD0–0x08013E0E`
 tests rising edges of bits `0x20` (Dave) and `0x40` (Omega) in the working save byte at
 `0x03006D2D` and writes a message selector to `0x03002874`. The 7-character roster is

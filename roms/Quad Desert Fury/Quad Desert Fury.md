@@ -1,5 +1,7 @@
 # Quad Desert Fury (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -174,7 +176,7 @@ search spaces that were checked for a hidden system:
 
 ## 7. Validation evidence
 
-* **Observed** (emulator screenshots, saved in `/tmp/opencode/quaddesert/`):
+* **Observed** (emulator screenshots, saved in `/tmp/quaddesert/`):
   title, main menu (both selections), track select (1 and 7 and wrap to 1),
   Challenge Mode intro, race HUD, pause menu (all three selections), and the
   post-probe title screen. Every button-code probe left the game on the same
@@ -211,14 +213,14 @@ search spaces that were checked for a hidden system:
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings` for Phase 0/1.
 * Python 3 + `capstone` 5.0.7 for literal scans, Thumb LDR/BL scans and the
   u16 key-mask/password-alphabet scans (`static1.py`, `static2.py`,
-  `static3.py` in `/tmp/opencode/quaddesert/`).
+  `static3.py` in `/tmp/quaddesert/`).
 * `arm-none-eabi-objdump -M force-thumb --adjust-vma=0x08000000` for manual
   disassembly of `main` (file `0x1110`) and the low-ROM task system.
 * `xdotool` (XTEST keydown/keyup to the focused mGBA window) and
   `import -window` for input and screenshots.
-* `/tmp/opencode/quaddesert/ss.py` — mGBA `.ss*` `gbAs` zlib decompressor and
+* `/tmp/quaddesert/ss.py` — mGBA `.ss*` `gbAs` zlib decompressor and
   IWRAM/EWRAM reader (guide §16.13).
-* `/tmp/opencode/quaddesert/helper.py` — reproducible input/screenshot helper.
+* `/tmp/quaddesert/helper.py` — reproducible input/screenshot helper.
 
 **Legal note:** no ROM image, extracted graphics, music or game text is
 reproduced here; only hashes, addresses, instruction snippets and analysis

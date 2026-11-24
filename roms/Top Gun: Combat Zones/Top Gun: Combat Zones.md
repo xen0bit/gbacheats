@@ -1,5 +1,7 @@
 # Top Gun: Combat Zones (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -175,7 +177,7 @@ code = char(v0) char(v1) char(v2) char(filler) char(v4) char(v5) '0' char(anythi
 
 ## 9. Tooling
 
-* Work dir `/tmp/opencode/topguncombat`; helper scripts: `scan.py`, `texttable.py`, `xref.py`, `ssparse.py` (mGBA `.ss1` → `gbAs` zlib blob; EWRAM at raw `0x21000`), `dbg.py` (mGBA `-d` pty debugger), `ui.py` (xdotool driver with cursor tracking), `traceok.py` (30k-instruction trace locating the validator), `pw.py`/`pw2.py` (validator model + enumeration), `trycode.py` (automated code entry).
+* Work dir `/tmp/topguncombat`; helper scripts: `scan.py`, `texttable.py`, `xref.py`, `ssparse.py` (mGBA `.ss1` → `gbAs` zlib blob; EWRAM at raw `0x21000`), `dbg.py` (mGBA `-d` pty debugger), `ui.py` (xdotool driver with cursor tracking), `traceok.py` (30k-instruction trace locating the validator), `pw.py`/`pw2.py` (validator model + enumeration), `trycode.py` (automated code entry).
 * `arm-none-eabi-objdump -M force-thumb`, mGBA 0.10.5 `-d`/`-t`, gdb stub unavailable (port 2345 occupied by a sibling session), `python3` + Pillow for glyph work.
 * Evidence files kept in the work dir: `entry_unlock.png`, `result_*.png`, `mode2_pause5_c.png`, `unlock_lvl3_c.png`, `stateC.ss1`, `unlocked.ss2` and their `.raw` dumps.
 * No ROM or copyrighted assets are redistributed; only addresses, algorithms, hashes and generated code strings are published.

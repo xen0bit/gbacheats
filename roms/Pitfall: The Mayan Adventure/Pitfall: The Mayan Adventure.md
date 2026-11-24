@@ -1,5 +1,7 @@
 # Pitfall: The Mayan Adventure (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -258,7 +260,7 @@ discarded.
   + ImageMagick crops. mGBA's `-d` CLI debugger (with `stdbuf -o0` and a held
   FIFO writer) was used to confirm the key getter/caller; its GDB stub was
   unavailable because port 2345 was held by another session.
-* `/tmp/opencode/pitfallmayan/ss.py` — PNG `gbAs` zlib decompressor and RAM
+* `/tmp/pitfallmayan/ss.py` — PNG `gbAs` zlib decompressor and RAM
   differ (§16.13); `ui.py` — PID-targeted xdotool helper; `dbg.py` — CLI debugger
   FIFO helper.
 * Web: `webfetch` + `websearch`, with `web.archive.org` snapshots for 403'd pages.

@@ -1,5 +1,7 @@
 # Shrek SuperSlam (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -37,11 +39,11 @@ Static scans over all 8,388,608 bytes found: 0 occurrences of 13 code-related ke
 
 ## 3. How to reproduce
 
-- Emulator: mGBA 0.10.5, `SDL_AUDIODRIVER=dummy`, under Xvfb `:317` + openbox. Command used: `mgba -3 ./game.gba` (a byte-identical copy of the ROM in `/tmp/opencode/shreksuperslam`, so no emulator artifacts touched the ROM folder).
+- Emulator: mGBA 0.10.5, `SDL_AUDIODRIVER=dummy`, under Xvfb `:317` + openbox. Command used: `mgba -3 ./game.gba` (a byte-identical copy of the ROM in `/tmp/shreksuperslam`, so no emulator artifacts touched the ROM folder).
 - Default SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. **Hold keys 180–300 ms**; 120 ms taps were intermittently missed by this game's input polling.
 - Menus: title screen has four sites — SOLO / MULTIPLAYER / BONUS / DATA. Full walk in §7.
 - Published-code tests (title screen): entered the DS "Unlock All Challenges" sequence remapped to available GBA buttons as `B,B,B,A,A,A,B,B,A,B,B,B,Down,Up,Left,Right,L,R` (X→A, Y→B). Result: no title-screen effect; character-select lock state identical before and after (5 open / 5 locked slots). A novel 18-press sequence (`A,A,Up,Up,B,L,R,Down,Left,Right,A,B,Up,L,L,R,R,Start`) likewise produced no unlock (the trailing Start simply activated the highlighted SOLO menu item, which is normal UI behaviour).
-- Savestate workflow: `Shift+F1` writes `game.ss1` in the emulator cwd. Parsed per guide §16.13: PNG with a zlib `gbAs` chunk → 397,312-byte raw state; VRAM at `+0x1000`, IWRAM at `+0x19000`, EWRAM at `+0x21000`. Scripts in `/tmp/opencode/shreksuperslam/`.
+- Savestate workflow: `Shift+F1` writes `game.ss1` in the emulator cwd. Parsed per guide §16.13: PNG with a zlib `gbAs` chunk → 397,312-byte raw state; VRAM at `+0x1000`, IWRAM at `+0x19000`, EWRAM at `+0x21000`. Scripts in `/tmp/shreksuperslam/`.
 
 ---
 
@@ -126,7 +128,7 @@ This is a *proven* absence over the enumerated space, not "not tested" — but i
 
 ## 7. Validation evidence
 
-**Observed (emulator, screenshots in `/tmp/opencode/shreksuperslam/`):**
+**Observed (emulator, screenshots in `/tmp/shreksuperslam/`):**
 
 1. Title: SOLO / MULTIPLAYER / BONUS / DATA (`title_for_test.png`).
 2. MULTIPLAYER → GAME LINK CABLE / WIRELESS (`multi_screen2.png`).
@@ -165,7 +167,7 @@ This is a *proven* absence over the enumerated space, not "not tested" — but i
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings` for Phase 0.
 - `websearch` for recon (GameFAQs, CheatCC, ChapterCheats, SuperCheats, projectcheatcodes, Gamespot, nintendo.fandom, cheatbook.de). One fetch returned a prompt-injection payload — ignored (§2).
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly.
-- Custom Python scripts in `/tmp/opencode/shreksuperslam/`: `kb.py` (XTEST input + cropped screenshots), `enter_code.py`, `scan.py` (button-mask/keyword scans), `xref.py` (pointer + Thumb-LDR-literal xrefs), `keyscan.py` (KEYINPUT refs), `fontscan.py` / `textbank.py` / `textbank2.py` / `fontmap.py` (font/text-bank attempts), `ss.py` / `ss2.py` (savestate PNG `gbAs` extraction), `render_vram.py` (tile rendering), `locate.py` (RAM-region identification), `tilemap.py`, `diffss.py` (state diffing), `final_counts.py`.
+- Custom Python scripts in `/tmp/shreksuperslam/`: `kb.py` (XTEST input + cropped screenshots), `enter_code.py`, `scan.py` (button-mask/keyword scans), `xref.py` (pointer + Thumb-LDR-literal xrefs), `keyscan.py` (KEYINPUT refs), `fontscan.py` / `textbank.py` / `textbank2.py` / `fontmap.py` (font/text-bank attempts), `ss.py` / `ss2.py` (savestate PNG `gbAs` extraction), `render_vram.py` (tile rendering), `locate.py` (RAM-region identification), `tilemap.py`, `diffss.py` (state diffing), `final_counts.py`.
 - mGBA 0.10.5 under Xvfb :317 + openbox; `SDL_AUDIODRIVER=dummy`.
 
 ---

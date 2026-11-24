@@ -1,5 +1,7 @@
 # Tom and Jerry in Infurnal Escape (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 - File: `Tom and Jerry in Infurnal Escape.gba` (4,194,304 bytes = 4 MiB)
 - Header title: `TOM AND JER` (full header string `TOM AND JERRAIFE5L`), game code `AIFE`, maker `5L`, version `0x00`
@@ -80,7 +82,7 @@ Encode is the exact inverse: build the 54-bit stream from fields with recomputed
   - Sentinel semantics: `f6 = 15` with valid CRC → **accepted**, decoded to `0xFF` ("not applicable") — establishes 15 as a sentinel rather than an out-of-range value.
 
 ## 7. Validation evidence
-- **Observed**: legal splash, CineGroupe logo, title, main menu (New Game / Continue / Options), Options (Music/SFX/Credits), Credits, Password screen, gameplay, pause menu (Resume / Select Level / Exit to Menu), level-select screen (levels 1..8, only those unlocked by progress are movable), and the two rejection outcomes — all via screenshots in `/tmp/opencode/tomjerry/`.
+- **Observed**: legal splash, CineGroupe logo, title, main menu (New Game / Continue / Options), Options (Music/SFX/Credits), Credits, Password screen, gameplay, pause menu (Resume / Select Level / Exit to Menu), level-select screen (levels 1..8, only those unlocked by progress are movable), and the two rejection outcomes — all via screenshots in `/tmp/tomjerry/`.
 - **Observed (RAM)**: savestate diffs located the password buffer; the game's own decoded `Q` after entering the L2 code was `0x11F03FFFFFF2F400`, byte-for-byte equal to my decoder's output. Decoded field bytes for L2 and both novel codes matched the reimplementation exactly.
 - **Derived**: validator, permutation, CRC and field layout from disassembly at `0x080038A0`/`0x080039E4`/`0x08003A84`/`0x08013E34`; all 9 published codes satisfy the reimplementation.
 - **Inferred**: semantic names of `f0/f1` and flags (level index and progress state) from the in-game level-select gating and the decoded RAM layout; the exact meaning of `f11` beyond "all-levels flag" was not isolated.
@@ -94,7 +96,7 @@ Encode is the exact inverse: build the 54-bit stream from fields with recomputed
 
 ## 9. Tooling
 - `arm-none-eabi-objdump -M force-thumb` for ROM disassembly; Capstone for pointer scans.
-- `python3` reimplementation `codec.py` / `mint.py` / `ss.py` in `/tmp/opencode/tomjerry/`.
+- `python3` reimplementation `codec.py` / `mint.py` / `ss.py` in `/tmp/tomjerry/`.
 - mGBA 0.10.5 under Xvfb `:317` with `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST input; `scrot` + ImageMagick capture/crop; savestate `gbAs` zlib extraction for RAM reads.
 - The mGBA GDB stub was unusable (port 2345 occupied by a concurrent agent); savestate diffing (guide §16.13) was used instead.
 - No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms and self-generated codes are published.

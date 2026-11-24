@@ -1,5 +1,7 @@
 # Top Gear GT Championship (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -55,7 +57,7 @@ ignored (§16.8).
   double-stepped (§16.2).
 * Boot path: intro → "PUSH START" title → Start → MAIN SELECT
   (QUICK RACE / CHAMPIONSHIP / OPTION).
-* Menus walked (screenshots retained in `/tmp/opencode/topgeargt/`):
+* Menus walked (screenshots retained in `/tmp/topgeargt/`):
   title; MAIN SELECT; OPTION (UNITS, DATA DELETE, BUTTON CONFIG, STAFF CREDITS —
   four items, the fourth reachable only by scrolling left); QUICK RACE
   (SINGLE / MULTI / COURSE EDIT); SINGLE RACE (VS COMPUTER / TIME ATTACK /
@@ -190,7 +192,7 @@ accepted as a name, no cheat effect), bounding the name-encoded surface.
 
 ## 9. Tooling
 
-Scripts retained in `/tmp/opencode/topgeargt/`: `scan1.py`/`scan2.py` (literal and
+Scripts retained in `/tmp/topgeargt/`: `scan1.py`/`scan2.py` (literal and
 BL scans), `xref.py` (Capstone Thumb PC-relative xrefs), `maskscan.py` (button-mask
 array scan), `static_neg.py` (multi-encoding keyword search), `textsearch.py`
 (affine UI-string search), `namesearch.py`/`nametable.py` (glyph-name searches),

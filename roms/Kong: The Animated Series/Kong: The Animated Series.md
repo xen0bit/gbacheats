@@ -1,5 +1,7 @@
 # Kong: The Animated Series (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -42,7 +44,7 @@ Title -> START -> language (ENGLISH) -> main menu
 
 Keypad navigation is a 2-D grid with edge clamping: rows `ABCDEFGH / IJKLMNOP / QRSTUVWX / YZ012345 / 6789X✓`; Up/Down change row by 8, Left/Right by 1, clamped at grid edges. Row 4 has only 6 cells; stepping Down from row 3 col 6/7 leaves the grid, so approach the green check via column ≤ 4. A helper that detects the yellow cursor by colour and closes the loop (`closed.py`) made input deterministic.
 
-**Screenshots taken** (kept on disk in `/tmp/opencode/konganimated`): legal, BKN/Planet logos, title + START, language select, main menu, options, credits, password (empty and with typed strings), pause menu, gameplay HUD.
+**Screenshots taken** (kept on disk in `/tmp/konganimated`): legal, BKN/Planet logos, title + START, language select, main menu, options, credits, password (empty and with typed strings), pause menu, gameplay HUD.
 
 **Codes tested in-emulator**:
 

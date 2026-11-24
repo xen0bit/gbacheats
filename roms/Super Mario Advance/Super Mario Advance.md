@@ -1,5 +1,7 @@
 # Super Mario Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 QA slot 110. Scope: developer-intended button codes / unlockables only. No GameShark,
 CodeBreaker or Action Replay codes were used or reported.
 
@@ -71,7 +73,7 @@ Code tests:
   the game leaves the title and performs the erase/reset transition
   (black copyright frame → Mario Bros. title on the next input).
 
-Screenshots in `/tmp/opencode/sma1/`: `title_g.png`, `gameselect_g.png`,
+Screenshots in `/tmp/sma1/`: `title_g.png`, `gameselect_g.png`,
 `mariobros_menu_g.png`, `mb_options_g.png`, `mb_pause_g.png`,
 `smb2_play_g.png`, `level1_g.png`, `level_1_1_g.png`, `before_reset_g.png`,
 `after_reset_g.png`, `near_miss_abs_g.png`, `extra_first_miss_g.png`,
@@ -246,7 +248,7 @@ the visible sleep effect is **Inferred**, not observed.
   treated as data only; no instructions in them were followed.
 * Custom Python scanners using `capstone` (Thumb) and `struct`: PC-relative
   literal resolution, `BL` target scan, input-read→compare scan. Scripts in
-  `/tmp/opencode/sma1/` (`dbgdrv.py`, `savestate_read.py`).
+  `/tmp/sma1/` (`dbgdrv.py`, `savestate_read.py`).
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 * `mgba 0.10.5` under `Xvfb :316` + `openbox`, `xdotool` XTEST input, `scrot`
   screenshots; RAM read via decompressed mGBA `gbAs` savestate chunks (§16.13).

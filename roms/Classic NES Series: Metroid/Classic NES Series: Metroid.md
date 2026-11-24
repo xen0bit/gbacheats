@@ -1,5 +1,7 @@
 # Classic NES Series: Metroid (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -506,7 +508,7 @@ debug prefix.
   used (RAM/savestate evidence only).
 * Python 3.13 + `py65` (6502 MPU) as the ROM-code oracle; Capstone 5.0.7 and
   `arm-none-eabi-objdump` for ARM/Thumb checks.
-* Custom scripts in `/tmp/opencode/cnesmetroid/`:
+* Custom scripts in `/tmp/cnesmetroid/`:
   `ss.py` (gbAs PNG/zlib state extractor), `readram.py`, `oracle.py`
   (loads the extracted PRG into py65 and calls `$8F60`/`$8DDE`),
   `gen.py` (pack/rotate/encode/decode), `metpwd.py`, `type_pwd.py`

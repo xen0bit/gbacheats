@@ -429,7 +429,7 @@ The two sequence rejections were verified with savestate byte
 | Matcher is prefix-based, edge-triggered, resets on mismatch | Derived | `0x0802D7D8` disassembly |
 | Code 1 sets `0x02000145` bit 0 | Observed | breakpoint `0x0800497C` (`r1=1`), savestate byte |
 | Code 2 sets bit 1 | Observed | breakpoint (`r1=2`), fresh-boot savestate `0x02` |
-| Full match blanks the screen white and plays SFX 0x45 | Observed + Derived | white frame captured; `DISPCNT |= 0x80` / `play_sfx(0x45)` in the match path |
+| Full match blanks the screen white and plays SFX 0x45 | Observed + Derived | white frame captured; `DISPCNT \|= 0x80` / `play_sfx(0x45)` in the match path |
 | Code 1 changes the new-game truck to Evil Bob's rig | Observed | `12-code1-evil-bob-truck.png` vs `03-character-select.png` |
 | New-game init copies only bit 0 to `0x0200013F` | Derived | `0x080006D6`/`0x080006DE`; watchpoint shows only this reader |
 | Bit 1 (`0x0200013F`-style consumer) has no consumer | Derived + bounded test | only reader of `0x02000145` located in the ROM is `0x080006B4`; read watchpoint across the new-game and multiplayer-profile init paths; whole-ROM offset scans for `base+0x141` find one site |

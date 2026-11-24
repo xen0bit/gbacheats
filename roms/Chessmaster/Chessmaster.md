@@ -1,5 +1,7 @@
 # Chessmaster (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -87,7 +89,7 @@ Environment: Debian, `mgba-sdl 0.10.5`, `Xvfb`, `openbox`, `xdotool`,
 Xvfb :242 -screen 0 1024x768x24 &
 DISPLAY=:242 openbox &
 export DISPLAY=:242 SDL_AUDIODRIVER=dummy
-/usr/games/mgba -d /mnt/gbacheats/roms/Chessmaster/Chessmaster.gba &
+/usr/games/mgba -d roms/Chessmaster/Chessmaster.gba &
 ```
 
 mGBA's `-d` debugger is driven through a pty (the GDB stub in this build
@@ -323,7 +325,7 @@ unexamined one.
 | Check | Result |
 |---|---|
 | `strings` for `password`, `cheat`, `secret`, `unlock`, `debug`, `trainer`, `gallery`, `demo`, `level select`, `infinite`, `all pieces`, `all boards`, `sound test`, `hidden`, `bonus`, `special` | Only chess prose, tutorial text, and the Chess Rater "Bonus Question". No cheat/password/debug strings. |
-| Plain ASCII and `ASCII|0x80` (high-bit) encodings of `STANDARD`, `HANDICAP`, `BOARD SETUP`, `MULTIPLAYER`, `CHESS TUTOR`, `RATER`, `FAMOUS`, `CHESS SET`, `SPECIAL`, `PASSWORD`, `CHEAT`, `DEBUG` | Menu labels found as plain ASCII records; no password/cheat/debug literals in any encoding. |
+| Plain ASCII and `ASCII\|0x80` (high-bit) encodings of `STANDARD`, `HANDICAP`, `BOARD SETUP`, `MULTIPLAYER`, `CHESS TUTOR`, `RATER`, `FAMOUS`, `CHESS SET`, `SPECIAL`, `PASSWORD`, `CHEAT`, `DEBUG` | Menu labels found as plain ASCII records; no password/cheat/debug literals in any encoding. |
 | Keyboard alphabets: `ABCDEFGHIJKLMNOPQRSTUVWXYZ`, lowercase, `0123456789`, `0123456789ABCDEF`, `!?` | **0 hits** for every alphabet. No text-entry field exists. |
 | Button-code sequences (Konami `U U D D L R L R B A`, `A B Start Select`, `L R L R`, `U U D D`) as bytes and as u16 key masks | **0 hits**. |
 | u16 key-mask values `0x3FFE`, `0x3FFD`, `0x3FBF`, `0x3F7F`, `0x3FEF`, `0x3FDF`, `0x3EFF`, `0x3F7E` | Only graphics data (`0x2406xx` tile runs) and coincidental bytes in code. No mask table. |
@@ -417,11 +419,11 @@ condition was not determined (see §8).
 
 - `arm-none-eabi-objdump` (raw binary, `-M force-thumb` / `-M force-arm`).
 - Python 3 + Capstone (planned scans), custom scripts:
-  - `/tmp/opencode/chessmaster/mgba_tool.py` — pty driver for `mgba -d`
+  - `/tmp/chessmaster/mgba_tool.py` — pty driver for `mgba -d`
     (run/break/read/write/savestate).
-  - `/tmp/opencode/chessmaster/state.py` — mGBA `.ss1` parser (PNG `gbAs`
+  - `/tmp/chessmaster/state.py` — mGBA `.ss1` parser (PNG `gbAs`
     zlib chunk → CPU/VRAM/IWRAM/EWRAM segments).
-  - `/tmp/opencode/chessmaster/walk3.py`, `input_test.py` — menu-walk and
+  - `/tmp/chessmaster/walk3.py`, `input_test.py` — menu-walk and
     input-verification drivers.
 - `strings`, `xxd`, `grep`, `xdotool`, `Xvfb :242`, `openbox`.
 - No ROM or copyrighted assets are redistributed by this report.

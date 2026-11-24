@@ -1,5 +1,7 @@
 # Extreme Ghostbusters: Code Ecto-1 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -310,7 +312,7 @@ the pause/menu handlers only process D-pad/A/B/Start for the documented options.
 
 **Observed** (emulator / screenshots / RAM):
 * Title, main menu, password, gameplay, pause, quit-confirm, options, credits
-  screens — `shot_00`–`shot_52` in `/tmp/opencode/ecto1/`.
+  screens — `shot_00`–`shot_52` in `/tmp/ecto1/`.
 * Published `HGBNL14VJ` accepted → level gameplay (`shot_25_code.png`).
 * Novel `WSF0JJJTJ` accepted → level gameplay (`shot_45_novel.png`).
 * Malformed entry → "INCORRECT PASSWORD" (`shot_31_state.png`).
@@ -368,7 +370,7 @@ fake "decode keys" were encountered (contrast §16.8).
   (`break/t`), register reads (`status`/`w/r`), and SIGINT-based pause.
 * Xvfb `:317` + openbox + XTEST (`xdotool`) for reproducible input and
   `import -window root` for screenshots.
-* Scripts in `/tmp/opencode/ecto1/`: `validator.py`→`validator3.py` (model),
+* Scripts in `/tmp/ecto1/`: `validator.py`→`validator3.py` (model),
   `perm_asm.py` (permutation from assembly), `oracle.py` (ROM pack/permute),
   `mint.py`/`mint2.py` (GF(2) solver and minting), `uc_emu.py` (Unicorn harness),
   plus the input helpers.

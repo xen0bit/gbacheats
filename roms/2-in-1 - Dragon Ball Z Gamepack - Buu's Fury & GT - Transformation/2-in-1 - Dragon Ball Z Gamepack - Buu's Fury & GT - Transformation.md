@@ -253,8 +253,8 @@ bool seq_match(InputState *s, int len, const u16 *seq)
 | `0x0880E1C8` | `0x80E1C8` | title-menu handler, start of the 9 `seq_match` checks |
 | `0x0880E3E8` | `0x80E3E8` | last menu check |
 | `0x0885A8AC` | `0x85A8AC` | UI/global struct; `+0x00` = input state ptr, `+0x18` = profile ptr |
-| `0x088035AA` | `0x8035AA` | `set_flag_A(obj, id)`: `obj[0x2C + (id>>5)*4] |= 1<<(id&31)` |
-| `0x088035C8` | `0x8035C8` | `set_flag_B(obj, id)`: `obj[0x28 + (id>>5)*4] |= 1<<(id&31)` |
+| `0x088035AA` | `0x8035AA` | `set_flag_A(obj, id)`: `obj[0x2C + (id>>5)*4] \|= 1<<(id&31)` |
+| `0x088035C8` | `0x8035C8` | `set_flag_B(obj, id)`: `obj[0x28 + (id>>5)*4] \|= 1<<(id&31)` |
 | `0x08833170` | `0x833170` | `play_sfx(obj, id, 0x40, 0)` — called on every match |
 
 ### 4.3 GT state / flags

@@ -1,5 +1,7 @@
 # Open Season (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -48,7 +50,7 @@ pause screen, and RAM-verified. Bounds were proven by rejection at four independ
   name → difficulty `Easy` → town/hub → **Start** to pause → hold **L** → press sequence.
 * RAM evidence: mGBA `Shift+F1..F9` writes `Open Season.ssN`; the PNG carries a `gbAs` chunk.
   `zlib.decompress` yields 397,312 bytes; IWRAM `0x03000000` starts at raw offset `0x19000`
-  (EWRAM at `0x21000`). Scripts are in `/tmp/opencode/openseason/`.
+  (EWRAM at `0x21000`). Scripts were in `/tmp/openseason/`.
 * Verified stat addresses (cross-checked against published CodeBreaker raw addresses and the
   on-screen HUD): bars `0x0300778A`, lives `0x030077E5`, health `0x030077E4`,
   invincibility `0x030077F8`, stage access `0x03007788`, abilities `0x03007790`.
@@ -217,7 +219,7 @@ decoded text, not on guesswork.
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/openseason/`: `phase0.py` (identity/header/logo scan), `mask_search.py`,
+Scripts in `/tmp/openseason/`: `phase0.py` (identity/header/logo scan), `mask_search.py`,
 `find_masks.py`, `scan2.py` (button-encoding scans), `dump2tables.py`/`dump_cheat2.py` (record
 tables), `blscan.py`/`xrefs.py` (xrefs), `ssread.py`/`diffstate.py`/`ramread.py`/`cheatstruct.py`
 (savestate `gbAs` decode and RAM reads), `press.py`/`trycode.py` (XTEST input + savestate loop),

@@ -1,5 +1,7 @@
 # The Pinball of the Dead (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -49,7 +51,7 @@ No GameShark / CodeBreaker / Action Replay codes were used or researched.
   ```
 
   (Note: letters `A`, `E`, `I`, `O`, `U` do not exist in this alphabet.)
-* A clean savestate at the password screen is at `/tmp/opencode/pinballdead/pw.ss1`; starting
+* A clean savestate at the password screen was at `/tmp/pinballdead/pw.ss1`; starting
   `mgba -3 -g -t pw.ss1 <rom>` skips all intro animation.
 * Codes entered with the real on-screen keyboard (no memory writes): `D0NTN33DM0N3Y` →
   `BOSS MODE UNLOCKED`. Other codes were submitted by writing the 14-byte buffer with the GDB stub
@@ -134,7 +136,7 @@ if word0 > 0x3B9AC9FF:                    reject
 
 The encoder is the exact inverse: build `S[]`, form `lo`/`hi` as in step 4, XOR with `KEYS[sel]`,
 OR `sel << 56`, compute the nibble checksum, then emit 13 symbols `ALPHA[(v>>(5*i))&31]`.
-Full reimplementation: `/tmp/opencode/pinballdead/codec.py`.
+Full reimplementation: `/tmp/pinballdead/codec.py`.
 
 Note the compiler quirk at `0x08020544`: one byte of the output struct is preserved from the saved
 `r5` register (the caller's password length, normally 0), so `S[7]` is effectively always zero.
@@ -197,10 +199,10 @@ Neoseeker or any other published list (all of which use only the five codes in �
 
 Observed in mGBA: accepted on the real ENTER PASSWORD screen → started a **CHALLENGE MODE** game on
 **WONDERING**. RAM readback: `0x02002EAC = 0x075BCD15` = **123456789**, exactly the minted score.
-Screenshot: `/tmp/opencode/pinballdead/novel_after.png`.
+Screenshot: `/tmp/pinballdead/novel_after.png`.
 
 The published algorithmic code `KJQV9LWB8!9HG` was also accepted in the same harness, starting
-**CHALLENGE MODE / CEMETERY** (screenshot `/tmp/opencode/pinballdead/kjqv2.png`); decoder output
+**CHALLENGE MODE / CEMETERY** (screenshot `/tmp/pinballdead/kjqv2.png`); decoder output
 for it is `S = e6 e0 68 02 d1 00 50 00`, score 40,427,750.
 
 **Bounds proven by rejection (all on the real screen, `ERROR` displayed)**
@@ -242,7 +244,7 @@ semantic-range layer separately.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for the validator,
   generator, helpers and callers.
 * `strings -t x`, `grep -abo`, `xxd` for recon.
-* Custom scripts in `/tmp/opencode/pinballdead/`: `scan.py` (pointer/BL scans), `codec.py`
+* Custom scripts in `/tmp/pinballdead/`: `scan.py` (pointer/BL scans), `codec.py`
   (encoder/decoder), `typer.py` (real keyboard entry), `submit.py`, `test_one.py` (GDB-assisted
   submission + RAM evidence), `probe_keys.sh` (UI alphabet discovery).
 * mGBA 0.10.5 with GDB stub on port 2345; gdb-multiarch; Xvfb `:317` + openbox; xdotool; scrot.

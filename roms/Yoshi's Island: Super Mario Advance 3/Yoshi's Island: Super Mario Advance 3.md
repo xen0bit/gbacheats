@@ -1,5 +1,7 @@
 # Yoshi's Island: Super Mario Advance 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -71,7 +73,7 @@ arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 \
 ### Dynamic / emulator
 - mGBA 0.10.5 under Xvfb (own display `:315`), `SDL_AUDIODRIVER=dummy`, `-3` scale.
 - mGBA SDL keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows.
-- Reproducible screen path observed with screenshots (all in `/tmp/opencode/yoshisland/`):
+- Reproducible screen path observed with screenshots (all in `/tmp/yoshisland/`):
   boot Nintendo logo → story crawl → "Single Player / Multiplayer" title →
   "Choose a Game" → Yoshi's Island splash → "FILE MENU" (File A/B/C, COPY, ERASE) →
   intro story → "Welcome to Yoshi's Island" → gameplay (W1-1) → PAUSE menu
@@ -176,7 +178,7 @@ play_sound(0x5D)                                        # rejection sound
 
 ### 6.1 The complete code table
 
-| Step | `table1` AND mask | `table2` exact mask | Required key (= `0xFC00 | table2`) | Button |
+| Step | `table1` AND mask | `table2` exact mask | Required key (= `0xFC00 \| table2`) | Button |
 |---:|---|---|---|---|
 | 0 | `0x0000` | `0x0000` | `0xFC00` | (unused — counter starts at 1) |
 | 1 | `0x0200` | `0x0204` | `0xFE04` | Select + L |
@@ -254,7 +256,7 @@ reset — this is the in-game rejection bound for a mistyped sequence.
 | Validator logic, gate, counter advance, success writes | **Derived** | Thumb disassembly `0x0800780C`–`0x08007914`, literal pool read back with `struct.unpack_from` |
 | Unique table and unique caller | **Derived** | Whole-ROM literal search + BL/BLX scan |
 | No typed password surface | **Derived (bounded)** | Keyword encodings scan, string scan, no alphabet/input buffer found |
-| Screens: boot, story, title, Choose a Game, File Menu, intro, gameplay, Pause, results | **Observed** | Cropped screenshots in `/tmp/opencode/yoshisland/` |
+| Screens: boot, story, title, Choose a Game, File Menu, intro, gameplay, Pause, results | **Observed** | Cropped screenshots in `/tmp/yoshisland/` |
 | Key mirror `0x030069BE = 0xFC00` idle | **Observed** | Savestate RAM diff (`stateA.ss`/`stateB.ss`) |
 | Success toggles mini-game interface | **Inferred** | Success-path writes plus the uniform published description; **not** directly observed in emulator |
 | In-game acceptance of the code | **Not observed** | The stage-select gate was not reached on a fresh file in this session; see §8 |
@@ -297,4 +299,4 @@ reset — this is the in-game rejection bound for a mistyped sequence.
 
 No ROM, save data, or copyrighted game assets are reproduced here. Only
 hashes, addresses, decoded button masks, algorithm description, and original
-analysis scripts/screenshots (kept in `/tmp/opencode/yoshisland/`) are recorded.
+analysis scripts/screenshots (kept in `/tmp/yoshisland/`) are recorded.

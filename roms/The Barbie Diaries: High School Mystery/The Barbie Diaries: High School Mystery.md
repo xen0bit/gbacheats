@@ -1,5 +1,7 @@
 # The Barbie Diaries: High School Mystery (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -54,7 +56,7 @@ Reproducible path:
 3. New Game → long scripted intro (100+ discrete A presses) → school map →
    **Start** opens the BDA menu.
 
-Screenshots retained in `/tmp/opencode/barbiediaries/`: `shot0.png` (title),
+Screenshots retained in `/tmp/barbiediaries/`: `shot0.png` (title),
 `minigames2.png` (mini-games), `st_after1.png` (title cursor), `title_pos1.png`,
 `minigames_menu.png`/`bda_menu.png` (transitional), `code_konami.png` (undocumented
 code test), `intro300.png`/`gameplay1.png` (in-game).
@@ -213,7 +215,7 @@ only code-capable routine present is provably unreferenced.
 `strings`, `xxd`, `grep`, Python 3, Capstone 5.0.7 (Thumb disassembly / BL and
 literal-pointer scans), `arm-none-eabi-objdump`, mGBA 0.10.5 (`-d` CLI debugger
 driven via `pty` in `clidbg.py`, high-level `driver.py`), `xdotool`, `scrot`,
-Xvfb + openbox on `:315`. Helper scripts are in `/tmp/opencode/barbiediaries/`.
+Xvfb + openbox on `:315`. Helper scripts were in `/tmp/barbiediaries/`.
 
 **Legal note:** no ROM bytes, graphics, audio or full game text are reproduced
 here — only hashes, addresses, algorithms, counts and short UI labels.

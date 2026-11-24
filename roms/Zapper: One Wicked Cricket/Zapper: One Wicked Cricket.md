@@ -1,10 +1,12 @@
 # Zapper: One Wicked Cricket! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `Zapper: One Wicked Cricket.gba` (analysed on a byte-identical copy in `/tmp/opencode/zapper/zapper.gba`) |
+| File | `Zapper: One Wicked Cricket.gba` (analysed on a byte-identical copy in `/tmp/zapper/zapper.gba`) |
 | Size | `0x400000` (4 MiB) |
 | `file` | Game Boy Advance ROM image: "ZAPPER" (AZPE70, Rev.00) |
 | Header title | `ZAPPER` |
@@ -52,7 +54,7 @@ The only "text entry" in the game is a 3-character **ENTER NAME** screen for the
   | `R L R L U D U U` | main menu | near-miss | **Rejected** — no unlock |
   | `U U L L R L R` | pause screen | GameFAQs "Infinite Lives" | Entered; no visible change observed (see Unknowns) |
   | `L D R R U U U`, `U D U L R D U` | pause screen | GameFAQs "Unlock All Levels" / "Unlimited Shield" (PS2/GC-labelled) | Entered; no visible change observed |
-* Evidence screenshots (all in `/tmp/opencode/zapper/`, **outside** the ROM folder): `clean_menu2.png`, `keytest_Return.png` (locked control), `arcade_after_code.png` (published code), `novel_code_test.png` (novel code), `options_screen.png`, `multiplayer_screen2.png`, `paused2.png`.
+* Evidence screenshots (all in `/tmp/zapper/`, **outside** the ROM folder): `clean_menu2.png`, `keytest_Return.png` (locked control), `arcade_after_code.png` (published code), `novel_code_test.png` (novel code), `options_screen.png`, `multiplayer_screen2.png`, `paused2.png`.
 
 ## 4. Address map
 
@@ -150,7 +152,7 @@ Observed acceptance at the main menu:
 
 ## 9. Tooling
 
-All scripts and evidence are in `/tmp/opencode/zapper/`:
+All scripts and evidence were in `/tmp/zapper/`:
 
 * `find_table.py`, `find_table2.py`, `find_table3.py`, `find_table4.py`, `find_swap.py`, `find_pack.py`, `find16.py`, `find_font.py`, `find_ascii.py`, `scan_masks.py` — literal/encoding table searches
 * `find_readers.py`, `blscan.py`, `funcs.py` — Thumb literal-pool and BL scanners (corrected to compare the *contents* of the literal pool, not its address)

@@ -1,5 +1,7 @@
 # Rocket Power: Zero Gravity Zone (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -27,7 +29,7 @@ The Career → Stage Select → (Select) **PASSWORD** panel is a real six-symbol
 
 ## 3. How to reproduce
 
-**Emulator:** mGBA SDL on `Xvfb :317`, `SDL_AUDIODRIVER=dummy`, `-3`. Keymap A=`x`, B=`z`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Savestate on the password screen: `/tmp/opencode/rocketzero2/clean_pwd.ss2`.
+**Emulator:** mGBA SDL on `Xvfb :317`, `SDL_AUDIODRIVER=dummy`, `-3`. Keymap A=`x`, B=`z`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Savestate on the password screen: `/tmp/rocketzero2/clean_pwd.ss2`.
 
 **Menu path (observed):** boot → A through MODE 7/legal/title → START → main menu → CAREER → STAGE SELECT → footer `D-Pad Select / Select Pass / A OK / B Back` → **Select** opens the six-slot PASSWORD panel (default glyph `B` in all six slots). OPTIONS exposes `BGM` and a developer-style `Music Test BGM` selector.
 
@@ -40,7 +42,7 @@ w/r r0 0x03007E00 ; w/r r14 0x08005399 ; w/r cpsr 0x3f ; w/r r15 0x080051CD
 trace 200   (repeat until r15 == 0x08005398)
 i           # r0 = 00000001  => accepted
 ```
-Scripts: `/tmp/opencode/rocketzero2/{validator.py,oracle.py,verify_bounds.py,rameffect.py}`.
+Scripts: `/tmp/rocketzero2/{validator.py,oracle.py,verify_bounds.py,rameffect.py}`.
 
 ## 4. Address map
 
@@ -144,7 +146,7 @@ Field layout of the 36-bit stream: bits 0–7 gate; 8–17 five 2-bit stats; 18�
 
 ## 9. Tooling
 
-`arm-none-eabi-objdump -M force-thumb` (raw binary, `--adjust-vma=0x08000000`), Capstone 5.0.7, Python 3.13, REA/Ghidra 12.1.4 (raw ARM import, full auto-analysis; note: its raw import did not lift the Thumb functions in this region, so the validator was recovered by manual Thumb disassembly and cross-checked against REA's load-image/symbol inventory), mGBA SDL `-3 -d -t`, `Xvfb :317`, `openbox`, `xdotool`, `scrot`, ImageMagick, zlib savestate decoder. Analysis scripts in `/tmp/opencode/rocketzero2/`.
+`arm-none-eabi-objdump -M force-thumb` (raw binary, `--adjust-vma=0x08000000`), Capstone 5.0.7, Python 3.13, REA/Ghidra 12.1.4 (raw ARM import, full auto-analysis; note: its raw import did not lift the Thumb functions in this region, so the validator was recovered by manual Thumb disassembly and cross-checked against REA's load-image/symbol inventory), mGBA SDL `-3 -d -t`, `Xvfb :317`, `openbox`, `xdotool`, `scrot`, ImageMagick, zlib savestate decoder. Analysis scripts in `/tmp/rocketzero2/`.
 
 ## 10. Cleanup
 

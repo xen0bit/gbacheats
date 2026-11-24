@@ -1,5 +1,7 @@
 # Shark Tale (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -16,7 +18,7 @@
 | SHA-256 | `5c3bd987d3de0099845ea81626357fe4a64095b720b21940c6b407c353b3d876` |
 | Developer (in-game credits) | Vicarious Visions |
 
-Verified on the copy at `/tmp/opencode/sharktale/sharktale.gba` (byte-identical MD5).
+Verified on the copy at `/tmp/sharktale/sharktale.gba` (byte-identical MD5).
 
 ## 2. Executive summary
 
@@ -118,7 +120,7 @@ This section states the complete searched space and proves the negative (guide �
 ## 7. Validation evidence
 
 **Observed** (emulator/screenshot/savestate):
-- Boot logo, title, slot select, initials keypad, level-intro card, dialogue, gameplay HUD, pause menu, sound menu, credits — screenshots in `/tmp/opencode/sharktale/*.png`.
+- Boot logo, title, slot select, initials keypad, level-intro card, dialogue, gameplay HUD, pause menu, sound menu, credits — screenshots in `/tmp/sharktale/*.png`.
 - Initials RAM proof: savestate diff `st_initials.ss1` → `st_initials_A1.ss1` changed EWRAM `0x020034E4: 00→01` (cursor) and `0x02005408: 00→41` ('A'); after OK, `0x02005408` reads `00` again in `st_ingame.ss1`.
 - Button-combo tests: pixel-diff counts recorded above; nothing beyond normal navigation.
 - Crop geometry obtained from `xdotool getwindowgeometry` (window 720×480 at 154,184 on :318).
@@ -142,7 +144,7 @@ This section states the complete searched space and proves the negative (guide �
 - `arm-none-eabi-objdump -M force-thumb` for code at 0x08016640 / 0x08007A74 / 0x0802Dxxx.
 - `mGBA 0.10.5` under `Xvfb :318` + `openbox`, `scrot`, `xdotool`, ImageMagick `convert` (window-relative crops and pixel diffs).
 - `ssdiff.py` — decompresses the mGBA `.ss1` `gbAs` zlib chunk and diffs IWRAM/EWRAM.
-- `ui.py`, `gshot.py`, `xref.py`, `button_scan.py` — input, capture, pointer/xref, and mask-table scanners (all under `/tmp/opencode/sharktale/`).
+- `ui.py`, `gshot.py`, `xref.py`, `button_scan.py` — input, capture, pointer/xref, and mask-table scanners (all under `/tmp/sharktale/`).
 - GDB stub note: this mGBA build hardwires `-g` to port 2345, which another concurrent agent owned; all RAM evidence here therefore uses savestate diffs (guide §16.13) rather than the stub. No other agent's processes or displays were touched.
 
 No ROM content or copyrighted assets are redistributed; this report contains only hashes, addresses, counts, and observations.

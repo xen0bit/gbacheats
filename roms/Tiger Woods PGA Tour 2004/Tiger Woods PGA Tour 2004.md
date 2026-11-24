@@ -1,5 +1,7 @@
 # Tiger Woods PGA Tour 2004 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -43,7 +45,7 @@ No GameShark / CodeBreaker / Action Replay codes are reported; none were used.
 * From a cold boot: press Start through the EA/TW/legal splash → Main Menu.
 * Main-menu items (top to bottom): **Practice Mode, Career Mode, Tutorial, Versus Mode,
   Options, GameCube Link**.
-* Screenshots of every state are in `/tmp/opencode/tiger2004/` (`mm*.png`, `m1.png`…`m6.png`,
+* Screenshots of every state were in `/tmp/tiger2004/` (`mm*.png`, `m1.png`…`m6.png`,
   `career_*.png`, `practice.png`, `pm_d*.png`, `versus*.png`, `options*.png`, `linkmode.png`,
   `gc2.png`, `vs_step*.png`, `boot_*.png`).
 
@@ -215,11 +217,11 @@ limitation, not a claim that no codes are published.
 
 No ROM bytes, graphics, music, or game text are redistributed here. Only hashes, addresses,
 algorithms, counts, and the analyst's own scripts/screenshots are published. Screenshots are
-analysis artifacts in `/tmp/opencode/tiger2004/` and are not part of the deliverable.
+analysis artifacts in `/tmp/tiger2004/` and are not part of the deliverable.
 
 ## 11. Cleanup
 
 Emulator and display processes started for this engagement (PIDs recorded in
-`/tmp/opencode/tiger2004/mgba.pid`) were terminated by PID number; Xvfb `:317` and its openbox
+`/tmp/tiger2004/mgba.pid`) were terminated by PID number; Xvfb `:317` and its openbox
 were terminated by PID number. No `.sav`/`.ss*` files remain in the ROM folder (all savestates
-were created in `/tmp/opencode/tiger2004/`).
+were created in `/tmp/tiger2004/`).

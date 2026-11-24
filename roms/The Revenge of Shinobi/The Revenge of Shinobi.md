@@ -1,5 +1,7 @@
 # The Revenge of Shinobi (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,7 +43,7 @@ ROM; all published codes are algorithmic.
 * Menu path (observed): boot → skip THQ/SEGA/Overworks/3d6 logos with Start → title `PRESS START` → main menu (`START GAME` / `CONTINUE` / `OPTIONS`) → `CONTINUE` → `ENTER PASSWORD` grid.
 * On the grid: D-pad selects one of 16 cells, L/R change its character, A executes. The screen prints `CONTROL PAD MOVES CURSOR`, `L AND R BUTTONS CHANGE CHARACTER`, `SELECT / ENTER PASSWORD / TO EXECUTE`, and failure shows `INVALID PASSWORD`.
 * **Oracle method (primary evidence):** mGBA's command-line debugger (`mgba -3 -d`) was driven through a PTY. Write 16 `u32` indices to `0x02000014`, set `cpsr=0x3f`, `r13=0x03007F00`, `r14=0x03000024`, `r15=0x0801939C`, set a breakpoint at `0x03000024`, `continue`, and read `r0` at the break: `1` = accepted, `0` = rejected. This uses the **game's own validator** as ground truth (guide §16.19). Every published code was cross-checked with it before minting novel ones.
-* Screenshots and logs are in `/tmp/opencode/shinobi/` (`pw1.png`, `grid.png`, `default_result*.png`, `search1.log`, `search2.log`, `verify_final.py`).
+* Screenshots and logs were in `/tmp/shinobi/` (`pw1.png`, `grid.png`, `default_result*.png`, `search1.log`, `search2.log`, `verify_final.py`).
 
 ## 4. Address map
 
@@ -216,7 +218,7 @@ indices 0–30, not ASCII and not tile numbers.
 
 * `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep -abo`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly; Python `capstone` for literal/BL scans.
-* `python3` scripts: `gdbproxy.py` (GDB-remote workaround), `oracle.py`–`oracle4.py`, `fastoracle.py`, `search1.py`, `search2.py`, `verify_final.py` (all in `/tmp/opencode/shinobi/`).
+* `python3` scripts: `gdbproxy.py` (GDB-remote workaround), `oracle.py`–`oracle4.py`, `fastoracle.py`, `search1.py`, `search2.py`, `verify_final.py` (all in `/tmp/shinobi/`).
 * mGBA 0.10.5 `-d` command-line debugger driven through a Python `pty.fork()`
   (more reliable than the GDB stub, which stops listening after one connection).
 * `xdotool` XTEST input, `scrot` screenshots, Xvfb `:316` + openbox.

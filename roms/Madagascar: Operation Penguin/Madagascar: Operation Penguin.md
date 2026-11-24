@@ -1,5 +1,7 @@
 # Madagascar: Operation Penguin (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -57,7 +59,7 @@ Tested codes (SELECT + 8 presses):
 | Rejected (unknown) | Up×8 | (none) | no flag change, buffer not cleared |
 | Rejected (unknown) | Up, R, Down, L, Up, R, Down, L → `uRdLuRdL` | (none) | no flag change, buffer not cleared |
 
-Screenshots kept in `/tmp/opencode/madpenguin/shots/`.
+Screenshots kept in `/tmp/madpenguin/shots/`.
 
 ## 4. Address map
 
@@ -235,7 +237,7 @@ against the ROM. No prompt-injection payload was encountered in the pages used.
 - mGBA under Xvfb `:318` + openbox; `xdotool` XTEST input; `scrot` + ImageMagick crops.
 - mGBA GDB stub (`mgba -g`, port 2345) with `gdb-multiarch`: RAM reads, savestate hooking.
 - mGBA `.ssN` savestates parsed via Python `zlib` (`gbAs` chunk) per §16.13 for diffing.
-- Helper scripts: `/tmp/opencode/madpenguin/gba.py`, `gdbctl.py`.
+- Helper scripts: `/tmp/madpenguin/gba.py`, `gdbctl.py`.
 
 Legal note: no ROM or copyrighted assets are redistributed here; only hashes, addresses,
 algorithms, and tool scripts are published.

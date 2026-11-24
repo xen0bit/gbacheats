@@ -1,5 +1,7 @@
 # Spy Muppets: License to Croak (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -132,7 +134,7 @@ D    = c2                                              # [st+24]
 flags at 0x02004BA4..A6 = (A>3, C>3, D>3)
 ```
 
-A faithful Python reimplementation is in `/tmp/opencode/spymuppets/pw.py`.
+A faithful Python reimplementation was in `/tmp/spymuppets/pw.py`.
 
 ## 6. Tables
 
@@ -167,7 +169,7 @@ hard-coded list; no table of accepted codes exists in the ROM.
 | `LLGGL` (published anchor) | `4 4 4 1 0` | Accepted → mode-select screen | `B=0, slot=1, A=4, C=4, D=4` |
 
 Screenshots: `novel_clean.png`, `alias_clean.png`, `maxfield_clean.png`,
-`pub_result.png` in `/tmp/opencode/spymuppets`.
+`pub_result.png` in `/tmp/spymuppets`.
 
 **Bounds proven by rejection:**
 
@@ -224,8 +226,8 @@ tuples above with flags `01 01 01`.
 
 - `mgba` 0.10.5 (`-3`, `-t <state>`, SDL dummy audio), Xvfb `:317`, openbox,
   `xdotool` XTEST input, `scrot` screenshots.
-- mGBA `.ss1` parser: `/tmp/opencode/spymuppets/ss.py` (zlib `gbAs` chunk).
-- Model/encoder/decoder: `/tmp/opencode/spymuppets/pw.py`.
+- mGBA `.ss1` parser: `/tmp/spymuppets/ss.py` (zlib `gbAs` chunk).
+- Model/encoder/decoder: `/tmp/spymuppets/pw.py`.
 - Keyboard automation / test harness: `k.py`, `enter.py`, `testcode.py`.
 - `arm-none-eabi-objdump -M force-thumb`, Python `struct`/`zlib`.
 - Web recon: DuckDuckGo result page, ChapterCheats password page (data only),
@@ -237,4 +239,4 @@ tuples above with flags `01 01 01`.
 All processes started for this engagement are terminated by PID number only
 (`mgba`, Xvfb and openbox instances owned by this session); no `pkill -f` was
 used. All `.sav`/`.ss1` artifacts were removed from the ROM folder. Analysis
-scripts and screenshots remain in `/tmp/opencode/spymuppets`.
+scripts and screenshots were left in `/tmp/spymuppets`.

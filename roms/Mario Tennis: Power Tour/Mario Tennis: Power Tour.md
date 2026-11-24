@@ -1,5 +1,7 @@
 # Mario Tennis: Power Tour (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -49,7 +51,7 @@ What the game **does** have is a substantial **developer debug mode**, the same 
 
 **Savestate gate patch (RAM analysis aid, not a delivered code):** mGBA `.ss1` files are PNGs with a zlib `gbAs` chunk; decompressing yields a 397,312-byte state with IWRAM at state offset `0x19000`. The debug byte is therefore at state offset `0x19000 + 0x1334 = 0x1A334`. Setting that byte to `1` and reloading the state produced `0x03001334 = 0x01` (re-verified in a subsequent state). This technique was used only to exercise the gated developer menu; no memory-edit code is reported as a cheat.
 
-Screenshots retained in `/tmp/opencode/mariotennis/` (representative): `s01_after_lang.png`, `s02_confirm.png`, `r03_title.png`, `titlecap05.png` (title), `opt_bs2.png` (options), `n02_mainmenu.png`→`mm13_exhibition.png`/`mm16_court_select.png`/`mm18_pause.png` etc. Full list in that work dir.
+Screenshots retained in `/tmp/mariotennis/` (representative): `s01_after_lang.png`, `s02_confirm.png`, `r03_title.png`, `titlecap05.png` (title), `opt_bs2.png` (options), `n02_mainmenu.png`→`mm13_exhibition.png`/`mm16_court_select.png`/`mm18_pause.png` etc. Full list in that work dir.
 
 ## 4. Address map
 
@@ -170,7 +172,7 @@ This engagement is a **negative** for a code/password system, so §0.2's "novel 
 * Python + `capstone` 5.0.7 for Thumb literal/pointer/BL scans and button-mask runs.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
 * `mgba 0.10.5` under `Xvfb :317` + `openbox`; `xdotool` XTEST input; `import`/`convert` for screenshots.
-* `/tmp/opencode/mariotennis/gba.py` (key/crop helper), `state.py` (zlib `gbAs` savestate decoder), `dbgsrv.py`/`dbgcmd.sh` (mGBA `-d` debugger driver used to read `0x04000130` and `0x03001334` live).
+* `/tmp/mariotennis/gba.py` (key/crop helper), `state.py` (zlib `gbAs` savestate decoder), `dbgsrv.py`/`dbgcmd.sh` (mGBA `-d` debugger driver used to read `0x04000130` and `0x03001334` live).
 * Generated `.sav`/`.ss*` files were removed from the ROM folder at cleanup.
 
 ## 10. Legal / handling note

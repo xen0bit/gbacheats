@@ -1,5 +1,7 @@
 # Jackie Chan Adventures: Legend of the Dark Hand (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -164,7 +166,7 @@ Published-code verification: the literal string of the published button sequence
 * `md5sum`/`sha1sum`/`sha256sum`, `file`, `xxd`, `strings -t x`, Python 3 for literal/pointer/BL scans and Thumb LDR literal maths.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
 * `mgba 0.10.5` (`-3`, `-t` for savestate restore), `Xvfb :318`, `openbox`, `xdotool` (XTEST events, 60–160 ms holds), `scrot` + ImageMagick `convert`.
-* Savestate RAM reads: mGBA `.ss1` is a PNG with a zlib-compressed `gbAs` chunk; decompressed to 397,312 bytes, IWRAM mapped at state offset `0x19000` (RAM `0x03000000`), EWRAM at `0x21000`. Helper scripts in `/tmp/opencode/jackie/` (`ssread.py`, `ss2raw.py`, `snap.sh`, `ram.py`, `key.py`, `keyfast.py`, `testcode.py`, `testcode2.py`, `fasttest.py`).
+* Savestate RAM reads: mGBA `.ss1` is a PNG with a zlib-compressed `gbAs` chunk; decompressed to 397,312 bytes, IWRAM mapped at state offset `0x19000` (RAM `0x03000000`), EWRAM at `0x21000`. Helper scripts in `/tmp/jackie/` (`ssread.py`, `ss2raw.py`, `snap.sh`, `ram.py`, `key.py`, `keyfast.py`, `testcode.py`, `testcode2.py`, `fasttest.py`).
 * mGBA command-line debugger (`mgba -d` with a persistent FIFO writer) was used for live RAM reads and a breakpoint at the per-frame key-update function `0x08004980`; the GDB stub was unavailable because port 2345 was owned by another user's emulator.
 
 Legal note: no ROM data or copyrighted graphics were copied into this report; only hashes, addresses, algorithms, buttons and observed screenshots are documented.

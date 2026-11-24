@@ -1,5 +1,7 @@
 # Madden NFL 06 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -123,7 +125,7 @@ Indices 0..137 are player cards (individual NFL players with stat lines), e.g. i
 
 ## 7. Validation evidence
 
-* **Observed:** every screen listed in §6 (screenshots saved under `/tmp/opencode/madden06/`); the Madden Cards menu with exactly three entries; Card Book `0/161`, `0` gold/silver/bronze, `BUY NEW PACK – 40 TKS`, `TOKENS REMAINING 0`; Challenge Status token scale 1/2/3/6; pause menu with ten entries; no debug screen from any button combo.
+* **Observed:** every screen listed in §6 (screenshots saved under `/tmp/madden06/`); the Madden Cards menu with exactly three entries; Card Book `0/161`, `0` gold/silver/bronze, `BUY NEW PACK – 40 TKS`, `TOKENS REMAINING 0`; Challenge Status token scale 1/2/3/6; pause menu with ten entries; no debug screen from any button combo.
 * **Observed (RAM):** mGBA `gbAs` savestate decompresses to 397,312 bytes; IWRAM/EWRAM offsets confirmed by cursor-state diff (§3). KEYINPUT reader and key buffers located by literal scan plus Thumb LDR-literal verification.
 * **Derived:** card table base/size/count from pointer-run analysis; card count cross-checked against the UI's own `0/161` display; key-mask meanings from the standard active-low GBA KEYINPUT encoding and the `~KEYINPUT & 0x3FF` instruction sequence.
 * **Inferred:** the exact SRAM offset holding card/token flags (likely `0x0A10..0x0BB8`); no tokens were earned during this session, so a before/after card-flag diff was not obtained. This does not affect the code-system conclusion.
@@ -140,6 +142,6 @@ Indices 0..137 are player cards (individual NFL players with stat lines), e.g. i
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, Python 3 byte/literal scanners.
 * `arm-none-eabi-objdump -M force-thumb` and Capstone 5.0.7 for Thumb disassembly of the input routine (`0x0800163C`).
 * mGBA 0.10.5 SDL under Xvfb `:315` + openbox; `xdotool` for input; `scrot`/ImageMagick for the (up-to-20) screenshots; savestate `gbAs` chunk parsing via Python `zlib` for RAM diffs.
-* Scripts retained in `/tmp/opencode/madden06/`: `ui.py` (input/screenshot helper), `ss.py` (savestate parser), `state.py` (state diff), `dis.py` (Capstone disassembler).
+* Scripts retained in `/tmp/madden06/`: `ui.py` (input/screenshot helper), `ss.py` (savestate parser), `state.py` (state diff), `dis.py` (Capstone disassembler).
 
 **Legal note:** No ROM bytes, graphics, or copyrighted assets are reproduced in this report — only hashes, offsets, algorithms, and the game's own short card-effect descriptions quoted for identification.

@@ -1,5 +1,7 @@
 # The Lord of the Rings: The Two Towers (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -98,12 +100,12 @@ There is no password/checksum algorithm in this build. The only algorithmic stru
 | Search (all over 16,777,216 bytes) | Count of plausible hits | Interpretation |
 |---|---:|---|
 | ASCII `password`/`cheat`/`debug`/`secret`/`level select`/`continue`/`unlock`, case-insensitive | **0** | No English code/debug string |
-| Same with `+0x20`, `-0x20`, `|0x80`, `^0x80`, UTF-16LE, UTF-16BE, reversed | **0** | No shifted/encoded variant |
+| Same with `+0x20`, `-0x20`, `\|0x80`, `^0x80`, UTF-16LE, UTF-16BE, reversed | **0** | No shifted/encoded variant |
 | Literal UI strings `Options`, `New Game`, `Aragorn`, `Password`, `DEBUG`, `Continue`, `Backpack` as ASCII or as tile-mapped byte sequences | **0** | Text is stored as custom font codes, not ASCII; no code string in any checked encoding |
 | `strings -n 4` keyword scan | **0** | Only header `TWO TOWERS`, `ALPE69`, `LORGBA03`, `EEPROM_V122`, and an RCS id `$Id: player.c,v 1.4 2003/03/19 23:12:15 seb Exp $` are legible |
 | u16 active-high single-button runs of length ≥4 with ≥2 distinct values | 215 | All are coincidences in high-entropy compressed graphics (`0x05xxxx`–`0x08xxxxxx`); none is a compact code table |
 | u16 active-low single-button runs ≥4 | **0** | No active-low code table |
-| u16 runs with L+R held (`0x300 | button`) | **0** | No "hold L+R" sequence table |
+| u16 runs with L+R held (`0x300 \| button`) | **0** | No "hold L+R" sequence table |
 | u16 active-low with L+R held | **0** | — |
 | u8 single-button runs of length 8 with ≥2 distinct | 1,613 | All high-entropy data coincidences; no 1-byte-per-press code table |
 | 3× consecutive active-high Down `0x0080` | **0** | — |
@@ -145,7 +147,7 @@ Note: `REA` Ghidra analysis was attempted but the server session is shared with 
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, Python 3 byte/literal scanners.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
-* mGBA 0.10.5 + Xvfb `:315` + openbox + `xdotool` + `scrot` + ImageMagick `convert`; screenshots kept in `/tmp/opencode/lotr twotowers/`.
+* mGBA 0.10.5 + Xvfb `:315` + openbox + `xdotool` + `scrot` + ImageMagick `convert`; screenshots kept in `/tmp/lotr twotowers/`.
 * mGBA savestate slot 1 (`The Lord of the Rings: The Two Towers.ss1`) for repeatable gameplay state; `ssdiff.py` (custom zlib `gbAs` chunk extractor/differ) prepared as a GDB-free RAM-diff fallback but not needed for the final result.
 * REA/Ghidra was opened once (`open_binary`) but not used for conclusions because the shared MCP session switched to a different ROM.
 

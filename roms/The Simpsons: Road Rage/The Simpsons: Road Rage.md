@@ -1,5 +1,7 @@
 # The Simpsons: Road Rage (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -51,7 +53,7 @@ Codes tested (portrait indices, row-major):
 | `[0,5,1,9,13,1,13,1]` | rejected (money 1,000,001 out of range, checksums valid) |
 | `[0,1,2,3,4,5,6,7]` | rejected |
 
-Screenshots (work dir `/tmp/opencode/simpsonsroadrage/`): `title_c.png`, `s2_c.png` (main menu), `s4_c.png` (options), `s5_c.png` (Set Password), `grid_zoom.png` (16-symbol alphabet), `getpw_c.png` (Get Password), `novel_ui_before_c.png` (novel code entered), `novel_ui_after_c.png` (return to main menu after acceptance).
+Screenshots (work dir `/tmp/simpsonsroadrage/`): `title_c.png`, `s2_c.png` (main menu), `s4_c.png` (options), `s5_c.png` (Set Password), `grid_zoom.png` (16-symbol alphabet), `getpw_c.png` (Get Password), `novel_ui_before_c.png` (novel code entered), `novel_ui_after_c.png` (return to main menu after acceptance).
 
 ## 4. Address map
 
@@ -113,7 +115,7 @@ return ACCEPT                                # 2
 
 Encoding is the exact inverse: pick `(money, missions)` in range, compute `d[0..5]`, add the key mod 16 to get `b[0..5]`, then `b6 = sum(b[0..5]) & 15`, and `b7 = (sum(b[0..5]) + Σ f1(b[i]+i)+b[i]+f2(b[i]-i)) & 15`.
 
-Faithful Python implementation: `/tmp/opencode/simpsonsroadrage/validator.py`.
+Faithful Python implementation: `/tmp/simpsonsroadrage/validator.py`.
 
 ## 6. Tables
 
@@ -184,7 +186,7 @@ Confidence: high for the algorithm, address map, novel code and bounds; low for 
 * `patchss.py`, `force.py` — patch password bytes / scene state in a savestate; `testcode.py` — automated accept/reject harness through the real UI.
 * `validator.py` — Python reimplementation with `validate()` / `encode()`; `enumerate.c` — exhaustive 2^24 payload count.
 * `scanptr.py`, `blscan.py` — 32-bit pointer and Thumb BL scanners; `arm-none-eabi-objdump -M force-thumb` for disassembly.
-* All analysis artifacts are in `/tmp/opencode/simpsonsroadrage/`. No ROM bytes or copyrighted assets are reproduced in this report beyond short numeric table values and addresses.
+* All analysis artifacts were in `/tmp/simpsonsroadrage/`. No ROM bytes or copyrighted assets are reproduced in this report beyond short numeric table values and addresses.
 
 ## 10. Cleanup
 

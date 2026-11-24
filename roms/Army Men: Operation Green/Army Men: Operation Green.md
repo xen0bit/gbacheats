@@ -1,5 +1,7 @@
 # Army Men: Operation Green (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -548,7 +550,7 @@ only per-symbol keys are A (append) and B (delete).
 
 ## 9. Tooling
 
-All scripts are in `/tmp/opencode/armygreen/` (reproducible, Python 3 +
+All scripts were in `/tmp/armygreen/` (reproducible, Python 3 +
 capstone + arm-none-eabi binutils + mGBA 0.10.5):
 
 | File | Purpose |
@@ -580,7 +582,7 @@ DISPLAY=:142 openbox &
 SDL_AUDIODRIVER=dummy DISPLAY=:142 mgba -3 "Army Men: Operation Green.gba" &
 ```
 
-Screenshots referenced above are the PNGs in `/tmp/opencode/armygreen/`
+Screenshots referenced above are the PNGs in `/tmp/armygreen/`
 (`s04_title`, `t05_pw_fresh`, `lvl2_a`, `v3d`, `v4`…`v12`, `novel12_brief`,
 `novel12_hud`, `pw_game_pause`, `alt2_pause`, `hid_credits2`, `hid_h4x2`,
 `hid_tak2`, `rej_*_2`, `b15_hud`, `f30_hud`, `base2_hud`, `flag_b2_hud`,

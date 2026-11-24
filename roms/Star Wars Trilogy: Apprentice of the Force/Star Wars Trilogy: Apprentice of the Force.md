@@ -1,5 +1,7 @@
 # Star Wars Trilogy: Apprentice of the Force (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -53,7 +55,7 @@ one string, one code xref, zero menu-table entries, zero controller reachability
 - mGBA SDL keymap (verified against `KEYINPUT` at `0x04000130`, idle = `0x03FF`):
   A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows.
 - Boot path and screens walked (all with screenshots in
-  `/tmp/opencode/starwarsapprentice/`):
+  `/tmp/starwarsapprentice/`):
   1. Title screen (`title.png`).
   2. **Language select** on first boot — 3 flags (US / blank / `A`) at the bottom
      (`cur.png`); A confirms. 16 language banks exist in ROM (`0x080D36B0`).
@@ -236,7 +238,7 @@ CodeBreaker/GameShark code would violate the scope rule.
 - mGBA 0.10.5 (`-d` command-line debugger via a pty controller; `r/4`, `x/4`, `w/4`,
   `!!INT`/Ctrl-C, `reset`), Xvfb `:315`, openbox, xdotool (XTEST to the focused window),
   scrot, Python 3.
-- Scripts in `/tmp/opencode/starwarsapprentice/`: `xref.py` (u32/BL xrefs), `litscan.py`
+- Scripts in `/tmp/starwarsapprentice/`: `xref.py` (u32/BL xrefs), `litscan.py`
   (Thumb LDR literal scan), `counts.py` (bounded-negative counts), `anstate.py` /
   `parse_ss.py` (savestate `gbAs` chunk decoding, §16.13), `gba2.py` / `dc.py` (input and
   debugger helpers).

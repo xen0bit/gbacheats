@@ -1,5 +1,7 @@
 # Whac-A-Mole (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -45,14 +47,14 @@ not hiding here.
 - Emulator: mGBA 0.10.5 under Xvfb `:317`, `SDL_AUDIODRIVER=dummy`, `mgba -3 game.gba`.
 - Keymap (mGBA SDL default): A=`x`, B=`z`, Start=`Return`, Select=`BackSpace`,
   D-pad=arrow keys. Hold 60–150 ms; menu cursors reset to the first item on return.
-- Work copy used for all dynamic tests: `/tmp/opencode/whacamole/game.gba` (identical
+- Work copy used for all dynamic tests: `/tmp/whacamole/game.gba` (identical
   hash). The ROM folder was never written by the emulator.
 - Screen path: title (`PRESS START`) → Start → Main Menu → [Arcade | Puzzle |
   Quick Play | Settings]. Arcade → [New Game → Create Game (3 slots) → Name entry |
   Continue → Continue Game (3 slots)]. Puzzle → [Peg Puzzle | Tic Tac Toe].
   Quick Play → [Rounds, Difficulty, Game Type]. Settings → [FX Volume, Music Volume,
   View Credits].
-- Screenshots for every transition are in `/tmp/opencode/whacamole/` (`menu1.png`,
+- Screenshots for every transition were in `/tmp/whacamole/` (`menu1.png`,
   `arcade1.png`, `continue1.png`, `puzzle1.png`, `quickplay_menu.png`, `settings1.png`,
   `m_slot.png` (name entry), `qp_*`, `gtL_montage.png`, …).
 
@@ -193,7 +195,7 @@ negative is bounded as follows:
 * mGBA 0.10.5 under Xvfb `:317` + openbox; `xdotool` XTEST input, `scrot` captures,
   ImageMagick crops/montages; `game.sav`, `game.ss1`, `game.ss2` kept in the /tmp work
   directory (never in the ROM folder).
-* Helper scripts: `/tmp/opencode/whacamole/ui.py` (key/screenshot driver),
+* Helper scripts: `/tmp/whacamole/ui.py` (key/screenshot driver),
   `ssdiff.py` (savestate `gbAs` zlib diff).
 
 **Legal note:** no ROM image, graphics, audio, or game text is redistributed here; only

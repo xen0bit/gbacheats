@@ -1,10 +1,12 @@
 # Mario Party Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Mario Party Advance/Mario Party Advance.gba` |
+| File | `roms/Mario Party Advance/Mario Party Advance.gba` |
 | Size | 8,388,608 bytes (`0x00800000`) |
 | Header title | `MARIOPARTYUS` |
 | Game code | `B8ME` (AGB-B8ME-USA) |
@@ -94,7 +96,7 @@ These predicates are satisfied only by gameplay; no controller input writes them
 
 | Space | Method | Result |
 |---|---|---|
-| Plaintext code-like strings | `strings -t x -n 4` | 76,826 strings total; keyword set `password|cheat|code|debug|secret|unlock|hidden|master|option` → 15 raw hits, all inside compressed dialogue/credits (e.g. `hidden` `0x2ADA19`, `code` `0x2ADA2F`, `secrets` `0x2C46AB`, `Secret` `0x2C4F02`, `master` `0x2C9FD4`, `option` `0x2CBB68`, `TEST` `0x2CC01E`) or the `miniGame` build tags. No UI password string |
+| Plaintext code-like strings | `strings -t x -n 4` | 76,826 strings total; keyword set `password\|cheat\|code\|debug\|secret\|unlock\|hidden\|master\|option` → 15 raw hits, all inside compressed dialogue/credits (e.g. `hidden` `0x2ADA19`, `code` `0x2ADA2F`, `secrets` `0x2C46AB`, `Secret` `0x2C4F02`, `master` `0x2C9FD4`, `option` `0x2CBB68`, `TEST` `0x2CC01E`) or the `miniGame` build tags. No UI password string |
 | Fixed-length code tables | regex clusters of 4–12 char `[A-Z0-9?\-]` runs | 10,469 runs; 5,986 contain a digit; 69 clusters of ≥5 runs — all are graphics/tile data or credit names, none a NUL-padded equal-length code table with a pointer table |
 | Literal published strings | byte search | `90277FA25AE2`, `C01336CB`, `BABOOM`, `CHAAA`, `MUSHROOM`, `UNLOCK`, `BOWSERLAND` → **0 hits each** |
 | Button-code sequences | byte search for Konami sequence in active-high u8/u16/u32 and active-low u16/u32 | **0 hits** in every encoding. No L+R+Start+A+B-style table |
@@ -143,7 +145,7 @@ No screen shows a code-entry field, a password keypad distinct from the passport
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x -n 4`, `grep`, `python3` (hashlib/struct/re/zlib/Pillow), `arm-none-eabi-objdump` (`-M force-thumb` / `-M force-arm`), Capstone 5.0.7, Keystone.
 * `Xvfb :316`, `openbox`, `xdotool`, `scrot`, ImageMagick `convert`, `tesseract` (OCR only as a convenience; RAM snapshots are primary).
-* Local helpers in `/tmp/opencode/marioparty`: `h.py` (key/screenshot), `step.py` (key → screenshot → OCR → `Shift+F1` state snapshot), `ss.py` (mGBA `gbAs` zlib decode and GBA RAM readers), `gdbread.py` (unsuccessful GDB attempt), `strings_all.txt`, `state_*.ss1` snapshots.
+* Local helpers in `/tmp/marioparty`: `h.py` (key/screenshot), `step.py` (key → screenshot → OCR → `Shift+F1` state snapshot), `ss.py` (mGBA `gbAs` zlib decode and GBA RAM readers), `gdbread.py` (unsuccessful GDB attempt), `strings_all.txt`, `state_*.ss1` snapshots.
 * No ROM or copyrighted assets are included in this report; only hashes, addresses, counts, and observations are published.
 
 ## 10. Legal note

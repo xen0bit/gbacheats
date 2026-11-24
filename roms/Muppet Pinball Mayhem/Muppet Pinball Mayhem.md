@@ -1,5 +1,7 @@
 # Muppet Pinball Mayhem (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -76,7 +78,7 @@ text and button spaces searched with counts, published codes attempted and recor
 * Debugger used where RAM was needed: `mgba -3 -d <rom>` driven through a pty; CLI commands
   `frame`, `r/1`, `r/4`, `x/4`, `b/t`, `b/a`, `c`, `load <slot>` (loads `rom.ss<slot>` from the
   ROM folder). Thumb breakpoint positive control: `b/t 0x0801BE46` then `c` → "Hit breakpoint".
-* Savestate RAM evidence: Shift+F<n> writes `Muppet Pinball Mayhem.ss<n>`; the PNG `gbAs`
+* Savestate RAM evidence: Shift+F`<n>` writes `Muppet Pinball Mayhem.ss<n>`; the PNG `gbAs`
   chunk is zlib-compressed to a 397,312-byte state (IWRAM at state offset `0x19000`,
   EWRAM at `0x21000`). States 1–10 were captured at the screens above.
 
@@ -257,7 +259,7 @@ visible labels were read from screenshots and the banks decoded as follows:
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x -n 4`, `grep -abo`.
 * `python3` + `capstone` 5.0.7 + `keystone-engine` + Pillow: literal/xref/BL scanners, Thumb
-  disassembly, savestate `gbAs` zlib decoder and IWRAM diffing (`/tmp/opencode/muppetpinball/ss.py`,
+  disassembly, savestate `gbAs` zlib decoder and IWRAM diffing (`/tmp/muppetpinball/ss.py`,
   `helper.py`, `combos.py`).
 * `arm-none-eabi-objdump -M force-thumb` for confirmatory disassembly.
 * mGBA 0.10.5 SDL under Xvfb `:315` + openbox; `xdotool` XTEST input; `scrot` + ImageMagick

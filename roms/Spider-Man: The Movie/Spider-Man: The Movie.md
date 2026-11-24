@@ -1,5 +1,7 @@
 # Spider-Man: The Movie (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -312,6 +314,6 @@ fabricated "code".
   cheats page (2018-12-29 snapshot) — lists only the five unlockables; GameFAQs/
   IGN/GameRevolution console pages — text codes that do not apply to this SKU.
   No prompt-injection content was encountered.
-* Analyst scripts and screenshots live in `/tmp/opencode/spidermanmovie/`.
+* Analyst scripts and screenshots were kept in `/tmp/spidermanmovie/`.
   All emulator processes and all generated `.sav`/`.ss*` files were removed from
   the ROM folder at completion.

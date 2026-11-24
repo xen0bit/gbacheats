@@ -1,5 +1,7 @@
 # Spirit: Stallion of the Cimarron — Search For Homeland (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -167,7 +169,7 @@ The game then applies `F0`-dispatch and four level-conditioned range tests, so t
 
 **Novel code (absent from every published list).** `bFghjjdNqdCCjm` — published level-1 code with character 1 changed from `d` to `b`, setting `F0 = 0`, a value that appears in no published list (published `F0` ∈ 1..14). Verified in-game:
 
-- screenshot `/tmp/opencode/spiritstallion/novel_after.png` — game left the password screen and loaded a distinct scene;
+- screenshot `/tmp/spiritstallion/novel_after.png` — game left the password screen and loaded a distinct scene;
 - RAM: `0x0200AFD3` `0x01 → 0x0E`, versus `0x01 → 0x08` for the published level-1 password;
 - buffers `0x0200B404` = `01 1f 06 07 09 09 03`, `0x0200B40E` = `27 10 03 1c 1c 09 0c`, cursor `0x0200B418 = 0x0E`.
 
@@ -218,7 +220,7 @@ The game then applies `F0`-dispatch and four level-conditioned range tests, so t
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb|force-arm`.
 - REA/Ghidra 12.1.4 via the `reverse-engineer-anything` skill: `open_binary` (raw-binary, ARM, base `0x08000000`), `binary_overview`, `xrefs`, `procedure_pseudo_code`, `procedure_assembly`, `read_bytes`; session closed with `close_binary`.
 - mGBA 0.10.5 under `Xvfb :315` with `SDL_AUDIODRIVER=dummy`, `openbox`, `xdotool` (XTEST events, 50–150 ms holds), `scrot`.
-- Python helpers in `/tmp/opencode/spiritstallion/`: `ctl.py` (input/screenshot), `enter_pw.py` (grid navigation and 14-character entry), `decode.py` (published-code decoder), `gen.py` (novel-code solver), `ssdiff.py` (PNG `gbAs` zlib state diff).
+- Python helpers in `/tmp/spiritstallion/`: `ctl.py` (input/screenshot), `enter_pw.py` (grid navigation and 14-character entry), `decode.py` (published-code decoder), `gen.py` (novel-code solver), `ssdiff.py` (PNG `gbAs` zlib state diff).
 - Web sources: Cheat Happens, absolutcheats, ggmania, cheatbook, mogelpower, cheatingdome, TMQ Horse Game Database (incl. scanned English manual OCR via `pdftoppm` + `tesseract` after installing `poppler-utils`), archived GameFAQs guide 22073. TCRF returned 403 and had no archive snapshot; treated as unavailable, not as evidence.
 
 No ROM bytes or copyrighted assets are reproduced in this report beyond short address/hash/algorithm notes and the cheat strings themselves (which are published developer-intended codes).

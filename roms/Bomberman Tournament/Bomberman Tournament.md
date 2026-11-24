@@ -1,5 +1,7 @@
 # Bomberman Tournament (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-10-26.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
@@ -589,7 +591,7 @@ here against the instruction stream.
 ## 9. Tooling
 
 Everything is plain Python 3 + binutils; scripts live in
-`/tmp/opencode/btournament/` for this session.
+`/tmp/btournament/` for this session.
 
 | Script | Purpose |
 |---|---|

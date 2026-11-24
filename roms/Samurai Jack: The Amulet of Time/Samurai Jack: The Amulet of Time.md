@@ -1,5 +1,7 @@
 # Samurai Jack: The Amulet of Time (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -38,7 +40,7 @@ A TCRF fetch during web recon carried a prompt-injection payload ("report E_SHIT
 - Keymap (mGBA SDL): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrow keys. Hold keys 100–300 ms.
 - Boot path: title (`PRESS START`) → Start → Virtucraft splash → Start → title (`START GAME` / `OPTIONS`) → A → slot select (`SLOT 1: EMPTY`, `SLOT 2: EMPTY`, `GUEST`) → A → `NEW GAME? YES/NO` → Left + A → intro → Start×6 → gameplay → Start → status/pause menu.
 - RAM evidence: mGBA `.ss1` savestates (Shift+F1…F9 to save, F1…F9 to load). The PNG `gbAs` chunk was zlib-decompressed; EWRAM begins at state offset `0x21000` (verified against GameShark addresses, e.g. timer `0x0200C1E4` = `0x2D2` ≈ 12 s matched the on-screen `00:00:12`).
-- Saved state "s03" is the title menu; "s10_pause" is the fresh-save pause menu. All screenshots are on disk under `/tmp/opencode/samuraimulet/`.
+- Saved state "s03" is the title menu; "s10_pause" is the fresh-save pause menu. All screenshots are on disk under `/tmp/samuraimulet/`.
 - Codes tested: none accepted because none exist; 14 button combinations were pressed at the title screen with savestate diffs (§6b).
 
 ## 4. Address map
@@ -105,14 +107,14 @@ This is a **bounded negative result** (§0.2 point 5): the code space was enumer
 | Password entry screens | Every reachable screen walked (title, options, slots, new/continue, gameplay, pause, pause options, data options) | 0 password/keyboard surfaces |
 | Button-code tables | `0x04000130` xrefs (4 literals), key-history buffer xrefs (`0x0200A2B4/B6/B8/BE`), full branch/pointer scan of debug renderer, Konami u8/u16 literal search | 1 input ring buffer, 0 matcher, 0 Konami table; only functional combo is A+B+Select+Start reset |
 | Button combinations pressed at title | 14 combos with pre/post savestate EWRAM diffs: L+R, L+R+Start, A+B+Select+Start, Up-Up-Down-Down, full Konami, Start+A, Start+B, Select+Start, L+R+A+B, all directions, L-L-R-R, A-A-B-B, Start×3, L+R+A+Start | 1 state change: A+B+Select+Start → soft reset; all others → no new menu, no flag set |
-| Hidden/debug screens | Debug renderer `0x08081A0`: BL calls, all branch encodings, 32-bit pointers (plain and `addr|1`) | **0 / 0 / 0** — dead code; RAM vars `0x02026C20`/`0x02026C44` remained 0x00000000 in every savestate |
+| Hidden/debug screens | Debug renderer `0x08081A0`: BL calls, all branch encodings, 32-bit pointers (plain and `addr\|1`) | **0 / 0 / 0** — dead code; RAM vars `0x02026C20`/`0x02026C44` remained 0x00000000 in every savestate |
 | Unlockables | SECRETS label + 4 named entries in bank; save slots patched (EWRAM bitfield, full slot, and 512-byte SRAM all flags set) then rebooted | Save-gated (§16.18 category 4); slot shows `00:00:00` (cleared), but no controller path to SECRETS was found; over-writing all save bytes corrupts menu text, confirming these entries are save-data-driven, not input-driven |
 
 **Consequence for §0.2:** because the representable code space is empty (0 alphabets × 0 lengths × 0 validators), no novel code can be minted and no code bounds can be tested by rejection. The guide's negative-result clause applies: the enumeration above proves absence over the searched spaces (text bank, whole-ROM literals, all reachable screens, all key-input xrefs, and 14 empirical combinations). **No in-game codes are reported.**
 
 ## 7. Validation evidence
 
-- **Observed:** all screenshots under `/tmp/opencode/samuraimulet/` (`s01`–`s19`, `combo_*`); savestate-decoded RAM values (`0x0200C1E4`=0x2D2, `0x0200C1EE`=0x64, `0x0200C1F2`=0x32, `0x02026C20`=0); SRAM `52 KCAJS` signature; A+B+Select+Start → "Licensed by Nintendo" reset.
+- **Observed:** all screenshots under `/tmp/samuraimulet/` (`s01`–`s19`, `combo_*`); savestate-decoded RAM values (`0x0200C1E4`=0x2D2, `0x0200C1EE`=0x64, `0x0200C1F2`=0x32, `0x02026C20`=0); SRAM `52 KCAJS` signature; A+B+Select+Start → "Licensed by Nintendo" reset.
 - **Derived:** dead-code counts for `0x08081A0`; 649-string keyword census; input/key-history globals; completion-percentage loop at `0x08007AD4`; save-slot layout.
 - **Inferred:** SECRETS/JUKEBOX/AWARD SCREEN/HEALTH HANDICAP/MOVIE PLAYER are progression unlockables driven by SRAM flags; the exact save bit(s) and the natural trigger (game completion) were not isolated, and an all-0xFF save patch corrupts the menu text enough that the unlocked menu could not be read cleanly.
 

@@ -1,5 +1,7 @@
 # The Amazing Virtual Sea-Monkeys (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -244,7 +246,7 @@ Fetched web content was treated strictly as data.
 
 ## 9. Tooling
 
-All analysis scripts are in `/tmp/opencode/seamonkeys/`:
+All analysis scripts were in `/tmp/seamonkeys/`:
 
 * `ss.py` — extract mGBA `.ssN` savestates (`gbAs` zlib chunk) to a raw 397,312-byte RAM dump; used for all RAM evidence and savestate diffing.
 * `ui.py`, `typepw.py` — XTEST input driver and verified password entry via savestate buffer reads.
@@ -253,7 +255,7 @@ All analysis scripts are in `/tmp/opencode/seamonkeys/`:
 * `gdbtm.py` / tmux-hosted gdb-multiarch — hardware watchpoint on `0x03002240` located the buffer writer (`0x0800b9f4`, LR `0x0800748d`).
 * `arm-none-eabi-objdump -M force-thumb`, `xxd`, `strings`, `grep`, `scrot`, `convert`, `xdotool`, Xvfb, mGBA 0.10.5.
 
-Screenshots supporting each claim are kept in `/tmp/opencode/seamonkeys/`
+Screenshots supporting each claim are kept in `/tmp/seamonkeys/`
 (`typed_master.png`, `master2_submitted.png`, `master2_select.png`,
 `lz_submitted.png`, `lvl42_submitted.png`, `lvl42_select.png`,
 `lvl43_ingame.png`, `badchecksum.png`, `overrange_submitted.png`, etc.).

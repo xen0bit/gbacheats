@@ -1,5 +1,7 @@
 # Monopoly (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -137,7 +139,7 @@ Because no code exists, there is no "out-of-range" input to test: the rejection 
 
 - `strings -t x`, `grep -abo`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for literal-pool and input-handler disassembly.
-- Python scripts written in `/tmp/opencode/monopoly/`: `scan.py` (direct-pointer / Thumb-LDR / BL scans), `obfsearch.py` (640 literal-transform searches), `button_scan.py` + `button_scan2.py` (whole-ROM key-mask array scans), `state.py` (mGBA `gbAs` decompressor and RAM mapper), `patchstate.py` (savestate name-buffer patcher), plus key/screenshot helpers.
+- Python scripts written in `/tmp/monopoly/`: `scan.py` (direct-pointer / Thumb-LDR / BL scans), `obfsearch.py` (640 literal-transform searches), `button_scan.py` + `button_scan2.py` (whole-ROM key-mask array scans), `state.py` (mGBA `gbAs` decompressor and RAM mapper), `patchstate.py` (savestate name-buffer patcher), plus key/screenshot helpers.
 - mGBA SDL under Xvfb `:317`; `import -window` for viewport capture; `xdotool` XTEST keys with 40–150 ms holds.
 - Web: GameFAQs GBA `926475` (developer/publisher/FAQ inventory), VGChartz `27503` (0 cheats), ChapterCheats `25719` (no codes/passwords/unlockables), SuperCheats (GBA Q&A and FAQ), remyhax "100 GBA crackmes" (methodology only). GameFAQs direct fetch 403; archived cheats URL 404. The TCRF fetch returned a prompt-injection payload (recorded above, ignored).
 

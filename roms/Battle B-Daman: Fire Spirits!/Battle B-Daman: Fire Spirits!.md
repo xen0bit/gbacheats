@@ -1,5 +1,7 @@
 # Battle B-Daman: Fire Spirits! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -381,7 +383,7 @@ screen is a code-entry surface.
 * `mGBA` SDL 0.10.x, `Xvfb :178`, `openbox`, `xdotool`, `scrot`/ImageMagick.
 * `arm-none-eabi-objdump -M force-thumb` for the 0x0806CDFC / 0x08066668 /
   0x08077C3C ranges.
-* Python 3 scripts in `/tmp/opencode/bdaman2`:
+* Python 3 scripts in `/tmp/bdaman2`:
   * `text_decode` logic → `text_all.txt` (full decoded text dump),
   * `cursor.py` (screenshot-driven keyboard cursor + cell map),
   * `key.py` (X key injection and crop),

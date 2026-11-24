@@ -1,5 +1,7 @@
 # Candy Land + Chutes and Ladders + Original Memory Game (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -379,7 +381,7 @@ writes.
   `scrot` + ImageMagick for captures.
 * `arm-none-eabi-objdump 2.44` (`-M force-thumb`) for the key-input and
   entity-table disassembly.
-* Python 3.13 scripts in `/tmp/opencode/candyland`:
+* Python 3.13 scripts in `/tmp/candyland`:
   * header/logo scan and header-field parser,
   * text-pointer-table dumper and keyword classifier,
   * u16/u32/u8 single-button-mask run scanner with xref filter,

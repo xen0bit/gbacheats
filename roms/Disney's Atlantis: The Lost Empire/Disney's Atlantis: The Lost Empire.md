@@ -1,5 +1,7 @@
 # Disney's Atlantis: The Lost Empire (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -387,15 +389,15 @@ validator.
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
 * `python3` + `capstone 5.0.7` for literal/BL scans.
-* `/tmp/opencode/atlantis/scan.py` — literal pointer scan.
-* `/tmp/opencode/atlantis/blscan.py` — Thumb BL target scan.
-* `/tmp/opencode/atlantis/pw.py` — validator/encoder model (the code in §5).
-* `/tmp/opencode/atlantis/type2.py` — reproducible key injection
+* `/tmp/atlantis/scan.py` — literal pointer scan.
+* `/tmp/atlantis/blscan.py` — Thumb BL target scan.
+* `/tmp/atlantis/pw.py` — validator/encoder model (the code in §5).
+* `/tmp/atlantis/type2.py` — reproducible key injection
   (`xdotool`, 60/80 ms hold/gap).
 * Savestate reader: parse the PNG chunks, `zlib.decompress` the `gbAs` chunk;
   IWRAM `0x19000`, EWRAM `0x21000`.
 * mGBA 0.10.5, Xvfb, openbox, scrot/ImageMagick. Screenshots and savestates were
-  kept only in `/tmp/opencode/atlantis` as working evidence; nothing from the
+  kept only in `/tmp/atlantis` as working evidence; nothing from the
   ROM (graphics, text, audio) is redistributed here.
 
 ## 10. Legal note

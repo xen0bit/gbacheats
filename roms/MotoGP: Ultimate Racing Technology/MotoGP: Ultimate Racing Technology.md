@@ -1,5 +1,7 @@
 # MotoGP: Ultimate Racing Technology (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -83,7 +85,7 @@ passwords write.
   state offset `0x1AC56` was patched with a code, the state was reloaded with F1,
   Start was pressed, and the screen at ~0.45 s classified (black transition =
   accept, INVALID banner = reject). Scripts: `patchss.py`, `fastoracle.py`,
-  `oracle.py` in `/tmp/opencode/motogp/`.
+  `oracle.py` in `/tmp/motogp/`.
 * Codes tested (accept): the seven published codes above plus `JVL?*BSWQR`,
   `JVL?*BSWQ7`, `R999D5998*`.
   Codes tested (reject): `BCDFGHJKTL`, `R999D5998K`, and all other symbols
@@ -191,7 +193,7 @@ exactly two spellings (differing only in the ignored bit) pass. Semantic bounds
 were proven by 15 random 9-character prefixes for which no final symbol was
 accepted — the range gate rejects them independently of the nibble.
 
-Screenshots kept in `/tmp/opencode/motogp/` (e.g. `password2.png`,
+Screenshots kept in `/tmp/motogp/` (e.g. `password2.png`,
 `reject_ref.png`, `accept_screen2.png`, `novel_clean.png`, `novel_afterA.png`,
 `walk_*.png`) — not attached to this report.
 

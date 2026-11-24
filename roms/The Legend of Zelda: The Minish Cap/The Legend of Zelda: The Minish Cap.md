@@ -1,5 +1,7 @@
 # The Legend of Zelda: The Minish Cap (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -49,7 +51,7 @@ No GameShark/CodeBreaker/AR code was reproduced, minted or promoted to an in-gam
 ## 3. How to reproduce
 
 - Emulator: mGBA 0.10.5, Xvfb `:318`, `SDL_AUDIODRIVER=dummy`, `mgba -3 -g ./game.gba`
-  (analysis copy in `/tmp/opencode/minishcap/game.gba`; **the ROM folder was never written to**).
+  (analysis copy in `/tmp/minishcap/game.gba`; **the ROM folder was never written to**).
 - Keymap (mGBA SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`,
   Select=`BackSpace`, D-pad=arrows.
 - RAM reads: single mGBA GDB stub client held through a bridge on TCP `:2346`
@@ -57,7 +59,7 @@ No GameShark/CodeBreaker/AR code was reproduced, minted or promoted to an in-gam
 - Repro path: boot → title (`PRESS START`) → Start → `CHOOSE A FILE` → empty slot →
   `ENTER A NAME` → `END` → Start → in-game cutscene → gameplay → Start (once Link has a
   sword) → pause pages (Items / Quest Status / Map, L/R to cycle).
-- Screen evidence saved under `/tmp/opencode/minishcap/shots/` (`10_title_ready.png`
+- Screen evidence saved under `/tmp/minishcap/shots/` (`10_title_ready.png`
   … `58_reset.png`; `49_debug_text_gdbwrite.png` shows the debug screen after a direct
   RAM write, i.e. a GDB-backed oracle, **not** an in-game code).
 
@@ -242,6 +244,6 @@ closure and the 10×4 string/encoding count matrix above.
 - `xdotool` XTEST key events (window focus via `xdotool windowfocus`), `scrot` + ImageMagick
   crops (720×480 at `+281+234` in a 1280×900 Xvfb).
 - Public `zeldaret/tmc` decompilation (SHA-1 matched) used as a static oracle only.
-- Analysis artifacts (screenshots, scripts, work ROM copy) live in `/tmp/opencode/minishcap`.
+- Analysis artifacts (screenshots, scripts, work ROM copy) were kept in `/tmp/minishcap`.
   **Cleanup**: all mGBA/Xvfb/openbox processes started for this job were terminated by
   their recorded PIDs; no `.sav`/`.ss*` files were created in the ROM folder.

@@ -1,10 +1,12 @@
 # Robotech: The Macross Saga (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Robotech: The Macross Saga/Robotech: The Macross Saga.gba` |
+| File | `roms/Robotech: The Macross Saga/Robotech: The Macross Saga.gba` |
 | Size | 8,388,608 bytes (0x800000) |
 | Header title | `ROBO MACROSS` |
 | Game code | `ARBE` |
@@ -145,4 +147,4 @@ Remaining minor unknowns: the trailing save byte `slot+0x73` (name checksum vs f
 
 ## 9. Tooling
 
-`arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 / Keystone, mGBA 0.10.5 CLI debugger (`-d`) and savestates (`gbAs` zlib chunk parser), Xvfb :317 + openbox + xdotool XTEST, Pillow/ImageMagick for screenshot detection. Scripts in `/tmp/opencode/robotech2`: `ptrxref.py`, `screen_triples2.py`, `run_seq.py`, `probe_keys.py`, `make_ps_state.py`, `ss.py`, `diffstate.py`, `search_seq.py`. Web sources (GameFAQs, GameGenie, cheatingdome, games-cheats, cheat-database) were used as data only; no instructions found in fetched pages or ROM strings were followed. No ROM image or copyrighted assets are redistributed by this report.
+`arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 / Keystone, mGBA 0.10.5 CLI debugger (`-d`) and savestates (`gbAs` zlib chunk parser), Xvfb :317 + openbox + xdotool XTEST, Pillow/ImageMagick for screenshot detection. Scripts in `/tmp/robotech2`: `ptrxref.py`, `screen_triples2.py`, `run_seq.py`, `probe_keys.py`, `make_ps_state.py`, `ss.py`, `diffstate.py`, `search_seq.py`. Web sources (GameFAQs, GameGenie, cheatingdome, games-cheats, cheat-database) were used as data only; no instructions found in fetched pages or ROM strings were followed. No ROM image or copyrighted assets are redistributed by this report.

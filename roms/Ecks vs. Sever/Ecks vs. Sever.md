@@ -50,7 +50,7 @@ Published-list defects found: Neoseeker prints `EXHONERATE` where the ROM has `E
 | SP validator loop | `0x08015218`–`0x08015252` | inside handler `0x0801518A` (A-on-OK, screen mode 4) |
 | MP validator loop | `0x08015356`–`0x08015386` | A-on-OK, screen mode 20 |
 | Password-screen draw / input | `0x08014C00`–`0x08015456` | keyboard layout, cursor 0–37, char entry, OK/EXIT |
-| Unlock-flag OR | `0x08014CE8`–`0x08014D04` | `flags |= mask_table[mp_index]` |
+| Unlock-flag OR | `0x08014CE8`–`0x08014D04` | `flags \|= mask_table[mp_index]` |
 | Unlock message dispatch | `0x08014D5C`–`0x08014E66` | 6 cases print `YOU HAVE UNLOCKED …` |
 | Pause-menu draw | `0x08013AF4`–`0x08013C38` | uses string IDs 138,136,154 (and 139/140 for YES/NO) |
 | Game-state base | `0x0200B7B0` | result word `+0x36`; unlock flags at `+0x464` = `0x0200BC14` |

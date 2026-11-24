@@ -1,6 +1,8 @@
 # Spider-Man 2 (GBA) — Reverse Engineering Report
 
-Rom: `/mnt/gbacheats/roms/Spider-Man 2/Spider-Man 2.gba`. Analysis date 2026-11-20.
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
+Rom: `roms/Spider-Man 2/Spider-Man 2.gba`. Analysis date 2026-11-20.
 All addresses are for **this exact image** (hash below). ROM offsets = address − `0x08000000`.
 
 ## 1. Target identity
@@ -82,7 +84,7 @@ Reproducible path (all observed):
 
 Published codes tested: `Up,Down,Right,A` at title (no cheat effect; starts `NEW`);
 `FLUWDEAR` (not enterable — 3-char field). Savestates and screenshots are in
-`/tmp/opencode/spiderman2/`.
+`/tmp/spiderman2/`.
 
 ## 4. Address map
 
@@ -249,7 +251,7 @@ or in ROM strings were executed. No prompt-injection payload was encountered.
   ranges; Python raw Thumb BL scanner for `BL` xrefs to `0x080024AC/0x08002564/0x0800F2FC`.
 * mGBA 0.10.5 `-3`, `-d` (CLI debugger via `pty_bridge.py`), `-t` (savestate), Xvfb `:319`,
   openbox, `xdotool` XTEST events, `scrot`.
-* Helper scripts in `/tmp/opencode/spiderman2/`: `gba.py` (input/screenshot), `pty_bridge.py`
+* Helper scripts in `/tmp/spiderman2/`: `gba.py` (input/screenshot), `pty_bridge.py`
   (persistent mGBA CLI-debugger pty), `dbg.py` (cmd/brk/go/rd/wr), `memdump.py` (`x/1` RAM dump),
   `ss.py`/`state.bin` (savestate `gbAs` zlib decode: 397,312 B; IWRAM at `0x19000`, EWRAM at
   `0x21000`), `codetest.py` (button-code RAM diff).

@@ -1,5 +1,7 @@
 # Ultimate Spider-Man (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -177,11 +179,11 @@ dynamic entry of all published and two novel sequences with no state change.
 ## 7. Validation evidence
 
 - **Observed** — mGBA screenshots of all 8 screens listed in §3/§6 (files in
-  `/tmp/opencode/ultimatespiderman/shots/`), including `w_title_crop.png`,
+  `/tmp/ultimatespiderman/shots/`), including `w_title_crop.png`,
   `w_slotselect_crop.png`, `w_modeselect_crop.png`, `w_gameplay_crop.png`,
   `w_sound_crop.png`, `w_quit2_crop.png`, `w_chapter2_crop.png`.
 - **Observed** — savestate EWRAM diffs: code trials vs idle control and novel controls,
-  recorded in `/tmp/opencode/ultimatespiderman/work/mx_*.bin` and `state_*.bin`.
+  recorded in `/tmp/ultimatespiderman/work/mx_*.bin` and `state_*.bin`.
 - **Derived** — the active-high key helper at `0x08002244`, the 2 KEYINPUT read sites, the
   string-bank inventory, and the zero-cluster table searches.
 - **Inferred** — that the console codes genuinely work on the PS2/GC/Xbox SKUs (published
@@ -206,7 +208,7 @@ dynamic entry of all published and two novel sequences with no state change.
   `openbox`, `xdotool` XTEST key events, `scrot`, ImageMagick `convert`.
 - `arm-none-eabi-objdump -M force-thumb` for targeted disassembly; Capstone for PC-relative
   literal and `cmp #imm` scans; Python 3 for literal/sequence/table searches.
-- Scripts kept in `/tmp/opencode/ultimatespiderman/work/`: `search_masks.py`, `search2.py`,
+- Scripts kept in `/tmp/ultimatespiderman/work/`: `search_masks.py`, `search2.py`,
   `cluster.py`, `finalsearch.py`, `find_keyinput.py`, `ldr_key2.py`, `blscan.py`, `cmpscan.py`,
   `ssdump.py` (gbAs decoder), `walk*.py`, `codetest*.py`, `matrix.py`.
 - No copyrighted assets or ROM bytes are redistributed in this report; only addresses,

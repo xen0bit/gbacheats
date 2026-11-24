@@ -1,5 +1,7 @@
 # Backyard Football 2006 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Status: complete. Scope: in-game / developer-intended cheats only (passwords, button
 codes, hidden/debug menus, unlockables). No GameShark, CodeBreaker, Action Replay or
 other memory-edit codes are proposed or relied on.
@@ -484,7 +486,7 @@ pause (`RESUME`/`QUIT`), player cards (35), credits, `PLEASE WAIT FOR OPPONENT`.
   `key.py`/`chord.py` (input helpers).
 * `arm-none-eabi-objdump` + Capstone for the debug-menu and input routines.
 
-Key artefacts live in `/tmp/opencode/bf2006`: `shots/` (numbered screenshots and
+Key artefacts were kept in `/tmp/bf2006`: `shots/` (numbered screenshots and
 the `m_*.png` contact sheets), `strings4.txt`, `sav_with_season.bin` and `bf.sav`.
 
 ## 10. Reproduction checklist

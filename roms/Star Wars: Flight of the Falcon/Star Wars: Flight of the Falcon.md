@@ -1,5 +1,7 @@
 # Star Wars: Flight of the Falcon (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -50,7 +52,7 @@ libretro AR codes found during recon are out of scope.
   Capstone 5.0.7.
 * mGBA's `-g` GDB stub was unusable (port 2345 already held by another session), so
   dynamic work used mGBA's `-d` command-line debugger through a PTY bridge
-  (`/tmp/opencode/falcon/dbg_bridge.py`) and savestate RAM read-back.
+  (`/tmp/falcon/dbg_bridge.py`) and savestate RAM read-back.
 
 ### Screen walk (observed)
 Legal screen → title (`PRESS START`) → high-score table (`Top 5 Pilots`; `SELECT`
@@ -304,7 +306,7 @@ in those sources were executed. No suspicious payload was encountered in this ru
 
 ## 9. Tooling
 
-Scripts written under `/tmp/opencode/falcon/`:
+Scripts written under `/tmp/falcon/`:
 
 | File | Purpose |
 |---|---|

@@ -1,5 +1,7 @@
 # Fantastic 4 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -60,7 +62,7 @@ edit codes and are out of scope.
   isolated (see §8).
 * Main menu (title → Start): `NEW GAME`, `CONTINUE`, `OPTIONS` (3-slot ring;
   Down wraps). `CONTINUE` → `SELECT SLOT`. No password/cheat entry item.
-* Screenshots used as evidence are in `/tmp/opencode/fantastic4/`
+* Screenshots used as evidence were in `/tmp/fantastic4/`
   (`code1_after2_crop.png`, `level_montage.png`, `mm01_main_crop.png`,
   `mm10_A_crop.png`, `walk05_a2_crop.png`, etc.).
 
@@ -272,7 +274,7 @@ screen: 01 → 43 → 42 → … → 32 over 12 Up presses (`level_montage.png`,
   so the stub-free `-d` debugger was used per guide §16.2/§16.13.)
 * Savestate analysis: zlib-decompress the PNG `gbAs` chunk (397,312-byte state)
   and diff bytes (§16.13).
-* Helper scripts in `/tmp/opencode/fantastic4/`:
+* Helper scripts in `/tmp/fantastic4/`:
   `phase0.py`, `keys.py`, `batch_codes.py`, `level_enum.py`,
   `cheat_controls.py`, `test_from_menu.py`, `mainmenu_walk.py`,
   `pause_walk.py`, `ssdiff.py`, `launch_dbg5.sh`.

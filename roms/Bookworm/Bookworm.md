@@ -1,5 +1,7 @@
 # Bookworm (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -53,7 +55,7 @@ Exact menu path used for every screen in §6b:
 7. Pause → Save Game → `Game Saving` → `Game Saved`/OK; New Game → `New Game?`; Main Menu → `Leave Game?`; High Scores → `Top Scores`/`Best Words` with `B Reset` and `A Continue`; Reset → `Reset High Scores?`.
 8. File select B → `Delete File?` (note inverted labels: **B = No, A = Yes**).
 
-Screenshots (all in `/tmp/opencode/bookworm/shots/`, 720×480 crops of the 240×160 viewport at 3×): `02_title_c.png`, `03_main_c.png`, `04_name_c.png`, `08_menu_c.png`, `09_menu2_c.png`, `10_pause_c.png`, `11_hs_c.png`, `13_mm_c.png`, `23_filesel_c.png`, `27_scramble_c.png`, `28_save_c.png`, `29_saved_c.png`, `30_newgame_c.png`, `33_hs_c.png`, `34_hsreset_c.png`, `37_name10_c.png`, `38_delete_c.png`.
+Screenshots (all in `/tmp/bookworm/shots/`, 720×480 crops of the 240×160 viewport at 3×): `02_title_c.png`, `03_main_c.png`, `04_name_c.png`, `08_menu_c.png`, `09_menu2_c.png`, `10_pause_c.png`, `11_hs_c.png`, `13_mm_c.png`, `23_filesel_c.png`, `27_scramble_c.png`, `28_save_c.png`, `29_saved_c.png`, `30_newgame_c.png`, `33_hs_c.png`, `34_hsreset_c.png`, `37_name10_c.png`, `38_delete_c.png`.
 
 Key test: at the title, nine single buttons (A, B, Select, L, R, Up, Down, Left, Right) and five chords (A+B; L+R+Select; Up+Down+Left+Right; A+B+Select; L+R) produced **no transition**; only Start does. Equivalent Select/Start/L/R/chord sets were pressed on the file-select and pause screens with no effect.
 
@@ -240,7 +242,7 @@ No published in-game code exists for this title, so there was nothing to enter a
 
 Environment: mGBA 0.10.5 SDL, Xvfb/openbox/scrot/ImageMagick, `arm-none-eabi-objdump`, Capstone 5.0.7, Python 3, `gdb-multiarch` (GDB stub was unusable because another session owned port 2345; mGBA's `-d` command debugger was used instead, with `watch 0x04000130`).
 
-Scripts in `/tmp/opencode/bookworm/scripts/`:
+Scripts in `/tmp/bookworm/scripts/`:
 * `k.py`, `key.py`, `title_buttons.py`, `type10.py` — XTEST key drivers.
 * `find_keyread3.py` — literal-pool + `ldrh` scan that located the three KEYINPUT reads (the literal `0x04000130` scan itself returns zero).
 * `find_add130.py` — enumerates every `add #0x130` (3 hits).

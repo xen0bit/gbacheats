@@ -1,5 +1,7 @@
 # Yu-Gi-Oh! Dungeon Dice Monsters (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -102,7 +104,7 @@ recorded as a negative result, not silently omitted.
 | `0x030008E8 +2` | Held key mask, active-high (`A=1,B=2,Select=4,Start=8,R=0x10,L=0x20,U=0x40,D=0x80,R=0x100,L=0x200`) | Derived |
 | `0x030008E8 +4` | Previous held mask | Derived |
 | `0x030008E8 +6` | Newly-pressed mask | Derived |
-| `0x030008E8 +8` | Held | auto-repeat | Derived |
+| `0x030008E8 +8` | Held \| auto-repeat | Derived |
 | `0x030008F2` | 10-byte name-entry slot array (observed empty-slot filler `0x10`) | Observed |
 | `0x0E000000` | Flash save, 64 KiB (`.sav` in work dir) | Observed |
 
@@ -256,7 +258,7 @@ load-bearing claims.
   `SDL_AUDIODRIVER=dummy`; `-3 -g` for GDB stub, `-3` for interactive runs.
   Keymap A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`.
 * `gdb-multiarch` driven through a persistent PTY/socket bridge
-  (`/tmp/opencode/yugiohddm/gdbdrv.py`) so the core can be interrupted for
+  (`/tmp/yugiohddm/gdbdrv.py`) so the core can be interrupted for
   `dump binary memory` and resumed with `continue &`.
 * `arm-none-eabi-objdump -M force-thumb` for literal-pool and stub verification.
 * Python 3 + `capstone` 5.0.7 for BL/pointer scans; `struct.unpack_from('<I', …)`
@@ -266,7 +268,7 @@ load-bearing claims.
   `ev_9efed8…`, `ev_59534c…`.
 * `strings -t x -n 4`, `xxd`, `scrot`, `xdotool`.
 
-All screenshots, dumps, savestates and scripts live in `/tmp/opencode/yugiohddm/`.
+All screenshots, dumps, savestates and scripts were kept in `/tmp/yugiohddm/`.
 No ROM or copyrighted asset is redistributed by this report. No `.sav`/`.ss*` files
 were left in the ROM folder.
 
@@ -275,5 +277,5 @@ were left in the ROM folder.
 Own processes only, killed by PID number: mGBA instances `891817`, `893890`,
 `894615`, `916228`; GDB drivers `895847`, `916339`; GDB stub clients by PID.
 The Xvfb (`:316`) and openbox started for this job were also stopped. Every
-`game.sav` / `game.ss1` artifact is in `/tmp/opencode/yugiohddm/`; the ROM folder
+`game.sav` / `game.ss1` artifact was in `/tmp/yugiohddm/`; the ROM folder
 contains only the original `.gba` and this report.

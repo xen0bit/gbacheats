@@ -1,5 +1,7 @@
 # Namco Museum 50th Anniversary (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -257,7 +259,7 @@ masks and the joypad reader located; no cheat matcher exists.
 - mGBA `-d` pty debugger via `socat PTY,link=…` (commands terminated with `\r`) for register
   reads; GDB stub was found unreliable and abandoned in favour of savestate RAM reads.
 - Savestate RAM reader: decompress PNG `gbAs` chunk with zlib; IWRAM@0x19000, EWRAM@0x21000
-  (`.ss1` is 397,312 B for this 4 MiB ROM). Scripts kept in `/tmp/opencode/namcomuseum50/`
+  (`.ss1` is 397,312 B for this 4 MiB ROM). Scripts kept in `/tmp/namcomuseum50/`
   (`gba.py`, `ss.py`, `rread.py`, `enum_game.py`, `scan.py`, `db.py`).
 
 No ROM bytes or copyrighted graphics are reproduced in this report; only addresses, hashes,

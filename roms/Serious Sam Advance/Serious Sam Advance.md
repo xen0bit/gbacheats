@@ -1,5 +1,7 @@
 # Serious Sam Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -64,7 +66,7 @@ button combination reaches a screen that renders it. This is reported as a
 Xvfb): mGBA `.ss1` files are PNGs with a zlib-compressed `gbAs` chunk; EWRAM
 starts at raw offset `0x21000`. Write the 8 candidate bytes at raw
 `0x21000 + 0x6C` (= EWRAM `0x0200006C`), recompress, reload with F1, press A.
-Scripts: `/tmp/opencode/serioussam/{ssread,patchss,testpw,enterpw}.py`.
+Scripts: `/tmp/serioussam/{ssread,patchss,testpw,enterpw}.py`.
 
 ## 4. Address map
 
@@ -269,7 +271,7 @@ fetched web text was treated as data.
 * mGBA GDB stub (`mgba -g`) was tried but found unreliable ("Ignoring packet
   error", "Cannot execute while target running") — switched to savestate
   `gbAs` chunk decompression per guide §16.13.
-* Analysis scripts in `/tmp/opencode/serioussam/`:
+* Analysis scripts in `/tmp/serioussam/`:
   `ssread.py` (state RAM reader), `patchss.py` (buffer patcher),
   `testpw.py` (submit-and-screenshot driver), `enterpw.py`, `key.py`.
 * Web: SuperCheats (full 33-code list, fetched as data), GameFAQs snippet,

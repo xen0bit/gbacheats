@@ -1,5 +1,7 @@
 # Mucha Lucha! Mascaritas of the Lost Code (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -46,7 +48,7 @@ No hidden character, hidden level, password screen, or debug screen was found on
 
   (The held value has fixed high bits, e.g. Down reads `0xFC80`, L reads `0xFE00`.)
 
-- Screen path (all reproduced with screenshots saved to `/tmp/opencode/muchalucha/`):
+- Screen path (all reproduced with screenshots saved to `/tmp/muchalucha/`):
   1. Boot logo → language select (`ENGLISH` / `FRANCAIS` / `ESPANOL`), press A.
   2. "PRESS START" title → Start.
   3. Main menu, exactly four entries: `NEW GAME`, `LOAD GAME`, `OPTIONS`, `CREDITS` (Down wraps at CREDITS).
@@ -160,7 +162,7 @@ Searched as: u16 LE, u16 BE, u8, u32 LE, active-low (`~mask & 0x3FF`), fixed-hig
 ## 9. Tooling
 
 - `arm-none-eabi-objdump -M force-thumb` for joypad/handler disassembly; Capstone 5.0.7 for literal/BL/xref scans.
-- Python helpers in `/tmp/opencode/muchalucha/`: `phase0.py`, `btnsearch.py`, `btnsearch2.py`, `xref.py`, `xref2.py`, `xref3.py`, `dumpf.py`, `unlock_xref.py`, `ss.py` (mGBA `.ss1` `gbAs` zlib parser), `probe.py`, `probe2.py`, `keymap.py`, `ui.py`.
+- Python helpers in `/tmp/muchalucha/`: `phase0.py`, `btnsearch.py`, `btnsearch2.py`, `xref.py`, `xref2.py`, `xref3.py`, `dumpf.py`, `unlock_xref.py`, `ss.py` (mGBA `.ss1` `gbAs` zlib parser), `probe.py`, `probe2.py`, `keymap.py`, `ui.py`.
 - mGBA savestate-diff RAM reading (guide §16.13) because the GDB stub port was contended by other sessions; no GDB stub was used against this ROM.
 - Web sources: GameFAQs cheat page (403 on direct fetch; content obtained from search index), visualboyadvance.org, GGmania, CheatingDome, VGChartz, GameHacking.org, Mucha Lucha fandom wiki.
 

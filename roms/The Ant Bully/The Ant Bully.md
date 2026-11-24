@@ -1,5 +1,7 @@
 # The Ant Bully (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -35,7 +37,7 @@ Published "cheats" for this SKU are exclusively encrypted GameShark / CodeBreake
 * Pause (Start, in-game) uses **Left/Right**: `Map` → `Objectives` → `Save Game` → `Options` → `Quit Game`. (Down/Up are ignored in these menus — a harness quirk that looks like a dead key.)
 * Extras: from title press Right ×4, A. Three locked entries `????` with fire-crystal icons `×25`, `×50`, `×100`; only `Back` (B) is available while locked.
 * Save format (observed): 512-byte SRAM, three 0x80-byte slots at `0x00/0x80/0x100`, header words `0xD703/0xD603/0xD503/0x9503`, ASCII `IM2A` at slot `+0x08`. Slot data is checksummed: patching slot-1 byte `0x4E` from `0x64` to `0xFF`, or bytes `0x20..0x7F` to `0xFF`, made the slot display `Empty` after reload — confirming rejection of out-of-range save edits.
-* All screenshots from this session are in `/tmp/opencode/antbully/` (`titlemenu2.png`, `tm_all.png`, `extras1.png`, `extras_zoom.png`, `pause_all.png`, `pw_all.png`, `options1.png`, `boot_all.png`, etc.). No copyrighted assets are reproduced in this report.
+* All screenshots from this session were in `/tmp/antbully/` (`titlemenu2.png`, `tm_all.png`, `extras1.png`, `extras_zoom.png`, `pause_all.png`, `pw_all.png`, `options1.png`, `boot_all.png`, etc.). No copyrighted assets are reproduced in this report.
 
 ## 4. Address map
 
@@ -64,7 +66,7 @@ There is no password validator to reimplement. The only algorithmic artifact cha
 * `FF FC` = space, `FF FE` = line break; punctuation is single-byte (`0x0E` `.`, `0x0C` `,`, `0x1F` `?`, `0x07` apostrophe).
 * The first byte of each record's text is `ASCII - 0x20` (e.g. `0x23`→`C`, `0x25`→`E`, `0x30`→`P`), the rest are plain ASCII.
 * `80 B3`–`80 BE` are button-glyph tokens (A/B/L/R/etc.), which is how the weapon tutorial text refers to buttons.
-* Decoder: `/tmp/opencode/antbully/decode_text.py`, `dump_text.py`.
+* Decoder: `/tmp/antbully/decode_text.py`, `dump_text.py`.
 
 Save-slot rejection was tested empirically (§3) rather than by reversing a checksum routine; the checksum function itself was not isolated (see §8).
 
@@ -92,13 +94,13 @@ Save-slot rejection was tested empirically (§3) rather than by reversing a chec
 | Save-slot edits: byte `0x4E`→`0xFF`; bytes `0x20..0x7F`→`0xFF` | 2 | Slot displayed `Empty` after reload — out-of-range data rejected |
 | Ghidra xrefs to the six debug-named scene records | 6 addresses queried | 0 xrefs each |
 | Ghidra xrefs to candidate threshold literal `0x08154CE4` and to the button-mask tables | 4 addresses queried | 0 xrefs each |
-| ASCII strings matching `password|cheat|code|unlock|debug|generator|invalid` (excluding localized dialogue and the debug scene labels) | 1 (`DebugCheats`) | No validator/password string |
+| ASCII strings matching `password\|cheat\|code\|unlock\|debug\|generator\|invalid` (excluding localized dialogue and the debug scene labels) | 1 (`DebugCheats`) | No validator/password string |
 
 **Space-size statement for the negative:** the search covered all 8 MiB of ROM for (a) ASCII and `+0x20`-shifted password/code strings, (b) 32-bit pointers to scene records and to `0x04000130`, (c) u16/byte button-mask sequences with ≥4 distinct masks (16 u16 runs, 55,975 byte runs — all either zero-fill, generic mask maps, or unreferenced asset data), and (d) the entire decoded script text bank (`0x580000–0x5C8000`, 568 short records enumerated). No code-system component was found in that space.
 
 ## 7. Validation evidence
 
-* **Observed** (mGBA screenshots, `/tmp/opencode/antbully/`): all reachable screens listed in §3; Extras `????` with ×25/×50/×100; Options volume/language; Pause items; rejection of patched saves (`Empty` slot); no effect from 15 button combos.
+* **Observed** (mGBA screenshots, `/tmp/antbully/`): all reachable screens listed in §3; Extras `????` with ×25/×50/×100; Options volume/language; Pause items; rejection of patched saves (`Empty` slot); no effect from 15 button combos.
 * **Observed** (Ghidra 12.1.4 via REA): 1583 procedures, 556 defined strings; zero xrefs to debug scene names, threshold candidate, and mask tables; two readers of `KEYINPUT`.
 * **Derived** (byte-level): scene-record layout and the 54-name sorted list; text-bank encoding; save-slot layout; button-mask table.
 * **Inferred**: that the six debug/prototype-named scene records are unreleased developer leftovers. The 25/50/100 run at `0x154CE4` is labelled a coincidence (item-stat table, no xrefs), not the Extras thresholds.
@@ -115,7 +117,7 @@ Save-slot rejection was tested empirically (§3) rather than by reversing a chec
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, Python 3 (`struct`, `re`).
 * Xvfb `:317` + openbox; mGBA 0.10.5 (`-3`); `xdotool` XTEST key events with 35–120 ms holds; `scrot`, ImageMagick for crops.
 * Ghidra 12.1.4 through REA MCP (`open_binary` raw-binary/ARM @ `0x08000000`, `binary_overview`, `xrefs`, `resolve_containing_procedure`, `close_binary`).
-* `arm-none-eabi-objdump -M force-thumb` for the keypad readers; custom scripts `/tmp/opencode/antbully/decode_text.py`, `dump_text.py`, `combotest.sh`, `bootcombo.sh`.
+* `arm-none-eabi-objdump -M force-thumb` for the keypad readers; custom scripts `/tmp/antbully/decode_text.py`, `dump_text.py`, `combotest.sh`, `bootcombo.sh`.
 * Web recon (treated strictly as data): GameFAQs, VGChartz, Project Cheat Codes, GameHacking.org, GameFAQs cheats, ChapterCheats, cheat-gba.blogspot. One TCRF fetch returned 403; no instructions from any fetched page were followed.
 
 No ROM image or extracted assets are redistributed here; only hashes, addresses, algorithms and observations are published.

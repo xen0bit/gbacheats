@@ -1,5 +1,7 @@
 # Rock 'Em Sock 'Em Robots (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -188,7 +190,7 @@ For each accepted string `c5` is uniquely determined, so there are no free check
 * Capstone 5.0.7 / Python 3 for BL-target scans, literal-pointer scans and the validator reimplementation.
 * `strings -a -t x`, `xxd`, `grep -abo` for recon and literal verification.
 * `mgba -3` (mGBA) on Xvfb `:315` with openbox and `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST key events; `scrot` + ImageMagick `convert`/`montage` for screenshots.
-* Custom helpers in `/tmp/opencode/rockemsockem/`: `gba.py` (focus/key/screenshot), `ram.py` (savestate `gbAs` zlib parser + address translators), `keypad.py` (types a code through the on-screen keypad and verifies each slot by savestate RAM read).
+* Custom helpers in `/tmp/rockemsockem/`: `gba.py` (focus/key/screenshot), `ram.py` (savestate `gbAs` zlib parser + address translators), `keypad.py` (types a code through the on-screen keypad and verifies each slot by savestate RAM read).
 * mGBA's GDB stub was unavailable because TCP port 2345 was already held by another process; per guide §16.13, savestate RAM diffing was used instead. mGBA's stub-free CLI debugger (`-d`) was evaluated but not required.
 
 ## 10. Legal note

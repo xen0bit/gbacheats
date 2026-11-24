@@ -1,5 +1,7 @@
 # Britney's Dance Beat (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -94,7 +96,7 @@ Novel codes confirmed on the real password screen:
 
 | Code | Decoded state | Observed effect | Published? |
 |---|---|---|---|
-| `THQSP` | fixed branch, `status0|=0x10`, mask 0 | Video unlocked; Concert Mode still locked; Tour Book empty | **No** |
+| `THQSP` | fixed branch, `status0\|=0x10`, mask 0 | Video unlocked; Concert Mode still locked; Tour Book empty | **No** |
 | `WWHQV` | `status0=0x02→0x22`, `status1=0x14`, `k=5` | Concert Mode opens; Tour Book has 5 of 12 pictures; Video stays locked | **No** |
 | `WWHFT` | `status0=0x12`, `status1=0x14`, `k=11` | everything unlocked (5 songs, Video, 11 Tour Book pictures) | **No** |
 | `JWHLJ` | `status0=0x02`, `status1=0x50`, `k=3` | 3 Tour Book pictures unlocked and Practice song list grows from 1 to 4 songs; Concert/Video stay locked | **No** |
@@ -137,29 +139,29 @@ shows a red “Incorrect Password !” banner and stays on the screen.
 Screenshots (kept on disk, not embedded):
 
 ```
-/tmp/opencode/britney/shots/05_password_entry.png   password screen + alphabet
-/tmp/opencode/britney/shots/42_concert_base.png     baseline lock state (submenu)
-/tmp/opencode/britney/shots/92_practice.png         baseline: 1 song unlocked
-/tmp/opencode/britney/shots/61_zz_reject.png        "Incorrect Password !"
-/tmp/opencode/britney/shots/69_wwhqv.png            WWHQV typed in
-/tmp/opencode/britney/shots/71_dance_wwhqv.png      WWHQV effect: Concert open, Video locked
-/tmp/opencode/britney/shots/73_tour_wwhqv.png       WWHQV: Concert list with 1 song
-/tmp/opencode/britney/shots/75_tour_wwhqv.png       WWHQV: 5 Tour Book pictures
-/tmp/opencode/britney/shots/76_pw_bbbzd.png         encoder output CTHQQ pre-filled after WWHQV
-/tmp/opencode/britney/shots/49_thqsp.png            THQSP typed in
-/tmp/opencode/britney/shots/51_dance_thqsp.png      THQSP effect: Video open only
-/tmp/opencode/britney/shots/121_jwhlj.png           JWHLJ typed in
-/tmp/opencode/britney/shots/124_tour_jwhlj.png      JWHLJ: 4 songs in Practice list
-/tmp/opencode/britney/shots/126_tour_jwhlj.png      JWHLJ: 3 Tour Book pictures
-/tmp/opencode/britney/shots/78_bbbzd_reject.png     checksum-valid, k>11 rejected
-/tmp/opencode/britney/shots/80_xwbdl_reject.png     checksum-valid, status bits invalid rejected
-/tmp/opencode/britney/shots/104_concert_dww.png     DWWFD: all 5 songs
-/tmp/opencode/britney/shots/108_concert_nxrfp.png   NXRFP: all 5 songs
-/tmp/opencode/britney/shots/58_tour_hmnfk.png       HMNFK: 11 Tour Book pictures (12th still locked)
-/tmp/opencode/britney/shots/97_pause.png            pause menu
-/tmp/opencode/britney/shots/83_options.png          options screen
-/tmp/opencode/britney/shots/87_2p.png              2-Player link error
-/tmp/opencode/britney/shots/89_puzzle.png           Puzzle menu
+/tmp/britney/shots/05_password_entry.png   password screen + alphabet
+/tmp/britney/shots/42_concert_base.png     baseline lock state (submenu)
+/tmp/britney/shots/92_practice.png         baseline: 1 song unlocked
+/tmp/britney/shots/61_zz_reject.png        "Incorrect Password !"
+/tmp/britney/shots/69_wwhqv.png            WWHQV typed in
+/tmp/britney/shots/71_dance_wwhqv.png      WWHQV effect: Concert open, Video locked
+/tmp/britney/shots/73_tour_wwhqv.png       WWHQV: Concert list with 1 song
+/tmp/britney/shots/75_tour_wwhqv.png       WWHQV: 5 Tour Book pictures
+/tmp/britney/shots/76_pw_bbbzd.png         encoder output CTHQQ pre-filled after WWHQV
+/tmp/britney/shots/49_thqsp.png            THQSP typed in
+/tmp/britney/shots/51_dance_thqsp.png      THQSP effect: Video open only
+/tmp/britney/shots/121_jwhlj.png           JWHLJ typed in
+/tmp/britney/shots/124_tour_jwhlj.png      JWHLJ: 4 songs in Practice list
+/tmp/britney/shots/126_tour_jwhlj.png      JWHLJ: 3 Tour Book pictures
+/tmp/britney/shots/78_bbbzd_reject.png     checksum-valid, k>11 rejected
+/tmp/britney/shots/80_xwbdl_reject.png     checksum-valid, status bits invalid rejected
+/tmp/britney/shots/104_concert_dww.png     DWWFD: all 5 songs
+/tmp/britney/shots/108_concert_nxrfp.png   NXRFP: all 5 songs
+/tmp/britney/shots/58_tour_hmnfk.png       HMNFK: 11 Tour Book pictures (12th still locked)
+/tmp/britney/shots/97_pause.png            pause menu
+/tmp/britney/shots/83_options.png          options screen
+/tmp/britney/shots/87_2p.png              2-Player link error
+/tmp/britney/shots/89_puzzle.png           Puzzle menu
 ```
 
 ## 4. Address map
@@ -176,7 +178,7 @@ All ROM addresses are `0x08000000 + file_offset`.
 | `0x03002BE6` | struct +22, byte bitmask (≤ `0x1F`; set by password validator) |
 | `0x03002BE8` | struct +24, u16 item bitmask (0..`0x7FF`; set by password validator) |
 | `0x03002C28` | status0 byte (low 8 bits of `X`, then `&0xEF`, then all-items bit `0x10`) |
-| `0x03002C29` | status1 byte: `(R/6) | ((R%6)<<4)` |
+| `0x03002C29` | status1 byte: `(R/6) \| ((R%6)<<4)` |
 | `0x03002C40` | **5-byte password buffer**, values 0–19, grid order |
 | `0x03002C48` | error-message flag set on failed submit (`=1`) |
 | `0x08006F80` | helper: index-of-byte in a 20-byte table |
@@ -501,8 +503,8 @@ accepted, which proves the fixed backdoor is a separate compare.
 * `gdb-multiarch` against mGBA's GDB stub (`-g`, port 2345) for RAM reads and
   a read watchpoint on `0x03002C40`; the watchpoint is what located the
   validator (`0x08006FB4`).
-* Python 3 model/encoder/enumerator: `/tmp/opencode/britney/britney_pw.py`.
-* Screenshots: `/tmp/opencode/britney/shots/`.
+* Python 3 model/encoder/enumerator: `/tmp/britney/britney_pw.py`.
+* Screenshots: `/tmp/britney/shots/`.
 * No ROM or game assets are redistributed here; only addresses, hashes,
   algorithms, and self-generated codes are published.
 

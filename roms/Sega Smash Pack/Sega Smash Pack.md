@@ -1,5 +1,7 @@
 # Sega Smash Pack (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -178,7 +180,7 @@ Sources: Neoseeker, GameGenie, GameFAQs (GBA 551519), ggmania, chaptercheats. Ga
 
 - `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -abo`.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for ROM disassembly; Capstone/Python for literal and pattern scans.
-- mGBA 0.10.5 under Xvfb `:319` + openbox; `xdotool` XTEST input; `scrot` + ImageMagick crops (≈20 screenshots retained on disk in `/tmp/opencode/segasmash`).
+- mGBA 0.10.5 under Xvfb `:319` + openbox; `xdotool` XTEST input; `scrot` + ImageMagick crops (≈20 screenshots retained on disk in `/tmp/segasmash`).
 - mGBA CLI debugger (`mgba -d`) driven through a PTY socket (`dbgserver.py`/`dbgcmd.py`) for breakpoints and RAM reads/writes (§16.2/§16.13 alternative to the incompatible GDB stub).
 - Savestate `gbAs` chunk decompression for RAM inspection and password injection (`state.bin`, `state_patched.bin`).
 - Third-party reference: `ecco-password-lib.js` (MIT, eccoonline.net) used only as a cross-check; all claims here are tied to ROM bytes at the addresses above.

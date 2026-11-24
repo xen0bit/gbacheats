@@ -1,5 +1,7 @@
 # Army Men: Turf Wars (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -115,7 +117,7 @@ Window is 720×480 at `(153,164)`; crop with
 6. In game: Start → pause → `UNPAUSE`, `QUIT`. `QUIT` → `ARE YOU SURE?`
    `YES`/`NO`; `YES` returns to the title screen.
 
-### Screenshots (session evidence, `/tmp/opencode/turf/`)
+### Screenshots (session evidence, `/tmp/turf/`)
 
 | File | Content |
 |---|---|
@@ -402,7 +404,7 @@ screen. This is a **proven absence for the single-cart retail build**, not a
   scan, pointer scan, table dump, mGBA savestate (`gbAs` zlib chunk) parser.
 - mGBA 0.10.5 (`/usr/games/mgba`), Xvfb `:143`, openbox, scrot, ImageMagick
   `compare`/`convert`, xdotool.
-- Scripts used this session: `/tmp/opencode/turf/ui.py` (keys/screenshots),
+- Scripts used this session: `/tmp/turf/ui.py` (keys/screenshots),
   `state.py` (savestate decode), `btnscan.py`, `lsscan.py`, `titlescan.py`.
 
 ## 10. Legal note

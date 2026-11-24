@@ -1,5 +1,7 @@
 # Street Racing Syndicate (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -222,7 +224,7 @@ not a gated feature (no screen-state gate). The console game's system was simply
 * `strings -t x`, `grep -abo`, custom Python scanners for pointers, encodings, and key-mask patterns.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly.
 * mGBA 0.10.5 + Xvfb `:315` + openbox + `xdotool` (XTEST) + `scrot`; Python helper `key.py` and
-  `combo.py` in `/tmp/opencode/streetracing/`.
+  `combo.py` in `/tmp/streetracing/`.
 * GDB stub attempted but non-responsive; conclusion rests on static evidence plus emulator observation.
 
 No ROM or copyrighted assets are redistributed in this report; only hashes, addresses, and generated

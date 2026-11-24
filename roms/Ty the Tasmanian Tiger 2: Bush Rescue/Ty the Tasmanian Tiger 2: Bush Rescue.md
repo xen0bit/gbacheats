@@ -1,5 +1,7 @@
 # Ty the Tasmanian Tiger 2: Bush Rescue (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -221,7 +223,7 @@ bound that negative instead.
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/ty2/` (analysis artifacts, not distributed with the ROM):
+Scripts in `/tmp/ty2/` (analysis artifacts, not distributed with the ROM):
 `key.py` (xdotool input), `scan_masks.py`, `scan2.py`, `scan3.py`, `scan_table.py`,
 `scan_masksets.py` (mask/table scans), `scan_bl.py`, `triage_calls.py` (BL/xref scans),
 `scan_keyinput.py` (KEYINPUT literal scan), `ssdiff.py` (mGBA `gbAs` PNG-chunk state

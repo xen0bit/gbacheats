@@ -1,5 +1,7 @@
 # Dr. Seuss: The Cat in the Hat (BCTE, USA) (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | field | value |
@@ -225,7 +227,7 @@ an unconditional “8 items always works” behaviour.
 
 ## 7. Validation evidence
 
-- **Observed** (emulator, screenshots on disk in `/tmp/opencode/catcolon/`):
+- **Observed** (emulator, screenshots on disk in `/tmp/catcolon/`):
   title/main/password/options/character-select/difficulty/gameplay screens;
   8-symbol entry; B deletes; valid codes fade to `Choose Difficulty`; invalid
   codes stay; three novel codes accepted; rejection cases.
@@ -266,7 +268,7 @@ an unconditional “8 items always works” behaviour.
 - `python3` + `capstone` 5.0.7 + `numpy` 2.5.5; `arm-none-eabi-objdump`,
   `gdb-multiarch`, `mgba -3` / `mgba -g`, `Xvfb :317`, `openbox`, `xdotool`,
   `import`/`convert`/`montage`/`scrot`; REA/Ghidra 12.1.4 MCP for decompilation.
-- Scripts in `/tmp/opencode/catcolon/`: `phase0.py` (hash/header/logo scan),
+- Scripts in `/tmp/catcolon/`: `phase0.py` (hash/header/logo scan),
   `scan_lit.py` / `blscan.py` (literal + BL scans), `findtable.py`,
   `findtable2.py`, `table3.py`, `perm.py` (table searches), `ss.py` (gbAs
   savestate parser), `ui.py` (XTEST input helper), `oracle.py` (automated code

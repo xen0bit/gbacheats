@@ -1,5 +1,7 @@
 # Juka and the Monophonic Menace (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -118,7 +120,7 @@ Because no code system exists, this section records the **search spaces and thei
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep` — fingerprint and literal scans.
 * Python 3 + `capstone`/`keystone`, `arm-none-eabi-objdump -M force-thumb/force-arm` — scanner `scan.py`, `static_neg.py`, `static_neg2.py` (keyword/alphabet/button-run counts).
 * REA MCP (Ghidra 12.1.4 provider): `open_binary`, `xrefs`, `analyze_function` on `0x080006F4`, `0x08000850`, `0x08000980`, `0x08008424`; evidence IDs `ev_dd66f8387fe37cae3f271f78cd597122568688e51cd1d01e88dc4ccce4639293` (main loop) and `ev_ff922b636ca466dc984c0f8b0da0d6cfdd56f2c093445ebed4c497de635e8544` (KEYINPUT xref).
-* mGBA 0.10.5 SDL on `Xvfb :318` + `openbox`, `xdotool` for XTEST input, `import`/`montage`/`convert` for screenshots (kept on disk in `/tmp/opencode/juka`, not attached).
+* mGBA 0.10.5 SDL on `Xvfb :318` + `openbox`, `xdotool` for XTEST input, `import`/`montage`/`convert` for screenshots (kept on disk in `/tmp/juka`, not attached).
 * Savestate decoder `ss.py` (zlib decompress of the PNG `gbAs` chunk) and font experiments `font.py`/`font2.py`.
 
 ## 10. Legal note

@@ -1,5 +1,7 @@
 # Archer Maclean's 3D Pool (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -475,7 +477,7 @@ negative is a property of the ROM, not a gap in testing.
 
 ### Observed (emulator screenshots)
 
-All captures are in `/tmp/opencode/pool/shots/` (720×480 GBA viewport crops):
+All captures were in `/tmp/pool/shots/` (720×480 GBA viewport crops):
 
 | File | Shows |
 |---|---|
@@ -544,11 +546,11 @@ screen, no code alphabet, no code table, and no invalid-code message.
   for the input/editor and frame-tick ranges.
 * Python 3 + Capstone 5.0.7 for literal-load, key-mask and byte-enumeration
   scans.
-* `mgba -d` CLI debugger driven over a Python pty (`/tmp/opencode/pool/dbgctl.py`)
+* `mgba -d` CLI debugger driven over a Python pty (`/tmp/pool/dbgctl.py`)
   for deterministic frame stepping, `0x04000130` verification and RAM dumps.
   GDB stub port 2345 was already occupied by another analysis session; the CLI
   debugger was used instead, without touching that session.
-* Scripts: `/tmp/opencode/pool/` — `dbgctl.py`, `probe*.py`, `walk*.py`,
+* Scripts: `/tmp/pool/` — `dbgctl.py`, `probe*.py`, `walk*.py`,
   `buttontest.py`, `wraptest*.py`, `choosewalk*.py`; scans were inline Python.
 
 ### Legal note

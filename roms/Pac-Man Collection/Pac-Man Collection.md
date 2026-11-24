@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Pac-Man Collection/Pac-Man Collection.gba` |
+| File | `roms/Pac-Man Collection/Pac-Man Collection.gba` |
 | Size | 4,194,304 bytes (0x400000) |
 | Header title | `PACMANCOLLE` |
 | Game code / maker | `APCE` / `AF` |

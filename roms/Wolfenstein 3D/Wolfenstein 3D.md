@@ -1,5 +1,7 @@
 # Wolfenstein 3D (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -13,7 +15,7 @@
 | SHA-1 | `4cf7b70807e8de6472844ea260fc4c48c879134a` |
 | SHA-256 | `cf327148ace896adc624451edbd7c2ca1da9c1ac8746a22d8085edfc510b5c65` |
 
-A byte-identical working copy was analysed in `/tmp/opencode/wolfenstein/game.gba` (same MD5). No ROM or game asset is reproduced here.
+A byte-identical working copy was analysed in `/tmp/wolfenstein/game.gba` (same MD5). No ROM or game asset is reproduced here.
 
 ## 2. Executive summary
 
@@ -27,7 +29,7 @@ There is **no password-entry screen** in this build. The `PASSWORD`, `NEW PASSWO
 * SDL keymap used: **A = `x`**, **B = `z`**, **L = `a`**, **R = `s`**, Start = `Return`, D-pad = arrow keys.
 * Route: boot → title → Start through two credit screens → `Options` → `New Game` → episode 1 → difficulty "Bring 'em on!" → gameplay → **Start** to open the in-game `Options` menu (the cursor rests on `New Game`; `Back to Game` is highlighted in yellow but is *not* the cursor).
 * Code entry: hold `a`+`s` (L+R), tap the A/B sequence with ~90 ms holds and ~90 ms gaps, release L+R. A successful code plays a distinct confirmation sample and clears the input buffer; the effect applies when you select `Back to Game` (cursor: press `Up` once from `New Game`, then `A`).
-* A pristine savestate of the pause menu was kept as `base.ss1` in `/tmp/opencode/wolfenstein/`; every test below was run by reloading it (mGBA `F1`) and re-saving (`Shift+F1`) to an independent file.
+* A pristine savestate of the pause menu was kept as `base.ss1` in `/tmp/wolfenstein/`; every test below was run by reloading it (mGBA `F1`) and re-saving (`Shift+F1`) to an independent file.
 * Codes tested (all with L+R held): `AABAAAAA`, **`AABABBBB`** (novel), `ABAABBBA`, `ABAABBAA`, `ABBAAAAA`, `AAAAAAAA` (reject), `AABABBBA` (near-miss reject).
 
 ## 4. Address map
@@ -125,7 +127,7 @@ Published codes, independently verified from the pristine base state: `ABBAAAAA`
 
 ## 7. Validation evidence
 
-**Observed** (emulator / savestate RAM): all rows of the §6b table; the weapon HUD (`play_weapons.png`), boss floor 9 (`play_boss.png`), the pause menu and all its sub-screens (`screen_graphics2.png` brightness, `screen_control2.png` turn acceleration, `screen_loadgame2.png` four empty save slots), title/credits/episode/difficulty screens (`shot_title.png`, `shot_menu1.png`, `shot_menu2.png`, `shot_newgame.png`, `shot_difficulty.png`, `shot_ingame.png`, `shot_pause.png`). Screenshots and `.ss1` evidence are in `/tmp/opencode/wolfenstein/`, outside the ROM folder.
+**Observed** (emulator / savestate RAM): all rows of the §6b table; the weapon HUD (`play_weapons.png`), boss floor 9 (`play_boss.png`), the pause menu and all its sub-screens (`screen_graphics2.png` brightness, `screen_control2.png` turn acceleration, `screen_loadgame2.png` four empty save slots), title/credits/episode/difficulty screens (`shot_title.png`, `shot_menu1.png`, `shot_menu2.png`, `shot_newgame.png`, `shot_difficulty.png`, `shot_ingame.png`, `shot_pause.png`). Screenshots and `.ss1` evidence were in `/tmp/wolfenstein/`, outside the ROM folder.
 
 **Derived** (disassembly): validator control flow, table contents, input semantics (edge-triggered A/B, held L+R gate), effect writes and sound IDs, absence of code-region xrefs to the `PASSWORD` text bank and its pointer table.
 
@@ -142,7 +144,7 @@ Published codes, independently verified from the pristine base state: `ABBAAAAA`
 
 ## 9. Tooling
 
-`strings -t x`, `grep -abo`, `xxd`, `arm-none-eabi-objdump -M force-thumb`, Python `struct`/Capstone-style literal & BL scans, mGBA 0.10.5 under Xvfb :316 + openbox with `SDL_AUDIODRIVER=dummy`, `xdotool` XTEST input, `import`/`scrot` screenshots, mGBA `Shift+F1`/`F1` savestates, and a Python PNG `gbAs` zlib extractor (`ss.py`) for RAM diffs. Scripts kept in `/tmp/opencode/wolfenstein/`: `find_codes.py`, `parse_table.py`, `analyze_validator.py`, `xrefs.py`, `enumerate.py`, `ss.py`, `rebuild_ss.py`, `runtests.py`, `code_and_play.py`.
+`strings -t x`, `grep -abo`, `xxd`, `arm-none-eabi-objdump -M force-thumb`, Python `struct`/Capstone-style literal & BL scans, mGBA 0.10.5 under Xvfb :316 + openbox with `SDL_AUDIODRIVER=dummy`, `xdotool` XTEST input, `import`/`scrot` screenshots, mGBA `Shift+F1`/`F1` savestates, and a Python PNG `gbAs` zlib extractor (`ss.py`) for RAM diffs. Scripts kept in `/tmp/wolfenstein/`: `find_codes.py`, `parse_table.py`, `analyze_validator.py`, `xrefs.py`, `enumerate.py`, `ss.py`, `rebuild_ss.py`, `runtests.py`, `code_and_play.py`.
 
 The mGBA GDB stub was unusable ("Ignoring packet error", memory reads failed), so all RAM evidence came from diffing decompressed savestates (guide §16.13).
 

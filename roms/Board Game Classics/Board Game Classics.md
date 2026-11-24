@@ -1,5 +1,7 @@
 # Board Game Classics (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -118,7 +120,7 @@ and boards are drawn as `?`.
 | `4` (Confirm) | Invalid Password |
 | `1234567` | 7th digit ignored, buffer stays `123456` |
 
-Screenshots (kept as working artifacts in `/tmp/opencode/boardclassics/`):
+Screenshots (kept as working artifacts in `/tmp/boardclassics/`):
 
 * `q6_c.png` / `fa0_c.png` — password keypad, empty
 * `fa2_c.png` — `Password Accepted` after `000413`
@@ -397,7 +399,7 @@ rejected in-game.
 * WEB: GameFAQs cheats page via `web.archive.org` (direct fetch is 403);
   searches for TCRF/VGChartz/fan-wiki pages and for the literal `000413`.
 
-Enumeration model used (also at `/tmp/opencode/boardclassics/password_model.py`):
+Enumeration model used (also at `/tmp/boardclassics/password_model.py`):
 
 ```python
 import itertools, struct

@@ -1,5 +1,7 @@
 # Star Wars: The New Droid Army (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 - File: `Star Wars: The New Droid Army.gba`, 8,388,608 bytes (0x800000)
 - Header: title `STAR WARS: T`, game code `A2WE78`, maker `78` (THQ), version `0x00`
@@ -192,7 +194,7 @@ four hidden codes are not on the published lists.
 ## 7. Validation evidence
 - **Observed**: `D31` (published) → "Password accepted"; gameplay started (speeder desert level).
   `NH8` (novel) → "Password accepted". `T2T` and `Z3J` → "Invalid password". Screenshots kept in
-  `/tmp/opencode/droidarmy/`. The 32-symbol alphabet was read directly from the password screen
+  `/tmp/droidarmy/`. The 32-symbol alphabet was read directly from the password screen
   and matches the ASCII table at `0x0804b914`.
 - **Derived**: validator/decoder algorithm, checksum, field layout, range table at `0x0804b938`,
   the 192/146 counts, and the 15-entry hidden-cheat table (disassembly + Ghidra pseudocode).
@@ -222,7 +224,7 @@ four hidden codes are not on the published lists.
 - REA Ghidra MCP (`open_binary` raw-binary arm @ `0x08000000`, `search_strings`, `xrefs`,
   `analyze_function`, `read_bytes`, `close_binary`) for pseudocode of `0x0800be6c` and
   `0x08025120`.
-- `validator.py` in `/tmp/opencode/droidarmy/`: exact reimplementation of the decoder and
+- `validator.py` in `/tmp/droidarmy/`: exact reimplementation of the decoder and
   encoder; enumerates all 192 accepted codes and mints novel ones.
 - Automation: `key.py`, `pwtest.py` (grid navigation), `sstate.py`/`flagtest.py` (savestate
   `gbAs` zlib-chunk parsing; EWRAM is at raw offset `0x21000`), `tesseract` OCR, `scrot`.

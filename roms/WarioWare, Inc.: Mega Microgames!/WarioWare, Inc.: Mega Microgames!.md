@@ -1,5 +1,7 @@
 # WarioWare, Inc.: Mega Microgames! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -55,7 +57,7 @@ survey and by the input enumeration in §6b.
   save). Start inside a stage → boombox/minigame → pause menu `CONTINUE`/`EXIT`
   → results `Retry`/`Exit`.
 * Savestate used for input tests: slot 2 (main menu) and slot 3 (title screen),
-  taken in the work dir `/tmp/opencode/warioware/` so the ROM folder stayed clean.
+  taken in the work dir `/tmp/warioware/` so the ROM folder stayed clean.
 
 ## 4. Address map
 
@@ -183,7 +185,7 @@ from any published cheat list was needed or tested as an in-game code.
 
 ## 7. Validation evidence
 
-* **Observed** — emulator screenshots in `/tmp/opencode/warioware/`
+* **Observed** — emulator screenshots in `/tmp/warioware/`
   (`boot4.png`, `title_after_start.png`, `menu1.png`, `main_menu3.png`,
   `options_screen.png`, `grid_screen.png`, `name_r_chance.png`,
   `name_trust_result.png`, `after_exit.png`, `intro3_9.png`, `skip_try.png`,
@@ -217,7 +219,7 @@ from any published cheat list was needed or tested as an in-game code.
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `strings -t x -n 4`, `xxd`.
 * `arm-none-eabi-objdump -M force-thumb/-M force-arm` for manual disassembly.
 * Python 3 + Capstone for PC-relative literal / pointer scans; Pillow for
-  screenshot diffing. Scripts in `/tmp/opencode/warioware/`:
+  screenshot diffing. Scripts in `/tmp/warioware/`:
   `key.py`, `combo_test.py`, `bruteforce.py`, `bruteforce_title.py`.
 * mGBA 0.10.5 with Xvfb `:316`, openbox, `xdotool` XTEST input, `scrot`.
 * REA/Ghidra was opened but the shared MCP session was taken over by another

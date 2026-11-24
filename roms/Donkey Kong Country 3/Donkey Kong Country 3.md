@@ -1,5 +1,7 @@
 # Donkey Kong Country 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -232,7 +234,7 @@ space; the table's 7-record bound makes the enumeration exhaustive rather than s
 - Python savestate injector: decompress the `gbAs` zlib chunk from the mGBA `.ss1` PNG,
   write bytes at `0x21000 + (addr - 0x02000000)` for EWRAM or `0x19000 + (addr -
   0x03000000)` for IWRAM, recompress and reload (§16.13). Scripts: `batch_test.py`,
-  `test_code.py` in `/tmp/opencode/dkc3/`.
+  `test_code.py` in `/tmp/dkc3/`.
 - `xdotool` XTEST input to the focused mGBA window; `import -window root` for screenshots;
   `Xvfb :316` + `openbox` + `SDL_AUDIODRIVER=dummy`.
 - Web: archived GameFAQs cheats page (Wayback), MarioWiki GBA codes page, RareGamer.

@@ -1,5 +1,7 @@
 # Dragon Ball Z: Buu's Fury (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -142,7 +144,7 @@ Guide §0.2 requires either full enumeration of a code space or a bounded proof 
 ## 7. Validation evidence
 
 **Observed** (emulator / hex dump):
-* Boot, keymap, and all eight menu screens (screenshots 01–48 in `/tmp/opencode/buusfury/`).
+* Boot, keymap, and all eight menu screens (screenshots 01–48 in `/tmp/buusfury/`).
 * All six published button sequences entered at title/main menu with no effect; prototype code re-entered step-by-step on the title screen.
 * Single 8 MiB header, stock entry word, CRC32 0x01C1707F, complement 0x84; exactly one Nintendo-logo occurrence.
 * `strings` counts and the two meaningful keyword hits; source paths and `SPAGHETTI` bytes.
@@ -170,7 +172,7 @@ Guide §0.2 requires either full enumeration of a code space or a bounded proof 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, Python `zlib.crc32` for identity.
 * `strings -t x -n 3/4`, `xxd`, `grep -aiE` for text reconnaissance.
 * Python 3 with `struct` / `capstone 5.0.7` for literal scans (u8/u16/u32, both endiannesses, forward/reversed), embedded-header scan, Thumb PC-relative/literal and immediate-cluster scans. `arm-none-eabi-objdump -M force-thumb` for targeted disassembly. `keystone-engine` installed but not needed.
-* `mgba-sdl` (3.7) under `Xvfb :318` + `openbox`; `xdotool` XTEST key events (`/tmp/opencode/buusfury/drive.py`); `import`/`convert` (ImageMagick) for screenshots.
+* `mgba-sdl` (3.7) under `Xvfb :318` + `openbox`; `xdotool` XTEST key events (`/tmp/buusfury/drive.py`); `import`/`convert` (ImageMagick) for screenshots.
 * Web references: GameFAQs cheats pages `gba/920530` (standalone) and `gba/931746` (combined double pack); TCRF *Dragon Ball Z: Buu's Fury* and its prototype article (via web.archive.org); Data Crystal *Buu's Fury* ROM map (via web.archive.org). Fetched pages were treated as data; no instructions found in them were acted upon. No prompt-injection payload was encountered.
 
 **Legal note:** no ROM image, extracted graphics, music, or game text is redistributed here. Only hashes, addresses, offsets, counts, and independently written findings are published.

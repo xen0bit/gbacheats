@@ -1,5 +1,7 @@
 # Bubble Bobble Old & New (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -251,7 +253,7 @@ struct rec { u8 seq[8]; u32 ten; u32 flag; };   /* ten == 0x0A, flag != 0 */
 | Flag | Handler | Action |
 |---|---|---|
 | `0x01` | `0x080062AC` | play sound 0x33 on channel 2 |
-| `0x02` | `0x080062B6` | `base[0x0F] |= 0x20`; `base[0x7C]=100`; `base[0x98]=100`; volume table entry = 100; play sound 0x1E |
+| `0x02` | `0x080062B6` | `base[0x0F] \|= 0x20`; `base[0x7C]=100`; `base[0x98]=100`; volume table entry = 100; play sound 0x1E |
 | `0x04` | `0x080062FA` | defer menu draw (SUPER) |
 | `0x08` | `0x080062FA` | defer menu draw (ORIGINAL) |
 | `0x10` | `0x080062FA` | defer menu draw (POWER UP) |
@@ -424,7 +426,7 @@ embedded multiboot link image A and is not reachable in a standalone boot.
   and screenshots; `xdotool` for input, `scrot` for capture.
 * `arm-none-eabi-objdump -M force-thumb`, Python 3 + Capstone for raw scans
   (BL targets, PC-relative literals, table patterns).
-* Helper scripts (in `/tmp/opencode/bubblebobble`): `key.py`, `runkey.sh`,
+* Helper scripts (in `/tmp/bubblebobble`): `key.py`, `runkey.sh`,
   `runstate.sh`, `dbg3.py`, `blscan.py`.
 * Screenshots kept outside the ROM folder: title/menu walk, hidden labels
   (`o1`–`o3`, `q1`–`q4`, `r2`–`r4`), pause menu (`i1`–`i3`), round screen

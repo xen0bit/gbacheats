@@ -1,5 +1,7 @@
 # 2-in-1 — Sonic Gamepack: Sonic Pinball Party & Sonic Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -326,7 +328,7 @@ name and has no published special name.
 * Rejections: `90_wrong.png` (wrong step 4), `138_wrongB.png` (wrong final B),
   `81_tailsA.png` (final character Tails).
 * Sound Test range: 1–39, wraps (`143_st39_exact.png`, `144_stwrap.png`).
-* Menus: screenshots `01`–`142` in `/tmp/opencode/sonic/shots/`; key ones are
+* Menus: screenshots `01`–`142` in `/tmp/sonic/shots/`; key ones are
   `11_menu`, `12_options`, `13_soundtest`, `43_pin_menu`, `45_pin_options`,
   `48_pin_opt`, `49_pin_sound`, `104_pin_menu`, `107_arcade`, `114_story`,
   `116_story2`, `121_tutorial`, `122_party`, `123_chao`, `124_casino`,
@@ -368,7 +370,7 @@ name and has no published special name.
 * `mGBA 0.10.5` SDL, `Xvfb :113`, `openbox`, `xdotool`, `scrot`, ImageMagick.
 * `gdb-multiarch` against `mgba -g` (GDB stub) for the write watchpoint on
   `0x0300271D`; log `gdbrun.log` shows the 0→8 increments at `0x0885BA66`.
-* Custom `libmgba` harness (`/tmp/opencode/sonic/harness.c`) for deterministic
+* Custom `libmgba` harness (`/tmp/sonic/harness.c`) for deterministic
   savestate loads, key injection, RAM dumps, and per-frame progress-byte probes.
   Compile: `gcc -O2 -o harness harness.c -lmgba -lm` (`libmgba-dev` installed).
 * `findwrite.c` (mGBA debugger API) was built during the investigation; the GDB stub
@@ -379,7 +381,7 @@ name and has no published special name.
 * Savestates used: `.ss3` (Sonic Advance character select), `.ss5` (Pinball mode
   select), and `.ss6` (shell `PRESS START`) for selector timing tests. Both are generated
   artifacts, not redistributed assets.
-* An early access copy `/tmp/opencode/sonic/pinball.gba` (entry word patched to
+* An early access copy `/tmp/sonic/pinball.gba` (entry word patched to
   `EA017FFE`, a direct ARM branch to `0x08060000`) was used to inspect Pinball before the
   Down boot selector was found. All evidence in this report uses the unmodified original
   image and the Down selector.

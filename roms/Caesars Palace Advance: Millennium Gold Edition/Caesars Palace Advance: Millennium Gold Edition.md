@@ -1,5 +1,7 @@
 # Caesars Palace Advance: Millennium Gold Edition (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -385,7 +387,7 @@ The corresponding screenshots in the work directory are
   * `rsp.py` — minimal GDB-remote client used for initial RAM checks.
   * Savestate parsing: mGBA `.ssN` is a PNG whose `gbAs` chunk is zlib-compressed; decompressed
     state was searched for the input buffer.
-* Work directory: `/tmp/opencode/caesars` (screenshots and scripts; not part of the repo).
+* Work directory: `/tmp/caesars` (screenshots and scripts; not part of the repo).
 
 ## 10. Legal note
 

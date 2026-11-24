@@ -1,5 +1,7 @@
 # Lemony Snicket's A Series of Unfortunate Events (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -126,4 +128,4 @@ The handler table has 10 slots; two further entries are not labelled on the sing
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/lemony/`: `gba.py` (input/screenshot), `ss.py` (savestate parser), `save_state.sh`, `snap.py` (crop + tesseract OCR), `scan.py` (keyword/key-mask scan), `xref.py`/`blscan.py`/`statewrite.py`/`stateset.py` (xref scans), `lz.py`/`lzdump.py` (LZ77 recon), `dbg.py` (CLI-debugger FIFO driver), `patchss.py`/`patch2.py` (savestate research), `fuzz.py`/`fuzz2.py` (combo fuzzing). Tools: mGBA 0.10.5 CLI debugger, `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, tesseract, Xvfb/openbox/xdotool/scrot/ImageMagick. No copyrighted assets are reproduced here; only addresses, hashes, and observed labels are published.
+Scripts in `/tmp/lemony/`: `gba.py` (input/screenshot), `ss.py` (savestate parser), `save_state.sh`, `snap.py` (crop + tesseract OCR), `scan.py` (keyword/key-mask scan), `xref.py`/`blscan.py`/`statewrite.py`/`stateset.py` (xref scans), `lz.py`/`lzdump.py` (LZ77 recon), `dbg.py` (CLI-debugger FIFO driver), `patchss.py`/`patch2.py` (savestate research), `fuzz.py`/`fuzz2.py` (combo fuzzing). Tools: mGBA 0.10.5 CLI debugger, `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, tesseract, Xvfb/openbox/xdotool/scrot/ImageMagick. No copyrighted assets are reproduced here; only addresses, hashes, and observed labels are published.

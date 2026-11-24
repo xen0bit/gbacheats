@@ -1,5 +1,7 @@
 # Super Duper Sumos (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -111,7 +113,7 @@ code did not change the behaviour.
 **Savestate layout used for RAM reads** (mGBA `.ss1`, PNG with zlib `gbAs` chunk, 397,312 B
 decompressed): `KEYINPUT` at state offset **0x530** (16-bit; 0x03FF = all released), IWRAM at
 **0x19000** (=> `0x03000000`), EWRAM at **0x21000** (=> `0x02000000`). Helper:
-`/tmp/opencode/superdupersumos/ssread.py`.
+`/tmp/superdupersumos/ssread.py`.
 
 ## 5. Algorithm
 
@@ -216,7 +218,7 @@ at the main menu were `0x080C3862 / 0x080C386D`; 0x0200022C read as 0 on a fresh
   `xdotool` (XTEST, held keys), `scrot`, ImageMagick `convert`/`montage`.
 * `gdb-multiarch` used once to confirm the initial PC/SP; abandoned because the stub is
   single-client and closed after one connection. Savestate diffing was used for all RAM reads.
-* Python helpers in `/tmp/opencode/superdupersumos/`: `ssread.py` (gbAs inflate + KEYINPUT/EWRAM
+* Python helpers in `/tmp/superdupersumos/`: `ssread.py` (gbAs inflate + KEYINPUT/EWRAM
   reader), `patch_ss.py` (patch EWRAM in a savestate and rebuild the PNG with CRC), `scan.py`
   (32-bit pointer scan), `dis.py` (Capstone Thumb disassembly), `texttables.py` (string-bank
   enumeration). `arm-none-eabi-objdump` used for the ARM boot stub.

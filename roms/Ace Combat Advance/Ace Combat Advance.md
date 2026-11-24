@@ -168,7 +168,7 @@ the state, and returns to the main menu with `CONTINUE GAME` selected.
 | `0x080033A8` | code | `state+0x18 = min(popcount(B)/3, 3)` |
 | `0x080033F4` | code | builds 10-bit aircraft-unlock mask at `state+0x0E` |
 | `0x080006C8` | code | New Game reset of progress struct (sets `c=0xC` at `+0x10`) |
-| `0x080076A8` | code | post-mission S-rank set: `B |= 1 << mission_index` |
+| `0x080076A8` | code | post-mission S-rank set: `B \|= 1 << mission_index` |
 | `0x080076CC` | code | post-mission `d = max(d, mission_index+1)` |
 | `0x080076E4` | code | post-mission score accumulation into `+0x14` |
 | `0x02000400` | RAM | UI screen object (`[0x03000000]` points here) |

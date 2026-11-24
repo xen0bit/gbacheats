@@ -1,5 +1,7 @@
 # Boxing Fever (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -95,7 +97,7 @@ Published codes verified in-emulator (all accepted):
 Exact novel-code test:
 
 1. Load a savestate taken on the password screen (the analysis used
-   `/tmp/opencode/boxingfever` savestates; any password screen works).
+   `/tmp/boxingfever` savestates; any password screen works).
 2. Enter `66BB9FB9` with the on-screen keypad (Up/Down + Right).
 3. Press **A**. The game leaves the password screen and shows
    **PSYCHO vs BYCLOP**.
@@ -452,7 +454,7 @@ consistent with the unused high payload bits.
 - `mGBA 0.10.5` SDL frontend (`/usr/games/mgba`) under `Xvfb :203` + `openbox`.
 - `xdotool`, `scrot`, ImageMagick for input and screenshots.
 - `arm-none-eabi-objdump -M force-thumb` for raw Thumb disassembly.
-- Python 3 scripts in `/tmp/opencode/boxingfever`:
+- Python 3 scripts in `/tmp/boxingfever`:
   - `pw.py` — alphabet, encoder/decoder, hash, checksum, field extractor.
   - `emu2.py` — pty wrapper around mGBA's `-d` command-line debugger
     (`r/1`, `w/1`, `x/1`, breakpoints, SIGINT pause).
@@ -461,7 +463,7 @@ consistent with the unused high payload bits.
     EWRAM `0x21000–0x60FFF`).
   - `test5.py`, `enter_ui.py`, `codetest.py` — repeatable code-entry and
     button-code tests.
-- Key screenshots in `/tmp/opencode/boxingfever`:
+- Key screenshots in `/tmp/boxingfever`:
   `game_ui66_screen.png` (novel code typed), `game_ui66_result.png`
   (PSYCHO vs BYCLOP), `game_ui_badck_result.png` (bad checksum rejected),
   `game_ui_char8_result.png` (semantic reject), `gc_after.png`

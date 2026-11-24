@@ -1,10 +1,12 @@
 # SD Gundam Force (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/SD Gundam Force/SD Gundam Force.gba` |
+| File | `roms/SD Gundam Force/SD Gundam Force.gba` |
 | Size | 8,388,608 bytes (8 MiB) |
 | Header title | `SDGFORCE` (bytes `0xA0`–`0xA7`) |
 | Game code | `BGEE` (USA) |
@@ -212,7 +214,7 @@ evidence; no entry was left "not tested".
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep -abo`.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all
   disassembly; PC-relative literal and BL scanners written in Python (`capstone`, `struct`).
-- Custom scripts in `/tmp/opencode/sdgundam/`: `scan.py`/`scan2.py`/`scan3.py`/`scan4.py`
+- Custom scripts in `/tmp/sdgundam/`: `scan.py`/`scan2.py`/`scan3.py`/`scan4.py`
   (literal/xref/BL scans), `keysearch.py` (button-mask search), `statedump.py` /
   `decode_all.py` (mGBA savestate `gbAs` zlib decode + RAM diff), `dbgdriver.py` (pty driver
   for mGBA `-d` CLI debugger used as an RAM oracle per §16.19).

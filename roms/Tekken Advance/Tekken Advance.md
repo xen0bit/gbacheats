@@ -1,5 +1,7 @@
 # Tekken Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -208,7 +210,7 @@ title/attract loop → mode-select menu (8 items, all cursor positions photograp
 
 Labels follow §8.4.
 
-* **Observed** (screenshots in `/tmp/opencode/tekken/`): boot splash (`view0.png`), attract and
+* **Observed** (screenshots in `/tmp/tekken/`): boot splash (`view0.png`), attract and
   mode-select menu (`view3.png`, `view7.png`, `menu_sheet1/2.png`), character select with 9
   portraits (`csv_before.png`), fight start (`cs_afterR2.png`), `CHARACTER USAGE` records screen
   (`view9.png`). Pressing R at character select was followed by a fight in which Xiaoyu's
@@ -250,5 +252,5 @@ Labels follow §8.4.
   (`gen_gdb_code.py`).
 * mGBA savestate diffing (`diff_states.py`, PNG `gbAs` zlib chunk) corroborated that the code
   entry changed no persistent unlock state.
-* All analysis artifacts live in `/tmp/opencode/tekken/`; no ROM or copyrighted asset is
+* All analysis artifacts were kept in `/tmp/tekken/`; no ROM or copyrighted asset is
   redistributed by this report.

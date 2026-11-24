@@ -1,5 +1,7 @@
 # The Tower SP (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -156,7 +158,7 @@ hidden menus).** This is a proven bounded negative, assembled from four
 independent bounds:
 
 1. **Screen enumeration (Observed).** Every reachable screen was walked in
-   mGBA and screenshotted (files in `/tmp/opencode/thetower/`): boot logo
+   mGBA and screenshotted (files in `/tmp/thetower/`): boot logo
    (`screen_initial.png`), title screen day/night (`screen_title.png`,
    `title_with_save.png`), intro slideshow (`intro_*.png`), Yama dialogue
    (`dlg_after120.png`, `welcome_dialogue_end.png`), CEO Room lecture/info pages
@@ -237,5 +239,5 @@ code".
 (`struct`, `capstone`, `PIL`), `arm-none-eabi-objdump -M force-thumb`,
 `gdb-multiarch` (attach attempt paused the core — abandoned), mGBA 0.10.5,
 Xvfb `:318` + openbox, `xdotool` XTEST input, `scrot`, `pdftotext` (manual).
-Helper: `/tmp/opencode/thetower/ui.py`. No ROM or copyrighted assets are
+Helper: `/tmp/thetower/ui.py`. No ROM or copyrighted assets are
 reproduced in this report; only hashes, addresses, counts and short labels.

@@ -1,5 +1,7 @@
 # Iridion 3D (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -140,16 +142,16 @@ sound (`0x0800B988`/`0x0800B8E4`) and returns 1; the fall-through at `0x08035D8`
 
 | # | Code string | Success block | Effect (evidence) |
 |---|---|---|---|
-| 1 | `*PNKRLZ*` (8) | `0x0803284` | `+7=0x10`, `+2 &=~0x20 \|= 5`, `+0x20 |= 0x80`, `+0x21=28` — pink/special laser (Derived) |
+| 1 | `*PNKRLZ*` (8) | `0x0803284` | `+7=0x10`, `+2 &=~0x20 \|= 5`, `+0x20 \|= 0x80`, `+0x21=28` — pink/special laser (Derived) |
 | 2 | `*KYTNN*` (7 + NUL check) | `0x08032F2` | same flag set, `+0x21=30` — weapon variant (Derived) |
-| 3 | `*CR3D1TS*` (9) | `0x0803368` | `+0x2F |= 0x02`, `+7=0x1A` — ending credits music (Derived; published) |
+| 3 | `*CR3D1TS*` (9) | `0x0803368` | `+0x2F \|= 0x02`, `+7=0x1A` — ending credits music (Derived; published) |
 | 4 | `*CHTRSXX*` (9) | `0x08033BC` | `+7=0x71`, `+2 &=~0x80`, `+3=0` — hidden test/display flag (Derived; unpublished) |
-| 5 | `*B4RT0*` (7) | `0x080340E` | `+7=0x11`, `+0x2F |= 0x05` — ship/appearance variant (Derived; unpublished) |
-| 6 | `*P1NK*` (6) | `0x0803456` | `+7=0x11`, `+0x2F |= 0x06` — pink ship variant (Derived; unpublished) |
-| 7 | `*G4LL3RY*` (9) | `0x08034B8` | `+0x2F |= 0x10`, `+7=0x2F` — gallery (Observed) |
-| 8 | `*SP33D*` (7) | `0x08034F8` | `+0x2F |= 0x04` — speed variant (Derived; unpublished) |
-| 9 | `*SH0WT1M3*` (10) | `0x0803550` | `+0x2F |= 0x10`, `+7=0x1A` — START LEVEL / START AT BOSS (Observed) |
-| 10 | `*S3L3CT0N*` (10) | `0x08035B4` | `+0x2F |= 0x20`, `+7=<mode>` — Select returns to title (Observed) |
+| 5 | `*B4RT0*` (7) | `0x080340E` | `+7=0x11`, `+0x2F \|= 0x05` — ship/appearance variant (Derived; unpublished) |
+| 6 | `*P1NK*` (6) | `0x0803456` | `+7=0x11`, `+0x2F \|= 0x06` — pink ship variant (Derived; unpublished) |
+| 7 | `*G4LL3RY*` (9) | `0x08034B8` | `+0x2F \|= 0x10`, `+7=0x2F` — gallery (Observed) |
+| 8 | `*SP33D*` (7) | `0x08034F8` | `+0x2F \|= 0x04` — speed variant (Derived; unpublished) |
+| 9 | `*SH0WT1M3*` (10) | `0x0803550` | `+0x2F \|= 0x10`, `+7=0x1A` — START LEVEL / START AT BOSS (Observed) |
+| 10 | `*S3L3CT0N*` (10) | `0x08035B4` | `+0x2F \|= 0x20`, `+7=<mode>` — Select returns to title (Observed) |
 
 Published strings **absent** from the matcher (searched symbol-index chains and ASCII):
 `*1NV1S4BL3*`, `*SHOWT1M3*` (letter O), `*S3L3TON*`. The ROM uses zero (`0`) where these lists
@@ -222,7 +224,7 @@ data; no prompt-injection payload was encountered.
 base `0x08000000`, `analyze_function` for decompilation), mGBA with GDB stub, Xvfb `:316` + openbox,
 `xdotool`, `scrot`, ImageMagick, `gdb-multiarch`.
 
-Helper scripts kept in `/tmp/opencode/iridion/`: `gen.py` (field packer/encoder + published-code
+Helper scripts kept in `/tmp/iridion/`: `gen.py` (field packer/encoder + published-code
 check), `enter.py` (keyboard-grid driver), `cheats_parse.py` (matcher-chain extractor),
 `parse_cheats.py`, `pw.py`, `findbuf.py`, `gdbctl.py`.
 

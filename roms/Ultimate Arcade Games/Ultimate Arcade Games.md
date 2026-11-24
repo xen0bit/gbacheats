@@ -1,5 +1,7 @@
 # Ultimate Arcade Games (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -36,7 +38,7 @@ Emulator: `mgba 0.10.5` under `Xvfb :319` + `openbox`, `SDL_AUDIODRIVER=dummy`, 
 mGBA SDL keys: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrows.
 Keys held 150–400 ms (100 ms taps are intermittently missed).
 
-Screenshots (all in `/tmp/opencode/ultimatearcade2/`):
+Screenshots (all in `/tmp/ultimatearcade2/`):
 `boot_small.png`, `mm_crop.png` (main menu), `ap_lock_crop.png` / `chalg_crop.png`
 (padlocks), `gateopen3_crop.png` (gate patched open — **no padlocks, row text turns white**),
 `arcade_enter_crop.png` (inside Arcade Parlor — Omega Force title/Play/Help/Quit),

@@ -1,10 +1,12 @@
 # Sword of Mana (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Sword of Mana/Sword of Mana.gba` |
+| File | `roms/Sword of Mana/Sword of Mana.gba` |
 | Size | 16,777,216 bytes (0x01000000) |
 | Header title | `SWORD OF MANA` |
 | Game code | `AVSE01` (USA, Europe), Rev. 00 |
@@ -147,7 +149,7 @@ hash in §1):
 
 | Search | Space covered | Result |
 |---|---|---|
-| `strings -t x -n 4` + keyword filter (`password|cheat|debug|sound test|secret|unlock|menu|…`) | 16,777,216 bytes; 71,001 strings of length ≥5 | 0 meaningful hits (4 garbage matches in compressed audio/graphics) |
+| `strings -t x -n 4` + keyword filter (`password\|cheat\|debug\|sound test\|secret\|unlock\|menu\|…`) | 16,777,216 bytes; 71,001 strings of length ≥5 | 0 meaningful hits (4 garbage matches in compressed audio/graphics) |
 | Exact/offset encodings: ASCII, `+k`/`-k`/`xor k` (k=0..255) for `PASSWORD`, `CHEAT`, `DEBUG`, `SECRET`, `SOUND TEST`, `NEW GAME`, `CONTINUE`, `MANA` | 16 MiB × 768 transforms | 1 hit: header `SWORD OF MANA` at `0xA0`; 2 coincidences in compressed data |
 | UTF-16LE / UTF-16BE for the same words | 16 MiB × 2 | only coincidental 4–8 byte matches in compressed blocks |
 | GBA LZ77 decompression (`0x10`+24-bit size), scan decompressed payloads for the same words | **3,245** successfully decompressed blocks | 0 cheat/debug/password strings (3 incidental `TEST` in graphics) |
@@ -195,7 +197,7 @@ in §3; no code needs to be typed.
 * `strings -t x -n 4`, `grep -iE` — ASCII/encoding keyword scans.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` —
   disassembly of `0x08002F80`, `0x080034E0`, `0x08004A00`, `0x08005130`.
-* Python 3 scripts in `/tmp/opencode/swordofmana/`: `lzscan.py` (3,245-block LZ77 scan),
+* Python 3 scripts in `/tmp/swordofmana/`: `lzscan.py` (3,245-block LZ77 scan),
   `read_ss.py` (mGBA `gbAs` savestate parser), plus inline scans for encodings, tables and
   button masks.
 * mGBA 0.10.5 under Xvfb `:318` with openbox; `xdotool` XTEST input; `scrot` + ImageMagick

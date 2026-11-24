@@ -1,5 +1,7 @@
 # Downforce (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -204,6 +206,6 @@ The first two were typed on the real password screen and accepted. `42216` also 
 * Python reimplementation + exhaustive 100,000-input validator sweep — enumeration and bounds.
 * mGBA under Xvfb `:315`, `xdotool`, `import`/`scrot`, ImageMagick — dynamic screen walks, code entry, screenshots.
 * REA/Ghidra was attempted for decompilation but timed out on the 4 MiB raw ARM image (330 s startup deadline); all conclusions rest on manual disassembly and emulator/RAM evidence instead.
-* Helper scripts in `/tmp/opencode/downforce/`: `keys.py` (keypress driver), `test_codes.py`, `verify_codes.py`, `final_tests.py`.
+* Helper scripts in `/tmp/downforce/`: `keys.py` (keypress driver), `test_codes.py`, `verify_codes.py`, `final_tests.py`.
 
 No ROM bytes or copyrighted assets are redistributed in this report; only addresses, hashes, algorithms, and generated code strings are published.

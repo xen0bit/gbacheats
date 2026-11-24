@@ -1,5 +1,7 @@
 # Harry Potter and the Sorcerer's Stone (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Queue position 349. Analysis performed independently on the exact image below;
 no address, code or gate was imported from the concurrent Chamber of Secrets
 (:317), Prisoner of Azkaban (:318) or Goblet of Fire (:319) jobs.
@@ -238,14 +240,14 @@ engine's input-global scheme at `0x030037C4/C8/CC`, which is generic.
 * Python + Capstone 5.0.7 (`capstone.Cs(CS_ARCH_ARM, CS_MODE_THUMB)`) for
   PC-relative literal resolution, BL/LDR scans and the 3,480-site compare scan.
 * `mgba` (SDL, `-3 -g`), Xvfb `:316`, openbox, `xdotool` XTEST input, `scrot`, ImageMagick `convert` (crop `720x480+153+165`).
-* `/tmp/opencode/hpss/ui.py` — input/screenshot helper (short holds).
-* `/tmp/opencode/hpss/st.py` — mGBA savestate reader: decompresses the PNG
+* `/tmp/hpss/ui.py` — input/screenshot helper (short holds).
+* `/tmp/hpss/st.py` — mGBA savestate reader: decompresses the PNG
   `gbAs` zlib chunk (397,312 bytes) and exposes IWRAM at `+0x19000`, EWRAM at
   `+0x21000`; used for all RAM evidence because the GDB stub port 2345 was
   occupied by concurrent analyses.
-* `/tmp/opencode/hpss/{scan,refs,codescan,fontscan,fonts,lzscan}.py` — literal,
+* `/tmp/hpss/{scan,refs,codescan,fontscan,fonts,lzscan}.py` — literal,
   xref, compare-sequence and compression scanners.
-* Screenshots kept in `/tmp/opencode/hpss/*.png` (not attached).
+* Screenshots kept in `/tmp/hpss/*.png` (not attached).
 
 ## 10. Legal note
 

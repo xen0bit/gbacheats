@@ -1,10 +1,12 @@
 # Ice Age (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Ice Age/Ice Age.gba` |
+| File | `roms/Ice Age/Ice Age.gba` |
 | Size | 4,194,304 bytes (0x400000, 4 MiB) |
 | Header title | `ICEAGE` |
 | Game code | `AIAE` + maker `41` (`file` prints "AIAE41, Rev.00") |
@@ -140,7 +142,7 @@ A 17th key `V` exists physically but has no nibble in the validator alphabet and
 
 ## 6b. Enumeration
 
-**Space definition.** 6 symbols × 4 bits = 24 bits nominal (`16^6 = 16,777,216` strings). Reserved/unused: the 17th key `V` is outside the alphabet. Accepted space, counted by an exhaustive C reimplementation of the ROM decoder (`/tmp/opencode/iceage1/enumerate.c`, full `16^6` sweep):
+**Space definition.** 6 symbols × 4 bits = 24 bits nominal (`16^6 = 16,777,216` strings). Reserved/unused: the 17th key `V` is outside the alphabet. Accepted space, counted by an exhaustive C reimplementation of the ROM decoder (`/tmp/iceage1/enumerate.c`, full `16^6` sweep):
 
 * **10,240 algorithmic codes** = 10 unary level values × `2^10` acorn masks;
 * **5 hard-coded codes** (which deliberately fail the checksum path);

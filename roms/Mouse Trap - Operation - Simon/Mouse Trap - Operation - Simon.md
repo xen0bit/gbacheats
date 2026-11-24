@@ -1,5 +1,7 @@
 # Mouse Trap / Operation / Simon (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -151,7 +153,7 @@ Guide §0.2 requires the whole code space to be characterised. Here the space is
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for raw Thumb disassembly.
 - REA MCP (`open_binary` raw-binary/arm @ `0x08000000`, `analyze_function`, `procedure_pseudo_code`, `close_binary`) for cross-checking the decompilation.
 - mGBA SDL under Xvfb `:318` + openbox; `xdotool` XTEST input; `scrot` + ImageMagick `convert` for cropped 720×480 captures.
-- Custom helpers in `/tmp/opencode/mousetrap/`: `ui.py` (input/screenshot), `state.py` (gbAs savestate parser + RAM reads), `combo.py` (button-code candidate battery with savestate RAM diffs).
+- Custom helpers in `/tmp/mousetrap/`: `ui.py` (input/screenshot), `state.py` (gbAs savestate parser + RAM reads), `combo.py` (button-code candidate battery with savestate RAM diffs).
 - No ROM or copyrighted assets are redistributed; only addresses, hashes, and findings are published.
 
 ---

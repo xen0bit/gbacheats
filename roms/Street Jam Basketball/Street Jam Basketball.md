@@ -1,5 +1,7 @@
 # Street Jam Basketball (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -63,7 +65,7 @@ limitation, not as evidence for or against cheats (§3.4 rule 4, §16.11).
   - In match: Start → PAUSE (2 entries: CONTINUE, QUIT).
 - Savestates: `Shift+F1..F9` save; states are PNG with a zlib `gbAs` chunk, decompressed to
   397,312 bytes; IWRAM appears at state offset `0x19000`, EWRAM at `0x21000`
-  (§16.13). Screenshots of every state are in `/tmp/opencode/streetjam/*.png`.
+  (§16.13). Screenshots of every state were in `/tmp/streetjam/*.png`.
 
 ## 4. Address map
 
@@ -177,7 +179,7 @@ the RANDOM selector, not a hidden court (confirmed after 10 Right presses = 1.67
 | Text banks | all `strings -n 4` output = 28,357 runs; every ASCII run in `0x040000–0x045000` dumped (≈500 real strings) | 15 team names, 6 ranks, 6 alphabets/glyph tables, 5 language dialogue banks (EN/IT/DE/FR/ES) |
 | Cheat keywords | 20 patterns (PASSWORD, CHEAT, DEBUG, SECRET, UNLOCK, BONUS, HIDDEN, EXTRA, CODE ENTRY, LEVEL/STAGE SELECT, SOUND TEST, WARP, MAP SELECT, …), case-insensitive, whole 4 MiB | **0 hits each** |
 | Hard-coded name cheats | 24 candidate names (GOD, KING, DEBUG, CHEAT, SECRET, XXX, TEST, …) in upper+lower ASCII | 0 validator-like hits (hits were rank strings, credits names, team names, graphics noise) |
-| Password validators | 32-bit pointers to each of 6 alphabet bases (incl. Thumb-bit `addr|1`) | hit counts: ALPHA1 1, ALPHA2 2, ALPHA3 1, ALPHA4 1, FONT1 0, FONT2 0 — all consumers are text rendering (`0x0801306C`/`0x080130C0`), none compares user input |
+| Password validators | 32-bit pointers to each of 6 alphabet bases (incl. Thumb-bit `addr\|1`) | hit counts: ALPHA1 1, ALPHA2 2, ALPHA3 1, ALPHA4 1, FONT1 0, FONT2 0 — all consumers are text rendering (`0x0801306C`/`0x080130C0`), none compares user input |
 | Button-code tables | Konami `UUDDLRLRBA`, `LRLR`, `UUDD`, `Start+Select`, `L+R+Start`, `A+B+Start`; 1-, 2-, 4-byte masks, both endian, forward+reversed | no plausible table; all 10 hits were random code/font bytes (e.g. `0x043FC0` = `40 40 80 80` inside a font table) |
 | Live combo tests | 6 combos at title and 6 at PAUSE: L+R, Select+Start, L+R+Start, A+B+Start, L+R+Select, `UUDDLRLRB A` | 0 visual change, 0 new screen; title combos only moved the slot-manager cursor |
 | Input consumers | 15 references to HELD `0x03005898`, 49 to PRESSED `0x030058A0`; scanned for `cmp/tst` with key-mask immediates | no compound-mask gate (no `0x300`, `0x0C`, `0x03`, `0x1FF` comparisons) |
@@ -200,7 +202,7 @@ ASCII" trap handled explicitly.
 
 ## 7. Validation evidence
 
-- **Observed** — every screenshot in `/tmp/opencode/streetjam/` (title, slot manager, name
+- **Observed** — every screenshot in `/tmp/streetjam/` (title, slot manager, name
   entry, main menu, OPTIONS, CREDITS scroll, team select ×14, opponent select ×16, playground
   ×11, VS, match, PAUSE ×3, post-combo states); ROM hashes and header; 512-byte SRAM with
   slot-1 name byte `0x41`; savestate `gbAs` chunks (397,312 bytes) and diffs.
@@ -234,7 +236,7 @@ ASCII" trap handled explicitly.
 - `gdb-multiarch` was connected to the mGBA stub once (PC read at `0x030036c8`); the stub is
   single-client and `detach` is unsupported (`E07`), and a co-running agent's process cleanup
   killed that instance, so RAM evidence was gathered from savestate diffs instead (§16.13).
-- Helper scripts: `/tmp/opencode/streetjam/{ui.py,ss.py,combos.py,scan_input.py}`.
+- Helper scripts: `/tmp/streetjam/{ui.py,ss.py,combos.py,scan_input.py}`.
 
 No ROM or copyrighted asset is redistributed by this report; only hashes, addresses, and
 observed state are published.

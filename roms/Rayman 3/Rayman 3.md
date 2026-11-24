@@ -1,5 +1,7 @@
 # Rayman 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -133,7 +135,7 @@ There is no alphabet or numeric code space. The input space is the set of paths 
 
 ## 9. Tooling / evidence files
 
-All evidence under `/tmp/opencode/rayman3retry/evidence/`:
+All evidence under `/tmp/rayman3retry/evidence/`:
 * `WORLD_MAP.png`, `pre_code.png`, `post_code.png`, `reject_test.png`, `code100.png` — screenshots.
 * `cheatvalue_watchpoint.log` — GDB watchpoint transcript of `CheatValue` transitions.
 * `R3_wm2.gba` — one-byte patched ROM used for the boot shortcut; `sav_good.bin` — crafted slot-0 save.

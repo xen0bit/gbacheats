@@ -1,5 +1,7 @@
 # Matchbox Missions: Air, Land and Sea Rescue - Emergency Response (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -162,7 +164,7 @@ Observed index → banner map (partial): idx 3 → Mission Two "Put Out The Fire
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep`.
 - Python 3 + `capstone` 5.0.7 for literal/xref scanning; `arm-none-eabi-objdump -M force-thumb` for disassembly.
 - mGBA SDL (`/usr/local/bin/mgba`) with `-3 -d`, `stdbuf -o0 -e0`, on a private `Xvfb :318` + `openbox`; CLI debugger driven through a persistent FIFO feeder; mGBA `gbAs` savestate chunks decompressed with Python `zlib` for RAM reads (IWRAM at raw offset `0x19000`).
-- Helper scripts in `/tmp/opencode/matchboxmissions/`: `model.py`, `model2.py`, `xref.py`, `readstate.py`, `dumptables.py`, `ptrscan.py`.
-- No GameShark/CodeBreaker/memory-edit codes were used as findings; debugger writes were used only to trace the validator and were always followed by real UI entry. Screenshots are kept on disk in `/tmp/opencode/matchboxmissions/` and are not attached.
+- Helper scripts in `/tmp/matchboxmissions/`: `model.py`, `model2.py`, `xref.py`, `readstate.py`, `dumptables.py`, `ptrscan.py`.
+- No GameShark/CodeBreaker/memory-edit codes were used as findings; debugger writes were used only to trace the validator and were always followed by real UI entry. Screenshots are kept on disk in `/tmp/matchboxmissions/` and are not attached.
 
 **Legal note:** No ROM bytes, graphics, audio, or game assets are redistributed here — only hashes, addresses, algorithms, and original code values.

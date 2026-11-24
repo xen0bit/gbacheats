@@ -1,5 +1,7 @@
 # The Powerpuff Girls: Him and Seek (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -66,7 +68,7 @@ not as a cheat code (§16.18).
   no new screen or flag.
 * Save-bit mint: patch EEPROM `0x08` and `0x20` from `0x00` to `0x08`, then `0x0F`;
   reboot. Screenshots `flag_menu.png`, `arc_all.png`, `arc_browse2.png`,
-  `g5_sound.png`, `ab_menu1.png` in the work dir `/tmp/opencode/powerpuffseek/`.
+  `g5_sound.png`, `ab_menu1.png` in the work dir `/tmp/powerpuffseek/`.
 * Analysis was performed on a copy in the work dir, so **no emulator artifacts
   were written into the ROM folder** (verified).
 
@@ -259,7 +261,7 @@ rewards. No password, button code, or hidden menu can be entered by a player.
   screenshots; `.ss1` PNG savestates decompressed with Python `zlib` for RAM
   evidence (guide §16.13). mGBA `-d` CLI debugger was also exercised.
 * Working scripts: `scan_ptrs.py`, `blscan.py`, `dump_ptrtab.py`, `findidx.py`,
-  `combos.py`, `ui.py` in `/tmp/opencode/powerpuffseek/`.
+  `combos.py`, `ui.py` in `/tmp/powerpuffseek/`.
 * No ROM or copyrighted assets are redistributed by this report.
 
 ## 10. Cleanup

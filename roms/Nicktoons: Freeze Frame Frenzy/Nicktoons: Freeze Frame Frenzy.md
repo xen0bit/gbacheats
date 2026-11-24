@@ -1,5 +1,7 @@
 # Nicktoons: Freeze Frame Frenzy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -14,7 +16,7 @@
 | SHA-1 | `a200cdaf66606bd724ce7073fd7990ea3fe6bcdd` |
 | SHA-256 | `88034aa978153ace301d7026408a8cc2200e9b2a247b2fa70d6314fbfd00ba39` |
 
-Phase 0: `file` reports `Game Boy Advance ROM image: "NICKTOONS" (BCCE78, Rev.00)`. A scan of the whole image for the 156-byte Nintendo logo found exactly **one** header, at file offset `0x0` — this is a single game image, not a 2-in-1 pack. The entry word is the unmodified ARM branch; no cracktro, no appended trainer, no patch was found. The zero header checksum is the usual rebuilt-header artifact; the complement byte is intact. Work was done on a byte-identical copy at `/tmp/opencode/nicktoonsfree/game.gba`.
+Phase 0: `file` reports `Game Boy Advance ROM image: "NICKTOONS" (BCCE78, Rev.00)`. A scan of the whole image for the 156-byte Nintendo logo found exactly **one** header, at file offset `0x0` — this is a single game image, not a 2-in-1 pack. The entry word is the unmodified ARM branch; no cracktro, no appended trainer, no patch was found. The zero header checksum is the usual rebuilt-header artifact; the complement byte is intact. Work was done on a byte-identical copy at `/tmp/nicktoonsfree/game.gba`.
 
 ## 2. Executive summary
 
@@ -44,7 +46,7 @@ Per §0.2 this is a proven negative, not a "not found" claim: the screen set, th
 | Held buttons global | `0x03004800` (u16) | `A=1,B=2,Sel=4,Start=8,R=0x10,L=0x20,U=0x40,D=0x80,Rtr=0x100,Ltr=0x200` |
 | Newly-pressed global | `0x03004A00` (u16) | `held & ~prev` |
 | Single caller of key reader | `0x0807DE6C` | no other poller |
-| Font charset (75 chars) | `0x008150C` (`0x0808150C`) | `A-Z a-z 0-9 ! ? - ' . , \` : ( ) % ~ <space>` |
+| Font charset (75 chars) | `0x008150C` (`0x0808150C`) | ``A-Z a-z 0-9 ! ? - ' . , ` : ( ) % ~ <space>`` |
 | Glyph width table | `0x0081558` | follows charset |
 | ASCII→tile converter | `0x08057B2C` (called from `0x08057ADA`) | index→tile: `i + (i>63?64:(i>31?32:0))` |
 | OPTIONS text + table | `0x2D9050`, table `0x2D90E4` (15 records) | code ref `0x08077D3C` |
@@ -146,10 +148,10 @@ Save file: 512-byte Flash/EEPROM `game.sav`; album at 0% on a fresh save.
 
 ## 9. Tooling
 
-`strings -t x`, `grep -abo`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`, `arm-none-eabi-objdump -M force-thumb`, `capstone` 5.0.7, `gdb-multiarch` over a named FIFO against mGBA's `-g` stub (SIGINT needed to flush queued commands), Ghidra 12.1.4 via REA (`open_binary`, `procedure_pseudo_code`), Python helpers in `/tmp/opencode/nicktoonsfree/`: `ui.py` (xdotool input/screenshots), `ss.py` (zlib `gbAs` extraction from mGBA `.ss1`), `ram.py`/`gdbwrap.py` (state diff / GDB reads), `scan.py`, `textbank.py`, `fontscan.py`.
+`strings -t x`, `grep -abo`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`, `arm-none-eabi-objdump -M force-thumb`, `capstone` 5.0.7, `gdb-multiarch` over a named FIFO against mGBA's `-g` stub (SIGINT needed to flush queued commands), Ghidra 12.1.4 via REA (`open_binary`, `procedure_pseudo_code`), Python helpers in `/tmp/nicktoonsfree/`: `ui.py` (xdotool input/screenshots), `ss.py` (zlib `gbAs` extraction from mGBA `.ss1`), `ram.py`/`gdbwrap.py` (state diff / GDB reads), `scan.py`, `textbank.py`, `fontscan.py`.
 
 No ROM or copyrighted asset is redistributed here; only addresses, hashes, counts and findings are published.
 
 ---
 
-*Cleanup note: all emulator/display processes started for this job were terminated by PID; generated `game.sav`, `game.ss1` and working artifacts were kept only under `/tmp/opencode/nicktoonsfree/` and removed from the ROM folder. `roms/INDEX.md` was not modified.*
+*Cleanup note: all emulator/display processes started for this job were terminated by PID; generated `game.sav`, `game.ss1` and working artifacts were kept only under `/tmp/nicktoonsfree/` and removed from the ROM folder. `roms/INDEX.md` was not modified.*

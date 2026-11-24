@@ -1,5 +1,7 @@
 # Demon Driver: Time to Burn Rubber (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -347,7 +349,7 @@ Published CodeBreaker/GameShark codes for this title exist (cash, damage, temper
 * mGBA 0.10.5, Xvfb `:290`, openbox, xdotool, ImageMagick `import`/`convert`.
 * `arm-none-eabi-objdump -M force-thumb` for the validator/handler.
 * Python 3 + Unicorn 2.1.4: `ucv.py` emulates `0x0800AE00` with the game’s IWRAM snapshot; `pwcode.py` implements the decoder/encoder and field table; `typeseq.py` drives the real grid with per-character RAM verification; `rdram.py` reads mGBA `.ssN` savestates (`gbAs` zlib chunk, IWRAM at `0x19000`); `patchstate.py` builds test states; `trycode.py` loads a patched state and submits it.
-* Working directory: `/tmp/opencode/demondriver`.
+* Working directory: `/tmp/demondriver`.
 
 ## 10. Legal note
 

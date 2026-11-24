@@ -1,5 +1,7 @@
 # Mega Man Battle Network 6: Cybeast Gregar (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 > **SKIPPED / DEFERRED — entry systems found but not in-game confirmed (coordinator decision).**
 > Under §0.2 this report does **not** meet the dynamic-confirmation bar: two real player code
 > systems were found and verified in ROM (10-button `{A,B,L,R}` Navi Customizer compression
@@ -10,7 +12,7 @@
 > produced. Per coordinator authorization, MMBN titles whose validator/code-entry surface is
 > blocked by a story gate are documented here and **skipped rather than retried or indexed**.
 > The code tables, exact RAM addresses and minimal steps to finish the test are recorded below.
-> This report is intentionally absent from `INDEX.md`.
+> This report is intentionally left out of the completed-reports table and listed under Skipped ROMs in the top-level `README.md`.
 
 ## 1. Target identity
 
@@ -60,7 +62,7 @@ mgba -3 -d "…/Mega Man Battle Network 6: Cybeast Gregar.gba"
 
 mGBA SDL keymap verified in-game: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. `xdotool key --repeat N --delay 70 x` reliably advances dialogue; `keydown`/`sleep 0.12`/`keyup` moves the cursor exactly one slot (the guide's §16.2 double-step warning is real: `--repeat` with a 150 ms hold oversteps menus).
 
-**Walk performed (all in the US Gregar image, screenshots on disk in `/tmp/opencode/mmbn6gregar/`)**
+**Walk performed (all in the US Gregar image, screenshots on disk in `/tmp/mmbn6gregar/`)**
 
 | # | Screen | Evidence | RAM at capture |
 |---|---|---|---|

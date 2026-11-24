@@ -1,5 +1,7 @@
 # Van Helsing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -99,7 +101,7 @@ so state `0x1A550` is RAM `0x03001550`.
    produces 0 — a no-op.) `f2`'s own bits 5–9 are the hole in the fold.
 8. On success, store fields into the globals in §4 and return 1.
 
-Python reimplementation: `/tmp/opencode/vanhelsing/vh.py`.
+Python reimplementation: `/tmp/vanhelsing/vh.py`.
 
 ## 6. Tables
 
@@ -218,6 +220,6 @@ Regenerating the published level-1 code's fields with `f4=2` yields back
   for savestate save/load.
 * Savestate `gbAs` zlib decoder/differ: `ss.py`.
 * Validator model/encoder: `vh.py`; keypad driver: `key.py`, `enter.py`.
-* Screenshots listed in §6b, kept under `/tmp/opencode/vanhelsing/`.
+* Screenshots listed in §6b, kept under `/tmp/vanhelsing/`.
 * No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms
   and generated codes are published.

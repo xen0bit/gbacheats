@@ -1,10 +1,12 @@
 # Strike Force Hydra (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Strike Force Hydra/Strike Force Hydra.gba` |
+| File | `roms/Strike Force Hydra/Strike Force Hydra.gba` |
 | Size | 4,194,304 bytes (`0x400000`) |
 | `file(1)` | Game Boy Advance ROM image: "HYDRA" (AFHE7M, Rev.00) |
 | Header title / game code / maker | `HYDRA` / `AFHE` / `7M` |
@@ -28,7 +30,7 @@ The validator checks only the most recent 6, 7 or 9 button presses. Older slots 
 * Keymap (mGBA SDL defaults): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Hold about 50 ms with ~70 ms gaps; the history recorder uses edge-triggered input, so every press must be released before the next.
 * Path: title → `A` → main menu (`START GAME` / `OPTIONS`) → `START GAME` → zone intro → in-flight → `Start` to reach `PAUSED`.
 * Codes are entered **only while paused**. `Start` is the unpause key and must not be used as a code press (the pause handler checks the newest slot for mask `0x0008`).
-* RAM evidence: mGBA `.ss1` savestate, PNG `gbAs` chunk zlib-decompressed; IWRAM begins at decompressed offset `0x19000`, so `0x03000D50` is at file offset `0x19D50`. Helper scripts in `/tmp/opencode/strikeforce/` (`ss.py`, `game.py`, `trial.py`, `testseq.py`, `ptybridge.py`, `dbg.py`).
+* RAM evidence: mGBA `.ss1` savestate, PNG `gbAs` chunk zlib-decompressed; IWRAM begins at decompressed offset `0x19000`, so `0x03000D50` is at file offset `0x19D50`. Helper scripts in `/tmp/strikeforce/` (`ss.py`, `game.py`, `trial.py`, `testseq.py`, `ptybridge.py`, `dbg.py`).
 * Codes from public lists (GameFAQs "Strike Force Hydra — Cheats", and a July 2026 Rings of Saturn article that names `0x08002530` and `0x03000D5A..0xD72`) were used as leads and verified against the bytes; published GameShark/CodeBreaker/AR codes were explicitly out of scope.
 
 ## 4. Address map
@@ -137,4 +139,4 @@ A simultaneous two-key press (Select+A via xdotool) was recorded as two successi
 
 ## 9. Tooling
 
-`arm-none-eabi-objdump -M force-thumb`, Python 3 + `struct`/`zlib` savestate parser, `strings`/`grep` static scans, mGBA 0.10.5 (`-d` CLI debugger driven through a Python pty bridge), Xvfb + openbox, `xdotool`, `scrot`, `gdb-multiarch` (GDB stub port 2345 was occupied by another analysis, so it was not used). No ROM or copyrighted assets are redistributed; screenshots and helper scripts remain in `/tmp/opencode/strikeforce/`.
+`arm-none-eabi-objdump -M force-thumb`, Python 3 + `struct`/`zlib` savestate parser, `strings`/`grep` static scans, mGBA 0.10.5 (`-d` CLI debugger driven through a Python pty bridge), Xvfb + openbox, `xdotool`, `scrot`, `gdb-multiarch` (GDB stub port 2345 was occupied by another analysis, so it was not used). No ROM or copyrighted assets are redistributed; screenshots and helper scripts were left in `/tmp/strikeforce/`.

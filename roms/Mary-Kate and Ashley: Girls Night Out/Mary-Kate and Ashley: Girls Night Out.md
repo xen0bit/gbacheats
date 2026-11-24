@@ -1,5 +1,7 @@
 # Mary-Kate and Ashley: Girls Night Out (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 - File: `Mary-Kate and Ashley: Girls Night Out.gba`
 - Size: 4,194,304 bytes (`0x400000`, 4 MiB)
@@ -128,7 +130,7 @@ A configuration absent from any published list was created through the game's ow
 **Unresolved (explicit negative):** the 13 code blobs' encoding was not recovered, so no *typed* or *button* code can be reported. This is a bounded negative over the exact 13-record space above, not an untested guess.
 
 ## 7. Validation evidence
-- **Observed**: all screenshots in `/tmp/opencode/mkgirlsnight/` (boot, title, name entry, character select, tutorials, song select, 8 main-menu slots, 6 OPTIONS screens, advanced-options rows, pause screen, EXTRAS, HI SCORES, CREDITS, RESET GAME). RAM values read with mGBA `-d` (`x/4`) and zlib-decompressed savestate diffs.
+- **Observed**: all screenshots in `/tmp/mkgirlsnight/` (boot, title, name entry, character select, tutorials, song select, 8 main-menu slots, 6 OPTIONS screens, advanced-options rows, pause screen, EXTRAS, HI SCORES, CREDITS, RESET GAME). RAM values read with mGBA `-d` (`x/4`) and zlib-decompressed savestate diffs.
 - **Derived**: web-code encoder from Thumb disassembly `0x0802F07C`; 13-record manifest layout from pointer/word dump; option value pools from pointer tables; savestate↔RAM mapping from byte-for-byte match.
 - **Inferred**: that the 13 code blobs encode button/glyph sequences (their byte-value structure is deliberate, but the mapping was not recovered). Explicitly not claimed as working codes.
 - Prompt-injection check: no fetched page contained instructions; all web results were cheat-database listings and were treated as data.

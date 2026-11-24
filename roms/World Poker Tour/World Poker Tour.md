@@ -1,5 +1,7 @@
 # World Poker Tour (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -15,7 +17,7 @@
 | SHA-1 | `c75851d14a96dea46770945aafeaf9a8f6c12271` |
 | SHA-256 | `754ec69e3e63856933bd7138f2c9eca7ece4ff28567feab1c01a4f4b76b8258f` |
 
-All analysis used a byte-identical copy at `/tmp/opencode/wpt/wpt.gba` (MD5 re-checked), so no save/state artifacts were written to the ROM folder.
+All analysis used a byte-identical copy at `/tmp/wpt/wpt.gba` (MD5 re-checked), so no save/state artifacts were written to the ROM folder.
 
 ## 2. Executive summary
 
@@ -137,7 +139,7 @@ L+R pressed in a single frame was also accepted on the title screen (`boot2.png`
 
 ## 7. Validation evidence
 
-- **Observed**: every screen transition and message above was captured with `scrot` (evidence in `/tmp/opencode/wpt/`); flags read from savestate RAM at the exact addresses in §4; key bits verified by holding each key and reading `0x030014A4`.
+- **Observed**: every screen transition and message above was captured with `scrot` (evidence in `/tmp/wpt/`); flags read from savestate RAM at the exact addresses in §4; key bits verified by holding each key and reading `0x030014A4`.
 - **Derived**: the input routine at `0x0800851C`, the two key gates and their literal pools, the menu-ID dispatch, and the flag/message writes were disassembled with `arm-none-eabi-objdump -M force-thumb` and cross-checked against observed RAM.
 - **Inferred**: gate `0x080186EA` is a modal-dismiss UI callback (calls `0x8008A18` when L+R absent; no cheat flag or cheat string anywhere in its path); it was never reached during the screen walk, so its precise screen is unresolved.
 - **Not instructions**: all ROM strings and the GameFAQs page were treated as data. No action-parser instructions were found in them.
@@ -151,7 +153,7 @@ L+R pressed in a single frame was also accepted on the title screen (`boot2.png`
 
 ## 9. Tooling
 
-- `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly; Python `struct` literal/BL/pattern scanners (`scan.py`, `scan2.py`, `find_gates.py`, `find_gates2.py`, `find_ldr.py`) in `/tmp/opencode/wpt/`.
+- `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly; Python `struct` literal/BL/pattern scanners (`scan.py`, `scan2.py`, `find_gates.py`, `find_gates2.py`, `find_ldr.py`) in `/tmp/wpt/`.
 - mGBA 0.10.5 + Xvfb `:317` + openbox; `xdotool` XTEST input (`k.py`, `tight.py`).
 - RAM reads: mGBA `.ss1` `gbAs` zlib chunk parser (`ss.py`, `readflags.sh`); GDB stub batch + persistent command file (`gdbcmds.txt`) that logged all four L+R gates with auto-continue.
 - Web recon: GameFAQs "World Poker Tour – Cheats" (three codes above), plus Cheat Happens AR codes (out of scope) — used only as leads, each checked against ROM bytes.

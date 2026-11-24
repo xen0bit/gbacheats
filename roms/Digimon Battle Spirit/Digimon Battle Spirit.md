@@ -1,5 +1,7 @@
 # Digimon Battle Spirit (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -77,10 +79,10 @@ any address matches; the sequel must be verified independently.
 ## 3. How to reproduce
 
 ```bash
-cp "roms/Digimon Battle Spirit/Digimon Battle Spirit.gba" /tmp/opencode/digimonbs1/game.gba
+cp "roms/Digimon Battle Spirit/Digimon Battle Spirit.gba" /tmp/digimonbs1/game.gba
 Xvfb :306 -screen 0 1280x960x24 &
 DISPLAY=:306 openbox &
-cd /tmp/opencode/digimonbs1
+cd /tmp/digimonbs1
 DISPLAY=:306 SDL_AUDIODRIVER=dummy mgba -3 game.gba        # or: -3 -t <savestate> game.gba
 W=$(DISPLAY=:306 xdotool search --name mGBA | head -1)
 DISPLAY=:306 xdotool windowfocus "$W"
@@ -360,7 +362,7 @@ empty.
 
 ## 7. Validation evidence
 
-**Observed (emulator, `:306`, mGBA, screenshots on disk in `/tmp/opencode/digimonbs1`)**
+**Observed (emulator, `:306`, mGBA, screenshots on disk in `/tmp/digimonbs1`)**
 
 * Boot → logo → title → menu; attract loop shows the battle demo and `SCORE RANKING`
   (1ST KEN 0250 / 2ND RYO 0200 / 3RD LEE 0150).
@@ -420,7 +422,7 @@ empty.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 --start-address=…
   --stop-address=…` for ARM windows. (This binutils rejects `-M force-arm`; plain `-marm`
   decodes ARM and `-M force-thumb` decodes Thumb.)
-* Scripts kept in `/tmp/opencode/digimonbs1`: `ident.py` (header/hash/entropy/logo scan),
+* Scripts kept in `/tmp/digimonbs1`: `ident.py` (header/hash/entropy/logo scan),
   `scan_keys.py` (mask-constant scan), `ss.py` (mGBA `gbAs` savestate zlib decoder + differ),
   `peek.py` (IWRAM/EWRAM peek), `probe.py`/`probe2.py` (savestate-diff field discovery),
   `key.py` (input helper).

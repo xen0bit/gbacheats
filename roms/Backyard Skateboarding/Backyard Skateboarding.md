@@ -1,5 +1,7 @@
 # Backyard Skateboarding (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -215,7 +217,7 @@ All addresses are ROM addresses (`file offset + 0x08000000`) unless marked RAM.
 | `0x0805665C` | `list_select(list, index)`: rejects `index < 0`, `index >= count`, disabled items; writes `+0x24` |
 | `0x08056734` | `list_item_id(list)`: returns id of current item |
 | `0x08056768` | `list_index(list)`: returns `[list+0x24]` |
-| `0x0803132x` | input handler: D-pad Down/Up → `list_select(±1)`; Left/Right → `0x08056570(list, 0/1)`; A → event 5 with `(index<<16)|item_id`; B → event 6 |
+| `0x0803132x` | input handler: D-pad Down/Up → `list_select(±1)`; Left/Right → `0x08056570(list, 0/1)`; A → event 5 with `(index<<16)\|item_id`; B → event 6 |
 | `0x08031356` | **the only** call site of `0x0802FE58` with event 5 |
 
 Runtime read at the main menu (savestate, after `PRESS START`):
@@ -487,7 +489,7 @@ exact effect the hints promise.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000
   -M force-thumb` for manual disassembly.
 * mGBA 0.10.5 SDL under Xvfb `:159`, `xdotool`, `scrot`.
-* Python helpers in `/tmp/opencode/bskate/tools/`:
+* Python helpers in `/tmp/bskate/tools/`:
   * `seqscan.py`, `cscan2.py`, `cscan3.py`, `cscan4.py` — key-mask/table scans
   * `pngstate.py`, `diffstate.py` — mGBA PNG `gbAs` state reader/differ
   * `probe.py`, `marker_test.py`, `marker_noaccept.py`, `trytitle.py`,
@@ -498,7 +500,7 @@ exact effect the hints promise.
   * `marker.gba` — unlock write redirected to `gameState[5]` (persistent marker)
   * `marker2.gba` — dispatch slot 0 redirected to case 4 (positive control)
 
-Screenshots are in `/tmp/opencode/bskate/shots/` (title, main menu,
+Screenshots were in `/tmp/bskate/shots/` (title, main menu,
 multiplayer, select skater, credits, tutorial, pause, tour home, select level,
 customize, settings, save confirmation, and the code-entry attempts).
 

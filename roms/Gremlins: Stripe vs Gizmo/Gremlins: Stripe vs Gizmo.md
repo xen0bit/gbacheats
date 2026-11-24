@@ -1,5 +1,7 @@
 # Gremlins: Stripe vs Gizmo (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -138,6 +140,6 @@ No checksum, no PRNG, no key table, no bit packing — the 25-bit input space is
 
 ## 9. Tooling
 
-`file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, Python 3 (`struct`, `zlib`, `capstone 5.0.7`), `arm-none-eabi-objdump`, `mgba -3` (SDL) under `Xvfb :317` + `openbox`, `xdotool` (keydown/keyup, ~40 ms holds), `scrot` + ImageMagick `convert`/`compare -metric AE` for screen hashing, and a Python savestate decoder (`zlib.decompress` of the PNG `gbAs` chunk; IWRAM at state offset `0x19000`, EWRAM at `0x21000`) used for RAM diffs. A persistent `gdb-multiarch` stub session and mGBA's `-d` CLI debugger were attempted for the oracle technique (§16.19) but were not usable due to port contention and command-prompt behavior; savestate diffing plus real-UI entry were used instead. Scripts live in `/tmp/opencode/gremlins/` (`ssdiff.py`, `pw.py`, `code_test.py`, `final_test2.py`).
+`file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, Python 3 (`struct`, `zlib`, `capstone 5.0.7`), `arm-none-eabi-objdump`, `mgba -3` (SDL) under `Xvfb :317` + `openbox`, `xdotool` (keydown/keyup, ~40 ms holds), `scrot` + ImageMagick `convert`/`compare -metric AE` for screen hashing, and a Python savestate decoder (`zlib.decompress` of the PNG `gbAs` chunk; IWRAM at state offset `0x19000`, EWRAM at `0x21000`) used for RAM diffs. A persistent `gdb-multiarch` stub session and mGBA's `-d` CLI debugger were attempted for the oracle technique (§16.19) but were not usable due to port contention and command-prompt behavior; savestate diffing plus real-UI entry were used instead. Scripts were kept in `/tmp/gremlins/` (`ssdiff.py`, `pw.py`, `code_test.py`, `final_test2.py`).
 
 **Legal note:** no ROM bytes or copyrighted graphics were redistributed; only hashes, addresses, and the authors' own generated tooling are published.

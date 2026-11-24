@@ -1,5 +1,7 @@
 # Kelly Slater's Pro Surfer (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -77,7 +79,7 @@ File offset ↔ ROM address: `rom_addr = 0x08000000 + file_offset`.
 
 ## 5. Algorithm
 
-Reimplementation: `/tmp/opencode/kelly/validator.py` (passes when run against the ROM table).
+Reimplementation: `/tmp/kelly/validator.py` (passes when run against the ROM table).
 
 Active-high key masks (standard GBA): `A=0x001, B=0x002, Sel=0x004, Start=0x008, Right=0x010, Left=0x020, Up=0x040, Down=0x080, R=0x100, L=0x200`.
 
@@ -187,7 +189,7 @@ All bits are cleared on boot; the code and toggles must be redone each session.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` — validator disassembly.
 * Capstone 5.0.7 (installed via `pip install --break-system-packages`) — available for Thumb scans; the final scans used raw halfword matching.
 * mGBA SDL (`mgba -3`) under Xvfb `:318` + openbox, `xdotool` XTEST input, `scrot` + ImageMagick for screenshots and montages.
-* `/tmp/opencode/kelly/validator.py` — reimplementation and rejection tests.
+* `/tmp/kelly/validator.py` — reimplementation and rejection tests.
 * Web checks: GameFAQs (console phone codes and 2-in-1 pack), TCRF (403 on direct fetch; search exposed only console-version debug material), MegaGames/Neoseeker/SuperCheats (console codes), plus the REMY HAX "100 GBA crackmes" post that describes this GBA shoulder code; the latter was **independently verified** here (table, disassembly, emulator flag, all effects).
 
 No ROM or copyrighted assets are redistributed in this report; only addresses, hashes, algorithms, masks and observations are published.

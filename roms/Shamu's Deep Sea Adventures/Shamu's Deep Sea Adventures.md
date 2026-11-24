@@ -1,5 +1,7 @@
 # Shamu's Deep Sea Adventures (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -43,7 +45,7 @@
   4. `CREDITS` → scrolling value credits.
   5. `ART GALLERY` → vertically scrolling list, every entry reads `NOT AVAILABLE`; A on a locked entry displays the default Shamu image with no prompt.
   6. In-game:START → transient `00:00:17` level timer, then normal play. No pause menu appeared.
-- RAM observation method: mGBA savestates are PNGs with a zlib `gbAs` chunk; decompressing yields a 397,312-byte state with **IWRAM at `0x19000`** and **EWRAM at `0x21000`** (guide §16.13). Each screen above has a corresponding `.ss1` in `/tmp/opencode/shamu/`.
+- RAM observation method: mGBA savestates are PNGs with a zlib `gbAs` chunk; decompressing yields a 397,312-byte state with **IWRAM at `0x19000`** and **EWRAM at `0x21000`** (guide §16.13). Each screen above has a corresponding `.ss1` in `/tmp/shamu/`.
 - GDB stub note: `mgba -g` halts at PC=0 until `continue` is sent by a GDB client; the free-running menu walk used states instead. No validator was found to call as an oracle (§16.19) because no validator exists.
 
 ## 4. Address map
@@ -133,7 +135,7 @@ Labels follow the guide (Observed / Derived / Inferred).
 
 - `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -abo` for Phase 0/1.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-arm/-M force-thumb` for literal pools, vtables and dispatch code.
-- Custom Python scripts in `/tmp/opencode/shamu/`: `phase0.py` (header/logo scan), `rtti.py`/`rtti2.py`/`vtable.py`/`xrefs.py` (RTTI + vtable + pointer scans), `scan.py`/`keyscan.py`/`fontdecode.py` (string/encoding/key-mask scans), `emu.py`/`walk.py`/`combos.py` (input + screenshots), `ss.py`/`diff.py` (savestate `gbAs` zlib decode + IWRAM/EWRAM RAM diffs).
+- Custom Python scripts in `/tmp/shamu/`: `phase0.py` (header/logo scan), `rtti.py`/`rtti2.py`/`vtable.py`/`xrefs.py` (RTTI + vtable + pointer scans), `scan.py`/`keyscan.py`/`fontdecode.py` (string/encoding/key-mask scans), `emu.py`/`walk.py`/`combos.py` (input + screenshots), `ss.py`/`diff.py` (savestate `gbAs` zlib decode + IWRAM/EWRAM RAM diffs).
 - Ghidra 12.1.4 via REA MCP (`open_binary`, `search_strings`, `procedure_pseudo_code`, `procedure_callers`) for the string inventory and scene dispatcher pseudocode.
 - Web sources: VGChartz cheats page, GameFAQs GBA 929545, Video Games Museum GBA cheats page, web search archive results. Content treated strictly as data.
 
@@ -143,4 +145,4 @@ No ROM image, extracted graphics, music, or game text assets are redistributed b
 
 ## 11. Cleanup
 
-All analyst processes were stopped by their own PIDs (never `pkill`): mGBA, Xvfb `:316`, and openbox were killed by the PIDs recorded in `/tmp/opencode/shamu/*.pid`. Generated `game.sav`/`game.ss*` and all screenshots/scripts were kept in `/tmp/opencode/shamu/` (a copy of the ROM was used for emulation); **no `.sav`/`.ss*` files were created in the ROM folder** — the report file is the only artifact written there.
+All analyst processes were stopped by their own PIDs (never `pkill`): mGBA, Xvfb `:316`, and openbox were killed by the PIDs recorded in `/tmp/shamu/*.pid`. Generated `game.sav`/`game.ss*` and all screenshots/scripts were kept in `/tmp/shamu/` (a copy of the ROM was used for emulation); **no `.sav`/`.ss*` files were created in the ROM folder** — the report file is the only artifact written there.

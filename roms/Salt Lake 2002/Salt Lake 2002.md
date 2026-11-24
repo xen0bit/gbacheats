@@ -1,5 +1,7 @@
 # Salt Lake 2002 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -123,7 +125,7 @@ No claim in this report is based solely on a published list or on a fetched page
 - Python + `struct`/`capstone` for literal-load scans, BL scans, pointer scans, font/text-bank decoding.
 - `arm-none-eabi-objdump -D -b binary -marm -M force-thumb --adjust-vma=0x08000000` for all disassembly.
 - mGBA 0.10.5 on `Xvfb :317` + `openbox`, `xdotool` XTEST input, `scrot` screenshots, ImageMagick `convert` for montages.
-- `/tmp/opencode/saltlake/ss.py` (savestate `gbAs` zlib extractor), `patchss.py` (savestate RAM patcher), `ui.py` (input/screenshot helpers).
+- `/tmp/saltlake/ss.py` (savestate `gbAs` zlib extractor), `patchss.py` (savestate RAM patcher), `ui.py` (input/screenshot helpers).
 - Web: websearch + webfetch (TCRF mirror used because tcrf.net returned 403). Search quota was exhausted before further GameFAQs detail; the available snippets already showed only cheat-device codes.
 
 No ROM or copyrighted assets are redistributed; only hashes, addresses, algorithms and findings are published.

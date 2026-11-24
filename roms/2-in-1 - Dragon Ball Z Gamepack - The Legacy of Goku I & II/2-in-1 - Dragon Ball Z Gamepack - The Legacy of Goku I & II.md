@@ -1,5 +1,7 @@
 # 2-in-1: Dragon Ball Z Gamepack — The Legacy of Goku I & II (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 **File analysed:**
@@ -143,7 +145,7 @@ work directory, not part of the ROM.
 ### Screen evidence
 
 The curated screenshots are stored next to this report in `evidence/`; the complete
-working set was produced in `/tmp/opencode/dbzlegacy/shots/` with the same filenames.
+working set was produced in `/tmp/dbzlegacy/shots/` with the same filenames.
 All are 720×480 crops of the 3× GBA viewport.
 
 | File | Content |
@@ -563,7 +565,7 @@ four counters, so no input sequence can produce an index outside the tables.
 * `gdb-multiarch` against `mgba -g` (port 2345) for entry-register inspection
   (`r0` at `0x08040BFE`), IWRAM dumps, and the LOG2 flag write.
 * Helper `gba.py` (key/screenshot/crop) and ad-hoc Python scans in
-  `/tmp/opencode/dbzlegacy/`; screenshots in `/tmp/opencode/dbzlegacy/shots/`.
+  `/tmp/dbzlegacy/`; screenshots in `/tmp/dbzlegacy/shots/`.
 * Savestates `rom.ss1` (debug menu) and `rom.ss2` (intro) in the work directory.
 
 ## 10. Legal note

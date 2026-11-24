@@ -1,5 +1,7 @@
 # Metroid: Zero Mission (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -238,7 +240,7 @@ visually on real screens, not inferred from ASCII.
 `convert`, `gdb-multiarch` (stub unreliable), mGBA `-d` pty debugger
 (`dbg.py`), `ui.py` (input/screenshot helper), `ssdiff.py` (savestate gbAs
 parser/differ), `metpass.py` (NES password codec), `unlock_sweep.py`
-(inconclusive SRAM probe). Working copy and artifacts in `/tmp/opencode/metroidzm`.
+(inconclusive SRAM probe). Working copy and artifacts in `/tmp/metroidzm`.
 
 No ROM or copyrighted asset is redistributed; only hashes, addresses, and
 original analysis scripts are published.

@@ -1,7 +1,9 @@
 # Baseball Advance (GBA) — Reverse Engineering Report
 
-Target: `/mnt/gbacheats/roms/Baseball Advance/Baseball Advance.gba`
-Work dir: `/tmp/opencode/baseballadv` (scripts, savestates, screenshots)
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
+Target: `roms/Baseball Advance/Baseball Advance.gba`
+Work dir: `/tmp/baseballadv` (scripts, savestates, screenshots)
 Display used: `:173` (own Xvfb + openbox); teardown by PID (see §9).
 
 ---
@@ -506,7 +508,7 @@ signed byte, and the retail writers only emit the 15 values listed above.
 
 ### Observed (emulator / memory)
 
-* Every screen in §3.3, with screenshots in `/tmp/opencode/baseballadv/`
+* Every screen in §3.3, with screenshots in `/tmp/baseballadv/`
   (`main.png`, `ex3.png`, `ex6.png`, `ex7.png`, `preball.png`, `ball1.png`,
   `pause4.png`, `pchange.png`, `playoffs_bracket.png`, `star2.png`,
   `as_lineup.png`, `hub_b.png` season hub, `dataroom.png`, `recs.png`,
@@ -559,7 +561,7 @@ signed byte, and the retail writers only emit the 15 values listed above.
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/baseballadv/` (all reproducible):
+Scripts in `/tmp/baseballadv/` (all reproducible):
 
 | Script | Purpose |
 |---|---|

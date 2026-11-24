@@ -1,10 +1,12 @@
 # Duke Nukem Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Duke Nukem Advance/Duke Nukem Advance.gba` |
+| File | `roms/Duke Nukem Advance/Duke Nukem Advance.gba` |
 | Size | 8,388,608 bytes (`0x00800000`) |
 | Header title | `DUKE NUKEM A` |
 | Game code / maker | `AD9E` / `54` (Torus Games), version `0x00` |
@@ -249,7 +251,7 @@ action; no second/third code exists in the table or in the validator's branches.
 
 * `mgba -3` (SDL) under `Xvfb :318` + `openbox`; `xdotool` XTEST input;
   `import -window root` / `scrot` screenshots; Tab = fast-forward.
-* Python helpers in `/tmp/opencode/duke/`: `gba.py` (input), `ss.py` (zlib
+* Python helpers in `/tmp/duke/`: `gba.py` (input), `ss.py` (zlib
   decompress of mGBA `gbAs` savestate chunk; IWRAM at raw `0x19000`),
   `findmask.py` (key-mask literal scan), `code_tests.py` (oracle-driven
   accept/reject trials).

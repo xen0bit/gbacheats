@@ -1,5 +1,7 @@
 # High Heat Major League Baseball 2002 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -140,7 +142,7 @@ Normal play restricts the reachable set to {4,5}; the published code claims to r
 
 * `mgba` SDL (Xvfb `:318`, openbox, `SDL_AUDIODRIVER=dummy`); `xdotool` XTEST key events; `scrot` screenshots.
 * `mgba -3 -d` command-line debugger (pty-driven) with `watch/r`, `watch/w`, `status`, `r/4` — used for the joypad and pitch-index proof.
-* `decode_ss.py` (zlib `gbAs` extractor for `.ss1`), `probe.py` / `seqtest.py` / `seqtest2.py` / `walkmenus.py` / `teamtest.py` (local drivers in `/tmp/opencode/highheat02`).
+* `decode_ss.py` (zlib `gbAs` extractor for `.ss1`), `probe.py` / `seqtest.py` / `seqtest2.py` / `walkmenus.py` / `teamtest.py` (local drivers in `/tmp/highheat02`).
 * `arm-none-eabi-objdump -M force-thumb/-M force-arm`, `strings -t x`, `xxd`, Python 3 + `capstone` 5.0.7, `zlib.crc32`.
 * Ghidra 12.1.4 via REA MCP (`open_binary`, `list_procedures`, `analyze_function`) — auto-analysis recognised only 326 procedures on this raw ARM/Thumb image and did not create a procedure at `0x083F26A4`, so manual objdump was authoritative.
 

@@ -1,5 +1,7 @@
 # Barbie as the Princess and the Pauper (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -336,7 +338,7 @@ mistook Wolfie for a "brown cat".
 **Novel codes (absent from GameFAQs, VGChartz, TCRF, supercheats, cheatingdome, chaptercheats,
 games-cheats, gameshampoo as recovered on 2026-10-26):**
 
-Screenshot filenames below are the session capture names in `/tmp/opencode/pauper/`
+Screenshot filenames below are the session capture names in `/tmp/pauper/`
 (they are not copied into the repository, to avoid redistributing game art).
 
 | Code | Entry | In-game effect (observed) | Screenshot |
@@ -417,7 +419,7 @@ are listed with their decoded scene in §6.3.
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for the
   validator and screen handler.
-* Python 3 scripts in `/tmp/opencode/pauper/`:
+* Python 3 scripts in `/tmp/pauper/`:
   `model.py` (offline reimplementation + 47-entry dump),
   `dump2.py` (IWRAM/EWRAM dump through the mGBA CLI debugger pty),
   `key.py` (xdotool driver), `dbgsrv.py`/`cmd.py` (debugger pty bridge).

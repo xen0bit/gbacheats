@@ -1,5 +1,7 @@
 # Jurassic Park III: Island Attack (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -137,7 +139,7 @@ The 512-byte save begins with reversed developer magic `12elibom` = `mobile21` a
 
 ## 7. Validation evidence
 
-* **Observed** — emulator screenshots: title, main menu, options, button config, DATA CLEAR confirmation, pause overlay, story intro, gameplay, and post-code title screens (all under `/tmp/opencode/jp3island/`).
+* **Observed** — emulator screenshots: title, main menu, options, button config, DATA CLEAR confirmation, pause overlay, story intro, gameplay, and post-code title screens (all under `/tmp/jp3island/`).
 * **Observed** — RAM (savestate `gbAs` decompress): `0x030077A0` = `0x00000004` at main menu, `0x00000005` at options, `0x00000001` in gameplay/button-config; `0x03000000` = `0x003E0058` (menu) vs `0x001A0078` (gameplay). These prove the screens are distinct states rather than one screen redrawn.
 * **Observed** — `.sav` dump with `12elibom` / `50.0` and unchanged progress bytes after failed stage attempts.
 * **Derived** — text encoding from ROM bytes (verified against six in-game strings and an Italian bank), single key-input routine from literal/xref scan, absence of any validator or comparison table from the input-handler disassembly.
@@ -152,6 +154,6 @@ The 512-byte save begins with reversed developer magic `12elibom` = `mobile21` a
 ## 9. Tooling
 
 * `arm-none-eabi-objdump -M force-thumb`, `capstone` 5.0.7, Python 3.
-* `strings`, `xxd`, `grep`; custom scripts in `/tmp/opencode/jp3island/`: `phase0.py`, `static1.py`, `textenc.py`, `lzscan.py`, `textbank.py`, `decode2.py`, `fulltext.py`, `kwsearch.py`, `kwlower.py`, `kwbrute.py`, `keyscan.py`, `ssdump.py`, `sssearch.py`, `ssregions.py`, `dbg.py`, `walk3.py`, `codetest.py`, `codetest_ui.py`, `ui.py`, `mash.py`.
+* `strings`, `xxd`, `grep`; custom scripts in `/tmp/jp3island/`: `phase0.py`, `static1.py`, `textenc.py`, `lzscan.py`, `textbank.py`, `decode2.py`, `fulltext.py`, `kwsearch.py`, `kwlower.py`, `kwbrute.py`, `keyscan.py`, `ssdump.py`, `sssearch.py`, `ssregions.py`, `dbg.py`, `walk3.py`, `codetest.py`, `codetest_ui.py`, `ui.py`, `mash.py`.
 * mGBA `-d` CLI debugger driven through a Python `pty` (`dbg.py`) for per-frame RAM reads; mGBA `Shift+F1/F2` savestates with a Python `zlib`/PNG `gbAs` decompressor for full-RAM snapshots.
 * Web sources accessed as data only (GameFAQs via web.archive.org 20181126022852, cheathappens, absolutcheats, TASVideos, CaH4e3). No instructions found in fetched content were followed. No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms, and derived findings are reported.

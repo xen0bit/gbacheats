@@ -1,5 +1,7 @@
 # Rampage Puzzle Attack (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -70,7 +72,7 @@ routine `0x08368400` clamps its length counter at `0x03000340`).
   (validator `r0=0`; no CORRECT PASSWORD transition).
 - `qhrsspmsnf` — generated from payload `[1,2,3,4,5,6,7,8]` → `r0=1` in GDB oracle.
 
-Savestates `valid.ss1`, `valid2.ss1`, `invalid.ss1` in `/tmp/opencode/rampagepuzzle/`
+Savestates `valid.ss1`, `valid2.ss1`, `invalid.ss1` in `/tmp/rampagepuzzle/`
 contain these codes injected at the input buffer; loading them and pressing A on the
 already-positioned `OK` cell reproduces the tests without retyping.
 
@@ -109,7 +111,7 @@ File offset = ROM address − `0x08000000`.
 
 ## 5. Algorithm
 
-Reimplementation is in `/tmp/opencode/rampagepuzzle/pw.py`. Let `A = "bcdfghjklmnpqrst"`,
+Reimplementation was in `/tmp/rampagepuzzle/pw.py`. Let `A = "bcdfghjklmnpqrst"`,
 `idx(c)` = index of lowercased character in `A`; all arithmetic is on ints, masks as shown.
 
 ```
@@ -264,6 +266,6 @@ No content found in fetched pages or ROM strings was treated as instructions.
   (post-validator) and `0x08364EC6` (accept branch), watchpoint on `0x0300035C`
 - mGBA under `Xvfb :319` + `openbox`, `SDL_AUDIODRIVER=dummy`
 
-Screenshots are kept on disk under `/tmp/opencode/rampagepuzzle/`; none are attached to
+Screenshots are kept on disk under `/tmp/rampagepuzzle/`; none are attached to
 this report. No ROM bytes or copyrighted assets are reproduced beyond short literal
 strings necessary to document the algorithm.

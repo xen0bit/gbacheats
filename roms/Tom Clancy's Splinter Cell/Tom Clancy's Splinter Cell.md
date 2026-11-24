@@ -1,5 +1,7 @@
 # Tom Clancy's Splinter Cell (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -51,7 +53,7 @@ negative with search counts instead.
   run `pkill -x mgba` in loops, which otherwise kills this session's emulator.
 * Keymap (verified): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`,
   Select=`BackSpace`, D-pad = arrow keys. Hold ≥0.15 s for menu presses.
-* Path walked (all screens, with screenshots in `/tmp/opencode/splintercell/`):
+* Path walked (all screens, with screenshots in `/tmp/splintercell/`):
   1. Ubi Soft intro → language select (US/ES/FR flags) → A = English.
   2. Main menu: **SELECT GAME**, **OPTIONS**.
   3. SELECT GAME → three slots (`---`) → New → **3-character name entry**
@@ -204,7 +206,7 @@ a **separate-ROM** finding, not a gated feature of this image.
 `strings`, `xxd`, `python3` (Capstone 5.0.7 for literal/BL scans),
 `arm-none-eabi-objdump -M force-thumb`, mGBA 0.10.5 under Xvfb :317,
 `xdotool`, `scrot`, ImageMagick, zlib savestate (`gbAs`) decoder.
-Scripts: `/tmp/opencode/splintercell/{scanlit.py,finalscan.py,key.py,
+Scripts: `/tmp/splintercell/{scanlit.py,finalscan.py,key.py,
 patchstate.py}`. No ROM or copyrighted asset is redistributed; only addresses,
 hashes and derived findings are published.
 

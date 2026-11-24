@@ -4,7 +4,7 @@
 ## 1. Target identity
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Pac-Man World/Pac-Man World.gba` |
+| File | `roms/Pac-Man World/Pac-Man World.gba` |
 | Size | 8,388,608 bytes (`0x800000`, 8 MiB) |
 | Header title / code / maker | `PAC-MANWORLD` / `BPAE` / `AF` |
 | Version | `0x00` (Rev.00), USA release, 2004-11-17; developer Full Fat, publisher Namco/DSI |

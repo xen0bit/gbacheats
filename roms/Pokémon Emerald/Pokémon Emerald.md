@@ -1,5 +1,7 @@
 # Pokémon Emerald (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -34,7 +36,7 @@ All other leads are negatives, with concrete gates:
 
 Emulator: mGBA under `Xvfb :318`, `SDL_AUDIODRIVER=dummy`, window focused with `xdotool windowfocus`. Keymap (mGBA SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Hold keys 100–300 ms.
 
-Menu walk (all observed, screenshots on disk in `/tmp/opencode/emerald/`):
+Menu walk (all observed, screenshots on disk in `/tmp/emerald/`):
 
 1. Boot → title. With no save: `NEW GAME`, `OPTION` (`title.png`). With the in-game save: `CONTINUE`, `NEW GAME`, `OPTION` (`title_saved2.png`) — **no Mystery Gift/Events entries**.
 2. `OPTION` → `TEXT SPEED / BATTLE SCENE / BATTLE STYLE / SOUND / BUTTON MODE / FRAME / CANCEL` (7 entries; `opt5.png`).
@@ -128,6 +130,6 @@ Menu-entry counts (all reachable screens walked): title 2 (no save) / 3 (with sa
 
 `strings -t x`, `grep -abo`, `xxd`, `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 (`pip install --break-system-packages capstone`), Python stdlib, `curl`/`web.archive.org`, `pret/pokeemerald` matching decomp (source only, as a reference map), mGBA under `Xvfb :318` + `openbox`, `xdotool`, `scrot`, ImageMagick `convert`.
 
-Scripts written in `/tmp/opencode/emerald/`: `g3text.py` (charset codec), `dbgserver.py`/`dbgclient.py`/`ram.py` (mGBA `-d` RAM bridge), `ui.sh` (input helper). Savestate RAM extraction used a Python PNG-chunk parser that `zlib.decompress`es the `gbAs` chunk (raw 397,312 bytes; EWRAM at `0x21000`, IWRAM at `0x19000`).
+Scripts written in `/tmp/emerald/`: `g3text.py` (charset codec), `dbgserver.py`/`dbgclient.py`/`ram.py` (mGBA `-d` RAM bridge), `ui.sh` (input helper). Savestate RAM extraction used a Python PNG-chunk parser that `zlib.decompress`es the `gbAs` chunk (raw 397,312 bytes; EWRAM at `0x21000`, IWRAM at `0x19000`).
 
 No ROM or copyrighted assets are redistributed here; only addresses, hashes, word IDs, and algorithm descriptions are published.

@@ -1,5 +1,7 @@
 # Popeye: Rush for Spinach (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -48,7 +50,7 @@ Codes tested:
 | `CR3D1T` + Start | Stage-1 acceptance branch (buffer cleared) |
 | `CR3D1T` then `R4P1D0S` | Stage-2 check identified statically (§5); UI input path not reliably driven — see §8 |
 
-Screenshots kept on disk in `/tmp/opencode/popeye/` (`title2.png`, `s3.png`, `after_start_long2.png`, `menu_main.png`, `walkmenu.png`, `optseq.png`, `pw_full.png`, `pw_result.png`, `pw_entered_F4BG*XT5.png`, `novel_start.png`, `fjresult2.png`, `st1c.png`).
+Screenshots kept on disk in `/tmp/popeye/` (`title2.png`, `s3.png`, `after_start_long2.png`, `menu_main.png`, `walkmenu.png`, `optseq.png`, `pw_full.png`, `pw_result.png`, `pw_entered_F4BG*XT5.png`, `novel_start.png`, `fjresult2.png`, `st1c.png`).
 
 ## 4. Address map
 

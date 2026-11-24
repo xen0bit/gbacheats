@@ -1,5 +1,7 @@
 # Mighty Beanz Pocket Puzzles (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -46,7 +48,7 @@ Four developer easter eggs *are* present in the text bank (Zork "grue", "This is
   * BEANZ CASE → collection grid (Right/Left/Down scroll bean info; A has no action).
   * Every list was pressed past its last entry to confirm wrap-around and exact item count.
 * Codes tested on title screen: Konami code, L+R+Start, A+B+Start+Select, Up/Down/Left/Right, ten consecutive A presses. On main menu: Konami code, L+R, A-B-A. Baseline/pressed states saved with Shift+F1/F2 and compared by extracting the zlib-compressed `gbAs` chunk from each `.ss1/.ss2` PNG.
-* No ROM or assets were modified; emulation used an identical byte-for-byte copy in `/tmp/opencode/mightybeanz/mb.gba`.
+* No ROM or assets were modified; emulation used an identical byte-for-byte copy in `/tmp/mightybeanz/mb.gba`.
 
 ## 4. Address map
 
@@ -149,6 +151,6 @@ None of these unknowns could conceal a cheat: they concern reward presentation a
 * `xxd`, `strings`, `grep`, `file`, `md5sum`/`sha1sum`/`sha256sum` for Phase 0/recon.
 * `mgba -3` on `Xvfb :315` with `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST input; `scrot` + ImageMagick `convert` for screenshots.
 * Savestate RAM reads: extract the zlib-compressed `gbAs` PNG chunk (raw 397,312 bytes; IWRAM at `0x19000`, EWRAM at `0x21000`) and diff between states (§16.13). Used because the GDB stub port 2345 was already held by another analysis session.
-* Scripts retained in `/tmp/opencode/mightybeanz/`: `findtext.py`, `fontprobe.py`, `bruteenc.py`, `decodetext.py`, `xrefs.py`, `bankptr.py`, `hidptr.py`, `findbank.py`, `enumbank.py`, `inputscan.py`, `keyptr.py`, `blscan.py`, `maskextract.py`, `maskstats.py`, `msgtable.py`, `k.sh`, `combo.sh`, `snap.sh`, `testcode.sh`, `diffstates.py`.
+* Scripts retained in `/tmp/mightybeanz/`: `findtext.py`, `fontprobe.py`, `bruteenc.py`, `decodetext.py`, `xrefs.py`, `bankptr.py`, `hidptr.py`, `findbank.py`, `enumbank.py`, `inputscan.py`, `keyptr.py`, `blscan.py`, `maskextract.py`, `maskstats.py`, `msgtable.py`, `k.sh`, `combo.sh`, `snap.sh`, `testcode.sh`, `diffstates.py`.
 
 **Legal note:** no ROM bytes, graphics, music or game text are redistributed here; only hashes, addresses, counts and independently written findings are published.

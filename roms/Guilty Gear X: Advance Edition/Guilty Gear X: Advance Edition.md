@@ -1,5 +1,7 @@
 # Guilty Gear X: Advance Edition (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -136,12 +138,12 @@ if (ret & 0x20) for b in 18..33: setbit(state->flagsA/B, b) // GG modes (16 char
 
 | idx | masks (u16 LE) | Buttons | Return | Published effect | Observed flag effect |
 |---:|---|---|---|---|---|
-| 0 | 0040 0080 0010 0020 0001 | Up, Down, Right, Left, A | `0x01` | Unlock Testament | `flagsA |= 0x00000001` |
-| 1 | 0080 0080 0100 0200 0100 | Down, Down, R, L, R | `0x02` | Unlock Dizzy | `flagsA |= 0x00000003` (**both**) |
-| 2 | 0001 0002 0001 0200 0200 | A, B, A, L, L | `0x04` | Original Mode | `flagsB |= 0x00000008` |
-| 3 | 0200 0100 0001 0001 0001 | L, R, A, A, A | `0x08` | Limit Release | `flagsB |= 0x00000004` |
-| 4 | 0010 0080 0020 0100 0100 | Right, Down, Left, R, R | `0x10` | All Extra chars | `flagsA |= 0x0003FFFC` (bits 2–17) |
-| 5 | 0020 0080 0010 0200 0200 | Left, Down, Right, L, L | `0x20` | All GG chars | `flagsA |= 0xFFFC0000`, `flagsB |= 0x00000003` (bits 18–33) |
+| 0 | 0040 0080 0010 0020 0001 | Up, Down, Right, Left, A | `0x01` | Unlock Testament | `flagsA \|= 0x00000001` |
+| 1 | 0080 0080 0100 0200 0100 | Down, Down, R, L, R | `0x02` | Unlock Dizzy | `flagsA \|= 0x00000003` (**both**) |
+| 2 | 0001 0002 0001 0200 0200 | A, B, A, L, L | `0x04` | Original Mode | `flagsB \|= 0x00000008` |
+| 3 | 0200 0100 0001 0001 0001 | L, R, A, A, A | `0x08` | Limit Release | `flagsB \|= 0x00000004` |
+| 4 | 0010 0080 0020 0100 0100 | Right, Down, Left, R, R | `0x10` | All Extra chars | `flagsA \|= 0x0003FFFC` (bits 2–17) |
+| 5 | 0020 0080 0010 0200 0200 | Left, Down, Right, L, L | `0x20` | All GG chars | `flagsA \|= 0xFFFC0000`, `flagsB \|= 0x00000003` (bits 18–33) |
 
 Terminator: `0x0000` at `0x0807A0DE`. Exactly six records; `memcpy` length 60 bytes leaves no
 room for a seventh.
@@ -235,7 +237,7 @@ fetched pages were treated as data.
   397,312-byte state (IWRAM `0x19000`, EWRAM `0x21000`).
 * `gx.py` / `test_codes.py` — xdotool input on `DISPLAY=:318` with dynamic window geometry,
   automated code entry and flag reads.
-* Screenshots retained in `/tmp/opencode/ggx/shots/` (not redistributed with this report).
+* Screenshots retained in `/tmp/ggx/shots/` (not redistributed with this report).
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced here; only addresses, hashes,
 algorithms and original observations are published.

@@ -1,5 +1,7 @@
 # All-Star Baseball 2004 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -78,10 +80,10 @@ one gameplay-control tip (R during a home-run trot), which is not a code.
 ### Emulator and display
 
 ```bash
-mkdir -p /tmp/opencode/asb2004
+mkdir -p /tmp/asb2004
 Xvfb :133 -screen 0 1024x768x24 &
 DISPLAY=:133 openbox &
-cd "/mnt/gbacheats/roms/All-Star Baseball 2004"
+cd "roms/All-Star Baseball 2004"
 DISPLAY=:133 SDL_AUDIODRIVER=dummy /usr/games/mgba -3 "All-Star Baseball 2004.gba" &
 ```
 

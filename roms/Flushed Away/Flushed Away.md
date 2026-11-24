@@ -1,10 +1,12 @@
 # Flushed Away (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Flushed Away/Flushed Away.gba` |
+| File | `roms/Flushed Away/Flushed Away.gba` |
 | Size | 8,388,608 bytes (0x800000) |
 | Header title / code / maker | `FLUSHED AWAY` / `BLHE` / `G9` (Europe) |
 | Version | 0x00 |
@@ -208,7 +210,7 @@ bonus-code table is not on any of those pages. Entered on the real Bonus Code sc
 `arm-none-eabi-objdump -M force-thumb`, Capstone (pattern scans), `gdb-multiarch`/mGBA `-d`
 CLI debugger driven through a Python pty (`ptydrv.py`, `dbgsend.py`), Python zlib savestate
 decoder/differ, `strings`/`xxd`, `xdotool`/`scrot`/`convert`. All generated scripts live in
-`/tmp/opencode/flushed/`. No ROM or copyrighted asset is redistributed here.
+`/tmp/flushed/`. No ROM or copyrighted asset is redistributed here.
 
 ## 10. Cleanup / legal note
 

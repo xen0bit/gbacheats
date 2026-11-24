@@ -1,5 +1,7 @@
 # The Koala Brothers: Outback Adventures (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -129,7 +131,7 @@ Because the accepted-code set is empty (not merely "unknown"), there is no rejec
 
 ## 9. Tooling
 
-All analysis scripts and captures are in `/tmp/opencode/koalabrothers/`:
+All analysis scripts and captures were in `/tmp/koalabrothers/`:
 
 | File | Purpose |
 |---|---|

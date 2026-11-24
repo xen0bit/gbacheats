@@ -1,5 +1,7 @@
 # Minority Report: Everybody Runs (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -159,7 +161,7 @@ Mall City · The Sprawl · Precrime Building · Jetpack Escape · Mall City 2 ·
 
 ## 7. Validation evidence
 
-* **Observed (emulator/screenshots):** title; main menu; options; name entry; difficulty; level-select list (10 entries); gameplay; pause; current statistics; BEST PLAYERS; credits. SUBARU → level select; novel 7-press code → level select; RULARS → no level select. `s_code_*.png`, `s_subaru_menu.png`, `s_novel_code_levelselect.png`, `s_*.ss1` states on disk under `/tmp/opencode/minority/`.
+* **Observed (emulator/screenshots):** title; main menu; options; name entry; difficulty; level-select list (10 entries); gameplay; pause; current statistics; BEST PLAYERS; credits. SUBARU → level select; novel 7-press code → level select; RULARS → no level select. `s_code_*.png`, `s_subaru_menu.png`, `s_novel_code_levelselect.png`, `s_*.ss1` states on disk under `/tmp/minority/`.
 * **Observed (RAM):** exact six key masks written into the ring buffer at `0x02011EE8+` for all four sequences; records at `0x0201B00C` with pointers `0x080B1F92` / `0x080B1FA2` and length 6; `0x02007F5C` byte 0 set by both accepted codes; level-select flag cluster set only by SUBARU; `0x0300016C` set only by RULARS and still set at difficulty select; rejection table values above.
 * **Derived (disassembly):** matcher record layout, 0xFFFF length scan, ring-buffer suffix comparison, literal-pool pointers at `0x080136DC/E0`, debug-menu table and gate condition.
 * **Inferred:** that `0x0300016C` is specifically the invincibility flag (the published effect name and code path agree; the full combat behaviour of "never takes damage" was not played through). That ROM records A/B are dead/unregistered (no xref, no observable effect) rather than belonging to a gated feature.
@@ -173,9 +175,9 @@ Mall City · The Sprawl · Precrime Building · Jetpack Escape · Mall City 2 ·
 
 ## 9. Tooling
 
-All analysis artifacts live in `/tmp/opencode/minority/`. Tools: `xxd`, `strings -t x`, `grep -abo`, `arm-none-eabi-objdump -M force-thumb`, Python 3 with `capstone` 5.0.7, mGBA 0.10 + Xvfb + xdotool + scrot + ImageMagick, Ghidra/REA (opened raw ARM at base 0x0; auto-analysis did not create procedures at the Thumb addresses, so manual objdump was used for the validator), web search (GameFAQs, Project Cheat Codes, MobyGames, TCRF).
+All analysis artifacts were kept in `/tmp/minority/`. Tools: `xxd`, `strings -t x`, `grep -abo`, `arm-none-eabi-objdump -M force-thumb`, Python 3 with `capstone` 5.0.7, mGBA 0.10 + Xvfb + xdotool + scrot + ImageMagick, Ghidra/REA (opened raw ARM at base 0x0; auto-analysis did not create procedures at the Thumb addresses, so manual objdump was used for the validator), web search (GameFAQs, Project Cheat Codes, MobyGames, TCRF).
 
-Scripts: `emu.py` (input/screenshot/GDB helper), `ss.py` (PNG `gbAs` → raw RAM), `ram.py` / `fulldiff.py` (targeted and full RAM snapshots/diffs), `codetest2.py` (clean-title code entry), `find_title.py` (title detection), `playtest.py` (gameplay runs). Savestates and screenshots are kept under `/tmp/opencode/minority/` and are not redistributed.
+Scripts: `emu.py` (input/screenshot/GDB helper), `ss.py` (PNG `gbAs` → raw RAM), `ram.py` / `fulldiff.py` (targeted and full RAM snapshots/diffs), `codetest2.py` (clean-title code entry), `find_title.py` (title detection), `playtest.py` (gameplay runs). Savestates and screenshots are kept under `/tmp/minority/` and are not redistributed.
 
 **Legal note.** No ROM, save data, or copyrighted assets are published here; only addresses, hashes, algorithms and independently written tooling.
 

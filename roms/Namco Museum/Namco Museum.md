@@ -1,5 +1,7 @@
 # Namco Museum (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -149,7 +151,7 @@ No novel code could be minted because there is no validator/table to invert; the
 
 ## 7. Validation evidence
 
-* **Observed:** screenshots of every screen class (work dir `/tmp/opencode/namcomuseum/`: `s_menu.png`, `sel_montage.png`, `f3_m.png`, `w_mont.png`, `r2_m.png`, `bonus_m.png`, `tips_m.png`, `go_m.png`, `goafter_m.png`, `dbg_m.png`, `code_m.png`); savestate RAM reads (KEYINPUT at `gbAs+0x530`, EWRAM maps verified against live debugger reads); mGBA crash reproduced without `-s 2` and eliminated with it.
+* **Observed:** screenshots of every screen class (work dir `/tmp/namcomuseum/`: `s_menu.png`, `sel_montage.png`, `f3_m.png`, `w_mont.png`, `r2_m.png`, `bonus_m.png`, `tips_m.png`, `go_m.png`, `goafter_m.png`, `dbg_m.png`, `code_m.png`); savestate RAM reads (KEYINPUT at `gbAs+0x530`, EWRAM maps verified against live debugger reads); mGBA crash reproduced without `-s 2` and eliminated with it.
 * **Derived:** input globals and menu record layout from Thumb disassembly; score parser and alphabet mapper from `0x0802F398`/`0x0802F406`; menu tables from the 16-byte record pointers at `0x080A68xx`; savestate→GBA address mapping confirmed by matching live reads.
 * **Inferred (clearly labelled):** the Dig Dug self-test screen is dead/gated because no caller from a reachable screen was found and no tested input reaches it — the gate flag itself was not exhaustively proven over all possible RAM states.
 

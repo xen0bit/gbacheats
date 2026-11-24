@@ -1,5 +1,7 @@
 # Medal of Honor: Underground (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -147,8 +149,8 @@ analytically, not by brute force).
 |---:|---|---|
 | 0 | `0x03005968 = param` | level index (0 = Mission 1) |
 | 1 | `0x03005220 = 1` | "enable/unlock" flag |
-| 2 | `0x03005224 |= 1` / `&= ~2` | invincibility bit on / off |
-| 3 | `0x03005224 |= 2` / `&= ~3` | mode bit on / off |
+| 2 | `0x03005224 \|= 1` / `&= ~2` | invincibility bit on / off |
+| 3 | `0x03005224 \|= 2` / `&= ~3` | mode bit on / off |
 | 4 | `0x03005964 = param` | difficulty 0=EASY, 1=MEDIUM, 2=HARD |
 | 5 | — | script terminator |
 
@@ -268,7 +270,7 @@ cross-checked against ROM bytes before use.
 
 ## 9. Tooling
 
-All work files are in `/tmp/opencode/mohunderground/`.
+All work files were in `/tmp/mohunderground/`.
 
 * `moh.gba` — byte-identical working copy; `restored.gba` — 4-byte entry patch
   for the §1 provenance check.

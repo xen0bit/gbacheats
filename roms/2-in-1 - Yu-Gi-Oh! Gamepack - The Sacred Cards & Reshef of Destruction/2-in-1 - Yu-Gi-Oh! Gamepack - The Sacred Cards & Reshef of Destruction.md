@@ -1,5 +1,7 @@
 # 2-in-1 Yu-Gi-Oh! Gamepack: The Sacred Cards & Reshef of Destruction (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -394,7 +396,7 @@ bounded to those two gates, not to the validator.
 
 ### Third pass, 2026-10-25 (later): in-game grant still not reached
 
-A third pass loaded the only usable Reshef savestate (`/tmp/opencode/ygo2/ygo2.ss1`,
+A third pass loaded the only usable Reshef savestate (`/tmp/ygo2/ygo2.ss1`,
 which restores the live save at 500 Domino and a 40-card deck, mirrored in EWRAM
 `0x0203813E`). Findings from this pass:
 
@@ -427,7 +429,7 @@ bounded negative, not a validator result.
 
 ### Fourth pass, 2026-10-25: sale route disproved and the requested grant located
 
-A fourth pass re-loaded `ygo2.sav` plus `/tmp/opencode/ygo2/ygo2.ss1` (`ygo2.ss2` is a
+A fourth pass re-loaded `ygo2.sav` plus `/tmp/ygo2/ygo2.ss1` (`ygo2.ss2` is a
 second starting state standing beside the "It's not nine o'clock yet." NPC in the
 north square). Live reads again gave **500 Domino** at `0x02038278`. Two results close
 the plan the pass was asked to execute:
@@ -475,8 +477,8 @@ the gate, so `0x020319E0` remained zero.
 
 **Seventh pass, 2026-10-25 (late): English roster, exit guard located, gate still shut**
 
-Replayed from `/tmp/opencode/ygo7/states/sacred_square_gate.ss` (copy in
-`/tmp/opencode/ygo8/states/`) with a fresh mGBA 0.10.5 + GDB stub.
+Replayed from `/tmp/ygo7/states/sacred_square_gate.ss` (copy in
+`/tmp/ygo8/states/`) with a fresh mGBA 0.10.5 + GDB stub.
 
 * **Input fix (method).** mGBA's SDL window ignores synthetic `xdotool key --window`
   events. Every key must go through XTEST to the focused window
@@ -818,7 +820,7 @@ maximum (one Normal Summon per turn, one attack per monster).
 ### Thirteenth pass, 2026-10-25: a second clean win from the 576 state — and the prize is **not** a fixed 76
 
 This pass re-attacked the money gate with the twelfth pass's clean stack
-(`/tmp/opencode/ygo13`, plain `/usr/games/mgba -3 -t`, XTEST only, no `-d`/GDB/RSP)
+(`/tmp/ygo13`, plain `/usr/games/mgba -3 -t`, XTEST only, no `-d`/GDB/RSP)
 and **won a second duel**, but could not start a third.
 
 **Ante flow (confirmed twice, exact inputs).** Facing the standalone NPC with a
@@ -899,7 +901,7 @@ The thirteenth pass proved the duel, not the gate. This pass attacked the gate t
 way the English walkthrough says it is passed — **talk with A, then challenge with
 R** — and settled where the "met" state lives.
 
-**Method (clean stack, no debugger).** `/tmp/opencode/ygo14`: plain
+**Method (clean stack, no debugger).** `/tmp/ygo14`: plain
 `/usr/games/mgba -3 -t <state>` on `:117` with `SDL_AUDIODRIVER=dummy`, input only
 through XTEST into the focused window, screenshots through the root-window
 `XGetImage` path, RAM only from `Shift+F<n>` savestates (`gbAs` → zlib → EWRAM at
@@ -987,7 +989,7 @@ exact condition, and the guide's **order** (Yugi→Mai→Bonz→Underwoods→Tsu
 left) should be replayed once in that order, since the fourteenth pass replayed the
 talks in a different order.
 
-Tooling/artifacts: `/tmp/opencode/ygo14/` — `x.py` (XTEST + root `XGetImage`
+Tooling/artifacts: `/tmp/ygo14/` — `x.py` (XTEST + root `XGetImage`
 capture), `ss.py` (`gbAs` decoder, EWRAM at `0x21000`), `nav2.py` (actor-table
 reader, world-coordinate chase, screen wrap), `probe.py` (bitset-font OCR of the
 dialogue band), `spam.py`, `route.py`, `hunt.py`, `track.py`; states
@@ -1055,7 +1057,7 @@ entries but the dispatch at `0x080E319C` is `cmp r0,#9; bls`, so only indices
 0–9 can be taken. It was nevertheless tested live: a savestate with those five
 bits forced (`0x3E` at `0x020319AA`, confirmed still `3E` after several map
 loads) produces the **same** Yugi refusal ("It's not nine o'clock yet…",
-`screenshots` in `/tmp/opencode/ygo15/shots/yR_Up.png`), so the five bits do not
+`screenshots` in `/tmp/ygo15/shots/yR_Up.png`), so the five bits do not
 gate the duel or the bell.
 
 **4. Where the bell actually lives: a map-event slot.** Each map record in the
@@ -1098,7 +1100,7 @@ advances the square's chapter (the record index), which is a map-load/story
 transition outside the five actor scripts; it is not reachable from the talk
 data.
 
-Tooling/artifacts: `/tmp/opencode/ygo15/` — `pngstate.py` (decode/patch/re-encode
+Tooling/artifacts: `/tmp/ygo15/` — `pngstate.py` (decode/patch/re-encode
 the PNG `gbAs` savestate), plus copies of `x.py`/`ss.py`/`nav2.py`/`probe.py`;
 `full.dis` (24 MB objdump sweep used for the flag/opcode call-site census);
 patched states `t_flags.ss`, `t_base_flags.ss`.
@@ -1254,7 +1256,7 @@ only the half names attached to the two validator addresses were swapped.
 is not. The exact story script that performs the `(1,3)` warp was not located —
 only the transition table that *cannot* reach it.
 
-Tooling/artifacts: `/tmp/opencode/ygo16/` — `pngstate.py`, `x.py`/`ss.py`/
+Tooling/artifacts: `/tmp/ygo16/` — `pngstate.py`, `x.py`/`ss.py`/
 `nav2.py`/`probe.py`, `dbgctl2.py` (mGBA `-d` command-line debugger over a pty:
 `watch/w`, `w/2`, `w/r`, `c`), states `game.ss3` (post-grant), `game.ss5`
 (rolling), screenshots in `shots/`.
@@ -1285,16 +1287,16 @@ L/R (`a`/`s`) move the slot index, the d-pad moves the digit cursor
 (`7 8 9 / 4 5 6 / 1 2 3 / 0 OK`), A writes the highlighted digit into the
 current slot and advances. Reading `0x02018800` from a savestate after each
 press removes all guesswork; a scripted entry of all four codes succeeded with
-zero mis-lands (`/tmp/opencode/ygo17/kp.py`).
+zero mis-lands (`/tmp/ygo17/kp.py`).
 
 **Results — every one `result 10`, read from `0x0203AC20`.**
 
 | Entered | `0x0203AC20` | Index | Card (name table) | Screenshot |
 |---|---|---|---|---|
 | `58551308` | `37 03 0A 05 08 05 05 01 03 00 08` | **823** (`0x0337`) | **Spear Cretin** | `sacred_password_58551308_seventeenth.png`, `sacred_card823_spear_cretin_seventeenth.png` |
-| `95956346` | `38 03 0A 09 05 09 05 06 03 04 06` | **824** (`0x0338`) | **Shining Angel** | `/tmp/opencode/ygo17/shots/kp_95956346.png`, `card_95956346.png` |
+| `95956346` | `38 03 0A 09 05 09 05 06 03 04 06` | **824** (`0x0338`) | **Shining Angel** | `/tmp/ygo17/shots/kp_95956346.png`, `card_95956346.png` |
 | `36996508` | `61 03 0A 03 06 09 09 06 05 00 08` | **865** (`0x0361`) | **Dark Magician** | `sacred_card865_dark_magician_seventeenth.png` |
-| `52121290` | `76 03 0A 05 02 01 02 01 02 09 00` | **886** (`0x0376`) | **Spherous Lady** | `/tmp/opencode/ygo17/shots/kp_52121290.png`, `card_52121290.png` |
+| `52121290` | `76 03 0A 05 02 01 02 01 02 09 00` | **886** (`0x0376`) | **Spherous Lady** | `/tmp/ygo17/shots/kp_52121290.png`, `card_52121290.png` |
 
 Each accept closed the keypad and opened the card screen; the header showed the
 name ("Spear Cretin", "Shining Angel", "Dark Magician", "Spherous Lady"). The
@@ -1591,7 +1593,7 @@ the story gate, not a validator result.
 ### Sixth pass, 2026-10-25 (evening): R-refusals reproduced, gate still not passed
 
 A sixth pass re-booted the Sacred half from a copy of the ROM and the 500-Domino `.sav`
-(`/tmp/opencode/ygo7/`), chose NEW GAME, cleared the name-entry keyboard (the OK button
+(`/tmp/ygo7/`), chose NEW GAME, cleared the name-entry keyboard (the OK button
 is the top-right green button, reached by pressing Right from the bottom-right letter
 cell), and replayed the prologue: Joey's room → "Okay, let's get going" → Kaiba's full
 Battle City / locator-card speech in Clock Tower Square. The intro was then complete and
@@ -1615,7 +1617,7 @@ Artifacts: `screenshots/sacred_mai_refusal_sixth.png`,
 
 **New negative: the refusals write no story flag.** A full EWRAM dump was taken before
 and after one R refusal ($0x02000000–$0x0203FFFF$, 256 KiB; dumps kept as
-`/tmp/opencode/ygo7/snapA.bin` / `snapB.bin`). Differences were confined to the dialogue
+`/tmp/ygo7/snapA.bin` / `snapB.bin`). Differences were confined to the dialogue
 text-render buffer (`0x0200D000–0x0200E000`) and the sound mixer (`0x02036xxx`); the
 range `0x02020000–0x0202FFFF` changed **zero** bytes and the known story-flag window
 `0x02031A58` (32 bytes) stayed all zero. So the "five R challenges" are **not** recorded
@@ -1641,7 +1643,7 @@ the mean during 3–8 s walks found no long black cutscene). No Card-Shop interi
 clerk/machine was found. `0x020319E0` was never written.
 
 **RAM at stop** (read through the mGBA GDB stub on a savestate of the final state,
-`/tmp/opencode/ygo7/states/sacred_after_challenges.ss`):
+`/tmp/ygo7/states/sacred_after_challenges.ss`):
 
 | Address | Value | Meaning |
 |---|---|---|
@@ -1685,7 +1687,7 @@ remaining requirement in §0.2 (in-game acceptance of a novel password and a scr
 of the received card, plus the `00000000` rejection) is still open.
 
 
-Tooling/states kept: `/tmp/opencode/ygo7/` (`t.py` screen/OCR/RAM helpers, `walkR.py`,
+Tooling/states kept: `/tmp/ygo7/` (`t.py` screen/OCR/RAM helpers, `walkR.py`,
 `w3.py`, `blobs.py`; `daemon.py`/`rsp.py` GDB RSP bridge with 0x200-byte read chunks —
 mGBA's stub rejects 0x400-byte reads; states `sacred_intro_narration.ss`,
 `sacred_square_gate.ss`, `sacred_after_challenges.ss`, plus `snapA.bin`/`snapB.bin`, the
@@ -1737,17 +1739,17 @@ Full detail in §6b, eighth pass. Net effect on §0.2:
 * mGBA 0.10.5 SDL (`/usr/games/mgba`), Xvfb :117, openbox, xdotool, scrot.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 * Python 3 scripts for: logo/header scan, table dump, published-list diff, save
-  checksum check (`/tmp/opencode/yugioh/`).
+  checksum check (`/tmp/yugioh/`).
 * Artifacts: `tables.json` (both tables), `reshef_pub.txt` / `sacred_pub.json`
-  (published lists), screenshots `*.png` in `/tmp/opencode/yugioh/`.
-* Eighth pass tooling (`/tmp/opencode/ygo9/`, works without the GDB port):
+  (published lists), screenshots `*.png` in `/tmp/yugioh/`.
+* Eighth pass tooling (`/tmp/ygo9/`, works without the GDB port):
   `md.py` drives `mgba9 -d` (a copy of `mgba`) through a pty (`r/4 0xADDR`,
   `save N`/`load N`), `srv.py` + `c.py` expose it over a unix socket, `rawgrab.py`
   reads the root window with `XGetImage` (the only capture that works on the
   DirectColor canvas), `nav.py` has the 45 ms turn + R probe, the 5 s full-screen
   walk, the boustrophedon `sweep()`, and dialogue OCR. Launch with
   `SDL_AUDIODRIVER=dummy DISPLAY=:NNN`.
-* Tenth pass tooling (`/tmp/opencode/ygo10/`): same `-d`-over-pty server plus
+* Tenth pass tooling (`/tmp/ygo10/`): same `-d`-over-pty server plus
   **`ssread.py`**, which parses an mGBA `save N` savestate offline: the PNG carries
   a `gbAs` chunk, zlib-decompressing it gives a 0x61000-byte state with
   **IWRAM at 0x19000 and EWRAM at 0x21000** (0x40000 bytes). That makes whole-RAM
@@ -1756,13 +1758,13 @@ Full detail in §6b, eighth pass. Net effect on §0.2:
   accepting after the first disconnect, and `-g` and `-d` cannot be combined.
   Joining the Reshef name table (`0x1DCE0E8` pointer array) to the password
   table is the fastest way to name a novel code.
-* Eleventh pass tooling (`/tmp/opencode/ygo11/`): `rel.py` restarts mGBA from a
+* Eleventh pass tooling (`/tmp/ygo11/`): `rel.py` restarts mGBA from a
   savestate (`-t`) because **F1–F10 do not load in this build**; `font.py` decodes the
   duel bitmap font (segment the text band on blank columns, identify each glyph by
   bitmap signature, learn new glyphs from one known string); `play.py`/`turn.py`
   drive a replay and print hand/deck/LP from RAM; `read.py` finds any text line on the
   whole screen (it needs a dark background, so it misses bright menu boxes).
-* Twelfth pass tooling (`/tmp/opencode/ygo12/`), the **clean** stack used for the
+* Twelfth pass tooling (`/tmp/ygo12/`), the **clean** stack used for the
   won duel — no debugger, no stub, no pty:
   `restart.sh` kills only its own PID and starts `/usr/games/mgba -3 -t <state>`;
   `x.py` focuses the window and sends XTEST `keydown`/`keyup` (`press(k, hold, gap)`

@@ -1,5 +1,7 @@
 # Connect Four / Perfection / Trouble (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -378,7 +380,7 @@ no validator consumes the buffer.
 
 - `mGBA 0.10.5` (SDL), `Xvfb :261`, `openbox`, `xdotool`.
 - `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 (Python).
-- Custom scripts in `/tmp/opencode/connect4`:
+- Custom scripts in `/tmp/connect4`:
   `state.py` (mGBA `gbAs` PNG chunk → RAM/VRAM; IWRAM base 0x19000,
   EWRAM base 0x21000, VRAM base 0x1000 for a 4 MiB ROM), `snap.py`
   (RAM/VRAM snapshots and diffs), `rsp.py` (GDB-RSP reader),

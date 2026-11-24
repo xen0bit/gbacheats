@@ -1,5 +1,7 @@
 # Mega Man Battle Network 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -35,7 +37,7 @@ One **hard-coded button-code validator** does exist in the ROM (§4, §5, §6). 
 * Emulator: `mgba` (SDL build), `DISPLAY=:317`, `SDL_AUDIODRIVER=dummy`, started with `mgba -3 <rom>`.
   Note: starting with `-g` pauses the core at boot until a GDB client attaches in this build; use the non-`-g` build for screen walking.
 * Keymap (mGBA SDL defaults): A=`x`, B=`z`, Start=`Return`, Select=`BackSpace`, L=`a`, R=`s`, D-pad=arrows. Hold 120–180 ms per press; menus need ~0.3–0.5 s to finish a fade before the next press registers.
-* Deterministic input helper: `/tmp/opencode/mmbn2/helper.py` (`focus()`, `key()`, `shot()`; screenshots cropped to `720x480+155+163`).
+* Deterministic input helper: `/tmp/mmbn2/helper.py` (`focus()`, `key()`, `shot()`; screenshots cropped to `720x480+155+163`).
 * Screen path reproduced:
   1. Boot → logo (shot `t_title.png`).
   2. `Start` → title menu `NEW GAME / CONTINUE` (shot `t_title_start1.png`); Up×5 proves a 2-item ring (`t_title_up5.png`).
@@ -124,7 +126,7 @@ No password alphabet table, no accepted-string table, and no code→effect table
 
 | Search | Space checked | Hits |
 |---|---|---|
-| `strings -n 4` case-insensitive for `password|cheat|secret|unlock|debug|code|menu|invalid|continue` | whole 8 MiB | 0 (only header `MEGAMAN_EXE2AE2E08`) |
+| `strings -n 4` case-insensitive for `password\|cheat\|secret\|unlock\|debug\|code\|menu\|invalid\|continue` | whole 8 MiB | 0 (only header `MEGAMAN_EXE2AE2E08`) |
 | ASCII exact `PASSWORD`, `CHEAT`, `DEBUG`, `SECRET`, `MENU`, `CHIP`, `DECK`, `ENTER` | whole ROM | 1 coincidental `CHIP` at `0x181A8A` inside compressed graphics |
 | `+0x20` lowercase→uppercase translation, same keywords | whole ROM | same single `CHIP` |
 | UTF-16LE/BE, UTF-32LE/BE for the same keywords | whole ROM | 0 |

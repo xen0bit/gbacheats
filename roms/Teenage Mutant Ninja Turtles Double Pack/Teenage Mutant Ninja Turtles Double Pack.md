@@ -1,5 +1,7 @@
 # Teenage Mutant Ninja Turtles Double Pack (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -203,6 +205,6 @@ The TANIMURA MENU is real, fully present, and its 17 entries and handler pointer
 * Capstone 5.0.7 (`dis2.py`, `dis_range.py`) and `arm-none-eabi-objdump -M force-thumb` for disassembly.
 * mGBA 0.10.5 with `-d` pty debugger behind a Python TCP bridge (`dbgbridge.py`, port 2347), supporting `r/2`, `w/2`, `x/2`, `b/t`, `frame`, `reset`, `!CTRLC`.
 * mGBA savestate PNG `gbAs` chunk decompressed with Python `zlib` for RAM dumps (§16.13); `before.sav`/`after_srlmd.sav` for SRAM diffing.
-* Xvfb :318 + openbox, `xdotool` XTEST input, `scrot` screenshots. All helper scripts and screenshots are under `/tmp/opencode/tmntdouble/`.
+* Xvfb :318 + openbox, `xdotool` XTEST input, `scrot` screenshots. All helper scripts and screenshots were under `/tmp/tmntdouble/`.
 
 No ROM bytes or copyrighted assets are reproduced in this report; only addresses, hashes, algorithms and the short published code strings are documented.

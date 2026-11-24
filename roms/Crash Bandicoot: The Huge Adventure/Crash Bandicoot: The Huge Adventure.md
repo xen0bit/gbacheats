@@ -1,5 +1,7 @@
 # Crash Bandicoot: The Huge Adventure (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -392,7 +394,7 @@ interface, the input surface and the one writable flag byte:
 * Savestate decoding: mGBA `.ssN` is a PNG with a zlib `gbAs` chunk; the raw
   state is 397,312 bytes (IWRAM at 0x19000, EWRAM at 0x21000), used for the
   before/after diff.
-* Local scripts kept in `/tmp/opencode/crashhuge`: `rsp.py`, `drv.py`,
+* Local scripts kept in `/tmp/crashhuge`: `rsp.py`, `drv.py`,
   `dbg.py`, `ids.py`, `pad.py`, `restart.sh`.
 
 ## 10. Notes

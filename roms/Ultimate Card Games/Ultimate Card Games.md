@@ -1,5 +1,7 @@
 # Ultimate Card Games (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -67,8 +69,8 @@ of key-mask-shaped `u16` values occur only inside compressed tile/audio data
   Select=`BackSpace`). The SDL window must be focused and a key pressed once
   before the first frame renders.
 - Savestate `Shift+F1` was taken on the top menu and copied to
-  `/tmp/opencode/cardgames/topmenu.ss1` for repeatable returns.
-- Menu path observed (all screenshots in `/tmp/opencode/cardgames/`):
+  `/tmp/cardgames/topmenu.ss1` for repeatable returns.
+- Menu path observed (all screenshots in `/tmp/cardgames/`):
   - Boot → main game list (`CLASSIC` selected) or top menu, depending on boot
     timing; `B` from the game list opens the icon-style top menu.
   - Top menu: `SINGLE PLAYER`, `MULTIPLAYER`, `FACE CREATOR`, `OPTIONS`.
@@ -247,7 +249,7 @@ timer reached it. It is a dead/gated UI label, not an unlockable menu.
 
 ## 9. Tooling
 
-All scripts and screenshots in `/tmp/opencode/cardgames/`:
+All scripts and screenshots in `/tmp/cardgames/`:
 `scan1.py` (keyword/encoding counts), `scan2.py` (KEYINPUT literal xrefs),
 `scan3.py` (ASCII runs, alphabets, mask runs), `scan4.py` (UI string pointers),
 `scan5.py` (string-table xrefs), `ssdiff.py` (mGBA `gbAs` savestate diff),

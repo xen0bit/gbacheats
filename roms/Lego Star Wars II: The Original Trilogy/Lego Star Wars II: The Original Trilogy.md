@@ -1,5 +1,7 @@
 # LEGO Star Wars II: The Original Trilogy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -46,7 +48,7 @@ this GBA image** under ASCII, +0x20, BCD, u16/u32 or tile-index encodings.
 * Emulator: mGBA 0.10.5 under `Xvfb :315`, `SDL_AUDIODRIVER=dummy`, `mgba -3 -d ROM`.
 * Keymap (mGBA SDL): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
   D-pad=arrows. Hold keys ~70–150 ms (shorter taps are missed).
-* Menu path (all screens walked, screenshots on disk in `/tmp/opencode/legostarwars2/`):
+* Menu path (all screens walked, screenshots on disk in `/tmp/legostarwars2/`):
   boot splash → title `START` → **main menu** (New Game / Load Game / Options) →
   **Options** (Music Volume 5/10, Effects Volume 10/10, Gamma Off, Vehicle Control
   Rotation, Credits) → **Credits** (scrolling AMAZE ENTERTAINMENT) → **New Game slot
@@ -136,7 +138,7 @@ Washed Out Mode, Monochrome Mode.
 * **Space:** 5 decimal digits, alphabet `{0..9}`, length exactly 5 → **100,000**
   representable values. No reserved bits, no checksum field, no second alphabet.
 * **Method (§16.9):** reimplemented the validator from the disassembly and ran it over
-  all 100,000 inputs (`/tmp/opencode/legostarwars2/enumerate.py`). **Exactly 22 accepted**;
+  all 100,000 inputs (`/tmp/legostarwars2/enumerate.py`). **Exactly 22 accepted**;
   the accepted set equals the ROM table byte-for-byte. The published lists are complete
   and correct for this SKU. **No novel accepted code exists** — the system is a fixed
   table, so §0.2's "mint an unpublished accepted code" is impossible here; the complete

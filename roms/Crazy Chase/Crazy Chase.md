@@ -1,5 +1,7 @@
 # Crazy Chase (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -250,7 +252,7 @@ No code system exists in the retail image, so no novel code can be generated. Th
 
 * `mgba` 0.10.x SDL, Xvfb `:269`, openbox, `xdotool` (200–400 ms holds).
 * Python 3 with `capstone` 5.0.7 for Thumb scans (literal-pool LDR/BL, `cmp` immediates).
-* Custom scripts in `/tmp/opencode/crazychase`: `p0.py` (header/logo/hash), `render2.py` (mode-0/BG/OBJ renderer from savestate), `probe.py` (DISPCNT/BG/scroll/palette signature), `ctx*.py` (input-consumer disassembly), `scan10.py` (`cmp`-immediate scan), `counts.txt` (literal/encoded word search and key-mask run census).
+* Custom scripts in `/tmp/crazychase`: `p0.py` (header/logo/hash), `render2.py` (mode-0/BG/OBJ renderer from savestate), `probe.py` (DISPCNT/BG/scroll/palette signature), `ctx*.py` (input-consumer disassembly), `scan10.py` (`cmp`-immediate scan), `counts.txt` (literal/encoded word search and key-mask run census).
 * mGBA savestates (`*.ss1`) were parsed by extracting the zlib-compressed `gbAs` PNG chunk (397,312 bytes): header/CPU at 0x0000, palette at 0x0800, OAM at 0x0C00, VRAM at 0x1000, IWRAM at 0x19000, EWRAM at 0x21000.
 
 ## 10. Legal note

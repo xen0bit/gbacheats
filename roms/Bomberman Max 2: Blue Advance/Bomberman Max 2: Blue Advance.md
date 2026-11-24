@@ -1,5 +1,7 @@
 # Bomberman Max 2: Blue Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -162,7 +164,7 @@ Save/load state with `Shift+F1` / `F1`; a title-screen state is kept at
 | Title → L+R+Start / Select+Start / A+B+Start / A+B+Select | no reset, no visible change |
 
 Evidence screenshots (GBA viewport crops unless noted, in
-`/tmp/opencode/bmaxblue/`):
+`/tmp/bmaxblue/`):
 
 | File | Content |
 |---|---|
@@ -595,7 +597,7 @@ The public lists are:
 * `mgba-qt` 0.10.5 debugger console (optional mode probe and memory
   reads; not used for the cheat conclusion).
 * `arm-none-eabi-objdump -D -b binary -m arm -M force-thumb`.
-* Python 3 + Capstone 5.0.7 scripts in `/tmp/opencode/bmaxblue/`:
+* Python 3 + Capstone 5.0.7 scripts in `/tmp/bmaxblue/`:
   * `rtool.py` — Thumb disassembly with resolved PC-relative literals,
     BL-target scan, literal-pointer scan.
   * `scan_lit.py` — finds every Thumb `LDR` that loads a chosen literal

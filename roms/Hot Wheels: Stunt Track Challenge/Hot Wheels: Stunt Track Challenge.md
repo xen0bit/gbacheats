@@ -1,5 +1,7 @@
 # Hot Wheels: Stunt Track Challenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -205,7 +207,7 @@ valid alphabet + correct length is necessary but not sufficient; membership in t
 
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep` for Phase 0/1.
 - `arm-none-eabi-objdump -D -b binary -marm -M force-thumb --adjust-vma=0x08000000` and Capstone 5.0.7 for disassembly/scans.
-- Python scripts in `/tmp/opencode/hwstunt/`: `scan_refs.py` (literal pointer scan), `pw.py` (keypad navigation), `ss.py` / `patchss.py` (savestate parse/patch), `submit.py` (code submission + RAM read), `walk.py` (screen walk), `dbgsrv.py`/`dbg.py` (attempted `-d` PTY debugger).
+- Python scripts in `/tmp/hwstunt/`: `scan_refs.py` (literal pointer scan), `pw.py` (keypad navigation), `ss.py` / `patchss.py` (savestate parse/patch), `submit.py` (code submission + RAM read), `walk.py` (screen walk), `dbgsrv.py`/`dbg.py` (attempted `-d` PTY debugger).
 - mGBA SDL under `Xvfb :318` + Openbox; `xdotool` with explicit keydown/keyup holds; `import`/`convert` for screenshots, `tesseract` for OCR.
 - Web: `websearch` + `webfetch` via `web.archive.org` snapshots (direct GameFAQs/TCRF fetches are 403).
 

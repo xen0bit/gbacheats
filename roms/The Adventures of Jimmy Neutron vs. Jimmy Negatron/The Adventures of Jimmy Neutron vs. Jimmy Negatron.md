@@ -1,5 +1,7 @@
 # The Adventures of Jimmy Neutron vs. Jimmy Negatron (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -15,7 +17,7 @@
 | SHA-1 | `5a4b0f5782e42f04040a4b0fc0073e726e725681` |
 | SHA-256 | `20ea655f5ffe031183aaec8f9ad79253b0ce20e62a9413cf6928d62be1d414a7` |
 
-Work dir / evidence: `/tmp/opencode/jimmynegatron/`.
+Work dir / evidence: `/tmp/jimmynegatron/`.
 
 ## 2. Executive summary
 
@@ -40,8 +42,8 @@ The 12-character codes widely published for "Jimmy Neutron: Boy Genius" do **not
    Move with the D-pad, press A to append a symbol, `del` to backspace, `OK` to submit.
 5. Novel proof code, typed exactly as shown (parentheses = circled variant, toggle with L):
    **`(P)(N)(F)4(J)(W)7(H)`** — byte values `2B 2A 23 19 26 31 1C 25`.
-   Screenshot before submit: `/tmp/opencode/jimmynegatron/ui_typed2.png`; after submit: `/tmp/opencode/jimmynegatron/ui_final_crop.png` ("Dark Dimension", coins 979).
-6. A published-structure code verified in-game: `DBD7M7GZ` (the ambiguous 6th symbol is `7`, not circled V) → bytes `02 00 02 1C 09 30 04 14` → green Retroland area, 2 coins (`/tmp/opencode/jimmynegatron/orac_retro_real_crop.png`).
+   Screenshot before submit: `/tmp/jimmynegatron/ui_typed2.png`; after submit: `/tmp/jimmynegatron/ui_final_crop.png` ("Dark Dimension", coins 979).
+6. A published-structure code verified in-game: `DBD7M7GZ` (the ambiguous 6th symbol is `7`, not circled V) → bytes `02 00 02 1C 09 30 04 14` → green Retroland area, 2 coins (`/tmp/jimmynegatron/orac_retro_real_crop.png`).
 
 ## 4. Address map
 
@@ -59,7 +61,7 @@ All ROM addresses are `0x08000000 + file offset`.
 | `0x0803BAF4` | `"Code:"`; `0x0803BAFC` `"Failed Code"`; `0x0803BB08` `"OK"`; `0x0803BB0C` `"del"`; `0x0803BB10` `"Enter Code"`; `0x0803BB34` `"DIFFICULTY"`; `0x0803BB2C/24/1C` `Easy/Normal/Hard` |
 | `0x0809DB00..0x0809DC80` | pointer table for all menu/help strings used by this screen |
 | `0x03000DC0` | 8-byte code input buffer (values 0..31 normal, 32..63 circled); 10 bytes copied by `ok_handler` |
-| `0x03000DE0..0x03000E05` | decoded field struct: `+0x20=f5<<8`, `+0x22=f6<<8`, `+0x24=f9|(f2<<10)`, `+0x26=f10`, `+0x2D=f1`, `+0x30=f4`, `+0x38=f2b`, `+0x43=f3`, `+0x44=f1b`; `+0x38` is zeroed on rejection |
+| `0x03000DE0..0x03000E05` | decoded field struct: `+0x20=f5<<8`, `+0x22=f6<<8`, `+0x24=f9\|(f2<<10)`, `+0x26=f10`, `+0x2D=f1`, `+0x30=f4`, `+0x38=f2b`, `+0x43=f3`, `+0x44=f1b`; `+0x38` is zeroed on rejection |
 | `0x03000E7C` | LCG state for permutation generation (u32) |
 
 ## 5. Algorithm
@@ -199,7 +201,7 @@ All 9 rejection cases agreed with the Python model; acceptance/rejection agreeme
 
 ## 9. Tooling
 
-- Custom scripts in `/tmp/opencode/jimmynegatron/`: `decode.py` (validator reimplementation), `mint.py` (field-exact code minter), `patchstate.py` (mGBA `.ss` `gbAs` chunk patcher, preserves PNG CRC), `oracle.sh` (patch → boot → OK → screenshot), `k.py` (xdotool key helper), `enter_code.py` (UI entry sequence).
+- Custom scripts in `/tmp/jimmynegatron/`: `decode.py` (validator reimplementation), `mint.py` (field-exact code minter), `patchstate.py` (mGBA `.ss` `gbAs` chunk patcher, preserves PNG CRC), `oracle.sh` (patch → boot → OK → screenshot), `k.py` (xdotool key helper), `enter_code.py` (UI entry sequence).
 - `arm-none-eabi-objdump -M force-thumb`, `gdb-multiarch` against mGBA's GDB stub, `capstone` for literal/BL scans, `tesseract` for screen OCR, `scrot`/ImageMagick for captures.
 - Note: other agents' processes held GDB port 2345 intermittently; the working stub was verified by `netstat` PID before each run. The emulator binary was copied to `emu_jn` to avoid other agents' process-wide cleanup.
 - No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms, and generated codes are published.

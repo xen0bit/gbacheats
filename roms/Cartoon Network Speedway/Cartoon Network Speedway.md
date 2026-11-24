@@ -1,5 +1,7 @@
 # Cartoon Network Speedway (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -89,7 +91,7 @@ Codes tested in the emulator (all on the above screen):
 | `39999999` | rejected (`M` out of range) |
 
 A savestate at the password screen and the analysis scripts are in
-`/tmp/opencode/cnspeedway/` (`cnspeedway_before.ss1`, `cns_model.py`,
+`/tmp/cnspeedway/` (`cnspeedway_before.ss1`, `cns_model.py`,
 `enter_code.py`, `key.py`).
 
 ## 4. Address map
@@ -349,12 +351,12 @@ the published lists omit: `b0..b4 = 3` (published codes only use 0/1) and
   `imagemagick`.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
   for raw Thumb disassembly; Python `capstone` for scripted scans.
-- `/tmp/opencode/cnspeedway/cns_model.py` — clean encoder/decoder and field
+- `/tmp/cnspeedway/cns_model.py` — clean encoder/decoder and field
   model (the pre-existing `model.py` had incorrect bit labels for `f10..f14`
   and a broken encoder; use `cns_model.py`).
-- `/tmp/opencode/cnspeedway/enter_code.py`, `key.py` — password-screen input
+- `/tmp/cnspeedway/enter_code.py`, `key.py` — password-screen input
   (Up = increment digit, Right = next slot, A = OK).
-- `/tmp/opencode/cnspeedway/cnspeedway_before.ss1` — savestate at the password
+- `/tmp/cnspeedway/cnspeedway_before.ss1` — savestate at the password
   screen before any code.
 - Savestates are PNG files with a zlib-compressed `gbAs` chunk; the raw state
   is 397,312 bytes and contains header/VRAM/IWRAM/EWRAM (IWRAM at raw offset

@@ -1,5 +1,7 @@
 # Bionicle: Maze of Shadows (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -47,7 +49,7 @@ DISPLAY=:185 openbox &
 DISPLAY=:185 SDL_AUDIODRIVER=dummy /usr/games/mgba -3 game.gba &
 ```
 
-mGBA SDL default keys: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrows. The ROM must be launched from a copy (`/tmp/opencode/mazeofshadows/game.gba`) so generated saves stay out of the ROM folder.
+mGBA SDL default keys: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrows. The ROM must be launched from a copy (`/tmp/mazeofshadows/game.gba`) so generated saves stay out of the ROM folder.
 
 ### Walking the normally reachable menus (all observed)
 
@@ -259,7 +261,7 @@ The part handler at `0x08038FFC` additionally range-checks the page (`0x020011D8
 * Capstone 5.0.7 for pointer/literal scans; Python 3 `struct`/`zlib`.
 * mGBA 0.10.5 SDL under `Xvfb :185` + `openbox`; `xdotool` for input, `scrot`/ImageMagick for screenshots.
 * mGBA's built-in command-line debugger (`mgba -d`) was the key tool: `w/1`, `r/1`, `frame`, `save 1`, `load 1`, `watch/w`, `watch/r`. It allowed exact screen-id/page reads and savestate anchoring of the debug menu.
-* Analysis artifacts (not shipped with the ROM): `/tmp/opencode/mazeofshadows/` contains the scanner (`scan.py`, `findset.py`), the debugger controller (`ctl.py`), the disassembly dumps (`core.txt`, `dis_036000.txt`, `dis_debug.txt`), and the screenshots referenced above (`cmp13c.png`, `plists.png`, `bounds.png`, `enum_*c.png`, `walk_*c.png`, `u03c.png`, `t01c.png`, `c9_0c.png`).
+* Analysis artifacts (not shipped with the ROM): `/tmp/mazeofshadows/` contains the scanner (`scan.py`, `findset.py`), the debugger controller (`ctl.py`), the disassembly dumps (`core.txt`, `dis_036000.txt`, `dis_debug.txt`), and the screenshots referenced above (`cmp13c.png`, `plists.png`, `bounds.png`, `enum_*c.png`, `walk_*c.png`, `u03c.png`, `t01c.png`, `c9_0c.png`).
 
 ## Legal note
 

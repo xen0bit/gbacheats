@@ -1,5 +1,7 @@
 # Super Street Fighter II Turbo Revival (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,7 +43,7 @@ DISPLAY=:319 SDL_AUDIODRIVER=dummy mgba -g -3 <rom> &
 
 mGBA SDL keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrow keys. **Important:** `xdotool windowactivate --sync <mGBA window>` is required before each input batch; without it XTEST events were silently dropped. Hold 60–120 ms; longer holds double-step the title/menu cursors.
 
-Screen walk (screenshots saved in `/tmp/opencode/ssf2turbo/`):
+Screen walk (screenshots saved in `/tmp/ssf2turbo/`):
 
 1. `bootseq1.png` — Nintendo licence screen ("SUPER STREETFIGHTER2 TURBO REVIVAL / LICENSED BY NINTENDO").
 2. `bootseq6.png` — CAPCOM logo. The published Survival code (`Up Down Left Right Left Down Up B A Start`) was entered here with 45 ms holds (`capcom_after.png`); no visible acknowledgement.
@@ -201,7 +203,7 @@ observed on any of them.
 
 ## 9. Tooling
 
-Scripts and captures kept in `/tmp/opencode/ssf2turbo/`:
+Scripts and captures kept in `/tmp/ssf2turbo/`:
 
 * `k.py` — xdotool key/screenshot helper (DISPLAY `:319`).
 * `state.py` — mGBA `.ss1` PNG `gbAs` decompressor and RAM dump helper.

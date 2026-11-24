@@ -1,5 +1,7 @@
 # Tony Hawk's Pro Skater 4 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -59,9 +61,9 @@ are published (§3) but were not exercised in-game.
   **Start** (`Return`), not A (A selects only in submenus); D-pad holds of
   60 ms move exactly one row (150 ms double-steps — guide §16.2).
 * The CLI debugger (`mgba -3 -d game.gba`) was driven through a FIFO→pty bridge
-  (`/tmp/opencode/thps4/dbg_bridge.py`); commands need a `\r` terminator and
+  (`/tmp/thps4/dbg_bridge.py`); commands need a `\r` terminator and
   `Ctrl+C` to break into a running core.
-* Screen path (all screens screenshotted in `/tmp/opencode/thps4/`):
+* Screen path (all screens screenshotted in `/tmp/thps4/`):
   1. Boot → Vicarious Visions splash (`s2.png`).
   2. `SELECT SAVE SLOT`, 4×`NEW` (`title.png`).
   3. `ENTER SAVE NAME` keyboard, default `Player` (`menu1.png`); A → `SAVING`
@@ -265,7 +267,7 @@ found on any reachable screen.
 ## 9. Tooling
 
 * `strings -t x -n 4` + `grep -iE` — full text-bank enumeration.
-* Python scripts in `/tmp/opencode/thps4/`: `search_codes.py` (multi-encoding
+* Python scripts in `/tmp/thps4/`: `search_codes.py` (multi-encoding
   literal sweep), `find_tables.py`, `xrefs.py`, `scan_ptrs.py`,
   `find_cheat_code.py`, `iwram_ptrs.py`, `button_scan.py` (mask runs),
   `ui.py` (xdotool key/shot), `dump_ram.py` + `dbgcmd.py` + `dbg_bridge.py`
@@ -274,7 +276,7 @@ found on any reachable screen.
   for the keyboard routines; REA/Ghidra raw-binary import (SHA-256 confirmed the
   same image) for pointer xrefs — Ghidra recognised only data references, as
   expected for a raw Thumb image (guide §5.5).
-* Screenshots are kept on disk in `/tmp/opencode/thps4/`; only 2–3 were viewed
+* Screenshots are kept on disk in `/tmp/thps4/`; only 2–3 were viewed
   at a time to conserve context (guide §16.2).
 
 ## 10. Legal note

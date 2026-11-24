@@ -1,5 +1,7 @@
 # Castlevania: Harmony of Dissonance (GBA) â€” Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -191,8 +193,8 @@ The gate byte was set by patching the `gbAs` chunk of a savestate (decompress â†
 * `arm-none-eabi-objdump`, Capstone 5.0.7 (Thumb), Python 3.
 * mGBA 0.10.5 (`mgba-sdl`), Xvfb `:237`, `openbox`, `xdotool`, `scrot`.
 * Savestate parser: `zlib.decompress` the `gbAs` chunk of the `.ss*` PNG; layout header/CPU `0x00000`, VRAM `0x01000`, IWRAM `0x19000`, EWRAM `0x21000`.
-* Helper scripts in `/tmp/opencode/hod/`: `mgba.py` (GDB stub), `nameentry.py` (name entry), `lz77.py`, `disasm.py`, `shot.sh`.
-* Screenshots in `/tmp/opencode/hod/shots/` (not redistributed).
+* Helper scripts in `/tmp/hod/`: `mgba.py` (GDB stub), `nameentry.py` (name entry), `lz77.py`, `disasm.py`, `shot.sh`.
+* Screenshots in `/tmp/hod/shots/` (not redistributed).
 
 ## Legal note
 

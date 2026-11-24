@@ -1,5 +1,7 @@
 # Broken Sword: The Shadow of the Templars (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -494,7 +496,7 @@ PlayStation version.
 * `arm-none-eabi-objdump -M force-thumb` for the key reader and reset routine.
 * Python 3 + Capstone 5.0.7 for literal/instruction scans; custom scripts for
   string census, room-manifest extraction, keyword searches and save parsing.
-* Work directory: `/tmp/opencode/brokensword` (screenshots and scripts).
+* Work directory: `/tmp/brokensword` (screenshots and scripts).
 * No ROM, graphics, music or text assets are redistributed here.
 
 ## 10. Legal note

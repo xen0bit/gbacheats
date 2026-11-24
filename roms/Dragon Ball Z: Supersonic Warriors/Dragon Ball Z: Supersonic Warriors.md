@@ -1,5 +1,7 @@
 # Dragon Ball Z: Supersonic Warriors (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -35,7 +37,7 @@ Every published code for this SKU was checked (§6). All "codes" on cheat sites 
   4. Press **Start** → the debug menu appears.
   * Timings: wait ~1 s after each screen transition; the cutscene text box must be present before Start is pressed.
   * Adjacent values 0x0B / 0x0D do **not** open the path — normal labelled main menu is shown (§6b).
-* Screenshots of every step are in `/tmp/opencode/dbzsw/` (e.g. `invisible_option_c.png`, `char sel` in `testN0_c.png`, `cutscene1_c.png`, `dbg_fresh_c.png`, `dbg2_after.png`, `opt_inside_c.png`, `shop_c.png`). Screenshots are evidence only; RAM/address proofs are primary.
+* Screenshots of every step were in `/tmp/dbzsw/` (e.g. `invisible_option_c.png`, `char sel` in `testN0_c.png`, `cutscene1_c.png`, `dbg_fresh_c.png`, `dbg2_after.png`, `opt_inside_c.png`, `shop_c.png`). Screenshots are evidence only; RAM/address proofs are primary.
 
 ## 4. Address map
 
@@ -140,4 +142,4 @@ This is a **story/scene-oriented debug menu**, not a universal "unlock all" pane
 * `strings -t x`, `grep -iE` for text reconnaissance; Capstone 5.0.7 for Thumb PC-relative literal and byte-accessor scans; `arm-none-eabi-objdump -M force-thumb` for targeted disassembly of 0x08000BFE, 0x0802C0A4, 0x0802D80E, 0x0803F190, 0x0803D760.
 * mGBA (SDL) under Xvfb :318 + openbox; xdotool/XTEST key helper (`key.py`); `import`/`scrot` + ImageMagick for screenshots.
 * Fallback tooling noted for reproduction: mGBA CLI debugger via a PTY (`script` + FIFO) provides `r/1`/`w/1` RAM access; the GDB stub (`-g`) was found single-client/unreliable and savestate patching was used instead.
-* All analysis artifacts live in `/tmp/opencode/dbzsw/`; no ROM or copyrighted assets are redistributed. Generated `.sav`/`.ss*` files were removed from the ROM folder; all spawned processes (mGBA, Xvfb :318, openbox) were stopped by PID.
+* All analysis artifacts were kept in `/tmp/dbzsw/`; no ROM or copyrighted assets are redistributed. Generated `.sav`/`.ss*` files were removed from the ROM folder; all spawned processes (mGBA, Xvfb :318, openbox) were stopped by PID.

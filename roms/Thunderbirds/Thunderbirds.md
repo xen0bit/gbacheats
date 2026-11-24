@@ -1,5 +1,7 @@
 # Thunderbirds (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -168,12 +170,12 @@ Counts: 17 accepted / 4096 tried offline; 6 inputs tested live (3 accepted: `BCD
 * **No second password system.** Literal searches (ASCII, `+0x20`, UTF-16) for the alphabet and for any other code-like string found no second alphabet/table; the validator has exactly one caller (`0x08002EE8`) and the table exactly one validator reference (`0x08002898`). A second system using an unrelated glyph encoding cannot be excluded by those searches alone.
 * **No button-code table.** A scan for runs of ≥5 consecutive valid KEYINPUT masks found 36 candidates, all in high ROM regions (`0x0817899A`+) that are graphics/level data, not code tables; no published button codes for this SKU were found. No hidden debug-menu strings exist in the ASCII bank (searched `debug|cheat|menu|invalid|secret|level select|bonus`; only gameplay text and `ai invalid message` at `0x08161E64`).
 * **Sleep-mode confirmation** (`ENTER SLEEP MODE?`, `0x0815FAD8`) exists but was not entered (Select+L+R on the game), so its post-screen state is untested.
-* No ROM or copyrighted assets were redistributed; all screenshots are local verification artifacts in `/tmp/opencode/thunderbirds`.
+* No ROM or copyrighted assets were redistributed; all screenshots are local verification artifacts in `/tmp/thunderbirds`.
 
 ## 9. Tooling and artifacts
 
 * Tools: `mGBA 0.10.5` (`-d` CLI debugger + savestates), `gdb-multiarch` (port contested, not used for final evidence), `arm-none-eabi-objdump -M force-thumb`, Capstone, Python 3, `xdotool`, `scrot`, ImageMagick, `Xvfb :319` + `openbox`.
-* Work dir: `/tmp/opencode/thunderbirds/` with scripts `ui.py`, `dbg.py`, `enter_code.py`, `ssdiff.py`, `scan1.py`–`scan3.py`, `decode_table.py`, `decode_apply2.py`, `final_table.py`, `enumerate.py`, and screenshots (`novel_734_result.png`, `novel_T89_result.png`, `submit111.png`, `rej_BCC_3.png`, `rej_len2b.png`, etc.).
+* Work dir: `/tmp/thunderbirds/` with scripts `ui.py`, `dbg.py`, `enter_code.py`, `ssdiff.py`, `scan1.py`–`scan3.py`, `decode_table.py`, `decode_apply2.py`, `final_table.py`, `enumerate.py`, and screenshots (`novel_734_result.png`, `novel_T89_result.png`, `submit111.png`, `rej_BCC_3.png`, `rej_len2b.png`, etc.).
 * ROM-folder savestates/save files (`Thunderbirds.sav`, `.ss1`–`.ss3`) were created during analysis and **removed at cleanup**.
 
 ## 10. Cleanup

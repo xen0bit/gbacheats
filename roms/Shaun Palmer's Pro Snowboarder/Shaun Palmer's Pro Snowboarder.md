@@ -1,5 +1,7 @@
 # Shaun Palmer's Pro Snowboarder (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -129,7 +131,7 @@ Rotation verifies as a fixed point (`rot = popcount(original) % 5`); `FUN_080419
 
 ## 9. Tooling
 
-Ghidra 12.1.4 via REA MCP (`open_binary`, `list_procedures`, `analyze_function`, `procedure_pseudo_code`); `arm-none-eabi-objdump -M force-thumb`; Python 3 + capstone; custom scripts in `/tmp/opencode/shaunpalmer2/`: `model.py` (exact validator model), `encode.py` (constructive encoder), `enter_code.py` (screen navigation + RAM dump), `ssread.py` (mGBA savestate decoder), `ui.py` (xdotool driver), `mapglyph.py` (alphabet recovery). Screenshots `accept_banner.png`, `success_*.png`, `reject_banner.png`, `g0_12c.png`, `g13_25c.png`, `g26_31c.png`.
+Ghidra 12.1.4 via REA MCP (`open_binary`, `list_procedures`, `analyze_function`, `procedure_pseudo_code`); `arm-none-eabi-objdump -M force-thumb`; Python 3 + capstone; custom scripts in `/tmp/shaunpalmer2/`: `model.py` (exact validator model), `encode.py` (constructive encoder), `enter_code.py` (screen navigation + RAM dump), `ssread.py` (mGBA savestate decoder), `ui.py` (xdotool driver), `mapglyph.py` (alphabet recovery). Screenshots `accept_banner.png`, `success_*.png`, `reject_banner.png`, `g0_12c.png`, `g13_25c.png`, `g26_31c.png`.
 
 ## 10. Legal note
 

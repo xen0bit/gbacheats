@@ -1,5 +1,7 @@
 # Power Rangers: Ninja Storm (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -139,7 +141,7 @@ Published-code verification (GameFAQs cheats page, 7 lists; GameFAQs walkthrough
 | `LGV` | Wind, Easy, L3 | Accepted → Wind Rangers selection (corrects published `IGW`) |
 | `GLG` | Thunder, Easy, L5 | Accepted → Thunder Rangers selection (corrects published `GLW`) |
 
-Screenshots for each are in `/tmp/opencode/prninjastorm/r_<CODE>.png` (contact sheet `sheet2.png`). Note: screenshots are local analysis artifacts and are not attached to this report.
+Screenshots for each were in `/tmp/prninjastorm/r_<CODE>.png` (contact sheet `sheet2.png`). Note: screenshots are local analysis artifacts and are not attached to this report.
 
 **RAM verification of effect.** Two pause states were diffed: `GG5` (Wind/Normal/L1) vs `BKB` (Green/Hard/L1). At IWRAM `0x030035B3..B5` the bytes change `[4,4,26]` → `[0,7,0]`, i.e. exactly the indices of the two codes; companion state bytes at `0x030035BC`, `0x0300266E`, `0x03002686`, `0x03007B3x` also change, consistent with a different team/difficulty/character. This proves the game itself regenerates the canonical password from its internal state rather than echoing the typed string.
 
@@ -174,7 +176,7 @@ Together these bound the accepted set to the model's 45-code space: a one-bit ch
 ## 9. Tooling
 
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep` for Phase 0/1.
-- Python 3 standard library for header parse, logo scan, savestate `gbAs` zlib extraction, bit-field analysis, GF(2) solve, and code generation (`analyze.py`, `bits.py`, `field.py`, `solve.py`, `tab.py`, `model.py`, `enter2.py`, `ss.py`, all in `/tmp/opencode/prninjastorm`).
+- Python 3 standard library for header parse, logo scan, savestate `gbAs` zlib extraction, bit-field analysis, GF(2) solve, and code generation (`analyze.py`, `bits.py`, `field.py`, `solve.py`, `tab.py`, `model.py`, `enter2.py`, `ss.py`, all in `/tmp/prninjastorm`).
 - `arm-none-eabi-objdump` for crt0 / cracktro disassembly.
 - mGBA (SDL) under Xvfb `:316` with `openbox`, `xdotool`, `scrot`, ImageMagick for Phase 2/5/6.
 - Web sources: GameFAQs cheats & walkthrough 49223, RangerWiki, Wikipedia, ROMSFUN (read only, treated as data).

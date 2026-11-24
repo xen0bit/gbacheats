@@ -1,5 +1,7 @@
 # Kingdom Hearts: Chain of Memories (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -245,7 +247,7 @@ gameplay menus with no cheat/debug entries.
 ## 9. Tooling
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -abo`.
-* Python 3 with `capstone`/`keystone`; custom scripts in `/tmp/opencode/khcom/`:
+* Python 3 with `capstone`/`keystone`; custom scripts in `/tmp/khcom/`:
   `helper.py` (xdotool input + scrot + crop), `sram.py` (savestate `gbAs` zlib-decompress and
   RAM read; EWRAM at state `+0x21000`, IWRAM at `+0x19000`), `patch_state.py` (savestate
   byte patch + CRC rewrite), `gq.py`/`gdbserver.py` (GDB bridge; abandoned due to port conflict).

@@ -1,5 +1,7 @@
 # Atomic Betty (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -341,7 +343,7 @@ membership, not a range or prefix rule.
 * Title, Main Menu, Game Select, Enter Password, Incorrect Password,
   Options, Music, Sound, Credits, Pause, Pause Map, Sure, Try Again, the
   Ship Controls help card, level intros, and the school/space stages were
-  reached and screenshotted (`/tmp/opencode/betty/*.png`; not redistributed).
+  reached and screenshotted (`/tmp/betty/*.png`; not redistributed).
 * The password screen cycles exactly 8 portraits in both directions; a
   savestate per stop proved the stored values are 0–7 with the mapping in
   §5 (`map0.png` … `map7.png`).
@@ -414,7 +416,7 @@ membership, not a range or prefix rule.
   A GDB-stub run (`mgba -g`) was used once to confirm the RAM table before
   the savestate layout was known.
 * All screenshots and savestates from this session are in
-  `/tmp/opencode/betty/` and the game folder's `*.ss1` (git-ignored); no ROM
+  `/tmp/betty/` and the game folder's `*.ss1` (git-ignored); no ROM
   or game art is redistributed here.
 
 ## Legal note

@@ -1,5 +1,7 @@
 # Paws & Claws: Pet Resort (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -34,7 +36,7 @@ Consequently §0.2's "mint a novel code" deliverable does not apply: no code spa
 
 Emulator: mGBA 0.10.5 under `Xvfb :319 -screen 0 1280x900x24`, `openbox`, `SDL_AUDIODRIVER=dummy`, launched as `mgba -3 -g <rom>` (GDB stub port 2345). Keymap (mGBA SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows; 70–150 ms holds.
 
-Menu paths walked (all screenshots saved in `/tmp/opencode/pawsclaws/`):
+Menu paths walked (all screenshots saved in `/tmp/pawsclaws/`):
 
 1. **Boot** → publisher splash (Denaris Entertainment Software / THQ / copyright) → **Title**: NEW GAME / LOAD GAME / RIDE OUT / CREDITS (4 entries, one selection ring).
 2. **NEW GAME** → name entry (75-symbol keyboard, 24-char name) → difficulty (Easy / Medium / Difficult) → scenario (6 entries) → story pages → gameplay.
@@ -136,6 +138,6 @@ No novel code was generated because no validator, table, alphabet or entry surfa
 
 ## 9. Tooling
 
-`file`, `md5sum`, `sha1sum`, `sha256sum`, `strings`, `xxd`, `grep`, `python3`, `capstone 5.0.7`, `binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`), mGBA 0.10.5 with GDB stub, `gdb-multiarch`, Xvfb, openbox, xdotool, scrot, ImageMagick. Analysis scripts in `/tmp/opencode/pawsclaws/`: `header_scan.py`, `xref.py`, `findlit.py`, `pcldr.py`, `blxref.py`, `maskscan.py`, `maskscan2.py`, `rsp.py`, `bridge.py`, `dumpram.py`, `restart.sh`.
+`file`, `md5sum`, `sha1sum`, `sha256sum`, `strings`, `xxd`, `grep`, `python3`, `capstone 5.0.7`, `binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`), mGBA 0.10.5 with GDB stub, `gdb-multiarch`, Xvfb, openbox, xdotool, scrot, ImageMagick. Analysis scripts in `/tmp/pawsclaws/`: `header_scan.py`, `xref.py`, `findlit.py`, `pcldr.py`, `blxref.py`, `maskscan.py`, `maskscan2.py`, `rsp.py`, `bridge.py`, `dumpram.py`, `restart.sh`.
 
 No cheats were applied and no game assets are redistributed.

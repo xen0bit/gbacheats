@@ -1,5 +1,7 @@
 # Spyro 2: Season of Flame (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -212,7 +214,7 @@ state (`W+0x7C0 = 0`, `W+0x7D4 = 1`) rather than opening a menu.
 - `strings -t x -n 4`, `grep -iE`, byte-pattern searches with Python `bytes.find`.
 - mGBA 0.10.5 under Xvfb `:318` with `SDL_AUDIODRIVER=dummy`, `xdotool` XTEST input,
   `scrot` + ImageMagick `convert` for screenshots.
-- Python helpers in `/tmp/opencode/spyro2/`: `scan_flags.py`, `scan_bl.py`, `enter_code.py`,
+- Python helpers in `/tmp/spyro2/`: `scan_flags.py`, `scan_bl.py`, `enter_code.py`,
   `verify_all.py`, `bounds.py`; savestate RAM reader using `zlib.decompress` of the `gbAs`
   PNG chunk.
 

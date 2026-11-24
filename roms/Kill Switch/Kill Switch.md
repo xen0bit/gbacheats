@@ -1,5 +1,7 @@
 # Kill Switch (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -44,7 +46,7 @@ Menu path (fresh SRAM): boot → DSI splash → attract/demo (`DEMO` HUD) → `R
 
 Codes tested: none applicable — no code-entry UI exists. Published console literals searched in ROM: `ABYX`, `RYXB`, `XBYA`, `RLAB`, `LYRB`, `KONAMI` → 0 hits each. Button tables searched: Konami `UUDDLRLRBA`, `L+R+B+B`, `L+R+B+A+B`, `ABAB` → 0 hits each.
 
-Screens walked (all with screenshots, kept in `/tmp/opencode/killswitch/`): splash, attract/demo, title, main menu, file select, name entry, confirm, Select Level, Level Briefing, gameplay, pause, pause-exit confirm, Options, Controls, Credits, Hall of Fame. No attract/demo screen was mistaken for the menu.
+Screens walked (all with screenshots, kept in `/tmp/killswitch/`): splash, attract/demo, title, main menu, file select, name entry, confirm, Select Level, Level Briefing, gameplay, pause, pause-exit confirm, Options, Controls, Credits, Hall of Fame. No attract/demo screen was mistaken for the menu.
 
 ## 4. Address map
 
@@ -142,6 +144,6 @@ The two "Earn N medals to unlock this mode" strings are the gate messages shown 
 
 ## 9. Tooling
 
-`strings -t x`, `grep -abo`, `xxd`, Python 3 (`struct`, `zlib`, `PIL`), `capstone` 5.0.7, `arm-none-eabi-objdump -M force-thumb`, REA MCP with Ghidra 12.1.4 (opened raw-binary ARM @0x08000000, then closed), `mgba` (SDL) under `Xvfb :315` + `openbox`, `xdotool`, `scrot`, `convert`. Helper scripts in `/tmp/opencode/killswitch/`: `k.py`, `nav.py`, `state.py`, `gdbcli.py`, `brute.py` (abandoned — unreliable detection). No scripts are published with this report beyond addresses/algorithms. No ROM or extracted asset is redistributed.
+`strings -t x`, `grep -abo`, `xxd`, Python 3 (`struct`, `zlib`, `PIL`), `capstone` 5.0.7, `arm-none-eabi-objdump -M force-thumb`, REA MCP with Ghidra 12.1.4 (opened raw-binary ARM @0x08000000, then closed), `mgba` (SDL) under `Xvfb :315` + `openbox`, `xdotool`, `scrot`, `convert`. Helper scripts in `/tmp/killswitch/`: `k.py`, `nav.py`, `state.py`, `gdbcli.py`, `brute.py` (abandoned — unreliable detection). No scripts are published with this report beyond addresses/algorithms. No ROM or extracted asset is redistributed.
 
 **Legal note:** only hashes, addresses, string classifications and observations are published; the ROM and its graphics/audio/text assets are not.

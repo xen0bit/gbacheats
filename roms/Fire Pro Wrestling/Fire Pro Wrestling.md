@@ -1,5 +1,7 @@
 # Fire Pro Wrestling (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -137,7 +139,7 @@ There is no alphabet checksum, no key table, no generator function and no variab
 ## 9. Tooling
 
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep -abo` — Phase 0/1 fingerprinting and searches.
-- Python scripts in `/tmp/opencode/fpw1/`: `patchstate.py` (savestate `gbAs` zlib patcher with CRC rebuild), `key.py` (XTEST key driver), `typecode.py` / `typecode2.py` / `typecode_bad.py` (position-aware on-screen text entry), `gdbr.py`, `gdbmon.py`, `gpty.py` (GDB-remote probing; stub proved single-client/flaky, so savestate diffing was primary), plus inline scanners for logo headers, literal pointers, Thumb `cmp` clusters and key masks.
+- Python scripts in `/tmp/fpw1/`: `patchstate.py` (savestate `gbAs` zlib patcher with CRC rebuild), `key.py` (XTEST key driver), `typecode.py` / `typecode2.py` / `typecode_bad.py` (position-aware on-screen text entry), `gdbr.py`, `gdbmon.py`, `gpty.py` (GDB-remote probing; stub proved single-client/flaky, so savestate diffing was primary), plus inline scanners for logo headers, literal pointers, Thumb `cmp` clusters and key masks.
 - `arm-none-eabi-objdump -M force-thumb / -M force-arm` for spot disassembly; `mgba -3` under `Xvfb :318` + `openbox`; `scrot`/ImageMagick for screenshots.
 - Analysis only; no ROM or copyrighted assets are redistributed here.
 

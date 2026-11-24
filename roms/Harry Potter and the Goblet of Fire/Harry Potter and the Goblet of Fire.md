@@ -1,5 +1,7 @@
 # Harry Potter and the Goblet of Fire (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -43,7 +45,7 @@ Published GBA "cheats" are **Action Replay / GameShark memory-edit codes** (Chea
 
 - **Emulator:** mGBA 0.10.5 SDL, `SDL_AUDIODRIVER=dummy`, `DISPLAY=:319`, `Xvfb :319 -screen 0 1024x768x24`, `openbox`, `mgba -3 <rom>`.
 - **Keymap (verified empirically):** A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Hold keys ≥60 ms; Start only opens the pause menu once the intro objective ("Get to the Portkey!") is finished.
-- **Screen path (all walked, screenshots on disk in `/tmp/opencode/hpgof/`):**
+- **Screen path (all walked, screenshots on disk in `/tmp/hpgof/`):**
   1. Language select (7 languages) → EA logo → title (`Press START`) → save slots (3) → Select = new game.
   2. Main menu (6 entries, cursor byte `0x020002C8` = 0..5): Single Player, Multiplayer, Options, Folio Universitas, Credits, Bonuses unlocked.
   3. Options (4): Music, Sfx, Light, Sleep mode.
@@ -132,7 +134,7 @@ This is edge-triggered (press all three, then release all). Forcing `flags |= 0x
 ## 9. Tooling
 
 - `arm-none-eabi-objdump -M force-thumb` for input-routine disassembly; Python 3 + Capstone 5.0.7 for literal/xref scans; `strings`, `xxd`, Python `struct`/`zlib` for headers and savestate decoding.
-- Custom scripts in `/tmp/opencode/hpgof/`: `phase0.py`, `recon.sh`, `dump.py`, `static_scan.py`, `ptrscan.py`, `key.py`, `combo.py`, `savestate.py`, `ssdecode.py`, `ramtool.py`, `patchss.py`.
+- Custom scripts in `/tmp/hpgof/`: `phase0.py`, `recon.sh`, `dump.py`, `static_scan.py`, `ptrscan.py`, `key.py`, `combo.py`, `savestate.py`, `ssdecode.py`, `ramtool.py`, `patchss.py`.
 - mGBA 0.10.5 SDL under Xvfb :319, xdotool/scrot/ImageMagick for input and screenshots.
 - Web: GameFAQs cheat/walkthrough pages (via `web.archive.org` snapshots), IGN archived cheat page, Cheat Happens, Wikipedia. Fetched pages were treated as data; no prompt-injection payload was observed in this session's fetches.
 

@@ -1,5 +1,7 @@
 # Sega Rally Championship (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -145,7 +147,7 @@ This game has **no code/password/menu-cheat space to enumerate**; the section th
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly (note: this build rejects `-M force-arm`; `-marm` is default).
-* Python scripts written in `/tmp/opencode/segarally/`: `ptrscan.py` (direct pointers + Thumb `LDR`-literal scan), `blscan.py` (Thumb BL targets), `keytable_scan.py` (key-mask run/xref counts), `writers.py`, `textdecode*.py`, `classify.py` (dHash screen classifier), `seq.py`/`press.sh`/`cap.sh`/`ocr.sh` (xdotool input, capture, OCR).
+* Python scripts written in `/tmp/segarally/`: `ptrscan.py` (direct pointers + Thumb `LDR`-literal scan), `blscan.py` (Thumb BL targets), `keytable_scan.py` (key-mask run/xref counts), `writers.py`, `textdecode*.py`, `classify.py` (dHash screen classifier), `seq.py`/`press.sh`/`cap.sh`/`ocr.sh` (xdotool input, capture, OCR).
 * mGBA 0.10.5 under Xvfb `:318`; savestate `gbAs` zlib chunk parsed with Python `zlib` for RAM reads; Tesseract OCR (installed via `apt-get install tesseract-ocr`) used only as a secondary screen label aid.
 * REA/Ghidra 12.1.4 was opened on the raw ROM (SHA-256 matched), but its auto-analysis treated most Thumb regions as data, so the conclusions here rest on objdump + emulator + savestate RAM.
 

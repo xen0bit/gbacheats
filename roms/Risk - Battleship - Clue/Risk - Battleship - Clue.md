@@ -1,5 +1,7 @@
 # Risk - Battleship - Clue (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -206,7 +208,7 @@ basis of the conclusion.
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd` — Phase 0 identity/hashes.
-* Python 3 scripts in `/tmp/opencode/riskbattleshipclue/`: `phase0.py` (logo/header
+* Python 3 scripts in `/tmp/riskbattleshipclue/`: `phase0.py` (logo/header
   scan), `static1.py` (text-bank pointer enumeration), `scan_codes.py` (key-mask and
   code-like string scans), `ss.py` / `ss_analyze.py` (mGBA `.ss1` `gbAs` zlib decoder,
   IWRAM/EWRAM/VRAM hashes and diffs), `combo_test.py` (button-sequence probe).

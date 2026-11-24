@@ -1,5 +1,7 @@
 # NFL Blitz 2003 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -36,7 +38,7 @@ No hidden/debug menu and no working button code were found: the title-screen seq
   4. To get the `New Game / Load Game` menu without replaying, use the savestate at that menu (or press B from the `One Player / Two Player` screen, choose Season again and step through). Select **Load Game** (Down, A) → **PASSWORD** screen.
   5. Navigate the 4×8 grid with the D-pad; A appends a symbol; after the 8th symbol the cursor moves to **OK**; press A to submit. Acceptance shows the **SEASON SCHEDULE** screen; rejection leaves the code on the password screen.
 * **Codes tested**: `XLMFMHVX` (49ers, published — accepted), `9Y5FZ63P` (Bears, published — accepted), `HZ0TLYJX` (published with `0` for `O`), `BBBFBCBB` (novel, accepted), `4L6BS4W1` (corrected published typo, accepted), `BBBDBCBB` (bad checksum, rejected), `BBBFBQVB` (out-of-range n, rejected).
-* Screenshots were kept on disk under `/tmp/opencode/nflblitz03/` (e.g. `season_menu.png`, `loadgame.png`, `pw_result_known.png`, `pw_novel_result.png`, `pw_reject.png`, `pw_reject_range.png`, `pw_corrected.png`, `options.png`, `practice2.png`, `trivia2.png`).
+* Screenshots were kept on disk under `/tmp/nflblitz03/` (e.g. `season_menu.png`, `loadgame.png`, `pw_result_known.png`, `pw_novel_result.png`, `pw_reject.png`, `pw_reject_range.png`, `pw_corrected.png`, `options.png`, `practice2.png`, `trivia2.png`).
 
 ## 4. Address map
 
@@ -131,7 +133,7 @@ V W X Y Z 0 1 2
 
 **Space definition.** 32 symbols × 8 positions = 32^8 = **2^40 = 1,099,511,627,776** possible inputs. The validator accepts a code iff bit0=0, `n`≤18, and the 4-bit checksum matches the per-team table byte. Counting: 19 values of `n` × 32 team indices × 2 values of the ignored bit 15 × 2^16 play bits × 2^8 keys = **20,401,094,656** accepted spellings (≈1.86 % of the input space). Because bit 15 is unused and the key is free, each game state has 512 aliases; published lists contain only 32 of the ~20.4 billion valid spellings.
 
-**Validator model.** Implemented in `/tmp/opencode/nflblitz03/pw.py`; it reproduces all 31 genuine published codes, rejects the one corrupted published code, and round-trips decode→encode exactly for known codes.
+**Validator model.** Implemented in `/tmp/nflblitz03/pw.py`; it reproduces all 31 genuine published codes, rejects the one corrupted published code, and round-trips decode→encode exactly for known codes.
 
 **Novel codes generated and confirmed in-game** (none appear on GameFAQs, IGN, TCRF, VGChartz or any wiki):
 
@@ -170,8 +172,8 @@ V W X Y Z 0 1 2
 * `strings -t x -n 3`, `grep -aboF`, Python `struct`/`capstone` (5.0.7) scanners for raw pointers, Thumb `LDR` literals and `BL` targets.
 * `arm-none-eabi-objdump -M force-thumb` for all disassembly (note: literal halfword order was re-checked with `struct.unpack_from("<I")` — objdump's `fe8c 0804` display corresponds to `0x0804FE8C`, the real checksum table).
 * mGBA SDL under `Xvfb :317` + openbox; `xdotool` for input; `scrot`/ImageMagick for screenshots.
-* Savestate RAM inspection: `.ss*` files are PNGs with a zlib `gbAs` chunk; decompressed to 397,312 bytes with IWRAM at +`0x19000` and EWRAM at +`0x21000` (helper `/tmp/opencode/nflblitz03/sstate.py`).
-* Decoder/encoder and test harness: `/tmp/opencode/nflblitz03/pw.py`, `typecode.py`.
+* Savestate RAM inspection: `.ss*` files are PNGs with a zlib `gbAs` chunk; decompressed to 397,312 bytes with IWRAM at +`0x19000` and EWRAM at +`0x21000` (helper `/tmp/nflblitz03/sstate.py`).
+* Decoder/encoder and test harness: `/tmp/nflblitz03/pw.py`, `typecode.py`.
 * GDB stub (`mgba -g`) was unusable because port 2345 was occupied by another session's emulator; savestate diffing was used instead.
 
 **Legal note:** no ROM bytes, graphics, audio or copyrighted game text are redistributed here — only hashes, addresses, algorithms, and codes of my own construction.

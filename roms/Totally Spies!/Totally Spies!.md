@@ -1,5 +1,7 @@
 # Totally Spies! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -34,7 +36,7 @@ The result is therefore a **bounded negative with counts** (§6b): 4,695 printab
 * Keymap (mGBA SDL defaults): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows.
 * Boot → Atari splash → title "PRESS START" → Start → main menu.
 * Menu path for the relevant content: main menu → **Secrets** (4th entry) → "SECRET ZONE" (shows 6 `LOCKED` rows and an empty message box). Gallery → **Image Gallery** (six `??????` rows, first viewable). Options → MUSIC/SFX/CREDITS. New Game → Choose a Story (2 stories available: The Aptitude Test, Save the Earth) → Choose a Level (first level playable, remaining rows `??????`).
-* Screenshots and scripts are in `/tmp/opencode/totallyspies/` (`menu.png`, `secrets.png`, `gallery.png`, `gal_view.png`, `options` in `sz3.png`, `ng1.png`, `levels.png`, `pause0.png`, `konami.png`, `sz_state.png`; scripts `scan.py`, `scan2.py`, `masks.py`, `final_stats.py`, `ssdiff.py`).
+* Screenshots and scripts were in `/tmp/totallyspies/` (`menu.png`, `secrets.png`, `gallery.png`, `gal_view.png`, `options` in `sz3.png`, `ng1.png`, `levels.png`, `pause0.png`, `konami.png`, `sz_state.png`; scripts `scan.py`, `scan2.py`, `masks.py`, `final_stats.py`, `ssdiff.py`).
 
 ## 4. Address map
 
@@ -141,7 +143,7 @@ English bank labels at 0x0860A3B0–0x0860A7F7: `Press START`, `New Game`, `Cont
 
 ## 9. Tooling
 
-* `strings -t x`, `grep -abo`, `xxd`, Python 3 `struct`/`re` scripts in `/tmp/opencode/totallyspies/` (`scan.py`, `scan2.py`, `masks.py`, `final_stats.py`, `ssdiff.py`).
+* `strings -t x`, `grep -abo`, `xxd`, Python 3 `struct`/`re` scripts in `/tmp/totallyspies/` (`scan.py`, `scan2.py`, `masks.py`, `final_stats.py`, `ssdiff.py`).
 * `arm-none-eabi-objdump` and Capstone were available for disassembly but no candidate validator was found to disassemble.
 * mGBA 0.10.5 under Xvfb `:316` with `SDL_AUDIODRIVER=dummy`; `xdotool` for input, `scrot` for screenshots; Python `zlib` for mGBA `gbAs` savestate extraction (§16.13).
 

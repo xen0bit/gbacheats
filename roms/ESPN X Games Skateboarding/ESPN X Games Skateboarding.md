@@ -1,5 +1,7 @@
 # ESPN X Games Skateboarding (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -35,7 +37,7 @@ No in-game code entry surface (no text field, no button-code validator, no mask-
 ### Environment
 * `Xvfb :315 -screen 0 1024x768x24`, `DISPLAY=:315 openbox`, `SDL_AUDIODRIVER=dummy SDL_VIDEODRIVER=x11 mgba -3 game.gba`.
 * mGBA SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Hold 80–180 ms.
-* The boot splash→title→attract sequence is ~1–4 s then auto-advances to DEMO. The reliable method: detect the title frame by template match, press `Shift+F1` to freeze it into slot 1, and `F1` to return before every experiment (`/tmp/opencode/espnskate2/boot_and_freeze.py`).
+* The boot splash→title→attract sequence is ~1–4 s then auto-advances to DEMO. The reliable method: detect the title frame by template match, press `Shift+F1` to freeze it into slot 1, and `F1` to return before every experiment (`/tmp/espnskate2/boot_and_freeze.py`).
 * RAM oracle: mGBA `.ss1` savestates are PNG with a zlib `gbAs` chunk; decompress to a 397,312-byte raw state, IWRAM at offset `0x19000`, EWRAM at `0x21000` (§16.13). GDB stub was tried and rejected with packet errors ("Ignoring packet error, continuing..."), so savestates were used.
 
 ### Screens walked — full list with RAM evidence
@@ -138,7 +140,7 @@ There is **no code space** to enumerate: no alphabet, no validator, no table of 
 
 ## 7. Validation evidence
 
-* **Observed**: 20 screenshots + decompressed savestate RAM snapshots in `/tmp/opencode/espnskate2/` (files listed in §3). Boot/title via template match; each menu transition verified by screenshot plus changed scene byte at `0x03003516` and anchors `0x03000dd0`/`0x03000e44`. Credits and debug screens observed by RAM patch of the same byte (screens 16–20).
+* **Observed**: 20 screenshots + decompressed savestate RAM snapshots in `/tmp/espnskate2/` (files listed in §3). Boot/title via template match; each menu transition verified by screenshot plus changed scene byte at `0x03003516` and anchors `0x03000dd0`/`0x03000e44`. Credits and debug screens observed by RAM patch of the same byte (screens 16–20).
 * **Derived**: input routine and KEYINPUT literal; single button gate (A+B+Select+Start → scene 0); 269 BL callers of scene-setter; debug dispatcher `0x080173CC` with 7 handlers; text bank at `0x08046000`–`0x08049C00`; input xref counts: `0x04000130`×1, `0x03006644`×560 (RAM pointer, mostly code references via literal pool), `0x0300081c`×3, `0x0300081e`×3, `0x03000820`×2.
 * **Inferred**: that no code system exists (strongly supported by the complete enumeration). The exact input sequence that opens the debug menu in retail play was not found; its RAM gate is proven (§8), so this is a bounded gate, not an open unknown.
 
@@ -191,7 +193,7 @@ The debug screens are real and live, but no normal input path to them was found.
 * `file`, `xxd`, `strings -i`, Python 3 (`struct`, `zlib`, `re`, `Pillow`), `md5sum`/`sha1sum`/`sha256sum`.
 * `arm-none-eabi-objdump -M force-thumb` / `-M force-arm`; Capstone 5.0.7 for BL/literal scans (`blscan.py`, `sets.py`, `findscene.py`, `xref.py`, `find5.py`).
 * mGBA 0.10.x SDL, Xvfb :315, openbox, xdotool, ImageMagick `import`/`convert`/`montage`.
-* Helper scripts in `/tmp/opencode/espnskate2/`: `harness.py` (input/screenshot/savestate/GDB), `boot_and_freeze.py` (template-match title freeze), `walk*.py` (screen walks), `ssdiff2.py` (RAM diff), `kwsearch.py`/`find_text.py` (text bank), `patchss.py`/`scenescan.py` (savestate scene patch), `combos.py` (button gates).
+* Helper scripts in `/tmp/espnskate2/`: `harness.py` (input/screenshot/savestate/GDB), `boot_and_freeze.py` (template-match title freeze), `walk*.py` (screen walks), `ssdiff2.py` (RAM diff), `kwsearch.py`/`find_text.py` (text bank), `patchss.py`/`scenescan.py` (savestate scene patch), `combos.py` (button gates).
 
 ## 10. Unknowns / limitations
 

@@ -1,5 +1,7 @@
 # Scooby-Doo and the Cyber Chase (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -28,7 +30,7 @@ The game has **two independent password systems**, both developer-intended:
 
 2. **An algorithmic 8-character password system** with a 32-symbol alphabet, a per-field additive key, and a six-group segmented parity checksum. It is reached from the same input screen: when the table check returns `0xFFFF`, the caller (`0x08008F44`) invokes the decoder at `0x0801CA3C`. It accepts exactly **2³⁴ = 17,179,869,184** of the 2⁴⁰ possible 8-symbol strings.
 
-I reimplemented the decoder (`/tmp/opencode/scoobycyber/pw.py`), validated it against **all nine published 8-character codes that are absent from the ROM table** (all nine pass), and minted a novel code **`L#8#5VBJ`**. Entered through the real 4×8 on-screen keyboard, it was accepted: the game started and the HUD showed score **135314**, the exact value predicted by the decoded payload (`0x21092`), confirmed in RAM at `0x03000210`.
+I reimplemented the decoder (`/tmp/scoobycyber/pw.py`), validated it against **all nine published 8-character codes that are absent from the ROM table** (all nine pass), and minted a novel code **`L#8#5VBJ`**. Entered through the real 4×8 on-screen keyboard, it was accepted: the game started and the HUD showed score **135314**, the exact value predicted by the decoded payload (`0x21092`), confirmed in RAM at `0x03000210`.
 
 Bounds were proven by rejection: `L#8#5VBK` (one-symbol parity-breaking near-miss) was accepted by the keyboard but rejected by the game — it stayed on the password screen. Non-alphabet characters (`A`, vowels) cannot even be entered: the screen exposes only the 32-symbol alphabet.
 
@@ -43,7 +45,7 @@ Every reachable screen was walked with screenshots and RAM checks: legal, title,
 * Path: boot → press `Return` through legal + title → Main Menu → Down to `PASSWORD` → `x`.
 * The password keyboard is a 4×8 grid (Left/Right = ±1 column, Up/Down = ±8; movement clamps at the edges). `A` selects a symbol, `B` deletes, `Select` submits.
 * Alphabet order (on screen, uppercase): `B C D F G H J K / L M N P Q R S T / V W X Y Z 1 2 3 / 4 5 6 7 8 9 @ #`.
-* Helper scripts used (all in `/tmp/opencode/scoobycyber`): `ctrl.py` (XTEST input), `typepw.py` (grid navigation), `pw.py` (decoder/encoder model), `oracle.py` (breakpoint-driven validator oracle), `state.py` (savestate RAM reader), `dbg.py` (mGBA CLI debugger via pty).
+* Helper scripts used (all in `/tmp/scoobycyber`): `ctrl.py` (XTEST input), `typepw.py` (grid navigation), `pw.py` (decoder/encoder model), `oracle.py` (breakpoint-driven validator oracle), `state.py` (savestate RAM reader), `dbg.py` (mGBA CLI debugger via pty).
 * To reproduce the novel-code result: enter `L#8#5VBJ` on the password screen and press Select. The game starts and the score reads `135314`.
 * To reproduce the rejection: enter `L#8#5VBK` instead; the game remains on the password screen.
 

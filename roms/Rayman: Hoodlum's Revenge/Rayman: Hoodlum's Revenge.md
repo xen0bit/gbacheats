@@ -1,5 +1,7 @@
 # Rayman: Hoodlum's Revenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,7 +43,7 @@ Emulator: `mgba -3` on `DISPLAY=:316` with `SDL_AUDIODRIVER=dummy`. Default SDL 
 
 Menu path: boot → language select (English) → title "Press START" → **save-slot main menu**. All four chords are accepted on this screen. Then press Start on a slot to play.
 
-Verification commands (from `/tmp/opencode/raymanhoodlum/`):
+Verification commands (from `/tmp/raymanhoodlum/`):
 - `python3 keyscan.py` — enumerate all KEYINPUT literal-pool readers.
 - `python3 blscan.py 0x0801F490` — find callers.
 - `python3 xref2.py 0x080E89C4 ...` — find literal-pool loads of debug strings.

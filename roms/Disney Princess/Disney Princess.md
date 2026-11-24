@@ -1,5 +1,7 @@
 # Disney Princess (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -360,7 +362,7 @@ treasures = `ff 01 00 00 00 00`).
 * `mgba` (SDL) on `Xvfb :310` + `openbox`; input via `xdotool` XTEST
   (`x`/`z`/`Return`/arrows); screenshots with `scrot`; crops/montages with
   ImageMagick.
-* `python3` scripts in `/tmp/opencode/disneyprincess`:
+* `python3` scripts in `/tmp/disneyprincess`:
   * `ss.py` / `editstate.py` — read and rewrite IWRAM/EWRAM in mGBA `.ssN`
     savestates (PNG `gbAs` chunk, zlib, 397 312-byte state; IWRAM at 0x19000,
     EWRAM at 0x21000). Used for RAM proofs and to place the cursor/test codes.

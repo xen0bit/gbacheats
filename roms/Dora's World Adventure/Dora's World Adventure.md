@@ -1,5 +1,7 @@
 # Dora's World Adventure (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -142,7 +144,7 @@ No branch anywhere compares a key history against a multi-button cheat table; th
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/doraworld`: `scan1.py`/`scan2.py` (KEYINPUT literal + Thumb LDR xrefs), `blscan.py`/`apixref.py`/`xrefkeys.py` (BL/xref and input-global consumer scans), `static_scan.py` (save-type, key-mask, alphabet, keyword counts), `ssread.py` (zlib `gbAs` savestate reader), `sspatch.py` (savestate word patcher), `test_codes.sh` (12-sequence title-screen harness), `enum_states.sh` (16-value screen-index oracle), `press.sh` (key helper). Stock tools: `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Ghidra 12.1.4 via REA, `strings`, `xxd`, `xdotool`, `import`, `montage`. No third-party packages were installed for this engagement.
+Scripts in `/tmp/doraworld`: `scan1.py`/`scan2.py` (KEYINPUT literal + Thumb LDR xrefs), `blscan.py`/`apixref.py`/`xrefkeys.py` (BL/xref and input-global consumer scans), `static_scan.py` (save-type, key-mask, alphabet, keyword counts), `ssread.py` (zlib `gbAs` savestate reader), `sspatch.py` (savestate word patcher), `test_codes.sh` (12-sequence title-screen harness), `enum_states.sh` (16-value screen-index oracle), `press.sh` (key helper). Stock tools: `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Ghidra 12.1.4 via REA, `strings`, `xxd`, `xdotool`, `import`, `montage`. No third-party packages were installed for this engagement.
 
 **Cleanup:** all generated `.sav`, `.raw` and `.ss1`–`.ss9` files were removed from the ROM folder; the :317 Xvfb/openbox/mGBA processes were stopped by PID; sibling sessions on :315 and :316 were left untouched.
 

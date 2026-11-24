@@ -1,5 +1,7 @@
 # LEGO Racers 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -193,7 +195,7 @@ all five worlds/tracks and all three special games were selectable from a fresh 
 * **Observed** — boot logos, language select, intro dialogue, title, MAIN MENU, OPTIONS, SAVE
   OPTIONS, CREDITS (listed in text bank), SINGLE PLAYER and its four sub-screens, ARCADE SETTINGS,
   track select, live race, PAUSE, STORY GAME character builder, 5-slot ENTER NAME, MULTIPLAYER
-  `PLEASE WAIT`. Screenshots retained in `/tmp/opencode/legoracers2/` (not attached).
+  `PLEASE WAIT`. Screenshots retained in `/tmp/legoracers2/` (not attached).
 * **Observed** — 16 published sequences × 2 screens + 8 combos, each with GDB RAM dumps before/after:
   0 EWRAM delta, 0 SRAM delta, 0 low-IWRAM delta beyond the frame counter.
 * **Derived** — four `0x04000130` readers at `0x08006B44`, `0x0800CF4E`, `0x08018F7C`, `0x08020C1C`;

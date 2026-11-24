@@ -1,6 +1,8 @@
 # Bionicle: Matoran Adventures (GBA) — Reverse Engineering Report
 
-Work dir for artifacts: `/tmp/opencode/bionicle` (strings dump, disassembly, screenshots).
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
+Work dir for artifacts: `/tmp/bionicle` (strings dump, disassembly, screenshots).
 Scope of this engagement: in-game / developer-intended cheats only (passwords,
 button codes, hidden/debug menus, unlockables). No GameShark/CodeBreaker/memory
 codes are proposed or evaluated.
@@ -158,7 +160,7 @@ in-level pause has exactly two items.
   and the `.sav` appears next to the ROM.
 * On a slot that already contains a game the game inserts the
   `OVERWRITE GAME ?` dialog; `YES` re-saves and goes to the character select.
-* All screenshots referenced above are in `/tmp/opencode/bionicle/shots/`.
+* All screenshots referenced above were in `/tmp/bionicle/shots/`.
 
 ---
 
@@ -471,7 +473,7 @@ state variables.
 
 ## 9. Tooling
 
-All artifacts in `/tmp/opencode/bionicle`:
+All artifacts in `/tmp/bionicle`:
 
 | Path | Purpose |
 |---|---|

@@ -1,5 +1,7 @@
 # Strawberry Shortcake: Summertime Adventure (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -59,7 +61,7 @@ Select=`BackSpace`, D-pad = arrow keys.
 8. Novel code `12345678` → loads the garden with a different quest dialogue
    ("Ginger. Fruit Cookies. Strawberries.").
 
-Screenshots retained at `/tmp/opencode/strawberry/`: `cont3.png` (menu), `seq_*.png`
+Screenshots retained at `/tmp/strawberry/`: `cont3.png` (menu), `seq_*.png`
 (entry screen), `pw_all0.png` (`00000000`), `pw100_pre.png` / `pw_slot7_after.png`
 (`00000001`), `pw12345678_pre.png` / `pw12345678_after.png`, `enum_00_0.png` …
 `enum_16_G.png` (full area enumeration), `sub_contact.png`, `pw_state.ss1` / `loaded000.ss2`
@@ -241,11 +243,11 @@ multi-field codes) exercised on the real screen.
 
 ## 9. Tooling
 
-* `/usr/local/bin/mgba` 0.10.5 — copied to `/tmp/opencode/strawberry/mgba_straw` so unrelated
+* `/usr/local/bin/mgba` 0.10.5 — copied to `/tmp/strawberry/mgba_straw` so unrelated
   agents' broad `pkill -x mgba` could not terminate this session.
 * Xvfb `:315` (PID 347338 at start), openbox (PID 347355), `SDL_AUDIODRIVER=dummy`.
 * `arm-none-eabi-objdump -M force-thumb` for all disassembly; `strings -t x`; `xxd`.
-* Custom scripts in `/tmp/opencode/strawberry/`: `key.py` (XTEST input), `pscan.py` (literal
+* Custom scripts in `/tmp/strawberry/`: `key.py` (XTEST input), `pscan.py` (literal
   pointer scan), `blscan.py` (Thumb BL target scan), `ssdiff.py` (mGBA `gbAs` zlib state dump
   and diff), `patch_ss.py`, `enumerate.py`.
 * No game assets are redistributed in this report; only hashes, addresses, algorithms, and

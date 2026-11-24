@@ -1,5 +1,7 @@
 # Sudoku Fever (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -134,7 +136,7 @@ Each screen handler reads the held copy and ANDs a single button mask (e.g. `1` 
 
 ## 7. Validation evidence
 
-- **Observed** (screenshots in `/tmp/opencode/sudokufever/`): `s03_title`, `s06_classic_difficulty`, `s07_puzzle_easy`, `s08_pause_menu`, `s09_options_tab`, `s10_preferences_tab`, `s11_character_select`, `s12_background` (Symbols selected), `s15_bg_submenu`, `s25b_solver`, `s26_solver_grid`, `s27b_solver_menu`, `s28_howtoplay`, `s37_solve_confirm`, `s38_solved`, `s24b_konami`, `tc_lr`, `tc_konami_noA`.
+- **Observed** (screenshots in `/tmp/sudokufever/`): `s03_title`, `s06_classic_difficulty`, `s07_puzzle_easy`, `s08_pause_menu`, `s09_options_tab`, `s10_preferences_tab`, `s11_character_select`, `s12_background` (Symbols selected), `s15_bg_submenu`, `s25b_solver`, `s26_solver_grid`, `s27b_solver_menu`, `s28_howtoplay`, `s37_solve_confirm`, `s38_solved`, `s24b_konami`, `tc_lr`, `tc_konami_noA`.
 - **Observed** (RAM): screen-state byte `0x03000430` = `0x03` on title, `0x04` on difficulty select; savestate diffs for Reveal Square and Solve Puzzle above.
 - **Derived** (static): all string pointers, menu tables, input routine, 13-state dispatcher, jump table, puzzle-data bank structure.
 - **Inferred**: the four `- Saved Game` difficulty variants at `0x0801A24A + 0x20·(4..7)` are reachable only after an explicit Save; they were decoded from the text bank but not displayed (no save was made before the final difficulty-menu check). This does not affect the code-surface conclusion.
@@ -150,7 +152,7 @@ Each screen handler reads the held copy and ANDs a single button mask (e.g. `1` 
 
 - `mgba` 0.10.5 (`-3`, `-g`, `-d` tried), Xvfb `:316`, openbox, xdotool, scrot, ImageMagick `convert`.
 - `arm-none-eabi-objdump -M force-thumb` for input/dispatcher disassembly; Capstone 5.0.7 for PC-relative literal scans.
-- Python 3 scripts (in `/tmp/opencode/sudokufever/`): `ssread.py` (zlib-decompress mGBA `gbAs` savestate chunk, read state bytes), `key.sh`, `shot.sh`, `testcode.sh`, plus one-off pointer/string/keyword scans.
+- Python 3 scripts (in `/tmp/sudokufever/`): `ssread.py` (zlib-decompress mGBA `gbAs` savestate chunk, read state bytes), `key.sh`, `shot.sh`, `testcode.sh`, plus one-off pointer/string/keyword scans.
 - ROM hashes with `md5sum`/`sha1sum`/`sha256sum`; `strings -t x`, `xxd`, `grep`.
 
 **Cleanup:** my mGBA (PID 374977), Xvfb (369983) and openbox (369984) were killed by PID number; `Sudoku Fever.sav` and `Sudoku Fever.ss1`–`.ss4` were removed from the ROM folder, leaving only the `.gba` (and this report). No `pkill`/`pkill -f` was used.

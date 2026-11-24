@@ -1,5 +1,7 @@
 # Grand Theft Auto Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -165,7 +167,7 @@ A second undocumented surface is the hidden **"pick level (cheat)"** menu itself
 
 **Inferred:** Gang-hostility toggle is gated on story progress (one published source notes "only completed in storyline"); not exercised to completion. Health handler's vehicle-repair branch was not exercised. The mission-select unlock flag's exact RAM address was not isolated (visual proof stands); the 0→1 byte at `0x02000EA5` tracked animation state, not the latch.
 
-Screenshots retained under `/tmp/opencode/gta/` (not attached to this report): `title.png`, `mainmenu.png`, `gameplay1.png`, `cheatmode_on.png`, `money_cheat.png`, `pause.png`, `options.png`, `controls.png`, `code_*.png`, `mission_down3.png`, `picklevel_screen.png`, `pick_island_portland.png`, `boss_missions.png`, `health_low.png`, `health_restored.png`, etc.
+Screenshots retained under `/tmp/gta/` (not attached to this report): `title.png`, `mainmenu.png`, `gameplay1.png`, `cheatmode_on.png`, `money_cheat.png`, `pause.png`, `options.png`, `controls.png`, `code_*.png`, `mission_down3.png`, `picklevel_screen.png`, `pick_island_portland.png`, `boss_missions.png`, `health_low.png`, `health_restored.png`, etc.
 
 ## 8. Unknowns
 

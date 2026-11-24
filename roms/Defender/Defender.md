@@ -1,5 +1,7 @@
 # Defender (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -345,7 +347,7 @@ symbol alphabet, no comparison table, and no entry screen.
 - `info.py` — read GBA addresses (`0x02…`/`0x03…`) from a savestate
 - `sspatch.py` — patch IWRAM/EWRAM bytes in a savestate and rebuild the PNG
 - `bg8.py` — decode mode-0 8bpp BG tilemaps from a savestate as ASCII
-- Analysis-only patched copy at `/tmp/opencode/defender/defpatch.gba` (one byte:
+- Analysis-only patched copy at `/tmp/defender/defpatch.gba` (one byte:
   file `0x6F6C` = `0x01`). The retail ROM was never modified.
 
 ## 10. Legal note

@@ -1,5 +1,7 @@
 # Tales of Phantasia (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -48,7 +50,7 @@ to mint one against; this is stated explicitly rather than disguised as a succes
   menu on boot.** A title-logo screen with no menu options appears only after a game-over/reset.
 * Reached and captured: health warning, logos, quote, intro battle, world map, overworld,
   game-over/title logo, menu transition. Screenshots: `screen2.png`, `montage3.png`, `walk1.png`,
-  `walk3.png`, `sysmenu2.png`, `menu1.png` in `/tmp/opencode/talesphantasia/`.
+  `walk3.png`, `sysmenu2.png`, `menu1.png` in `/tmp/talesphantasia/`.
 * Static: `strings -t x`, `grep -abo`, `arm-none-eabi-objdump -M force-thumb/-M force-arm`,
   Python byte/pointer/BL scanners, `enumerate.py` (this work dir).
 * Dynamic RAM reads: mGBA `-g` stub, `gdb-multiarch` attach → `x/…` → `detach` (detach resumes the
@@ -220,7 +222,7 @@ rests on static reference counts, not on this attempt.
 
 ## 9. Tooling and artifacts
 
-* Work dir: `/tmp/opencode/talesphantasia/` — `enumerate.py` (counted mask/literal search),
+* Work dir: `/tmp/talesphantasia/` — `enumerate.py` (counted mask/literal search),
   `key.py` (XTEST input helper), `ram.py` / `ramsnap.sh` (GDB RAM reads), `bpwatch.log` (failed
   breakpoint attempt), screenshots and `montage*.png`.
 * Tools: `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, `objdump` from

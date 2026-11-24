@@ -1,5 +1,7 @@
 # Stuart Little 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,7 +43,7 @@ breakpoint in mGBA's `-d` CLI debugger, removed the breakpoint, then pressed A
 on the real screen so the game's own validator ran. Screenshots and savestates
 were taken after submission. Internal digit = displayed digit − 1.
 
-### Scripts (in work dir `/tmp/opencode/stuart2`)
+### Scripts (in work dir `/tmp/stuart2`)
 * `model.py` — Python validator/enumerator (exact reimplementation).
 * `run2.py` — set digits via CLI debugger, submit on screen, screenshot, save state.
 * `ssdiff.py`, `ssdiff2.py`, `ssdump.py` — mGBA `gbAs` savestate decompression and RAM diff.
@@ -160,7 +162,7 @@ behaviourally near-identical (§16.4b of the guide).
 | **`1367`** | `(lives=4, level=1, flag=1)` | Accepted. RAM: valid flag `01`, digits `00 02 05 06`, `lives=4`, `level=1`, `flag=1`. This is the unpublished flag-1 twin of published `1377` (flag=0). |
 
 Screenshots: `8713_t3_crop.png`, `8713_L20_crop.png`, `1367_t2/t3_crop.png`,
-`6787_t3_crop.png`, `1487_t3_crop.png` in `/tmp/opencode/stuart2`.
+`6787_t3_crop.png`, `1487_t3_crop.png` in `/tmp/stuart2`.
 
 **Bounds proven by rejection** (each submitted on the real screen after setting
 the buffer; RAM read from a savestate 6 s later):

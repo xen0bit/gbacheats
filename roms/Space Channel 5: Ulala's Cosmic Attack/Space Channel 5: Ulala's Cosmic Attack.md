@@ -1,5 +1,7 @@
 # Space Channel 5: Ulala's Cosmic Attack (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -55,7 +57,7 @@ gate is reported as **Inferred**, not Observed.
   Keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, D-pad=arrow keys, B(back)=`z`.
 * Boot path: `mgba -3 <rom>` → legal screen → ART splash → intro → title menu
   (`NEW GAME / LOAD / CONTINUE [greyed] / TUTORIAL / OPTIONS`).
-* Menu walk (screenshots and savestates retained in `/tmp/opencode/spacechannel5/`):
+* Menu walk (screenshots and savestates retained in `/tmp/spacechannel5/`):
   * `OPTIONS` → `CONTROL OPTIONS`, `SOUND OPTIONS`, `PLAYERS STATUS`
     ("PLAYER'S BEST RECORD", four reports, per-report view/rescue ratings),
     `CHARACTER PROFILE` ("Main Characters", `COLLECT`, 0%).

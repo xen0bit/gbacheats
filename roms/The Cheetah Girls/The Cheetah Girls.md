@@ -1,5 +1,7 @@
 # The Cheetah Girls (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -54,7 +56,7 @@ No novel *accepted* code exists: the validator is a closed lookup (§6b), so thi
 Default keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`.
 
 Screenshots of every state are in the work directory
-`/tmp/opencode/cheetahgirls/` (`fresh_dial1174b.png`, `typed1234_dial.png`,
+`/tmp/cheetahgirls/` (`fresh_dial1174b.png`, `typed1234_dial.png`,
 `test9966.png`, `v_4102_full.png`, `dial4003.png`, `fresh_title.png`, `fresh_pad.png`).
 
 ## 4. Address map
@@ -199,11 +201,11 @@ the two entry points use different tables. This is a genuine distinction, not a 
 
 * `mgba` 0.10.5 (`/usr/local/bin/mgba`), `-3 -d` under Xvfb :316 + openbox,
   `SDL_AUDIODRIVER=dummy`, CLI debugger driven through a pty helper
-  (`/tmp/opencode/cheetahgirls/pty_mgba.py`) and a FIFO command bridge (`dbg.py`).
+  (`/tmp/cheetahgirls/pty_mgba.py`) and a FIFO command bridge (`dbg.py`).
   The GDB stub on port 2345 was already occupied by another analysis session, so the
   stub-free `-d` debugger was used instead.
 * `xdotool` XTEST keystrokes (`key.py`), `scrot` screenshots, ImageMagick crops/montage.
 * `arm-none-eabi-objdump -M force-thumb` for raw disassembly; Python for table parsing,
   hash/header parsing and savestate (`gbAs`/zlib) inspection.
 * Work artifacts (scripts, logs, screenshots) are confined to
-  `/tmp/opencode/cheetahgirls/`. No ROM or copyrighted assets are reproduced here.
+  `/tmp/cheetahgirls/`. No ROM or copyrighted assets are reproduced here.

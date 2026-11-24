@@ -1,10 +1,12 @@
 # Doom (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Doom/Doom.gba` |
+| File | `roms/Doom/Doom.gba` |
 | Size | 8,388,608 bytes (`0x800000`) |
 | Header title | `AGB-DOOM` |
 | Game code | `ADME` (region E / USA); maker `52` |
@@ -159,7 +161,7 @@ only when the result is in `1..24`; this is the source of the observed level bou
 
 | # | Bytes | Sequence | Handler | Effect / RAM proof |
 |---:|---|---|---|---|
-| 0 | `01 01 00 01 01 01 01 01` | AABAAAAA | `0x0801130C` | `[0x03000544] |= 2`; msg `0x084FF624` (observed) |
+| 0 | `01 01 00 01 01 01 01 01` | AABAAAAA | `0x0801130C` | `[0x03000544] \|= 2`; msg `0x084FF624` (observed) |
 | 1 | `01 01 00 01 00 00 00 00` | AABABBBB | `0x0801133C` | `[0x03000544] &= ~3`; msg `0x084FF630` (observed: 2→0) |
 | 2 | `01 00 00 01 01 01 01 01` | ABBAAAAA | `0x08011370` | armour 200 at `0x030004B8`, type 2, all weapon/ammo flags and 500 ammo; msg `0x084FF640` |
 | 3 | `00 01 01 01 01 01 01 01` | BAAAAAAA | `0x080113F0` | `P_GivePower(3)` → `[0x030004CC]=1`; msg `0x084FF658` |
@@ -211,7 +213,7 @@ from a starting map of 1, so the upper bound remains **Derived**, not observed.
 
 ## 7. Validation evidence
 
-* **Observed** (emulator, savestate RAM, screenshots in `/tmp/opencode/doom1`):
+* **Observed** (emulator, savestate RAM, screenshots in `/tmp/doom1`):
   title/main/options (6 items)/episode (3)/skill (4)/pause (3)/credits/load-game
   (4 empty slots) screens; no hidden entry in any of them. God mode ON with L+R on
   pause (`0x03000544=2`, msg pointer `0x084FF624`, `shot_15.png`), God mode OFF
@@ -257,6 +259,6 @@ from a starting map of 1, so the upper bound remains **Derived**, not observed.
 `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 + Keystone (Python), mGBA
 (`-3`, briefly `-g` for a breakpoint probe), Xvfb `:317`, openbox, `xdotool`,
 `import -window root`, ImageMagick `convert`, `gdb-multiarch`. Analysis scripts kept in
-`/tmp/opencode/doom1`: `key.py`, `testcode.py`, `ssram.py` (mGBA `gbAs` savestate RAM
+`/tmp/doom1`: `key.py`, `testcode.py`, `ssram.py` (mGBA `gbAs` savestate RAM
 extractor), `bp.gdb`; disassembly/string dumps `strings.txt`, `dis_cheat.txt`,
 `dis_handlers.txt`. No ROM or copyrighted assets are redistributed in this report.

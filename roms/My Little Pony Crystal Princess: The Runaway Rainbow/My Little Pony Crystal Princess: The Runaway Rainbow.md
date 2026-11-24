@@ -1,5 +1,7 @@
 # My Little Pony Crystal Princess: The Runaway Rainbow (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -202,7 +204,7 @@ Chapter selection (observed, last digit): `6 → Chapter 3`, `9 → Chapter 2`.
   used for initial function discovery and evidence records.
 * Python 3 + capstone 5.0.7, Pillow; `binutils`, `xxd`, `strings`, `file`, `scrot`,
   `convert`, `tesseract`.
-* Custom scripts in `/tmp/opencode/mlp/`: `ui.py` (keypress/screenshot),
+* Custom scripts in `/tmp/mlp/`: `ui.py` (keypress/screenshot),
   `stateutil.py` (savestate PNG `gbAs` decode, RAM read, diff),
   `patch.py` (write 9 u32 digits into savestate), `verify.py` (model + accept/deny
   classifier), `gdbc.py` (persistent GDB controller, ultimately unused because the

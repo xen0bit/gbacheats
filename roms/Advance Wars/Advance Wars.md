@@ -1,5 +1,7 @@
 # Advance Wars (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -558,7 +560,7 @@ with Python; TCRF archived page cross-check for the published map).**
 
 * mGBA 0.10.5 (`mgba-sdl`), Xvfb `:125`, `openbox`, `xdotool`, ImageMagick
   (`import`, `montage`), `arm-none-eabi-objdump`, Python 3.13, Capstone 5.0.7.
-* `/tmp/opencode/aw1/out/`:
+* `/tmp/aw1/out/`:
   * `bootcheck.py` — offline model and full 1024-state enumeration.
   * `keytests.py`, `keymasks.py` — literal-pool key-mask scans.
   * `xref.py` — Thumb `BL` and pointer cross-reference scan.

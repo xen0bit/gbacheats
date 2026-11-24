@@ -1,8 +1,10 @@
 # SKIPPED — Drill Dozer (GBA) — §0.2 story gate not closable after two attempts
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Two focused reverse-engineering attempts were run on this ROM. The detailed
 work is preserved in `Drill Dozer.md` (396 lines, now with `## 6b. Enumeration`)
-and scratch artifacts in `/tmp/opencode/drilldozer*`, but the game's code-entry
+and scratch artifacts in `/tmp/drilldozer*`, but the game's code-entry
 system could not be brought to the full §0.2 bar, so the report is deliberately
 **not indexed** rather than reported as a solved code system.
 

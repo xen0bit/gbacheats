@@ -1,5 +1,7 @@
 # Elf Bowling 1 & 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -33,7 +35,7 @@ The MD5 matches the RetroAchievements set hash (`25cdcf14…`) for this exact SK
 
 ## 3. How to reproduce
 
-* Emulator: mGBA (SDL build), `-3` scale, headless on `Xvfb :317`, `SDL_AUDIODRIVER=dummy`. Because a sibling session repeatedly runs `pkill -x mgba`, the binary was copied to `./ebmgba` and launched under its own name so it survives; `setsid ./ebmgba -3 game.gba` with a working copy in `/tmp/opencode/elfbowling`.
+* Emulator: mGBA (SDL build), `-3` scale, headless on `Xvfb :317`, `SDL_AUDIODRIVER=dummy`. Because a sibling session repeatedly runs `pkill -x mgba`, the binary was copied to `./ebmgba` and launched under its own name so it survives; `setsid ./ebmgba -3 game.gba` with a working copy in `/tmp/elfbowling`.
 * Keymap (verified against `KEYINPUT` at IWRAM `0x0300484C`): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrows. Keys held 100–150 ms with equal gaps.
 * RAM evidence: mGBA GDB stub was unreliable (§16.13); RAM was read instead by parsing the zlib `gbAs` chunk of `.ss1/.ss2` savestates (`Shift+F1/F2`). IWRAM begins at raw offset `0x19000`, EWRAM at `0x21000`; IWRAM `0x0300484C` maps to raw `0x1D84C` and holds raw active-low `KEYINPUT` (no keys = `0xFFFFFC00`, A = `…FC01`, L = `…FE00`).
 * Menu path walked (all with RAM/screenshot evidence):
@@ -130,10 +132,10 @@ Every one of the 31 `CheckHistMask` call sites passes `mask=0x0A` (Start). There
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep` — Phase 0/1.
 * Python 3 + `capstone` 5.0.7 for Thumb literal/BL scanning; `arm-none-eabi-objdump -M force-thumb` for disassembly.
 * REA MCP (Ghidra 12.1.4) `open_binary` / `analyze_function` / `xrefs` / `search_strings` for decompilation and cross-references.
-* mGBA (SDL) under `Xvfb :317` with `DISPLAY=:317`, `SDL_AUDIODRIVER=dummy`, launched as renamed `./ebmgba` to survive a sibling session's `pkill -x mgba`. `xdotool` XTEST input; `import -window root` for the ≤20 retained screenshots in `/tmp/opencode/elfbowling`.
+* mGBA (SDL) under `Xvfb :317` with `DISPLAY=:317`, `SDL_AUDIODRIVER=dummy`, launched as renamed `./ebmgba` to survive a sibling session's `pkill -x mgba`. `xdotool` XTEST input; `import -window root` for the ≤20 retained screenshots in `/tmp/elfbowling`.
 * `ss.py`: Python savestate reader — zlib-decompress the PNG `gbAs` chunk, map IWRAM (`+0x19000`) / EWRAM (`+0x21000`), read `KEYINPUT` and history words. Used because the GDB stub was non-functional.
 * Web recon: websearch/webfetch of Cheat Index, Cheat Happens, CheatingDome, GameFAQs, TCRF, RetroAchievements, almarsguides (CodeBreaker codes noted as out-of-scope).
 
 No ROM image or copyrighted assets are redistributed in this report; only hashes, addresses, and analysis artifacts are published.
 
-**Cleanup:** all emulator processes launched for this engagement were stopped by PID; generated `.sav`/`.ss*` files in the ROM folder were removed (working copies and screenshots remain only under `/tmp/opencode/elfbowling`). `roms/INDEX.md` was not edited.
+**Cleanup:** all emulator processes launched for this engagement were stopped by PID; generated `.sav`/`.ss*` files in the ROM folder were removed (working copies and screenshots remain only under `/tmp/elfbowling`). `roms/INDEX.md` was not edited.

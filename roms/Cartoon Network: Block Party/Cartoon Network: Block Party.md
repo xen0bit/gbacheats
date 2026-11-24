@@ -1,5 +1,7 @@
 # Cartoon Network: Block Party (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -429,7 +431,7 @@ re-displays it as `Z1BDBBBBBC?BC?BC` (mixed = 0). The 9-bit mixed field therefor
   breakpoints did not fire reliably, so static disassembly was used for the
   validator).
 * Python 3 for the codec, pointer/BL scans, and enumeration.
-* Analysis scripts and screenshots: `/tmp/opencode/cnblockparty/`
+* Analysis scripts and screenshots: `/tmp/cnblockparty/`
   (`pwcodec.py` = reference decoder/encoder, `enumerate.py` = space counts,
   `harness2.py` = savestate-driven in-game tests, `phase0.py`, `recon_strings.py`,
   `blscan.py`, `ramscan.py`, `debugscan.py`).

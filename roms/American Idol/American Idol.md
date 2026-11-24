@@ -1,5 +1,7 @@
 # American Idol (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-10-25.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
@@ -139,7 +141,7 @@ Codes entered during this analysis (accepted): `Z999&6QR`, `9999&6TR`,
 Rejected: `Y999&6TR`, `Z999&6TR`, `A999&6QR`, `2999&6QR`, `HBBBB64Y`,
 `HBBBB64` (7 chars).
 
-Screenshots (all produced in this run, under `/tmp/opencode/idol/`):
+Screenshots (all produced in this run, under `/tmp/idol/`):
 
 | File | Shows |
 |---|---|
@@ -452,7 +454,7 @@ Every accepted string is a valid code; each (stage, progress) pair has exactly
 
 ## 9. Tooling
 
-All scripts were written for this analysis and are in `/tmp/opencode/idol/`:
+All scripts were written for this analysis and were in `/tmp/idol/`:
 `pw.py` (codec), `patchstate.py` (password-screen savestate writer),
 `typecode.py` / `test2.py` (emulator drivers), `keys.py` (xdotool helper).
 

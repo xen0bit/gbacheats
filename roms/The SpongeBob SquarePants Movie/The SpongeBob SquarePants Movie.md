@@ -1,5 +1,7 @@
 # The SpongeBob SquarePants Movie (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -64,7 +66,7 @@ ignored; nothing was written or executed from it.
 | ROM special case | `6,4,2,3,2,1` | 194618 | Accepted by decoder (no TRY AGAIN); no visible screen transition — flag/side-effect path, not isolated |
 | Rejection bound | `1,1,1,1,1,2` | 338207 | **TRY AGAIN** (`rej_result.png`) |
 
-Screenshots are in `/tmp/opencode/spongemovie/` (`lsel_result.png`,
+Screenshots were in `/tmp/spongemovie/` (`lsel_result.png`,
 `novel_result.png`, `rej_result.png`, `master2result.png`, plus the entry frames).
 
 ## 4. Address map
@@ -198,11 +200,11 @@ are out of scope). It differs from the published Level Select code
 (`[10,10,7,8,3,1]`) in slot 1 only, changing decoded `world` from 30 to 14.
 Entered on the real "ENTER PASSWORD" screen in mGBA and **accepted**: the game
 started on the *The Desert* world map with levels 1–3 open
-(`/tmp/opencode/spongemovie/novel_result.png`).
+(`/tmp/spongemovie/novel_result.png`).
 
 **Bounds proven by rejection.** `[1,1,1,1,1,2]` → `S = 338207` was entered on
 the same screen and produced **TRY AGAIN** with all slots reset
-(`/tmp/opencode/spongemovie/rej_result.png`). This is a well-formed base-11
+(`/tmp/spongemovie/rej_result.png`). This is a well-formed base-11
 code (all digits in 0..10) that the state checks reject, bounding the accepted
 set as a strict subset of 11^6. The "reserved-bit" style bound is the
 permutation's 19-bit limit: any `S` whose permuted form fails the field/state

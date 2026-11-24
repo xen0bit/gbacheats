@@ -1,5 +1,7 @@
 # Daredevil (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -290,7 +292,7 @@ decodes to map 25, i.e. the published label is wrong or the list duplicated leve
 * mGBA 0.10.5 SDL (`Xvfb :279`, openbox, `SDL_AUDIODRIVER=dummy`).
 * `objdump` (arm-none-eabi) and Ghidra 12.1 headless (raw binary, `ARM:LE:32:v4t`,
   base `0x08000000`, manual Thumb context) for `FUN_0801D5F4`, `FUN_0801DD50`, `FUN_0801D914`.
-* Python tools in `/tmp/opencode/daredevil`: `codec.py` (decoder/encoder), `ss.py` (mGBA
+* Python tools in `/tmp/daredevil`: `codec.py` (decoder/encoder), `ss.py` (mGBA
   savestate reader: VRAM @0x1000, IWRAM @0x19000, EWRAM @0x21000, IO @0x400), `enter4.py`
   (verified keypad entry), `diff.py`, `xref.py`, `bg.py`/`art2.py` (text-mode tilemap dumps).
 * `capstone` 5.0.7 for literal/BL scans.

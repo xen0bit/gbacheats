@@ -1,5 +1,7 @@
 # FIFA Football 2005 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -135,7 +137,7 @@ Counts from `scan.py` (encodings tried: ASCII, upper, lower, UTF-16LE, UTF-16BE,
 
 No encoding produced a "password screen", "enter code", "cheat menu", or "debug menu" UI string.
 
-### 6.2 Screens walked (all with screenshots retained in `/tmp/opencode/fifa05/`)
+### 6.2 Screens walked (all with screenshots retained in `/tmp/fifa05/`)
 
 1. Language flag select (6 flags: DE/EN/IT/FR/NL/ES)
 2. FIFA license / legal splash
@@ -200,7 +202,7 @@ Per §0.2 item 5, the negative result is bounded as follows:
    the controller-label/string tables around 0x08063xxx and 0x0805Dxxx, not cheat tables.
    Dynamic: 12 combos on the pause menu + 12 on the main menu (each from a fresh savestate)
    + 4 held combos at boot = **28 tested**; none produced a new screen. Full list in
-   `/tmp/opencode/fifa05/combos.py`.
+   `/tmp/fifa05/combos.py`.
 4. **Published-code space** — 8 sources consulted: GameFAQs GBA cheats (403), archived
    GameFAQs (404), SuperCheats, ChapterCheats, Neoseeker (403), Cheatbook, VGChartz,
    CheatCodes.com (transport error). Every reachable page lists only gameplay hints
@@ -263,5 +265,5 @@ memory-edit codes are published or used as cheat deliverables.
 
 All processes started for this engagement were terminated by their own PID numbers
 (Xvfb :318, openbox, mgba); no `pkill` was used. No `.sav`/`.ss*` files remain in
-`roms/FIFA Football 2005/` — all emulator artifacts were created in `/tmp/opencode/fifa05/`.
+`roms/FIFA Football 2005/` — all emulator artifacts were created in `/tmp/fifa05/`.
 `roms/INDEX.md` was not modified.

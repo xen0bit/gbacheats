@@ -1,10 +1,12 @@
 # Shonen Jump's One Piece (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Shonen Jump's One Piece/Shonen Jump's One Piece.gba` |
+| File | `roms/Shonen Jump's One Piece/Shonen Jump's One Piece.gba` |
 | Size | 8,388,608 bytes (0x800000, 8 MiB) |
 | `file(1)` | Game Boy Advance ROM image: "ONEPIECE" (BONEB2, Rev.00) |
 | Header title | `ONEPIECE` (0xA0–0xAB) |
@@ -116,7 +118,7 @@ Up/Down wrap bounds (0 ↔ 5) prove a six-item menu, matching the six labels. Th
 | Embedded GBA headers (Nintendo-logo scan) | 1 hit (`0x4`) | Single image; no second game/trainer whose codes could be conflated |
 | BL calls into debug-menu block from whole ROM | 0 | `0x080007C4`, `0x0800089C`, `0x08000A04` have no BL caller |
 | Unconditional B branches into block from outside | 0 | Only intra-block branches found |
-| 32-bit pointers to block (plain and `|1`) from outside | 0 | Self-references only; the 7 handler pointers are consumed only by the dead menu |
+| 32-bit pointers to block (plain and `\|1`) from outside | 0 | Self-references only; the 7 handler pointers are consumed only by the dead menu |
 | Title-screen button combinations tested | 18 (listed in §3) + boot holds L/R/L+R + in-game L | 0 debug screens; only title and SELECT DATA |
 | Published in-game codes verified | 0 published codes exist | GameFAQs/VGChartz/Cheat Happens confirm; blogspot codes are GameShark memory edits (excluded) |
 
@@ -145,6 +147,6 @@ Up/Down wrap bounds (0 ↔ 5) prove a six-item menu, matching the six labels. Th
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x -n 4`, `grep`, Python 3 for header parsing, literal-pool dumps, bl/B/pointer scanners and savestate (`gbAs` zlib) parsing.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` (and `-M force-arm` for crt0); Capstone for Thumb PC-relative checks.
 - `/usr/local/bin/mgba` 0.10.5 under `Xvfb :318` + `openbox`, `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST input; `scrot` + ImageMagick `convert`/`montage` for screenshots and contact sheets. GDB stub (`gdb-multiarch`, `:2345`) was used for spot RAM reads; it proved unstable across repeated batch sessions, so savestate RAM diffing (guide §16.13) was the primary RAM method.
-- Analysis scripts/artifacts: `/tmp/opencode/onepiece/phase0.py`, `helper.py`, `state_raw.bin`, screenshots and contact sheets (`combos_sheet.png`, `coll_sheet.png`, `menu_main.png`, `s2.png`, etc.).
+- Analysis scripts/artifacts: `/tmp/onepiece/phase0.py`, `helper.py`, `state_raw.bin`, screenshots and contact sheets (`combos_sheet.png`, `coll_sheet.png`, `menu_main.png`, `s2.png`, etc.).
 
 **Legal note:** only hashes, addresses, algorithms and findings are published; no ROM bytes or copyrighted assets are redistributed.

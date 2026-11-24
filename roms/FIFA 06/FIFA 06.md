@@ -1,10 +1,12 @@
 # FIFA 06 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/FIFA 06/FIFA 06.gba` |
+| File | `roms/FIFA 06/FIFA 06.gba` |
 | Size | 8,388,608 bytes (0x800000, 8 MiB) |
 | Header title | `FIFA 06` |
 | Game code / maker | `BF6E` / `69` (EA), Rev `00` |
@@ -33,7 +35,7 @@ No code was minted because no code space exists. §6b documents the bounded sear
 * mGBA SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Hold ~180 ms per press.
 * Boot path: language select (cursor starts on UK/English flag — press A immediately; pressing Right selects Italian) → EA splash → "Game Controls / Attacking" tutorial → demo match (Arsenal–Tottenham). Press Start for the demo's pause menu, choose **Quit Match** → confirm **Ok** → **main menu**.
 * Main menu (IDs 386–391): Kick Off, Challenges, Career, Competition, Multiplayer, Options. All were entered. Multiplayer stops at "Connect all Players" (needs link cables).
-* Searches (all scripts in `/tmp/opencode/fifa06/`): `phase0.py`, `xrefs.py`, `dumptable.py`, `textbank.py`, `menuids.py`, `scans.py`, `ldrscan.py`, `blscan.py`, `ssram.py`.
+* Searches (all scripts in `/tmp/fifa06/`): `phase0.py`, `xrefs.py`, `dumptable.py`, `textbank.py`, `menuids.py`, `scans.py`, `ldrscan.py`, `blscan.py`, `ssram.py`.
 * Published codes checked: GameFAQs GBA cheats page has **no** GBA-specific codes; `web.archive.org`/GameFAQs/TCRF/SuperCheats lists contain only console/PSP/DS/N-Gage material. Fetched pages were treated as data; no prompt-injection payload was encountered in this run.
 
 ## 4. Address map
@@ -101,7 +103,7 @@ Because no code system exists, the enumeration is the bounded search of the *tex
 
 ## 7. Validation evidence
 
-* **Observed** — all screens in §3, captured as `shot_*.png` / `combo_*.png` in `/tmp/opencode/fifa06/`; Custom Challenges greyed at 0/10; no `Test Hooks` on the pause menu; soft-reset on A+B+Start+Select.
+* **Observed** — all screens in §3, captured as `shot_*.png` / `combo_*.png` in `/tmp/fifa06/`; Custom Challenges greyed at 0/10; no `Test Hooks` on the pause menu; soft-reset on A+B+Start+Select.
 * **Observed (RAM)** — the mGBA `FIFA 06.ss1` state was parsed (`ssram.py`): PNG `gbAs` chunk decompresses to 397,312 bytes; the state header at `0x10` contains `FIFA 06\0…BF6E`; IWRAM region at `0x19000`, EWRAM at `0x21000`. No `PASSWORD`/`Create`/`Arsenal` string is present in RAM at the main-menu state, confirming the account UI is not loaded on the GBA path.
 * **Derived** — text-bank base/stride and all IDs (exact 24-byte divisibility across 1,645 entries); N-Gage identification (ID 1208); unreachability of the Test Mode function (zero callers/pointers); absence of console unlockables (zero string hits).
 * **Inferred** — that the N-Gage account and NDS menu blocks are shared-engine leftovers cut from the GBA build; that "My Club" editor strings are likewise shared (its menu block IDs 1210–1225 is the NDS layout, not the GBA menu IDs 386–391). Labelled as inference, not observation.
@@ -114,4 +116,4 @@ Because no code system exists, the enumeration is the bounded search of the *tex
 
 ## 9. Tooling
 
-`binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`), Python 3 with `capstone` 5.0.7, mGBA SDL under Xvfb+openbox, `xdotool`, `import`/`convert`, `gdb-multiarch` (not needed). Analysis scripts listed in §3; screenshots retained in `/tmp/opencode/fifa06/`. Web sources: GameFAQs cheats pages (GBA/DS/PSP/GC/PS2/X360), SuperCheats GBA, Wikipedia, Nintendo UK. No ROM or copyrighted assets are redistributed here — only addresses, hashes, and findings.
+`binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`), Python 3 with `capstone` 5.0.7, mGBA SDL under Xvfb+openbox, `xdotool`, `import`/`convert`, `gdb-multiarch` (not needed). Analysis scripts listed in §3; screenshots retained in `/tmp/fifa06/`. Web sources: GameFAQs cheats pages (GBA/DS/PSP/GC/PS2/X360), SuperCheats GBA, Wikipedia, Nintendo UK. No ROM or copyrighted assets are redistributed here — only addresses, hashes, and findings.

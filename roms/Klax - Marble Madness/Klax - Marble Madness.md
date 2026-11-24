@@ -1,5 +1,7 @@
 # Klax - Marble Madness (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -168,8 +170,8 @@ Because no code system exists, §0.2's enumeration is replaced by a **bounded ex
 * `md5sum`/`sha1sum`/`sha256sum`, `file`, `xxd`, `strings -t x -n 4` (11,641 lines).
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` (and `-M force-arm` for crt0); Capstone 5.0.7 for literal/BL xref scans and mask-comparison enumeration.
 * mGBA (`/usr/local/bin/mgba`) with Xvfb `:318`, openbox, `xdotool`, `import -window`, ImageMagick `montage`.
-* Helper scripts (all under `/tmp/opencode/klax/work/`): `emu.py` (focus/press/shot), `state.py` (save/load/parse/diff of `gbAs` chunks), `cap.py`, `scan.py` (u32 literal + Thumb PC-relative xrefs + mask-run scan), `dbg.py` (mGBA `-d` PTY debugger driver), `patchstate.py` (raw-state → PNG savestate rewriter used only as a navigation aid on copies), `rsp.py`, `marker*.py`.
-* Analysis-only ROM copies (`game_lowhs.gba`, `game_neghs.gba`, `game_forceinit*.gba`) were kept in `/tmp/opencode/klax/work/` and never written to the ROM folder; the target ROM was not modified.
+* Helper scripts (all under `/tmp/klax/work/`): `emu.py` (focus/press/shot), `state.py` (save/load/parse/diff of `gbAs` chunks), `cap.py`, `scan.py` (u32 literal + Thumb PC-relative xrefs + mask-run scan), `dbg.py` (mGBA `-d` PTY debugger driver), `patchstate.py` (raw-state → PNG savestate rewriter used only as a navigation aid on copies), `rsp.py`, `marker*.py`.
+* Analysis-only ROM copies (`game_lowhs.gba`, `game_neghs.gba`, `game_forceinit*.gba`) were kept in `/tmp/klax/work/` and never written to the ROM folder; the target ROM was not modified.
 
 ## Legal note
 

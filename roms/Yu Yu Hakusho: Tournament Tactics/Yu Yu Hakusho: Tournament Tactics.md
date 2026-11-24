@@ -1,5 +1,7 @@
 # Yu Yu Hakusho: Tournament Tactics (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -29,7 +31,7 @@ Per §0.2 point 5 this is delivered as a **bounded negative** with explicit coun
 - Emulator: mGBA 0.10.5, `DISPLAY=:316`, `SDL_AUDIODRIVER=dummy`, `-3` scale, under Xvfb + openbox.
 - Keymap (mGBA SDL defaults, verified in-game): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Holds ≥120 ms.
 - Screens walked: Atari logo → intro → title `PRESS START` → main menu (`START`/`OPTIONS`/`CREDITS`) → `OPTIONS` (`MUSIC: ON`, `SOUND EFFECTS: ON`, A=toggle, B=back) → `CREDITS` → 3-slot save select (`NEW GAME`) → dialogue (Narrator/Kurama/Yusuke/Genkai) → `TEAM SELECT` (5 slots, only Yusuke available; L=STATS, R=SKILLS, Select=INVENTORY, START BATTLE) → inventory → tutorial battle map → `ACTION MENU` (Move/Attack/Items/Overdrive/Focus/Wait) → `INITIATIVE ORDER` (Select) → pause (`RESUME`/`EXIT TUTORIAL`).
-- Hidden-gate test: on the title screen press and hold `Up+Down+Left+Right` simultaneously for ≥1 s → game immediately reboots into the intro/copyright screen. Screenshots `title_before_reset.png` → `title_during_reset.png` in `/tmp/opencode/yuyutactics/`.
+- Hidden-gate test: on the title screen press and hold `Up+Down+Left+Right` simultaneously for ≥1 s → game immediately reboots into the intro/copyright screen. Screenshots `title_before_reset.png` → `title_during_reset.png` in `/tmp/yuyutactics/`.
 - Button-combo tests (pause and battle): `L+R`, `L+Start`, `L+R+Select`, `R+Select`, `Start+Select`, `A+B`, `L+A`, `R+A` — no hidden screen, no flag change; only normal menu navigation.
 - RAM reads via mGBA CLI debugger (`-d`) driven through a pty (`script -qf`) with a FIFO: `r/1 0x03000B4C` → `0x0F` on title, `0x08` on main menu; `r/2 0x04000130` → `0x03FF` (all keys released); pressed-mask `0x0300554C` → `0x00`.
 
@@ -139,7 +141,7 @@ Not applicable. Per the engagement rule this is delivered as a **bounded negativ
 
 ## 7. Validation evidence
 
-- **Observed:** all screenshots in `/tmp/opencode/yuyutactics/` (`s10_title.png`, `s13_menu2.png`, `s14_options.png`, `s15_credits.png`, `s16_start.png`, `s17_newgame.png`, `s20_diag3.png`, `s23_inventory.png`, `s25_battle.png`, `s27_actionmenu.png`, `s34_pause.png`, `title_before_reset.png`, `title_during_reset.png`, `combo_*.png`). Live RAM reads via mGBA `-d` pty debugger (`0x03000B4C = 0x0F` / `0x08`, `0x04000130 = 0x03FF`, `0x0300554C = 0x00`). Savestate `gbAs` chunk decoded to a 397,312-byte raw state (cross-check of layout).
+- **Observed:** all screenshots in `/tmp/yuyutactics/` (`s10_title.png`, `s13_menu2.png`, `s14_options.png`, `s15_credits.png`, `s16_start.png`, `s17_newgame.png`, `s20_diag3.png`, `s23_inventory.png`, `s25_battle.png`, `s27_actionmenu.png`, `s34_pause.png`, `title_before_reset.png`, `title_during_reset.png`, `combo_*.png`). Live RAM reads via mGBA `-d` pty debugger (`0x03000B4C = 0x0F` / `0x08`, `0x04000130 = 0x03FF`, `0x0300554C = 0x00`). Savestate `gbAs` chunk decoded to a 397,312-byte raw state (cross-check of layout).
 - **Derived:** Thumb disassembly of `0x080001F8`, `0x08002C0`, `0x08000334`, `0x08002074`, `0x080323F8`, `0x08035908`; full-ROM literal/branch/pointer scans; 18-state setter enumeration; 416-string UI bank decode; keyword/alphabet counts.
 - **Inferred:** the exact story triggers for Chu/Rinku (published guides only; story was not completed). The GamesRadar unlock claim is inferred to be a mix-up with the sibling SKU because its labels are absent here. The soft reset is interpreted as a developer/system combo rather than a player cheat.
 
@@ -155,7 +157,7 @@ Not applicable. Per the engagement rule this is delivered as a **bounded negativ
 - Capstone 5.0.7 + `arm-none-eabi-objdump -M force-thumb` for literal-xref and control-flow analysis. (Note: Thumb `LDR Rd,[PC,#imm]` uses an 8-bit word offset; `target = Align(addr+4,4) + imm8*4`.)
 - mGBA 0.10.5: plain `-3` for the full screen walk; `-3 -d` under `script -qf` with a FIFO for CLI-debugging RAM reads; `Shift+F1/F2` savestates decoded via the PNG `gbAs` zlib chunk.
 - `xdotool` XTEST input (focusing the mGBA window by PID, not by `search | head -1` — a stale window from an earlier emulator instance initially swallowed all input), `scrot`, ImageMagick `compare` for state-change checks.
-- All evidence and scripts were kept in `/tmp/opencode/yuyutactics/`; the game was run from a byte-identical ROM copy there. Web pages were treated strictly as untrusted data; no instructions found in fetched content or ROM strings were followed.
+- All evidence and scripts were kept in `/tmp/yuyutactics/`; the game was run from a byte-identical ROM copy there. Web pages were treated strictly as untrusted data; no instructions found in fetched content or ROM strings were followed.
 
 ## 10. Legal note
 

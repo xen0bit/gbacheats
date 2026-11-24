@@ -1,5 +1,7 @@
 # Mortal Kombat: Tournament Edition (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -64,7 +66,7 @@ Fully characterised data (retained from the first pass):
 ```
 export DISPLAY=:319 SDL_AUDIODRIVER=dummy
 Xvfb :319 -screen 0 1024x768x24 &  openbox &
-mgba -3 -t /tmp/opencode/mktournament/ss_charselect.ss1 <rom> &
+mgba -3 -t /tmp/mktournament/ss_charselect.ss1 <rom> &
 ```
 For the RAM experiments the **mGBA command-line debugger** is used:
 `mgba -3 -d -t <state> <rom>`; drive it through a pty (script in §9). Keymap
@@ -143,7 +145,7 @@ on A-confirm at battle-plan:
 
 ## 6. Tables
 
-**Krypt records (abridged; full dump in `/tmp/opencode/mktournament/krypt_table.txt`).**
+**Krypt records (abridged; full dump in `/tmp/mktournament/krypt_table.txt`).**
 Record stride 12; low byte of field 0 = sequential item ID with flag bits in the
 high half (`0x100` on some costumes, `0xFF00` on achievement/link items).
 
@@ -213,7 +215,7 @@ seven documented masks at the documented screen with an A confirm.
 Method: mGBA CLI debugger, deterministic `frame` advance with real held
 xdotool keys, from `ss_charselect.ss1` (§3). For every combo the sequence
 reached the battle-plan screen and then the "ROUND 1" fight (screenshots
-`wc_blue_plan.png`, `wc_blue_fight.png`, `wca_*.png` in `/tmp/opencode/mktournament2/`).
+`wc_blue_plan.png`, `wc_blue_fight.png`, `wca_*.png` in `/tmp/mktournament2/`).
 
 **RAM diff, blue (Up+A) vs red (R), identical frame counts, IWRAM
 `0x03000000`–`0x03007fff`:** only **4 bytes** differ —
@@ -307,12 +309,12 @@ enumerator.
 `objdump -M force-thumb`, Python 3 + struct/Capstone 5, mGBA SDL and mGBA
 **command-line debugger** under Xvfb :319 + openbox, xdotool, scrot/ImageMagick,
 mGBA `.ss1` parsing (zlib `gbAs` → 397,312-byte state; IWRAM at `0x19000`,
-EWRAM at `0x21000`). Scripts in `/tmp/opencode/mktournament2/`: `dbg.py` (pty
+EWRAM at `0x21000`). Scripts in `/tmp/mktournament2/`: `dbg.py` (pty
 driver for the CLI debugger), `wc_experiment.py` / `wc_all.py` (deterministic
 held-mask frame experiments), `wc_negative.py` (rejection tests), `findcolourcode*.py`,
 `xrefs.py`, `blscan.py`, `keyrefs.py`, `scan_key_sites.py`, `find_wpn*.py`
 (mask/xref scans), plus the first-pass `ss.py`, `diffss.py`, `kbd.py`,
-`krypt_table.py`, `verify_codes.py` in `/tmp/opencode/mktournament/`.
+`krypt_table.py`, `verify_codes.py` in `/tmp/mktournament/`.
 
 **Legal note:** no ROM bytes or copyrighted assets are redistributed here;
 only hashes, addresses, derived tables and the analyst's own tools.

@@ -1,5 +1,7 @@
 # Jurassic Park III: Park Builder (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -192,6 +194,6 @@ All 37 table entries were also batch-entered (17 individually re-tested in the f
 - `arm-none-eabi-objdump -M force-thumb` for disassembly; Python `capstone` for PC-relative literal resolution; Python + `struct`/`zlib` for savestate `gbAs` chunk decode/patch/diff (`ssdiff.py`, `sspatch.py`).
 - mGBA `-d` pty debugger (`dbgserver.py`/`dc.py`) for read watchpoints on the code strings, which located the validator, and a breakpoint at `0x0800333E` to read its return value. (The GDB stub port 2345 was occupied by a parallel task, hence the pty debugger and savestate diffs.)
 - mGBA savestates (Shift+F1/F2/F3) for RAM evidence and for priming arbitrary tile-index names; `xdotool` for input; Xvfb `:317` + openbox; `scrot`/ImageMagick for screenshots.
-- Work dir: `/tmp/opencode/jp3builder2` (scripts, raw savestate dumps, screenshots). No ROM or copyrighted assets are redistributed by this report.
+- Work dir: `/tmp/jp3builder2` (scripts, raw savestate dumps, screenshots). No ROM or copyrighted assets are redistributed by this report.
 
 **Legal note:** only hashes, addresses, algorithms and the tool scripts are documented; no ROM image, graphics, audio or game text assets are reproduced here.

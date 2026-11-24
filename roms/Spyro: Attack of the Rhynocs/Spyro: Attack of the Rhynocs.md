@@ -1,5 +1,7 @@
 # Spyro: Attack of the Rhynocs (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -33,7 +35,7 @@ This is a **bounded negative** (§0.2 case "no system"). Bounds are proven in §
 * Emulator: `mgba 0.10.5` under `Xvfb :316` + openbox, `SDL_AUDIODRIVER=dummy`, `-3` scale. Window geometry 720×480 viewport at root `+152+144`.
 * Keymap (mGBA SDL defaults verified in-emulator): `A`=`x`, `B`=`z`, `L`=`a`, `R`=`s`, `Start`=`Return`, `Select`=`BackSpace`, D-pad = arrow keys. Hold ≥70 ms.
 * Boot → Universal Interactive splash → **PRESS START** → main menu.
-* Menu paths walked (all with screenshots and `.ss1` RAM snapshots in `/tmp/opencode/spyrorhynocs/`):
+* Menu paths walked (all with screenshots and `.ss1` RAM snapshots in `/tmp/spyrorhynocs/`):
   * Main: `New Game`, `Options`, `Credits`, `Byrd Rescue` (plus `Continue Game` once a save exists).
   * `New Game` → `Select Game` → three `unused` slots (empty Flash save slots; selecting one starts a new game).
   * `Options`: `Music: On`, `Sound FX: On`, `Speech FX: On` — no secret entries.
@@ -109,7 +111,7 @@ Bounds proven by rejection: the three `unused` slots are rejections of empty-sav
 
 ## 7. Validation evidence
 
-* **Observed** — title/menu/pause screens and all text listed in §6 captured as PNGs under `/tmp/opencode/spyrorhynocs/` (`w*.png`, `g*.png`, `nav_*.png`, `combo_*.png`, `menu_step*.png`). RAM values read from decompressed `.ss1` snapshots (`raw1.bin`/`raw2.bin` and `c00_base.ss1`…`c10_abc.ss1`). `.sav` inspected (8 KiB Flash, three slots).
+* **Observed** — title/menu/pause screens and all text listed in §6 captured as PNGs under `/tmp/spyrorhynocs/` (`w*.png`, `g*.png`, `nav_*.png`, `combo_*.png`, `menu_step*.png`). RAM values read from decompressed `.ss1` snapshots (`raw1.bin`/`raw2.bin` and `c00_base.ss1`…`c10_abc.ss1`). `.sav` inspected (8 KiB Flash, three slots).
 * **Derived** — crt0/main/scene-helper addresses and all literal/xref counts from `arm-none-eabi-objdump` and Python byte scans over the exact SHA-256. Text-bank format from `0xFF`-terminated byte records.
 * **Inferred (labelled)** — that the "Byrd Rescue" gate is 100% completion (from published walkthrough and TV Tropes, **not** confirmed in-game; a fresh save already reached level 2). That the glyph substitution is a font-tile index map (structure proven, individual glyph values not solved).
 
@@ -125,7 +127,7 @@ Bounds proven by rejection: the three `unused` slots are rejections of empty-sav
 
 * `mgba 0.10.5` (`/usr/local/bin/mgba` → `/usr/games/mgba`) under `Xvfb :316`, openbox, `xdotool`, `scrot`, ImageMagick `convert`.
 * `arm-none-eabi-objdump -M force-thumb` / `-M force-arm` with `--adjust-vma=0x08000000`.
-* Python 3 helper scripts in `/tmp/opencode/spyrorhynocs/`: `ssdump.py` (savestate `gbAs` decompress), `inp.py` (input/capture), `walk.py`, `combos.py`, `findtext.py`, `affine.py`, `affine_fast.py`, `lit_scan.py`, `final_scan.py`, `render_tiles.py`, `render8.py`, `findfont.py`.
+* Python 3 helper scripts in `/tmp/spyrorhynocs/`: `ssdump.py` (savestate `gbAs` decompress), `inp.py` (input/capture), `walk.py`, `combos.py`, `findtext.py`, `affine.py`, `affine_fast.py`, `lit_scan.py`, `final_scan.py`, `render_tiles.py`, `render8.py`, `findfont.py`.
 * REA/Ghidra was opened and closed; it timed out on this image and contributed no evidence.
 
 **Legal note:** no ROM or copyrighted assets are redistributed. This report contains only hashes, addresses, counts and observations.

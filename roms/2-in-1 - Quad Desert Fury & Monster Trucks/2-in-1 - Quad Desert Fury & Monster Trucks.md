@@ -1,5 +1,7 @@
 # 2-in-1 — Quad Desert Fury & Monster Trucks (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
 Scope note: **in-game / developer-intended cheats only** (passwords, button codes,
@@ -280,7 +282,7 @@ footer labels — so a third/hidden entry cannot be reached by any input.
 
 ## 6. Tables
 
-### 6.1 Menu inventory (all reached; screenshots in `/tmp/opencode/quad/shots/`)
+### 6.1 Menu inventory (all reached; screenshots in `/tmp/quad/shots/`)
 
 | # | Screen | Half | Items / notes | Screenshot |
 |---:|---|---|---|---|
@@ -488,7 +490,7 @@ was not touched.
 
 ## 9. Tooling
 
-All scripts in `/tmp/opencode/quad/` (session-only, not archived):
+All scripts in `/tmp/quad/` (session-only, not archived):
 
 | Script | Purpose |
 |---|---|
@@ -502,7 +504,7 @@ All scripts in `/tmp/opencode/quad/` (session-only, not archived):
 Environment: `mgba-sdl 0.10.5`, `binutils-arm-none-eabi`, `capstone 5.0.7`,
 `Xvfb`/`openbox`/`xdotool`/`scrot`, `python3` + Pillow.
 
-Screenshots referenced in §6.1 are in `/tmp/opencode/quad/shots/` (not committed).
+Screenshots referenced in §6.1 were in `/tmp/quad/shots/` (not committed).
 
 Legal: no ROM, extracted graphics, music or game text is redistributed here; only
 addresses, algorithms, hashes and the game's own short UI labels are quoted as

@@ -1,5 +1,7 @@
 # Harry Potter and the Prisoner of Azkaban (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -63,7 +65,7 @@ not individually mapped, see §8).
   main menu. Selecting "New Game" → three save slots → slot 1 → story intro → gameplay.
   Start in gameplay opens the pause "Menu".
 * RAM: mGBA GDB stub (`mgba -3 -g`); raw GDB-RSP client `gdbrsp.py` / proxy `rsp_proxy.py`
-  in `/tmp/opencode/hpazkaban` (plain `gdb-multiarch` produced packet errors — guide §16.13).
+  in `/tmp/hpazkaban` (plain `gdb-multiarch` produced packet errors — guide §16.13).
   `KEYINPUT` at `0x04000130` (`0x03FF` = all released). Savestates `Shift+F1`…; the `gbAs`
   PNG chunk is zlib-compressed to a 397,312-byte state (IWRAM at raw `0x19000`, EWRAM at
   `0x21000`). Live IWRAM snapshots for each screen are in `iw_*.hex` in the work dir.
@@ -237,7 +239,7 @@ sequence and no debug entry point on any reachable screen. Bounds established:
 ## 9. Tooling
 
 `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, Python 3 (header/scan/font
-scripts in `/tmp/opencode/hpazkaban`: `scan.py`, `keyinput_scan.py`, `gdbrsp.py`,
+scripts in `/tmp/hpazkaban`: `scan.py`, `keyinput_scan.py`, `gdbrsp.py`,
 `rsp_proxy.py`, `rsp.py`, `multi.py`, `bulk.py`, `render4.py`, `render_bw.py`), Capstone,
 `arm-none-eabi-objdump -M force-thumb`, mGBA 0.x SDL (`-3`, `-g`), raw GDB-RSP client
 (`gdb-multiarch` batch mode was unreliable), Xvfb `:318` + openbox, xdotool (60 ms holds),

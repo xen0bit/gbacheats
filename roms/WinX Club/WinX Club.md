@@ -1,5 +1,7 @@
 # WinX Club (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -10,7 +12,7 @@
 | MD5 | `80acbed66f2f7a2fc88357f9a2028458` |
 | SHA-256 | `a3d9b2461d5408f354a511716fdd586514ffe4af713e8d4e3a39e123a5151c65` |
 
-All offsets below are **file offsets**; the GBA bus address is offset + `0x08000000` (code/ROM). Work copy and all evidence: `/tmp/opencode/winxclub3/`. **No patched ROM, savestate or screenshot was left in the ROM folder.**
+All offsets below are **file offsets**; the GBA bus address is offset + `0x08000000` (code/ROM). Work copy and all evidence: `/tmp/winxclub3/`. **No patched ROM, savestate or screenshot was left in the ROM folder.**
 
 ## 2. Executive summary — what this pass established
 
@@ -175,7 +177,7 @@ Warp destination names (text bank): `0xD79708` "Alfea Main Floor", `0xD79778` "A
 
 ## 9. Tooling / how to reproduce
 
-* ROM copy: `/tmp/opencode/winxclub3/game.gba`. Emulator: mGBA 0.10.5, Xvfb `:318`, `SDL_AUDIODRIVER=dummy`, `-3`. Keymap D-pad = arrows, A = `x`, B = `z`, Start = `Return`.
+* ROM copy: `/tmp/winxclub3/game.gba`. Emulator: mGBA 0.10.5, Xvfb `:318`, `SDL_AUDIODRIVER=dummy`, `-3`. Keymap D-pad = arrows, A = `x`, B = `z`, Start = `Return`.
 * `ss.py` decodes/re-encodes mGBA's PNG `gbAs` zlib chunk (raw `0x19000` → IWRAM `0x03000000`, raw `0x21000` → EWRAM `0x02000000`). `save()` must write to an existing copy of the source state.
 * Minimal reproduction of the gate:
   1. Boot to a reachable screen; save a state (mGBA Shift+F1).
@@ -187,4 +189,4 @@ Warp destination names (text bank): `0xD79708` "Alfea Main Floor", `0xD79778` "A
 
 ## 10. Cleanup
 
-Only this session's own PIDs were signalled, by number: mGBA instances started from `/tmp/opencode/winxclub3` (including 839404, 839996, 840680, 841292, 841651, 842539, 842786, 843837, 846841–847745, 848739, 849062, 849413, 850025, 850241, 851xxx–852838). Xvfb `:318` and its openbox were started by this session (PIDs 837476, 837494). Other agents' displays (`:315`, `:316`, `:317`, `:319`) and processes were left untouched. No `pkill` was used. The ROM folder contains only `WinX Club.gba` and this report; all `.ss1`, `.sav`, logs and screenshots live in `/tmp/opencode/winxclub3/`.
+Only this session's own PIDs were signalled, by number: mGBA instances started from `/tmp/winxclub3` (including 839404, 839996, 840680, 841292, 841651, 842539, 842786, 843837, 846841–847745, 848739, 849062, 849413, 850025, 850241, 851xxx–852838). Xvfb `:318` and its openbox were started by this session (PIDs 837476, 837494). Other agents' displays (`:315`, `:316`, `:317`, `:319`) and processes were left untouched. No `pkill` was used. The ROM folder contains only `WinX Club.gba` and this report; all `.ss1`, `.sav`, logs and screenshots were kept in `/tmp/winxclub3/`.

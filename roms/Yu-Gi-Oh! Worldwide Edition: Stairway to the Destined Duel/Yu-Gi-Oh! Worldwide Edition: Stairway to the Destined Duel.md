@@ -1,5 +1,7 @@
 # Yu-Gi-Oh! Worldwide Edition: Stairway to the Destined Duel (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -17,7 +19,7 @@
 | SHA-1 | `53d4ae06d1b605f8925c53d6c585478d73ff55c0` |
 | SHA-256 | `c4c3ef5c8980996be049a3b6efd1c99b165e565405e040ea428801a14b8c8aa9` |
 
-The 156-byte Nintendo logo at file offset 0x04 is nonstandard (patched dump), but the crt0 at 0x080000C0 disassembles as clean stock ARM code and the image boots normally in mGBA 0.10.5. All analysis was done on a byte-identical copy in `/tmp/opencode/worldwide/game.gba`; the ROM folder was left untouched.
+The 156-byte Nintendo logo at file offset 0x04 is nonstandard (patched dump), but the crt0 at 0x080000C0 disassembles as clean stock ARM code and the image boots normally in mGBA 0.10.5. All analysis was done on a byte-identical copy in `/tmp/worldwide/game.gba`; the ROM folder was left untouched.
 
 ## 2. Executive summary
 
@@ -148,16 +150,16 @@ Published-list discrepancy: GameFAQs lists *Ancient Tool* as `49587386`; the ROM
 
 | Code | Card | Screenshot |
 |---|---|---|
-| `11714098` | 30,000-Year White Turtle | `/tmp/opencode/worldwide/after_wait.png` |
-| `89631139` | Blue-Eyes White Dragon | `/tmp/opencode/worldwide/valid_beyond2.png` |
+| `11714098` | 30,000-Year White Turtle | `/tmp/worldwide/after_wait.png` |
+| `89631139` | Blue-Eyes White Dragon | `/tmp/worldwide/valid_beyond2.png` |
 
 **Bounds proven by rejection** (all three observed on the real password screen — display cleared, right card panel left empty):
 
 | Input | Why it must fail | Screenshot |
 |---|---|---|
-| `12345678` | well-formed 8-digit input, no matching table row | `/tmp/opencode/worldwide/rej_random.png` |
-| `00000000` | matches ROM sentinel index 0, which is not a card | `/tmp/opencode/worldwide/rej_zero.png` |
-| `49587386` | GameFAQs typo; ROM row `5` is `49587396` | `/tmp/opencode/worldwide/rej_typo.png` |
+| `12345678` | well-formed 8-digit input, no matching table row | `/tmp/worldwide/rej_random.png` |
+| `00000000` | matches ROM sentinel index 0, which is not a card | `/tmp/worldwide/rej_zero.png` |
+| `49587386` | GameFAQs typo; ROM row `5` is `49587396` | `/tmp/worldwide/rej_typo.png` |
 
 **RAM evidence**: with `89631139` accepted, savestate slot 7 raw `0x408B0` (= `0x0201F8B0`) contains `08 09 06 03 01 01 03 09`; control byte at raw `0x408C0` = `0x00` (screen reset after submit). With `11714098` entered but not yet submitted, the same address held `01 01 07 01 04 00 09 08` and control = `0xA7` (high nibble 10 = GET CARD, low nibble 7 = display cursor at the 8th digit).
 
@@ -188,8 +190,8 @@ Labels follow guide §8.4.
 - `md5sum`, `sha1sum`, `sha256sum`, `file`, `xxd`, `strings -t x`, `grep -abo` — Phase 0/1.
 - Python 3 + `capstone` 5.0.7, `Pillow` 13.0.0 — literal scans, BCD decode, set comparison, PNG cropping.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` — all disassembly.
-- mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`; `xdotool windowactivate --sync` + XTEST helper `/tmp/opencode/worldwide/key.py`; state-entry helper `/tmp/opencode/worldwide/enter_code.py`.
+- mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`; `xdotool windowactivate --sync` + XTEST helper `/tmp/worldwide/key.py`; state-entry helper `/tmp/worldwide/enter_code.py`.
 - Savestate parser: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte raw state, diffed in Python (§16.13).
-- mGBA `-d` pty debugger driver `/tmp/opencode/worldwide/dbg.py` / `dbg_live.py` (used to locate the buffer writer at `0x080916C4` with a write watchpoint).
+- mGBA `-d` pty debugger driver `/tmp/worldwide/dbg.py` / `dbg_live.py` (used to locate the buffer writer at `0x080916C4` with a write watchpoint).
 - Web recon: GameFAQs cheats/FAQ 22840/FAQ 23151, yugioh-world.com full password list, IGN, Yugipedia, Data Crystal, libretro cheat database, GameHacking.org. Fetched pages were treated strictly as data; no instructions found in them were followed.
-- All screenshots, savestates, scripts, and the ROM copy live in `/tmp/opencode/worldwide/`; none were written into the ROM folder. No copyrightable game assets are reproduced here.
+- All screenshots, savestates, scripts, and the ROM copy were kept in `/tmp/worldwide/`; none were written into the ROM folder. No copyrightable game assets are reproduced here.

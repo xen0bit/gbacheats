@@ -1,5 +1,7 @@
 # ATV: Quad Power Racing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -266,19 +268,19 @@ IWRAM words after each code (read from savestates):
 * **Novel code (not in any published list):**
   **Up-arrow, ATV, Wheel, Up-arrow, Up-arrow** (`U A W U U`, `N=2418`, `r=0`).
   * Entered in mGBA: **PASSWORD ACCEPTED** with the five icons visible
-    (`/tmp/opencode/atvqpr/r0_msg.png`).
+    (`/tmp/atvqpr/r0_msg.png`).
   * Effect: progress word `0x1111` — the minimum record. Demonstrated with a
     control: after the published `WWLLU`, challenge → class select offers
     `stock`, `pro`, `open`; after `UAWUU` the same screen shows **locked**
-    for pro and open (`/tmp/opencode/atvqpr/ua_class2.png` vs
+    for pro and open (`/tmp/atvqpr/ua_class2.png` vs
     `r0_class2.png`). Mask deltas in §6.3.
 * **Bounds proven by in-game rejection:**
   * `U A W U T` (`3 4 1 3 4`, `N=2419`): one symbol from the novel code,
     fails `q` (93 ≠ 4) → **PASSWORD INVALID**
-    (`/tmp/opencode/atvqpr/bad_msg.png`).
+    (`/tmp/atvqpr/bad_msg.png`).
   * `L L L L L` (`0 0 0 0 0`, `N=0`): lowest possible value, fails
     (q 0 ≠ 93) → **PASSWORD INVALID**
-    (`/tmp/opencode/atvqpr/lllll_msg.png`).
+    (`/tmp/atvqpr/lllll_msg.png`).
   * Out-of-range field: a symbol >4 cannot be expressed — the spinner wraps
     at 4, and `N ≥ 3125` needs a sixth base-5 digit, so the space is closed
     at 3124. This is a property of the input widget, observed in RAM
@@ -331,14 +333,14 @@ IWRAM words after each code (read from savestates):
 
 * `mGBA 0.10.5` (SDL) under `Xvfb :120` + `openbox`, `xdotool` for input,
   `import`/ImageMagick for screenshots.
-* `/tmp/opencode/atvqpr/pwmodel.py` — independent reimplementation and full
+* `/tmp/atvqpr/pwmodel.py` — independent reimplementation and full
   3125-code enumeration.
-* `/tmp/opencode/atvqpr/state.py` — mGBA PNG savestate reader (the `gbAs`
+* `/tmp/atvqpr/state.py` — mGBA PNG savestate reader (the `gbAs`
   chunk is zlib-compressed; `0x19000..0x20FFF` = IWRAM, `0x21000..0x60FFF` =
   EWRAM), used to read RAM without a debugger.
 * `arm-none-eabi-objdump -M force-thumb` for the disassembly; a temporary
   `gdb-multiarch` session against `mgba -g` for the write watchpoint.
-* Screenshots referenced above live in `/tmp/opencode/atvqpr/` (not part of
+* Screenshots referenced above were kept in `/tmp/atvqpr/` (not part of
   the repository): `r0_msg.png` (novel code accepted), `r0_class2.png` /
   `ua_class2.png` (locked vs unlocked), `bad_msg.png`, `lllll_msg.png`,
   `open8_acc.png`, `unlock_all_msg.png`, `walk_*.png`.

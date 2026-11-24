@@ -1,10 +1,12 @@
 # Family Feud (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Family Feud/Family Feud.gba` |
+| File | `roms/Family Feud/Family Feud.gba` |
 | Size | 4,194,304 bytes (`0x400000`) |
 | Header title | `FAMILY FEUD` |
 | Game code / maker | `B2FE` / `54` (Global Star Software) |
@@ -135,6 +137,6 @@ Text entry (family name / survey answer) is a direct glyph-to-buffer append with
 ## 9. Tooling
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for Thumb disassembly; Capstone 5.0.7 for literal-load / BL / state-value scans.
-* Python 3 scripts in `/tmp/opencode/familyfeud/`: `menu_scan.py` (title→pointer map), `screens.py` (function-table enumeration), `transitions.py` (state-change graph), `final_static.py` (string/keyword counts + encodings), `find_strcmp.py`, `scan_keycmp.py`.
+* Python 3 scripts in `/tmp/familyfeud/`: `menu_scan.py` (title→pointer map), `screens.py` (function-table enumeration), `transitions.py` (state-change graph), `final_static.py` (string/keyword counts + encodings), `find_strcmp.py`, `scan_keycmp.py`.
 * mGBA `-g` GDB stub + `gdb-multiarch` for live RAM reads (`0x030042B8` key mask, `0x030024D8` cursor, screen-state globals). `dumpram.sh` diffs EWRAM/IWRAM to locate state variables.
 * `Xvfb :317`, `openbox`, `xdotool`, `scrot`/`import`, ImageMagick `convert`, `tesseract` for screen capture/OCR. No ROM or assets were redistributed; only addresses, hashes, and findings are published.

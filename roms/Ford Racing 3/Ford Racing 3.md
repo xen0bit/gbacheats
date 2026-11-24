@@ -1,5 +1,7 @@
 # Ford Racing 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -53,7 +55,7 @@ a bad/unverifiable submission (§7).
   `0x0800E282`: `count = [0x03007070]+1; if count > 5: bl 0x08018E6C;
   if r0 != 0: bl 0x080190F8` (accept handler)).
 - Screens walked with evidence (screenshots + savestate RAM snapshots kept in
-  `/tmp/opencode/ford3/work/`): DSI/Ford logo splash, warning, legal text,
+  `/tmp/ford3/work/`): DSI/Ford logo splash, warning, legal text,
   "PRESS START" attract, MAIN MENU, in-race HUD, PAUSE (`CONTINUE / RESTART /
   QUIT RACE`), quit-confirm (`NO/YES`), race-results banner, and ENTER PASSWORD.
 - Codes tested: published `B7BBxB` (rejected), ROM-generated `****M*`

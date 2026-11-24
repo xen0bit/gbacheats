@@ -1,6 +1,8 @@
 # Harlem Globetrotters: World Tour (GBA) — Reverse Engineering Report
 
-Queue position 345. Work dir `/tmp/opencode/harlem`. Analysis target:
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
+Queue position 345. Work dir `/tmp/harlem`. Analysis target:
 `roms/Harlem Globetrotters: World Tour/Harlem Globetrotters: World Tour.gba`
 (the brief's filename `Harlem Globetrotters.gba` does not exist; the ROM in the
 folder carries the full title).
@@ -199,7 +201,7 @@ payload `arg1 = 16146 ^ 0x123F = 11565`, `arg2 = 12`, `arg3 = 0`.
   for `X3TB2D` and `X3TD1F`; "PASSWORD INVALID!" for `X3TB2G`; GDB breakpoint at
   `0x08100D48` reading `r0 = 0x02000ce4` / `0x03000224` with bytes
   `12 18 0F 00 17 02` and their `-1` response to UP presses (oracle use per
-  §16.19). `x/8bx` transcripts are in `/tmp/opencode/harlem/gdb3.txt`.
+  §16.19). `x/8bx` transcripts were in `/tmp/harlem/gdb3.txt`.
 * **Derived** (static, byte-verified): encoder/validator equations, constants,
   alphabet, field widths, code counts, call graph (BL scan found the encoder at
   `0x080FF9A8/0x080FF9FE`, the validator at `0x080FF9D0`, `0x080FFA26`,
@@ -210,7 +212,7 @@ payload `arg1 = 16146 ^ 0x123F = 11565`, `arg2 = 12`, `arg3 = 0`.
   particular `arg2/arg3` combination was not isolated to a named unlock flag, so
   it is not claimed. Acceptance itself is fully proven.
 
-Media evidence: screenshots were kept on disk in `/tmp/opencode/harlem/`;
+Media evidence: screenshots were kept on disk in `/tmp/harlem/`;
 none are attached here.
 
 ## 8. Unknowns
@@ -247,7 +249,7 @@ none are attached here.
   ImageMagick `convert`/`montage`, `tesseract` (OCR triage only).
 * GDB: `gdb-multiarch`, `target remote :2345`, breakpoint `0x08100D48`,
   `x/8bx $r0` — used as the validator oracle (guide §16.19).
-* Helper scripts: `/tmp/opencode/harlem/ui.py` (timed XTEST input), `enter.py`,
+* Helper scripts: `/tmp/harlem/ui.py` (timed XTEST input), `enter.py`,
   `gdb3.cmd` (breakpoint command list).
 
 No ROM, copyrighted graphics, or extracted assets are redistributed in this

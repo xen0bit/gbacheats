@@ -1,5 +1,7 @@
 # X2: Wolverine's Revenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -162,7 +164,7 @@ to the published `L + Right×7`; screenshot `novel_gameplay2.png` (work dir).
 
 ## 7. Validation evidence
 
-* **Observed** (mGBA screenshots, all in `/tmp/opencode/x2wolverine/`):
+* **Observed** (mGBA screenshots, all in `/tmp/x2wolverine/`):
   `after_100lives.png`→`gameplay.png` (`x99`), `novel_gameplay2.png` (`x99`),
   `control_gameplay.png` (`x3`), `reject_menu.png` (`LIVES: 3`), `final_state.png` (`x3`).
 * **Observed** (GDB stub, `KEYINPUT`): holding `a` → `0x01FF` (L, bit 9 clear); holding
@@ -203,4 +205,4 @@ original screenshots are published.
 
 All emulator/GDB processes started for this engagement were terminated by PID, and all
 `.sav`/`.ss*` files generated in the ROM folder were removed. Screenshots and analysis
-scripts remain only in `/tmp/opencode/x2wolverine/`.
+scripts remain only in `/tmp/x2wolverine/`.

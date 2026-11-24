@@ -1,5 +1,7 @@
 # Star Wars Episode I: Jedi Power Battles (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -53,7 +55,7 @@ Published button codes found on the web belong to the 2025 remaster and the cons
 | `0x080B6120` | VALID display routine |
 | `0x0801084C`–`0x08010870` | Copies the 8 decoded bytes into the game's u16 state array at `0x03007A70` |
 | `0x087CA178`, `0x087CA180` | ASCII `INVALID\0`, ` VALID \0` |
-| `0x087CA188` | **Keyboard/alphabet table**: 32 entries × 8 bytes `{u16 x, u16 y, u16 (ascii|tile<<8), u16 0}` |
+| `0x087CA188` | **Keyboard/alphabet table**: 32 entries × 8 bytes `{u16 x, u16 y, u16 (ascii\|tile<<8), u16 0}` |
 | `0x087CA288`, `0x087CA290` | Special keys: green check (value `0x0300`) and red X (`0x0401`) |
 | `0x087CA298`, `0x087CA2A4` | `PASSWORD`, `PRESS START` |
 | `0x061D898`–`0x061DB94` | ASCII text bank: `PRESS START`, `NEW GAME`, `RESUME GAME`, `OPTIONS`, `MUSIC OFF/ON`, `SFX OFF/ON`, `PAUSED`, `CONTINUE`, `QUIT GAME`, `Level/Map/Scene/Pause/Fade` |
@@ -164,4 +166,4 @@ The last two rows separate the two layers: the checksum layer is fully proven, w
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/jedipower/`: `codec.py` (decode/encode/validate), `scan.py`/`scan2.py` (literal-pointer scans), `model.py`/`fields.py` (published-code decode), `run_code.py` (exact cursor model + BFS pathing), `typeit.py` (30 ms-tap UI driver), `ramev.py`/`decstate.py` (breakpoint RAM capture), `testcode.py` (accept/reject tests), `walkopts.py`/`walkgame.py`/`walknew.py` (screen walks), `mgba_pty.py` (pty wrapper for `mgba -d`). Tools: mGBA 0.10.5 (`-d` pty debugger; `-g` was unavailable due to a port held by another agent), `xdotool`, `scrot`, PIL, `arm-none-eabi-objdump -M force-thumb`, capstone/Python. No ROM or copyrighted assets were redistributed; only hashes, addresses, algorithms and generated codes are published.
+Scripts in `/tmp/jedipower/`: `codec.py` (decode/encode/validate), `scan.py`/`scan2.py` (literal-pointer scans), `model.py`/`fields.py` (published-code decode), `run_code.py` (exact cursor model + BFS pathing), `typeit.py` (30 ms-tap UI driver), `ramev.py`/`decstate.py` (breakpoint RAM capture), `testcode.py` (accept/reject tests), `walkopts.py`/`walkgame.py`/`walknew.py` (screen walks), `mgba_pty.py` (pty wrapper for `mgba -d`). Tools: mGBA 0.10.5 (`-d` pty debugger; `-g` was unavailable due to a port held by another agent), `xdotool`, `scrot`, PIL, `arm-none-eabi-objdump -M force-thumb`, capstone/Python. No ROM or copyrighted assets were redistributed; only hashes, addresses, algorithms and generated codes are published.

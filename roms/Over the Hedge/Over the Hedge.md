@@ -1,5 +1,7 @@
 # Over the Hedge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -111,8 +113,8 @@ Because no code system exists, enumeration is of the **search spaces and screens
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/overthehedge/`: `ss.py` (gbAs savestate decoder), `scanlit.py` (corrected PC-relative literal scanner — the first version compared addresses instead of loaded values and found nothing), `blscan.py` (Thumb BL scanner), `textbank.py` (dialogue linked-list walker), `button_scan.py` (key-mask table scan). Tools: `arm-none-eabi-objdump` (`-M force-thumb`), Capstone 5.0.7, `gdb-multiarch` (mGBA stub, port 2345 with clean per-session HOME), Python 3, `xdotool`, `scrot`, ImageMagick `compare`, `tesseract`, Xvfb :317 + openbox. REA/Ghidra was opened once but its raw-binary auto-analysis created no Thumb functions at the needed addresses and the shared MCP session was subsequently taken over by another target, so it was not relied on.
+Scripts in `/tmp/overthehedge/`: `ss.py` (gbAs savestate decoder), `scanlit.py` (corrected PC-relative literal scanner — the first version compared addresses instead of loaded values and found nothing), `blscan.py` (Thumb BL scanner), `textbank.py` (dialogue linked-list walker), `button_scan.py` (key-mask table scan). Tools: `arm-none-eabi-objdump` (`-M force-thumb`), Capstone 5.0.7, `gdb-multiarch` (mGBA stub, port 2345 with clean per-session HOME), Python 3, `xdotool`, `scrot`, ImageMagick `compare`, `tesseract`, Xvfb :317 + openbox. REA/Ghidra was opened once but its raw-binary auto-analysis created no Thumb functions at the needed addresses and the shared MCP session was subsequently taken over by another target, so it was not relied on.
 
 ## 10. Legal note
 
-No ROM bytes, graphics, music, or game text are redistributed here. Only addresses, hashes, counts, and the author's own analysis scripts are published. The original ROM was not modified; all experiments used copies in `/tmp/opencode/overthehedge/`.
+No ROM bytes, graphics, music, or game text are redistributed here. Only addresses, hashes, counts, and the author's own analysis scripts are published. The original ROM was not modified; all experiments used copies in `/tmp/overthehedge/`.

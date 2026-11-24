@@ -1,5 +1,7 @@
 # Robots (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,7 +43,7 @@ Published button codes for the *console* versions (Big head `UDDURRLR`, Unlimite
 - In-game: Start → pause menu `CONTINUE / MUSIC / SOUND / GAMMA / GALLERY / SAVE & QUIT`. `GALLERY` → 10 locked `?` tiles (2 rows × 5); the green up/down arrows wrap, no extra page was reached.
 - Button codes tested at the pause screen with 45 ms presses: `UDDURRLR`, `URDULDRL`, `DDLUURUD`. No chime/message/flag/visual effect was observed.
 - Debug combos tested at the main menu (`L+R+Start+Select`, `Select+A+B`): no hidden screen.
-- Screenshots (RAM-corroborated) are in `/tmp/opencode/robots/` (`f_main_c.png`, `sel_slot2_c.png`, `name_QZX_c.png`, `pause_again_c.png`, `gallery1_c.png`, `f_copy_screen_c.png`, `savequit1_c.png`, `code_scrap_c.png`, `dbg_combo1_c.png`).
+- Screenshots (RAM-corroborated) were in `/tmp/robots/` (`f_main_c.png`, `sel_slot2_c.png`, `name_QZX_c.png`, `pause_again_c.png`, `gallery1_c.png`, `f_copy_screen_c.png`, `savequit1_c.png`, `code_scrap_c.png`, `dbg_combo1_c.png`).
 
 ## 4. Address map
 

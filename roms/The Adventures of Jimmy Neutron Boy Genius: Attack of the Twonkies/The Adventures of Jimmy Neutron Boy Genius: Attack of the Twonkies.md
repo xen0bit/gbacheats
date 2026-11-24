@@ -1,5 +1,7 @@
 # The Adventures of Jimmy Neutron Boy Genius: Attack of the Twonkies (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -64,7 +66,7 @@ this explicitly and enumerates the spaces that *were* checked (§0.2's
 **Environment:** mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`,
 3× scale. Default SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`,
 Select=`BackSpace`, D-pad=arrow keys. The ROM was **copied** to
-`/tmp/opencode/jimmyneutron2/game.gba` byte-for-byte (MD5 verified) so emulator
+`/tmp/jimmyneutron2/game.gba` byte-for-byte (MD5 verified) so emulator
 artifacts never touched the ROM folder.
 
 **Cold-boot walk (all screens observed):**
@@ -226,7 +228,7 @@ the 10 reachable screens or in the UI string bank.
 
 ## 7. Validation evidence
 
-* **Observed** — emulator screenshots (`*.png` in `/tmp/opencode/jimmyneutron2`)
+* **Observed** — emulator screenshots (`*.png` in `/tmp/jimmyneutron2`)
   for all 10 screens in §3; savestate RAM diffs giving the `0x0300000C` state
   word `5 → 1 → 0`; 512-byte SRAM written by normal play.
 * **Derived** — `objdump -M force-thumb` disassembly of the input routines and
@@ -264,7 +266,7 @@ string was executed.
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep` for Phase 0
   and the bounded string searches.
-* Python 3 scripts (in `/tmp/opencode/jimmyneutron2`): `allstrings.txt` dump,
+* Python 3 scripts (in `/tmp/jimmyneutron2`): `allstrings.txt` dump,
   pointer/xref scanner (`struct.find` of little-endian 32-bit constants),
   `ss.py` for zlib-decompressing mGBA `gbAs` chunks and diffing IWRAM.
 * `arm-none-eabi-objdump -M force-thumb` for raw Thumb disassembly.

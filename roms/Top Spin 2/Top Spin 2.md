@@ -1,6 +1,8 @@
 # Top Spin 2 (GBA) — Reverse Engineering Report
 
-Queue 217. Analysis date 2026-11-20. Work dir `/tmp/opencode/topspin2`.
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
+Queue 217. Analysis date 2026-11-20. Work dir `/tmp/topspin2`.
 All addresses below are ROM addresses (`0x08000000 + file offset`) unless marked RAM.
 
 ## 1. Target identity
@@ -208,11 +210,11 @@ unlock messages and save format, but no full playthrough was completed).
 
 * Tools: `mgba` 0.10.5, Xvfb `:318` + openbox, `xdotool`, `scrot`,
   `arm-none-eabi-objdump`, Python 3 + `capstone`, zlib savestate parser.
-* Scripts in `/tmp/opencode/topspin2/`: `drive.py` (input), `state.py`
+* Scripts in `/tmp/topspin2/`: `drive.py` (input), `state.py`
   (savestate RAM read), `diffstate.py` (IWRAM/EWRAM diff), `scancmp.py` and
   `scanmask.py` (key-mask scans), `counts.py` (keyword/pointer counts),
   `ptydbg.py` (mGBA CLI debugger driver, used for early probing).
-* Evidence screenshots in `/tmp/opencode/topspin2/`: `shot0.png`, `shot1.png`
+* Evidence screenshots in `/tmp/topspin2/`: `shot0.png`, `shot1.png`
   (splash/language), `shot_lang.png` (title), `shot_menu.png` (main menu),
   `shot_options.png`, `shot_controls.png`, `shot_playnow1.png`, `shot_exh.png`,
   `shot_exh1p.png` (settings), `shot_selectp.png` (venue),

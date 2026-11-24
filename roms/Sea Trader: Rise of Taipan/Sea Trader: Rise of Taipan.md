@@ -1,5 +1,7 @@
 # Sea Trader: Rise of Taipan (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -239,7 +241,7 @@ work dir), accepted, and the game started normally at the South China map
 * `arm-none-eabi-objdump -M force-thumb --adjust-vma=0x08000000` for all
   disassembly; Python `struct` scans for literals, BL targets and Thumb LDR
   literals; zlib/CRC32 savestate patching.
-* Work scripts in `/tmp/opencode/seatrader/`: `helpers.py` (keypress,
+* Work scripts in `/tmp/seatrader/`: `helpers.py` (keypress,
   screenshot, savestate decompress/EWRAM/IWRAM reads), `typeword.py` (keyboard
   grid navigator), `patchstate.py` (savestate byte patcher).
 * mGBA 0.10.5, Xvfb :319, openbox, xdotool, scrot, ImageMagick.

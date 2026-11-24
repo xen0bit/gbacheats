@@ -1,5 +1,7 @@
 # Frogger's Journey: The Forgotten Relic (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -144,7 +146,7 @@ Because the answer is negative, this section proves the *searched space*, as §0
 ## 9. Tooling
 
 * `file`, `xxd`, `strings -t x`, `grep -abo`, `md5sum`/`sha1sum`/`sha256sum` — Phase 0/1.
-* Custom Python in `/tmp/opencode/froggersjourney/`: `phase0.py` (header/logo scan), `xref.py`/`xref2.py` (Capstone Thumb literal-pointer and direct-pointer xrefs), `blscan.py` (raw Thumb BL scan), `dis.py` (Capstone Thumb disassembly), `btnsearch.py` (key-mask sequence scan), `dumptext.py` (message bank decoder), `ss.py`/`ssread.py`/`ssdiff.py` (mGBA `gbAs` savestate parser and RAM diff), `ui.py`/`ui2.py`/`nav.py` (XTEST input and screenshots).
+* Custom Python in `/tmp/froggersjourney/`: `phase0.py` (header/logo scan), `xref.py`/`xref2.py` (Capstone Thumb literal-pointer and direct-pointer xrefs), `blscan.py` (raw Thumb BL scan), `dis.py` (Capstone Thumb disassembly), `btnsearch.py` (key-mask sequence scan), `dumptext.py` (message bank decoder), `ss.py`/`ssread.py`/`ssdiff.py` (mGBA `gbAs` savestate parser and RAM diff), `ui.py`/`ui2.py`/`nav.py` (XTEST input and screenshots).
 * `arm-none-eabi-objdump`, Capstone (bulk Thumb disassembly), `gdb-multiarch` (GDB stub was unavailable: ports 2345/2460 were held by other sessions), REA/Ghidra (opened the raw image at `0x08000000`; its generic ARM language does not recover Thumb procedures, so it contributed no xrefs; session closed).
 * `Xvfb :315`, `openbox`, `mgba` 0.10.5 SDL, `xdotool`, `scrot`, ImageMagick. All started on display `:315` only.
 

@@ -1,5 +1,7 @@
 # Ice Nine (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -192,7 +194,7 @@ walk (§7) and by the ASCII/shifted/UTF-16/font-index searches (§11).
 *Observed* (emulator / debugger / hex dump):
 - Boot → language select → title → intro/credits → mission briefing → dialogue
   → gameplay → pause menu → controls screen; screenshots saved in
-  `/tmp/opencode/ice9/` (`s_lang`, `intro4`, `menu5`, `game_play`, `pause`,
+  `/tmp/ice9/` (`s_lang`, `intro4`, `menu5`, `game_play`, `pause`,
   `options_screen`, etc.).
 - Held-key mask at `0x03000EF8` = `0x0306` while L+R+Select+B is down; 0x0305 /
   0x030C for the undocumented variants; 0 when idle (mGBA `-d` `r/2`).
@@ -242,7 +244,7 @@ walk (§7) and by the ASCII/shifted/UTF-16/font-index searches (§11).
 * `arm-none-eabi-objdump -D -b binary -marm -M force-thumb` with
   `--adjust-vma=0x08000000`.
 * Python 3 + Capstone 5.0.7: PC-relative literal xref scanner, BL scanner,
-  key-mask/literal search (`/tmp/opencode/ice9/*.py`).
+  key-mask/literal search (`/tmp/ice9/*.py`).
 * mGBA SDL (`mgba -3 -d`) under Xvfb `:319` + openbox; its pty debugger driven
   through a UNIX-socket bridge (`dbgserver.py`, `dc.py`) for `r/2`, `x/2`, `x/4`,
   `watch/r`, `c` and SIGINT pause. GDB stub was avoided because TCP 2345 was

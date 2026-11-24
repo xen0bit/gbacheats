@@ -1,5 +1,7 @@
 # Back Track (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -494,7 +496,7 @@ health.png`, `Back Track - ARM 150 armor.png`.
   `detach`, so the CLI debugger was used instead.)
 * `arm-none-eabi-objdump -D -b binary -marm -M force-thumb`,
   `strings -t x`, `grep -abo`, Capstone 5.0.7 for literal-pool scans.
-* Analysis scripts in `/tmp/opencode/backtrack/`: `phase0.py` (hashes/header/
+* Analysis scripts in `/tmp/backtrack/`: `phase0.py` (hashes/header/
   logo scan), `flow.py` + `type.py` (debugger driver, navigation, verified
   letter entry with RAM feedback), `one.py`/`toggle.py`/`hud2.py` (per-code
   tests and screenshots), `len_test.py` (17-char bound), `tival2.py`

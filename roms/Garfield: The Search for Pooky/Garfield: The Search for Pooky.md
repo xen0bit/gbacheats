@@ -1,5 +1,7 @@
 # Garfield: The Search for Pooky (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -36,7 +38,7 @@ Web content was treated as data; no instructions found in fetched pages were exe
 - Keymap (mGBA SDL defaults): A=`x`, B=`z`, Start=`Return`, D-pad = arrow keys.
 - Boot path: language screen → A → title → Hold Start through intro → main menu (NEW GAME / PASSWORD / REPLAY INTRO / CREDITS).
 - Password path: main menu → Down → PASSWORD → A → `ENTER PASSWORD` grid. D-pad moves the cursor in a 4×8 grid, A appends the highlighted symbol, B deletes one. After 9 symbols, press A once more to submit. Valid → map/level-select screen (purple, `01`/`50%` for a level code, `17`/`50%` for clear-game); invalid → return to `ENTER PASSWORD` (orange) with slots cleared.
-- Savestate oracle: a password-screen state with 9 symbols entered was saved. The 9 ASCII bytes live at raw savestate offset `0x2FCED` (EWRAM `0x0200ECED`). Patch those 9 bytes, repack the PNG `gbAs` chunk, `mgba -3 -t <patched>` on `:316`, focus the window, press A, classify the result (purple = accept, orange = reject). Scripts in `/tmp/opencode/garfieldpooky2/` (`oracle.py`, `sweep.py`, `mutsweep.py`, `randprefix.py`, `twod.py`, `stateutil.py`, `dbg.py`).
+- Savestate oracle: a password-screen state with 9 symbols entered was saved. The 9 ASCII bytes live at raw savestate offset `0x2FCED` (EWRAM `0x0200ECED`). Patch those 9 bytes, repack the PNG `gbAs` chunk, `mgba -3 -t <patched>` on `:316`, focus the window, press A, classify the result (purple = accept, orange = reject). Scripts in `/tmp/garfieldpooky2/` (`oracle.py`, `sweep.py`, `mutsweep.py`, `randprefix.py`, `twod.py`, `stateutil.py`, `dbg.py`).
 - Pixel classifier (full-screen `-3` viewport at (200,200)): purple `(154,103,154)` = ACCEPT; orange `(247,90,41)` = reject. Cropped viewport screenshots saved as `evidence_ACCEPT_published.png`, `evidence_REJECT_wrong9.png`, `evidence_REJECT_mutprefix.png`.
 
 ## 4. Address map
@@ -177,7 +179,7 @@ Screenshots: `evidence_ACCEPT_published.png` (purple map, accepted), `evidence_R
 
 - `arm-none-eabi-objdump` (`-M force-thumb`), Capstone 5.0.7, Keystone, Ghidra 12.1.4 via REA MCP (`open_binary`, `analyze_function`, `procedure_pseudo_code`, `xrefs`, `search_procedures`), `strings`, `xxd`, `file`, `sha*sum`.
 - mGBA (`mgba -3`, `-g`, `-d`), Xvfb `:316`, openbox, `xdotool`, `scrot`, ImageMagick.
-- Python helpers in `/tmp/opencode/garfieldpooky2/`: `stateutil.py` (PNG `gbAs` zlib extractor/differ), `oracle.py` (fresh-launch patched-savestate oracle), `sweep.py` (32-symbol ninth sweep), `mutsweep.py` (prefix-mutation sweep), `randprefix.py` (random-prefix sweep), `twod.py` (position 7×8 sweep), `dbg.py` (pty driver for `-d`), `analyze.py`/`analyze2.py`/`fitxor.py` (static checksum fitting), `ramverify.py` (RAM flag attempt). Logs: `mutsweep.log`, `randprefix.log`, `twod.log`.
+- Python helpers in `/tmp/garfieldpooky2/`: `stateutil.py` (PNG `gbAs` zlib extractor/differ), `oracle.py` (fresh-launch patched-savestate oracle), `sweep.py` (32-symbol ninth sweep), `mutsweep.py` (prefix-mutation sweep), `randprefix.py` (random-prefix sweep), `twod.py` (position 7×8 sweep), `dbg.py` (pty driver for `-d`), `analyze.py`/`analyze2.py`/`fitxor.py` (static checksum fitting), `ramverify.py` (RAM flag attempt). Logs: `mutsweep.log`, `randprefix.log`, `twod.log`.
 - Web sources: archived GameFAQs cheats (`web.archive.org/web/20220804030516/...`), TCRF, GameHacking.org index (ROM identity). A retry web search returned no additional code list. No ROM or copyrighted assets are redistributed by this report.
 
 ## 10. Legal note

@@ -1,5 +1,7 @@
 # Super Ghouls 'n Ghosts (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -46,7 +48,7 @@ Neither SNES nor GBA cheat-device codes are reported as findings.
   D-pad=arrow keys. Holds of 100–300 ms; transitions can take 10–15 s.
 * RAM evidence: mGBA CLI debugger `r/4 ADDR`, plus zlib-decompressed `gbAs`
   chunks of `.ss1` savestates (IWRAM at raw offset `0x19000`, EWRAM at `0x21000`).
-* Screen walk (all observed, screenshots in `/tmp/opencode/superghouls/`):
+* Screen walk (all observed, screenshots in `/tmp/superghouls/`):
   Capcom logo → two intro scenes → title (`ORIGINAL MODE` / `ARRANGE MODE` /
   `OPTION MODE`, plus `NEW GAME` / `LOAD GAME` once a `.sav` exists) →
   `OPTION MODE` (DIFFICULTY / NORMAL / KEY CONFIG. / SHOT B BUTTON /
@@ -256,7 +258,7 @@ treated strictly as data, and is reported here as required.
 Xvfb `:315` + openbox, `xdotool`, `scrot`, ImageMagick, `gdb-multiarch` (not used
 — the GDB stub was unavailable; the `-d` pty debugger was used instead).
 Helper scripts: `scan_ptrs.py`, `blscan.py`, `gba.py`, `ssread.py`,
-`readram.py`, `patchss.py`, `combo2.py` in `/tmp/opencode/superghouls/`.
+`readram.py`, `patchss.py`, `combo2.py` in `/tmp/superghouls/`.
 
 ## 10. Legal note
 

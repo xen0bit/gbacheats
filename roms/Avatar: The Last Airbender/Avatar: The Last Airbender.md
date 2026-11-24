@@ -1,5 +1,7 @@
 # Avatar: The Last Airbender (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -426,7 +428,7 @@ The in-scope code space of this cartridge is **empty**:
   `gdb-multiarch` against mGBA's GDB stub (memory dumps, one RAM state write
   used only to observe the developer room screen).
 * Helper scripts (analysis only, not part of the deliverable):
-  `/tmp/opencode/avatar/h.py` (keys/screenshots), `combo.py`,
+  `/tmp/avatar/h.py` (keys/screenshots), `combo.py`,
   `bootcombo.sh`, `statetest.sh`.
 * All screenshots in this folder were taken from the running ROM; no ROM data
   or copyrighted assets are redistributed in this report.

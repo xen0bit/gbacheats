@@ -1,5 +1,7 @@
 # Backyard Sports: Baseball 2007 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Status: complete for the code/unlock surface. Scope: in-game / developer-intended
 cheats only (passwords, button codes, hidden/debug menus, unlockables). No
 GameShark, CodeBreaker, Action Replay or other memory-edit codes are proposed or
@@ -138,7 +140,7 @@ For repeated tests a savestate at the Options screen was used as the clean base
 ### 3.3 Accepted inputs and rejections actually entered
 
 All of the following were entered through the real on-screen keyboard. Evidence
-screenshots are in `/tmp/opencode/bb2007/shots/` (paths below).
+screenshots were in `/tmp/bb2007/shots/` (paths below).
 
 | Input | Length | Result | Screenshot |
 |---|---:|---|---|
@@ -533,7 +535,7 @@ only to calibrate detectors, not as assumptions about this ROM.
   `import`/`convert` for screenshots.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 * Python 3 for hashes, pointer/BL scans, table decoding, savestate RAM extraction
-  and the 17-row table detector (`/tmp/opencode/bb2007/`).
+  and the 17-row table detector (`/tmp/bb2007/`).
 * `gdb-multiarch` against mGBA's `-g` stub (port 2345) for breakpoint and
   memory checks; the gbAs chunk of mGBA `.ssN` files was zlib-decompressed to
   read IWRAM (`0x19000`) and EWRAM (`0x21000`) without a debugger.

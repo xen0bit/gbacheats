@@ -1,5 +1,7 @@
 # That's So Raven 2: Supernatural Style (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -77,7 +79,7 @@ Conclusion type (guide §16.3): **no system**, plus **dead resources** and a
 | Dead cheat-menu resource names | `0x864B3EC`, `0x8652F4C`, `0x86536E4`, `0x865522C` | Observed |
 | Dialog text bank (ASCII + `0xFFFC` space, `0xFFFE` terminator) | `0x74C400…`, `0x74FBFE…` | Observed |
 
-Screenshots (work dir `/tmp/opencode/raven2/`): boot, title, NoteBook, main menu,
+Screenshots (work dir `/tmp/raven2/`): boot, title, NoteBook, main menu,
 Bonus, Special Material, Options, Select Level, gameplay, Pause, View Vision,
 plus both published-code attempts.
 
@@ -192,9 +194,9 @@ This is a **bounded negative**, not a code-system enumeration.
 - `strings -t x -n 4`, `grep -abo`, Python (`capstone`, `struct`, `zlib`),
   `arm-none-eabi-objdump -M force-thumb`, Ghidra 12.1.4 via REA MCP, mGBA 0.10.5
   under Xvfb `:318` + openbox, `xdotool`, `scrot`, GDB stub / mGBA CLI debugger.
-- Analysis scripts in `/tmp/opencode/`: `r2_scan.py`, `r2_pack.py`, `r2_pack2.py`,
+- Analysis scripts in `/tmp/`: `r2_scan.py`, `r2_pack.py`, `r2_pack2.py`,
   `r2_cmpscan.py`, `r2_keyinput.py`, `r2_state.py` (savestate `gbAs` extractor/differ).
-- Screenshots in `/tmp/opencode/raven2/`.
+- Screenshots in `/tmp/raven2/`.
 - No ROM or copyrighted assets are redistributed; only addresses, hashes and
   findings are published.
 

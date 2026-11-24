@@ -1,10 +1,12 @@
 # Hot Wheels: Burnin' Rubber (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Hot Wheels: Burnin' Rubber/Hot Wheels: Burnin' Rubber.gba` |
+| File | `roms/Hot Wheels: Burnin' Rubber/Hot Wheels: Burnin' Rubber.gba` |
 | Size | 8,388,608 bytes (`0x800000`) |
 | Header title | `HOTWHEELS BR` |
 | Game code / maker | `AHWE` / `78` (THQ; Altron developed) |
@@ -81,7 +83,7 @@ Menu path (fresh 512-byte save):
 
 Savestates: `Shift+F1` writes slot 1; `F1` loads it. The `.ss1` is a PNG with a
 zlib-compressed `gbAs` chunk; `zlib.decompress` yields 397,312 bytes with
-VRAM at `0x1000`, IWRAM at `0x19000`, EWRAM at `0x21000` (`/tmp/opencode/hwburnin/ss.py`).
+VRAM at `0x1000`, IWRAM at `0x19000`, EWRAM at `0x21000` (`/tmp/hwburnin/ss.py`).
 
 ## 4. Address map
 
@@ -211,13 +213,13 @@ bounded by these concrete searches over all 8,388,608 bytes:
 
 ## 9. Tooling
 
-* `png`/`zlib` savestate decoder: `/tmp/opencode/hwburnin/ss.py`.
-* XTEST input + screenshot helper: `/tmp/opencode/hwburnin/k.py`.
-* VRAM/palette tile renderer: `/tmp/opencode/hwburnin/vram.py`.
+* `png`/`zlib` savestate decoder: `/tmp/hwburnin/ss.py`.
+* XTEST input + screenshot helper: `/tmp/hwburnin/k.py`.
+* VRAM/palette tile renderer: `/tmp/hwburnin/vram.py`.
 * searches: `strings -t x -n 4`, `grep -abo`, Python `struct`/numpy scans,
   `arm-none-eabi-objdump -M force-thumb`, REA/Ghidra raw-ARM import
   (268 procedures, 171 defined strings), `tesseract` for OCR triage.
-* Screenshots/savestates retained in `/tmp/opencode/hwburnin/`; none are attached
+* Screenshots/savestates retained in `/tmp/hwburnin/`; none are attached
   to this report. No ROM or copyrighted asset is reproduced here.
 
 No ROM or copyrighted assets were redistributed. All addresses are for SHA-256

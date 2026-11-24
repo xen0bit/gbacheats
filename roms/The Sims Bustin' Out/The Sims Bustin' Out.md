@@ -1,10 +1,12 @@
 # The Sims Bustin' Out (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/The Sims Bustin' Out/The Sims Bustin' Out.gba` |
+| File | `roms/The Sims Bustin' Out/The Sims Bustin' Out.gba` |
 | Size | 16,777,216 bytes (16 MiB) |
 | Header title | `THE SIMS ADV` (12 bytes at `0xA0`) |
 | Game code | `ASIE` |
@@ -37,7 +39,7 @@ Confidence: high for the menu/title/creation surfaces; the in-game gameplay and 
 - Emulator: `mgba` 0.10.5 under `Xvfb :317` + `openbox`, `SDL_AUDIODRIVER=dummy`, `-3` scale.
 - Keymap (mGBA SDL defaults): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrow keys. Holds of 60–70 ms with ~180 ms gaps avoided double-stepping (guide §16.2).
 - Boot path: language selector (English default) → A → copyright → EA/Maxis splashes → title "Press START" → Start → main menu.
-- Screens enumerated (all with screenshots in `/tmp/opencode/simsbustin/`):
+- Screens enumerated (all with screenshots in `/tmp/simsbustin/`):
   1. Language selector (`English`/`Nederlands`/`Français`/`Deutsch`/`Italiano`/`Español`)
   2. Copyright + "LICENSED BY NINTENDO"
   3. EA Games / Maxis splash
@@ -121,7 +123,7 @@ No code/password table, no alphabet-to-value table, no checksum table, no debug-
 
 ### Reproduction artifacts
 
-Work dir `/tmp/opencode/simsbustin/`: `kb.py` (input helper), `sstate.py` (gbAs extractor), `render4.py`, `renderfont.py`, `fontbank.py` (font renderers), `findmap.py` (tilemap locator), `buttonscan.c`, `codesearch.py`, `cmpscan.py`, `findkeyinput.py`, `findkey_arm.py`, `xref.py`, `histogram.py`, `lzscan.py`, `patternscan.c`, `cipherfind.c`, plus all screenshots (`boot.png`, `menu1.png`, `options3.png`, `cas_start.png`, `cas_next2.png`, `code_*.png`, …).
+Work dir `/tmp/simsbustin/`: `kb.py` (input helper), `sstate.py` (gbAs extractor), `render4.py`, `renderfont.py`, `fontbank.py` (font renderers), `findmap.py` (tilemap locator), `buttonscan.c`, `codesearch.py`, `cmpscan.py`, `findkeyinput.py`, `findkey_arm.py`, `xref.py`, `histogram.py`, `lzscan.py`, `patternscan.c`, `cipherfind.c`, plus all screenshots (`boot.png`, `menu1.png`, `options3.png`, `cas_start.png`, `cas_next2.png`, `code_*.png`, …).
 
 ## 8. Unknowns
 

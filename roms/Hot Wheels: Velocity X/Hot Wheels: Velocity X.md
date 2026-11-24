@@ -1,5 +1,7 @@
 # Hot Wheels: Velocity X (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -123,7 +125,7 @@ same bit flip, subtract mod 2^25), so applying the 40 groups in reverse order ma
 valid 25-bit `code` back to a unique `acc`. Since `2^25 < 9^8`, every 25-bit accumulator
 is representable as eight 1–9 digits — hence exactly one password per accepted code.
 
-Working reimplementation: `/tmp/opencode/hwvx/pw.py` (Python) and `enum.c` (C enumerator).
+Working reimplementation: `/tmp/hwvx/pw.py` (Python) and `enum.c` (C enumerator).
 
 ## 6. Tables
 
@@ -225,9 +227,9 @@ than by glyph tables.
 ## 9. Tooling
 
 * `binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`), Python 3, GCC.
-* `/tmp/opencode/hwvx/pw.py` — validator model + published-code check.
-* `/tmp/opencode/hwvx/enum.c` — exhaustive enumerator (77,824 codes).
-* `/tmp/opencode/hwvx/ui.py`, `ocr.py`, `testcode.py` — input, screen capture/OCR and
+* `/tmp/hwvx/pw.py` — validator model + published-code check.
+* `/tmp/hwvx/enum.c` — exhaustive enumerator (77,824 codes).
+* `/tmp/hwvx/ui.py`, `ocr.py`, `testcode.py` — input, screen capture/OCR and
   savestate-RAM verification helpers.
 * mGBA SDL `-3`, Xvfb `:316`, openbox, xdotool, scrot, ImageMagick, tesseract.
 * Web sources consulted as **data only** (no instructions followed): GameFAQs GBA cheats,

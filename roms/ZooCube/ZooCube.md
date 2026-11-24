@@ -1,5 +1,7 @@
 # ZooCube (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -220,5 +222,5 @@ instead of red. Earlier, before the code, `spd_montage.png` showed those same sp
   offset `0x19000`, EWRAM at `0x21000` — this game leaves EWRAM entirely zero).
 - xdotool exact key injection with 0.03 s holds / 0.15 s gaps; `scrot` + ImageMagick crops.
 - Web recon: GameFAQs/SuperCheats/Neoseeker game pages and the GBA-specific FAQ by Lisanne.
-- All evidence (screenshots, scripts, savestates, work ROM copy) is in `/tmp/opencode/zoocube`,
+- All evidence (screenshots, scripts, savestates, work ROM copy) was in `/tmp/zoocube`,
   not in the ROM folder. No ROM or copyrighted assets are redistributed by this report.

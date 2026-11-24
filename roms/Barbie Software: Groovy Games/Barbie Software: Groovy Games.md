@@ -1,5 +1,7 @@
 # Barbie Software: Groovy Games (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
 Scope: **in-game / developer-intended cheats only** (passwords, button codes,
@@ -423,7 +425,7 @@ independently of the empirical test below.
 ### 6b.4 Menu / screen space
 
 Every reachable menu and top-level screen was walked and screenshotted (files
-under `/tmp/opencode/barbie/shots`, this run):
+under `/tmp/barbie/shots`, this run):
 
 | Screen | Trigger | Evidence file |
 |---|---|---|
@@ -596,10 +598,10 @@ input that *does* exist (Select → credits) is documented above.
   `b 0x08024bcc` + repeated `c` to advance one frame per continue, then
   `x/4 0x030000xx` and `x/4 0x020000xx` dumps. This is also how the "only three
   input words" result was measured.
-* **Scripts (this run, `/tmp/opencode/barbie`):** `scan_codes.py` (identity,
+* **Scripts (this run, `/tmp/barbie`):** `scan_codes.py` (identity,
   keyword, mask-table and input-reference scans), `ui.py` (focus/key/screenshot
   helper), `test2.py`/`titlecodes.py` (button-code tests), `tour.py`/`tour2.py`
-  (game-screen walk). Screenshots: `/tmp/opencode/barbie/shots/`.
+  (game-screen walk). Screenshots: `/tmp/barbie/shots/`.
 * **Savestates:** title slot 3, game-select slot 4; `F1`–`F10` load,
   `Shift+F1`–`F10` save.
 

@@ -1,5 +1,7 @@
 # Backyard Sports: Basketball 2007 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -635,7 +637,7 @@ reached only through the cut text-ID menu. Every reachable menu was walked
   `0x0300098D` starts at 5 and counts down while the type is active. This is
   the game's own activation signal, not a visual inference.
 
-Screenshots (in `/tmp/opencode/bball2007/shots/`):
+Screenshots (in `/tmp/bball2007/shots/`):
 `t02.png` (title), `mm3.png` (main), `m10.png` (Game Setup), `m05.png`
 (General), `extras_select.png` (Extras, 4 rows), `season01.png` (Coach Sign
 In), `nameentry.png` (name grid), `n_babybear2.png` (BABYBEAR → Game Setup),
@@ -699,7 +701,7 @@ Player), `pause_menu.png` (pause), `play_base.png` (baseline 01:00),
 * mGBA 0.10.5 (SDL frontend, `/usr/games/mgba`), Xvfb `:161` (1024×768×24),
   openbox, `xdotool`, `scrot`, ImageMagick `import`/`convert`, Python 3.
 * `arm-none-eabi-objdump` (binutils-arm-none-eabi), Capstone 5.0.7.
-* Scripts in `/tmp/opencode/bball2007/scripts/`:
+* Scripts in `/tmp/bball2007/scripts/`:
   * `keys.py` — xdotool key sender + window capture.
   * `testcodes.py` — button-letter → key map, savestate save/load, index read.
   * `enumerate.py` — final 20-entry + control enumeration (log

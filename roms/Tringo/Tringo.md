@@ -1,10 +1,12 @@
 # Tringo (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Tringo/Tringo.gba` |
+| File | `roms/Tringo/Tringo.gba` |
 | Size | 4,194,304 bytes (0x400000, 32 Mbit) |
 | Header title | `TRINGO` (0xA0) |
 | Game code | `BTJE` (0xAC) |
@@ -31,7 +33,7 @@ Per guide §0.2 item 5, this engagement delivers the bounded-negative form of th
 ## 3. How to reproduce
 
 - Emulator: mGBA 0.10.5 under Xvfb `:319`, `SDL_AUDIODRIVER=dummy`, `mgba -3 -d <rom>` (CLI debugger on a PTY). Keymap used: A=`x`, B=`z`, Start=`Return`, Select=`BackSpace`, D-pad=arrows.
-- Hold keys ~100–150 ms; menus debounce. Screenshots in `/tmp/opencode/tringo/work/` (`s*.png`, `cred_*.png`).
+- Hold keys ~100–150 ms; menus debounce. Screenshots in `/tmp/tringo/work/` (`s*.png`, `cred_*.png`).
 - Menu walk (all reached and screenshotted):
   1. Crave splash → legal crawl (auto-advance).
   2. **Main menu** (5 entries exactly): Single Player, Multi-Player, Options, Player Name, Load/Save. Cursor stops at index 4; no hidden 6th entry.
@@ -178,7 +180,7 @@ Index 0 = `_` (space), 1–26 = `A`–`Z`; identical lowercase table. 27 symbols
 
 ## 9. Tooling
 
-- `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, custom Python pointer/encoding scanners (`ptrscan.py`, `scan1.py`, `xref.py`, `calib` scripts) in `/tmp/opencode/tringo/work/`.
+- `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, custom Python pointer/encoding scanners (`ptrscan.py`, `scan1.py`, `xref.py`, `calib` scripts) in `/tmp/tringo/work/`.
 - `arm-none-eabi-objdump -M force-arm/force-thumb` for crt0, input path and name consumers.
 - mGBA 0.10.5 `-3 -d` CLI debugger on a Python PTY bridge (`dbg_daemon.py` + `dbgcmd.py`), Xvfb `:319`, openbox, `xdotool`, `scrot`.
 - mGBA savestate `gbAs` zlib chunk parser with magic-value calibration (IWRAM raw 0x19000, EWRAM raw 0x21000, palette 0x800, VRAM 0x1000).

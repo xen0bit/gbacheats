@@ -1,5 +1,7 @@
 # Tweety & the Magic Gems (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -155,7 +157,7 @@ return zero and that every reachable menu entry was opened.
 
 ## 7. Validation evidence
 
-* **Observed**: all screenshots in `/tmp/opencode/tweety/` (`tbase_crop.png`, `combo_montage.png`,
+* **Observed**: all screenshots in `/tmp/tweety/` (`tbase_crop.png`, `combo_montage.png`,
   `gcombo_montage.png`, `jb2_crop.png`, `jr*_crop.png`, `w2_crop.png`, `bb8_crop.png`, etc.);
   savestate-derived IWRAM/EWRAM reads; emulator response to all 26 button sequences.
 * **Derived**: text-bank encoding, function boundaries and branch counts from `objdump -M
@@ -179,7 +181,7 @@ return zero and that every reachable menu entry was opened.
 * Tools: `arm-none-eabi-objdump` (`-M force-thumb`/`force-arm`), Capstone, Python 3 (`struct`,
   `zlib`, Pillow), mGBA 0.10.5 SDL with `-3`, `-g` and `-d`, `xdotool`, `scrot`, ImageMagick,
   Xvfb `:316` + openbox, GDB.
-* Scripts in `/tmp/opencode/tweety/`: `key.py` (XTEST input), `combotest.py`, `gamecombos.py`
+* Scripts in `/tmp/tweety/`: `key.py` (XTEST input), `combotest.py`, `gamecombos.py`
   (button-combo harnesses), `ptydbg.py`, `ptyrun.py` (mGBA pty-debugger drivers), plus the
   one-off text decoder and savestate `gbAs` extractor.
 * Savestate parsing: `.ss*` files are PNGs with a zlib `gbAs` chunk; the decompressed 397,312-byte

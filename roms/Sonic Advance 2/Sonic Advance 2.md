@@ -1,5 +1,7 @@
 # Sonic Advance 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -50,7 +52,7 @@ Sonic Advance 3 were tested on this ROM and rejected (wrong SKU).
 ## 3. How to reproduce
 
 * Emulator: mGBA 0.10.5 (`/usr/local/bin/mgba -3`), Xvfb `:319` + openbox,
-  `SDL_AUDIODRIVER=dummy`. Screenshots in `/tmp/opencode/sonicadvance2/`.
+  `SDL_AUDIODRIVER=dummy`. Screenshots in `/tmp/sonicadvance2/`.
 * Keymap: A = `x`, B = `z`, L = `a`, R = `s`, Start = `Return`, Select = `BackSpace`,
   D-pad = arrow keys. **80–100 ms holds and ~300 ms gaps are required**; this menu engine debounces
   faster taps (8 rapid Downs once advanced the cursor only one slot).

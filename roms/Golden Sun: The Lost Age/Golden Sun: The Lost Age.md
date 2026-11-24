@@ -1,5 +1,7 @@
 # Golden Sun: The Lost Age (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -60,7 +62,7 @@ D-pad=arrow keys. Hold keys 100–300 ms.
 
 Because the GDB stub's default port 2345 was occupied by another process, mGBA was
 launched with a tiny `LD_PRELOAD` shim that rewrites `bind(2345)` to `bind(2399)`:
-`LD_PRELOAD=/tmp/opencode/gsla/portshim.so DISPLAY=:318 SDL_AUDIODRIVER=dummy mgba -g -3 <ROM>`.
+`LD_PRELOAD=/tmp/gsla/portshim.so DISPLAY=:318 SDL_AUDIODRIVER=dummy mgba -g -3 <ROM>`.
 A minimal Python GDB-RSP client (`gclient.py`) was used for `m`/`M` memory packets.
 
 **Reach the debug menus:**
@@ -242,5 +244,5 @@ Full password codec: **not recovered** (see §8). What is established:
   concurrent session). `gclient.py` — minimal GDB-RSP `m`/`M` client.
 * `ramread.py` — savestate `gbAs` zlib parser and IWRAM/EWRAM reader.
 * `keysh.py` — focused XTEST key driver / screenshot / savestate helper.
-* Findings ledger: `finding*` screenshots under `/tmp/opencode/gsla/`. No ROM or
+* Findings ledger: `finding*` screenshots under `/tmp/gsla/`. No ROM or
   copyrighted assets are redistributed by this report.

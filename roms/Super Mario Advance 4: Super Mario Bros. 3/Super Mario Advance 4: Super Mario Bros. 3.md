@@ -1,5 +1,7 @@
 # Super Mario Advance 4: Super Mario Bros. 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -50,7 +52,7 @@ To force the debug menu:
 Screenshot within ~1 s. The screen renders as a white card with blue striped border, black katakana text:
 `かーど いー` (Card-e), `もーど せんたく` (Mode Select), `▷ ちゃれんじ もーど` (Challenge Mode), `しなりお もーど` (Scenario Mode). Cursor moves with Down or B. Selecting a submenu was **not** achieved by this RAM-write route (see §8) — the submenu list is from Hiccup/TCRF documentation, not from our own screen walk.
 
-Helper scripts used: `/tmp/opencode/sma4/gdbbridge.py` (persistent GDB-over-FIFO bridge; needed because `continue &` plus repeated `x` in a batch is unreliable), `gcmd.py`, `gset.py`, `probe.py`, `scan1534.py`.
+Helper scripts used: `/tmp/sma4/gdbbridge.py` (persistent GDB-over-FIFO bridge; needed because `continue &` plus repeated `x` in a batch is unreliable), `gcmd.py`, `gset.py`, `probe.py`, `scan1534.py`.
 
 ## 4. Address map
 
@@ -168,5 +170,5 @@ Conclusion: the negative is bounded to "no in-game code system and no controller
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` over `0x08000000`–`0x08100000` (19 MB listing `thumb1m.txt`); Capstone for short windows.
 - `gdb-multiarch` + mGBA GDB stub on `:2345` through a persistent FIFO bridge (`gdbbridge.py`), because batch GDB detaches and mGBA's stub then stops listening. `set style off` needed to strip ANSI codes. `x/4xb` used instead of `x/16bx` after watchpoint stops (GDB reported "Invalid hex digit 83" for the latter).
 - Python scans: literal-xref scan for `0x1534`/`0xB7E`, `movs #imm`+`strb` pairing, u16 mask-run scan, Nintendo-logo/multi-header scan.
-- `xdotool` XTEST input, `scrot` + ImageMagick crop (720×480+154+184). Screenshots saved in `/tmp/opencode/sma4/`.
+- `xdotool` XTEST input, `scrot` + ImageMagick crop (720×480+154+184). Screenshots saved in `/tmp/sma4/`.
 - No ROM or copyrighted assets were modified or redistributed; all patches attempted were in-emulator only and were discarded with the emulator process.

@@ -1,6 +1,8 @@
 # Yu-Gi-Oh! Ultimate Masters: World Championship Tournament 2006 (GBA) — Reverse Engineering Report
 
-Engagement: queue 281. Scope: **in-game / developer-intended cheats only** — passwords, button codes, hidden/debug menus, unlockables. No GameShark/CodeBreaker/AR codes were used or sought. Analysis date 2026-11-21 (focused retry, display `:315`, work dir `/tmp/opencode/yumasters2`).
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
+Engagement: queue 281. Scope: **in-game / developer-intended cheats only** — passwords, button codes, hidden/debug menus, unlockables. No GameShark/CodeBreaker/AR codes were used or sought. Analysis date 2026-11-21 (focused retry, display `:315`, work dir `/tmp/yumasters2`).
 
 ## 1. Target identity
 
@@ -15,7 +17,7 @@ Engagement: queue 281. Scope: **in-game / developer-intended cheats only** — p
 | SHA-256 | `f405c620da05a817a5d63f45a4707b914260fb5802fe519b1e31bf050ba8f524` |
 | Build signature | Konami/Nintendo Nitro SDK (assert strings near `0x09E3A640`) |
 
-A byte-identical working copy was analysed in `/tmp/opencode/yumasters2/game.gba`; the ROM folder was never written to.
+A byte-identical working copy was analysed in `/tmp/yumasters2/game.gba`; the ROM folder was never written to.
 
 ## 2. Executive summary
 
@@ -158,7 +160,7 @@ The DP cost is `*(u32*)(0x09CEDFA4 + 4*i)`; the UI charges it after the YES conf
 
 ## 9. Tooling
 
-All artifacts in `/tmp/opencode/yumasters2` (none in the ROM folder):
+All artifacts in `/tmp/yumasters2` (none in the ROM folder):
 
 - `mkelf.py` — builds a Thumb-symbolised ELF (`pwthumb.elf`) from ROM `0x080D0000–0x080F1000` for Ghidra/REA decompilation.
 - `rec.dis`, `pwmodule.dis`, `scanldr*.py`, `recdis.py` — capstone/objdump scans that located the literals `0x03005850`, `0x09B94CC`, `0x09B7CCA`.
@@ -175,4 +177,4 @@ No ROM bytes, card art, or copyrighted assets are reproduced. Only hashes, addre
 ## 11. Cleanup confirmation
 
 - All mGBA / Xvfb `:315` / openbox / CLI-debugger processes started for this engagement were killed **by PID number only** (never `pkill`).
-- The ROM folder was checked with `find` and contains **no** `.sav`, `.ss1`–`.ss9`, or `.state` files. All screenshots and dumps live under `/tmp/opencode/yumasters2`.
+- The ROM folder was checked with `find` and contains **no** `.sav`, `.ss1`–`.ss9`, or `.state` files. All screenshots and dumps were kept under `/tmp/yumasters2`.

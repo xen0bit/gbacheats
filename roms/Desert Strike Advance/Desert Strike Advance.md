@@ -1,5 +1,7 @@
 # Desert Strike Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -394,7 +396,7 @@ untouched, so the rejection is a semantic range rejection, not a parse failure.
 
 * `mgba 0.10.5` and `mednafen 1.32.1` under `Xvfb :302` + `openbox`;
   `xdotool` for XTEST input, `scrot`/`import` for per-window captures.
-* `python3` scripts in `/tmp/opencode/desertstrike`:
+* `python3` scripts in `/tmp/desertstrike`:
   * `model.py` — alphabet/checksum/field validator and exhaustive counter
     (returns 40,000 generic codes),
   * `ent3.py` — password entry driver that reads the live buffer from a

@@ -1,5 +1,7 @@
 # Karnaaj Rally (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -38,7 +40,7 @@ No button-code sequence, hidden debug menu, or unlock code exists in this build.
 4. SELECT PLAYER → A
 5. Main menu → OPTIONS → HI-SCORES → ENTER CODE
 
-**Testing a code (reproducible, no debugger needed):** start from the savestate at the CODES screen (`/tmp/opencode/karnaaj/test_BB.ss1` during this engagement), patch the 20-byte code buffer in the `gbAs` chunk of the `.ss1` PNG at raw offset `0x20BEC` (6 chars, `-`, 6 chars, `-`, 6 chars; `'@'` = blank), load the state, and press A. (`roms/Karnaaj Rally/Karnaaj Rally.ss1` in the ROM folder was regenerated during testing and is a generated artifact.)
+**Testing a code (reproducible, no debugger needed):** start from the savestate at the CODES screen (`/tmp/karnaaj/test_BB.ss1` during this engagement), patch the 20-byte code buffer in the `gbAs` chunk of the `.ss1` PNG at raw offset `0x20BEC` (6 chars, `-`, 6 chars, `-`, 6 chars; `'@'` = blank), load the state, and press A. (`roms/Karnaaj Rally/Karnaaj Rally.ss1` in the ROM folder was regenerated during testing and is a generated artifact.)
 
 **Codes tested on the real screen:**
 
@@ -239,7 +241,7 @@ was cross-checked against two independent codes before minting.
   `target remote :2345`) and `-t` savestate loading; GDB breakpoints/watchpoints
   on `0x03007BEC`, `0x0800765E`, `0x080177A6`
 - `xdotool` (XTEST key events, `windowfocus`), `scrot`, ImageMagick `convert`
-- Custom scripts in `/tmp/opencode/karnaaj/`:
+- Custom scripts in `/tmp/karnaaj/`:
   `solve.py` (validator reimplementation + code generator), `xref.py`,
   `ssdiff.py` / `ssdiff2.py` (zlib `gbAs` savestate extraction and diffing),
   `sspatch.py` (code-buffer patcher), `key.py`, and the GDB command files

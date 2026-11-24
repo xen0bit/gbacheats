@@ -1,5 +1,7 @@
 # Disney's Extreme Skate Adventure (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-11-14.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
@@ -202,7 +204,7 @@ python3 encsearch.py                         # encoding search
 python3 ssdiff.py a.ss1 b.ss2                # savestate RAM diff
 ```
 
-Scripts are in `/tmp/opencode/extremeskate/` (`tools.py`, `encsearch.py`,
+Scripts were in `/tmp/extremeskate/` (`tools.py`, `encsearch.py`,
 `ssdiff.py`, `keys.py`).
 
 ---

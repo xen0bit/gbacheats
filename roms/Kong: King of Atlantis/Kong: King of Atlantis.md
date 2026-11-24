@@ -1,5 +1,7 @@
 # Kong: King of Atlantis (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -211,7 +213,7 @@ recorded as **unverified / wrong SKU**, per §16.11.
 
 `arm-none-eabi-objdump -M force-thumb`, Capstone/Keystone, `strings`, Python 3
 (`phase0.py`, `recon.py`, `locate.py`, `model.py`, `decode.py`, `state.py`,
-`emu.py`, `diffstate.py`, `combos.py` in `/tmp/opencode/kongatlantis`), mGBA SDL
+`emu.py`, `diffstate.py`, `combos.py` in `/tmp/kongatlantis`), mGBA SDL
 with savestate RAM reads, Xvfb `:317`, xdotool, ImageMagick, tesseract OCR.
 No ROM or copyrighted assets are redistributed; only addresses, hashes, and
 the author's own scripts/results are published.

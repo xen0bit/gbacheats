@@ -1,5 +1,7 @@
 # Camp Lazlo: Leaky Lake Games (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -75,7 +77,7 @@ No in-game codes exist to test. The published CodeBreaker codes were **not appli
 
 ### Screenshots (kept on disk, not embedded)
 
-`/tmp/opencode/camplazlo/`: `boot2.png` (title), `fs2.png` (file select), `fs_back.png` (erase YES/NO), `pause2.png` (pause), `save_res.png` (SAVING), `map_forest.png` (map), `nav1.png` (MINIGAMES board, 0 unlocked), `out2.png` (MINIGAMES board, 15 unlocked + blank 16th), `cabin_in3.png` (cabin).
+`/tmp/camplazlo/`: `boot2.png` (title), `fs2.png` (file select), `fs_back.png` (erase YES/NO), `pause2.png` (pause), `save_res.png` (SAVING), `map_forest.png` (map), `nav1.png` (MINIGAMES board, 0 unlocked), `out2.png` (MINIGAMES board, 15 unlocked + blank 16th), `cabin_in3.png` (cabin).
 
 ## 4. Address map
 
@@ -304,8 +306,8 @@ So the blank slot is not a password/cheat, but it is an unadvertised 16th event/
 * `arm-none-eabi-objdump -M force-thumb` for the raw Thumb disassembly.
 * Python 3 + Capstone 5.0.7 for the LDR-literal and BL scans.
 * GDB (`gdb-multiarch`) over mGBA's `-g` stub for RAM reads and the analysis-only flag write used to render the populated board.
-* Scripts/logs: `/tmp/opencode/camplazlo/keys.py`, `strings4.txt`, `gdb.log`.
+* Scripts/logs: `/tmp/camplazlo/keys.py`, `strings4.txt`, `gdb.log`.
 
 ## 10. Legal note
 
-No ROM, extracted graphics, audio, or text assets are redistributed. Only hashes, addresses, short identifiers, and behavioural findings are reported. The screenshots referenced above are local analysis artifacts under `/tmp/opencode/camplazlo` and are not part of the repository.
+No ROM, extracted graphics, audio, or text assets are redistributed. Only hashes, addresses, short identifiers, and behavioural findings are reported. The screenshots referenced above are local analysis artifacts under `/tmp/camplazlo` and are not part of the repository.

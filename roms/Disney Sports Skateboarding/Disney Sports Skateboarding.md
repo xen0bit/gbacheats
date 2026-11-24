@@ -138,7 +138,7 @@ ROM addresses are `0x08000000 + file_offset`.
 | `0x080A37EC` | **code encoder**: reads `0x02004D30 & 0x3FF` (literal base `0x02001700` + offset `0x3630`) and maps KEYINPUT bits to the game's 10 code values |
 | `0x080A3360` | **history push**: shifts the 10×u16 ring at `0x02007F80` down one slot and writes the newest code to `0x02007F92` |
 | `0x080A3390` | **matcher**: clears the 2×11 state array at `0x02007068` and dispatches on each of the 10 history entries |
-| `0x0801067C`–`0x080106FA` | **title-screen per-frame driver**: 20-frame debounce word `0x02007FA0`, push, match, then `if (state[10]==1 || state[21]==1) call 0x080A36B8` |
+| `0x0801067C`–`0x080106FA` | **title-screen per-frame driver**: 20-frame debounce word `0x02007FA0`, push, match, then `if (state[10]==1 \|\| state[21]==1) call 0x080A36B8` |
 | `0x080A36B8` | **accept handler**: sets flag bit 9 (`0x0200`) for row 0, bit 12 (`0x1000`) for row 1 in `0x02008110`, writes `1` to `0x02006070`/`0x02006074`, plays the jingle |
 | `0x080A379C` | **consume/reset**: clears the 22-byte state and the 10-entry history |
 | `0x02004D30` | new-press word (active-high, `0x3FF` mask) |

@@ -1,5 +1,7 @@
 # Finding Nemo (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Queue position 302. Analysed independently of the sibling *Finding Nemo: The
 Continuing Adventures* image (position 303). This revision of the report closes
 the §0.2 gap in the earlier pass: a **novel unpublished accepted password,
@@ -268,7 +270,7 @@ Every rejection returns to the keyboard with the display reset to
 `file`, hashes, `xxd`, `strings -t x`, Python 3.13, Capstone 5.0.7,
 `arm-none-eabi-objdump -M force-thumb`, mGBA 0.10.5 `-d` pty debugger,
 Xvfb `:315`, openbox, xdotool (150 ms holds), scrot, ImageMagick.
-Scripts in `/tmp/opencode/nemo1b/`: `dbg_fast.py` (debugger bridge),
+Scripts in `/tmp/nemo1b/`: `dbg_fast.py` (debugger bridge),
 `oracle3.py`/`run_sweep.py` (oracle + 32-value sweeps), `typecode.py` (real
 keyboard entry), `rejects.py`, `dumpall.py`, `fitanalysis.py`/`fitorders.py`.
 Screenshots and RAM dumps in the same folder.

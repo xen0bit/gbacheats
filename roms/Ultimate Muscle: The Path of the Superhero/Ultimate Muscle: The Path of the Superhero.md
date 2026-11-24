@@ -1,5 +1,7 @@
 # Ultimate Muscle: The Path of the Superhero (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -39,7 +41,7 @@ No novel code could be minted because there is no code space to enumerate; the "
 * Emulator: mGBA 0.10.5 under Xvfb `:316`, `SDL_AUDIODRIVER=dummy`, `-3` scaling. GBA viewport is 720×480 at screen `(153,165)` in the 1024×768 root.
 * Keymap (mGBA SDL defaults): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Hold ~60–100 ms per press (longer holds double-step menus).
 * Boot: the VENOM cracktro appears; press Start/A to skip it, then let the ~20 s retailer intro play (or press A repeatedly) to reach the title. Press Start on the title to reach the main menu.
-* A convenient savestate of the main menu (Story Mode highlighted) is preserved as `/tmp/opencode/ultimatemuscle/state_story.ss1`; mGBA `-t <state>` boots straight to it.
+* A convenient savestate of the main menu (Story Mode highlighted) is preserved as `/tmp/ultimatemuscle/state_story.ss1`; mGBA `-t <state>` boots straight to it.
 * Menu ring (Down cycles, wraps): **Story Mode → Survivor Mode → 3 VS 3 Team Battle → Versus Mode → Training → Directory → Options**. Press A to enter, B to return.
 * Observations per entry:
   * Story Mode: `New game` / `Continue` (save-based; Continue immediately plays the opening cutscene).
@@ -150,7 +152,7 @@ Five common sequences were pressed on the title/menu: Konami code (`↑↑↓↓
 * **Observed:** boot screen (VENOM cracktro), title, all seven menu screens, sub-screens, character-select locked slots, Directory roster, Options rows; menu index byte at `0x030058F4`; savestate diffs; button-sequence probe frames.
 * **Derived:** entry-branch target arithmetic; KEYINPUT interpreter at `0x080098AE`; header complement mismatch; font-mapping brute-force results; pointer-referenced mask-run enumeration.
 * **Inferred (labelled):** the five locked slots are save-bit gated — the in-game selector skipping them is observed, and the unlock conditions are from three consistent published sources, but no unlock setter was executed in the emulator (would require completing full game modes). The exact identity of each locked slot's character is inferred from the published list, not read from the ROM UI.
-* Screenshots and raw dumps used as evidence are in `/tmp/opencode/ultimatemuscle/` (`walk00_small.png`, `story1_small.png`, `survivor_new_small.png`, `cs_locked2_small.png`, `options_screen_small.png`, `dir_names_sheet.png`, `state_raw.bin`, `ramA.ss1`/`ramB.ss1`, etc.).
+* Screenshots and raw dumps used as evidence were in `/tmp/ultimatemuscle/` (`walk00_small.png`, `story1_small.png`, `survivor_new_small.png`, `cs_locked2_small.png`, `options_screen_small.png`, `dir_names_sheet.png`, `state_raw.bin`, `ramA.ss1`/`ramB.ss1`, etc.).
 
 ## 8. Unknowns
 
@@ -165,7 +167,7 @@ Five common sequences were pressed on the title/menu: Konami code (`↑↑↓↓
 * Python 3 (+ Pillow) for whole-ROM byte/pattern censuses, savestate `gbAs` zlib extraction and diffing, font-mapping brute force, and screenshot cropping.
 * `arm-none-eabi-objdump -M force-thumb` for the `0x08009780` input interpreter.
 * `gdb-multiarch` with mGBA's `-g` stub for VRAM/IWRAM/EWRAM dumps (note: detaching the stub can terminate this mGBA build; savestate diffing is the more reliable RAM fallback, §16.13).
-* mGBA 0.10.5 under Xvfb `:316` + openbox; `xdotool` XTEST input; `scrot` screenshots; helper `/tmp/opencode/ultimatemuscle/ui.py`.
+* mGBA 0.10.5 under Xvfb `:316` + openbox; `xdotool` XTEST input; `scrot` screenshots; helper `/tmp/ultimatemuscle/ui.py`.
 
 **Legal note:** no ROM bytes or copyrighted graphics/audio are reproduced here; only hashes, addresses, counts and original observations are published.
 

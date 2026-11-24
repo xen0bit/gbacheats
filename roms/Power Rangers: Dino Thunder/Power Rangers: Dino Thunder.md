@@ -1,5 +1,7 @@
 # Power Rangers: Dino Thunder (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -160,7 +162,7 @@ A=9 and A=21 are unused by the published labels but are accepted by the format (
 ## 7. Validation evidence
 
 **Observed (emulator / RAM / screenshots)**
-* Boot, title, main menu (`PASSWORD`, `NEW GAME`, `OPTIONS`), password keypad, difficulty screen, gameplay, and pause screen were walked; screenshots saved in `/tmp/opencode/prdino/`.
+* Boot, title, main menu (`PASSWORD`, `NEW GAME`, `OPTIONS`), password keypad, difficulty screen, gameplay, and pause screen were walked; screenshots saved in `/tmp/prdino/`.
 * Buffer bytes at `0x03003426` tracked the selected symbols (`08 ff ff` → `08 00 ff` → `08 00 10` for `LBV`).
 * Cursor row/column bytes at `0x030033F8`/`0x030033F4` tracked keypad movement; `0xFF` column = OK.
 * After `QVN`, RAM held `0x0300006E=01` (C Normal), `0x0300006F=02` (A=2), `0x03000070=04` (B=4), matching the reconstructed decoder exactly.
@@ -185,13 +187,13 @@ A=9 and A=21 are unused by the published labels but are accepted by the format (
 * Exact stage/character mapping for the 475+ unpublished (A,B) combinations; only `LBV` (A=2,B=0,C=0) was entered in-game.
 * Whether any accepted-but-unpublished combination lacks compatible content and would soft-lock later (the range gates were proven, but deeper game-state consequences were not exhaustively tested).
 * The literal purpose of the `A`=9 and `A`=21 slots and the unused B-bit combinations.
-* All screenshots are stored in `/tmp/opencode/prdino/`; no game assets are reproduced here.
+* All screenshots are stored in `/tmp/prdino/`; no game assets are reproduced here.
 
 ## 9. Tooling
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, Python 3 + `capstone` 5.0.7, `arm-none-eabi-objdump -M force-thumb`.
 * mGBA SDL (`mgba -3`, `-g` for the GDB stub), Xvfb `:319`, openbox, `xdotool`, `scrot`/`import`, ImageMagick, `gdb-multiarch`.
-* Analysis scripts in `/tmp/opencode/prdino/`: `decode.py` (published code table + alphabet), `codec.py` (verified decoder/encoder), `state.py` (mGBA `gbAs` savestate extractor), `patchcursor.py` (cursor-position oracle), `verify.py`/`battery.py` (in-game verification harness), `gdbenter.py` (GDB watchpoint experiments).
+* Analysis scripts in `/tmp/prdino/`: `decode.py` (published code table + alphabet), `codec.py` (verified decoder/encoder), `state.py` (mGBA `gbAs` savestate extractor), `patchcursor.py` (cursor-position oracle), `verify.py`/`battery.py` (in-game verification harness), `gdbenter.py` (GDB watchpoint experiments).
 * Web sources, treated strictly as data: GameFAQs cheats page via `web.archive.org`, VGChartz, SuperCheats, GamesRadar, mariogba.nl, remyhax.xyz. None were followed as instructions.
 
 No ROM image or copyrighted asset is redistributed in this report; only hashes, addresses, algorithms, and code strings are published.

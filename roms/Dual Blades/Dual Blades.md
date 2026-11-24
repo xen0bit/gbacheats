@@ -1,5 +1,7 @@
 # Dual Blades (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -32,7 +34,7 @@ No hidden debug screen exists. The ASCII strings that look like debug leftovers 
 
 ## 3. How to reproduce
 
-Emulator: `mgba -3 -d` (CLI debugger over PTY) on `Xvfb :315`, `SDL_AUDIODRIVER=dummy`, 1024×768 root, window managed by `openbox`. A byte-identical copy of the ROM was run from `/tmp/opencode/dualblades/DualBlades.gba` so no emulator artifacts were written into the ROM folder.
+Emulator: `mgba -3 -d` (CLI debugger over PTY) on `Xvfb :315`, `SDL_AUDIODRIVER=dummy`, 1024×768 root, window managed by `openbox`. A byte-identical copy of the ROM was run from `/tmp/dualblades/DualBlades.gba` so no emulator artifacts were written into the ROM folder.
 
 mGBA SDL keymap (RAM-verified by reading `0x04000130` while holding each key):
 

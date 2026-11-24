@@ -1,5 +1,7 @@
 # Classic NES Series: Super Mario Bros. (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -501,7 +503,7 @@ published L+R menu descriptions.
   runtime PRG bytes.
 * Python 3 + `zlib` savestate parser (`state.py`, `menutext.py`) for RAM/VRAM reads;
   no screenshots or image files were used.
-* `.sav`/`.ss*` artifacts were kept in `/tmp/opencode/cnessmb`, not next to the ROM.
+* `.sav`/`.ss*` artifacts were kept in `/tmp/cnessmb`, not next to the ROM.
 
 ## Legal
 

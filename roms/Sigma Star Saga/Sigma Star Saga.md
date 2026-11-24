@@ -1,10 +1,12 @@
 # Sigma Star Saga (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Sigma Star Saga/Sigma Star Saga.gba` |
+| File | `roms/Sigma Star Saga/Sigma Star Saga.gba` |
 | Size | 8,388,608 bytes (0x800000) |
 | Header title | `SIGMA STAR` (in-game splash: *Sigma Star Saga*) |
 | Game code / maker | `B3GE` / `AF` (Atari Europe; code revision 00) |
@@ -180,5 +182,5 @@ and the only cheat-like content (the debug subsystem) was fully enumerated from 
 * `debug.cht`, `debug2.cht`, `debug3.cht` — temporary research-only cheat files in the work dir.
 * `arm-none-eabi-objdump -M force-thumb`, `strings`, `xxd`, `scrot`, `xdotool`, `Xvfb :315`, `openbox`.
 
-All screenshots and analysis artifacts live in `/tmp/opencode/sigargestar/`. No ROM or copyrighted
+All screenshots and analysis artifacts were kept in `/tmp/sigargestar/`. No ROM or copyrighted
 assets are redistributed by this report.

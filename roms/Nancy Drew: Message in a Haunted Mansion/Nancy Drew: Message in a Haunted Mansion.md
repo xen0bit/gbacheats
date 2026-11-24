@@ -1,5 +1,7 @@
 # Nancy Drew: Message in a Haunted Mansion (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -133,5 +135,5 @@ The six published codes from GameFAQs, Cheat Happens, ChapterCheats and Planet C
 - `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -abo` — fingerprint and recon.
 - `arm-none-eabi-objdump -M force-thumb`, Python 3 + Capstone 5.0.7, `struct` literal/BL scanners.
 - `mgba 0.10.5` under `Xvfb :315` + `openbox`; `xdotool`, `scrot`, ImageMagick.
-- mGBA CLI debugger (`-d`) over `socat` pty with `stdbuf -oL -eL`, driven by `dbg_server.py`/`dbgtool.py`; helper scripts `enter_code.py`, `reject_test.py`, `reject_perm.py`, `enumerate_validator.py` in `/tmp/opencode/nancydrew/`.
+- mGBA CLI debugger (`-d`) over `socat` pty with `stdbuf -oL -eL`, driven by `dbg_server.py`/`dbgtool.py`; helper scripts `enter_code.py`, `reject_test.py`, `reject_perm.py`, `enumerate_validator.py` in `/tmp/nancydrew/`.
 - No ROM or copyrighted assets are redistributed; only hashes, addresses and findings are published.

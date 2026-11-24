@@ -1,5 +1,7 @@
 # Madden NFL 2003 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -36,7 +38,7 @@ Menu text is **not** plain ASCII: the ROM contains 15,042 printable strings ≥4
 - Emulator: mGBA 0.10.5 under `Xvfb :318`, `DISPLAY=:318`, `SDL_AUDIODRIVER=dummy`, `mgba -g -3 <rom>`.
 - mGBA SDL keymap used: **A = `x`, B = `z`, L = `a`, R = `s`, Start = `Return`, Select = `BackSpace`, D-pad = arrow keys.** Keys were held 50–150 ms; screenshots captured with `scrot -o` and cropped to the 720×480 client area at `+154+158`.
 - RAM evidence: GDB stub on `:2345`; a persistent `gdb-multiarch` client was kept connected (the stub terminates on client disconnect). `SIGINT` to the GDB process pauses mGBA, `x/<n><fmt> <addr>` reads memory, `continue` resumes. Savestates were also decoded independently: mGBA `.ss1` is a PNG with a zlib-compressed `gbAs` chunk; the decompressed state is 397,312 bytes for this 4 MiB ROM (§16.13).
-- Menu paths walked (all screenshots saved in `/tmp/opencode/madden03/`):
+- Menu paths walked (all screenshots saved in `/tmp/madden03/`):
   - Legal/copyright → **Start** → "PLAY NOW / SOLO PLAY / LINK PLAY" quick menu → **Start/A** → GAME RULES (QUARTERS 5 MINUTES, LOCATION OAKLAND, WEATHER FAIR, ENDURANCE ON, ROSTERS ORIGINAL) → **A** → TEAM SELECT (HOME/VISITOR) → **A** → CONTROLLER SETUP → **A** → in-game (play-call grid, then field play).
   - **B** from the quick menu → main menu "PLAY NOW / SEASON PLAY / FRONT OFFICE / RECORDS" → SEASON PLAY (NEW NFL SEASON / NEW PLAYOFFS / SEASON RULES), RECORDS (NFL RECORDS: MOST YARDS PASSING/RUSHING, LONGEST PASS CAUGHT, LONGEST RUN, MOST TOTAL YARDS, MOST POINTS, LONGEST FIELD GOAL; `SELECT: RESET`).
   - **Start** during play returned to the main menu (no separate pause menu).
@@ -140,7 +142,7 @@ Scanning the first 1 MiB of code for aligned runs of ≥4 single-key u16 masks (
 
 ## 7. Validation evidence
 
-- **Observed**: all screenshots in `/tmp/opencode/madden03/` (legal, quick menu, GAME RULES, TEAM SELECT, CONTROLLER SETUP, play-call grid, field, main menu, SEASON PLAY, RECORDS). GDB reads of 0x02000510 changing `0x00180016` → `0x00180017` → `0x00180018` as teams changed, confirming the published team-modifier addresses are live game state. Savestate `gbAs` chunk decompressed to 397,312 bytes. L+R and Select+Start probes produced no new screen.
+- **Observed**: all screenshots in `/tmp/madden03/` (legal, quick menu, GAME RULES, TEAM SELECT, CONTROLLER SETUP, play-call grid, field, main menu, SEASON PLAY, RECORDS). GDB reads of 0x02000510 changing `0x00180016` → `0x00180017` → `0x00180018` as teams changed, confirming the published team-modifier addresses are live game state. Savestate `gbAs` chunk decompressed to 397,312 bytes. L+R and Select+Start probes produced no new screen.
 - **Derived**: objdump disassembly of the joypad handlers at 0x08000D20 and 0x08001320 (KEYINPUT literal 0x04000130, active-high XOR 0x03FF, no sequence tracker). The 36-byte font tables at 0x3740D4/0x3740F4 are permutations, confirming a tile-index text scheme.
 - **Inferred / external**: hidden team IDs and the drill-unlock requirements come from TCRF and SuperCheats; I did not execute a drill to Gold Rank or press A/B/R/L after a touchdown. Their RAM addresses exist, but the unlock state changes themselves are not independently observed, so they are labelled accordingly (§16.8: fetched pages treated as data; no prompt-injection payload was found in the fetched pages).
 

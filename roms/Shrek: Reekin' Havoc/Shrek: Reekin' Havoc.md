@@ -1,5 +1,7 @@
 # Shrek: Reekin' Havoc (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -36,7 +38,7 @@ All published "cheats" for this title found on the web are GameShark / CodeBreak
   - Main Game → New Game → 3 save slots → difficulty (Normal / Hard) → world map → level 1 "Bad Pinocchio" → gameplay → Start pauses.
   - Options → Languages (6), Records (7 pages: Total Score + Levels 1–6), Format game save data (Yes/No).
 - Debug breakpoints (mGBA CLI debugger via `-d`, `b/t`): set `0x08015108` and `0x08014BD0`, `c`, then walk all screens and hold any of `L+R`, `L+R+Start`, `Start+Select`, `A+B+Start+Select`, `L+R+A+B`, `Up+Down+L+R` at boot (use `reset`, breakpoints persist). Neither breakpoint ever hits. Validation: `b/t 0x080004D0` hits within one frame ("Hit breakpoint 3 at 0x080004D0").
-- Screenshots of every screen are preserved in `/tmp/opencode/shrekreek/` (`screens_montage.png`, plus `fresh_menu.png`, `s3.png`, `maingame_flow.png`, `newgame1.png`, `slot1.png`, `diff_right.png`, `s_options.png`, `s_records2.png`, `pause4.png`, `level1.png`, `records_all.png`).
+- Screenshots of every screen are preserved in `/tmp/shrekreek/` (`screens_montage.png`, plus `fresh_menu.png`, `s3.png`, `maingame_flow.png`, `newgame1.png`, `slot1.png`, `diff_right.png`, `s_options.png`, `s_records2.png`, `pause4.png`, `level1.png`, `records_all.png`).
 
 ## 4. Address map
 
@@ -142,7 +144,7 @@ None of the 13 presents a password prompt, code pad, button-code display, unlock
 ## 9. Tooling
 
 - `strings`, `xxd`, `grep`, `file`, `md5sum`/`sha1sum`/`sha256sum` (Phase 0/1).
-- Python 3 + `capstone` for Thumb literal/BL scans and mask-sequence searches (scripts in `/tmp/opencode/shrekreek/`).
+- Python 3 + `capstone` for Thumb literal/BL scans and mask-sequence searches (scripts in `/tmp/shrekreek/`).
 - `arm-none-eabi-objdump -M force-thumb` / `-M force-arm` for all disassembly.
 - mGBA 0.10.5 under Xvfb `:318` + `openbox`, `xdotool` XTEST input, `scrot` screenshots, ImageMagick `convert`/`montage`.
 - mGBA **CLI debugger** (`-d`) bridged through a PTY (`pty_dbg.py`, commands via FIFO, SIGINT to break). GDB stub (`-g`) was attempted but mGBA 0.10.5's stub is incompatible with the installed `gdb-multiarch` (`vMustReplyEmpty` / `qSupported` errors); the CLI debugger was used instead (§16.2 stub-free alternative).

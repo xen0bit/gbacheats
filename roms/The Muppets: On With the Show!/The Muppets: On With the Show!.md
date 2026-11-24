@@ -1,5 +1,7 @@
 # The Muppets: On With the Show! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -36,7 +38,7 @@ Novel algorithmic codes were minted from the field model and confirmed in-game: 
 * The password screen is a 5-slot display above an 8×4 on-screen keyboard plus a backspace key. **The validator runs automatically on entry of the 5th character** — there is no separate ACCEPT key. Valid codes return to the title menu or start a game; invalid codes show "BAD PASSWORD" and clear the slots.
 * Input is normalised to lowercase; case does not matter. The on-screen glyphs are mixed-case but the underlying string is lowercase.
 * Savestate `Shift+F4` / load `F4` used for repeatable before/after RAM evidence.
-* Screenshots and all scripts are in `/tmp/opencode/muppetsshow/work/`; key frames: `s7.png` (entry screen), `tdktv_after0.png`, `14st1_after0.png`, `l978d_play.png`, `dljtv_after1.png`, `rejcheck3_after0.png`, `rejcheck1_after0.png`.
+* Screenshots and all scripts were in `/tmp/muppetsshow/work/`; key frames: `s7.png` (entry screen), `tdktv_after0.png`, `14st1_after0.png`, `l978d_play.png`, `dljtv_after1.png`, `rejcheck3_after0.png`, `rejcheck1_after0.png`.
 
 ## 4. Address map
 
@@ -171,7 +173,7 @@ The f1=7 crash is a semantic-range layer *after* checksum acceptance (guide §16
 
 ## 9. Tooling
 
-All scripts in `/tmp/opencode/muppetsshow/work/`:
+All scripts in `/tmp/muppetsshow/work/`:
 
 * `xref.py` — 32-bit pointer and Thumb LDR-literal xref scans (returned zero hits for the text strings, proving the algorithmic path).
 * `tables.py` — alphabet copies, index-table and packed-code searches (zero stored tables/codes).

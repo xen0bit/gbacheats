@@ -1,5 +1,7 @@
 # Virtual Kasparov (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -177,7 +179,7 @@ artifact in this category is the reproduced extra-rook board state (screenshot
 
 ## 7. Validation evidence
 
-**Observed** (emulator, screenshots in `/tmp/opencode/kasparov/`):
+**Observed** (emulator, screenshots in `/tmp/kasparov/`):
 - `title_final.png`, `s03_menu.png`, `options_screen.png`, `lang_screen.png`,
   `story1.png`, `quick1.png`, `setup2.png`, `after_black.png` (PAUSED),
   `p3_setup.png` (CHANGE SETUP), `posedit1.png` (editor), `cycL_06.png` (extra rook),
@@ -217,7 +219,7 @@ artifact in this category is the reproduced extra-rook board state (screenshot
 - mGBA 0.10.5 under Xvfb :319 + openbox, `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST input;
   `scrot` + ImageMagick crop to 720×480; zlib decompression of the `gbAs` PNG chunk for
   KEYINPUT/savestate reads (guide §16.13).
-- Helper: `/tmp/opencode/kasparov/ui.py`.
+- Helper: `/tmp/kasparov/ui.py`.
 
 ## 10. Legal note
 
@@ -227,7 +229,7 @@ data, never as instructions.
 
 ## Cleanup
 
-mGBA (PID recorded in `/tmp/opencode/kasparov/mgba.pid`), Xvfb `:319` and openbox were
+mGBA (PID recorded in `/tmp/kasparov/mgba.pid`), Xvfb `:319` and openbox were
 started with explicit PIDs and stopped by number only (no `pkill`/`pkill -f`).
 `Virtual Kasparov.sav` and `Virtual Kasparov.ss1` were removed from the ROM folder; the
 ROM folder now contains only `Virtual Kasparov.gba` and this report.

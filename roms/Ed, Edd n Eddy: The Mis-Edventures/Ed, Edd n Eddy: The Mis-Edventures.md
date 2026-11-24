@@ -1,5 +1,7 @@
 # Ed, Edd n Eddy: The Mis-Edventures (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -42,7 +44,7 @@ The prior report's table address `0x08018C9F0` was a digit short: the real table
   Pause (`Quick Save / Display Case / Options / Quit Game`) → Display Case viewer.
 * **RAM oracle**: mGBA `.ssN` savestates are PNG with a zlib `gbAs` chunk; decompress it
   and read EWRAM at raw offset `0x21000 + (addr-0x02000000)`. `0x020028C4` is the debug
-  screen's flag. `/tmp/opencode/eenemis2/dyn.py` implements save/load/read/write.
+  screen's flag. `/tmp/eenemis2/dyn.py` implements save/load/read/write.
 * **Instrumented ROM (inspection only, not a cheat)**: `forced2.gba` changes two
   instructions at `0x08017A66`/`0x08017A72` so the main-menu spawn template's index byte
   is 0 instead of 1. It makes the dispatcher call `0x0801854C`. With this ROM the RAM

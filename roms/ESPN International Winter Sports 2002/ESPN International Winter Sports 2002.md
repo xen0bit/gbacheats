@@ -1,5 +1,7 @@
 # ESPN International Winter Sports 2002 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -133,7 +135,7 @@ Guide §0.2 requires the whole code space to be characterised and a novel code a
 - `Xvfb :317`, `openbox`, `xdotool`, `scrot`/`import`, ImageMagick — emulator control and screenshots.
 - mGBA SDL (`mgba -3`), mGBA CLI debugger (`mgba -d` via a pty) and GDB stub (`mgba -g`) — runtime ground truth. The `-d` debugger was driven through a small Unix-socket server (`dbgsrv.py`) for `break`/`continue`/`status`/`r/4` command sequences; the GDB stub was found unreliable across reconnects and was used only for initial key reads.
 
-Screenshots were kept on disk under `/tmp/opencode/espnwinter/` and are not attached to this report. No ROM or copyrighted assets are redistributed here; only addresses, hashes, counts, and findings are published.
+Screenshots were kept on disk under `/tmp/espnwinter/` and are not attached to this report. No ROM or copyrighted assets are redistributed here; only addresses, hashes, counts, and findings are published.
 
 ## 10. Legal note
 

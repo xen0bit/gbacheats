@@ -1,6 +1,6 @@
 # DemiKids: Dark Version (GBA) — Reverse Engineering Report
 
-Target: `/mnt/gbacheats/roms/DemiKids: Dark Version/DemiKids: Dark Version.gba`
+Target: `roms/DemiKids: Dark Version/DemiKids: Dark Version.gba`
 Analyzed: 2026-11-12. Scope: in-game / developer-intended code surfaces
 (passwords, hidden menus, unlockables). No GameShark/CodeBreaker/memory-edit
 codes are published here.

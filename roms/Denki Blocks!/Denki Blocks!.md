@@ -1,5 +1,7 @@
 # Denki Blocks! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -65,8 +67,8 @@ proved unreachable rather than merely un-found.
 ## 3. How to reproduce
 
 ```bash
-cd /tmp/opencode/denkiblocks
-cp "/mnt/gbacheats/roms/Denki Blocks!/Denki Blocks!.gba" denki.gba
+cd /tmp/denkiblocks
+cp "roms/Denki Blocks!/Denki Blocks!.gba" denki.gba
 Xvfb :301 -screen 0 1024x768x24 &
 DISPLAY=:301 openbox &
 DISPLAY=:301 SDL_AUDIODRIVER=dummy mgba -3 denki.gba &

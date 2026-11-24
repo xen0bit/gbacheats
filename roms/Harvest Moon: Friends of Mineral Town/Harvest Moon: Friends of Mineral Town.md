@@ -1,5 +1,7 @@
 # Harvest Moon: Friends of Mineral Town (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -92,7 +94,7 @@ Negative-search space checked (all counts from this ROM/hash):
 
 ## 7. Validation evidence
 
-**Observed (emulator + RAM)** — screenshot files in `/tmp/opencode/harvestfomt/`:
+**Observed (emulator + RAM)** — screenshot files in `/tmp/harvestfomt/`:
 - `01_title.png`, `title_saved2.png` — title with 1 and 2 options.
 - `name_final.png`, `after_endA.png`, `birthday.png`, `farmname2.png`, `farm_confirm.png`, `dogname.png`, `dog_confirm.png`, `final_confirm.png` — full name-entry flow.
 - `game1.png`–`game5.png`, `intro1.png` — intro cutscene and first farm view.
@@ -117,7 +119,7 @@ Negative-search space checked (all counts from this ROM/hash):
 - `mgba 0.10.5` (SDL, Xvfb `:315`, openbox, `SDL_AUDIODRIVER=dummy`), `xdotool`, `scrot`, ImageMagick (`convert`/`montage`).
 - `arm-none-eabi-objdump` (`-M force-thumb`), Capstone 5.0.7, `strings`, `xxd`, Python 3.13.
 - REA/Ghidra 12.1.4 (`open_binary` raw-binary ARM @ `0x08000000`) for `main`/task-scheduler decompilation; session closed afterwards.
-- Work scripts in `/tmp/opencode/harvestfomt/`: `ui.py` (input/capture), `ram.py` (savestate→GBA RAM reader), `walk.py`, `scan.py` (Capstone literal/BL scans), `title_probe.py`, `ingame_probe.py`, `boot_probe.py`.
+- Work scripts in `/tmp/harvestfomt/`: `ui.py` (input/capture), `ram.py` (savestate→GBA RAM reader), `walk.py`, `scan.py` (Capstone literal/BL scans), `title_probe.py`, `ingame_probe.py`, `boot_probe.py`.
 - No ROM or copyrighted assets are redistributed; only hashes, addresses and original findings are published.
 
 ## 10. Legal note

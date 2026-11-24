@@ -1,5 +1,7 @@
 # Hi Hi Puffy AmiYumi: Kaznapped! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -68,7 +70,7 @@ screen walks below — not "dead code", "cut feature", or "gated feature".
 
 Emulator: mGBA 0.10.5 under Xvfb `:317`, `SDL_AUDIODRIVER=dummy`,
 `SDL_RENDER_DRIVER=software`, command `mgba -3 game.gba` (analysis copy at
-`/tmp/opencode/puffy/game.gba`, byte-identical MD5 to the target).
+`/tmp/puffy/game.gba`, byte-identical MD5 to the target).
 
 Default SDL keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
 D-pad=arrow keys. Holds of 100–300 ms were used (short taps are missed). Screenshots were
@@ -267,7 +269,7 @@ not a code/debug gate: nothing in the ROM suggests a hidden screen beyond it.
 
 ## 9. Tooling
 
-Work dir `/tmp/opencode/puffy`. Created by this analysis:
+Work dir `/tmp/puffy`. Created by this analysis:
 
 * `helpers.py` — XTEST key presses, screenshots, mGBA-GDB-stub RAM reads.
 * `ss.py` — mGBA `.ss1` PNG parser: extracts zlib `gbAs` chunk; maps GBA RAM addresses to

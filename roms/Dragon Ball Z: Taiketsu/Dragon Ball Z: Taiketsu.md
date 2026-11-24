@@ -1,5 +1,7 @@
 # Dragon Ball Z: Taiketsu (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -14,7 +16,7 @@
 | SHA-256 | `544c79fed869574565f9d7fab0a1f041906379c43afdfaf5aa71db19549437fb` |
 | `file` id | `Game Boy Advance ROM image: "DBZ TAIKETSU" (BDBE70, Rev.00)` |
 
-**Phase 0 / patch check (§16.1):** one Nintendo logo and one GBA header only, at file offset `0`; no multiboot sub-header, no appended trainer, no cracktro. The first 4 KiB is a normal crt0. Header complement byte `0x73` does not match the computed `0x8C` and the header checksum is `0x0000` — the usual rebuilt-header artifact, recorded as an observation, not evidence of a game-image patch (entry branch and logo are intact). All analysis used a byte-identical copy at `/tmp/opencode/dbztaiketsu/game.gba`; no emulator artifacts were written to the ROM folder.
+**Phase 0 / patch check (§16.1):** one Nintendo logo and one GBA header only, at file offset `0`; no multiboot sub-header, no appended trainer, no cracktro. The first 4 KiB is a normal crt0. Header complement byte `0x73` does not match the computed `0x8C` and the header checksum is `0x0000` — the usual rebuilt-header artifact, recorded as an observation, not evidence of a game-image patch (entry branch and logo are intact). All analysis used a byte-identical copy at `/tmp/dbztaiketsu/game.gba`; no emulator artifacts were written to the ROM folder.
 
 ## 2. Executive summary
 
@@ -169,6 +171,6 @@ The matcher is the same routine used for fighting-game command inputs (8 call si
 
 ## 9. Tooling
 
-`strings`, `grep`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`, Python 3 + `capstone` 5.0.7, `arm-none-eabi-objdump -M force-thumb`, mGBA (`-3`, `-g`, `-t`), GDB (`gdb-multiarch`), Xvfb `:315` + openbox, `xdotool`, `import`/`scrot`, ImageMagick, `tesseract`. Scripts in `/tmp/opencode/dbztaiketsu`: `key.py`, `ssdiff.py`, plus ad-hoc Python scanners (header check, pointer/xref scans, mask-table enumeration, jump-table decode). Screenshots `shot_00`–`shot_16`, `egg2_w*`, `enum_*`, `patch_*`, `menu_*` retained there.
+`strings`, `grep`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`, Python 3 + `capstone` 5.0.7, `arm-none-eabi-objdump -M force-thumb`, mGBA (`-3`, `-g`, `-t`), GDB (`gdb-multiarch`), Xvfb `:315` + openbox, `xdotool`, `import`/`scrot`, ImageMagick, `tesseract`. Scripts in `/tmp/dbztaiketsu`: `key.py`, `ssdiff.py`, plus ad-hoc Python scanners (header check, pointer/xref scans, mask-table enumeration, jump-table decode). Screenshots `shot_00`–`shot_16`, `egg2_w*`, `enum_*`, `patch_*`, `menu_*` retained there.
 
 **Legal note:** no ROM bytes or copyrighted assets are redistributed here — only hashes, addresses, decoded button sequences and original observations.

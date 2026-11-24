@@ -1,5 +1,7 @@
 # Lizzie McGuire 3: Homecoming Havoc (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -127,5 +129,5 @@ Since no code system exists, there is no code space to enumerate and no novel co
 ## 9. Tooling
 
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep`, Python 3 (struct/re/zlib), `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 (used for literal/BL scan design), mGBA 0.10.5 (`-3`, `-d`, `-g`), Xvfb `:319`, openbox, xdotool, scrot, ImageMagick (`convert`, `montage`, `compare`).
-- Local scripts in `/tmp/opencode/lizzie3/`: `ui.py` (input/screenshot helper), `ssdiff.py` (mGBA `gbAs` savestate decoder/differ), `walkdbg.py` (CLI-debugger RAM dump driver), plus the button-mask and alphabet scanners.
+- Local scripts in `/tmp/lizzie3/`: `ui.py` (input/screenshot helper), `ssdiff.py` (mGBA `gbAs` savestate decoder/differ), `walkdbg.py` (CLI-debugger RAM dump driver), plus the button-mask and alphabet scanners.
 - No ROM or copyrighted asset is redistributed; only addresses, hashes, and findings are reported.

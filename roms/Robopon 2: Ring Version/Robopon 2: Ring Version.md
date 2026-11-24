@@ -1,5 +1,7 @@
 # Robopon 2: Ring Version (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -24,7 +26,7 @@
 
 Both have the stock entry word `0xEA00002E`; they are in-image multiboot payloads, not a 2-in-1 pack patch. No scene cracktro/trainer strings, no appended code beyond these payloads, no patched entry word.
 
-**Dump-quality finding (important).** This 4 MiB file appears to be a **truncated/bad dump** of an 8 MiB game. Independent corroboration: mGBA issue [#2052](https://github.com/mgba-emu/mgba/issues/2052) and BizHawk [#2635](https://github.com/TASEmulators/BizHawk/issues/2635) report that Ring/Cross 4 MiB images freeze/corrupt while the expected No-Intro size is 8 MiB. Our image reproduces the failure exactly (§7). Padding a working copy to 8 MiB with `0xFF` (`padded8.gba`, SHA-256 of the first 4 MiB unchanged) removes the crash and lets the intro run to completion, confirming missing high-half data. **All analysis below is of the exact hash above; the padding was only a diagnostic copy in `/tmp/opencode/robopon2`.**
+**Dump-quality finding (important).** This 4 MiB file appears to be a **truncated/bad dump** of an 8 MiB game. Independent corroboration: mGBA issue [#2052](https://github.com/mgba-emu/mgba/issues/2052) and BizHawk [#2635](https://github.com/TASEmulators/BizHawk/issues/2635) report that Ring/Cross 4 MiB images freeze/corrupt while the expected No-Intro size is 8 MiB. Our image reproduces the failure exactly (§7). Padding a working copy to 8 MiB with `0xFF` (`padded8.gba`, SHA-256 of the first 4 MiB unchanged) removes the crash and lets the intro run to completion, confirming missing high-half data. **All analysis below is of the exact hash above; the padding was only a diagnostic copy in `/tmp/robopon2`.**
 
 ## 2. Executive summary
 
@@ -127,7 +129,7 @@ None. This system writes a robot-grant event, not a persistent bitfield. The sur
 ## 7. Validation evidence
 
 **Observed (emulator, DISPLAY=:318, screenshots + live debugger):**
-- mGBA 0.10.5 (`/usr/local/bin/mgba`) and a freshly built mGBA 0.11 (`/tmp/opencode/robopon2/mgba_src/build/sdl/mgba`, commit `9fcaa88`) both boot the title screen. Screenshots: `boot_crop.png`, `t2.png` (RED logo), `title.png` / `nm2.png` / `pad10.png` (title).
+- mGBA 0.10.5 (`/usr/local/bin/mgba`) and a freshly built mGBA 0.11 (`/tmp/robopon2/mgba_src/build/sdl/mgba`, commit `9fcaa88`) both boot the title screen. Screenshots: `boot_crop.png`, `t2.png` (RED logo), `title.png` / `nm2.png` / `pad10.png` (title).
 - On the **supplied 4 MiB file**, pressing Start at the title (or simply letting the demo run) ends in `GBA Memory: Jumped to invalid address: 01220122` / `GBA: Illegal opcode: e710b710` / `The game crashed!` in mGBA, and a frozen solid-color screen in VBA 1.8.0. Reproduced on fresh boots with the `.sav` removed. This is the truncation failure of §1.
 - With the **8 MiB `0xFF`-padded diagnostic copy**, the full opening cutscene runs to completion without crashing (`pad1.png` … `pad10.png` show logos → character cards → title), proving the missing high-half data is the cause. On this copy the title screen accepts Start: pressing it at the first title appearance (observed mean 44450 at t≈14 s) immediately replays the RED Entertainment logo and the entire new-game cutscene (`ft_after.png`), i.e. input delivery and key mapping were verified. The cutscene then loops back to the title; neither Start nor repeated A presses during it advanced to a gameplay menu before the session budget expired.
 - Live CLI-debugger session on the unmodified ROM: `b/t 0x0800794c`, `c` → `Hit breakpoint 1 at 0x0800794C`, `r15=0x0800794E`, `cpsr=0x4000003F [T]`, `Cycle=5199431`, KEYINPUT `0x03FF` (no keys held at that instant), DISPCNT `0x0000`. RAM at 0x03001EBC / 0x03006000 / 0x03006004 / 0x03006304 all `0x00000000` at that early cycle. This is the RAM-level evidence that execution reaches the game's main loop before the dump fails.
@@ -158,6 +160,6 @@ None. This system writes a robot-grant event, not a persistent bitfield. The sur
 - Python 3 + `capstone 5.0.7` for literal/pointer scans (`find_u32`, Thumb `LDR [PC,#imm]` scanner).
 - `strings -t x -n 3/4`, `grep -abo`, `xxd` for the string/literal sweeps.
 - mGBA 0.10.5 (system) and a locally built mGBA 0.11 (git clone 2026-11-18, commit `9fcaa88`; `cmake -DBUILD_QT=OFF` + `cmake --build --target mgba-sdl -j4`; installed `libsdl2-dev` via apt) for boot/walk; VBA 1.8.0 as a cross-check.
-- mGBA CLI debugger (`-d`) driven through a Python PTY harness (`/tmp/opencode/robopon2/mgba_dbg.py`): `b/t`, `c`, `x/4`, `watch/r`, `w/1|2|4` — used for the live main-loop breakpoint and RAM reads.
+- mGBA CLI debugger (`-d`) driven through a Python PTY harness (`/tmp/robopon2/mgba_dbg.py`): `b/t`, `c`, `x/4`, `watch/r`, `w/1|2|4` — used for the live main-loop breakpoint and RAM reads.
 - X11: `Xvfb :318`, `openbox`, `xdotool` (focus/key events), `scrot` + ImageMagick crop (`720x480+153+163`). All other displays and all other agents' processes were left untouched.
 - No ROM or copyrighted asset is redistributed; only addresses, hashes and our own tools are reported.

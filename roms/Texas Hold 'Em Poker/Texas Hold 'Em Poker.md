@@ -1,5 +1,7 @@
 # Texas Hold 'Em Poker (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -241,7 +243,7 @@ sweep.
 * Python 3 + Capstone 5.0.7 (installed), Pillow
 * mGBA 0.10.5 (`-3`, `-g`, `-d` variants tried; the GDB stub proved single-client/unreliable here),
   Xvfb `:315`, openbox, xdotool, scrot, tesseract
-* Custom scripts in `/tmp/opencode/texaspoker/`: `gp.py` (keypress helper), `cursor.py`
+* Custom scripts in `/tmp/texaspoker/`: `gp.py` (keypress helper), `cursor.py`
   (yellow-cursor locator), `typecode.py` (keypad driver), `statediff.py`, `mkpatch.py`/`oracle.py`
   (savestate `gbAs` patcher + accept/reject oracle), `batchtest.py`
 

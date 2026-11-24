@@ -1,10 +1,12 @@
 # The Wild (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/The Wild/The Wild.gba` |
+| File | `roms/The Wild/The Wild.gba` |
 | Size | 8,388,608 bytes (0x800000) |
 | Header title | `THE WILD` |
 | Game code | `BWLE` |
@@ -66,7 +68,7 @@ on the dead block never fired in any screen or after 17 multi-button combination
 | `0x0808d3c4` | `"- CHEAT MENU -"` |
 | `0x087a9540` | 5-entry pointer table of cheat-menu labels (NUL-terminated at `0x087a9554`) |
 | `0x0808d350`–`0x0808d3c4` | Cheat labels: RESET EVERYTHING, INVINCIBILITY, two challenge unlocks, ALL CHEATS ON |
-| `0x087a9280` | Live debug state-name table: 12-byte records `{handler|1, name_ptr, state_id}`, states 0x00–0x1b with gaps 0x0d/0x10/0x12; names at `0x0804c6b0`–`0x0804c888` |
+| `0x087a9280` | Live debug state-name table: 12-byte records `{handler\|1, name_ptr, state_id}`, states 0x00–0x1b with gaps 0x0d/0x10/0x12; names at `0x0804c6b0`–`0x0804c888` |
 | `0x08035920` | Live per-frame input poll: `held = ~KEYINPUT`, `pressed/held/released` at `0x03006A90+4/+0x0C/+0x14` |
 | `0x0804e8cc`–`0x0804f3c0` | Live ASCII UI text bank (all menu strings) |
 | `0x0809a170`–`0x0809a918` | Debug build banner + 60+ `"debug only"` placeholder entries |
@@ -159,7 +161,7 @@ construction, not by failure to find one.
 | Count on cheat handler `0x0800a7e4` | Value |
 |---|---|
 | Thumb BL / B.w callers | **0** |
-| 32-bit literal pointers (value and `value|1`) | **0** |
+| 32-bit literal pointers (value and `value\|1`) | **0** |
 | Unconditional branch callers | **0** |
 | Entries in the 28-record state-name table | **0** |
 | Breakpoint hits across 9 screens + 17 button combos | **0** |
@@ -178,7 +180,7 @@ consumer. No hard-coded button sequence table exists.
 ## 7. Validation evidence
 
 - **Observed:** all 9 screens above via scrot; save file created only in the ROM *copy* under
-  `/tmp/opencode/thewild`; RAM at boot `0x0300636D/E/F = 00 00 00`, `0x03005200 = 00000000`,
+  `/tmp/thewild`; RAM at boot `0x0300636D/E/F = 00 00 00`, `0x03005200 = 00000000`,
   KEYINPUT `0x03FF`; zero breakpoint hits on the dead block.
 - **Derived:** dead-menu table/dispatcher/gate logic from raw Thumb disassembly and literal
   pools (`struct.unpack_from` used for every literal, avoiding objdump halfword-order errors).

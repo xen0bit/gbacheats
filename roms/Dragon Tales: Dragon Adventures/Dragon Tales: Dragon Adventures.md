@@ -1,5 +1,7 @@
 # Dragon Tales: Dragon Adventures (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,7 +43,7 @@ Reachable menu path (verified with screenshots):
 
 Published-code check: no password/button codes are published. The only listed codes are CodeBreaker/AR RAM patches (`0000976D 000A`, `1006324A 0007` enable; `830044CC 00E7` max Blue Jewels; `830044C8 0063` cupcakes; `83004470 0063` dragonberries; `830044D4 0063` music notes) — all target EWRAM `0x0200xxxx`, i.e. memory edits, not in-game input codes. None were tested as cheats because they are out of scope.
 
-Debug-menu reproduction (analysis copy only): patch file offsets `0x14D34` and `0x14D38` from `0x08050281`/`0x0805028D` (title init/loop thunks) to `0x080505BD`/`0x080505C9` (debug init/loop thunks), boot the patched copy, press A/Start through the splash, and the Level Select screen appears (patched file kept in `/tmp/opencode/dragontales/forcedebug3.gba`; not redistributed).
+Debug-menu reproduction (analysis copy only): patch file offsets `0x14D34` and `0x14D38` from `0x08050281`/`0x0805028D` (title init/loop thunks) to `0x080505BD`/`0x080505C9` (debug init/loop thunks), boot the patched copy, press A/Start through the splash, and the Level Select screen appears (patched file kept in `/tmp/dragontales/forcedebug3.gba`; not redistributed).
 
 ## 4. Address map
 
@@ -54,7 +56,7 @@ Debug-menu reproduction (analysis copy only): patch file offsets `0x14D34` and `
 | `0x08028D44` | debug menu loop (button masks `0x10/0x20/0x40/0x80/0x01/0x02/0x08`) | Derived |
 | `0x080505BC` / `0x080505C8` | thunks → debug init / loop | Derived |
 | `0x08051E84` | screen dispatcher: calls init, stores loop pointer to `0x0300029C` at `+0x24` | Derived |
-| `0x0802B9D4` | pause handler (sets `[state+0x5C] |= 2`) | Derived |
+| `0x0802B9D4` | pause handler (sets `[state+0x5C] \|= 2`) | Derived |
 | `0x08027F9C` | main-menu loop (Up/Down selection, A/Start confirm) | Derived |
 | `0x0806331C` | `isPressed(mask)`: `(mask & [0x03000798]) && !(mask & [0x030007A4])` | Derived |
 | `0x03000798` / `0x030007A4` | key-edge / key-held state words | Derived |
@@ -157,4 +159,4 @@ Pressing A on Level Select launched the chosen map into gameplay (observed) — 
 
 ## 9. Tooling
 
-`strings -t x`, `grep -abo`, `xxd`, `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 (BL/PC-literal scanners in `/tmp/opencode/dragontales/scan.py`, `masks.py`), mGBA (Xvfb `:317`, `SDL_AUDIODRIVER=dummy`), `xdotool` + Python key helper (`k.py`), `scrot`/`import -window root`, `gdb-multiarch` (single-session GDB stub at `:2345`; used as an oracle per §16.19), Python byte-patching for the analysis-only forced-menu copy. No ROM or copyrighted assets are redistributed; only addresses, hashes, and findings are reported.
+`strings -t x`, `grep -abo`, `xxd`, `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 (BL/PC-literal scanners in `/tmp/dragontales/scan.py`, `masks.py`), mGBA (Xvfb `:317`, `SDL_AUDIODRIVER=dummy`), `xdotool` + Python key helper (`k.py`), `scrot`/`import -window root`, `gdb-multiarch` (single-session GDB stub at `:2345`; used as an oracle per §16.19), Python byte-patching for the analysis-only forced-menu copy. No ROM or copyrighted assets are redistributed; only addresses, hashes, and findings are reported.

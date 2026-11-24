@@ -1,5 +1,7 @@
 # Tron 2.0: Killer App (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -137,7 +139,7 @@ These bound the matcher to exact, position-for-position, eight-press D-pad seque
 * **Observed** (screens): title; main menu (Story Mode / Battle Mode / View Clips / Mini-Games / Options); Options submenu (Music, Sound FX, Tutorial, Credits); Story Mode submenu (New Game / Continue Game / Delete Game); Mini-Games selector (Light Cycle / Tank / Recognizer); classic-game list (Tron (1982), Discs of Tron (1983), Firewall, Security, Defragment, View High Scores); character select; chip loadout; gameplay; game-over "Play Again?".
 * **Derived** (disassembly): 3-entry table, bounded loop, toggle semantics, ring indexing, trigger semantics, helper bit functions.
 * **Inferred** (not played through): the exact visible effect of bit 1 (Battle Mode maps) and the pause-menu "Cheats" row from bit 2 — the flag-bit consumer at `0x08013E20` is consistent with the published descriptions, but the specific maps/rows were not reached in this session. Battle Mode's submenu itself was not successfully opened (the menu cursor could not be pinned down reliably; see Unknowns).
-* RAM evidence per screen: savestate snapshots `00_title`, `01_menu`, `03b_minigames`, `classic_list`, `story_sub`, `char_select_done`, `gameplay`, `pause_menu`, etc. in `/tmp/opencode/tron/*.ss1` with decompressed `*.raw`; e.g. title→menu changed 17,287 raw bytes and the flag word stayed `0x07000000` throughout.
+* RAM evidence per screen: savestate snapshots `00_title`, `01_menu`, `03b_minigames`, `classic_list`, `story_sub`, `char_select_done`, `gameplay`, `pause_menu`, etc. in `/tmp/tron/*.ss1` with decompressed `*.raw`; e.g. title→menu changed 17,287 raw bytes and the flag word stayed `0x07000000` throughout.
 
 ## 8. Unknowns
 
@@ -150,7 +152,7 @@ These bound the matcher to exact, position-for-position, eight-press D-pad seque
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for the validator and helpers.
 * Python + Capstone 5.0.7 for literal/BL scans and the key-mask table scan.
-* mGBA 0.10.5 CLI debugger (`-d`) bridged through a Python `pty` + FIFO (`/tmp/opencode/tron/dbg.py`, `harness.py`); `SIGINT` used to halt and `x/1|x/2|x/4` to read RAM. The GDB stub was unusable because port 2345 belonged to another session.
+* mGBA 0.10.5 CLI debugger (`-d`) bridged through a Python `pty` + FIFO (`/tmp/tron/dbg.py`, `harness.py`); `SIGINT` used to halt and `x/1|x/2|x/4` to read RAM. The GDB stub was unusable because port 2345 belonged to another session.
 * `xdotool` XTEST key events, `scrot` + ImageMagick `convert`/`montage` for screen evidence.
 * Savestate parsing: PNG `gbAs` chunk, `zlib.decompress`, 397,312-byte raw state (IWRAM `0x19000`, EWRAM `0x21000`).
 

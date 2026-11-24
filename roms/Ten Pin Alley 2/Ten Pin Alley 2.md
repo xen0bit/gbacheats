@@ -1,5 +1,7 @@
 # Ten Pin Alley 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -141,7 +143,7 @@ This engagement is a **bounded negative**, so the enumeration is the enumeration
 ## 9. Tooling
 
 - `objdump`/`arm-none-eabi-objdump -M force-thumb` for targeted disassembly; Python 3 + Capstone for literal-load/xref and instruction-immediate scans.
-- Scripts in work dir `/tmp/opencode/tenpin2/`: `key.py`, `scan_buttons.py`, `keypad_xrefs.py`, `scan_input_cmp.py`, `input_mask_census.py`, `probe_codes.py`.
+- Scripts in work dir `/tmp/tenpin2/`: `key.py`, `scan_buttons.py`, `keypad_xrefs.py`, `scan_input_cmp.py`, `input_mask_census.py`, `probe_codes.py`.
 - Screenshots in work dir: `00_title.png` … `32_*.png` (title, menus, character/alley/player selects, gameplay, pause, jukebox, credits, cheat probes). None are stored in the ROM folder.
 - Fetched web data treated strictly as data: GameFAQs FAQ via Wayback (`20181231083932`), GameFAQs cheats page (no snapshot exists), search-result snippets. No instructions found in fetched content were followed.
 

@@ -1,5 +1,7 @@
 # Need for Speed: Underground 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Scope: in-game / developer-intended cheats only (passwords, button codes, hidden/debug menus,
 unlockables). GameShark / CodeBreaker / Action Replay memory-edit codes are out of scope and are
 only mentioned to classify web hits. All conclusions below are for the exact 8 MiB image whose
@@ -224,7 +226,7 @@ results are bounded as follows:
 * `ui.py` (input/screenshot helper), `detect.py` (title-screen pixel detector), `savediff.py`
   (savestate `gbAs` zlib reader + EWRAM/IWRAM diff), `btntest.py` (code trial harness),
   `patchstate.py` (analysis-only dispatch-index probe), `screenstate.py` (screen-index reader).
-  All scripts are in `/tmp/opencode/nfsu2/`.
+  All scripts were in `/tmp/nfsu2/`.
 * Installed/used from the base toolchain: binutils-arm-none-eabi, mGBA, Xvfb, openbox, xdotool,
   scrot, ImageMagick, Python 3 with capstone/keystone. No additional packages were required.
 

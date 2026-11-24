@@ -1,5 +1,7 @@
 # Pitfall: The Lost Expedition (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -179,11 +181,11 @@ Because the only accepted value is the published one, no unpublished *accepted* 
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings` — Phase 0/1 fingerprinting.
-* `capstone` 5.0.7 (`/tmp/opencode/pitfall/dis.py`) — raw Thumb disassembly at chosen ROM addresses; raw BL/xref scanners (`xrefs.py`, `find_debug.py`, `find_code.py`).
+* `capstone` 5.0.7 (`/tmp/pitfall/dis.py`) — raw Thumb disassembly at chosen ROM addresses; raw BL/xref scanners (`xrefs.py`, `find_debug.py`, `find_code.py`).
 * `gdb-multiarch` with mGBA `-g` stub — breakpoint at `0x0809E704`, register/RAM reads, hardware read watchpoint that located the matcher at `0x0809E798`.
-* Savestate parser (`/tmp/opencode/pitfall/state.py`) — decompresses mGBA PNG `gbAs` zlib chunk (397,312-byte state; IWRAM at `0x19000`, EWRAM at `0x21000`) for RAM diffing.
+* Savestate parser (`/tmp/pitfall/state.py`) — decompresses mGBA PNG `gbAs` zlib chunk (397,312-byte state; IWRAM at `0x19000`, EWRAM at `0x21000`) for RAM diffing.
 * `xdotool` + `scrot` + ImageMagick on `Xvfb :319` with `openbox`; `SDL_AUDIODRIVER=dummy`.
 * `tesseract` for the tile-indexed level-select labels; pixel-count detectors in `try_code.py`/`reject.py` for locked-vs-unlocked state.
 * Helper scripts: `ctl.py`, `enter_code.py`, `unlock.py`, `reject.py`, `enum_levels.py`, `codes_block.py`, `phase0.py`.
 
-All analysis artifacts live in `/tmp/opencode/pitfall/`. No ROM or copyrighted assets are redistributed by this report.
+All analysis artifacts were kept in `/tmp/pitfall/`. No ROM or copyrighted assets are redistributed by this report.

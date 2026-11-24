@@ -1,5 +1,7 @@
 # Mega Man Battle Network 5: Team Colonel (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 > **SKIPPED / DEFERRED — entry system found but not in-game confirmed (coordinator decision).**
 > Under §0.2 this report does **not** meet the dynamic-confirmation bar: a genuine
 > Numberman/Number Trader lotto system was found with 51 published eight-digit codes (algorithmic,
@@ -8,7 +10,7 @@
 > in-game, the validator was not located, and no novel code or rejection bounds were produced.
 > Per coordinator authorization, MMBN titles whose validator/code-entry surface is blocked by a
 > story gate are documented here and **skipped rather than retried or indexed**. The 51 codes
-> and the exact gate are recorded below. This report is intentionally absent from `INDEX.md`.
+> and the exact gate are recorded below. This report is intentionally left out of the completed-reports table and listed under Skipped ROMs in the top-level `README.md`.
 
 ## 1. Target identity
 
@@ -298,7 +300,7 @@ Neoseeker, TCRF and IGN direct fetches returned 403 and were not used.
   `import -window <id>` capture; ImageMagick `montage` for contact sheets.
 * `gdb-multiarch` against mGBA's GDB stub on port 2345 (breakpoint at
   `0x080002FC` worked; `interrupt` did not, so breakpoints were used to halt).
-* Custom scripts in `/tmp/opencode/mmbn5colonel/`: `press.py` (keymap helper),
+* Custom scripts in `/tmp/mmbn5colonel/`: `press.py` (keymap helper),
   `ss.py` (mGBA `gbAs` savestate RAM reader), `scan.py`, `dis.py`, `lzscan.py`
   (GBA LZ77 decompressor + code search), `brute`/`brute2` (checksum search),
   `scenes.py` (savestate scene-byte patcher).

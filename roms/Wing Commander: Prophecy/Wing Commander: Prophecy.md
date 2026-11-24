@@ -1,5 +1,7 @@
 # Wing Commander: Prophecy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -238,7 +240,7 @@ and `DISPCNT |= 0x80` in the accept path.
 * `arm-none-eabi-objdump -M force-thumb` for all disassembly; Capstone 5.0.7
   for BL/pointer/xref scans; Ghidra 12.1.4 via REA for pseudocode (session
   closed).
-* Local scripts in `/tmp/opencode/wingcommander/`: `search_codes.py`,
+* Local scripts in `/tmp/wingcommander/`: `search_codes.py`,
   `xref.py`, `blscan.py`, `scan_tables.py`, `ssdiff.py`, `press.py`,
   `test_code.py`, `rsp.py`.
 * No ROM or copyrighted assets are reproduced in this report; only addresses,

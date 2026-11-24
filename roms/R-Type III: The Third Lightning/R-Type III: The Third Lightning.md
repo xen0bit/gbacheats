@@ -1,5 +1,7 @@
 # R-Type III: The Third Lightning (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -217,7 +219,7 @@ after 54DSF        3a0b3700 (0x00370B3A)  "54DSF\0"        0x00   (rejected)
 ## 9. Tooling
 
 * `arm-none-eabi-objdump -M force-thumb` for raw GBA disassembly; `capstone` 5.0.7 for
-  scans; Python scripts `/tmp/opencode/rtype3/pw.py` (encoder/decoder),
+  scans; Python scripts `/tmp/rtype3/pw.py` (encoder/decoder),
   `ssread.py` (mGBA `.ss1` `gbAs` zlib RAM reader), `sspatch.py` (savestate word patcher),
   `enterfull.py` (XTEST password entry), `key.py`.
 * Ghidra 12.1.4 via the `rea` MCP/CLI was tried, but the shared REA session was hijacked

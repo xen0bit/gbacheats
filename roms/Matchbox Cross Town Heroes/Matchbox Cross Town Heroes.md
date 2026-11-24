@@ -1,5 +1,7 @@
 # Matchbox Cross Town Heroes (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -29,7 +31,7 @@ No published code list could be retrieved: GameFAQs returned HTTP 403, TCRF retu
 ### Environment
 - Emulator: `mgba 0.10.5` (SDL), launched headless under `Xvfb :317` + `openbox`, `SDL_AUDIODRIVER=dummy`, `-3` scale.
 - Live RAM access: mGBA's CLI debugger (`mgba -3 -d ...`) driven through a pty; `BREAK` (Ctrl-C) pauses, `r/4 ADDR` / `w/1 ADDR VAL` / `w/r REG VAL` read and write state, `b/t ADDR` sets a Thumb breakpoint. (The GDB stub on port 2345 was occupied by another session, so the stub-free `-d` debugger was used.)
-- Exact offline oracle: **Unicorn 2.1.4** — map the ROM at `0x08000000`, EWRAM at `0x02000000`, IWRAM at `0x03000000`, SP `0x03007F00`, call `0x080043FC` in Thumb mode with `r0` = pointer to a NUL-terminated 4-character buffer, `lr` = sentinel return address. `r0 == 1` on return means accepted. Scripts: `ucval.py`, `enumerate_codes.py`, `fields.py` in `/tmp/opencode/matchbox`.
+- Exact offline oracle: **Unicorn 2.1.4** — map the ROM at `0x08000000`, EWRAM at `0x02000000`, IWRAM at `0x03000000`, SP `0x03007F00`, call `0x080043FC` in Thumb mode with `r0` = pointer to a NUL-terminated 4-character buffer, `lr` = sentinel return address. `r0 == 1` on return means accepted. Scripts: `ucval.py`, `enumerate_codes.py`, `fields.py` in `/tmp/matchbox`.
 
 ### Menu path observed
 Title menu: **New Game / Continue / Options / Credits**. `Up`/`Down` move the selection; `A` (`x`) confirms; `Start` (`Return`) returns from the attract gameplay. The attract/demo gameplay screen is labelled `DEMO` and is entered from the New Game/Continue actions in this build. The title screen builder is at `0x08007F5C` (writes screen id `2` to `0x02018160`); the password screen's renderer is installed by `0x08010C48` and the renderer itself is `0x08010A69` (it draws the string with table index 36, `Enter Password`). All UI strings are plain ASCII in a six-language bank at `0x0802AD60`–`0x0802C3F0`, so the keyword scan was not defeated by tile-indexed text.

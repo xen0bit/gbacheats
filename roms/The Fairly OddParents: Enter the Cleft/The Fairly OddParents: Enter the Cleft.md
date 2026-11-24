@@ -1,5 +1,7 @@
 # The Fairly OddParents! Enter the Cleft (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -252,7 +254,7 @@ Control: the published Ep3 code `0 7 0 3 3` was re-entered by the same RAM-write
 * `arm-none-eabi-objdump -M force-thumb` / Capstone for literal-pool and BL scans;
   Python (`struct`, `zlib`) for header parsing, savestate `gbAs` decompression/diffing
   and the validator reimplementation.
-* Work directory: `/tmp/opencode/fairlyodd3` (`val.py`, `ssdiff.py`, `testcode.sh`,
+* Work directory: `/tmp/fairlyodd3` (`val.py`, `ssdiff.py`, `testcode.sh`,
   `game_clean.gba`, `game_clean.ss1/.ss2`, screenshots).
 * No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms
   and generated codes are published here.

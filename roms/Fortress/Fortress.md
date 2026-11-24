@@ -1,10 +1,12 @@
 # Fortress (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Fortress/Fortress.gba` |
+| File | `roms/Fortress/Fortress.gba` |
 | Size | 4,194,304 bytes (`0x400000`, 4 MiB) |
 | Header title | `FORTRESS` |
 | Game code / maker | `AFOE` / `5G` |
@@ -185,7 +187,7 @@ The negative is bounded as follows.
    menu BATTLE/MEDIUM, mode menu TOURNAMENT, mode menu BLITZ, mode menu EASY,
    mode menu HARD, four eras, battle intro, gameplay, QUIT dialog, and the
    2-player path. Full table of captured states is in the work directory
-   (`/tmp/opencode/fortress/*.ss1`, `w*_grid.png`).
+   (`/tmp/fortress/*.ss1`, `w*_grid.png`).
 3. **Text space searched with counts.** 42,683 `strings` records at `-n 4`;
    a curated NUL-terminated printable-ASCII scan found 618 strings in the content
    script and the complete UI set in two banks; literal searches for 7 keyword
@@ -247,7 +249,7 @@ The negative is bounded as follows.
   `scrot` + ImageMagick `convert`/`montage` for screenshots.
 - Savestate RAM reader: zlib-decompress the PNG `gbAs` chunk (raw length
   `0x61000`), EWRAM at raw `0x21000`, IWRAM at `0x19000` (guide §16.13).
-  Helper scripts: `/tmp/opencode/fortress/ss.py`, `diff_ss.py`, `gba.py`,
+  Helper scripts: `/tmp/fortress/ss.py`, `diff_ss.py`, `gba.py`,
   `combo_test2.py`, `menu_combo.py`.
 - Web sources treated strictly as data (§16.8): archived GameFAQs cheats &
   FAQ 13620. No code was found, so no literal verification was possible.

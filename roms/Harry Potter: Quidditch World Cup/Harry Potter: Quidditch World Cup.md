@@ -1,5 +1,7 @@
 # Harry Potter: Quidditch World Cup (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,7 +43,7 @@ Phase 0 findings:
 * Menus reached and verified on screen: language select; Saved Data; house choice; Hogwarts training; **Pause Menu** (`Continue / Options / Restart / Quit`, plus `Are you sure? / Yes / No`); **pause Options** (`Sfx : On`, `Sleep Mode` — a 2-item ring); **main menu** (`Go to Hogwarts`, `Exhibition Match` locked, `World Cup` locked, `Quidditch Cards`, `Options`); **main Options** (`Music: On`, `Sfx: On`, `Brightness: Normal`, `Credits`, `Sleep Mode` — a 5-item ring, no 6th entry); **Quidditch Cards** menu (`View Quidditch Cards`, `Trade Cards`) and the 105-slot card grid; **Sleep Mode** screen (`To exit Sleep Mode, press SELECT + L + R at the same time`).
 * Codes tested: none applicable — no password UI exists. Published CodeBreaker/GameShark patches were checked against the ROM and rejected as out-of-scope memory edits (their addresses are RAM patch targets, not ROM literals).
 * Button-combination probes (held simultaneously, with EWRAM reads before/after): at Saved Data title — L, R, L+R, L+R+A, L+R+B, L+R+Start, L+R+Select, L+R+Up, L+R+Down (EWRAM delta **0 bytes** for all); at main Options — L+R, L+R+Start, L+R+Select, L+R+A+B, L+R+L+R+Up+Down, Up+Up+Down+Down; at title — 8 longer sequences including Konami-style Up Up Down Down Left Right Left Right and L L R R Up Down Up Down; at the card grid — R, L, Select, Start, B. None produced the debug menu. Only observable effects were menu-cursor movement, the Save/Erase confirmation, gameplay entry, and the documented Sleep Mode screen (L+R+Select).
-* Oracle/debug harness: because port 2345 was occupied by another session's mGBA, a 14-line `LD_PRELOAD` shim (`/tmp/opencode/hpqwc/portshift.c`) rewrote `bind(2345)`→`bind(2346)`, giving an exclusive GDB stub; RSP reads/writes/breakpoints/watchpoints were issued from a small Python client (`rsp.py`, `dbg.py`).
+* Oracle/debug harness: because port 2345 was occupied by another session's mGBA, a 14-line `LD_PRELOAD` shim (`/tmp/hpqwc/portshift.c`) rewrote `bind(2345)`→`bind(2346)`, giving an exclusive GDB stub; RSP reads/writes/breakpoints/watchpoints were issued from a small Python client (`rsp.py`, `dbg.py`).
 
 ## 4. Address map
 
@@ -156,6 +158,6 @@ No password/checksum/button sequence algorithm exists. The only algorithmic cont
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` — Thumb disassembly.
 * Python 3 + `capstone` 5.0.7 — literal/BL/pattern scans (input globals, button masks, string IDs).
 * mGBA 0.10 under Xvfb `:317` + openbox; `xdotool` XTEST input (60–150 ms holds); `scrot` + ImageMagick `convert` for 720×480 viewport crops; `tesseract` available (not needed).
-* Custom tooling in `/tmp/opencode/hpqwc/`: `gba.py` (input/screenshot helper), `portshift.c` → `portshift.so` (`LD_PRELOAD` bind 2345→2346 for an exclusive GDB stub), `rsp.py` / `dbg.py` (GDB RSP client), `watchprobe.py` (watchpoint probes), `savestate` `gbAs` zlib parser.
+* Custom tooling in `/tmp/hpqwc/`: `gba.py` (input/screenshot helper), `portshift.c` → `portshift.so` (`LD_PRELOAD` bind 2345→2346 for an exclusive GDB stub), `rsp.py` / `dbg.py` (GDB RSP client), `watchprobe.py` (watchpoint probes), `savestate` `gbAs` zlib parser.
 * Savestates used as evidence sources: `state1.ss1` (pause Options), `titledata.ss2` (Saved Data title), `mainmenu.ss4` (main menu).
 * No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms and the author's own tools are published.

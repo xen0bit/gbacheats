@@ -1,5 +1,7 @@
 # Spider-Man: Mysterio's Menace (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -42,7 +44,7 @@ I reimplemented the validator exactly (cross-checked against the ROM's own valid
 | `0x084C11F4` | Hard-coded `CRDT5` cheat literal |
 | `0x08002CEC` | Password **generator** (state → 25-bit word → 5 symbols), runs when Select is pressed in-game; helpers at `0x080025F8`, `0x0802674`, `0x0802714`, `0x080282C` (parity encoder) |
 | `0x08003358` | Same generator writing symbols into caller buffer (`r1`) |
-| `0x0801C4A0` | Packs the five entered alphabet indices into a 25-bit word (`b<<5 | idx`, high index = char 4) and calls `0x08002388` |
+| `0x0801C4A0` | Packs the five entered alphabet indices into a 25-bit word (`b<<5 \| idx`, high index = char 4) and calls `0x08002388` |
 | `0x08002388` | **Password validator / decoder** (5-bit checksum, range checks, field decode) |
 | `0x080032FC` | Range helper: `(payload16 & 0x8208) ∈ {0x8208, 0x200, 0x08}` |
 | `0x0802990` | Range helper: four additional bit-consistency checks |
@@ -151,7 +153,7 @@ An in-game bad-code attempt also left the RAM payload at `0x00000000` (fresh gam
 
 ## 7. Validation evidence
 
-- **Observed (screenshots, kept in `/tmp/opencode/mysteriosmenace2/`)**: title `NEW GAME / PASSWORD / SOUND`; difficulty select `EASY / NORMAL / SUPER HERO`; 4×8 password keypad; level-select map with "LEVEL COMPLETED"; gameplay HUD (`x5` cartridges, black suit); Select/inventory screen showing `PASSWORD: TW3-R` and all items; pause menu `RESUME / SOUND / QUIT GAME`; Sound settings `BACK / MUSIC / SFX`.
+- **Observed (screenshots, kept in `/tmp/mysteriosmenace2/`)**: title `NEW GAME / PASSWORD / SOUND`; difficulty select `EASY / NORMAL / SUPER HERO`; 4×8 password keypad; level-select map with "LEVEL COMPLETED"; gameplay HUD (`x5` cartridges, black suit); Select/inventory screen showing `PASSWORD: TW3-R` and all items; pause menu `RESUME / SOUND / QUIT GAME`; Sound settings `BACK / MUSIC / SFX`.
 - **Observed (RAM)**: mGBA `gbAs` savestate decompressed; EWRAM `G = 0x02000028`, `G+0x8C = 0x0DFE22F`, `G+0x94 = 0`, `G+0x98 = 0x7F`, `G+0xE0 = 0xFF`, `G+0xE1 = 0x03` after entering `TW3-R`; same fields zero in the pre-entry state.
 - **Derived (disassembly / Unicorn)**: all checksum equations and range checks, the 86,016 count, the 5-symbol base-32 format, `CRDT5` being a separate literal comparison at `0x0801C454` called only when the main validator rejects, and its effect of setting screen state 10.
 - **Inferred**: screen state 10 set by `CRDT5` is the credits screen (based on the literal `CRDT5` and the credited-employees trivia); not visually confirmed.
@@ -165,6 +167,6 @@ An in-game bad-code attempt also left the RAM payload at `0x00000000` (fresh gam
 
 ## 9. Tooling
 
-`file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, Python 3 (`struct`, `zlib`, `PIL`), `arm-none-eabi-objdump -M force-thumb`, Capstone, **Unicorn 2.1.4** (`pip install --break-system-packages unicorn`) used to execute the ROM's validator as an oracle, mGBA 0.10.5 with Xvfb `:318` / openbox, `xdotool`, `scrot`, `convert`. Scripts: `/tmp/opencode/mysteriosmenace2/{validator,oracle,enumerate,decode_states,pick_codes,enter2,trace_all}.py`.
+`file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, Python 3 (`struct`, `zlib`, `PIL`), `arm-none-eabi-objdump -M force-thumb`, Capstone, **Unicorn 2.1.4** (`pip install --break-system-packages unicorn`) used to execute the ROM's validator as an oracle, mGBA 0.10.5 with Xvfb `:318` / openbox, `xdotool`, `scrot`, `convert`. Scripts: `/tmp/mysteriosmenace2/{validator,oracle,enumerate,decode_states,pick_codes,enter2,trace_all}.py`.
 
 Legal note: no ROM, extracted graphics, music, or game text were redistributed; only hashes, addresses, algorithms, and generated codes are published.

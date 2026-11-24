@@ -1,5 +1,7 @@
 # Rocky (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -267,7 +269,7 @@ TIM SIMMS, TOMMY GUNN, CHAPEL (+ venues begin at 0x72AFAE).
 (stub tried; flaky — savestate diffing used instead), `Xvfb`, `openbox`,
 `xdotool`, `scrot`, ImageMagick, `tesseract`, `mGBA 0.10.5 SDL`.
 
-Helper scripts in `/tmp/opencode/rocky/`: `key.py` (XTEST input), `brute.py`
+Helper scripts in `/tmp/rocky/`: `key.py` (XTEST input), `brute.py`
 (button-code entry + screenshot diff), `ssdecode.py` (PNG `gbAs` zlib decode).
 
 No ROM or copyrighted asset is redistributed by this report.

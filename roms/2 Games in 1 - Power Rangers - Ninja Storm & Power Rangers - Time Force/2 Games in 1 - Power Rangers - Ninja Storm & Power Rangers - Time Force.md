@@ -170,7 +170,7 @@ V W X Y Z 0 1 2
 |---:|---|
 | `0x0804AE0C` | password-screen init (clears `B+0x2426..0x2429`) |
 | `0x0804B1C6` | submit handler (calls validator, then THQ check) |
-| `0x0804D090` | packer: 3 chars → 15-bit value (`P = c2 | c1<<5 | c0<<10`) |
+| `0x0804D090` | packer: 3 chars → 15-bit value (`P = c2 \| c1<<5 \| c0<<10`) |
 | `0x0804CEA0` | core validator (bit fields + checksum, returns −1 or value) |
 | `0x0804955C` | special case: returns 1 iff buffer = `(15,5,12)` = `THQ` |
 | `0x0804B29A` | character-entry store (writes the buffer) |

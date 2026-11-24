@@ -1,5 +1,7 @@
 # Breath of Fire II (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -93,7 +95,7 @@ Boot path walked:
    panel (`Ryu`, `Lv 1`, `HP 24/24`, `AP 3/3`, `EXP 0`, location `Gate`).
    The `ITEM` page exposes `USE / DSOD / CHNG / SORT / VITL`.
 
-Screenshots were kept on disk under `/tmp/opencode/boff2/` (title, file select,
+Screenshots were kept on disk under `/tmp/boff2/` (title, file select,
 name entry, options, field menu, item submenu); they are deliberately not
 embedded in this report.
 
@@ -372,7 +374,7 @@ executed.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 - Python 3 `struct`/`hashlib` for header, pointer-table, string and mask scans.
 - `gdb-multiarch` against mGBA's GDB stub for the validator transition test.
-- Helper scripts and screenshots in `/tmp/opencode/boff2/` (not tracked).
+- Helper scripts and screenshots in `/tmp/boff2/` (not tracked).
 
 ## 10. Legal note
 

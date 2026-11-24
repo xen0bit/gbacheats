@@ -1,5 +1,7 @@
 # Ty the Tasmanian Tiger 3: Night of the Quinkan (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -227,7 +229,7 @@ in the code region, which suggests the string is unused by the retail front end.
 
 ## 9. Tooling
 
-Scripts written for this engagement (all in `/tmp/opencode/ty3`, not shipped):
+Scripts written for this engagement (all in `/tmp/ty3`, not shipped):
 
 * `scan_buttons.py` — literal button-prefix search in u8/u16 active-high/raw.
 * `scan_input.py` — `0x04000130` literal and LDR-reference scan.

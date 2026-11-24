@@ -1,5 +1,7 @@
 # Duel Masters: Shadow of the Code (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -75,11 +77,11 @@ Separately, the game has a **Kaijudo Code** — five story couplets reviewable i
 | `0x03004A30` | IWRAM | money/credits field, 32-bit: baseline `0x12C` = 300 |
 | `0x03004CAC/B0` | IWRAM | BAKUTO flags (4 bytes set by the check) |
 | `0x03003E5C/60/64/68` | IWRAM | FAITAA-linked scene flags (`0x03003E64` holds pointer `0x08B28C38`) |
-| `0x03003E5C bit2` | IWRAM | FAITAA match marker (`|= 4`) — never observed set through the UI (see §8) |
+| `0x03003E5C bit2` | IWRAM | FAITAA match marker (`\|= 4`) — never observed set through the UI (see §8) |
 | `0xAA500B–0xAA50EA` | ROM | Kaijudo Code couplets (5 parts) |
 | `0xAA510D` | ROM | `Kaijudo Code not known yet.` |
 | `0xA89E04 / 0xA89E1E` | ROM | Gizmo UI strings `Stats & Quest` / `Code Notes` |
-| `0xAA5479–0xAA5513` | ROM | five "You unlock <character> in multiplayer mode." strings |
+| `0xAA5479–0xAA5513` | ROM | five "You unlock &lt;character&gt; in multiplayer mode." strings |
 
 mGBA `.ssN` parsing: PNG `gbAs` chunk is zlib-compressed raw state (`0x61000` bytes for this 16 MiB ROM); IWRAM starts at raw `0x19000`, EWRAM at `0x21000`.
 
@@ -119,7 +121,7 @@ if strncmp(name, "KAGA", 4) == 0 and random_check(0x08340DB0) passes:
 | Name | Table slot (ROM) | Compare len | Live? | Effect | Confidence |
 |---|---|---:|---|---|---|
 | `BAKUTO` | `0x08342848` | 5 | yes | sets 4 flags at `0x03004CAC/B0` (minigame unlock, per published list) | Derived + name observed |
-| `FAITAA` | `0x08342850` | 7 | yes* | scene flags `0x03003E5C|=4`, `0x03003E64` image pointer | Derived; UI match not observed (§8) |
+| `FAITAA` | `0x08342850` | 7 | yes* | scene flags `0x03003E5C\|=4`, `0x03003E64` image pointer | Derived; UI match not observed (§8) |
 | `OKANE` | `0x08342858` | 5 | yes | skips warning; "infinite money" (published) | Derived from `0x082A5AD4` |
 | `FUYUU` | `0x08342860` | 5 | yes | money `+300` (`0x03004A30`) | **Observed** |
 | `FURY` | `0x08342868` | — | **no** | none — dead table entry | Derived (0 xrefs) |
@@ -175,7 +177,7 @@ These spellings appear on GameFAQs, VGChartz, TCRF, Reddit and the Duel Masters 
 
 ## 7. Validation evidence
 
-* **Observed**: emulator screenshots of splash/title/name entry/difficulty/card shop (work dir `/tmp/opencode/duelshadow/shot_*.png`); IWRAM reads from mGBA savestates. Name buffers for `QWERTYU`, `FOREST`, `FUYUU`, `FUYUUX`, `FAITAA`, `FAITAAX` read at `0x03004C90`. Money `0x03004A30` = `0x012C` for control/`FOREST`, `0x0258` for `FUYUU` and `FUYUUX`. F1/Shift+F1 savestate cycling used for repeatable tests.
+* **Observed**: emulator screenshots of splash/title/name entry/difficulty/card shop (work dir `/tmp/duelshadow/shot_*.png`); IWRAM reads from mGBA savestates. Name buffers for `QWERTYU`, `FOREST`, `FUYUU`, `FUYUUX`, `FAITAA`, `FAITAAX` read at `0x03004C90`. Money `0x03004A30` = `0x012C` for control/`FOREST`, `0x0258` for `FUYUU` and `FUYUUX`. F1/Shift+F1 savestate cycling used for repeatable tests.
 * **Derived**: table base/stride and replicated copy count; the single `strncmp` at `0x083425EC` and its exactly 6 call sites; all five validators, their literals, lengths and effect instructions; callback registration pointers; the prefix flaw; the dead-name classification (0 xrefs); FAITAA's NUL-inclusive 7-byte compare.
 * **Inferred**: published effect labels for `OKANE` (infinite money), `KAGAMI` (see opponent's cards), `BAKUTO` (minigames) — the comparisons and name acceptance were observed, but the downstream feature screens were not all played through. The fan claim that `FOREST` gives a tier-3 Nature deck here is contradicted by the 0-xref finding and was not reproduced.
 
@@ -191,6 +193,6 @@ These spellings appear on GameFAQs, VGChartz, TCRF, Reddit and the Duel Masters 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, Python 3 byte/literal/BL/PC-relative scanners.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for validator disassembly; Capstone 5.0.7 for literal-load scans.
 * mGBA (SDL) + Xvfb `:317` + openbox + xdotool; savestate RAM reads via a Python `gbAs`/zlib parser (IWRAM at raw `0x19000`).
-* Helper scripts in `/tmp/opencode/duelshadow/`: `k.py`, `pad.py`, `batchtest.py`, `ss.py`, `oracle.gdb`.
+* Helper scripts in `/tmp/duelshadow/`: `k.py`, `pad.py`, `batchtest.py`, `ss.py`, `oracle.gdb`.
 
 **Legal note**: no ROM bytes or copyrighted assets are reproduced here; only hashes, addresses, algorithms and generated code strings are published.

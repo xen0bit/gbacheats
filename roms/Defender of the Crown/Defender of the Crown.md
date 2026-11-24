@@ -1,10 +1,12 @@
 # Defender of the Crown (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Defender of the Crown/Defender of the Crown.gba` |
+| File | `roms/Defender of the Crown/Defender of the Crown.gba` |
 | Size | 4,194,304 bytes (0x400000) |
 | Header title | `DOTC` (0xA0, space/NUL padded) |
 | Game code | `ADHE` (0xAC) |
@@ -463,7 +465,7 @@ pointer spaces above are closed.
 * mGBA 0.10 SDL under Xvfb `:286`; `.ss1` states are PNGs whose `gbAs` chunk is
   `zlib`-compressed (397,312 bytes; VRAM 0x1000, IWRAM 0x19000, EWRAM 0x21000).
 * `xdotool` XTEST key injection (45–80 ms holds; 150 ms double-steps menus).
-* Custom scripts (in `/tmp/opencode/defendercrown`): `phase0.py`, `state.py`,
+* Custom scripts (in `/tmp/defendercrown`): `phase0.py`, `state.py`,
   `screen.py` (tile-map text decoder), `nav.py`, `dbg2.py` (mGBA CLI debugger over
   a pty), `holdtest.py`.
 

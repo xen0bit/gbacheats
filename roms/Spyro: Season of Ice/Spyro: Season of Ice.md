@@ -1,5 +1,7 @@
 # Spyro: Season of Ice (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -43,7 +45,7 @@ A second, separate published input surface exists (hold-`Select` weapon/key comb
 | `0x0805DB74` | ROM table | Cheat code table, 128 bytes: 8 records × 8 `u16` direction masks (active high: `R=0x10, L=0x20, U=0x40, D=0x80`) |
 | `0x0805DBF4` | ROM data | Separate particle-parameter table used by the credits/menu background controller (values `0x0403,0x0201,…`) |
 | `0x0800D1A0` | ROM/Thumb | **Validator**. Copies table to stack (`BL 0x0805D95C`, 0x80 bytes), loops `i=0..7`, `j=0..7`, compares `table[i*8+j]` with `ring[(head+j)&7]`, sets flag bit on full match, clears the 8-entry ring, calls `0x0803ED8` |
-| `0x0800D200` | ROM/Thumb | Flag-set block: `flags |= (1<<i)`; if `i==1`, also `flags |= 1` |
+| `0x0800D200` | ROM/Thumb | Flag-set block: `flags \|= (1<<i)`; if `i==1`, also `flags \|= 1` |
 | `0x0800E754` | ROM/Thumb | Sole caller: runs only when scene-state `==5` and another state `==0`; calls validator when `*(u16*)0x03001014 == 1` (A pressed), then writes that press into the ring and advances `head` |
 | `0x03002254` | IWRAM | **Cheat flag word** (bit `i` = code `i` accepted) |
 | `0x030014C8` | IWRAM | Pointer to game object base `r7`; ring at `r7+0x560`, head halfword at `r7+0xEC0` |
@@ -147,6 +149,6 @@ This proves strict 8-press, exact-match acceptance and bounds the code space to 
 
 ## 9. Tooling
 
-Scripts written in `/tmp/opencode/spyroice2/`: `find_masks.py` (mask-sequence search), `keys.py` (XTEST key helper), `stateutil.py` (gbAs parser / IWRAM reader), `test_code.py`, `verify_all.py` (8-code + 3-rejection sweep), `find_bitreaders.py`, `text_search.py`, `font_dump.py`. Tools: `arm-none-eabi-objdump -M force-thumb`, Python/capstone, mGBA 0.10.5, Xvfb `:318`, openbox, xdotool, scrot. GDB stub was unavailable (protocol handshake errors), so all RAM claims use savestate diffs.
+Scripts written in `/tmp/spyroice2/`: `find_masks.py` (mask-sequence search), `keys.py` (XTEST key helper), `stateutil.py` (gbAs parser / IWRAM reader), `test_code.py`, `verify_all.py` (8-code + 3-rejection sweep), `find_bitreaders.py`, `text_search.py`, `font_dump.py`. Tools: `arm-none-eabi-objdump -M force-thumb`, Python/capstone, mGBA 0.10.5, Xvfb `:318`, openbox, xdotool, scrot. GDB stub was unavailable (protocol handshake errors), so all RAM claims use savestate diffs.
 
 No ROM or copyrighted assets are redistributed here; only addresses, hashes, masks and our own scripts are documented.

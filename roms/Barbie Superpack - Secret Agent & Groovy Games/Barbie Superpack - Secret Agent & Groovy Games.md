@@ -1,5 +1,7 @@
 # Barbie Superpack: Secret Agent & Groovy Games (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -424,7 +426,7 @@ the help overlay and the credits were enumerated. This is a statement about that
   `-M force-thumb` / default ARM).
 * Python 3 + Capstone 5.0.7 for scans; `pw.py` in the analysis work dir is the
   reference codec (`decode`, `encode`, published-code table).
-* Work dir: `/tmp/opencode/bsuper` (`phase0.py`, `ptrox.py`, `pw.py`,
+* Work dir: `/tmp/bsuper` (`phase0.py`, `ptrox.py`, `pw.py`,
   `k.py`/`k2.py`, `half0.bin`, `half1.bin`, raw screenshots).
 
 ## Legal note

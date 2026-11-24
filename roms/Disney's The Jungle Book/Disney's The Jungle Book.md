@@ -1,5 +1,7 @@
 # Disney's The Jungle Book (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -447,7 +449,7 @@ as bytes and as `u16`:
   crops `720x480+282+312`.
 * mGBA 0.10.5, Xvfb 21.1.16, openbox, tesseract 5.5 (banner OCR),
   `arm-none-eabi-objdump -M force-thumb`, Capstone.
-* Key screenshots (work dir `/tmp/opencode/junglebook`): `m6.png` (pad),
+* Key screenshots (work dir `/tmp/junglebook`): `m6.png` (pad),
   `cs0.png` (all `?`), `typedc.png` (`BHBBBDBK`), `typed_okc.png`
   (Chapter 1), `fl2.png` (flags code accepted), `galCD.png` (gallery with
   locked/real cards), `c6.png` (Chapter 6), `wc12.png` (`BHBBBDBM` →

@@ -1,5 +1,7 @@
 # The Urbz: Sims in the City (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -169,7 +171,7 @@ candidate handler/table was found at all. One minor gated/unused artifact exists
 ## 7. Validation evidence
 
 * **Observed** — ROM header/hashes; all screens listed in §3/§6b with screenshots saved under
-  `/tmp/opencode/urbz/`; `Press START` / name text and font table read from EWRAM via savestate
+  `/tmp/urbz/`; `Press START` / name text and font table read from EWRAM via savestate
   `gbAs` decompression; input masks confirmed against KEYINPUT disassembly and working menu
   navigation; write watchpoint hit at `0x08027B30` when text was decompressed; the `CheaterX`
   name copied by `0x08023964`.
@@ -204,7 +206,7 @@ candidate handler/table was found at all. One minor gated/unused artifact exists
 * `md5sum`, `sha1sum`, `sha256sum`, `file`, `xxd`, `strings -t x`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all
   disassembly; Capstone 5.0.7 Python for literal/BL scans.
-* Python scripts written to `/tmp/opencode/urbz/`: `helper.py` (PID-scoped XTEST input + scrot),
+* Python scripts written to `/tmp/urbz/`: `helper.py` (PID-scoped XTEST input + scrot),
   `ss.py` (PNG `gbAs` zlib state parser), `patchss.py` (state patch + PNG rebuild),
   `scan_input.py`, `scan_combo.py`, `scan_masks.py` (input xrefs / mask scans), `dbg.py` (pty
   driver for mGBA's `-d` CLI debugger: `x/1`, `break/t`, `watch/w`).

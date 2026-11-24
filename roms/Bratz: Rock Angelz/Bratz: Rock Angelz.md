@@ -1,10 +1,12 @@
 # Bratz: Rock Angelz (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Bratz: Rock Angelz/Bratz: Rock Angelz.gba` |
+| File | `roms/Bratz: Rock Angelz/Bratz: Rock Angelz.gba` |
 | Size | 8,388,608 bytes (8 MiB, `0x800000`) |
 | Header title (`0xA0`–`0xAB`) | `BRATZ ROCK A` |
 | Game code (`0xAC`–`0xAF`) | `BRRE` (region nibble `E` = USA) |
@@ -411,7 +413,7 @@ representable code values = 0. The negative is a statement about this exact
 
 ## 7. Validation evidence
 
-### Observed (emulator/screenshots, on disk under `/tmp/opencode/rockangelz/`)
+### Observed (emulator/screenshots, on disk under `/tmp/rockangelz/`)
 
 * `s03.png` — title screen.
 * `s04.png`, `mm.png`, `mm2.png` — main menu with the three modes.

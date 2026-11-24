@@ -1,5 +1,7 @@
 # Ready 2 Rumble Boxing: Round 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -130,10 +132,10 @@ Field layout (`v` = 5-bit symbols):
 | boxer identity | `v[0]` + `v[1]&1` << 5 | 6 bits (published codes all 63) |
 | records | `(v[1]>>1)&15` | 4 bits |
 | progress low | `v[2]&15` | must ≤10 |
-| money/100 | `(v[4]<<6)|(v[3]<<1)|(v[2]>>4)&1` | 7 bits |
-| STR | `((v[8]&3)<<5)|v[5]` | ≤100 |
-| SPD | `(((v[8]>>2)&3)<<5)|v[6]` | ≤100 |
-| STM | `((v[9]&1)<<6)|(((v[8]>>4)&1)<<5)|v[7]` | ≤100 |
+| money/100 | `(v[4]<<6)\|(v[3]<<1)\|(v[2]>>4)&1` | 7 bits |
+| STR | `((v[8]&3)<<5)\|v[5]` | ≤100 |
+| SPD | `(((v[8]>>2)&3)<<5)\|v[6]` | ≤100 |
+| STM | `((v[9]&1)<<6)\|(((v[8]>>4)&1)<<5)\|v[7]` | ≤100 |
 | five small fields | `v[10]&1`, `(v[10]>>1)&3`, `(v[10]>>3)&3`, `(v[9]>>1)&3`, `(v[9]>>3)&3` | 1,2,2,2,2 bits |
 | XOR check | `v[0]` vs `XOR(v[1..11])` | enforced |
 | display digit | `v[12] = sum(v[0..11]) & 31` | **not enforced** |
@@ -210,4 +212,4 @@ Every published code encodes stats 100/100/100, so the 55/42/70 combination is p
 * `ui.py` / `enter.py` — XTEST input and automated 13-symbol password entry.
 * `patchstate.py` — savestate register patcher (used only as a navigation aid while locating the natural path; all final proofs used the natural UI path).
 * `pdftotext`/`tesseract` on the retail manual PDF (fetched as data) for the Championship/password navigation hint.
-* Work directory `/tmp/opencode/ready2rumble`; screenshots kept there (not attached). No ROM or copyrighted assets are redistributed in this report.
+* Work directory `/tmp/ready2rumble`; screenshots kept there (not attached). No ROM or copyrighted assets are redistributed in this report.

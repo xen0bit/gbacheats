@@ -1,10 +1,12 @@
 # Mega Man Zero 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Mega Man Zero 2/Mega Man Zero 2.gba` |
+| File | `roms/Mega Man Zero 2/Mega Man Zero 2.gba` |
 | Size | 8,388,608 bytes (`0x800000`) |
 | Header title | `MEGAMANZERO2` |
 | Game code / maker | `A62E` / `08` (Capcom) |
@@ -141,6 +143,6 @@ Published codes checked: all web-listed GameShark/Action-Replay/CodeBreaker entr
 
 * `binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`), Capstone 5.0.7 (literal/BL/immediate scans), Python 3 + Pillow.
 * mGBA 0.10.5 (`-3`), Xvfb (shared `:319`), xdotool, scrot, tesseract OCR.
-* Working scripts in `/tmp/opencode/mmzero2/`: `drive.py` (PID-scoped window focus, key/combo, screenshot+crop), `testcombos.py` (title button-code sweep), savestate `gbAs` zlib patcher (used to set `0x0202F8E1`), EWRAM/IWRAM diff helpers.
+* Working scripts in `/tmp/mmzero2/`: `drive.py` (PID-scoped window focus, key/combo, screenshot+crop), `testcombos.py` (title button-code sweep), savestate `gbAs` zlib patcher (used to set `0x0202F8E1`), EWRAM/IWRAM diff helpers.
 * Method note (§16.13): mGBA `.ssN` files are PNGs with a zlib `gbAs` chunk; for this image the raw state is `0x61000` bytes, VRAM at `0x1000`, IWRAM at `0x19000`, EWRAM at `0x21000`. SRAM is separate (`.sav`).
 * No ROM or copyrighted assets are redistributed by this report; only hashes, addresses, and derived algorithms are published.

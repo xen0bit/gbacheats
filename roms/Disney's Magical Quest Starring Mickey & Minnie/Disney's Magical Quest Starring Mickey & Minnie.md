@@ -1,5 +1,7 @@
 # Disney's Magical Quest Starring Mickey & Minnie (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | field | value |
@@ -267,7 +269,7 @@ Only `0x08025316` implements a cheat; the others are ordinary menu/gameplay chec
 * Capstone 5.0.7 scans: PC-relative literal loads, BL target scan, key-gate enumeration (`inpscan.py`, `suminp3.py`, `ldrscan2.py`).
 * mGBA GDB stub (`-g`) + `gdb-multiarch`: stop at the per-frame input store `0x080080CC`, read `0x02000904`, set `$pc=0x0802530C`, `$lr` to the game's own return address, break at `0x08025392` (post-write), read the stat bytes; unwind `sp += 12` and resume.
 * Savestate reader (`ss.py`): mGBA `.ssN` PNG + zlib `gbAs` chunk (397,312 bytes); IWRAM at `0x19000`, EWRAM at `0x21000`.
-* Screenshots kept outside the ROM folder in `/tmp/opencode/magicalquest1` (not published).
+* Screenshots kept outside the ROM folder in `/tmp/magicalquest1` (not published).
 
 ## 10. Legal note
 

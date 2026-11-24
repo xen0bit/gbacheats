@@ -1,5 +1,7 @@
 # Aggressive Inline (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -78,11 +80,11 @@ Negative results (bounded, not “not tested”):
 ### Emulator and display
 
 ```bash
-mkdir -p /tmp/opencode/inline
+mkdir -p /tmp/inline
 Xvfb :128 -screen 0 1024x768x24 &
 DISPLAY=:128 openbox &
 DISPLAY=:128 SDL_AUDIODRIVER=dummy mgba -3 \
-  "/mnt/gbacheats/roms/Aggressive Inline/Aggressive Inline.gba" &
+  "roms/Aggressive Inline/Aggressive Inline.gba" &
 ```
 
 mGBA SDL default keymap used here:
@@ -568,7 +570,7 @@ matching the `0x80`-frame counter at `0x03000191`.
 * `gdb-multiarch` + mGBA `-g` stub for RAM/profile reads.
 * `arm-none-eabi-objdump -M force-thumb` for validator disassembly.
 * Python 3 + Capstone 5.0.7 for mask/table scans and header parsing.
-* Helper scripts/logs: `/tmp/opencode/inline/key.py`, `gdb1.txt`, `gdb2.txt`,
+* Helper scripts/logs: `/tmp/inline/key.py`, `gdb1.txt`, `gdb2.txt`,
   `logs/gdb1.log`, `logs/gdb2.log`.
 * Evidence images: `roms/Aggressive Inline/evidence/` (24 PNG/JPG images +
   2 GDB logs).

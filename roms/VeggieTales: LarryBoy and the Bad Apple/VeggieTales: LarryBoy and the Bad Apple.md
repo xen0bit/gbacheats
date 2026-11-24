@@ -1,5 +1,7 @@
 # VeggieTales: LarryBoy and the Bad Apple (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -167,7 +169,7 @@ was found.
 under Xvfb `:318` + openbox, mGBA CLI debugger (`-d`) for RAM reads/writes,
 `gdb-multiarch` + mGBA GDB stub, `xdotool` XTEST input, `scrot` screenshots,
 Brave web search (read-only). All scripts and screenshots are under
-`/tmp/opencode/larryboy/`.
+`/tmp/larryboy/`.
 
 **Cleanup (confirmed):** display `:318` (Xvfb PID 767629) and openbox (767633)
 stopped; every mGBA instance and debugger helper started for this job killed by

@@ -1,5 +1,7 @@
 # 2-in-1 – Cartoon Network Block Party & Cartoon Network Speedway (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -655,7 +657,7 @@ Field semantics established from the validator and from in-game effects:
 
 ## 9. Tooling
 
-All scripts are in `/tmp/opencode/cn` (disposable). mGBA 0.10.5 (`/usr/games/mgba`),
+All scripts were in `/tmp/cn` (disposable). mGBA 0.10.5 (`/usr/games/mgba`),
 `arm-none-eabi-objdump`, Capstone 5.0.7, Xvfb + openbox + xdotool + scrot.
 
 ### `bppass.py` — Block Party codec (encode/decode/validate)

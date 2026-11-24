@@ -1,5 +1,7 @@
 # Monster House (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -37,7 +39,7 @@ Genuine unlockables exist (Hard Mode, Ruby Key, Doom Bringer 3000) but are save-
 * Keymap (verified on-screen): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Hold 80–250 ms.
 * Boot path: legal splash → A → ~40 s of Sony/Columbia/A2M logos → title (`Press START`) → Start → main menu.
 * Main menu is a horizontal 4-item ring/cap: **New Game, Load Game, Options, Credits** (Left/Right navigate; Right at Credits is capped, B returns to title).
-* Screens walked (all with screenshots retained in `/tmp/opencode/monsterhouse/*.png`):
+* Screens walked (all with screenshots retained in `/tmp/monsterhouse/*.png`):
   1. legal splash, 2. eight intro logos, 3. title, 4. main menu, 5. Load Game → 2 empty slots, 6. Options → Music Volume / Sound Volume / Language (English ↔ Français only), 7. Credits, 8. New Game → slot select → "Create Game? Yes/No", 9. chapter title card "Entering the Monster", 10. in-game dialogue/field, 11. gameplay with HUD, 12. Start → ITEMS/quest inventory grid. The inventory's two `?` entries are unlabelled item slots, not hidden menu entries.
 * Savestate slots 1 (main menu) and 2 (gameplay) were used for repeatable experiments; `F1`/`F2` reload confirmed working.
 * No code was entered because no code-entry surface exists.
@@ -132,6 +134,6 @@ Not applicable — no validator, checksum, generator, or key-mask matcher exists
 * mGBA SDL under `Xvfb :316` + `openbox`; `xdotool` XTEST input; `scrot` + ImageMagick `convert` for cropped 720×480 frames.
 * mGBA CLI debugger `-d` on a FIFO for read-watchpoints; mGBA savestates parsed by extracting the zlib `gbAs` PNG chunk for RAM diffs (§16.13). GDB stub was trialled but proved unreliable in this build and was abandoned in favor of savestates.
 * REA/Ghidra 12.1.4 raw-ARM import at 0x08000000 for xref queries (session closed after use).
-* Helper scripts retained in `/tmp/opencode/monsterhouse/` (`emu.py`, decoder/pointer-scan scripts, `decoded_text.txt`).
+* Helper scripts retained in `/tmp/monsterhouse/` (`emu.py`, decoder/pointer-scan scripts, `decoded_text.txt`).
 
 **Legal note:** no ROM bytes, graphics, music, or game text are redistributed here; only hashes, addresses, and findings are published.

@@ -1,5 +1,7 @@
 # The Hobbit: The Prelude to the Lord of the Rings (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -144,7 +146,7 @@ is empty; the counts below define the searched spaces.
    level/area names, language names, `ELROND`, `BILBO`, and float-formatting constants).
    **Tested on the real screen:** `ELROND` → ordinary new game + normal dialogue; novel
    `AZQX74` → ordinary new game + normal dialogue (screenshots `novel_azqx74.png`,
-   `novel_after.png` in `/tmp/opencode/hobbit/`); default `BILBO` → normal. No distinct
+   `novel_after.png` in `/tmp/hobbit/`); default `BILBO` → normal. No distinct
    effect for any name.
    Therefore the name field is a label, not a code (§16.2b).
 2. **Button-code space.** Scanned all of `0x08000000`–`0x081FFFFF` as `u16` runs of
@@ -152,7 +154,7 @@ is empty; the counts below define the searched spaces.
    instruction-stream/data false positive (e.g. `0x08085C4C`, `0x080872D2`); no entry has
    a terminator or a consuming validator. `SELECT+L+R` is sleep mode (UI strings at
    `0x08312BC`–`0x08312E4`, prompt `0x08313AC`); `A+B+Start+Select` was **observed** to
-   soft-reset to the credits/title (`combo_abst.png` in `/tmp/opencode/hobbit/`), not to
+   soft-reset to the credits/title (`combo_abst.png` in `/tmp/hobbit/`), not to
    open a menu. A Konami-style
    sequence produced no change beyond that reset state.
 3. **Hidden/debug menu space.** The full localized UI bank has 43 records; record 27 is
@@ -204,7 +206,7 @@ which bounds the negative: no accepted set exists in the 36^1..9 name space.
   `xdotool` (XTEST), `scrot`, `ImageMagick`.
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, REA/Ghidra 12.1.4 raw-binary
   import (base `0x08000000`, architecture ARM; session closed at end).
-* Work scripts in `/tmp/opencode/hobbit/`: `findptr.py`, `findtext.py`, `scanmasks.py`,
+* Work scripts in `/tmp/hobbit/`: `findptr.py`, `findtext.py`, `scanmasks.py`,
   `ss.py` (savestate `gbAs` extractor), `type_name.py`, `combo.py`, `k.sh`, `shot.sh`.
 * No ROM or copyrighted assets are redistributed; only addresses, hashes and findings are published.
 

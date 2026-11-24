@@ -1,5 +1,7 @@
 # Sports Illustrated for Kids Baseball (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -17,7 +19,7 @@
 | SHA-1 | `a262d54f5f9fc35e7ce410b834f3bcd2aa163f10` |
 | SHA-256 | `f7206824a4f49ed161d2f727aa808da56a44ae6751b13e3cc7066fd6a304eb63` |
 
-All addresses below are for **this exact hash**. Work directory: `/tmp/opencode/sibaseball`.
+All addresses below are for **this exact hash**. Work directory: `/tmp/sibaseball`.
 
 ## 2. Executive summary
 
@@ -33,19 +35,19 @@ Web reconnaissance (GameFAQs 403; Google/DuckDuckGo/Bing blocked or irrelevant) 
 * Keymap (verified by menu navigation): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. **A is `x`, not the letter `a`** — the letter `a` is L and does nothing in menus.
 * Boot path: BAM! → Sennari → title (timed, ~10 s) → Start → main menu.
 * Main menu (4 items, wraps at 4 — confirmed by pressing Down four times): **SEASON / EXHIBITION / LINK / CREDITS**.
-* Screens walked (each verified by screenshot, files in `/tmp/opencode/sibaseball/`):
+* Screens walked (each verified by screenshot, files in `/tmp/sibaseball/`):
   * `s8.png` main menu; `menu_season2.png` Season → LOAD TEAM (five "New Team" slots + Erase);
   * `ps2.png` PICK A STATE (US map), `mapS.png` TEAM COLORS, `tn3b.png` TEAM NAME (A–Z + backspace + END keypad, help text `A Button replaces, B Button exits, START accepts` at 0x08383B9C);
   * `exh4.png` Exhibition → TEAM SELECTION (Warlocks … Hawks, skill 6); `link2.png` LINK → CONNECTING; CREDITS rendered black in this build.
 * Savestate slot 1 saved at the main menu (`F1` loads, `Shift+F1` saves); slots 2–4 saved at the Team Name screen for RAM diffing.
-* Static tools: `strings -t x`, `xxd`, `arm-none-eabi-objdump -M force-thumb`, custom Python BL/pointer/table scanners in `/tmp/opencode/sibaseball/`.
+* Static tools: `strings -t x`, `xxd`, `arm-none-eabi-objdump -M force-thumb`, custom Python BL/pointer/table scanners in `/tmp/sibaseball/`.
 
 ## 4. Address map
 
 | ROM address | Meaning | Evidence |
 |---|---|---|
 | `0x080314DC` | Code validator (called as UI accept callback) | Derived from Thumb disassembly; literal pool at 0x08031574–0x0803159C |
-| `0x080315B0` | Unlock helper: clears all 9 flag bytes with value 2, sets `flag[idx] |= 2` | Derived |
+| `0x080315B0` | Unlock helper: clears all 9 flag bytes with value 2, sets `flag[idx] \|= 2` | Derived |
 | `0x080313E4` | Screen setup that installs validator pointer `0x080314DD` at `[arg+12]` | Derived; pointer referenced at 0x083837F0 |
 | `0x08031260`, `0x0803162C` | Companion text-entry handlers (other screens) | Derived; pointers at 0x0838359C / 0x08383834 |
 | `0x083835D4` | Code string table: 27 × 12-byte NUL-padded records (9 codes × 3 copies), 324 bytes | Derived; dumped and parsed |
@@ -173,7 +175,7 @@ i code         bytes
 
 * `strings -t x`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
-* Custom Python scripts in `/tmp/opencode/sibaseball/`: `scan.py` (literal u32 pointer scan), `blscan.py` (Thumb BL target scan), `scanrange.py` (pointer-into-range scan), `keyscan.py` (button-mask table scan), `walk.py`/`key.py` (XTEST input + scrot), `combos.py` (button-combo fuzzer).
+* Custom Python scripts in `/tmp/sibaseball/`: `scan.py` (literal u32 pointer scan), `blscan.py` (Thumb BL target scan), `scanrange.py` (pointer-into-range scan), `keyscan.py` (button-mask table scan), `walk.py`/`key.py` (XTEST input + scrot), `combos.py` (button-combo fuzzer).
 * Savestate decoding: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte raw state; IWRAM at +0x19000, EWRAM at +0x21000 (guide §16.13).
 * mGBA 0.10.5 under Xvfb `:315`; window focused with `xdotool windowfocus` (no window manager needed); `SDL_AUDIODRIVER=dummy`.
 

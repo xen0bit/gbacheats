@@ -1,5 +1,7 @@
 # Planet of the Apes (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -73,7 +75,7 @@ r1=0x03004514**; after stepping the store, `r/4 0x03004514` = `0xFFFFFFFF`.
 ### 3.2 Password entry
 
 Reach the password wheel (main-menu padlock) or load
-`/tmp/opencode/planetoftheapes2/pw0.ss1`. Wheel order (34 slots):
+`/tmp/planetoftheapes2/pw0.ss1`. Wheel order (34 slots):
 `B C D F G H J K L M N P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9 # ←`.
 LEFT decrements, RIGHT increments, A appends. `9BBBBB` from the state with 'C'
 selected: LEFT×4 → `9`, A, RIGHT×3 → `B`, A×5. Press Start to submit.

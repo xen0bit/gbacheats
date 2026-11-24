@@ -1,5 +1,7 @@
 # Star Wars: Episode II – Attack of the Clones (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -118,14 +120,14 @@ code = ''.join(A[x] for x in (v0, v1, v2, v3, v4, v5))
 Worked example for `JDCGCH` (`v = [6,2,1,4,1,5]`):
 `6^1^1 = 6` ✓, `2^4^5 = 3` ✓, `v1=2 ≤ 3` ✓, `v2=1` ✓, `v3=4` ✓ → accepted;
 the emulator played the level-2 intro and reached gameplay (screenshot
-`/tmp/opencode/starwars2/novel1_crop.png`, work-dir copy only).
+`/tmp/starwars2/novel1_crop.png`, work-dir copy only).
 
 ## 6. Tables
 
 **Alphabet / symbol values**
 
 | idx | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
-|---|---|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|
+|---|---|---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|
 | symbol | B | C | D | F | G | H | J | K | L | M | N | P | Q | R | S | T |
 
 **Field interpretation (confidence: inferred from published-code correlations)**
@@ -234,7 +236,7 @@ retail input path; it does not rule out gated debug code in dead code paths.
   over a pty with a small Unix-socket server (`dbgserver.py`) was used for the
   keypad watchpoint. `arm-none-eabi-objdump -M force-thumb`, Python/Capstone 5.0.7
   for literal-pool and BL scans, Python/Pillow for screenshot classification.
-* Work files (scripts, screenshots, fitted tables): `/tmp/opencode/starwars2/`.
+* Work files (scripts, screenshots, fitted tables): `/tmp/starwars2/`.
   No ROM or copyrighted assets are redistributed; screenshots are local evidence only.
 
 ## 10. Legal note

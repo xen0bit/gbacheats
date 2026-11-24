@@ -1,5 +1,7 @@
 # Dragon Ball Z: The Legacy of Goku (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Property | Value |
@@ -356,8 +358,8 @@ The handler clamps (`cmp #41 / #30 / #17 / #14`) independently bound all four co
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 * Python 3 + capstone 5.0.7 for PC-relative literal, BL/B-target and byte-pattern scans.
 * `savestate.py` (zlib-decompresses the `gbAs` PNG chunk) for IWRAM/EWRAM RAM proofs;
-  `gba.py` (XTEST keypress/screenshot/crop helpers) in `/tmp/opencode/logoku1/`.
-* Screenshots: up to ~20 720×480 crops in `/tmp/opencode/logoku1/`; key files named in §7.
+  `gba.py` (XTEST keypress/screenshot/crop helpers) in `/tmp/logoku1/`.
+* Screenshots: up to ~20 720×480 crops in `/tmp/logoku1/`; key files named in §7.
 
 ## 10. Legal note
 

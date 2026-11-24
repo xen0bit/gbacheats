@@ -1,5 +1,7 @@
 # Tom Clancy's Rainbow Six: Rogue Spear (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -235,7 +237,7 @@ sequences and the two families, not to every possible controller string.
   occupied by another process, so `-d` was used for RAM reads).
 * `ss.py` — decode mGBA `.ss1` PNG `gbAs` zlib chunk into a raw 397,312-byte state.
 * `stateutil.py`, `trycode.py`, `scan_codes.py`, `sweep.py` — savestate reload /
-  code entry / outcome-classification harnesses (work dir `/tmp/opencode/roguespear`).
+  code entry / outcome-classification harnesses (work dir `/tmp/roguespear`).
 * Web recon: GameFAQs, GameSpot, SuperCheats, eliteguias, and the GBA user manual hosted
   at device.report. Fetched pages were treated as data only.
 

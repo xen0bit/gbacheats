@@ -1,5 +1,7 @@
 # Stuntman (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -26,7 +28,7 @@ The apparent "debug" strings `AUTO TESTING 1..6` (0x08008EDA..0x08008F90) are **
 * Emulator: mGBA 0.10.5 under Xvfb `:317`, `SDL_AUDIODRIVER=dummy`, `-3` scale; XTEST key events via `xdotool` (A=`x`, B=`z`, Start=`Return`, D-pad=arrows).
 * Boot: Atari splash → (A) → language select (English / Español / Français) → (A) → Create a Game / Load Game with three slots → (A) on a slot → main menu (`STUNTMAN CAREER`, `ARENA`, `INFO. ABOUT ICONS`) → career/attract gameplay. Start returns from active play to attract/title flow.
 * Cheat-code attempts: none accepted because no entry surface exists. The five published PS2 strings were searched in the ROM (0 hits) and `fellA` was written into slot 1's name field in SRAM (wordwise byte-reversed, the game's own convention) and loaded; no unlock or "cheat" confirmation appeared.
-* Screenshots and RAM dumps are kept in `/tmp/opencode/stuntman/` (not redistributed with the report).
+* Screenshots and RAM dumps are kept in `/tmp/stuntman/` (not redistributed with the report).
 
 ## 4. Address map
 
@@ -100,7 +102,7 @@ The 8-byte name at `slot+4` is included in that sum; this is the only observed r
 ## 9. Tooling
 
 * `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, keyword greps.
-* Python 3 scripts (in `/tmp/opencode/stuntman/`): header parse, multi-encoding literal search (515 transforms/string), alphabet/button-mask scanners, mixed-case token scan, savestate `gbAs` zlib extraction and EWRAM diff.
+* Python 3 scripts (in `/tmp/stuntman/`): header parse, multi-encoding literal search (515 transforms/string), alphabet/button-mask scanners, mixed-case token scan, savestate `gbAs` zlib extraction and EWRAM diff.
 * `arm-none-eabi-objdump` (`-b binary -marm`, `-M force-thumb` / ARM mode) and Capstone for literal/xref scans; REA/Ghidra raw-binary import (base `0x08000000`) for string/xref checks.
 * mGBA 0.10.5 with `-3`, `-g`, `-d`; `xdotool`/`scrot` under Xvfb `:317` + openbox; `SDL_AUDIODRIVER=dummy`.
 

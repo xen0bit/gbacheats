@@ -1,5 +1,7 @@
 # LEGO Knights' Kingdom (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -121,8 +123,8 @@ alphabet map to index 15 at most and are ignored when the index exceeds 15. Deco
 raw word at `0x02000F7C`; validation happens separately in `0x08086220`; only then does
 `0x08086448` unpack data bits into the flags and set the unlock word at `0x02000EB4`.
 
-A full Python implementation is `/tmp/opencode/legoknights/pw.py`; the brute-force enumerator is
-`/tmp/opencode/legoknights/enum.c`.
+A full Python implementation is `/tmp/legoknights/pw.py`; the brute-force enumerator is
+`/tmp/legoknights/enum.c`.
 
 ## 6. Tables
 
@@ -183,7 +185,7 @@ cursor starts on `B`, `Down` from the grid cycles `Done → Delete → Quit`.
 
 ## 7. Validation evidence
 
-* **Observed** (emulator screenshots, saved on disk in `/tmp/opencode/legoknights/`): boot/legal,
+* **Observed** (emulator screenshots, saved on disk in `/tmp/legoknights/`): boot/legal,
   title, MAIN MENU, SELECT QUEST, ENTER PASSWORD + keyboard, GAME PAUSED, Options, Trophy Room
   (`Vladek Artifacts 4/4`, `Lost Key 4/4` after `YZZVZYZ`), SELECT KNIGHT! with Lord Vladek
   selectable, Multiplayer "Waiting for player", and the novel-code result.
@@ -218,11 +220,11 @@ cursor starts on `B`, `Down` from the grid cycles `Done → Delete → Quit`.
 * Python 3 with `capstone` 5.0.7 for literal/PC-relative scans; `arm-none-eabi-objdump
   -M force-thumb` for all disassembly; REA/Ghidra (`open_binary` raw-binary ARM @ `0x08000000`,
   `search_strings`, `xrefs`) for string discovery and cross-reference checks.
-* `/tmp/opencode/legoknights/ss.py` — mGBA `.ss*` `gbAs` zlib extractor / RAM reader.
-* `/tmp/opencode/legoknights/pw.py` — bit-exact encoder, validator, decoder and flag map.
-* `/tmp/opencode/legoknights/enum.c` — exhaustive 2^28 validator enumeration.
-* `/tmp/opencode/legoknights/enter.py`, `key.py` — reproducible on-screen code entry via XTEST.
-* Screenshots and savestates are in `/tmp/opencode/legoknights/` and in the ROM folder during
+* `/tmp/legoknights/ss.py` — mGBA `.ss*` `gbAs` zlib extractor / RAM reader.
+* `/tmp/legoknights/pw.py` — bit-exact encoder, validator, decoder and flag map.
+* `/tmp/legoknights/enum.c` — exhaustive 2^28 validator enumeration.
+* `/tmp/legoknights/enter.py`, `key.py` — reproducible on-screen code entry via XTEST.
+* Screenshots and savestates were in `/tmp/legoknights/` and in the ROM folder during
   the run; all generated `.sav`/`.ss*` files were removed from the ROM folder at the end.
 
 *Legal note*: no ROM bytes, graphics, music or game text are redistributed by this report —

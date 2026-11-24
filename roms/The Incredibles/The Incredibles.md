@@ -1,5 +1,7 @@
 # The Incredibles (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -35,7 +37,7 @@ Rejection bounds were proven in-game: a checksum-valid but out-of-range level (`
 * Boot path: intro → main menu (**New Game / Password / Sound**). Select **Password**, press A. The keypad grid is 8 columns × 4 rows; move the cursor with the D-pad and press A to enter a symbol, B to erase. The 4th entry triggers validation immediately.
 * Savestate `game.ss1` (empty password screen) was used as the restart point for every code test. `python3 entercode.py <code>` navigates the grid and types a 4-character code using the alphabet below.
 * Codes verified on-screen: `MSW5` (published level 1-1-1, accepted), `ZYQ8` (published level select, accepted → "111" bar appears on main menu; R changes it to "112"), `CR3D` (accepted → credits), `GBZZ`, `3YKT`, `M4RK` (novel, accepted), `NNS6` and `MSW7` (rejected with "Invalid"), `SH!T` (rejected).
-* Screens walked (all with screenshots under `/tmp/opencode/incredibles/`): title/intro (`title2.png`, `boot2.png`), main menu (`title2.png`), password keypad + "Invalid" (`pw3.png`, `rej_checksum.png`), sound menu (`soundmenu2.png`), level-select bar (`lvlsel3.png`, `lvlsel_R.png`), level banner / gameplay (`novel_3ykt_play.png`, `novel_gbzz2.png`), credits (`cr3d_after.png`).
+* Screens walked (all with screenshots under `/tmp/incredibles/`): title/intro (`title2.png`, `boot2.png`), main menu (`title2.png`), password keypad + "Invalid" (`pw3.png`, `rej_checksum.png`), sound menu (`soundmenu2.png`), level-select bar (`lvlsel3.png`, `lvlsel_R.png`), level banner / gameplay (`novel_3ykt_play.png`, `novel_gbzz2.png`), credits (`cr3d_after.png`).
 * Offline decoder/encoder: `python3 model.py` reproduces all 56 published checksum codes and regenerates each from its decoded payload.
 
 ## 4. Address map

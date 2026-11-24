@@ -1,5 +1,7 @@
 # 2-in-1: Tony Hawk's Underground & Kelly Slater's Pro Surfer (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -64,7 +66,7 @@ Boot selector (important): the shell animates its background and defers the actu
 4. Down ×7 to **Extras**, A. Scroll down: after *Sound FX On* there are now four `(Cheat) Off` entries; A toggles each to `(Cheat) Beach/Boards/Clips/Champ`.
 5. Back (B), Championship (Down ×1, A), A at surfer select, A at beach select, advance tutorial cards, Start → pause → Down ×2 → **End Run** → A → championship standings.
 
-Screenshots (crops, `/tmp/opencode/thug/`): `right1_g.png` (11-item Extras with four Off), `t2_g.png`/`t4_g.png` (all four active), `beach_only_g.png` (13/13 beaches), `boards_only_g.png` (13/13 boards), `clip_on_g.png` (all 13 clips), `ch_stand_g.png` (Champ: player 10.0, #1), `base_heat2_g.png`/`end_off2_g.png` (baseline 0.0, #7), `wrong2_g.png` (wrong code: no cheat entries), `pers5_g.png` (cold boot: no cheats, music Off persisted).
+Screenshots (crops, `/tmp/thug/`): `right1_g.png` (11-item Extras with four Off), `t2_g.png`/`t4_g.png` (all four active), `beach_only_g.png` (13/13 beaches), `boards_only_g.png` (13/13 boards), `clip_on_g.png` (all 13 clips), `ch_stand_g.png` (Champ: player 10.0, #1), `base_heat2_g.png`/`end_off2_g.png` (baseline 0.0, #7), `wrong2_g.png` (wrong code: no cheat entries), `pers5_g.png` (cold boot: no cheats, music Off persisted).
 
 ### THUG — reaching Options
 
@@ -323,9 +325,9 @@ On screen the four entries appear in the order **Beach, Boards, Clips, Champ**.
 
 * `mGBA 0.10.5` (SDL), `Xvfb :116`, `openbox`, `xdotool`, `scrot`, ImageMagick `convert`.
 * `arm-none-eabi-objdump -M force-thumb` / default ARM mode; Python 3 + `capstone 5.0.7` for pointer/BL scans.
-* Custom scripts in `/tmp/opencode/thug/`: `key.py` (input + cropped screenshots), `ptrscan.py`, text-ID mapper, mGBA PNG-savestate reader/writer (the `gbAs` zlib chunk is at the end; EWRAM is the last `0x40000` bytes, i.e. offset `len-0x40000`; `ss9` was used only as an analysis aid to test the `0x0200D364` hypothesis).
+* Custom scripts in `/tmp/thug/`: `key.py` (input + cropped screenshots), `ptrscan.py`, text-ID mapper, mGBA PNG-savestate reader/writer (the `gbAs` zlib chunk is at the end; EWRAM is the last `0x40000` bytes, i.e. offset `len-0x40000`; `ss9` was used only as an analysis aid to test the `0x0200D364` hypothesis).
 * No GameShark/CodeBreaker code was used to produce any reported effect; the only memory write was the explicitly labelled `0x0200D364` negative test, which had no effect.
 
 ## 10. Legal note
 
-No ROM, extracted graphics, audio, or game text is redistributed here beyond short identifiers needed to document the cheat system. Screenshots are emulator output retained only as local evidence in `/tmp/opencode/thug/`.
+No ROM, extracted graphics, audio, or game text is redistributed here beyond short identifiers needed to document the cheat system. Screenshots are emulator output retained only as local evidence in `/tmp/thug/`.

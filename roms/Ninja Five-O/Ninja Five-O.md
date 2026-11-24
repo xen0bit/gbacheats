@@ -1,5 +1,7 @@
 # Ninja Five-O (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -184,7 +186,7 @@ No novel code was entered because no code exists to enter; this is a proven nega
 ## 9. Tooling and cleanup
 
 * Tools: `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, Python 3 with `capstone` 5.0.7 / `keystone-engine`, `arm-none-eabi-objdump -M force-thumb`, mGBA SDL (`-3`), Xvfb :315, openbox, `xdotool`, `scrot`, ImageMagick, Pillow. REA MCP was loaded per the guide; raw ARM/Thumb `objdump` plus the emulator remained the practical path.
-* Scripts in `/tmp/opencode/ninjafiveo/`: `scan1.py`, `buttoncodes.py`, `keyrefs.py`, `textdecode.py`, `dumptext.py`, `fontscan.py`, `ssram.py`, `ssdiff.py`, `rendertiles.py`, `rendfont.py`.
+* Scripts in `/tmp/ninjafiveo/`: `scan1.py`, `buttoncodes.py`, `keyrefs.py`, `textdecode.py`, `dumptext.py`, `fontscan.py`, `ssram.py`, `ssdiff.py`, `rendertiles.py`, `rendfont.py`.
 * **Cleanup performed:** all processes started for this job were stopped **by PID** (`kill $(cat mgba.pid)`, Xvfb and openbox PIDs from their `.pid` files): mgba, Xvfb :315, openbox. No `pkill` was used at any point. All generated `Ninja Five-O.sav`, `Ninja Five-O.ss1`–`.ss4` were removed from the ROM folder; only `Ninja Five-O.gba` and this report remain. Other agents' displays/processes were not touched.
 
 ## 10. Legal note

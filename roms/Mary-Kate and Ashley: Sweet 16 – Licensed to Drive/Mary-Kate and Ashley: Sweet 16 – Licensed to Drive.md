@@ -1,5 +1,7 @@
 # Mary-Kate and Ashley: Sweet 16 – Licensed to Drive (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -189,11 +191,11 @@ use `f1 = 0..35` and `58..63`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
   for validator disassembly; Capstone 5.0.7 and Python for literal scans.
 * mGBA 0.10 CLI debugger driven through a PTY (`ptydebug.py` / `dbg.py` in
-  `/tmp/opencode/mksweet16`); read watchpoint at `0x02018034` located the validator.
+  `/tmp/mksweet16`); read watchpoint at `0x02018034` located the validator.
 * Python scripts: `decoder.py`, `encoder.py`, `validate_rom.py` (bit-exact validator),
   `state.py` (savestate `gbAs` zlib parser), `typer2.py` (keyboard automation),
   `testcodes2.py` (code → RAM proof). C scripts: `enum.c`, `enum2.c` (exhaustive counts).
-* Screenshots retained under `/tmp/opencode/mksweet16/` (`password.png`,
+* Screenshots retained under `/tmp/mksweet16/` (`password.png`,
   `novel_f3_1_result.png`, `t_*_result.png`, `reject_gm_imm.png`, `credits.png`, etc.).
 * No ROM or copyrighted assets are redistributed here — only addresses, hashes,
   algorithms and generated code strings.

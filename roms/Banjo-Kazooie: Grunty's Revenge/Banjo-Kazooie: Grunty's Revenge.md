@@ -1,5 +1,7 @@
 # Banjo-Kazooie: Grunty's Revenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,7 +43,7 @@ Emulator: mGBA SDL (`/usr/games/mgba`), 3× scale, under `Xvfb :165` + `openbox`
 ```
 Xvfb :165 -screen 0 1024x768x24 &
 DISPLAY=:165 openbox &
-cd /tmp/opencode/banjo
+cd /tmp/banjo
 DISPLAY=:165 SDL_AUDIODRIVER=dummy mgba -3 rom.gba &
 W=$(DISPLAY=:165 xdotool search --name mGBA | head -1)
 DISPLAY=:165 xdotool windowfocus $W

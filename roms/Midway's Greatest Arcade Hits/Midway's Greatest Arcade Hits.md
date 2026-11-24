@@ -1,5 +1,7 @@
 # Midway's Greatest Arcade Hits (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -17,7 +19,7 @@
 | SHA-1 | `194913c9d5a74b9af5f90b539828f6fa77c016ed` |
 | SHA-256 | `9cd872a8c69ba58426f8a5d1bae2baf786d9d3609c2fdaef97eefdefb806109b` |
 
-The analysis copy under `/tmp/opencode/midway/MGAH.gba` has the identical MD5.
+The analysis copy under `/tmp/midway/MGAH.gba` has the identical MD5.
 
 ### Phase 0 layout findings
 
@@ -315,4 +317,4 @@ hashes, addresses, algorithms and findings are published.
 
 All processes started for this job were stopped by PID: mGBA, Xvfb `:317` and
 openbox. Generated `MGAH.sav`, `MGAH.ss*` and analysis artifacts live only in
-`/tmp/opencode/midway`; the ROM folder was not modified.
+`/tmp/midway`; the ROM folder was not modified.

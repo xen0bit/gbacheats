@@ -1,10 +1,12 @@
 # The Mummy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/The Mummy/The Mummy.gba` |
+| File | `roms/The Mummy/The Mummy.gba` |
 | Size | 4,194,304 bytes (0x400000) |
 | Header title | `THEMUMMY` |
 | Game code | `AUME41` (`AUME` at 0xAC, maker field `41` at 0xB0) |
@@ -14,7 +16,7 @@
 | SHA-1 | `cc833b1398a6ea87d31712806757c2fe52fadd31` |
 | SHA-256 | `3525361ab0166dfd7418770659fd3ea184df44d640709068df9eda0952c9d135` |
 
-Analysis used a byte-identical copy in `/tmp/opencode/mummy/`.
+Analysis used a byte-identical copy in `/tmp/mummy/`.
 
 ## 2. Executive summary
 
@@ -58,8 +60,8 @@ keyboard; this is labelled explicitly in §7.
 * Oracle reproduction: mGBA CLI debugger (`mgba -3 -d The Mummy.gba`), `load 1` (a
   savestate captured on the password screen). Set `r0` to the address of a 32-bit packed
   code, `lr = 0x0800F9CC`, `pc = 0x08031ED5`; set breakpoint `b 0x0800F9CC`, `c`, then
-  read `r0` and `x/1 0x020072B0 16`. Script: `/tmp/opencode/mummy/oracle.py`.
-* Codec reproduction: `/tmp/opencode/mummy/pw.py` (`validate`, `encode_payload`,
+  read `r0` and `x/1 0x020072B0 16`. Script: `/tmp/mummy/oracle.py`.
+* Codec reproduction: `/tmp/mummy/pw.py` (`validate`, `encode_payload`,
   `to_code`, `from_code`) is bit-exact against the ROM for all published codes.
 
 ## 4. Address map
@@ -83,7 +85,7 @@ File offset = ROM address − `0x08000000`.
 | `0x020072B0` | game-state object written by decoder (bytes +0,+2,+3,+4,+D observed) | Observed (RAM) |
 | `0x080326E0` | password-entry UI handler (4 slots, A cycles symbol, grid select) | Derived |
 | `0x080329F8` | grid→symbol: `col + row*8 + 1` (8×4 grid = 32 symbols) | Derived |
-| `0x08032A60` | packs 4 slots: `s3<<15 | s2<<10 | s1<<5 | s0` (first entered = low bits) | Derived |
+| `0x08032A60` | packs 4 slots: `s3<<15 \| s2<<10 \| s1<<5 \| s0` (first entered = low bits) | Derived |
 | `0x08037304` / `0x08037388` | screen factories; `r0=3` builds the 6-option menu, `r0=2` the code screen | Derived |
 | `0x080371D0` | menu result handler; selection `5` → `FUN_08037388(2)` (code entry) | Derived |
 | `0x02003298` | active-screen object pointer (observed `0x0200C860` menu, `0x02007320` gameplay) | Observed |
@@ -182,7 +184,7 @@ cross-checked against the oracle):**
 Each exercises a payload value absent from the 14 valid published codes. `CGFC`, `NLHG`
 and `TR8W` were fed to the game's own decoder at `0x08031ED4` and returned r0=1 with the
 distinct RAM changes shown; screenshots of the source screens are in
-`/tmp/opencode/mummy/` (`pw_*`, `statc.png`, `cur2c.png`).
+`/tmp/mummy/` (`pw_*`, `statc.png`, `cur2c.png`).
 
 **Bounds proved by rejection (in-game code, oracle):**
 * bad checksum: packed `0x00001` → r0=0, state bytes unchanged.
@@ -236,7 +238,7 @@ REA MCP (`open_binary`, `analyze_function`, `procedure_pseudo_code`, `xrefs`,
 `batch_decompile`), mGBA 0.10.5 with CLI debugger (`-d`, `load 1`, `w/r`, `w/4`, `b`, `c`,
 `x/1`), Xvfb :318 + openbox, `xdotool`, `scrot`, ImageMagick.
 
-Scripts retained: `/tmp/opencode/mummy/pw.py`, `blscan.py`, `findtext.py`, `ss.py`,
+Scripts retained: `/tmp/mummy/pw.py`, `blscan.py`, `findtext.py`, `ss.py`,
 `k.py`, `play.py`, `invoke.py`, `oracle.py`, `decode.py`.
 
 No ROM bytes, graphics or copyrighted assets are reproduced here; only addresses,

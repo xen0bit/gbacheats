@@ -1,5 +1,7 @@
 # Shaman King: Legacy of the Spirits, Sprinting Wolf (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -209,7 +211,7 @@ The chord test proves the simultaneous-press requirement; the wrong-button test 
 
 ## 7. Validation evidence
 
-- **Observed**: title screen with 2 entries; field menu with 2 entries; Album screen; battle-menu text bank; the 16-entry ring buffer contents, result byte, and flag word read from decompressed mGBA savestates for all four test inputs above. Screenshots: `s23_title_with_save.png`, `s39_field_menu.png`, `s40_menu_down1.png`, `s46_published_code_accepted.png`, `s47_menu_after_code.png` (work dir `/tmp/opencode/shamanking`).
+- **Observed**: title screen with 2 entries; field menu with 2 entries; Album screen; battle-menu text bank; the 16-entry ring buffer contents, result byte, and flag word read from decompressed mGBA savestates for all four test inputs above. Screenshots: `s23_title_with_save.png`, `s39_field_menu.png`, `s40_menu_down1.png`, `s46_published_code_accepted.png`, `s47_menu_after_code.png` (work dir `/tmp/shamanking`).
 - **Derived**: code table layout, validator pseudocode, caller/dispatcher wiring, result-byte semantics, code-index bound — all from `objdump -M force-thumb` at the addresses in §4 and the literal pointer scan.
 - **Inferred**: the precise on-screen reward ("Spirit of Fire" added to the spirit roster) is documented by the GameFAQs guide and is consistent with the dispatcher path (case 2 → scene handler `0x08015180` → mode byte `0x0201F644`), but I did **not** visually capture the spirit inside the roster because the story intro is long and the roster screen is far into the game. The RAM-level acceptance and flag change are directly observed; the reward identity is inferred from the published guide.
 - **Negative results bounded**: no password UI, no debug menu, no second code — bounded by the counts in §6b, not by "did not find".

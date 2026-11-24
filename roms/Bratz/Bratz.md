@@ -1,10 +1,12 @@
 # Bratz (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Bratz/Bratz.gba` |
+| File | `roms/Bratz/Bratz.gba` |
 | Size | 4,194,304 bytes (4 MiB) |
 | Header title | `BRATZ` (`0xA0`–`0xAB`) |
 | Game code | `A2RE` (`0xAC`–`0xAF`) |
@@ -67,7 +69,7 @@ absence of L do not.
 ```bash
 Xvfb :204 -screen 0 1024x768x24 &
 DISPLAY=:204 openbox &
-DISPLAY=:204 SDL_AUDIODRIVER=dummy mgba -3 /mnt/gbacheats/roms/Bratz/Bratz.gba &
+DISPLAY=:204 SDL_AUDIODRIVER=dummy mgba -3 roms/Bratz/Bratz.gba &
 ```
 
 Default mGBA SDL keymap used throughout:
@@ -153,14 +155,14 @@ text-entry function and reading the 9-byte stride loop, not by guessing a checks
 ```bash
 # reach the CHEAT screen from a fresh boot (all timings in the helper scripts):
 # hold L, tap z, Up, x, Down
-python3 /tmp/opencode/bratz/combos.py z,Up,x,Down combo_right
+python3 /tmp/bratz/combos.py z,Up,x,Down combo_right
 
 # enter a code from the CHEAT screen:
-python3 /tmp/opencode/bratz/typecode.py TOGETHER tog2
+python3 /tmp/bratz/typecode.py TOGETHER tog2
 # then: A (PRACTICE), A (SELECT SONG), screenshot the song list
 ```
 
-Screenshots are in `/tmp/opencode/bratz/`; the key ones are named in §§6b and 7.
+Screenshots were in `/tmp/bratz/`; the key ones are named in §§6b and 7.
 
 ## 4. Address map
 
@@ -186,7 +188,7 @@ File offset = ROM address − `0x08000000`.
 | `0x080100D0` | Step 2: Up (bit 6). |
 | `0x080100E6` | Step 3: A (bit 0). |
 | `0x080100FC` | Step 4: Down (bit 7); if the counter is 3, trigger. |
-| `0x0801010C`–`0x08010114` | Sets `state[0x04] |= 0x40000000` (the "open CHEAT" request). |
+| `0x0801010C`–`0x08010114` | Sets `state[0x04] \|= 0x40000000` (the "open CHEAT" request). |
 | `0x080119D2` | Front-end state machine. |
 | `0x08011EAE` | Calls the entry screen with `param_2 = 1` (CHEAT mode). `0x08011C46` calls it with `param_2 = 0` (NAME mode). |
 | `0x08007516` | Song-select screen. Reads Practice progress from `state[0x0C] & 0x0F`, Contest progress from `(state[0x0C] >> 20) & 0x0F`. A song index is unlocked iff `index <= progress`; locked songs are drawn with sprite ID `0xB5`. |
@@ -314,9 +316,9 @@ This is why a progress nibble of 0 leaves only `All Eyes On Me` visible, 1 adds
 | 7 | `DAZZLING` | Practice progress = 7 | 8 songs (indices 0–7) |
 | 8 | `DECORATE` | Practice progress = 8 | 9 songs (indices 0–8) |
 | 9 | `LIPGLOSS` | Practice progress = 9 | 10 songs (indices 0–9) |
-| 10 | `EXPRESSU` | `state[0x04] |= 0x80000000` | bonus flag; no song change observed |
-| 11 | `DRESSNUP` | `state[0x08] |= 0x01` | bonus flag; no song change observed |
-| 12 | `CUTNEDGE` | `state[0x08] |= 0x02` | bonus flag; no song change observed |
+| 10 | `EXPRESSU` | `state[0x04] \|= 0x80000000` | bonus flag; no song change observed |
+| 11 | `DRESSNUP` | `state[0x08] \|= 0x01` | bonus flag; no song change observed |
+| 12 | `CUTNEDGE` | `state[0x08] \|= 0x02` | bonus flag; no song change observed |
 | 13 | `HAVINFUN` | Practice = 10, Contest = 9, `0x80000000`, packed bits | all 11 Practice songs; all bonus flags |
 | 14 | `GOODTIME` | Practice = 10 | all 11 Practice songs (indices 0–10) |
 
@@ -361,7 +363,7 @@ lowercase alphabet exists only in NAME mode (the case-toggle branch is inside th
 
 ### Offline validator
 
-`/tmp/opencode/bratz/validate.py` reimplements the table and comparator directly
+`/tmp/bratz/validate.py` reimplements the table and comparator directly
 from the ROM bytes:
 
 ```
@@ -488,7 +490,7 @@ The offline validator's 200,000 random 8-symbol strings produced zero accepts; t
 * `mgba` 0.10.5 (SDL), Xvfb `:204`, openbox, scrot, ImageMagick.
 * `arm-none-eabi-objdump` (Thumb disassembly), Python 3 + Capstone for literal/BL
   scans, REA/Ghidra 12.1.4 for decompilation and xrefs.
-* Helper scripts (all in `/tmp/opencode/bratz/`):
+* Helper scripts (all in `/tmp/bratz/`):
   * `keys.py` — focus, key hold/tap, screenshot + crop.
   * `combos.py` — main-menu button-code driver with optional L hold.
   * `typecode.py` — grid navigator/typer for the CHEAT screen.

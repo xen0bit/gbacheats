@@ -1,5 +1,7 @@
 # Gadget Racers (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -48,7 +50,7 @@ Menu path used for every test:
 
 Published codes tested: `DRAGON` (rename path), `B` at both title prompts, `Up` during a race, medal/tournament unlockables (verified as save-bit progress, not codes).
 
-Screenshots were kept on disk under `/tmp/opencode/gadget/`; RAM/address proofs (below) are primary.
+Screenshots were kept on disk under `/tmp/gadget/`; RAM/address proofs (below) are primary.
 
 ## 4. Address map
 

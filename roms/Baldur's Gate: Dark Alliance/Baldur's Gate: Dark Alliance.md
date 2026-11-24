@@ -1,5 +1,7 @@
 # Baldur's Gate: Dark Alliance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -116,7 +118,7 @@ memory/device codes and out of scope.
 
 ### Analysis-only patch used for the fourth class
 
-Copy ROM to `/tmp/opencode/bgda/bgda_patch4.gba`, then change file offset
+Copy ROM to `/tmp/bgda/bgda_patch4.gba`, then change file offset
 `0x068B64A` from `0x03` to `0x04` (only the class-handler bound). This is **not**
 a cheat code and **not** a distributed ROM; it is lab evidence to make the
 otherwise completion-gated fourth slot selectable. The original ROM was not
@@ -149,7 +151,7 @@ File offset → ROM address: `rom_address = 0x08000000 + file_offset`.
 | `0x68B632` | `0x0868B632` | class-select input handler (pressed-key edge) |
 | `0x68B63E`–`0x68B650` | `0x0868B63E`–`0x0868B650` | reads bit 7 of `0x030001F1`; `r6 = 3` or `4` |
 | `0x68C5C0` | `0x0868C5C0` | second class handler (hard bound 4; branches on the byte at `0x03000AB8`) |
-| `0x69CB76` | `0x0869CB76` | completion path: `0x030001F1 |= 0x80`, then save |
+| `0x69CB76` | `0x0869CB76` | completion path: `0x030001F1 \|= 0x80`, then save |
 | `0x685D18` | `0x08685D18` | pack unlock flag into save bitstream (bit 0) |
 | `0x685D44` | `0x08685D44` | unpack flag from save bitstream (bit 0) |
 | `0x6859E0` | `0x086859E0` | character-record packer (writes bitstream at `0x03000200`) |
@@ -268,7 +270,7 @@ as the Elven Fighter is **inferred** from (a) string ID 55, (b) the flag-gated
 count of 4, and (c) the stat line being a fighter/archer hybrid. It is not
 claimed as directly observed under a legitimate completed save.
 
-### 6.2 Menu / screen inventory (all screenshots in `/tmp/opencode/bgda/shots/`)
+### 6.2 Menu / screen inventory (all screenshots in `/tmp/bgda/shots/`)
 
 | Screen | Evidence |
 |---|---|
@@ -450,7 +452,7 @@ completion-only content.
 
 * `binutils-arm-none-eabi` (`objdump -M force-thumb`).
 * Capstone 5.0.7 (pointer/literal scans).
-* Python 3 scripts in `/tmp/opencode/bgda/`:
+* Python 3 scripts in `/tmp/bgda/`:
   * `patch_state.py` — mGBA PNG savestate `gbAs` chunk decompress/edit/recompress;
   * `press.py` — xdotool key/combo helper;
   * `shot.sh` — scrot + crop to 720×480;
@@ -467,6 +469,6 @@ gameplay screens.
 ### Reproduction caveat
 
 The analysis-only patch changes one byte of a **copy** of the ROM
-(`/tmp/opencode/bgda/bgda_patch4.gba`, offset `0x068B64A`). It is not a cheat
+(`/tmp/bgda/bgda_patch4.gba`, offset `0x068B64A`). It is not a cheat
 code, is not part of the original image, and should not be distributed as a
 patched ROM.

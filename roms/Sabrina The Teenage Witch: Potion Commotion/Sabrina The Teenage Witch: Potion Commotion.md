@@ -1,5 +1,7 @@
 # Sabrina The Teenage Witch: Potion Commotion (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -203,6 +205,6 @@ These bound both the checksum layer and the semantic payload/level layer (§16.5
 
 ## 9. Tooling
 
-`strings`, `grep -abo`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`, `arm-none-eabi-objdump -M force-thumb`, Capstone (available), Python 3 + Pillow (savestate PNG chunk parsing, cursor detection), mGBA 0.10.5 in Xvfb with SDL dummy audio, `xdotool`, `scrot`, `gdb-multiarch` (GDB stub proved unreliable; CLI `-d` debugger with a FIFO used instead), gcc (enumeration cross-check). Analysis scripts in `/tmp/opencode/sabrina/`: `phase0.py`, `parse_state2.py`, `enter_pw.py`, `reliable_submit.py`, `model.py` (decoder/caller model), `encode.py` (encoder), `oracle.py` (debugger oracle), `count.c`.
+`strings`, `grep -abo`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`, `arm-none-eabi-objdump -M force-thumb`, Capstone (available), Python 3 + Pillow (savestate PNG chunk parsing, cursor detection), mGBA 0.10.5 in Xvfb with SDL dummy audio, `xdotool`, `scrot`, `gdb-multiarch` (GDB stub proved unreliable; CLI `-d` debugger with a FIFO used instead), gcc (enumeration cross-check). Analysis scripts in `/tmp/sabrina/`: `phase0.py`, `parse_state2.py`, `enter_pw.py`, `reliable_submit.py`, `model.py` (decoder/caller model), `encode.py` (encoder), `oracle.py` (debugger oracle), `count.c`.
 
 **Legal note.** No ROM or extracted copyrighted assets are redistributed. Only hashes, addresses, algorithms, code strings and original tooling are published.

@@ -1,5 +1,7 @@
 # Hot Wheels World Race (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -142,7 +144,7 @@ where `field[i] = (P >> (5*i)) & 31`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
 * Python 3 with `capstone` 5.0.7 (installed), plain `struct`/`zlib` for literal scans and savestate decoding.
 * `mgba` (SDL, `/usr/local/bin/mgba`) under `Xvfb :319` + `openbox`; `xdotool` XTEST input; `scrot`/`import` screenshots; `convert` crops.
-* `enter.py` (keypad navigator), `ssdiff.py` (gbAs savestate extractor/differ), `key.py` (XTEST key helper) in `/tmp/opencode/hwvr/`.
+* `enter.py` (keypad navigator), `ssdiff.py` (gbAs savestate extractor/differ), `key.py` (XTEST key helper) in `/tmp/hwvr/`.
 * Web sources: GameFAQs GBA cheats and FAQ by silver-wonder, chaptercheats GBA level-password list, absolutcheats (GBA "super password"), plus console-version pages used only to exclude non-GBA codes. Fetched pages were treated as data; no prompt-injection was encountered in this run.
 
 **Legal note:** no ROM bytes, graphics, audio, or extracted assets are redistributed here — only hashes, addresses, algorithms, and independently generated codes.

@@ -1,5 +1,7 @@
 # Monster Force (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -182,7 +184,7 @@ unreliable and were not used as evidence.
 ## 7. Validation evidence
 
 * **Observed** — boot/title/main menu/Options/View Credits/Character Select/level intro/gameplay/
-  pause/shop/Multiplayer screens (screenshots on disk in `/tmp/opencode/monsterforce/`);
+  pause/shop/Multiplayer screens (screenshots on disk in `/tmp/monsterforce/`);
   key-global values while holding keys; mGBA pty breakpoints hitting at `0x08008E10`
   (level skip: `held=0xFF41`, `pressed=0x0040`), `0x08037CF2` (unlock: `r0=0x10`),
   `0x0803A9A2` (invincibility toggle: `r1=0x00000002`, clearing bit 0);

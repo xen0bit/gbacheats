@@ -211,7 +211,7 @@ There is no `A`, `E`, `I`, `O`, `U`, `V`, `W`, `X`, `Y`, `Z` on the keypad.
 | `HHGDBHQC` | 9 | 255 (8 clocks) | 25 | accept | `4×8 1 0 …` |
 | `NPTDBHNG` | 10 | 0 | 2 | accept | `2×9 1 0 …` |
 | `BCHBBHSC` | 10 | 511 (9 clocks) | 2 | accept | `4×9 1 0 …` |
-| `TNSDBHAG` | — | — | — | **cannot be entered**: `A` is not a symbol |
+| `TNSDBHAG` | — | — | — | **cannot be entered** | `A` is not a symbol |
 
 Progress values: 0 = locked, 1 = current, 2 = completed, 4 = completed with the
 level's golden clock collected.

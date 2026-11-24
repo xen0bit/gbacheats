@@ -1,5 +1,7 @@
 # Boktai: The Sun is in Your Hand (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -131,7 +133,7 @@ menu or code testing.
 * Link: Item Exchange / Link Battle / Emblem Resonance (link-cable only).
 * First boot also: solar-sensor setup, time setting, caution pages.
 
-Screenshots (work dir `/tmp/opencode/boktai1`): `shot0.png`, `s1.png`,
+Screenshots (work dir `/tmp/boktai1`): `shot0.png`, `s1.png`,
 `s2.png`, `s8.png`, `mr1.png`–`mr3.png`, `opt0.png`, `basics0.png`,
 `name1.png`, `reg0.png`, `diff0.png`, `conf0.png`, `pmenu1.png`,
 `imenu1.png`, `tab1.png`, `tab2.png`, and Abyss shots `w14.png`, `amap.png`,
@@ -275,8 +277,8 @@ Slot 2 Stat fields used here: map ID +0x100 (0x1300), init script +0x10C
 0x880/0x88C/0xA5C/0x870. The GameFAQs container is **hardware byte order**:
 each 8-byte doubleword is reversed relative to the logical layout. Convert with
 an 8-byte chunk reversal, edit, reverse back, then rebuild checksums with the
-corrected tool `/tmp/opencode/boktai2/sav.py` (the first-pass
-`/tmp/opencode/boktai1/boksave.py` uses the wrong chunk order).
+corrected tool `/tmp/boktai2/sav.py` (the first-pass
+`/tmp/boktai1/boksave.py` uses the wrong chunk order).
 
 RAM (wiki, confirmed by GDB): map ID `0x0203D900`, area ID `0x0203DADC`,
 position `0x0203D8F0`, keypad held/pressed/released `0x03004450/52/54`,
@@ -485,7 +487,7 @@ in the script directory.
   The engine is alive in this state (PC sampling lands in the normal main loop
   and in the IWRAM audio mixer), so this is a *logic* state, not a crash.
 * **The only RAM differences between the two arrivals** (same save, same code
-  path, dumps at `/tmp/opencode/boktai3/d288b.bin`, `d289b.bin`) are map data:
+  path, dumps at `/tmp/boktai3/d288b.bin`, `d289b.bin`) are map data:
   `Stat` map/init/pos, `Scratch+0x02` (0x29 vs 0x24), `+0x04` (0x30 vs 0x35),
   `+0x18` (0x0401 vs 0x0001), `+0x3C`, `+0x102`, and a new block of
   script-written words at `Scratch+0xA8..0xDE` (0x0258, 0x0400, 0x0022,
@@ -545,7 +547,7 @@ the script directory or the string bank.
   observation was wrong: the black frame was the arrival dialogue.
 * **Third pass (2026-10-26):** dismissing the arrival dialogue with A reveals a
   fully rendered map-289 room (HUD live, room/camera update) — screenshot
-  `/tmp/opencode/boktai3/evidence_map289_room_noplayer.png`; the camera follows
+  `/tmp/boktai3/evidence_map289_room_noplayer.png`; the camera follows
   the room's blue NPC, not a player (`evidence_map289_after_seq.png`). EWRAM
   scan `0x02004000..0x0200D000` finds **no** `type 0xF5EB` actor record in map
   289 (six save-warp positions) while the same scan on a map-288 load finds it
@@ -556,7 +558,7 @@ the script directory or the string bank.
   "map 288 only works from a specific position" is corrected. The 10-press
   sequence in map 289 leaves `0x0203F216` at 0. PC sampling in the map-289
   state shows the normal main loop and IWRAM audio mixer still running.
-  Evidence dumps: `/tmp/opencode/boktai3/d288b.bin`, `d289b.bin`
+  Evidence dumps: `/tmp/boktai3/d288b.bin`, `d289b.bin`
   (EWRAM+IWRAM).
 * Save checksum format reproduced byte-for-byte on both GameFAQs saves:
   logical image, LE-u16 `xor,sum,size,0xFFFF` per block.
@@ -616,20 +618,20 @@ the script directory or the string bank.
 
 * mGBA 0.10.5 (`mgba-qt`), Xvfb :194 + openbox, `xdotool`, `scrot`,
   ImageMagick `import`/`convert`, `gdb-multiarch`.
-* `/tmp/opencode/boktai1/drv.py` — window focus/keypress/screenshot driver.
-* `/tmp/opencode/boktai1/boksave.py` — 8-byte byte-order conversion and block
+* `/tmp/boktai1/drv.py` — window focus/keypress/screenshot driver.
+* `/tmp/boktai1/boksave.py` — 8-byte byte-order conversion and block
   checksum rebuild.
-* `/tmp/opencode/boktai1/disasm.py` — container-aware Boktai bytecode
+* `/tmp/boktai1/disasm.py` — container-aware Boktai bytecode
   disassembler (uses the script directory at 0x08E0DA84).
-* `/tmp/opencode/boktai1/findzone.py` — MFT collision-map walker + GBA LZ77
+* `/tmp/boktai1/findzone.py` — MFT collision-map walker + GBA LZ77
   decompressor + zone table search.
-* Second pass (`/tmp/opencode/boktai2`): `sav.py` (corrected EEPROM checksum,
+* Second pass (`/tmp/boktai2`): `sav.py` (corrected EEPROM checksum,
   hardware↔logical conversion, slot copy, warp), `mkslot1.py` (build a warped
   slot-1 save), `gstub.py` + `rspd.py` (persistent GDB-stub bridge over a unix
   socket; 0x200-byte max reads), `load.py`/`load2.py` (title → file select →
   DATA.1 loader), `bdis.py` (disassembler), `walk.py`, `cap.py`/`capq.py`
   (SDL/Qt window capture).
-* Third pass (`/tmp/opencode/boktai3`): `run.sh` (Xvfb :194 + `mgba-qt -g` +
+* Third pass (`/tmp/boktai3`): `run.sh` (Xvfb :194 + `mgba-qt -g` +
   `rspd.py` GDB-stub bridge), `load3.py`/`settle.py` (boot → file select →
   DATA.1, then advance the arrival dialogue until the frame is stable),
   `dump.py`/`scan.py`/`actors.py` (EWRAM+IWRAM dumps, actor scan by update

@@ -1,5 +1,7 @@
 # Scooby-Doo! Unmasked (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -223,7 +225,7 @@ pause-menu state; the eight bytes at EWRAM `0x020164BC` changed from zero to
 
 ## 9. Tooling
 
-Work dir: `/tmp/opencode/scoobyunmasked2`.
+Work dir: `/tmp/scoobyunmasked2`.
 
 | Script | Purpose |
 |---|---|

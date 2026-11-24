@@ -402,7 +402,7 @@ comparison table exists for it anywhere in the ROM.
 | runs containing `master` | 1 — `Your a real trick master!` (`0xD64252`) |
 | runs containing `continue` | 2 — pause item + `Press A to continue` |
 | runs containing `track` | 1 — `or START for new track` |
-| high-bit-set (`c|0x80`) variants of PASSWORD/CHEAT/DEBUG/SECRET/UNLOCK | **0** |
+| high-bit-set (`c\|0x80`) variants of PASSWORD/CHEAT/DEBUG/SECRET/UNLOCK | **0** |
 
 All hits were dumped with ±100 bytes of context and classified: they are the
 track-description bank, the pause/record messages and the cracktro slab. No

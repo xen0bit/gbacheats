@@ -1,5 +1,7 @@
 # Astro Boy: Omega Factor (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -50,7 +52,7 @@ The published access method (Sega Retro / TCRF, credited to “Labmaster”) is 
 Xvfb :146 -screen 0 1024x768x24 &
 DISPLAY=:146 openbox &
 DISPLAY=:146 SDL_AUDIODRIVER=dummy /usr/games/mgba -3 \
-  "/mnt/gbacheats/roms/Astro Boy: Omega Factor/Astro Boy: Omega Factor.gba" &
+  "roms/Astro Boy: Omega Factor/Astro Boy: Omega Factor.gba" &
 ```
 
 mGBA 0.10.5 (SDL). Default keymap: **A = `x`**, **B = `z`**, **L = `a`**, **R = `s`**, **Start = `Return`**, **Select = `BackSpace`**, D-pad = arrows. Hold every key 150–350 ms; the game polls once per frame and drops short taps. The GBA viewport is the 720×480 3× area at `+152+144` on the 1024×768 root.
@@ -377,7 +379,7 @@ Result: every combination lands on a normal screen (title menu, `SELECT DATA`, p
 
 ## 7. Validation evidence
 
-**Observed (emulator screenshots, `/tmp/opencode/astroboy/shots/`):**
+**Observed (emulator screenshots, `/tmp/astroboy/shots/`):**
 * Language list (6), title, main menu, options, gallery `NUMBER 00 Astro`, bio text, high-score `FROM BEGINNING`/`STAGE`/`BLOCK`, save select, `COPY` two-step flow, delete confirmation, name entry, difficulty, `IS THIS OK?`, 1-1 gameplay, pause menu, Omega chart (`EVIL`/`JUSTICE` kanji nodes), stage card.
 * `Down+START` → normal pause menu (`078_pause_try.png`).
 * Gallery clamps at `00` both directions (`char_Left.png`, `char_Right.png`).
@@ -410,7 +412,7 @@ Result: every combination lands on a normal screen (title menu, `SELECT DATA`, p
 
 * mGBA 0.10.5 (`mgba-sdl`), Xvfb `:146`, openbox, `xdotool`, `scrot`, ImageMagick (`convert`, `compare`).
 * `arm-none-eabi-objdump` (`-M force-thumb`) and Python `capstone` 5.0.7 for scripted disassembly.
-* Python 3.13 scripts in `/tmp/opencode/astroboy/`: `ctl.py` (key/screenshot), `combos.py` (savestate + combo harness), `disa.py` (Thumb disassembler with correct address base).
+* Python 3.13 scripts in `/tmp/astroboy/`: `ctl.py` (key/screenshot), `combos.py` (savestate + combo harness), `disa.py` (Thumb disassembler with correct address base).
 * `strings -t x`, `grep -abo`, and custom ROM scanners for literal pointers, Thumb `BL` targets, and `ldr rX,[pc,#imm]` literal pools.
 
 ## 10. Legal note

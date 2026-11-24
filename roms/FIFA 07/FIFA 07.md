@@ -1,5 +1,7 @@
 # FIFA 07 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -68,7 +70,7 @@ finds only the player surname `Booth` and `Marchant`.
   * Kick Off → Select Home/Away Team → control settings → live match → Start → Pause Menu
     (Resume, Team Management, Instant Replay, Match Statistics, Game Settings, Quit Match).
 * Screenshots and savestates captured for every step (`shot_*.png`, `crop_*.png`, `st_*.ss1` in
-  `/tmp/opencode/fifa07`). Savestates were taken with Shift+F2 and parsed per §16.13.
+  `/tmp/fifa07`). Savestates were taken with Shift+F2 and parsed per §16.13.
 * Codes tested: Konami sequence `↑↑↓↓←→←→BA` at the pause menu and at the title screen; `L+R+Start`
   family. All produced only normal menu navigation / match resume — no cheat state.
 
@@ -199,7 +201,7 @@ reward presentation is data-driven). ROM confirms the Classic XI and challenge-u
 ## 9. Tooling
 
 * `strings -t x -n 4`, `grep -abo`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum` (Phase 0/1).
-* Python 3 scripts in `/tmp/opencode/fifa07/`: `phase0.py` (header/logo scan), `xref.py` (u32
+* Python 3 scripts in `/tmp/fifa07/`: `phase0.py` (header/logo scan), `xref.py` (u32
   pointer xrefs), `scan_masks.py` (button-mask table scan), `scan_codes.py` (literal table scan),
   `parse_ss.py`/`ssread.py` (zlib `gbAs` savestate decode + RAM layout), `screenstate.sh`,
   `snap.sh`, `key.sh` (XTEST input, screenshot, OCR, savestate).

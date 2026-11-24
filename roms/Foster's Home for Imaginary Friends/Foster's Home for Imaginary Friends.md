@@ -1,5 +1,7 @@
 # Foster's Home for Imaginary Friends (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -129,7 +131,7 @@ Because **no code system exists**, the §0.2 space is empty (0 accepted in-game 
 - `python3` + `re`, `struct`, `capstone` 5.0.7, Pillow — multi-encoding string scans, u16 key-mask table scan, Thumb literal/BL scans, VRAM tile rendering, CBA decryption (`cbdecrypt.py`).
 - `arm-none-eabi-objdump -M force-thumb` — disassembly of `0x0802F4A8`.
 - `Xvfb :316`, `openbox`, `mgba` (SDL, `-g -3`), `xdotool` (XTEST), `scrot`, ImageMagick — Phase 2 screen walk (~56 screenshots, key frames read via the read tool).
-- Custom helpers in `/tmp/opencode/fosters/`: `gba.py` (input/capture), `ssd.py` (gbAs savestate parser), `probe.py` (button-sequence RAM-diff harness), `render_vram.py`/`render8.py`, `cbdecrypt.py`.
+- Custom helpers in `/tmp/fosters/`: `gba.py` (input/capture), `ssd.py` (gbAs savestate parser), `probe.py` (button-sequence RAM-diff harness), `render_vram.py`/`render8.py`, `cbdecrypt.py`.
 - REA `reverse-engineer-anything` skill loaded and its evidence discipline (Observed/Derived/Inferred, prompt-injection-as-data) applied throughout; fetched cheat pages were treated as untrusted data. No prompt-injection payload was encountered in the fetched content.
 
 **Legal note:** no ROM image, graphics, music, or game text is redistributed here; only hashes, addresses, algorithms, and the analyst's own tools/observations are published.

@@ -1,5 +1,7 @@
 # Tony Hawk's Pro Skater 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -33,7 +35,7 @@ One novel, undocumented 10-press sequence was minted and entered in the emulator
 - Keymap (mGBA SDL defaults, verified against the menus): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Hold keys 40–90 ms; menu wheel needs ~1.2 s to settle before A is accepted.
 - Boot path: title/logo → Vicarious Visions splash → title (5×Start) → main menu wheel.
 - Main menu wheel items (4): CAREER MODE, FREE SKATE, SKATE SHOP, OPTIONS. CAREER MODE submenu: CONTINUE CAREER, NEW CAREER, LOAD CAREER, TUTORIAL. OPTIONS submenu (10): SOUND OPTIONS, CHEATS (dimmed), TRICKZOOM, KID MODE, CONTROL SETUP, HIGH SCORES, SAVE CAREER, GAP CHECKLIST, CREDITS, BACK.
-- Published GBA codes were entered both at the main menu and in gameplay with the R modifier held, at hold/gap timings of 30/40 ms, 40/50 ms, 50/30 ms and 90/60 ms (`/tmp/opencode/thps2/keys.py`).
+- Published GBA codes were entered both at the main menu and in gameplay with the R modifier held, at hold/gap timings of 30/40 ms, 40/50 ms, 50/30 ms and 90/60 ms (`/tmp/thps2/keys.py`).
 - Savestate RAM reads: mGBA `.ssN` are PNGs containing a zlib-compressed `gbAs` chunk; decompressed size 0x61000. IWRAM starts at state offset `0x19000` (confirmed by the pointer `0x03003A80` written to `0x03001D48`, found at state offset `0x1AD48`). Cheat flags: state offset `0x1CA80 + 4*i`.
 
 ## 4. Address map
@@ -156,7 +158,7 @@ No literal from any of these 11 sequences appears in the ROM in any encoding tes
 
 ## 7. Validation evidence
 
-- **Observed** (emulator): boot screens, main menu wheel (4 items), career submenu (4 items), OPTIONS submenu (10 items, CHEATS rendered dim), in-game free-skate render, save/load savestates, cheat flags read from decompressed `gbAs` chunks, all keystroke effects captured to `/tmp/opencode/thps2/*.png`.
+- **Observed** (emulator): boot screens, main menu wheel (4 items), career submenu (4 items), OPTIONS submenu (10 items, CHEATS rendered dim), in-game free-skate render, save/load savestates, cheat flags read from decompressed `gbAs` chunks, all keystroke effects captured to `/tmp/thps2/*.png`.
 - **Observed** (CLI debugger `mgba -d`): two watchpoint hits at `0x03001D48`/`0x03003A80`; pointer written `0x03003A80` at `PC=0x0800EE94`; `CheatInit` clearing the array at `PC=0x0800CA34`; a flag set at `PC=0x0800F81A` and cleared at `PC=0x0800F5CE`.
 - **Derived** (Thumb disassembly): `CheatInit`/`CheatUnlock`/`CheatName` bodies and jump table; the 13-name mapping; the two-caller enumeration of `CheatUnlock`; the input recorder's active-high mask and 0xFFFF sentinel; the save validator at `0x08006718`.
 - **Inferred**: that the published button codes are the intended entry mechanism (supported by the exact 13-cheat name match and by published sources), and that a "360° spin" frame observed during entry might be the acceptance cue. Neither was confirmed by a flag change.
@@ -172,7 +174,7 @@ No literal from any of these 11 sequences appears in the ROM in any encoding tes
 
 ## 9. Tooling
 
-All analysis artifacts live in `/tmp/opencode/thps2/`:
+All analysis artifacts were kept in `/tmp/thps2/`:
 
 | File | Purpose |
 |---|---|

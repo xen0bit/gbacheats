@@ -1,5 +1,7 @@
 # World Tennis Stars (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -45,13 +47,13 @@ Xvfb :315 -screen 0 1024x768x24 &
 openbox --display :315 &
 DISPLAY=:315 SDL_AUDIODRIVER=dummy mgba -3 game.gba &
 ```
-(the copy `game.gba` in `/tmp/opencode/worldtennisstars` is byte-identical to the ROM;
+(the copy `game.gba` in `/tmp/worldtennisstars` is byte-identical to the ROM;
 all `.sav`/`.ss*` artifacts were kept in that work dir, none in the ROM folder).
 
 mGBA SDL keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
 D-pad = arrow keys. Keys held 120–300 ms.
 
-Menu path actually walked (all screenshots in `/tmp/opencode/worldtennisstars/`):
+Menu path actually walked (all screenshots in `/tmp/worldtennisstars/`):
 
 1. `s_intro_skip.png` — Ignition logo → character select
 2. `s_mainmenu.png` — MAIN MENU: **Singles / Championship Mode / Options / Head To Head** (4 entries)
@@ -222,7 +224,7 @@ generic input helper, not a cheat.
 searches), `arm-none-eabi-objdump -M force-thumb`, Capstone (LDR-literal and BL xref
 scans), mGBA 0.10.5 under Xvfb `:315` with `SDL_AUDIODRIVER=dummy`, `xdotool`, `scrot`,
 ImageMagick montage, and mGBA savestates with a Python `gbAs` zlib/diff reader. Scripts
-and all evidence images are in `/tmp/opencode/worldtennisstars/` only.
+and all evidence images were in `/tmp/worldtennisstars/` only.
 
 **Legal note:** no ROM image, extracted graphics, music, or game text is redistributed by
 this report; only hashes, addresses and original analysis are published.

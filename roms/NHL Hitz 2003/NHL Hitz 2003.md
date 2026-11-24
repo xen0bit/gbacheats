@@ -1,5 +1,7 @@
 # NHL Hitz 2003 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -145,7 +147,7 @@ features: there is no orphan handler or unused table to gate.
 
 ## 7. Validation evidence
 
-* **Observed** (emulator, screenshots on disk in `/tmp/opencode/nhlhitz/`, savestate RAM): all screens listed in
+* **Observed** (emulator, screenshots on disk in `/tmp/nhlhitz/`, savestate RAM): all screens listed in
   §3; 30-team and 9-player wrap; 8 Game Options rows and 3-value Skill Level cycle; 6 pause rows; 2×3 Strategy
   values; 6 Season Central rows; A+B+Start+Select → Midway splash with `0x02000888` transitioning `1→0→1` and
   59,846 state bytes changing; IWRAM `0x03000002` surname suffix changing with each player press.

@@ -1,10 +1,12 @@
 # Mat Hoffman's Pro BMX (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Mat Hoffman's Pro BMX/Mat Hoffman's Pro BMX.gba` |
+| File | `roms/Mat Hoffman's Pro BMX/Mat Hoffman's Pro BMX.gba` |
 | Size | 4,194,304 bytes (0x400000, 4 MiB) |
 | Header title | `MH PRO BMX` |
 | Game code | `AHOE52` (USA, revision 00) |
@@ -51,7 +53,7 @@ MAIN MENU
 
 Observations for all of the above: normal menu/gameplay navigation, **no unlock**. After (1) the game lands on SELECT RIDER with the last rider highlighted purely because the A/B/arrow presses navigate; the identical screen is reached in (3) without L+R. Starting a new career after (1) still shows THE WORKS locked. Saving under OPTIONS after (1) produced the same EEPROM as saving after (3).
 
-**Screens walked (screenshots retained in `/tmp/opencode/mathoffman1/`):** boot splash, demo mode, title screen, MAIN MENU (TRAINING / 1P GAMES / 2P GAMES / OPTIONS), 1 PLAYER GAMES (CAREER / TOURNAMENT / FREE RIDE / TIME TRIAL), CAREER MENU (CONTINUE greyed / NEW / LOAD greyed), SELECT RIDER (all 10 portraits), SELECT LEVEL (cover-gated), OPTIONS (MUSIC / SFX / SAVE / LOAD), SAVE GAME? prompt, 2 PLAYER GAMES ("LOOKING FOR LINK" — link cable required), RULES briefing, gameplay HUD, PAUSED (Continue / Retry / End Run). No other screen is reachable without a link cable or save data.
+**Screens walked (screenshots retained in `/tmp/mathoffman1/`):** boot splash, demo mode, title screen, MAIN MENU (TRAINING / 1P GAMES / 2P GAMES / OPTIONS), 1 PLAYER GAMES (CAREER / TOURNAMENT / FREE RIDE / TIME TRIAL), CAREER MENU (CONTINUE greyed / NEW / LOAD greyed), SELECT RIDER (all 10 portraits), SELECT LEVEL (cover-gated), OPTIONS (MUSIC / SFX / SAVE / LOAD), SAVE GAME? prompt, 2 PLAYER GAMES ("LOOKING FOR LINK" — link cable required), RULES briefing, gameplay HUD, PAUSED (Continue / Retry / End Run). No other screen is reachable without a link cable or save data.
 
 ## 4. Address map
 

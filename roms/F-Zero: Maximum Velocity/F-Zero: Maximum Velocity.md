@@ -1,5 +1,7 @@
 # F-Zero: Maximum Velocity (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -91,7 +93,7 @@ Password alphabet (32 symbols, index = position):
 
 Name input: 8 characters; each stored byte is `name_index + 0x20` (so ordinary uppercase names are plain ASCII). Name-index grid (6-bit, from the TASVideos reference and confirmed by the ROM constants): space at 0x00, `!` 0x01, digits 0x10–0x19, `?` 0x1E, `A`–`O` 0x21–0x2F, `P`–`Z` 0x30–0x3A, `_` 0x3B.
 
-Validator (`0x08002A2C`), reimplemented bit-for-bit in `/tmp/opencode/fzeromax/fzmv_pass.py`:
+Validator (`0x08002A2C`), reimplemented bit-for-bit in `/tmp/fzeromax/fzmv_pass.py`:
 
 ```
 validate(name[8], password[12]):
@@ -176,8 +178,8 @@ Matcher semantics (`0x0801C0B8`/`0x0801C108`): exact match advances `progress`; 
 
 * `strings -t x`, `grep -abo`, Python `struct`/`zlib`, `capstone` 5.0.7, `arm-none-eabi-objdump -M force-thumb`, `md5sum`/`sha1sum`/`sha256sum`.
 * `mgba` (SDL) under `Xvfb :315` + `openbox`; `xdotool` XTEST input; `import`/`convert` screenshots (kept on disk, never attached to the reply).
-* `/tmp/opencode/fzeromax/fzmv_pass.py` — Python codec (generate/decode) used for all codes.
-* `/tmp/opencode/fzeromax/patch_state.py` — patches the 12-byte password field at mGBA savestate offset `0x1BB68` (RAM `0x03002B68`), recompresses the `gbAs` PNG chunk, and copies it next to the ROM; `F1` loads the state. This made each code test a single keypress after reaching the password screen. Savestate `gbAx` chunk decodes to the 32 KiB SRAM; `zlib.decompress` of its embedded `78 9c` stream exposes the unlock flag at `0xBEC`.
+* `/tmp/fzeromax/fzmv_pass.py` — Python codec (generate/decode) used for all codes.
+* `/tmp/fzeromax/patch_state.py` — patches the 12-byte password field at mGBA savestate offset `0x1BB68` (RAM `0x03002B68`), recompresses the `gbAs` PNG chunk, and copies it next to the ROM; `F1` loads the state. This made each code test a single keypress after reaching the password screen. Savestate `gbAx` chunk decodes to the 32 KiB SRAM; `zlib.decompress` of its embedded `78 9c` stream exposes the unlock flag at `0xBEC`.
 * `nav.py`/`gba_key.py` — key/capture helpers.
 * The mGBA GDB stub (`-g`) timed out in this environment and `-d` paused the core; RAM evidence was obtained by savestate diffing instead (§16.13).
 * No ROM or copyrighted assets are redistributed; only hashes, addresses, algorithms and generated codes are published.

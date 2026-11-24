@@ -138,14 +138,14 @@ File offset = ROM address − `0x08000000`.
 | `0x0002D0` | `0x080002D0` | State dispatcher: `ldrb r0,[0x03000002]`, `ldr r0,[table+r0*4]`, `bx r0` |
 | `0x000394` | `0x08000394` | 30-entry screen-state table (state 23 entry at `0x080003F0`) |
 | `0x523F6C` | `0x08523F6C` | Title-screen hidden-button gate |
-| `0x524048` | `0x08524048` | Literal `0x00000243` (L|Up|B|A) |
+| `0x524048` | `0x08524048` | Literal `0x00000243` (L\|Up\|B\|A) |
 | `0x524054` | `0x08524054` | `state = byte_table[[fp+0xFF]]` |
 | `0x524068` | `0x08524068` | State selector bytes `0c 0c 17 00` (index 2 → `0x17`) |
 | `0x6E6224` | `0x086E6224` | Password screen init (clears digit buffer, loads text) |
 | `0x6E6248` | `0x086E6248` | Three packed-BCD password constants |
 | `0x6E6254` | `0x086E6254` | Message-pointer table: 3 success pointers, 2 zero, wrong, already |
 | `0x6E644C` | `0x086E644C` | Password entry/update (keys, digit select, insert/backspace) |
-| `0x6E6620` | `0x086E6620` | Digit insert: `word |= digit << ((7-index)*4)` |
+| `0x6E6620` | `0x086E6620` | Digit insert: `word \|= digit << ((7-index)*4)` |
 | `0x6E66DC` | `0x086E66DC` | Validator and unlock/duplicate dispatch |
 | `0x6E6944` | `0x086E6944` | Literal pointer to table `0x086E6248` |
 | `0x6E6948` | `0x086E6948` | Literal pointer to flags `0x0203F410` |

@@ -1,5 +1,7 @@
 # Tony Hawk's Underground (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -53,7 +55,7 @@ is fully enumerated (§6b).
 ## 3. How to reproduce
 
 * mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`, `mgba -3 game.gba`.
-  The ROM was copied to `/tmp/opencode/thug/game.gba` (identical MD5) so emulator artifacts never
+  The ROM was copied to `/tmp/thug/game.gba` (identical MD5) so emulator artifacts never
   touch the ROM folder.
 * Keymap (mGBA SDL defaults, verified against menus): A=`x`, B=`z`, L=`a`, R=`s`,
   Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Holds of 60–150 ms work; menu transitions
@@ -260,7 +262,7 @@ about the whole accessible text bank, not a blind `strings` miss.
   produced packet errors on reconnect) and `-d` pty debugger (`continue` works, but no reliable
   break-in without a controlling terminal). Final RAM evidence used savestate decoding.
 * Savestate decoder: `.ssN` PNG → zlib-decompress the `gbAs` chunk → 0x61000 raw bytes; EWRAM at
-  raw 0x21000, IWRAM at 0x19000 (guide §16.13). Scripts in `/tmp/opencode/thug/`: `ss.py`,
+  raw 0x21000, IWRAM at 0x19000 (guide §16.13). Scripts in `/tmp/thug/`: `ss.py`,
   `diffss.py`, `scan1.py`, `scan2.py`, `xref.py`, `btnsearch.py`, `btnfull.py`, `negative.py`,
   `keyin.py`, `k.py`, `kcode.py`, `dbg.py`.
 * Web recon (data only, never instructions): GameFAQs GBA/PC/PS2/GC cheat pages and FAQ 28373,
@@ -268,4 +270,4 @@ about the whole accessible text bank, not a blind `strings` miss.
   SuperCheats, Almars CodeBreaker address list.
 
 No ROM or copyrighted assets are redistributed; only hashes, addresses, algorithms and findings
-are published. All emulator artifacts were written to `/tmp/opencode/thug/`, not the ROM folder.
+are published. All emulator artifacts were written to `/tmp/thug/`, not the ROM folder.

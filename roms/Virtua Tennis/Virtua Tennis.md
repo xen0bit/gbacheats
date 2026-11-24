@@ -1,5 +1,7 @@
 # Virtua Tennis (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -45,7 +47,7 @@ Menu path (all screens walked, in order):
 
 Dynamic tests performed at the character-select screen: L alone, R alone, Select alone, L+R, Select+A, L+R+Start, Start+A — **no hidden menu appeared** (screens `probe_*.png`, `combo_*.png`). At the main menu, the PSP code `L + U,D,U,D,A,B,A` was entered — **no confirmation tone or state change** (`code_test1.png`).
 
-Screenshots and scratch scripts are in `/tmp/opencode/virtuatenis/`; selected evidence frames: `s3.png` (main menu), `s4.png` (Options), `s5.png` (ranking), `s13.png` (Exhibition settings), `s15.png`/`cs4.png` (character select), `w4.png` (NAME keyboard), `code_test1.png` (rejected PSP code).
+Screenshots and scratch scripts were in `/tmp/virtuatenis/`; selected evidence frames: `s3.png` (main menu), `s4.png` (Options), `s5.png` (ranking), `s13.png` (Exhibition settings), `s15.png`/`cs4.png` (character select), `w4.png` (NAME keyboard), `code_test1.png` (rejected PSP code).
 
 ## 4. Address map
 
@@ -137,7 +139,7 @@ Screen dispatch was enumerated by walking all reachable screens (§3). The "debu
 ## 9. Tooling
 
 - `strings -t x -n 4`, `grep -ic`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`
-- Python 3 scripts in `/tmp/opencode/virtuatenis/`: `k.py`/`k2.py` (XTEST key driver + screenshot crop), `ssdiff.py` (mGBA `gbAs` zlib chunk diff), `rmem.py`/`keyprobe.py`/`mgba_debug.py` (mGBA `-d` pty debugger), `mgba_probe.py`
+- Python 3 scripts in `/tmp/virtuatenis/`: `k.py`/`k2.py` (XTEST key driver + screenshot crop), `ssdiff.py` (mGBA `gbAs` zlib chunk diff), `rmem.py`/`keyprobe.py`/`mgba_debug.py` (mGBA `-d` pty debugger), `mgba_probe.py`
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
 - Python `struct` scans for literal pointers, packed code strings, and button-mask runs
 - mGBA 0.10.5 (`-3`, `-g`, `-d`, savestates F1/F2), Xvfb :315 + openbox, `xdotool`, `scrot`, ImageMagick

@@ -1,5 +1,7 @@
 # Pokémon Mystery Dungeon: Red Rescue Team (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -42,7 +44,7 @@ No GameShark/CodeBreaker/memory-edit codes are reported as cheats.
   - **Novel (not in any published list):** `F ? C N + W F ? ? + 6 N F R ? J F ? 6 6 8 5 ? W` — accepted; changes the reward from `rewardType=0` (MONEY, 77 Poke) to `rewardType=3` (ITEM_EXTRA, item 77 = MAX_ELIXIR), all other fields identical.
   - Bounds A (bad checksum): same as novel but last symbol `W`→`6` — rejected, "This password is incorrect. Would you like to enter it again?".
   - Bounds B (valid checksum, semantic out-of-range): `F ? H N + W 0 ? ? + 6 N F R ? J F ? 6 6 8 5 ? W` — `rewardType=4` (BLANK_4); checksum valid but rejected by `IsValidWonderMail`.
-- **Screenshots:** `shot37.png` (empty keypad), `shot38.png` (published accepted), `shot45.png` (novel accepted), `shot62.png` / `shot63.png` (both rejections), `shot34.png` (main menu). Kept on disk in `/tmp/opencode/pmdred/`; not redistributed.
+- **Screenshots:** `shot37.png` (empty keypad), `shot38.png` (published accepted), `shot45.png` (novel accepted), `shot62.png` / `shot63.png` (both rejections), `shot34.png` (main menu). Kept on disk in `/tmp/pmdred/`; not redistributed.
 
 ## 4. Address map
 
@@ -195,7 +197,7 @@ No in-game button code unlocks anything. The Debug Mode handlers and all 7 menu 
 
 ## 9. Tooling
 
-- `pret/pmd-red` decomp (cloned to `/tmp/opencode/pmdred/decomp`) — exact matching SHA-1.
+- `pret/pmd-red` decomp (cloned to `/tmp/pmdred/decomp`) — exact matching SHA-1.
 - `wondermail.py` — full Wonder Mail decoder/encoder (alphabet, permutation, checksum, 93-bit fields); `sosmail.py` — 54-symbol SOS codec; `savscan.py` — bit-level `.sav` record locator; `drive_kb.py` — keypad navigation from the game's own layout graph; `ui.py` / `goto_pw.py` — mGBA input helpers.
 - `arm-none-eabi-objdump -M force-thumb`, Python 3 + capstone 5.0.7, `xdotool`, `scrot`, ImageMagick, `gdb-multiarch` (connected once to confirm the `-g` stub halts at reset; not needed for the result).
-- All scripts live in `/tmp/opencode/pmdred/`. No ROM or copyrighted asset is redistributed; only hashes, addresses, algorithms and our own generated codes are published.
+- All scripts were kept in `/tmp/pmdred/`. No ROM or copyrighted asset is redistributed; only hashes, addresses, algorithms and our own generated codes are published.

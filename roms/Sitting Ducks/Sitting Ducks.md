@@ -1,5 +1,7 @@
 # Sitting Ducks (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -71,7 +73,7 @@ Default SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpac
 - Press Start → Mission Selector now lists **Mission 01** and **Mission 02**. Screenshot `eff_DSBBSK_after.png`.
 - `G#BB#M` similarly lists Missions 01–04 (`eff_GSBBSM_after.png`).
 
-Work-dir screenshots: `/tmp/opencode/sittingducks2/` — `eff_DSBBSK_lock.png`, `eff_DSBBSK_after.png`, `eff_GSBBSM_after.png`, `valid_entered.png`, `pause_fresh.png`, `bt_check.png`, `brute2.log`, `checksum_map.log`.
+Work-dir screenshots: `/tmp/sittingducks2/` — `eff_DSBBSK_lock.png`, `eff_DSBBSK_after.png`, `eff_GSBBSM_after.png`, `valid_entered.png`, `pause_fresh.png`, `bt_check.png`, `brute2.log`, `checksum_map.log`.
 
 ## 4. Address map
 
@@ -203,9 +205,9 @@ The model agrees with the game on every accepted **and** rejected input tested.
 ## 9. Tooling
 
 - `file`, `xxd`, `strings`, `grep`, `md5sum`/`sha1sum`/`sha256sum`.
-- `python3` scripts in `/tmp/opencode/sittingducks2/`: `ss.py` (zlib `gbAs` savestate decoder), `diffss.py`/`diffmem.py` (RAM diffs), `mdbg.py` (mGBA CLI-debugger pty driver), `gba.py`/`typer.py` (xdotool grid typer), `test_codes.py` (batch code entry + lock-pixel oracle), `brute2.py` (exhaustive single-position probe), `solve_check.py`, `effect.py` (effect screenshots), `scan_checksum.py` (Capstone immediate scan), `nav*.py`, `collect.py`, `play.py`.
+- `python3` scripts in `/tmp/sittingducks2/`: `ss.py` (zlib `gbAs` savestate decoder), `diffss.py`/`diffmem.py` (RAM diffs), `mdbg.py` (mGBA CLI-debugger pty driver), `gba.py`/`typer.py` (xdotool grid typer), `test_codes.py` (batch code entry + lock-pixel oracle), `brute2.py` (exhaustive single-position probe), `solve_check.py`, `effect.py` (effect screenshots), `scan_checksum.py` (Capstone immediate scan), `nav*.py`, `collect.py`, `play.py`.
 - `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, REA/Ghidra 12.1.4 (own session), `mgba 0.10.5` CLI debugger (`-d`) for RAM/watchpoints, Xvfb :319 + openbox, `xdotool` (XTEST), `scrot`, ImageMagick, Pillow.
-- All analysis used a copy of the ROM in `/tmp/opencode/sittingducks2/`; no emulator artifacts were written to the ROM folder.
+- All analysis used a copy of the ROM in `/tmp/sittingducks2/`; no emulator artifacts were written to the ROM folder.
 
 ## 10. Legal note
 

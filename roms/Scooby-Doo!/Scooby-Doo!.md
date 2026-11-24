@@ -1,10 +1,12 @@
 # Scooby-Doo! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Scooby-Doo!/Scooby-Doo!.gba` |
+| File | `roms/Scooby-Doo!/Scooby-Doo!.gba` |
 | Size | 4,194,304 bytes (0x00400000) |
 | Header title | `SCOOBYMOVIEE` |
 | Game code | `AP8E` (USA) |
@@ -201,7 +203,7 @@ produce any cheat effect; those rejections bound the space rather than being
 
 ## 7. Validation evidence
 
-- **Observed** (emulator, screenshots in `/tmp/opencode/scooby1/c_*.png`):
+- **Observed** (emulator, screenshots in `/tmp/scooby1/c_*.png`):
   cracktro → 2 legal screens → main menu (4 items) → load/options/extras/
   minigames/credits → name entry → new-game dialogue → gameplay (HUD +
   objective) → pause (3 items) → pause options (2 sliders) → quit confirm.

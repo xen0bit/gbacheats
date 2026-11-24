@@ -1,5 +1,7 @@
 # The Adventures of Jimmy Neutron Boy Genius: Jet Fusion (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -56,7 +58,7 @@ is New Game / Password / Options (two volume sliders).
   character submits automatically. Result screens:
   * `PASSWORD ACCEPTED / PRESS START TO PLAY` (status flag `0x0200114C == 1`)
   * `ACCESS DENIED / PRESS THE B BUTTON TO TRY AGAIN` (status flag `0x0200114C == 2`)
-* Screenshots of every state are in `/tmp/opencode/jimmyneutron1/` (`s5.png`, `m2.png`,
+* Screenshots of every state were in `/tmp/jimmyneutron1/` (`s5.png`, `m2.png`,
   `eight.png`, `test_pub.png`, `novel1.png`, `novboth_acc.png`, `novstart_play.png`,
   `pubstart_play.png`, `walk_options2.png`).
 
@@ -229,7 +231,7 @@ checksum arithmetic remains unresolved (§8).
   ImageMagick (`compare -metric AE` against accept/deny templates), tesseract available but unused.
 * Savestate analysis: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte state; EWRAM begins at
   offset `0x21000` (guide §16.13).
-* Helper scripts in `/tmp/opencode/jimmyneutron1/`: `enter.py`, `batch.py`, `playcode.py`,
+* Helper scripts in `/tmp/jimmyneutron1/`: `enter.py`, `batch.py`, `playcode.py`,
   `testcode.sh` (emulator driving + screenshot classification), `stateA.bin` / `stateB.bin`
   (decompressed states).
 * No ROM or copyrighted assets are redistributed; only hashes, addresses, and derived findings are

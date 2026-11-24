@@ -1,5 +1,7 @@
 # Wario Land 4 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -201,7 +203,7 @@ field combination reported here.
   scene `0x0006` and reward flags `07..0A=2, 0C=1` at passage 0 and
   `07..0B=2, 0C=1` at passage 1; passage 5 produced all-zero flags;
   `A+B+Left` on title produced no change. Screenshots are in
-  `/tmp/opencode/warioland4/*.png` and are referenced above.
+  `/tmp/warioland4/*.png` and are referenced above.
 * **Derived (disassembly):** input globals and masks; every branch of
   `0x0801D308` and its literal pool; zero code xrefs to the debug string
   bank; all 5 writers of the debug gate; zero password strings in three
@@ -234,7 +236,7 @@ field combination reported here.
 * Web recon: TCRF mirror `tcrf.tiago.zip`, Data Crystal Wario Land 4
   RAM/TBL/ROM maps, `wario-land/Toge-Docs` ROM hacking notes. Fetched page
   content was treated strictly as data.
-* Working files: `/tmp/opencode/warioland4/` (scans, screenshots, logs).
+* Working files: `/tmp/warioland4/` (scans, screenshots, logs).
 
 ## 10. Legal note
 

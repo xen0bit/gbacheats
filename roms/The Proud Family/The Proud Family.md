@@ -1,5 +1,7 @@
 # The Proud Family (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -39,7 +41,7 @@ negative instead of a fabricated code.
 ## 3. How to reproduce
 
 * Emulator: mGBA 0.10.5 under Xvfb, `SDL_AUDIODRIVER=dummy`, `mgba -3 game.gba`.
-  A **copy** of the ROM was run from `/tmp/opencode/proudfamily/` so no `.sav`
+  A **copy** of the ROM was run from `/tmp/proudfamily/` so no `.sav`
   or `.ss*` was written into the ROM folder (verified clean at the end).
 * SDL keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
   D-pad=arrow keys. Holds of 50–60 ms with 80–200 ms gaps avoided the
@@ -226,7 +228,7 @@ requirement is discharged by the bounded-negative clause.
 
 ## 9. Tooling
 
-All scripts are in `/tmp/opencode/proudfamily/`:
+All scripts were in `/tmp/proudfamily/`:
 `scan.py` (keyword/alphabet/mask scan), `ptrscan.py` (4-byte pointer/range scan),
 `dis.py` and `arm-none-eabi-objdump -M force-thumb` (disassembly),
 `ssdiff.py` (zlib `gbAs` extraction + state diff), `scene.py` (scene name from

@@ -1,5 +1,7 @@
 # Ultimate Winter Games (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -146,7 +148,7 @@ digit is 0–8, so adding 1 always yields a keypad-reachable `'1'..'9'`.
 **81,000** strings (0.188 %), i.e. `3×3×9×10×10×10`. Every accepted string corresponds
 bijectively to one `(A,F,e,b,c,d)` tuple; there are no aliases in the accepted set.
 
-**Closure proof (§16.9).** `enum.c` (in `/tmp/opencode/wintergames/enum.c`) runs the
+**Closure proof (§16.9).** `enum.c` (in `/tmp/wintergames/enum.c`) runs the
 bit-exact validator over all 43,046,721 integers `P` in 0.2 s:
 
 ```
@@ -195,7 +197,7 @@ With `12294654` the same diff gives `0x02001EDC = 1` (A=1) and `0x02001E64 = 2`.
 
 * **Observed** (emulator): boot, all seven main-menu entries, password screen, keypad
   navigation, six accepted codes and three rejected codes, event launch, RAM savestate diffs.
-  Screenshots are in `/tmp/opencode/wintergames/*.png`.
+  Screenshots were in `/tmp/wintergames/*.png`.
 * **Derived** (disassembly): validator arithmetic, helper identities (`0x08015814` = signed
   divide, `0x080158A8` = signed remainder, `0x08015B40` = strncmp), literal pool, global writes.
 * **Inferred**: field *names* "difficulty" for A and "record seed" for b/c/d are inferred
@@ -222,9 +224,9 @@ With `12294654` the same diff gives `0x02001EDC = 1` (A=1) and `0x02001E64 = 2`.
 
 * `strings -t x`, `grep -abo`, `xxd`, `arm-none-eabi-objdump -M force-thumb`, Python
   (`struct`, `zlib`) for pointer/literal xrefs and savestate diffs.
-* `/tmp/opencode/wintergames/genpw2.py` — bit-exact encoder used to mint all codes.
-* `/tmp/opencode/wintergames/enum.c` — full 43,046,721-input validator sweep.
-* `/tmp/opencode/wintergames/enter.py`, `batch.py`, `clean.py`, `kg.py` — Xvfb/xdotool
+* `/tmp/wintergames/genpw2.py` — bit-exact encoder used to mint all codes.
+* `/tmp/wintergames/enum.c` — full 43,046,721-input validator sweep.
+* `/tmp/wintergames/enter.py`, `batch.py`, `clean.py`, `kg.py` — Xvfb/xdotool
   drivers (BFS over the keypad grid, clean state reloads, screenshots).
 * mGBA `-g` GDB stub was tried but proved unreliable (stale listener on 2345 owned by
   another session; detach left the target halted), so RAM evidence used savestate diffs.

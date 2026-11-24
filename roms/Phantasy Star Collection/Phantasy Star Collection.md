@@ -1,5 +1,7 @@
 # Phantasy Star Collection (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -211,7 +213,7 @@ documented selector, code table, or debug-menu entry exists in this surface.
 | PS3 speed option 0..8 | Observed | `ps3_opt*.png` + EW 0x0202D08 read-back |
 | Component games | Derived | reversed Genesis header strings and item/dialogue banks at each sub-image base |
 
-Evidence files (`/tmp/opencode/phantasystar/`): `ct_*.raw`, `bnd_*.png`,
+Evidence files (`/tmp/phantasystar/`): `ct_*.raw`, `bnd_*.png`,
 `btn_*.png`, `combo*.png`, `ps1_*.png`, `ps2_*.png`, `ps3_*.png`, `all_strings.txt`.
 
 ## 8. Unknowns

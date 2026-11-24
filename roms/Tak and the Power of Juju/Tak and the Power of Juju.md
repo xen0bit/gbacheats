@@ -1,5 +1,7 @@
 # Tak and the Power of Juju (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -60,7 +62,7 @@ report's claim that UI text is "a 16-bit offset bank at base `0x47E000` with a
      Yes / No` (IDs 28–31).
   None of these screens is the `Level Password` screen.
 * Debugger: mGBA GDB stub (`-g`, port 2345) driven by a hand-written Python GDB
-  remote client (`/tmp/opencode/takjuju2/gdbclient.py`, `gdb_ctrl.py`). The GDB stub
+  remote client (`/tmp/takjuju2/gdbclient.py`, `gdb_ctrl.py`). The GDB stub
   halts on connect, so the controller holds one socket open and uses `send_only('c')`
   plus raw `0x03` to run/interrupt without dropping the session. `Z0,80109c8,2` sets
   a Thumb breakpoint at the text renderer; each stop is read with `g` and `r0` (the
@@ -68,7 +70,7 @@ report's claim that UI text is "a 16-bit offset bank at base `0x47E000` with a
   controller; it processes commands only when the core is halted.
 * Savestates: mGBA `.ss1`–`.ss8`; the `gbAs` PNG chunk is zlib-decompressed to a
   397,312-byte raw state with IWRAM at raw `0x19000` and EWRAM at raw `0x21000`
-  (`/tmp/opencode/takjuju2/ssdecode.py`).
+  (`/tmp/takjuju2/ssdecode.py`).
 
 ## 4. Address map
 
@@ -237,7 +239,7 @@ build or a prototype where the handler exists.
   Python 3 + struct, Capstone, REA/Ghidra (`open_binary`, `search_strings`, `xrefs`,
   `procedure_pseudo_code`, `procedure_callers`).
 * mGBA 0.10.5 with Xvfb `:319` + openbox, `SDL_AUDIODRIVER=dummy`, `-3` scale.
-* GDB-stub tooling written in this engagement (all under `/tmp/opencode/takjuju2/`):
+* GDB-stub tooling written in this engagement (all under `/tmp/takjuju2/`):
   `gdbclient.py` (minimal GDB remote protocol client: `m`/`M`/`g`/`Z0`/`c`/raw-`0x03`),
   `gdb_ctrl.py` (persistent file-driven controller), `gdb_session.py`,
   `trace_text.py`, `ssdecode.py` (zlib `gbAs` savestate decoder), `capture_loop.py`,

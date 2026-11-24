@@ -1,5 +1,7 @@
 # Yu-Gi-Oh! 7 Trials to Glory: World Championship Tournament 2005 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -34,7 +36,7 @@ No GameShark/CodeBreaker/Action Replay codes were investigated.
 ```bash
 Xvfb :317 -screen 0 1024x768x24 -nolisten tcp &
 DISPLAY=:317 openbox &
-cd /tmp/opencode/yugioh7trials2
+cd /tmp/yugioh7trials2
 DISPLAY=:317 SDL_AUDIODRIVER=dummy mgba -3 -g -t pw0.ss1 game.gba &
 gdb-multiarch -q -x gdb_oracle.cmd    # GDB stub on :2345
 ```
@@ -198,7 +200,7 @@ Terminated by `0x0000`. Mask convention `~KEYINPUT & 0x3FF`.
 
 First 16 entries: `0x520FCCF6, 0x17A01110, 0x8BC15869, 0xE8DB46A2, 0x164295B4, 0x8BF332A0, 0xDFFA28AB, 0x19BA693D, 0xDE945353, 0x19954316, 0xDE863722, 0xEC47283A, 0xDBE0113A, 0xEFA15273, 0x96D14975, 0xDA929561`.
 
-Full 4000-byte table dumped to `/tmp/opencode/yugioh7trials2/password_table_0x8477df8.bin`. All 1000 derived passwords are in `/tmp/opencode/yugioh7trials2/all_1000_passwords.txt`.
+Full 4000-byte table dumped to `/tmp/yugioh7trials2/password_table_0x8477df8.bin`. All 1000 derived passwords were in `/tmp/yugioh7trials2/all_1000_passwords.txt`.
 
 Sample derived pairs: card 1 → `89631139` (Blue-Eyes White Dragon), card 30 → `46986414` (Dark Magician), card 49 → `49417509` (Wolf), card 484 → `38033121` (Dark Magician Girl), card 494 → `11761845` (Beast of Talwar).
 
@@ -272,7 +274,7 @@ Fixed length 10; single 10-entry table; one action branch with a gate. Any singl
 * Ghidra 12.1.4 `analyzeHeadless` on a 320 KiB code slice with base `0x08100000`; Java post-script created Thumb functions and decompiled them.
 * Python reimplementation `password.py`; table dump and 1000-code list in the work dir.
 * `xdotool` XTEST input, `scrot` screenshots, Pillow keypad-cursor detection.
-* All screenshots, savestates and scripts live in `/tmp/opencode/yugioh7trials2`; nothing was written into the ROM folder.
+* All screenshots, savestates and scripts were kept in `/tmp/yugioh7trials2`; nothing was written into the ROM folder.
 
 ## 10. Legal note
 

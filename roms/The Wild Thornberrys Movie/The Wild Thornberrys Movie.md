@@ -1,5 +1,7 @@
 # The Wild Thornberrys Movie (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -39,7 +41,7 @@ Keymap used: A=`x`, B=`z`, Start=`Return`, D-pad=arrows. Holds of 80–150 ms, g
 - `0x08000834`: `bl 0x0800D42C` → `bl 0x080094BC` (call the password-screen initializer during boot)
 - `0x0800098C`: literal `0x0803D0A1` → `0x08008B41` (initial scene handler = password screen)
 
-Boot the copy with `mgba -3 -t <clean_password_state> pw_hook3.gba` or simply let it boot to the keyboard. All patches and the clean state are in `/tmp/opencode/wildthornberrys/`.
+Boot the copy with `mgba -3 -t <clean_password_state> pw_hook3.gba` or simply let it boot to the keyboard. All patches and the clean state were in `/tmp/wildthornberrys/`.
 
 **Keyboard and entry.** The keyboard has three rows (`BCDFGHJKLM`, `NPQRSTVWXYZ`, `1234567890`) plus an `END` cell to the right of row 3. D-pad moves one cell; A selects a character; after four selections move to `END` and press A. `END` is at keyboard-table row 2 / column 12 (marker byte `0x0C`).
 
@@ -155,7 +157,7 @@ Screenshot artifacts: `pw_atEND2.png` (cursor on END with `6XNB` entered), `pw_r
 - Custom Python for password-table decoding (`dump_pw2.py`) and ROM boot hooks (`make_patch3.py`).
 - mGBA 0.10.5 (`-3`, `-g` attempted but its GDB stub was unusable/busy, `-t` for state loading), Xvfb `:316`, openbox, xdotool, scrot.
 - Savestate RAM reads via zlib decompression of the PNG `gbAs` chunk (`savestate_read.py`) and state patching (`patch_state_code.py`) — used because this mGBA build's GDB stub rejected connections. IWRAM layout: `0x19000 + (addr - 0x03000000)`.
-- All scripts and screenshots live in `/tmp/opencode/wildthornberrys/`. No copyrighted assets are redistributed; only addresses, hashes, algorithms and code strings are published here.
+- All scripts and screenshots were kept in `/tmp/wildthornberrys/`. No copyrighted assets are redistributed; only addresses, hashes, algorithms and code strings are published here.
 
 ## 10. Legal note
 

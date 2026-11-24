@@ -1,5 +1,7 @@
 # Shaman King: Legacy of the Spirits, Soaring Hawk (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -16,7 +18,7 @@
 | SHA-256 | `a6f8d6b4abf6650256b03999ba574e1346321f80b746328f825002583c6c29e9` |
 | CRC32 (external listing) | `798593A5`, serial `AGB-BHLE-USA` |
 
-No `.sav`/`.ss*` artifacts were left in the ROM folder; all work used a copy in `/tmp/opencode/shamanhawk`.
+No `.sav`/`.ss*` artifacts were left in the ROM folder; all work used a copy in `/tmp/shamanhawk`.
 
 ## 2. Executive summary
 
@@ -209,7 +211,7 @@ using separate `xdotool keydown` calls for the third and fourth presses, which t
 * ring buffer = `0x0010, 0x0010, 0x0200, 0x0020, 0x0100, 0x0080, 0x0100, 0x0010, 0x0002`, write index `9`;
 * match byte = **`1`** (rejected).
 
-A second variant with the L and Left+R presses swapped (recorded `0x0200` then `0x0020`/`0x0100`) also produced match = `1`. These are the required rejection bounds: any substitution, omission, or splitting of the combined press fails. Evidence files: `code_immediate.png`, `game.ss2`, `game.ss3`, `game.ss4`, `game.ss5` in `/tmp/opencode/shamanhawk`.
+A second variant with the L and Left+R presses swapped (recorded `0x0200` then `0x0020`/`0x0100`) also produced match = `1`. These are the required rejection bounds: any substitution, omission, or splitting of the combined press fails. Evidence files: `code_immediate.png`, `game.ss2`, `game.ss3`, `game.ss4`, `game.ss5` in `/tmp/shamanhawk`.
 
 **Accepted-sequence proof (game.ss5 / game.ss2).** Ring exactly `0x0010,0x0010,0x0200,0x0120,0x0080,0x0100,0x0010,0x0002`, write index `8`, match byte **`2`**. This is the developer-intended sequence entered through the real on-screen input path.
 
@@ -235,7 +237,7 @@ A second variant with the L and Left+R presses swapped (recorded `0x0200` then `
 ## 9. Tooling
 
 * `md5sum`, `sha1sum`, `sha256sum`, `file`, `strings`, `grep -abo` — Phase 0/1.
-* Python 3 scripts (in `/tmp/opencode/shamanhawk`): header parse, Nintendo-logo scan, byte-pattern search, `u16`/`u32` literal-pool dumps, BL scanner, referenced-sequence scan, savestate `gbAs` zlib decompression and EWRAM diff.
+* Python 3 scripts (in `/tmp/shamanhawk`): header parse, Nintendo-logo scan, byte-pattern search, `u16`/`u32` literal-pool dumps, BL scanner, referenced-sequence scan, savestate `gbAs` zlib decompression and EWRAM diff.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` — all disassembly.
 * mGBA 0.10.5 (`-3`), Xvfb `:316`, openbox, xdotool (XTEST), scrot — dynamic validation.
 * GDB stub (`mgba -g`, `gdb-multiarch`) was tried but proved unreliable on this build (stale stub, `Ignoring packet error`, target hanging); all RAM reads therefore used savestate decompression (guide §16.13).

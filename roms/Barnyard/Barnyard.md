@@ -1,5 +1,7 @@
 # Barnyard (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -113,7 +115,7 @@ All addresses are ROM addresses (`0x08000000 + file offset`); RAM addresses are 
 | `0x0800C790` | code | Options-screen init (`options_screen.ro`, cursor sprite, prompt) |
 | `0x0800C96C` | code | Options-menu update: key decode, item index 0–4, volume/display |
 | `0x0800CDF0` | code | **Enter Code** sub-screen update (digit wheel) |
-| `0x0800D708` | code | Digit validity predicate: `(c-'0')<=9 || (c-'A')<=25` |
+| `0x0800D708` | code | Digit validity predicate: `(c-'0')<=9 \|\| (c-'A')<=25` |
 | `0x0800D72C` | code | Redraw one digit (reads buffer + position tables) |
 | `0x08092784` | code | `strcmp` used by the validator |
 | `0x0809A46C` | data | ASCII literal **`"0T1S"`** (file `0x9A46C`), the only accepted code |
@@ -368,7 +370,7 @@ The flag was read from the deflated `gbAs` savestate chunk (`EWRAM[0x33D6C]`):
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 * Python 3 + Capstone 5.0.7 for the Thumb `BL` scan (86 `strcmp` call sites) and literal
   resolution.
-* Custom scripts in `/tmp/opencode/barnyard/`:
+* Custom scripts in `/tmp/barnyard/`:
   `phase0.py` (hashes/header/logo scan), `ptrscan.py` (ROM pointer scan),
   `keysearch.py` (button-mask sequence scan), `helper.py` (key/screenshot harness),
   `enter_code.py` (menu navigation + wheel entry), plus a PNG-savestate parser

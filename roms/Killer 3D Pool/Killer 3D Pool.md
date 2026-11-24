@@ -1,5 +1,7 @@
 # Killer 3D Pool (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -50,7 +52,7 @@ intended for a save editor. This is stated with the concrete bounds below.
 - mGBA CLI debugger: `break/t 0x0800e9b4` (key reader, once per frame) gives a
   reliable stop at each frame; `watch/w 0x03001030` traps every unlock-flag
   write; `r/1 <addr>` reads bytes. `dbg.py`, `dyntest2.py`, `brute_wp.py`,
-  `brute_cs.py` in `/tmp/opencode/killerpool3/`.
+  `brute_cs.py` in `/tmp/killerpool3/`.
 - Static: REA/Ghidra 12.1.4 raw-ARM import at `0x08000000`;
   `procedure_pseudo_code` on all 163 procedures (full dump retained);
   `arm-none-eabi-objdump -M force-thumb -D` for literal-pool xrefs.
@@ -236,7 +238,7 @@ input; this is a direct consequence of the §7 proof, not an omitted test.
 
 REA Ghidra 12.1.4, `arm-none-eabi-objdump -M force-thumb`, mGBA 0.x SDL + CLI
 debugger, Xvfb :319 + openbox, xdotool, scrot, Pillow, Python 3. All analysis
-artifacts in `/tmp/opencode/killerpool3/`. No `INDEX.md` was modified. No
+artifacts in `/tmp/killerpool3/`. No `INDEX.md` was modified. No
 `.sav`/`.ss*` files were created in the ROM folder. Own processes (Xvfb/openbox
 PIDs 773499/773504 and mGBA PIDs launched by the drivers) were terminated by
 PID only; no `pkill` was used.

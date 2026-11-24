@@ -1,5 +1,7 @@
 # SpongeBob SquarePants: Battle for Bikini Bottom (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -155,7 +157,7 @@ word = x ^ 0x1A071605
 code = ''.join(ALPHA[(word>>(8*k)) & 31] for k in 0..3)
 ```
 
-Python implementations of both directions are in `/tmp/opencode/spongebob2/model.py` and `encode.py`.
+Python implementations of both directions were in `/tmp/spongebob2/model.py` and `encode.py`.
 
 ### 5.4 Level numbering
 
@@ -284,7 +286,7 @@ These turn "the game rejects out-of-range values" into measured results for both
 ## 9. Tooling
 
 - `md5sum`, `sha1sum`, `sha256sum`, `file`, `xxd`, `strings -t x`, `grep -aboF` (Phase 0/1).
-- Python 3 + `capstone` for literal/BL xref scans (`xref.py`, `model.py`, `encode.py`, `enter.py`) in `/tmp/opencode/spongebob2`.
+- Python 3 + `capstone` for literal/BL xref scans (`xref.py`, `model.py`, `encode.py`, `enter.py`) in `/tmp/spongebob2`.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb/-M force-arm` for disassembly (note: this build rejects `-M force-arm`; ARM ranges disassemble correctly by default).
 - mGBA 0.10.5 under Xvfb `:319` with openbox; `xdotool` XTEST input; `scrot` screenshots; `gdb-multiarch` (one successful register/RAM read at PC `0x08017746`).
 - mGBA `.ss1` savestates parsed by extracting the zlib-compressed `gbAs` PNG chunk for RAM diffs (§16.13).

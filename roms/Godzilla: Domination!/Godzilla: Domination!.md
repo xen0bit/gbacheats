@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Godzilla: Domination!/Godzilla: Domination!.gba` |
+| File | `roms/Godzilla: Domination!/Godzilla: Domination!.gba` |
 | Size | 4,194,304 bytes (0x400000, 4 MiB) |
 | Header title | `GODZILLADOMI` |
 | Game code | `AG4E` · Maker `70` · Version `0x00` |

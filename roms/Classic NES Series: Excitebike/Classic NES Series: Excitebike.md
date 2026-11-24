@@ -107,7 +107,7 @@ The visible NES nametable is the GBA BG3 tilemap at VRAM `0x2000` (`BG3CNT = 0x4
 | `0x080000CC` | Entry point (ARM) |
 | `0x08000DF4` | Joypad read: `pressed = 0x3FF ^ KEYINPUT(0x04000130)`; stores current at `0x03005CE8`, newly pressed at `0x03005CEC` |
 | `0x08000E24`/`0x08000E44`/`0x08000E60` | Frame wait / VBlank sync helpers used by the wrapper |
-| `0x08000EC4` | Wrapper dialog/pause routine: toggles on Start|Select (`#0x30`), exits on B or A/Start |
+| `0x08000EC4` | Wrapper dialog/pause routine: toggles on Start\|Select (`#0x30`), exits on B or A/Start |
 | `0x02000000` | NES PRG, 16 KiB runtime image (EWRAM) |
 | `0x02004000` | NES CHR, 8 KiB (EWRAM) |
 | `0x03007200` | NES CPU RAM, 2 KiB (IWRAM) |

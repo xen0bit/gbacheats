@@ -1,5 +1,7 @@
 # FIFA World Cup: Germany 2006 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -63,7 +65,7 @@ and the only debug screen was proved dead.
   L=`a`, R=`s`.
 - Boot path: flag splash → EA Sports logo → **Choose Your Favourite Team** (A=select) →
   **Select Home Team** (A) → **Main Menu**.
-- Screens walked (each captured as a screenshot and a savestate in `/tmp/opencode/fifawc06/states/`):
+- Screens walked (each captured as a screenshot and a savestate in `/tmp/fifawc06/states/`):
   title/intros, Choose Favourite Team, Select Home Team, Main Menu, FIFA World Cup, Game Modes
   submenu, Global Challenge team-select, Penalty Shootout, Multiplayer, My Cup submenu (Game
   Settings, Control Options, Favourite Team, Rewards, My Profile, Language, Credits), Match Options,
@@ -160,7 +162,7 @@ be minted for a system that does not exist; inventing one and claiming acceptanc
 
 ## 7. Validation evidence
 
-- **Observed:** all screenshots in `/tmp/opencode/fifawc06/shot_*.png` and `state_*_crop.png`; 6-item
+- **Observed:** all screenshots in `/tmp/fifawc06/shot_*.png` and `state_*_crop.png`; 6-item
   pause menu and its wrap; Rewards screen objective text; 19+ savestate RAM diffs; single logo hit;
   512-byte save dump.
 - **Derived:** full Thumb `BL` scan (0 callers), raw pointer scan (0 references), Ghidra

@@ -1,5 +1,7 @@
 # Donald Duck Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -99,7 +101,7 @@ ROM (address = `0x08000000 + file offset`):
 | `0x0800CE78` | screen init: `bl 0x08016250` with the digit-buffer pointer |
 | `0x08016250` | build temp struct from save, call encoder |
 | `0x08016308` | `get level bit`: returns `(e >> (arg-1)) & 1` |
-| `0x0801631C` | `set level bit`: `e |= 1 << (arg-1)` |
+| `0x0801631C` | `set level bit`: `e \|= 1 << (arg-1)` |
 | `0x08016330` | reset progress helper (`e=0`, c=1, b=3) |
 | `0x0800392C`, `0x08003A94` | literal pools holding `0x04000130`; the only two `KEYINPUT` reads are at `0x08003900` and `0x08003A8A` |
 | `0x080038FC` | input engine: held/previous/repeat/callback, no history |
@@ -417,7 +419,7 @@ Conclusion: no developer button code or hidden debug menu is present in this ima
 * `sstool.py` — mGBA `.ss1` PNG `gbAs` zlib reader/writer for RAM patch/read.
 * `type_code.py` — BFS keypad-cursor planner + XTEST sender used to type `18JS5DHQ` on the real screen.
 * `testcode.sh` — restore a password-screen savestate, patch the eight digits, redraw, submit, screenshot.
-* Screenshots and savestates were kept in `/tmp/opencode/donaldduck` during the analysis; they are not redistributed.
+* Screenshots and savestates were kept in `/tmp/donaldduck` during the analysis; they are not redistributed.
 
 The decoder is short enough to reimplement from §5.2; the 40-entry permutation table is at ROM `0x08045F5C`, the key literals at `0x08018110`/`0x08018094`, and the check equations in §5.1.
 

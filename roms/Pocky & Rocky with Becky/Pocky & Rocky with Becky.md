@@ -1,5 +1,7 @@
 # Pocky & Rocky with Becky (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Queue position 554. Analysis date 2026-11-19.
 
 ## 1. Target identity
@@ -307,6 +309,6 @@ implemented as per-frame comparisons rather than a stored array.
   with `w/1`, `w/2`, `x/1`, `break/t`, `watch/w`, `load`, `save`.
 * Savestate diffing: mGBA `.ss1` PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte
   raw state (`ssdiff.py`); IWRAM at state `0x19000`, EWRAM at `0x21000`.
-* Work dir: `/tmp/opencode/pockyrocky` (scripts, screenshots, logs, savestates).
+* Work dir: `/tmp/pockyrocky` (scripts, screenshots, logs, savestates).
 * Legal note: no ROM images or copyrighted assets are redistributed; only addresses,
   hashes, algorithms, and original findings are published.

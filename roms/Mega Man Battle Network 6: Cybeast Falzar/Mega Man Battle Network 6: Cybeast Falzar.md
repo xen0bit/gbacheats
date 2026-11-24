@@ -1,5 +1,7 @@
 # Mega Man Battle Network 6: Cybeast Falzar (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 > **SKIPPED / DEFERRED — entry system found but not in-game confirmed (coordinator decision).**
 > Under §0.2 this report does **not** meet the dynamic-confirmation bar: a Lotto/Number Trader
 > system exists and 29 published 8-digit codes were recovered from the Mega Man Wiki, with the
@@ -91,7 +93,7 @@ classroom/Expo sequence, which was not completed here.
    `ChipFolder`, `Sub Chip`, `Library`, `MegaMan`, `E-Mail`, `KeyItem`, `Comm`,
    `Save`. `Comm` opens `NETWORK` with `LINK CBL` and `WRLS ADPT`.
    `E-Mail` reports "You haven't gotten any mail yet, Lan."
-4. **Screenshots** are in `/tmp/opencode/mmbn6falzar/` (`s27_title.png`,
+4. **Screenshots** were in `/tmp/mmbn6falzar/` (`s27_title.png`,
    `s29_title_menu.png`, `s09_startmenu.png`, `s11_chipfolder.png`,
    `s13_email.png`, `s14_comm.png`, `m_library.png`, `m_megaman.png`, `m_now.png`,
    `s42_pet_check.png`, `s43_living.png`, `s46_living2.png`, etc.).
@@ -268,7 +270,7 @@ not "no system").
 - REA MCP + Ghidra 12.1.4: `open_binary` (raw-binary, arm, entry `0x08000000`),
   `binary_overview` (4,675 procedures), `xrefs`, `analyze_function`; session
   closed after analysis.
-- Python scripts in `/tmp/opencode/mmbn6falzar/`: `phase0.py`, `ssdump.py`,
+- Python scripts in `/tmp/mmbn6falzar/`: `phase0.py`, `ssdump.py`,
   `diff.py`, `decode_region.py`, `textdec.py`, `textdec2.py`, `kwsearch.py`,
   `verify_codes.py`, `code_brute.py` … `code_brute4.py`, `table_hunt.py`,
   `keyscan.py`, `numtable.py`, `xref.py`, `xref2.py`, `combo_diff.py`.

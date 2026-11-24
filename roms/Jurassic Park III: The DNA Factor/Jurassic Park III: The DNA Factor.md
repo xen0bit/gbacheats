@@ -1,5 +1,7 @@
 # Jurassic Park III: The DNA Factor (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -82,7 +84,7 @@ Select=`BackSpace`, D-pad = arrow keys. Hold keys ~100–250 ms.
 4. Right/Left: level index (byte 0 of `[0x03006FE0]`) 0→1→…→9→0. Up/Down: player
    (byte 2) 0=Man, 1=Woman. A+Start simultaneously: scene 9 → 10 (selected level loads).
 5. `base.ss1`, `title_sel5.ss1`, `debug9.ss1` and the helper scripts are in
-   `/tmp/opencode/jp3dna/`.
+   `/tmp/jp3dna/`.
 
 **Published code verification.** Web search + `web.archive.org` snapshot of the
 GameFAQs cheats page (capture 2022-02-10) gives a single entry: *"Harder Game — Play

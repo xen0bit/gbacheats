@@ -1,5 +1,7 @@
 # 2-in-1: Golden Nugget Casino & Texas Hold'em Poker (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -90,8 +92,8 @@ needed; shorter taps are dropped by the game.
    credits; **Left + A** from there enters Blackjack, whose header shows
    `Player Money: $…`.
 
-The GN input script used is `typepw.py` in `/tmp/opencode/nugget`; the Texas
-driver is `typepass.py` in `/tmp/opencode/nugget2` (see §9); both drive the
+The GN input script used is `typepw.py` in `/tmp/nugget`; the Texas
+driver is `typepass.py` in `/tmp/nugget2` (see §9); both drive the
 cursor with short taps and verify each key by the on-screen cursor colour.
 
 ### Texas Hold'em Poker
@@ -112,7 +114,7 @@ cursor with short taps and verify each key by the on-screen cursor colour.
 5. The keyboard's vowels are drawn as glyphs but store ASCII: ▲=A, ▶=E, ▼=I,
    ■=O (blank/space), ◀=U. There is a delete key to the left of `OK`.
 
-The Texas input driver is `typepass.py` in `/tmp/opencode/nugget2`; the codec
+The Texas input driver is `typepass.py` in `/tmp/nugget2`; the codec
 is `txpass.py`.
 
 ## 4. Address map
@@ -457,8 +459,8 @@ on-screen keyboard and accepted; the table header then showed **ACE** with
 
 **Observed (emulator screenshots):** the durable copies referenced from this
 report are in `screenshots/` next to this file. The Golden Nugget frames were
-captured in the earlier pass (`/tmp/opencode/nugget/shots`); the Texas frames
-were captured in the codec pass (`/tmp/opencode/nugget2/shots`).
+captured in the earlier pass (`/tmp/nugget/shots`); the Texas frames
+were captured in the codec pass (`/tmp/nugget2/shots`).
 
 * `screenshots/gn_published_500000.png` — GN `$500,000` code accepted;
   Blackjack header `Player Money: $500000`.
@@ -534,11 +536,11 @@ documented guard.
 * Python 3 + Pillow for the on-screen keyboard cursor feedback.
 * `poppler-utils` was installed to test the scanned manual (no extractable
   text).
-* Scripts: `/tmp/opencode/nugget2/txpass.py` (encoder/decoder + published-list
+* Scripts: `/tmp/nugget2/txpass.py` (encoder/decoder + published-list
   self-test), shipped next to this report as `txpass.py`; `typepass.py` (36-key
   cursor driver and submit), `key.py` (keypress helper).
 * Screenshots: `screenshots/` (repo, referenced above); working copies in
-  `/tmp/opencode/nugget2/shots` and the earlier `/tmp/opencode/nugget/shots`.
+  `/tmp/nugget2/shots` and the earlier `/tmp/nugget/shots`.
 
 ## 10. Legal note
 

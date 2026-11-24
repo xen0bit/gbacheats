@@ -1,5 +1,7 @@
 # Need for Speed: Underground (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -66,7 +68,7 @@ text/button spaces characterised with counts.
 * Verified keymap from `KEYINPUT` at `0x04000130`: `x`=A(bit0), `z`=B(bit1),
   `BackSpace`=Select(bit2), `Return`=Start(bit3), `Right`=0x10, `Left`=0x20, `Up`=0x40,
   `Down`=0x80, `s`=R(bit8), `a`=L(bit9). Active-high held buttons are mirrored at `0x03006C64`.
-* Boot path (all screenshots in `/tmp/opencode/nfsu1/`):
+* Boot path (all screenshots in `/tmp/nfsu1/`):
   `SELECT LANGUAGE` → A → EA splash → attract → title → Start → `ENTER NAME` → type `1234`,
   move cursor to ✓, A → `MAIN MENU`.
 * Menu paths walked (each step screenshot + RAM read):

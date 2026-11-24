@@ -1,5 +1,7 @@
 # SpongeBob SquarePants: SuperSponge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -47,7 +49,7 @@ Typing on-screen is subject to key-repeat, so acceptance tests used savestate pa
 
 ### Codes tested in-game
 
-| Code | Result | Evidence (screenshots in `/tmp/opencode/spongesuper/`) |
+| Code | Result | Evidence (screenshots in `/tmp/spongesuper/`) |
 |---|---|---|
 | `BGNR` | **Accepted** → chapter/level 1 intro, password echoed as `Password BGNR` in pause menu | `bg_valid.png`, `pause2.png` |
 | `JRST` | **Accepted** → level select with Oil Rig selected (level 19) | `jrstc.png` |
@@ -185,5 +187,5 @@ No checksum, XOR, permutation, PRNG or second format exists: the only two `bl` c
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
 * Python: `enumerate.py` (pointer-table dereference + full-space enumeration), `patch_ss.py` (mGBA `gbAs` zlib-chunk patcher), `ss.py` (savestate extract/diff), `enter_code.py` (xdotool keyboard helper), `dbgserver.py` + `dbg.py` (PTY front-end for mGBA `-d`, used because the GDB stub port 2345 was occupied by another session's emulator).
 * mGBA 0.10.5, Xvfb :319, openbox, xdotool, scrot, gdb-multiarch (unused after stub conflict).
-* Cleanup: only this job's PIDs were killed by number; the working ROM copy and all savestates/screenshots live in `/tmp/opencode/spongesuper`. The ROM folder contains only the original `.gba`.
+* Cleanup: only this job's PIDs were killed by number; the working ROM copy and all savestates/screenshots were kept in `/tmp/spongesuper`. The ROM folder contains only the original `.gba`.
 * No ROM or copyrighted assets are redistributed here; only addresses, hashes, algorithms and the game's own 4-letter codes are published.

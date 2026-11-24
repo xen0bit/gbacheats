@@ -1,10 +1,12 @@
 # Little League Baseball 2002 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Little League Baseball 2002/Little League Baseball 2002.gba` |
+| File | `roms/Little League Baseball 2002/Little League Baseball 2002.gba` |
 | Size | 8,388,608 bytes (`0x800000`, 8 MiB) |
 | Header title | `LLB 2002` |
 | Game code / maker | `ALCE` / `5L` (file utility prints `ALCE5L`) |
@@ -143,6 +145,6 @@ Language Select, Title, splashes, all 4 difficulty values, credits, the in-game 
 * Python 3 + Capstone 5.0.7 for Thumb literal/ADR/BL scans.
 * `strings -t x -n 3/4`, `grep`, `xxd`, `re` for text/keyword/alphabet sweeps.
 * mGBA `-3 -g` under Xvfb `:317` + xdotool for screen walks; `scrot` + ImageMagick for captures.
-* `ssram.py` / `ssdiff.py` / `findstate.py` — mGBA `.ssN` PNG `gbAs` zlib state extraction and diffing (guide §16.13). All analysis scripts are in `/tmp/opencode/llb2002/`.
+* `ssram.py` / `ssdiff.py` / `findstate.py` — mGBA `.ssN` PNG `gbAs` zlib state extraction and diffing (guide §16.13). All analysis scripts were in `/tmp/llb2002/`.
 
 **Legal:** no ROM image or copyrighted assets are reproduced here; only hashes, addresses, algorithms, and observations are published.

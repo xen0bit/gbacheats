@@ -1,5 +1,7 @@
 # WWF Road to WrestleMania (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -40,7 +42,7 @@ The validator was found by setting mGBA's *native* debugger read-watchpoint on t
 
 **Rejection bounds proven on-screen:** an in-alphabet, checksum-invalid 8-symbol string produced the red **INCORRECT** message (`novel_typed_ok2.png`), and the algorithm enumerated in §5 gives the exact byte-level accept predicate (wrong checksum, field A≥12, field B≥24, field C∈25..30, B==C, D≥100, `E&8 && C==0xFF`, F≥3, `G && D≤9` all reject).
 
-Screenshots and analysis scripts live in `/tmp/opencode/wwfrtwm2/`, **not** in the ROM folder.
+Screenshots and analysis scripts were kept in `/tmp/wwfrtwm2/`, **not** in the ROM folder.
 
 ## 3. How to reproduce
 
@@ -201,7 +203,7 @@ Fields are chosen freely within their ranges; `q[i]` is assembled from the field
 
 ### 6.2 Published codes
 
-90 distinct codes collected from six web sources; full machine-readable list with 5-bit values and 40-bit hex in `/tmp/opencode/wwfrtwm2/codes_decoded.txt`. Feeding them through the recovered validator: **76 pass all checks**; 14 fail at the checksum gate and are attributable to transcription/OCR errors in the web lists (e.g. `00LBB284`, `HMQ6H2R4`, `6RLBM686`). No published code was used to derive the field layout — the layout came from disassembly and was then cross-checked.
+90 distinct codes collected from six web sources; full machine-readable list with 5-bit values and 40-bit hex in `/tmp/wwfrtwm2/codes_decoded.txt`. Feeding them through the recovered validator: **76 pass all checks**; 14 fail at the checksum gate and are attributable to transcription/OCR errors in the web lists (e.g. `00LBB284`, `HMQ6H2R4`, `6RLBM686`). No published code was used to derive the field layout — the layout came from disassembly and was then cross-checked.
 
 Representative families: Stone Cold starter (`HHMBCQ84`, `HMQ6H2R4`, `HMHM3QR4`, …), all-belts (`00CBBZ84`, `08CCC874`, `6RLBM686`, …), Christian season set (`BQ1LYXCW`, `H0PWP!Q6`, `GCJM59M4`, …), Triple H (`BLVWX70H`, `Z7BCP878`), Undertaker (`8GVVV274`), Bradshaw/Jericho (`Z2BMLQR4`, `CLBK23WC`), Eddy Guerrero (`CNV013WC`, `HFGM2L44`, …).
 
@@ -263,6 +265,6 @@ Representative families: Stone Cold starter (`HHMBCQ84`, `HMQ6H2R4`, `HMHM3QR4`,
 
 - Prior pass (retained): Ghidra 12.1.4 headless `DumpDecomp.java` → `decomp_all.txt` (765 functions; a decompiler error at `0x08284824` required zeroing 256 bytes of a **copy** for analysis only). REA/Ghidra MCP repeatedly timed out on this ROM at the same analyzer error, so local Ghidra + `arm-none-eabi-objdump -M force-thumb` + Capstone were used.
 - This pass: `dis_valid.txt` (objdump of `0x0801A9D0..0x0801AD74`), `dis_pwhandler.txt` (objdump of `0x0802665C..0x08026E24`), Thumb BL scanner, function-pointer table scanner, mGBA CLI debugger (`watch/r`, `w/1`, `x/1`, `break`, `continue`) via `clidbg.py`, GDB stub bridge via `gdbbridge.py`, RAM dumps via `dump.py`, keypad typing via `typecode2.py`, and the exact reimplementation `validator.py` (`decode()` / `encode()`).
-- Screenshots: `/tmp/opencode/wwfrtwm2/pw_clean.png`, `typed_code.png`, `after_enter.png`, `novel_ready.png`, `reject_near.png`, `novel_typed_ok2.png`, `states_montage.png`. No screenshots in the ROM folder.
+- Screenshots: `/tmp/wwfrtwm2/pw_clean.png`, `typed_code.png`, `after_enter.png`, `novel_ready.png`, `reject_near.png`, `novel_typed_ok2.png`, `states_montage.png`. No screenshots in the ROM folder.
 
 No ROM bytes or copyrighted assets are reproduced in this report; only hashes, addresses, alphabets, and derived code values are published.

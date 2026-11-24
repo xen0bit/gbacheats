@@ -1,5 +1,7 @@
 # Dark Arena (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -430,7 +432,7 @@ one divergent published variant (`SFX`) was tested and rejected.
 
 * `mGBA` SDL (`-3`) under `Xvfb :280` + `openbox`, `SDL_AUDIODRIVER=dummy`.
 * `xdotool` for held key events; savestates `Shift+F1`, load `F1`.
-* Python 3 scripts in `/tmp/opencode/darkarena`:
+* Python 3 scripts in `/tmp/darkarena`:
   * `typepass.py` — types a password with the correct 22/27-symbol alphabet;
   * `dumpstate.py` — decodes the `.ss1` `gbAs` zlib chunk and prints state,
     buffers, flags and selector;

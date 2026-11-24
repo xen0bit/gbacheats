@@ -1,5 +1,7 @@
 # Finding Nemo: The Continuing Adventures (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -165,7 +167,7 @@ Both were *generated offline* from the recovered model and entered by patching t
 
 ## 7. Validation evidence
 
-- **Observed:** all screenshots (`*.png` in `/tmp/opencode/nemo2`), GDB reads of `0x03003FCF` (input bytes `14 12 01 0f 13 0e 1c 1d 1b 09` for typed `ZXCTYS897M`), savestate diffs locating the buffer and the flag word, acceptance/rejection screenshots, visible main-menu character changes.
+- **Observed:** all screenshots (`*.png` in `/tmp/nemo2`), GDB reads of `0x03003FCF` (input bytes `14 12 01 0f 13 0e 1c 1d 1b 09` for typed `ZXCTYS897M`), savestate diffs locating the buffer and the flag word, acceptance/rejection screenshots, visible main-menu character changes.
 - **Derived:** validator address and call site (BL scan + Capstone), checksum table/mask/constant, field key schedule, output flag addresses, alphabet mapping (verified by round-tripping the typed buffer).
 - **Inferred:** the exact role of each payload bit inside the decoded flag word (field clamps at `0x0806A11C`–`0x0806A4BA` were read but not fully enumerated field-by-field); the Gallery unlock semantics beyond the visible character change.
 
@@ -181,7 +183,7 @@ Evidence discipline: `DDNND` was found as a literal in a *data* table (two point
 ## 9. Tooling
 
 - `binutils-arm-none-eabi` (`arm-none-eabi-objdump`), Python 3 + Capstone 5.0.7 + Pillow, mGBA SDL, Xvfb, openbox, xdotool, scrot, ImageMagick, gdb-multiarch.
-- Helper scripts in `/tmp/opencode/nemo2/`: `dis.py` (Capstone disassembler + literal/BL xref scans), `ui.py` (focus-by-PID key driver + cropped screenshots), `enter.py` (keyboard entry with cursor tracking), `setpw.py` (savestate `gbAs` password-buffer patcher), `dbg.py` (mGBA CLI debugger driver).
+- Helper scripts in `/tmp/nemo2/`: `dis.py` (Capstone disassembler + literal/BL xref scans), `ui.py` (focus-by-PID key driver + cropped screenshots), `enter.py` (keyboard entry with cursor tracking), `setpw.py` (savestate `gbAs` password-buffer patcher), `dbg.py` (mGBA CLI debugger driver).
 - All addresses verified against the exact `BZIE` image (SHA-256 above). No ROM or copyrighted assets are redistributed; only hashes, addresses, algorithms and the analyst's own codes are published.
 
 ## Legal note

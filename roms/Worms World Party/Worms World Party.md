@@ -1,5 +1,7 @@
 # Worms World Party (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -16,7 +18,7 @@
 | SHA-256 | `7976da3e2936e005902d2be68503d03aad0c04369f045fd6709b0d698cab635b` |
 
 **Observed** (header dump). Analysis was performed on a byte-identical copy in
-`/tmp/opencode/wormsworldparty/wpt.gba`; nothing was written into the ROM folder.
+`/tmp/wormsworldparty/wpt.gba`; nothing was written into the ROM folder.
 
 ## 2. Executive summary
 
@@ -249,7 +251,7 @@ by the table loop and the ammo-setter calls in the ROM.
 
 ## 9. Tooling
 
-All scripts and screenshots live in `/tmp/opencode/wormsworldparty/` (nothing
+All scripts and screenshots were kept in `/tmp/wormsworldparty/` (nothing
 in the ROM folder):
 
 * `scan_keys.py` — key constants, mask literals, PC-relative `KEYINPUT` scan.

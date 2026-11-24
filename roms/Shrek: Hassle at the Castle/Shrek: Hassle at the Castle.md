@@ -1,5 +1,7 @@
 # Shrek: Hassle at the Castle (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -37,7 +39,7 @@ Everything reachable was walked with screenshots; the negative result is bounded
 ## 3. How to reproduce
 
 * Emulator: mGBA 0.10.5 (`/usr/local/bin/mgba`) under Xvfb on `:316`, `SDL_AUDIODRIVER=dummy`, `mgba -3 <rom>`. mGBA SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. **Hold keys ~200–600 ms**: 120 ms taps are missed by this engine's polling (a 1 s A-hold was required to leave the level-map screen).
-* Screens walked (each with screenshots saved in `/tmp/opencode/shrekhassle/`): legal splash → title ("Press Start") → main menu (Story Mode / Fighting Mode / Options) → Options (Difficulty Easy/Normal/Advanced; Languages EN/IT/FR/ES/DE/NL; Erase Saved Data) → Story Mode → Select Saved Game (3 slots + New Game) → Level-1 intro → cutscene → Level-1 map screen → Select Character → objective card → gameplay (HUD: lives, hearts, ∞ shout, score, coins) → in-game pause ("Pause") → Fighting Mode ("Multiplayer With Single Game Pak" / "Multiplayer With Multi-Game Pak").
+* Screens walked (each with screenshots saved in `/tmp/shrekhassle/`): legal splash → title ("Press Start") → main menu (Story Mode / Fighting Mode / Options) → Options (Difficulty Easy/Normal/Advanced; Languages EN/IT/FR/ES/DE/NL; Erase Saved Data) → Story Mode → Select Saved Game (3 slots + New Game) → Level-1 intro → cutscene → Level-1 map screen → Select Character → objective card → gameplay (HUD: lives, hearts, ∞ shout, score, coins) → in-game pause ("Pause") → Fighting Mode ("Multiplayer With Single Game Pak" / "Multiplayer With Multi-Game Pak").
 * Code-entry attempts: published sequences entered on each of the above screens; no effect observed.
 * Debug trigger (works): during gameplay, hold **Up+Down+Left+Right simultaneously** for ~1 s → game resets to the Level-1 map screen, then A → Select Character. Confirmed twice.
 * Font decode: text bytes are ASCII−54 (`0xCA` addend); `0xF2` = space, `0xFE` = line break, `0xFF` = skip. Example: bytes `1A 1C 0F 1D 1D` → "PRESS". Decode script: `decode_all.py` (§9).
@@ -137,7 +139,7 @@ This section gives the bounded negative for the code/password system (§0.2 "neg
 
 * `strings -t x`, `grep -abo`, `xxd`, Python 3 (`struct`, `zlib`, `capstone` 5.0.7), `arm-none-eabi-objdump -M force-thumb/-force-arm`, `gdb-multiarch`, mGBA 0.10.5 (`-3`, `-g`, `-d`), Xvfb + openbox on `:316`, `xdotool`, `scrot`, ImageMagick.
 * REA MCP (Ghidra 12.1.4, raw-binary ARM import at `0x08000000`) used for `procedure_pseudo_code` / `xrefs` / `read_bytes` on the menu and input functions.
-* Local scripts in `/tmp/opencode/shrekhassle/`: `key.py` (input helper), `find_ldr.py` (PC-relative literal scanner), `blscan.py` (BL scanner), `scan_input_cmp.py`, `scan_cmpchain.py`, `decode_text.py` / `decode_all.py` (font/text-bank decoder), `ssdiff.py` / `ssdiff2.py` (mGBA `gbAs` savestate RAM diff), `dbg_server.py` / `dbg.py` (mGBA `-d` pty bridge).
+* Local scripts in `/tmp/shrekhassle/`: `key.py` (input helper), `find_ldr.py` (PC-relative literal scanner), `blscan.py` (BL scanner), `scan_input_cmp.py`, `scan_cmpchain.py`, `decode_text.py` / `decode_all.py` (font/text-bank decoder), `ssdiff.py` / `ssdiff2.py` (mGBA `gbAs` savestate RAM diff), `dbg_server.py` / `dbg.py` (mGBA `-d` pty bridge).
 * Legal note: no ROM bytes or copyrighted assets were redistributed; only hashes, addresses, algorithms, and original analysis are published.
 
 ---

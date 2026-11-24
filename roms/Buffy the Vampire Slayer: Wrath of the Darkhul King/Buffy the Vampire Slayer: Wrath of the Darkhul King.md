@@ -1,5 +1,7 @@
 # Buffy the Vampire Slayer: Wrath of the Darkhul King (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -312,7 +314,7 @@ checksum, is what bounds the set.
 
 ### Visual evidence kept on disk
 
-All files are in `/tmp/opencode/buffy/`:
+All files were in `/tmp/buffy/`:
 
 | File | Shows |
 |---|---|
@@ -391,18 +393,18 @@ All files are in `/tmp/opencode/buffy/`:
 
 | File | Purpose |
 |---|---|
-| `/tmp/opencode/buffy/validator.py` | Parses the real ROM table, reimplements the validator, asserts the four published codes, the prefixed novel input, and the rejected cases. |
-| `/tmp/opencode/buffy/enumerate.c` | Exhaustive 8-symbol enumeration to length 8; prints end-in-code and triggered-at-some-prefix counts. |
-| `/tmp/opencode/buffy/ptydbg.py` | mGBA CLI-debugger driver over a pty, used to set watchpoints/breakpoints and read the flag word. |
+| `/tmp/buffy/validator.py` | Parses the real ROM table, reimplements the validator, asserts the four published codes, the prefixed novel input, and the rejected cases. |
+| `/tmp/buffy/enumerate.c` | Exhaustive 8-symbol enumeration to length 8; prints end-in-code and triggered-at-some-prefix counts. |
+| `/tmp/buffy/ptydbg.py` | mGBA CLI-debugger driver over a pty, used to set watchpoints/breakpoints and read the flag word. |
 | `arm-none-eabi-objdump -M force-thumb` | Raw Thumb disassembly of the validator and flag readers. |
 | mGBA 0.10.5 + Xvfb :217 + xdotool + scrot | Gameplay, screenshots, savestates. |
 
 Reproduce the offline model:
 
 ```
-python3 /tmp/opencode/buffy/validator.py
-gcc -O2 -o /tmp/opencode/buffy/enumerate /tmp/opencode/buffy/enumerate.c
-/tmp/opencode/buffy/enumerate
+python3 /tmp/buffy/validator.py
+gcc -O2 -o /tmp/buffy/enumerate /tmp/buffy/enumerate.c
+/tmp/buffy/enumerate
 ```
 
 Expected validator output: 4 reachable records; code0–3 → 0,1,2,3; short and

@@ -1,5 +1,7 @@
 # Sky Dancers (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -121,7 +123,7 @@ The mod-21 relation `i6+i7 = const` *did* fit the published table because those 
 
 **Novel code OBSERVED accepted in-game:**
 * **`TTPBHBZR`** = indices `[15,15,11,0,5,0,20,13]`. `Σ i[0..6] = 66`; required `i7 = (15−66)&0xF = 13 = R`; `i6 = 20 = Z`. Combines maximum progress flags with the final flag **cleared** — a combination absent from every published list (which pairs `i6=20` only with `i5=1` in `TTPBHCZQ`).
-  * **Proof (Observed):** at the real `ENTER PASSWORD` screen with `BBBBBBBB`, A was pressed; the validator BP hit at `0x0800675A` with `lr = 0x080064D1` and all eight indices `0`. The eight indices were then written to `0x03000000..1C` as `[15,15,11,0,5,0,20,13]` (readback `0x03000018 = 0x14`, `0x0300001C = 0x0D`) and execution continued. **Breakpoint 2 (`0x08006590`, the `"PASSWORD ACCEPTED!"` block) was hit with `r0 = 0x000000FE`**, the accept return value. Screenshot `fr_ACCEPTED_c.png`/`ACCEPTED_novel_c.png` in `/tmp/opencode/skydancers2/`.
+  * **Proof (Observed):** at the real `ENTER PASSWORD` screen with `BBBBBBBB`, A was pressed; the validator BP hit at `0x0800675A` with `lr = 0x080064D1` and all eight indices `0`. The eight indices were then written to `0x03000000..1C` as `[15,15,11,0,5,0,20,13]` (readback `0x03000018 = 0x14`, `0x0300001C = 0x0D`) and execution continued. **Breakpoint 2 (`0x08006590`, the `"PASSWORD ACCEPTED!"` block) was hit with `r0 = 0x000000FE`**, the accept return value. Screenshot `fr_ACCEPTED_c.png`/`ACCEPTED_novel_c.png` in `/tmp/skydancers2/`.
 
 **Other novel codes generated from the recovered predicate (unpublished, not individually entering the emulator):** `TTPBBCZC` (`[15,15,11,0,0,1,20,1]`), `FBFBBBZH` (`[3,0,3,0,0,0,20,5]`).
 
@@ -155,7 +157,7 @@ The mod-21 relation `i6+i7 = const` *did* fit the published table because those 
 
 ## 9. Tooling
 
-`file`, hashes, `xxd`, `strings -t x`, `grep -abo`; Python 3 + Capstone 5.0.7 (raw Thumb literal/BL scanners, `scan.py`, `dis.py`); REA/Ghidra 12.1.4 (`open_binary` raw-binary ARM @ `0x08000000`, `xrefs`, `procedure_info`, `procedure_pseudo_code`); mGBA 0.10.5 CLI debugger driven over a PTY (`dbgserver.py`, `dc.py`) under `Xvfb :316` + `openbox`, `SDL_AUDIODRIVER=dummy`, `xdotool` XTEST input, `scrot`. Scripts/artifacts: `/tmp/opencode/skydancers2/` (`dis.py`, `scan.py`, `k.py`, `dbgserver.py`, `dc.py`, `final_run.py`, screenshots). Web: CheatCC via `r.jina.ai`; fetched pages treated strictly as data (§16.8), no instruction found in them was acted upon. mGBA's GDB stub was incompatible with gdb-multiarch 16.3 (`Ignoring packet error`); the CLI debugger was used instead; all ROM-facing work used REA static analysis (§16.19-style oracle via the injected-index + validator-BP technique).
+`file`, hashes, `xxd`, `strings -t x`, `grep -abo`; Python 3 + Capstone 5.0.7 (raw Thumb literal/BL scanners, `scan.py`, `dis.py`); REA/Ghidra 12.1.4 (`open_binary` raw-binary ARM @ `0x08000000`, `xrefs`, `procedure_info`, `procedure_pseudo_code`); mGBA 0.10.5 CLI debugger driven over a PTY (`dbgserver.py`, `dc.py`) under `Xvfb :316` + `openbox`, `SDL_AUDIODRIVER=dummy`, `xdotool` XTEST input, `scrot`. Scripts/artifacts: `/tmp/skydancers2/` (`dis.py`, `scan.py`, `k.py`, `dbgserver.py`, `dc.py`, `final_run.py`, screenshots). Web: CheatCC via `r.jina.ai`; fetched pages treated strictly as data (§16.8), no instruction found in them was acted upon. mGBA's GDB stub was incompatible with gdb-multiarch 16.3 (`Ignoring packet error`); the CLI debugger was used instead; all ROM-facing work used REA static analysis (§16.19-style oracle via the injected-index + validator-BP technique).
 
 ## 10. Legal note
 

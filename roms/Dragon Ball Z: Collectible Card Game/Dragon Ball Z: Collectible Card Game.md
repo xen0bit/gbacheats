@@ -1,5 +1,7 @@
 # Dragon Ball Z: Collectible Card Game (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -140,6 +142,6 @@ The two Piccolo gates and the two Vegeta gates are separate words even though on
 - mGBA CLI debugger on a PTY (`dbgpty.py`, `oracle.py`) for RAM reads/writes: the GDB stub on port 2345 was held by a sibling session, so `-d` was used; GDB RSP client (`gdbclient.py`) was written but unusable for that reason.
 - mGBA savestate parser (`ss.py`): PNG `gbAs` chunk → zlib → 397,312-byte state; EWRAM at state `0x21000`, IWRAM at `0x19000`. State patcher (`patchss.py`, `patch_zeros.py`).
 - Save editor (`savpatch.py`) implementing the recovered CRC, plus boot-and-screenshot harness (`savtest.py`, `map_flags.py`) and automated slot-difference detector (`analyze_slots.py`).
-- Screenshots kept in `/tmp/opencode/dbzccg/` (`sav_base6.png`, `sav_48wide.png`, `map_00..map_14.png`, `sel_trunks.png`, `sav_bit1.png`, `sav_namecode.png`, `menu_*`); none contain redistributable game assets in this report.
+- Screenshots kept in `/tmp/dbzccg/` (`sav_base6.png`, `sav_48wide.png`, `map_00..map_14.png`, `sel_trunks.png`, `sav_bit1.png`, `sav_namecode.png`, `menu_*`); none contain redistributable game assets in this report.
 
 **Legal note:** no ROM or copyrighted assets are redistributed here; only hashes, addresses, algorithms, and addresses/offsets are published.

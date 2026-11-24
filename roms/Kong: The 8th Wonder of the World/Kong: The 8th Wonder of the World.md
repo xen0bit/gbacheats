@@ -1,5 +1,7 @@
 # Kong: The 8th Wonder of the World (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -66,7 +68,7 @@ openbox window manager, `-3` scale. GBA→keyboard: A=`x`, B=`z`, L=`a`, R=`s`,
 Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Hold keys ≥150 ms.
 
 Screens, in order (all verified visually and by `.ss1` savestate snapshots in
-`/tmp/opencode/kong8th/`):
+`/tmp/kong8th/`):
 
 1. Language select — `English / Français / Español`; Down stops at the third
    entry; A on `English` advances. RAM: `0x03000EF0+4 = 0xFC00` (idle key mask).
@@ -83,7 +85,7 @@ Screens, in order (all verified visually and by `.ss1` savestate snapshots in
    detach from the group! Press SELECT to split the group.") driven by the hint
    table at `0x0808A00C`. To enumerate the menu label set reproducibly, an
    **investigation-only copy** of the ROM was made at
-   `/tmp/opencode/kong8th/kong_probe.gba`; the single pointer at file offset
+   `/tmp/kong8th/kong_probe.gba`; the single pointer at file offset
    `0x8A018` was changed from `0x08085CF0` (hint group) to `0x080852EC`
    (menu-label group). Pressing Start then displayed the full nine-label menu
    group. **The original ROM was not modified** (MD5 re-verified after the
@@ -177,7 +179,7 @@ by the searches below instead.
 | Keyword `strings -i -n 4` over 47,061 strings | password 0, cheat 0, code 0, debug 0, unlock 1 (gameplay sentence), hidden 0, generator 0, level 2, secret 7 (all story text), bonus 5 (all "time bonus" pickups) | no code UI |
 | Full text-bank extraction | 216 English UI strings + 201 credits/debug strings + French/Italian/German/Spanish banks | no code entry, no level select, no cheat menu |
 | Dialog-group table | 24 groups at `0x08085C00`; 9 menu labels at `0x080852EC`; OPTIONS strings at `0x08085B68` | no cheat/debug entry |
-| Button-code mask scan (u16 single-key masks `0x0001…0x0200`, active-high and `0xFC00|mask`) | all 8 MiB, 2-byte aligned; **572 runs of ≥3**, longest 7 | every run lies in compressed graphics/audio (`0x0Cxxxx`) or code literal pools (`0x0720xx`, `0x0A5xxx`); none has a pointer/BL xref; **no key-sequence table** |
+| Button-code mask scan (u16 single-key masks `0x0001…0x0200`, active-high and `0xFC00\|mask`) | all 8 MiB, 2-byte aligned; **572 runs of ≥3**, longest 7 | every run lies in compressed graphics/audio (`0x0Cxxxx`) or code literal pools (`0x0720xx`, `0x0A5xxx`); none has a pointer/BL xref; **no key-sequence table** |
 | Password-style `strcmp`/`memcmp` comparison of an entry buffer | no entry buffer exists; all `strcmp`-style comparisons are against dialog/pickup constants | no validator |
 | Debug string `Level ID: %d` | u32 pointer, 16-bit pointer, Thumb `LDR` literal and `BL` scans over 8 MiB | **0 xrefs** → dead code |
 | Screens walked (screenshots + `.ss1` RAM states) | language select ×3 entries, title, file select ×3 slots + NEW/Erase/Continue, tutorial dialog, gameplay HUD, 9-label menu group, OPTIONS strings, collectible messages | no hidden screen |
@@ -229,7 +231,7 @@ web page was executed.
 
 ## 9. Tooling
 
-All scripts and screenshots are in `/tmp/opencode/kong8th/`:
+All scripts and screenshots were in `/tmp/kong8th/`:
 
 * `ss.py` — zlib-decompress the mGBA `.ss1` `gbAs` chunk into raw RAM.
 * `diff.py` — savestate RAM differ.

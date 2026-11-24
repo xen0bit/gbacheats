@@ -1,5 +1,7 @@
 # SpongeBob SquarePants: Lights, Camera, Pants! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -167,5 +169,5 @@ Roles (Lookout, Motorcycle Cop, Stand-In, Waiter) are awarded for clearing speci
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep -abo`, Python 3 (`struct`, `zlib`, `PIL`).
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for Thumb disassembly; Capstone for PC-relative literal and immediate-compare scans.
 * `webfetch`/`websearch` for GameFAQs (via Wayback) and TCRF pages; all fetched content treated as untrusted data.
-* mGBA 0.10.5 under Xvfb `:315` + openbox; `xdotool` XTEST input; `scrot` screenshots; savestate `gbAs`/zlib patcher (`patchstate.py`) and GDB-remote client (`gdbrc.py`) written in `/tmp/opencode/spongelights/`.
+* mGBA 0.10.5 under Xvfb `:315` + openbox; `xdotool` XTEST input; `scrot` screenshots; savestate `gbAs`/zlib patcher (`patchstate.py`) and GDB-remote client (`gdbrc.py`) written in `/tmp/spongelights/`.
 * Legal: no ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms and findings are published. Analyzer processes and generated `.sav`/`.ss*` artifacts were removed at the end (see final reply).

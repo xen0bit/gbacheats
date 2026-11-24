@@ -1,5 +1,7 @@
 # Shining Soul II (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -52,7 +54,7 @@ Timing note: each press must be a distinct key-down edge; rapid/overlapping arro
 4. `Yoshi` → STR/DEX/INT/VIT = 15/**20**/15/15 (published `dex +5` confirmed).
 5. `Undead` → 15/15/15/15, status renders `NAME:Undead` (novel name accepted; no stat change observed).
 
-For fast probing, the name buffer was patched in mGBA savestates with `/tmp/opencode/shiningsoul2/patch_state.py` (raw state offset `0x24870`, EWRAM `0x3870`) and reloaded — this is an analysis probe only; the final confirmations above were driven through the real UI.
+For fast probing, the name buffer was patched in mGBA savestates with `/tmp/shiningsoul2/patch_state.py` (raw state offset `0x24870`, EWRAM `0x3870`) and reloaded — this is an analysis probe only; the final confirmations above were driven through the real UI.
 
 ## 4. Address map
 
@@ -208,7 +210,7 @@ Published sources checked: GameFAQs cheats page, Planet Cheats, GameRevolution, 
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/shiningsoul2/` (analysis aids, not shipped with the report):
+Scripts in `/tmp/shiningsoul2/` (analysis aids, not shipped with the report):
 * `mgba_helper.py` — xdotool `key`/`focus`/`shot`, mGBA `.ssN` PNG/`gbAs` zlib state reader (IWRAM `0x19000`, EWRAM `0x21000`).
 * `patch_state.py` — patches the u16 name buffer at raw `0x24870` in a savestate and rebuilds the PNG (used only as a probe).
 * `gdbcli.py` / `gdbpersist.py` — minimal GDB RSP clients for mGBA's `-g` stub (used to read registers and set the `Z2` watchpoint that located the key-state address; the stub proved flaky and was abandoned in favour of savestate diffs).

@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Driven/Driven.gba` |
+| File | `roms/Driven/Driven.gba` |
 | Size | 4,194,304 bytes (0x400000, 4 MiB) |
 | Header title | `DRIVEN` |
 | Game code | `ADVE` |

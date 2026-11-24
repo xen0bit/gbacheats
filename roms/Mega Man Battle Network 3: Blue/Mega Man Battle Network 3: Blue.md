@@ -1,5 +1,7 @@
 # Mega Man Battle Network 3: Blue (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -225,7 +227,7 @@ sequence comparator exists.
 * `mGBA -d` via a Python `pty` bridge (`dbgsrv.py`/`dbgcli.py`) — attempted live
   RAM/breakpoint access; the GDB stub port was occupied by another process at
   first, so savestate parsing was used as the primary RAM evidence path.
-* Custom scripts in `/tmp/opencode/mmbn3blue/`:
+* Custom scripts in `/tmp/mmbn3blue/`:
   `ss.py` (gbAs PNG-chunk extractor), `parse_states.py` (state diffing),
   `decode_text.py`, `find_text.py`, `hunt_text.py`, `alltext.py` (encoded-text
   decode + keyword census), `scan_btn.py` (button-mask scanner), `k.py` and

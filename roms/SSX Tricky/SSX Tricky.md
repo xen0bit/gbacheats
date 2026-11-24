@@ -1,5 +1,7 @@
 # SSX Tricky (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -186,7 +188,7 @@ The generic message is assembled from the ASCII fragments at `0x0802E117` (`GOLD
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` — raw Thumb disassembly of candidate regions.
 * mGBA 0.10.5 SDL: `-3` viewport, `-d` pty command-line debugger (`r/4`, `r/2`, `w/4`, `b`, `c`, `i`), `.ss1` savestates; Xvfb `:319` + openbox + `xdotool` (XTEST) + `scrot` + ImageMagick `convert` for cropping.
 * Web: GameFAQs cheats page (HTTP 403 direct; data recovered from search snippets), projectcheatcodes.com, plus searches of supercheats/gamesradar/retrogems — all treated as **data**, never as instructions. No prompt-injection payload was encountered in this session; fetched content contained only cheat claims.
-* Working scripts retained in `/tmp/opencode/ssxtricky/`: `helper.py` (input/screenshot), `ss.py` (savestate parser), `dbgserver3.py` (pty debugger driver), `testcode.py` (L+R code entry).
+* Working scripts retained in `/tmp/ssxtricky/`: `helper.py` (input/screenshot), `ss.py` (savestate parser), `dbgserver3.py` (pty debugger driver), `testcode.py` (L+R code entry).
 
 ## 10. Legal note
 

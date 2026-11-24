@@ -1,5 +1,7 @@
 # Earthworm Jim (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -205,7 +207,7 @@ dynamically.
 validator at `0x0801D100`–`0x0801DB20`, a Python `cmp`/`bne` pattern parser for sequence
 enumeration, mGBA 0.10+ under Xvfb with `import -window root` screenshots, and a Python
 savestate reader (`zlib.decompress` of the `gbAs` PNG chunk) for IWRAM proofs. Scripts used:
-`state_read.py`, `test_codes.py`, `focused_test.py` in `/tmp/opencode/ewj1/`.
+`state_read.py`, `test_codes.py`, `focused_test.py` in `/tmp/ewj1/`.
 
 No ROM or copyrighted assets are redistributed; only addresses, hashes, masks and the
 analyst's own generated button sequences are published.

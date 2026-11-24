@@ -1,10 +1,12 @@
 # Spy Kids Challenger (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Spy Kids Challenger/Spy Kids Challenger.gba` |
+| File | `roms/Spy Kids Challenger/Spy Kids Challenger.gba` |
 | Size | 4,194,304 bytes (4 MiB) |
 | Header title | `SPYKIDSCHALL` (12 bytes at `0xA0`) |
 | Game code | `A2KE` (at `0xAC`) |
@@ -49,7 +51,7 @@ Emulator: mGBA 0.10.5 under Xvfb `:315`, `SDL_AUDIODRIVER=dummy`, 3× scale.
 Default SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
 D-pad=arrow keys. Hold keys 60–150 ms for menu steps.
 
-Screen path (all walked, screenshots in `/tmp/opencode/spykidschallenger3/`):
+Screen path (all walked, screenshots in `/tmp/spykidschallenger3/`):
 
 1. Disney Interactive splash → title "PRESS START" (`title_crop.png`, `q5c.png`).
 2. Start → main menu: START / OPTIONS / HIGH SCORE / CREDITS (`ng1c.png`).
@@ -265,7 +267,7 @@ editor drives SPRING POINTS `25 → 1711` (`holdRc.png`), and 8 s more reaches
 
 ## 9. Tooling
 
-Scripts and captures in `/tmp/opencode/spykidschallenger3/`:
+Scripts and captures in `/tmp/spykidschallenger3/`:
 
 * `scan1.py`–`scan5.py`, `parse_tables.py`, `parse_menus.py`,
   `parse_all_menus.py` — Python/Capstone scans for KEYINPUT literals, key-mask

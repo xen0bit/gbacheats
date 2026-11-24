@@ -1,5 +1,7 @@
 # Trollz: Hair Affair! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -237,7 +239,7 @@ Unlocked the Boom Room Watch-the-Hair level selector reaches **Level 9** (screen
 `arm-none-eabi-objdump -M force-thumb`, Capstone (small range disassembler `dis.py`),
 GDB stub via `gdb-multiarch` on mGBA port 2345 (interrupted for each RAM read),
 Python 3 for string/pointer/literal scans, `xdotool` XTEST input, `scrot` + Pillow for
-cropped screenshots. Work directory: `/tmp/opencode/trollz`. No GameShark, CodeBreaker
+cropped screenshots. Work directory: `/tmp/trollz`. No GameShark, CodeBreaker
 or Action Replay codes were used or reported.
 
 **Legal note:** no ROM image or copyrighted assets are redistributed; only addresses,

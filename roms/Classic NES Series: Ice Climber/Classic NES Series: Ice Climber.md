@@ -122,7 +122,7 @@ Wrapper dialogue text is the BG0 tilemap at VRAM `0x6800` (`BG0CNT = 0x8D04`, sc
 | `0x08001480` | keypad reader: `current = KEYINPUT ^ 0x3FF`; stores current at `0x0300649C`, newly pressed at `0x030064A0` |
 | `0x08002428` | System Menu state handler (opens on L+R, reads item index at context+`0x94D`) |
 | `0x08002490` | System Menu dispatcher table, 5 entries: `0x24A4`, `0x24B0`, `0x24BC`, `0x2594`, `0x25A0` |
-| `0x080025D0`–`0x0800262A` | System Menu cursor: Up (`0x40`) at `0x25D4`, Down|Select (`0x84`) at `0x25FE`, A|Start (`0x09`) at `0x2620`; wrap `>4→0` at `0x2614`, `0→4` at `0x25F8` |
+| `0x080025D0`–`0x0800262A` | System Menu cursor: Up (`0x40`) at `0x25D4`, Down\|Select (`0x84`) at `0x25FE`, A\|Start (`0x09`) at `0x2620`; wrap `>4→0` at `0x2614`, `0→4` at `0x25F8` |
 | `0x080023B8` / `0x080023F0` | render message 45 (`HIGH SCORE SAVED.`) / 46 (`WAS UNABLE TO SAVE.`) |
 | `0x080038BB` | message 51 string `SAVE HIGH SCORE AND SECRET CODE!` (unreferenced by code) |
 | `0x080038E2`/`0x080038F1` | messages 52/53 `YES / NO` (unreferenced) |

@@ -1,5 +1,7 @@
 # 3-in-1 Sports Pack: Paintball Splat! / Dodgeball: Dodge This! / Big Alley Bowling (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -80,7 +82,7 @@ Tools: `mgba` 0.10.5 (SDL frontend), `Xvfb`, `openbox`, `xdotool`, `scrot`/Image
 ```bash
 Xvfb :119 -screen 0 1280x960x24 &
 DISPLAY=:119 openbox &
-cd /tmp/opencode/sports3
+cd /tmp/sports3
 DISPLAY=:119 SDL_AUDIODRIVER=dummy /usr/games/mgba -3 "<path to the .gba>" &
 W=$(DISPLAY=:119 xdotool search --name mGBA | tail -1)
 DISPLAY=:119 xdotool windowfocus "$W"
@@ -364,7 +366,7 @@ No generated string was withheld: every string that had to be tested is shown in
 
 ## 7. Validation evidence
 
-**Observed (emulator screenshots in `/tmp/opencode/sports3/shots/`):**
+**Observed (emulator screenshots in `/tmp/sports3/shots/`):**
 
 * Shell selector and the three panels: `44`, `45`, `46`.
 * Paintball: title `50`; main `51`; options `52`; mode `53`; team `54`; player select `55`;
@@ -417,7 +419,7 @@ No generated string was withheld: every string that had to be tested is shown in
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb|force-arm`
   for all disassembly.
 * Python 3: header/logo scanner, string classifier, keyword census, literal and pointer scans,
-  mask-run scanner, and the name-entry driver (`/tmp/opencode/sports3/gb.py`,
+  mask-run scanner, and the name-entry driver (`/tmp/sports3/gb.py`,
   `name_entry.py`, `probe.py`).
 * Capstone (16-bit Thumb literal-load scan) and Ghidra 12.1.4 via REA (raw import of the Bowling
   sub-image at `0x085E8000`) as a cross-check; Ghidra's default auto-analysis found only 173

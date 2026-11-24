@@ -1,5 +1,7 @@
 # The Lost Vikings (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -73,7 +75,7 @@ reads e.g. `SPACESHIP   00%`; Left/Right cycle the 33 stages; A opens
 **Deterministic reproduction:** `mgba -d -t base.ss1` and advance with `frame`
 commands while sending XTEST keys (script `test_seq.py`) gives frame-exact input.
 
-**Screenshots** (in `/tmp/opencode/lostvikings/`): `load_game.png` (six empty
+**Screenshots** (in `/tmp/lostvikings/`): `load_game.png` (six empty
 slots), `slot6_after_code.png` (`SPACESHIP 00%`), `slot6_right.png` (`03%`),
 `lvl_sheet.png` (all 33 stages), `walk_options.png`, `t_slot6.png` (replication).
 
@@ -236,7 +238,7 @@ flags with `x/2 0x03002594`. The 7-press row is the key bound: the validator
 advances one index per correct press, so success is reachable **only** at index 7
 → 8; a wrong nonzero press zeroes the index, and an idle frame leaves it alone.
 Tests used `mgba -d` with `frame` stepping from a clean base state
-(`/tmp/opencode/lostvikings/base.ss1`) so each key was a single deterministic
+(`/tmp/lostvikings/base.ss1`) so each key was a single deterministic
 press; the accepted code was also reproduced on the ordinary SDL window with
 screenshot proof (`s2_slot6.png` / `slot6_after_code.png`).
 

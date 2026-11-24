@@ -1,5 +1,7 @@
 # Mega Man & Bass (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -206,7 +208,7 @@ only in-game cheat is a single held-button chord.
 - **Button-code space searched:** all 2^10 = 1024 possible button subsets over the GBA
   keypad; 50 concrete chords/sequences were pressed on the title and data-base screens
   (listed in `combos2.py` and the `t01..t14`, `d01..d14`, `c1..c7`, `db_*` screenshot sets in
-  `/tmp/opencode/megamanbass/`). The only input with a unique, reproducible effect was
+  `/tmp/megamanbass/`). The only input with a unique, reproducible effect was
   Select+Start+A+B+L+R on the DATA BASE screen. Shorter Start-containing subsets
   (e.g. Start+A+B) also left that screen, so the published chord is **not** a strict
   exact-mask gate — the menu treats an A/B press while Start is held as a confirm/exit.

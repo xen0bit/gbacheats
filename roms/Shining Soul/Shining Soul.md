@@ -1,5 +1,7 @@
 # Shining Soul (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -147,6 +149,6 @@ Other published cheats verified as *claims in the ROM-era documentation* (not pa
 
 ## 9. Tooling
 
-Scripts written in `/tmp/opencode/shiningsoul1/`: `header.py` (header/logo scan), `search_enc.py`/`enc_brute.py`/`textfind.py`/`findtable.py` (encoding and table recovery), `ssparse.py` (mGBA `gbAs` savestate parser), `ui.py`/`drive.py`/`typer.py`/`typer2.py` (xdotool input), `dbgdaemon.py`/`dbgcli.py` (persistent mGBA `-d` CLI-debugger driver over a PTY/FIFO). Static disassembly with `arm-none-eabi-objdump -M force-thumb`. Web evidence: GameFAQs Shining Soul cheats page via `web.archive.org` (403 direct).
+Scripts written in `/tmp/shiningsoul1/`: `header.py` (header/logo scan), `search_enc.py`/`enc_brute.py`/`textfind.py`/`findtable.py` (encoding and table recovery), `ssparse.py` (mGBA `gbAs` savestate parser), `ui.py`/`drive.py`/`typer.py`/`typer2.py` (xdotool input), `dbgdaemon.py`/`dbgcli.py` (persistent mGBA `-d` CLI-debugger driver over a PTY/FIFO). Static disassembly with `arm-none-eabi-objdump -M force-thumb`. Web evidence: GameFAQs Shining Soul cheats page via `web.archive.org` (403 direct).
 
 No ROM or copyrighted assets are redistributed; only hashes, addresses, and the authors' own tools are published.

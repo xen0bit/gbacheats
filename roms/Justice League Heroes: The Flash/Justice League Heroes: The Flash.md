@@ -1,5 +1,7 @@
 # Justice League Heroes: The Flash (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -37,7 +39,7 @@ The Extras menu (4 entries: Making of…, Boss Rush, Theater, Superman Race) ren
 - Emulator: `mgba -3` under `Xvfb :315 -screen 0 1024x768x24`, `openbox`, `SDL_AUDIODRIVER=dummy`.
 - mGBA SDL keymap used: `A=x`, `B=z`, `L=a`, `R=s`, `Start=Return`, `Select=BackSpace`, D-pad = arrow keys. Hold each key ~100 ms (shorter taps are missed).
 - **To enter a code:** from the title screen, hold `z` (B) down, tap the eight direction keys in order, tap `BackSpace` (Select), then release `z`. The Flash shouts on success.
-- Scripts used (all in `/tmp/opencode/jlflash/`): `find_codes.py` (mask-table search), `verify_all.py` (7-code RAM verification), `novel_bounds2.py` (rejection tests), `prefix_debug.py`, `hidden_and_novel.py`, `to_gameplay.py`, `entercode.py`, `ctl.sh`.
+- Scripts used (all in `/tmp/jlflash/`): `find_codes.py` (mask-table search), `verify_all.py` (7-code RAM verification), `novel_bounds2.py` (rejection tests), `prefix_debug.py`, `hidden_and_novel.py`, `to_gameplay.py`, `entercode.py`, `ctl.sh`.
 - RAM evidence method: mGBA savestates (`Shift+F1…F9`) are PNGs with a zlib-compressed `gbAs` chunk. Decompress that chunk to a 397,312-byte state; for this image the mapping is **IWRAM `0x03000000` ↔ state `0x19000`**, **EWRAM `0x02000000` ↔ state `0x21000`**. All flag/buffer reads below come from those states (guide §16.13).
 - Menu path walked: Title → (Start) Mode select [Story Mode / Extras] → Extras menu → back → Story Mode → File Select (3 slots) → NEW GAME → Difficulty (Easy / Normal / Justice Mode) → dialogue → Keystone City gameplay → Pause (Continue / Quit).
 - To inspect the code table directly: `xxd -g1 -s 0x1f464c -l 0x46 <rom>`.
@@ -196,6 +198,6 @@ The "A before a code" anomaly was characterized: pressing `A` at the title puts 
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for the disassembly in §5.
 - `capstone 5.0.7` available (not required after objdump located the functions).
 - `mgba -3` (SDL build) under `Xvfb :315` + `openbox`; `xdotool` XTEST input; `scrot` screenshots; `convert` for cropping.
-- Scripts retained in `/tmp/opencode/jlflash/`: `find_codes.py`, `verify_all.py`, `novel_bounds.py`, `novel_bounds2.py`, `prefix_debug.py`, `hidden_and_novel.py`, `to_gameplay.py`, `entercode.py`, `ctl.sh`, `gdbcmd*.txt`.
+- Scripts retained in `/tmp/jlflash/`: `find_codes.py`, `verify_all.py`, `novel_bounds.py`, `novel_bounds2.py`, `prefix_debug.py`, `hidden_and_novel.py`, `to_gameplay.py`, `entercode.py`, `ctl.sh`, `gdbcmd*.txt`.
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced here; only addresses, hashes, mask tables and reproduced findings are published. The button sequences are short factual game inputs.

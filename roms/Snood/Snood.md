@@ -1,10 +1,12 @@
 # Snood (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Snood/Snood.gba` |
+| File | `roms/Snood/Snood.gba` |
 | Size | 4,194,304 bytes (`0x400000`) |
 | Header title | `SNOOD` |
 | Game code | `ASQE20` (region: USA) |
@@ -55,7 +57,7 @@ sequences were entered in-game and rejected.
 
 * Emulator: mGBA 0.10.5 at `/usr/local/bin/mgba`, `DISPLAY=:317`,
   `SDL_AUDIODRIVER=dummy`, `Xvfb :317 -screen 0 1024x768x24`, `openbox`,
-  `mgba -3 /mnt/gbacheats/roms/Snood/Snood.gba`.
+  `mgba -3 roms/Snood/Snood.gba`.
 * Keymap (mGBA SDL defaults): A=`x`, B=`z`, Start=`Return`, Select=`BackSpace`,
   arrows = D-pad. Hold 80–300 ms (menus debounce; 0.3 s can double-step).
 * Boot path: Destination Software splash → title `Snood / PRESS START TO PLAY`.
@@ -223,7 +225,7 @@ not by absence of testing.
   Puzzle `LEVEL 1` and Classic `MEDIUM` boards, the multiplayer host-search
   screen, absence of a pause menu (Start/Select/B in both modes), and no change
   after the Konami sequence. Screenshots were saved under
-  `/tmp/opencode/snood1/` (e.g. `view.png`, `diffs.png`, `chars_montage.png`).
+  `/tmp/snood1/` (e.g. `view.png`, `diffs.png`, `chars_montage.png`).
 * **Observed (RAM)** — savestate `gbAs` diffs: `0x030000F4` = 0 (title) / 1
   (menus); `0x03005B50` = `0x00` / `0x3F` / `0xE3` / `0xA4` for title / main
   menu / options / character select; `0x03000FA8` = `0x0010` with Right held vs
@@ -252,7 +254,7 @@ not by absence of testing.
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `strings -t x`, `grep -aob`, `xxd`, Python 3.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb|force-arm`.
 * Capstone (Python) for Thumb literal/BL scans; `render2.py`/`rendv*.py`/`findfont*.py`
-  under `/tmp/opencode/snood1/` for savestate and ROM tile rendering.
+  under `/tmp/snood1/` for savestate and ROM tile rendering.
 * mGBA 0.10.5 `-3`, `Shift+F1..F4` savestates; `gbAs` PNG chunk decompressed
   with `zlib` to read IWRAM/RAM at state offset `0x19000`.
 * `Xvfb :317`, `openbox`, `xdotool` (XTEST), `scrot`, ImageMagick `convert`/`montage`.

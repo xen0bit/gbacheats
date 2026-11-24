@@ -1,5 +1,7 @@
 # WWE Survivor Series (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -157,7 +159,7 @@ Both are **Observed** (screenshots `s29`–`s34` in the work dir).
 ## 7. Validation evidence
 
 * **Observed:** all screenshots `s00_boot.png` … `s38_multi2.png` in
-  `/tmp/opencode/wwesurvivor/`; mGBA 512-byte EEPROM `.sav` dumps before/after
+  `/tmp/wwesurvivor/`; mGBA 512-byte EEPROM `.sav` dumps before/after
   mutation; GDB register/memory reads through the mGBA stub (`0x04000130` returned
   `0x03EF` with Right held, i.e. bit 4 clear — input path confirmed).
 * **Derived:** disassembly of `0x08001110`–`0x08001170`; LDR-literal and BL scans;
@@ -192,7 +194,7 @@ Both are **Observed** (screenshots `s29`–`s34` in the work dir).
   Ghidra 12.1.4 through the REA MCP provider, Python/Pillow for VRAM/ROM tile
   montages (`ss_extract.py`, `render_tiles.py`), `xdotool`/`scrot` for input and
   evidence, `test_combos.py` for title-code trials.
-* Working files (not committed, not in the ROM folder): `/tmp/opencode/wwesurvivor/`.
+* Working files (not committed, not in the ROM folder): `/tmp/wwesurvivor/`.
 
 ## 10. Legal note
 

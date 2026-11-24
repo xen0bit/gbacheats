@@ -1,5 +1,7 @@
 # The Flintstones: Big Trouble in Bedrock (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -160,7 +162,7 @@ Because no accepted set exists, §16.9's "run the validator over the whole space
 
 ## 7. Validation evidence
 
-* **Observed** (emulator screenshots, all saved under `/tmp/opencode/flintstones/`): title; Options and all six entries; three Difficulty values; Type A/B; scrolling Credits; legal/splash boot screens; intro cutscene; gameplay HUD and level-clear map `Crazy Quarry`; Pause; `Are you sure?` confirmation.
+* **Observed** (emulator screenshots, all saved under `/tmp/flintstones/`): title; Options and all six entries; three Difficulty values; Type A/B; scrolling Credits; legal/splash boot screens; intro cutscene; gameplay HUD and level-clear map `Crazy Quarry`; Pause; `Are you sure?` confirmation.
 * **Observed** (mGBA `-d` RAM reads): input state at `0x03005F30` read as `0x0000FC00` with the game running; global state pointers at `0x03008040`= `0x03006DC8` (title/options phase); savestate `gbAs` chunk decompressed to a 397,312-byte state with IWRAM at offset `0x19000` (§16.13).
 * **Derived** (static, verified against bytes): single `KEYINPUT` poller and its counter layout; 8-entry scene dispatcher and all 8 scene identities; ASCII text renderer formula; absence of any string/table comparison against user input.
 * **Inferred**: The tile-font strings for the menu were not glyph-by-glyph decoded; the inference that no hidden menu entry exists rests on the fixed menu-item count in the OptionMenu state machine plus the complete screen walk, not on reading those tiles. This is labelled inference, not observation.
@@ -178,7 +180,7 @@ Because no accepted set exists, §16.9's "run the validator over the whole space
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
 * Python + Capstone 5.0.7: `scans.py` (KEYINPUT literals, mask runs), `inputxref.py`, `blscan.py`, `ldrscan.py`, `ptrscan.py`, `find_text.py`/`find_text2.py` (encoding search).
 * `mgba -d -3` driven over a pty (`mgba_dbg.py`, `dbg_server.py`, `dbg.sh`) for RAM reads; `parse_ss.py` to extract the zlib `gbAs` chunk from `.ss1` savestates.
-* Reproduction artifacts (screenshots, scripts, parsed state) remain in `/tmp/opencode/flintstones/`. No ROM or copyrighted assets are redistributed by this report.
+* Reproduction artifacts (screenshots, scripts, parsed state) were left in `/tmp/flintstones/`. No ROM or copyrighted assets are redistributed by this report.
 
 ## 10. Cleanup
 

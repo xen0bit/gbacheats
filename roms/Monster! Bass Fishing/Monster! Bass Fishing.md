@@ -1,10 +1,12 @@
 # Monster! Bass Fishing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Monster! Bass Fishing/Monster! Bass Fishing.gba` |
+| File | `roms/Monster! Bass Fishing/Monster! Bass Fishing.gba` |
 | Size | 4,194,304 bytes (0x00400000) |
 | Header title | `MONSTER BASS` |
 | Game code | `A4BE` |
@@ -48,10 +50,10 @@ found; the only debug leftovers are crash-handler assertion strings.
 * **Important UI quirk:** the password buffer is *not cleared* when you leave and re-enter the
   PASSWORD screen. A full 14-character buffer silently ignores every further keypress (including
   navigation and accept). Reload a clean state or delete the old characters before trying another code.
-* Screenshots: `/tmp/opencode/monsterbass/*.png` (accept proof: `novel_after.png`; rejection proof:
+* Screenshots: `/tmp/monsterbass/*.png` (accept proof: `novel_after.png`; rejection proof:
   `badchk_rejected.png`; keypad: `password1.png`; menus: `s1.png`, `options2.png`, `aquarium.png`,
   `hiscores_baseline.png`).
-* Codec tool: `/tmp/opencode/monsterbass/pw.py` (`python3 pw.py <5-char-name> <12 fields csv>`).
+* Codec tool: `/tmp/monsterbass/pw.py` (`python3 pw.py <5-char-name> <12 fields csv>`).
   Keypad driver: `typepw.py`; savestate RAM reader: `ssdiff.py`.
 
 ## 4. Address map
@@ -209,7 +211,7 @@ bounds. It accepts every generated code and rejects single-character corruptions
   (397,312 bytes) and maps state offset `0x19000 + (RAM − 0x03000000)` to IWRAM.
 * GDB stub and `-d` CLI debugger were attempted; the GDB stub proved unreliable (packet errors),
   so all RAM evidence came from savestate diffs.
-* Scripts written: `pw.py`, `typepw.py`, `ui.py`, `ssdiff.py`, `lit.py` (all in `/tmp/opencode/monsterbass/`).
+* Scripts written: `pw.py`, `typepw.py`, `ui.py`, `ssdiff.py`, `lit.py` (all in `/tmp/monsterbass/`).
 
 Legal note: no ROM bytes or copyrighted assets are reproduced here; only addresses, hashes, tables of
 algorithmic constants, and original tooling are published.

@@ -1,5 +1,7 @@
 # The Suite Life of Zack & Cody: Tipton Caper (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -57,7 +59,7 @@ published in-game codes in 5 web sources.
 * New game path: New Game → slot 1 → A → "Episode 1" card → ~40 A presses through dialogue
   → top-down gameplay. Pause = Start.
 * Every screen listed in §7 was reached and screenshotted; screenshots are kept in
-  `/tmp/opencode/suitelife/*.png` (not redistributed).
+  `/tmp/suitelife/*.png` (not redistributed).
 * Savestate RAM decoding: mGBA `.ssN` is PNG with a zlib `gbAs` chunk. `zlib.decompress`
   yields 397,312 bytes; EWRAM starts at raw offset `0x21000`, so
   `raw[0x21000 + (addr - 0x02000000)]` is RAM byte `addr`.

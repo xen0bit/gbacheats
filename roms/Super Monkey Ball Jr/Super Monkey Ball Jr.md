@@ -1,5 +1,7 @@
 # Super Monkey Ball Jr. (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -38,7 +40,7 @@ No GameShark/CodeBreaker/Action Replay codes are reported as cheats.
 * Novel/unpublished code (from ROM, no handler): `Right, Right, Left, Left, Right, Left, A`.
 * Rejection test: same Nice Try sequence but final `B, A` swapped to `A, B` → no match.
 
-Screenshots and savestates for every step are in `/tmp/opencode/supermonkey/` (e.g. `p_nice.png`, `nice_long.png`, `p_mirror.png`, `mirror_long.png`, `fd_00.png`, `fd_0a.png`, `fd_17.png`, `w_*.png`). They are working artifacts, not redistributed assets.
+Screenshots and savestates for every step were in `/tmp/supermonkey/` (e.g. `p_nice.png`, `nice_long.png`, `p_mirror.png`, `mirror_long.png`, `fd_00.png`, `fd_0a.png`, `fd_17.png`, `w_*.png`). They are working artifacts, not redistributed assets.
 
 ## 4. Address map
 
@@ -152,7 +154,7 @@ Mask legend: `01`=A, `02`=B, `10`=Right, `20`=Left, `40`=Up, `80`=Down. The on-s
 
 * `mgba` 0.10.5 (`-3`, `-d` PTY debugger with `watch/c`, `break/t`, `r/4`, `w/4`, `save N`; plain full-speed runs with Shift+F1 savestates).
 * Xvfb `:317` + openbox, `xdotool`, `scrot`, `SDL_AUDIODRIVER=dummy`.
-* `arm-none-eabi-objdump -M force-thumb/-force-arm`, Capstone + Python scripts (`scan_buttons.py`, `seq_search.py`, `find_input.py`, `decode_codetable.py`, `decode_names.py`, `bl_scan.py`, `scan_lits2.py`, `scan_mask_tables.py`, `final_codes.py`, `plain_test.py`, `force_debug.py`, `walk2.py`) — all in `/tmp/opencode/supermonkey/`.
+* `arm-none-eabi-objdump -M force-thumb/-force-arm`, Capstone + Python scripts (`scan_buttons.py`, `seq_search.py`, `find_input.py`, `decode_codetable.py`, `decode_names.py`, `bl_scan.py`, `scan_lits2.py`, `scan_mask_tables.py`, `final_codes.py`, `plain_test.py`, `force_debug.py`, `walk2.py`) — all in `/tmp/supermonkey/`.
 * Savestate RAM reader `parcess.py`: mGBA `.ss1` is PNG with a zlib `gbAs` chunk (397,312 bytes for this 4 MiB ROM); IWRAM at state offset `0x19000`, so e.g. `0x03000680` → `0x19680` (guide §16.13).
 
 **Legal note:** no ROM image or copyrighted graphics/audio are redistributed; only addresses, algorithms, hashes and original analysis artifacts are reported.

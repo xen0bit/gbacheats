@@ -1,7 +1,9 @@
 # Shrek 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Analysis date: 2026-11-19. All addresses are ROM (`0x08...`) or RAM as labelled.
-ROM-under-analysis copy and all evidence artifacts: `/tmp/opencode/shrek2/`.
+ROM-under-analysis copy and all evidence artifacts: `/tmp/shrek2/`.
 
 ## 1. Target identity
 
@@ -41,7 +43,7 @@ All reachable screens were walked in mGBA with screenshots and RAM savestates; t
 - Hold keys 60–150 ms with ~150–300 ms gaps; short taps are missed.
 - Path: language select → A → legal/credits splash → A → title (`Start Game` / `View Credits`) → A → slot select → A on an empty slot → three-character initials keyboard → navigate to `OK` (index 31) → A → intro → A × ~12 → book select → chapter select → level → Start for pause.
 - No codes were enterable because no code surface exists. Button-code attempt tested on the pause menu: `Left,Up,A,B` ×3 then `Up` ×5 produced **no change in any save/unlock flag** (61 EWRAM bytes changed, all cursor/rendering; only first-0x400 change was cursor byte at EWRAM `0x32C`).
-- Screenshots and savestates are kept on disk in `/tmp/opencode/shrek2/` (not redistributed with this report).
+- Screenshots and savestates are kept on disk in `/tmp/shrek2/` (not redistributed with this report).
 
 ## 4. Address map
 
@@ -135,7 +137,7 @@ This section proves the negative result with counts, per §0.2 and §16.9.
 - `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, Python 3 (`struct`, `zlib`, `binascii`) for header/embedded-logo scan, pointer-table decoding, literal/key-mask scans.
 - `strings -t x -n 3/4`, plus a custom Python pass over plain/lower/upper case, for the keyword census.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly of `0x08009480`–`0x08009C00`, `0x0800A180`–`0x0800A500`, `0x0800B460`–`0x0800B4D0`, `0x0801DEB0`–`0x0801E080`, `0x08000240`–`0x080002B0`.
-- mGBA 0.10.5 SDL under Xvfb `:317` with openbox; `xdotool` XTEST input via helper `/tmp/opencode/shrek2/k.py`; `scrot` + ImageMagick crops.
+- mGBA 0.10.5 SDL under Xvfb `:317` with openbox; `xdotool` XTEST input via helper `/tmp/shrek2/k.py`; `scrot` + ImageMagick crops.
 - Savestate forensics: `state.py` (decompress PNG `gbAs` into 0x61000-byte raw state; IWRAM `0x19000`, EWRAM `0x21000`), `patchstate.py` (patch EWRAM cursor to 31 to select OK), `patchsram.py` (decode/re-encode `gbAx` SRAM chunk). Used to locate the keyboard cursor and to confirm the SRAM name field.
 - A PTY-based mGBA `-d` debugger bridge and a GDB-stub attempt were tried and abandoned: port 2345 was occupied by another agent's stub, and the CLI debugger became unreliable after a break; savestate diffing (§16.13) was the primary RAM-evidence method instead.
 

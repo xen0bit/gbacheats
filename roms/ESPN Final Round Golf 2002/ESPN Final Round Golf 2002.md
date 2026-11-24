@@ -1,5 +1,7 @@
 # ESPN Final Round Golf 2002 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -55,7 +57,7 @@ Title (PRESS START) --Start--> MAIN MENU
             -> GAME SELECT: TOURNAMENT / STROKE / MATCH PLAY / PRACTICE
             -> PRACTICE -> HOLE 1 flyby -> gameplay
 ```
-The in-game Select menu (BGM/SE, Score, Ranking, Give Up, Retire, Reset, Exit) is documented by the archived FAQ (§3.4); no hidden extra entries were found in static analysis. Screenshots of every observed screen are in `/tmp/opencode/espngolf/shot_*.png`.
+The in-game Select menu (BGM/SE, Score, Ranking, Give Up, Retire, Reset, Exit) is documented by the archived FAQ (§3.4); no hidden extra entries were found in static analysis. Screenshots of every observed screen were in `/tmp/espngolf/shot_*.png`.
 
 ### Debug-menu access proof (RAM injection; investigation only — NOT an in-game code)
 1. Launch `mgba -3 -d <rom>` under Xvfb; the CLI debugger breaks at cycle 0.

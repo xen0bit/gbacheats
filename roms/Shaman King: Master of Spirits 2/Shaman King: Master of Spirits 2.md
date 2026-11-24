@@ -1,5 +1,7 @@
 # Shaman King: Master of Spirits 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -162,4 +164,4 @@ This is a standard edge-triggered keypad state machine. It produces masks only; 
 * mGBA 0.10.5 `-d` console under `stdbuf -o0`, driven by `dbg_server.py` / `cmd`; `rr.sh` for `x/1|x/2|x/4` RAM dumps; SIGINT to break.
 * `ssdiff.py`, `saveview.py`: zlib `gbAs` savestate extraction and EWRAM/IWRAM diffing.
 * `press.sh`, `ss.sh` (`Shift+F1..F10`) for deterministic input and state snapshots.
-* All analysis artifacts are in `/tmp/opencode/shamanmaster2`; no copyrighted ROM/assets were redistributed.
+* All analysis artifacts were in `/tmp/shamanmaster2`; no copyrighted ROM/assets were redistributed.

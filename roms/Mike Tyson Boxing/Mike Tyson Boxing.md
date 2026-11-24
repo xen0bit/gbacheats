@@ -1,5 +1,7 @@
 # Mike Tyson Boxing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -179,7 +181,7 @@ Language select → PRESS START title → main menu 5 tabs → 5 mode descriptio
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep -abo` — Phase 0/1.
-* Python 3 + `capstone` 5.0.7 (installed) — Thumb literal/BL/key-mask scans; custom `ptr.py`, `dumpptrs.py`, `scanlit.py`, `nameentry.py`, `ssdiff.py`, `dbg.py`, `dbgdaemon.py`, `gba.py`, `ram.py` in `/tmp/opencode/miketyson/`.
+* Python 3 + `capstone` 5.0.7 (installed) — Thumb literal/BL/key-mask scans; custom `ptr.py`, `dumpptrs.py`, `scanlit.py`, `nameentry.py`, `ssdiff.py`, `dbg.py`, `dbgdaemon.py`, `gba.py`, `ram.py` in `/tmp/miketyson/`.
 * `arm-none-eabi-objdump` (`-M force-thumb`) — targeted disassembly of the keypad handler.
 * REA MCP (Ghidra 12.1.4 via `provider_id: "ghidra"`) — `open_binary`, `xrefs`, `trace_feature`, `analyze_function`; session closed after analysis.
 * mGBA SDL (`-3`) under Xvfb `:319` + openbox; `xdotool` XTEST input; `scrot` + ImageMagick for screenshots.

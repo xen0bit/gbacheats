@@ -1,5 +1,7 @@
 # Beyblade VForce: Ultimate Blader Jam (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -96,7 +98,7 @@ menu.
 `PAUSE / Resume / Exit` overlay, then verify in memory or resume.
 
 Menu walk performed (all screenshots kept as working artifacts in
-`/tmp/opencode/beyblade/`):
+`/tmp/beyblade/`):
 
 | Screen | measured screen id | notes |
 |---|---:|---|

@@ -1,5 +1,7 @@
 # Sonic Advance 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -36,7 +38,7 @@ Per §0.2 the whole space was enumerated: the table has exactly 6 entries, all 1
 **Emulator:** mGBA 0.10.5 (SDL) under `Xvfb :315`, `-3` scale, `SDL_AUDIODRIVER=dummy`.
 Keymap verified live against `KEYINPUT` (`0x04000130`): A=`x`, B=`z`, Start=`Return`, Select=`BackSpace`, R=`s`, D-pad=arrows.
 
-**UI walk observed (screenshots in `/tmp/opencode/sonic3/`):** language select → registration name entry ("REG. NAME", 6-glyph keyboard; must fill all 6 slots then END) → "PRESENTED BY SEGA" → character-intro cutscenes → title "PRESS START" → "DEMO PLAY" attract loop → in-game "ROUTE 99" demo → back to title. The title→demo→title cycle repeated on a fresh process, with the ROM's own save file present or absent.
+**UI walk observed (screenshots in `/tmp/sonic3/`):** language select → registration name entry ("REG. NAME", 6-glyph keyboard; must fill all 6 slots then END) → "PRESENTED BY SEGA" → character-intro cutscenes → title "PRESS START" → "DEMO PLAY" attract loop → in-game "ROUTE 99" demo → back to title. The title→demo→title cycle repeated on a fresh process, with the ROM's own save file present or absent.
 
 **Code entry:** The code is attached to the main-menu handlers that call the validator (`0x808789A`, `0x8087EF2`, `0x8089CA2`, `0x8089D24`). In this headless run the main-menu scene could not be reached through the UI (the title screen always routed to the demo attract loop), so entry and verification were performed with the guide's §16.19 **validator-as-oracle** technique: the emulator was paused in mGBA's `-d` pty debugger, the gate byte and the game's real key-state word (`0x03003F8C`) were written, and the validator was called at its own address with a constructed menu object. All presses were delivered to the exact RAM word the game's validator reads on its native code path, and the resulting scene write was verified in RAM. This is a genuine in-game execution of the code path, not a standalone reimplementation (the Python decoder was only used to choose inputs).
 
@@ -176,7 +178,7 @@ Bytes: `40 00 00 01 80 00 00 02 10 00 20 00`. Raw literal search in the 16 MiB i
 
 **Full transition enumeration using the ROM validator as oracle** (all 10 buttons at progress states `0xFFFF,0,1,2,3,4,5,10`, gate `0x7F`):
 
-| State | Correct button | A (wrong) | Up | No key | `expected|Start` |
+| State | Correct button | A (wrong) | Up | No key | `expected\|Start` |
 |---:|---:|---:|---:|---:|---:|
 | `FFFF` | `0000` (Up) | `FFFF` | `0000` | `FFFF` | advances |
 | `0000` | `0001` (R) | `FFFF` | `0000` | `0000` | advances |
@@ -228,4 +230,4 @@ Entered through the validator as the game's real key-state word with gate `0x7F`
 - Savestate diffing (`ssdiff.py`): PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte raw state; IWRAM at raw `0x19000`, EWRAM at `0x21000`.
 - `arm-none-eabi-objdump -M force-thumb` + Capstone 5.0.7 PC-relative literal resolution and pointer/mask-table scanners (Python).
 - `strings`, `xxd`, `grep`, Python `struct`/`zlib`/`re`; web search of GameFAQs, CheatCC, CheatingDome, GGmania, Supercheats, GameHacking.org, anti-gsc (treated as untrusted data).
-- Working files and screenshots: `/tmp/opencode/sonic3/` (`title_screen.png`, `demo_screen.png`, `intro_cutscene.png`, `strings_all.txt`, scripts above). No ROM or copyrighted assets are redistributed in this report.
+- Working files and screenshots: `/tmp/sonic3/` (`title_screen.png`, `demo_screen.png`, `intro_cutscene.png`, `strings_all.txt`, scripts above). No ROM or copyrighted assets are redistributed in this report.

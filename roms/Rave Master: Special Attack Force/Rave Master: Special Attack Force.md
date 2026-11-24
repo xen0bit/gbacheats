@@ -1,5 +1,7 @@
 # Rave Master: Special Attack Force! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -70,7 +72,7 @@ double-stepping menus.
    holding Up: raw `0x1FAA0` toggles `0x00→0x40`, which maps to IWRAM
    `0x03006AA0 = 0x19000 + 0x6AA0`. EWRAM starts at raw `0x21000`.
 
-Screenshots used as evidence (kept in `/tmp/opencode/ravemaster/`):
+Screenshots used as evidence (kept in `/tmp/ravemaster/`):
 `title.png`, `menu1.png`, `s_story2.png`, `option4.png`, `cleartime.png`,
 `v_ranking.png`, `v_free.png`, `v_link.png`, `v_training.png`,
 `o_reset.png`, `o_battlecry.png`.
@@ -225,7 +227,7 @@ counts above.
 * `file`, `xxd`, `strings -t x`, `grep -abo`, `md5sum`/`sha1sum`/`sha256sum`.
 * `arm-none-eabi-objdump -D -b binary -marm -M force-thumb` with
   `--adjust-vma=0x08000000` (and `dd` extraction for ranges objdump skipped).
-* Python scripts in `/tmp/opencode/ravemaster/`: `header_scan.py`,
+* Python scripts in `/tmp/ravemaster/`: `header_scan.py`,
   `keysearch.py`, `keysearch2.py` (mask encodings), `blscan.py` (BL targets),
   `scan_cmp.py` (key-mask comparisons), `textdecode.py`, `lzscan.py`,
   `parse_state.py`, `patch_state.py`, `state_preview.py`, `saves.py`, `k.py`,

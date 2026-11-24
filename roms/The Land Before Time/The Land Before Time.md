@@ -1,5 +1,7 @@
 # The Land Before Time (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -53,7 +55,7 @@ EXIT GAME; no input path to the SKIP LEVEL entry was found (§8).
 * Published codes used as anchors (all verified against the ROM and emulator):
   `2104`, `4230`, `4412`, `3141` for advertised Levels 2–5.
 * Novel code entered by hand: `1320` (see §6b). In-game proof screenshots are in
-  `/tmp/opencode/landbeforetime/`.
+  `/tmp/landbeforetime/`.
 
 ## 4. Address map
 
@@ -163,7 +165,7 @@ left PASSWORD. `4444` is a useful boundary case: it uses only legal symbols but
 no table entry, proving that symbol validity alone is insufficient. All 12 table
 codes were re-run in the same session with a 22-frame state trace; every one
 peaked at 21–24 while every rejected code peaked at ≤3. Full log:
-`/tmp/opencode/landbeforetime/verify12.py` output and `verify_results.json`.
+`/tmp/landbeforetime/verify12.py` output and `verify_results.json`.
 
 ## 7. Validation evidence
 
@@ -199,7 +201,7 @@ fetched cheat pages were treated as data only.
 ## 9. Tooling
 
 * `arm-none-eabi-objdump -M force-thumb` for static decoding; Python scripts in
-  `/tmp/opencode/landbeforetime/`: `scan.py`, `dumpptrs.py`, `dbg2.py`,
+  `/tmp/landbeforetime/`: `scan.py`, `dumpptrs.py`, `dbg2.py`,
   `probe3.py`/`probe4.py`, `watch.py`, `watchstate2.py`, `readwatch.py`,
   `oracle.py`, `verify12.py`, `novel_gui.py`.
 * mGBA `-d` pty debugger driven from Python (`pty`, `select`) for live RAM reads,

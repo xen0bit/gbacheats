@@ -1,10 +1,12 @@
 # everGirl (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `roms/everGirl/everGirl.gba` (analysis copy at `/tmp/opencode/evergirl/everGirl.gba`) |
+| File | `roms/everGirl/everGirl.gba` (analysis copy at `/tmp/evergirl/everGirl.gba`) |
 | Size | 4,194,304 bytes (4 MiB) |
 | `file` | Game Boy Advance ROM image: "EVERGIRL" (BEVE78, Rev.00) |
 | Header title | `EVERGIRL` @ 0xA0 |
@@ -51,7 +53,7 @@ No GameShark/CodeBreaker/Action Replay codes were used or reported.
 - GDB: `mgba -g -3`; `gdb-multiarch -ex 'set architecture arm' -ex 'target remote
   :2345'`. A GDB disconnect while the target is running can kill this mGBA
   build; keep the client attached or use savestate diffing instead.
-- Work files (screenshots, scripts, states) are in `/tmp/opencode/evergirl/`,
+- Work files (screenshots, scripts, states) were in `/tmp/evergirl/`,
   never in the ROM folder.
 
 ## 4. Address map
@@ -163,7 +165,7 @@ the developer-menu renderer breakpoints.
 - `k.py` (xdotool key/screenshot helper), `combo_test.py`, `title_combos.py`,
   `boot_combos.py`, `title_brute.py` (savestate-backed combo sweep),
   `gdb_harness.py`, `gdb_ctrl.py`, `gdb_batch.gdb`.
-- All artifacts live in `/tmp/opencode/evergirl/`; no ROM or copyrighted asset
+- All artifacts were kept in `/tmp/evergirl/`; no ROM or copyrighted asset
   is redistributed by this report.
 
 **Legal note:** only hashes, addresses, algorithms, and original scripts are

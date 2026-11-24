@@ -1,5 +1,7 @@
 # The Ripping Friends: The World's Most Manly Men! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Queue 178. Analysis date 2026-11-20. All addresses below are for the exact ROM hashed in §1.
 
 ## 1. Target identity
@@ -82,7 +84,7 @@ Button code → symbol (`s = code - 2`):
 | code | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | ignored |
 | symbol `s` | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | — |
 
-Validator (`0x0800D078`), exact model implemented in `/tmp/opencode/rippingfriends/pwmodel.py`:
+Validator (`0x0800D078`), exact model implemented in `/tmp/rippingfriends/pwmodel.py`:
 
 ```
 v = 0
@@ -177,8 +179,8 @@ No debug menu, sound test, level-select cheat sequence, or character-name/name-e
 ## 9. Tooling
 
 * `arm-none-eabi-objdump -M force-thumb` for all disassembly; Python 3 + capstone 5.0.7 available but the final scans used raw byte search (`scan.py`).
-* `/tmp/opencode/rippingfriends/pwmodel.py` — exact validator model; `gen.py` — code generator; `find_table.py` — encoding scans; `ssdiff.py` / `probe_parse.py` — zlib `gbAs` savestate extraction and RAM probing; `key.sh` — timed XTEST key helper.
-* Evidence screenshots and savestates remain in `/tmp/opencode/rippingfriends/`; they are transient analysis artifacts, not distributed assets. No ROM data or copyrighted assets are reproduced in this report.
+* `/tmp/rippingfriends/pwmodel.py` — exact validator model; `gen.py` — code generator; `find_table.py` — encoding scans; `ssdiff.py` / `probe_parse.py` — zlib `gbAs` savestate extraction and RAM probing; `key.sh` — timed XTEST key helper.
+* Evidence screenshots and savestates were left in `/tmp/rippingfriends/`; they are transient analysis artifacts, not distributed assets. No ROM data or copyrighted assets are reproduced in this report.
 
 ## 10. Legal note
 

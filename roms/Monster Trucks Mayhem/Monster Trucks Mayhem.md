@@ -1,5 +1,7 @@
 # Monster Trucks Mayhem (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md), including §0.2 (full enumeration) and §16.19 (validator-as-oracle).
 
 Scope: **in-game / developer-intended cheats only** (passwords, button codes, hidden/debug menus, unlockables). GameShark/CodeBreaker/RAM patches are out of scope.
@@ -184,7 +186,7 @@ Given any 19 typed characters, the 20th is found by trying all 36 symbols with `
 | Check position | character 20 (index 19), excluded from the sum |
 | Input buffer | `0x030020C5`, 20 ASCII bytes |
 
-### 6.2 Menu inventory (all reached; screenshots in `/tmp/opencode/monstermayhem/shots/`)
+### 6.2 Menu inventory (all reached; screenshots in `/tmp/monstermayhem/shots/`)
 
 | # | Screen | Items / notes | Evidence |
 |---:|---|---|---|
@@ -288,7 +290,7 @@ Neither string occurs anywhere in the ROM (`grep -abo` style search) or in any p
 
 ## 9. Tooling
 
-All scripts in `/tmp/opencode/monstermayhem/` (session-only, not archived):
+All scripts in `/tmp/monstermayhem/` (session-only, not archived):
 
 | Script | Purpose |
 |---|---|
@@ -301,7 +303,7 @@ All scripts in `/tmp/opencode/monstermayhem/` (session-only, not archived):
 
 Environment: `mgba` (SDL), `Xvfb`/`openbox`/`xdotool`/`scrot`, `binutils-arm-none-eabi`, `capstone 5.0.7`, REA/Ghidra 12.1.4 (raw ARM import; Thumb functions not auto-detected, so manual `objdump` was used), Python 3 + Pillow.
 
-Screenshots: `/tmp/opencode/monstermayhem/shots/` (not committed).
+Screenshots: `/tmp/monstermayhem/shots/` (not committed).
 
 ### Cleanup
 

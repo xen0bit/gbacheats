@@ -1,5 +1,7 @@
 # Island Xtreme Stunts (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -137,7 +139,7 @@ Because no code system exists, the deliverable here is a **bounded negative** ra
 
 ## 7. Validation evidence
 
-* **Observed** (emulator, `DISPLAY=:315`): language select, title, intro/ATTRACT, save-slot select, name entry, Single/Multiplayer selection, Studio Map, per-minigame intro, instructions, Freeway Frenzy gameplay, PAUSED menu with CONTINUE/RESTART/QUIT, QUIT confirmation, results/outro. Screenshots: `walk_*.png`, `code_step*.png`, `idle*.png`, `s0..s6.png`, `intro*.png`, `pause*.png`, `cut*.png` (all in `/tmp/opencode/islandxtreme/`).
+* **Observed** (emulator, `DISPLAY=:315`): language select, title, intro/ATTRACT, save-slot select, name entry, Single/Multiplayer selection, Studio Map, per-minigame intro, instructions, Freeway Frenzy gameplay, PAUSED menu with CONTINUE/RESTART/QUIT, QUIT confirmation, results/outro. Screenshots: `walk_*.png`, `code_step*.png`, `idle*.png`, `s0..s6.png`, `intro*.png`, `pause*.png`, `cut*.png` (all in `/tmp/islandxtreme/`).
 * **Observed** (RAM): `KEYINPUT` verified for all 10 keys; `held`/`pressed` globals read live; savestates `Island Xtreme Stunts.ss1`–`.ss4` decoded (397,312-byte `gbAs` payloads per §16.13) and diffed to follow screen transitions; RSP breakpoints confirmed `0x0801342C` is the live map handler.
 * **Derived** (static): single header/logo; stock entry branch; screen table of 20 records; input helper and globals; zero keyword hits; zero published-sequence literals in four encodings; no debug state in the screen table.
 * **Inferred** (not fully exercised): link-multiplayer states 9–13 and story-gated Challenge Select/CH GameOutro (states 14–15) cannot be reached without a second console/completed save, so their internal lack of cheats is inferred from the table and code structure, not from gameplay.
@@ -156,7 +158,7 @@ Because no code system exists, the deliverable here is a **bounded negative** ra
 * mGBA (SDL) with `-g` GDB stub; a small Python GDB-RSP client (`rsp.py`, `rspd.py`) used because `gdb-multiarch` could not negotiate with this stub. Key evidence: KEYINPUT reads, breakpoint at `0x0801342C`.
 * `xdotool` (XTEST key events), `scrot`, ImageMagick `convert` (720×480 crop at +152+166), `Xvfb :315` + `openbox`.
 * Savestate diffing: Python `zlib` decompression of the `gbAs` PNG chunk (`ssdiff.py`).
-* All scripts and screenshots live in `/tmp/opencode/islandxtreme/`. Generated `.sav`/`.ss1`–`.ss4` in the ROM folder were removed at cleanup.
+* All scripts and screenshots were kept in `/tmp/islandxtreme/`. Generated `.sav`/`.ss1`–`.ss4` in the ROM folder were removed at cleanup.
 
 ## Legal note
 

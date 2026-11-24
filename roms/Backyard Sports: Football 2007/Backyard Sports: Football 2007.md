@@ -1,5 +1,7 @@
 # Backyard Sports: Football 2007 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Status: complete. Scope: in-game / developer-intended cheats only (passwords,
 button codes, hidden/debug menus, unlockables). No GameShark, CodeBreaker,
 Action Replay or memory-edit code is proposed or used.
@@ -482,7 +484,7 @@ any table/matcher is the stronger, whole-ROM bound.
 
 * `mGBA 0.10.5` (SDL) under `Xvfb :162` + `openbox`; `xdotool` for input,
   `ImageMagick import/convert` for screenshots, `tesseract` for name OCR.
-* Python 3 scripts in `/tmp/opencode/bfoot2007/`:
+* Python 3 scripts in `/tmp/bfoot2007/`:
   * `phase0.py` — hashes, header parse, embedded-logo scan.
   * `scan_keys.py`, `scan2.py`, `scan3.py` — u16 key-mask runs, ASCII button
     table scan, keyword counts.

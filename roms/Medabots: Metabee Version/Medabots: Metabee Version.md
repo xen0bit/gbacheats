@@ -1,5 +1,7 @@
 # Medabots: Metabee Version (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -176,7 +178,7 @@ These are genuinely undocumented: every fetched guide lists only Select+Start. T
 
 ## 7. Validation evidence
 
-**Observed** (emulator screenshots + RAM reads, all saved as states under `/tmp/opencode/medabotsmetabee/`):
+**Observed** (emulator screenshots + RAM reads, all saved as states under `/tmp/medabotsmetabee/`):
 - Boot chain: "Licensed by Nintendo" → Natsume logo → robot attract → "PRESS START" title → NEW GAME/OPTIONS menu with Robattle Time/Message/BGM panel.
 - New Game confirmation dialog (default "No"); selecting "Yes" enters the overworld with dialogue.
 - Overworld field screens, dialogue text, and the fact that B does not open the field menu at this story point.
@@ -206,8 +208,8 @@ These are genuinely undocumented: every fetched guide lists only Select+Start. T
 - `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -abo` — Phase 0/1.
 - Python 3 + `struct`/`zlib` — header parse, embedded-header scan, savestate `gbAs` decompression and RAM reads/diffs.
 - `arm-none-eabi-objdump -M force-thumb` and Capstone 5.0.7 — literal/BL scans and disassembly.
-- mGBA 0.10.5 under `Xvfb :317` + openbox, driven by `xdotool` (helper `/tmp/opencode/medabotsmetabee/gba.py`) — screens, chords, named savestates.
+- mGBA 0.10.5 under `Xvfb :317` + openbox, driven by `xdotool` (helper `/tmp/medabotsmetabee/gba.py`) — screens, chords, named savestates.
 - REA/Ghidra 12.1.4 attempted for decompilation; timed out on the 8 MiB raw image and the session was closed without a snapshot.
-- ~30 screenshots saved under `/tmp/opencode/medabotsmetabee/` as visual evidence; not attached to this report.
+- ~30 screenshots saved under `/tmp/medabotsmetabee/` as visual evidence; not attached to this report.
 
 No ROM data or copyrighted assets are redistributed here — only hashes, addresses, and the author's own observations.

@@ -1,5 +1,7 @@
 # The Chronicles of Narnia: The Lion, the Witch and the Wardrobe (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -138,6 +140,6 @@ Every published spelling of this effect uses **Down** (or, incorrectly, D-pad Ri
 
 ## 9. Tooling
 
-`strings`, `xxd`, `grep`, `arm-none-eabi-objdump -M force-thumb`, Capstone, Python 3 scripts in `/tmp/opencode/narnia/` (`find_tables.py`, `scan_cmp2.py`, `find_codes.py`, `keymap2.py`, `decode.py`, `verify_code.py`, `state.py`), mGBA 0.10.5 + Xvfb `:318` + openbox, xdotool, scrot, zlib savestate `gbAs` chunk decoder, Ghidra 12.1.4 via REA (`resolve_containing_procedure`, `procedure_pseudo_code`, `procedure_callers`).
+`strings`, `xxd`, `grep`, `arm-none-eabi-objdump -M force-thumb`, Capstone, Python 3 scripts in `/tmp/narnia/` (`find_tables.py`, `scan_cmp2.py`, `find_codes.py`, `keymap2.py`, `decode.py`, `verify_code.py`, `state.py`), mGBA 0.10.5 + Xvfb `:318` + openbox, xdotool, scrot, zlib savestate `gbAs` chunk decoder, Ghidra 12.1.4 via REA (`resolve_containing_procedure`, `procedure_pseudo_code`, `procedure_callers`).
 
 No ROM or copyrighted assets are redistributed here; only hashes, addresses and derived algorithms are published.

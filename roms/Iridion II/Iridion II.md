@@ -1,5 +1,7 @@
 # Iridion II (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -126,7 +128,7 @@ Notes:
 * Step 2 packs the **first typed character into the low 5 bits** (little-endian symbol order).
 * Step 3 is a pure bit transpose; PERM is a permutation of 0..24.
 * **Bits 21–24 of `d` are never read.** They create 16 interchangeable spellings per game state (§6b).
-* `encode()` is the exact inverse: build `d` from fields (high bits 0), XOR `KEY`, inverse-permute with the same PERM loop, emit 5 low-to-high symbols. A reference implementation is `/tmp/opencode/iridion2/pw.py`.
+* `encode()` is the exact inverse: build `d` from fields (high bits 0), XOR `KEY`, inverse-permute with the same PERM loop, emit 5 low-to-high symbols. A reference implementation is `/tmp/iridion2/pw.py`.
 
 ## 6. Tables
 
@@ -202,4 +204,4 @@ This matches the decoder output for `RCPHX` exactly and demonstrates that f1 (di
 * Savestate RAM reading: decompress the PNG `gbAs` chunk with zlib (397,312-byte state; IWRAM at `0x19000`, EWRAM at `0x21000`) — used because the GDB stub is single-client and disconnects halted this mGBA build.
 * REA/Ghidra was available but its session was bound to a different ROM belonging to another analyst, so it was deliberately not used; all findings here come from objdump/Capstone and the emulator.
 
-All analysis scripts are in `/tmp/opencode/iridion2/`. No ROM bytes or copyrighted assets are reproduced in this report.
+All analysis scripts were in `/tmp/iridion2/`. No ROM bytes or copyrighted assets are reproduced in this report.

@@ -1,5 +1,7 @@
 # X-Bladez: Inline Skater (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -66,7 +68,7 @@ Codes tested in the emulator:
 |---|---|---|
 | `0x0800ED00` | Thumb fn | **Password validator**. `r0` must be `0x20`; checksum test at `0x0800ED32/0x0800ED3C`; payload decode `0x0800ED3E–0x0800ED68`; flag write `0x0800ED76–0x0800EDA4`. |
 | `0x0800EE28` | code | Rejection branch (UI reset, no unlock). |
-| `0x0800EC48` | Thumb fn | Companion repack routine (called from dispatcher case `0x0800BD1C`): moves bytes between `0x03004560` and `0x03005BA0`, packs `out[5] = src[5] | (src[6]<<2)`, `out[6]=src[7]`, `out[7]=carry of 7-byte sum`. Derived. |
+| `0x0800EC48` | Thumb fn | Companion repack routine (called from dispatcher case `0x0800BD1C`): moves bytes between `0x03004560` and `0x03005BA0`, packs `out[5] = src[5] \| (src[6]<<2)`, `out[6]=src[7]`, `out[7]=carry of 7-byte sum`. Derived. |
 | `0x0800EEDC`–`0x0800EF0E` | code | Per-keystroke: `buffer[cursor] = symbol index`; max 8 enforced via `0x03005C1C`. |
 | `0x0800EBCC` | code | Submit gate: requires 8 characters and A on the green arrow. |
 | `0x0800ECC8` | Thumb fn | Clear password (fills buffer with `0x21`). |
@@ -148,7 +150,7 @@ Pre-code baseline flags: `1100000000` (flags 0 and 1 are set by default).
 
 **Novel codes (absent from GameFAQs, SuperCheats and every other published list; the only published code is `CBMBBQLT`):**
 
-1. **`BBBBBBDC`** — exercises an unadvertised combination: level/count byte 2 instead of the published 8. Verified in emulator: typed buffer `[0,0,0,0,0,0,2,1]`, decoded `[0,0,0,0,0,0,0,2]`, flags changed from `1100000000` to `1111000000` (only flags 2 and 3 added). Screen returned to HOME (accept). Screenshot: `/tmp/opencode/xbladez/vnovel_after.png`.
+1. **`BBBBBBDC`** — exercises an unadvertised combination: level/count byte 2 instead of the published 8. Verified in emulator: typed buffer `[0,0,0,0,0,0,2,1]`, decoded `[0,0,0,0,0,0,0,2]`, flags changed from `1100000000` to `1111000000` (only flags 2 and 3 added). Screen returned to HOME (accept). Screenshot: `/tmp/xbladez/vnovel_after.png`.
 2. **`MMMMMMK9`** — exercises the maximum representable checksum (Σ=61 → index 30, symbol `9`). Verified: decoded `[9,9,9,9,9,1,2,7]`, flags → `1111111110`.
 
 **Bounds proven by rejection (RAM-verified: decoded stays all-zero and flags stay `1100000000`):**
@@ -178,7 +180,7 @@ Published-code verification: `CBMBBQLT` (GameFAQs "Have full selection of levels
 
 ## 9. Tooling
 
-All artifacts are in `/tmp/opencode/xbladez` (nothing written to the ROM folder except this report).
+All artifacts were in `/tmp/xbladez` (nothing written to the ROM folder except this report).
 
 * `gdbdump.py`, `scan_refs.py`, `parse_state.py`, `render_vram.py`, `render_thresh.py` — literal/BL scans, `gbAs` state extraction, font/tile investigation.
 * `enter_code.py` — 8×4 grid keyboard navigator (Left/Right within row, Up/Down between rows, Right past `←` selects ACCEPT).

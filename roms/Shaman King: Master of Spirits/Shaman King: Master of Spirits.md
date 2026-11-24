@@ -1,5 +1,7 @@
 # Shaman King: Master of Spirits (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -90,7 +92,7 @@ Menu path (all screens reached):
    produced a hidden screen.
 
 Screenshots and full-RAM savestates for every step are in
-`/tmp/opencode/shamanmaster1/` (`s*.png`, `state_*.ss1/.ss2/.ss3`). Helper
+`/tmp/shamanmaster1/` (`s*.png`, `state_*.ss1/.ss2/.ss3`). Helper
 scripts: `key.py` (XTEST input), `ss.py` (mGBA `gbAs` savestate decoder),
 `scan.py` (static scans). Raw scan output: `scan_out.txt`.
 

@@ -1,5 +1,7 @@
 # The Game of Life - Yahtzee - Payday (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -33,11 +35,11 @@ Excluded as out of scope: the community-reported *Payday* loan-overflow "money g
 ## 3. How to reproduce
 
 * Emulator: mGBA 0.10.5 (`/usr/local/bin/mgba`), `SDL_AUDIODRIVER=dummy`, Xvfb display `:319` with openbox.
-* Command: `mgba -3 game.gba` (the analysed copy lives at `/tmp/opencode/lifeYahtzeePayday/game.gba`; the ROM folder copy was not modified).
+* Command: `mgba -3 game.gba` (the analysed copy lives at `/tmp/lifeYahtzeePayday/game.gba`; the ROM folder copy was not modified).
 * Keymap used (default mGBA SDL): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Holds of 120–300 ms; `xdotool windowfocus` to the mGBA window before each burst.
 * Savestates: `Shift+F1` saves, `F1` loads. States were kept in the work dir, never in the ROM folder.
 
-Menu path and screens walked (screenshots retained in `/tmp/opencode/lifeYahtzeePayday/`):
+Menu path and screens walked (screenshots retained in `/tmp/lifeYahtzeePayday/`):
 
 | # | Screen | Screenshot |
 |---|---|---|
@@ -194,7 +196,7 @@ No screen exposes an alphabetic/numeric keypad, no "Enter code" prompt, and no e
 * Capstone (`CS_ARCH_ARM`, `CS_MODE_THUMB`) for BL/B target scanning and call-site context.
 * mGBA 0.10.5 with `-3`, `-g` (GDB stub exercised: `target remote :2345`, reads of `0x02000000` and IWRAM succeeded); Xvfb `:319`, openbox, `xdotool` XTEST input, `scrot`.
 * Savestate forensics: Python PNG chunk walk → `zlib.decompress(gbAs)` → 397,312-byte raw state → IWRAM diff (guide §16.13).
-* Helper scripts: `/tmp/opencode/lifeYahtzeePayday/key.py`, savestate dump scripts; screenshots and `state_*.ss1/.raw` retained in that directory.
+* Helper scripts: `/tmp/lifeYahtzeePayday/key.py`, savestate dump scripts; screenshots and `state_*.ss1/.raw` retained in that directory.
 
 ## 10. Legal note
 

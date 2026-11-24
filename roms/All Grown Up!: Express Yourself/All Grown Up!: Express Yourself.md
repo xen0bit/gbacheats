@@ -1,5 +1,7 @@
 # All Grown Up!: Express Yourself (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-10-25.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
@@ -548,7 +550,7 @@ comparison of that buffer against any constant in the ROM.
 * `mgba` 0.10.5 (`/usr/games/mgba`), SDL, `-3` scale, private `Xvfb :131` +
   `openbox`, `xdotool`, ImageMagick `import`/`convert`.
 * `arm-none-eabi-objdump -D -b binary -marm -M force-thumb` for raw Thumb.
-* Python 3 scripts in `/tmp/opencode/allgrownup/`:
+* Python 3 scripts in `/tmp/allgrownup/`:
   * `phase0.py` — header, hashes, complement/checksum, Nintendo-logo scan.
   * `ptr.py` / inline scanners — 32-bit literal-pointer searches.
   * BL-target scanner — call-site recovery for `0x08043CB4`, `0x0804476C`,

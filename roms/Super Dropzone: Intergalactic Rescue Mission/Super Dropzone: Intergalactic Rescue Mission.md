@@ -1,5 +1,7 @@
 # Super Dropzone: Intergalactic Rescue Mission (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -49,7 +51,7 @@ mGBA SDL keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSp
 ### 3.3 Deterministic input via savestate (used for all RAM proofs)
 mGBA `.ss1` files are PNG with a zlib-compressed `gbAs` chunk. Decompressed layout: IWRAM begins at raw `0x19000` (so RAM `0x03000010` → raw `0x19010`). The menu-copy of the string `   Start New Game    Password: 00000000 …` lives at `0x0801406D` and is copied to `0x03000010`; the 8 password digits are at offset 31 → raw `0x1902F`..`0x19037`.
 
-Procedure: save a state at the Options menu, patch those 8 bytes, write a new PNG with a correct `gbAs` CRC, reload (F1), press A on `Start New Game`, save again, and read the effect flags from the new state. Scripts: `/tmp/opencode/superdropzone/ss_write.py`, `test_pw.py` (§9).
+Procedure: save a state at the Options menu, patch those 8 bytes, write a new PNG with a correct `gbAs` CRC, reload (F1), press A on `Start New Game`, save again, and read the effect flags from the new state. Scripts: `/tmp/superdropzone/ss_write.py`, `test_pw.py` (§9).
 
 ### 3.4 Codes verified in-game
 | Code | Index | Observed RAM effect |
@@ -192,7 +194,7 @@ These are a sparse subset of the 46 progress codes (levels 0–3 sampled at wave
 ## 7. Validation evidence
 
 - **Derived (disassembly):** validator loop `0x080032F8`–`0x0803322`; table base/size from literal `0x08033C0 = 0x080140BE` and loop bound `49`; special-case stores `0x0803328`–`0x080334E`; buffer clear at `0x0803366`; division helper `0x08010FF0`; CHEATS menu strings/gates/toggle at `0x08010306`/`0x0801037C`/`0x0801047A`.
-- **Observed (emulator + savestate RAM reads):** table of 50 codes (ROM bytes); password displayed on Options screen after savestate injection; `51853435` → `0x03000F54=1`; `88895288` → `0x030012B4=0xFF`; `00247227` → `0x03000FA0=9`; `41693261` → `0x030041E0=1`; `22441687` → level 3 / wave 4; `12345678` and `36104232` rejected with buffer not cleared. Screenshots stored in `/tmp/opencode/superdropzone/`.
+- **Observed (emulator + savestate RAM reads):** table of 50 codes (ROM bytes); password displayed on Options screen after savestate injection; `51853435` → `0x03000F54=1`; `88895288` → `0x030012B4=0xFF`; `00247227` → `0x03000FA0=9`; `41693261` → `0x030041E0=1`; `22441687` → level 3 / wave 4; `12345678` and `36104232` rejected with buffer not cleared. Screenshots stored in `/tmp/superdropzone/`.
 - **Inferred (not fully exercised):** the semantic names of `0x030012B4`, `0x03000FA0`, `0x030041E0` beyond their observed values; the in-game visual effect of each of the five cheat toggles (only the menu structure and one action path were traced). The CHEATS overlay itself was not captured on screen — its gate and rendering code were proven statically and the gate flag was RAM-verified, but the overlay screen was not reached through the controller in the available session (labelled as a gap, not a negative claim).
 - **Web recon:** all direct fetches (GameFAQs, IGN, TCRF) returned 403; DuckDuckGo returned a CAPTCHA; the search integration was quota-limited. Published lists were therefore not independently verified. ROM text was treated strictly as data; no fetched content was followed as instructions.
 
@@ -209,7 +211,7 @@ These are a sparse subset of the 46 progress codes (levels 0–3 sampled at wave
 - Capstone 5.0.7 scripts: `scan_ptrs.py` (32-bit literal pointers), `scan_ldr2.py`/`scan_ldr3.py` (Thumb `LDR Rd,[PC,#imm]` literal resolution), `scan_bl.py` (Thumb BL target scan).
 - Python zlib/struct savestate tools: `ss_write.py` (patch 8 password bytes in `.ss1`), `test_pw.py` (batch patch → reload → submit → read RAM), `ss_patch.py` (inspect).
 - mGBA 0.10.5 under Xvfb :316 + openbox, `SDL_AUDIODRIVER=dummy`; screenshots via `scrot` + `convert` crop to the 720×480 viewport.
-- All analysis artifacts are in `/tmp/opencode/superdropzone/`; no ROM or copyrighted assets are redistributed by this report.
+- All analysis artifacts were in `/tmp/superdropzone/`; no ROM or copyrighted assets are redistributed by this report.
 
 ## 10. Legal note
 

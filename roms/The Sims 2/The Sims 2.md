@@ -1,5 +1,7 @@
 # The Sims 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -15,7 +17,7 @@
 | SHA-1 | `702a109bd60d2e288814968d49caacdfd14ae2c6` |
 | SHA-256 | `d92722d6c980b8fe661e765c2a2ec4ab4eae3c91611f82d0a6fe2ee1d324e2ac` |
 
-Work files: `/tmp/opencode/thesims2/` (screenshots `shot00`–`shot50`, savestates, scripts).
+Work files: `/tmp/thesims2/` (screenshots `shot00`–`shot50`, savestates, scripts).
 
 ## 2. Executive summary
 
@@ -164,7 +166,7 @@ This is a **bounded negative**, not a code enumeration. Bounds and counts:
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/thesims2/`: `ss.py` (savestate `gbAs` zlib extractor), `ui.py` (xdotool
+Scripts in `/tmp/thesims2/`: `ss.py` (savestate `gbAs` zlib extractor), `ui.py` (xdotool
 input/screenshots), `findenc.py` (encoding sweep), `bscan.py` (literal/BL xrefs), `lzscan.py`
 (GBA-LZ77 block scan), `vram.py`/`fontgrid.py`/`render_map.py` (VRAM glyph/tilemap rendering).
 System tools: `mgba` 0.10.5, Xvfb, openbox, xdotool, scrot, ImageMagick, `strings`, `xxd`,

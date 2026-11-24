@@ -1,10 +1,12 @@
 # Medabots AX: Rokusho Version (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Medabots AX: Rokusho Version/Medabots AX: Rokusho Version.gba` |
+| File | `roms/Medabots AX: Rokusho Version/Medabots AX: Rokusho Version.gba` |
 | Size | 8,388,608 bytes (`0x800000`) |
 | `file` | Game Boy Advance ROM image: "MEDABOTS RKS" (AK9EE9, Rev.00) |
 | Header title | `MEDABOTS RKS` (`0xA0`) |
@@ -15,7 +17,7 @@
 | MD5 | `08a002ca5de6e28726c3d17644137b23` |
 | SHA-1 | `ef47f8c675f1f541a0fe4bd37c8882efc539b1c7` |
 | SHA-256 | `c1d194d9ffc703066109563aef173520d8c1f2f5bbb4fd4a7b7ebb9ff98c31cc` |
-| Analysis copy | byte-identical copy at `/tmp/opencode/medabotsrokusho/game.gba` |
+| Analysis copy | byte-identical copy at `/tmp/medabotsrokusho/game.gba` |
 
 Identity caveat: this is **not** *Medabots: Rokusho Version* (game code `A9BE`,
 `MEDABOTSRKSV`). A byte-identical-decompilation project exists for that *other*
@@ -153,7 +155,7 @@ reset is "hold A+B+SELECT, then press START". The variant actually confirmed
 here is **all four buttons pressed simultaneously from idle** (KEYINPUT observed
 as `0x0003` = all low bits clear → `0x000F` held). This produced an immediate
 reboot to `Licensed by Nintendo` (screenshot
-`/tmp/opencode/medabotsrokusho/shots/sr_after_all4.png`). It is a different
+`/tmp/medabotsrokusho/shots/sr_after_all4.png`). It is a different
 input from the published description and is accepted because `new` then
 contains bit 3 as well.
 

@@ -1,5 +1,7 @@
 # Mortal Kombat: Deadly Alliance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -131,7 +133,7 @@ Normal unlockables (not name codes): Kano/Kitana/Sub-Zero via Arcade-mode clears
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for validator/helper disassembly; a short Python regex parser to extract the compared name bytes from the objdump text.
 * Python for hashes/header parse, embedded-logo scan, literal/transformation searches, key-mask scan and save-RAM diffs.
-* mGBA SDL (`-3`) under Xvfb `:315` with openbox; `xdotool` (XTEST) input helpers `key.sh`, `nav2.py`, `create_profile.py`; `scrot` + ImageMagick crop/zoom; up to 20 screenshots retained on disk in `/tmp/opencode/mkdeadly`.
+* mGBA SDL (`-3`) under Xvfb `:315` with openbox; `xdotool` (XTEST) input helpers `key.sh`, `nav2.py`, `create_profile.py`; `scrot` + ImageMagick crop/zoom; up to 20 screenshots retained on disk in `/tmp/mkdeadly`.
 * `gdb-multiarch` attempted (stub failure described above). `capstone 5.0.7` available but not required.
 * Web: archived GameFAQs cheats page and guides 20278 / 26184 / 29005 for game 551910 (fetched as data; no prompt-injection content encountered). All published literals were verified against the ROM: `KWIKKASH` appears only as the interleaved `cmp` immediates at `0x0803E17E+`, not as a contiguous ASCII string.
 

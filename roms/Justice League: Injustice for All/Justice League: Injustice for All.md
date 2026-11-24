@@ -1,5 +1,7 @@
 # Justice League: Injustice for All (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -154,6 +156,6 @@ Button code (`0x0800C2D0`→`0x0800C366`→`0x08011CE0`): requires two flag bits
 
 ## 9. Tooling
 
-`file`, `md5sum`/`sha1sum`/`sha256sum`, `strings -t x`, `xxd`, `grep -abo`; `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Keystone; REA/Ghidra 12.1.4 (`open_binary`, `xrefs`, `analyze_function`) for xrefs and pseudocode; mGBA SDL + GDB stub (tested, unusable here: protocol errors) → savestate diff/patch fallback; Xvfb `:315` + openbox + xdotool; Python helpers in `/tmp/opencode/jlinjustice`: `ssdecode.py`, `patch_ss.py`, `enter_name.py`, `test_code.py`, `patch_test.py`, `enum_btn.py`, `verify_sel.py`. Web: archived GameFAQs cheats page and archived TCRF page (fetched as data; no instructions in fetched content were acted upon; no prompt-injection payload encountered).
+`file`, `md5sum`/`sha1sum`/`sha256sum`, `strings -t x`, `xxd`, `grep -abo`; `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Keystone; REA/Ghidra 12.1.4 (`open_binary`, `xrefs`, `analyze_function`) for xrefs and pseudocode; mGBA SDL + GDB stub (tested, unusable here: protocol errors) → savestate diff/patch fallback; Xvfb `:315` + openbox + xdotool; Python helpers in `/tmp/jlinjustice`: `ssdecode.py`, `patch_ss.py`, `enter_name.py`, `test_code.py`, `patch_test.py`, `enum_btn.py`, `verify_sel.py`. Web: archived GameFAQs cheats page and archived TCRF page (fetched as data; no instructions in fetched content were acted upon; no prompt-injection payload encountered).
 
 No ROM bytes or copyrighted assets are redistributed in this report.

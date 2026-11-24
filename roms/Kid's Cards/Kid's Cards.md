@@ -1,5 +1,7 @@
 # Kid's Cards (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -35,7 +37,7 @@ The single key-input reader at `0x0800066C` merely computes active-high `held` a
 - Keymap (mGBA SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Hold 100–150 ms.
 - Menu path: title (`PRESS START`) → **Start** → GAME SELECT (5 entries) → **A** on a game → that game's SETTINGS (Left/Right changes values, e.g. PLAYERS 2→4; A starts, B goes back) → in-game → **Select** opens pause (RESUME / RESTART / MUSIC / SOUND / QUIT) → Down×4 + A on QUIT → `ARE YOU SURE?` YES/NO → YES returns to GAME SELECT.
 - RAM reads: mGBA's GDB stub reset on connect in this build, so RAM evidence uses §16.13 savestate diffs. Savestates were taken with Shift+F1…F10 and the `gbAs` PNG chunk zlib-decompressed (script `ss.py`). State layout confirmed: raw length 0x61000; IWRAM at state +0x19000, EWRAM at +0x21000.
-- Savestates used: `states/state1.ss1` (title) … `state10.ss1` (post-quit) in `/tmp/opencode/kidscards/states/`.
+- Savestates used: `states/state1.ss1` (title) … `state10.ss1` (post-quit) in `/tmp/kidscards/states/`.
 
 ## 4. Address map
 
@@ -100,6 +102,6 @@ No sequence buffer, progress index, checksum, PRNG, XOR key, comparison table or
 
 ## 9. Tooling
 
-`file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, Python 3 with `capstone` 5.0.7 and `keystone-engine`, `arm-none-eabi-objdump`, mGBA 0.10.5 SDL under Xvfb + openbox on `:316`, `xdotool`, `scrot`, ImageMagick `convert`, `tesseract` (OCR triage), REA/Ghidra (`open_binary`, `search_strings`, `list_procedures`, `search_bytes`). Local scripts in `/tmp/opencode/kidscards/`: `ss.py` (savestate PNG/`gbAs` parser), `diffss.py`, `screenvar.py`, `ui.py`, `ptrscan.py`, `scan_input.py`, `scan_seq.py`. No ROM or copyrighted assets are redistributed by this report.
+`file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, Python 3 with `capstone` 5.0.7 and `keystone-engine`, `arm-none-eabi-objdump`, mGBA 0.10.5 SDL under Xvfb + openbox on `:316`, `xdotool`, `scrot`, ImageMagick `convert`, `tesseract` (OCR triage), REA/Ghidra (`open_binary`, `search_strings`, `list_procedures`, `search_bytes`). Local scripts in `/tmp/kidscards/`: `ss.py` (savestate PNG/`gbAs` parser), `diffss.py`, `screenvar.py`, `ui.py`, `ptrscan.py`, `scan_input.py`, `scan_seq.py`. No ROM or copyrighted assets are redistributed by this report.
 
 *Legal note: findings only — no ROM bytes, graphics, music or game text are published here beyond short UI labels used as evidence.*

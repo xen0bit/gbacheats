@@ -1,5 +1,7 @@
 # Crash Bandicoot 2: N-Tranced (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -132,7 +134,7 @@ active-low u16 masks.
 | `0x08006744` | pause action 5 — sound toggle |
 | `0x08003000` | `partner_type = byte[save+0x1F9] >> 4` |
 | `0x080030EC` | `test_bit(save, bit)` = `(byte[save+0x1FA] & bit) != 0` |
-| `0x08003124` | `set_bit(save, bit)` = `byte[save+0x1FA] |= bit` (+ checksum) |
+| `0x08003124` | `set_bit(save, bit)` = `byte[save+0x1FA] \|= bit` (+ checksum) |
 | `0x08002FDC` | save checksum: sum of 127 words (508 bytes) stored at `save+0x1FC` |
 | `0x08003C80`–`0x08003DE0` | link receive/state machine (only writer of the unlock byte) |
 | `0x0800448C`–`0x0800473C` | post-transfer "unlocked …" results screen |
@@ -318,7 +320,7 @@ interface and of the one writable flag space:
   `0xF000/0xF800`) for caller counts.
 * mGBA 0.10.5 SDL CLI debugger on Xvfb :264 (no screenshots; all state read
   through `x/`, breakpoints and `frame`).
-* Scripts kept in `/tmp/opencode/crash2`: `driver.py`, `nav2.py`, `dbg.sh`,
+* Scripts kept in `/tmp/crash2`: `driver.py`, `nav2.py`, `dbg.sh`,
   `frames.sh`, plus the extraction/scan snippets in the shell history above.
 
 ## 10. Notes

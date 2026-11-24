@@ -1,5 +1,7 @@
 # Hey Arnold!: The Movie (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -28,13 +30,13 @@ Published GameFAQs/Cheat-Happens codes were verified against the ROM decoder: 17
 
 ## 3. How to reproduce
 
-- Emulator: `mgba 0.10.5` (SDL), `Xvfb :316`, `SDL_AUDIODRIVER=dummy`, `-3` scale, CLI debugger `-d` driven through a FIFO by `/tmp/opencode/heyarnold/mgba_drv.py`.
+- Emulator: `mgba 0.10.5` (SDL), `Xvfb :316`, `SDL_AUDIODRIVER=dummy`, `-3` scale, CLI debugger `-d` driven through a FIFO by `/tmp/heyarnold/mgba_drv.py`.
 - Keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrow keys. All keys held 120–180 ms.
 - Menu path: title → `Start` → `Down`,`A` → **Password** screen. Nine-symbol keyboard: D-pad selects, A uses, B deletes, cursor moves to O.K. when slot 9 is filled; A submits.
 - To enter an arbitrary password quickly, write its nine 6-bit values to `0x0300167C..0x03001684` with the debugger (`w/1`) while the cursor is on O.K., then press A.
 - Area Select: reach it by submitting any valid password (e.g. `mQJB0Cgxg`), then press Up,Down,Right,Left,Left,Right,Down,Up,Select for Helga.
 - Pause screen: during gameplay press Start; it contains Continue / Exit / Retry / Password (Password shows the generated password for current state).
-- Scripts: `model.py` (decoder/encoder), `mint.py` (code generation), `gen_cmds.py` (byte-array → debugger writes), `ssdiff.py`/`findbuf.py` (savestate RAM diffs), `findcode.py`/`blscan.py` (xref scans). All in `/tmp/opencode/heyarnold/`.
+- Scripts: `model.py` (decoder/encoder), `mint.py` (code generation), `gen_cmds.py` (byte-array → debugger writes), `ssdiff.py`/`findbuf.py` (savestate RAM diffs), `findcode.py`/`blscan.py` (xref scans). All in `/tmp/heyarnold/`.
 
 ## 4. Address map
 

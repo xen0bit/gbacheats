@@ -1,5 +1,7 @@
 # Yu-Gi-Oh! The Eternal Duelist Soul (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -90,7 +92,7 @@ All ROM addresses are `0x08000000 + file offset`.
 | `0x08623120` | table | 821 × 4-byte BCD password slots (slot 0 … slot 820) |
 | `0x0201F7B0`–`B7` | EWRAM | 8 displayed input digits (byte per digit, value 0–9) |
 | `0x0201F7B8`–`BF` | EWRAM | validator's 8-byte copy, written at submit |
-| `0x0201F7C0` | EWRAM | keypad cursor byte = `(selected_digit << 4) | input_position` |
+| `0x0201F7C0` | EWRAM | keypad cursor byte = `(selected_digit << 4) \| input_position` |
 | `0x0201F7C4` | EWRAM | u16 validator result (card index; 0 = reject) |
 
 Savestate raw-state offsets used: EWRAM base `0x21000`, so ROM-RAM `0x0201F7B0` is raw offset `0x407B0`.
@@ -217,7 +219,7 @@ Labels: **Observed** = emulator screenshot/RAM read; **Derived** = instruction s
 
 ## 9. Tooling
 
-All scripts and evidence live in `/tmp/opencode/yu_gi_oh_eternal_duelist_soul/` (nothing in the ROM folder except the report):
+All scripts and evidence were kept in `/tmp/yu_gi_oh_eternal_duelist_soul/` (nothing in the ROM folder except the report):
 
 * `keys.py` — xdotool key helper (DISPLAY=:315).
 * `probe.py` — reads cursor/digit/result bytes from a savestate; used to map the keypad.

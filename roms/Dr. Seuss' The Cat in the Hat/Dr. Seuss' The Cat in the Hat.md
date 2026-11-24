@@ -1,10 +1,12 @@
 # Dr. Seuss' The Cat in the Hat (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Dr. Seuss' The Cat in the Hat/Dr. Seuss' The Cat in the Hat.gba` |
+| File | `roms/Dr. Seuss' The Cat in the Hat/Dr. Seuss' The Cat in the Hat.gba` |
 | Size | 4,194,304 bytes (0x00400000, 4 MiB) |
 | Header title | `CATINTHEHAT` (0xA0) |
 | Game code | `AQTE` (0xAC) |
@@ -40,7 +42,7 @@ Confidence: **high** for "no password system / no published code valid for this 
 - Emulator: `mgba` (SDL build), `SDL_AUDIODRIVER=dummy`, under `Xvfb :316` with `openbox`; `-3` scale.
 - Keymap verified on menus: **A = `x`**, **B = `z`**, **Start = `Return`**, **Select = `BackSpace`**, D-pad = arrow keys, **L = `a`**, **R = `s`**. (Menu confirm is A/`x`; Start alone does not select on the title/menu.)
 - Menu path: title (`PRESS START`) → A → `Select Game Slot` (2 slots) → A → film cutscene → press A repeatedly (~150×) → Living Room gameplay. Start → pause menu (5 items). Pause → PDA → Right ×8 to walk all pages.
-- Screenshots taken at each transition (`shot_00`…`shot_credits6`, `shot_pda_*`, `shot_combo_*`, `code_test.png` in `/tmp/opencode/catinthehat/`).
+- Screenshots taken at each transition (`shot_00`…`shot_credits6`, `shot_pda_*`, `shot_combo_*`, `code_test.png` in `/tmp/catinthehat/`).
 - Codes tested on-screen (all rejected / no effect):
   - Title: hold `L+R+Start+Select` (1.2 s); Konami sequence `Up Up Down Down Left Right Left Right B A`; hold `L+R` then Start — all left the title unchanged or advanced only via the final A/Start press into the normal slot-select screen.
   - Main menu: console "Open all levels" code adapted to GBA — hold `L+R+A`, press `Down, R, Up, L, B, Down, Down, Down, Down, Up` — no new menu entry, no level select.
@@ -133,7 +135,7 @@ Guide §0.2 requires the whole space to be characterised, or — when there is n
 - `gdb-multiarch` against mGBA `-g` (port 2345) — RAM/CPU reads of the input globals and idle PC.
 - `mgba` (SDL), `Xvfb :316`, `openbox`, `xdotool` (XTEST to the focused window), `scrot`/`import`, ImageMagick `montage` — reproducible emulator runs and screenshots.
 - `websearch` / `webfetch` — GameFAQs (GBA 919412 password list; GBA 915604 and PS2 915608 console-code lists), TCRF, Wikipedia, speedrun.com; direct GameFAQs/TCRF fetches returned 403/Cloudflare and were replaced with search-result text (§3.4 / §16.8).
-- Analysis scripts and screenshots: `/tmp/opencode/catinthehat/` (`scan_codes.py`, `scan_input.py`, `press2.sh`, `shot_*.png`).
+- Analysis scripts and screenshots: `/tmp/catinthehat/` (`scan_codes.py`, `scan_input.py`, `press2.sh`, `shot_*.png`).
 
 ## 10. Legal note
 

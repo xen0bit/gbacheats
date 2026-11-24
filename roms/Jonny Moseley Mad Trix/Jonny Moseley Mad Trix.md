@@ -1,5 +1,7 @@
 # Jonny Moseley Mad Trix (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -154,7 +156,7 @@ The dispatcher (`0x0800680`) does `state = [0x030014D8]; if state <= 35: pc = ta
 * Capstone (Python, `CS_ARCH_ARM`/`CS_MODE_THUMB`) for literal-pool and dispatch-table scans; `struct.unpack_from('<I', …)` for every pointer (never objdump's split halfwords).
 * Custom persistent GDB-RSP client (`gdbrsp.py`) + JSON daemon (`gdbd.py`) + CLI (`gcli.py`) to work around mGBA's single-connection GDB stub. Note: RSP memory commands need **no space** (`m08000000,4`, not `m 08000000,4`).
 * `xdotool` key injection (XTEST) on `DISPLAY=:316`; `scrot` screenshots; ImageMagick montages.
-* Scripts kept in `/tmp/opencode/jonny/`: `key.py`, `walk.py`, `brute.py`, `cs_brute.py`, `gate_final.py`, `oracle.py`, `to_charselect.py`.
+* Scripts kept in `/tmp/jonny/`: `key.py`, `walk.py`, `brute.py`, `cs_brute.py`, `gate_final.py`, `oracle.py`, `to_charselect.py`.
 * No ROM or copyrighted assets are redistributed here; only addresses, hashes, hashes and algorithms are published.
 
 ---

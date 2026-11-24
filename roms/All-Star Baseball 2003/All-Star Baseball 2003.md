@@ -1,5 +1,7 @@
 # All-Star Baseball 2003 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -67,10 +69,10 @@ searched spaces and the rejection evidence.
 ### Emulator and display
 
 ```bash
-mkdir -p /tmp/opencode/asb2003
+mkdir -p /tmp/asb2003
 Xvfb :132 -screen 0 1024x768x24 &
 DISPLAY=:132 openbox &
-cd "/mnt/gbacheats/roms/All-Star Baseball 2003"
+cd "roms/All-Star Baseball 2003"
 DISPLAY=:132 SDL_AUDIODRIVER=dummy mgba -3 "All-Star Baseball 2003.gba" &
 ```
 

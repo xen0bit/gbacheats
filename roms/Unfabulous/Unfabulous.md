@@ -1,5 +1,7 @@
 # Unfabulous (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -15,7 +17,7 @@
 | SHA-256 | `980ad0002a06cda7e127febd9fc6a95674a7599a06a35f10ecea4b0abb3d2c38` |
 | Entry branch | `0xEA00002E` (ARM, 0x080000C0) |
 
-All addresses below are for this exact hash. Work directory: `/tmp/opencode/unfabulous`.
+All addresses below are for this exact hash. Work directory: `/tmp/unfabulous`.
 
 ## 2. Executive summary
 
@@ -54,7 +56,7 @@ DISPLAY=:316 SDL_AUDIODRIVER=dummy mgba -3 -g <rom>
 ```
 
 Because another agent already held mGBA's default GDB port 2345, I used a small `LD_PRELOAD` shim
-(`/tmp/opencode/unfabulous/portshift.c`) that rewrites `bind(...,2345)` to `bind(...,2399)`, so the GDB
+(`/tmp/unfabulous/portshift.c`) that rewrites `bind(...,2345)` to `bind(...,2399)`, so the GDB
 stub could be attached without disturbing other processes. GDB commands were sent with a small Python
 RSP client (`rsp.py`) rather than `gdb-multiarch` (the stock client mis-handles mGBA's register packet).
 

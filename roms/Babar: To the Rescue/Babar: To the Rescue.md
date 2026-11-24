@@ -1,5 +1,7 @@
 # Babar: To the Rescue (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -47,7 +49,7 @@ Because the code space is empty, there is no unpublished code to mint. The bound
 Xvfb :151 -screen 0 1024x768x24 &
 DISPLAY=:151 openbox &
 DISPLAY=:151 SDL_AUDIODRIVER=dummy mgba -3 \
-  "/mnt/gbacheats/roms/Babar: To the Rescue/Babar: To the Rescue.gba"
+  "roms/Babar: To the Rescue/Babar: To the Rescue.gba"
 W=$(DISPLAY=:151 xdotool search --name mGBA | head -1)
 DISPLAY=:151 xdotool windowfocus "$W"
 ```
@@ -78,7 +80,7 @@ mGBA 0.10.5 SDL default keymap used here: **A = `x`, B = `z`, L = `a`, R = `s`, 
 
 ### Screenshot evidence
 
-Full-window captures are in `/tmp/opencode/babar/shots/`; 720×480 GBA-viewport crops are in `/tmp/opencode/babar/crops/`:
+Full-window captures were in `/tmp/babar/shots/`; 720×480 GBA-viewport crops were in `/tmp/babar/crops/`:
 
 ```
 title_play.png  title_options.png  options_menu.png  high_scores.png
@@ -321,7 +323,7 @@ The honest bound is structural: **there is no text-input state to reject a strin
 - mGBA 0.10.5 (SDL), Xvfb `:151`, openbox, `xdotool`, `scrot`, ImageMagick `convert`.
 - `arm-none-eabi-objdump` (binutils-arm-none-eabi) for ARM disassembly.
 - Python 3 with Capstone 5.0.7 (raw ARM scans), pexpect 4.9.0 (mGBA CLI debugger sessions).
-- Scripts and logs in `/tmp/opencode/babar/`:
+- Scripts and logs in `/tmp/babar/`:
   - `recon.py`, `recon_out.txt` — string counts and UI label inventory.
   - `calls_summary.py`, `calls.py`, `calls2.py`, `calls3.py` — input-helper BL scans.
   - `scan_io3.py` — key-register access scan.

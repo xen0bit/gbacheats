@@ -1,10 +1,12 @@
 # No Rules: Get Phat (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/No Rules: Get Phat/No Rules: Get Phat.gba` |
+| File | `roms/No Rules: Get Phat/No Rules: Get Phat.gba` |
 | Size | 8,388,608 bytes (0x00800000) |
 | `file` classification | Game Boy Advance ROM image: "GET PHAT!" (AGPE6S, Rev.00) |
 | Header title | `GET PHAT!` (0xA0–0xA7, NUL padded) |
@@ -77,7 +79,7 @@ negative, not as a usable cheat.
   and rejects `13TYNLP18J35`, `13TYNLP18J3M`, `T3T!6LP18J3V`, `XFTYNLP18J39`.
 * Offline tools: `pwmodel.py` (validator), `pwencode.py` (inverse/generator),
   `enter_code.py` (automated UI entry), `stateutil.py` (savestate RAM diff),
-  `gba.py` (input helper). All in `/tmp/opencode/norules/`.
+  `gba.py` (input helper). All in `/tmp/norules/`.
 
 ## 4. Address map
 
@@ -303,7 +305,7 @@ checksum-valid code is still rejected by the semantic layer.
 * `mgba` SDL with GDB stub attempted (stub proved unreliable; savestate diff
   used instead), `Xvfb :319`, `openbox`, `xdotool` XTEST, `scrot`,
   ImageMagick `convert`.
-* Scripts in `/tmp/opencode/norules/`: `gba.py`, `enter_code.py`, `pwmodel.py`,
+* Scripts in `/tmp/norules/`: `gba.py`, `enter_code.py`, `pwmodel.py`,
   `pwencode.py`, `stateutil.py`.
 * Web sources consulted (treated strictly as untrusted data; no instructions
   in fetched content were acted upon): GameFAQs, IGN, GamesRadar,

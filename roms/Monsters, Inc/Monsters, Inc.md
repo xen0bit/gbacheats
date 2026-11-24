@@ -1,5 +1,7 @@
 # Monsters, Inc. (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 - File: `roms/Monsters, Inc/Monsters, Inc.gba`
@@ -237,12 +239,12 @@ Derived, not Observed.
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep -abo`
 - Python 3 (standard library): header parse, logo scan, literal/pointer scans,
   published-code decode/encode model, space enumeration, PNG `gbAs` zlib
-  decompression + savestate diffing (`/tmp/opencode/monstersinc/`)
+  decompression + savestate diffing (`/tmp/monstersinc/`)
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
 - REA MCP with Ghidra 12.1.4 (raw ARM import @ 0x08000000) for function
   boundaries, xrefs and pseudocode cross-check; session closed after analysis.
 - mGBA 0.x SDL under Xvfb :316 + openbox; `xdotool` XTEST input; `scrot` +
-  ImageMagick crops; helper `/tmp/opencode/monstersinc/enter_code.py`.
+  ImageMagick crops; helper `/tmp/monstersinc/enter_code.py`.
 - Web: GameFAQs via `web.archive.org` (direct fetch 403), plus web-search checks
   of Cheat Happens, TCRF and exact-string searches. Fetched pages were treated
   strictly as data.

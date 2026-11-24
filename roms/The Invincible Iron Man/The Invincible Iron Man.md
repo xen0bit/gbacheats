@@ -1,5 +1,7 @@
 # The Invincible Iron Man (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -193,12 +195,12 @@ published form is rejected; the ROM's 4-button form is accepted.
 * `strings -t x`, `xxd`, `grep` for recon; Python + Capstone for literal/BL
   scans; `arm-none-eabi-objdump -M force-thumb` for disassembly.
 * mGBA 0.10.5 CLI debugger (`-d`) driven over a local PTY bridge
-  (`/tmp/opencode/ironman/debug_server.py`, `dbg.py`) for breakpoint oracle.
+  (`/tmp/ironman/debug_server.py`, `dbg.py`) for breakpoint oracle.
 * `xdotool` XTEST key events with explicit hold/gap timings
-  (`/tmp/opencode/ironman/press.py`).
-* Savestate `gbAs` zlib extraction (`/tmp/opencode/ironman/ss_extract.py`) per
+  (`/tmp/ironman/press.py`).
+* Savestate `gbAs` zlib extraction (`/tmp/ironman/ss_extract.py`) per
   guide §16.13 (GDB stub was occupied by another session).
-* Screenshots: `/tmp/opencode/ironman/eff0a.png` (level select), `cur.png`
+* Screenshots: `/tmp/ironman/eff0a.png` (level select), `cur.png`
   (EEPROM erase), `gallery2.png`, `bonusmenu.png`, `mainmenu.png`.
 
 No ROM data or copyrighted assets are redistributed by this report.

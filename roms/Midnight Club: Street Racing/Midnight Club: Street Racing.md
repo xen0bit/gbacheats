@@ -1,5 +1,7 @@
 # Midnight Club: Street Racing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -61,7 +63,7 @@ Observed examples (typed via XTEST, not memory-edited):
 * `AAAA` → buffer `00 00 00 00` → **rejected**.
 * `AGEN` (one letter off a valid code) → **rejected**.
 
-Screens walked with screenshots on disk in `/tmp/opencode/midnightclub/`:
+Screens walked with screenshots on disk in `/tmp/midnightclub/`:
 Rebellion splash, PRESS START title, MAIN SELECT, Extras/GAME OPTIONS
 (Biographies, Credits, Music On/Off), CAREER OPTIONS (New, Passcode),
 PASSCODE ENTRY, Arcade CITY SELECT (New York, London), WAYPOINT race list
@@ -233,12 +235,12 @@ gameplay trick, not a developer-intended code, and was not counted as a code.
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep -abo`.
 * `arm-none-eabi-objdump -D -b binary -marm -M force-thumb --adjust-vma=0x08000000`.
 * Python 3 + Capstone 5.0.7 for Thumb literal/BL scans (scanners in
-  `/tmp/opencode/midnightclub/scan*.py`).
+  `/tmp/midnightclub/scan*.py`).
 * mGBA (SDL) under `Xvfb :316` + `openbox`, `xdotool` XTEST input, `scrot`
   + ImageMagick screenshots.
 * Savestate RAM reads: PNG `gbAs` chunk → `zlib.decompress` → raw state;
   IWRAM at raw offset `0x19000` (§16.13). Helper:
-  `/tmp/opencode/midnightclub/ss.py`, `one_test*.py`.
+  `/tmp/midnightclub/ss.py`, `one_test*.py`.
 
 No ROM or copyrighted assets are redistributed; only addresses, hashes, and
 derived findings are published.

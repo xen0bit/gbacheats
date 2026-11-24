@@ -1,5 +1,7 @@
 # Tom and Jerry: The Magic Ring (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -13,7 +15,7 @@
 | SHA-1 | `19ed73f1ea71454ed804ed758a697d5e3feda8be` |
 | SHA-256 | `7c8c0864e092d2df4cecf56705b6d6939d97ded4c7b2cba720e88ed53667c119` |
 
-Hashes also recorded in `/tmp/opencode/magicring/`. Addresses below are for this exact image.
+Hashes also recorded in `/tmp/magicring/`. Addresses below are for this exact image.
 
 ## 2. Executive summary
 
@@ -134,4 +136,4 @@ T3 entries of `0x15` (21) are unrepresentable by the 4-bit r5 and make that r4 r
 
 ## 9. Tooling
 
-`/tmp/opencode/magicring/`: `decoder.py` (validator + exhaustive enumeration), `enter.py`/`mr.py` (deterministic keypad driver and 720×480 viewport capture), `testrun.py`/`ramverify.py`/`gdbdrv.py` (GDB stub harness), `ssdiff.py` (mGBA `gbAs` savestate diff), plus screenshots. Environment: Xvfb :316 + openbox, mGBA 0.10.5 SDL, `SDL_AUDIODRIVER=dummy`; tools otherwise as supplied (gdb-multiarch, arm-none-eabi-objdump, scrot, ImageMagick). No ROM or copyrighted assets are redistributed — addresses, hashes, algorithms and own scripts only.
+`/tmp/magicring/`: `decoder.py` (validator + exhaustive enumeration), `enter.py`/`mr.py` (deterministic keypad driver and 720×480 viewport capture), `testrun.py`/`ramverify.py`/`gdbdrv.py` (GDB stub harness), `ssdiff.py` (mGBA `gbAs` savestate diff), plus screenshots. Environment: Xvfb :316 + openbox, mGBA 0.10.5 SDL, `SDL_AUDIODRIVER=dummy`; tools otherwise as supplied (gdb-multiarch, arm-none-eabi-objdump, scrot, ImageMagick). No ROM or copyrighted assets are redistributed — addresses, hashes, algorithms and own scripts only.

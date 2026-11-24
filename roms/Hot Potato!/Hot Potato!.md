@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Hot Potato!/Hot Potato!.gba` |
+| File | `roms/Hot Potato!/Hot Potato!.gba` |
 | Size | 4,194,304 bytes (0x400000) |
 | Header title | `HOT POTATO` |
 | Game code / maker | `AHPE` / `6L` |

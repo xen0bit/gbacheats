@@ -1,5 +1,7 @@
 # Star X (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -183,7 +185,7 @@ ship/loadout state (see §8).
   `49 47 41 46 43 44 4C 47` (`IGAFCDLG`), the call at `0x0801300E` returned
   `r0 = 1`, and `0x0300529C` read `0x00000000`. The game displayed the
   **AQUESS – PART 1** briefing — the level web lists say has *no password*.
-  Screenshot: `novel_effectc.png` in the work dir (`/tmp/opencode/starx/`).
+  Screenshot: `novel_effectc.png` in the work dir (`/tmp/starx/`).
   A second encoder output, `IHIFCD1C`, is also accepted by the model.
 * **Bounds proven by rejection (in game).**
   * `IGIFCDLA` (last char `C`→`A`, broken parity): reached the validator
@@ -243,7 +245,7 @@ ship/loadout state (see §8).
   (`-M force-thumb`) for disassembly; `gcc -O2` for the 2³⁰ enumerator.
 * mGBA 0.10.5 `-d` CLI debugger driven through a pty (`dbg.py`) with a FIFO
   command feeder; savestate `pw.ss1` taken at the password screen.
-* Scripts in `/tmp/opencode/starx/`: `scan_xrefs.py`, `encoder.py`,
+* Scripts in `/tmp/starx/`: `scan_xrefs.py`, `encoder.py`,
   `check_parity.py`, `fields.py`, `mint.py`, `enum.c`, `enter_slow.py`,
   `run_test.sh`, `test_cheat.sh`, `walk.py`.
 * No ROM or copyrighted assets are redistributed; only addresses, hashes,

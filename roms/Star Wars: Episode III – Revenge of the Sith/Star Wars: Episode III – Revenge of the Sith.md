@@ -1,5 +1,7 @@
 # Star Wars: Episode III – Revenge of the Sith (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -64,7 +66,7 @@ Keymap used (mGBA SDL defaults): `A=x`, `B=z`, `L=a`, `R=s`, `Start=Return`, `Se
 D-pad = arrow keys. Holds of 30–60 ms were used for menu navigation (longer holds double-step).
 
 **Screen walk performed (every reachable screen, all with screenshots saved under
-`/tmp/opencode/starwars3/`)**
+`/tmp/starwars3/`)**
 
 | # | Screen | Screenshot | Key observations |
 |---:|---|---|---|
@@ -292,7 +294,7 @@ ROM in all six encodings, so entering it on any GBA screen cannot be accepted.
 - `file`, `xxd`, `strings -t x`, `grep -abo`, `md5sum`/`sha1sum`/`sha256sum`.
 - `arm-none-eabi-objdump -M force-thumb` for targeted disassembly; Capstone 5.0.7 Python scans for
   PC-relative literals and BL targets (`findptr.py`, `blscan.py`, `scan_keyinput.py`, `scan_masks.py`
-  in `/tmp/opencode/starwars3/`).
+  in `/tmp/starwars3/`).
 - REA MCP + Ghidra 12.1.4 raw-ARM import (base `0x08000000`): 1,492 procedures, 7,039 strings;
   `binary_overview`, `search_strings`, `xrefs`, `procedure_pseudo_code`, `procedure_callers`.
 - mGBA 0.10.5 under Xvfb `:317` with `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST key events;

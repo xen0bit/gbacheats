@@ -1,5 +1,7 @@
 # Operation: Armored Liberty (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -211,7 +213,7 @@ oracle but their individual mission differences were not exhaustively played.
 - **Inferred (not exhaustively played):** each index 1–9 maps to a distinct
   mission/loadout; only index 5's gameplay was observed end-to-end.
 
-Screenshots retained in `/tmp/opencode/operationarmored/` (≤20 read via the
+Screenshots retained in `/tmp/operationarmored/` (≤20 read via the
 read tool; none attached to this reply).
 
 ## 8. Unknowns

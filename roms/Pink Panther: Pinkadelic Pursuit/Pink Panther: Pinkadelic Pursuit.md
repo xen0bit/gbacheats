@@ -1,5 +1,7 @@
 # Pink Panther: Pinkadelic Pursuit (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -72,7 +74,7 @@ Novel-code proof: entering **star, paw, ball, face** (`1,2,3,0`) starts gameplay
 | `0x02000C6C`–`0x02000C77` | EWRAM object-state bytes that change with each committed symbol. |
 | `.sav` | Created by mGBA but **0 bytes** — the game does not use SRAM; passwords are the continue mechanism. |
 
-Savestate diffs are included as evidence files in `/tmp/opencode/pinkpanther/` (`s3.ss1`/`s4.ss1` = 2 vs 3 symbols; `s5.ss1`/`s6.ss1` = `000` vs `111`).
+Savestate diffs are included as evidence files in `/tmp/pinkpanther/` (`s3.ss1`/`s4.ss1` = 2 vs 3 symbols; `s5.ss1`/`s6.ss1` = `000` vs `111`).
 
 ## 5. Algorithm (behavioural model)
 
@@ -126,7 +128,7 @@ The 9 spinner-class codes are the only inputs distinguished by the game; the dis
 ## 9. Tooling
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep` for Phase 0/1.
-* Python scripts (in `/tmp/opencode/pinkpanther/`): `scan.py` (literal/pointer scans), `ssdiff.py` (`.ss1` PNG `gbAs` zlib decode + RAM diff), `key.py` (xdotool driver with a fixed mGBA window ID), `tester.py`/`batch.py`/`enumerate_all.py` (code entry and 256-code enumeration), `gdbdrv.py`/`gdbdump.py`/`gdbpoke.py` (mGBA GDB stub experiments), REA/Ghidra (opened but session was contended).
+* Python scripts (in `/tmp/pinkpanther/`): `scan.py` (literal/pointer scans), `ssdiff.py` (`.ss1` PNG `gbAs` zlib decode + RAM diff), `key.py` (xdotool driver with a fixed mGBA window ID), `tester.py`/`batch.py`/`enumerate_all.py` (code entry and 256-code enumeration), `gdbdrv.py`/`gdbdump.py`/`gdbpoke.py` (mGBA GDB stub experiments), REA/Ghidra (opened but session was contended).
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 (installed via pip) for static disassembly.
 * mGBA 3× under Xvfb :315 + openbox; `scrot`, ImageMagick `convert`/`montage`, `tesseract` (OCR trial, unreliable on the stylised level font, superseded by visual reads).
 * Installed/used packages already present: `binutils-arm-none-eabi`, `gdb-multiarch`, `xvfb`, `xdotool`, `scrot`, `imagemagick`, `tesseract-ocr`, `python3-capstone`, `python3-pil`, `pexpect`.

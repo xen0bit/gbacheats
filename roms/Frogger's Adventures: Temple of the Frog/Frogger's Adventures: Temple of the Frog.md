@@ -1,5 +1,7 @@
 # Frogger's Adventures: Temple of the Frog (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -158,6 +160,6 @@ ValidateSelection():                # called only when mapped == START (0x40)
 - Python 3 + Pillow for savestate `gbAs` zlib chunk parsing and screenshot cropping; `xdotool` for input; `scrot` for captures.
 - mGBA 0.10.5 under `Xvfb :317` + `openbox`; RAM read via savestate diffing (guide §16.13) because the GDB stub port 2345 is shared with concurrent sessions.
 - Reference only: public WIP decomp `JRickey/frog-adv-temple-decomp` (SHA-1-matched baserom) used to locate named functions; every claim above was re-verified against the actual ROM bytes and emulator RAM.
-- Work dir: `/tmp/opencode/frogger3` (scripts `walk.py`, `state.py`, `bounds.py`; screenshots `w_*.png`).
+- Work dir: `/tmp/frogger3` (scripts `walk.py`, `state.py`, `bounds.py`; screenshots `w_*.png`).
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced here; only hashes, addresses, algorithms, and original findings are published.

@@ -85,7 +85,7 @@ All addresses are GBA bus addresses; file offset = address − `0x08000000` for 
 | Address | File offset | Meaning |
 |---|---|---|
 | `0x080e4fa0` | `0xe4fa0` | Code record table: six 8-byte NUL-padded strings, in order `CUPIUP`, `ALL4ME`, `BIFFIN`, `BIGUNS`, `LOGRAV`, `IAMCAR` |
-| `0x080e4f9c` | `0xe4f9c` | Thumb pointer `0x08095919` (dispatcher | 1), immediately before the strings |
+| `0x080e4f9c` | `0xe4f9c` | Thumb pointer `0x08095919` (dispatcher \| 1), immediately before the strings |
 | `0x080e4858` | `0xe4858` | `AZ09 /;@[_` — character-class range table (`A-Z`,`0-9`,` -/`,`; -@`,`[-_`) used by a shared text-input helper, **not** part of code validation |
 | `0x080958f8` | `0x958f8` | **Validator**: exact 6-byte compare (`r0` = screen struct, reads `[r0+0x48]`; `r1` = table string ptr; returns 1/0) |
 | `0x08095918` | `0x95918` | **Dispatcher**: 8 validator calls + effect handlers |

@@ -1,10 +1,12 @@
 # Mega Man Zero 4 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Mega Man Zero 4/Mega Man Zero 4.gba` |
+| File | `roms/Mega Man Zero 4/Mega Man Zero 4.gba` |
 | Size | 16,777,216 bytes (`0x01000000`, 128 Mbit) |
 | Header title | `MEGAMANZERO4` |
 | Game code / maker | `B4ZE` / `08` (Capcom); region USA |
@@ -152,7 +154,7 @@ and `0/56` — direct screen evidence that these flags are unset.
 | Search space | Method | Count / result |
 |---|---|---|
 | Reachable screens | Manual walk, screenshot + savestate RAM at each | Title(2), Difficulty(2), cutscenes, gameplay, pause tabs(4), Database(4 tags), game-over. **No code-entry screen, no hidden debug screen.** |
-| ASCII text | `strings -t x -n 4` over 16 MiB | 198,948 strings; **0** matches for `password|cheat|code|debug|secret|unlock|stage select|level select`. (Earlier keyword grep hits were binary fragments/`BOS`/`ELF`, not UI strings.) |
+| ASCII text | `strings -t x -n 4` over 16 MiB | 198,948 strings; **0** matches for `password\|cheat\|code\|debug\|secret\|unlock\|stage select\|level select`. (Earlier keyword grep hits were binary fragments/`BOS`/`ELF`, not UI strings.) |
 | Tile-indexed text | u16 message bank at `0x088C7018` | 237 pointer entries; strings are u16 glyph/attribute pairs terminated by `0x00FF`. Decoded sample messages (`0x088C75F0…0x088C7694`) are menu labels only; no password/entry vocabulary observed. Font glyphs confirmed in the render routine at `0x080AE570`. |
 | Button-mask sequences | Literal search for all published arcs in 2 encodings × 1/2-byte width (20 pattern forms) | 877 raw byte hits, all in compressed graphics/data regions (`0x0813…`–`0x088…`); **zero** hits in executable code with the structure of a code table. The only code-side direction constants are inline `cmp` immediates in `0x0811876C`. |
 | Key-input consumers | u32 scan for `0x04000130` literal | **1** reference (`0x08001510`) → single key manager; no second validator reading keys directly. |
@@ -209,9 +211,9 @@ exists. Testers should not interpret "no novel code" as an unfinished search.
   Capstone 5.0.7 available but the raw halfword scans sufficed.
 * `Xvfb :315`, `openbox`, `mgba -3`, `xdotool`, `scrot`, ImageMagick `convert`,
   `tesseract` (OCR of Database tags).
-* `/tmp/opencode/mmzero4/sstate.py`: decompress mGBA `.ssN` `gbAs` zlib chunk to
+* `/tmp/mmzero4/sstate.py`: decompress mGBA `.ssN` `gbAs` zlib chunk to
   raw 397,312-byte state; EWRAM at state offset `0x21000`.
-* `/tmp/opencode/mmzero4/{phase0,seqscan*,litscan,xref,blscan,immscan,diagscan,
+* `/tmp/mmzero4/{phase0,seqscan*,litscan,xref,blscan,immscan,diagscan,
   colocate,dumptext,final_counts,diffstate,tiles}.py` — all analysis scripts.
 * No ROM or copyrighted assets are redistributed; only addresses, hashes, and
   our own tooling are published.

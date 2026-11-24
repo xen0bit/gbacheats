@@ -1,5 +1,7 @@
 # Contra Advance: The Alien Wars EX (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -466,7 +468,7 @@ backs this up: the only instruction in the ROM that stores 1 to `0x03001A64` is
 
 * `arm-none-eabi-objdump` (binutils-arm-none-eabi), Capstone not required.
 * mGBA SDL under `Xvfb :262` + openbox, `SDL_AUDIODRIVER=dummy`.
-* Python helpers in `/tmp/opencode/contraadvance/`:
+* Python helpers in `/tmp/contraadvance/`:
   * `gba.py` — key injection, savestate save/load, gbAs chunk decompression
     (PNG chunk `gbAs`, zlib; IWRAM at state offset `0x19000`, EWRAM at
     `0x21000`).

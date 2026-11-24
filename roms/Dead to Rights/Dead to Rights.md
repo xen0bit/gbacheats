@@ -1,5 +1,7 @@
 # Dead to Rights (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -323,7 +325,7 @@ four bytes. No input character outside `A-Z` can be produced by the wheel.
   the live state object at `0x0200D340`.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
   for raw Thumb disassembly.
-- Helper scripts written during this engagement (in `/tmp/opencode/deadtorights`):
+- Helper scripts written during this engagement (in `/tmp/deadtorights`):
   `ss.py`/`ctl.py` (savestate extraction/diff), `cur.py` (state name),
   `fp.py` (VRAM fingerprints), `nav*.py` (menu/password entry with RAM
   feedback), `states.py` (state-record parser).

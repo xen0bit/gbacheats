@@ -1,5 +1,7 @@
 # Teen Titans 2: The Brotherhood's Revenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -182,7 +184,7 @@ The debug menu is therefore a **gated/unreachable feature** (§16.3 category 4) 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, Python 3 (`struct`, `re`, `zlib`, Pillow).
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for Thumb disassembly; Capstone-style Python BL/pointer scanners written ad hoc.
 * mGBA 0.10.5 under Xvfb `:317` with openbox, `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST input; `scrot` screenshots.
-* Savestate RAM reader: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte state; EWRAM at `0x21000`, IWRAM at `0x19000`. Helper artifacts are under `/tmp/opencode/teentitans2/`.
+* Savestate RAM reader: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte state; EWRAM at `0x21000`, IWRAM at `0x19000`. Helper artifacts were under `/tmp/teentitans2/`.
 * Web recon: GameHacking.org, Neoseeker, ChapterCheats, VGChartz, TCRF (live page 403; Wayback snapshot used).
 
 ## 10. Legal note

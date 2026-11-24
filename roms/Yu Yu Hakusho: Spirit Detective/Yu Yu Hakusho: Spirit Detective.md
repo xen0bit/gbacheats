@@ -1,5 +1,7 @@
 # Yu Yu Hakusho: Spirit Detective (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -118,7 +120,7 @@ Count: 4 menus, 21 rendered rows, 17 actionable entries, 4 EXIT rows. None reach
 
 ## 7. Validation evidence
 
-- **Observed:** all screenshots in `/tmp/opencode/yuyu/` (`walk_title.png`, `s2_afterstart.png`, `s3_locked.png`, `s4_play.png`, `s5_next.png`, `s12_gameplay.png`, `s16_pause3.png`, `s17_RSelect.png`, `post_gate.png`, `post_gate_combo.png`); live RAM reads via mGBA `-d` (`r/1 0x03007DC9` → `0x05` after write; `r/2 0x04000130` → `0x03FF` with all keys released); saved slot displays name `A`.
+- **Observed:** all screenshots in `/tmp/yuyu/` (`walk_title.png`, `s2_afterstart.png`, `s3_locked.png`, `s4_play.png`, `s5_next.png`, `s12_gameplay.png`, `s16_pause3.png`, `s17_RSelect.png`, `post_gate.png`, `post_gate_combo.png`); live RAM reads via mGBA `-d` (`r/1 0x03007DC9` → `0x05` after write; `r/2 0x04000130` → `0x03FF` with all keys released); saved slot displays name `A`.
 - **Derived:** Thumb disassembly of `0x08004E70`–`0x080056CA` (renderers, handlers, controller); full-ROM branch/pointer scans; ASCII string/pointer-table decode of `0x080358D0`–`0x08035970`.
 - **Inferred:** the three unlockables' exact completion triggers (published guides agree with each other and with the ROM's `EXTRAS`/`TOURNAMENT`/`MINI GAMES`/Genkai strings; the story was not played to completion). The debug menu's *intended* effects are inferred from its row labels only — its code was never executed.
 
@@ -131,11 +133,11 @@ Count: 4 menus, 21 rendered rows, 17 actionable entries, 4 EXIT rows. None reach
 ## 9. Tooling
 
 - `strings -t x -n 3/4`, `xxd`, `grep -iE`.
-- `/tmp/opencode/yuyu/scan_ptrs.py`, `scan_lits.py`, `scan_debug_region.py` — pointer/literal scans.
-- `/tmp/opencode/yuyu/blscan.py`, `blrange.py`, `branchscan.py` — Thumb branch/BL scans.
-- `/tmp/opencode/yuyu/dis.py` — Capstone-based Thumb/ARM disassembler.
+- `/tmp/yuyu/scan_ptrs.py`, `scan_lits.py`, `scan_debug_region.py` — pointer/literal scans.
+- `/tmp/yuyu/blscan.py`, `blrange.py`, `branchscan.py` — Thumb branch/BL scans.
+- `/tmp/yuyu/dis.py` — Capstone-based Thumb/ARM disassembler.
 - mGBA 0.10.5 `-3 -d` with a FIFO-fed stdin (`stdbuf -o0`), SIGINT to break, `break/t`, `r/1`, `r/2`, `w/1`, `continue`.
-- `xdotool` XTEST input, `scrot` screenshots; all evidence kept in `/tmp/opencode/yuyu/`, none in the ROM folder.
+- `xdotool` XTEST input, `scrot` screenshots; all evidence kept in `/tmp/yuyu/`, none in the ROM folder.
 - Web recon: GameFAQs, Planet Cheats, Almars Guides, GameHacking.org, SuperCheats (published device codes/unlockable descriptions only). TCRF fetch returned a prompt-injection payload (§2) and was disregarded.
 
 ## 10. Legal note

@@ -1,5 +1,7 @@
 # World Championship Poker (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -181,6 +183,6 @@ These show the three independent reject layers behave as the disassembly predict
 * mGBA 0.10.5 (`-3 -g`/`-d`), Xvfb :316 + openbox, `xdotool` XTEST input, `scrot` screenshots.
 * mGBA CLI debugger (`-d`) over a pty: `load 1`, `watch/w`, `frame`, `b`, `x/1`, `w/1`; `load <slot>` takes a savestate slot number, not a filename.
 * Savestate analysis: Python `zlib.decompress` of the PNG `gbAs` chunk, EWRAM at state offset `0x21000` (scripts `ssdiff.py`, `inject_and_check.py`, `verify_final.py`).
-* Helper scripts and all screenshots/evidence live in `/tmp/opencode/wcpoker/`, **not** in the ROM folder.
+* Helper scripts and all screenshots/evidence were kept in `/tmp/wcpoker/`, **not** in the ROM folder.
 
 No ROM data or copyrighted assets are redistributed here; only hashes, addresses, algorithms, counts, and the authors' own generated codes are published.

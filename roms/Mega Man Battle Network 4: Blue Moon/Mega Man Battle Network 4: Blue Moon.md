@@ -1,5 +1,7 @@
 # Mega Man Battle Network 4: Blue Moon (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 > **SKIPPED / DEFERRED — entry systems found but not in-game confirmed (coordinator decision).**
 > Under §0.2 this report does **not** meet the dynamic-confirmation bar: two digit-password
 > systems were found with validator accept/reject branches dumped (PET-device 8-digit at
@@ -191,7 +193,7 @@ GBA active-high masks used by the input handler: `A=0x001 B=0x002 Select=0x004 S
 
 ## 7. Validation evidence
 
-* **Observed:** all hashes/header bytes; single Nintendo-logo hit; `Apr 16 2004 14:36:29` build stamp; boot/title/intro/overworld/dialogue screenshots (saved in `/tmp/opencode/mmbn4blue/`); input-handler disassembly hit at `0x080003C0`; debugger registers (`r0=0x0200A700`, `r10=0x02009E70`) at breakpoint; savestate RAM values at `0x0200A700` (`0xFC08` Start, `0xFC20` Left), `0x02009E70` pointer table, `0x03000000` IWRAM; savestate diff before/after published title code (154 EWRAM bytes changed, all in animation/sprite buffers — no persistent flag).
+* **Observed:** all hashes/header bytes; single Nintendo-logo hit; `Apr 16 2004 14:36:29` build stamp; boot/title/intro/overworld/dialogue screenshots (saved in `/tmp/mmbn4blue/`); input-handler disassembly hit at `0x080003C0`; debugger registers (`r0=0x0200A700`, `r10=0x02009E70`) at breakpoint; savestate RAM values at `0x0200A700` (`0xFC08` Start, `0xFC20` Left), `0x02009E70` pointer table, `0x03000000` IWRAM; savestate diff before/after published title code (154 EWRAM bytes changed, all in animation/sprite buffers — no persistent flag).
 * **Derived:** text alphabet mapping (`+0x36` uppercase, `+0x3B` lowercase) from multiple known phrases; LZ77 block boundaries; debug-command count and labels; password-script operand layout; script-opcode roles from byte patterns repeated across banks.
 * **Inferred (labelled):** that the debug bank is unreachable in the retail GBA build (based on no reachable trigger + no published GBA activation method found); that the `Left,L,Start` code is VC-only (TCRF explicitly describes a VC/Mod-Card effect); that `FOLD2RSBMGE` is a folder-related debug action (its last entry, purpose stated unknown by TCRF too).
 
@@ -204,7 +206,7 @@ GBA active-high masks used by the input handler: `A=0x001 B=0x002 Select=0x004 S
 
 ## 9. Tooling
 
-Scripts written in `/tmp/opencode/mmbn4blue/`:
+Scripts written in `/tmp/mmbn4blue/`:
 
 | File | Purpose |
 |---|---|

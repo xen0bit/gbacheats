@@ -1,5 +1,7 @@
 # SpongeBob SquarePants: Creature from the Krusty Krab (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -167,7 +169,7 @@ Because the accepted set is empty, **no novel code can be generated and no rejec
 | Stock crt0, not a scene release | Derived | entry word `EA00002E`, first 0x200 bytes match standard crt0 |
 | Published codes absent as table | Observed | ~6,900 literal searches, 0 code-table hits; incidental hits dumped and reclassified |
 | No code-entry UI text | Observed | whole-ROM `strings` keyword scan = 5 hits, none UI labels |
-| All reachable screens enumerated | Observed | 11 screenshots in `/tmp/opencode/spongekrusty3/` |
+| All reachable screens enumerated | Observed | 11 screenshots in `/tmp/spongekrusty3/` |
 | L+R = soft reset | Observed | frontend L+R → health & safety screen (screenshot `combo_changed_L_R.png`) |
 | Debug menu exists, 15 core entries | Derived | 0x080323BC disassembly + literal pool + 15 valid 0x24-stride records + 0x00FF terminator |
 | Four submenu lists/counts | Derived | 0x080323C0–0x080324D2 disassembly, literals resolved with Python `struct.unpack_from` |
@@ -183,7 +185,7 @@ Because the accepted set is empty, **no novel code can be generated and no rejec
 
 ## 9. Tooling
 
-* `/tmp/opencode/spongekrusty3/key.py` — PID-targeted XTEST key sender (correcting for multiple mGBA windows).
+* `/tmp/spongekrusty3/key.py` — PID-targeted XTEST key sender (correcting for multiple mGBA windows).
 * Python 3 + Capstone 5.0.7 — literal-pool scanner, BL scanner, byte-transform code search, savestate PNG/`gbAs` parser and patcher.
 * `arm-none-eabi-objdump -M force-thumb` — disassembly of 0x080323BC and 0x0800E374.
 * REA MCP / Ghidra 12.1.4 — raw ARM import at 0x08000000 for cross-checking (auto-analysis treats several Thumb ranges as data; manual objdump was authoritative).

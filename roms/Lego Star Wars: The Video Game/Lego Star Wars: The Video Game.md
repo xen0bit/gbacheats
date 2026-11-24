@@ -1,5 +1,7 @@
 # Lego Star Wars: The Video Game (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -267,6 +269,6 @@ All 6 published 6-character alphanumeric codes tested are absent from the ROM in
 - mGBA (SDL, Xvfb `:317`, `SDL_AUDIODRIVER=dummy`) + `xdotool` + `scrot`/ImageMagick — screen walk and code entry.
 - mGBA `-g` GDB stub + `gdb-multiarch` — direct RAM reads (`x/s 0x02003200`, `x/wx 0x03006ec8`).
 - mGBA `.ss*` savestates: PNG with zlib-compressed `gbAs` chunk; decompressed to 397,312-byte raw state and diffed (IWRAM at raw `0x19000`, EWRAM at raw `0x21000`).
-- Helper scripts kept in `/tmp/opencode/legostarwars1/` (`testcode.py`, `enum_codes.py`, `table_listing.txt`, `enum_results.txt`).
+- Helper scripts kept in `/tmp/legostarwars1/` (`testcode.py`, `enum_codes.py`, `table_listing.txt`, `enum_results.txt`).
 
 No ROM bytes, graphics, music or full game text are redistributed here; only addresses, hashes, algorithms, masks and the authors' own generated observations are published.

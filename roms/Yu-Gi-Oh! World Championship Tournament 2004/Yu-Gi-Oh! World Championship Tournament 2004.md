@@ -1,5 +1,7 @@
 # Yu-Gi-Oh! World Championship Tournament 2004 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -15,7 +17,7 @@
 | SHA-1 | `3a7fceffa1405640fe4606e006d272d1af542f2b` |
 | SHA-256 | `516530e73ba2ebd2fc8c4280cac13bc125dfb6c1fa1678d35fb5dc8a2a9c063c` |
 
-Analysis was on a byte-identical copy at `/tmp/opencode/yugiohwct2004/game.gba`; the ROM folder was left untouched. The Nintendo logo at 0x04 is nonstandard (patched dump) but the image boots normally in mGBA 0.10.5.
+Analysis was on a byte-identical copy at `/tmp/yugiohwct2004/game.gba`; the ROM folder was left untouched. The Nintendo logo at 0x04 is nonstandard (patched dump) but the image boots normally in mGBA 0.10.5.
 
 ## 2. Executive summary
 
@@ -173,4 +175,4 @@ Labels per guide §8.4.
 - mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`, XTEST input helper (`key.py`), `scrot` — screen walk, RAM evidence, credits proof.
 - `gdb-multiarch` with mGBA's `-g` stub — attempted as an oracle (guide §16.19); abandoned due to stub unreliability (recorded in §7).
 - Web recon treated strictly as data: GameFAQs, IGN (cheats + General FAQ "Passwords are gone!"), cheatcc, GameHacking.org, Ethereal Games, Almars Guides. No instructions found in fetched content were followed.
-- All screenshots, savestates, and scripts live in `/tmp/opencode/yugiohwct2004/`; none were written into the ROM folder. No ROM or copyrighted assets are reproduced here.
+- All screenshots, savestates, and scripts were kept in `/tmp/yugiohwct2004/`; none were written into the ROM folder. No ROM or copyrighted assets are reproduced here.

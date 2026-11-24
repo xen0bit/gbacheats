@@ -1,5 +1,7 @@
 # Metal Slug Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,9 +43,9 @@ Screen path (unpatched ROM):
 
 Debug menu reproduction (patched **copy**; original ROM untouched):
 ```
-cp "Metal Slug Advance.gba" /tmp/opencode/metalslug/MSA_debugpatch2.gba
-python3 -c "p='/tmp/opencode/metalslug/MSA_debugpatch2.gba';d=bytearray(open(p,'rb').read());d[0x6524:0x6526]=bytes.fromhex('cff8');open(p,'wb').write(d)"
-mgba -3 /tmp/opencode/metalslug/MSA_debugpatch2.gba
+cp "Metal Slug Advance.gba" /tmp/metalslug/MSA_debugpatch2.gba
+python3 -c "p='/tmp/metalslug/MSA_debugpatch2.gba';d=bytearray(open(p,'rb').read());d[0x6524:0x6526]=bytes.fromhex('cff8');open(p,'wb').write(d)"
+mgba -3 /tmp/metalslug/MSA_debugpatch2.gba
 ```
 Original bytes at `0x6520` = `cb f8 00 06 00 0e 02 bc`; patched = `cb f8 00 06 cf f8 02 bc`. Start any mission, pause with Start → the debug menu is drawn over the pause menu. D-pad navigates, A selects, B cancels.
 
@@ -163,4 +165,4 @@ No published in-game password or button code was found on GameFAQs (archived), T
 
 ## 10. Legal note
 
-No ROM bytes, graphics, audio, or extracted assets are redistributed here. Only addresses, hashes, algorithms, and the analyst's own tooling are published. The patched ROM used for the debug-menu walk was a temporary copy in `/tmp/opencode/metalslug` and was removed; the original ROM was not modified.
+No ROM bytes, graphics, audio, or extracted assets are redistributed here. Only addresses, hashes, algorithms, and the analyst's own tooling are published. The patched ROM used for the debug-menu walk was a temporary copy in `/tmp/metalslug` and was removed; the original ROM was not modified.

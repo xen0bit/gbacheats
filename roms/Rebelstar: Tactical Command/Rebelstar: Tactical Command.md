@@ -1,5 +1,7 @@
 # Rebelstar: Tactical Command (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -57,7 +59,7 @@ excluded. No password, button sequence or unlockable is published anywhere.
   chunk. `zlib.decompress` yields a 397,312-byte state; IWRAM at `+0x19000`,
   EWRAM at `+0x21000` (guide §16.13). Every screen below has a stored
   `state_<tag>.ss1` / `raw_<tag>.bin` and a `c_<tag>.png` in
-  `/tmp/opencode/rebelstar/`.
+  `/tmp/rebelstar/`.
 
 Menu path (all screens visited, each with a screenshot + RAM dump):
 
@@ -241,7 +243,7 @@ search spaces:
 Xvfb `:318` + openbox, xdotool/scrot/ImageMagick, REA + Ghidra (raw ARM import,
 `xrefs`, `close_binary`), websearch/webfetch (GameFAQs, VGChartz, CheatingDome,
 CheatsGuru, GameHacking.org, TCRF). Helper scripts: `key.py`, `combo.py`,
-`ram.py` in `/tmp/opencode/rebelstar/`.
+`ram.py` in `/tmp/rebelstar/`.
 
 No ROM bytes or copyrighted assets are redistributed in this report; only
 addresses, hashes, counts and original observations are published.

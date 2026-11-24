@@ -1,5 +1,7 @@
 # Mario Pinball Land (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -37,7 +39,7 @@ Every reachable screen was booted and walked on the real emulator with RAM evide
 Xvfb :319 -screen 0 1024x768x24 -nolisten tcp &
 DISPLAY=:319 openbox &
 export DISPLAY=:319 SDL_AUDIODRIVER=dummy
-mgba -g -3 "/mnt/gbacheats/roms/Mario Pinball Land/Mario Pinball Land.gba" &
+mgba -g -3 "roms/Mario Pinball Land/Mario Pinball Land.gba" &
 
 # Persistent GDB client (stub is single-client and corrupts on batch detach)
 gdb-multiarch -quiet -x gdb_init.gdb < gdbin > gdbout.log &
@@ -119,7 +121,7 @@ These are not codes; they are save-bit/content gates. cturt's "cheats" list (liv
 
 | Space searched | Bounds / count | Result |
 |---|---|---|
-| ASCII text bank and whole 8 MiB ROM | `strings -n 4` -> 108,247 lines; keyword filter over `password|cheat|code|debug|secret|unlock|level|menu|table|option|continue|invalid|bonus|test|warp` | 5 hits, all `CONTINUE`, `BALL BONUS`, and three `TESTING*` credit lines; zero code/debug labels |
+| ASCII text bank and whole 8 MiB ROM | `strings -n 4` -> 108,247 lines; keyword filter over `password\|cheat\|code\|debug\|secret\|unlock\|level\|menu\|table\|option\|continue\|invalid\|bonus\|test\|warp` | 5 hits, all `CONTINUE`, `BALL BONUS`, and three `TESTING*` credit lines; zero code/debug labels |
 | Cheat keywords in ASCII / `+0x20` / UTF-16LE / UTF-16BE | 12 keywords x 4 encodings | **0** occurrences for every keyword |
 | On-screen alphabet | 27 symbols at `0x087FB870`, only 6 xrefs (`0x08029894/9914/9950/99B8/99F8/9A60`) | All in name-entry cursor `0x080298A0`–`0x08029A60`; no validator consumer |
 | Hard-coded literal code tables | literal-pool scan for every menu string; `strcmp`-style comparison search | No accepted-code string table; only UI labels |
@@ -147,7 +149,7 @@ No prompt-injection payload was found in the fetched GameFAQs/TCRF pages; fetche
 ## 9. Tooling
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
-* Python 3 scripts (in `/tmp/opencode/mariopinball/`): header/hash fingerprint, literal-pointer scan, Thumb `BL` target scan, keymask-run scan, ASCII/UTF-16 keyword scan, screenshot-difference attract detector.
+* Python 3 scripts (in `/tmp/mariopinball/`): header/hash fingerprint, literal-pointer scan, Thumb `BL` target scan, keymask-run scan, ASCII/UTF-16 keyword scan, screenshot-difference attract detector.
 * mGBA `-g -3` under `Xvfb :319` + `openbox`; persistent `gdb-multiarch` on port 2345 with `interrupt` / `x/..wx` / `continue&`; XTEST input via `xdotool`; `scrot` + ImageMagick `convert`/`montage`.
 * Cross-reference: archived GameFAQs cheats page (2018-11-26 snapshot), TCRF `Notes:Mario Pinball Land`, cturt.github.io/pinball.html (reverse-engineering notes).
 * No ROM or copyrighted assets were redistributed; only addresses, hashes, algorithms and tool scripts are published.

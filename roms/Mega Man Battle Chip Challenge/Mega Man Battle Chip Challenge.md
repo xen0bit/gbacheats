@@ -1,5 +1,7 @@
 # Mega Man Battle Chip Challenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -48,7 +50,7 @@ mgba -3 "roms/Mega Man Battle Chip Challenge/Mega Man Battle Chip Challenge.gba"
 
 mGBA SDL keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Hold 100–300 ms per press. Screenshot crop for the 3× viewport: `720x480+155+165`.
 
-Deterministic path actually walked (screenshots and savestates in `/tmp/opencode/mmchipchallenge/`):
+Deterministic path actually walked (screenshots and savestates in `/tmp/mmchipchallenge/`):
 1. `Start` → "PRESS START" title → `Start` → `START / CONTINUE` menu.
 2. `A` → CHARACTER SELECT (6 navigator portraits: 3×2 grid) → `A` to accept.
 3. Scripted PET tutorial dialogue: "Six months ago / DenCity", "boiled!", "Somebo", "I'll never forget the boy who came to our rescue", "Someday, I wish", "Attention NetBattlers", "Then use the +Control Pad to move to", "Let me open it.", "This is the Progra…". Dialogue advances one press at a time; ~500 `A` presses were needed to traverse it.
@@ -138,6 +140,6 @@ UI strings observed on-screen (font-rendered, not ASCII): `BATTLECHIPGP`, `PRESS
 - `file`, `xxd`, `strings`, `grep`, `md5sum`/`sha1sum`/`sha256sum` for Phase 0/1.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for KEYINPUT/input-routine disassembly.
 - Python 3 + Capstone 5.0.7 / Keystone (installed) for literal/BL scans (not needed for final result but available).
-- Custom scripts in `/tmp/opencode/mmchipchallenge/`: `scan_headers.py` (logo/header scan), `scan_text.py` (shift/XOR/UTF-16 keyword scan), `scan_struct.py`/`scan_codetables.py` (mask runs and code-table scan), `scan_keyinput.py`, `state.py` (zlib `gbAs` savestate parser + GBA↔state address map), `drive.py` (savestate hotkeys), `gba.py` (XTEST input + screenshot crop), `render_romfont.py`/`render2.py` (VRAM/ROM tile rendering), `title_combos.py` (combo enumeration).
+- Custom scripts in `/tmp/mmchipchallenge/`: `scan_headers.py` (logo/header scan), `scan_text.py` (shift/XOR/UTF-16 keyword scan), `scan_struct.py`/`scan_codetables.py` (mask runs and code-table scan), `scan_keyinput.py`, `state.py` (zlib `gbAs` savestate parser + GBA↔state address map), `drive.py` (savestate hotkeys), `gba.py` (XTEST input + screenshot crop), `render_romfont.py`/`render2.py` (VRAM/ROM tile rendering), `title_combos.py` (combo enumeration).
 - mGBA 3× under Xvfb `:315` with `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST input; `scrot` + ImageMagick for frames; `tesseract` for OCR triage.
 - No ROM or copyrighted assets are redistributed; only hashes, addresses, counts and tooling are published.

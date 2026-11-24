@@ -1,5 +1,7 @@
 # Terminator 3: Rise of the Machines (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -64,7 +66,7 @@ input was found that extends the count; see §8.
   kill cutscene, then **Start** during play → **SELECT MISSION** grid appears.
 * `VRTGC` → accepted, briefing "TECH-COM 2032" with T-X dialogue.
 * `CGTRV`, `BWLSG` → **WRONG PASSWORD**.
-* Offline decoder/encoder: `/tmp/opencode/terminator3/decode.py` (code in §9).
+* Offline decoder/encoder: `/tmp/terminator3/decode.py` (code in §9).
 * mGBA CLI debugger (`mgba -3 -d`) was used as a ground-truth oracle: break at
   `0x0800C2F4`, write five byte indices to `0x020346A0`, set `pc`, `trace` until
   return, then read the globals.
@@ -201,7 +203,7 @@ mariogba.nl and every other published list checked):
 
 * **`VRTGC`** — payload `0x0E8F`, scene **58** (grid row0 col1, unadvertised), field
   7, f1=1, f2=0, check 4/4. Entered on the real PASSWORD screen in mGBA → accepted;
-  "TECH-COM 2032" briefing shown (`/tmp/opencode/terminator3/evidence_vrtgc.ss1`,
+  "TECH-COM 2032" briefing shown (`/tmp/terminator3/evidence_vrtgc.ss1`,
   screenshot in work dir). **Observed (emulator) + Derived (decoder).**
 * RAM proof via the ROM's own validator (mGBA CLI debugger, buffer written at
   `0x020346A0`): `0x0201DF9C=0x3A` (58), `0x0201E430=0x00000007`,
@@ -268,10 +270,10 @@ published "level" labels are therefore not the payload field (§16.15).
 
 * `strings -t x`, `xxd`, `grep -abo`, `arm-none-eabi-objdump -M force-thumb`, Capstone
   (BL/literal scans), Python 3 decoder/encoder:
-  `/tmp/opencode/terminator3/decode.py`, model search `brute_model.py`,
+  `/tmp/terminator3/decode.py`, model search `brute_model.py`,
   input driver `enter.py`.
 * mGBA 0.10.5 under Xvfb `:317` + openbox; `xdotool` XTEST input; `scrot` screenshots.
 * mGBA CLI debugger (`mgba -3 -d`, driven through a PTY by
-  `/tmp/opencode/terminator3/dbgserver.py`) for RAM reads and as validator oracle.
+  `/tmp/terminator3/dbgserver.py`) for RAM reads and as validator oracle.
 * No ROM or copyrighted assets are redistributed; only hashes, addresses, algorithms
   and self-generated codes are published.

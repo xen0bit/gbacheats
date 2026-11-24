@@ -1,10 +1,12 @@
 # Garfield and His Nine Lives (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Garfield and His Nine Lives/Garfield and His Nine Lives.gba` |
+| File | `roms/Garfield and His Nine Lives/Garfield and His Nine Lives.gba` |
 | Size | 4,194,304 bytes (0x400000, exactly 4 MiB) |
 | `file` | Game Boy Advance ROM image: "GARFIELD" (BG9EGY, Rev.00) |
 | Header title (0xA0) | `GARFIELD` (NUL-padded) |
@@ -134,7 +136,7 @@ This is a **cut/debug feature** (guide §16.3 case 3), not an undiscovered gate.
 
 ## 7. Validation evidence
 
-- **Observed (emulator):** all 10 screens listed in §3; screenshots `after_lang.png`, `main_menu.png`, `options.png`, `credits.png`, `slot1.png`, `diff_sel.png`, `pause.png`, `after_quit.png`, `reset_effect.png` (work dir `/tmp/opencode/garfield9`). Screen-state values in §6 read from decompressed `gbAs` chunks of savestates `ss1`–`ss9` (raw length 397,312 bytes), EWRAM at raw `0x21000`.
+- **Observed (emulator):** all 10 screens listed in §3; screenshots `after_lang.png`, `main_menu.png`, `options.png`, `credits.png`, `slot1.png`, `diff_sel.png`, `pause.png`, `after_quit.png`, `reset_effect.png` (work dir `/tmp/garfield9`). Screen-state values in §6 read from decompressed `gbAs` chunks of savestates `ss1`–`ss9` (raw length 397,312 bytes), EWRAM at raw `0x21000`.
 - **Observed:** A+B+Select+Start on main menu → license screen, `0x02002040: 0x1E → 0x00000000`. L+R+A+B+Select+Start → unchanged/resume.
 - **Derived:** reset validator predicate and reset routine effect from Thumb disassembly `0x08003DDC`/`0x08003D04`; key-mask literal decoding with aligned PC-relative arithmetic and `struct.unpack_from`.
 - **Derived:** dead debug strings from zero-xref scans (u32 literal search over the whole ROM, bothThumb-bit forms checked).
@@ -154,7 +156,7 @@ This is a **cut/debug feature** (guide §16.3 case 3), not an undiscovered gate.
 - `mgba` under `Xvfb :315` + `openbox`, `xdotool` XTEST input, `scrot`, ImageMagick `convert` (720×480 viewport crop to the window geometry reported by `xdotool getwindowgeometry`).
 - mGBA `-d` CLI debugger driven through a Python `pty` daemon (the `-g` GDB stub was unusable: "Ignoring packet error", qSupported "timeout" — guide §16.13); per-frame breakpoint at `0x08003DAD` (Thumb bit set on `0x08003DAC`) used for live RAM reads.
 - Savestate analysis: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte state; EWRAM at raw `0x21000`; `state1_raw.bin`…`state9_raw.bin` in the work dir.
-- Scripts in `/tmp/opencode/garfield9`: `k.py`, `shot.sh`, `sweep.py`, `sweep2.py` (green-text-only change detector), `ramstate.sh`, `dbgdaemon.py`, `readrange.py`, `dbg.py`.
+- Scripts in `/tmp/garfield9`: `k.py`, `shot.sh`, `sweep.py`, `sweep2.py` (green-text-only change detector), `ramstate.sh`, `dbgdaemon.py`, `readrange.py`, `dbg.py`.
 
 ## 10. Legal note
 

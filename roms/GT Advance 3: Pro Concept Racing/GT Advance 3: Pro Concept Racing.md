@@ -1,5 +1,7 @@
 # GT Advance 3: Pro Concept Racing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -59,7 +61,7 @@ not as a silent omission. Fetched content was treated strictly as data.
   QUICK RACE, PRACTICE, EXTRA, SAVE.
 * Menu walk performed with RAM evidence: title, MODE SELECT, CLASS, GARAGE
   (CHAMPIONSHIP and DRIFT-COMBO), and the locked EXTRA entry. Savestates
-  `gta3.ss1`–`gta3.ss7` in `/tmp/opencode/gta3` contain the RAM images; IWRAM
+  `gta3.ss1`–`gta3.ss7` in `/tmp/gta3` contain the RAM images; IWRAM
   (state offset `0x19000`) and EWRAM (`0x21000`) MD5 fingerprints are distinct
   for each captured state (e.g. ss1 `66fb4f64fa0c`/`5c7a827fc28a`,
   ss3 `f4f7d5387e83`/`7795911833a7`, ss7 `c3d3b6c16678`/`c55176c789ea`).
@@ -189,7 +191,7 @@ tested published-code channel (unavailable).
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, Python 3
   (struct/Capstone 5.0.7), `arm-none-eabi-objdump -M force-thumb`.
 * `mgba -3 -d` on `Xvfb :317` with a Python PTY debug server
-  (`/tmp/opencode/gta3/dbgserver.py`, client `dc.py`) and savestate parser
+  (`/tmp/gta3/dbgserver.py`, client `dc.py`) and savestate parser
   (`ssread.py`, decompresses the PNG `gbAs` chunk).
 * Custom scans: `scanptr.py`, `blscan.py`, `ldrscan.py`, `lzscan.py`.
 * Cross-game check: GT Advance 2 (`AGWE78`, SHA-256 prefix `2a61ba4a…`) lacks

@@ -1,5 +1,7 @@
 # Dora the Explorer: The Search for Pirate Pig's Treasure (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -146,7 +148,7 @@ All 8 published codes were also submitted and all 8 were accepted (cutscene for 
 
 ## 7. Validation evidence
 
-- **Observed:** title/main/options/pause/password screens and every transition, captured as screenshots on disk in `/tmp/opencode/dorapirate/`; 8 published codes accepted, novel codes accepted, listed invalid codes rejected to the title screen; F1 savestate reload; GDB stub registers at the password screen (`PC = 0x0801865E`); 16-symbol cycle and wrap; savestate diffs and read/write watchpoints showing UI object activity.
+- **Observed:** title/main/options/pause/password screens and every transition, captured as screenshots on disk in `/tmp/dorapirate/`; 8 published codes accepted, novel codes accepted, listed invalid codes rejected to the title screen; F1 savestate reload; GDB stub registers at the password screen (`PC = 0x0801865E`); 16-symbol cycle and wrap; savestate diffs and read/write watchpoints showing UI object activity.
 - **Derived:** header fields and entry target from the raw bytes; code/data boundary and function identities from `arm-none-eabi-objdump -M force-thumb` and Ghidra decompilation; absence of any plain/offset/packed encoding of the published codes from exhaustive byte searches.
 - **Inferred:** that the validator is a bit-packed value against a per-chapter accept set with unused low bits (aliases). The per-slot accept counts are observed, but the exact packing and the complete accept table are **inferred**, not recovered.
 

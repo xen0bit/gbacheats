@@ -1,5 +1,7 @@
 # Blender Bros (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -580,7 +582,7 @@ no published list documents; screenshots `test1c.png` (TEST2 field map),
 * GNU binutils 2.44 `arm-none-eabi-objdump` for Thumb listings.
 * Python 3 + capstone 5.0.7 for PC-relative literal resolution and BL scans;
   a small scanner for `ADR` and for `u16` button-mask runs.
-* Scripts (in `/tmp/opencode/blenderbros`): `dis1.py` (Thumb disassembler with
+* Scripts (in `/tmp/blenderbros`): `dis1.py` (Thumb disassembler with
   literal annotation), ad-hoc scanners for literals/`BL`/`ADR`/mask runs.
 * Savestate `Blender Bros.ss5` (debug menu at `GAME START`) is an emulator
   artifact; `.sav`/`.ss*` are git-ignored.

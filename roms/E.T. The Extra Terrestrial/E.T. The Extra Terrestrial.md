@@ -1,5 +1,7 @@
 # E.T. The Extra Terrestrial (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -42,7 +44,7 @@ All claims are tagged Observed (emulator/savestate/REA), Derived (disassembly), 
 ## 3. How to reproduce
 
 **Setup.** mGBA SDL (`/usr/local/bin/mgba -3 -d et.gba`) under Xvfb `:316`, 1024×768×24,
-`SDL_AUDIODRIVER=dummy`. `/tmp/opencode/et2/et.gba` is a byte-identical working copy of the
+`SDL_AUDIODRIVER=dummy`. `/tmp/et2/et.gba` is a byte-identical working copy of the
 ROM (SHA-256 above); no savestates/saves were written into the ROM folder. The `-d` CLI
 debugger (PTY) gave reliable `r/1`, `x/1`, `watch/w`, `reset`, `c`, interrupt, unlike the
 GDB stub (port 2345 was also occupied by another process).
@@ -172,7 +174,7 @@ No input outside the 9 records was accepted.
 
 ## 7. Validation evidence
 
-* **Observed** (screenshots `/tmp/opencode/et2/*.png`): title OPTIONS, empty 8-cell field,
+* **Observed** (screenshots `/tmp/et2/*.png`): title OPTIONS, empty 8-cell field,
   all 8 glyphs (`◀ ▶ ▲ ▼ A B L R`), completed codes, and level-intro screens ("Level 1/
   2/3 … In this level, you play as E.T./both E.T. and Elliott").
 * **Observed** (savestate `gbAs` diffs): flag at `0x03002D00` = `0xFF` (unset), `0x00`
@@ -212,7 +214,7 @@ are all resolved.
 * `xdotool` XTEST input (`k.py`), `import -window root` screenshots.
 * Savestate oracle: `ss.py` (zlib `gbAs` decompress), `diffss.py`/`findflag.py`, and
   `run_tests.py` (load-empty → type → submit → read flag). All scripts in
-  `/tmp/opencode/et2`.
+  `/tmp/et2`.
 * Web: Cheat Happens published level-password list (retrieved 2026-11-17) used only to
   cross-check the ROM table, not as a source of truth.
 

@@ -1,5 +1,7 @@
 # Rocket Power: Dream Scheme (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -42,7 +44,7 @@ A **second semantic gate** exists in the caller (`0x0802C49E`–`0x0802C4D2`): a
 3. The entry grid is 8 columns × 4 rows; D-pad moves the highlight, A adds the highlighted symbol, B erases the last symbol. Exactly 8 characters are accepted.
 4. Press Start after a valid 8-character code; the footer reads `password accepted, press START to play`, then the game starts at the encoded level.
 
-**Codes tested on the real screen** (screenshots kept in `/tmp/opencode/rocketdream/`):
+**Codes tested on the real screen** (screenshots kept in `/tmp/rocketdream/`):
 
 | Code | Result |
 |---|---|
@@ -53,7 +55,7 @@ A **second semantic gate** exists in the caller (`0x0802C49E`–`0x0802C4D2`): a
 | `W621JMTF` (checksum-valid, bad state) | rejected |
 | **`V73ZJMTD` (novel, not published)** | **accepted → The Neighborhood** |
 
-**Automated reproduction**: `/tmp/opencode/rocketdream/pw.py` (validator), `mint.py` (GF(2) inversion + code generator), `pwentry.py`/`gba.py` (on-screen keyboard driver), `savestate.py` (mGBA `.ss1` `gbAs` decoder).
+**Automated reproduction**: `/tmp/rocketdream/pw.py` (validator), `mint.py` (GF(2) inversion + code generator), `pwentry.py`/`gba.py` (on-screen keyboard driver), `savestate.py` (mGBA `.ss1` `gbAs` decoder).
 
 ## 4. Address map
 

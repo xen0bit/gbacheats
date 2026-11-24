@@ -1,5 +1,7 @@
 # Zone of the Enders: The Fist of Mars (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -208,5 +210,5 @@ untested absence.
 * `arm-none-eabi-objdump -M force-thumb` for the crt0 literal at `0x080002C`.
 * mGBA 0.10.5 (`-3`, `-g` for a one-shot GDB dump), `gdb-multiarch` (one-shot dump; the stub
   is single-client and dies on detach), Xvfb `:318` + openbox, `xdotool`, `scrot`, `tesseract`.
-* Evidence files (screenshots, savestates, RAM dumps, OCR logs) are in `/tmp/opencode/zoe/`,
+* Evidence files (screenshots, savestates, RAM dumps, OCR logs) were in `/tmp/zoe/`,
   deliberately outside the ROM folder. No ROM or copyrighted asset is redistributed here.

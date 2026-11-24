@@ -1,5 +1,7 @@
 # Pac-Man Pinball Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -139,7 +141,7 @@ No password validator, code table, alphabet table, key-mask dispatch table, or d
 | Main-menu confirmation | `0x0801E8A8` | `0x02000718` | `943e1a8b16c5ab3f` |
 | Game over | `0x0801E8A8` | `0x02000730` | `d5563e50d4f2a006` |
 
-The three menu-family screens share handler `0x0801C564` but have distinct heap object pointers; the gameplay-family screens share handler `0x0801E8A8` and are separated by object pointer and/or EWRAM hash. Every row is backed by a screenshot (`/tmp/opencode/pacpinball/<name>.png`) and a state file (`states/<name>.ss1`).
+The three menu-family screens share handler `0x0801C564` but have distinct heap object pointers; the gameplay-family screens share handler `0x0801E8A8` and are separated by object pointer and/or EWRAM hash. Every row is backed by a screenshot (`/tmp/pacpinball/<name>.png`) and a state file (`states/<name>.ss1`).
 
 **Evidence labels:**
 

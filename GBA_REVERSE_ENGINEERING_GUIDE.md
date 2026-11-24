@@ -66,7 +66,7 @@ This document is a living guide. Every time a ROM is reverse engineered:
    `.gba` files are git-ignored; the `.md` reports are tracked and are the
    durable artifact.
 
-2. **Add the game to `roms/INDEX.md`** with a one-line status, so the
+2. **Add the game to the top-level `README.md` index** with a one-line status, so the
    collection can be scanned without opening every report.
 
 3. **Update this guide** when the game teaches something new: a new pitfall, a
@@ -1173,7 +1173,7 @@ builds can differ in addresses, strings, and even code.
 * **Never `pkill -f <name>`** for the emulator or Xvfb. The pattern matches the
   shell command line that contains the same word and kills your own session.
   Use `pkill -x Xvfb` / `pkill -x mgba`.
-* Output written by a root-owned helper (`/tmp/opencode`, log files) may not be
+* Output written by a root-owned helper (a scratch directory under `/tmp`, log files) may not be
   writable by the analysis user; check ownership rather than assuming a scrot
   failure is an emulator problem.
 * Some modes prompt for a save/guest profile before the feature. Pick the
@@ -1346,7 +1346,7 @@ Lessons:
 - [ ] **Enumeration section present: space size, at least one generated code
       that is in no published list, confirmed in-game, plus a rejected
       out-of-range test proving the bounds.**
-- [ ] Report written next to the ROM and listed in `roms/INDEX.md`.
+- [ ] Report written next to the ROM and listed in the top-level `README.md` index.
 - [ ] Guide updated with any general lesson.
 - [ ] mGBA/Xvfb/scrot stopped; `pgrep -x mgba` and `pgrep -x Xvfb` return nothing.
 

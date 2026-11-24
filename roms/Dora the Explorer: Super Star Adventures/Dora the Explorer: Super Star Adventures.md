@@ -1,5 +1,7 @@
 # Dora the Explorer: Super Star Adventures (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -77,7 +79,7 @@ The one interesting system found — the front-end state machine (`0x0300002C`) 
 | `0x0806A140..0x0806A2ED` | Font/glyph-order tables (not code alphabets) | Observed |
 | Savestate layout | `.ss1` → zlib `gbAs` chunk; IWRAM at `0x19000`, EWRAM at `0x21000` | Observed (state bytes match GDB reads) |
 
-**State-ID → `GST_*` map (from the dispatch table).** 0 `GST_GAMEOVER`, 5 `GST_FRONT_END`, 6 `GST_CORPORATEBACKGROUNDS`, 7 `GST_TITLE`, 8 `GST_CONFIRM_QUIT`, 9 `GST_PAUSE_OPTIONS`, 10 `GST_OPTIONS`, 12 `GST_MAIN_MENU`, 13 `GST_MAP`, 14 `GST_LEVELMAP`, 15–33 `GST_LEVEL_1A..5C`, 36–47 cutscenes, 49 `GST_CUTSCENE_OPENING`, 50 `GST_CUTSCENE_L1`, 57 `GST_LEVEL_STARGALLERY`, 60 `GST_LEVEL_BACKPACK`, 61 `GST_PAUSE`, 62 `GST_UNPAUSE`, 63 `GST_AUDIO_OPTIONS`. Full 54-row dump is in `/tmp/opencode/dorastar` (`litscan.py`, `ssread.py` output).
+**State-ID → `GST_*` map (from the dispatch table).** 0 `GST_GAMEOVER`, 5 `GST_FRONT_END`, 6 `GST_CORPORATEBACKGROUNDS`, 7 `GST_TITLE`, 8 `GST_CONFIRM_QUIT`, 9 `GST_PAUSE_OPTIONS`, 10 `GST_OPTIONS`, 12 `GST_MAIN_MENU`, 13 `GST_MAP`, 14 `GST_LEVELMAP`, 15–33 `GST_LEVEL_1A..5C`, 36–47 cutscenes, 49 `GST_CUTSCENE_OPENING`, 50 `GST_CUTSCENE_L1`, 57 `GST_LEVEL_STARGALLERY`, 60 `GST_LEVEL_BACKPACK`, 61 `GST_PAUSE`, 62 `GST_UNPAUSE`, 63 `GST_AUDIO_OPTIONS`. Full 54-row dump was in `/tmp/dorastar` (`litscan.py`, `ssread.py` output).
 
 ## 5. Algorithm
 
@@ -165,7 +167,7 @@ The same six debug tokens repeat once per language block at `0x0804B4B0..`, `0x0
 
 ## 9. Tooling
 
-Scripts written in `/tmp/opencode/dorastar`: `litscan.py` (PC-relative literal / raw-word scanner), `ssread.py` (zlib `gbAs` savestate reader + IWRAM/EWRAM mapping), `sspatch.py` / `sspatch2.py` (savestate byte/word patcher for the oracle), `gdbmem.py` (GDB remote client, superseded by the `-d`/watchpoint approach), `gcmd.sh` (persistent GDB FIFO helper), `readstate.sh`, `press.sh`, `search_codes.py`, `enum_states.sh`. Stock tools: `arm-none-eabi-objdump -M force-thumb`, `gdb-multiarch` (hardware watchpoint on `0x0300002C`), `strings`, `xxd`, `xdotool`, `import`, `montage`. No third-party packages were installed for this engagement.
+Scripts written in `/tmp/dorastar`: `litscan.py` (PC-relative literal / raw-word scanner), `ssread.py` (zlib `gbAs` savestate reader + IWRAM/EWRAM mapping), `sspatch.py` / `sspatch2.py` (savestate byte/word patcher for the oracle), `gdbmem.py` (GDB remote client, superseded by the `-d`/watchpoint approach), `gcmd.sh` (persistent GDB FIFO helper), `readstate.sh`, `press.sh`, `search_codes.py`, `enum_states.sh`. Stock tools: `arm-none-eabi-objdump -M force-thumb`, `gdb-multiarch` (hardware watchpoint on `0x0300002C`), `strings`, `xxd`, `xdotool`, `import`, `montage`. No third-party packages were installed for this engagement.
 
 **Cleanup:** all generated `.sav`/`.ss1` files were removed from the ROM folder and the :317 Xvfb/openbox/mGBA processes were stopped by PID (see final reply).
 

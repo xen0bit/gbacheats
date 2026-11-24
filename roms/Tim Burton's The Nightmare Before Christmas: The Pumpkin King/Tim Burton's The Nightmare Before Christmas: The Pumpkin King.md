@@ -1,5 +1,7 @@
 # Tim Burton's The Nightmare Before Christmas: The Pumpkin King (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -43,7 +45,7 @@ Emulator: mGBA 0.10.5 under Xvfb `:315`, `SDL_AUDIODRIVER=dummy`, `-3` scale.
 Keymap (SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
 D-pad = arrow keys. Hold keys 100–300 ms.
 
-Menu path walked (all screens in `/tmp/opencode/pumpkinking/*_c.png`):
+Menu path walked (all screens in `/tmp/pumpkinking/*_c.png`):
 
 1. Boot → Buena Vista Interactive logo → **Language Select** (English/Español/Français/Italiano/Deutsch) → title "PRESS START".
 2. Start → main menu: **START GAME / MINI GAME / OPTION**.
@@ -129,7 +131,7 @@ encoding, alphabet, combo, and save-format counts above. This is the "No system"
 
 ## 7. Validation evidence
 
-- **Observed** (emulator screenshots `/tmp/opencode/pumpkinking/*_c.png`): every screen in
+- **Observed** (emulator screenshots `/tmp/pumpkinking/*_c.png`): every screen in
   §3; all locked placeholders; all 14 button-combo tests returning to the normal screen.
 - **Observed** (RAM): 512-byte SRAM dump; 397,312-byte `.ss1` savestate `gbAs` chunks parsed
   and EWRAM/IWRAM compared across combo tests.
@@ -157,7 +159,7 @@ encoding, alphabet, combo, and save-format counts above. This is the "No system"
 - REA MCP (`open_binary`, `search_strings`, `list_procedures`) — Ghidra 12.1.4 provider;
   session was shared with other agents and target binding was unstable, so final evidence
   rests on the Python/objdump scans above.
-- Analysis scripts in `/tmp/opencode/pumpkinking/`: `gba.py` (input/shot), `scan.py`,
+- Analysis scripts in `/tmp/pumpkinking/`: `gba.py` (input/shot), `scan.py`,
   `scan2.py`, `alphabets.py`, `buttons.py`, `joypad.py`, `joypad2.py`, `ctx.py`,
   `bootcombos.py`, `combo_ram.py`, `combo_shot.py`, `savestate.py` (zlib `gbAs` parser).
 

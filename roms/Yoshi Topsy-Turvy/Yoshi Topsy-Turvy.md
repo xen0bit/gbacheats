@@ -1,5 +1,7 @@
 # Yoshi Topsy-Turvy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 - File: `Yoshi Topsy-Turvy.gba` (8,388,608 bytes, 8 MiB)
 - Header title: `YOSHI TOPSY`; game code `KYGE01`; maker `01` (Nintendo); version `0x00`; fixed byte `0x96`; entry word `0xEA00002E` (stock crt0 — not a scene-patched image, §16.1)
@@ -79,7 +81,7 @@ EEPROM records: 0x30 bytes each, header `00 FF 00 30 A0 40`, 16-bit field at `+6
 - **Novel code**: none possible — the space is empty. Bounded negative proven by the counts above, not by absence of evidence.
 
 ## 7. Validation evidence
-- **Observed**: title/main-menu/file-select/options/pause/chapter-select/gameplay screens (screenshots in `/tmp/opencode/yoshitopsy/`); EEPROM `.sav` 8192 bytes with two 0x30 records; debug-level byte 0 on all screens; A+B+Select+Start soft reset; no menu change from debug-level writes 3–6 or all-FF save patches.
+- **Observed**: title/main-menu/file-select/options/pause/chapter-select/gameplay screens (screenshots in `/tmp/yoshitopsy/`); EEPROM `.sav` 8192 bytes with two 0x30 records; debug-level byte 0 on all screens; A+B+Select+Start soft reset; no menu change from debug-level writes 3–6 or all-FF save patches.
 - **Derived**: all addresses in §4; the 4-way debug gate; the scene-table setter; the absence of literal xrefs to debug strings; the joypad reader at `0x0801A0E`; `EEPROM_V124` signature.
 - **Inferred**: that the five hidden editor entries are fully functional if the gate were satisfied — the menu objects and handlers exist and the table is intact, but **the entry screen was never reached**, so this is not claimed as observed.
 
@@ -89,7 +91,7 @@ EEPROM records: 0x30 bytes each, header `00 FF 00 30 A0 40`, 16-bit field at `+6
 - The debug editor screens themselves were not visually reached, because the gate cannot be satisfied by controller input; only their data structures and strings were enumerated.
 
 ## 9. Tooling
-- Scripts in `/tmp/opencode/yoshitopsy/`: `key.py` (XTEST keymap), `dbgtool.py` (`-d` PTY driver), `dumpram.py`, `dumpvram2.py`, `dumpmaps.py`, `scan.py`, `refs.py` (single-pass literal-xref map), `buttoncodes.py`, `findfont.py`, `renderfont.py`, `patchstate.py`, `patch_ss.py`, `boot_test.py`, `testgate.py`, `testlevels.py`.
+- Scripts in `/tmp/yoshitopsy/`: `key.py` (XTEST keymap), `dbgtool.py` (`-d` PTY driver), `dumpram.py`, `dumpvram2.py`, `dumpmaps.py`, `scan.py`, `refs.py` (single-pass literal-xref map), `buttoncodes.py`, `findfont.py`, `renderfont.py`, `patchstate.py`, `patch_ss.py`, `boot_test.py`, `testgate.py`, `testlevels.py`.
 - Installed tools used: `mgba` 0.10.5, `gdb-multiarch`, `xdotool`, `scrot`, ImageMagick, `arm-none-eabi-objdump`, Capstone (Python). No ROM or extracted assets are redistributed.
 
 ## 10. Legal note

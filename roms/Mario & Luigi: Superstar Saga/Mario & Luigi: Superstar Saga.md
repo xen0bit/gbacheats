@@ -1,10 +1,12 @@
 # Mario & Luigi: Superstar Saga (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Mario & Luigi: Superstar Saga/Mario & Luigi: Superstar Saga.gba` |
+| File | `roms/Mario & Luigi: Superstar Saga/Mario & Luigi: Superstar Saga.gba` |
 | Size | 16,777,216 bytes (`0x01000000`) |
 | Header title | `MARIO&LUIGIU` |
 | Game code | `A88E` (USA), maker `01` (Nintendo), version `0x00` |
@@ -136,6 +138,6 @@ For a *positive* password/code system §0.2 would require space size, validator 
 
 ## 9. Tooling
 
-All analysis scripts are in `/tmp/opencode/mlss/`: `scan_keys3.py` (Capstone KEYINPUT scan), `final_scan.py` (keyword/menu census), `dbg_daemon.py` + `d.py` + `q.py` (mGBA CLI debugger over PTY), `cap.py`/`ss.py`/`ram.py` (savestate decode, address mapping and diffs), `k.py` (xdotool keymap), `start.sh`/`replay.py`/`wander*.py` (display and navigation helpers). System tools: `arm-none-eabi-objdump` (`-M force-thumb`), Capstone 5.0.7, `mgba 0.10.5`, `Xvfb`, `openbox`, `xdotool`, `scrot`, ImageMagick, Python 3.
+All analysis scripts were in `/tmp/mlss/`: `scan_keys3.py` (Capstone KEYINPUT scan), `final_scan.py` (keyword/menu census), `dbg_daemon.py` + `d.py` + `q.py` (mGBA CLI debugger over PTY), `cap.py`/`ss.py`/`ram.py` (savestate decode, address mapping and diffs), `k.py` (xdotool keymap), `start.sh`/`replay.py`/`wander*.py` (display and navigation helpers). System tools: `arm-none-eabi-objdump` (`-M force-thumb`), Capstone 5.0.7, `mgba 0.10.5`, `Xvfb`, `openbox`, `xdotool`, `scrot`, ImageMagick, Python 3.
 
 No ROM or copyrighted asset is redistributed; only addresses, hashes, counts and derived observations are published.

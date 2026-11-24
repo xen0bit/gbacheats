@@ -1,5 +1,7 @@
 # Driv3r (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -179,7 +181,7 @@ text at `0x210FE7` is dead/unused (TCRF notes it) and has no reachable trigger i
 
 - **Observed (emulator, `:318`):** all 12 screens and their exact entry sets; Select/A/B navigation;
   no reaction to any tested code sequence; credits roll; statistics values; save-slot behavior.
-  Screenshots saved under `/tmp/opencode/driv3r/` (not attached).
+  Screenshots saved under `/tmp/driv3r/` (not attached).
 - **Observed (RAM):** input globals at `0x0203AB3C/3E`; 512-byte `.sav` with `driv`/`saveA`
   record mirrored at EWRAM `0x0203CD88`; savestate diffs after code attempts showed only animation/
   timer noise, no persistent cheat flag.
@@ -208,7 +210,7 @@ text at `0x210FE7` is dead/unused (TCRF notes it) and has no reachable trigger i
   shared environment), Xvfb `:318`, openbox, xdotool, `import`/scrot.
 - `strings -t x`, `xxd`, `grep`, Python 3 + `capstone` 5.0.7 for literal/xref and button-sequence
   scans; `arm-none-eabi-objdump -M force-arm/force-thumb` for disassembly.
-- `/tmp/opencode/driv3r/ssdiff.py` — mGBA `.ss1` PNG `gbAs` zlib decompress + RAM diff.
+- `/tmp/driv3r/ssdiff.py` — mGBA `.ss1` PNG `gbAs` zlib decompress + RAM diff.
 - No ROM or copyrighted assets are redistributed in this report.
 
 ## 10. Legal note

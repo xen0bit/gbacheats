@@ -1,5 +1,7 @@
 # V-Rally 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -54,7 +56,7 @@ D-pad=arrow keys.
    jumps directly to `STAGE RANKING` (race skipped).
 5. Control: holding Up + Select + B instead leaves the race running.
 
-Screenshots and savestates used as evidence are in `/tmp/opencode/vrally3/`
+Screenshots and savestates used as evidence were in `/tmp/vrally3/`
 (`v_before_c.png`, `v_held_c.png`, `combo_experiment.py`, `reject_test_c.png`,
 `accept_after_c.png`, `novel_after_c.png`, `ss1`–`ss4`).
 

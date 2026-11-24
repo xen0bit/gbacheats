@@ -1,5 +1,7 @@
 # Disney's Magical Quest 2 Starring Mickey and Minnie (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -343,7 +345,7 @@ exist on this SKU (no screen, no label, no alphabet table). They are therefore n
   scanner, Konami literal search.
 * mGBA text savestates (`Shift+F1..F4`/`F1..F4`) used to return to the pause menu and title;
   `Ctrl+R` for reset while preserving SRAM.
-* All emulator runs used a copy of the ROM in `/tmp/opencode/magicalquest2`; the ROM folder
+* All emulator runs used a copy of the ROM in `/tmp/magicalquest2`; the ROM folder
   was left untouched (no `.sav`, no savestates).
 
 ## 10. Legal note

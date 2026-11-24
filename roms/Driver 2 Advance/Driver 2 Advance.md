@@ -1,5 +1,7 @@
 # Driver 2 Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -58,7 +60,7 @@ does not — SELECT was pressed in-game and produced no overlay.
 
 * Emulator: `mgba -3 -g driver2.gba` (GDB stub on `:2345`) under
   `Xvfb :317 -screen 0 1024x768x24`, `SDL_AUDIODRIVER=dummy`, Openbox WM.
-* The ROM was **copied to `/tmp/opencode/driver2/driver2.gba`** and run from there, so no
+* The ROM was **copied to `/tmp/driver2/driver2.gba`** and run from there, so no
   `.sav`/`.ss*` files were ever created in the ROM folder. The copy's SHA-256 matches the
   original exactly.
 * mGBA SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
@@ -71,8 +73,8 @@ does not — SELECT was pressed in-game and produced no overlay.
 * GDB reads (attach/detach pauses/resumes the mGBA core):
   `gdb-multiarch -q -batch -ex 'set architecture arm' -ex 'target remote :2345' -ex 'x/wx 0x03004078'`
   (run detached from the game so the target resumes on GDB exit).
-* Helper scripts: `/tmp/opencode/driver2/key.py`, `scan_keys.py`, `negative_scan.py`.
-  Screenshots: `/tmp/opencode/driver2/*.png` (`*_g.png` are the cropped 720×480 frames).
+* Helper scripts: `/tmp/driver2/key.py`, `scan_keys.py`, `negative_scan.py`.
+  Screenshots: `/tmp/driver2/*.png` (`*_g.png` are the cropped 720×480 frames).
 
 ## 4. Address map
 
@@ -268,7 +270,7 @@ SELECT on the final retail build produced no prototype-style debug overlay.
   routine; Capstone 5.0.7 for PC-relative literal scans.
 * `mgba` (with `-g` GDB stub, port 2345) + `gdb-multiarch` for RAM reads; Xvfb `:317`,
   Openbox, `xdotool`, `import`/`convert` for screenshots.
-* Scripts retained at `/tmp/opencode/driver2/`: `key.py` (XTEST input + screenshots),
+* Scripts retained at `/tmp/driver2/`: `key.py` (XTEST input + screenshots),
   `scan_keys.py` (key-variable xref scanner), `negative_scan.py` (bounded text/key search).
 * Web sources consulted: GameFAQs walkthrough/cheats, codebook.potchgult.com, Vizzed,
   gamehacking.org, 53lu, gamez.com.tw, TCRF (injection payload ignored).

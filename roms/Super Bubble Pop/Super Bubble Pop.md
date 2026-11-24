@@ -1,5 +1,7 @@
 # Super Bubble Pop (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -64,7 +66,7 @@ mint from; the enumeration deliverable is the counted negative above.
 * Live RAM proof of the unlock flags: in mGBA's `-d` debugger, break and issue
   `w/1 0x030043BB 1`, `w/1 0x030043BC 1`, then `c`. The character-select list
   immediately reads `C29, VIX, TNT, ZIM`. Writing `0` back restores `???`.
-* Screenshots retained in `/tmp/opencode/superbubble/`: `s0_title.png`,
+* Screenshots retained in `/tmp/superbubble/`: `s0_title.png`,
   `s1_afterstart.png`, `s5_options.png`, `s8_jukebox.png`, `s10_startgame.png`,
   `s14_char_down4.png`, `s15_skill.png`, `s16_game.png`, `s17_pause.png`,
   `s19_charsel_again.png`, `s22_cs_base.png`, `s23_flags_set.png`,
@@ -237,7 +239,7 @@ the ROM rejects (there are none to test).
 * mGBA 0.10.5 under Xvfb `:315` + openbox; `SDL_AUDIODRIVER=dummy`.
 * mGBA CLI debugger (`-d`) driven through a FIFO and captured with `script(1)`;
   commands `x/1|x/2|x/4`, `w/1`, Ctrl+C break, `c`. Helper scripts `dbg2.py`,
-  `dump.py` in `/tmp/opencode/superbubble/`.
+  `dump.py` in `/tmp/superbubble/`.
 * Because other concurrent agents used global `pkill -x mgba`, the emulator was
   run from a renamed copy (`sbpmgba`) and only the exact recorded PIDs were
   signalled at teardown.
@@ -245,7 +247,7 @@ the ROM rejects (there are none to test).
 Cleanup: all processes started for this task were stopped by their recorded
 PIDs (`sbpmgba`, its FIFO holder, `script`, Xvfb `:315`, openbox, and the short
 fresh-boot instance `sbp2mgba`). No `pkill`/`pkill -f` was used. The temporary
-ROM copy and its `.sav` live in `/tmp/opencode/superbubble/`; the `.sav` in the
+ROM copy and its `.sav` were kept in `/tmp/superbubble/`; the `.sav` in the
 ROM folder is the emulator artifact and is removed at handoff.
 
 ## 10. Legal note

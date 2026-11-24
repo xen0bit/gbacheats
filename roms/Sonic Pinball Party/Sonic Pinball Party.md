@@ -1,5 +1,7 @@
 # Sonic Pinball Party (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Scope: in-game / developer-intended cheats (passwords, button codes, hidden/debug
 menus, unlockables). GameShark/CodeBreaker memory-write codes are **out of scope**
 and are recorded only as web-recon context.
@@ -62,8 +64,8 @@ level-select sequence belongs to **Sonic Advance** in the Combo Pack, and
 ## 3. How to reproduce
 
 ```
-cd /tmp/opencode/sonicpinball
-cp "/mnt/gbacheats/roms/Sonic Pinball Party/Sonic Pinball Party.gba" game.gba
+cd /tmp/sonicpinball
+cp "roms/Sonic Pinball Party/Sonic Pinball Party.gba" game.gba
 Xvfb :319 -screen 0 1024x768x24 &          # PID recorded, own display only
 DISPLAY=:319 openbox &
 DISPLAY=:319 SDL_AUDIODRIVER=dummy mgba -3 game.gba &
@@ -175,7 +177,7 @@ highlighted in turn); Options and all four of its sub-screens (Button Config
 with its 8 rows, Language, Sound Test with BGM/SE/PLAY, Chao Navi); PARTY
 mini-game select; STORY/TUTORIAL story text and cutscenes; ARCADE/Sonic table
 gameplay with its bonus callouts. Savestates `game.ss1`–`game.ss9` and the
-corresponding screenshots in `/tmp/opencode/sonicpinball/` preserve each
+corresponding screenshots in `/tmp/sonicpinball/` preserve each
 state; RAM diffs are tabulated in §3. No password-entry screen, no keyboard
 alphabet, no code-confirmation prompt, and no debug menu item exists on any
 of these screens.
@@ -248,7 +250,7 @@ deliverable here is the bounded negative plus the complete feature inventory.
 as a screen-label aid, never as proof), `gdb-multiarch` (input-word
 verification), `strings`, `grep`, `xxd`, Python 3 (`capstone` not required),
 `arm-none-eabi-objdump -M force-thumb`, and the two local helpers
-`/tmp/opencode/sonicpinball/state.py` (zlib `gbAs` savestate RAM reader) and
+`/tmp/sonicpinball/state.py` (zlib `gbAs` savestate RAM reader) and
 `kb.py` (key/capture wrapper). No scripts were installed system-wide.
 
 **Legal note:** no ROM data, graphics, music, or extracted game text is
@@ -258,5 +260,5 @@ analysis are published.
 **Cleanup:** all processes used by this analysis were terminated by their
 recorded PIDs (`mgba`, `Xvfb`, `openbox` for display `:319`); no `pkill` was
 used. The emulation copy and all generated `game.sav` / `game.ss1`–`.ss9`
-files live in `/tmp/opencode/sonicpinball/`, not in the ROM folder; the ROM
+files were kept in `/tmp/sonicpinball/`, not in the ROM folder; the ROM
 folder contains only the original `.gba` and this report.

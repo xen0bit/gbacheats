@@ -1,5 +1,7 @@
 # Alienators: Evolution Continues (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -77,8 +79,8 @@ Emulator: mGBA 0.10.5 (`/usr/games/mgba`, SDL frontend), `-3` scale, on
 ```bash
 Xvfb :130 -screen 0 1280x960x24 &
 DISPLAY=:130 openbox &
-cd /tmp/opencode/alienators
-cp "/mnt/gbacheats/roms/Alienators: Evolution Continues/Alienators: Evolution Continues.gba" game.gba
+cd /tmp/alienators
+cp "roms/Alienators: Evolution Continues/Alienators: Evolution Continues.gba" game.gba
 DISPLAY=:130 SDL_AUDIODRIVER=dummy SDL_VIDEODRIVER=x11 /usr/games/mgba -3 game.gba &
 ```
 

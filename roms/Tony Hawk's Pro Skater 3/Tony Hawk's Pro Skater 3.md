@@ -1,5 +1,7 @@
 # Tony Hawk's Pro Skater 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -230,7 +232,7 @@ CHEATS screen should be walked and each of the 9 toggles verified there.
 * `scrot` screenshots, ImageMagick crops, Python zlib `gbAs` savestate decoder.
 * Web recon: GameFAQs GBA FAQ 17761, cheatcc GBA page, Neoseeker GBA cheats,
   SuperCheats Q&A; all fetched content treated as data (Guide §16.8).
-* Work files: `/tmp/opencode/thps3/` (screenshots, `menu_state.bin`, scripts
+* Work files: `/tmp/thps3/` (screenshots, `menu_state.bin`, scripts
   `lit.py`, `dbg3.py`, `stateio.py`, `key2.py`).
 
 No ROM or copyrighted assets are redistributed; only addresses, hashes and

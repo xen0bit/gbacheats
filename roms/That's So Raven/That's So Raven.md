@@ -1,5 +1,7 @@
 # That's So Raven (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -107,8 +109,8 @@ There is no password algorithm. The only nontrivial transformations are:
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
 * Python 3 + `capstone` for Thumb LDR-literal and whole-ROM mask scans; `struct`-based pointer and string-table parsing.
-* mGBA 0.10.5 (`-3 -d`) under Xvfb `:319`; `xdotool` XTEST input; `scrot` screenshots in `/tmp/opencode/raven1/shots/`.
-* Savestate diffing per guide §16.13: `zlib.decompress` of the PNG `gbAs` chunk (397,312 bytes; IWRAM at raw `0x19000`, EWRAM at `0x21000`). Helper: `/tmp/opencode/raven1/patch_state.py`.
+* mGBA 0.10.5 (`-3 -d`) under Xvfb `:319`; `xdotool` XTEST input; `scrot` screenshots in `/tmp/raven1/shots/`.
+* Savestate diffing per guide §16.13: `zlib.decompress` of the PNG `gbAs` chunk (397,312 bytes; IWRAM at raw `0x19000`, EWRAM at `0x21000`). Helper: `/tmp/raven1/patch_state.py`.
 * REA/Ghidra was opened once (`open_binary`, raw ARM, base `0x08000000`) but provided no usable Thumb procedure for the candidate function; session closed.
 * No ROM or copyrighted assets are redistributed here; only addresses, counts, hashes and observations are published.
 

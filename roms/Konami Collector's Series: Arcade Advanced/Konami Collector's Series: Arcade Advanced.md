@@ -1,5 +1,7 @@
 # Konami Collector's Series: Arcade Advanced (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -234,7 +236,7 @@ exactly six callers.
 * Python savestate decoder: locate PNG `gbAs` chunk, `zlib.decompress`, diff raw
   state (IWRAM at raw `0x19000`, EWRAM at `0x21000`, VRAM at `0x1000`).
 * mGBA under Xvfb `:315` with `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST key helper
-  (`/tmp/opencode/konamiarcade/key.py`); `scrot` + ImageMagick for screen walks.
+  (`/tmp/konamiarcade/key.py`); `scrot` + ImageMagick for screen walks.
 * Web: web.archive.org Wayback snapshot of the GameFAQs cheats page (live pages
   returned 403). Fetched page text was treated strictly as data; no embedded
   instructions were followed.

@@ -1,5 +1,7 @@
 # Tom Clancy's Splinter Cell: Pandora Tomorrow (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -61,7 +63,7 @@ by the bounded negative and counts in §6b.
   session's emulator.
 * Keymap verified: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
   D-pad = arrow keys. Hold ≥100 ms for menu presses.
-* Path walked (screenshots in `/tmp/opencode/pandora/`, prefix `walk_`, `gate_`,
+* Path walked (screenshots in `/tmp/pandora/`, prefix `walk_`, `gate_`,
   `title`, `opt_`, `code_`, `aaa_`, `boot`):
   1. Ubi Soft / NSA / binary-rain intro → title + language flags (US/ES/FR); A = English.
   2. Main menu **SELECT GAME / OPTIONS**; OPTIONS → **MUSIC / SFX / CREDITS** (MUSIC is an ON/OFF toggle, CREDITS scrolls).
@@ -253,7 +255,7 @@ carried over from the separately analysed first Splinter Cell GBA report.
 mGBA 0.10.5 under Xvfb `:318` with `SDL_AUDIODRIVER=dummy`, `xdotool`, `scrot`,
 ImageMagick (`convert`, `montage`), mGBA `-d` command-line debugger and GDB stub
 (`gdb-multiarch` read watchpoints). Scripts/artifacts in
-`/tmp/opencode/pandora/`: `ui.py`, `scan_ldr.py`, `finalscan.py`, `gdbcmd.txt`,
+`/tmp/pandora/`: `ui.py`, `scan_ldr.py`, `finalscan.py`, `gdbcmd.txt`,
 screenshots and decompressed savestate `state_q6z.bin`. No ROM or copyrighted
 asset is redistributed; only hashes, addresses and derived findings are published.
 

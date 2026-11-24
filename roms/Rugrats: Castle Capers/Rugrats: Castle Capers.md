@@ -1,5 +1,7 @@
 # Rugrats: Castle Capers (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -107,7 +109,7 @@ All ROM addresses are `0x08000000 + file offset`.
 | `0x080061B4` | password accept/reject handler |
 | `0x0800620C` | reject path → text script 17 |
 | `0x080083B8` | **top-level validator** — 0 = reject, nonzero = accept |
-| `0x080083F0` | charset check: `('A'<=c<='Z') || c=='*'` |
+| `0x080083F0` | charset check: `('A'<=c<='Z') \|\| c=='*'` |
 | `0x08008440` | pack 12 chars → 6 bytes (4 bits/char) |
 | `0x08008588` | `strchr` into alphabet `0x083D77F8`, returns index |
 | `0x083D77F8` | alphabet string `BCFGJKLNPQRSTWXY*\0` |
@@ -275,7 +277,7 @@ contain it.
   apparently derived from the hash-like payload, not a simple field).
 
 No images are attached; screenshots and raw artifacts remain in
-`/tmp/opencode/rugratscastle/`.
+`/tmp/rugratscastle/`.
 
 ## 8. Unknowns
 

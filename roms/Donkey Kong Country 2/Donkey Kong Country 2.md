@@ -1,5 +1,7 @@
 # Donkey Kong Country 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -40,7 +42,7 @@ Menu path (every step observed):
 5. **ENTER CHEAT CODE**: on-screen keyboard rows `A–J / K–T / . U V W X Y Z * / DEL END`.
 6. Type a code, select **END** → A. On acceptance the game returns to the save-slot screen; on rejection it also returns but leaves the flag at 0.
 
-Deterministic testing shortcut (used for the enumeration): savestate at the cheat screen, patch the input buffer with `patchss.py`, set the cursor byte to `END` (29), reload, press A, save a state, and read the flag from the uncompressed `gbAs` chunk with `ss.py`. All scripts are in `/tmp/opencode/dkc2b/`.
+Deterministic testing shortcut (used for the enumeration): savestate at the cheat screen, patch the input buffer with `patchss.py`, set the cursor byte to `END` (29), reload, press A, save a state, and read the flag from the uncompressed `gbAs` chunk with `ss.py`. All scripts were in `/tmp/dkc2b/`.
 
 Published codes tested (all accepted, all flags verified):
 `RICHMAN`, `WELLRICH`, `HELPME`, `WEAKLING`, `WELLARD`, `ROCKARD`, `FREEDOM`, `ONETIME`, `KREDITS`.
@@ -151,9 +153,9 @@ Input alphabet (keyboard table at `0x080DC1E0`): `A B C D E F G H I J K L M N O 
 
 - `strings -t x -n 4`, `grep -abo`, `xxd`, `arm-none-eabi-objdump -D -M force-thumb`, Capstone 5.0.7 for literal/BL scans.
 - mGBA 0.10.5 SDL under Xvfb `:315` with `xdotool` key injection; savestates for reproducible screen state.
-- `/tmp/opencode/dkc2b/ss.py` — decodes mGBA's zlib `gbAs` savestate chunk and reads IWRAM/EWRAM.
-- `/tmp/opencode/dkc2b/patchss.py` — patches savestate bytes (input buffer, length, cursor) for deterministic tests.
-- `/tmp/opencode/dkc2b/testcode.py` — submits a code through the real END key and reads the RAM flag.
-- `/tmp/opencode/dkc2b/diffstate.py` — diffs two savestates to locate RAM fields (buffer, cursor, flag).
+- `/tmp/dkc2b/ss.py` — decodes mGBA's zlib `gbAs` savestate chunk and reads IWRAM/EWRAM.
+- `/tmp/dkc2b/patchss.py` — patches savestate bytes (input buffer, length, cursor) for deterministic tests.
+- `/tmp/dkc2b/testcode.py` — submits a code through the real END key and reads the RAM flag.
+- `/tmp/dkc2b/diffstate.py` — diffs two savestates to locate RAM fields (buffer, cursor, flag).
 - Web: GameFAQs, RareGamer, CheatingDome, GGmania, CheatCC, gamezone.de, Bahamut — all nine literals verified in ROM.
 - No ROM or copyrighted assets are redistributed; only addresses, hashes, and our own tooling are published.

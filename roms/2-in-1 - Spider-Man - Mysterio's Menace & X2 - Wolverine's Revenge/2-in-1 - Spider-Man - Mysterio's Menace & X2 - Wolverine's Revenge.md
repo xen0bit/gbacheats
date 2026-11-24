@@ -1,5 +1,7 @@
 # 2-in-1 — Spider-Man: Mysterio's Menace & X2: Wolverine's Revenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -478,7 +480,7 @@ Rejection examples (format cannot express these):
 
 ## 9. Tooling
 
-All scripts are in `/tmp/opencode/spidermm/bin/` (not part of the repo):
+All scripts were in `/tmp/spidermm/bin/` (not part of the repo):
 
 | Script | Use |
 |---|---|
@@ -491,7 +493,7 @@ All scripts are in `/tmp/opencode/spidermm/bin/` (not part of the repo):
 | `keys.py` | xdotool key helper for `:115` |
 | `dbg_driver.py` | pty driver for mGBA’s `-d` command-line debugger |
 
-Screenshots are in `/tmp/opencode/spidermm/shots/`; the key ones are
+Screenshots were in `/tmp/spidermm/shots/`; the key ones are
 `00_boot_000.png` (shell), `05_x2_menu_g.png` (SELECT A SLOT),
 `26_hud2_g.png` (100-lives HUD `x99`), `10_act3_g.png` (reachable in-level act
 select), `41_sm_pw_g.png` (Spider-Man status panel), `85_save_g.png`

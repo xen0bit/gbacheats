@@ -1,5 +1,7 @@
 # Metroid Fusion (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -155,4 +157,4 @@ This is a **gated hidden menu**, not a password system, so §0.2's "mint a novel
 
 **Legal:** no ROM or copyrighted assets are redistributed; only hashes, addresses, algorithms, and original tooling are published.
 
-**Cleanup:** all generated artifacts live in `/tmp/opencode/metroidfusion` (work copy `mf.gba`, patched copies, `.cheats`, scripts, screenshots, `mf.sav`, `mf.ss1`). No `.sav`/`.ss*` was written into the ROM folder. All processes started for this job (Xvfb `:318` PID 1221297, openbox PID 1221311, mGBA PIDs recorded in `mgba.pid` plus GDB PIDs in `gdb.pid`) were/are owned by this job only and were terminated by numeric PID; no `pkill` was used and no other display or agent's process was touched.
+**Cleanup:** all generated artifacts were kept in `/tmp/metroidfusion` (work copy `mf.gba`, patched copies, `.cheats`, scripts, screenshots, `mf.sav`, `mf.ss1`). No `.sav`/`.ss*` was written into the ROM folder. All processes started for this job (Xvfb `:318` PID 1221297, openbox PID 1221311, mGBA PIDs recorded in `mgba.pid` plus GDB PIDs in `gdb.pid`) were/are owned by this job only and were terminated by numeric PID; no `pkill` was used and no other display or agent's process was touched.

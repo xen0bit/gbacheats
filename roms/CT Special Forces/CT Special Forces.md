@@ -1,5 +1,7 @@
 # CT Special Forces (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -367,7 +369,7 @@ therefore closed: **10,000 inputs, exactly 7 accepts**.
 * `enumerate.py` — reads the ROM table at `0x366FF4`, validates all 10,000
   inputs, prints the accepted set and the rejected probes.
 * mGBA 0.10.5 (SDL), Xvfb `:221`, openbox, scrot, ImageMagick.
-* Evidence screenshots (`/tmp/opencode/ctsf1/`): `code1407.png`,
+* Evidence screenshots (`/tmp/ctsf1/`): `code1407.png`,
   `code1407_map.png`, `code1407_game3.png`, `code1408_wrong.png`,
   `code1406_wrong.png`, `code9999.png`, `code0000.png`,
   `pw_0202_result.png` (the 2202 rejection), `map0202_full.png`,

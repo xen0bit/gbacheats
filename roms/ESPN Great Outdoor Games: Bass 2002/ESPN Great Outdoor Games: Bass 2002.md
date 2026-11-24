@@ -1,5 +1,7 @@
 # ESPN Great Outdoor Games: Bass 2002 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -173,7 +175,7 @@ checked. This is a **closed negative result**:
 
 * **Observed** (emulator, Xvfb :315, mGBA -3): every screen in §3/§6b;
   A+B+Select+Start soft reset; PAUSE overlay with no items; save-detected
-  prompt. Screenshots retained in `/tmp/opencode/espnbass/shot_*.png` /
+  prompt. Screenshots retained in `/tmp/espnbass/shot_*.png` /
   `crop_*.png` (not attached).
 * **Observed** (binary): hashes and header §1; single logo hit; SRAM dump
   with `BASSFISHING_2002` signature; 0 ASCII keyword hits; 143 decoded text
@@ -215,7 +217,7 @@ checked. This is a **closed negative result**:
   stub-free `-d` pty debugger was used for memory reads where needed.
 * `pdftotext` on the USA manual (image-only; 0 text lines) — not used as
   evidence.
-* Artifacts: `/tmp/opencode/espnbass/` (scripts `key.py`, `dbg.py`, `dbgd.py`,
+* Artifacts: `/tmp/espnbass/` (scripts `key.py`, `dbg.py`, `dbgd.py`,
   screenshots, logs).
 * Legal: no ROM bytes or copyrighted assets are redistributed here — only
   hashes, addresses, and the analysis method.

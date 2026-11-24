@@ -1,6 +1,8 @@
 # DemiKids: Light Version (GBA) — Reverse Engineering Report
 
-Target: `/mnt/gbacheats/roms/DemiKids: Light Version/DemiKids: Light Version.gba`
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
+Target: `roms/DemiKids: Light Version/DemiKids: Light Version.gba`
 Analyzed: 2026-11-14. Scope: in-game / developer-intended code surfaces
 (passwords, button codes, hidden menus, unlockables). No GameShark /
 CodeBreaker / memory-edit codes are published here.
@@ -83,7 +85,7 @@ block at `0x0827C8E8`–`0x0827CA2E` (`View Ally Status`, `Dismiss Ally`,
 ### 3.1 Emulator and keys
 
 ```
-cp "DemiKids: Light Version.gba" /tmp/opencode/demikidslight/game.gba
+cp "DemiKids: Light Version.gba" /tmp/demikidslight/game.gba
 Xvfb :300 -screen 0 1024x768x24 &
 DISPLAY=:300 openbox &
 SDL_AUDIODRIVER=dummy DISPLAY=:300 mgba -3 game.gba &
@@ -431,7 +433,7 @@ fields.
 
 ## 6c. Sibling SKU comparison (Light vs Dark)
 
-Verified against `/mnt/gbacheats/roms/DemiKids: Dark Version/DemiKids: Dark
+Verified against `roms/DemiKids: Dark Version/DemiKids: Dark
 Version.gba` (SHA-256 `5a6c050a34db8fe020b36fdca586a94a1eb60b8a4d82412658fc103a5be1c6f1`).
 
 | Aspect | Light | Dark | Same? |

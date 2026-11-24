@@ -1,5 +1,7 @@
 # F-Zero: GP Legend (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -119,4 +121,4 @@ if (screen == TITLE and pressed & KEY_R): enter_demo()   # observed
 
 ## 9. Tooling
 
-`md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, `python3` (Capstone 5.0.7), `arm-none-eabi-objdump` (`-M force-thumb`), `mgba` (SDL, `-g` for GDB stub), `gdb-multiarch`, `Xvfb :318`, `openbox`, `xdotool`, `scrot`/`import`, Pillow. Scripts in `/tmp/opencode/fzerogp/`: `ssread.py` (savestate `gbAs` decoder + RAM views), `sspatch.py` (EWRAM patcher for analysis only), `ramprobe.py` (button-probe + RAM diff), `scan_keys.py` / `findrefs.py` (KEYINPUT and literal scanners), `lzscan.py` (LZ77 sweep). No ROM or copyrighted assets are redistributed; only hashes, addresses, and observations are published.
+`md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, `python3` (Capstone 5.0.7), `arm-none-eabi-objdump` (`-M force-thumb`), `mgba` (SDL, `-g` for GDB stub), `gdb-multiarch`, `Xvfb :318`, `openbox`, `xdotool`, `scrot`/`import`, Pillow. Scripts in `/tmp/fzerogp/`: `ssread.py` (savestate `gbAs` decoder + RAM views), `sspatch.py` (EWRAM patcher for analysis only), `ramprobe.py` (button-probe + RAM diff), `scan_keys.py` / `findrefs.py` (KEYINPUT and literal scanners), `lzscan.py` (LZ77 sweep). No ROM or copyrighted assets are redistributed; only hashes, addresses, and observations are published.

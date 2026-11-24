@@ -108,7 +108,7 @@ Codes tested (all re-entered in the emulator):
 
 | Item | ROM address | File offset | Notes |
 |---|---:|---:|---|
-| State dispatch table (120 entries) | 0x082B2200 | 0x2B2200 | `state → entry|1`, 0x03002070 holds the state |
+| State dispatch table (120 entries) | 0x082B2200 | 0x2B2200 | `state → entry\|1`, 0x03002070 holds the state |
 | Password screen handler | 0x08007A88 | 0x7A88 | state 22 draw; helper memcpy at 0x0800769C |
 | Password validator | 0x08007B08 | 0x7B08 | state 59; compares 8 bytes at 0x03002010 |
 | INCORRECT screen | 0x08007CFC | 0x7CFC | state 23 |

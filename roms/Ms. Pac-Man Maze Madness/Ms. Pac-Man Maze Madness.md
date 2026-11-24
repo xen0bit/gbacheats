@@ -1,5 +1,7 @@
 # Ms. Pac-Man Maze Madness (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -76,7 +78,7 @@ and source counts.
 - RAM-observation method: mGBA `.ss1` savestates; the PNG `gbAs` chunk is inflated with
   `zlib.decompress`, giving a 397,312-byte state with IWRAM at state offset 0x19000 and
   EWRAM at 0x21000 (§16.13). Savestates were taken on every screen; `st_*.ss1` are kept in
-  `/tmp/opencode/mspacman/`. Plain F1 loads slot 1; copy a stored state over `game.ss1`
+  `/tmp/mspacman/`. Plain F1 loads slot 1; copy a stored state over `game.ss1`
   first to restore a chosen screen.
 - The screen-state RAM pair used as evidence is `(0x030001A0, 0x030002F4)` (see §4).
 
@@ -198,7 +200,7 @@ the recorded RAM state unchanged, which is the in-game rejection of every candid
 
 ## 7. Validation evidence
 
-- **Observed:** emulator screenshots (`s_*.png`, `cmb_*.png` in `/tmp/opencode/mspacman/`)
+- **Observed:** emulator screenshots (`s_*.png`, `cmb_*.png` in `/tmp/mspacman/`)
   for all 9 screens and all 12 button experiments; RAM state pairs from 9 `.ss1` states;
   single GBA header and stock entry word from the raw file; 512-byte `game.sav`.
 - **Derived:** pointer xrefs from the menu l10n tables to the ASCII UI strings (§4/§6b);
@@ -223,7 +225,7 @@ the recorded RAM state unchanged, which is the in-game rejection of every candid
 
 `mgba` 0.x SDL (`-3`), `Xvfb :315`, `openbox`, `xdotool`, `scrot`, ImageMagick `convert`,
 `arm-none-eabi-objdump -M force-thumb`, `strings -t x`, `xxd`, Python 3 + `zlib`/`struct`.
-Scripts kept in `/tmp/opencode/mspacman/`: `phase0.py` (header/logo scan), `gba.py`
+Scripts kept in `/tmp/mspacman/`: `phase0.py` (header/logo scan), `gba.py`
 (input/screenshot), `ssread.py` (gbAs state decoder and diff), `ptr.py` (pointer xref scan),
 `tbl.py` (localisation-table resolver), `btnsearch.py` (55 button-mask patterns),
 `findstate.py`/`unique.py` (RAM state mining), `combo.py` (runtime button experiments),

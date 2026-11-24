@@ -1,5 +1,7 @@
 # Spy Hunter (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -232,7 +234,7 @@ is impossible without changing the ROM.
 **Observed**
 * mGBA boots the image; screens walked: legal → Midway logo → attract/demo →
   `PRESS START` title → `AGENT` select (8 slots) → `ENTER NAME` keyboard →
-  gameplay. Screenshots kept in `/tmp/opencode/spyhunter1/`.
+  gameplay. Screenshots kept in `/tmp/spyhunter1/`.
 * `SUPERSPY` typed on the real keyboard: name displayed as `SUPERSPY` in slot 1
   and persisted in `game.sav`.
 * RAM after entry (GDB and savestate reads agree): `0x030007C0` bytes
@@ -282,7 +284,7 @@ was executed.
   (guide §16.13). `scan_calls2.py` — BL-to-`strcmp` xref listing.
   `scan_keycmp.py` — Thumb key-mask `cmp` cluster scan. `typer.py` /
   `enter_code.py` — keyboard navigation helpers. All in
-  `/tmp/opencode/spyhunter1/`.
+  `/tmp/spyhunter1/`.
 * No ROM, save, or copyrighted asset is redistributed; only addresses,
   algorithms and hashes are published.
 
@@ -290,5 +292,5 @@ was executed.
 
 All processes started for this engagement were terminated by PID number
 (Xvfb, openbox, mGBA); no `pkill`/`pkill -f` was used. No `.sav`, `.ss*` or
-other emulator artifacts were left in `/mnt/gbacheats/roms/Spy Hunter/` — the
+other emulator artifacts were left in `roms/Spy Hunter/` — the
 directory contains only `Spy Hunter.gba` and this report.

@@ -1,5 +1,7 @@
 # Batman: Vengeance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -73,7 +75,7 @@ Beyond the published list the same table contains ten special records:
   `MRCLVLRL` (all four cheat bits at once).
 
 All of those were entered through the real password screen and their effects
-were observed (screenshots in `/tmp/opencode/vengeance/evidence/`, section 9).
+were observed (screenshots in `/tmp/vengeance/evidence/`, section 9).
 Bounds are proven by
 in-game rejection of `FLYMODE` (a typeable table record deliberately routed to
 the invalid path) and of `ZZZZZZZ` (absent from the table), and by the fact that
@@ -510,12 +512,12 @@ string cannot match any record and is rejected.
   serialized state has IWRAM at `0x19000` and EWRAM at `0x21000`. A small
   parser was used to read `0x03000000`, `0x03000008`, `0x03003DCC`,
   `0x03004244` and the timer struct.
-* Decoder/validator reimplementation: `/tmp/opencode/vengeance/bv.py`
+* Decoder/validator reimplementation: `/tmp/vengeance/bv.py`
   (`python3 bv.py CODE` prints matching entry indices; `python3 bv.py` dumps
   all 53 records). It reproduces `GOTHAM→[0]`, `CATWOMAN→[10]`,
   `HOWDEYDO→[39]`, `FLYMODE→[41]`, `ZZZZZZZ→[]`.
 * Evidence kept outside the repository at
-  `/tmp/opencode/vengeance/evidence/`:
+  `/tmp/vengeance/evidence/`:
   `01_password_screen.png`, `02_gotham_level2.png`, `03_credits_code.png`,
   `04_nora_cinema.png`, `05_howdeydo_photo1.png`, `06_howdeydo_photo2.png`,
   `07_qpmtrl_team_photo.png`, `08_psclctt_timer_9_99.png`,

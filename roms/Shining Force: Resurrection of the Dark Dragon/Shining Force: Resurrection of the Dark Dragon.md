@@ -1,5 +1,7 @@
 # Shining Force: Resurrection of the Dark Dragon (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -43,7 +45,7 @@ Emulator: mGBA 0.10.5 (`/usr/local/bin/mgba`), headless on `DISPLAY=:317`, `SDL_
 1. Copy the ROM to a scratch file and write `0x0800B4CC` (little-endian `CC B4 00 08`) at file offset `0xB424`. That redirects the boot-time scene-11 request to the mode-2 (debug) creator.
 2. Boot the copy. The debug menu appears immediately at boot — no button input needed.
 3. In the menu: Up/Down move the 10-item cursor, Left/Right change the highlighted value, A activates.
-4. Screenshots of every entry are in `/tmp/opencode/shiningforce/entry1_v.png` … `entry9_v.png`, `menu_sceneselect_v.png`, `soundtest_v.png`, `scene2_afterA_v.png`.
+4. Screenshots of every entry were in `/tmp/shiningforce/entry1_v.png` … `entry9_v.png`, `menu_sceneselect_v.png`, `soundtest_v.png`, `scene2_afterA_v.png`.
 
 **Observed menu path → effect:** `SCENE SELECT` value 2 + A → warps into Guardiana field map (mode 3). `SOUND TEST` + A → `[SOUND TEST]` screen (mode 9). `MESSAGE TEST` + A → test dialogue from Varios (mode 1). `BATTLE VISUAL` + A → VISUAL VIEWER (mode 6). `BOOT PROCESS` + A → boot/debug info screen (mode 15).
 
@@ -183,7 +185,7 @@ Footer shown on the main debug screen: `A BUTTON : OK`, `SELECT + START : SOFT R
 - `arm-none-eabi-objdump -M force-thumb` for all disassembly listed in §4–§5.
 - mGBA 0.10.5 CLI debugger (`-d`) for breakpoints at `0x0800B3BC` / `0x0800B39C` and register reads; Xvfb `:317`, openbox, xdotool, scrot, ImageMagick for screens.
 - Python/zlib parser for mGBA `.ss1` `gbAs` chunks (raw state 397,312 B; IWRAM at `0x19000`, EWRAM at `0x21000`) — used for all RAM evidence and the savestate diff (§16.13).
-- Helper scripts: `/tmp/opencode/shiningforce/{walk.py,snap.py,ss.py,combos.py,enumrun.py,dbg_daemon*.py}`. Patch copies `sf_debugpatch.gba` (mode-2 entry) and `sf_rejectpatch.gba` (no-op entry) live in the work dir; neither was written to the ROM folder.
+- Helper scripts: `/tmp/shiningforce/{walk.py,snap.py,ss.py,combos.py,enumrun.py,dbg_daemon*.py}`. Patch copies `sf_debugpatch.gba` (mode-2 entry) and `sf_rejectpatch.gba` (no-op entry) live in the work dir; neither was written to the ROM folder.
 
 **Legal note:** no ROM, save, savestate or copyrighted asset is redistributed by this report. Only addresses, hashes, algorithms, and observations are published.
 

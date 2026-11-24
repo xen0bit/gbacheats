@@ -1,5 +1,7 @@
 # Classic NES Series: Pac-Man (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -478,15 +480,15 @@ and confirmed on the running cartridge:
 
 ## 9. Tooling
 
-* `/tmp/opencode/cnespacman/ss.py` — extract zlib `gbAs` chunk from `.ss1`.
-* `/tmp/opencode/cnespacman/scr.py` — NES nametable → ASCII (PPU nametable at
+* `/tmp/cnespacman/ss.py` — extract zlib `gbAs` chunk from `.ss1`.
+* `/tmp/cnespacman/scr.py` — NES nametable → ASCII (PPU nametable at
   EWRAM `0x6000`).
-* `/tmp/opencode/cnespacman/nes.py` — NES pattern-table ASCII renderer.
-* `/tmp/opencode/cnespacman/gba.py` — minimal GBA mode-0 BG/OBJ renderer
+* `/tmp/cnespacman/nes.py` — NES pattern-table ASCII renderer.
+* `/tmp/cnespacman/gba.py` — minimal GBA mode-0 BG/OBJ renderer
   (IO block `0x0400`, palette `0x0800`, OAM `0x0C00`, VRAM `0x1000`).
-* `/tmp/opencode/cnespacman/drive.py`, `menu.py` — xdotool driver +
+* `/tmp/cnespacman/drive.py`, `menu.py` — xdotool driver +
   savestate/RAM probes.
-* `/tmp/opencode/cnespacman/d6502.py` — py65 6502 disassembler wrapper.
+* `/tmp/cnespacman/d6502.py` — py65 6502 disassembler wrapper.
 * `da65` (cc65) for bulk 6502 listing; `arm-none-eabi-objdump -M force-thumb`
   for the wrapper.
 * Tools: mGBA 0.10.5, Xvfb/openbox/xdotool, Python 3 + py65, capstone.

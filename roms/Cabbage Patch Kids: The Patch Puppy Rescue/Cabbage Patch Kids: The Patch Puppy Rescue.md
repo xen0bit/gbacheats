@@ -1,5 +1,7 @@
 # Cabbage Patch Kids: The Patch Puppy Rescue (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -336,7 +338,7 @@ reachable page, and no button combination in the tested space selects it.
   screen/menu detection.
 * `arm-none-eabi-objdump -M force-thumb` for Thumb disassembly.
 * Python 3: literal scans, BL/pointer scans, savestate `gbAs` + zlib parsing and EWRAM
-  diffing, and a minimal GDB-RSP client (`/tmp/opencode/cabbage/rsp.py`) used only while
+  diffing, and a minimal GDB-RSP client (`/tmp/cabbage/rsp.py`) used only while
   the shared `:2345` port was free.
 * mGBA `-d` command-line debugger for key-register reads and breakpoints.
 

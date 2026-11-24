@@ -1,5 +1,7 @@
 # The Legend of Spyro: A New Beginning (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -48,7 +50,7 @@ are listed in §7.
 - Boot: health-and-safety screen → `x` → legal screen → `x` → Krome Studios →
   `x`×3 → title "Press Start" → `Return` → title menu.
 - Menu confirm is **A (`x`)**, not Start; A also advances cutscenes.
-- Screen walk (all reached, all screenshotted in `/tmp/opencode/spyrolegend/`):
+- Screen walk (all reached, all screenshotted in `/tmp/spyrolegend/`):
   title, title menu (2 items, then 3 items after a save), OPTIONS
   (Music/Sound/Display/Credits), LOAD GAME (3 slots), in-game gameplay,
   pause menu (CONTINUE/SAVE GAME/EXIT GAME), pause→L "OPTIONS" page
@@ -177,6 +179,6 @@ navigation set (22 sequences/combos), with zero acceptances.
 - mGBA 0.10.5 (`-3`, `-g`, `-d`), Xvfb `:316`, openbox, xdotool, scrot,
   ImageMagick. mGBA's CLI debugger (`-d`) supports `watch/w`, `bt`, `x/1|2|4`,
   `w/1|2|4`, `trace` and was used to confirm the save-shadow write path.
-- Work files/screenshots: `/tmp/opencode/spyrolegend/`.
+- Work files/screenshots: `/tmp/spyrolegend/`.
 - No ROM or copyrighted assets are redistributed here; only hashes, addresses
   and algorithms are published.

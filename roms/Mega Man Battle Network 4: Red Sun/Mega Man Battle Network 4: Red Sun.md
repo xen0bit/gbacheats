@@ -1,5 +1,7 @@
 # Mega Man Battle Network 4: Red Sun (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 > **SKIPPED / DEFERRED — entry systems found but not in-game confirmed (coordinator decision).**
 > Under §0.2 this report does **not** meet the dynamic-confirmation bar: a real system was
 > found (32-entry NumberMan/Number Trader lotto table, all 32 codes present literally in the
@@ -9,9 +11,9 @@
 > coordinator authorization, MMBN titles whose validator/code-entry surface is blocked by a
 > story gate are documented here and **skipped rather than retried or indexed**. The 32 codes
 > and the exact gate are recorded below for anyone continuing this work. This report is
-> intentionally absent from `INDEX.md`.
+> intentionally left out of the completed-reports table and listed under Skipped ROMs in the top-level `README.md`.
 
-Queue position 460. Analyst run on display `:315`, work dir `/tmp/opencode/mmbn4red`.
+Queue position 460. Analyst run on display `:315`, work dir `/tmp/mmbn4red`.
 
 ## 1. Target identity
 

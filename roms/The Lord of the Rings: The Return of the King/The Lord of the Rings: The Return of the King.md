@@ -1,5 +1,7 @@
 # The Lord of the Rings: The Return of the King (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 - **File**: `The Lord of the Rings: The Return of the King.gba`
 - **Size**: 16,777,216 bytes (0x01000000)
@@ -138,4 +140,4 @@ This is a **bounded negative** result. The "code space" for in-game cheats is em
 No ROM image, extracted graphics, music, or game text is redistributed. Only hashes, addresses, algorithms, and original analysis scripts are published.
 
 ## 11. Cleanup
-Emulator processes started by this analysis were stopped by PID; Xvfb :316 and openbox were stopped by PID. `.sav` and `.ss*` artifacts were removed from the ROM folder (working copies remain only in `/tmp/opencode/lotr rotk/`). No `pkill`/`pkill -f` was used.
+Emulator processes started by this analysis were stopped by PID; Xvfb :316 and openbox were stopped by PID. `.sav` and `.ss*` artifacts were removed from the ROM folder (working copies remain only in `/tmp/lotr rotk/`). No `pkill`/`pkill -f` was used.

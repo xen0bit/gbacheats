@@ -1,5 +1,7 @@
 # Masters of the Universe: He-Man – Power of Grayskull (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -263,7 +265,7 @@ selectable in normal play.
 * `mgba -g -3` under `Xvfb :319` + `openbox`; `xdotool` (XTEST keys);
   `scrot`/ImageMagick. `gdb-multiarch` attached with a persistent pty session;
   `interrupt` → `x/1xb` → `continue &` cycle for reliable RAM reads.
-* Analysis scripts in `/tmp/opencode/heman2/`: `phase0.py`, `scan_pw.py`,
+* Analysis scripts in `/tmp/heman2/`: `phase0.py`, `scan_pw.py`,
   `tables.py`, `pw_decode.py`, `emu.py`, `pwentry.py`, `ram.py`,
   `gdb_server.py`, `ss.py`.
 

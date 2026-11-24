@@ -1,10 +1,12 @@
 # Fire Pro Wrestling 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Fire Pro Wrestling 2/Fire Pro Wrestling 2.gba` |
+| File | `roms/Fire Pro Wrestling 2/Fire Pro Wrestling 2.gba` |
 | Size | 8,388,608 bytes (`0x800000`) |
 | Header title | `FP2 NA` |
 | Game code / maker | `AFYE` / `6L` (serial AGB-AFYE-USA, Rev.00) |
@@ -41,7 +43,7 @@ Other published "unlocks" (Manager of the Ring talent-search wrestlers, Ironman 
 trainer) are **save-bit unlocks**, not codes (§16.18), and are out of scope. All published GameShark/CodeBreaker
 entries are memory-edit codes and are out of scope.
 
-The sibling image *Fire Pro Wrestling* (`/mnt/gbacheats/roms/Fire Pro Wrestling/Fire Pro Wrestling.gba`,
+The sibling image *Fire Pro Wrestling* (`roms/Fire Pro Wrestling/Fire Pro Wrestling.gba`,
 title `FP US`, code `AFPE`, MD5 `aacbdc2916c5941607b0b2d6d68512ed`) is a **different ROM** (different code,
 different content, different hash). Nothing was found to be shared; this report is derived independently from
 the `AFYE` image.
@@ -203,7 +205,7 @@ in-match ring view. No hidden/debug menu was reachable from any of these (Start 
 
 `mgba` (SDL, `-3` and one-shot `-g` GDB stub), `Xvfb :319`, `openbox`, `xdotool`, `scrot`, ImageMagick
 (`convert`/`montage`), `arm-none-eabi-objdump` (`-M force-thumb` / `-M force-arm`), `gdb-multiarch`, Python 3 with
-`capstone`, `PIL`, plus small scripts in `/tmp/opencode/fpw2`:
+`capstone`, `PIL`, plus small scripts in `/tmp/fpw2`:
 
 - `type_names.py`, `enter_code.py`, `enter_code_on.py` — xdotool grid/name entry automation.
 - `patch_state.py` — mGBA `gbAs` zlib savestate decode/patch/repack (used to probe name buffers).

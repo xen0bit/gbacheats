@@ -1,5 +1,7 @@
 # Power Rangers: Time Force (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -80,7 +82,7 @@ it was not observed on any reachable screen; see §8.
 | 0x081A1D78 / 0x081A1D90 | `Valid Password` / `Invalid Password` strings |
 | 0x081A1DB0..0x081A1DF8 | six hidden debug-menu strings; pointer table at 0x081A1DF8 |
 | 0x0800D82C | password keypad input handler (digit = cursor - 34; auto-validate at length 4) |
-| 0x0800E33C | packs four digits into a 20-bit word (`digit[3]<<15 | ... | digit[0]`) |
+| 0x0800E33C | packs four digits into a 20-bit word (`digit[3]<<15 \| ... \| digit[0]`) |
 | 0x08002778 | **validator** (five parity checks + three range checks) |
 | 0x08002CAC / 0x08002C58 / 0x08002C88 | semantic range checks A / B / C |
 | 0x0800E2B0 / 0x0800E224 | "Invalid Password Entered" / "Valid Password Entered" display |
@@ -122,7 +124,7 @@ b[0] == 1                                   # implicit: validator returns packed
 
 Encoder: choose the four field values, place their scattered bits, then compute
 the five check bits from the equations above and emit four alphabet symbols.
-The offline implementation is in `/tmp/opencode/prtimeforce/mint.py`.
+The offline implementation was in `/tmp/prtimeforce/mint.py`.
 
 ## 6. Tables
 

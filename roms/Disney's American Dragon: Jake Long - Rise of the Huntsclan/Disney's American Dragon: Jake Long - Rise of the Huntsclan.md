@@ -1,5 +1,7 @@
 # Disney's American Dragon: Jake Long — Rise of the Huntsclan (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -366,7 +368,7 @@ field (1..15), i.e. 60 test cells per world row.
   `imagemagick`/`scrot` for captures.
 * `arm-none-eabi-objdump -M force-thumb` for all Thumb disassembly.
 * Python + Capstone for the immediate/mask and BL-target scans.
-* `/tmp/opencode/amdrag/cbdec.py` — CodeBreaker decryptor (ported from mGBA
+* `/tmp/amdrag/cbdec.py` — CodeBreaker decryptor (ported from mGBA
   `src/gba/cheats/codebreaker.c`) plus its inverse encoder; used to decode the
   published code and to build lab-only conditional writes.
 * Savestate reader: mGBA `.ssN` is a PNG with a zlib `gbAs` chunk; IWRAM is at

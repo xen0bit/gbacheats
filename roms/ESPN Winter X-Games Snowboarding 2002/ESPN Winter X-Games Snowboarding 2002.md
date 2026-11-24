@@ -1,5 +1,7 @@
 # ESPN Winter X-Games Snowboarding 2002 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -48,7 +50,7 @@ Per §0.2, with no code system the space is defined by the **29-entry scene disp
 6. Gameplay demo (scene 1) and several fade/transition scenes (2,3,4,5,7,8,9,11,13,14,15,17–22).
 
 ### Scene enumeration technique (Derived; reproducible)
-The main loop at `0x08000210` increments a frame counter at `0x0300B852` and dispatches through a 29-entry Thumb function-pointer table at `0x08196978`; the scene index is the word at **`0x030052BC`** (saved in the mGBA state header at `0x30` as the pointer to `0x030052B8`). I dumped the title-screen savestate (`gbAs` PNG chunk, zlib-decompressed to 397,312 bytes; IWRAM at state offset `0x19000`), patched the scene word at state offset `0x19000 + (0x030052BC - 0x03000000) = 0x1E2BC`, rebuilt the PNG with a corrected CRC (`patchstate.py`), and booted each `mgba -3 -t scene_N.ss1 game.gba`. This reached every handler 0–28; screenshots retained in `/tmp/opencode/espnxgames/scene_*.png`. This is RAM injection for analysis only — **not** an in-game code (§16.10).
+The main loop at `0x08000210` increments a frame counter at `0x0300B852` and dispatches through a 29-entry Thumb function-pointer table at `0x08196978`; the scene index is the word at **`0x030052BC`** (saved in the mGBA state header at `0x30` as the pointer to `0x030052B8`). I dumped the title-screen savestate (`gbAs` PNG chunk, zlib-decompressed to 397,312 bytes; IWRAM at state offset `0x19000`), patched the scene word at state offset `0x19000 + (0x030052BC - 0x03000000) = 0x1E2BC`, rebuilt the PNG with a corrected CRC (`patchstate.py`), and booted each `mgba -3 -t scene_N.ss1 game.gba`. This reached every handler 0–28; screenshots retained in `/tmp/espnxgames/scene_*.png`. This is RAM injection for analysis only — **not** an in-game code (§16.10).
 
 ### Codes tested
 No in-game code was found or published for the GBA SKU, so none could be entered. The following were checked and excluded:
@@ -135,7 +137,7 @@ if (held & 1) and ((held & 0x0E) == 0x0E):        ; A + B|Select|Start
 
 * `strings`, `xxd`, `grep`, `file`, `md5sum`/`sha1sum`/`sha256sum` — Phase 0/1.
 * `arm-none-eabi-objdump -M force-thumb` and Capstone 5.0.7 — disassembly and literal-pointer scans.
-* Python 3 scripts in `/tmp/opencode/espnxgames/`: `key.py` (XTEST input), `gomenu.py` (title detection via white-pixel band), `patchstate.py` (savestate `gbAs` patch + PNG CRC rebuild), `scenes.sh` (scene-index enumeration), plus `state_*.bin` RAM dumps.
+* Python 3 scripts in `/tmp/espnxgames/`: `key.py` (XTEST input), `gomenu.py` (title detection via white-pixel band), `patchstate.py` (savestate `gbAs` patch + PNG CRC rebuild), `scenes.sh` (scene-index enumeration), plus `state_*.bin` RAM dumps.
 * mGBA 0.10.5 under Xvfb `:318` with `SDL_AUDIODRIVER=dummy`; savestate format: PNG `gbAs` chunk zlib-decompressed to 397,312 bytes, IWRAM at `0x19000`, EWRAM at `0x21000` (§16.13).
 * Web: web.archive.org GameFAQs snapshot (confirmed empty cheats page), GameFAQs current cheats page (PS2/Xbox-only secrets), Cheat Happens, Ethereal Games (Action Replay index, no GBA codes), BizHawk GBA database (hash match), TCRF (no article for this GBA SKU).
 

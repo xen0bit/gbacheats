@@ -1,10 +1,12 @@
 # Gauntlet Dark Legacy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Gauntlet Dark Legacy/Gauntlet Dark Legacy.gba` |
+| File | `roms/Gauntlet Dark Legacy/Gauntlet Dark Legacy.gba` |
 | Size | 8,388,608 bytes (0x800000, 8 MiB) |
 | `file` identification | Game Boy Advance ROM image: "GAUNTLET_DL" (AYGE5D, Rev.00) |
 | Header title | `GAUNTLET_DL` (file 0xA0) |
@@ -94,7 +96,7 @@ Menu path:
    field on any of these screens. The verification performed was literal
    ROM search under 7 encodings (Section 4/6).
 
-Screenshots used as evidence are in `/tmp/opencode/gauntletdl/` (boot,
+Screenshots used as evidence were in `/tmp/gauntletdl/` (boot,
 title_a2b_crop, press_start, optL_sheet, opt2b_crop, audiosub2_crop,
 backmain_crop, s1_crop, opt_start_crop, loop_sheet, btn_sheet).
 
@@ -247,4 +249,4 @@ addresses, hashes, and findings.
   ImageMagick (`convert`, `montage`, `compare`), `gdb-multiarch` (GDB stub
   unusable: fixed port 2345 occupied by another session; `-C gdb.port=`
   unsupported in this build; savestate diffing used instead).
-* Working artifacts: `/tmp/opencode/gauntletdl/`.
+* Working artifacts: `/tmp/gauntletdl/`.

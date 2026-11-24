@@ -1,5 +1,7 @@
 # Barbie Software - Horse Adventures: Blue Ribbon Race (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-10-26.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
@@ -303,7 +305,7 @@ Allowed last-two-symbol spellings (model, five observed):
 ### 6.3 Test vectors
 
 | Code | Fields `f0..f12` | `V` | `lo` | `sum` | check | result |
-|---|---|---|---:|---:|---:|---:|---|
+|---|---|---|---:|---:|---:|---|
 | `BBBV8+SBB` | `0,0,0,0,0,0,0,0,0,7,7,7,7` | `0x3BBB80000` | `0xBBB80000` | `0x0C83BAFE` | `0x00` | accepted |
 | `BCBV8+SLB` | `0,0,1,0,0,0,0,0,0,7,7,7,7` | `0x3BBB80020` | `0xBBB80020` | `0x0C83BB00` | `0x08` | accepted |
 | `B6M-VQLBB` | `0,0,1,2,3,0,1,2,3,1,2,3,4` | `0x2190F2720` | `0x190F2720` | `0x01ABAD2B` | `0x00` | accepted |
@@ -355,7 +357,7 @@ accepted spellings** (`BB`/`BL`/`BV`/`B5` when the check is 0,
 
 These strings are in no published list. Each was typed through the normal
 password screen; the screenshots are in the analysis work directory
-(`/tmp/opencode/barbiehorse/`).
+(`/tmp/barbiehorse/`).
 
 | Code | State encoded | In-game proof |
 |---|---|---|
@@ -478,7 +480,7 @@ high bits.
 | mGBA CLI debugger (`mgba -d`) | Breakpoint at `0x080B48A4`, stack map and mask-table reads (GDB port 2345 was occupied by another session) |
 | Python 3 | Encoder/decoder reimplementation and test-vector generation |
 
-Analysis scripts (work directory `/tmp/opencode/barbiehorse/`):
+Analysis scripts (work directory `/tmp/barbiehorse/`):
 
 * `pw.py` — alphabet, pack/checksum/encode/decode/valid, state mapping.
 * `enter.py`, `verify_entry.py`, `typeonly.py` — deterministic password entry.

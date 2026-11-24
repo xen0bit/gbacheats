@@ -1,5 +1,7 @@
 # Disney's Herbie: Fully Loaded (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -410,7 +412,7 @@ strings (IDs 3,5) have no reachable item, and the observed menu ring is 4.
   debugger: header 0x0, VRAM 0x1000, IWRAM 0x19000, EWRAM 0x21000.
 * Python 3 + `capstone` for Thumb literal-pool xref scans; `arm-none-eabi-objdump
   -M force-thumb` for range disassembly.
-* Helper scripts (in `/tmp/opencode/herbie`): `key.py`/`h.py` (input + state
+* Helper scripts (in `/tmp/herbie`): `key.py`/`h.py` (input + state
   capture), inline scripts for string-table decode, record encode/decode, xref
   enumeration and mask scanning. Screenshots (`g_*.png`) were kept in that work
   directory during the engagement; each claim above is also stated in words plus a

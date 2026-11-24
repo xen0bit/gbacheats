@@ -1,5 +1,7 @@
 # Super Army War (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -56,8 +58,8 @@ all three tables but always resolves to Easy because the scan is easy-first).
   | Left | 4 | Right | 6 |
 
   The validator fires automatically on the 6th digit; no separate OK press is needed.
-* Repro helper scripts: `/tmp/opencode/superarmy/ui.py` (focus/key/screenshot),
-  `/tmp/opencode/superarmy/enter.py` (`python3 enter.py 684464`).
+* Repro helper scripts: `/tmp/superarmy/ui.py` (focus/key/screenshot),
+  `/tmp/superarmy/enter.py` (`python3 enter.py 684464`).
 * Savestates `F1`–`F9` save, `F1`–`F9` load; mGBA `.ssN` files are PNGs with a zlib `gbAs` chunk
   (raw 397,312 bytes; IWRAM at raw `0x19000`, EWRAM at `0x21000`). This was the RAM-reading method
   because the `-g` stub never bound a TCP port in this environment (see §9).

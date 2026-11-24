@@ -1,5 +1,7 @@
 # Gradius Galaxies (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -215,7 +217,7 @@ displayed it. Conclusion: dead/cut developer screen, not an unlockable.
 - Title, main menu, OPTION (NORMAL/HARD, Life, BUTTON Config, Rapid, Exit),
   PowerUpSelect, Stage 1 gameplay, PAUSE, RANKING, name entry, history/hint
   screens all reached; screenshots saved on disk (e.g.
-  `/tmp/opencode/gradius/s1.png`, `r_play.png`, `r_pause.png`,
+  `/tmp/gradius/s1.png`, `r_play.png`, `r_pause.png`,
   `m_option2.png`, `code_*.png`).
 - Gate RAM: `0x03004D56` 0x0100 (playing) → 0x0001 after Start; history index
   0 → 1; after code entry index 1 → 0xB and history ring reads

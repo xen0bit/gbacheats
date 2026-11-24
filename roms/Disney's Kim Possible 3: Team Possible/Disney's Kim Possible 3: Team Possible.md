@@ -1,5 +1,7 @@
 # Disney's Kim Possible 3: Team Possible (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -126,7 +128,7 @@ not scroll, so their item counts are complete.
 
 mGBA `.ssN` files are PNGs with a zlib-compressed `gbAs` chunk. For this 8 MiB image the
 state is 397,312 bytes; **IWRAM at 0x19000, EWRAM at 0x21000** after decompression
-(`/tmp/opencode/kp3/state.py`). All RAM claims below were read this way. The same parser
+(`/tmp/kp3/state.py`). All RAM claims below were read this way. The same parser
 can rebuild a state with patched bytes (`patchstate.py`), which was used only for
 exploration and is labelled as such.
 
@@ -446,7 +448,7 @@ menu/mode select do not scroll.
 * `arm-none-eabi-objdump -M force-thumb` and Python + `capstone` for literal-pool, BL and
   mask-run scans; `cbdec*.py` for the CodeBreaker experiment (inconclusive).
 * `textdec*.py` / linear decoder for the two-charset message bank; `keys.py` input helper;
-  `patchsav.py` for EEPROM exploration. Work directory `/tmp/opencode/kp3` (transient).
+  `patchsav.py` for EEPROM exploration. Work directory `/tmp/kp3` (transient).
 
 ## 10. Legal note
 

@@ -1,5 +1,7 @@
 # Tiger Woods PGA Tour Golf (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -29,7 +31,7 @@ Evidence for the negative is bounded and counted in §6b/§7: every screen in th
 
 ## 3. How to reproduce
 
-* Emulator: `mgba 0.10.5`, `DISPLAY=:316`, `SDL_AUDIODRIVER=dummy`, `Xvfb :316 -screen 0 1024x768x24`, `openbox --sm-disable`; `mgba -3 game.gba` (copy of the ROM in `/tmp/opencode/tigergolf`, so no emulator artifacts land in the ROM folder).
+* Emulator: `mgba 0.10.5`, `DISPLAY=:316`, `SDL_AUDIODRIVER=dummy`, `Xvfb :316 -screen 0 1024x768x24`, `openbox --sm-disable`; `mgba -3 game.gba` (copy of the ROM in `/tmp/tigergolf`, so no emulator artifacts land in the ROM folder).
 * Keymap (mGBA SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. **A (not Start) selects menu items**; B goes back. Hold keys ≥60 ms; wait ≥1 s after each transition (the menu renderer draws labels over 2–3 frames).
 * Savestates: `Shift+F1` saves, `F1` loads. States used: slot 1 = title, slot 2 = Select Player, slot 3 = Options, slot 4 = Main Menu.
 * Screen path walked:
@@ -117,7 +119,7 @@ All 23 literal references to these two words were inspected (see §7). They are 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for `0x080156A4`, `0x08015AF8`, `0x080D7xx–0x080E3xx`, `0x080B394`.
 * GDB remote (`gdb-multiarch`, `target remote localhost:2345`) for RAM reads of the key-state words; mGBA `-d`/`-g` were tried, `-g` used for the memory snapshot.
 * `.ss1` PNG/`gbAs` chunk decoded with Python `zlib` for the RAM diff (Lesson 16.13).
-* Xvfb `:316` + openbox + `xdotool` XTEST + `scrot`/ImageMagick for screen capture; helper `/tmp/opencode/tigergolf/k.py`.
+* Xvfb `:316` + openbox + `xdotool` XTEST + `scrot`/ImageMagick for screen capture; helper `/tmp/tigergolf/k.py`.
 
 ## 10. Legal note
 

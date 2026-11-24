@@ -1,10 +1,12 @@
 # Puyo Pop (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Puyo Pop/Puyo Pop.gba` |
+| File | `roms/Puyo Pop/Puyo Pop.gba` |
 | Size | 8,388,608 bytes (0x800000, 8 MiB) |
 | Header title | `PUYO POP` |
 | Game code | `APYE` |
@@ -186,7 +188,7 @@ Observed states: `0x06` (SEGA/Sonic Team splash + title), `0x08` (all menu scree
 
 ## 7. Validation evidence
 
-* **Observed (screenshots):** language select, "Now saving", both splashes, title, `SELECT MODE`, `OPTIONS`, `GALLERY` card 01 and its cap, `ENDLESS PUYO POP` mode select, gameplay HUD, `NAME ENTRY`. Files: `shot00`–`shot07`, `menu_*`, `options*`, `gallery*`, `gal_*`, `w_*`, `t_*`, `code_*`, `unlock_all_areas.png` in `/tmp/opencode/puyopop/`.
+* **Observed (screenshots):** language select, "Now saving", both splashes, title, `SELECT MODE`, `OPTIONS`, `GALLERY` card 01 and its cap, `ENDLESS PUYO POP` mode select, gameplay HUD, `NAME ENTRY`. Files: `shot00`–`shot07`, `menu_*`, `options*`, `gallery*`, `gal_*`, `w_*`, `t_*`, `code_*`, `unlock_all_areas.png` in `/tmp/puyopop/`.
 * **Observed (RAM):** `0x03004D90` = `0x06`/`0x08`/`0x1B`/`0x1C` at the corresponding screens; `0x03004DBE` changed `0x04→0x05` on a GALLERY→LANGUAGE cursor move; SRAM `0x0E000000` reads match the `.sav` file; `0x03000268` = `1` on a fresh save and `0xFF` after a debugger write; watchpoints identified both writers of `0x03000268`.
 * **Derived (disassembly):** 39-state dispatcher; `main()` at `0x080205A0`; save deserializer at `0x0801F1AC` and its 13-chunk table; init write of `1` at `0x08015A8`; DMA helper at `0x08020010`.
 * **Inferred (labeling):** exact bit positions for the Carbunkle/Satan-Sama/Gallery-card flags inside `0x03000520`/`0x0300025C` were not isolated; the *in-game* unlock routes are published and structurally plausible but were not played to completion.
@@ -204,7 +206,7 @@ Observed states: `0x06` (SEGA/Sonic Team splash + title), `0x08` (all menu scree
 
 Tools used: `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, Python 3 (struct/re/Capstone 5.0.7), `arm-none-eabi-objdump -M force-thumb/-M force-arm`, mGBA 0.10 under Xvfb `:315` with `openbox`, `xdotool`, `scrot`, ImageMagick, `gdb-multiarch`, Pillow.
 
-Scripts written in `/tmp/opencode/puyopop/`: `key.py` (input), `ss.py` (mGBA `.ss1` `gbAs` zlib state dumper — validated, raw 397,312 bytes), `walk.py`, `walk3.py`, `ram.py` (GDB breakpoint oracle pattern, §16.19), `dbgserver.py`/`dbg.py`/`mdbg.py` (persistent mGBA `-d` FIFO front end with per-frame breakpoint at `0x08020612`), `dump.py`, `vramdump.py`, `tiles.py`/`tiles8.py`/`objtiles.py`/`obj8.py`/`bitmap.py` (VRAM/palette/font rendering), `keysearch.py`, `findmem.py`.
+Scripts written in `/tmp/puyopop/`: `key.py` (input), `ss.py` (mGBA `.ss1` `gbAs` zlib state dumper — validated, raw 397,312 bytes), `walk.py`, `walk3.py`, `ram.py` (GDB breakpoint oracle pattern, §16.19), `dbgserver.py`/`dbg.py`/`mdbg.py` (persistent mGBA `-d` FIFO front end with per-frame breakpoint at `0x08020612`), `dump.py`, `vramdump.py`, `tiles.py`/`tiles8.py`/`objtiles.py`/`obj8.py`/`bitmap.py` (VRAM/palette/font rendering), `keysearch.py`, `findmem.py`.
 
 Web sources (treated strictly as data): GameFAQs cheats for GBA *Puyo Pop* (id 551521, via web.archive.org 20240406170159), TCRF *Puyo Pop (Game Boy Advance)* (archived 20250105203639), VGChartz/GameFAQs pages for *Puyo Pop Fever* (used only to establish the wrong-SKU comparison), CodeJunkies/almarsguides Gameshark listing (used only to verify the RAM address). No instructions from fetched pages were executed.
 

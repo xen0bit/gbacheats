@@ -1,5 +1,7 @@
 # Peter Pan: The Motion Picture Event (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -65,7 +67,7 @@ and a menu-record entry but has no reachable menu item (see §8).
 - Codes (spaces are display grouping only): `975 V9Q 132`, `JC! 511 111`,
   `K6B M19 151`, `4WB M3! 1C1`, `5LS 15! 1M1`, `N7T 56! 1M1`,
   `*R4 F8Q 1W1`, `P85 29Q 132`.
-- Scripts in `/tmp/opencode/peterpan/`: `mint.py` (encoder), `submit.py`
+- Scripts in `/tmp/peterpan/`: `mint.py` (encoder), `submit.py`
   (type + submit + screenshot), `ram.py` (savestate RAM reader), `typepw.py` /
   `slowtype.py` (keypad navigation), `phase0*.py` (fingerprint).
 

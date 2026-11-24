@@ -1,5 +1,7 @@
 # Ed, Edd n Eddy: Jawbreakers! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -205,7 +207,7 @@ This is the Level Select code with one extra `Right` appended. It was entered
 on a real title screen in mGBA; the main menu grew from two to three entries
 (`START GAME / OPTIONS / GAME CHEATS`), and GAME CHEATS launched a selected
 level. Evidence: `walk_menu_novel.png`, `lv_select.png`, `lv_started.png` in
-`/tmp/opencode/eennejaw/` (screenshots retained locally; no assets published).
+`/tmp/eennejaw/` (screenshots retained locally; no assets published).
 A second novel variant, the same code with two extra presses
 (`…, Right, Right`), was also accepted.
 
@@ -269,7 +271,7 @@ helper / crt0). No password screen, keypad alphabet, or debug menu exists.
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -iE`.
 * Python 3 + `capstone` 5.0.7 for Thumb/ARM disassembly and literal/BL scans;
   `arm-none-eabi-objdump -M force-thumb/-M force-arm` for spot checks.
-* Python helpers in `/tmp/opencode/eennejaw/`: `key.py` (XTEST key driver),
+* Python helpers in `/tmp/eennejaw/`: `key.py` (XTEST key driver),
   `enumerate2.py` (fresh-boot accept/reject harness), `menu_check.py`
   (red-text row-group detector for GAME CHEATS presence), `ssdiff.py`
   (mGBA `gbAs` savestate extractor/diff), `oracle.py`, `menu_walk.py`,

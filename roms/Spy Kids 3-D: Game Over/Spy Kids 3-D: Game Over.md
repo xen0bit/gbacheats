@@ -1,5 +1,7 @@
 # Spy Kids 3-D: Game Over (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -158,8 +160,8 @@ This proves the table is exact in all four positions and that there is no algori
 
 - `mgba` 0.10.5 (SDL, `-3`, headless under Xvfb `:318`, `SDL_AUDIODRIVER=dummy`); `xdotool` for input (50 ms taps to avoid key-repeat double-stepping), `scrot` for captures.
 - `arm-none-eabi-objdump -M force-thumb` for raw Thumb disassembly; Python + `struct` for pointer scans; Python `zlib` to extract the `gbAs` chunk from mGBA `.ss1` savestates for RAM diffs.
-- Helper scripts in `/tmp/opencode/spykids3d/`: `enter_code.py` (navigates the keypad from the index map), `verify_all.py`, `reject_tests.py`, `ptrscan.py`, `textscan.py`, `bankscan.py`.
-- Screenshots in `/tmp/opencode/spykids3d/` as named above. No copyrighted game assets are reproduced in this report.
+- Helper scripts in `/tmp/spykids3d/`: `enter_code.py` (navigates the keypad from the index map), `verify_all.py`, `reject_tests.py`, `ptrscan.py`, `textscan.py`, `bankscan.py`.
+- Screenshots in `/tmp/spykids3d/` as named above. No copyrighted game assets are reproduced in this report.
 
 ## 10. Legal note
 

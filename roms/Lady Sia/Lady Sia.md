@@ -1,5 +1,7 @@
 # Lady Sia (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -78,7 +80,7 @@ screen walk, the full text-bank census, and the literal/table scans (counts abov
   pause) contains Music / SFX / Tutorial / English (pause omits Tutorial). Credits
   auto-scroll and ignore B. After Quit → main menu, the menu is still exactly 3 items.
 * Savestates: `Shift+F1..F8` save; `F1..F8` load. States were copied out of the ROM
-  folder to `/tmp/opencode/ladysia/state_*.ss1` and decoded with `ssdecode.py`.
+  folder to `/tmp/ladysia/state_*.ss1` and decoded with `ssdecode.py`.
 * Published "codes" tested: the two unlockables cannot be entered as typed codes;
   their prerequisite UI (Perfect rating / save slots) was verified statically and
   their existence cross-checked against the two archived web lists. No typed-code
@@ -249,7 +251,7 @@ statically (Derived); the gameplay effect of individual moves is Inferred.
 * `mgba 0.10.5` (SDL), `Xvfb`, `openbox`, `xdotool`, `scrot`, ImageMagick `convert`.
 * `arm-none-eabi-objdump` (`-M force-thumb`, `--adjust-vma=0x08000000`), `capstone 5.0.7`.
 * REA MCP with Ghidra 12.1.4 (raw-binary ARM import @ `0x08000000`) for decompilation.
-* Local scripts in `/tmp/opencode/ladysia/`: `gba.py` (input/screenshot helper),
+* Local scripts in `/tmp/ladysia/`: `gba.py` (input/screenshot helper),
   `ssdecode.py` (mGBA `gbAs` zlib savestate decoder), `xref.py` (raw-pointer / Thumb-LDR
   scanner). Screenshots and `state_*.ss1` are kept in the same work dir.
 * Legal note: no ROM bytes or copyrighted assets are reproduced here; only addresses,

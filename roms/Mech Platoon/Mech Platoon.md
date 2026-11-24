@@ -1,10 +1,12 @@
 # Mech Platoon (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Mech Platoon/Mech Platoon.gba` |
+| File | `roms/Mech Platoon/Mech Platoon.gba` |
 | Size | 8,388,608 bytes (0x800000, 8 MiB) |
 | `file` | Game Boy Advance ROM image: "MECH PLATOON" (AKGE7F, Rev.00) |
 | Header title | `MECH PLATOON` |
@@ -115,7 +117,7 @@ non-password screen scores 0–501 / 0–51):
 | 16–25 | Prior pass: 4/6/14/30/45/60 A presses, savestate reloads, empty and populated SRAM, 15 detector loops | no screen |
 
 The detector and monitor scripts, all captures, and the calibrated scores are
-in `/tmp/opencode/mechplatoon2/` (`monitor.py`, `explore.py`, `*.png`, logs).
+in `/tmp/mechplatoon2/` (`monitor.py`, `explore.py`, `*.png`, logs).
 
 ## 4. Address map
 
@@ -293,7 +295,7 @@ empty/populated SRAM, and Konami/Start+A+B/ABABAB sequences.
 - `arm-none-eabi-objdump -M force-thumb/force-arm` for targeted disassembly.
 - mGBA SDL under Xvfb + openbox; `xdotool` XTEST input; `scrot`/ImageMagick
   screenshots; `Shift+F#`/`F#` savestates.
-- Custom scripts this pass in `/tmp/opencode/mechplatoon2/`: `g.py`
+- Custom scripts this pass in `/tmp/mechplatoon2/`: `g.py`
   (input/capture/GDB bridge), `monitor.py` (color detector + instant state
   save), `explore.py` (menu/button explorer), `patchss.py` (savestate word
   patcher), `scan.py` (Capstone literal/BL scans).

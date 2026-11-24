@@ -1,5 +1,7 @@
 # Rayman Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -33,7 +35,7 @@ Embedded GBA-header scan for the 156-byte Nintendo logo found **exactly one** he
 - **Example (published, 99 Lives):** `Left, Right, Down, Right, Left, R`.
 - **Novel (unpublished, All Items +25 tings):** `R, R, Up, Left, Right, Left, L` — the duplicate first press is deliberately ignored by the matcher.
 - **Rejected example:** `R, Up, Down, Left, Right, Left, L` (wrong third button) — no state change.
-- Screenshots saved as `shot01.png` … `shot41.png` in `/tmp/opencode/raymanadvance/`; key frames: `shot21` gameplay, `shot24`/`shot28` quit prompt, `shot31` choose-a-game, `shot33` world map, `cur8.png` HUD x99 after the 99-lives code.
+- Screenshots saved as `shot01.png` … `shot41.png` in `/tmp/raymanadvance/`; key frames: `shot21` gameplay, `shot24`/`shot28` quit prompt, `shot31` choose-a-game, `shot33` world map, `cur8.png` HUD x99 after the 99-lives code.
 
 ## 4. Address map
 

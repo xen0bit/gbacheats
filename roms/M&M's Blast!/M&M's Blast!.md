@@ -1,5 +1,7 @@
 # M&M's Blast! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -149,7 +151,7 @@ deliverable is a bounded negative (§0.2 item 5):
 
 **Novel-code requirement:** not applicable — there is no code system to mint a novel code for.
 This is a proven "No system" (§16.3 category 1), not an untested one. Screenshots of every
-screen are in `/tmp/opencode/mmblast/` (work-dir artifacts; not attached to this report).
+screen were in `/tmp/mmblast/` (work-dir artifacts; not attached to this report).
 
 ## 7. Validation evidence
 
@@ -187,8 +189,8 @@ screen are in `/tmp/opencode/mmblast/` (work-dir artifacts; not attached to this
 - mGBA SDL (`/usr/local/bin/mgba`) under Xvfb `:315` + openbox, `SDL_AUDIODRIVER=dummy`;
   `xdotool` XTEST key events; `scrot` + ImageMagick `convert` for 720×480 viewport crops;
   `tesseract` OCR for menu scanning.
-- `/tmp/opencode/mmblast/key.py` — input/keymap helper.
-- `/tmp/opencode/mmblast/ss.py` — mGBA `.ss1` PNG `gbAs` zlib chunk decoder for RAM diffs
+- `/tmp/mmblast/key.py` — input/keymap helper.
+- `/tmp/mmblast/ss.py` — mGBA `.ss1` PNG `gbAs` zlib chunk decoder for RAM diffs
   (state offsets: IWRAM `0x19000`, EWRAM `0x21000`, decoded length 397,312 bytes).
 - GDB stub (`mgba -g`) attempted but unreliable ("Cannot execute this command while the
   target is running" / hex-digit parse errors), so RAM evidence uses savestate diffs (§16.13).

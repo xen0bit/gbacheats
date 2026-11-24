@@ -1,5 +1,7 @@
 # Asteroids / Pong / Yars' Revenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
 Scope: **in-game / developer-intended cheats only** (passwords, button codes,
@@ -499,7 +501,7 @@ below is a statement about a measured space.
 | u8 runs over single-bit masks `{1,2,4,8,0x10,0x20,0x40,0x80}`, length ≥4 | 9 731 runs | only 4 run starts are LDR-literal targets (`0x166054`, `0x1705C8`, `0x1A3618`, `0x3E35F8`); all four are runs of ASCII space `0x20` |
 | u16 runs over masks `{1…0x200}`, length ≥4 | 1 168 runs | none loaded as a table by code |
 | Published sequence (A=1, B=2, both orders) as u8 and u16 | 4 encodings | **0 hits** |
-| Multi-button masks tested at a key read (`cmp/ands/tst`) | all 33 sites in 9 functions | only single bits plus `0x22` (Left|B) and `0x11` (Right|A), both documented game-type controls |
+| Multi-button masks tested at a key read (`cmp/ands/tst`) | all 33 sites in 9 functions | only single bits plus `0x22` (Left\|B) and `0x11` (Right\|A), both documented game-type controls |
 | `Select` / `L` / `R` bits | all code | **0 references** |
 | Boot-time gate | scene 0 (`0x0800AD18`) | no key read at all |
 
@@ -619,7 +621,7 @@ option system the cartridge has.
 * Ghidra 12.1.4 via REA (`open_binary` raw-binary, ARM, base `0x08000000`) for
   xrefs and pseudocode; all key claims were re-checked with objdump against the
   bytes.
-* Scripts written for this job (in `/tmp/opencode/asteroids`):
+* Scripts written for this job (in `/tmp/asteroids`):
   `an.py` (Thumb literal/BL scans), `k2.py` (input), `st.py` (savestate RAM
   read), `sx.py` (savestate rebuild/patch), `sweep.py` (48-scene/mode sweep).
 

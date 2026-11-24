@@ -1,5 +1,7 @@
 # Rugrats Go Wild (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -72,7 +74,7 @@ The prior report's conclusion ("validator not recovered") is therefore supersede
   dropped; a RAM-feedback typer (`type_code.py`) was used to set exact letter indices
   reliably (SLOT table below).
 
-Screenshots in `/tmp/opencode/rugratswild2/`:
+Screenshots in `/tmp/rugratswild2/`:
 `state1_press.png` (entry screen reached), `typed_HMJDT.png` (novel code on screen),
 `after_submit_x.png` (accepted → gameplay), `near_miss_entered.png`,
 `near_miss_result.png` (rejected, screen unchanged).
@@ -145,7 +147,7 @@ set. Any single-bit change to one of those positions is rejected.
 
 ### 5.3 Reimplementation
 
-`model.py` in `/tmp/opencode/rugratswild2/` implements `code_to_value`,
+`model.py` in `/tmp/rugratswild2/` implements `code_to_value`,
 `value_to_code`, and `validate` exactly as above.
 
 ## 6. Tables
@@ -251,7 +253,7 @@ Darwin, Debbie, Jumpin' Jungle, Nigel, Phil & Lil, Spike, Stroller, Swamp Stomp.
 * REA MCP / Ghidra 12.1.4 (raw ARM import at `0x08000000`) for string/xref inventory;
   its auto-analysis produced only 394 procedures on this image and was not relied on
   for the validator, which was recovered by manual Thumb disassembly.
-* Helper scripts in `/tmp/opencode/rugratswild2/`: `model.py` (offline validator),
+* Helper scripts in `/tmp/rugratswild2/`: `model.py` (offline validator),
   `gdbrsp.py`, `gdbbridge.py`/`bridge.py` (persistent one-connection GDB bridge),
   `nav.py`, `dump.py`, `type_code.py` (RAM-feedback password typer), `portshim.c`,
   plus the screenshot and RAM-dump artifacts listed above.

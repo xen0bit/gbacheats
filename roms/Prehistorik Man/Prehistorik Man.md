@@ -1,5 +1,7 @@
 # Prehistorik Man (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -43,7 +45,7 @@ A code absent from every published list — `BBH9?BSD6GDG` (stage 17 / level 18,
 
   Cursor starts at `L`. D-pad moves between cells; A appends the symbol; B deletes one symbol. The last row has only 4 columns, so move Up before moving horizontally when entering row 4. Enter 12 symbols, then press Start to submit.
 * Submitting a valid level code returns to gameplay at the decoded stage; invalid input leaves the password buffer and stage untouched.
-* Helper scripts used (all in `/tmp/opencode/prehistorik/`): `mg.py` (pty debugger harness), `pwlib2.py` (`open_pw`, `goto`, `typepw`, `buf`), `pwalg.py` (encoder/decoder/checksum), `runcodes.py` (type → submit → read RAM). Example: `python3 runcodes.py novel=BBH9?BSD6GDG`.
+* Helper scripts used (all in `/tmp/prehistorik/`): `mg.py` (pty debugger harness), `pwlib2.py` (`open_pw`, `goto`, `typepw`, `buf`), `pwalg.py` (encoder/decoder/checksum), `runcodes.py` (type → submit → read RAM). Example: `python3 runcodes.py novel=BBH9?BSD6GDG`.
 
 ## 4. Address map
 
@@ -198,6 +200,6 @@ For each accepted code the password copy at `0x03004DD0` changed from 0 to the e
 
 ## 9. Tooling
 
-All artifacts in `/tmp/opencode/prehistorik/`: `mg.py` (mGBA `-d` pty harness with key/shot/RAM helpers), `pwlib2.py` (on-screen keyboard driver), `pwalg.py` (encoder/decoder/checksum model), `runcodes.py`, `ss.py` (mGBA `.ss1` `gbAs` zlib decoder), plus investigation scripts and screenshots (`res_*.png`, `sc_*.png`). System tools: `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Python 3, mGBA 0.10.5, Xvfb, xdotool, scrot, ImageMagick. No ROM or copyrighted assets were modified or redistributed; generated `.sav`/`.ss1` files were deleted from the ROM folder and all own processes stopped by PID.
+All artifacts in `/tmp/prehistorik/`: `mg.py` (mGBA `-d` pty harness with key/shot/RAM helpers), `pwlib2.py` (on-screen keyboard driver), `pwalg.py` (encoder/decoder/checksum model), `runcodes.py`, `ss.py` (mGBA `.ss1` `gbAs` zlib decoder), plus investigation scripts and screenshots (`res_*.png`, `sc_*.png`). System tools: `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Python 3, mGBA 0.10.5, Xvfb, xdotool, scrot, ImageMagick. No ROM or copyrighted assets were modified or redistributed; generated `.sav`/`.ss1` files were deleted from the ROM folder and all own processes stopped by PID.
 
 **Legal note:** only addresses, algorithms, hashes and findings are published here; no ROM content or extracted assets are included.

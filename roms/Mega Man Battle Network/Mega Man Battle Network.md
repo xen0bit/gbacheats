@@ -1,5 +1,7 @@
 # Mega Man Battle Network (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -169,7 +171,7 @@ Button codes, had any existed, would be short arrays of active-high key masks co
 * `scan.py` — direct-word, Thumb-LDR-literal, and button-mask encodings scans (BN2/BN3 sequences, software reset).
 * `ssdiff.py` — parses mGBA `.ss1` PNG `gbAs` zlib chunk and diffs EWRAM/IWRAM/header for RAM evidence (guide §16.13).
 * `arm-none-eabi-objdump -M force-thumb` for the `0x8061530…0x80619C0` cluster and `0x80034A4` dispatcher.
-* `xdotool` driver `k.py` (80–150 ms holds); `scrot` + ImageMagick crops; screenshots retained under `/tmp/opencode/mmbn1/`.
+* `xdotool` driver `k.py` (80–150 ms holds); `scrot` + ImageMagick crops; screenshots retained under `/tmp/mmbn1/`.
 * Public font table: `RockmanEXEZone/MMBN-Table-Files` `done/bn1-utf8.tbl` (fetched as data and validated against TCRF offsets in this ROM).
 * Environment installed/used: system `binutils-arm-none-eabi`, `mgba`, `xvfb`, `openbox`, `xdotool`, `scrot`, `imagemagick`, Python 3 + `capstone`/`keystone` (already present; nothing non-obvious added).
 

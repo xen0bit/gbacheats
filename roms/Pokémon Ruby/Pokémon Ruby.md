@@ -1,5 +1,7 @@
 # Pokémon Ruby (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -22,7 +24,7 @@ A 156-byte Nintendo-logo scan over all 16 MiB found **one** header, at file `0x0
 unlike FireRed/Emerald, this ROM ships **no embedded multiboot stub headers**.
 No `GAMESHARK`, `CODEBREAKER`, `CRC BANDIT`, `TRAINER` or trainer-menu strings
 exist in the image. No `.sav`/`.ss*` was left in the ROM folder (all emulator
-work used a byte-identical copy in `/tmp/opencode/pokemonruby`).
+work used a byte-identical copy in `/tmp/pokemonruby`).
 
 Game text is **not ASCII**: Gen-3 charset (space=`0x00`, `A`–`Z`=`0xBB`–`0xD4`,
 `a`–`z`=`0xD5`–`0xEE`, `0`–`9`=`0xEF`–`0xF8`). `g3text.py` decoded **106,776**
@@ -76,7 +78,7 @@ L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Hold keys
 100–300 ms; `Ctrl+R` resets (Ruby's intro has **no** skip combo in
 `src/intro.c`, so allow ~45 s for the title screen).
 
-Menu walk (all observed; screenshots in `/tmp/opencode/pokemonruby/`):
+Menu walk (all observed; screenshots in `/tmp/pokemonruby/`):
 
 1. Boot → Game Freak intro → Pokémon logo → Birch scene → title
    (`s_titleB2_c.png`, `s_selonly_c.png` — "PRESS START" visible).
@@ -344,7 +346,7 @@ Python 3 stdlib, `capstone 5.0.7`, `arm-none-eabi-objdump -M force-thumb`,
 map), web pages (data only), mGBA 0.10.5 under `Xvfb :316` + `openbox`,
 `xdotool`, `scrot`, ImageMagick `convert -resize 1x1` colour-hash evidence.
 
-Scripts in `/tmp/opencode/pokemonruby/`: `phase0.py`/`logo2.py` (header + logo
+Scripts in `/tmp/pokemonruby/`: `phase0.py`/`logo2.py` (header + logo
 scan), `g3text.py` + `find_encoded.py` (Gen-3 text codec and encoded-literal
 search), `state.py` (PNG `gbAs` zlib chunk parser for RAM reads), `ui.sh`
 (input/capture helper). No ROM or copyrighted asset is redistributed; only

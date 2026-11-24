@@ -1,5 +1,7 @@
 # Tak: The Great Juju Challenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Analysis date: 2026-11-20. Method: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md) §0.2 (full enumeration), §16.3/§16.20 (four kinds of "no"; CodeBreaker activator is not an in-game trigger), §16.13 (savestate RAM reads). REA skill loaded; raw-GBA path used (objdump/Capstone + mGBA + savestate diff) because REA had no bound native target.
 
 Scope: **in-game / developer-intended cheats only.** No GameShark/CodeBreaker/AR code was applied to the game, published, or counted as a cheat; a CB-style *RAM write* was used only as a research tool to open the developer menu, exactly as §16.20 prescribes.
@@ -43,7 +45,7 @@ The debug screen-index space is a single byte. Exact menu tables were decoded fr
 Xvfb :316 -screen 0 1024x768x24 &  DISPLAY=:316 openbox &
 DISPLAY=:316 SDL_AUDIODRIVER=dummy mgba -3 "<rom>.gba" &
 ```
-mGBA 0.10.5; default SDL map A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Keys held 60–90 ms (longer double-steps menus, §16.2). Screenshots via `scrot` on `:316`; all captured frames are in `/tmp/opencode/takjuju3/`.
+mGBA 0.10.5; default SDL map A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows. Keys held 60–90 ms (longer double-steps menus, §16.2). Screenshots via `scrot` on `:316`; all captured frames were in `/tmp/takjuju3/`.
 
 mGBA's GDB stub could not be used: port 2345 was held by another agent's emulator. RAM reads/writes therefore used **savestate patching** (§16.13): a `.ss1` is a PNG whose `gbAs` chunk is zlib-compressed; `zlib.decompress` gives a 397,312-byte state whose IWRAM image begins at raw offset `0x19000`, so GFA `0x0300175C` is raw byte `0x1A75C`. `patchstate.py` rewrites that byte, recompresses, and rebuilds the PNG chunk with a fresh CRC. `F1` reloads slot 1, so each experiment is one keypress. (The CLI `-d` debugger was also used for breakpoints; it only accepts commands while halted.)
 
@@ -172,8 +174,8 @@ Selection semantics: 14-slot wrap on root; FX clamps at entry 108 after 120 Down
 
 * `mgba` 0.10.5 (`-3`, `-d`, `-g`), Xvfb `:316`, openbox, `xdotool` XTEST, `scrot`, ImageMagick `convert`/`montage`.
 * `arm-none-eabi-objdump -M force-thumb` / raw ARM, Capstone (Thumb LDR-literal and BL target scanners), `strings -t x`, Python 3 `struct`/`zlib`.
-* Local helper scripts in `/tmp/opencode/takjuju3/`: `patchstate.py` (savestate IWRAM patcher), `readstate.sh`, `enum_screens.sh`, `seqtest.sh`, `ptyctl.py`/`gpty.py` (PTY controllers for mGBA `-d` and gdb), `keylib.sh`.
-* All screenshots live in `/tmp/opencode/takjuju3/`; no ROM, graphics, or audio were extracted or redistributed.
+* Local helper scripts in `/tmp/takjuju3/`: `patchstate.py` (savestate IWRAM patcher), `readstate.sh`, `enum_screens.sh`, `seqtest.sh`, `ptyctl.py`/`gpty.py` (PTY controllers for mGBA `-d` and gdb), `keylib.sh`.
+* All screenshots were kept in `/tmp/takjuju3/`; no ROM, graphics, or audio were extracted or redistributed.
 
 ---
 

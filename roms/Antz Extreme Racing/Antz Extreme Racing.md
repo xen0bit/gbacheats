@@ -1,5 +1,7 @@
 # Antz Extreme Racing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -99,7 +101,7 @@ Exact menu path:
    `Up` to `4 SEASONS` → `x` → `CONTINUE` → `x` → `NEXT RACE`/`GARAGE`.
 
 Screens walked (screenshots taken during the session; filenames in
-`/tmp/opencode/antz/`): boot/legal, title, main menu, password entry,
+`/tmp/antz/`): boot/legal, title, main menu, password entry,
 published-code contents, novel-code contents, invalid-password screen,
 developer photo, `4 SEASONS` (CONTINUE/NEW GAME), `NEXT RACE`/`GARAGE`,
 `QUICK RACE` vehicle select, character switch (Z/BALA stats), Head-to-Head
@@ -432,7 +434,7 @@ Opened Levels 12 — an in-game proof of the published-list error.
 * Python 3 + `unicorn` 2.1.4: created a ROM/RAM harness and executed
   `0x08326004`, `0x083257FC`, `0x08325ACC`, `0x08326F34`, `0x08326FAC`
   directly from the ROM (no reimplementation guesswork for the bit layer).
-* Scripts used (in `/tmp/opencode/antz/`):
+* Scripts used (in `/tmp/antz/`):
   `emu.py` (Unicorn harness), `val.py`/`val2.py` (validator probes),
   `trace.py` (pipeline/field tracing), `model.py`/`affine9.json` (affine
   basis extraction), `vmodel9.py` (full Python validator, 0 mismatches),

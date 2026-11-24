@@ -1,5 +1,7 @@
 # Riviera: The Promised Land (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -51,7 +53,7 @@ The 81 stage-select entries include **undocumented content absent from TCRF/Game
 5. Navigate the selector with **Left/Right** (Up/Down do nothing here). The selected index is readable at `0x02006068` (`r/2`), the sub-state at `0x02006051`.
 6. Press **A** to launch the selected stage/chapter; observe the write of the index to `0x0200B320` (set `watch/w 0x0200B320` before pressing A).
 
-Screenshots are kept in `/tmp/opencode/riviera/` (`stage3c.png` = menu entry, `ss1c.png` = `1 CHAPTER1`, `act80c.png` = novel index 80 gameplay, `extra2c.png` = Extra Contents, `oor81c.png` = out-of-range label, `oor81actc.png` = corrupted launch).
+Screenshots are kept in `/tmp/riviera/` (`stage3c.png` = menu entry, `ss1c.png` = `1 CHAPTER1`, `act80c.png` = novel index 80 gameplay, `extra2c.png` = Extra Contents, `oor81c.png` = out-of-range label, `oor81actc.png` = corrupted launch).
 
 ## 4. Address map
 

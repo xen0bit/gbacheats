@@ -1,5 +1,7 @@
 # Bratz: Forever Diamondz (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -108,7 +110,7 @@ Boot and reach the street reproducibly:
 6. After `Save Game`, quit to the title: the title gains `Load Game`
    (`New Game`, `Load Game`, `Mini Games`, `Level Select`, `Credits`).
 
-Menu paths exercised (screenshots retained in `/tmp/opencode/bratzforever`,
+Menu paths exercised (screenshots retained in `/tmp/bratzforever`,
 prefix `c_`):
 
 | Screen | Path | Observed |
@@ -295,7 +297,7 @@ The only 26-byte ascending run in the image (`0x079F2C9`) is part of the
 ### Menu enumeration
 
 All non-story-gated menu surfaces were walked (screenshots in
-`/tmp/opencode/bratzforever`):
+`/tmp/bratzforever`):
 
 1. Title, fresh: 4 items.
 2. Title, after save: 5 items (Load Game added).
@@ -418,7 +420,7 @@ bounded negative above, which is the correct result for this SKU.
 * mGBA 0.10.5 (`mgba-sdl`), Xvfb `:205`, openbox, xdotool, scrot,
   ImageMagick (`convert`, `montage`).
 * `arm-none-eabi-objdump` with `-M force-thumb` for the input/text routines.
-* Python 3 scripts in `/tmp/opencode/bratzforever`:
+* Python 3 scripts in `/tmp/bratzforever`:
   * header/hash/logo/checksum check;
   * `strings` census and UTF-16LE text-bank extractor;
   * GBA LZ77 block scanner/decompressor;

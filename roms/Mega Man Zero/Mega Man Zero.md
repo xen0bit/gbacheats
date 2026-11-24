@@ -1,5 +1,7 @@
 # Mega Man Zero (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -34,7 +36,7 @@ The negative result is bounded: the full byte-encoded text bank was decoded (not
 - Emulator: mGBA (SDL), `/usr/local/bin/mgba -3 <rom>`, `DISPLAY=:318`, `SDL_AUDIODRIVER=dummy`, own Xvfb + openbox on `:318`.
 - Keymap (mGBA SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrows.
 - Savestates: `Shift+F1` writes `Mega Man Zero.ss1` next to the ROM; `mmzero1/ss.py` decompresses the `gbAs` PNG chunk (state length 397,312 bytes; EWRAM at state `0x21000`, IWRAM at `0x19000`, per guide §16.13).
-- Screen path walked (all with screenshots and/or savestates in `/tmp/opencode/mmzero1/`):
+- Screen path walked (all with screenshots and/or savestates in `/tmp/mmzero1/`):
   1. Inti Creates splash → `PRESS START` title (`shot00`, `shot01`, `w01_title.ss1`).
   2. `Start` → title menu, **only `NEW GAME`** when no save exists (`w02_menu`, `menu_base.ss1`). Down/Up do not reveal further entries.
   3. `A` on NEW GAME → lengthy scripted intro (multiple dialogue screens; `shot05`–`shot12`, `w03`–`w12`).

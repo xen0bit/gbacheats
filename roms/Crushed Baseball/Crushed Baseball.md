@@ -1,5 +1,7 @@
 # Crushed Baseball (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-11-11.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
@@ -430,7 +432,7 @@ not an untested case.
 ## 9. Tooling
 
 * mGBA 0.10.5 (SDL) under Xvfb `:273`; savestate parser
-  (`zlib` + `gbAs` chunk) in `/tmp/opencode/crushedbaseball/state.py`.
+  (`zlib` + `gbAs` chunk) in `/tmp/crushedbaseball/state.py`.
 * `arm-none-eabi-objdump -M force-thumb` for the keypad reader and literal
   pools.
 * Capstone 5.0.7 for Thumb literal/key-mask scans.

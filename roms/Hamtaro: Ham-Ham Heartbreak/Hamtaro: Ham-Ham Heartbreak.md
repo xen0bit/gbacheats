@@ -37,7 +37,7 @@ Per guide §16.18 the song/ending unlocks are save-bit flags, not codes: they ca
 Xvfb :318 -screen 0 1024x768x24 &
 DISPLAY=:318 openbox &
 export DISPLAY=:318 SDL_AUDIODRIVER=dummy
-ROM="/mnt/gbacheats/roms/Hamtaro: Ham-Ham Heartbreak/Hamtaro: Ham-Ham Heartbreak.gba"
+ROM="roms/Hamtaro: Ham-Ham Heartbreak/Hamtaro: Ham-Ham Heartbreak.gba"
 mgba -3 "$ROM" &
 W=$(xdotool search --name mGBA | tail -1); xdotool windowfocus "$W"
 # IMPORTANT: capture with `import -window "$W" out.png`.

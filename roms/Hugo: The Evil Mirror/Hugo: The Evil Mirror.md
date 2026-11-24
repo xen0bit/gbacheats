@@ -1,5 +1,7 @@
 # Hugo: The Evil Mirror (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -184,7 +186,7 @@ was present in all five. Zero code references to `0x03006C00` exist in the ROM.
 
 - **Observed** — boot, language, difficulty, tutorials, gameplay, PAUSE, time-out
   prompt, GAME OVER, HIGH SCORE, main menu and its four children, LOAD GAME slots,
-  CREDITS: screenshots in `/tmp/opencode/hugo/` (`c*.png`, `s*.png`, `m*.png`,
+  CREDITS: screenshots in `/tmp/hugo/` (`c*.png`, `s*.png`, `m*.png`,
   `menu_*.png`, `cb_*.png`, `rs_*.png`, `bd_*.png`).
 - **Observed** — A+B+Select+Start reboots to the Nintendo logo; A+B+Start does not.
 - **Observed** — input table `0x03003A48` changes from all-zero to `[7]=1` with pressed
@@ -213,7 +215,7 @@ was present in all five. Zero code references to `0x03006C00` exist in the ROM.
 literal, BL and alphabet scans; REA/Ghidra 12.1.4 raw ARM import at `0x08000000` for
 decompilation of `0x080101CC`; mGBA SDL 0.3 under Xvfb :319; `xdotool` XTEST input;
 `scrot`+ImageMagick screenshots; mGBA `-g` GDB stub (single-connection) and
-`gbAs`-chunk zlib savestate parser (`/tmp/opencode/hugo/ss.py`) for RAM evidence.
+`gbAs`-chunk zlib savestate parser (`/tmp/hugo/ss.py`) for RAM evidence.
 No game assets or ROM bytes are redistributed in this report.
 
 **Legal note:** analysis only; no ROM, graphics, audio or text assets are published here.

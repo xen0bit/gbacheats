@@ -1,5 +1,7 @@
 # Reign of Fire (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -141,4 +143,4 @@ All vowels (A E I O U) are omitted. The next grid cells (32=`-`, 33+, red) are c
 
 ## 9. Tooling
 
-All artifacts in `/tmp/opencode/reignoffire/`: `phase0.py` (hash/header/logo scan), `scanptr.py`/`scanbl.py` (literal/BL scans), `inp.py` (XTEST key driver), `dbg_daemon.py`/`dc.py`/`db.py` (mGBA `-d` debugger over PTY + Unix socket), `bytediff.py`/`findbuf.py` (RAM diffs/ searches), `decoder.py`/`encoder.py` (reimplementation and generator), plus screenshots named in the text. Tools: `arm-none-eabi-objdump -M force-thumb`, mGBA 0.10.5 `-d` debugger, `xdotool`, `scrot`, `convert`, Python 3. No ROM or copyrighted assets are redistributed here — only addresses, hashes, and algorithms.
+All artifacts in `/tmp/reignoffire/`: `phase0.py` (hash/header/logo scan), `scanptr.py`/`scanbl.py` (literal/BL scans), `inp.py` (XTEST key driver), `dbg_daemon.py`/`dc.py`/`db.py` (mGBA `-d` debugger over PTY + Unix socket), `bytediff.py`/`findbuf.py` (RAM diffs/ searches), `decoder.py`/`encoder.py` (reimplementation and generator), plus screenshots named in the text. Tools: `arm-none-eabi-objdump -M force-thumb`, mGBA 0.10.5 `-d` debugger, `xdotool`, `scrot`, `convert`, Python 3. No ROM or copyrighted assets are redistributed here — only addresses, hashes, and algorithms.

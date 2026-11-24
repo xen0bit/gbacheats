@@ -1,5 +1,7 @@
 # Capcom Classics Mini-Mix (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -199,7 +201,7 @@ GBA shell can. Static 6502 analysis is valid.
 | `$B2CD`–`$B2F8` | bank 1 | checksum / field checks |
 | `$B317` | bank 1 | accept path (`JSR $C037`, `JSR $C046`, `JSR $9957`, `JMP $AC59`) |
 | `$B32D` | bank 1 | reject path (`PASSWORD WRONG`, return to `$B16E`) |
-| `$B343` | bank 1 `0x3343` | build byte `b = (conv($0202[Y]) << 4) | conv($0202[Y+1])` |
+| `$B343` | bank 1 `0x3343` | build byte `b = (conv($0202[Y]) << 4) \| conv($0202[Y+1])` |
 
 ### GBA RAM used by the NES emulator
 
@@ -576,7 +578,7 @@ an editor input-path/timing artifact.
   the validator. Used to test every code against the ROM's own validator.
 * `pw.py` / `daemon_gen.py`: mGBA pty daemon and debugger command helper.
 
-Generated files were kept in `/tmp/opencode/capcommix`, not in the ROM
+Generated files were kept in `/tmp/capcommix`, not in the ROM
 folder.
 
 ## 10. Legal note

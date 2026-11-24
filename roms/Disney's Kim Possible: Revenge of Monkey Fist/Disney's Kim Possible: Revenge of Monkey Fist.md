@@ -1,5 +1,7 @@
 # Disney's Kim Possible: Revenge of Monkey Fist (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -268,7 +270,7 @@ space is 8 × 8 × 8 × 256 = 131,072 states, each writable by exactly two strin
 | 4 | `7 7 7 7 7 3 3` | A=7,B=7,C=7,E=255 | `CORRECT`; world map `Draken's Lair`; pause MOVIES lists `MOVIE 1..5`; pause HUD continue counter shows 8; PICTURES opens from picture 1 |
 | 5 | `0 0 0 4 4 4 4` | same as #1 | `CORRECT`; proves the unused slot-7 bit 2 (alias) |
 
-Screenshots kept in `/tmp/opencode/kp1`: `t1.png` (#1 `CORRECT`), `t2.png` (#1 map),
+Screenshots kept in `/tmp/kp1`: `t1.png` (#1 `CORRECT`), `t2.png` (#1 map),
 `u2.png`/`u4.png`/`u5.png` (#2 `CORRECT` and pictures 1–2), `e2p1.png`/`e2p2.png`
 (#3 locked/open), `full_res.png`/`full_map.png`/`full_movies.png` (#4),
 `alias_res.png` (#5), `s14.png`/`s16.png` (published Level 2 rejected),
@@ -341,7 +343,7 @@ Screenshots kept in `/tmp/opencode/kp1`: `t1.png` (#1 `CORRECT`), `t2.png` (#1 m
 * `arm-none-eabi-objdump -M force-thumb`, Python 3 + `capstone`.
 * mGBA savestates parsed as PNG with a zlib `gbAs` chunk (EWRAM at `0x21000` of the
   raw 397,312-byte state) to diff RAM without a debugger.
-* Scripts in `/tmp/opencode/kp1`: `kp.py` (decoder/encoder), `enumerate.py`
+* Scripts in `/tmp/kp1`: `kp.py` (decoder/encoder), `enumerate.py`
   (full 8^7 sweep), `run_code2.py`/`batchA.py`/`batchC.py` (input harness),
   `drv.py` (debugger driver), `phase0.py` (header).
 

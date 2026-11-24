@@ -1,5 +1,7 @@
 # Planet Monsters (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -169,7 +171,7 @@ in published lists are unreliable; the ROM index is authoritative (cf. guide §1
   NEW GAME/PASSWORD submenu, password keyboard, world map, READY/gameplay, pause
   (`QUITTER? / OUI / NON`), OPTIONS (`EASY`, `MAX TIME`, `SOUND`, `CREDITS`), SOUND
   submenu (`MUSIC`, `MUSIC TEST`, `SFX`, `SFX TEST`), scrolling credits, MULTI player
-  setup (`P1..P4`, `CPU 00..`). Screenshots kept in `/tmp/opencode/planetmonsters/`.
+  setup (`P1..P4`, `CPU 00..`). Screenshots kept in `/tmp/planetmonsters/`.
 - Keyboard grid characters recovered by reading the EWRAM preview byte after each arrow
   press (not inferred from the stylized font).
 - `x5dn`, `fr63`, `m63b` accepted; `1111`, `zzzz` rejected; buffer/state bytes read from
@@ -214,7 +216,7 @@ in published lists are unreliable; the ROM index is authoritative (cf. guide §1
 
 - `arm-none-eabi-objdump -M force-thumb` (raw GBA disassembly), Capstone 5.0.7 and custom
   Python pointer/LDR scanners.
-- Python 3 scripts in `/tmp/opencode/planetmonsters/`: `ss.py` (zlib `gbAs` savestate
+- Python 3 scripts in `/tmp/planetmonsters/`: `ss.py` (zlib `gbAs` savestate
   decoder + diff), `enter.py` / `enter2.py` (on-screen keyboard driver verified against
   EWRAM), `srv.py` (pexpect driver for mGBA `-d`).
 - mGBA `-d` command-line debugger (`r/1`, `watch/r`, `watch/w`) and savestate diffs;

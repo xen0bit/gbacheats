@@ -304,7 +304,7 @@ windows and found consistent with random chance, not a table.
 | u16 decimal LE and BE; u32 LE/BE | full ROM | isolated hits only; best 256-byte cluster 4 codes |
 | UTF-16LE/BE, UTF-32 | full ROM | no table |
 | Digit + constant offset 0–255 (add/xor/sub) | full ROM | no contiguous table; best isolated score 16/22 at offset 0 |
-| Nibble-packed `(dial<<4)|digit` and `(digit<<4)|dial`, bases 0/1, all orders | full ROM | zero hits for all 24 unlock-recipe variants |
+| Nibble-packed `(dial<<4)\|digit` and `(digit<<4)\|dial`, bases 0/1, all orders | full ROM | zero hits for all 24 unlock-recipe variants |
 | Unlock recipes as 1/2/4-byte values, LE/BE, bases 0/1 | full ROM | zero hits |
 | Consecutive tile-index range `[B,B+9]` (numpy, 1.94M candidate windows) | full ROM | 7/22 isolated hits; no clustering |
 | **Base+B digit encoding for arbitrary base B=0..246 (numpy, this pass)** | full ROM | best clusters at 0x337A80/0x337B80 — repeating compressed tile data, false positive |

@@ -1,5 +1,7 @@
 # An American Tail: Fievel's Gold Rush (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -339,7 +341,7 @@ score/lives/difficulty.
 * The score field counts in units of 100; the preview multiplies by 100.
 * `LEVEL SELECT` is a leftover/unused string from a removed screen.
 
-**Screenshots** are in `/tmp/opencode/fievel/shots/` (session work directory);
+**Screenshots** were in `/tmp/fievel/shots/` (session work directory);
 the report is the durable artifact.
 
 ## 8. Unknowns
@@ -362,7 +364,7 @@ the report is the durable artifact.
 
 * mGBA 0.10.5 SDL (`/usr/games/mgba`), Xvfb `:137`, openbox, scrot, ImageMagick,
   xdotool, `arm-none-eabi-objdump`, `gdb-multiarch` (mGBA `-g` stub on `:2345`).
-* Python 3 scripts in `/tmp/opencode/fievel/scripts/`:
+* Python 3 scripts in `/tmp/fievel/scripts/`:
   `fievel_pw.py` (encoder/decoder above), `type_code.py` (types a six-symbol code
   from the built-in `MCN1H9`), `key.py` (keypress/screenshot helper).
 * Search/verification: literal `grep -abo`, pointer scans, Thumb `BL` scans,

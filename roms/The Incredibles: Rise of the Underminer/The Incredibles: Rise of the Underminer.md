@@ -1,5 +1,7 @@
 # The Incredibles: Rise of the Underminer (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -241,7 +243,7 @@ is why the algorithmic family is not discoverable from the stored strings alone.
 * Capstone 5.0.7 (installed beforehand) for Thumb literal/BL scans.
 * mGBA 0.10.5 (`-3`, `-g` used briefly, then plain `-3` with savestates), Xvfb `:319`,
   openbox, `xdotool`, `scrot`, ImageMagick `convert`.
-* Helpers in `/tmp/opencode/incredibles2/`: `stateutil.py` (zlib-decompress mGBA `gbAs`
+* Helpers in `/tmp/incredibles2/`: `stateutil.py` (zlib-decompress mGBA `gbAs`
   state), `pwdriver.py` (RAM-feedback keyboard navigation), `batch_test.py`
   (restart + enter + screen-based accept/reject), `model.py` (offline field decoder),
   plus the screenshot evidence listed in §6b.

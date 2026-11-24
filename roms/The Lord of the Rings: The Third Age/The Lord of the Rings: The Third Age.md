@@ -1,5 +1,7 @@
 # The Lord of the Rings: The Third Age (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -145,7 +147,7 @@ rejector because it exposes no acceptor.
 
 ## 7. Validation evidence
 
-**Observed (emulator screenshots, all saved in `/tmp/opencode/lotr thirdage/`):**
+**Observed (emulator screenshots, all saved in `/tmp/lotr thirdage/`):**
 
 1. Language Select (`screen.png`)
 2. Legal / copyright (`s2.png`)
@@ -190,7 +192,7 @@ with high confidence from the branch at `0x08000420`, but no debug printf caller
 
 * `mgba` 0.10.5, `Xvfb :317`, `openbox`, `xdotool`, `scrot`, `convert` (crop/zoom).
 * `arm-none-eabi-objdump -M force-thumb` / `-M force-arm` for literal pools and the crt0.
-* Python 3 scripts in `/tmp/opencode/lotr thirdage/`:
+* Python 3 scripts in `/tmp/lotr thirdage/`:
   * `ssdump.py` — extracts and zlib-decompresses the `gbAs` PNG chunk from `.ss1`.
   * `lzscan.py` — GBA-LZ77 scanner/decompressor + keyword search (342 blocks).
   * `render_font.py`, `render_font2.py`, `render_bg.py` — VRAM tile/map visualisation.

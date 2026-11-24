@@ -1,5 +1,7 @@
 # The King of Fighters EX2: Howling Blood (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Scope: **in-game / developer-intended cheats only** (passwords, button codes, hidden/debug menus, unlockables). No GameShark / CodeBreaker / Action Replay codes were sought or produced.
 
 ## 1. Target identity
@@ -30,7 +32,7 @@ Evidence, in short:
 2. Every reachable menu was walked in mGBA with screenshots and RAM reads (§6b): title (6 entries), OPTION (10 rows), SPECIAL CONTENT (1 row on a fresh save), player-select grid, PRACTICE (goes straight to a match), and the link-cable RECORDS mode. No entry accepts a code.
 3. The only joypad reader is one function at `0x08095668`, producing `held`/`pressed`/`prev` masks in EWRAM. There is no sequence/progress index and no multi-button combination validator in its 24 literal-pool consumers.
 4. Eight plausible title-screen button combos (L+R+Start, A+B+Start, Select+Start, L+R+A+B+Start, ±Direction+Start, L+Start, R+Start) were entered in the emulator: all produced ordinary menu navigation, never a hidden screen.
-5. A debug-looking string block at `0x08A7960`–`0x08A7A40` (PRESS SELECT / BUTTON SETTING / MOVE LIST / CHARACTER CHANGE / EXIT / <ENEMY SIDE> STANCE/GUARD/ATTACK/P.GAUGE/COUNTER/LIFE) is the **PRACTICE-mode panel text**, not a secret menu: 0 raw aligned pointers, 0 Thumb-PC-relative loads, 0 BL targets. The `0x08A600F4`–`0x08A61400` `BOSS_TASK`/`MOTION_STOP` block is development residue: its 7 apparent BL hits all originate inside compressed graphics/data at `0x086xxxxx`–`0x087xxxxx`, not code.
+5. A debug-looking string block at `0x08A7960`–`0x08A7A40` (PRESS SELECT / BUTTON SETTING / MOVE LIST / CHARACTER CHANGE / EXIT / &lt;ENEMY SIDE&gt; STANCE/GUARD/ATTACK/P.GAUGE/COUNTER/LIFE) is the **PRACTICE-mode panel text**, not a secret menu: 0 raw aligned pointers, 0 Thumb-PC-relative loads, 0 BL targets. The `0x08A600F4`–`0x08A61400` `BOSS_TASK`/`MOTION_STOP` block is development residue: its 7 apparent BL hits all originate inside compressed graphics/data at `0x086xxxxx`–`0x087xxxxx`, not code.
 
 Because no code system exists, §0.2's "mint a novel code" deliverable is **not applicable**; the bounded negative is delivered with explicit counts instead (§6b).
 
@@ -152,7 +154,7 @@ This is a **no-code-system** engagement, so the §0.2 deliverables are stated as
 
 ## 9. Tooling
 
-Scripts written in `/tmp/opencode/kofex2` (analysis artifacts, not redistributed): `scan_ptrs.py`, `ldr_scan.py`, `ldr_text.py`, `ldr_text2.py`, `scan_debug_refs.py`, `textscan.py`, `textscan2.py`, `maskscan.py`, `reach.py`, `inp_dis.py`, `keyinput_scan.py`, `ss.py`, `ss2.py`, `ui.py`, `combo.py`, `dbg.py`, `dbg_server.py`, `dbgc.py` (plus `dbg_server2.py`/`dbgc2.py`). External tools: `arm-none-eabi-objdump -M force-thumb/-force-arm`, Capstone (Python), `strings`, `xxd`, `grep`, `mGBA 0.10.5`, `Xvfb`, `openbox`, `xdotool`, `scrot`, ImageMagick, `gdb-multiarch` (GDB stub port 2345 was held by another concurrent agent's mGBA, so RAM work used CLI debugger + savestate `gbAs` extraction instead). Web recon: direct GameFAQs/TCRF fetches returned 403 (Cloudflare); Bing via a read-proxy returned only generic KOF results, so no published code list was verified. No fetched page was treated as instructions.
+Scripts written in `/tmp/kofex2` (analysis artifacts, not redistributed): `scan_ptrs.py`, `ldr_scan.py`, `ldr_text.py`, `ldr_text2.py`, `scan_debug_refs.py`, `textscan.py`, `textscan2.py`, `maskscan.py`, `reach.py`, `inp_dis.py`, `keyinput_scan.py`, `ss.py`, `ss2.py`, `ui.py`, `combo.py`, `dbg.py`, `dbg_server.py`, `dbgc.py` (plus `dbg_server2.py`/`dbgc2.py`). External tools: `arm-none-eabi-objdump -M force-thumb/-force-arm`, Capstone (Python), `strings`, `xxd`, `grep`, `mGBA 0.10.5`, `Xvfb`, `openbox`, `xdotool`, `scrot`, ImageMagick, `gdb-multiarch` (GDB stub port 2345 was held by another concurrent agent's mGBA, so RAM work used CLI debugger + savestate `gbAs` extraction instead). Web recon: direct GameFAQs/TCRF fetches returned 403 (Cloudflare); Bing via a read-proxy returned only generic KOF results, so no published code list was verified. No fetched page was treated as instructions.
 
 ## 10. Legal note
 

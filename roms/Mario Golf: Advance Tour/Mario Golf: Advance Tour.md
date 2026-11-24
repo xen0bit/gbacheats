@@ -1,5 +1,7 @@
 # Mario Golf: Advance Tour (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -91,7 +93,7 @@ This engagement is a **negative**: there is no code space to enumerate. The sear
 | Space searched | Count / result | Method |
 |---|---|---|
 | Embedded GBA headers (Nintendo logo) | 1 hit (file `0x0`) → single retail image | `rom.find(logo)` over all 16 MiB |
-| `strings -t x -n 4` | 167,996 strings; keyword scan (`password|cheat|code|secret|debug|unlock|character|course|menu|invalid|continue|hidden|bonus|master|tourney|putt|championship`) | only credits and dev labels; **zero** password/cheat strings |
+| `strings -t x -n 4` | 167,996 strings; keyword scan (`password\|cheat\|code\|secret\|debug\|unlock\|character\|course\|menu\|invalid\|continue\|hidden\|bonus\|master\|tourney\|putt\|championship`) | only credits and dev labels; **zero** password/cheat strings |
 | Literal keyword search (all casings, `PASS/CODE/SECRET/UNLOCK/DEBUG`) | 0 hits in ROM | Python byte scan over 16 MiB |
 | Password-plausible NUL-terminated ASCII strings (len 4–32, restricted alphabet) | 2,244 total; 333 uppercase+digit-only | full-ROM scan; all clustered hits are region codes and terrain names (§6) |
 | Standard password alphabets (`0-9A-Z`, `A-Z0-9`, no-confusion variants, lowercase, ASCII-shifted) | 0 hits | full-ROM byte scan, 7 alphabets |
@@ -122,7 +124,7 @@ This engagement is a **negative**: there is no code space to enumerate. The sear
 * `file`, `xxd`, `strings`, `grep`, Python 3 (`capstone` 5.0.7, `keystone-engine`), `arm-none-eabi-objdump -M force-thumb`, `sha1sum`/`sha256sum`/`md5sum`.
 * `mgba 0.10.5` (Xvfb :317, openbox, `SDL_AUDIODRIVER=dummy`), `xdotool`, `scrot`/ImageMagick `import`/`convert`, `tesseract 5.5.0`.
 * REA MCP (Ghidra 12.1.4) — raw-binary ARM import at `0x08000000`; `open_binary`, `analyze_function`, `xrefs`.
-* Local scripts: `/tmp/opencode/mariogolf/gba.py`, `combo.py`, `ocr.sh`; savestate `gbAs`-chunk decompressor (zlib, 397,312-byte state).
+* Local scripts: `/tmp/mariogolf/gba.py`, `combo.py`, `ocr.sh`; savestate `gbAs`-chunk decompressor (zlib, 397,312-byte state).
 * No ROM or copyrighted assets are redistributed; only hashes, addresses, algorithms and the analyst's own scripts are published.
 
 ## 10. Legal note

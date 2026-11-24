@@ -1,5 +1,7 @@
 # Scrabble Blast! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -68,7 +70,7 @@ Display/launch (own display only; do not touch other agents' displays):
 Xvfb :317 -screen 0 1024x768x24 &
 DISPLAY=:317 openbox &
 DISPLAY=:317 SDL_AUDIODRIVER=dummy \
-  /usr/local/bin/mgba -3 -g "/mnt/gbacheats/roms/Scrabble Blast!/Scrabble Blast!.gba"
+  /usr/local/bin/mgba -3 -g "roms/Scrabble Blast!/Scrabble Blast!.gba"
 ```
 
 mGBA SDL keymap used: A=`x`, B=`z`, Start=`Return`, Select=`BackSpace`,
@@ -81,7 +83,7 @@ RAM reads: GDB stub on `:2345`; one persistent `gdb-multiarch` session,
 required — repeated batch connects to this mgba 0.10.5 stub are unreliable.
 
 Screen path walked (all with screenshots saved under
-`/tmp/opencode/scrabbleblast/work/`, and IWRAM/EWRAM dumps `ram_<tag>_*.bin`):
+`/tmp/scrabbleblast/work/`, and IWRAM/EWRAM dumps `ram_<tag>_*.bin`):
 
 1. Boot license screen → title `SCRABBLE BLAST! / PRESS START`.
 2. Main menu: ONE PLAYER / TWO PLAYERS WITHOUT GAME LINK / TWO PLAYERS WITH GAME
@@ -207,7 +209,7 @@ exhaustive counts above.
 - **Observed** — mGBA on display :317: all screens in §3 walked; screenshots
   `screen.png`, `s02.png`, `s_menu*.png`, `shot_dict.png`, `shot_puzzle_setup.png`,
   `s_pause*.png`, `s_options*.png`, `s_opt_credits.png`, `s_title_lr.png`,
-  etc. under `/tmp/opencode/scrabbleblast/work/`. RAM dumps `ram_<tag>_iw.bin`
+  etc. under `/tmp/scrabbleblast/work/`. RAM dumps `ram_<tag>_iw.bin`
   (32 KiB IWRAM), `_ew.bin` (256 KiB EWRAM), `_io.bin` were taken at each named
   screen; `0x030000B7` was read live across the mode sweep.
 - **Observed** — only one logo/header at 0x0; no patch/trainer signatures;
@@ -253,5 +255,5 @@ an emulator observation.
   (halt with `kill -INT <gdb-pid>`, read/dump, `c`).
 
 Reproduction artifacts (RAM dumps, screenshots, scanner scripts, launch helpers)
-are in `/tmp/opencode/scrabbleblast/work/`. No ROM or copyrighted asset is
+were in `/tmp/scrabbleblast/work/`. No ROM or copyrighted asset is
 redistributed by this report.

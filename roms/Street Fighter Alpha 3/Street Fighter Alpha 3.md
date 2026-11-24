@@ -1,5 +1,7 @@
 # Street Fighter Alpha 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -16,7 +18,7 @@
 | SHA-1 | `7fd4258bcd2bf639e1ec98b7a7ec7218fcf5859e` |
 | SHA-256 | `9b2170fc6b440a7c7f5bf2ad4103e5f97ff5bd0b07a1b50fda09d268f2623cec` |
 
-Analysis copy kept at `/tmp/opencode/sfa3/sfa3.gba` (same MD5). This is the retail
+Analysis copy kept at `/tmp/sfa3/sfa3.gba` (same MD5). This is the retail
 image: no appended trainer, stock crt0 (guide §16.1). Save device is EEPROM
 (`EEPROM_V122` at file `0x13B94C`; mGBA creates an 8192-byte `.sav`).
 
@@ -57,7 +59,7 @@ Emulator: mGBA 0.10.5, Xvfb `:316` 1024×768, `SDL_AUDIODRIVER=dummy`,
 D-pad=arrow keys). Data were gathered with three complementary setups:
 
 * plain mGBA + `xdotool` for screen walks/screenshots;
-* `mgba -g` + an interactive `gdb-multiarch` driver (`/tmp/opencode/sfa3/gdbarness.py`)
+* `mgba -g` + an interactive `gdb-multiarch` driver (`/tmp/sfa3/gdbarness.py`)
   for live RAM reads, hardware watchpoints and `dump binary memory`;
 * mGBA savestates (`Shift+F1`/`Shift+F2`) decompressed with Python (`ssdiff.py`)
   for byte-exact RAM diffs. The `.ss1` `gbAs` zlib chunk expands to 397,312 bytes;
@@ -245,7 +247,7 @@ sets their gate bytes before the progress thresholds are met.
 
 `arm-none-eabi-objdump -M force-thumb`, Python 3 + `capstone`, `strings`, `grep`,
 `xxd`, `scrot`, `xdotool`, `gdb-multiarch`, mGBA 0.10.5 with `-g` (port 2345)
-and savestates. Scripts written in `/tmp/opencode/sfa3/`:
+and savestates. Scripts written in `/tmp/sfa3/`:
 `ssdiff.py` (gbAs PNG state decoder), `gdbarness.py` (interactive GDB driver with
 timed `continue`/SIGINT), `rsp.py` (RSP client, superseded by GDB),
 `bitsearch.py` (button-mask encoding search), `blscan.py` (BL xref scanner),

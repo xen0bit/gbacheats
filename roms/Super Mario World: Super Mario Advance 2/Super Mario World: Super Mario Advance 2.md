@@ -1,10 +1,12 @@
 # Super Mario World: Super Mario Advance 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Super Mario World: Super Mario Advance 2/Super Mario World: Super Mario Advance 2.gba` |
+| File | `roms/Super Mario World: Super Mario Advance 2/Super Mario World: Super Mario Advance 2.gba` |
 | Size | 4,194,304 bytes (`0x400000`) |
 | Header title | `SUPER MARIOB` (12-byte field) |
 | Game code / maker | `AA2E` / `01` (Nintendo), version `0x00` |
@@ -33,7 +35,7 @@ The validator, its RAM flag, and its rejection boundaries were confirmed in mGBA
 * Emulator: mGBA 0.10.5, `SDL_AUDIODRIVER=dummy`, Xvfb `:319`, 3× scale.
 * Keymap (mGBA SDL default): `A`=`x`, `B`=`z`, `L`=`a`, `R`=`s`, `Select`=`BackSpace`, `Start`=`Return`, D-pad = arrow keys. Hold each key ~130 ms with ~120 ms gaps; the validator compares the *exact* held-mask, so press one button at a time.
 * Boot the ROM and stay on the first intro scene (balloon with an `M` over the island).
-* Press **Right → Select → Left → L → R → Select**. The intro scene switches to the close-up with Mario/Luigi/Peach and prints `VER. 01-12-06 09:33` along the bottom (screenshot `code1.png` / `s_after.png` in `/tmp/opencode/sma2/`). The banner disappears as the intro resumes; it is a one-shot flag.
+* Press **Right → Select → Left → L → R → Select**. The intro scene switches to the close-up with Mario/Luigi/Peach and prints `VER. 01-12-06 09:33` along the bottom (screenshot `code1.png` / `s_after.png` in `/tmp/sma2/`). The banner disappears as the intro resumes; it is a one-shot flag.
 * To repeat experiments: `Shift+F1` saves, `F1` loads (mGBA writes `.ss1`…`.ss10` into the ROM folder). `novel5.ss4` / `novel6.ss5` in the work dir capture the intermediate and rejected states.
 
 Screens walked (each advanced by key input and screenshotted): balloon intro (code screen) → sepia intro → SMA2 title (`Single Player`/`Multiplayer`) → "CHOOSE A GAME" (Super Mario World / Mario Bros., both top-scores 0, no password field) → story dialogs → first playable Yoshi's House scene. No other code-entry surface appeared on any of them.
@@ -165,4 +167,4 @@ The index reaching 5 proves the first five presses were accepted; the reset to 0
 * Capstone 5.0.7 (available; literal-load scanning cross-checked against objdump).
 * Web recon: TCRF (via Wayback Machine) and GameFAQs cheats (via Wayback Machine), chaptercheats. Fetched pages were treated strictly as data.
 * mGBA 0.10.5 under Xvfb `:319` + openbox, `SDL_AUDIODRIVER=dummy`; xdotool XTEST input; scrot screenshots.
-* Work artifacts in `/tmp/opencode/sma2/` (`code1.png`, `s_after.png`, `novel_rejected.png`, `state_*.ss*`, `novel*.ss*`, `walk_*.png`). No ROM or copyrighted assets are redistributed in this report.
+* Work artifacts in `/tmp/sma2/` (`code1.png`, `s_after.png`, `novel_rejected.png`, `state_*.ss*`, `novel*.ss*`, `walk_*.png`). No ROM or copyrighted assets are redistributed in this report.

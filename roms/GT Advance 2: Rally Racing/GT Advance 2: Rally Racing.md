@@ -1,10 +1,12 @@
 # GT Advance 2: Rally Racing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| Path | `/mnt/gbacheats/roms/GT Advance 2: Rally Racing/GT Advance 2: Rally Racing.gba` |
+| Path | `roms/GT Advance 2: Rally Racing/GT Advance 2: Rally Racing.gba` |
 | Size | 8,388,608 bytes (`0x800000`, 64 Mbit) |
 | Header title | `GT ADVANCE 2` (`0xA0`–`0xAB`) |
 | Game code | `AGWE` ; maker `78` (MTO / THQ) |
@@ -36,7 +38,7 @@ The CodeBreaker/Action Replay entries found on the web are **memory-edit codes a
 
 * **Emulator:** mGBA (`mgba -3`, SDL), display `:319`, `SDL_AUDIODRIVER=dummy`, Xvfb `1024x768x24` + openbox.
 * **Keymap (verified against `KEYINPUT`):** `A=x`, `B=z`, `L=a`, `R=s`, `Start=Return`, `Select=BackSpace`, D-pad = arrow keys. Hold each key ≥100 ms.
-* **Boot path:** title is reached through a long MTO/THQ/date/disclaimer attract sequence (roughly 25–35 `Start` presses, ~12 s). mGBA savestate `Shift+F1` saves slot 1 and `F1` loads it; plain `F1`/`Shift+F1` were verified by screenshot. A clean title savestate was kept as `/tmp/opencode/gta2/baseline.ss1`.
+* **Boot path:** title is reached through a long MTO/THQ/date/disclaimer attract sequence (roughly 25–35 `Start` presses, ~12 s). mGBA savestate `Shift+F1` saves slot 1 and `F1` loads it; plain `F1`/`Shift+F1` were verified by screenshot. A clean title savestate was kept as `/tmp/gta2/baseline.ss1`.
 * **RAM read methods:** mGBA `-d` pty debugger (`r/1`, `r/2`, `x/2`, `w/…`, `watch/w`, `b`, `frame`, `trace`) and savestate `gbAs` chunk decompression (§9). The GDB stub (`-g`, port 2345) was usable once but is a shared single-client resource on this host, so the private `-d` pty was used for the bulk of the work.
 * **Menu path walked (all with screenshots):** Title → Game Mode (`WORLD RALLY`, `TIME TRIAL`, `SINGLE RACE`, `PRACTICE`, `LICENSE`, `CO-DRIVER`, `LINK` — all seven present on a clean boot) → Round (Australia, world map) → Leg 1 (course condition: length/tarmac/gravel/mud/snow, weather) → GARAGE (car select: `GO RACE`, surface, `COURSE PROGRESS`, `CARS` bar) → in-race HUD → Pause (`Cancel`, `Restart`, `Retire`). No password/cheat entry screen exists on any of them.
 * **Codes entered (all at title, L+B held, direction pressed):** `L+B+Left`, `L+B+Right`, `L+B+Up`, `L+B+Down`; also rejected variants `L+B+A`, `L+B+Start`, `R+B+Down`, `L+B+A+…`, simultaneous all-three and sequential tap orders, and hold durations 0.15 s / 0.5 s / 1.5 s.
@@ -125,5 +127,5 @@ ROMSFun/libretro CodeBreaker entries `83000D38 6F17`, `83000D3E FFFF`, `83000D44
 * `file`, `xxd`, `strings -t x`, `grep -abo`, Python 3 (`struct`, `zlib`, `capstone 5.0.7`, `keystone`) for Phase 0/1 and literal/BL/pointer scans.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb|force-arm`.
 * mGBA CLI `-3` with `-d` (private pty debugger: `r/1`, `r/2`, `x/2`, `watch/w`, `b`, `frame`, `trace`) and `-g` (shared GDB stub, used once). Xvfb `:319`, openbox, xdotool, scrot, ImageMagick.
-* Savestate reader: mGBA `.ssN` is a PNG; `zlib.decompress` the `gbAs` chunk to a 397,312-byte raw state. Layout used: IWRAM at raw `0x19000`, EWRAM at raw `0x21000`. Scripts: `phase0.py`, `scan_masks.py`, `blscan.py`, `lit_scan.py`, `lit_scan2.py`, `inp_readers.py`, `dbgpty.py`, `dctl.py`, `ssdiff.py`, `tracediff2.py`, `gba.py` (all under `/tmp/opencode/gta2`).
+* Savestate reader: mGBA `.ssN` is a PNG; `zlib.decompress` the `gbAs` chunk to a 397,312-byte raw state. Layout used: IWRAM at raw `0x19000`, EWRAM at raw `0x21000`. Scripts: `phase0.py`, `scan_masks.py`, `blscan.py`, `lit_scan.py`, `lit_scan2.py`, `inp_readers.py`, `dbgpty.py`, `dctl.py`, `ssdiff.py`, `tracediff2.py`, `gba.py` (all under `/tmp/gta2`).
 * No ROM or copyrighted asset is redistributed here; only hashes, addresses, masks and original findings are published.

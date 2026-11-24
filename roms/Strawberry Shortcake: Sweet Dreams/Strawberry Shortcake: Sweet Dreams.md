@@ -1,5 +1,7 @@
 # Strawberry Shortcake: Sweet Dreams (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -56,7 +58,7 @@ lock icon). It is progress-gated save data, **not** a code — documented in §8
 5. Negative control: reload a Credits savestate and repeat with the final B replaced by A — nothing
    happens (see §6b).
 
-All screenshots and scripts are in `/tmp/opencode/strawberrydreams/` (key files:
+All screenshots and scripts were in `/tmp/strawberrydreams/` (key files:
 `credits_ready.png`, `credits_code_b.png`, `pong_play1.png`, `montage_credcode.png`,
 `test_correct.png`, `test_wrong_last_B_to_A.png`, `test_nine_presses.png`).
 
@@ -220,7 +222,7 @@ validator call graph (1 matcher), and the literal sequence table (1 entry).
 * mGBA 0.10.5 under Xvfb `:318` with openbox, `SDL_AUDIODRIVER=dummy`; binary copied to
   `sd_mgba` to avoid a global `pkill -x mgba` loop launched by another job that was SIGKILLing
   unrelated emulator processes (exit 137).
-* Input/screenshot helper `/tmp/opencode/strawberrydreams/ui.py`; savestate RAM reader
+* Input/screenshot helper `/tmp/strawberrydreams/ui.py`; savestate RAM reader
   `ssdump.py` (zlib-decompresses the `gbAs` chunk of mGBA `.ss1` PNGs; EWRAM at state offset
   `0x21000`); test harness `test_code.py`.
 * No REA/Ghidra session was needed: the raw Thumb disassembly plus emulator and savestate RAM

@@ -1,10 +1,12 @@
 # IK+ (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/IK+/IK+.gba` |
+| File | `roms/IK+/IK+.gba` |
 | Size | 4,194,304 bytes (0x400000) |
 | `file` | Game Boy Advance ROM image: "IK PLUS" (A3KE7M, Rev.00) |
 | Header title | `IK PLUS` (0xA0) |
@@ -153,8 +155,8 @@ No validator, checksum, code table or generator exists, so there is no algorithm
 * `arm-none-eabi-objdump -M force-thumb` for raw Thumb disassembly.
 * mGBA 0.x SDL (`mgba -3`) under `Xvfb :317` + `openbox`; `xdotool` XTEST input; `scrot` + ImageMagick `convert`/`montage` for screenshots.
 * mGBA CLI debugger (`mgba -3 -d`) driven over a Python `pty` with prompt-synchronised `frame`, `r/2`, `r/4`, `x/4`, `w/2`, `load` commands for live RAM reads.
-* `/tmp/opencode/ikplus/ss.py` — decompresses the `gbAs` PNG chunk of mGBA savestates into raw RAM (guide §16.13).
-* `/tmp/opencode/ikplus/dbg.py`, `live.py`, `gba.py`, `ramdump.py`, `walk.py` — analysis helpers written for this engagement.
+* `/tmp/ikplus/ss.py` — decompresses the `gbAs` PNG chunk of mGBA savestates into raw RAM (guide §16.13).
+* `/tmp/ikplus/dbg.py`, `live.py`, `gba.py`, `ramdump.py`, `walk.py` — analysis helpers written for this engagement.
 
 **Legal note:** no ROM image, extracted graphics, music, or full game text is redistributed here; only addresses, hashes, algorithms, and the analyst's own scripts are published.
 

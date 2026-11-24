@@ -1,5 +1,7 @@
 # Castlevania: Circle of the Moon (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -358,7 +360,7 @@ proves the compare is byte-exact at the 8-byte boundary and that the alphabet is
 
 ## 9. Tooling
 
-All scripts are in `/tmp/opencode/cotm/` (not part of the repository):
+All scripts were in `/tmp/cotm/` (not part of the repository):
 
 | File | Purpose |
 |---|---|
@@ -376,7 +378,7 @@ Commands used for the dynamic proof:
 Xvfb :235 -screen 0 1024x768x24 &
 DISPLAY=:235 openbox &
 SDL_AUDIODRIVER=dummy mgba -d -3 "Castlevania: Circle of the Moon.gba"
-python3 daemon235.py          # driver on /tmp/opencode/cotm/daemon235.sock
+python3 daemon235.py          # driver on /tmp/cotm/daemon235.sock
 python3 c235.py raw "w/4 0x02022490 0x05120906"
 python3 c235.py raw "w/4 0x02022494 0x0C0C0102"
 python3 c235.py raw "w/1 0x020224C4 0x1E"

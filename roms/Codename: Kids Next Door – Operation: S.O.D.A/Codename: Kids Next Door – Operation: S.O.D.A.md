@@ -1,5 +1,7 @@
 # Codename: Kids Next Door – Operation: S.O.D.A. (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -383,7 +385,7 @@ Baseline before entry: `0x02002B20 = 00000000`; after: `0x02002B20 = 00010000`.
 * mGBA 0.10.5 (`-3 -d`), `Xvfb :258`, `openbox`, `xdotool`, `SDL_AUDIODRIVER=dummy`.
 * `arm-none-eabi-objdump` (`-M force-thumb`), Python 3 + `capstone` for the
   `movs r1,#n; bl 0x08004CD0` field-width extraction and BL/pointer scanners.
-* Debugger scripts in `/tmp/opencode/kndsoda`: `daemon.py` (pty command
+* Debugger scripts in `/tmp/kndsoda`: `daemon.py` (pty command
   bridge), `key.py`, `ss.py` (extract the zlib `gbAs` chunk from `.ssN`),
   `ssdiff.py`, `ptr.py`, `blscan.py`, `fields.py`.
 * No GameShark/CodeBreaker/AR codes, no memory-edit cheats, no redistributed

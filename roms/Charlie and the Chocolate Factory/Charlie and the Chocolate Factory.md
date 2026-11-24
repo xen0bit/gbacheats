@@ -1,5 +1,7 @@
 # Charlie and the Chocolate Factory (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -307,7 +309,7 @@ the acceptance of the extra-press variant proves the index is not reset by non-m
   `w/r`, memory writes `w/4`, `trace`, `r/4`)
 * mGBA savestates (`.ss1`): PNG `gbAs` chunk, zlib-decompressed; EWRAM at state offset `0x21000`,
   IWRAM at `0x19000`, VRAM at `0x1000` (used to confirm `~KEYINPUT` and the flag address)
-* Scripts (in `/tmp/opencode/charlie/`): `phase0.py`, `ssread.py`, `drive2*.py`
+* Scripts (in `/tmp/charlie/`): `phase0.py`, `ssread.py`, `drive2*.py`
 
 Legal note: no ROM, asset or copyrighted data is redistributed; only addresses, algorithms,
 hashes and the developer's own button sequence are published.

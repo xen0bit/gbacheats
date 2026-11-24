@@ -1,5 +1,7 @@
 # Pirates of the Caribbean: Dead Man's Chest (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -241,7 +243,7 @@ This proves the exact length (6), exact token order, and the single alias pair.
 * mGBA GDB stub (`gdb-multiarch`) — hardware watchpoints worked, software
   breakpoints did not fire in this stub, so watchpoints were used as the oracle.
 * Savestate `gbAs` zlib extraction/diff (`zlib.decompress`) for RAM evidence.
-* Python helpers in `/tmp/opencode/piratesdmc/`: `gba.py`, `lit_scan2.py`,
+* Python helpers in `/tmp/piratesdmc/`: `gba.py`, `lit_scan2.py`,
   `find_table*.py`, `find_index_table.py`, `watch*.gdb`.
 
 Legal note: no ROM bytes or copyrighted assets are reproduced here; only hashes,

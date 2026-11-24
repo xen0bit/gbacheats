@@ -1,5 +1,7 @@
 # Medal of Honor: Infiltrator (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -216,7 +218,7 @@ ROM strings dump.
 
 ## 9. Tooling
 
-Scripts created in `/tmp/opencode/mohinfiltrator/`:
+Scripts created in `/tmp/mohinfiltrator/`:
 `phase0.py` (hash/header/logo scan), `ptrscan.py`, `strptrs.py`, `ldrsan.py` /
 `ldrscan.py` (PC-relative literal xrefs), `keyscan.py` (button-mask scan),
 `ss.py` / `gbAs` parser, `diffss.py` (savestate RAM diff), `findstr.py`,

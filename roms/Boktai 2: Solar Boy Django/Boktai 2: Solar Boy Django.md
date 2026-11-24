@@ -1,5 +1,7 @@
 # Boktai 2: Solar Boy Django (GBA, USA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -132,7 +134,7 @@ Novel code (not in any published list), entered key-by-key in the emulator:
 Result: "Boktai data successfully continued." then CONFIRM SETTING with
 `NAME : OPENCODE` and `Boktai title [ Pawn ]` (screenshots
 `typednovel_typed.png`, `typednovel_submit.png`, `typednovel_confirm.png` in
-`/tmp/opencode/boktai2/`).
+`/tmp/boktai2/`).
 
 Bounds tested (all rejected with "Incorrect password."):
 
@@ -494,7 +496,7 @@ table, not merely the length, and that the type field is constrained to 2.
   to read/write EWRAM, set watchpoints and step the validation path. Because
   another session owns TCP 2345, an `LD_PRELOAD` shim (`shim/shim.c`) remaps
   mGBA's GDB port to 23455.
-* Working directory and screenshots: `/tmp/opencode/boktai2/`
+* Working directory and screenshots: `/tmp/boktai2/`
   (`typednovel_*.png`, `novel_*.png`, `a1_*`, `badck_*`, `dot_*`, `g18.png`,
   `g49.png`, `g50.png`, `menu*.png`).
 

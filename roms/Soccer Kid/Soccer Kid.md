@@ -1,5 +1,7 @@
 # Soccer Kid (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -65,7 +67,7 @@ This is a **bounded negative for controller-code systems on this SKU**.
 * **Test menu:** title → Down, Down → OPTIONS → A. Down twice to `TEST FX`,
   once more to `TEST MUSIC`; Left/Right cycle the 2-digit value.
 * Savestate slots 1–9 (Shift+F*n* saves, F*n* loads) were used to keep each test
-  deterministic; all evidence files live in `/tmp/opencode/soccerkid/`.
+  deterministic; all evidence files were kept in `/tmp/soccerkid/`.
 
 ## 4. Address map
 
@@ -317,7 +319,7 @@ isolated on the GBA title because A also activates the START menu item.)
 
 ## 9. Tooling
 
-Scripts and evidence in `/tmp/opencode/soccerkid/`: `recon.py` (string/pointer
+Scripts and evidence in `/tmp/soccerkid/`: `recon.py` (string/pointer
 recon), `litscan.py` (PC-relative literal scan), `ss.py` (savestate `gbAs`
 extractor), `decode.py` (exact validator model + decoder/encoder), `mint.py`
 (code generator), `count.c` (exhaustive accepted-space count), `enter.py` /

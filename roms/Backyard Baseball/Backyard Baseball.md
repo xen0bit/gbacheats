@@ -1,5 +1,7 @@
 # Backyard Baseball (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Status: complete for the questions asked (in-game code/password/menu systems).
 Result: **negative** — this ROM contains no password system, no
 coach-name code table, and no developer cheat/debug menu, and the one
@@ -399,7 +401,7 @@ effect does not occur.
 
 ## 7. Validation evidence
 
-**Observed (emulator, screenshots in `/tmp/opencode/bb/shots/`)**
+**Observed (emulator, screenshots in `/tmp/bb/shots/`)**
 
 * Boot, title, main menu, Options, Cards, Custom Player, Skills Edit, Season
   Sign In, Season Game Setup, pause menus, quit dialog, HR Derby setup,

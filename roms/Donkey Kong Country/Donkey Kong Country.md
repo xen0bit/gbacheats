@@ -1,5 +1,7 @@
 # Donkey Kong Country (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -205,7 +207,7 @@ stored-mask symbols from an 8-symbol alphabet (`Select`/`Start` excluded), with 
 `0x0000` terminator and a 16-bit effect word.
 
 **Validator as oracle (§16.19).** I reimplemented the validator in
-`/tmp/opencode/dkc1/model.py` directly from the disassembly and ran it over every
+`/tmp/dkc1/model.py` directly from the disassembly and ran it over every
 stored-mask sequence of length 1–6 (`8+8^2+…+8^6 = 299,592` inputs). Exactly
 **11 stored-mask sequences** are accepted: the 3 table families, plus 8 extra
 Bubba spellings caused by the missing exact-length check (any 6th symbol after
@@ -290,7 +292,7 @@ input outside the three families exists in the enumerated length ≤6 space.
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -abo`
 * Python 3 + `capstone` 5.0.7 for literal/BL/pattern scans and the offline
-  validator model (`/tmp/opencode/dkc1/model.py`, `findseq.py`, `ptrscan.py`,
+  validator model (`/tmp/dkc1/model.py`, `findseq.py`, `ptrscan.py`,
   `scanbl.py`, `g154b.py`)
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
 * mGBA SDL under Xvfb `:317` + openbox; `xdotool` XTEST input; `scrot`/`import`

@@ -1,5 +1,7 @@
 # Spy Hunter / Super Sprint (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -191,4 +193,4 @@ Therefore the absence of a code system is a statement about the complete
 `PIL`), mGBA 0.10.5 `-3`/`-g`/`-d`, Xvfb `:316` + openbox, xdotool, scrot,
 ImageMagick. Helper scripts: `k2.py`, `probe.py` (savestate `gbAs` extraction
 and RAM word reads). No ROM or copyrighted asset is redistributed; the
-patched copy existed only in `/tmp/opencode/spyhunter` and was deleted.
+patched copy existed only in `/tmp/spyhunter` and was deleted.

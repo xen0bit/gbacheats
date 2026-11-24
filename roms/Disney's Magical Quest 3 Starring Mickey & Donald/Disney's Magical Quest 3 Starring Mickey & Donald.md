@@ -1,5 +1,7 @@
 # Disney's Magical Quest 3 Starring Mickey & Donald (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -336,7 +338,7 @@ of which is a code.
 
 ## 9. Tooling
 
-Scripts (in `/tmp/opencode/magicalquest3`):
+Scripts (in `/tmp/magicalquest3`):
 * `state.py` — read/patch mGBA `.ssN` PNG savestates (zlib `gbAs` chunk) and
   rewrite the PNG; used to locate and poke the menu cursor byte.
 * `keys.py` / `combo.py` — XTEST key injection and screenshot capture with

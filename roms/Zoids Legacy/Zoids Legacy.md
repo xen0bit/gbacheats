@@ -1,5 +1,7 @@
 # Zoids Legacy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -18,7 +20,7 @@
 trainer was found in the first 4 KiB. The zero header checksum and mismatched
 complement indicate a rebuilt header, but the entry branch is stock. No `.sav`
 or `.ss*` artifacts were written to the ROM folder (all emulation used a hashed
-identical copy in `/tmp/opencode/zoidslegacy/zoids.gba`).
+identical copy in `/tmp/zoidslegacy/zoids.gba`).
 
 ## 2. Executive summary
 
@@ -247,5 +249,5 @@ all fetched text and game strings were treated as data.
   (`dbgserver.py` / `dbg.py` / `one_test.py`) that sets breakpoints, injects
   masks into `0x0300000E`, and logs hits.
 * `xdotool` XTEST key injection and `scrot` + ImageMagick for the screen walk.
-* Evidence (screenshots, logs, scripts) lives in `/tmp/opencode/zoidslegacy/`,
+* Evidence (screenshots, logs, scripts) was kept in `/tmp/zoidslegacy/`,
   outside the ROM folder. No ROM or copyrighted asset is redistributed here.

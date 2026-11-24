@@ -1,5 +1,7 @@
 # Mega Man Zero 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -38,7 +40,7 @@ Published-code research: GameFAQs, TCRF, VGChartz and general web search were at
 * Boot path: Inti Creates splash → Capcom logo → title `PRESS START`.
   * With an existing SRAM: **Start** opens the title menu directly.
   * With a blank SRAM: **Start** plays the logo/opening movie and then runs an attract demo; pressing **Start** during the demo returns to the title menu.
-* Menu map (all walked, screenshots in `/tmp/opencode/mmzero3/`):
+* Menu map (all walked, screenshots in `/tmp/mmzero3/`):
   * Title menu: `NEW GAME`, `LOAD GAME` (no third row).
   * In-game pause (Status): `ZERO ×2`, `LEVEL F`, play time, E-Crystals, `Code Name WARRIOR`, MAIN/SUB slots; footers `L → Elf List`, `R → EX Skills`, centre `ESCAPE`.
   * `L` → Elf List: `SATELLITE1`, `SATELLITE2`, `FUSION`, `E-CRYSTALS`, `LIST`; footer `L → Options`, `R → Status`.
@@ -110,7 +112,7 @@ Guide §0.2 requires the *whole space* to be characterised. The characterisation
 
 ## 7. Validation evidence
 
-* **Observed (emulator):** all screens in §3, screenshots `title_clean`, `menu4`, `pausemenu`, `elflist`, `options2`, `ex2`, `stage_end`, etc. in `/tmp/opencode/mmzero3/`.
+* **Observed (emulator):** all screens in §3, screenshots `title_clean`, `menu4`, `pausemenu`, `elflist`, `options2`, `ex2`, `stage_end`, etc. in `/tmp/mmzero3/`.
 * **Observed (RAM):** `0x04000130` = `0x03FF` idle and `0x03FE` with A held, read through mGBA's `-d` debugger (which required `c` then a `frame` step because the CLI debugger pauses execution while at its prompt).
 * **Derived:** input manager structure and lack of key-history consumer (disassembly `0x08003194`–`0x08003220`, Capstone + `arm-none-eabi-objdump -M force-thumb`); text encoding offsets; all address-map entries.
 * **Inferred:** that `MINI GAMES` is gated on a save/story flag (or cut) rather than a button code — several inputs failed, and the game is SRAM-driven, but the exact gate writer was not isolated.

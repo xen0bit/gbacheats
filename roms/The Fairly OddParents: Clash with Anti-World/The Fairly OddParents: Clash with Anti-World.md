@@ -1,5 +1,7 @@
 # The Fairly OddParents: Clash with Anti-World (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -50,7 +52,7 @@ menu** — with a cheat-count of 5 all five visible rows are checked and no sixt
 - Novel codes entered on that screen: `QH8KRHTC`, `VQ7K48D4`.
 - Rejection tests: `QH8KRHTD` (one checksum symbol changed), `BBBBBBBB` (length prefix `B`
   → 0 digits).
-- Evidence screenshots (saved in `/tmp/opencode/fairlyodd2/`): `nov1.png` (novel Hard level
+- Evidence screenshots (saved in `/tmp/fairlyodd2/`): `nov1.png` (novel Hard level
   accepted), `ac_cheats.png` (all five cheats checked), `walk_cheats2.png` (cheat menu,
   one cheat), `reject1.png`, `reject_ndig.png`, `walk_mm.png`, `walk_opt.png`,
   `walk_pause2.png`, `q5.png` (keypad), `pw1.png`.
@@ -269,7 +271,7 @@ row does not appear when all flags are set.
   A=`x`, B=`z`, Start=`Return`), scrot, ImageMagick.
 - mGBA CLI debugger (`mgba -d`) used for ROM/RAM reads; the GDB stub proved unreliable for
   `find`/`dump` and was abandoned in favour of static analysis plus emulator ground truth.
-- Scripts in `/tmp/opencode/fairlyodd2/`: `encoder.py` (validator + encoder, offline),
+- Scripts in `/tmp/fairlyodd2/`: `encoder.py` (validator + encoder, offline),
   `decode.py`, `analyze.py`, `brute_model.py`, `fields.py`, `xref.py`, `enter.py` (keypad driver),
   `dumplive.py`/`dumpdbg.py` (CLI-debugger memory dumps).
 

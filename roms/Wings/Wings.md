@@ -1,10 +1,12 @@
 # Wings (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Wings/Wings.gba` |
+| File | `roms/Wings/Wings.gba` |
 | Size | 8,388,608 bytes (`0x800000`) |
 | Header title / code / maker | `WINGS` / `AWQE` / `5N`, version `0x00` |
 | Entry branch | `0xEA00002E` (stock) |
@@ -148,7 +150,7 @@ any of these values exists for this SKU (four web searches returned no results).
 **Novel combination generated and entered (no published list).** Through the AI editor on the
 debugger-reached DogfightCheatProcess screen I set
 `minSpeed = 30, maxSpeed = 31, defaultSpeed = 15` (shipped defaults are `23, 23, 23`).
-Evidence: screenshot `/tmp/opencode/wings/novelc.png`; savestate RAM readback
+Evidence: screenshot `/tmp/wings/novelc.png`; savestate RAM readback
 `0x0300446E = 0x1E (30)`, `0x0300446F = 0x1F (31)`, `0x03004470 low byte = 0x0F (15)`.
 All three values were produced by controller input (D-pad) on the game's own editor screen; the
 screen was opened by a debugger-forced process switch because no retail path exists (below).
@@ -156,12 +158,12 @@ screen was opened by a debugger-forced process switch because no retail path exi
 **Bounds proven by rejection / clamping tests.**
 
 * Lower bound: 25 × Left on `defaultSpeed` drove it to `0`; the UI displayed `0` and RAM read
-  `0x03004470 = 0x00` (screenshot `/tmp/opencode/wings/boundc.png`). The descriptor's declared
+  `0x03004470 = 0x00` (screenshot `/tmp/wings/boundc.png`). The descriptor's declared
   minimum is `1`, so the editor does **not** enforce that minimum — a real, bounded finding.
 * Upper bound: a 3-second Right hold incremented `defaultSpeed` from 0 to 19
-  (`/tmp/opencode/wings/upperc.png`); no clamp was reached within the tested range.
+  (`/tmp/wings/upperc.png`); no clamp was reached within the tested range.
 * Wrong-screen input: pressing L on CheatProcess (the screen reached by L from DogfightCheatProcess)
-  produced no change (`/tmp/opencode/wings/cpLc.png`) — the L handler belongs only to
+  produced no change (`/tmp/wings/cpLc.png`) — the L handler belongs only to
   DogfightCheatProcess, confirming the two screens are distinct code paths.
 
 **Bounded negative — retail reachability (counts).**
@@ -214,7 +216,7 @@ No password prompt, code table, or cheat option exists on any walked screen.
 `capstone` (Thumb disassembly scans), `arm-none-eabi-objdump -M force-thumb`, mGBA 0.10.5 with
 Xvfb `:317` + openbox, `xdotool` XTEST input, `scrot`/ImageMagick screenshots, mGBA built-in `-d`
 debugger driven through a Python `pty` (`frame`, `r/4`, `w/4`, `continue`). All scripts and evidence
-live in `/tmp/opencode/wings/`; no ROM or extracted assets are published here.
+were kept in `/tmp/wings/`; no ROM or extracted assets are published here.
 
 **Cleanup:** all spawned processes (Xvfb `:317`, mGBA debugger sessions) terminated by PID;
 `Wings.sav` and `Wings.ss1` removed from the ROM folder.

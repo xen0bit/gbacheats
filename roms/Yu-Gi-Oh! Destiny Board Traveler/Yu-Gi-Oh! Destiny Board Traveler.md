@@ -1,5 +1,7 @@
 # Yu-Gi-Oh! Destiny Board Traveler (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -194,7 +196,7 @@ The trailing-extra rejection is especially informative: it confirms matching is 
 - Capstone 5.0.7 / Keystone (Python) — LDR-literal and BL scans.
 - Ghidra 12.1.4 via REA MCP (`open_binary`, `resolve_containing_procedure`, `procedure_pseudo_code`, `procedure_callers`, `search_bytes`) — decompilation of `FUN_08032114`, `FUN_08032084`, `FUN_0801B8B4`, `FUN_08036654`.
 - mGBA 0.10.5 (`mgba -3 -g -t <state>`) under Xvfb :320 + openbox, `SDL_AUDIODRIVER=dummy`; xdotool XTEST input.
-- Custom Python scripts (all in `/tmp/opencode/yugiohdestiny/`): `keys.py`, `dbg.py`, `dbg2.py`, `clear_ring.py`, `patch_ring.py`, `run_tests.py`, `run_tests2.py`, `run_tests3.py`.
+- Custom Python scripts (all in `/tmp/yugiohdestiny/`): `keys.py`, `dbg.py`, `dbg2.py`, `clear_ring.py`, `patch_ring.py`, `run_tests.py`, `run_tests2.py`, `run_tests3.py`.
 - Savestate RAM diffing: zlib-decompress the PNG `gbAs` chunk; EWRAM begins at raw offset `0x21000`, so `0x0201D770` maps to `0x231770`.
 - Evidence screenshots (`novel_select.png`, `novel_crop.png`, `sel_before.png`, `sel_after.png`, `crop_before.png`, `crop_after.png`, `title_before.png`, `title_after_grandpa.png`) are in the work dir, deliberately outside the ROM folder.
 

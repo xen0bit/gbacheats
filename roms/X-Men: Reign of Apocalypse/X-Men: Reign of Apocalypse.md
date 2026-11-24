@@ -1,5 +1,7 @@
 # X-Men: Reign of Apocalypse (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -60,7 +62,7 @@ Screen walk (all reached, screenshots in the work dir):
 | `0x02009EA0` | EWRAM | base of a large state struct; held keys at `+0xC12` (`0x0200AAB2`), new presses at `+0xC14` (`0x0200AAB4`) |
 | `0x020003A0` | EWRAM | packed key-state struct (written by `0x0807FC8`) |
 | `0x020075E4` | EWRAM | 32-bit link-mode "characters available" mask (read at `0x0808D9C`, written on unlock at `0x0800F470`) |
-| `0x0808D9C` | code (Thumb) | link-mode screen: `popcount(mask | 15)` → "N characters available" |
+| `0x0808D9C` | code (Thumb) | link-mode screen: `popcount(mask \| 15)` → "N characters available" |
 | `0x08092CE0` | data | `"Debug V\n"` |
 | `0x08092CA8` | data | 12-entry pointer/data block copied to `0x02009E50` by `main()` |
 | `0x08092CEC` | data | 16-byte-stride graphics records used by `0x08008C60` (character art), **not** a cheat table |
@@ -167,7 +169,7 @@ No password alphabet, no checksum table, no code record table, and no button-mas
 * `k.py`: XTEST key sender that resolves the mGBA window by PID from `mgba.pid` (a stale window from a killed emulator was swallowing input).
 * `ss.py`: mGBA `.ss1` `gbAs` zlib chunk decoder; IWRAM at raw `0x19000`, EWRAM at raw `0x21000`.
 * `testcodes.py`: candidate-code runner with savestate reload and mask readback.
-* Screenshots and scripts live in `/tmp/opencode/xmenroa/`, never in the ROM folder.
+* Screenshots and scripts were kept in `/tmp/xmenroa/`, never in the ROM folder.
 
 ## 10. Legal note
 

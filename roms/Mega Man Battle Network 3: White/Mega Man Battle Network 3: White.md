@@ -1,5 +1,7 @@
 # Mega Man Battle Network 3: White (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -108,7 +110,7 @@ All addresses are ROM addresses (`0x08000000 + file offset`) unless noted.
 | `0x08022598` | data | Pointer `0x0802259C` to the button mask table |
 | `0x0802259C` | u16 table | `R,R,L,R,L,R,L,L,0` — the SP/Omega Navis code |
 | `0x080223BC` | Thumb fn | Star/menu gate dispatcher (caller of the validator) |
-| `0x08021D08` | Thumb fn | Set global flag: `flag = (r0<<8)|r1` |
+| `0x08021D08` | Thumb fn | Set global flag: `flag = (r0<<8)\|r1` |
 | `0x08021D24` | Thumb fn | Clear global flag |
 | `0x08021D40` | Thumb fn | Test global flag → `r0` nonzero if set |
 | `0x08021D58` | Thumb fn | Toggle global flag |
@@ -335,7 +337,7 @@ published-literal absence prove the system exists but not its validator.
 * `Xvfb :319`, `openbox`, `mgba -3 -d` with a Python `pty` daemon (`dbgd.py`, FIFO `cmd.fifo`)
   for RAM reads/writes and breakpoints; `xdotool` with **PID-resolved** window targeting;
   `scrot` for screenshots. mGBA's `-g` GDB stub was tried first and rejected (packet errors).
-* Saved artifacts in `/tmp/opencode/mmbn3white/`: `rom_decoded.txt`, `strings_all.txt`,
+* Saved artifacts in `/tmp/mmbn3white/`: `rom_decoded.txt`, `strings_all.txt`,
   `codes.py`, `dbgd.py`, `dbg.log`, `ROM.sav`, and ~20 screenshots (`title.png`,
   `title_cont_menu.png`, `startmenu_live.png`, `pet_1.png`…`pet_7.png`, `saved.png`,
   `title_code_test.png`, …).

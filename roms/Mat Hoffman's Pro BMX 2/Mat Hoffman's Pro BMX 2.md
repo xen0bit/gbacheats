@@ -1,5 +1,7 @@
 # Mat Hoffman's Pro BMX 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -226,7 +228,7 @@ Per guide §0.2, a negative result is bounded by characterising the searched spa
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep` — Phase 0/1.
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, custom Python scanners
   (`phase0.py`, `dumptext.py`, `xrefs.py`, `litscan.py`, `keyptr.py`, `ramxref.py`,
-  `blscan.py`, `btnscan.py`, `btnscan2.py`, `cmp_scan.py`) in `/tmp/opencode/mathoffman2`.
+  `blscan.py`, `btnscan.py`, `btnscan2.py`, `cmp_scan.py`) in `/tmp/mathoffman2`.
 * REA MCP Ghidra 12.1.4 raw-ARM import (`open_binary`, `xrefs`) for reference counts.
 * mGBA SDL under Xvfb :315 + openbox; `xdotool` XTEST input; `scrot`/ImageMagick
   screenshots; `tesseract` OCR for secondary screen checks.

@@ -1,5 +1,7 @@
 # The Wild Thornberrys: Chimp Chase (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -54,7 +56,7 @@ shortcut is effectively a dead/gated feature on this screen.
   last symbol (and exits the screen when empty). Eight symbols trigger validation.
 * Novel code, typed character-by-character: **KFPBCDVL** → "password accepted, press
   START to play" → Start → map screen → Jungle-level intro/gameplay.
-* Evidence images (analysis work dir `/tmp/opencode/chimpchase/`):
+* Evidence images (analysis work dir `/tmp/chimpchase/`):
   `typedcrop.png` (novel code typed + accepted), `NOVEL_code_KFPBCDVL_accepted.png`,
   `accepted_startcrop.png` (map), `walk3crop.png` (Jungle dialogue),
   `rej0crop.png`–`bound2crop.png` (rejections), `optionscrop.png`, `s3.png`–`s5.png`.
@@ -220,7 +222,7 @@ line, both ordinary game text), and no alternate input surface were found.
 * `arm-none-eabi-objdump -M force-thumb` for raw GBA disassembly; Capstone 5.0.7 for
   literal/BL scans; Ghidra via REA MCP for decompiling `0x0800E060`, `0x0801740C`,
   `0x0801738C`.
-* Python scripts in `/tmp/opencode/chimpchase/`: `pw.py` (codec), `scan.py`
+* Python scripts in `/tmp/chimpchase/`: `pw.py` (codec), `scan.py`
   (pointer scan), `xref_ram.py`, `lits.py`, `alphabet_scan.py`, `ssdiff.py`
   (savestate `gbAs` zlib chunk diff), `patch_ss.py` (savestate RAM patcher),
   `drive.py` (window-pinned xdotool driver), `solve_credits.py`.

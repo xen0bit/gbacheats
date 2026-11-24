@@ -1,5 +1,7 @@
 # The Bible Game (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -152,7 +154,7 @@ These codes do **not** occur as ASCII anywhere in the ROM (literal searches for 
 
 **Space definition.** 11 characters × 20 symbols = `20^11 = 204,800,000,000,000` possible strings. The validator requires bits 45..47 of the decoded word to be clear (it compares the full 7-bit `V>>41` against a 4-bit checksum), so only `V < 2^45` can pass. The accepted generated-code space is therefore exactly the `2^41 = 2,199,023,255,552` payloads, each with one uniquely determined checksum; plus the seven strcmp shortcuts (six of which are believed reachable; see §8). No reserved payload bits were found — every bit 0..40 is written to a game-state variable by the validator. Field widths: 3 + 4 + 4 + 1 + 5 + 5 + 16 + 2 + 1 = 41 bits; checksum 4 bits.
 
-**Validator model.** Implemented in Python (`dec`, `enc`, `chk` helpers in `/tmp/opencode/biblegame`); it agrees with the ROM on:
+**Validator model.** Implemented in Python (`dec`, `enc`, `chk` helpers in `/tmp/biblegame`); it agrees with the ROM on:
 * all six published generated codes (checksum matches in every case, `f0` = 1..6 in published level order — §16.15: the payload field is the truth, not the web label);
 * the game's own code `MDGHFMDTBFT` (stored checksum 9 = computed 9, payload `0x180`, `f2=3` lives);
 * both novel codes below;
@@ -193,9 +195,9 @@ These codes do **not** occur as ASCII anywhere in the ROM (literal searches for 
 ## 9. Tooling
 
 * `strings -t x`, `grep -abo`, `xxd`, Python `struct` literal/pointer scans, `arm-none-eabi-objdump -M force-thumb`, Capstone for annotated disassembly.
-* `/tmp/opencode/biblegame/enter_pw.py` — XTEST password entry driver (20-symbol cycle, ≥100 ms holds).
-* `/tmp/opencode/biblegame/calib.py` — input-timing calibration via savestate reads.
-* Python decoder/encoder/checksum helpers (inline in `/tmp/opencode/biblegame`); mGBA savestate `gbAs` zlib chunk decoded with `zlib.decompress`, IWRAM at raw offset `0x19000`, password buffer at `0x1DDF0`.
+* `/tmp/biblegame/enter_pw.py` — XTEST password entry driver (20-symbol cycle, ≥100 ms holds).
+* `/tmp/biblegame/calib.py` — input-timing calibration via savestate reads.
+* Python decoder/encoder/checksum helpers (inline in `/tmp/biblegame`); mGBA savestate `gbAs` zlib chunk decoded with `zlib.decompress`, IWRAM at raw offset `0x19000`, password buffer at `0x1DDF0`.
 * Web recon: GameFAQs (403, recovered via search snippet), SuperCheats (two pages fetched), IGN (403). All fetched page text treated strictly as data.
 
 No ROM data or copyrighted assets are redistributed here; only addresses, hashes, algorithms and the author's own generated codes are published.

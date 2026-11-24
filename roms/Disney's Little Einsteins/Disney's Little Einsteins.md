@@ -1,5 +1,7 @@
 # Disney's Little Einsteins (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -422,7 +424,7 @@ code. Where a code would live is provably absent — the only candidate text
 
 ## 9. Tooling
 
-All commands run from `/tmp/opencode/littleeinsteins` against a copy of the ROM
+All commands run from `/tmp/littleeinsteins` against a copy of the ROM
 (`game.gba`). No ROM or extracted asset is redistributed.
 
 * `md5sum` / `sha1sum` / `sha256sum`, `file`, `xxd`, `strings -t x`.

@@ -1,5 +1,7 @@
 # Fire Emblem: The Sacred Stones (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -133,8 +135,8 @@ There is **no validator, checksum, alphabet or lookup table** for a password/che
 ## 9. Tooling
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, `arm-none-eabi-objdump -M force-thumb`, Python 3 + `capstone` 5.0.7, Pillow.
-* Work dir `/tmp/opencode/fe8`: `parse_state.py` (savestate `gbAs` zlib extraction), `render_vram.py` (4bpp tile renderer), `lz77scan.py`/`lz77_dump.py` (4,724 LZ77 block decompression), `scan_lit.py` (Thumb PC-relative literal scan), `blscan.py` (Thumb BL scan), `btnscan.py` (input-mask comparison scan), `key.sh`/`combo.sh`/`trycombo.sh` (XTEST input helpers).
-* All artifacts (screenshots, savestates, RAM dumps, scripts) are in `/tmp/opencode/fe8`; the ROM copy used for emulation was also in that dir, so the ROM folder acquired no `.sav`/`.ss*` files.
+* Work dir `/tmp/fe8`: `parse_state.py` (savestate `gbAs` zlib extraction), `render_vram.py` (4bpp tile renderer), `lz77scan.py`/`lz77_dump.py` (4,724 LZ77 block decompression), `scan_lit.py` (Thumb PC-relative literal scan), `blscan.py` (Thumb BL scan), `btnscan.py` (input-mask comparison scan), `key.sh`/`combo.sh`/`trycombo.sh` (XTEST input helpers).
+* All artifacts (screenshots, savestates, RAM dumps, scripts) were in `/tmp/fe8`; the ROM copy used for emulation was also in that dir, so the ROM folder acquired no `.sav`/`.ss*` files.
 
 ## 10. Legal note
 

@@ -1,5 +1,7 @@
 # Frogger's Adventures 2: The Lost Wand (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -24,7 +26,7 @@ all with the stock `0xEA00002E` entry and the same title/code (copies inside com
 
 Stock crt0 is intact at `0x080000C0` (`bx r1` with `r1 = 0x08000235`, Thumb `main`).
 Per §16.1, analysis used **a copy** with the first four bytes restored to `2E 00 00 EA`
-(`/tmp/opencode/frogger2/clean.gba`). The cracktro is a separate release artifact and
+(`/tmp/frogger2/clean.gba`). The cracktro is a separate release artifact and
 is **not** an in-game cheat; no appended trainer menu was found.
 
 ## 2. Executive summary
@@ -63,7 +65,7 @@ D-pad = arrow keys. Hold each key ~150–200 ms (short taps are missed).
 6. Press **R** → the **MAGICIAN'S REALM** screen appears, listing three best times.
 7. Control: press **R** at the menu *without* step 4 and nothing happens (verified).
 
-Screenshots of each state are in `/tmp/opencode/frogger2/` (`title_here.png`,
+Screenshots of each state were in `/tmp/frogger2/` (`title_here.png`,
 `postcode_menu2.png`, `after_R2.png`, `nocode_R2.png`, `walk_story_slots.png`,
 `vt_extra.png` for the novel code). Screenshots are evidence only; no assets are published.
 
@@ -238,7 +240,7 @@ accepted variation, and they are ignored post-completion rather than matched by 
   `tesseract` (OCR-based screen-state oracle).
 - Savestate analysis: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte state;
   EWRAM at `0x21000`, IWRAM at `0x19000` (§16.13). Scripts in
-  `/tmp/opencode/frogger2/` (`ss.py`, `vtest.py`, `ram_novel.py`, `scan_codes.py`, etc.).
+  `/tmp/frogger2/` (`ss.py`, `vtest.py`, `ram_novel.py`, `scan_codes.py`, etc.).
 
 **Legal note:** no ROM data, graphics, music or full game text is reproduced here; only
 hashes, addresses, algorithms and the author-generated button sequence are published.

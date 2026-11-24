@@ -1,5 +1,7 @@
 # Teenage Mutant Ninja Turtles (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -238,14 +240,14 @@ the *bit* is unambiguous, the cosmetic description is not.
 
 * `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, Python `struct`/regex scans.
 * `arm-none-eabi-objdump -M force-thumb` with `--adjust-vma=0x08000000`.
-* Python exhaustive validator reimplementation: `/tmp/opencode/tmnt1/enumerate.py`.
+* Python exhaustive validator reimplementation: `/tmp/tmnt1/enumerate.py`.
 * mGBA command-line debugger through a FIFO:
   `mkfifo dbg.fifo; tail -f dbg.fifo | stdbuf -oL -eL env DISPLAY=:315 SDL_AUDIODRIVER=dummy mgba -d -3 ROM >log 2>&1`;
   commands `c`, `save N`, `load N`, `x/1 ADDR`, `help` (SIGINT to the *owned*
   mGBA PID breaks into the prompt).
-* Savestate reader: `/tmp/opencode/tmnt1/ss.py` (zlib-decompresses the PNG
+* Savestate reader: `/tmp/tmnt1/ss.py` (zlib-decompresses the PNG
   `gbAs` chunk). EWRAM at raw `0x21000`, IWRAM at `0x19000`.
-* Input helper `/tmp/opencode/tmnt1/key.py` (XTEST via `xdotool`); screenshots
+* Input helper `/tmp/tmnt1/key.py` (XTEST via `xdotool`); screenshots
   via `scrot`, cropped with ImageMagick.
 
 No ROM or copyrighted asset is redistributed here; only addresses, hashes,

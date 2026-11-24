@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Elf: The Movie/Elf: The Movie.gba` |
+| File | `roms/Elf: The Movie/Elf: The Movie.gba` |
 | Size | 4,194,304 bytes (4 MiB, `0x400000`) |
 | `file` | Game Boy Advance ROM image: "ELF" (BELE4Z, Rev.00) |
 | Header title | `ELF` (12-byte field `ELF\0\0\0\0\0\0\0`) |

@@ -1,5 +1,7 @@
 # Spirits & Spells (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -47,7 +49,7 @@ A debug level-name bank (15 entries `Level H011`…`Level H03B`) and `CACHEVERIF
 4. Overwrite the buffer with any 7 ASCII characters via `w/1`, then `c` to the return breakpoint. `r0 != 0` means accepted; the decoded record is at `0x03000BB0`.
 5. To mint: at the validator breakpoint, clear the breakpoints, set the state record at `0x03000BB0`, call `0x8345EC0` with `r0` = an output buffer, `lr` = a breakpoint address, `cpsr=0x3F`, `pc=0x8345EC1`; read the 7-char string from the output buffer.
 
-Helper scripts are in `/tmp/opencode/spiritsspells3/` (`oracle.py`, `pworacle.py`, `minter.py`, `verify_code.py`, `levelcheck.py`).
+Helper scripts were in `/tmp/spiritsspells3/` (`oracle.py`, `pworacle.py`, `minter.py`, `verify_code.py`, `levelcheck.py`).
 
 **Codes tested (all from the archived GameFAQs list):** `R6JGF91`, `GH0V3GW`, `D7JDN31`, `/6JT12S`, `PC5R05M`, `6C14X05`, `GB1G40P`, `PG7R05R`, `*2XZMC6`, `4HNZB44`, `4G7ZJ5R`, `4BQR85P`, `N/0RGFG`, `PBQZS5P` — all accepted.
 
@@ -210,5 +212,5 @@ Length is bounded by the UI: exactly 7 slots; no 8th character can be entered.
 - `strings -t x`, `grep -abo`, `xxd` for reconnaissance; `web.archive.org` for the GameFAQs cheat list.
 - mGBA 0.10.5 GUI under `Xvfb :316` with `openbox`, `xdotool` for input, `scrot`/ImageMagick for screenshots.
 - mGBA CLI debugger (`-d`) over a pty: `r/1|2|4`, `w/1|2|4`, `w/r`, `b/t`, `c`, `status` — used as the validator/generator oracle (guide §16.19).
-- Helper scripts: `/tmp/opencode/spiritsspells3/{oracle,pworacle,minter,verify_code,levelcheck,ingame,visual,phase0,static1,static2,blscan}.py`.
+- Helper scripts: `/tmp/spiritsspells3/{oracle,pworacle,minter,verify_code,levelcheck,ingame,visual,phase0,static1,static2,blscan}.py`.
 - No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms and self-generated codes are published.

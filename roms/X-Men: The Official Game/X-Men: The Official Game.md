@@ -1,5 +1,7 @@
 # X-Men: The Official Game (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -45,7 +47,7 @@ The game's main loop is a 91-slot scene dispatcher; all 91 scene indices were en
 * To reach the locked Extras screen from a fresh file: debug menu, page 1, select `EXTRAS` (index 8), press A.
 * To unlock Nightcrawler from a fresh file: debug menu, page 1, select `Unlock NtCwlr` (index 17), press A.
 
-Screenshots and the state-file enumeration are in `/tmp/opencode/xmenofficial/` (not in the ROM folder). Key frames: `real_title6.png` (natural title), `real_code_after6.png` (menu after code on real title), `dbg_entry.png`, `walk_p1_*.png`, `walk_p2_*.png`, `walk_p2left_*.png`, `unlock_ntcwlr_effect.png`, `bound_30press.png`, `bound_31press.png`, `bound_wrong15.png`, `scenes/s01.png`…`s91.png`.
+Screenshots and the state-file enumeration were in `/tmp/xmenofficial/` (not in the ROM folder). Key frames: `real_title6.png` (natural title), `real_code_after6.png` (menu after code on real title), `dbg_entry.png`, `walk_p1_*.png`, `walk_p2_*.png`, `walk_p2left_*.png`, `unlock_ntcwlr_effect.png`, `bound_30press.png`, `bound_31press.png`, `bound_wrong15.png`, `scenes/s01.png`…`s91.png`.
 
 ## 4. Address map
 
@@ -192,7 +194,7 @@ Active-high image of `KEYINPUT & 0x3FF`: `A=0x001, B=0x002, Select=0x004, Start=
 * Capstone — Thumb literal/BL scans (`keyinput_xrefs.py`, `blscan.py`).
 * REA MCP + Ghidra 12.1.4 raw-binary import (ARM:LE:32:v7, base 0x08000000) — `procedure_pseudo_code` on `FUN_0800A32C`, `FUN_0800BBE4`, `FUN_080000C0`; session closed after analysis.
 * mGBA 0.10.5 + Xvfb `:316` + openbox + xdotool + scrot + ImageMagick `montage` — dynamic walk and screenshots.
-* Python scripts in `/tmp/opencode/xmenofficial/`: `parse_bank.py`, `strings_bank.py`, `ptrscan.py`, `findptr.py`, `blscan.py`, `buttonsearch.py`, `idsearch.py`, `patch_ss.py`, `patch2.py`, `enter_code.py`, `bounds.py`, `dbgtest.py`, `walk_menu.py`, `ram_evidence.py`, `realtest3.py`, `ss.py`.
+* Python scripts in `/tmp/xmenofficial/`: `parse_bank.py`, `strings_bank.py`, `ptrscan.py`, `findptr.py`, `blscan.py`, `buttonsearch.py`, `idsearch.py`, `patch_ss.py`, `patch2.py`, `enter_code.py`, `bounds.py`, `dbgtest.py`, `walk_menu.py`, `ram_evidence.py`, `realtest3.py`, `ss.py`.
 * Savestate technique (§16.13): mGBA `.ss1` PNG, zlib-decompressed `gbAs` chunk (397,312 bytes); IWRAM at raw 0x19000, scene byte at raw 0x1A858. Patching the scene byte and reloading F1 gave deterministic access to all 91 scenes. GDB stub on mGBA 0.10.5 returned protocol errors, so savestate diffing was used instead.
 
 ## 10. Legal note

@@ -1,5 +1,7 @@
 # 2 Games in 1 — SpongeBob: SuperSponge & Revenge of the Flying Dutchman (GBA) — RE Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-10-24; Revenge half completed
 2026-10-26.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
@@ -155,7 +157,7 @@ slot 1/3 = password keypad, slot 2 = main menu, slot 5 = level intro.
 | `0x0801AB80` | Revenge packer: 30-bit value in `r5` → 6 symbols at `*(0x03001954)` |
 | `0x0801ABB8` | Revenge decoder/apply: 6 symbols → state words, returns 0/1/2 |
 | `0x0801AEF4` | Encoder wrapper: `bl 0x0801AA38`, returns the code pointer |
-| `0x08039EEC` | In-game code printer (pause/level card): sets `W|=0x20000`, encodes |
+| `0x08039EEC` | In-game code printer (pause/level card): sets `W\|=0x20000`, encodes |
 | `0x080D1E28` | Revenge alphabet `BCDFGHJKLMNPQRSTVWXYZ0123456789?` |
 | `0x08020E94` | Password-screen call site: `bl 0x0801ABB8` on the 6-byte buffer |
 | `0x08020C00`–`0x08021060` | Password keypad screen (6 slots; `cmp r3,#6` at `0x08020E8E`, validator call at `0x08020E94`) |
@@ -533,7 +535,7 @@ Remaining bounded gaps, stated so they are not mistaken for open questions:
 | savestate PNG `gbAs` chunk (zlib) | raw IWRAM dump to confirm decoded fields |
 | Python codec + exhaustive enumeration | `rev_codec.py`, 1,777,664 valid codes constructed and round-tripped |
 
-`rev_codec.py` (kept at `/tmp/opencode/spongebob/rev_codec.py` during the
+`rev_codec.py` (kept at `/tmp/spongebob/rev_codec.py` during the
 session) implements `symbols_to_val`, `split`, `join`, `check`, `decode`,
 `encode` and reproduces every published code and every rejection above:
 
@@ -546,7 +548,7 @@ UNARY = (0, 1, 3, 7, 15, 31)
 ```
 
 Screenshots referenced by name in §6b/§7 were captured to
-`/tmp/opencode/spongebob/shots/` during the session
+`/tmp/spongebob/shots/` during the session
 (`pw_screen.png`, `hub_allzero_BBBBBB.png`, `hub_novel_H0X1J2.png`,
 `novel_H0X1J2_intro_echo.png`, `pub_BBBBBN_ch2_special_delivery.png`,
 `pub_???91?_final_level.png`, `reject_BBBBBH_cleared.png`,

@@ -1,5 +1,7 @@
 # Crash Bandicoot Purple: Ripto's Rampage (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -307,7 +309,7 @@ One published-list byte was corrected where it mattered: `J45S0N` was typed in m
 * `mGBA 0.10.5` (SDL) under `Xvfb :265` + `openbox`, driven by `xdotool`; window selected by PID, not by name.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for the validator, branches and palette calls.
 * Python 3: PC-relative literal scanner, pointer scan, keypad driver, `.ss1` parser (PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte state; IWRAM `0x19000`, EWRAM `0x21000`, palette `0x800`).
-* `parse_ss.py`, `drive.py`, `enter.py` in `/tmp/opencode/crashpurple`.
+* `parse_ss.py`, `drive.py`, `enter.py` in `/tmp/crashpurple`.
 
 ## 10. Legal note
 

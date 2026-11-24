@@ -1,5 +1,7 @@
 # Super Robot Taisen: Original Generation (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -254,7 +256,7 @@ code format exists to mint against.
 * Custom `ss.py` / `diff.py` / `vram2.py` — mGBA savestate `gbAs` extraction, RAM
   diffing and 8-bpp VRAM rendering with palette at raw `0x0800`.
 
-Screenshots kept under `/tmp/opencode/srtog/` (`t3.png`, `ng1.png`, `sys1.png`,
+Screenshots kept under `/tmp/srtog/` (`t3.png`, `ng1.png`, `sys1.png`,
 `systemmenu.png`, `mapmenu.png`, `mission.png`, `reset.png`, `code1.png`,
 `terrain.png`, `vram8_big.png`, etc.).
 

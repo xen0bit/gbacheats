@@ -1,5 +1,7 @@
 # LEGO Island 2: The Brickster's Revenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 **Scope:** developer-intended cheats only (passwords, button codes, hidden/debug menus,
 unlockables). No GameShark/CodeBreaker/memory-edit codes. ROM hash is recorded so every
 address below is tied to exactly this image.
@@ -149,7 +151,7 @@ cluster `0x08019500`–`0x0801A300`; no comparison against any literal occurs th
 
 * **Name alphabet (37 symbols), ROM `0x08498F98`:** `A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 1 2 3 4 5 6 7 8 9 0 <space>`. `.` (the published code) is **not** a member.
 * **High-score record (`.sav` `0x2BE0`+):** `u8 name[4]` (3 uppercase initials + `0x00`), `u32 score` — 8 bytes/record. Default data includes `SWD`, `NOR`, `KTS`, `LEE`, `MAT`, `DEB`, `PIH`, `DAL`, `LAR`, `JEO`, `MSG`, `SAM`, `JON`, `ROS`, `MOS` (developer-style 3-letter initials; inert filler, not codes).
-* **Screens and RAM states (all Observed):** Language Select (`English`); Title; Main Menu; Slot Select (3 slots); In-game (overworld); Inventory (R); Map (L); Pause (Continue/Save/Quit); Are You Sure? (No/Yes). State markers saved in `/tmp/opencode/legoisland2/st_*.ss1`.
+* **Screens and RAM states (all Observed):** Language Select (`English`); Title; Main Menu; Slot Select (3 slots); In-game (overworld); Inventory (R); Map (L); Pause (Continue/Save/Quit); Are You Sure? (No/Yes). State markers saved in `/tmp/legoisland2/st_*.ss1`.
 * **Debug/dev leftovers (string scan, Observed):** `GOGOMONKEYX` (`0x49790`), `MultiSioSync010316` (`0x4979C`), `Multiplayer already initialised` (`0x497B4`), `Jane Oldfield` / `10:17 Wed 11st Apr 2001` / `10:33 ...` (`0x4A0030`), `score_sp: %d` (`0x615E40`), `score_wab : %d` (`0x61FD08`), `Score : %d` (`0x54CFD4`), `Start Menu` (`0x670B0`), `Pause Menu` (`0x4B420C`), `Map Screen` (`0x4A3E24`), `SubGame Select` (`0x9A294`), `Language Select` (`0x642A0`), `Slot Select` (`0x4BCBF4`), `High Score Entry` (`0x498F08`). None is a cheat/debug entry point.
 
 ---
@@ -216,7 +218,7 @@ field), the entire ROM text/button spaces, and every reachable screen.
 * Python + `capstone` 5.0.7 for pointer-xref (`scan_xrefs.py`) and immediate scans; `keystone` installed but unused.
 * `arm-none-eabi-objdump -M force-thumb` for the high-score cluster disassembly.
 * `mgba` (SDL) under `Xvfb :319` + `openbox`; `xdotool` for input; `scrot` for screens
-  (saved in `/tmp/opencode/legoisland2/*.png`, not attached).
+  (saved in `/tmp/legoisland2/*.png`, not attached).
 * `ss.py`/`diff.py`: zlib-decompress the `gbAs` chunk of mGBA `.ss1` states and diff
   HEADER/IWRAM/EWRAM for RAM evidence (§16.13).
 * `dbgserver.py`/`dbg.py`: pty bridge to mGBA `-d` CLI debugger (RAM reads were attempted;

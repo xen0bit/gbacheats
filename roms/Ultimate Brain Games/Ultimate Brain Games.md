@@ -1,5 +1,7 @@
 # Ultimate Brain Games (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -260,7 +262,7 @@ so it is not mistaken for a level-select code.
 
 ## 9. Tooling
 
-Scripts written in `/tmp/opencode/braingames/`: `ui.py` (XTEST input + scrot),
+Scripts written in `/tmp/braingames/`: `ui.py` (XTEST input + scrot),
 `mdbg.py` (mGBA `-d` pty debugger driver: `r/4`, `x/4`, `b/t`, `watch/r`,
 `continue`), `ss.py` (mGBA `.ss1` PNG/`gbAs` zlib savestate parser + RAM diff),
 `scan_input.py` (KEYINPUT literal/xref scan), `scan_codes.py` (mask-sequence

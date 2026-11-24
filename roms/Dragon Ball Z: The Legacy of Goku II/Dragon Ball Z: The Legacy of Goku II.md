@@ -1,5 +1,7 @@
 # Dragon Ball Z: The Legacy of Goku II (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -217,7 +219,7 @@ exists on the title/menu path.
 * Capstone 5.0.7 (available; the `ADR` scan used an equivalent direct decoder).
 * mGBA (SDL) under `Xvfb :316` + `openbox`, `xdotool` XTEST input helper, `scrot`/`import`
   screenshots. mGBA `-c` cheat file used once as an analysis probe; no shipped code.
-* A 2-byte temporary ROM patch in `/tmp/opencode/logoku2/` was used solely to reach the
+* A 2-byte temporary ROM patch in `/tmp/logoku2/` was used solely to reach the
   gated debug screen for enumeration. It was not placed in the ROM folder and is not a code.
 * Legal: no ROM bytes or copyrighted assets are reproduced here; only addresses, hashes,
   algorithms, and original observations are published.

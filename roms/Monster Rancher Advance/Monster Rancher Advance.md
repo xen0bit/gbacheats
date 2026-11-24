@@ -1,5 +1,7 @@
 # Monster Rancher Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -36,7 +38,7 @@ Novel codes absent from all **18,673** published passwords were generated (e.g. 
 
 **Menu path.** Title → PRESS START (`Return`) → **NEW GAME** (`x`) → optionally enter a breeder name (the same 63-symbol keyboard; I used `AA`, confirmed with YES) → advance the intro dialogue with `x` → Shrine → **Regeneration** screen. A clean savestate of this screen is kept as `mra.ss3` in the work dir and was used for every entry experiment.
 
-**Code-entered observation.** At the Regeneration keyboard, characters are selected with the D-pad and typed with A; END submits. A five-character input triggers the "I will now regenerate your monster" dialogue automatically (input cap at starting breeder rank). Advancing the dialogue shows the monster on the regeneration result screen with its `No. NNN` and name. Screenshots of the title, main menu, name entry, Shrine, Regeneration screen, and generated-monster result are retained in `/tmp/opencode/monsterrancher1/`.
+**Code-entered observation.** At the Regeneration keyboard, characters are selected with the D-pad and typed with A; END submits. A five-character input triggers the "I will now regenerate your monster" dialogue automatically (input cap at starting breeder rank). Advancing the dialogue shows the monster on the regeneration result screen with its `No. NNN` and name. Screenshots of the title, main menu, name entry, Shrine, Regeneration screen, and generated-monster result are retained in `/tmp/monsterrancher1/`.
 
 **Published codes verified against ROM.** GameFAQs/IGN/CheatCC lists were checked; literals such as `Rika`, `Justice`, `Ninja`, `PAI`, `Samurai`, `night1`, `Hobo`, `Noah`, `pal`, `GHNNINOO` are present in the hard-coded table under the font-index encoding (not ASCII — `strings` finds none of them). The 579-word list from the IGN FAQ (ROM range given there as `0813B3D6`–`0813E230`) maps to this ROM at file `0x13B3C8`–`0x13E23C`; the FAQ's first entries `98%SPEED`, `FROMFREE`, `SEAINSUN`, `RICECAKE`, `SQUIRREL`, `ASSASSIN`, `Delusion`, `Missouri`, `Cardinal`, `Bulldoze`, `Boyscout`, `12345678`, `87654321`, `Seahorse` were decoded directly from ROM bytes and match exactly.
 

@@ -1,5 +1,7 @@
 # Advance Wars 2: Black Hole Rising (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -174,7 +176,7 @@ without a completed save.
 | `0x05826E0` | | `SOUND*ROOM` |
 | `0x090F30` | | 45-byte debug glyph strip (`ABCDEFGHLMOPRSTUVWabcdefghi…`) |
 | `0x090F8C–0x0910D8` | | **unreachable debug-menu lexicon** (see §6) |
-| `0x0849E5F8–0x0849E6A4` | | debug/widget descriptor table (`{handler|1, flags, next, …}`) |
+| `0x0849E5F8–0x0849E6A4` | | debug/widget descriptor table (`{handler\|1, flags, next, …}`) |
 
 ## 5. Algorithm
 
@@ -398,7 +400,7 @@ values were enumerated exhaustively by `out/bootcheck.py`.
 * `link_menu.png` (SINGLE-PAK / MULTI-PAK / TRADE MAPS), `war_room_sel.png`,
   `versus_map.png` (SELECT MAP list), `editor_lr_select.png` (L+R+Select in
   the designer: no effect), `abst_start_reject.png` (A+B+Start+Select at boot:
-  intro plays, no prompt) — under `/tmp/opencode/aw2/evidence/`.
+  intro plays, no prompt) — under `/tmp/aw2/evidence/`.
 * Rejection runs `0x215`, `0x210`, `0x00F`: no prompt at 8 s or 15 s.
 
 **Derived (disassembly, `arm-none-eabi-objdump -M force-thumb`):**
@@ -438,7 +440,7 @@ values were enumerated exhaustively by `out/bootcheck.py`.
 * `mGBA 0.10.5` (`mgba-sdl`), `Xvfb :124`, `openbox`, `xdotool`, `scrot`,
   ImageMagick `import`, `arm-none-eabi-objdump`.
 * `python3` with `capstone 5.0.7` (used for ad-hoc literal/BL scans).
-* Scripts/artifacts in `/tmp/opencode/aw2/`:
+* Scripts/artifacts in `/tmp/aw2/`:
   * `key.py` — input/screenshot helper (window capture + native F12 frames).
   * `out/strings5.txt` — `strings -t x -n 5` of the ROM (63,015 entries).
   * `out/keyscan.py` — naive button-mask byte search.

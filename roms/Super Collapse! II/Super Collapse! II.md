@@ -1,5 +1,7 @@
 # Super Collapse! II (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -52,8 +54,8 @@ No button-code sequence, debug menu, or other hidden code surface was found on a
 | `0x08000974` – `0x08000978` | `strb 1` to `0x0300032C` (secret flag) | Derived |
 | `0x0800097A` – `0x0800099C` | Mode→range selection from `0x03000322` | Derived |
 | `0x080009B4` – `0x0800A60` | 5-byte compare loop over table entries | Derived |
-| `0x0800A02` – `0x0800A18` | Hard branch: `flags |= 3`, level `= 5*(off-19)` | Derived |
-| `0x0800A30` – `0x0800A42` | Easy branch: `flags = (flags|1)&~3`, level `= 5*(off+1)` | Derived |
+| `0x0800A02` – `0x0800A18` | Hard branch: `flags \|= 3`, level `= 5*(off-19)` | Derived |
+| `0x0800A30` – `0x0800A42` | Easy branch: `flags = (flags\|1)&~3`, level `= 5*(off+1)` | Derived |
 | `0x0800A44` – `0x0800A58` | Puzzle branch: `flags &= ~3`, level `= off` | Derived |
 | `0x0800A64` | Failure path (invalid-code handling) | Derived |
 | `0x08002C40` – `0x08002E98` | Generator: derive table index from (mode, difficulty, level) and copy the 5 chars into `0x03000108` | Derived |
@@ -211,4 +213,4 @@ No button-code system was found. Recon found no published button sequences for t
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for validator/generator disassembly; Capstone/Python for PC-relative literal and BL scans
 * Python 3 for header parse, table enumeration, published-list set difference, and savestate `gbAs` zlib decompression
 * mGBA 0.10.5 SDL, Xvfb `:319`, openbox, xdotool, scrot; savestate RAM diffing (guide §16.13) because the GDB stub was unreliable in this build
-* Evidence files live in `/tmp/opencode/supercollapse2/` (`s*.png`, `rej_*.png`, `screen_*.png`, `gfaqs_arch.html`, helper scripts). No ROM or copyrighted assets are redistributed by this report.
+* Evidence files were kept in `/tmp/supercollapse2/` (`s*.png`, `rej_*.png`, `screen_*.png`, `gfaqs_arch.html`, helper scripts). No ROM or copyrighted assets are redistributed by this report.

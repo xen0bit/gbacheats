@@ -1,5 +1,7 @@
 # Scooby-Doo! Mystery Mayhem (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -211,7 +213,7 @@ accepted because no code can be submitted.
 
 ## 9. Tooling
 
-- `emu.py` — xdotool key holder + scrot crop helper (custom, in `/tmp/opencode/scoopymystery`).
+- `emu.py` — xdotool key holder + scrot crop helper (custom, in `/tmp/scoopymystery`).
 - Python/PIL — savestate `gbAs` zlib decode and EWRAM/IWRAM diff; screenshot image-diff
   detector for button-code probes; pointer/literal/xref scanners.
 - `arm-none-eabi-objdump -M force-thumb` — disassembly of input manager and data pools.

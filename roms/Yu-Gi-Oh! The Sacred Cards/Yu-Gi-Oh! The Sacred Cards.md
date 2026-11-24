@@ -1,5 +1,7 @@
 # Yu-Gi-Oh! The Sacred Cards (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -31,7 +33,7 @@ The game ships exactly one developer-intended cheat surface: the **Card Shop Pas
 * mGBA 0.10.5, `DISPLAY=:316`, Xvfb 1024×768×24 + openbox, `SDL_AUDIODRIVER=dummy`.
 * Keymap (SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrows.
 * Boot path: title → NEW GAME → name grid → intro → Yugi's room → Clock Tower Square.
-* **Validator oracle (reproducible):** start `mgba -3 -d -t <state> game.gba` with a CLI-debugger PTY on stdin. Connect, `break 0x08003BD6`, `continue` (savestate PC). Write raw digits to `0x02020D90..97`, set `r0`=table record, `r1`=0x02020D90, `r14`=0x08003BD7, `r15`=0x08034261, `continue`; the breakpoint prints `r0` = 10 (accept) or 11 (reject). Scripts: `/tmp/opencode/sacredcards2/cmp_oracle.py`, `batch_oracle.py`.
+* **Validator oracle (reproducible):** start `mgba -3 -d -t <state> game.gba` with a CLI-debugger PTY on stdin. Connect, `break 0x08003BD6`, `continue` (savestate PC). Write raw digits to `0x02020D90..97`, set `r0`=table record, `r1`=0x02020D90, `r14`=0x08003BD7, `r15`=0x08034261, `continue`; the breakpoint prints `r0` = 10 (accept) or 11 (reject). Scripts: `/tmp/sacredcards2/cmp_oracle.py`, `batch_oracle.py`.
 * Known-good anchors: `46986414` (Dark Magician), `89631139` (Blue-Eyes White Dragon), `70781052` (Summoned Skull), `98025229`, `62626514` (utility).
 
 ## 4. Address map
@@ -130,7 +132,7 @@ This proves the accept/reject predicate over representative points and resolves 
 * **Record size:** 8 bytes; **896 distinct accepted strings**, zero duplicates.
 * **Layout:** 831 consecutive records `0x08D4F444`–`0x08D50E34`; SKIP markers at indices 832–834; further blocks to index 900; TERM at index 901 (`0x08D51064`); utility table `0x08D5106C`–`0x08D5107C`; markers at 905–907.
 * **Published recon:** 829 unique codes extracted from four sources; 800 appear verbatim in the ROM table. 29 published codes were not found under any encoding tried (transcription errors, e.g. `91939603` vs ROM `91939608`).
-* Full dumps: `all_rom_codes.txt` (895 lines of records), `published_codes.txt` (822), `novel_final.txt` (95) in `/tmp/opencode/sacredcards2/` (copied from the prior work dir).
+* Full dumps: `all_rom_codes.txt` (895 lines of records), `published_codes.txt` (822), `novel_final.txt` (95) in `/tmp/sacredcards2/` (copied from the prior work dir).
 
 ## 6b. Enumeration
 
@@ -160,7 +162,7 @@ This proves the accept/reject predicate over representative points and resolves 
 * `arm-none-eabi-objdump -M force-thumb` for ROM/IWRAM disassembly; custom Thumb BL scanner (`blscan.py`) — no BL or pointer xrefs to `0x0803428C` exist in ROM/EWRAM/IWRAM, so the screen reaches it via an indirect/compressed path (the IWRAM code at `0x03000340` is an IRQ/audio routine, not the validator).
 * mGBA `-g` GDB stub (port conflicted with a sibling session) and, successfully, mGBA's `-d` CLI debugger driven over a Python PTY (`cmp_oracle.py`, `batch_oracle.py`, `trace_sub2.py`).
 * mGBA `.ssN` PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte state; EWRAM at `0x21000`, IWRAM at `0x19000`; `patchss.py` rewrites a byte and rebuilds the PNG for load tests.
-* Work dir `/tmp/opencode/sacredcards2/`: scripts and evidence PNGs. No screenshots or emulator artifacts left in the ROM folder.
+* Work dir `/tmp/sacredcards2/`: scripts and evidence PNGs. No screenshots or emulator artifacts left in the ROM folder.
 
 ## 10. Legal note
 

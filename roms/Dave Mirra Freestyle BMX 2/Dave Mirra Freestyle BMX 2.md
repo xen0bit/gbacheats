@@ -1,5 +1,7 @@
 # Dave Mirra Freestyle BMX 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -328,6 +330,6 @@ build exposes no effect from it.
 - `capstone` for the whole-ROM Thumb scan of `0x03001608` accesses and
   `BL` call-site scans.
 - Python scripts: savestate loader/differ, label-pointer scanner, mask/table
-  dumper (kept in `/tmp/opencode/davemirra2`).
+  dumper (kept in `/tmp/davemirra2`).
 
 No ROM, graphics, music, or extracted text is redistributed.

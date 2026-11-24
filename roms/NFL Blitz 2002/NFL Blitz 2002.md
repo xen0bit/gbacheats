@@ -1,10 +1,12 @@
 # NFL Blitz 2002 / NFL Blitz 20-02 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/NFL Blitz 2002/NFL Blitz 2002.gba` |
+| File | `roms/NFL Blitz 2002/NFL Blitz 2002.gba` |
 | Size | 4,194,304 bytes (`0x400000`) |
 | Header title | `NFLBLITZ2002` |
 | Game code / maker | `ABZE` / `5D` |
@@ -46,7 +48,7 @@ Published GBA sources (GameFAQs, world-of-nintendo, MoFunZone, GGmania, all cros
 Xvfb :316 -screen 0 1024x768x24 &            # PID recorded, own display only
 openbox &                                     # on :316
 export DISPLAY=:316 SDL_AUDIODRIVER=dummy
-mgba -3 "/mnt/gbacheats/roms/NFL Blitz 2002/NFL Blitz 2002.gba"
+mgba -3 "roms/NFL Blitz 2002/NFL Blitz 2002.gba"
 ```
 mGBA SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Hold keys 70–180 ms; 40–60 ms moves one menu slot.
 
@@ -60,7 +62,7 @@ mGBA SDL keymap: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
 
 **RAM access method that worked** (mGBA CLI debugger + SIGINT):
 ```bash
-mgba -3 -d "/mnt/gbacheats/roms/NFL Blitz 2002/NFL Blitz 2002.gba"
+mgba -3 -d "roms/NFL Blitz 2002/NFL Blitz 2002.gba"
 # from Python PTY driver:
 #   "c"                       -> run
 #   os.kill(pid, SIGINT)      -> break into debugger while running
@@ -152,7 +154,7 @@ Labels: **Observed** = emulator screen / live RAM read / savestate bytes; **Deri
 * **Observed** — all screens walked: intro/credits (VRAM hashes `f8d8379e5dfd`, `9e5e407fb64b`, `8fd6cf08c45c`, `ee39fda068f2`, `05c794827c29`), main menu (`af75b6ab2a58`), options (`77780278e547`), match-up/team select (`7e7c039cc2b3`, `6aa0447730e5`), gameplay (EWRAM `0x02007710` filled with tile indices; OAM shadow `0x0203E4B4/B8` active), roster (`L`/`R` presses). Screens were identified by VRAM-hash transitions and EWRAM changes, not by attract-screen assumptions.
 * **Observed** — `x/4` reads after SIGINT gave full EWRAM/IWRAM dumps (73,728 words per snapshot). Savestate→RAM mapping was cross-checked against live reads.
 * **Derived** — secret teams `OGRES`/`MIDWAY` and their table indices; hint string at `0x0230EEC`; keypad-read function at `0x08013D60`; all negative search counts in §6.
-* **Observed (negative)** — keyram experiment at the team-select match-up screen: `L`, `B`, `A`, `R` each changed only `0x0200C208/20C/210` (RNG), `0x0203E4B4/B8` (sprite animation) and `0x03007520` (frame pointer). Full results in `/tmp/opencode/nflblitz/keyram2.out`.
+* **Observed (negative)** — keyram experiment at the team-select match-up screen: `L`, `B`, `A`, `R` each changed only `0x0200C208/20C/210` (RNG), `0x0203E4B4/B8` (sprite animation) and `0x03007520` (frame pointer). Full results in `/tmp/nflblitz/keyram2.out`.
 * **Observed (negative)** — enable-key sweep with `L×4 B×3 A×2` then each of `R, Left, Right, Up, Down, Start, Select, A, B`: 0 non-noise diffs for R/Left/Right/Up/Down; remaining keys not completed because the run exceeded its time budget (recorded here explicitly rather than as "tested").
 * **Observed (negative)** — with a clean both-teams match-up state (`6aa0447730e5`, stable across two saves 0.5 s apart), `L×4 B×3 A×2 R` transitioned to gameplay (text buffer `0x02007710` populated) with no code-name buffer or persistent flag before the transition.
 * **Inferred** — the published GBA count codes may have been transcribed from the console SKUs, whose published lists contain many more codes and use D-pad directions; this would explain both the `R` vs direction disagreement between sources and the absence of the literals in this image.
@@ -171,7 +173,7 @@ Labels: **Observed** = emulator screen / live RAM read / savestate bytes; **Deri
 * `arm-none-eabi-objdump`, `capstone` Thumb disassembly and PC-relative literal/LDR scans.
 * `Xvfb :316`, `openbox`, `mgba -3` (SDL, `SDL_AUDIODRIVER=dummy`), `mgba -3 -d` via a Python `pty` driver with SIGINT-based breaking, `xdotool` XTEST input, `scrot` + ImageMagick `convert`/`montage` for the limited visual checks.
 * `gdb-multiarch` was attempted against mGBA's `-g` stub on port 2345/2745 but the handshake failed; the `-d`/SIGINT path replaced it.
-* Helper scripts in `/tmp/opencode/nflblitz/`: `keys.py`, `stateutil.py`, `dbg_state.py`, `dbg_keytest.py`, `read_states.py`, `keyram.py`, `enable_test.py`, `capture_states.py`. Raw outputs: `keyram2.out`, `keyram_match.out`, `enable_test.out`, `read_states.out`, `matchdiff.out`.
+* Helper scripts in `/tmp/nflblitz/`: `keys.py`, `stateutil.py`, `dbg_state.py`, `dbg_keytest.py`, `read_states.py`, `keyram.py`, `enable_test.py`, `capture_states.py`. Raw outputs: `keyram2.out`, `keyram_match.out`, `enable_test.out`, `read_states.out`, `matchdiff.out`.
 
 **Legal note.** No ROM image, extracted graphics, music or game assets are redistributed here. Only hashes, addresses, tool scripts and findings are published.
 

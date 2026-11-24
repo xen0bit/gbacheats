@@ -1,5 +1,7 @@
 # Casper (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -301,7 +303,7 @@ published strings are accepted by this USA image.
 - Dynamic: mGBA 0.10.5 (`/usr/games/mgba`) with `-d` command-line debugger
   (`r/1`, `w/1`, `w/r`, `break`, `frame`, `info`) and `-g` GDB stub; Xvfb `:233`;
   `xdotool` for input.
-- Custom scripts left in `/tmp/opencode/casper/`: `pwlib.py` (encoder/decoder),
+- Custom scripts left in `/tmp/casper/`: `pwlib.py` (encoder/decoder),
   `pwenum.py` (enumeration), `myhelper.py` (mGBA pty helper), `gdbclient.py`
   (GDB remote client), `final_verify.py` / `verify_dec.py` (direct decoder
   calls), `direct2.py` (direct encoder call).

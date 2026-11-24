@@ -1,10 +1,12 @@
 # Final Fantasy Tactics Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Final Fantasy Tactics Advance/Final Fantasy Tactics Advance.gba` |
+| File | `roms/Final Fantasy Tactics Advance/Final Fantasy Tactics Advance.gba` |
 | Size | 16,777,216 bytes (`0x01000000`) |
 | Header title | `FFTA_USVER.` (12-byte field; the retail title string was re-tagged — see below) |
 | Game code / maker | `AFXE` / `01` (Nintendo), version `0x00`, complement `0x89`, header checksum `0x0000` |
@@ -108,7 +110,7 @@ From GameFAQs/CheatCC (corroborated by TCRF's unused-dialogue notes): Expert Mis
 
 ## 6b. Enumeration
 
-### Screens walked (all with screenshots retained in `/tmp/opencode/ffta/`)
+### Screens walked (all with screenshots retained in `/tmp/ffta/`)
 
 | # | Screen | Entries observed | RAM/snapshot evidence |
 |---|---|---|---|

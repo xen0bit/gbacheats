@@ -1,5 +1,7 @@
 # The Berenstain Bears and the Spooky Old Tree (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -40,7 +42,7 @@ No ASCII text, hard-coded code table, mask sequence, button code, or hidden/debu
 * A valid code transitions to a level-select map (7 numbered circles); levels 1..N show green/highlighted. An invalid code leaves the screen unchanged.
 * Novel code entry from the fresh screen (all Knight, cursor at slot 1): slot1 Up once (Drawers), Right, slot2 Up×3 (Squirrel), Right, slot3 unchanged (Knight), Right, slot4 Up×2 (Bug), A.
 
-Key artifacts in the work dir `/tmp/opencode/berenstain/`: `enumerate.log` (full 256-code run), `NOVEL_code_entered.png`, `NOVEL_result.png`, `v_1302.png` (all-unlocked map), `v_XXXX.png` for each accepted code, `icons_montage.png` (icon alphabet), `downcycle_montage.png` (reverse cycle), `invalid_allK.png`, `credits*.png`.
+Key artifacts in the work dir `/tmp/berenstain/`: `enumerate.log` (full 256-code run), `NOVEL_code_entered.png`, `NOVEL_result.png`, `v_1302.png` (all-unlocked map), `v_XXXX.png` for each accepted code, `icons_montage.png` (icon alphabet), `downcycle_montage.png` (reverse cycle), `invalid_allK.png`, `credits*.png`.
 
 ## 4. Address map
 

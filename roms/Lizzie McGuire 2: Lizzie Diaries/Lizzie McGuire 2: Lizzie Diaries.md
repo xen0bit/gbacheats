@@ -1,5 +1,7 @@
 # Lizzie McGuire 2: Lizzie Diaries (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -202,7 +204,7 @@ No prompt-injection payload was found in the fetched TCRF/GameFAQs pages; the fe
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep` for Phase 0/1.
-* Python 3 scripts in `/tmp/opencode/lizzie2/`: `gba.py` (XTEST input, ~60 ms holds), `walk.py` (screenshot + savestate capture), `ss.py` (zlib-decompress the mGBA `.ss1` `gbAs` chunk), `combo.py` (boot-combo sweeps), `dbg_server.py`/`dbg.py`/`snap.py` (mGBA `-d` CLI debugger via pty).
+* Python 3 scripts in `/tmp/lizzie2/`: `gba.py` (XTEST input, ~60 ms holds), `walk.py` (screenshot + savestate capture), `ss.py` (zlib-decompress the mGBA `.ss1` `gbAs` chunk), `combo.py` (boot-combo sweeps), `dbg_server.py`/`dbg.py`/`snap.py` (mGBA `-d` CLI debugger via pty).
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for raw disassembly.
 * REA/Ghidra 12.1.4 (raw-binary import, ARM base 0x08000000): `xrefs`, `resolve_containing_procedure`, `procedure_pseudo_code`, `procedure_callers`.
 * mGBA 0.x SDL (`-3`, `-g`, `-d`), Xvfb `:315`, openbox, `xdotool`, `scrot`, ImageMagick `compare -metric AE` for screen-change detection.

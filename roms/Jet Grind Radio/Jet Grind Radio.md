@@ -1,5 +1,7 @@
 # Jet Grind Radio (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -259,7 +261,7 @@ feature, or a gated screen.
 - `xdotool` XTEST keys, `scrot` + `convert` crops, `tesseract` (OCR aid only),
   `grep`/`strings` for the text bank.
 - All analysis scripts and per-screen RAM captures are in
-  `/tmp/opencode/jetgrind/` (`ss.py`, `kb.py`, `ram_*.raw`, `*.ss1`).
+  `/tmp/jetgrind/` (`ss.py`, `kb.py`, `ram_*.raw`, `*.ss1`).
 
 ## 10. Legal note
 

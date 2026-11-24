@@ -1,5 +1,7 @@
 # Fear Factor: Unleashed (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -226,7 +228,7 @@ accept it in a different context either.
 debugger via PTY (`dbg2.py`) with `watch/w`, `frame`, `x/4`, `r/4`; XTEST key
 injection with `xdotool`; `ss.py` savestate decoder; mGBA GDB stub probed via
 a minimal RSP client (`gdbrsp.py`). Analysis artifacts, traces and dumps are in
-`/tmp/opencode/fearfactor2/`.
+`/tmp/fearfactor2/`.
 
 **Legal note:** no ROM bytes, graphics, audio, or extracted game text are
 redistributed; this report contains only addresses, hashes, algorithms,

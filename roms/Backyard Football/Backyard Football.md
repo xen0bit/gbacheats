@@ -1,5 +1,7 @@
 # Backyard Football (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -389,7 +391,7 @@ opens the CUSTOM PLAYER editor, `m2_c.png`), not a locked card.
 
 ## 7. Validation evidence
 
-**Observed (emulator — screenshots in `/tmp/opencode/bf/`):**
+**Observed (emulator — screenshots in `/tmp/bf/`):**
 
 * Boot sequence and title (`bootgrid.png`), main menu (`t21_c.png`), every
   submenu listed in §3, options (`u4_c.png`), difficulty (`s2_c.png`), matchup
@@ -442,13 +444,13 @@ opens the CUSTOM PLAYER editor, `m2_c.png`), not a locked card.
   ImageMagick, `arm-none-eabi-objdump` (binutils-arm-none-eabi),
   `gdb-multiarch` (mGBA GDB stub on `:2345`), Python 3 (`zlib`, `struct`,
   Capstone), Ghidra 12.1.4 via the REA MCP provider.
-* Scripts (all in `/tmp/opencode/bf/`): `keys.py` / `combo.py` (xdotool key
+* Scripts (all in `/tmp/bf/`): `keys.py` / `combo.py` (xdotool key
   driver with hold/release), `shot.sh` (scrot + 720×480 crop), `state.py`
   (mGBA `gbAs` zlib savestate reader with `0x03/0x02` address mapping),
   `dbg.gdb` / `test2.gdb` (breakpoint scripts).
 * Savestates: `Backyard Football.ss1` (pickup matchup), `.ss2`–`.ss6`
   (scratch/diffs).
-* Screenshots: `/tmp/opencode/bf/*.png` (cropped `*_c.png`), notably
+* Screenshots: `/tmp/bf/*.png` (cropped `*_c.png`), notably
   `bootgrid.png`, `t21_c.png`, `u4_c.png`, `s2_c.png`, `s06_pickup2_c.png`,
   `s20_c.png`, `q1_c.png`, `s24_season3_c.png`, `t33_c.png`, `k6_c.png`,
   `m2_c.png`.

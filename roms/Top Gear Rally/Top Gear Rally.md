@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Top Gear Rally/Top Gear Rally.gba` |
+| File | `roms/Top Gear Rally/Top Gear Rally.gba` |
 | Size | 4,194,304 bytes (4 MiB) |
 | Header title | `TGRALLY` |
 | Game code | `BTGE01` |

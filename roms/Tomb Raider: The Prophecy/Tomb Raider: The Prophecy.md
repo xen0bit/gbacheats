@@ -1,5 +1,7 @@
 # Tomb Raider: The Prophecy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -147,7 +149,7 @@ ROM and rejected in-game, while `WEFX` is present and accepted — a published t
 **Space definition.** Alphabet size 36, length 4 ⇒ **36⁴ = 1,679,616** representable inputs.
 Every input maps to a distinct packed u32. The accepted set is the 33 literals in the ROM table.
 
-**Exhaustive offline run of the validator model** (`/tmp/opencode/tombraider/enumerate.py`, which
+**Exhaustive offline run of the validator model** (`/tmp/tombraider/enumerate.py`, which
 reimplements `0x08026ECC`, `0x08026E74` and `0x08025254` bit-for-bit):
 
 ```text
@@ -228,10 +230,10 @@ closed table (no algorithmic fallback accepts near-misses).
 - `strings -t x -n 3` + literal `grep -abo` to locate the 33 codes.
 - Python `struct` scanning for raw pointer xrefs to `0x0803E78C` / `0x08060F70`.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for the routines.
-- `/tmp/opencode/tombraider/ssram.py` — extract/decompress the `gbAs` chunk from mGBA `.ssN` files.
-- `/tmp/opencode/tombraider/keys.py`, `enter_code.py` — reproducible XTEST input and code entry.
-- `/tmp/opencode/tombraider/enumerate.py` — exact offline validator model and 36⁴ enumeration.
-- Screenshots named in §3/§6b are in `/tmp/opencode/tombraider/`; no ROM assets are reproduced here.
+- `/tmp/tombraider/ssram.py` — extract/decompress the `gbAs` chunk from mGBA `.ssN` files.
+- `/tmp/tombraider/keys.py`, `enter_code.py` — reproducible XTEST input and code entry.
+- `/tmp/tombraider/enumerate.py` — exact offline validator model and 36⁴ enumeration.
+- Screenshots named in §3/§6b were in `/tmp/tombraider/`; no ROM assets are reproduced here.
 
 **Legal note:** no ROM image or extracted artwork is redistributed by this report; only addresses,
 hashes, algorithms and original observation screenshots are recorded.

@@ -1,5 +1,7 @@
 # Golden Nugget Casino (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -77,7 +79,7 @@ read 0x03004030 4        # -> 3f 42 0f 00  (999999)
 Rejection controls use the same procedure with a modified last byte (`...62786262` = bad checksum) or `41` in byte 0 (`A`, outside both alphabets).
 
 ### Scripts
-`pwcoder.py` (encoder/decoder), `gdb_server.py` (persistent GDB-stub bridge), `g.py` / `snap.py` (command + screenshot/RAM helpers), `scan.py` (pointer / literal-pool scanner). All under `/tmp/opencode/goldennugget/`.
+`pwcoder.py` (encoder/decoder), `gdb_server.py` (persistent GDB-stub bridge), `g.py` / `snap.py` (command + screenshot/RAM helpers), `scan.py` (pointer / literal-pool scanner). All under `/tmp/goldennugget/`.
 
 ## 4. Address map
 
@@ -221,7 +223,7 @@ No published code list was located (§8), so "not in any published list" is base
 ## 9. Tooling
 
 - `binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`), Capstone 5.0.7, Python 3.13, mGBA 0.10.5 SDL, Xvfb, openbox, xdotool, scrot, ImageMagick, GDB remote serial protocol via a single persistent socket (the stub locks up across repeated client connections, matching guide §16.13/§16.19).
-- Analysis scripts: `pwcoder.py`, `gdb_server.py`, `g.py`, `snap.py`, `dumpmem.py`, `scan.py` in `/tmp/opencode/goldennugget/`.
+- Analysis scripts: `pwcoder.py`, `gdb_server.py`, `g.py`, `snap.py`, `dumpmem.py`, `scan.py` in `/tmp/goldennugget/`.
 - Screenshots and RAM dumps retained on disk in the same directory; not attached to this reply.
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced here. Only hashes, addresses, algorithms, and our own generated codes are published.

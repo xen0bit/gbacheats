@@ -1,5 +1,7 @@
 # Disney's Treasure Planet (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -140,7 +142,7 @@ screen in slot 2 and a per-test state in slot 1.
 | `0x0801C296` | language-byte store: `strb r1,[0x030000E0,#15]`, value = 1 + row + 3*col |
 | `0x0801BE14` | language-select screen init (scene 4 first entry) |
 | `0x0801C2DC` / `0x0801C33C` | language-select scene sub-functions |
-| `0x080EA2E8` | scene descriptor table, 9 records × 16 bytes (four Thumb `|1` function pointers) |
+| `0x080EA2E8` | scene descriptor table, 9 records × 16 bytes (four Thumb `\|1` function pointers) |
 | `0x08016764` | scene scheduler; rejects id > 8, enqueues `0x080EA2E8 + id*16` |
 | `0x080EA318` | scene 3 = debug Theme/Level/Room Select |
 | `0x080EA328` | scene 4 = language select (never queued) |
@@ -406,7 +408,7 @@ this engagement; they are not in-game cheats and are excluded here.
 * Scripts used in this engagement: `pw.py` (closed-loop keyboard driver
   reading the cursor byte from EWRAM), `case.py` (load clean slot 2, type,
   submit, screenshot, RAM dump), `enum_tp.py` (model + counts). The ROM was
-  run from a copy in `/tmp/opencode/treasureplanet`; no `.sav`/`.ss*` files
+  run from a copy in `/tmp/treasureplanet`; no `.sav`/`.ss*` files
   were left in the ROM folder.
 
 No ROM, graphics, music or text assets are redistributed here; only addresses,

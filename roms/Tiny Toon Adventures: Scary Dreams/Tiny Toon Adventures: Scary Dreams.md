@@ -1,5 +1,7 @@
 # Tiny Toon Adventures: Scary Dreams (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -139,7 +141,7 @@ Published-code note: most of the 13 published triples were **not** accepted when
 
 **Bounds proven by rejection.** The following were submitted through the same UI and were **rejected** (RETRY? / EXIT prompt): `[0,0,0]`, `[1,1,1]`, `[2,2,2]`, `[3,3,3]`, `[4,4,4]`, `[5,5,5]`, `[6,6,6]`, `[7,7,7]`, `[9,9,9]`, `[2,4,2]`, `[2,7,2]`, `[6,5,5]`, `[0,9,8]`, `[2,3,0]`, `[4,7,2]`, `[8,8,0]`, `[8,8,2]`…`[8,8,6]`, `[8,8,9]`, `[0,8,8]`, `[1,8,8]`, `[2,8,8]`, `[3,8,8]`, `[4,8,8]`. This proves the validator is a real filter over the 1000-code space and that the wheel cannot express an "always accept" mode.
 
-**Partial sweep.** A scan of codes with middle slot fixed at 8 (`[a,8,c]`, a,c ∈ 0..9) was run under a 600 s timeout and completed `a = 0..3` (40 of 100 codes). Accepted entries in that sub-range: `[0,8,0]`, `[0,8,2]`, `[0,8,9]`, `[1,8,3]`, `[1,8,9]`, `[2,8,0]`, `[2,8,9]`, `[3,8,9]` — 8 of the first 40 tested, together with `[8,8,1]`, `[8,8,7]`, `[8,8,8]` found earlier. The raw log is `/tmp/opencode/tinytoon/scan_b8.out`. The accepted set is therefore clearly larger than the published 13 codes, but its exact cardinality remains unproven (§8).
+**Partial sweep.** A scan of codes with middle slot fixed at 8 (`[a,8,c]`, a,c ∈ 0..9) was run under a 600 s timeout and completed `a = 0..3` (40 of 100 codes). Accepted entries in that sub-range: `[0,8,0]`, `[0,8,2]`, `[0,8,9]`, `[1,8,3]`, `[1,8,9]`, `[2,8,0]`, `[2,8,9]`, `[3,8,9]` — 8 of the first 40 tested, together with `[8,8,1]`, `[8,8,7]`, `[8,8,8]` found earlier. The raw log is `/tmp/tinytoon/scan_b8.out`. The accepted set is therefore clearly larger than the published 13 codes, but its exact cardinality remains unproven (§8).
 
 ## 7. Validation evidence
 
@@ -163,7 +165,7 @@ Published-code note: most of the 13 published triples were **not** accepted when
 * `arm-none-eabi-objdump -M force-thumb` for raw disassembly; Python + Capstone/struct for literal/pointer scans.
 * Savestate decoder: mGBA `.ss*` are PNG with a zlib-compressed `gbAs` chunk; Python `zlib.decompress` yields a 397,312-byte state with EWRAM at offset `0x21000` (i.e. file `0x22000` = RAM `0x02000000`).
 * Python acceptance detector: Pillow `ImageChops.difference` against a captured `RETRY?` template crop.
-* Helper scripts in `/tmp/opencode/tinytoon/`: `key.py`, `ssdiff.py`, `test_state2.py`, `fasttest_save2.py`, `scan_b8.py`, `dbgpty.py`.
+* Helper scripts in `/tmp/tinytoon/`: `key.py`, `ssdiff.py`, `test_state2.py`, `fasttest_save2.py`, `scan_b8.py`, `dbgpty.py`.
 * Web recon: GameFAQs cheat page, CheatingDome, chaptercheats, games-cheats.org, TCRF (untrusted content ignored).
 
 ## 10. Legal note

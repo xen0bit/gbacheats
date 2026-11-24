@@ -1,10 +1,12 @@
 # MLB Slugfest 2004 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/MLB Slugfest 2004/MLB Slugfest 2004.gba` |
+| File | `roms/MLB Slugfest 2004/MLB Slugfest 2004.gba` |
 | Size | 4,194,304 bytes (0x400000) |
 | Header title | `SLUGFEST2K4` |
 | Game code | `A5ME` |
@@ -150,7 +152,7 @@ Three press counters `(B,A,R) = (0x030011B8, 0x030011BC, 0x030011C0)` are increm
 
 ## 7. Validation evidence
 
-* **Observed (screenshots):** password BAD PASSWORD and accepted→SELECT TEAM; matchup screen with "NO VIOLENCE MODE" and with "NUKE BALL" effect names; title/menu/options/team/field/pause screens (retained from the prior pass and this pass in `/tmp/opencode/mlbslugfest2/`).
+* **Observed (screenshots):** password BAD PASSWORD and accepted→SELECT TEAM; matchup screen with "NO VIOLENCE MODE" and with "NUKE BALL" effect names; title/menu/options/team/field/pause screens (retained from the prior pass and this pass in `/tmp/mlbslugfest2/`).
 * **Observed (RAM / watchpoints):**
   * `watch/w 0x02000D50 1` hit at `0x08011CBE` (input handler, LR `0x080429BF`) when a symbol was selected — proves the EWRAM slot array is the real entry buffer.
   * `watch/w 0x02000D40`-area showed one u8 symbol index per 140-byte slot.

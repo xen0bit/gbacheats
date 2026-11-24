@@ -1,5 +1,7 @@
 # Prince of Persia: The Sands of Time (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -76,7 +78,7 @@ not reachable by controller input (§16.18-style gated feature).
   Main-menu selector is IWRAM `0x03002740` = 0 / 1 / 2 for
   START / DELETE / OPTIONS. EWRAM `[0x02000000]` = `0x080A3A8C` in gameplay,
   `0x00000000` on menu screens — a clean screen witness.
-* Savestates/snapshots and scripts are under `/tmp/opencode/princepersia/`.
+* Savestates/snapshots and scripts were under `/tmp/princepersia/`.
 
 ## 4. Address map
 
@@ -172,7 +174,7 @@ the master table.
   MUSIC toggled ON→OFF during testing); DELETE confirm; 9-character name entry;
   cutscenes; gameplay; six inventory tabs; Continue/Sleep/Quit menu; undocumented
   button combos produced no visible change. Screenshots on disk under
-  `/tmp/opencode/princepersia/` (e.g. `w_title_crop.png` … `x_tab6_crop.png`,
+  `/tmp/princepersia/` (e.g. `w_title_crop.png` … `x_tab6_crop.png`,
   `after_combos_crop.png`).
 * **Observed (RAM)**: savestate EWRAM/IWRAM hashes distinct per screen;
   IWRAM `0x03002740` = 0/1/2 for the three main-menu selections; live `r/4`

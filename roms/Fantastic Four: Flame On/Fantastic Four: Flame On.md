@@ -1,5 +1,7 @@
 # Fantastic Four: Flame On (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -183,7 +185,7 @@ sequences appear as `u16` mask arrays in this image.
   checkbox items after `BADASS`; D-pad moves the orange highlight; the `OPTIONS`
   screen (`SFX/MUSIC/BONUS/HIGH SCORES/CREDITS`); `BONUS` screen with two padlocked
   items (`SNOWBOARDING`, `MOTO X`); `SELECT SLOT`; in-game HUD/cutscenes; legal
-  screen. Screenshots: `/tmp/opencode/ff4flameon/montage_bc_badass.png`,
+  screen. Screenshots: `/tmp/ff4flameon/montage_bc_badass.png`,
   `montage_wa.png`, `cm_full_zoom.png`.
 * **Observed (debugger, ground truth):** `b 0x08073EE0` hit for each of the three
   sequences, with `r1` = 0/1/2 (code index), `r2` = 4/3/6 (length), final `r5` =

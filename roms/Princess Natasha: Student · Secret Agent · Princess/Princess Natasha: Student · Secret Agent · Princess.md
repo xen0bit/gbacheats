@@ -1,5 +1,7 @@
 # Princess Natasha: Student • Secret Agent • Princess (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -132,7 +134,7 @@ Range check (`0x0800CD3C`): `S[0] <= 12000`, `S[4] <= 7`, `S[17] <= 63`, `S[16] 
 
 ## 7. Validation evidence
 
-- **Observed (emulator):** all three cheat codes accepted with the three distinct on-screen messages; flag byte `0x02000004` changed 0→1 and 0→2; `SMASHROBOT` showed "EXTRA LEVELS!". Novel password accepted to a gameplay map; published password accepted to a different counter; wrong-check password showed "WRONG PASSWORD!". Screenshots are kept in `/tmp/opencode/princessnatasha/` (not attached).
+- **Observed (emulator):** all three cheat codes accepted with the three distinct on-screen messages; flag byte `0x02000004` changed 0→1 and 0→2; `SMASHROBOT` showed "EXTRA LEVELS!". Novel password accepted to a gameplay map; published password accepted to a different counter; wrong-check password showed "WRONG PASSWORD!". Screenshots are kept in `/tmp/princessnatasha/` (not attached).
 - **Observed (RAM/savestate):** decoded level-28 struct at `0x020000E8`; cheat flag byte transitions; input buffers in IWRAM.
 - **Derived (disassembly):** the three `strcmp` sites, the 36-symbol alphabet and base-36 parse, the additive hash and check-symbol comparison, the struct unpacking and all range checks, the generator at `0x0800CF00`.
 - **Oracle (Unicorn):** the ROM's own validator at `0x0800CDBC` executed over thousands of inputs; it accepted 19/22 published passwords and the novel code, rejected the three bad published entries and every wrong-check mutant.

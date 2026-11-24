@@ -1,5 +1,7 @@
 # Snood 2: On Vacation (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -39,7 +41,7 @@ A TCRF page fetched during reconnaissance contained a **prompt-injection payload
 * Novel code `g p R Y R` (values `5,7,1,4,1`) → `THAT'S CORRECT!`; RAM then holds level 5, area 15, difficulty 4.
 * Rejection example: `B B B G p` (`0,0,0,2,7`) → `THAT'S WRONG!`, no state change; press `A` to reset the entry for another try.
 
-ROM-analysis scripts used (`/tmp/opencode/snood2/`): `xref.py`, `scanrefs.py`, `enumerate_space.py`, plus the PTY debugger driver `dbgserver.py`/`d.py`/`rr.py`/`pw.py`/`nav.py`.
+ROM-analysis scripts used (`/tmp/snood2/`): `xref.py`, `scanrefs.py`, `enumerate_space.py`, plus the PTY debugger driver `dbgserver.py`/`d.py`/`rr.py`/`pw.py`/`nav.py`.
 
 ## 4. Address map
 

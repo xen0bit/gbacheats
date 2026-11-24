@@ -1,5 +1,7 @@
 # Madagascar (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -53,7 +55,7 @@ indirection in the bank is the sleep prompt `Press\nSELECT + \x86 + \x87\nto wak
 Environment: `Xvfb :315 -screen 0 1024x768x24`, `openbox`, `SDL_AUDIODRIVER=dummy`,
 `mgba -3 <rom>` (mGBA SDL). Keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`,
 Select=`BackSpace`, D-pad=arrow keys. Keys held 80–250 ms; savestates via `Shift+F<n>`
-save / `F<n>` load. All test artifacts live in `/tmp/opencode/madagascar/`.
+save / `F<n>` load. All test artifacts were kept in `/tmp/madagascar/`.
 
 Path traversed (all screens observed, not inferred):
 
@@ -243,5 +245,5 @@ copyrighted asset is redistributed here — only addresses, hashes, and findings
 
 All emulators and display servers started for this job were stopped by their own PIDs
 (Xvfb/openbox :315 and the mGBA instances), and all generated `.sav`/`.ss*` files were
-removed from `/mnt/gbacheats/roms/Madagascar/`. `roms/INDEX.md` was left unchanged as
+removed from `roms/Madagascar/`. `roms/INDEX.md` was left unchanged as
 instructed.

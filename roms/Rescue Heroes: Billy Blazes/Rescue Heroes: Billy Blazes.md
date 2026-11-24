@@ -1,5 +1,7 @@
 # Rescue Heroes: Billy Blazes (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -212,7 +214,7 @@ Consequently the debug setter cannot be used to make the Password screen accept.
 - mGBA SDL (`-3`, `-t`, `-g`, `-d`), Xvfb `:316`, openbox, xdotool, scrot, ImageMagick.
 - REA/Ghidra raw-binary import at `0x08000000` (ARM) with dossiers on `0x08018384`
   (password screen handler), `0x080104C8`, `0x080002F0`, and xrefs on `0x0801DBF4`.
-- Work dir: `/tmp/opencode/rescueheroes`; key artifacts: `phase0.py`, `ptrscan_fast.py`,
+- Work dir: `/tmp/rescueheroes`; key artifacts: `phase0.py`, `ptrscan_fast.py`,
   `ldrscan.py`, `ssdiff.py`, `sspatch.py`, `bufref.py`, `brute_good.py`,
   `brute_good.log` (ends `DONE 0`), `debug_labels.txt`, `title_ref.png`,
   `pwclear_ref.png`, `titleref_g.png`.

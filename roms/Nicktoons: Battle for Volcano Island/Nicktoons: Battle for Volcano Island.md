@@ -1,5 +1,7 @@
 # Nicktoons: Battle for Volcano Island (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 - **File:** `Nicktoons: Battle for Volcano Island.gba` (4,194,304 bytes = 0x400000)
 - **Header title:** `NICKTOONSBVI` · **Game code:** `BNVE` · **Maker:** `78`
@@ -92,7 +94,7 @@ Followed by generic edge/held/release helpers and a 14-entry key→action jump t
 - The `-g` GDB stub stalls this mGBA build at boot; RAM work used savestate extraction instead.
 
 ## 9. Tooling
-- `arm-none-eabi-objdump -M force-thumb` for the input library; Python/Capstone 5.0.7; `strings -t x`, `grep -abo`; Python `zlib` savestate `gbAs` decoder (`stateutil.py`, `ctl.py` in `/tmp/opencode/nicktoonsvolcano`); `Xvfb :316` + `openbox` + mGBA SDL + `xdotool` + `scrot`.
+- `arm-none-eabi-objdump -M force-thumb` for the input library; Python/Capstone 5.0.7; `strings -t x`, `grep -abo`; Python `zlib` savestate `gbAs` decoder (`stateutil.py`, `ctl.py` in `/tmp/nicktoonsvolcano`); `Xvfb :316` + `openbox` + mGBA SDL + `xdotool` + `scrot`.
 - Web: GameFAQs GBA cheats (archived 2021), TCRF GBA page (archived 2023), VGChartz, GameFAQs GC/PS2/DS pages. Fetched pages were treated as data; no prompt-injection content was encountered.
 
 No ROM or copyrighted assets are redistributed here — only addresses, hashes, and our own observations.

@@ -1,5 +1,7 @@
 # Dungeons & Dragons: Eye of the Beholder (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -216,7 +218,7 @@ Sound-index bounds: 105× R clamped at `0x64` (100); 110× L clamped at `0x0000`
 - **Observed** (emulator/savestate): intro → title ("PRESS START") → main menu (two "Create a
   new Party" + OPTIONS) → OPTIONS (Credits / Erase Character / Erase Save Game) → Credits,
   erase-roster and erase-party submenus → party creation → "Type Name" keyboard. All screenshots
-  retained under `/tmp/opencode/eyebeholder/`.
+  retained under `/tmp/eyebeholder/`.
 - **Observed**: L+R+Select atomic chord changes menu ID `0x00 → 0x04` and the screen to
   "Sound Test / SoundIndex = 000"; partial combos leave menu ID at `0x00`; R/L/B change the
   index in RAM to 1/2/3/100/0 as described.

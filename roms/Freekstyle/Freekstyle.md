@@ -1,5 +1,7 @@
 # Freekstyle (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 - File: `roms/Freekstyle/Freekstyle.gba`
@@ -182,7 +184,7 @@ the observed number of EWRAM flag bytes that differ from baseline after entry).
   to specific riders/tracks. The "your new password is:" career screen was not triggered
   (would require completing a cup); its codes are the same table strings.
 
-**Screens walked (all with screenshots in `/tmp/opencode/freekstyle/`):** scene cracktro
+**Screens walked (all with screenshots in `/tmp/freekstyle/`):** scene cracktro
 and shouts; "LICENSED BY NINTENDO"; EA Sports BIG splash; attract DEMO race; Main menu
 (CAREER / SINGLE RACE / MULTIPLAYER / ENTER CODE / OPTIONS); CAREER → rider select
 (NETZ, stats, quote) → cup select ("THE SAGUARD CUP", 11 cup icons); SINGLE RACE → rider
@@ -212,7 +214,7 @@ SOUNDTRACK, CRY?CELL, EXIT). No further screen was reachable from any of these.
 - mGBA under Xvfb `:319`, `xdotool` XTEST key events, `scrot` screenshots, ImageMagick
   crop/montage for glyph reading.
 - `gba.py` (key/shot helper), `code_entry.py` (grid navigator + code typer), `ssdiff.py`
-  (PNG `gbAs` zlib chunk decompress + RAM diff). Work dir: `/tmp/opencode/freekstyle`.
+  (PNG `gbAs` zlib chunk decompress + RAM diff). Work dir: `/tmp/freekstyle`.
 
 Legal note: no ROM or copyrighted graphics/audio/text assets are redistributed here; only
 addresses, hashes, algorithms, and the ten short code strings (already public) are published.

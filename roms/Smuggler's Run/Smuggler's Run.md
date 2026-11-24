@@ -1,5 +1,7 @@
 # Smuggler's Run (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -62,7 +64,7 @@ mission is **29**, not 30.
   `SCULLY` (stage 30 label). Both accepted. Wrong inputs tested: `BEGIX`,
   `ZZZZ`, and 12×`A` — none accepted (§7).
 * **A-Z keypad typing helper** (used to mint/enter codes deterministically):
-  `typecode.py` in `/tmp/opencode/smugglersrun/` (follows the linear cursor ring).
+  `typecode.py` in `/tmp/smugglersrun/` (follows the linear cursor ring).
 * **RAM observation method:** GDB stub was unavailable (port 2345 occupied by another
   agent's mGBA), so evidence was gathered by mGBA savestate diffing: `.ss1` is a PNG
   with a zlib `gbAs` chunk; decompressing yields a 397,312-byte state with IWRAM at
@@ -231,7 +233,7 @@ at 29). This is the payload-vs-label trap (guide §16.15).
 * All menus/screens walked: title, Main Menu (3 items), Options (music only),
   Select Level (level select + `ENTER PASSWORD`), Select Stage (Forest/Desert/Snow),
   Garage (3 vehicles), briefing, race, Pause (Resume/Restart/Quit), Enter Password.
-  Screenshots are on disk in `/tmp/opencode/smugglersrun/`.
+  Screenshots are on disk in `/tmp/smugglersrun/`.
 * `BEGIN`, `SCULLY` accepted; wrong inputs rejected; length cap 12; B = backspace;
   Left from A wraps to Z; Down on keypad does not reveal a hidden submit cell.
 * RAM diffs as quoted in §6b.
@@ -269,7 +271,7 @@ at 29). This is the payload-vs-label trap (guide §16.15).
   input; `scrot` screenshots.
 * `key.py` (timed key presses), `typecode.py` (linear keypad navigation),
   `statediff.py` (`.ss1` → `gbAs` zlib inflate → IWRAM/EWRAM diff) — all in
-  `/tmp/opencode/smugglersrun/`.
+  `/tmp/smugglersrun/`.
 
 ## 10. Legal note
 

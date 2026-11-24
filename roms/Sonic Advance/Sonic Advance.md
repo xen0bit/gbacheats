@@ -1,5 +1,7 @@
 # Sonic Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -56,7 +58,7 @@ Time Attack.
   `r/4 <addr>` to read.
 * Soft reset: hold `A+B+Start+Select` together.
 
-Screenshots kept on disk in `/tmp/opencode/sonic1/`: `charselect.png`, `in_game.png`
+Screenshots kept on disk in `/tmp/sonic1/`: `charselect.png`, `in_game.png`
 (canonical code), `alias_game.png` (novel alias), `rejected.png` (near-miss rejected),
 `course_select.png`, `soundtest.png`, `menu3c.png`.
 

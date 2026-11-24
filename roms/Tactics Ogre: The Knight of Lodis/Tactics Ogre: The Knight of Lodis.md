@@ -1,5 +1,7 @@
 # Tactics Ogre: The Knight of Lodis (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -124,7 +126,7 @@ Composer credits as rendered: `REZON` and `YmoH.S`. Six entries (08, 25, 26, 27,
 
 ## 7. Validation evidence
 
-- **Observed (emulator):** `MUSIC.ON` → CHECK dialog → Music Mode menu with 31 tracks; `DEL.DATA` → "Delete all data?"; `MUSICXON` → normal name confirmation. Screenshots: `s39_musicon_end.png`, `s44_musicmenu.png`, `s45_music_9_crop.png`, `s47_15_crop.png`, `s52_deldata_prompt.png`, `s55_nearmiss_result.png` (work dir `/tmp/opencode/tacticsogre`).
+- **Observed (emulator):** `MUSIC.ON` → CHECK dialog → Music Mode menu with 31 tracks; `DEL.DATA` → "Delete all data?"; `MUSICXON` → normal name confirmation. Screenshots: `s39_musicon_end.png`, `s44_musicmenu.png`, `s45_music_9_crop.png`, `s47_15_crop.png`, `s52_deldata_prompt.png`, `s55_nearmiss_result.png` (work dir `/tmp/tacticsogre`).
 - **Observed (RAM):** savestate `gbAs` chunk decoded with `ss.py`; raw state offset `0x4AC92` read back as
   - `CDEFGHIJ` → `02 03 04 05 06 07 08 09`
   - `MUSIC.ON` → `0C 14 12 08 02 40 0E 0D`

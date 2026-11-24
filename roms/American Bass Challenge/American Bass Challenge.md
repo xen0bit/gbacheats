@@ -1,5 +1,7 @@
 # American Bass Challenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -73,7 +75,7 @@ Emulator: mGBA SDL 0.10.5 (`/usr/games/mgba`), 3× scale.
 Xvfb :135 -screen 0 1024x768x24 &
 DISPLAY=:135 openbox &
 DISPLAY=:135 SDL_AUDIODRIVER=dummy /usr/games/mgba -3 \
-  "/mnt/gbacheats/roms/American Bass Challenge/American Bass Challenge.gba" &
+  "roms/American Bass Challenge/American Bass Challenge.gba" &
 ```
 
 Keymap used (mGBA default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`,
@@ -340,7 +342,7 @@ Both were entered in mGBA and the effects were screenshotted.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 * Python 3 + Capstone for BL/pointer/literal scans; a small `strings`/byte-pattern
   scanner for the key tables; mGBA savestates + zlib parsing for RAM layout checks.
-* Working directory: `/tmp/opencode/bass` (scans, screenshots, helper `key.py`).
+* Working directory: `/tmp/bass` (scans, screenshots, helper `key.py`).
 * Evidence copies: `roms/American Bass Challenge/evidence/`.
 
 ## Legal note

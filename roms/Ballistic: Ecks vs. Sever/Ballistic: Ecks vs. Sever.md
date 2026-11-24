@@ -1,5 +1,7 @@
 # Ballistic: Ecks vs. Sever (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -457,7 +459,7 @@ neither a prefix, a suffix nor a case variant can match.
 
 ## 9. Tooling
 
-Scripts and screenshots are in `/tmp/opencode/ballistic/` (Python 3,
+Scripts and screenshots were in `/tmp/ballistic/` (Python 3,
 `arm-none-eabi-objdump`, capstone, mGBA 0.10.5, xdotool, scrot/ImageMagick).
 `ballistic_pw.py` next to this report is the reimplementation of the accept
 decision and of the table→bit/level mapping:

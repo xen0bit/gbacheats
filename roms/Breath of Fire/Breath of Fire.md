@@ -1,5 +1,7 @@
 # Breath of Fire (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -392,8 +394,8 @@ name-entry alphabet and consumers enumerated. Within that space, the answer is
   `0x19000`).
 * Python 3 + Capstone for BL-target and literal-pool scans; `arm-none-eabi-objdump
   -M force-thumb` for all cited disassembly.
-* Analysis scripts and screenshots: `/tmp/opencode/boff1/tools/`,
-  `/tmp/opencode/boff1/shots/`.
+* Analysis scripts and screenshots: `/tmp/boff1/tools/`,
+  `/tmp/boff1/shots/`.
 
 *Legal: no ROM, graphics, music or text is redistributed here; only hashes,
 addresses, algorithms and the analyst's own test inputs are published.*

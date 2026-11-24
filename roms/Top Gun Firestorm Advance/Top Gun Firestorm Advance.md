@@ -1,5 +1,7 @@
 # Top Gun: Firestorm Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -78,7 +80,7 @@ Reproduced inputs and results:
 | `4,0,4,0` (**novel**, group 2 / level 12) | ACCEPTED; RAM: group=2, level=12 |
 | `9,3,1,1` (out-of-range, written via debugger) | REJECTED (X marks) |
 
-Screenshots of every case are in `/tmp/opencode/topgun/` (`pub_l2_beforeA.png`,
+Screenshots of every case were in `/tmp/topgun/` (`pub_l2_beforeA.png`,
 `pub_l2_afterA.png`, `novel_g1l1_beforeA.png`, `novel_g1l1_afterA.png`,
 `novel_g2l12_afterA.png`, `reject_test_afterA.png`, `pub_l6_typo_afterA.png`,
 `pub_l6_fixed_afterA.png`, `oor_dbg_after.png`), together with `game.ssN`
@@ -223,7 +225,7 @@ transcription error (§16.7), not a second code.
 - Acceptance rate: `36/6561 ≈ 0.55%`.
 
 **Validator model.** Reproduced bit-for-bit in
-`/tmp/opencode/topgun/enumerate.py`: it iterates all 6561 tuples and matches
+`/tmp/topgun/enumerate.py`: it iterates all 6561 tuples and matches
 them against the 36 dumped records; the script reports exactly 36 accepted
 codes and the groups `{0,1,2}` × levels `{1..12}`. This is a bounded negative
 for every other one of the 6561 inputs.
@@ -289,7 +291,7 @@ the one archived cheat page that was readable contained only code lists.
 
 ## 9. Tooling
 
-All scripts and captures in `/tmp/opencode/topgun/` (analysis working copy of
+All scripts and captures in `/tmp/topgun/` (analysis working copy of
 the ROM; the original was never modified):
 
 * `rsp.py`, `drive.py`, `repl.py` — attempted GDB-RSP drivers (abandoned: mGBA GDB

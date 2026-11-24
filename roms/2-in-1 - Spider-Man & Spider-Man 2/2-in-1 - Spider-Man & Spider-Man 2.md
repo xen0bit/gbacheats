@@ -1,5 +1,7 @@
 # 2-in-1: Spider-Man & Spider-Man 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 File: `roms/2-in-1 - Spider-Man & Spider-Man 2/2-in-1 - Spider-Man & Spider-Man 2.gba`
@@ -324,7 +326,7 @@ In a fresh save the list is exactly `SECRET 01`–`SECRET 14` (text IDs 34–47)
 * **Unlock state:** 17 bytes at `0x02038FE0+0xA1`; enable bits at `0x0202A6C0+0xC`; per-entry toggle bytes `0x02025EF4..F6`.
 * **Novel selection (not in any published list):**
   * **MOVIE SHOT 14** — GameFAQs lists only "Movie Clips"; it does not enumerate the 14 shots. Selected at PAGE 3 and played in mGBA (Green Goblin / alley scene). `evidence/half1_movieshot14.png`.
-  * **STRENGTH ENHANCEMENT ON + LEVEL CHEAT ON** (`evidence/half1_secrets_unlocked.png`) and **ARMOR UPGRADE ON + LEVEL CHEAT ON** (`/tmp/opencode/spiderman/w4_game.png`) — combinations not documented on any published list; each toggle is individually published only as a generic unlockable.
+  * **STRENGTH ENHANCEMENT ON + LEVEL CHEAT ON** (`evidence/half1_secrets_unlocked.png`) and **ARMOR UPGRADE ON + LEVEL CHEAT ON** (`/tmp/spiderman/w4_game.png`) — combinations not documented on any published list; each toggle is individually published only as a generic unlockable.
 * **Effect of LEVEL CHEAT ON:** pause screen gains `CHEAT <level name>` (observed `CHEAT THE CRADLE WILL FALL`). The post-gate debug warp (`0x0902B018`) remains blocked by `0x0900074C`.
 
 ### 6b.2 Reachable space (half 0, Spider-Man 2)
@@ -383,7 +385,7 @@ The `Cheatlevel` / `Cheat Zap` debug framework is **unreachable in this build**.
 * mGBA 0.10.5 SDL (`/usr/games/mgba`), Xvfb `:114`, openbox, `scrot`, `xdotool`.
 * `arm-none-eabi-objdump` and Capstone 5.0.7 for raw Thumb/ARM disassembly and LDR-literal resolution.
 * gdb-multiarch with `mgba -g` (TCP 2345), hardware breakpoints/watchpoints.
-* Python one-off scripts (working dir `/tmp/opencode/spiderman`):
+* Python one-off scripts (working dir `/tmp/spiderman`):
   * `hash/header/logo scan` — full-file Nintendo-logo search, header parse, complement check.
   * `literal/xref scan` — 4-byte pointer search + Thumb `LDR Rd,[PC,#imm]` slot resolution, used for every string in §6b.3.
   * `BL-target scan` — enumerated the three gate callers.
@@ -393,7 +395,7 @@ The `Cheatlevel` / `Cheat Zap` debug framework is **unreachable in this build**.
   `half1_secrets_locked.png`, `half1_secrets_unlocked.png`,
   `half1_strength_detail.png`, `half1_pause_levelcheat.png`,
   `half1_movieshot14.png`, `gdb_transcript.txt`.
-* Full screenshot set and the complete GDB log remain in the analysis working directory `/tmp/opencode/spiderman/` (`boot_game.png`, `b1_game.png`, `t1_game.png`, `sm2_opt.png`, `sm2_sec4.png`, `h0_game.png`, `k1_game.png`, `sec_p1.png`, `sec_p2.png`, `det1.png`, `v1_game.png`, `v2_game.png`, `v3_game.png`, `u2_game.png`, `w4_game.png`, `x1_game.png`, `gdb_evidence.log`).
+* Full screenshot set and the complete GDB log remain in the analysis working directory `/tmp/spiderman/` (`boot_game.png`, `b1_game.png`, `t1_game.png`, `sm2_opt.png`, `sm2_sec4.png`, `h0_game.png`, `k1_game.png`, `sec_p1.png`, `sec_p2.png`, `det1.png`, `v1_game.png`, `v2_game.png`, `v3_game.png`, `u2_game.png`, `w4_game.png`, `x1_game.png`, `gdb_evidence.log`).
 
 ## 10. Legal note
 

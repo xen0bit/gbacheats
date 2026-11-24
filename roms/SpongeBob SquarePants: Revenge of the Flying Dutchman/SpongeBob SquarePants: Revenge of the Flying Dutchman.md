@@ -1,5 +1,7 @@
 # SpongeBob SquarePants: Revenge of the Flying Dutchman (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Analysis date: 2026-11-20. Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md), especially §0.2 (full enumeration), §11 (text/font banks), §16.5/§16.9 (unary groups; prove closed sets), §16.11 (SKU verification).
 
 Scope: **in-game / developer-intended cheats only.** No GameShark / CodeBreaker / Action Replay codes were analysed or published.
@@ -442,7 +444,7 @@ the `BBBCBB` case isolates the reserved-bit layer from the unary layer.
 | Xvfb + openbox + xdotool + scrot + ImageMagick + tesseract | screen walk and state detection |
 | web search (IGN/GameFAQs/Fandom/planetcheats) | published-code recon; pages treated strictly as data |
 
-Work artifacts (screenshots, scripts, logs) were kept in `/tmp/opencode/spongedutchman/`;
+Work artifacts (screenshots, scripts, logs) were kept in `/tmp/spongedutchman/`;
 notably `shots/p_novel2_levelcard.png`, `shots/p_novel_levelcard.png`,
 `shots/p_after_rej_reserved.png`, `codec.py`, `pty_exp.log`. No ROM, graphics, audio or game text
 is redistributed in this report — only addresses, algorithms, hashes and short identifiers.

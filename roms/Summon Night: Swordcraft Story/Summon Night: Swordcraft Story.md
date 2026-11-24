@@ -1,5 +1,7 @@
 # Summon Night: Swordcraft Story (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -178,7 +180,7 @@ code, and must be labelled as such.
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/summonnight1/`: `dis.py` (Capstone Thumb disassembler),
+Scripts in `/tmp/summonnight1/`: `dis.py` (Capstone Thumb disassembler),
 `state.py` (gbAs zlib savestate RAM reader), `ui.py` (xdotool/scrot driver),
 `combos.py` (combo test loop), `mgba_console.py`/`testconsole.py` (abandoned `-d`
 experiment). Tools: `arm-none-eabi-objdump`, `capstone`, `gdb-multiarch`, `mgba 0.10.5`,

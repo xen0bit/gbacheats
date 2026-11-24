@@ -1,5 +1,7 @@
 # Cars (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -270,7 +272,7 @@ Entry 5 is absent from every list consulted.
 | `0x08` | `0x0801859A` | 90 Boltz into profile+`0xC8` |
 | `0x10` | `0x080185B2` | secret circuit bit into profile+`0xCA` |
 | `0x20` | `0x0800FABA/FBE6/FCB2`, `0x080163B2`, `0x0801664C`, `0x08016F78`, `0x08018912`, `0x0801D65C` | tested as `flags & 0x28` — “cheat used”, suppresses progressive unlock bookkeeping |
-| any | `0x0801CFAA` (`flags & 1 || flags & 0x2E`) | draws text ID `0x50` = **“Cheater”** |
+| any | `0x0801CFAA` (`flags & 1 \|\| flags & 0x2E`) | draws text ID `0x50` = **“Cheater”** |
 
 Text ID `0x50` resolves through `0x0802FF58` + `0x08617E40`/`0x0861808A` to
 file offset `0x618453`, the ASCII string `Cheater`.
@@ -332,7 +334,7 @@ savestate after each attempt):
 | `Up Up Down Down Left Right Left Right B B` (all-levels, last button wrong) | reject, `flags=0x00`, index 10 |
 | 16 junk presses `Up Down Left Right` ×4 | reject, `flags=0x00`, index 0 |
 
-The offline reimplementation (`/tmp/opencode/cars/verify_codes.py`) reproduces
+The offline reimplementation (`/tmp/cars/verify_codes.py`) reproduces
 the same accept/reject behaviour for the whole table and for every
 single-symbol mutation (0 mutations match).
 
@@ -382,8 +384,8 @@ single-symbol mutation (0 mutations match).
   driver for the confirmation-sound capture.
 - mGBA savestate PNG → `gbAs` zlib chunk decode for RAM checks (EWRAM at
   state offset `0x21000`, so `state[0x21000+addr-0x02000000]`).
-- `/tmp/opencode/cars/verify_codes.py` — offline validator + table dump
-  (`/tmp/opencode/cars` also holds the screenshots and audio captures).
+- `/tmp/cars/verify_codes.py` — offline validator + table dump
+  (`/tmp/cars` also holds the screenshots and audio captures).
 - Key scan scripts were ad-hoc Python/Capstone: literal-pointer scans for
   `0x02015210`, `0x02015B30`, `0x086A5EF8`, BL scans for `0x0801F530/5C8/680`,
   and a whole-ROM scan for runs of key-code words.

@@ -1,5 +1,7 @@
 # Kao the Kangaroo (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -176,6 +178,6 @@ Not present in GameFAQs, IGN, GameRevolution, TCRF or any other published GBA li
 
 ## 9. Tooling
 
-`strings -t x`, `xxd`, `grep -abo`, `arm-none-eabi-objdump -M force-thumb`, Capstone (literal/BL scans), Python 3 (savestate `gbAs` zlib diff, table decode), mGBA SDL with `-3`, Xvfb `:316` + openbox, xdotool, ImageMagick `convert`/`montage`, tesseract (attempted OCR, unreliable on the stylized font). Analysis scripts are in `/tmp/opencode/kao/` (`phase0.py`, `textbank.py`, `strtab.py`, `findcode.py`, `blscan.py`, `ssdiff.py`, `dumptab.py`, `setpw.py`, `batchtest.py`, `novelfinal.py`, `ram_pause.py`).
+`strings -t x`, `xxd`, `grep -abo`, `arm-none-eabi-objdump -M force-thumb`, Capstone (literal/BL scans), Python 3 (savestate `gbAs` zlib diff, table decode), mGBA SDL with `-3`, Xvfb `:316` + openbox, xdotool, ImageMagick `convert`/`montage`, tesseract (attempted OCR, unreliable on the stylized font). Analysis scripts were in `/tmp/kao/` (`phase0.py`, `textbank.py`, `strtab.py`, `findcode.py`, `blscan.py`, `ssdiff.py`, `dumptab.py`, `setpw.py`, `batchtest.py`, `novelfinal.py`, `ram_pause.py`).
 
 No ROM or copyrighted assets are redistributed by this report; only hashes, addresses, algorithms and the author-generated code strings are published.

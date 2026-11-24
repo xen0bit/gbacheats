@@ -1,5 +1,7 @@
 # Final Fantasy IV Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -79,7 +81,7 @@ was not opened by this session.)
 
 - **Emulator:** mGBA (SDL, `/usr/local/bin/mgba`) under `Xvfb :317 -screen 0
   1024x768x24`, `openbox`, `SDL_AUDIODRIVER=dummy`, invoked `mgba -3 ff4a.gba`.
-  The ROM was **copied** to `/tmp/opencode/ff4a/ff4a.gba` so no emulator artifacts
+  The ROM was **copied** to `/tmp/ff4a/ff4a.gba` so no emulator artifacts
   land in the ROM folder.
 - **Keymap — verified by RAM read, not assumed.** Holding each key and reading
   the live held-button word at EWRAM `0x020068A8` from an mGBA savestate gave:
@@ -248,7 +250,7 @@ console.**
   literal-LDR candidate scans); Pillow available (unused).
 - `strings -t x -n 3/4`, `grep -abo/-abi`, `xxd`, `file`, `md5sum`/`sha1sum`/
   `sha256sum`.
-- Custom scripts in `/tmp/opencode/ff4a/`: `phase0.py` (hashes/header/embedded
+- Custom scripts in `/tmp/ff4a/`: `phase0.py` (hashes/header/embedded
   header scan), `encsearch.py` (encoding brute force), `lzscan.py` (LZ77 sweep),
   `key.py` (xdotool key helper), savestate `gbAs` zlib parser (`ssram.py` and
   inline readers).

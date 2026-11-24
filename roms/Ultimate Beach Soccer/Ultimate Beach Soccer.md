@@ -1,5 +1,7 @@
 # Ultimate Beach Soccer (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -125,7 +127,7 @@ There is no code algorithm to reimplement. The two algorithms actually present a
 * `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep -abo`, Python 3 `struct`/`zlib`/`Pillow`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for raw Thumb ranges; Capstone 5.0.7 for literal-pointer, input-global, and key-mask scanners.
 * mGBA 0.10.5 (`-3`, `-g`, `-d`), Xvfb `:317`, openbox, xdotool (XTEST), scrot, ImageMagick.
-* Helper scripts kept in `/tmp/opencode/beachsoccer/`: `gba.py` (input/screenshot), `scan.py` (Thumb literal scan), `input_scan.py`, `mdbg2.py` (stub-free `-d` debugger), `diffstate.py` (gbAs state diffs), `repack.py` (savestate patcher).
+* Helper scripts kept in `/tmp/beachsoccer/`: `gba.py` (input/screenshot), `scan.py` (Thumb literal scan), `input_scan.py`, `mdbg2.py` (stub-free `-d` debugger), `diffstate.py` (gbAs state diffs), `repack.py` (savestate patcher).
 
 ## 10. Legal note
 

@@ -1,5 +1,7 @@
 # Bomberman Max 2: Red Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -208,7 +210,7 @@ title-screen state is kept at
 | Gameplay → A+B+Select+Start | BIOS SoftReset; Mode7 intro replays (`ev18`) |
 | Gameplay → L+R+Start / Select+Start / A+B+Start / A+B+Select | no reset (`ev20` for Select+Start; A+B+Select opens pause) |
 
-Evidence screenshots (720×480 mGBA window, in `/tmp/opencode/bmaxred/`):
+Evidence screenshots (720×480 mGBA window, in `/tmp/bmaxred/`):
 
 | File | Content |
 |---|---|
@@ -773,7 +775,7 @@ whose code and labels are mapped in §4–§6.
   3× scale.
 * `arm-none-eabi-objdump -D -b binary -marm -M force-thumb` (and default
   ARM mode for the Mode7 entry).
-* Python 3 + Capstone 5.0.7, scripts in `/tmp/opencode/bmaxred/`:
+* Python 3 + Capstone 5.0.7, scripts in `/tmp/bmaxred/`:
   * `phase0.py`, `phase0b.py` — hashes, header, complement, logo/header
     scan, ROM diff statistics.
   * `scan1.py`, `lit.py` — literal-pointer and pointer-run scans.

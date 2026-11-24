@@ -1,5 +1,7 @@
 # Kirby: Nightmare in Dream Land (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -41,7 +43,7 @@ Keymap (verified against gameplay movement): A=`x`, B=`z`, L=`a`, R=`s`, Start=`
 7. With GAME SELECT open, B returns to FILE SELECT; B again returns to title.
 8. Starting a file (A on FILE1) plays the intro story and tutorials, then Level 1: Vegetable Valley. **Start during gameplay opens the single-page "About Copy Abilities" help screen** (A or Right dismisses; Start toggles). There is no separate pause menu.
 
-Screenshots and per-screen savestates are in `/tmp/opencode/kirbynightmare/shots/` and `/tmp/opencode/kirbynightmare/*.ss1`.
+Screenshots and per-screen savestates were in `/tmp/kirbynightmare/shots/` and `/tmp/kirbynightmare/*.ss1`.
 
 ## 4. Address map
 

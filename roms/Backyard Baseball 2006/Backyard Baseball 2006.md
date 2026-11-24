@@ -1,5 +1,7 @@
 # Backyard Baseball 2006 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Status: complete. Scope: in-game / developer-intended cheats only. No GameShark,
 CodeBreaker, Action Replay or other memory-edit codes are proposed or relied on.
 
@@ -145,7 +147,7 @@ Both match the GameFAQs/VGChartz lists and both are in the ROM table.
 
 Screenshots: `shots/50_october_result.png`, `shots/78_baby_prefix.png`,
 `shots/79_zzzz.png`, `shots/92_player_spaceman.png` in the work directory
-`/tmp/opencode/bb2006`.
+`/tmp/bb2006`.
 
 ## 4. Address map
 
@@ -358,7 +360,7 @@ The menu is real code (`0x08037EE8`, 4 page functions, 4 draw/input functions,
 
 Each was entered through the real on-screen keyboard and confirmed by the
 in-game unlock message. Screenshot paths are relative to
-`/tmp/opencode/bb2006/`.
+`/tmp/bb2006/`.
 
 | Novel code | Bit | Observed effect | Screenshot |
 |---|---:|---|---|
@@ -492,7 +494,7 @@ button codes.
   compared between `A`, `AB` and `ZZZZZZZZ` states.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`.
 * Python 3 for table decoding, pointer scans, BL/BLX scans and hash/header work.
-* Helper scripts in `/tmp/opencode/bb2006`: `key.py` (press helper),
+* Helper scripts in `/tmp/bb2006`: `key.py` (press helper),
   `type_name.py` (grid navigation + DONE), `next_test.py` (message → next code).
 
 Minimal table reproducer (prints the nine codes from the ROM directly):

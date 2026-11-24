@@ -1,5 +1,7 @@
 # Egg Mania: Eggstreme Madness (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -328,10 +330,10 @@ the button-code gate; whether the unlock persists to SRAM across a real power cy
 * `zlib.decompress` of the mGBA `.ss1` `gbAs` PNG chunk for RAM diffs (§16.13).
 * Web sources consulted: GameFAQs, Cheating Dome, Cheat Happens, Wikipedia,
   GameRevolution, ROMSFUN (CodeBreaker, out of scope).
-* Scripts/artifacts in `/tmp/opencode/eggmania2/` (`gba.py`, `parse_ss.py`,
+* Scripts/artifacts in `/tmp/eggmania2/` (`gba.py`, `parse_ss.py`,
   `explore.py`/`2`/`3`, `title_brute.py`, `cs_brute.py`, `scroll.py`, `longhold.py`,
   `force_screens.py`, `find_writers.py`, `screens/` and `sweep3/` montages,
-  `wp3_gdb.log`). Prior-session evidence in `/tmp/opencode/eggmania/`
+  `wp3_gdb.log`). Prior-session evidence in `/tmp/eggmania/`
   (`shot_09.png` = password screen, `fresh_before.ss1`/`fresh_after.ss1` = RAM proof,
   `baseline_chars.png` / `after_code_chars.png` / `r_code_chars.png` = roster proof).
 

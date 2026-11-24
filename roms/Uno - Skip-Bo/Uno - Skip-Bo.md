@@ -1,5 +1,7 @@
 # Uno - Skip-Bo (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -52,7 +54,7 @@ Evidence in brief:
 
 **Codes tested**: none exist to test. Button sequences tested in-game without effect from the title screen and menus: Konami code (↑↑↓↓←→←→BA), L+R, Start+Select, and L+R+Start. All were treated as ordinary navigation/no-ops.
 
-**Screenshots**: `crop_*.png` in `/tmp/opencode/unoskipo/` (boot, title, all menus, theme, challenge levels, gameplay, pause). Savestates `game.ss1`–`game.ss7` in the same directory.
+**Screenshots**: `crop_*.png` in `/tmp/unoskipo/` (boot, title, all menus, theme, challenge levels, gameplay, pause). Savestates `game.ss1`–`game.ss7` in the same directory.
 
 ## 4. Address map
 
@@ -92,7 +94,7 @@ The `0x0802BB54` routine tracks only the 4-bit direction field (`mask 0xF0`, i.e
 
 ### 6.1 Complete UI vocabulary (386 distinct strings × 5 languages)
 
-Menu/navigation strings were enumerated in full; the complete English set is in `/tmp/opencode/unoskipo/en_strings.txt` (derived from `0x08040AC4`). Notable groups:
+Menu/navigation strings were enumerated in full; the complete English set was in `/tmp/unoskipo/en_strings.txt` (derived from `0x08040AC4`). Notable groups:
 
 - Screens: `Main Menu`, `UNO Main Menu`, `SKIP-BO Main Menu`, `Theme`, `Name Entry`, `Icon Selection`, `Special Modes`, `Options`, `Credits`, `Help`, `Instructions`, `Controls`, `Pause`, `Quick Play`, `Player Setup`, `Game Settings`, `House Rules`, `Alternate Cards`, `Challenge Mode`, `Scores`, `Custom Game`, `Endurance Mode`, `Timed Mode`, `Challenge Level 1..5`, `Random Challenge`.
 - Actions: `Back`, `Confirm`, `Select`, `Delete`, `Add Character`, `Start Game`, `Next`, `Enter`, `Press Start`, `Resume`, `Cancel`, `Quit`.
@@ -113,7 +115,7 @@ Health & Safety · Legal · Title · Top menu · Options · UNO Main Menu · Nam
 
 ### 6.4 Save data
 
-`/tmp/opencode/unoskipo/game.sav` is 0 bytes after the full menu walk — no unlock flags are written by any of the visited screens.
+`/tmp/unoskipo/game.sav` is 0 bytes after the full menu walk — no unlock flags are written by any of the visited screens.
 
 ## 6b. Enumeration
 
@@ -138,7 +140,7 @@ Because the accepted set is **empty**, there is no code to mint and no "novel co
 
 ## 7. Validation evidence
 
-- **Observed**: every screen listed in §6.3 was reached in mGBA with a screenshot retained on disk (`/tmp/opencode/unoskipo/crop_*.png`). Background cycling observed through WINGS → SQUARES → SPHERES (all reachable). Challenge Levels 1–5 and Random Challenge observed by D-pad cycling. Gameplay + pause menu observed.
+- **Observed**: every screen listed in §6.3 was reached in mGBA with a screenshot retained on disk (`/tmp/unoskipo/crop_*.png`). Background cycling observed through WINGS → SQUARES → SPHERES (all reachable). Challenge Levels 1–5 and Random Challenge observed by D-pad cycling. Gameplay + pause menu observed.
 - **Observed (RAM)**: savestate `game.ss7` (pause menu) decoded from the mGBA `gbAs` chunk; `0x0300513C = 0xFC00` (active-high, no buttons held), `0x03005110 = 0x8`, `0x03005140 = 0x1`, `0x03005160 = 0x14`, `0x03005164 = 0x6` — all inside the input manager's own global block.
 - **Derived**: the 1,930-pointer string table and 386 unique English strings were decoded directly from ROM bytes at `0x08040AC4`; keyword counts are byte-exact. The single KEYINPUT literal/reader/caller chain was verified by Capstone literal scanning and a Thumb BL scan over all 4 MiB.
 - **Derived**: the keypad alphabet and its trailing glyph bytes at `0x0803EFB8` were read directly; no secret symbol exists.
@@ -154,7 +156,7 @@ Because the accepted set is **empty**, there is no code to mint and no "novel co
 ## 9. Tooling
 
 - `md5sum`/`sha1sum`/`sha256sum`, `file`, `xxd`, `strings -t x`, `grep -abo`
-- Python 3 scripts in `/tmp/opencode/unoskipo/`:
+- Python 3 scripts in `/tmp/unoskipo/`:
   - `kb.py` — XTEST key helper (100–150 ms holds) + screenshot/crop
   - `scan_input.py` — literal + Capstone Thumb-LDR scan for `0x04000130`
   - `ram.py` — mGBA `.ss1` `gbAs` chunk decompressor / RAM diff (IWRAM at +0x19000, EWRAM at +0x21000)

@@ -1,5 +1,7 @@
 # Final Fantasy I & II: Dawn of Souls (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -129,7 +131,7 @@ Result: **0** breakpoint hits and **0** debug screens. (`A+B+Start+Select` is th
 
 ## 7. Validation evidence
 
-* **Observed:** emulator boots to the documented title; button combinations produced no debug screen; the keypad globals and a live `Hit breakpoint 1 at 0x08011D70` register dump were read in mGBA's CLI debugger; screenshots `shot_00`–`shot_29` are in `/tmp/opencode/ff12/`.
+* **Observed:** emulator boots to the documented title; button combinations produced no debug screen; the keypad globals and a live `Hit breakpoint 1 at 0x08011D70` register dump were read in mGBA's CLI debugger; screenshots `shot_00`–`shot_29` were in `/tmp/ff12/`.
 * **Derived:** all addresses, the unreferenced status of the sound-test module, the mask values of the keypad globals, the ROM-vs-RAM address translation, and the meaning of the track-name tables — each from disassembly and exhaustive xref scans whose scanner was sanity-checked against a known BL (`0x8055420 → 0x0818C258`).
 * **Inferred:** that the sound-test module was compiled into retail builds inadvertently (typical of TOSE/Square development builds). It is **not** claimed to be reachable; no code path was found.
 * **External (attempted):** web research was blocked by CAPTCHA/403; the one accessible archived TCRF article corroborates the absence of a documented debug menu. Treated as weak corroboration only.
@@ -145,7 +147,7 @@ Result: **0** breakpoint hits and **0** debug screens. (`A+B+Start+Select` is th
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -abo` — Phase 0/1.
 * Python `struct` scripts for embedded-header/logo scanning, literal-pointer scanning, Thumb BL/BL-target scanning and `LDR [PC,#imm]` literal resolution.
 * `arm-none-eabi-objdump -D -b binary -marm -M force-thumb --adjust-vma=0x08000000` — disassembly.
-* REA MCP + Ghidra 12.1.4: full 16 MiB raw-ARM import timed out at the 330 s startup deadline; a 25 KiB trimmed window (`/tmp/opencode/ff12/soundtest_window.bin`, base `0x08054000`) was analysed instead and used to decompile `FUN_0805501C`, `FUN_080557B4`, `FUN_080557D4`, `FUN_0805661C`. Session closed afterwards.
+* REA MCP + Ghidra 12.1.4: full 16 MiB raw-ARM import timed out at the 330 s startup deadline; a 25 KiB trimmed window (`/tmp/ff12/soundtest_window.bin`, base `0x08054000`) was analysed instead and used to decompile `FUN_0805501C`, `FUN_080557B4`, `FUN_080557D4`, `FUN_0805661C`. Session closed afterwards.
 * mGBA with `-d` CLI debugger driven through a FIFO (`stdbuf -oL -eL`) for breakpoints and RAM reads; Xvfb `:316` + openbox + xdotool + scrot for screen walking. Used `-d` because sibling sessions hold the single-client GDB stub port.
 * Web tools: `webfetch`/`websearch` against TCRF, Wayback Machine, Google, Bing, DuckDuckGo, Mojeek, Jina.ai — all blocked or empty as documented.
 

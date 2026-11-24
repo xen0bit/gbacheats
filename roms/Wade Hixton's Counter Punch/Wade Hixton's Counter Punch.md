@@ -1,5 +1,7 @@
 # Wade Hixton's Counter Punch (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -40,14 +42,14 @@ Keymap (mGBA SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Select=`BackSpace`, Start
 2. Move to `SOUND TEST` (fourth entry) and press `Left`/`Right`: values `0..45`, wraps `45 → 0`; each change triggers the corresponding sound effect.
 3. Move to `MUSIC TEST` (fifth entry) and press `Left`/`Right`: values `0..13`, wraps `13 → 0`; each change starts the corresponding music track.
 
-Evidence screenshots are in `/tmp/opencode/hixton_evidence/` (moved out of the ROM folder per policy).
+Evidence screenshots were in `/tmp/hixton_evidence/` (moved out of the ROM folder per policy).
 
 ## 4. Address map
 
 | Address (ROM / file) | Meaning |
 |---|---|
 | `0x08006400` / `0x06400` | Pause-screen routine (draws `GAME PAUSED`, `RESUME`, `GIVE UP`) |
-| `0x0800646c` | `L|R` mask (`0x300`) branch in the pause handler |
+| `0x0800646c` | `L\|R` mask (`0x300`) branch in the pause handler |
 | `0x0800657a` | Validator entry: reads progress byte, bounds check `<= 4`, dispatch |
 | `0x0800659c` / `0x0659c` | 5-entry jump table: `080065B0`, `080065C0`, `080065E4`, `08006610`, `08006A0C` |
 | `0x080065b0` / `0x080065c0` | States 0/1: expect `L` (`0x200`), then `R` (`0x100`) |
@@ -140,9 +142,9 @@ on Left/Right at MUSIC TEST  -> idx = (idx +/- 1) mod 14    # 0..13, start music
 
 **Novel codes generated and confirmed in-game.**
 
-1. `L, L, R, Select` — an undocumented sequence with an extra `L` inserted at state 0 (state 1 expects `R`, so the extra press is ignored). Entered in mGBA from a fresh pause-screen savestate: `DEBUGMODE PG.1` appeared (`/tmp/opencode/hixton_evidence/debug_pg1_novel_LLRSel.png`) and the progress byte read back as `3`.
+1. `L, L, R, Select` — an undocumented sequence with an extra `L` inserted at state 0 (state 1 expects `R`, so the extra press is ignored). Entered in mGBA from a fresh pause-screen savestate: `DEBUGMODE PG.1` appeared (`/tmp/hixton_evidence/debug_pg1_novel_LLRSel.png`) and the progress byte read back as `3`.
 2. `L, R, R, Select` — extra `R` tolerated at state 2; progress byte `3`.
-3. **OPTIONS → SOUND TEST / MUSIC TEST** — two entirely undocumented developer test entries. Navigated on the real title-menu OPTIONS screen, cycled through both indices, observed sound/music playback and confirmed the backing RAM values at `0x03001184`/`0x03001185` (`/tmp/opencode/hixton_evidence/options_menu.png`, `/tmp/opencode/hixton_evidence/music_test.png`, `/tmp/opencode/hixton_evidence/sound_test_wrap.png`).
+3. **OPTIONS → SOUND TEST / MUSIC TEST** — two entirely undocumented developer test entries. Navigated on the real title-menu OPTIONS screen, cycled through both indices, observed sound/music playback and confirmed the backing RAM values at `0x03001184`/`0x03001185` (`/tmp/hixton_evidence/options_menu.png`, `/tmp/hixton_evidence/music_test.png`, `/tmp/hixton_evidence/sound_test_wrap.png`).
 
 **Bounds proven by rejection.**
 
@@ -154,9 +156,9 @@ on Left/Right at MUSIC TEST  -> idx = (idx +/- 1) mod 14    # 0..13, start music
 ## 7. Validation evidence
 
 **Observed (emulator / savestate RAM reads)**
-* `L,R,Select` on the pause screen draws `DEBUGMODE PG.1`; `R` draws `PG.2`; `L` returns to `PG.1` (`/tmp/opencode/hixton_evidence/debug_pg1_public_code.png`, `/tmp/opencode/hixton_evidence/debug_pg2.png`).
+* `L,R,Select` on the pause screen draws `DEBUGMODE PG.1`; `R` draws `PG.2`; `L` returns to `PG.1` (`/tmp/hixton_evidence/debug_pg1_public_code.png`, `/tmp/hixton_evidence/debug_pg2.png`).
 * Progress byte at IWRAM `0x0300118B`: `0x00` on the plain pause screen, `0x03` in PG.1, `0x04` in PG.2 — read directly from decompressed mGBA savestates at state offset `0x1A18B`.
-* `A` in PG.1 → `+0x0E=0x02`, `+0x10=0x01`; `Select` in PG.1 → `+0x10=0x01`; unpause then shows a lost round/match (`/tmp/opencode/hixton_evidence/pause_screen.png`).
+* `A` in PG.1 → `+0x0E=0x02`, `+0x10=0x01`; `Select` in PG.1 → `+0x10=0x01`; unpause then shows a lost round/match (`/tmp/hixton_evidence/pause_screen.png`).
 * OPTIONS menu renders all six entries including SOUND TEST and MUSIC TEST; changing them alters RAM `0x03001184`/`0x03001185` and produces audio.
 * Screens walked in the emulator: title menu, slot select, name entry, story scenes, bar hub, live match, pause (RESUME/GIVE UP), debug PG.1, debug PG.2, and OPTIONS with both test entries. `CREDITS` and `SLIDESHOW` exist in the menu label table (`0x08411790`) but those two destinations were not entered; they are not code surfaces.
 

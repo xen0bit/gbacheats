@@ -1,5 +1,7 @@
 # Teen Titans (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -285,7 +287,7 @@ untrusted data and ignored, per guide §16.8; it did not affect the analysis.
   tried but rejected commands with a packet error; savestate diffing was used
   instead.
 * Work artifacts (screenshots, scripts, decompressed state) live in
-  `/tmp/opencode/teentitans1/`. No ROM or copyrighted assets are redistributed.
+  `/tmp/teentitans1/`. No ROM or copyrighted assets are redistributed.
 
 ## 10. Legal note
 

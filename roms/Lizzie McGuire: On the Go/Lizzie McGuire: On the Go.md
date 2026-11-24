@@ -1,5 +1,7 @@
 # Lizzie McGuire: On the Go! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 - File: `roms/Lizzie McGuire: On the Go/Lizzie McGuire: On the Go.gba`
 - Size: 4,194,304 bytes (0x400000, 4 MiB)
@@ -81,7 +83,7 @@ Menu walk (every screen visited, with screen-id variable at `0x02005C60`):
 Screenshot evidence: `c_cheatresult.png` (all flag bytes set immediately after
 submitting), `c_games_unlocked.png` (6/6 Games), `c_fwf_unlocked2.png` (4/4 Fun
 With Friends), `c_games.png` / `c_fwf_scroll.png` (locked before), all kept in
-`/tmp/opencode/lizziego/`.
+`/tmp/lizziego/`.
 
 ## 4. Address map
 | Item | Address (ROM / RAM) | Evidence |
@@ -232,7 +234,7 @@ do not trigger the validator — they are not used as evidence of acceptance.
   literal/BL/xref scans; `xxd`, `strings`, `grep`; zlib/png savestate decoder
   (`state.py`, `ram.py`, `xref.py`, `strbscan.py`, `patchstate.py`,
   `typecheat.py`, `cheat_test*.py`, `g.py`, `combo.py`) in
-  `/tmp/opencode/lizziego/`.
+  `/tmp/lizziego/`.
 - mGBA SDL under Xvfb `:316` with openbox; `xdotool` XTEST input; `scrot`
   screenshots (≤20 read, kept on disk, not attached).
 - Legal: no ROM bytes or copyrighted assets are redistributed; only hashes,

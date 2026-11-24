@@ -51,7 +51,7 @@ Invalid codes are rejected on-screen with **"The password is not correct."** Cod
 | Password display screen (0x19) | `0x08017848` | calls encoder `0x0801225E` |
 | Password entry screen (0x1A) | `0x08017BA8` | creates 0x58-byte struct |
 | Password per-frame handler | `0x08017DE8` | writes current symbol, submits at position 6 |
-| Password symbol painter | `0x08017A6C` | packs `(icon<<2)|color` |
+| Password symbol painter | `0x08017A6C` | packs `(icon<<2)\|color` |
 | **Encoder** | `0x0801225E` | game state → 7 valid symbols |
 | **Validator** | `0x08012400` | 7 symbols → accept/reject + decoded fields |
 | XOR constant | `0x080123FC` = `0x08012520` | `0x2873CAB9` |

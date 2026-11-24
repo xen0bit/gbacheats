@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Konami Krazy Racers/Konami Krazy Racers.gba` |
+| File | `roms/Konami Krazy Racers/Konami Krazy Racers.gba` |
 | Size | 4,194,304 bytes (0x400000, 4 MiB) |
 | Header title | `KRAZY RACERS` (0xA0–0xAB) |
 | Game code | `AKWE` (region E / USA); maker `A4` (Konami) |

@@ -1,5 +1,7 @@
 # Chicken Shoot (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -228,7 +230,7 @@ No literal from any published list exists to search, and the ROM contains no suc
 ## 9. Tooling
 
 * `binutils-arm-none-eabi` (`objdump -M force-thumb`), Python 3 (`struct`, `zlib`), mGBA SDL on `Xvfb :244` with `openbox`, `xdotool`.
-* Scripts in `/tmp/opencode/chickenshoot`: `myserver.py`/`server2.py` (pty-controlled mGBA debugger and frame stepping), `snap.py` (extract `gbAs` from `.ss1`), `differ.py` (IWRAM/EWRAM diff), plus ad-hoc pointer/mask scanners described above.
+* Scripts in `/tmp/chickenshoot`: `myserver.py`/`server2.py` (pty-controlled mGBA debugger and frame stepping), `snap.py` (extract `gbAs` from `.ss1`), `differ.py` (IWRAM/EWRAM diff), plus ad-hoc pointer/mask scanners described above.
 * Savestates were read as PNG `gbAs` zlib chunks; no screenshots or image assets were used as evidence.
 
 ## 10. Legal note

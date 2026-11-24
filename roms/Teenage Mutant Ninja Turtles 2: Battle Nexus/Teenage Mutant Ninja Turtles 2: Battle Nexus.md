@@ -1,5 +1,7 @@
 # Teenage Mutant Ninja Turtles 2: Battle Nexus (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -270,7 +272,7 @@ dead code or gated by an unlocated mechanism — reachability is not claimed.
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings` — Phase 0/recon.
 * `arm-none-eabi-objdump -M force-thumb` and a small Capstone wrapper
   (`dis.py`) with PC-relative literal resolution — disassembly/xrefs.
-* Custom Python scripts in `/tmp/opencode/tmnt2/`: `xref.py` (pointer-scan),
+* Custom Python scripts in `/tmp/tmnt2/`: `xref.py` (pointer-scan),
   `litscan.py` (literal scan), `enumerate.py` (exhaustive validator model),
   `dis.py`, `dbg2.py`, `testcode.py`.
 * mGBA 0.10.5 `-d` CLI debugger driven through a PTY (`script`) and a

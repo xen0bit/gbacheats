@@ -1,5 +1,7 @@
 # The Sum of All Fears (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -54,7 +56,7 @@ chord semantics). The accepted space is exactly 6 sequences out of the
   a zlib `gbAs` chunk; 397,312-byte state for this 8 MiB ROM. EWRAM starts at state
   offset `0x21000`, IWRAM at `0x19000`.
 * Code entry: hold each button ~100 ms with ~130 ms gaps. Example: `a s Down Down`.
-* Screenshots of every result are in `/tmp/opencode/sumofallfears/`
+* Screenshots of every result were in `/tmp/sumofallfears/`
   (`code0_LRUU.png`, `code1_LRDD.png`, `code2_LLRRDD.png`, `code3_LSelL.png`,
   `code4_RRLRU.png`, `code5_RSelR.png`, `reject_bad.png`, `reject_inv.png`,
   plus the menu walk `s1..s12.png`, `multiplayer.png`, `controls2.png`,
@@ -238,7 +240,7 @@ space is exactly these 6 sequences — not merely "the 6 we found".
 * Tools: `mgba 0.10.5` (`-g` unused because port 2345 was occupied by another
   session; `-d`/savestate diffs used instead), `Xvfb`, `openbox`, `xdotool`,
   `scrot`, `arm-none-eabi-objdump -M force-thumb`, Capstone, `gdb-multiarch`.
-* Working scripts in `/tmp/opencode/sumofallfears/`: `state.py` (PNG `gbAs`
+* Working scripts in `/tmp/sumofallfears/`: `state.py` (PNG `gbAs`
   zlib extraction), `diffstates.py` (savestate RAM diff), `testcode.py`
   (code entry + RAM read), `key.py` (XTEST key helper).
 * Screen enumeration: Language Selection, Main Menu (5 items), Game Selection

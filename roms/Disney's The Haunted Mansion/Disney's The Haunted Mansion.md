@@ -1,5 +1,7 @@
 # Disney's The Haunted Mansion (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -66,7 +68,7 @@ menus repeat.
 Boot path: legal screen → Pocket Studios / Disney / TDK logos →
 intro cut-scene → `Press Start` → main menu.
 
-Menus walked (screenshots on disk, `/tmp/opencode/hauntedmansion/`):
+Menus walked (screenshots on disk, `/tmp/hauntedmansion/`):
 
 ```
 Main menu:  New Game | Password | Options
@@ -290,7 +292,7 @@ condition is the 5-bit equality in §5.3, so the accepted progress-code set is
 plus the four hard-coded cheats that bypass the checksum. The four cheats are
 *not* members of the checksum set.
 
-**Generator.** Offline encoder (Python, `/tmp/opencode/hauntedmansion/mint.py`)
+**Generator.** Offline encoder (Python, `/tmp/hauntedmansion/mint.py`)
 that chooses the desired `d` bit-planes, enforces the checksum, and XORs the
 key. Codes for checksum classes 0–7 with all other fields zero:
 
@@ -383,7 +385,7 @@ ROM, and the absence of a hidden debug menu is a statement about that space.
 
 ## 9. Tooling
 
-* `python3` + `capstone`-free raw scripts in `/tmp/opencode/hauntedmansion/`:
+* `python3` + `capstone`-free raw scripts in `/tmp/hauntedmansion/`:
   `phase0.py`, `ptrscan.py`, `blscan.py`, `model.py` (decoder),
   `mint.py` (encoder), `scan_codes.py`, `ss.py`/`ssmake.py` (mGBA savestate
   PNG/`gbAs` zlib reader/writer), `key.py`/`type_code.py`/`enter_code.py`

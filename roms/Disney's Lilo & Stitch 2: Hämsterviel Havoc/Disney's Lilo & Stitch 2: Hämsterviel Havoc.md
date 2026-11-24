@@ -1,5 +1,7 @@
 # Disney's Lilo & Stitch 2: Hämsterviel Havoc (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -361,7 +363,7 @@ it unreachable on a retail cart without a memory edit.
 * mGBA GDB stub (`mgba -g`) with `gdb-multiarch` for the gate breakpoint
 * mGBA savestates parsed as PNG `gbAs` chunks (zlib) for RAM diffs; a small
   re-packer was used to set the gate word in a copy of a state
-* Scripts (working directory `/tmp/opencode/lilo2`):
+* Scripts (working directory `/tmp/lilo2`):
   `drive.py` (X11 input/screenshots), `ss.py` (savestate extractor),
   `patch_ss.py` (savestate patcher), `emu_dbg.py`/`gdb_driver.py`
   (debugger drivers)

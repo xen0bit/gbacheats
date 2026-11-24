@@ -1,5 +1,7 @@
 # Stadium Games (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -164,7 +166,7 @@ Web reconnaissance (GameFAQs/Google/Bing/DuckDuckGo queries for `Stadium Games G
 * Ghidra 12.1.4 via the REA MCP (`open_binary`, `binary_overview`, `list_strings`, `list_procedures`, `procedure_pseudo_code`, `batch_decompile`); 299 procedures, 109 strings inventoried.
 * mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`, `xdotool` XTEST input, `scrot` + ImageMagick crops.
 * mGBA CLI debugger driven through a Python `pty` (`mgba_dbg.py`): `b/t 0x0800441c`, `c`, `r/4`, `x/4`, `status`.
-* Analysis scripts kept in `/tmp/opencode/stadiumgames/`: `ui.py`, `scan.py`, `keystate.py`, `keyscan.py`, `final_sweep.py`, `buttontest.py`, `mgba_dbg.py`, `ram_walk.py`.
+* Analysis scripts kept in `/tmp/stadiumgames/`: `ui.py`, `scan.py`, `keystate.py`, `keyscan.py`, `final_sweep.py`, `buttontest.py`, `mgba_dbg.py`, `ram_walk.py`.
 
 ## 10. Legal note
 

@@ -1,5 +1,7 @@
 # Madden NFL 07 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -127,7 +129,7 @@ The "locked" branch `byte == 0x7B` cannot be reached by any controller input: ex
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, GNU `strings`, `grep`, `objdump` (`arm-none-eabi-objdump -M force-thumb`), Python 3 + capstone 5.0.7.
-* Scripts in `/tmp/opencode/madden07/`: `xref.py` (PC-relative literal / BL target scanner), `state.py` (mGBA `.ss1` PNG `gbAs` zlib reader), `ramdiff.py` (IWRAM/EWRAM differ), `key.py`, `walk.py`, `survey.py` (XTEST input, screenshots, Tesseract OCR, savestates).
+* Scripts in `/tmp/madden07/`: `xref.py` (PC-relative literal / BL target scanner), `state.py` (mGBA `.ss1` PNG `gbAs` zlib reader), `ramdiff.py` (IWRAM/EWRAM differ), `key.py`, `walk.py`, `survey.py` (XTEST input, screenshots, Tesseract OCR, savestates).
 * Headless runtime: `Xvfb :316 -screen 0 1024x768x24`, `openbox`, `mgba -3` with `SDL_AUDIODRIVER=dummy`; GDB stub (`-g`) was blocked by environment conditions, so the guide's §16.13 savestate-diff technique was used for RAM evidence.
 
 ## 10. Legal note

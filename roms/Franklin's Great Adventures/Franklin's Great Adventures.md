@@ -1,5 +1,7 @@
 # Franklin's Great Adventures (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -101,7 +103,7 @@ press = raw & ~held                       ; 0x03001F0A
 
 Per §0.2 there is no code system, so this section bounds the negative instead of minting a code.
 
-**Screen space (all walked, with RAM):** logo/title, Language Selection, Main Menu, Options, Credits, Mini-Games carousel (all entries `???????` on a fresh save), Story overworld, dialogue prompt, Pause. A labeled 32 KiB IWRAM snapshot was captured at each screen via the mGBA GDB stub (breakpoint at `0x08000534`, `dump binary memory ... 0x03000000 0x03008000`); files `ram_lang.bin`, `ram_title_final.bin`, `ram_menu2.bin`, `ram_story_intro2.bin`, `ram_pause.bin`, `ram_dialogue*.bin` in `/tmp/opencode/franklin2`. Key state at `0x03001F08` was read live and matched every sent keypress (e.g. 0x0200 for `a`/L). No screen beyond those listed appeared.
+**Screen space (all walked, with RAM):** logo/title, Language Selection, Main Menu, Options, Credits, Mini-Games carousel (all entries `???????` on a fresh save), Story overworld, dialogue prompt, Pause. A labeled 32 KiB IWRAM snapshot was captured at each screen via the mGBA GDB stub (breakpoint at `0x08000534`, `dump binary memory ... 0x03000000 0x03008000`); files `ram_lang.bin`, `ram_title_final.bin`, `ram_menu2.bin`, `ram_story_intro2.bin`, `ram_pause.bin`, `ram_dialogue*.bin` in `/tmp/franklin2`. Key state at `0x03001F08` was read live and matched every sent keypress (e.g. 0x0200 for `a`/L). No screen beyond those listed appeared.
 
 **Text space (decoded):** the visible text is ASCII with control codes in a bank at `0x08048FC8`, indexed by a `u16` offset table at `0x0804CD14`; the font at `0x081D540D` maps ASCII `0x20..0x7E` directly to glyphs. The `??????` locked label and all 22 names were decoded from these tables. Raw 4 MiB byte counts (case-insensitive lower/upper/`+0x20`-shift/UTF-16LE): `password` 0/0/0/0, `cheat` 0, `debug` 0, `secret` 0, `unlock` 0, `level select` 0, `sound test` 0, `enter code` 0, `game shark`/`action replay` 0/0; `code` = 1, which is `Codeurs` in the French credits (`0x5B494`) — a false positive. No password alphabet literal exists (`ABCDEFGHIJKLMNOPQRSTUVWXYZ` occurs once, at `0x1D542D`, as part of the font glyph map, not an input alphabet).
 
@@ -127,6 +129,6 @@ Per §0.2 there is no code system, so this section bounds the negative instead o
 
 ## 9. Tooling
 
-- Scripts (all in `/tmp/opencode/franklin2`): `phase0.py` (hash/header/logo scan), `recon.py`, `textbank.py` (text decode), `patterns.py` / key-mask & keyword scans, `ptrscan.py`, `keylinks.py`, `gdbbrk.py` (GDB breakpoint + `dump binary memory` driver), `ui.py` / `cap.py` (xdotool + scrot), `ssparse.py` / `diffstate.py` (savestate `gbAs` parser, §16.13 fallback).
+- Scripts (all in `/tmp/franklin2`): `phase0.py` (hash/header/logo scan), `recon.py`, `textbank.py` (text decode), `patterns.py` / key-mask & keyword scans, `ptrscan.py`, `keylinks.py`, `gdbbrk.py` (GDB breakpoint + `dump binary memory` driver), `ui.py` / `cap.py` (xdotool + scrot), `ssparse.py` / `diffstate.py` (savestate `gbAs` parser, §16.13 fallback).
 - Native tools: `arm-none-eabi-objdump` (`-M force-thumb`/`force-arm`), `capstone` 5.0.7, `gdb-multiarch`, `mgba -3 -g`, `Xvfb :318`, `openbox`, `xdotool`, `scrot`, ImageMagick, Python/Pillow.
 - No game assets are redistributed; only addresses, hashes, counts and the author's own tooling are published.

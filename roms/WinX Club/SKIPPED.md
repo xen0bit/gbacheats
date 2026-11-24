@@ -1,8 +1,10 @@
 # SKIPPED — WinX Club (GBA) — §0.2 not closable after three attempts
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Three focused reverse-engineering attempts were run on this ROM. The detailed
 investigation is preserved in `WinX Club.md` (and scratch artifacts in
-`/tmp/opencode/winxclub*`), but the game's trophy-case "password" could not be
+`/tmp/winxclub*`), but the game's trophy-case "password" could not be
 brought to the full §0.2 bar, so it is deliberately **not indexed** rather than
 reported as a solved code system.
 

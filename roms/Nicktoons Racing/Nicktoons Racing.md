@@ -1,5 +1,7 @@
 # Nicktoons Racing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -133,7 +135,7 @@ Main-Menu savestate, with unlock-byte readings:
 | Variant | Result |
 |---|---|
 | Hold R + **Left** (extra held modifier) during the standard sequence | `0x1F` accepted |
-| Each press delivered **together with A** (`pressed = expected | 0x001`) | `0x1F` accepted |
+| Each press delivered **together with A** (`pressed = expected \| 0x001`) | `0x1F` accepted |
 | **R+Start simultaneously** on the first step, then Select, L, Select, Start | `0x1F` accepted |
 | Extra **Down** press before the sequence, then the standard sequence | `0x1F` accepted |
 
@@ -175,7 +177,7 @@ bitwise AND, so extra held bits and extra simultaneously-pressed bits are ignore
 
 `strings -t x`, `xxd`, `grep`, `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7,
 Python 3 (struct/zlib/PIL), mGBA SDL under `Xvfb :315` with `SDL_AUDIODRIVER=dummy`,
-`xdotool` XTEST, `scrot`/ImageMagick. Helper scripts in `/tmp/opencode/nicktoons/`:
+`xdotool` XTEST, `scrot`/ImageMagick. Helper scripts in `/tmp/nicktoons/`:
 `ss.py` (gbAs savestate decoder), `keymap.sh`, `brute.sh`, `novel3.sh`, `walk.sh`,
 `gdbrsp.py`. Note: mGBA's GDB stub returned zeros for RAM reads on this build, so savestate
 diffing was used as the RAM oracle. No ROM or copyrighted asset is redistributed here.

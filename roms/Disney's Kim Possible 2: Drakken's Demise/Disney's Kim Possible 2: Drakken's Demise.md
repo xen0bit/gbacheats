@@ -1,5 +1,7 @@
 # Disney's Kim Possible 2: Drakken's Demise (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -122,7 +124,7 @@ menu being complete at 3 entries.
 
 mGBA `.ssN` files are PNGs with a zlib-compressed `gbAs` chunk. Extracted layout:
 header/CPU 0x0, VRAM 0x1000, IWRAM 0x19000, EWRAM 0x21000 (state size 397,312 B
-for this 8 MiB ROM). All RAM claims below were read this way (`/tmp/opencode/kp2/ss.py`).
+for this 8 MiB ROM). All RAM claims below were read this way (`/tmp/kp2/ss.py`).
 
 ## 4. Address map
 
@@ -436,7 +438,7 @@ cursor, and the 3-item Extras does not scroll while the 8-item Training list doe
   runs); `arm-none-eabi-objdump -M force-thumb` for range disassembly.
 * `textdump.py` / `text3.py` — message-bank extractor and two-charset decoder.
 * `key.py` — input helper (120 ms taps, 400 ms "back" holds) and `pagecheck.py`
-  for the pagination check. Work directory `/tmp/opencode/kp2` (transient).
+  for the pagination check. Work directory `/tmp/kp2` (transient).
 
 ## 10. Legal note
 

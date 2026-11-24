@@ -1,10 +1,12 @@
 # Monster Truck Madness (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Monster Truck Madness/Monster Truck Madness.gba` |
+| File | `roms/Monster Truck Madness/Monster Truck Madness.gba` |
 | Size | 4,194,304 bytes (`0x400000`) |
 | Header title | `MTM` |
 | Game code | `BMTE` (USA: `AGB-BMTE-USA`; maker `78`, THQ/Tantalus) |
@@ -30,7 +32,7 @@ The only text-entry field is the player **NAME ENTRY** screen (`A-Z 0-9 .`), whi
 
 * Emulator: mGBA 0.10.5 (`mgba -3`) and VisualBoyAdvance 1.8.0 (`vba`) under `Xvfb :318`, `SDL_AUDIODRIVER=dummy`. The game boots in ~10–20 s of emulated time; wait for the red `PRESS START` before input.
 * VBA keymap used (`VisualBoyAdvance-1.8.0` SDL defaults): `z`=A, `x`=B, arrows=D-pad, `Return`=Start, `BackSpace`=Select. Use **explicit 200 ms holds** (`xdotool keydown`/`keyup`), not instantaneous `key` taps — taps are frequently missed at the game's ~39 FPS poll.
-* Menu path (all reachable screens, verified by screenshot; files in `/tmp/opencode/monstertruck/`):
+* Menu path (all reachable screens, verified by screenshot; files in `/tmp/monstertruck/`):
 
   | Screen | Evidence file | Notes |
   |---|---|---|
@@ -163,7 +165,7 @@ The one genuine hidden element, **Nugget**, is a save-bit unlock: its "bounds" a
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep -abo` — identification/recon.
 * `capstone` 5.0.7 (`dis2.py`), `arm-none-eabi-objdump` — Thumb/ARM disassembly; `scan_lit.py` for PC-relative literal xrefs.
-* Custom Python scripts in `/tmp/opencode/monstertruck/`: `header.py` (header + embedded-header scan), `mtools.py`/`nav.py`/`nav2.py`/`mg_nav.py` (Xvfb/XTEST input, screenshots, OCR state detection), `parse_ss.py` (mGBA `.ss1` `gbAs`-chunk zlib decode and RAM offset discovery), `restab.py` (resource-name pointer dump).
+* Custom Python scripts in `/tmp/monstertruck/`: `header.py` (header + embedded-header scan), `mtools.py`/`nav.py`/`nav2.py`/`mg_nav.py` (Xvfb/XTEST input, screenshots, OCR state detection), `parse_ss.py` (mGBA `.ss1` `gbAs`-chunk zlib decode and RAM offset discovery), `restab.py` (resource-name pointer dump).
 * `tesseract` for screen-state detection; `python3-pillow`/`numpy` for image diffs; `Xvfb :318` + `openbox`; `mgba` 0.10.5 and `vba` 1.8.0 (installed via apt for cross-check); `gdb-multiarch` against VBA's `-G tcp:55555` stub and mGBA's stub.
 * Web: web.archive snapshots of GameFAQs GBA cheats (2018-11-26), Monster Trucks Wiki GBA page (2023-02-25), GameFAQs/IGN N64 + PC pages for wrong-SKU comparison, Dubble_G GBA FAQ PDF (pdftotext). Fetched pages were treated as data; no prompt-injection payload was encountered.
 

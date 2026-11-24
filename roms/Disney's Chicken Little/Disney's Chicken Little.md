@@ -1,5 +1,7 @@
 # Disney's Chicken Little (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -78,10 +80,10 @@ raw-binary, base `0x08000000`).
 ```bash
 Xvfb :321 -screen 0 1280x900x24 &
 DISPLAY=:321 openbox &
-cd /tmp/opencode/chickenlittle
+cd /tmp/chickenlittle
 DISPLAY=:321 SDL_AUDIODRIVER=dummy \
   mgba -3 -C savestatePath=$PWD -C screenshotPath=$PWD \
-  "/mnt/gbacheats/roms/Disney's Chicken Little/Disney's Chicken Little.gba" &
+  "roms/Disney's Chicken Little/Disney's Chicken Little.gba" &
 W=$(DISPLAY=:321 xdotool search --name mGBA | head -1)
 DISPLAY=:321 xdotool windowfocus "$W"
 ```
@@ -424,7 +426,7 @@ durable output of this engagement:
 * Python 3 scripts: header/hash, string dump + `−0x20` decoder, 32-bit pointer
   scanner, pad-site/CMP scanner, button-mask run scanner, `ram.py` (savestate
   `gbAs` reader), `keys.py` (XTEST driver). All in
-  `/tmp/opencode/chickenlittle/`.
+  `/tmp/chickenlittle/`.
 * REA / Ghidra 12.1.4 raw-binary import (base `0x08000000`) used for
   independent xref queries and function inventory.
 * `tesseract` (installed during this job) for OCR of menu hints.

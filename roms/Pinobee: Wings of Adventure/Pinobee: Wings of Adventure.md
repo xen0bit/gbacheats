@@ -1,11 +1,13 @@
 # Pinobee: Wings of Adventure (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
 | File | `Pinobee: Wings of Adventure.gba` |
-| Folder | `/mnt/gbacheats/roms/Pinobee: Wings of Adventure/` |
+| Folder | `roms/Pinobee: Wings of Adventure/` |
 | Size | 8,388,608 bytes (`0x800000`) |
 | `file(1)` | Game Boy Advance ROM image: "PINOBEE" (APBE52, Rev.00) |
 | Header title | `PINOBEE` (`0x080000A0`) |
@@ -227,7 +229,7 @@ behaviour, never the debug screen.
 
 * **Observed** — hashes/header/CRC32; single Nintendo-logo hit; stock entry word; title,
   Select Diary, Erase Diary, PAUSED, ITEMS and ITEM EFFECTS screens (screenshots in
-  `/tmp/opencode/pinobee/`); savestate RAM tables in §4; 34 button-combo screenshots.
+  `/tmp/pinobee/`); savestate RAM tables in §4; 34 button-combo screenshots.
 * **Derived** — debug address map, handler tables, label bank, BL/pointer counts,
   dispatcher pseudocode (§5), literal scans (§6/§6b); all from bytes + `objdump -M
   force-thumb` + Capstone, with each literal re-read as `u32` (guide §11).
@@ -267,7 +269,7 @@ directive. No fetched content was acted on.
   with other agents, so each query was preceded by an explicit `open_binary`.
 * Playwright-style control: Xvfb :316, openbox, mGBA 0.10.5, `xdotool` XTEST input,
   `import`/`convert`/`montage` (ImageMagick), Pillow.
-* Local scripts in `/tmp/opencode/pinobee/`: `ss.py` (gbAs parser), `ram.py` (EWRAM/IWRAM
+* Local scripts in `/tmp/pinobee/`: `ss.py` (gbAs parser), `ram.py` (EWRAM/IWRAM
   reader), `helper.py` (input/screenshot), `scan_keys.py`, `keylogic.py`,
   `mask_scan.py`, `blscan.py`, `reach.py`, `render.py`, `render_bg.py`,
   `decode_text.py`, `trycombos*.py`, `menucombos.py`, `titlecombos.py`, `dbg.py`,

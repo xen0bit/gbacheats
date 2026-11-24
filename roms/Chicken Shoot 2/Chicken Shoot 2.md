@@ -1,5 +1,7 @@
 # Chicken Shoot 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -365,9 +367,9 @@ one sample.
 * `Xvfb :243`, `openbox`, mGBA SDL (`-3`, `-d` command-line debugger).
 * Python 3 + Capstone 5.0.7 for Thumb disassembly and instruction-pattern scans.
 * GNU `arm-none-eabi-objdump` (`-M force-thumb`) and `xxd`/`strings`.
-* `/tmp/opencode/chickenshoot2/analyze.py` — reproduces the screen table, keyword
+* `/tmp/chickenshoot2/analyze.py` — reproduces the screen table, keyword
   counts, test-string xref counts, mask-table count and key-consumer count.
-* `/tmp/opencode/chickenshoot2/daemon.py` + `ram.py` — pty controller for the mGBA
+* `/tmp/chickenshoot2/daemon.py` + `ram.py` — pty controller for the mGBA
   command-line debugger (read RAM, run frames, write the A-action slot).
 
 ## Legal note

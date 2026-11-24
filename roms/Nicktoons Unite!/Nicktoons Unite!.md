@@ -1,5 +1,7 @@
 # Nicktoons Unite! (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -208,7 +210,7 @@ The password screen restricts this to indices 10–35 (`A`–`Z`).
 * Python 3 + Capstone 5.0.7 for PC‑relative literal and BL scanning.
 * REA MCP with Ghidra 12.1.4 (raw‑binary import, base `0x08000000`, `arm`/`v7`) for `procedure_pseudo_code` on the validator/input handlers; session closed after use.
 * mGBA SDL with `-3 -d`, CLI debugger driven through a FIFO (`stdbuf -o0 -e0`) because the GDB stub at port 2345 returned protocol timeouts; `r/4`, `w/4`, `x/1` used while paused.
-* Savestate tooling: `.ss1` PNG `gbAs` chunk is zlib; raw length 397,312 bytes; IWRAM at raw `0x19000` (GBA `0x03000000`), EWRAM at `0x21000`. Scripts `ssdiff.py`, `patchss.py`, `enterpw.py`, `batchtest.py`, `forcepc.py` in `/tmp/opencode/nicktoonsunite/`.
+* Savestate tooling: `.ss1` PNG `gbAs` chunk is zlib; raw length 397,312 bytes; IWRAM at raw `0x19000` (GBA `0x03000000`), EWRAM at `0x21000`. Scripts `ssdiff.py`, `patchss.py`, `enterpw.py`, `batchtest.py`, `forcepc.py` in `/tmp/nicktoonsunite/`.
 * `websearch`/`webfetch` for published codes and TCRF (data only).
 
 ## 10. Legal note

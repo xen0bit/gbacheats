@@ -1,5 +1,7 @@
 # Game & Watch Gallery 4 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -70,7 +72,7 @@ There is no validator to reverse. The text system is worth recording because it 
 ## 7. Validation evidence
 
 **Observed (screenshots / RAM):**
-* Title, AUTOSAVE notice, title menu, GAME SELECT with MODERN/CLASSIC panel, Boxing rules + Modern Boxing rules, Boxing gameplay, pause menu (CONTINUE/EXIT/HI SCORE), Gallery Corner notice and room, MESSAGE BOARD (AUTOSAVE message). Screenshots stored in `/tmp/opencode/gw4/` (e.g. `boot_c.png`, `s01b_after_start_c.png`, `s04b_c.png`, `pause2_c.png`, `gal4_c.png`, `msg3_c.png`).
+* Title, AUTOSAVE notice, title menu, GAME SELECT with MODERN/CLASSIC panel, Boxing rules + Modern Boxing rules, Boxing gameplay, pause menu (CONTINUE/EXIT/HI SCORE), Gallery Corner notice and room, MESSAGE BOARD (AUTOSAVE message). Screenshots stored in `/tmp/gw4/` (e.g. `boot_c.png`, `s01b_after_start_c.png`, `s04b_c.png`, `pause2_c.png`, `gal4_c.png`, `msg3_c.png`).
 * SRAM save record contents (32,768-byte `.sav`): magic at 0x0, data only at 0x328–0x42F, rest erased (`0xFF`).
 * Savestate RAM diff: title vs game-select differ by 4,087 IWRAM bytes and 54,099 EWRAM bytes (screen state genuinely changes).
 * VRAM tile render showing font/game-logo tiles; four embedded `AGBJ` headers.
@@ -95,7 +97,7 @@ There is no validator to reverse. The text system is worth recording because it 
 * `arm-none-eabi-objdump -M force-thumb` and Capstone 5.0.7 (literal/BL/key-mask scans).
 * Ghidra 12.1.4 via REA MCP (`open_binary` raw ARM @ `0x08000000`, `binary_overview`, `list_strings`, `list_procedures`, `xrefs`); 795 procedures, 79 strings; session closed with `close_binary`.
 * mGBA SDL + Xvfb `:319` + openbox + xdotool + scrot + ImageMagick; mGBA `-g` GDB stub and `-d` pty debugger were trialed; mGBA savestate (`gbAs` zlib chunk) decompression for VRAM/RAM evidence.
-* Custom scripts in `/tmp/opencode/gw4/`: `gw.py`, `walk_list.py`, `scan_input.py`, `scan_masks.py`, `lzscan.py`, `render_full.py`, `render_map.py`, `diffstate.py`, `mgba_pty.py`.
+* Custom scripts in `/tmp/gw4/`: `gw.py`, `walk_list.py`, `scan_input.py`, `scan_masks.py`, `lzscan.py`, `render_full.py`, `render_map.py`, `diffstate.py`, `mgba_pty.py`.
 
 ## 10. Legal note
 

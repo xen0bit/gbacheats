@@ -1,5 +1,7 @@
 # Duel Masters: Sempai Legends (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -40,7 +42,7 @@ Consequently §0.2's "mint a novel code" deliverable does not apply: there is no
 * **Fresh ROM path (RAM-verified):** boot → Mistic Software splash → Hasbro "Licensed by" → title logo → **Start** → `CHOOSE YOUR DECK` (5 civilization icons: Nature/Light/Water/Fire/Darkness) → **A** → birthday cutscene/dialogue → outdoors → **Start** opens the in-game menu.
 * **Menus walked (all):** title (`NEW GAME`, `CONTINUE`, `CREDITS`, `DUEL ROOM` greyed); `MAP & OBJECTIVE`; `DECK MANAGEMENT` (Deck 40/40, Trunk 25/180, card list, R pages the list); `TUTORIAL` (greyed, selector skips it); `LINK` (warps to a receptionist podium location — no duel/menu offered on a fresh save); `ADVANCED RULES`; `STATS`; `OPTIONS` (TEXT SPEED, AI SPEED, BATTLE SCREEN, MUSIC, SOUND FX, GRAPHIC PRESET); `SAVE`; `RESUME THE GAME`; `QUIT TO MAIN MENU` (confirm `QUIT WITHOUT SAVING?`); `CREDITS` (rolling staff roll).
 * **Button codes tested on title:** `Up Up Down Down Left Right Left Right B A` (Konami), `L+R` held, `A B` / D-pad probes, plus idle observation. In every case `DUEL ROOM` stayed greyed and no state change appeared. The character-art sequence that appeared during the L+R test was proven to be the title screen's **idle animation** by reproducing it with no input (screenshots `shot_38.png`–`shot_40.png`).
-* **Savestates:** `game.ss1` (in-game Start menu), `game.ss2` (title menu) in `/tmp/opencode/duelsempai`. `.ss1` files are PNG with a zlib `gbAs` chunk; decompressed size 397,312 bytes for this 8 MiB ROM (§16.13). `game.sav` is 512 bytes.
+* **Savestates:** `game.ss1` (in-game Start menu), `game.ss2` (title menu) in `/tmp/duelsempai`. `.ss1` files are PNG with a zlib `gbAs` chunk; decompressed size 397,312 bytes for this 8 MiB ROM (§16.13). `game.sav` is 512 bytes.
 
 ## 4. Address map
 
@@ -126,7 +128,7 @@ No claims were promoted from inference to observation. Fetched web pages were tr
 * `file`, `xxd`, `strings -t x -n 4`, `grep -i`, Python 3 (`struct`, `zlib`) for header/hash/string/literal analysis.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly of the KEYINPUT sites and the secondary entry.
 * Capstone 5.0.7 (`CS_ARCH_ARM`, `CS_MODE_THUMB`) for PC-relative literal-load discovery and `keystone-engine` availability check.
-* Custom scripts in `/tmp/opencode/duelsempai/`: `find_keyinput.py` (literal + LDR scan), `blscan.py` (Thumb BL callers), `scan_keys.py` (key-mask table scan), `key.py` (XTEST input helper), `ssdiff.py` (savestate `gbAs` chunk decompress + diff), `ptydbg.py`/`dbgserver*.py` (mGBA CLI-debugger pty harness, abandoned in favour of savestate diffing because the GDB stub port 2345 was held by a concurrent session — no other session's process was touched).
+* Custom scripts in `/tmp/duelsempai/`: `find_keyinput.py` (literal + LDR scan), `blscan.py` (Thumb BL callers), `scan_keys.py` (key-mask table scan), `key.py` (XTEST input helper), `ssdiff.py` (savestate `gbAs` chunk decompress + diff), `ptydbg.py`/`dbgserver*.py` (mGBA CLI-debugger pty harness, abandoned in favour of savestate diffing because the GDB stub port 2345 was held by a concurrent session — no other session's process was touched).
 * mGBA under Xvfb `:318` + openbox; `import -window root` for screenshots (≤20 retained on disk in the work dir, none attached to this reply).
 * Web sources: GameFAQs cheats/FAQ pages, CheatingDome, libretro-database `.cht`, IGN, CheatHappens, Answers.com — consulted for published-code verification only.
 

@@ -1,5 +1,7 @@
 # Monster Rancher Advance 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -36,7 +38,7 @@ I reimplemented the generator in Python (`decode.py`), validated it against **al
 
 **Menu path (observed).** Title → PRESS START (`Return`) → **NEW GAME** (`x`). Advance the intro dialogue (many `x` presses) → **Name Entry** keyboard: type a name (e.g. `AAAAA`), press **Start** to jump the cursor to **END**, press `x` to submit. Continue the intro dialogue → a first **Shrine** visit runs automatically: Bolzoi explains Tablet Regeneration, then the **Regeneration** keyboard appears (the prompt says *"Until then, you can only use a few characters"* — the starting cap is 4). Type a word, press `x`; after the regeneration sequence a confirmation reads `Is <MonsterName><word> OK?` — choose **YES**.
 
-**Code entry demonstration.** At the Regeneration keyboard with cursor on `A`, press `x` four times (`AAAA`), press `x` once more to submit. Result: confirmation `Is OctopeeAAA OK?`; YES registers the monster. Screenshots of the title, main menu, name entry, Shrine, Regeneration keyboard, typed `AAAA`, result monster and confirmation are in `/tmp/opencode/mra2/` (`v06_4_*.png`, `w06_before_*.png`, `w08_monster_*.png`, `w10_final_*.png`, `w11_confirm_*.png`).
+**Code entry demonstration.** At the Regeneration keyboard with cursor on `A`, press `x` four times (`AAAA`), press `x` once more to submit. Result: confirmation `Is OctopeeAAA OK?`; YES registers the monster. Screenshots of the title, main menu, name entry, Shrine, Regeneration keyboard, typed `AAAA`, result monster and confirmation were in `/tmp/mra2/` (`v06_4_*.png`, `w06_before_*.png`, `w08_monster_*.png`, `w10_final_*.png`, `w11_confirm_*.png`).
 
 **Oracle reproduction (needs mGBA `-d`).** With the ROM's `-d` pty debugger: disable interrupts (`w/4 0x04000208 0`), place u16 char codes + `0xFFFD` terminator at `0x02000000`, zero an output struct at `0x02000100`, set `r0=0x02000000, r1=0x08217368, r2=0x081E9AD0, r3=0x02000100, lr=0x08000101, cpsr=0x20 (Thumb), pc=0x0801E561`, set `break/t 0x08000100`, `continue`. The output struct appears at `0x02000100`.
 
@@ -128,7 +130,7 @@ The hard-coded lookup (`0x0801E9DC`) runs first: descriptor `u16[8-L]` gives the
 
 **Special pairs** at `0x080013A4` (16 pairs): `(29,30)→0, (24,31)→1, (23,30)→2, (24,30)→3, (26,31)→4, (29,31)→8, (18,32)→9, (28,30)→10, (4,35)→11, (4,36)→12, (9,36)→13, (22,32)→14, (7,31)→15, (11,32)→16, (23,31)→17, (0,30)→18`.
 
-**Hard-coded records** (119 total): L8=54, L7=35, L6=19, L5=5, L4=4, L3=1, L2=1. Samples: `SUN_BURN`→(0,32), `Valhalla`→(0,35), `Kunoichi`→(0,36), `MRA2`→(29,29), `GARU`→(29,29), `MRA`→(3,3), `MR`→(3,3), `TECMO`→(3,3). Full list in `/tmp/opencode/mra2/hardcoded.json`.
+**Hard-coded records** (119 total): L8=54, L7=35, L6=19, L5=5, L4=4, L3=1, L2=1. Samples: `SUN_BURN`→(0,32), `Valhalla`→(0,35), `Kunoichi`→(0,36), `MRA2`→(29,29), `GARU`→(29,29), `MRA`→(3,3), `MR`→(3,3), `TECMO`→(3,3). Full list in `/tmp/mra2/hardcoded.json`.
 
 ## 6b. Enumeration
 
@@ -178,6 +180,6 @@ The hard-coded lookup (`0x0801E9DC`) runs first: descriptor `u16[8-L]` gives the
 - Python 3 + `struct`/`json`: `decode.py` (generator reimplementation), `parse_hardcoded.py` (119-entry table enumeration), `state.py` (mGBA `.ss1` `gbAs` zlib chunk reader, guide §16.13), `ui.py` (Xvfb/xdotool driver).
 - mGBA 0.10.5 `-d` pty debugger (helper `session.py`) for the §16.19 oracle: IME off, registers/PC/LR written, breakpoint at `0x08000100`, output struct read at `0x02000100`.
 - Web: `web.archive.org` snapshot of GameFAQs FAQ 20384 (347 passwords) and the cheats page.
-- Env: `Xvfb :317`, `openbox`, `SDL_AUDIODRIVER=dummy`; all emulator artifacts were written to a ROM **copy** in `/tmp/opencode/mra2`, never into the ROM folder.
+- Env: `Xvfb :317`, `openbox`, `SDL_AUDIODRIVER=dummy`; all emulator artifacts were written to a ROM **copy** in `/tmp/mra2`, never into the ROM folder.
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced in this report; only hashes, addresses, algorithms, and tool scripts are published.

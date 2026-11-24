@@ -1,5 +1,7 @@
 # Phil of the Future (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -134,5 +136,5 @@ Reimplementation is unnecessary — the space has 4 reachable indices and one un
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, Python 3.13 + `struct`/`zlib`/`capstone 5.0.7`/`Pillow 13.0.0`.
 * `arm-none-eabi-objdump -M force-thumb` for raw range disassembly; REA MCP + Ghidra 12.1.4 (raw-ARM import, base `0x08000000`) for `analyze_function`/`xrefs`.
 * mGBA 0.10 SDL (`-3`, `-d` PTY debugger), Xvfb `:317`, openbox, `xdotool`, `scrot`, ImageMagick.
-* Helper scripts in `/tmp/opencode/philfuture/`: `patch_state.py` (savestate word patcher), `seqtest.py` (button-sequence + RAM harness), `dbg_bridge.py` (mGBA CLI debugger bridge). Capstone BL/literal scanners were one-off inline scripts.
+* Helper scripts in `/tmp/philfuture/`: `patch_state.py` (savestate word patcher), `seqtest.py` (button-sequence + RAM harness), `dbg_bridge.py` (mGBA CLI debugger bridge). Capstone BL/literal scanners were one-off inline scripts.
 * No ROM or copyrighted asset is redistributed; only hashes, addresses, and derived findings are published.

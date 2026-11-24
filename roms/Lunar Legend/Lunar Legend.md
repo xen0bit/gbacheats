@@ -1,8 +1,10 @@
 # Lunar Legend (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
-- **File**: `/mnt/gbacheats/roms/Lunar Legend/Lunar Legend.gba`
+- **File**: `roms/Lunar Legend/Lunar Legend.gba`
 - **Size**: 8,388,608 bytes (8 MiB)
 - **Header title**: `LUNAR LEGEND` · **Game code**: `ALNE` · **Maker**: `41` · **Version**: `0x00` · **Complement**: `0x7B` · **Header checksum**: `0x0000`
 - **Entry word**: `0xEA00002E` (stock branch to `0x080000C0`)
@@ -94,6 +96,6 @@ Space definition: **the code space is empty**. Concretely:
 
 ## 9. Tooling
 
-`strings`, `grep -abo`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`, Python 3 (`zlib`, `struct`, `re`, `Pillow`), `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 (available, not required), mGBA 0.10.5 under Xvfb `:319` + openbox, `xdotool`, `scrot`, ImageMagick. Helper scripts in `/tmp/opencode/lunarlegend/`: `h.py` (input/screenshot), `ramstate.py` (savestate→RAM), `evidence.py` (tilemap decode), `renderfont.py`, `ssram.py`.
+`strings`, `grep -abo`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`, Python 3 (`zlib`, `struct`, `re`, `Pillow`), `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 (available, not required), mGBA 0.10.5 under Xvfb `:319` + openbox, `xdotool`, `scrot`, ImageMagick. Helper scripts in `/tmp/lunarlegend/`: `h.py` (input/screenshot), `ramstate.py` (savestate→RAM), `evidence.py` (tilemap decode), `renderfont.py`, `ssram.py`.
 
 **Legal note**: only hashes, addresses, algorithms, and original tools are published; no ROM bytes or copyrighted assets are redistributed.

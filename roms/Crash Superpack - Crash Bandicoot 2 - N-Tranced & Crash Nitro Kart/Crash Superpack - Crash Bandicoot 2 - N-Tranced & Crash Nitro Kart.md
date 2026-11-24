@@ -1,5 +1,7 @@
 # Crash Superpack – Crash Bandicoot 2: N-Tranced & Crash Nitro Kart (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -168,7 +170,7 @@ holds the 14-entry table the launcher writes at `0x03000000`.
 | `0x080000C0` | stock CB2 ARM crt0 (unchanged) |
 | `0x08003000` | CB2 `partner_type = byte[save+0x1F9] >> 4` |
 | `0x080030EC` | CB2 `test_bit(save,bit)` → `byte[save+0x1FA] & bit` |
-| `0x08003124` | CB2 `set_bit(save,bit)` → `byte[save+0x1FA] |= bit` + checksum `0x08002FDC` |
+| `0x08003124` | CB2 `set_bit(save,bit)` → `byte[save+0x1FA] \|= bit` + checksum `0x08002FDC` |
 | `0x08003CC0`,`0x08003CE4`,`0x08003DB6`,`0x08003DC2`,`0x08003DCE`,`0x08003DDA` | all six `set_bit` call sites (link receive) |
 | `0x0800448C–0x0800473C` | CB2 link results screen |
 | `0x0800452E/45BA/463E/46C2` | `test_bit 0x02/0x08/0x04/0x10` branches |
@@ -467,7 +469,7 @@ Text-id table check: `u32[0x081D5C04 + 4*id]` → id 89 = `0x081D4430`
 
 * mGBA 0.10.5 SDL (`/usr/local/bin/mgba`), Xvfb `:268`, openbox, xdotool.
 * `arm-none-eabi-objdump` and Capstone (Thumb/ARM) for all disassembly.
-* Helper scripts kept in `/tmp/opencode/crashsuperpack/`:
+* Helper scripts kept in `/tmp/crashsuperpack/`:
   `ss.py` (PNG `gbAs` → raw state), `dyn.py` (launch/focus/tap/savestate +
   RAM summary), `lz77.py` (GBA LZ77 decoder used to reproduce the Crash Party
   image), `dis.py` (literal-resolving disassembler).

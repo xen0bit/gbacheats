@@ -1,5 +1,7 @@
 # Kien (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -127,13 +129,13 @@ Source: `https://cheat-database.com/display/cheat.php?id=171577` ("Kien — Ques
 
 * **Space definition:** alphabet 36 symbols × 9 positions = 36^9 = 1,015,120,533,826,416 ≈ 1.02×10^14 possible strings. The UI also allows submitting shorter/other strings, but the validator compares against fixed 9-byte strings only.
 * **Validator model:** exact `strcmp` against an 8-element table; reimplemented above. Because the table is iterated with exact bounds `hero 0..1`, `quest 0..3` (disassembly at `0x08005E22` `cmp r4,#3` and `0x08005E2C` `cmp r0,#1`), **the accepted set is provably exactly these 8 strings** — there are no algorithmic extra codes, no checksum variants, and no aliases.
-* **Novel codes not in any published list:** `EE10LVQ1M`, `EF18LVQ2L`, `EG30LVQ3G`, `EH70LVQ4S`. All four were accepted via the savestate oracle. `EE10LVQ1M` was **typed on the real password screen** (each symbol set by counted DOWN presses; buffer read back from savestate as `EE10LVQ1M`) and START produced the Elandel QUEST II book screen. Screens: `ee2_entered.png`, `ee2_result.png`, `oracle_all.png` (in `/tmp/opencode/kien/`).
+* **Novel codes not in any published list:** `EE10LVQ1M`, `EF18LVQ2L`, `EG30LVQ3G`, `EH70LVQ4S`. All four were accepted via the savestate oracle. `EE10LVQ1M` was **typed on the real password screen** (each symbol set by counted DOWN presses; buffer read back from savestate as `EE10LVQ1M`) and START produced the Elandel QUEST II book screen. Screens: `ee2_entered.png`, `ee2_result.png`, `oracle_all.png` (in `/tmp/kien/`).
 * **Effect distinction:** the same quest number with a different hero is the unadvertised combination — published lists document only Kjan's four quests; the ROM's second hero row is undocumented.
 * **Bounds proven by rejection:** `KA10LVQ1N` (last checksum-like char changed), `KA10LVQ2M` (quest digit changed), `AE10LVQ1M` (hero prefix changed), `ZZ10LVQ1M` (out-of-table hero/level), `000000000` (default) all returned to the title screen with no quest flag set. Captured as `oracle_KA10LVQ1N.png`, `oracle_KA10LVQ2M.png`, `oracle_AE10LVQ1M.png`, `oracle_ZZ10LVQ1M.png`, `oracle_000000000.png`.
 
 ## 7. Validation evidence
 
-* **Observed (emulator):** title, options (TUTORIAL ON/toggle, CONTROLS, CREDITS, BACK), password screen, hero select (Kjan/Elandel), quest book with PREV/NEXT/START=SKIP and live password display, CHAPTER I screen, gameplay, hero sheet/status screen (SELECT), level-up message. Screens saved under `/tmp/opencode/kien/walk_*.png`, `ng_*.png`, `ch1_*.png`, `hsheet_*.png`, `book2_*.png`, `bookpages.png`.
+* **Observed (emulator):** title, options (TUTORIAL ON/toggle, CONTROLS, CREDITS, BACK), password screen, hero select (Kjan/Elandel), quest book with PREV/NEXT/START=SKIP and live password display, CHAPTER I screen, gameplay, hero sheet/status screen (SELECT), level-up message. Screens saved under `/tmp/kien/walk_*.png`, `ng_*.png`, `ch1_*.png`, `hsheet_*.png`, `book2_*.png`, `bookpages.png`.
 * **Observed (RAM):** savestate diff placed the 9-char input at `0x03007E74` (`pwb.ss` all `0` → `entered_KA.ss`/`ee2_entered.ss` exact ASCII). Acceptance flag at `0x030041B0`: `0x00` on password screen → `0x01` after Quest II (both K and E codes). Read watchpoint on `0x03007E74` broke at `0x080295B0` with `r3=0x0802DBB4`, proving which strings are compared.
 * **Derived (disassembly):** `strcmp` at `0x0802959C`; 8-entry iteration at `0x08005DD0`–`0x08005E2E`; table at `0x087D6C0C`; string table at `0x0802DB60`.
 * **Inferred:** the `SECRET LEVEL` and `MALKUT MAP` screens exist in the data bank but are gameplay/progress gated; they were not reached as standalone cheat surfaces.
@@ -147,7 +149,7 @@ Source: `https://cheat-database.com/display/cheat.php?id=171577` ("Kien — Ques
 ## 9. Tooling
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for Thumb disassembly.
-* Python + `capstone`/`struct` for literal/pointer scans; custom `pwrq`-independent scripts in `/tmp/opencode/kien/`.
+* Python + `capstone`/`struct` for literal/pointer scans; custom `pwrq`-independent scripts in `/tmp/kien/`.
 * mGBA CLI debugger (`mgba -d` over a pty) for read watchpoints and PC capture; GDB stub is **not compiled into this mGBA 0.10.5 build** (no listener on :2345).
 * Custom scripts: `ss.py` (mGBA `.ss1` `gbAs` zlib state reader/differ), `patchss.py` (patch 9-byte buffer in savestates), `kb.py` (XTEST input), `enter3.py` (verified password entry), `oracle_batch.py` (accept/reject oracle), `template.py` (glyph matching).
 * Web sources: cheat-database.com cheat id 171577 (published code list); Cheat Happens (empty); GameFAQs (403).

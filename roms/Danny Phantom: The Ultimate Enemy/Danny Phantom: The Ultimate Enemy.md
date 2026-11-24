@@ -1,5 +1,7 @@
 # Danny Phantom: The Ultimate Enemy (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -472,7 +474,7 @@ in §8, not as a proven absence of the codes from the title.
 - `mgba` SDL under `Xvfb :277` + `openbox`; `xdotool` (must use `windowactivate --sync`, 40–60 ms
   holds); `Shift+F1..F7` savestates.
 - `arm-none-eabi-objdump -M force-thumb`; Capstone 5.0.7; NumPy for the encoding/hash searches.
-- Scripts in `/tmp/opencode/dpultimate/`:
+- Scripts in `/tmp/dpultimate/`:
   - `ssx.py` — extract the zlib `gbAs` chunk from mGBA `.ssN` savestates.
   - `h.py` — key injection (window activation + short holds), savestate read, screen-id decode.
   - `probe.py`, `probe2.py` — boot a patched copy of the ROM directly into screen id N and record

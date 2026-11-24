@@ -1,5 +1,7 @@
 # Polly Pocket: Super Splash Island (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Item | Value |
@@ -199,7 +201,7 @@ bit6→`+24`. Bit0 of symbol 6 and bit3 of symbol 7 are never read.
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
   for raw Thumb disassembly; `capstone` 5.0.7 for literal/BL/branch scans.
-* `python3` scripts in `/tmp/opencode/pollypocket/`: `password.py` (codec,
+* `python3` scripts in `/tmp/pollypocket/`: `password.py` (codec,
   decoder, encoder and space count), `xref2260.py` (literal xrefs),
   `findptr.py`/`jumptbl.py` (screen-state jump table), `entercode.py`
   (savestate-verified code entry), `lits*.py` (literal-pool decoding).

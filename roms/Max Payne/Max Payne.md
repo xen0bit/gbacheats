@@ -1,6 +1,8 @@
 # Max Payne (GBA) — Reverse Engineering Report
 
-Queue 448. Analyzed 2026-11-18. Target: `/mnt/gbacheats/roms/Max Payne/Max Payne.gba`.
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
+Queue 448. Analyzed 2026-11-18. Target: `roms/Max Payne/Max Payne.gba`.
 
 ## 1. Target identity
 
@@ -35,7 +37,7 @@ No in-game code is typed anywhere: the literal `Password` is a dead menu string 
 * **Extras** (locked save) → `Audio / Video / Controls / Back`. With completion flags set, Extras becomes the **Game Mode Menu** (`Fugitive / DOA / New York Minute / Back`) and a second unlocked Extras screen exposes `Credits / Story / Cheats / Back`.
 * **Cheats** screen (unlocked): `Infinite Ammo / All Weapons / Super Cop / Back`, each showing `Off`/`On`. **Toggle with Left/Right** (A alone does not change a toggle). All three `On` screenshot: `shots/cheats_all_on_crop.png` in the work dir.
 * **Pause** in gameplay (Start): `Pause / Continue / Quit` only — no hidden entries.
-* RAM evidence was collected as mGBA `.ss1`/`.ss2`/… states in `/tmp/opencode/maxpayne/` and decoded per guide §16.13 (PNG `gbAs` chunk, `zlib.decompress`; raw `0x19000` = IWRAM `0x03000000`, raw `0x21000` = EWRAM `0x02000000`). GDB stub port 2345 was occupied by another agent, so the stub-free savestate path was used throughout.
+* RAM evidence was collected as mGBA `.ss1`/`.ss2`/… states in `/tmp/maxpayne/` and decoded per guide §16.13 (PNG `gbAs` chunk, `zlib.decompress`; raw `0x19000` = IWRAM `0x03000000`, raw `0x21000` = EWRAM `0x02000000`). GDB stub port 2345 was occupied by another agent, so the stub-free savestate path was used throughout.
 
 ## 4. Address map
 
@@ -102,7 +104,7 @@ Published GBA codes checked and classified:
 
 ## 7. Validation evidence
 
-* **Observed** (emulator/screenshots): title, main, Options→Audio/Video, Controls, level select (Parts 1–3), Extras (locked), Game Mode Menu, unlocked Extras (Credits/Story/Cheats), Cheats menu (all Off → all On), pause menu, gameplay, cutscene. Savestates for each screen are in `/tmp/opencode/maxpayne/`; their decompressed `gbAs` RAM confirms the EWRAM flag bytes `0x02000030/31`.
+* **Observed** (emulator/screenshots): title, main, Options→Audio/Video, Controls, level select (Parts 1–3), Extras (locked), Game Mode Menu, unlocked Extras (Credits/Story/Cheats), Cheats menu (all Off → all On), pause menu, gameplay, cutscene. Savestates for each screen were in `/tmp/maxpayne/`; their decompressed `gbAs` RAM confirms the EWRAM flag bytes `0x02000030/31`.
 * **Derived** (disassembly/data): global string-pointer table base `0x08531D4` and 3,464 entries; 19 menu definitions with u16 string IDs; the Cheats menu contains exactly three toggles; `Password`/`No Reload`/`Test` have no menu definition; the only GBA header is at file `0x4`.
 * **Inferred**: that `0x02000030` is written on game completion (published guides say "complete the game once"; the gate was exercised by patching the byte, not by playing through the campaign). The exact writer of that byte was not isolated. A patched-savestate round-trip of `0x02000031` did not reproduce the on-screen toggles even though the byte was `0x07` in restored RAM, so the menu's authoritative toggle source is **unknown**; the live-menu transitions and the RAM delta remain observed facts.
 
@@ -117,7 +119,7 @@ Published GBA codes checked and classified:
 
 * `md5sum`/`sha1sum`/`sha256sum`, `file`, `xxd`, `strings -t x`, `grep -abo`.
 * Python 3 + capstone 5.0.7 / keystone 0.9.2 installed; `arm-none-eabi-objdump -M force-thumb` for spot disassembly.
-* Custom scripts in `/tmp/opencode/maxpayne/`: `scanptr.py`, `dumptable.py`, `allmenus.py`, `dumpids2.py`, `menustruct.py`, `negsearch.py`, `ss.py` (mGBA savestate decoder), `patchss.py`, `walk*.py`, `ui.py`, `menustate.py`.
+* Custom scripts in `/tmp/maxpayne/`: `scanptr.py`, `dumptable.py`, `allmenus.py`, `dumpids2.py`, `menustruct.py`, `negsearch.py`, `ss.py` (mGBA savestate decoder), `patchss.py`, `walk*.py`, `ui.py`, `menustate.py`.
 * mGBA `-3` under Xvfb `:315` with openbox; `xdotool` XTEST input; `scrot`/ImageMagick `montage` for screens.
 * Web sources treated strictly as data: GameFAQs cheats/guides 35563 & 38377, IGN, SuperCheats, GameRevolution, ROMSFUN/libretro, archived TCRF page. No instructions found in fetched content were executed; no prompt-injection payload was encountered in this session's fetches.
 

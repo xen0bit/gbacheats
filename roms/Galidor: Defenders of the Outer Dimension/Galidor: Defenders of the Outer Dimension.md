@@ -1,7 +1,9 @@
 # Galidor: Defenders of the Outer Dimension (GBA) — Reverse Engineering Report
 
-Target: `/mnt/gbacheats/roms/Galidor: Defenders of the Outer Dimension/Galidor: Defenders of the Outer Dimension.gba`
-Analysis workspace: `/tmp/opencode/galidor`
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
+Target: `roms/Galidor: Defenders of the Outer Dimension/Galidor: Defenders of the Outer Dimension.gba`
+Analysis workspace: `/tmp/galidor`
 
 ---
 
@@ -79,7 +81,7 @@ Enter at the main/title menu as discrete D-pad presses; a confirmation sound pla
 arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 \
   --start-address=0x080057e0 --stop-address=0x080058d8 -M force-thumb game.gba
 xxd -s 0x30c50 -l 0xf0 game.gba
-python3 /tmp/opencode/galidor/verify.py
+python3 /tmp/galidor/verify.py
 ```
 
 ---
@@ -252,7 +254,7 @@ No GameShark/CodeBreaker/Game Genie code is treated as an in-game cheat here; th
 
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Ghidra via REA MCP (raw-binary ARM load at `0x08000000`), `strings`, `grep`, `xxd`, `struct`.
 * mGBA 0.10.5 on Xvfb `:316` with `SDL_AUDIODRIVER=dummy`; `xdotool` for input, `scrot`/ImageMagick for screenshots.
-* Savestate RAM reader `ssdump.py`, state patcher `patchstate.py`, code injector `injectcode.py`, input helper `press.py`, decoder `verify.py` (all in `/tmp/opencode/galidor`).
+* Savestate RAM reader `ssdump.py`, state patcher `patchstate.py`, code injector `injectcode.py`, input helper `press.py`, decoder `verify.py` (all in `/tmp/galidor`).
 * Web sources: SuperCheats (full GBA code list), Neoseeker, GameFAQs search snippets, TCRF search snippet, Almar's Guides CodeBreaker list (address cross-check only). Fetched pages were treated as data; no page contained an instruction that was acted upon.
 
 ---

@@ -1,10 +1,12 @@
 # SimCity 2000 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/SimCity 2000/SimCity 2000.gba` |
+| File | `roms/SimCity 2000/SimCity 2000.gba` |
 | Size | 4,194,304 bytes (0x400000) |
 | Header title | `SIMCITY 2000` |
 | Game code | `A5CE` (USA region letter `E`) |
@@ -40,14 +42,14 @@ Key findings:
 Xvfb :318 -screen 0 1024x768x24 &
 DISPLAY=:318 openbox &
 export DISPLAY=:318 SDL_AUDIODRIVER=dummy
-/usr/local/bin/mgba -3 "/mnt/gbacheats/roms/SimCity 2000/SimCity 2000.gba"
+/usr/local/bin/mgba -3 "roms/SimCity 2000/SimCity 2000.gba"
 ```
 
 mGBA SDL keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrow keys. Hold keys 50–150 ms (long holds double-step menus). Window focus via `xdotool windowfocus` on the window found by `xdotool search --name mGBA`.
 
 **RAM evidence method (§16.13):** the mGBA GDB stub on this build proved unreliable after a client disconnect (`-g` halts the core at reset; `interrupt` fails with "Cannot execute this command while the target is running"). Instead, snapshots were taken with `Shift+F1` and the `.ss1` PNG's zlib-compressed `gbAs` chunk decompressed with `ss.py`. The 397,312-byte state has IWRAM at `0x19000` (so IWRAM `0x030006A0` → state offset `0x196A0`) and EWRAM at `0x21000`.
 
-**Screen path walked (all with screenshots + savestates in `/tmp/opencode/simcity2000`):**
+**Screen path walked (all with screenshots + savestates in `/tmp/simcity2000`):**
 
 ```
 Title (START / OPTIONS)
@@ -164,7 +166,7 @@ Counts that bound the negative:
 
 ## 9. Tooling
 
-All scripts in `/tmp/opencode/simcity2000`: `phase0.py` (hash/header/logo scan), `allstrings.txt` (`strings -t x -n 4`), `scan.py` (32-bit pointer, Thumb-BL and PC-relative-LDR scanners), `keyscan.py` (key-mask run scanner), `ss.py` (mGBA `gbAs` zlib extractor + RAM diff/hexdump), `snap.sh` (screenshot+savestate helper), `key.py` / `combo.py` (xdotool input), `gdbram.sh` (abandoned GDB dump helper). Disassembly via `arm-none-eabi-objdump -M force-thumb`. Web sources: archived GameFAQs cheats page (empty) and walkthrough 53430 (archived).
+All scripts in `/tmp/simcity2000`: `phase0.py` (hash/header/logo scan), `allstrings.txt` (`strings -t x -n 4`), `scan.py` (32-bit pointer, Thumb-BL and PC-relative-LDR scanners), `keyscan.py` (key-mask run scanner), `ss.py` (mGBA `gbAs` zlib extractor + RAM diff/hexdump), `snap.sh` (screenshot+savestate helper), `key.py` / `combo.py` (xdotool input), `gdbram.sh` (abandoned GDB dump helper). Disassembly via `arm-none-eabi-objdump -M force-thumb`. Web sources: archived GameFAQs cheats page (empty) and walkthrough 53430 (archived).
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced here; only hashes, addresses, algorithms and original findings are published.
 

@@ -1,5 +1,7 @@
 # The Fairly OddParents: Breakin' Da Rules (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 - File: `The Fairly OddParents: Breakin' Da Rules.gba` (4,194,304 bytes / 4 MiB)
@@ -47,7 +49,7 @@ Menu path:
 4. To reach the cheat menu: enter `X3YSV3!P`, choose **Level1 → Easy**, skip the title card
    with Start, press Start in-game, select **CHEATS**.
 
-Screenshots of every step are in `/tmp/opencode/fairlyodd/*.png` (not redistributed here).
+Screenshots of every step were in `/tmp/fairlyodd/*.png` (not redistributed here).
 
 Published codes tested in emulator: `X3YSV3!P` (accepted → LEVEL screen + CHEATS enabled),
 `8F6S3DNK` (accepted → level 1-2). The other 14 published codes were verified by the
@@ -60,7 +62,7 @@ All addresses are ROM addresses (`file_offset = addr − 0x08000000`) unless not
 
 | Address | Role |
 |---|---|
-| `0x0802C444` | Range validator: `state[21]<=4`, `state[20]<=27`, `state[28]<=50`, `state[27]<=20`; writes `state[6] |= 2` during test, clears it on success |
+| `0x0802C444` | Range validator: `state[21]<=4`, `state[20]<=27`, `state[28]<=50`, `state[27]<=20`; writes `state[6] \|= 2` during test, clears it on success |
 | `0x0802C478` | Encoder front-end: packs `state[10..17]` into the 4 raw bytes and calls `0x0802C4E0` |
 | `0x0802C4E0` | Field decoder: splits the 4 bytes into state fields `20..29` (writes before validation) |
 | `0x0802C5A0`, `0x0802C5B8`, `0x0802C5D0`, `0x0802C5E4` | Small getters of state fields |
@@ -120,7 +122,7 @@ The inverse encoder (validated against all 16 published codes) works in the whit
 domain: choose `c0..c5` from the desired `out`, set `c6`/`c7` low bits from the parity
 above, invert the two triangular passes (a per-bit-plane 8×8 GF(2) matrix; implemented
 as a precomputed 256-entry truth table per bit), then `char[i] = ALPHA[raw[i] ^ KEY[i]]`.
-Scripts: `/tmp/opencode/fairlyodd/{model,encode2,analyze,enumerate}.py`.
+Scripts: `/tmp/fairlyodd/{model,encode2,analyze,enumerate}.py`.
 
 ## 6. Tables
 
@@ -209,7 +211,7 @@ fields **before** `0x0802C444` validates them, so a rejected code still pollutes
   (CHEATS greyed until `X3YSV3!P`), CHEATS screen with six entries, LEVEL screen with a
   left/right-cycled name selector and a down/up-cycled `Level N`, gameplay starts for
   accepted codes, and all four rejection screenshots listed above. Screenshots in
-  `/tmp/opencode/fairlyodd/`.
+  `/tmp/fairlyodd/`.
 - **Observed (RAM):** state `0x0201D420` offsets 20..29 read from decompressed savestates
   for every accepted/rejected case; exact match to the model in all cases.
 - **Derived (disassembly):** parser, key table, parity taps (bits 0..4 — the bit-2 term

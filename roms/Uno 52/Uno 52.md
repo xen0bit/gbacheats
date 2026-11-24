@@ -1,10 +1,12 @@
 # Uno 52 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Uno 52/Uno 52.gba` |
+| File | `roms/Uno 52/Uno 52.gba` |
 | Size | 4,194,304 bytes (`0x400000`) |
 | Header title | `UNO 52` (offset `0xA0`) |
 | Game code | `BU5E` (`0xAC`); maker `20` (`0xB0`); `file(1)` prints `BU5E20` |
@@ -147,7 +149,7 @@ the exhaustive UI/table counts above: every selector was cycled through its
 full pointer table (15/4/3/20/6 entries) and every combo class was pressed
 without producing an undocumented screen or RAM flag.
 
-**Screen walk (screenshots in `/tmp/opencode/uno52/`):** Health warning (`s0`),
+**Screen walk (screenshots in `/tmp/uno52/`):** Health warning (`s0`),
 Mattel logo, copyright (`s1`), title (`s2`), Main Menu (`s3`), Name Entry
 (`s4`), Icon Selection (`s9`), Special Modes (`s6`), Challenge Mode
 (`sm_challenge*`; 6 entries wrapped), Theme (`t_theme3`; 15 backgrounds cycled),
@@ -197,7 +199,7 @@ found absent.
 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
   for the input library and name-entry code.
-* Python scripts in `/tmp/opencode/uno52/`: `scan.py`, `scan2.py` (literal/BL/
+* Python scripts in `/tmp/uno52/`: `scan.py`, `scan2.py` (literal/BL/
   mask scans), `keys.py`, `combos.py`, `combos_reset.py`, `cycle_theme.py`,
   `ssdiff.py` (PNG `gbAs` zlib extraction + IWRAM/EWRAM diff).
 * mGBA 0.10.5 under Xvfb `:318`, `scrot`, ImageMagick `montage`/`convert`.

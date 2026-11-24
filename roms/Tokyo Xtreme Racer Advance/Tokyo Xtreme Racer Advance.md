@@ -1,5 +1,7 @@
 # Tokyo Xtreme Racer Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -51,7 +53,7 @@ an instruction to terminate). It was treated strictly as untrusted data, ignored
 * Keymap (verified by observing each transition): `A=x`, `B=z`, `L=a`, `R=s`, `Start=Return`,
   `Select=BackSpace`, D-pad = arrow keys. Holds of 100–150 ms were reliable; the GBA boot splashes
   (`David A. Palmer Productions`, `CRAVE Entertainment`) take ~15 s before `PRESS START`.
-* Screen path walked (screenshots retained in `/tmp/opencode/tokyoxr/`):
+* Screen path walked (screenshots retained in `/tmp/tokyoxr/`):
   `boot.png`, `title1.png` → **PRESS START** → `after_start.png` / `w_nameentry.png` → **ENTER NAME**
   (a 6-character `A–Z 0–9 _` keyboard with `DEL`/`END`; `name_entry_2.png`) → `after_name.png` /
   `w_buycar.png` → **BUY CAR** class selector (A/B/C) → `buy_car_A2.png` → class-A car lot →
@@ -197,7 +199,7 @@ concrete out-of-set input (`L+R` held at the title; `SPEEDY` on the main menu) w
 * Capstone 5.0.7 (Thumb/ARM) for literal-load, BL-target and key-mask scans.
 * mGBA 0.10.5 under Xvfb `:316` + openbox; `xdotool` XTEST input; `scrot` screenshots; GDB stub
   (`gdb-multiarch`, `target remote :2345`) for `KEYINPUT` reads; `helper.py` and `walk.py` in
-  `/tmp/opencode/tokyoxr/`.
+  `/tmp/tokyoxr/`.
 * Web reconnaissance: GameFAQs, GameHacking.org, VGChartz, cheatingdome, Fandom, TCRF, classicemu.
   No ROM or copyrighted assets are redistributed by this report.
 

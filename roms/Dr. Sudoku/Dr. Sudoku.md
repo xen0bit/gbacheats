@@ -1,10 +1,12 @@
 # Dr. Sudoku (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Dr. Sudoku/Dr. Sudoku.gba` |
+| File | `roms/Dr. Sudoku/Dr. Sudoku.gba` |
 | Size | 4,194,304 bytes (`0x400000`) |
 | Header title | `DOCTORSUDOKU` |
 | Game code / maker | `BUOE` / `FP` (Success; published by Mastiff) |
@@ -228,7 +230,7 @@ negative result** with explicit space sizes and counts (§0.2 point 5):
 * mGBA under `Xvfb :316`/`openbox`, `xdotool` XTEST input, `import`/`scrot`
   screenshots (≈28 taken, ≤20 retained), `Shift+F1..F3` savestates; zlib `gbAs`
   extraction and byte-diff for RAM evidence (§16.13).
-* Helper scripts: `/tmp/opencode/drsudoku/{btn_test,keymap_test,verify_reset}.py`.
+* Helper scripts: `/tmp/drsudoku/{btn_test,keymap_test,verify_reset}.py`.
 
 **Legal note:** no ROM image or copyrighted asset is redistributed here; only
 addresses, hashes, counts, algorithms, and observations are published.

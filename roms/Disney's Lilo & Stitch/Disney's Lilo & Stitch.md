@@ -1,5 +1,7 @@
 # Disney's Lilo & Stitch (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -415,7 +417,7 @@ combination: the published Mothership code gives 1 life and f6=3.
 * mGBA 0.10.5 (SDL), Xvfb `:329`, openbox, xdotool, ImageMagick
   (`import`, `convert`), scrot.
 * `arm-none-eabi-objdump` and Python 3 + Capstone 5.0.7 for Thumb disassembly.
-* `lilo_pw.py` (work dir `/tmp/opencode/lilo1`): alphabet/field model,
+* `lilo_pw.py` (work dir `/tmp/lilo1`): alphabet/field model,
   encoder/decoder, published-code check, space enumeration
   (131,072 + 1 of 2,097,152) and alias demonstration.
 * Savestate parser: PNG `gbAs` chunk → zlib → 397,312-byte state; IWRAM at

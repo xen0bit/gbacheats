@@ -1,5 +1,7 @@
 # Backyard Basketball (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -331,12 +333,12 @@ There is no 18th code: 17 records exist and the game-setup readers special-case
 * `Xvfb :155`, `openbox`, `mgba 0.10.5` (SDL), `xdotool`, `scrot`,
   ImageMagick, `arm-none-eabi-objdump` (binutils-arm-none-eabi),
   `gdb-multiarch` (mGBA GDB stub on `:2345`), Python 3 (zlib, struct).
-* Scripts (in `/tmp/opencode/bball`): `rsp.py` (GDB-RSP memory client),
+* Scripts (in `/tmp/bball`): `rsp.py` (GDB-RSP memory client),
   `testcodes.py` / `testflags.py` (drive all 17 sequences via xdotool and read
   the index from savestates), `bounds.py` (negative controls), `hdr.py`,
   `logo.py` (identity/embedded-header scan).
 * Savestates used: `Backyard Basketball.ss1` (matchup screen), `.ss3` (scratch).
-* Screenshots: `/tmp/opencode/bball/*_c.png` (720×480 crops), notably
+* Screenshots: `/tmp/bball/*_c.png` (720×480 crops), notably
   `state1_c.png` (matchup), `g2_c.png` (play after novel code `sbbbba`),
   `y_hot_c.png` (after `uudda`), `m09_c.png` (Extras), `t03_c.png` (main menu).
 

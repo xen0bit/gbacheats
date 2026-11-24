@@ -1,5 +1,7 @@
 # Turok: Evolution (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -49,7 +51,7 @@ format. See §6b.
 * The on-screen keyboard is 16 symbols: `T R / K V / L N` and `0-9` (the `V` glyph
   renders like `U` at this scale). The ROM stores **lowercase** alphabet bytes and
   draws them as capitals.
-* Test scripts/artifacts live in `/tmp/opencode/turok` (`pw.py`, `patch_state.py`,
+* Test scripts/artifacts were kept in `/tmp/turok` (`pw.py`, `patch_state.py`,
   screenshots). No ROM assets are redistributed.
 
 ## 4. Address map
@@ -135,7 +137,7 @@ return ok1 and ok2 and ok3
 | `P[2]` bit 7 | `S[0] & 1` | mode flag |
 | `P[3]` bit 0 | `S[10]&4>>2` | misc flag |
 | `P[3]` bits 1–7 | `S[3] & 0x7F` | **7 alien weapon-owned flags** |
-| `P[4]` bits 0–2 | checksum | `r5 | r4` |
+| `P[4]` bits 0–2 | checksum | `r5 \| r4` |
 | `P[4]` bits 3–5 | `S[1] & 7` | armour/health-related field |
 | `P[4]` bits 6–7 | `S[10] & 3` | difficulty/ending field |
 
@@ -284,8 +286,8 @@ data, ignored, and not acted upon.
 
 * `strings -t x`, `grep -abo`, `xxd`, Python `struct`/`zlib`, Capstone,
   `arm-none-eabi-objdump -M force-thumb`.
-* `/tmp/opencode/turok/pw.py` — validator, generator and payload decoder (Python).
-* `/tmp/opencode/turok/patch_state.py` — patches the inventory/level password at
+* `/tmp/turok/pw.py` — validator, generator and payload decoder (Python).
+* `/tmp/turok/patch_state.py` — patches the inventory/level password at
   fixed offsets in an mGBA `.ssN` savestate (PNG + zlib `gbAs` chunk, §16.13).
 * mGBA 0.10.5 `-g` GDB stub did not bind port 2345 in this build; savestate patching
   was used instead. Xvfb `:317`, openbox, xdotool, scrot. All own PIDs were stopped

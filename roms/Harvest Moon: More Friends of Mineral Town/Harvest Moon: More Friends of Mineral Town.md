@@ -1,5 +1,7 @@
 # Harvest Moon: More Friends of Mineral Town (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -130,6 +132,6 @@ Not applicable — no password validator, checksum, key table, or button sequenc
 
 ## 9. Tooling
 
-`strings -t x`, `grep -abo`, Python/`struct` literal & pointer-run scanners, `capstone` 5.0.7 for Thumb disassembly, `arm-none-eabi-objdump -M force-thumb`, mGBA `-d` pty debugger (breakpoint `b/t 0x08009194`, `r/2`, `x/2`) and mGBA `-g`/GDB (stub was non-functional in this build), zlib savestate (`gbAs` chunk) extraction/diffing, Xvfb `:318` + openbox + `xdotool` + `scrot` + ImageMagick. Screenshots retained in `/tmp/opencode/harvestmfomt/`.
+`strings -t x`, `grep -abo`, Python/`struct` literal & pointer-run scanners, `capstone` 5.0.7 for Thumb disassembly, `arm-none-eabi-objdump -M force-thumb`, mGBA `-d` pty debugger (breakpoint `b/t 0x08009194`, `r/2`, `x/2`) and mGBA `-g`/GDB (stub was non-functional in this build), zlib savestate (`gbAs` chunk) extraction/diffing, Xvfb `:318` + openbox + `xdotool` + `scrot` + ImageMagick. Screenshots retained in `/tmp/harvestmfomt/`.
 
 **Legal note:** no ROM, graphics, music, or game text was redistributed; only hashes, addresses, algorithms and original tooling are published.

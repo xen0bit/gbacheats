@@ -1,5 +1,7 @@
 # Summon Night: Swordcraft Story 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -217,7 +219,7 @@ no comparison table and no entry screen exist. Bounded negative evidence:
   ImageMagick `montage`/`convert`.
 * `arm-none-eabi-objdump -M force-thumb` for raw Thumb disassembly; Python `capstone`
   available but not needed for the final scans.
-* `patch_state.py` (work dir `/tmp/opencode/summonnight2`) — rewrites the zlib `gbAs`
+* `patch_state.py` (work dir `/tmp/summonnight2`) — rewrites the zlib `gbAs`
   chunk of an mGBA `.ss1` savestate; RAM mapping `IWRAM +0x19000`, `EWRAM +0x21000`.
 * REA/Ghidra 12.1.4 was opened on the ROM for cross-checking; raw-image auto-analysis
   created no function at `0x08053580` (known Thumb/raw-import limitation, guide §5.5), so

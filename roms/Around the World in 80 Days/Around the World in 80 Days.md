@@ -1,5 +1,7 @@
 # Around the World in 80 Days (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-10-25.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
@@ -490,7 +492,7 @@ string (`CLGC`) is invalid in the ROM and is a typo.
   enumeration), `enum84.csv`, `key.py`/`test_code.py`/`loop_codes.py`/`reject.py`
   (X11 input and screenshot automation), `ptr.py`/Capstone scans for pointer and
   literal-load searches.
-* Screenshots referenced above are in `/tmp/opencode/atw80/shots/` (analysis
+* Screenshots referenced above were in `/tmp/atw80/shots/` (analysis
   artifacts; not part of the repository).
 
 **Lesson for the guide.** Two checksum traps showed up here and are worth

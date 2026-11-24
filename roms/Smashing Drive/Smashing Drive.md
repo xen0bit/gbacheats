@@ -1,5 +1,7 @@
 # Smashing Drive (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -265,7 +267,7 @@ walked, that is a bounded "cut string" negative.
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep -abo` for Phase 0/1.
-* Python scripts in `/tmp/opencode/smashingdrive/`: `phase0.py`, `ptrscan.py`, `lits.py`,
+* Python scripts in `/tmp/smashingdrive/`: `phase0.py`, `ptrscan.py`, `lits.py`,
   `enumerate.py` (the validator reimplementation and exhaustive count), `ssdiff.py` (zlib-decompress
   the mGBA `gbAs` savestate chunk and diff/extract RAM), `enter.py`, `batch.py`, `effect.py`
   (automated password entry), `blscan.py`.

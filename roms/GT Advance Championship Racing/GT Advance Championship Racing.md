@@ -1,5 +1,7 @@
 # GT Advance Championship Racing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -247,6 +249,6 @@ The published button codes all matched the ROM mask table exactly.
   (raw IWRAM begins at state offset `0x19000`).
 * `sspatch.py`, `oracle.py`, `fastoracle.py`, `sweep.py` — savestate patching and
   an oracle harness that runs the ROM's own validator; `oracle_{zero,zjo,pub1,pub2}_c.png`
-  and `steps.png` are the key screenshots (kept in `/tmp/opencode/gtachamp`).
+  and `steps.png` are the key screenshots (kept in `/tmp/gtachamp`).
 * Legal: no ROM or copyrighted assets are redistributed; only addresses, hashes,
   algorithms, and original tools are published here.

@@ -1,5 +1,7 @@
 # Mobile Suit Gundam Seed: Battle Assault (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -55,7 +57,7 @@ in §7.
   ```
 
   33 symbols (vowels A/E/I/O/U omitted). Nine white entry slots.
-* Clean reproduction state: `/tmp/opencode/gundamseed/clean_password.ss1` (a
+* Clean reproduction state: `/tmp/gundamseed/clean_password.ss1` (a
   savestate sitting on the empty password screen); `mgba -3 -t clean_password.ss1 ROM`.
 * Tooling scripts: `ui.py` (XTEST input + screenshot), `pwlib.py` (keypad navigator),
   `val.py` (validator reimplementation), `gen.py` (encoder), `verify.py`

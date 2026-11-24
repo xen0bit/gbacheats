@@ -1,5 +1,7 @@
 # Classic NES Series: Dr. Mario (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -383,7 +385,7 @@ Observed dispatch:
 * Custom savestate parser: PNG `gbAs` chunk → zlib → 397,312-byte state;
   `io` at `0x400`, palette `0x800`, OAM `0xC00`, VRAM `0x1000`,
   IWRAM `0x19000`, EWRAM `0x21000` (mGBA 0.10.5 `serialize.h` layout).
-* `/tmp/opencode/cnesdrmario/mgdaemon.py` + `mgc.py` (mGBA `-d` pty bridge),
+* `/tmp/cnesdrmario/mgdaemon.py` + `mgc.py` (mGBA `-d` pty bridge),
   `st.py` (state loader/diff), `keys.py` (Xvfb key + F1/Shift+F1), `screen.py`
   / `rowtext.py` (VRAM tilemap → text), `comp.py` (BG compositor).
 * `fceux` 2.6.5 with Lua for NES RAM and nametable reads.

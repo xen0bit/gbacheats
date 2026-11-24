@@ -1,5 +1,7 @@
 # 2-in-1: Hot Wheels — Velocity X & Hot Wheels — World Race (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -194,7 +196,7 @@ the in-image offset; for Velocity X the image starts at file `0x800000` / ROM `0
 | `0x08840114` | Thumb | `toggle_bit(v, p)` — `v ^= 1<<p` |
 | `0x08840138` | Thumb | `add_masked(v, n)` — `(v + n) & 0x1FFFFFF` |
 | `0x08840160` | Thumb | `sub_masked(v, n)` — `(v - n) & 0x1FFFFFF` (inverse helper) |
-| `0x08840188` | Thumb | `rebuild_checksum(v)` = `(v & 0x1FFFFF) | ((popcount(v & 0x1FFFFF) & 0xF) << 21)` |
+| `0x08840188` | Thumb | `rebuild_checksum(v)` = `(v & 0x1FFFFF) \| ((popcount(v & 0x1FFFFF) & 0xF) << 21)` |
 | `0x088401D8`+`0x…2A0` | — | 40-round loop: `c=200; while c>0 { rotl25(T[c-1]); swap(T[c-2],T[c-3]); xor T[c-4]; add T[c-5]; c-=5 }` |
 | `0x08840384` | Thumb | `build_current_password()` — encoder: flags from `0x03005A90`, level from `0x03005AC0`, checksum, inverse scramble, digit conversion |
 | `0x08828778` | Thumb | password-screen update: when input count reaches 8, `bl 0x088401D8`; on reject plays SFX 0x14 and clears the entry |
@@ -558,7 +560,7 @@ for cross-checks.
 * `state.py` / `state_patch.py` — read and patch IWRAM/EWRAM inside mGBA PNG savestates.
 * `ctl.py`, `k.py`, `typepw.py`, `typewr.py` — xdotool input and on-screen keypad typing helpers.
 
-Screenshots referenced by name in §7 were captured to `/tmp/opencode/hwvx/shots/` during the session
+Screenshots referenced by name in §7 were captured to `/tmp/hwvx/shots/` during the session
 (session artifacts, not required for reproduction).
 
 Reproduce the key Velocity X result:

@@ -1,5 +1,7 @@
 # Gauntlet / Rampart (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -250,7 +252,7 @@ tested as inapplicable.
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep -abo`.
-* Python 3 scripts (in `/tmp/opencode/gauntletrampart/`): `phase0.py` (logo/header
+* Python 3 scripts (in `/tmp/gauntletrampart/`): `phase0.py` (logo/header
   scan), `recon.py` (searchable-term sweep incl. `+0x20`), `dumpstr.py` (ASCII
   banks), `xref.py`/`keyref.py` (literal/xref scans), `ss.py`/`ssdiff.py`
   (savestate `gbAs` zlib parse, RAM/VRAM hashes), `ui.py`, `brute.py`,

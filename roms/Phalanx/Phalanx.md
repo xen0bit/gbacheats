@@ -1,10 +1,12 @@
 # Phalanx (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Phalanx/Phalanx.gba` |
+| File | `roms/Phalanx/Phalanx.gba` |
 | Size | 4,194,304 bytes (0x400000, 4 MiB) |
 | Header title | `PHALANX` |
 | Game code | `APXE7F` (maker `7F`) |
@@ -127,7 +129,7 @@ Representative verified literals (all GameShark format, out of scope): `03005CD5
 ## 6b. Enumeration
 
 ### 6b.1 Screen space — walked, RAM-verified
-10 distinct screens/states observed and captured on disk under `/tmp/opencode/phalanx/`:
+10 distinct screens/states observed and captured on disk under `/tmp/phalanx/`:
 
 | # | Screen | Evidence |
 |---|---|---|
@@ -176,7 +178,7 @@ All published codes for this SKU are device memory patches (§6.3) and were veri
 
 ## 9. Tooling
 
-Scripts (all under `/tmp/opencode/phalanx/`):
+Scripts (all under `/tmp/phalanx/`):
 * `parse_state.py` — PNG `gbAs` chunk zlib decompression; `render_vram.py`, `render_map.py` — VRAM/tilemap renderers; `dbg.py`, `mksave.py`, `codes.py` — mGBA `-d` pty debugger and input harness; `xref.py`, `scan.py`, `scan_btn.py` — literal-pool xref and button-mask scanners; `findtext.py`, `findtable.py` — encoding searches.
 * Toolchain: `arm-none-eabi-objdump` (`-M force-thumb`), Python 3 + capstone 5.0.7 + Pillow, mGBA SDL, Xvfb `:318`, openbox, xdotool, scrot, ImageMagick. REA/Ghidra 12.1.4 was attempted but OOM'd.
 

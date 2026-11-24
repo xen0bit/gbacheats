@@ -1,10 +1,12 @@
 # XS Moto (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `roms/XS Moto/XS Moto.gba` (byte-identical working copy `/tmp/opencode/xsmoto2/xs.gba`) |
+| File | `roms/XS Moto/XS Moto.gba` (byte-identical working copy `/tmp/xsmoto2/xs.gba`) |
 | Size | 4,194,304 bytes (`0x400000`) |
 | Header title | `XS MOTO` (`0xA0`); game code `BXME`, maker `FS` (`0xB0`) |
 | Revision | `Rev.00`, version `0x00`; entry word `0xEA00002E` (stock ARM branch) |
@@ -51,7 +53,7 @@ defaults. The "password" is a **display-only progress certificate** shown after 
   instead of the GDB stub, whose fixed port 2345 was occupied by another agent).
 * Keymap: A = `x`, B = `z`, Start = `Return`, D-pad = arrows; 150 ms holds.
 * Debugger commands used: `break/t 0x08010c76`, `w/1 <addr> <val>`, `w/4`, `x/4`, `r/1`,
-  `save 1` / `load 1` (savestate `/tmp/opencode/xsmoto2/xs.ss1`), `continue`, SIGINT to halt.
+  `save 1` / `load 1` (savestate `/tmp/xsmoto2/xs.ss1`), `continue`, SIGINT to halt.
 * Screen force (from the clean main-menu savestate, halted at the per-frame breakpoint):
   ```
   w/1 0x03007DD8 0x2d        ; screen id 45 (Results template)
@@ -61,7 +63,7 @@ defaults. The "password" is a **display-only progress certificate** shown after 
   w/4 0x02000044 0x0b470d    ; novel code 739421
   continue
   ```
-* All evidence images are in `/tmp/opencode/xsmoto2/` (never in the ROM folder).
+* All evidence images were in `/tmp/xsmoto2/` (never in the ROM folder).
 
 ## 4. Address map
 
@@ -265,7 +267,7 @@ failed because the menu item count is set by the handler itself (`*(menu+1)=8` i
   `procedure_pseudo_code`, `procedure_callers`, `trace_feature`, `xrefs`).
 * mGBA 0.10.5 CLI debugger (`mgba -d`) driven through a named FIFO with `stdbuf -oL -eL`,
   `break/t`, `w/1`, `w/4`, `x/4`, `r/1`, `save`/`load`, SIGINT to halt; Xvfb `:320`,
-  openbox, xdotool, scrot, PIL for crops. Helper scripts in `/tmp/opencode/xsmoto2/`.
+  openbox, xdotool, scrot, PIL for crops. Helper scripts in `/tmp/xsmoto2/`.
 
 ## 10. Legal note
 
@@ -274,6 +276,6 @@ analyst's own observations are published.
 
 ## 11. Cleanup
 
-Screenshots, savestates and helper scripts remain under `/tmp/opencode/xsmoto2/` only; the
+Screenshots, savestates and helper scripts were left under `/tmp/xsmoto2/` only; the
 ROM folder contains `XS Moto.gba` and the report. Own mGBA/Xvfb/openbox/FIFO-holder PIDs
 were terminated by number; no `pkill` was used. The RE/Ghidra session was closed.

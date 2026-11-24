@@ -1,5 +1,7 @@
 # Mega Man Battle Network 5: Team Protoman (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 > **SKIPPED / DEFERRED — entry systems found but not in-game confirmed (coordinator decision).**
 > Under §0.2 this report does **not** meet the dynamic-confirmation bar: two genuine cheat
 > systems exist per published sources (48 eight-digit Numberman Lotto passwords and ~20
@@ -9,7 +11,7 @@
 > not found, and no novel code or rejection bounds were produced. Per coordinator authorization,
 > MMBN titles whose validator/code-entry surface is blocked by a story gate are documented here
 > and **skipped rather than retried or indexed**. The full code tables and gate are recorded
-> below. This report is intentionally absent from `INDEX.md`.
+> below. This report is intentionally left out of the completed-reports table and listed under Skipped ROMs in the top-level `README.md`.
 
 Queue position 462. Analysis date 2026-11-18. All addresses below are **ROM addresses**
 (`0x08000000 + file offset`) unless labelled "file". ROM analysed is the exact image
@@ -104,7 +106,7 @@ report is reproducible from the address map and the commands in §3/§9.
 export DISPLAY=:317 SDL_AUDIODRIVER=dummy
 Xvfb :317 -screen 0 1024x768x24 -nolisten tcp &
 DISPLAY=:317 openbox &
-cd "/mnt/gbacheats/roms/Mega Man Battle Network 5: Team Protoman"
+cd "roms/Mega Man Battle Network 5: Team Protoman"
 mgba -3 "Mega Man Battle Network 5: Team Protoman.gba" &
 ```
 
@@ -112,7 +114,7 @@ Only PIDs created for :317 were used; no `pkill` was used. mGBA SDL keymap used:
 A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys.
 Key holds of 100–300 ms; screenshots via `scrot` + `convert -crop 720x480+152+144`.
 
-### Screen path actually walked (all with screenshots in `/tmp/opencode/mmbn5proto/`)
+### Screen path actually walked (all with screenshots in `/tmp/mmbn5proto/`)
 
 | # | Screen | Evidence | RAM proof |
 |---|---|---|---|
@@ -360,7 +362,7 @@ rather than a literal comparison table.
 
 ## 9. Tooling
 
-Scripts written for this engagement (all in `/tmp/opencode/mmbn5proto/`):
+Scripts written for this engagement (all in `/tmp/mmbn5proto/`):
 
 | Script | Purpose |
 |---|---|

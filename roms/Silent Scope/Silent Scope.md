@@ -1,5 +1,7 @@
 # Silent Scope (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -122,7 +124,7 @@ There is **no validator** to reimplement: no comparison against user-entered tex
 
 **Unlockable space (the actual system)**
 
-* Enumerated every reachable screen: title, main menu (6/7 items), OPTIONS (2 tabs, 5+5 rows), SHOOTING RANGE (stage + 5 modes), gameplay, RANKING, STATUS, LINKED PLAY, ARCADE MODE start. Screenshots retained in `/tmp/opencode/silentscope/`.
+* Enumerated every reachable screen: title, main menu (6/7 items), OPTIONS (2 tabs, 5+5 rows), SHOOTING RANGE (stage + 5 modes), gameplay, RANKING, STATUS, LINKED PLAY, ARCADE MODE start. Screenshots retained in `/tmp/silentscope/`.
 * Save-data unlock field at EEPROM `0x3A` is a **single byte = 256 representable values**. Tested `0x00` → ADVANCE STORY **absent** (6-item menu) and `0xFF` → **present** (7-item menu). The novel value `0xFF` appears in no published list; the published unlock method (finish Arcade Mode) was not used.
 * Option value sets are fully enumerated from the ROM pointer tables at `0x087002A0..0x087002F8` (see §5/§6): nothing beyond `EXTRA` / `+30` / `8` / 5 languages is representable.
 * **Bounds proven by rejection:** unpatched (`0x3A = 0x00`) and the original fresh EEPROM both reject the ADVANCE STORY entry — it is not drawn. Also, patching every byte in `0x18..0x3F` to `0xFF`, and separately `0x40..0xFF` to `0xFF`, left CONTINUE=`1` and TIME LIMIT=`00` (Observed screenshots), i.e. the SS-rank gates for those values are not simple stored flags in those regions. They are likely derived from per-mode rank records; that exact accumulator was **not** isolated (§8). This is a bounded negative for the byte regions tested, not "not tested".
@@ -147,6 +149,6 @@ There is **no validator** to reimplement: no comparison against user-entered tex
 * mGBA 0.10.5 (`-3`, `-g`, `-d` trials), Xvfb `:317`, openbox, xdotool, scrot, ImageMagick.
 * `strings`, `xxd`, `grep`, Python 3 (struct/zlib/PIL), `arm-none-eabi-objdump -M force-thumb`.
 * REA MCP (Ghidra provider) opened/closed for xref queries; auto-analysis did not yield additional xrefs in time.
-* Helper scripts in `/tmp/opencode/silentscope/`: `drive.py` (input + cropped capture), `ssdecode.py` (mGBA `.ss1` `gbAs` zlib decoder), `probe_unlock.py`/`binsearch.py` (save-byte unlock search), `probe_opts.py`, `gdbread.py` (GDB stub attempts). Savestate diffing was attempted but noisy (VRAM/audio churn); EEPROM byte diffs and screenshots were used instead.
+* Helper scripts in `/tmp/silentscope/`: `drive.py` (input + cropped capture), `ssdecode.py` (mGBA `.ss1` `gbAs` zlib decoder), `probe_unlock.py`/`binsearch.py` (save-byte unlock search), `probe_opts.py`, `gdbread.py` (GDB stub attempts). Savestate diffing was attempted but noisy (VRAM/audio churn); EEPROM byte diffs and screenshots were used instead.
 
 No ROM image or copyrighted assets are redistributed by this report.

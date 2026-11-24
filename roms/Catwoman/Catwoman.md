@@ -1,5 +1,7 @@
 # Catwoman (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -265,7 +267,7 @@ validator.
   397,312 bytes (`0x61000`): CPU `0x00000`, palette `0x0800`, OAM `0x0C00`,
   VRAM `0x1000`, IWRAM `0x19000`, EWRAM `0x21000`. Used for all RAM/VRAM evidence
   above (no screenshots were taken; screens were reconstructed from VRAM as text).
-* Analysis scripts and state dumps: `/tmp/opencode/catwoman/`
+* Analysis scripts and state dumps: `/tmp/catwoman/`
   (`gdbremote.py`, `ssparse.py`, `render.py`, `strings4.txt`, `s*.ss1`, `w*.ss1`,
   `n*.ss1`).
 

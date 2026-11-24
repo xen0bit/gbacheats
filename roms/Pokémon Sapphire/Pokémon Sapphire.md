@@ -1,10 +1,12 @@
 # Pokémon Sapphire (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Pokémon Sapphire/Pokémon Sapphire.gba` |
+| File | `roms/Pokémon Sapphire/Pokémon Sapphire.gba` |
 | Size | 16,777,216 bytes (0x01000000, 16 MiB) |
 | Header title | `POKEMON SAPP` |
 | Game code / maker | `AXPE01` (AGB-AXPE-USA), maker `01` (Nintendo) |
@@ -43,7 +45,7 @@ Keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-p
 5. Find the caller by searching for the "secret saying" text and its pointer: text at ROM `0x081B2172`, pointer at file `0x1B1C34`, script bytes `0f 00 72 21 1b 08 09 03 6c 02` at ROM `0x081B1C32`.
 6. Enumerate the word vocabulary from the 22 group `words.h` tables (996 words) and locate each target string exactly once.
 
-**Dynamic walk performed (screenshots in `/tmp/opencode/pokemonsapphire/`):**
+**Dynamic walk performed (screenshots in `/tmp/pokemonsapphire/`):**
 - `07_title..08_title_wait` — title screen; `10_options` — Options menu;
 - `26_after_intro110..28_ow_room` — New Game, Birch intro, name entry, bedroom;
 - `22_pause_try` — in-game pause menu (BAG / name / SAVE / OPTION / EXIT);

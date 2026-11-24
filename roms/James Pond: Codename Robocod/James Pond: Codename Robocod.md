@@ -1,5 +1,7 @@
 # James Pond: Codename Robocod (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -182,7 +184,7 @@ The debug system is closed: `0x0800307C`'s loop has exactly two special dispatch
 
 ## 7. Validation evidence
 
-- **Observed** (emulator / savestate RAM): title, Options (Jump A/B, Music Volume, Credits), credits scrolling, Continue Game → password keyboard, Pause (Continue/Quit), all screenshots in `/tmp/opencode/jamespond/`. Gate word 0→1 after `DNX3`; level word 1 / 20 after `JT01` / `JT20`; `0x03001884`/`0x03001888` = 3 on JT success; rejection screens for `AAAAAAAAAA` and gated `JT20`; acceptance screens for two published codes.
+- **Observed** (emulator / savestate RAM): title, Options (Jump A/B, Music Volume, Credits), credits scrolling, Continue Game → password keyboard, Pause (Continue/Quit), all screenshots in `/tmp/jamespond/`. Gate word 0→1 after `DNX3`; level word 1 / 20 after `JT01` / `JT20`; `0x03001884`/`0x03001888` = 3 on JT success; rejection screens for `AAAAAAAAAA` and gated `JT20`; acceptance screens for two published codes.
 - **Derived** (disassembly, verified against observed RAM): the DNX3/JT handlers at `0x08003960`/`0x08003928`; the `−528` ASCII-digit conversion; the two-character first-field comparisons; the 37-entry jump table; the 40-symbol alphabet tables; the 13 published codes' absence from the ROM under ASCII, reversed, lowercase, `+0x20`, UTF-16LE/BE, XOR/all byte shifts, add/all byte shifts, and 5/6-bit packings.
 - **Inferred**: the precise final acceptance comparison for the 13 ordinary level codes (the token-weighted value at `0x03001A20` is computed and bounded, but the exact equality against the digits/flags was not isolated). The six filler characters of `DNX3??????` and `JTnn??????` are not read by the special handlers (derived from the absence of any access to `buf[4..9]` in those branches) but were not exhaustively varied on screen.
 
@@ -196,7 +198,7 @@ The debug system is closed: `0x0800307C`'s loop has exactly two special dispatch
 ## 9. Tooling
 
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for Thumb disassembly.
-- Python/Capstone scripts in `/tmp/opencode/jamespond/`: `scan.py` (pointer + PC-relative literal scans), `xrefs.py` (literal → loader xrefs), `ss.py` (mGBA `.ss1` PNG `gbAs` zlib parser; raw state IWRAM at 0x19000, EWRAM at 0x21000).
+- Python/Capstone scripts in `/tmp/jamespond/`: `scan.py` (pointer + PC-relative literal scans), `xrefs.py` (literal → loader xrefs), `ss.py` (mGBA `.ss1` PNG `gbAs` zlib parser; raw state IWRAM at 0x19000, EWRAM at 0x21000).
 - mGBA CLI debugger (`mgba -d`) driven over a PTY: `break/t`, `continue`, `i`, `r/4`, `x/1`, `dis/t`. The GDB stub at port 2345 was occupied by another process, so a PTY debugger and savestate RAM diffs were used instead.
 - `xdotool` XTEST input on `DISPLAY=:316`; `scrot` + ImageMagick crop at `730x490+153+163`.
 - Web sources: SuperCheats unlockables page (fetched in full), GameFAQs GBA cheats page (403; recovered via search snippets), Sega Retro hidden-content page. No prompt-injection content was encountered in fetched pages.

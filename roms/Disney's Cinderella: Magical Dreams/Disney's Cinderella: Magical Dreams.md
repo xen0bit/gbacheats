@@ -128,7 +128,7 @@ All ROM addresses are `0x08000000 + file_offset`.
 | `0x0801F73E`–`0x0801F77C` | Decode input to `A/B/L/R` (tests bits 0,1,9,8) |
 | `0x0801F782`–`0x0801F79A` | Append character; increment length at `[sp+0x14]`; buffer at `[sp+0x18]` |
 | `0x0801F908`–`0x0801F934` | Length check and 9 × 5-character compare loop |
-| `0x0801F936`–`0x0801F95A` | `flags |= 1 << entry_index`; count newly unlocked in `r4` |
+| `0x0801F936`–`0x0801F95A` | `flags \|= 1 << entry_index`; count newly unlocked in `r4` |
 | `0x0801F96C`–`0x0801F972` | Reset length = 0, armed = 0 after any 5-press attempt |
 | `0x03007E34` | Menu-object base in IWRAM (runtime) |
 | `0x03007EA4` | Cheat flag word (menu object + 0x70), IWRAM |
@@ -227,7 +227,7 @@ ROM `0x0842386`, 46 bytes:
 | Bits | Meaning | Evidence |
 |---|---|---|
 | 0..8 | Cheat unlocked (one bit per record) | table loop bound 9; observed `0x001`, `0x002`, `0x008`, `0x020`, `0x080`, `0x100`, `0x1FF` |
-| 9..31 | Unused / no code path sets them | only writer is `flags |= 1 << index`, index < 9 |
+| 9..31 | Unused / no code path sets them | only writer is `flags \|= 1 << index`, index < 9 |
 
 Diagnostic (not a game code): writing `0x000003FF` to `0x03007EA4` in a savestate and re-entering the overlay still displayed `9 cheats unlocked` and no tenth name. The game has no tenth name string; bits 9+ are not a hidden cheat.
 

@@ -1,10 +1,12 @@
 # Final Fight One (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Final Fight One/Final Fight One.gba` |
+| File | `roms/Final Fight One/Final Fight One.gba` |
 | Size | 4,194,304 bytes (`0x400000`, 4 MiB) |
 | Header title | `FINAL FIGHT` |
 | Game code | `AFFE` (region code `08`) |
@@ -17,7 +19,7 @@
 | SHA-1 | `17918e125bcafd44fcf3b21813575c2ccb19bd45` |
 | SHA-256 | `c952ccc0bd0f65990db2c6ad0f309484d790691fcbdbae23d2cb29af4aa27989` |
 
-All addresses below are for **this exact hash**. Analysis copy `ff.gba` in `/tmp/opencode/finalfight` is byte-identical.
+All addresses below are for **this exact hash**. Analysis copy `ff.gba` in `/tmp/finalfight` is byte-identical.
 
 ## 2. Executive summary
 
@@ -54,7 +56,7 @@ Send **short taps** (~50 ms hold, ~500 ms gap). Long (~150–300 ms) holds doubl
 - `OPTIONS` → Start → OPTIONS screen (DIFFICULTY / EXTEND / SOUND TEST / SE TEST / BUTTON CONFIG). Left/Right change values; Start confirms, B exits.
 - `GAME START` → Start → PLAYER SELECT (GUY / CODY / HAGGAR; Left/Right select, Start confirms) → gameplay → Start → `PAUSE` → Start → resume.
 
-**Screenshots kept on disk** in `/tmp/opencode/finalfight/` (`modesel_01.png`, `nav_3.png`, `nav_4.png`, `opt_via_start.png`, `opt_labels2.png`, `opt_cursor_sound.png`, `st_zero.png`, `se_max.png`, `flow_06.png`, `pause_01.png`, `char_left_montage.png`, `seq_montage.png`). They are evidence only; no assets are published.
+**Screenshots kept on disk** in `/tmp/finalfight/` (`modesel_01.png`, `nav_3.png`, `nav_4.png`, `opt_via_start.png`, `opt_labels2.png`, `opt_cursor_sound.png`, `st_zero.png`, `se_max.png`, `flow_06.png`, `pause_01.png`, `char_left_montage.png`, `seq_montage.png`). They are evidence only; no assets are published.
 
 ## 4. Address map
 
@@ -177,6 +179,6 @@ No hidden debug menu screen was found on any of the ten; the only developer faci
 - `xdotool` XTEST taps with PID-resolved window targeting; OCR-assisted navigation (`tesseract`) for reliably stopping on MODE SELECT.
 - mGBA savestate parser: `.ss1` is a PNG with a zlib `gbAs` chunk; decompressed to 397,312 bytes. EWRAM at raw `0x21000`, IWRAM at `0x19000`. Used to read `0x020208AD`.
 - REA/Ghidra was opened on the raw GBA image but auto-analysis exceeded the 330 s startup deadline and was abandoned; the work additionally follows `objdump`/Capstone + emulator as the guide recommends.
-- All analysis artifacts live in `/tmp/opencode/finalfight/`. No ROM bytes were modified; no ROM or copyrighted assets are redistributed.
+- All analysis artifacts were kept in `/tmp/finalfight/`. No ROM bytes were modified; no ROM or copyrighted assets are redistributed.
 
 **Legal note**: findings, hashes, addresses and tool scripts are published; the ROM image and extracted graphics/audio are not.

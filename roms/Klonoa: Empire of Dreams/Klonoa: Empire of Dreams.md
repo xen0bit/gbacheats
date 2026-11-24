@@ -1,5 +1,7 @@
 # Klonoa: Empire of Dreams (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -130,7 +132,7 @@ This is a **bounded negative**, quantified over the spaces that could have conta
 ## 9. Tooling
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x -n 3`.
-* `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for spot disassembly; Capstone 5.0.7 via `python3` scripts (`dis.py`, `xref_fast.py`, `xref_ram.py`, `scan_keycmp.py`, `decode_text2.py`, `dump_vram.py`, `render_map.py`) kept in `/tmp/opencode/klonoa1`.
+* `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for spot disassembly; Capstone 5.0.7 via `python3` scripts (`dis.py`, `xref_fast.py`, `xref_ram.py`, `scan_keycmp.py`, `decode_text2.py`, `dump_vram.py`, `render_map.py`) kept in `/tmp/klonoa1`.
 * `mgba -3 -d` under `Xvfb :317` + `openbox`, driven through a FIFO; `xdotool` for input, `scrot` + ImageMagick `convert -crop 720x480+154+163` for screenshots; Pillow for VRAM/tilemap rendering.
 * Web: Wayback Machine snapshots of GameFAQs cheats, TCRF and cheatcodes.com; Cheat Happens, Almar's Guides, remyhax 100-ROM study. Fetched pages were treated as data; no instruction found in any fetched page was acted upon.
 

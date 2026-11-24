@@ -1,5 +1,7 @@
 # WTA Tour Tennis (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -136,7 +138,7 @@ No encoder, decoder, checksum, alphabet, or mask sequence exists to reimplement.
 ## 9. Tooling
 
 * `md5sum` / `sha1sum` / `sha256sum`, `file`, `xxd`, `strings -t x` (Phase 0/1).
-* `arm-none-eabi-objdump -M force-thumb` and Capstone 5 (Python) for literal/BL/xref scans; helper scripts in `/tmp/opencode/wtatennis/`: `scan_ptr.py`, `scan_tbl.py`, `scan_bl.py`, `scan_masks.py`, `scan_codetable.py`, `dis.py`, `lits.py`, `find_lit.py`, `find_range.py`, `parse_state.py`.
+* `arm-none-eabi-objdump -M force-thumb` and Capstone 5 (Python) for literal/BL/xref scans; helper scripts in `/tmp/wtatennis/`: `scan_ptr.py`, `scan_tbl.py`, `scan_bl.py`, `scan_masks.py`, `scan_codetable.py`, `dis.py`, `lits.py`, `find_lit.py`, `find_range.py`, `parse_state.py`.
 * mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST input, `scrot` screenshots; `-d` pty debugger for breakpoints; savestate `gbAs` zlib chunk decoded with Python for RAM evidence.
 * REA/Ghidra 12.1.4 was opened on the raw image (747 procedures) but its ARM/Thumb auto-analysis did not map the candidate Thumb addresses, so conclusions rest on objdump/Capstone + emulator, per the guide's raw-GBA path.
 * No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms, and observations are published.

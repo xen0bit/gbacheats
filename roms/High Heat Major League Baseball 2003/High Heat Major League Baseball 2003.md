@@ -1,5 +1,7 @@
 # High Heat Major League Baseball 2003 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -150,7 +152,7 @@ Also Observed: "No Connection..." in LINK GAME; 30-team-only cycling in the UI; 
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep` for Phase 0/1.
-* Python 3 with `capstone` 5.0.7 and Pillow 13.0.1: custom scripts `xref.py` (direct/Thumb-literal pointer scan), `blscan.py` (Thumb BL scanner), `parse_state.py` (`gbAs` zlib state parser), `render_tiles.py` / `tilemap.py` (8bpp VRAM font and tilemap decoding), plus inline scanners for encodings, text runs and key masks. Scripts are in `/tmp/opencode/highheat03/`.
+* Python 3 with `capstone` 5.0.7 and Pillow 13.0.1: custom scripts `xref.py` (direct/Thumb-literal pointer scan), `blscan.py` (Thumb BL scanner), `parse_state.py` (`gbAs` zlib state parser), `render_tiles.py` / `tilemap.py` (8bpp VRAM font and tilemap decoding), plus inline scanners for encodings, text runs and key masks. Scripts were in `/tmp/highheat03/`.
 * `arm-none-eabi-objdump -M force-thumb` for the team cycler and input helpers.
 * `mgba -3` (GDB stub `-g` used early for live RAM/VRAM dumps), `Xvfb :316`, `openbox`, `xdotool`, `scrot`, `convert`, `tesseract` for Phase 2 screen walking.
 * `curl` + Python HTML-to-text for archived GameFAQs and Wayback CDX queries.
@@ -158,4 +160,4 @@ Also Observed: "No Connection..." in LINK GAME; 30-team-only cycling in the UI; 
 
 ### Legal / cleanup note
 
-All generated emulator artifacts (`*.sav`, `*.ss1`) in the ROM folder were removed at the end of the run. Only the analysis processes owned by this session (PIDs recorded in `/tmp/opencode/highheat03/*.pid`) were terminated, by PID number; no `pkill` was used and no other display/session was touched.
+All generated emulator artifacts (`*.sav`, `*.ss1`) in the ROM folder were removed at the end of the run. Only the analysis processes owned by this session (PIDs recorded in `/tmp/highheat03/*.pid`) were terminated, by PID number; no `pkill` was used and no other display/session was touched.

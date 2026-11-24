@@ -1,5 +1,7 @@
 # Mario Kart: Super Circuit (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -239,6 +241,6 @@ reader sites × all nearby `cmp` immediates → 1 multi-button comparison.
 * mGBA 0.10.5 + Xvfb `:315` + xdotool; savestate `gbAs` zlib extraction and
   RAM reads (`ss.py`, `gba.py`); mGBA GDB stub (single-connection limitation
   worked around by savestate diffs, per §16.13).
-* Screenshots kept on disk in `/tmp/opencode/mariokart/`; not redistributed.
+* Screenshots kept on disk in `/tmp/mariokart/`; not redistributed.
 * No ROM or copyrighted assets are included in this report; only addresses,
   hashes, algorithms, and observed results.

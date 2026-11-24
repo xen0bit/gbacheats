@@ -1,5 +1,7 @@
 # Kerplunk! / Toss Across / Tip It (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -111,7 +113,7 @@ The `\ ] ^ _` bytes in the PLAYER strings are font tile placeholders for player 
 ## 7. Validation evidence
 
 **Observed (emulator / RAM):**
-- All screens listed in §2 photographed on `DISPLAY=:319`; each transition accompanied by a Shift+F1 savestate copied into `/tmp/opencode/kerplunk/`.
+- All screens listed in §2 photographed on `DISPLAY=:319`; each transition accompanied by a Shift+F1 savestate copied into `/tmp/kerplunk/`.
 - Player-count selection visibly cycles 2→3→4; EWRAM `0x0203E644` changed with the selection.
 - Typing a letter changed name-slot tile index at `0x0203E750+0x10` from `0x00` to `0x11` ('A'), proving the buffer is tile-indexed.
 - B+Select+Start produced `QUIT NO YES` (Kerplunk) and `QUIT? YES - NO` (Toss Across); choosing YES returned to the title screen.

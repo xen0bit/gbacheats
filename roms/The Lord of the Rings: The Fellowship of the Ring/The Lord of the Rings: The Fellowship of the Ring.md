@@ -1,5 +1,7 @@
 # The Lord of the Rings: The Fellowship of the Ring (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -177,6 +179,6 @@ observation (no screen change, no debug flag, no breakpoint hit). The debug menu
 `blfind.py`, `blmap.py`, `ldrscan.py`, `keyscan.py`, `combos.py`, `titlecombos.py`, `bp_test.py`,
 `bp_verify.py`, `force3.py`), `arm-none-eabi-objdump -M force-thumb`, mGBA 0.10.5 (`-g` GDB stub
 found unresponsive; `-d` command-line debugger used instead), Xvfb `:319` + openbox, xdotool,
-scrot/ImageMagick. All work files under `/tmp/opencode/lotr fellowship/`.
+scrot/ImageMagick. All work files under `/tmp/lotr fellowship/`.
 
 No ROM or copyrighted assets are redistributed; only addresses, hashes, and findings are published.

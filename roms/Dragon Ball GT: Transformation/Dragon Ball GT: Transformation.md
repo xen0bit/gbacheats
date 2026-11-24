@@ -1,5 +1,7 @@
 # Dragon Ball GT: Transformation (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -13,7 +15,7 @@
 | SHA-1 | `8dd4b6e95dca4554a919bff55128481a9a95b611` |
 | SHA-256 | `66e27d7389368801f29b2dc59eb96800bb868e4fa0509cb73dd9c8aa0ded865c` |
 
-**Phase 0 / patch check (§16.1):** one Nintendo logo and one GBA header only, at file offset `0`; no multiboot sub-headers, no appended trainer, no cracktro. The entry branch is the stock `0xEA00002E` and the first 4 KiB is a normal crt0. Header checksum is `0x0000` and the stored complement byte `0x4B` does not match the computed `0x64` — the usual rebuilt-header artifact; no code patch was found, so this is recorded as an observation, not evidence of a modified game image. Analysis was done on a byte-identical copy (`/tmp/opencode/dballgt/game.gba`) so no emulator artifacts were written to the ROM folder.
+**Phase 0 / patch check (§16.1):** one Nintendo logo and one GBA header only, at file offset `0`; no multiboot sub-headers, no appended trainer, no cracktro. The entry branch is the stock `0xEA00002E` and the first 4 KiB is a normal crt0. Header checksum is `0x0000` and the stored complement byte `0x4B` does not match the computed `0x64` — the usual rebuilt-header artifact; no code patch was found, so this is recorded as an observation, not evidence of a modified game image. Analysis was done on a byte-identical copy (`/tmp/dballgt/game.gba`) so no emulator artifacts were written to the ROM folder.
 
 ## 2. Executive summary
 
@@ -204,8 +206,8 @@ The four Max Out Stats trials use the same savestate and the same observable, so
 * `strings -t x -n 4/6/8` and case-insensitive variants: **no readable ASCII menu/debug text** in the 8 MiB image; this game stores UI text as font/tile indices (§16.11). The negative result is therefore based on screen enumeration + literal mask-table discovery, not on strings.
 * Python + `capstone` scans: raw pointers, Thumb `LDR [PC,#imm]`, ARM literal loads, Thumb `BL`, and unaligned u32 scans against the table addresses (all negative — recorded).
 * `arm-none-eabi-objdump -M force-thumb` for spot disassembly.
-* Custom scripts in `/tmp/opencode/dballgt`: `phase0.py`, `search_masks.py`, `dump_tables.py`, `tables_full.py`, `final_enum.py`, `ssdiff.py`, `diff_states.py`, `scan_validator.py`, `scan_arm.py`, `scan2.py`, `key.py`, `probe2.py`, `cleantest.py`, `ingame_probe.py`.
+* Custom scripts in `/tmp/dballgt`: `phase0.py`, `search_masks.py`, `dump_tables.py`, `tables_full.py`, `final_enum.py`, `ssdiff.py`, `diff_states.py`, `scan_validator.py`, `scan_arm.py`, `scan2.py`, `key.py`, `probe2.py`, `cleantest.py`, `ingame_probe.py`.
 * mGBA `-g` GDB stub driven through a persistent FIFO session (`gdb-multiarch`, `dump binary memory`, `x/uh`); savestate PNG `gbAs` zlib extraction as a fallback for RAM inspection (§16.13).
-* Screenshots `shot_00`–`shot_69.png` (root capture, cropped to the 720×480 GBA viewport) retained in `/tmp/opencode/dballgt`; key frames cited above.
+* Screenshots `shot_00`–`shot_69.png` (root capture, cropped to the 720×480 GBA viewport) retained in `/tmp/dballgt`; key frames cited above.
 
 **Legal note:** no ROM bytes or copyrighted assets are redistributed here — only hashes, addresses, decoded button sequences and original observations.

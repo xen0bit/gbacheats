@@ -1,5 +1,7 @@
 # The Powerpuff Girls: Mojo Jojo A-Go-Go (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -40,7 +42,7 @@ All CodeBreaker / GameShark / Action Replay codes found on the web are **out of 
 * Emulator: mGBA 0.10.5 (`/usr/local/bin/mgba`), `DISPLAY=:316`, `SDL_AUDIODRIVER=dummy`, `Xvfb :316 -screen 0 1024x768x24`, `mgba -3 <rom>`.
 * SDL keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrow keys. Keys held 100–200 ms.
 * Boot path: language select (English highlighted) → A → title art → "PRESS START" → Start → main menu.
-* Screens walked (all with screenshots retained in `/tmp/opencode/powerpuffmojo/`):
+* Screens walked (all with screenshots retained in `/tmp/powerpuffmojo/`):
   1. Language select (EN/FR/DE/IT/ES/NL).
   2. Title screen / PRESS START.
   3. Main menu: PLAY GAME (3 entries total), LINK GAME, OPTIONS.
@@ -176,7 +178,7 @@ Decoded in full; grouped by function. **No entry is a password/cheat/debug promp
 
 ## 9. Tooling
 
-Scripts created in `/tmp/opencode/powerpuffmojo/`:
+Scripts created in `/tmp/powerpuffmojo/`:
 
 * `key.py`, `combo.py` — XTEST key helpers (single press, simultaneous combo, sequence) on `DISPLAY=:316`.
 * `bl_scan.py` — Thumb BL target scanner (used to find callers of the input handler).

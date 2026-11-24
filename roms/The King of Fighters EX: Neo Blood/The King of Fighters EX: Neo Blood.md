@@ -1,5 +1,7 @@
 # The King of Fighters EX: Neo Blood (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Scope: **in-game / developer-intended cheats only** (passwords, button codes, hidden/debug menus, unlockables). No GameShark / CodeBreaker / Action Replay codes were sought or produced.
 
 ## 1. Target identity
@@ -121,7 +123,7 @@ This is a **no-code-system** engagement, so the §0.2 deliverables are stated as
 
 ## 7. Validation evidence
 
-- **Observed:** mGBA screenshots of all 14 screens (`s_*.png`, `att_*.png`, `boot_*.png` in `/tmp/opencode/kofex1`), including the mode select, option values, 2-player dialog, character select, five ranking screens and a live battle.
+- **Observed:** mGBA screenshots of all 14 screens (`s_*.png`, `att_*.png`, `boot_*.png` in `/tmp/kofex1`), including the mode select, option values, 2-player dialog, character select, five ranking screens and a live battle.
 - **Observed:** savestate diff between `ss_charselect.ss1` (cursor on Kyo) and `ss_charsel_left.ss1` (cursor on Moe) changed EWRAM words at `0x02000A54` (0x0B→0x06) and `0x02000A8C` (0x0EBB→0x001D) — RAM evidence that the character cursor is tracked in EWRAM.
 - **Derived:** the input manager and its sole KEYINPUT literal; the 103-call BL graph; the 124-pattern keyword count; the 919 mask-run count.
 - **Inferred:** the unlockables are save-bit gated; the character-name text is tile/pre-rendered rather than ASCII (names never appear in any checked encoding despite being visibly rendered).
@@ -136,7 +138,7 @@ This is a **no-code-system** engagement, so the §0.2 deliverables are stated as
 ## 9. Tooling
 
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep -aob` for Phase 0/1.
-- Python 3 + `capstone` for literal/BL/mask scans (`scan_input.py` and inline scripts in `/tmp/opencode/kofex1`).
+- Python 3 + `capstone` for literal/BL/mask scans (`scan_input.py` and inline scripts in `/tmp/kofex1`).
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly.
 - `ss.py` (written for this engagement): decodes the `gbAs` zlib chunk of mGBA `.ss1` files into a 397,312-byte raw state for RAM diffing (guide §16.13).
 - `ui.py` (written for this engagement): xdotool key/screenshot helper for `DISPLAY=:317`.

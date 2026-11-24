@@ -1,5 +1,7 @@
 # SSX 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -48,7 +50,7 @@ passwords. This is a **bounded negative** proven by counts in §6b, not an untes
 
 * Analyzer: mGBA 0.10.5 (`/usr/local/bin/mgba`) on `DISPLAY=:315` under Xvfb + openbox,
   `SDL_AUDIODRIVER=dummy`, launched as `mgba -3 -d game.gba` on a byte-identical copy at
-  `/tmp/opencode/ssx3/game.gba` (the ROM folder was never written to).
+  `/tmp/ssx3/game.gba` (the ROM folder was never written to).
 * Keymap (mGBA SDL default): `A`=`x`, `B`=`z`, `L`=`a`, `R`=`s`, `Start`=`Return`,
   `Select`=`BackSpace`, D-pad = arrow keys. Holds of 60–150 ms; transitions waited 0.6–4 s.
 * RAM inspection: mGBA command-line debugger on a pty (`-d`), commands `c` (continue), Ctrl-C
@@ -142,7 +144,7 @@ space and counts below.
 5. **Debug-menu space.** UI text bank contains no debug/scene-list/level-select label; toggles
    obtainable by controller input open only the menus in item 6. No gate byte for a hidden screen
    was found. This is a "no system" negative (§16.3 case 1), not dead code or a gate.
-6. **Reachable screens walked — 22 distinct (screenshots in `/tmp/opencode/ssx3/`):**
+6. **Reachable screens walked — 22 distinct (screenshots in `/tmp/ssx3/`):**
    1. Title / "Press START" — `title_c.png`
    2. Enter Your Name keypad — `name_now_c.png` (RAM: name buffer `0x020001EA`)
    3. Main menu (Conquer / Quick Play / Multiplayer / GameCube Link / Options) — `cur_state_c.png`

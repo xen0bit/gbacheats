@@ -1,5 +1,7 @@
 # Bruce Lee: Return of the Legend (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -180,14 +182,14 @@ practical entry is `L` + seven symbols, and any extra presses before the seven a
 | 2 | `rrrrrrr` | `0x080045B0` | enemy-set pointers; `0x020094BC = 0xE8` (Jamal) |
 | 3 | `rlrlrlr` | `0x0800459E` | enemy-set pointers; `0x020094BC = 0xB8` (Big Thug) |
 | 4 | `udlrudl` | `0x080045C4` | enemy-set pointers; `0x020094BC = 0x50` (Texas) |
-| 5 | `uRsRuss` | `0x080045E4` | `0x02008F34 |= 0x01` (Director's Cut) |
-| 6 | `uduRuds` | `0x080045F4` | `0x02008F34 |= 0x02` (Time Challenge) |
-| 7 | `rddRRsl` | `0x08004604` | `0x02008F34 |= 0x40` (Bruce '73) |
-| 8 | `rudRusl` | `0x08004614` | `0x02008F34 |= 0x10` (Dragon) |
-| 9 | `ruuRRsl` | `0x08004624` | `0x02008F34 |= 0x20` (Gold) |
+| 5 | `uRsRuss` | `0x080045E4` | `0x02008F34 \|= 0x01` (Director's Cut) |
+| 6 | `uduRuds` | `0x080045F4` | `0x02008F34 \|= 0x02` (Time Challenge) |
+| 7 | `rddRRsl` | `0x08004604` | `0x02008F34 \|= 0x40` (Bruce '73) |
+| 8 | `rudRusl` | `0x08004614` | `0x02008F34 \|= 0x10` (Dragon) |
+| 9 | `ruuRRsl` | `0x08004624` | `0x02008F34 \|= 0x20` (Gold) |
 | 10 | `urdRRsl` | `0x080045D8` | `struct+0x16 = 1`; `0x020094BA = 1` (random enemies) |
 | 11 | `ddRRuus` | `0x080045DE` | `struct+0x17 = 1`; `0x020094BB = 1` (invincible) |
-| 12 | `dudRRsl` | `0x08004634` | `0x02008F34 |= 0x80` (Gallery) |
+| 12 | `dudRRsl` | `0x08004634` | `0x02008F34 \|= 0x80` (Gallery) |
 
 ## 6. Tables
 
@@ -333,7 +335,7 @@ pointers set by types 2–4 were not decoded. The Gallery bit's consumer was not
   **savestate diffing** was the dynamic oracle.
 * `savestate.py`-style parser: PNG `gbAs` chunk → `zlib.decompress` → EWRAM at `0x21000`.
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 for BL/literal scans.
-* Scripts and evidence in `/tmp/opencode/brucelee/`: `phase0.py`, `matrix.py`, `testcodes.py`,
+* Scripts and evidence in `/tmp/brucelee/`: `phase0.py`, `matrix.py`, `testcodes.py`,
   `testvariants.py`, `dbgdrive.py`, `states/*.ss`, and screenshots
   `proof_novel8_mode.png`, `proof_reject_mode.png`, `proof_all_modes.png`,
   `proof_all_outfits.png`, `w3_pause.png`, `w4_controls.png`, `w7_sleep.png`, `w7_wake.png`,

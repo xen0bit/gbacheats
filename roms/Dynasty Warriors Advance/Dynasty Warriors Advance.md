@@ -1,5 +1,7 @@
 # Dynasty Warriors Advance (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -63,7 +65,7 @@ TCRF (`tcrf.net/Dynasty_Warriors_Advance`, mirror consulted) documents only "hid
 | `0x080EB330` | data | `Src/Japan/MT/ConsoleScreen.cpp` |
 | `0x080EB3CC` | data | `Src/Japan/MT/Src/Debug/ScriptConsole.cpp` |
 | `0x080EB3F8–0x080EB4BC` | data | Debug console labels: `Max Hp`, `Hit Point`, `Tension`, `Attack`, `Defence`, `Speed`, `KillCount`, `Enemy Hp`, `No Damage`, `Print MemInfo`, `DEBUG CONSOLE`, `WorkView1`, `WorkView2`, `StepRun`, `ScriptView`, `AGBPrint`, `Parameter` |
-| `0x080EB4CC/4D4/4DC` | data | Debug console handler pointers `0x08023A39`, `0x080239B5`, `0x08023A05` (`|1` Thumb) |
+| `0x080EB4CC/4D4/4DC` | data | Debug console handler pointers `0x08023A39`, `0x080239B5`, `0x08023A05` (`\|1` Thumb) |
 | `0x080EB4E0/4E4` | data | `off` / `on ` (Parameter toggle) |
 | `0x080EB4E8/500` | data | Pointers to the above; `0x080EB4F4` = `%s%02x:%04x` |
 | `0x080EB514/51C/524/538` | data | `Hide`, `Trace`, `History`, `Unuse`; `0x080EB540/544/548` = `GW`, `LW`, `GF` |
@@ -167,7 +169,7 @@ Sources checked: GameFAQs cheats (archived 2018-11-26), TCRF + mirror, Neoseeker
 ## 9. Tooling
 
 - `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x`, `grep -aob`.
-- Custom Python in `/tmp/opencode/dwadvance`: `phase0.py` (hash/header/logo scan), `xrefs.py`/`pool.py`/`blscan.py`/`reach.py`/`keyinput.py` (Capstone-free literal/BL/pointer scans), `mgba_ctl.py` (xdotool input helper).
+- Custom Python in `/tmp/dwadvance`: `phase0.py` (hash/header/logo scan), `xrefs.py`/`pool.py`/`blscan.py`/`reach.py`/`keyinput.py` (Capstone-free literal/BL/pointer scans), `mgba_ctl.py` (xdotool input helper).
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 … -M force-thumb` for disassembly; literal pools decoded with `struct.unpack_from('<I', …)` (§11 byte-order pitfall observed and avoided).
 - mGBA SDL `mgba -3` and `mgba -g -3` + `gdb-multiarch` (`set architecture arm`, `set remote noack-packet off`, `target remote :2345`, `interrupt`, `break *0x08023140`).
 - Web: GameFAQs via `web.archive.org`; TCRF via `tcrf.tiago.zip` mirror (direct TCRF fetch returned 403/Cloudflare challenge). Fetched pages treated as data; no instructions in them were followed.

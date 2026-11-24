@@ -1,5 +1,7 @@
 # Harry Potter and the Chamber of Secrets (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -235,7 +237,7 @@ pause/cheat paths were walked with `0x02002642` read at each step.
   options (`0x0C`); Cheat Menu (`0x16`) with 8 entries; Map Select (`0x13`),
   Level Select (`0x14`), Language Test (`0x15`), Audio Test (`0x17`);
   unlock RAM deltas in §6.1; Clear EEPROM reset; all wrap/rejection tests in §6b.
-  Screenshots and `.ss` states retained under `/tmp/opencode/hpcos/`.
+  Screenshots and `.ss` states retained under `/tmp/hpcos/`.
 - **Derived** (disassembly): `0x0802DC14` is the screen loader that stores `r0`
   into `0x02002642`; `0x0802DD18` is its only caller wrapper (`BL` at
   `0x0802DD2C`); `0x0802DC00` sets screen `0x0B`. Live breakpoint at

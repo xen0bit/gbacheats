@@ -1,5 +1,7 @@
 # Blades of Thunder (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-10-26.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
@@ -374,7 +376,7 @@ Installed/used: `mgba-sdl` 0.10.5, `binutils-arm-none-eabi` (`objdump`),
 `scrot`, ImageMagick, tesseract 5.5.0, Python 3.13, Capstone 5.0.7,
 Unicorn 2.1.4, Pillow.
 
-Scripts (in `/tmp/opencode/blades/`, key ones copied beside the report):
+Scripts (in `/tmp/blades/`, key ones copied beside the report):
 
 | File | Purpose |
 |---|---|
@@ -386,7 +388,7 @@ Scripts (in `/tmp/opencode/blades/`, key ones copied beside the report):
 | `key.py` | xdotool key helper. |
 
 Screenshots referenced above were captured during this run in
-`/tmp/opencode/blades/` (e.g. `title_menu.png`, `levelcode_screen.png`,
+`/tmp/blades/` (e.g. `title_menu.png`, `levelcode_screen.png`,
 `v_4265.png`, `v_4266.png`, `mission9864_play.png`); the durable evidence is
 the address map, the validator model and the reproducible input path.
 

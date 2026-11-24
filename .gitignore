@@ -27,3 +27,8 @@
 /Return-*.png
 /g.in
 /dbgpid
+
+# Python bytecode and emulator FIFOs
+__pycache__/
+*.pyc
+mgba_fifo

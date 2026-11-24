@@ -1,5 +1,7 @@
 # Rapala Pro Fishing (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -140,7 +142,7 @@ Because no code system exists, the enumeration is of the *search space that was 
 ## 9. Tooling
 
 * `file`, `xxd`, `strings -t x`, `md5sum`/`sha1sum`/`sha256sum` (Phase 0/1).
-* `arm-none-eabi-objdump -M force-thumb` with `--adjust-vma=0x08000000`; Capstone 5.0.7; Keystone; custom Python BL/pointer scanners (`/tmp/opencode/rapala/*.py`).
+* `arm-none-eabi-objdump -M force-thumb` with `--adjust-vma=0x08000000`; Capstone 5.0.7; Keystone; custom Python BL/pointer scanners (`/tmp/rapala/*.py`).
 * REA/Ghidra 12.1.4 (raw ARM import at `0x08000000`) for procedure decompilation and xref counts.
 * mGBA SDL under Xvfb `:317` + openbox; `xdotool` XTEST input; `scrot`/ImageMagick for screenshots; `tesseract` OCR for menu labels.
 * `state.py` — mGBA savestate `gbAs` zlib parser used as the RAM oracle; `watch_combo.py`/`watch_stateid.py` — mGBA `-d` write-watchpoint drivers; `bp_tour.py` — live breakpoint tour.

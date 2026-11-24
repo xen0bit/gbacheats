@@ -1,5 +1,7 @@
 # Super Hornet F/A-18F (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -15,7 +17,7 @@
 | SHA-1 | `038b533bb09845ade7b0a13c7ca9923348eb1100` |
 | SHA-256 | `090713684c66bafec1bdf4e4233c332e0e7531adff07ba8c8a90e5691ec17762` |
 
-The analysed image was byte-copied to `/tmp/opencode/superhornet/sh.gba` so that all emulator
+The analysed image was byte-copied to `/tmp/superhornet/sh.gba` so that all emulator
 artifacts (`.ss1`) were written into the work directory, never the ROM folder.
 
 ## 2. Executive summary
@@ -222,7 +224,7 @@ PRACTICE LANDING (screenshots `r0.png`, `screen_options.png`,
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
   for all disassembly; Python `struct` for literal pools; `strings -t x`,
   `xxd`, `md5sum`/`sha1sum`/`sha256sum` for recon.
-* Python scripts in `/tmp/opencode/superhornet`: `gba.py` (XTEST key holds),
+* Python scripts in `/tmp/superhornet`: `gba.py` (XTEST key holds),
   `nav.py` (title→password navigation), `enter.py` (keyboard driver),
   `detect.py` (green-cursor detection), `memread.py` (savestate `gbAs` zlib
   decompress + IWRAM reads), plus the one-shot scan/test scripts.

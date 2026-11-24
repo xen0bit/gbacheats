@@ -1,5 +1,7 @@
 # Sabre Wulf (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -226,7 +228,7 @@ returned 403.
 
 * `strings`/regex ASCII scan, `grep`-style literal scans, custom Python
   `capstone` LDR-literal / pointer / BL xref scanners (`findref.py`,
-  `buttonscan.py`, level-table parser) in `/tmp/opencode/sabrewulf`.
+  `buttonscan.py`, level-table parser) in `/tmp/sabrewulf`.
 * `arm-none-eabi-objdump -M force-thumb` for targeted disassembly.
 * mGBA 0.10.5 with GDB stub; `gdb-multiarch` MI driver (`pdaemon.py`) using
   `gdb-set target-async 1` so memory reads work while the core runs;

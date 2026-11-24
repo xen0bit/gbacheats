@@ -1,5 +1,7 @@
 # Superman: Countdown to Apokolips (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -13,7 +15,7 @@
 | SHA-256 | `9beb0ef068c4aa675fc7adbeaef8ea0eaa73c304511fe026b5a4742924187fbe` |
 | Header checksum | `0x0000`, complement `0x59` |
 
-**Release caveat (guide §16.1):** the distributed image is a **EURASIA cracktro** release. Its entry word at `0x00000000` is `0xEA1DFCBE` (`b 0x0877F300`), not the stock `0xEA00002E` (`b 0x080000C0`). The cracktro displays "EURASIA ... supplied by TEAM EURASIA" and only then hands off. All analysis and emulation in this report used a **byte-identical working copy with the stock entry word restored** (`/tmp/opencode/superman/superman_restored.gba`); only the 4-byte entry word was changed. Game code/strings/tables are untouched.
+**Release caveat (guide §16.1):** the distributed image is a **EURASIA cracktro** release. Its entry word at `0x00000000` is `0xEA1DFCBE` (`b 0x0877F300`), not the stock `0xEA00002E` (`b 0x080000C0`). The cracktro displays "EURASIA ... supplied by TEAM EURASIA" and only then hands off. All analysis and emulation in this report used a **byte-identical working copy with the stock entry word restored** (`/tmp/superman/superman_restored.gba`); only the 4-byte entry word was changed. Game code/strings/tables are untouched.
 
 ## 2. Executive summary
 
@@ -38,7 +40,7 @@ Because the game's key repeat is frame-rate sensitive, reliable arbitrary-code e
 3. Boot with `mgba -3 -t patched.ss1 superman_restored.gba`, press `Return`.
 4. Save another state; read result byte at state offset `0x190CD` (RAM `0x030000CD`) and the accepted payload at `0x1C704` (RAM `0x03003704`).
 
-Scripts: `/tmp/opencode/superman/{pwmodel.py,patchstate.py,testcodes.py,capture.py,enumerate.py}`.
+Scripts: `/tmp/superman/{pwmodel.py,patchstate.py,testcodes.py,capture.py,enumerate.py}`.
 
 ## 4. Address map
 
@@ -141,7 +143,7 @@ The two rejected codes are absent from the ROM under this codec. One-character c
 | `A#bjXp` | `0x4000124A` | accepted | `result=1`, value `0x4000124A` |
 | `A9jjXp` | `0x4024924A` | accepted (model) | — |
 
-Screenshots: `cap_novel_before.png` (code on screen), `cap_novel_after.png` (accepted cutscene), both in `/tmp/opencode/superman/`.
+Screenshots: `cap_novel_before.png` (code on screen), `cap_novel_after.png` (accepted cutscene), both in `/tmp/superman/`.
 
 **Bounds proven by rejection.**
 

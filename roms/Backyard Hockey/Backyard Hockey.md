@@ -1,5 +1,7 @@
 # Backyard Hockey (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Status: complete. Scope: in-game / developer-intended cheats only (passwords,
 button codes, hidden/debug menus, unlockables). No GameShark, CodeBreaker,
 Action Replay or other memory-edit codes are proposed or relied on.
@@ -158,7 +160,7 @@ in game: Start → pause (RESUME / QUIT) → QUIT GAME? (YES / NO)
 | 8th/9th letter | coach keyboard | dropped at 7 (observed) |
 | SPACE | coach keyboard | not present as a cell |
 
-Screenshots (work directory `/tmp/opencode/bhockey/shots/`):
+Screenshots (work directory `/tmp/bhockey/shots/`):
 
 * `05_main_c.png` — main menu (7 rows)
 * `15_nameentry_c.png` — coach keyboard (A–Z, OK, DELETE; no SPACE)
@@ -525,11 +527,11 @@ accounted for.
   -M force-thumb`.
 * Python 3 (`struct`, `zlib`, `hashlib`, `re`), Capstone for the immediate
   scans.
-* Work directory `/tmp/opencode/bhockey`:
+* Work directory `/tmp/bhockey`:
   * `p0.py` — size/header/logo/hash identity.
   * `repro.py` — one-shot reproducer (identity, keyword counts, savestate
     name decode, save checksum). Example:
-    `python3 repro.py "/mnt/gbacheats/roms/Backyard Hockey/Backyard Hockey.ss5"`
+    `python3 repro.py "roms/Backyard Hockey/Backyard Hockey.ss5"`
     prints `packed name bytes 00801468337e decoded 'AIKANTR'`.
   * `scan1.py`, `scan2.py`, `packsearch.py`, `scanbtn.py`, `blscan.py` —
     string/packed-name/button-mask/BL scans.

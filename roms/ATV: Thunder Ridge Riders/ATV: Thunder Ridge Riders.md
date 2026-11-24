@@ -1,5 +1,7 @@
 # ATV: Thunder Ridge Riders (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -231,7 +233,7 @@ def decode(code):
             "engine": b[4], "shocks": b[5], "tires": b[6], "turbo": b[7]}
 ```
 
-Working copy: `/tmp/opencode/atvtrr/atv_password.py` (also prints the published-code check table).
+Working copy: `/tmp/atvtrr/atv_password.py` (also prints the published-code check table).
 
 Valid-code space: `7 events × 10001 money values × 7^4 upgrade combos = 168,070,000` codes, i.e. about
 1 in 21.8 million of the `36^10 = 3,656,158,440,062,976` possible 10-symbol strings.
@@ -367,13 +369,13 @@ Examples generated with the encoder and confirmed in the emulator: `5AAAAAAABG` 
 ## 9. Tooling
 
 * `mgba-sdl` 0.10.5 under `Xvfb :103` + `openbox`; `xdotool` for input, `scrot` for screenshots.
-* GDB stub disabled for the main work; a small GDB-RSP client (`/tmp/opencode/atvtrr/rsp.py`, raw
+* GDB stub disabled for the main work; a small GDB-RSP client (`/tmp/atvtrr/rsp.py`, raw
   `$<data>#<checksum>` packets over TCP) was used instead because mGBA's stub accepts a single connection, caps
   memory reads at `0x200` bytes and does not survive repeated `gdb-multiarch` reconnects. It provided:
   `m` memory reads (RAM dumps), `M` writes (buffer injection), `Z0` breakpoints and the `0x03` interrupt.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly.
 * Capstone 5.0.7 (python) for pointer/BL/literal scans; Pillow for screenshot pixel checks.
-* Scripts in `/tmp/opencode/atvtrr/`:
+* Scripts in `/tmp/atvtrr/`:
   * `atv_password.py` — encoder/decoder and the verification table above.
   * `navgrid.py` — breadth-first key-path planner over the four navigation tables.
   * `phase0.py` — hashes/header/embedded-header scan.

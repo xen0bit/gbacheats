@@ -1,5 +1,7 @@
 # Dexter's Laboratory: Chess Challenge (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -308,7 +310,7 @@ out-of-alphabet symbol; the bound is enforced in the input handler itself.
 * mGBA 0.10.5 (`mgba -3`, `-g` GDB stub on `:2345`), `gdb-multiarch`,
   `Xvfb :303` + `openbox`, `xdotool`, `scrot`/ImageMagick `import`,
   `arm-none-eabi-objdump -M force-thumb`, Python 3 + Capstone 5.0.7.
-* Custom scripts (in `/tmp/opencode/dexterchess`):
+* Custom scripts (in `/tmp/dexterchess`):
   * `dex.py`-style header/literal scans (`struct`, `grep -abo`),
   * savestate reader: PNG `gbAs` chunk → zlib → IWRAM at `0x19000`,
   * `patchstate.py`: rewrite the `gbAs` chunk to inject 16 `u32` into
@@ -323,5 +325,5 @@ out-of-alphabet symbol; the bound is enforced in the input handler itself.
 `ref_active_c.png` (PASSWORD ACTIVE for `CSHJMQNSKTGRDHFN`),
 `ref_denied_c.png` (PASSWORD DENIED after a one-nibble mutation),
 `shot_02.png`/`shot_03.png` (main menu, options), `shot_09`/`shot_10` (password
-screen), `cur.png` walks. Files live in `/tmp/opencode/dexterchess` and are not
+screen), `cur.png` walks. Files were kept in `/tmp/dexterchess` and are not
 part of the repository.

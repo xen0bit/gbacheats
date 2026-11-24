@@ -1,5 +1,7 @@
 # Ozzy & Drix (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -111,7 +113,7 @@ validate(code):                                                       # 0x08022F
 
 The generator (`0x0800E200`) is the exact inverse for the meaningful fields: `f1 = (i8)P[0x18]`, `f3 = (u8)P[0x1C]`, `f5 = |f1-f3|`; `f0`, `f2`, `f4` are pseudo-random filler (the `0x0801D85C` RNG calls at `0x0800E276`/`0x0800E28E`/`0x0800E2B4`). This is why multiple spellings decode to the same `(f1,f3)`: the validator never reads fields 0, 2 or 4.
 
-Reimplementation: `codec.py` in the work dir `/tmp/opencode/ozzydrix/` matches the ROM on every published code, every generated code and both rejection classes.
+Reimplementation: `codec.py` in the work dir `/tmp/ozzydrix/` matches the ROM on every published code, every generated code and both rejection classes.
 
 ## 6. Tables
 
@@ -190,8 +192,8 @@ The GameFAQs "Level n" labels do not equal either field directly; the payloads a
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, GNU `strings -t x` (34,559 strings), `grep -abo`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly; Capstone 5.0.7 + Keystone available.
 * `Xvfb :318`, `openbox`, `mgba -3 -g`, `xdotool`, `scrot`, ImageMagick (`convert`, `compare`).
-* `/tmp/opencode/ozzydrix/codec.py` — Python codec (pack/unpack/encode/decode) and full-space enumeration.
-* `/tmp/opencode/ozzydrix/helper.py`, `test_codes.py` — xdotool input driver and savestate-RAM reader (zlib-decompress mGBA `gbAs` chunk).
+* `/tmp/ozzydrix/codec.py` — Python codec (pack/unpack/encode/decode) and full-space enumeration.
+* `/tmp/ozzydrix/helper.py`, `test_codes.py` — xdotool input driver and savestate-RAM reader (zlib-decompress mGBA `gbAs` chunk).
 * Web: GameFAQs cheats page via `web.archive.org/web/20150920021750/http://www.gamefaqs.com/gba/914926-ozzy-and-drix/cheats` (3 passwords) and the Spriters-Resource comment (`Y3WF?`); GameHacking.org and VGChartz checked. Fetched pages were treated as data; no prompt-injection payload was encountered in this run.
 
 **Legal note:** no ROM, extracted graphic, music or game asset is redistributed here — only addresses, algorithms, hashes and self-authored code are published.

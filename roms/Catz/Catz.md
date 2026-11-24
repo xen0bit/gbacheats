@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Catz/Catz.gba` |
+| File | `roms/Catz/Catz.gba` |
 | Size | 4,194,304 bytes (0x400000, 4 MiB) |
 | Header title | `CATZ` |
 | Game code | `AN3E` |

@@ -1,5 +1,7 @@
 # The Santa Clause 3: The Escape Clause (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -18,7 +20,7 @@
 | SHA-1 | `2163907f0a197f4164c9b9041fb1175d3c608750` |
 | SHA-256 | `8f35bce22bab03c73e7bcdaaa2358a4cdfacf6c169bb69c0c7bd375891771b2d` |
 
-A copy of this exact image was analysed in `/tmp/opencode/santa3/game.gba` (byte-identical). No single-game
+A copy of this exact image was analysed in `/tmp/santa3/game.gba` (byte-identical). No single-game
 published cheat list could be retrieved: web searches for this exact SKU returned no relevant results and
 GameFAQs returned HTTP 403. Recon therefore rested on the ROM itself.
 
@@ -215,7 +217,7 @@ and no second alphabetic code surface exists in the text bank.
 
 - `strings -t x -n 4`, `xxd`, `grep -abo` for text/pointer recon.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
-- Custom Python helpers in `/tmp/opencode/santa3/`: `xref.py`, `xrefs2.py`, `blscan.py`, `keypad.py`,
+- Custom Python helpers in `/tmp/santa3/`: `xref.py`, `xrefs2.py`, `blscan.py`, `keypad.py`,
   `buttonscan.py`, `rsp.py` (minimal GDB RSP client), `bptest2.py` (breakpoint control), `bp_walk.py`
   (validator reachability walk), `ssdiff.py` (zlib `gbAs` savestate diff), `k.py` (XTEST key helper).
 - mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`, `-3`, `-g` where noted.

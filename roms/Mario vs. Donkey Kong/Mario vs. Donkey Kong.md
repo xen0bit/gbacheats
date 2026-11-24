@@ -1,5 +1,7 @@
 # Mario vs. Donkey Kong (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -224,12 +226,12 @@ gave `password=0`, `cheat=0`, `code=0`, `secret=0`, `debug=0`, `invalid=0`,
 
 ## 9. Tooling
 
-* `/tmp/opencode/mvdk/probe.py` — focus mGBA, send keys, Shift+F1 savestate, decode `gbAs`
+* `/tmp/mvdk/probe.py` — focus mGBA, send keys, Shift+F1 savestate, decode `gbAs`
   chunk, print named RAM addresses, crop 720×480 screenshot.
-* `/tmp/opencode/mvdk/chord.py` — hold arbitrary key sets simultaneously for chord tests.
-* `/tmp/opencode/mvdk/find_literal_xrefs.py` — literal + Thumb/ARM LDR-literal xref scanner.
-* `/tmp/opencode/mvdk/scan_setscene.py` — Thumb BL scanner for `set_scene` call sites.
-* `/tmp/opencode/mvdk/lzscan.py` — GBA LZ77 decompression scan for hidden ASCII banks.
+* `/tmp/mvdk/chord.py` — hold arbitrary key sets simultaneously for chord tests.
+* `/tmp/mvdk/find_literal_xrefs.py` — literal + Thumb/ARM LDR-literal xref scanner.
+* `/tmp/mvdk/scan_setscene.py` — Thumb BL scanner for `set_scene` call sites.
+* `/tmp/mvdk/lzscan.py` — GBA LZ77 decompression scan for hidden ASCII banks.
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Python 3, mGBA SDL, Xvfb :315,
   openbox, xdotool, scrot, ImageMagick.
 

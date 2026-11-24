@@ -1,5 +1,7 @@
 # WWE Road to WrestleMania X8 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -15,7 +17,7 @@
 | Header checksum / complement | `0x0000` / `0x42` |
 | Entry word | `0xEA0FD03E` → branch to `0x0803F4100` |
 
-**Scene-release note (guide §16.1).** Boot shows a cracktro: "Game supplied by: Mick Burns (GGG) / released on: Oct 04th, 2002", followed by the Natsume "DREAM CREATOR" logo. The stock entry branch was repointed from `0x080000C0` to a relocated crt0 copy at file offset `0x3F4100` (`bytes 12 00 a0 e3 00 f0 29 e1 ...`, same instruction stream as `0xC0`). The ROM then runs normally and controller input works. No trainer menu was observed; all data below is from the game proper. Analysis used a byte-identical copy in `/tmp/opencode/wwex8/wwex8.gba` (MD5 verified) so the ROM folder stayed clean.
+**Scene-release note (guide §16.1).** Boot shows a cracktro: "Game supplied by: Mick Burns (GGG) / released on: Oct 04th, 2002", followed by the Natsume "DREAM CREATOR" logo. The stock entry branch was repointed from `0x080000C0` to a relocated crt0 copy at file offset `0x3F4100` (`bytes 12 00 a0 e3 00 f0 29 e1 ...`, same instruction stream as `0xC0`). The ROM then runs normally and controller input works. No trainer menu was observed; all data below is from the game proper. Analysis used a byte-identical copy in `/tmp/wwex8/wwex8.gba` (MD5 verified) so the ROM folder stayed clean.
 
 ## 2. Executive summary
 
@@ -145,7 +147,7 @@ This title has **no code space to enumerate**. Per guide §0.2, a bounded negati
 ## 9. Tooling
 
 - `strings -t x -n 4`, `xxd`, `grep -abo` for the ASCII bank.
-- Python scripts in `/tmp/opencode/wwex8/`: `scan_ldr.py`, `scan_input.py`, `ssdiff.py` (PNG `gbAs` zlibState extractor + byte diff), plus inline pointer/mask/BL scanners.
+- Python scripts in `/tmp/wwex8/`: `scan_ldr.py`, `scan_input.py`, `ssdiff.py` (PNG `gbAs` zlibState extractor + byte diff), plus inline pointer/mask/BL scanners.
 - `arm-none-eabi-objdump -M force-thumb` for the input handler and scene initializers.
 - mGBA 0.10.5 (`-3 -g`) under Xvfb `:318` + openbox; `xdotool` XTEST input; `scrot`/ImageMagick `montage` for screen enumeration.
 - Cleanup: only own PIDs killed by number (Xvfb `:318` and the mGBA instance launched from the workdir); workdir `.sav`/`.ss*` files are outside the ROM folder. No other agent's process or display was touched.

@@ -1,8 +1,10 @@
 # Madden NFL 2002 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
-- File: `/mnt/gbacheats/roms/Madden NFL 2002/Madden NFL 2002.gba`
+- File: `roms/Madden NFL 2002/Madden NFL 2002.gba`
 - Size: 4,194,304 bytes (`0x400000`), one retail GBA image.
 - Header title `MADDEN NFL02`; game code `A2ME`; maker `69`; version `0x00`.
 - Entry word `0xEA00002E` (stock crt0). Header checksum `0x0000`, complement
@@ -47,7 +49,7 @@ codes are out of scope for this report.
 - Menu path: title (PRESS START) → main (**PLAY NOW**) → **TEAM SELECT**
   (accept) → **GAME RULES**. Enter the sequences there.
 - Save a state on GAME RULES (Shift+F3) so each test costs one load (F3).
-- Helper scripts and captured frames are in `/tmp/opencode/madden02/`.
+- Helper scripts and captured frames were in `/tmp/madden02/`.
 
 ## 4. Address map
 

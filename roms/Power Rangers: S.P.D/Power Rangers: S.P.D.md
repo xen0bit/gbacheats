@@ -1,5 +1,7 @@
 # Power Rangers: S.P.D. (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -87,7 +89,7 @@ accept iff  C == chk  and  A <= 19  and  B != 3
 
 On accept the routine writes `A` to `UI+0x2A` (through `0x08000C28`) and `B` to `UI+0x29`; on reject it returns `-1`. `B` is the difficulty: `0=Easy, 1=Normal, 2=Hard`, `3=reject marker`. A is the stage index (the title shown is `A+1` for `A<19`; `A=19` is the "Final battle" on Easy and the "all episodes" unlock on Hard).
 
-A faithful Python reimplementation is `/tmp/opencode/prspd/validator.py`; it agrees with all 39 published codes and with every emulator test below.
+A faithful Python reimplementation is `/tmp/prspd/validator.py`; it agrees with all 39 published codes and with every emulator test below.
 
 ## 6. Tables
 
@@ -134,7 +136,7 @@ Published sources and verification:
 
 ## 9. Tooling
 
-Scripts in `/tmp/opencode/prspd/`: `phase0.py` (hash/header/logo scan), `findkey.py` / `xrefbuf.py` (literal and LDR xref scans), `findbuf5.py` / `findbuf_final.py` (RAM diff via mGBA PTY debugger), `submit_code.py` (write buffer + submit), `validator.py` (offline decoder), `enumerate.py` (full 32,768-input enumeration), plus watchpoint/trace drivers (`watchfa.py`, `watchwrite.py`, `traceval.py`). Tools: `arm-none-eabi-objdump`, Capstone 5.0.7, `mgba -d` PTY debugger (the `-g` GDB stub was incompatible with GDB 16 and was abandoned; SIGINT-to-PID was used to pause), `Xvfb :317`, `openbox`, `xdotool`, `scrot`, ImageMagick.
+Scripts in `/tmp/prspd/`: `phase0.py` (hash/header/logo scan), `findkey.py` / `xrefbuf.py` (literal and LDR xref scans), `findbuf5.py` / `findbuf_final.py` (RAM diff via mGBA PTY debugger), `submit_code.py` (write buffer + submit), `validator.py` (offline decoder), `enumerate.py` (full 32,768-input enumeration), plus watchpoint/trace drivers (`watchfa.py`, `watchwrite.py`, `traceval.py`). Tools: `arm-none-eabi-objdump`, Capstone 5.0.7, `mgba -d` PTY debugger (the `-g` GDB stub was incompatible with GDB 16 and was abandoned; SIGINT-to-PID was used to pause), `Xvfb :317`, `openbox`, `xdotool`, `scrot`, ImageMagick.
 
 **Legal note:** no ROM bytes, graphics, audio, or copyrighted game text are redistributed here — only hashes, addresses, algorithms, and our own tools/findings.
 

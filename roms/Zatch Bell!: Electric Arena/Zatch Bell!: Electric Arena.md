@@ -1,5 +1,7 @@
 # Zatch Bell!: Electric Arena (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -35,7 +37,7 @@ A large Japanese script bank also contains an unreached developer debug menu (`�
 - Boot to the title ("Press START"). **Do not press Start.**
 - Press, with ~100 ms holds and ~50 ms gaps: `Up`, `a`, `s`, `Down`, `a`, `s`, `a`, `Left`, `Right`, `s`.
 - Observation: background turns from blue to red (`code_attempt2.png`, `t2_published.png`); flag `0x02024616` changes `0x00 → 0x01`.
-- Savestates: `Shift+F1` saves slot 1, `F1` loads it. All screenshots/states were kept in `/tmp/opencode/zatch`, not in the ROM folder.
+- Savestates: `Shift+F1` saves slot 1, `F1` loads it. All screenshots/states were kept in `/tmp/zatch`, not in the ROM folder.
 - RAM read: mGBA `.ss*` savestates are PNG with a zlib-compressed `gbAs` chunk; decompressing gives a 397,312-byte state whose EWRAM begins at `0x21000` (so EWRAM address `A` is at raw offset `A - 0x02000000 + 0x21000`).
 
 ## 4. Address map
@@ -155,5 +157,5 @@ Notable derived detail: the neutral-frame counter is reset to **0** on every cor
 
 - `Xvfb :318`, `openbox`, `mgba 0.10.5` (`-3`), `xdotool`, `scrot`, `file`, `xxd`, `md5sum`/`sha1sum`/`sha256sum`.
 - `arm-none-eabi-objdump -M force-thumb` for validator disassembly; Python 3 + `capstone` 5.0.7 for pointer/BL scans; Python `zlib` + `struct` for mGBA `gbAs` savestate RAM reads; Python `shift_jis` codec for text-bank decoding.
-- Analysis scripts retained in `/tmp/opencode/zatch/`: `search_seq.py`, `dump_table.py`, `xrefs.py`, `find_codes2.py`, `ss.py`, `diffss.py`, `harness.py`, `tests2.py`, `tests3.py`, `decode_text.py`.
-- All screenshots/savestates/ROM copies were kept in `/tmp/opencode/zatch`; no evidence files were written to the ROM folder.
+- Analysis scripts retained in `/tmp/zatch/`: `search_seq.py`, `dump_table.py`, `xrefs.py`, `find_codes2.py`, `ss.py`, `diffss.py`, `harness.py`, `tests2.py`, `tests3.py`, `decode_text.py`.
+- All screenshots/savestates/ROM copies were kept in `/tmp/zatch`; no evidence files were written to the ROM folder.

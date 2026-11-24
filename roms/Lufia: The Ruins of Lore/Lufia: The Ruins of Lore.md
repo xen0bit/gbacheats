@@ -1,5 +1,7 @@
 # Lufia: The Ruins of Lore (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -32,7 +34,7 @@ The negative is bounded: all controller-reachable screens were walked with scree
 - Emulator: `mgba` 0.10.x, Xvfb `:318`, `SDL_AUDIODRIVER=dummy`, scaled `3×`.
 - Keymap (mGBA SDL default): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad = arrow keys.
 - Boot path: Start ×6–8 through Taito/Atlus logos and the prologue text → title menu (**New Game / Continue / Link**). New Game + A-mash through the opening dialogue → field. Select opens the field menu; Start opens Field Record (quick-save).
-- Screens walked (screenshots kept in `/tmp/opencode/lufia/`): `z1_crop.png` (title), `w_field_crop.png` / `e2_crop.png` (field), `w_menu_crop.png` (field menu — renders as tile-indexed glyphs), `g1_000.png` / `y_clear_crop.png` (intro/dialogue), `w_record` capture (Field Record).
+- Screens walked (screenshots kept in `/tmp/lufia/`): `z1_crop.png` (title), `w_field_crop.png` / `e2_crop.png` (field), `w_menu_crop.png` (field menu — renders as tile-indexed glyphs), `g1_000.png` / `y_clear_crop.png` (intro/dialogue), `w_record` capture (Field Record).
 - Debug-menu activation attempts (all out-of-scope memory edits, used only as probes, none delivered as a "code"):
   - mGBA savestate `gbAs` chunk edits at `0x03005978`, `0x0300597E`, `0x02001A2C`;
   - mGBA GDB stub `w/4` (port 2345 was held by another agent, so a private `-d` pty debugger was used instead);
@@ -146,7 +148,7 @@ This engagement is a **negative result**: there is no validated code space to en
 ## 9. Tooling
 
 - `strings -t x`, `grep`, `xxd`, `python3` (Capstone 5.0.7 / Keystone for literal & BL scans), `arm-none-eabi-objdump -M force-thumb`.
-- Helper scripts in `/tmp/opencode/lufia/`: `an.py` (literal/BL/Thumb-LDR scanners, hex dump), `ss.py` (mGBA `.ss1` `gbAs` zlib chunk read/write; IWRAM at `0x19000`, EWRAM at `0x21000`), `dbg.py` (pty driver for mGBA `-d` CLI debugger: `r/4`, `w/4`, `w/r`, `status`), `key.py` (XTEST key injection), `gdbint.py` (pexpect GDB stub helper).
+- Helper scripts in `/tmp/lufia/`: `an.py` (literal/BL/Thumb-LDR scanners, hex dump), `ss.py` (mGBA `.ss1` `gbAs` zlib chunk read/write; IWRAM at `0x19000`, EWRAM at `0x21000`), `dbg.py` (pty driver for mGBA `-d` CLI debugger: `r/4`, `w/4`, `w/r`, `status`), `key.py` (XTEST key injection), `gdbint.py` (pexpect GDB stub helper).
 - Emulator: `mgba` 0.10.x under `Xvfb :318` with `openbox`, `SDL_AUDIODRIVER=dummy`; screenshots via `scrot` + `convert` crop.
 - Web cross-check: GameFAQs cheats/walkthrough/boards, VGChartz, TCRF (cutting-room mirror), Data Crystal, supercheats, cheatingdome.
 - No ROM or copyrighted graphics were redistributed; only addresses, hashes, and translated menu labels are published here.

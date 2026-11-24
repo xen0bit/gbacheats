@@ -1,5 +1,7 @@
 # Tetris Worlds (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -35,7 +37,7 @@ Environment: mGBA 0.10.5 under Xvfb `:316` + openbox, `SDL_AUDIODRIVER=dummy`, `
 4. The list grows to seven entries; scroll down to see `POPULAR` (screenshot `poptestc.png` in the work dir). Press A to play classic Tetris.
 5. Rejections: on the same screen, `Select` alone, `R+Select`, `L+B` leave the count at 6 (§6b).
 
-Screenshots kept in `/tmp/opencode/tetrisworlds/` (not published with the report).
+Screenshots kept in `/tmp/tetrisworlds/` (not published with the report).
 
 ## 4. Address map
 
@@ -150,7 +152,7 @@ Conclusion: the accepted password-input space in this ROM is the **empty set** (
 
 - `mgba` 0.10.5 (`-3`, `-g` / `-d` tried; GDB stub was single-client and repeatedly stolen by other agents sharing the machine, so savestate diffs were the primary RAM oracle), Xvfb `:316`, openbox, `xdotool`, `scrot`, ImageMagick.
 - `arm-none-eabi-objdump -M force-thumb` for spot disassembly; Capstone 5.0.7 / Keystone available.
-- Ghidra 12.1.4 headless (`analyzeHeadless`, raw-binary import, `ARM:LE:32:v7`, base `0x08000000`) with custom scripts `FindRefs.java`, `FindConsts.java`, `Decomp.java`, `CreateAndDecomp.java`, `ScanResUsers.java` in `/tmp/opencode/tetrisworlds/`.
+- Ghidra 12.1.4 headless (`analyzeHeadless`, raw-binary import, `ARM:LE:32:v7`, base `0x08000000`) with custom scripts `FindRefs.java`, `FindConsts.java`, `Decomp.java`, `CreateAndDecomp.java`, `ScanResUsers.java` in `/tmp/tetrisworlds/`.
 - Python helpers in the same folder: `key.py`, `scan.py`, `parse_state.py` (PNG `gbAs` zlib chunk → raw 397,312-byte state; IWRAM at `0x19000`, EWRAM at `0x21000`), `diffstates.py`, `combos.py`, `combo_counts.py`, `reject_test.py`.
 - Web recon: GameFAQs cheats/FAQ (via Wayback), chaptercheats, aaacheatcodes, TCRF search snippets. All treated as data.
 

@@ -1,5 +1,7 @@
 # Starsky & Hutch (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -27,7 +29,7 @@ ROM `0x083FC000`, which is a two-stage BIOS decompressor:
 followed by ~1 MiB of high-entropy packed data. This is a scene-release
 cracktro/intro wrapper, **not** an in-game cheat; it was not analysed further.
 Per §16.1, the stock entry branch `0xEA00002E` was restored **on a copy**
-(`/tmp/opencode/starsky/starsky_stock.gba`, MD5 `b2d2f51b0863201f88d195e2ca8f0cd5`)
+(`/tmp/starsky/starsky_stock.gba`, MD5 `b2d2f51b0863201f88d195e2ca8f0cd5`)
 for all dynamic work. All game strings/tables/addresses below are from the
 unmodified image and apply equally to the original.
 
@@ -274,7 +276,7 @@ developer-intended cheats.
   `0x08003400`–`0x08003A00` is garbage).
 - Python + `struct` for pointer/literal scans; `zlib` for mGBA `gbAs`
   savestate patching (`ssdecode.py`, `testcode.py`, `kprobe.py`,
-  `mapcodes.py`, `key.py` in `/tmp/opencode/starsky/`).
+  `mapcodes.py`, `key.py` in `/tmp/starsky/`).
 - mGBA 0.10.5 under Xvfb `:316` + openbox; `xdotool`, `scrot`, ImageMagick
   `convert`/`montage` for screen evidence.
 - Web recon: GameFAQs GBA FAQ/cheats, GamesRadar, Tips & Tricks #111

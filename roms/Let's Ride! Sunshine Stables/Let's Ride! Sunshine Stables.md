@@ -1,5 +1,7 @@
 # Let's Ride! Sunshine Stables (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -230,13 +232,13 @@ previously under-documented hidden Highscore gate.
 
 * `arm-none-eabi-objdump` (`-D -b binary -marm --adjust-vma=0x08000000`), Capstone 5.0.7,
   `strings`, `xxd`, `grep -abo`.
-* Python scripts in `/tmp/opencode/letssunshine/`:
+* Python scripts in `/tmp/letssunshine/`:
   `phase0.py` (header/hash/logo scan), `xrefs.py` (literal-pointer scan),
   `negproof.py` (keyword/password/mask/table counts), `keymasks.py` (button sequences),
   `server.py` + `cli.py` (persistent mGBA `-d` pty debugger over a Unix socket),
   `ram.py` (standard RAM snapshots), `ssdiff.py`/`ssdiff2.py` (savestate `gbAs` diff),
   `walk.py` (screen-walk helper).
-* Screenshots and RAM dumps in `/tmp/opencode/letssunshine/` (not redistributed).
+* Screenshots and RAM dumps in `/tmp/letssunshine/` (not redistributed).
 * No ROM or copyrighted asset is reproduced in this report; only hashes, addresses, and
   observations.
 

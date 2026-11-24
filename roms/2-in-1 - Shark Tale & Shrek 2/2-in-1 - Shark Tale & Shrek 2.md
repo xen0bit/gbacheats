@@ -1,5 +1,7 @@
 # 2-in-1: Shark Tale & Shrek 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 Report generated from a local ROM analysis on 2026-10-25.
 Methodology: [`GBA_REVERSE_ENGINEERING_GUIDE.md`](../../GBA_REVERSE_ENGINEERING_GUIDE.md)
 
@@ -190,7 +192,7 @@ sliders and the sleep dialog.
   chapter screen still shows only Chapter 1 unlocked (0/40).
 
 All tests are in `screenshots/` (key screens) and in the session work directory
-(`/tmp/opencode/shark/shots/sw_*`, `seq_*`, `gp_*`, `boot_*`).
+(`/tmp/shark/shots/sw_*`, `seq_*`, `gp_*`, `boot_*`).
 
 ---
 
@@ -205,7 +207,7 @@ the address (Shark `0x08080000`, Shrek `0x08890000`).
 | `0x080003B8` | `0x03B8` | shell | literal `0x04000130` |
 | `0x08089284` | `0x089284` | Shark | `KEYINPUT` read (same helper, active-high mask) |
 | `0x08089290` | `0x089290` | Shark | literal `0x04000130`; `0x3FF` at `0x08089294` |
-| `0x0809C6F0` | `0x09C6F0` | Shark | sleep routine: `KEYCNT=0xC304`, `IE|=0x1000`, `SWI 3` |
+| `0x0809C6F0` | `0x09C6F0` | Shark | sleep routine: `KEYCNT=0xC304`, `IE\|=0x1000`, `SWI 3` |
 | `0x0809C75C` | `0x09C75C` | Shark | literals: `0x04000132` (KEYCNT), `0xC304`, `0x04000200` (IE) |
 | `0x080BF0D8` | `0x0BF0D8` | Shark | text-ID table, **202 entries** (ends `0x0BF400`) |
 | `0x0889A4A0` | `0x89A4A0` | Shrek | `KEYINPUT` read |
@@ -513,7 +515,7 @@ overlays, zero unlocks.
 * Python 3.13: `capstone` 5.0.7, `numpy` 2.5.4.
 * mGBA CLI debugger (`-d`) for the input/KEYCNT checks; mGBA GDB stub (`-g`)
   for the key-object read; `objdump`/Capstone for disassembly.
-* Scripts (session work dir `/tmp/opencode/shark/`): `recon.py` (text/mask/
+* Scripts (session work dir `/tmp/shark/`): `recon.py` (text/mask/
   literal scans), `test_seqs2.py` + JSON test lists, `sweep2.py` (112-mask
   sweep), `wakescan.py` (36 wake masks), `d.py` (Capstone disassembler).
 * Savestates `rom.ss1`–`rom.ss4`; screenshots in `screenshots/`.

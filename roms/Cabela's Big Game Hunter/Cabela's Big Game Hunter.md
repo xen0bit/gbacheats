@@ -1,5 +1,7 @@
 # Cabela's Big Game Hunter (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -220,7 +222,7 @@ Button masks: see §4. No mask table is stored in the ROM (see §6b).
 * `tesseract-ocr` on the US manual PDF (`videogamemanual.com`) for the control/menu/trophy-room descriptions.
 * mGBA PNG savestates parsed with a small Python script (PNG `gbAs` chunk → zlib → mGBA 0x61000 state; EWRAM at `+0x21000`, IWRAM at `+0x19000`, VRAM at `+0x1000`, I/O at `+0x400`).
 * Search scripts: printable-string extractor, multi-encoding keyword scan, Thumb PC-relative literal scanner, u8/u16/u32 mask-run scanner, screenshot cycle-hash comparator.
-* Working artifacts (not shipped): `/tmp/opencode/cabela/` — screenshots, savestates, scan scripts, cycle frames.
+* Working artifacts (not shipped): `/tmp/cabela/` — screenshots, savestates, scan scripts, cycle frames.
 
 ## Legal note
 

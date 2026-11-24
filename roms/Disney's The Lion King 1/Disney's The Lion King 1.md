@@ -1,5 +1,7 @@
 # Disney's The Lion King 1½ (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -360,7 +362,7 @@ game input. No in-game path was found here.
   `import`/`convert`/`compare` for screenshots.
 * Python 3 scripts: literal/pointer searches, key-mask run scan, mGBA savestate
   (`gbAs` zlib chunk) parser and EWRAM diffs.
-* Artifacts in `/tmp/opencode/lionking1`: `ctl.py`, `strings4.txt`,
+* Artifacts in `/tmp/lionking1`: `ctl.py`, `strings4.txt`,
   `refs.txt`, savestates `lk1.ss1/ss3/ss4`, screenshots (`shot_*.png`,
   `opt2_c.png`, `credits2_c.png`, `ls3_c.png`, `sleep_c.png`, `erase2_c.png`,
   `gen1_c.png`, `gen2_c.png`, `snes1_c.png`, `snes2_c.png`, `gb1_c.png`,

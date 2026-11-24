@@ -1,5 +1,7 @@
 # Pocket Dogs (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -229,7 +231,7 @@ Labels: **Observed** = emulator screenshot / savestate RAM read / live debugger;
 
 - **Observed** — single 8 MiB header, stock entry, hashes (§1).
 - **Observed** — DEBUG MENU root and all 12 sub-screens; screenshots `05_debugmenu.png`,
-  `06_after_A.png`, `e0..e11.png` in `/tmp/opencode/pocketdogs/`.
+  `06_after_A.png`, `e0..e11.png` in `/tmp/pocketdogs/`.
 - **Observed** — `0x03001258` read back as 0x02/0x03/0x04/0x0F/0x13 for each patched boot,
   and 0x05/0x06/0x07/0x08/0x09/0x0A/0x10/0x12 for the corresponding scene entries,
   always matching `0x03004918` (current scene).
@@ -272,7 +274,7 @@ Labels: **Observed** = emulator screenshot / savestate RAM read / live debugger;
 - mGBA SDL under Xvfb `:318` + openbox; `xdotool` XTEST input; `scrot`/ImageMagick crops.
 - Savestate RAM reads: PNG `gbAs` chunk → `zlib.decompress` → IWRAM at raw offset
   `0x19000`; scene byte at `0x1A258`. Scripts: `ssread.py`, `sspatch.py`, `snap.sh`,
-  `enter.sh`, `go.sh` in `/tmp/opencode/pocketdogs/`.
+  `enter.sh`, `go.sh` in `/tmp/pocketdogs/`.
 - mGBA CLI debugger (`-d`) driven through a PTY for the live breakpoint proof
   (`dbg2.py`/`dbg3.py`, `dbgcmd.sh`); GDB stub on :2345 was unavailable (held by another
   process), so the PTY debugger and savestate diffing were used instead (guide §16.13).

@@ -1,5 +1,7 @@
 # The Land Before Time: Into the Mysterious Beyond (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -49,7 +51,7 @@ was followed.
 ## 3. How to reproduce
 
 * Emulator: mGBA 0.10.5 SDL, `DISPLAY=:315`, `SDL_AUDIODRIVER=dummy`, `-3` scaling.
-* A byte-identical copy (`md5 cc966f…`) was run from `/tmp/opencode/landbeforetime2/lbt.gba` so
+* A byte-identical copy (`md5 cc966f…`) was run from `/tmp/landbeforetime2/lbt.gba` so
   no `.sav`/savestate could be written into the ROM folder.
 * Keymap (mGBA SDL defaults): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`,
   D-pad=arrow keys. Holds of 120 ms with 180 ms gaps (guide §16.2).

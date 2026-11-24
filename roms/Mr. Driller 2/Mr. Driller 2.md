@@ -1,10 +1,12 @@
 # Mr. Driller 2 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Mr. Driller 2/Mr. Driller 2.gba` |
+| File | `roms/Mr. Driller 2/Mr. Driller 2.gba` |
 | Size | 4,194,304 bytes (`0x400000`) |
 | Header title | `MR. DRILLER2` |
 | Game code | `BR2E` |
@@ -68,7 +70,7 @@ The slow cadence is essential: the identical sequence pressed at ~4 presses/s
 **Reading RAM:** mGBA savestates (`Shift+F1`) are PNGs with a zlib `gbAs` chunk.
 For a 4 MiB ROM the IWRAM image begins at state offset `0x19000`; therefore
 `0x03001151` lives at state byte `0x1A151`. A parser is in
-`/tmp/opencode/mrdriller2/ss.py`; a patcher in `patchss.py`.
+`/tmp/mrdriller2/ss.py`; a patcher in `patchss.py`.
 
 **Debug screen (analysis only, not reachable by input):** patch a main-menu
 savestate's `0x030048B4` to `2` with `patchss.py`, load with `mgba -t`, and the
@@ -303,13 +305,13 @@ were treated as data.
 * mGBA (SDL) under `Xvfb :318` + `openbox`; `xdotool` XTEST input; `scrot` screenshots.
 * `arm-none-eabi-objdump -M force-thumb` for raw disassembly; Capstone 5.0.7 for
   literal/BL/ADR scans; `strings`, `xxd`, `grep`.
-* `/tmp/opencode/mrdriller2/ss.py` — mGBA `.ss1` `gbAs` parser (IWRAM at
+* `/tmp/mrdriller2/ss.py` — mGBA `.ss1` `gbAs` parser (IWRAM at
   state offset `0x19000`, EWRAM at `0x21000`).
-* `/tmp/opencode/mrdriller2/patchss.py` — savestate RAM patcher (used only to
+* `/tmp/mrdriller2/patchss.py` — savestate RAM patcher (used only to
   inspect the dead debug screen).
-* `/tmp/opencode/mrdriller2/codetest.py` — reproducible button-code test harness
+* `/tmp/mrdriller2/codetest.py` — reproducible button-code test harness
   (restart from `gameplay.ss1`, pause, slow presses, read `0x03001151`).
-* `/tmp/opencode/mrdriller2/helper.py` — input/screenshot/GDB helpers.
+* `/tmp/mrdriller2/helper.py` — input/screenshot/GDB helpers.
 
 No ROM or copyrighted assets are redistributed; only addresses, hashes,
 algorithms and original scripts are published.

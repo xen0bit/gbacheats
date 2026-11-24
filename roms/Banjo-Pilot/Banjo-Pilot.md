@@ -1,5 +1,7 @@
 # Banjo-Pilot (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -436,12 +438,12 @@ display/dialogue text.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M
   force-thumb` for the keypad reader, the hit-test helper and the 25 key-state
   xrefs.
-* Python 3 scripts (in `/tmp/opencode/banjopilot/tools/`):
+* Python 3 scripts (in `/tmp/banjopilot/tools/`):
   * `ident.py` — header/complement/logo/hash dump.
   * `textscan.py` — bank extraction, string/letter counts, keyword counts.
   * `maskscan.py` — single-bit mask run and pointer scan.
   * `ui.py` — key hold/crop helper.
-* Evidence screenshots: `/tmp/opencode/banjopilot/shots/` — key files:
+* Evidence screenshots: `/tmp/banjopilot/shots/` — key files:
   `03_after.png` (title), `04_boot_start.png` (main), `05_options.png`
   (options), `168_name.png` and `150_one.png` (name entry + wheel showing
   `… Z 0 1 2 3 …`), `24_sp.png` (six-piece grid), `97_cupselect.png` (cups),

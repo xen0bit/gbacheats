@@ -1,10 +1,12 @@
 # Onimusha Tactics (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
 |---|---|
-| File | `/mnt/gbacheats/roms/Onimusha Tactics/Onimusha Tactics.gba` |
+| File | `roms/Onimusha Tactics/Onimusha Tactics.gba` |
 | Size | 8,388,608 bytes (0x800000, 8 MiB) |
 | Header title | `ONITAC1US` (12 bytes at 0xA0, NUL-padded) |
 | Game code | `A6OE` |
@@ -146,7 +148,7 @@ This is a **progress/flag gate**, not an input-validated cheat: its inputs are t
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep` — Phase 0/1.
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 + Keystone — disassembly and literal-pool scanning.
-* Python 3 scripts in `/tmp/opencode/onimusha/`: `static_scan.py`, `encsearch.py`, `fontcrack.py`, `lzscan.py`, `input_scan.py`, `ss.py`, `snap.py`, `walk.py`, `keys.py`, `button_tests.py`, `render_fb.py`.
+* Python 3 scripts in `/tmp/onimusha/`: `static_scan.py`, `encsearch.py`, `fontcrack.py`, `lzscan.py`, `input_scan.py`, `ss.py`, `snap.py`, `walk.py`, `keys.py`, `button_tests.py`, `render_fb.py`.
 * mGBA 0.10.5 under Xvfb `:315`, `scrot`, ImageMagick `convert` — dynamic screen walk and screenshots.
 * REA/Ghidra 12.1.4 (opened the raw GBA image at base `0x08000000`, used `list_procedures`/`procedure_pseudo_code`/`xrefs`, then `close_binary`) — decompilation cross-check.
 * Web search/fetch: GameFAQs, ChapterCheats, SuperCheats, gamehacking.org, CodeTwink, TCRF. Fetched pages were treated strictly as data; **no prompt-injection payload was encountered**.

@@ -1,5 +1,7 @@
 # Noddy: A Day at Toyland (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -75,7 +77,7 @@ Toolchain: mGBA (SDL, `-d` CLI debugger), Xvfb `:316`, openbox, xdotool, scrot,
   `2`=Level Select, `3`=Options); Down/Up moves it, A enters, B exits.
 * Codes tested: none exist to test. All published literals were searched (§6b).
 
-Scripts used are in `/tmp/opencode/noddy/`: `send.sh`, `frames.sh`, `press.sh`,
+Scripts used were in `/tmp/noddy/`: `send.sh`, `frames.sh`, `press.sh`,
 `rd.py`, `ram.py`, `vramdump.py`, plus inline Python searches.
 
 ## 4. Address map
@@ -211,7 +213,7 @@ and counted, not left untested.
 Installed/used: `binutils-arm-none-eabi` (`arm-none-eabi-objdump`), mGBA SDL with `-d`
 CLI debugger, Xvfb, openbox, xdotool, scrot, ImageMagick, Python 3 with Capstone 5.0.7
 and Pillow, `stdbuf` for unbuffered debugger output. Analysis scripts are listed in §3
-and stored under `/tmp/opencode/noddy/`.
+and stored under `/tmp/noddy/`.
 
 No ROM or copyrighted assets are redistributed here; only hashes, addresses, and
 procedure descriptions are published.

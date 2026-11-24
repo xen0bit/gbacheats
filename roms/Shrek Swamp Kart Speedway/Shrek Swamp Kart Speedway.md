@@ -1,5 +1,7 @@
 # Shrek: Swamp Kart Speedway (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -159,7 +161,7 @@ Each is a boolean byte, 0 = locked ("?" icon), 1 = selectable. Source bits are 1
 - **Observed:** all 11 screens in mGBA; EWRAM dump `0x02027CE8..EB = 00 00 00 00` at a fresh Select Racer state; after patching those bytes to `01` the four "?" portraits appear; after patching one byte at a time exactly one portrait appears per byte; reset combo shows only the legal screen.
 - **Derived:** `0x08012450` reads bits 12–15 of `0x02027C54`; the 0x0800EACE loop expands them into the four byte flags using offsets `[0,2,1,3]` at 0x0858AAF0; 0x080125C4 / 0x08012580 evaluate story completion against a difficulty threshold; 0x0800D148 is the sole KEYINPUT reader.
 - **Inferred (labelled):** the precise mapping of each course-clear byte to a specific story flag (the group loop at 0x080125C4 was read but not exercised by playing a full cup). The published difficulty conditions are corroborated by the code's threshold logic but were not replayed end-to-end in a 3-lap race.
-- Screenshots proving the effects are on disk in `/tmp/opencode/shrekkart/` (`proof_all_unlocked.png`, `proof_byte0.png` … `proof_byte3.png`, `combo_lr.png`, `combo_all.png`).
+- Screenshots proving the effects are on disk in `/tmp/shrekkart/` (`proof_all_unlocked.png`, `proof_byte0.png` … `proof_byte3.png`, `combo_lr.png`, `combo_all.png`).
 
 ## 8. Unknowns
 

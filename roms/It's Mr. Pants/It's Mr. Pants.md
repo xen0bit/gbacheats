@@ -1,5 +1,7 @@
 # It's Mr. Pants (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -257,7 +259,7 @@ verified as present strings, and a fresh save was observed to have Hard/Special
 locked — i.e., the gates are real save-bit state, not bypassable input.
 
 **Screens enumerated (15, each with a `gbAs` RAM savestate in
-`/tmp/opencode/mrpants/states/`):** boot white, THQ splash, Rare splash, title,
+`/tmp/mrpants/states/`):** boot white, THQ splash, Rare splash, title,
 name entry, save-slot select, main menu, skill select, puzzle title card, puzzle
 gameplay, puzzle help, pause menu, puzzle fail, Options submenu, Scores, Art
 Gallery, Save Slots. (Splashes and consecutive sub-screens count separately;
@@ -300,7 +302,7 @@ the full state files and matching `shots/*_c.png` crops are the RAM evidence.)
 - `arm-none-eabi-objdump -M force-thumb` for raw ROM disassembly.
 - Python 3 + Capstone 5.0.7 (`capstone.CS_MODE_THUMB`) for PC-relative literal
   scans, BL-target scans and the KEYINPUT xref search.
-- Custom helpers in `/tmp/opencode/mrpants/`: `mgba_daemon.py` (persistent mGBA
+- Custom helpers in `/tmp/mrpants/`: `mgba_daemon.py` (persistent mGBA
   `-d` pty controller on a Unix socket), `dbg.py`, `walk.py` (frame-accurate
   keypress helper), `state.py` / `loadstate.py` (savestate `gbAs` capture/reload),
   `key.py`.

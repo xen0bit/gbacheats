@@ -120,7 +120,7 @@ menu is open and `0x08002855` in the game/title state.
 | `0x08002634`–`0x08002640` | dispatch: `CMP #4; BHI default`; table at `0x08002654` |
 | `0x08002654` | 5-entry handler table: `0x08002668`, `0x08002674`, `0x08002680`, `0x08002758`, `0x08002764` |
 | `0x08002794` | cursor Up (`0x40`), wrap 0→4 (`CMP #4` after load) |
-| `0x080027C2` | cursor Down|Select (`0x84`), wrap 4→0 (`CMP #4`) |
+| `0x080027C2` | cursor Down\|Select (`0x84`), wrap 4→0 (`CMP #4`) |
 | `0x08003B60` | message-record table base, 55 records × 8 bytes `{u16 xy, u16 wh, u32 text_ptr}` |
 | `0x08003B90` | record 6 = System-Menu text (`X MENU X` / five item names) |
 | `0x03007B4D` | System-Menu selector (context `0x03007200` + `0x94D`) |

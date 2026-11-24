@@ -1,5 +1,7 @@
 # Tiny Toon Adventures: Wacky Stackers (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -59,7 +61,7 @@ not a validator input (§16.2b).
   Select instead of R — nothing appears (`test_novel.png`, `test_short4.png`,
   `test_select5.png`, `test_reversed.png`).
 
-Screenshots and scripts are in `/tmp/opencode/wackystackers/`.
+Screenshots and scripts were in `/tmp/wackystackers/`.
 
 ## 4. Address map
 
@@ -252,7 +254,7 @@ ROM strings were acted upon. No prompt-injection payload was encountered.
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings`, `grep`
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`
-* Python scripts in `/tmp/opencode/wackystackers/`:
+* Python scripts in `/tmp/wackystackers/`:
   `scan_buttons.py` (button-mask encodings), `dump.py` (hex/u16 dump),
   `xreffast.py` (u32 pointers, Thumb BL / LDR-literal / ARM LDR-literal),
   `litref.py`, `ramref.py`, `scan_tables.py` (whole-ROM struct scan),

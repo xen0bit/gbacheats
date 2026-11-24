@@ -1,5 +1,7 @@
 # Need for Speed: Porsche Unleashed (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -245,7 +247,7 @@ payload was encountered.
   at raw offset `0x19000 + (addr − 0x03000000)` (§16.13).
 - `robust.py` / `type_name.py` / `final_alias3.py` — OCR-guided menu navigation,
   on-screen keyboard driver, and name-cheat test harness.
-- Helper scripts and screenshots live in `/tmp/opencode/nfsporsche`.
+- Helper scripts and screenshots were kept in `/tmp/nfsporsche`.
 
 Legal note: no ROM or copyrighted assets are redistributed; only addresses,
 hashes, algorithms and original tooling are published here.

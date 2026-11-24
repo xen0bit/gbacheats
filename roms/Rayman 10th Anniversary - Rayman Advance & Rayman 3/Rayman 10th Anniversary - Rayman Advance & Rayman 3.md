@@ -1,5 +1,7 @@
 # Rayman 10th Anniversary – Rayman Advance & Rayman 3 (GBA) — Reverse Engineering Report
 
+> **Paths:** `/tmp/...` locations named in this report were scratch directories from the original analysis session. They no longer exist and were never committed; relative names such as `shots/...` refer to them unless the file is in this folder. Only files in this folder are part of the repository.
+
 ## 1. Target identity
 
 | Field | Value |
@@ -35,7 +37,7 @@ Published PS1/GBC Rayman passwords (`942KV7N9XD`, `CH5G4mS1jD`, etc.) belong to 
 
 ## 3. How to reproduce
 
-* Emulator: `mgba` (SDL), `DISPLAY=:318`, `SDL_AUDIODRIVER=dummy`, `Xvfb :318 -screen 0 1280x960x24`, `openbox`. We copied the ROM to `/tmp/opencode/rayman10/game.gba` so no emulator artifacts touch the ROM folder.
+* Emulator: `mgba` (SDL), `DISPLAY=:318`, `SDL_AUDIODRIVER=dummy`, `Xvfb :318 -screen 0 1280x960x24`, `openbox`. We copied the ROM to `/tmp/rayman10/game.gba` so no emulator artifacts touch the ROM folder.
 * Keymap (mGBA SDL): A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-pad=arrow keys. Hold 90–120 ms per press; savestates: `Shift+F1` save, `F1` load (and `mgba -t <state> game.gba` to boot into a saved screen).
 * Boot → "PRESS START" → Start → picture-frame game select → left picture = Rayman Advance, right = Rayman 3.
 * **Rayman Advance path to the code screen:** Start → choose language (A) → Sound options (A) → "CHOOSE A GAME" → A on an EMPTY slot (creates `AAA`, 5 lives) → Start → cutscene (A to skip) → world map → A → A to skip the level intro → gameplay → **Start** opens "DO YOU REALLY WANT TO QUIT THE GAME?" — this is the pause/quit dialog on which the six codes are entered. Enter the 6 presses, then B selects NO/return to play (note: some code prefixes move the YES/NO cursor; check the screen before pressing B).
@@ -164,7 +166,7 @@ ROM verification: literal searches for masks `0x104/0x5/0x5/0x5`, `0x6/0x6/0x6/0
 
 ## 7. Validation evidence
 
-* **Observed:** boot/title/game-select, Rayman Advance language/sound/save-slot screens, world map, level intro and gameplay, pause/quit dialog, Rayman 3 intro/language/main menu/options/link/save slots/level/pause/quit; HUD `x05`→`x99`; savestate byte diffs; six write-watchpoint hits with PCs. Screenshots on disk: `/tmp/opencode/rayman10/s01…s82_*.png` (key ones: `s02_select_c.png`, `s28_ra_lives99_c.png`, `s30_ra_tings_effect_c.png`, `s66_r3_slots_real2_c.png`, `s75_r3_map_c.png`).
+* **Observed:** boot/title/game-select, Rayman Advance language/sound/save-slot screens, world map, level intro and gameplay, pause/quit dialog, Rayman 3 intro/language/main menu/options/link/save slots/level/pause/quit; HUD `x05`→`x99`; savestate byte diffs; six write-watchpoint hits with PCs. Screenshots on disk: `/tmp/rayman10/s01…s82_*.png` (key ones: `s02_select_c.png`, `s28_ra_lives99_c.png`, `s30_ra_tings_effect_c.png`, `s66_r3_slots_real2_c.png`, `s75_r3_map_c.png`).
 * **Derived:** validator disassembly at `0x080BDD48`, dispatch bounds, handler writes, table stride (`12*c`), mask filtering (`and #0x3F0`), world-map writer chain `0x080DBD74`→`0x080CBF98`.
 * **Inferred:** semantic label of the 24-byte world-map array; that R3's published codes exist in this compilation (web + absence of literal table is not proof of absence of an algorithmic matcher); that the blank-title `AGBJ` header is the Rayman 3 half.
 
@@ -180,7 +182,7 @@ ROM verification: literal searches for masks `0x104/0x5/0x5/0x5`, `0x6/0x6/0x6/0
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for raw disassembly; Capstone 5.0.7 / Keystone for literal and BL scans.
 * mGBA SDL (`-3`, `-d` CLI debugger, `-t` savestate boot). CLI debugger commands used: `watch/w`, `listw`, `dis`, `r/1`, `r/2`, `r/4`, `x/2`, `c`.
 * `Xvfb :318`, `openbox`, `xdotool` XTEST key events, `scrot`, ImageMagick `convert`.
-* Python helpers in `/tmp/opencode/rayman10/`: `k.py` (keys/screenshots), `ss.py` (zlib `gbAs` savestate decode + RAM dump/diff), `exp.py` (state→keys→state), `watchcode.py`/`watchcombo.py` (reproducible watchpoint experiments), `dbg.py` (FIFO debugger bridge), `all_strings.txt` (full `strings -t x` dump).
+* Python helpers in `/tmp/rayman10/`: `k.py` (keys/screenshots), `ss.py` (zlib `gbAs` savestate decode + RAM dump/diff), `exp.py` (state→keys→state), `watchcode.py`/`watchcombo.py` (reproducible watchpoint experiments), `dbg.py` (FIFO debugger bridge), `all_strings.txt` (full `strings -t x` dump).
 * Web search: GameFAQs Rayman Advance/Rayman 3/10th Anniversary cheat pages, RayWiki, VGChartz, chaptercheats, archived cheat collections. Fetched pages were treated as data; no instruction found in them was executed.
 
 **Legal note:** no ROM or copyrighted asset is redistributed here; only hashes, addresses, algorithms and the analyst's own scripts/screenshots are recorded.
