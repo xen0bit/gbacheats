@@ -274,7 +274,7 @@ Space: `2^10 = 1024` combinations. Validator: `(held & 0x214) == 0x214`.
 
 * Accepted: every combination that contains Select, L and Right. The other 7 buttons are don't-care, so **128 accepted** combinations (`2^7`).
 * Rejected: the remaining **896** combinations.
-* The published GameFAQs code is the minimal three-button member: **Select + L + Right**.
+* The published 3rd party cheat index code is the minimal three-button member: **Select + L + Right**.
 
 Novel codes generated and entered (not in any published list):
 
@@ -336,14 +336,14 @@ There is no password system:
 
 * `strings -t x -n 4`: 93,282 lines; `password` = 0, `cheat mode` = 0, `code` = 1 (an audio error: `AUDIO ERROR, not enough space to put audio RAM code`), `cheat` = 1 (`CHEATS`, debug menu), `debug` = 1 (`DEBUG INFO`, debug menu), `unlock` = 2 (debug menu), `secret` = 10 (all story text), `hidden` = 2 (story text).
 * No 32/40/64-symbol alphabet table, no 5-bit-per-character decoder, and no checksum validator exists in the ROM. The only literal accepted inputs are the boot erase button mask and the debug menu labels.
-* The only published in-game code (GameFAQs "Erase All Save Data", Select+L+Right at power-on) was verified against the ROM and the emulator. The VGChartz page has only the gameplay secret "Get N.Kreditzs"; its other entries are walkthrough tips, not codes. TCRF documents the debug menu only via a memory patch.
+* The only published in-game code (3rd party cheat indexes "Erase All Save Data", Select+L+Right at power-on) was verified against the ROM and the emulator. The 3rd party cheat index page has only the gameplay secret "Get N.Kreditzs"; its other entries are walkthrough tips, not codes. 3rd party cheat indexes document the debug menu only via a memory patch.
 
 Published-source check:
 
-* `https://gamefaqs.gamespot.com/gba/517531-banjo-kazooie-gruntys-revenge/cheats` — direct fetch is 403; the archived 2022 snapshot contains only the two ending unlocks and the N.Kreditzs secret, while the current search snippet/summary gives the erase code used above.
-* `https://www.vgchartz.com/game/12283/banjo-kazooie-gruntys-revenge/cheats` — "Total cheats available: 5"; four are walkthrough tips and one is the N.Kreditzs gameplay secret.
-* `https://tcrf.net/Banjo-Kazooie:_Grunty%27s_Revenge` — debug-menu description and the CodeBreaker/GameShark patch; no in-game trigger.
-* `https://almarsguides.com/retro/walkthroughs/gba/games/banjokazooiegruntysrevenge/codebreaker/` — same memory-patch recipe, out of scope.
+* 3rd party cheat indexes — direct fetch is 403; the archived 2022 snapshot contains only the two ending unlocks and the N.Kreditzs secret, while the current search snippet/summary gives the erase code used above.
+* 3rd party cheat indexes — "Total cheats available: 5"; four are walkthrough tips and one is the N.Kreditzs gameplay secret.
+* 3rd party cheat indexes — debug-menu description and the CodeBreaker/GameShark patch; no in-game trigger.
+* 3rd party cheat indexes — same memory-patch recipe, out of scope.
 
 ## 7. Validation evidence
 

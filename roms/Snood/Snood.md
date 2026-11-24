@@ -35,12 +35,12 @@ key-mask sequence tables, comparison sites, and the tile-indexed UI text system.
 The counts are in §6b.
 
 This is a *bounded negative*, not an untested guess:
-* the GameFAQs "Enter password / level codes" lists found by web search belong to
+* the 3rd party cheat indexes "Enter password / level codes" lists found by web search belong to
   **Snood 2: On Vacation** (game code different, 2005, Gravity-i) — a different
   game (§16.11 of the guide). The only published cheat material for this SKU is
   **Action Replay RAM-patch codes**, which are an external cheat device and
-  explicitly out of scope. GameFAQs game id `565768` (this game) lists no codes;
-  there is no TCRF page for it.
+  explicitly out of scope. 3rd party cheat indexes game id `565768` (this game) lists no codes;
+  there is no 3rd party cheat index page for it.
 * the game's UI text is **sprite/tile-indexed**, never ASCII; all encodings tried
   (ASCII, `+0x20`, UTF-16LE/BE, reversed, single-byte add/XOR, and five common
   permutation alphabets) contain **zero** occurrences of `PASSWORD`, `DEBUG`,
@@ -159,10 +159,10 @@ Published-code verification:
 
 | Source | Claim | ROM verification |
 |---|---|---|
-| GameFAQs, *Snood 2: On Vacation* (id `929551`) | 5-character colour passwords, Child/Easy/Hard/Evil/Normal | **Wrong SKU** (different game code, 2005). Not applicable to `ASQE20`. |
-| Cheat Happens / Action Replay, "Snood" | `b9f532cb ...`, infinite lives, max score, never drown, start on level 50 | External RAM patches (cheat device). Out of scope; not developer-intended codes. |
-| TCRF | no page for GBA *Snood* | no hidden/debug content published |
-| GameFAQs id `565768` (this game) | no cheat entries | consistent with the negative result |
+| 3rd party cheat indexes, *Snood 2: On Vacation* (id `929551`) | 5-character colour passwords, Child/Easy/Hard/Evil/Normal | **Wrong SKU** (different game code, 2005). Not applicable to `ASQE20`. |
+| 3rd party cheat indexes / Action Replay, "Snood" | `b9f532cb ...`, infinite lives, max score, never drown, start on level 50 | External RAM patches (cheat device). Out of scope; not developer-intended codes. |
+| 3rd party cheat indexes | no page for GBA *Snood* | no hidden/debug content published |
+| 3rd party cheat indexes id `565768` (this game) | no cheat entries | consistent with the negative result |
 
 ## 6b. Enumeration
 

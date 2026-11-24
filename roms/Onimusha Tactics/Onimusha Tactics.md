@@ -17,7 +17,7 @@
 | MD5 | `7c8e479f4c4e46f406b1da5e786358c0` |
 | SHA-1 | `83abee3aa535590f666d7e9a6971640d8a41aa9d` |
 | SHA-256 | `ded6f9ab2cab130088ee3fe3c8507bb3192ea1150a3cb236a89e1f37e0a10a44` |
-| CRC32 | `70475D7F` (matches gamehacking.org listing and mGBA savestate header) |
+| CRC32 | `70475D7F` (matches 3rd party cheat index listing and mGBA savestate header) |
 
 **Embedded-header scan:** scanned all 8 MiB for the 156-byte Nintendo logo; exactly **one** hit, at file offset `0x0`. This is a single retail image — no multiboot stub, no concatenated second game, and no appended trainer. The first 4 KiB contain ordinary ARM crt0 code with no cracktro strings (no `CRC BANDIT`, `MODE7`, `SUNHORS`, etc.), and the entry word is the unmodified `0xEA00002E`. **No patch/trainer present.**
 
@@ -124,7 +124,7 @@ This is a **progress/flag gate**, not an input-validated cheat: its inputs are t
 | LZ77 text banks | decompressed all 23 valid `0x10`-header LZ77 blocks | **0** contained any UI/dialogue keyword |
 | Alternate text encodings | UTF-16LE/BE, reverse, nibble-swap, `±0x20`, XOR-0x80, affine `(a·c+b) mod 256` over all a,b, and sliding-window font-table inversions over `0x781000–0x783200` | **0 hits** for `Message`, `Movement`, `Music`, `civilization`, `Onikko`, `Phantom` |
 | Font/tile-indexed text banks | located glyph bitmaps at `0x08060A00` and structured mapping tables at `0x080782E28`/`0x080782F20`; rendered tile data from mGBA savestates | UI text confirmed tile-indexed (hence absent from `strings`); encoding not fully inverted (see §8), but **every screen was enumerated visually**, so no hidden menu text could be missed |
-| Published codes | GameFAQs, ChapterCheats, SuperCheats, gamehacking.org, CodeTwink, TCRF search | All published "codes" are external memory edits (out of scope); **0** are in-game passwords/button codes; **no TCRF page exists** for this title; three unlockables verified as progress-based, not code-based |
+| Published codes | 3rd party cheat index search | All published "codes" are external memory edits (out of scope); **0** are in-game passwords/button codes; **no 3rd party cheat index page exists** for this title; three unlockables verified as progress-based, not code-based |
 | Button-code input space | 10 common sequences on title screen, each from clean savestate with Before/After RAM diff | IWRAM diffs 12–162 bytes (normal animation/counters), EWRAM diffs ~3200 bytes (save copy) — **no new flag or screen** in any case |
 | Debug/hidden screen reachability | walked all reachable menus (title, options + 3 sub-dialogs, load, save, field, battle, pause + 6 items) | **0** unlabelled/hidden entries; every menu item is a normal game function |
 
@@ -136,7 +136,7 @@ This is a **progress/flag gate**, not an input-validated cheat: its inputs are t
 
 * **Observed:** all screens in §3 captured as screenshots (`s_title.png`, `opt_menu.png`, `options2.png`, `loadgame_save2.png`/`lgseq7.png`, `field1.png`, `field2.png`, `pause.png`, `save5.png`) and as mGBA savestates with RAM dumps; save file written and inspected (`0x0–0xDBF` non-`FF`); 10 button-code trials with RAM diffs.
 * **Derived:** header/entry/crc from file bytes; main loop and event dispatcher from `arm-none-eabi-objdump -M force-thumb`; 16-record gate and `0xEC` stride from literal pools; single-header result from logo scan; font glyph shapes from `0x60A000`.
-* **Inferred (labeled):** the three unlockable→clear-count mappings come from published guides (ChapterCheats/SuperCheats/GameFAQs) and are *consistent* with the `== 16` gate in ROM, but were not executed end-to-end (would require clearing all 16 Phantom Realm floors). The exact save-file offset of the Phantom Realm clear counter was not isolated.
+* **Inferred (labeled):** the three unlockable→clear-count mappings come from published guides (3rd party cheat indexes) and are *consistent* with the `== 16` gate in ROM, but were not executed end-to-end (would require clearing all 16 Phantom Realm floors). The exact save-file offset of the Phantom Realm clear counter was not isolated.
 
 ## 8. Unknowns
 
@@ -151,6 +151,6 @@ This is a **progress/flag gate**, not an input-validated cheat: its inputs are t
 * Python 3 scripts in `/tmp/onimusha/`: `static_scan.py`, `encsearch.py`, `fontcrack.py`, `lzscan.py`, `input_scan.py`, `ss.py`, `snap.py`, `walk.py`, `keys.py`, `button_tests.py`, `render_fb.py`.
 * mGBA 0.10.5 under Xvfb `:315`, `scrot`, ImageMagick `convert` — dynamic screen walk and screenshots.
 * REA/Ghidra 12.1.4 (opened the raw GBA image at base `0x08000000`, used `list_procedures`/`procedure_pseudo_code`/`xrefs`, then `close_binary`) — decompilation cross-check.
-* Web search/fetch: GameFAQs, ChapterCheats, SuperCheats, gamehacking.org, CodeTwink, TCRF. Fetched pages were treated strictly as data; **no prompt-injection payload was encountered**.
+* Web search/fetch: 3rd party cheat indexes. Fetched pages were treated strictly as data; **no prompt-injection payload was encountered**.
 
 **Legal note:** No ROM image or copyrighted asset is redistributed here. Only hashes, addresses, offsets, and original analysis are published.

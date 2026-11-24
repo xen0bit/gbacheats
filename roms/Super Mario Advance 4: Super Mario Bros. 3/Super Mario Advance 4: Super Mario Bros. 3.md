@@ -11,7 +11,7 @@
 | Header title | `SUPER MARIOD` (12-byte GBA title field, truncated "SUPER MARIO ADVANCE 4") |
 | Game code | `AX4E` (USA), maker `01` (Nintendo), version `0x01` |
 | Header | fixed `0x96`, complement `0x72`, checksum `0x0000`, entry `0xEA00002E` (stock, §16.1 clean) |
-| Build date | `0x00263C78` = `04-01-20 13:32:00` — matches TCRF/Hiccup "US, Australia (Rev 1) & US (Virtual Console)" |
+| Build date | `0x00263C78` = `04-01-20 13:32:00` — matches 3rd party cheat indexes "US, Australia (Rev 1) & US (Virtual Console)" |
 | MD5 | `605286b3aedeffba70bf46b834b120b1` |
 | SHA-1 | `532f3307021637474b6dd37da059ca360f612337` |
 | SHA-256 | `53ec98fc672d94e3962ba854805ce5005e07e10a4c7ed4e7dbec7a2ca7846562` |
@@ -50,7 +50,7 @@ To force the debug menu:
 (gdb) continue &
 ```
 Screenshot within ~1 s. The screen renders as a white card with blue striped border, black katakana text:
-`かーど いー` (Card-e), `もーど せんたく` (Mode Select), `▷ ちゃれんじ もーど` (Challenge Mode), `しなりお もーど` (Scenario Mode). Cursor moves with Down or B. Selecting a submenu was **not** achieved by this RAM-write route (see §8) — the submenu list is from Hiccup/TCRF documentation, not from our own screen walk.
+`かーど いー` (Card-e), `もーど せんたく` (Mode Select), `▷ ちゃれんじ もーど` (Challenge Mode), `しなりお もーど` (Scenario Mode). Cursor moves with Down or B. Selecting a submenu was **not** achieved by this RAM-write route (see §8) — the submenu list is from 3rd party cheat indexes documentation, not from our own screen walk.
 
 Helper scripts used: `/tmp/sma4/gdbbridge.py` (persistent GDB-over-FIFO bridge; needed because `continue &` plus repeated `x` in a batch is unreliable), `gcmd.py`, `gset.py`, `probe.py`, `scan1534.py`.
 
@@ -125,7 +125,7 @@ Observed live: `0x39` intro, `0x07` game select, `0x09` mode select, `0x10` file
 | Challenge Mode | Time Attack `T-1`…`T-20`; Infinite 1-ups `U-1`…`U-20`; Defeat enemies `E-1`…`E-20`; Collect coins `C-1`…`C-20` |
 | Scenario Mode | `S-01`…`S-80`; left/right toggles `S-N`, `TEST`, `QUICKCK` (`QUICKCK` absent from JP 1.0) |
 
-Source: Hiccup wiki debug-menu section and TCRF talk page (read as data). Our emulator confirmed only the main screen; selecting a submenu via the forced route did not work.
+Source: 3rd party cheat index wiki debug-menu section and 3rd party cheat indexes talk page (read as data). Our emulator confirmed only the main screen; selecting a submenu via the forced route did not work.
 
 ### 6.3 Keymap / masks
 
@@ -146,7 +146,7 @@ GBA active-low KEYINPUT bits: `A=0x001 B=0x002 Select=0x004 Start=0x008 Right=0x
 
 **Bounded negative with counts (no code system).**
 1. `strings -n 4` over all 4 MiB: **0** ASCII occurrences of `PASSWORD`, `CHEAT`, `DEBUG`, `WARP`, `SECRET`, `MENU` (case-insensitive/case-shifted search included). Visible UI text is tile-index encoded, not ASCII; VRAM was dumped (`vram.bin`, 98,304 bytes) and a font/tile text bank exists — the absence of ASCII therefore proves nothing about UI text, which is why the screen walk was used.
-2. Web recon: GameFAQs/SLB/TCRF/Hiccup lists yield only gameplay tips and completion unlockables; **0** in-game button codes published. Every visual "code" found is a cheat-device RAM poke (e.g. `03003774:34`, `83002D52 ...`), out of scope and not counted as an in-game code.
+2. Web recon: 3rd party cheat indexes/3rd party cheat index lists yield only gameplay tips and completion unlockables; **0** in-game button codes published. Every visual "code" found is a cheat-device RAM poke (e.g. `03003774:34`, `83002D52 ...`), out of scope and not counted as an in-game code.
 3. Raw `u16` mask-sequence scan at both byte alignments: **2,862** runs of ≥4 halfwords with values `1..0x3FF` and ≤2 bits set. Every high-scoring cluster inspected is either ordinary code/data (alternating `0x200` literals) or the debug-handler region; **0** clusters form a terminator-delimited sequence with a validating comparison and a state write.
 4. Scene/gate enumeration: **106** scene-write sites, **51** distinct scene values, **2** sites writing `0x34`, both gated; **7** reachable screens walked with RAM evidence. No other hidden-menu gate was found.
 

@@ -22,7 +22,7 @@ Analysed independently of the sibling `YUYUHAKUSHO1`/`BYYE` (Spirit Detective) i
 
 **No password, code-entry field, button-code cheat sequence or reachable debug menu exists in this retail image.** The game's entire UI text bank is plain NUL-terminated ASCII and contains no alphabet table, no validator, no `DEBUG`/`CHEAT`/`PASSWORD`/`LEVEL SELECT` string and no password keyboard. There is exactly **one** reader of `KEYINPUT` in the whole ROM, and its only special gate is **hold all four D-pad directions → soft reset** (a system/developer reset combo, not a cheat). The scene dispatcher has exactly 18 states (0–17); all 18 have reachable setter call sites, so there is no hidden/unreachable screen.
 
-All published "cheats" for this SKU are GameShark / CodeBreaker / Action Replay RAM patches (out of scope). Developer-intended unlockables exist only as **play-gated characters** (Chu, Rinku and others join through story progression) and **skill unlocks** driven by stat-point distribution; neither is an input code. A GamesRadar claim that beating the game opens `EXTRAS → TOURNAMENT (Arcade Mode)` is **not supported by this ROM**: the strings `EXTRAS`, `ARCADE`, `MINI GAMES` and a title/menu `TOURNAMENT` label do not exist in the image (the 16 lowercase `tournament` hits are all dialogue prose). It is almost certainly conflated with the sibling Spirit Detective SKU.
+All published "cheats" for this SKU are GameShark / CodeBreaker / Action Replay RAM patches (out of scope). Developer-intended unlockables exist only as **play-gated characters** (Chu, Rinku and others join through story progression) and **skill unlocks** driven by stat-point distribution; neither is an input code. A 3rd party cheat index claim that beating the game opens `EXTRAS → TOURNAMENT (Arcade Mode)` is **not supported by this ROM**: the strings `EXTRAS`, `ARCADE`, `MINI GAMES` and a title/menu `TOURNAMENT` label do not exist in the image (the 16 lowercase `tournament` hits are all dialogue prose). It is almost certainly conflated with the sibling Spirit Detective SKU.
 
 Per §0.2 point 5 this is delivered as a **bounded negative** with explicit counts (§6b), not as an untested "not found".
 
@@ -113,8 +113,8 @@ Device codes only: master `00007D33 000A 100323FE 0007`; infinite upgrade points
 
 | Unlockable | Gate (published recon; not played to completion) |
 |---|---|
-| Chu joins the party | Beat the first round (Neoseeker) |
-| Rinku joins the party | Beat the last level of the first area (Neoseeker) |
+| Chu joins the party | Beat the first round (3rd party cheat indexes) |
+| Rinku joins the party | Beat the last level of the first area (3rd party cheat indexes) |
 | Skill unlocks (`UNLOCKED:` + skill name) | Spend stat points in Offense/Spirit/Power/Movement (ROM strings + tutorial dialogue) |
 
 ## 6b. Enumeration
@@ -143,7 +143,7 @@ Not applicable. Per the engagement rule this is delivered as a **bounded negativ
 
 - **Observed:** all screenshots in `/tmp/yuyutactics/` (`s10_title.png`, `s13_menu2.png`, `s14_options.png`, `s15_credits.png`, `s16_start.png`, `s17_newgame.png`, `s20_diag3.png`, `s23_inventory.png`, `s25_battle.png`, `s27_actionmenu.png`, `s34_pause.png`, `title_before_reset.png`, `title_during_reset.png`, `combo_*.png`). Live RAM reads via mGBA `-d` pty debugger (`0x03000B4C = 0x0F` / `0x08`, `0x04000130 = 0x03FF`, `0x0300554C = 0x00`). Savestate `gbAs` chunk decoded to a 397,312-byte raw state (cross-check of layout).
 - **Derived:** Thumb disassembly of `0x080001F8`, `0x08002C0`, `0x08000334`, `0x08002074`, `0x080323F8`, `0x08035908`; full-ROM literal/branch/pointer scans; 18-state setter enumeration; 416-string UI bank decode; keyword/alphabet counts.
-- **Inferred:** the exact story triggers for Chu/Rinku (published guides only; story was not completed). The GamesRadar unlock claim is inferred to be a mix-up with the sibling SKU because its labels are absent here. The soft reset is interpreted as a developer/system combo rather than a player cheat.
+- **Inferred:** the exact story triggers for Chu/Rinku (published guides only; story was not completed). The 3rd party cheat indexes unlock claim is inferred to be a mix-up with the sibling SKU because its labels are absent here. The soft reset is interpreted as a developer/system combo rather than a player cheat.
 
 ## 8. Unknowns
 

@@ -38,7 +38,7 @@ The only route into the debug scene is a **script-VM command handler** at `0x080
 (table `0x0817F060`, command 5, handler slot +0x18). That handler reads a scene pointer from
 `0x02002CD8`; the only two writers of that word are scene-loading routines, not input code.
 This is a **gated feature with no reachable retail writer**, not an absent feature and not a
-published code. TCRF explicitly lists "Figure out how to access the debug menu" as a *To do*
+published code. 3rd party cheat indexes explicitly lists "Figure out how to access the debug menu" as a *To do*
 for this exact game, which agrees with the static result.
 
 Because there is no code system, §0.2's "mint a novel code" deliverable is not applicable.
@@ -165,7 +165,7 @@ The overlay field records at `0x017F670` pair these strings with handlers `0x081
 | Raw runs of ≥4 consecutive u16 key-mask values (active-high `A=1,B=2,Select=4,Start=8,R=0x10,L=0x20,U=0x40,D=0x80,R=0x100,L=0x200`) | 2,793 candidate runs | 0 had a validator xref in the code region; every hit was inside script/text or compressed data (typical false positive: repeating `0x0008,0x020B` at `0x020927` etc.) |
 | `0x04000130` (KEYINPUT) literal-pool references in code (`<0x600000`) | 2 (`0x02A2D8`, `0x03AE20`) | both are ordinary input-shadow reads, no sequence matcher |
 | Button sequences/combos actually pressed on title, main menu, gameplay and pause menu | 21 | 0 opened any debug menu; `A+B+Start+Select` soft-resets to the language screen (a master reset, not a cheat) |
-| Published in-game codes across TCRF, GameFAQs (GBA + DS), GameHacking.org, ROMSFUN, GBAtemp | 5 sources | 0 in-game codes; only cheat-device (CodeBreaker/AR) memory patches, explicitly out of scope |
+| Published in-game codes across 3rd party cheat indexes | 5 sources | 0 in-game codes; only cheat-device (CodeBreaker/AR) memory patches, explicitly out of scope |
 | Scene-pointer writers for the only debug-loader input (`0x02002CD8`) | 2 | both are scene allocators (`0x080194EC`, `0x08019568`), neither is an input handler |
 
 **Debug-menu contents enumerated (static, because the menu cannot be opened by retail input):**

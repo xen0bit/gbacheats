@@ -273,7 +273,7 @@ there is no cheat list, no toggles, and no flag writes to enumerate.
 | Pitfall-style `00 00 <masks> FF FF` script records | 3 hits (`0x359E88`, `0x378CE2`, `0x3C9394`) | each is `R,A,A`, not a code table |
 | Literal Pitfall sequence `B,A,Down,Left,A,Down` (u8/u16, raw and inverted) | 4 encodings | 0 hits in this ROM (present once in Pitfall GBA at `0xB60F6`) |
 | Password/cheat/debug/unlock strings (`strings -n 4`) | 34,815 strings scanned, 19 keyword hits | all are engine class names; no UI/validator text |
-| Published GBA code lists | web search (GameFAQs, chaptercheats, Neoseeker, GameHacking, TCRF) | none exist for the GBA SKU |
+| Published GBA code lists | web search (3rd party cheat indexes) | none exist for the GBA SKU |
 | PC code literals in ROM | 5 strings, 4 encodings | 0 hits |
 | Cheat class method references | 3 methods | only inside the class descriptor; 0 BL, 0 pointer tables |
 | "Pitfall Debug Screen" renderer `0x08000760` | — | 0 BL callers, 0 pointer refs (dead engine debug screen) |

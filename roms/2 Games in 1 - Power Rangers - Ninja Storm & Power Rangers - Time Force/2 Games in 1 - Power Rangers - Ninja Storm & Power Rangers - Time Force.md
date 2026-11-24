@@ -432,7 +432,7 @@ New (not published): every code with mode 2, e.g. `W3DB` (§6b.2).
 ### 6b.2 Time Force — novel code confirmed in-game
 
 **`W3DB`** = chapter 6, mode 2, 0 continues, flags 0. It is **not** in the
-GameFAQs / ChapterCheats Time Force list (which uses only mode 0 and 1, and
+3rd party cheat indexes Time Force list (which uses only mode 0 and 1, and
 chapters 0–6 with the fixed B/C values in §6.2).
 
 * Entering `W3DB` from `PASSWORD` shows `VALID PASSWORD ENTERED!`
@@ -551,7 +551,7 @@ complement: range-valid but checksum-invalid.
 | Thumb disassembly (`objdump -M force-thumb`) | packer, validator, checksum, THQ check |
 | `time_force_password.py` (Python, §5.3) | Time Force pack/unpack/valid; `--selftest` reproduces the ROM's generator and enumerates 10,416 valid codes |
 | xdotool + `import -window` | code entry and screenshot evidence |
-| web (GameFAQs via Wayback, ChapterCheats) | published code lists to test |
+| web (3rd party cheat indexes via Wayback, 3rd party cheat indexes) | published code lists to test |
 
 Time Force evidence screenshots are in `screenshots/` (`tf_novel_*`,
 `tf_reject_*`, `tf_published_*`, `tf_mode*`).

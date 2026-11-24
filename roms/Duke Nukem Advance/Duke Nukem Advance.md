@@ -45,7 +45,7 @@ The validator was recovered completely:
   states (two Thumb pointers in the screen dispatch table), both in-game pause
   variants. The map screen and title screen do not run it.
 
-The published GameFAQs/TCRF code is correct. The "invincibility" title-screen
+The published 3rd party cheat index code is correct. The "invincibility" title-screen
 code found on the Duke Nukem Wiki (`Up,Down,Down,Left,Right,Left,Up,Up`) is
 **not** from this SKU: its mask sequence does not occur anywhere in the ROM and
 entering it on the title screen has no effect.
@@ -171,9 +171,9 @@ hidden entry.
 
 | Source | Code | ROM verification | In-game result |
 |---|---|---|---|
-| TCRF, GameFAQs (Peer), Neoseeker, cheatcc | Pause + hold L + Left,Up,A,Up,Left,A,Start,Select | literal table at `0x08030044` matches all 8 masks | **accepted**; CHEATS screen opens |
+| 3rd party cheat indexes | Pause + hold L + Left,Up,A,Up,Left,A,Start,Select | literal table at `0x08030044` matches all 8 masks | **accepted**; CHEATS screen opens |
 | Duke Nukem Wiki (title-screen "Invincibility" Up,Down,Down,Left,Right,Left,Up,Up) | 8 presses, no L | mask sequence absent from entire 8 MiB; no validator on title screen | **rejected**: progress stays 0, no visible effect |
-| GameFAQs FAQ (Beat the Clock timer exploit) | not a button/password code | N/A | out of scope (in-game glitch), recorded for completeness |
+| 3rd party cheat index FAQ (Beat the Clock timer exploit) | not a button/password code | N/A | out of scope (in-game glitch), recorded for completeness |
 
 ## 6b. Enumeration
 
@@ -256,7 +256,7 @@ action; no second/third code exists in the table or in the validator's branches.
   `findmask.py` (key-mask literal scan), `code_tests.py` (oracle-driven
   accept/reject trials).
 * `arm-none-eabi-objdump -M force-thumb` for validator disassembly; Capstone
-  5.0.7 available. Web sources: TCRF and GameFAQs via `web.archive.org`
+  5.0.7 available. Web sources: 3rd party cheat indexes via `web.archive.org`
   (direct fetches 403). Fetched pages were treated strictly as data.
 * No ROM or copyrighted asset is redistributed; only addresses, hashes,
   algorithms and original test procedures are published here.

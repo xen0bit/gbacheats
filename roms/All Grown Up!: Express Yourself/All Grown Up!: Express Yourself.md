@@ -53,8 +53,8 @@ main-menu screens were walked, including every sub-screen and the in-game pause
 menu. No screen accepts a code; the only free-text input in the whole game is
 the PDA profile name/phone editor. Keyword, literal-table, pointer-table and
 key-mask scans found no validator, table or sequence. Published cheat sources
-contain no in-game codes for this title (GameFAQs lists only GameShark/
-CodeBreaker memory codes; VGChartz reports 0 cheats; TCRF documents only unused
+contain no in-game codes for this title (3rd party cheat index lists only GameShark/
+CodeBreaker memory codes; 3rd party cheat indexes report 0 cheats; 3rd party cheat indexes document only unused
 debug text and gives no access method).
 
 What *is* shipped and developer-intended is the **Options sound test**:
@@ -78,7 +78,7 @@ names, 38 BGM/screen names and a 53-name SFX list. The menu's rendering and
 navigation code exists, but its visibility byte (`task+0xAD4`) is never set by
 any input path found in this build; the only reference to the renderer comes
 from a boot-time task record. It is present as data/code, not reachable from
-the retail UI. This matches TCRF's classification as unused text.
+the retail UI. This matches a 3rd party cheat index's classification as unused text.
 
 Because no code system exists, the guide's "mint a novel code" requirement is
 replaced by the negative-result proof in §6b: all menus enumerated, all text/
@@ -184,10 +184,10 @@ every possible revision; the static search below is the primary bound.
 
 | Source | Content relevant here |
 |---|---|
-| `https://tcrf.net/All_Grown_Up!:_Express_Yourself` | Lists the debug menu text/area/animation/BGM/SFX names and build date; no access method given |
-| `https://gamefaqs.gamespot.com/gba/925094-all-grown-up-express-yourself/cheats` | GameShark and CodeBreaker memory codes only; no passwords/secrets (direct fetch 403; content from search-result snippets) |
-| `https://www.vgchartz.com/game/14961/all-grown-up-express-yourself/cheats` | "Total cheats available: 0" |
-| `https://www.videogamemanual.com/gba/All%20Grown%20Up!%20-%20Express%20Yourself%20(USA).pdf` | Six main-menu choices; documents the Options music/SFX test and unlockable credits; no codes |
+| 3rd party cheat indexes | Lists the debug menu text/area/animation/BGM/SFX names and build date; no access method given |
+| 3rd party cheat indexes | GameShark and CodeBreaker memory codes only; no passwords/secrets (direct fetch 403; content from search-result snippets) |
+| 3rd party cheat indexes | "Total cheats available: 0" |
+| 3rd party cheat indexes | Six main-menu choices; documents the Options music/SFX test and unlockable credits; no codes |
 
 ---
 
@@ -477,9 +477,9 @@ comparison of that buffer against any constant in the ROM.
   checksum constant, or length branch for a password was found. The Options
   sound test is the only numeric "test" UI; it is an index ring, not a
   validator.
-* **Published codes tested:** no in-game code exists to test. GameFAQs'
+* **Published codes tested:** no in-game code exists to test. 3rd party cheat indexes'
   cheats page for this title contains only **GameShark/CodeBreaker** memory
-  codes (excluded by scope); VGChartz reports **0 cheats**; TCRF documents only
+  codes (excluded by scope); 3rd party cheat indexes report **0 cheats**; 3rd party cheat indexes document only
   the unused debug text and gives no access method; the manual documents the
   Options sound test/credits but no codes.
 

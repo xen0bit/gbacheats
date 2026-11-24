@@ -42,7 +42,7 @@ maps, bosses and all 24 playable levels).
 
 Two findings go beyond the published lists:
 
-1. **The published modifier is wrong.** GameSpot/Fandom/Cheat Happens all say
+1. **The published modifier is wrong.** 3rd party cheat indexes all say
    "hold L+R". The game only requires **L held**; R is optional. Holding R alone
    is rejected, and holding L+A or L+Select is accepted. Holding Start while
    entering is rejected because it leaves the title screen.
@@ -59,7 +59,7 @@ cheat system. No GameShark/CodeBreaker codes were used or reported.
 shared.** Different developer (Artificial Mind & Movement vs Climax), different
 publisher (Midway vs BAM!), different engine (3D vs 2D), and a different cheat
 design (jawbreaker-completion unlocks of Stealth/Damage/Fast Run vs these
-title-screen button codes). Several cheat aggregators (SuperCheats, Cheatbook)
+title-screen button codes). Several cheat aggregators (3rd party cheat indexes)
 misattribute these Jawbreakers button codes to "Mis-Edventures"; that is a
 transcription error in those sites, not shared code.
 
@@ -193,8 +193,7 @@ reserved bits. The game exposes exactly four effects (three named cheat
 toggles in ROM plus level select).
 
 **Complete accepted set (published, all verified in this image):** the four
-sequences in §6.1. Four independent sources (GameSpot, Fandom wiki, Cheat
-Happens, Vizzed) agree on exactly these four; the ROM contains exactly three
+sequences in §6.1. Four independent sources (3rd party cheat index wiki, 3rd party cheat indexes) agree on exactly these four; the ROM contains exactly three
 cheat-effect name strings plus the level-select field, consistent with four.
 
 **Novel code generated and accepted in-game (not on any published list):**
@@ -277,9 +276,9 @@ helper / crt0). No password screen, keypad alphabet, or debug menu exists.
   (mGBA `gbAs` savestate extractor/diff), `oracle.py`, `menu_walk.py`,
   `level_verify.py`, `options_walk.py`.
 * mGBA SDL under `Xvfb :318` + `openbox`; `import -window root` for screenshots.
-* Web sources consulted (treated as data, no instructions followed): GameSpot
-  cheats, Fandom wiki, Cheat Happens, Vizzed, SuperCheats, Cheatbook, GameFAQs
-  FAQ 23710, RetroAchievements. No prompt-injection payload was encountered in
+* Web sources consulted (treated as data, no instructions followed): 3rd party cheat indexes
+  cheats, 3rd party cheat index wiki, 3rd party cheat indexes
+  FAQ 23710, 3rd party cheat indexes. No prompt-injection payload was encountered in
   the fetched pages.
 
 No ROM content or copyrighted assets are redistributed in this report; only

@@ -30,7 +30,7 @@ Key results:
 * The validator is **`0x08026494`**; the matching generator is **`0x08026660`**. Both use a 10-byte XOR/parity key at **`0x083732E4`**, a 5-entry preset table (`0x0836225C` keys / `0x08362234` strings), and a reversible two-stage XOR cascade.
 * I reimplemented the validator bit-for-bit in Python. It accepts 8 of the 13 published codes algorithmically; the other 5 (`TW1ST3R!`, `!!QTTQ!!`, `?R3GG13?`, `S4MDL4RD`, `M4DTQWN!`) are the 5 ROM preset records and are accepted by the table path.
 * **A novel, unpublished code was generated and accepted in the emulator:** `V73ZJMTD` → "The Neighborhood" level. Bounds were proven by rejection (`????????`, `6YZ3QBRY`, `W621JMTF`).
-* The 13 published codes from GameFAQs/TCRF were verified against the ROM and/or the live screen; no published code was found as plaintext in the ROM (they are glyph-encoded or algorithmic).
+* The 13 published codes from 3rd party cheat indexes were verified against the ROM and/or the live screen; no published code was found as plaintext in the ROM (they are glyph-encoded or algorithmic).
 
 A **second semantic gate** exists in the caller (`0x0802C49E`–`0x0802C4D2`): after the algorithmic validator returns 1, `0x0203E3D4` must be nonzero and an indirect function pointer at `0x0203E3C4` must return 1 for the decoded 4-byte state. Checksum-valid codes with unsuitable states are rejected — this is why `6YZ3QBRY` and `W621JMTF` fail despite passing the checksum model.
 
@@ -108,7 +108,7 @@ Generator `0x08026660`: pack state into six 5-bit values, compute the two check 
 **Alphabet (screen order, index 0–31):** `B C D F G H J K / L M N P Q R S T / V W X Y Z 1 2 3 / 4 5 6 7 8 9 ! ?`
 (No vowels A/E/I/O/U and no `0` — hence `TW1ST3R!` for TWISTER, `M4DTQWN!` for MADTOWN.)
 
-**Published codes (GameFAQs cheats page, 13 total; TCRF confirms the 3 special passwords):** 
+**Published codes (3rd party cheat index cheats page, 13 total; 3rd party cheat indexes confirm the 3 special passwords):** 
 
 | Effect | Password | ROM path |
 |---|---|---|
@@ -126,13 +126,13 @@ Generator `0x08026660`: pack state into six 5-bit values, compute the two check 
 | Unlock Everything | `TW1ST3R!` | preset |
 | Unlocks all Gadgets | `8XK7CNZ3` | algorithmic |
 
-Note: GameFAQs spells the "Unlock All Levels" code `b!p356bt` in lowercase; the on-screen alphabet only has capitals, so the correct input is `B!P356BT`. All 13 strings are **absent from the ROM as ASCII** (searched literally, with ±0x20, XOR, and 5-bit-index encodings); the 5 special codes are stored as the 5 preset records above.
+Note: 3rd party cheat indexes spells the "Unlock All Levels" code `b!p356bt` in lowercase; the on-screen alphabet only has capitals, so the correct input is `B!P356BT`. All 13 strings are **absent from the ROM as ASCII** (searched literally, with ±0x20, XOR, and 5-bit-index encodings); the 5 special codes are stored as the 5 preset records above.
 
 ## 6b. Enumeration
 
 * **Space**: 8 symbols × 5 bits = 40 bits (`32^8 = 1.10e12` spellings); the validator's algorithmic subset is 30 payload bits + 10 check bits, and the preset table adds 5 fixed records. Two XOR cascades are invertible (verified rank 64), so any pre-image can be generated offline.
 * **Published set**: 13 codes; 8 satisfy the algorithmic check and 5 are the preset records.
-* **Novel code generated and accepted in-game**: **`V73ZJMTD`** — derived from `2V74BFDG` by changing pre-scramble symbol 4 from `0x00` to `0x01`, recomputing both check bytes, re-applying the cascade and re-encoding. It is on no published list (GameFAQs, TCRF). Entered on the real password screen: `password accepted, press START to play`; after Start the game loaded **The Neighborhood** with two battery containers visible (screenshot `novel_effect.png`; savestate `novel_effect.ss1`).
+* **Novel code generated and accepted in-game**: **`V73ZJMTD`** — derived from `2V74BFDG` by changing pre-scramble symbol 4 from `0x00` to `0x01`, recomputing both check bytes, re-applying the cascade and re-encoding. It is on no published list (3rd party cheat indexes). Entered on the real password screen: `password accepted, press START to play`; after Start the game loaded **The Neighborhood** with two battery containers visible (screenshot `novel_effect.png`; savestate `novel_effect.ss1`).
 * **Bounds proven by rejection**:
   * `????????` — fails the checksum (short/invalid pattern) → `invalid password`.
   * `6YZ3QBRY` — passes my checksum model but maps to a state the second gate rejects → `invalid password`.
@@ -157,6 +157,6 @@ Because the second gate is an indirect call through a runtime pointer (`0x0203E3
 ## 9. Tooling
 
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Python 3.13, `gdb-multiarch` (GDB stub was client-blocked by another session on port 2345, so mGBA's `-d` PTY debugger and `.ss1` savestate diffing were used for RAM evidence).
-* `strings -t x`, `grep -abo`, `xxd`; web/archive retrieval of the GameFAQs cheats page and TCRF, treated strictly as data.
+* `strings -t x`, `grep -abo`, `xxd`; web/archive retrieval of the 3rd party cheat index cheats page and 3rd party cheat indexes, treated strictly as data.
 * Scripts: `xrefs.py`, `blxref.py`, `savestate.py`, `pw.py`, `mint.py`, `pwentry.py`, `gba.py`, `dbgserver.py`.
 * Legal note: no ROM bytes or copyrighted assets are reproduced in this report; only hashes, addresses, algorithms and generated code strings are documented.

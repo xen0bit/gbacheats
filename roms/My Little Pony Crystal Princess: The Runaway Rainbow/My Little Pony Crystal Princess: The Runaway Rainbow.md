@@ -183,7 +183,7 @@ Chapter selection (observed, last digit): `6 → Chapter 3`, `9 → Chapter 2`.
 ## 8. Unknowns / negative results (bounded)
 
 * **Published codes:** `websearch` returned no results for 8 queries (titles +
-  "password"/"cheat"/"codes"/"walkthrough"); direct fetches of GameFAQs (403),
+  "password"/"cheat"/"codes"/"walkthrough"); direct fetches of 3rd party cheat indexes,
   Google (JS-only), DuckDuckGo (bot challenge), Bing via `r.jina.ai` (irrelevant
   results) produced no usable list. No code was found in `web.archive.org` snapshots
   tested (404). No prompt-injection payload was encountered in fetched content.

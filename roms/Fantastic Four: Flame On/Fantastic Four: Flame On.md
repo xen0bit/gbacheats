@@ -132,18 +132,18 @@ reset; no checksum and no wildcard symbol exist.
 |---:|---|---|---:|---|---|
 | 0 | Up, Down, Up, Right | `40 00 80 00 40 00 10 00` | 4 | **No** | yes, completion observed |
 | 1 | Left, Right, Left | `20 00 10 00 20 00` | 3 | **No** | yes, completion observed |
-| 2 | B, A, Down, A, Select, Select ("BADASS") | `02 00 01 00 80 00 01 00 04 00 04 00` | 6 | Yes (classicgamehacking.com, GBA-US) | yes → cheat menu |
+| 2 | B, A, Down, A, Select, Select ("BADASS") | `02 00 01 00 80 00 01 00 04 00 04 00` | 6 | Yes (3rd party cheat indexes, GBA-US) | yes → cheat menu |
 
 Published web codes:
 
 | Source | Code | Verdict |
 |---|---|---|
-| classicgamehacking.com, "Cheat Menu – Fantastic 4: Flame on (U) (GBA)" | `B,A,Down,A,Select,Select` = BADASS | **verified** literally at `0x0808ACE0` and in emulator |
-| GameFAQs `Fantastic 4` (sibling game) | `B,A,Left,Select,A` | belongs to the other SKU; **not present** in this ROM |
-| GameFAQs console entries (PS2/Xbox/GC) | Hell unlock, Barge arena, infinite cosmic power | other platforms; not applicable |
+| 3rd party cheat indexes, "Cheat Menu – Fantastic 4: Flame on (U) (GBA)" | `B,A,Down,A,Select,Select` = BADASS | **verified** literally at `0x0808ACE0` and in emulator |
+| 3rd party cheat indexes `Fantastic 4` (sibling game) | `B,A,Left,Select,A` | belongs to the other SKU; **not present** in this ROM |
+| 3rd party cheat indexes console entries (PS2/Xbox/GC) | Hell unlock, Barge arena, infinite cosmic power | other platforms; not applicable |
 | CodeBreaker/GameShark/Action Replay lists | memory patches | out of scope, not applied |
 
-TCRF's fetched page contained an injected "decode key" instruction (write an
+a 3rd party cheat index's fetched page contained an injected "decode key" instruction (write an
 EICAR test string to `key.bin`). It was treated as untrusted data and ignored;
 no action was taken on it.
 

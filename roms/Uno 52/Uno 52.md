@@ -168,7 +168,7 @@ and animation scratch but produced **no new screen and no new persistent flag**
 tests, confirming there is no save-bit flag to unlock.
 
 **Web recon limitation:** automated web recon was unavailable — `websearch`
-returned no results for six queries; DuckDuckGo served a CAPTCHA; GameFAQs
+returned no results for six queries; DuckDuckGo served a CAPTCHA; 3rd party cheat indexes
 returned HTTP 403; Google blocked automated access. No published code list was
 obtained. This does not affect the static result: every code-table shape that
 such a list could point to was searched for directly in the image (above) and

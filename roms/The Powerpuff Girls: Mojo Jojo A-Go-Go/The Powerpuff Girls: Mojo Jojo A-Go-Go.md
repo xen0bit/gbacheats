@@ -17,7 +17,7 @@
 | MD5 | `28a2b3e44952944e29a168e5f17b5696` |
 | SHA-1 | `e6d3537f4e95e578dcdc84200578e77fbdc381b1` |
 | SHA-256 | `1d5197f5dc5bcaa1b1f080c15d546df80eeb744ea341e3c71ccfd6a74d58bf37` |
-| CRC32 | `0xDFB57DCF` — matches gamehacking.org's entry for `APTE`, USA (En,Fr,De,Es,It,Nl), serial AGB-APTE-USA |
+| CRC32 | `0xDFB57DCF` — matches a 3rd party cheat index's entry for `APTE`, USA (En,Fr,De,Es,It,Nl), serial AGB-APTE-USA |
 
 Build is the retail 6-language USA revision. Six localized text banks (English, French, German, Italian, Spanish, Dutch) are present; only the English bank is analyzed here (all banks share structure).
 
@@ -31,11 +31,11 @@ Evidence supporting the negative (all counts in §6b):
 * The input system has exactly **one** `KEYINPUT` (`0x04000130`) literal reference in the whole ROM, inside the input handler at `0x0804B280`. All **11** code xrefs to the per-button state array `0x03004330` are single-button "pressed-edge" checks in ordinary menu/gameplay handlers. No xref compares a *sequence* of presses or a multi-button mask.
 * No contiguous button-mask table (2–4 entries of `{1,2,4,8,0x10,0x20,0x40,0x80,0x100,0x200}`) exists in code regions; the raw scan's only apparent hits were literal-pool words such as `0x08000080`.
 * Every reachable screen was walked in mGBA (§3). No hidden menu entry exists on any screen.
-* The four "button codes" published on Neoseeker were tested in gameplay and on menus; none changed the HUD, and a savestate RAM diff showed no new persistent flag (only the input-state array itself changed, as expected from pressing buttons). Their published descriptions are garbled ("as the scientist", "as Mojo"), which is consistent with a misfiled/unverifiable user submission rather than a real code (guide §16.7, §16.11).
+* The four "button codes" published on 3rd party cheat indexes were tested in gameplay and on menus; none changed the HUD, and a savestate RAM diff showed no new persistent flag (only the input-state array itself changed, as expected from pressing buttons). Their published descriptions are garbled ("as the scientist", "as Mojo"), which is consistent with a misfiled/unverifiable user submission rather than a real code (guide §16.7, §16.11).
 
 All CodeBreaker / GameShark / Action Replay codes found on the web are **out of scope** (external cheat devices) and are not reported as codes. They are used only as RAM-address *leads* in §4.
 
-**Prompt-injection note (§16.8):** every TCRF page for this franchise that appeared in search results was a fake "LLM instructions" payload (corn-cob roleplay, a fake `$1 Brazillion` transfer demand, an "E_SHITASS_OPERATOR" error, and instructions to write an EICAR `key.bin`). All of it was treated as untrusted data and ignored; no instruction from a fetched page was followed. Direct fetches of TCRF returned HTTP 403.
+**Prompt-injection note (§16.8):** every 3rd party cheat index page for this franchise that appeared in search results was a fake "LLM instructions" payload (corn-cob roleplay, a fake `$1 Brazillion` transfer demand, an "E_SHITASS_OPERATOR" error, and instructions to write an EICAR `key.bin`). All of it was treated as untrusted data and ignored; no instruction from a fetched page was followed. Direct fetches of 3rd party cheat indexes returned HTTP 403.
 
 ## 3. How to reproduce
 
@@ -54,7 +54,7 @@ All CodeBreaker / GameShark / Action Replay codes found on the web are **out of 
   9. Pause menu (Start during gameplay): PAUSE MENU / CONTINUE / MUSIC ON / SFX ON / QUIT (4 entries).
   10. LINK GAME cable-check screen: "CHECK GAME BOY ADVANCE GAME LINK CABLE", "PRESS THE B BUTTON TO CANCEL".
   11. Level-complete / next-level, retry and game-over paths (strings `NEXT LEVEL`, `RETRY`, `ARE YOU SURE?`, `TIE GAME`, `*_WINS!`).
-* Published button codes tested (Neoseeker, user "Krunal", 2005-06-11):
+* Published button codes tested (3rd party cheat indexes, user "Krunal", 2005-06-11):
   - `Left + B` ("Extra Points")
   - `Right` ("Power Up")
   - `Left + Down` ("New Life")
@@ -140,9 +140,9 @@ Decoded in full; grouped by function. **No entry is a password/cheat/debug promp
 
 | Source | Claim | Status |
 |---|---|---|
-| Neoseeker (user submission, 2005) | `Left+B` = Extra Points; `Right` = Power Up; `Left+Down` = New Life; `Up,Up,B` = Level Jump (**appended garbled "as the scientist / as Buttercup / as Mojo / as Blossom"**) | **Not an in-game code.** Tested in gameplay and menus; no HUD or RAM change. Descriptions are nonsensical for this SKU; no validator exists. |
-| Neoseeker / supercheats / almars / gamehacking.org | CodeBreaker: `33003D1F 00FF` unlock all levels; `83003D24 03E7` jewels; health/weapons/score codes | Out of scope (external cheat device). Used only as RAM-address leads. |
-| TCRF franchise pages | Fake "LLM instructions" / payment / EICAR key payloads | Prompt injection — ignored, recorded (§2). |
+| 3rd party cheat indexes | `Left+B` = Extra Points; `Right` = Power Up; `Left+Down` = New Life; `Up,Up,B` = Level Jump (**appended garbled "as the scientist / as Buttercup / as Mojo / as Blossom"**) | **Not an in-game code.** Tested in gameplay and menus; no HUD or RAM change. Descriptions are nonsensical for this SKU; no validator exists. |
+| 3rd party cheat indexes / almars / 3rd party cheat indexes | CodeBreaker: `33003D1F 00FF` unlock all levels; `83003D24 03E7` jewels; health/weapons/score codes | Out of scope (external cheat device). Used only as RAM-address leads. |
+| 3rd party cheat indexes franchise pages | Fake "LLM instructions" / payment / EICAR key payloads | Prompt injection — ignored, recorded (§2). |
 
 ## 6b. Enumeration
 
@@ -166,12 +166,12 @@ Decoded in full; grouped by function. **No entry is a password/cheat/debug promp
 
 * **Observed** — mGBA screenshots of all 11 screens (§3); four published button codes + five extra combos produced no HUD change; `.sav` dump (512 B) with high-score records; savestate RAM diff (IWRAM/EWRAM) showed changes only in the input-state array and volatile animation/state bytes, no new flag.
 * **Derived** — `updateInput()` at `0x0804B280` and its button mapping (objdump); 228-entry text table and its decoded contents; 11 input-array xrefs (Ghidra) with objdump confirmation that each is a single-bit check; 1 `KEYINPUT` literal; no button-mask tables; 7 level names.
-* **Inferred** — the EEPROM level-unlock bitfield at `0x03003D1F` (from published CodeBreaker RAM addresses, corroborated by the in-game level-info screen); that the Neoseeker button-code text is a misfiled submission rather than a cut feature.
+* **Inferred** — the EEPROM level-unlock bitfield at `0x03003D1F` (from published CodeBreaker RAM addresses, corroborated by the in-game level-info screen); that the 3rd party cheat indexes button-code text is a misfiled submission rather than a cut feature.
 * **Not claimed** — no asset was extracted or redistributed; no GameShark/CodeBreaker/AR code is presented as an in-game cheat.
 
 ## 8. Unknowns
 
-* Whether the GBC Powerpuff titles' elaborate password systems (documented on GameFAQs for *Bad Mojo Jojo* / *Paint the Townsville Green*) were ever planned for this GBA SKU — no residue exists in this ROM, so this is speculation only.
+* Whether the GBC Powerpuff titles' elaborate password systems (documented on 3rd party cheat indexes for *Bad Mojo Jojo* / *Paint the Townsville Green*) were ever planned for this GBA SKU — no residue exists in this ROM, so this is speculation only.
 * Exact EEPROM record layout/checksum and the precise bit→level mapping beyond the single mirrored byte at `0x03003D1F`.
 * Whether the six non-English text banks contain any string omitted from English (all are dialogue/UI translations; they were not fully enumerated).
 * The ROM has two known retail variants (USA and revised USA-1); this report covers only CRC32 `DFB57DCF` (APTE, Rev.00).

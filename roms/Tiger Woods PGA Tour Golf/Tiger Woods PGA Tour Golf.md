@@ -23,7 +23,7 @@ This is the **2002 Rebellion GBA title** (also sold as *Tiger Woods PGA Tour 200
 
 ## 2. Executive summary
 
-**This SKU has no in-game code surface.** There is no password entry screen, no button-code table, no debug menu and no cheat validator. The only published cheat is a **save-based unlockable** — "Snake", obtained by defending the Open Style Championship title five times (GameFAQs, VGChartz, Cheatbook, GGmania all give this one item and nothing else). No password codes are published for this SKU at all.
+**This SKU has no in-game code surface.** There is no password entry screen, no button-code table, no debug menu and no cheat validator. The only published cheat is a **save-based unlockable** — "Snake", obtained by defending the Open Style Championship title five times (3rd party cheat indexes all give this one item and nothing else). No password codes are published for this SKU at all.
 
 The widely circulated Tiger Woods password lists (`THEKITCHENSINK`, `ALLTHETRACKS`, `CANYOUPICKONE`, `4REDSHIRTS`, …) belong to *Tiger Woods PGA Tour 2004* and other platforms. **All 60 published strings tested are absent from this ROM** (the three incidental substring hits — `XON` inside `FAXON`, `SS`, `TB` — are ordinary text/graphics bytes, not codes). A contemporary review of this exact game explicitly states the developers "avoided a password system" and used a battery save.
 

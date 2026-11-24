@@ -20,7 +20,7 @@ Phase 0: one Nintendo-logo hit only (file `0x4`); no embedded headers, no multib
 
 ## 2. Executive summary
 
-The game has a genuine, developer-intended **9-symbol password / level-select system** (PASSWORD on the main menu). The alphabet has exactly 32 symbols, so each symbol carries 5 bits and the representable space is `32^9 = 35,184,372,088,832` strings. The published GameFAQs list contains 24 codes: 12 Easy and 12 Hard (levels 2–12 plus a "clear game" code). **All 24 were verified in the emulator (24/24 accepted)**, and none is stored as a plaintext literal in the ROM — the validator is algorithmic.
+The game has a genuine, developer-intended **9-symbol password / level-select system** (PASSWORD on the main menu). The alphabet has exactly 32 symbols, so each symbol carries 5 bits and the representable space is `32^9 = 35,184,372,088,832` strings. The published 3rd party cheat index list contains 24 codes: 12 Easy and 12 Hard (levels 2–12 plus a "clear game" code). **All 24 were verified in the emulator (24/24 accepted)**, and none is stored as a plaintext literal in the ROM — the validator is algorithmic.
 
 **Accept-layer characterization (this retry).** The game itself was used as a black-box accept/reject oracle (patched savestate + real OK press, DISPLAY=:316). The 9th symbol behaves as a **checksum of the first 8**: for a pristine published 8-symbol prefix, exactly one of the 32 possible 9th symbols was accepted — the published one (`9W9KNN?D` → only `F`, 1/32). However, **an additional constraint exists on the first 8 symbols**: every single-symbol mutation of every published prefix (all 8 positions), every random 8-symbol prefix (16 prefixes), and a full 2-D brute-force of positions 7 and 8 for a mutated prefix (32×32 = 1024 codes) produced **zero** accepted codes. No field (level/difficulty) was found to be free, and no wildcard symbol exists.
 
@@ -92,7 +92,7 @@ Alphabet index map (file `0x7D1178`):
 24 2  25 3  26 4  27 5  28 6  29 7  30 8  31 9
 ```
 
-Published level passwords (GameFAQs, archived snapshot; all 24 verified in-game):
+Published level passwords (3rd party cheat indexes, archived snapshot; all 24 verified in-game):
 
 | Effect | Easy | Hard |
 |---|---|---|
@@ -109,11 +109,11 @@ Published level passwords (GameFAQs, archived snapshot; all 24 verified in-game)
 | Level 11 | `MW5PK1H8?` | `9LJVPVZ6G` |
 | Level 12 | `J*GV92WTF` | `HJ90T0Z#2` |
 
-Note: GameFAQs' "Level 2" code showed `01` on the map screen; published labels are taken as-is (guide §16.15). Field layout unknown, so not resolved.
+Note: 3rd party cheat indexes' "Level 2" code showed `01` on the map screen; published labels are taken as-is (guide §16.15). Field layout unknown, so not resolved.
 
 ## 6b. Enumeration
 
-**Space definition:** 9 positions × 32 symbols = 45 bits = **35,184,372,088,832** representable strings. Checksum width (5 bits, 9th symbol) inferred; field boundaries unknown. Known accepted members: exactly 24 published codes (no additional codes found in any source checked: GameFAQs archived cheats, TCRF, Cheat Happens, wiki pages, plus this retry's web search which returned no additional list).
+**Space definition:** 9 positions × 32 symbols = 45 bits = **35,184,372,088,832** representable strings. Checksum width (5 bits, 9th symbol) inferred; field boundaries unknown. Known accepted members: exactly 24 published codes (no additional codes found in any source checked: 3rd party cheat indexes archived cheats, 3rd party cheat indexes, wiki pages, plus this retry's web search which returned no additional list).
 
 **Novel code: none generated.** The accept set appears closed at the 24 published codes; all targeted searches below returned zero novel accepted codes. This section documents the closed-set result with full sweep tables rather than claiming an unrecovered checksum as an unknown.
 
@@ -170,7 +170,7 @@ Screenshots: `evidence_ACCEPT_published.png` (purple map, accepted), `evidence_R
 
 1. Checksum/generator function: not isolated. Ghidra auto-analysis created no functions in the `0x08009xxx`–`0x0800A2xx` Thumb region; the password panel uses thunk-style indirect calls (`bl <veneer>; bx rN`), so a BL-target scan was uninformative. mGBA's `-d` debugger watchpoints (`watch/w 0x02000F40`) re-triggered forever on a boot-time memset at `0x0802606E` and could not be stepped past; `watch/c 0x030010D0` caught only a 4→0 screen transition, not the accept write. The GDB stub (`-g`, port 2345) replied `timeout`/packet errors and could not be used as an oracle.
 2. Field layout (level, difficulty, lives) and the code for Level 1 / unusual lives counts remain unminted.
-3. The pause-menu overlay was not captured; strings and TCRF description are the only evidence.
+3. The pause-menu overlay was not captured; strings and 3rd party cheat index description are the only evidence.
 4. The published "Level 2" → map `01` off-by-one was not resolved.
 5. Whether an undocumented button sequence reaches `GameLevelTest` was not exhaustively proven (only static call graph + walked screens).
 6. Exact cardinality of the accepted set: empirically consistent with 24, but not proven exhaustively over `32^9` strings because the validator was not recovered.
@@ -180,7 +180,7 @@ Screenshots: `evidence_ACCEPT_published.png` (purple map, accepted), `evidence_R
 - `arm-none-eabi-objdump` (`-M force-thumb`), Capstone 5.0.7, Keystone, Ghidra 12.1.4 via REA MCP (`open_binary`, `analyze_function`, `procedure_pseudo_code`, `xrefs`, `search_procedures`), `strings`, `xxd`, `file`, `sha*sum`.
 - mGBA (`mgba -3`, `-g`, `-d`), Xvfb `:316`, openbox, `xdotool`, `scrot`, ImageMagick.
 - Python helpers in `/tmp/garfieldpooky2/`: `stateutil.py` (PNG `gbAs` zlib extractor/differ), `oracle.py` (fresh-launch patched-savestate oracle), `sweep.py` (32-symbol ninth sweep), `mutsweep.py` (prefix-mutation sweep), `randprefix.py` (random-prefix sweep), `twod.py` (position 7×8 sweep), `dbg.py` (pty driver for `-d`), `analyze.py`/`analyze2.py`/`fitxor.py` (static checksum fitting), `ramverify.py` (RAM flag attempt). Logs: `mutsweep.log`, `randprefix.log`, `twod.log`.
-- Web sources: archived GameFAQs cheats (`web.archive.org/web/20220804030516/...`), TCRF, GameHacking.org index (ROM identity). A retry web search returned no additional code list. No ROM or copyrighted assets are redistributed by this report.
+- Web sources: archived 3rd party cheat index cheats (`web.archive.org/web/20220804030516/...`), 3rd party cheat indexes index (ROM identity). A retry web search returned no additional code list. No ROM or copyrighted assets are redistributed by this report.
 
 ## 10. Legal note
 

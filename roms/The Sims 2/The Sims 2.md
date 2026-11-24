@@ -28,7 +28,7 @@ a validator: the field's buffer is never compared with any constant string in th
 published "cheats" for this GBA SKU are **save-gated unlockables** (episodes unlocked by plot points or
 a GBA link cable) or gameplay glitches, not codes. The widely copied "enter codes with the D-pad /
 Cheat Gnome" list belongs to the **GameCube/PC** versions, not the GBA image — verified against the
-GameFAQs snippet and the GBA-specific cheat pages (Cyberly, SuperCheats).
+3rd party cheat indexes snippet and the GBA-specific cheat pages (3rd party cheat indexes).
 
 No GameShark/CodeBreaker/Action Replay material was used or reported.
 
@@ -97,8 +97,7 @@ word is written on name commit (§6b).
 
 **Unlockables (not codes):** Aliens Arrived / Weirdness plot (50 pts), There Was This Mummy /
 Mystery plot (50 pts), It All Came to an End / Motorcycle plot (150 pts), A Very Special Reunion /
-GBA link cable (or 100 points on all other episodes, per community reports). Source: Cyberly,
-SuperCheats, warfreak GBA walkthrough. These are save/flag-gated, not controller-input-gated.
+GBA link cable (or 100 points on all other episodes, per community reports). Source: 3rd party cheat indexes, warfreak GBA walkthrough. These are save/flag-gated, not controller-input-gated.
 
 **`CheaterX`:** the single cheat-like literal in the image. It is the *source operand* of one
 unreferenced `strncpy` at `0x080211B8`; it is never a comparison operand and never read as input.

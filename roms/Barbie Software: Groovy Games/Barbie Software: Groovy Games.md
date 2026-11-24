@@ -149,12 +149,12 @@ path.
 
 | Source | Code / claim | Result in this ROM |
 |---|---|---|
-| GameFAQs (archived) | `Up, Down, Left, Right, B, A` — "Unlimited Health" for 5 HP or less | No health stat or HUD exists. At the title the sequence only uses B to return to the attract; at pause it is ordinary cursor/flip input. **Inapplicable/fake.** |
-| cheatingdome / games-cheats / 53lu | same Unlimited Health code | Same as above. |
+| 3rd party cheat indexes | `Up, Down, Left, Right, B, A` — "Unlimited Health" for 5 HP or less | No health stat or HUD exists. At the title the sequence only uses B to return to the attract; at pause it is ordinary cursor/flip input. **Inapplicable/fake.** |
+| 3rd party cheat indexes | same Unlimited Health code | Same as above. |
 | classicemu (machine-generated page) | `GROOVY100` (100 coins), `FREEDRESS` (all dresses free) | Literal search: **0 hits**. No coin, dress, shop or text-entry system exists. **Fabricated / not this game.** |
-| mariogba / emuinfo (Barbie Superpack 2-in-1) | Secret Agent level passwords: `BBBBCG`, `CBBDCX`, `DBBFCM`, `FBBFFQ`, `GBBPFH`, `HBBPKN`, `JCBPKQ`, `KCBTKC`, `LCGTKJ`, `MCHTKL`, `NCHTTC`, `PCRTTN`, `TTTTTS` | All 13 literals: **0 hits** in this standalone `AVBE` ROM. They belong to the Secret Agent half of the 2-in-1, not this cartridge. |
+| 3rd party cheat indexes / emuinfo (Barbie Superpack 2-in-1) | Secret Agent level passwords: `BBBBCG`, `CBBDCX`, `DBBFCM`, `FBBFFQ`, `GBBPFH`, `HBBPKN`, `JCBPKQ`, `KCBTKC`, `LCGTKJ`, `MCHTKL`, `NCHTTC`, `PCRTTN`, `TTTTTS` | All 13 literals: **0 hits** in this standalone `AVBE` ROM. They belong to the Secret Agent half of the 2-in-1, not this cartridge. |
 
-The GameFAQs page was read through an archive snapshot because direct fetching
+The 3rd party cheat index page was read through an archive snapshot because direct fetching
 is blocked; the archived text is unambiguous (one cheat, contributed by
 `tiamold2`).
 
@@ -480,7 +480,7 @@ to the credits bank.
 
 | Test | Exact input | Result |
 |---|---|---|
-| "Unlimited Health" (GameFAQs/cheatingdome/53lu) | `Up, Down, Left, Right, B, A` at title | U/D/L/R no-op; **B returned to attract**; A no-op. No health exists; no state change (`ti_after2_crop.png`) |
+| "Unlimited Health" (3rd party cheat indexes) | `Up, Down, Left, Right, B, A` at title | U/D/L/R no-op; **B returned to attract**; A no-op. No health exists; no state change (`ti_after2_crop.png`) |
 | Same at pause | `Up, Down, Left, Right, B, A` while paused | Select (pressed first to test) resumed the game; the sequence moved the cursor and flipped a CD as normal input (`pause_udlrba_crop.png`); no cheat state |
 | Konami sequence | `Up Up Down Down Left Right Left Right B A` at title | normal navigation; no hidden screen (`titlecodes`/`tx` sheets) |
 | Select at non-title screens | player, character, opponent, game select, in-game | screen unchanged (identical screenshots) |

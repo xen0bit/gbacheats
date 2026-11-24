@@ -19,7 +19,7 @@
 | SHA-1 | `013f128c8d67f1165196b4f29297bcd4616c5033` |
 | SHA-256 | `ea3954de1582c0f156ba48e12c05959b8fb1a2463cc4082fb3536fe395dec1c9` |
 
-The MD5 matches the RetroAchievements set hash (`25cdcf14…`) for this exact SKU, confirming the revision.
+The MD5 matches the 3rd party cheat indexes set hash (`25cdcf14…`) for this exact SKU, confirming the revision.
 
 **Embedded-header scan (§2 / §5.4b):** scanning all 0x400000 bytes for the 156-byte Nintendo logo found **exactly one** header, at file offset 0x0. Despite the "1 & 2" compilation title this is a single integrated image, not concatenated ROMs; both games are separate screens of one engine. No appended trainer or patch region was found.
 
@@ -111,14 +111,14 @@ Every one of the 31 `CheckHistMask` call sites passes `mask=0x0A` (Start). There
 2. **Published-code test (bounds by rejection).** The one published in-game sequence was entered at three screens (title, game-select, gameplay) with exact key holds and verified against `KEYINPUT` and frame screenshots. It was **rejected** — no big ball, no unlock, no debug screen. This satisfies §0.2 point 4 in the negative direction: a candidate code was tested and failed.
 3. **Novel code minting.** Not applicable — no code system exists to mint from. §0.2's "generate an unpublished accepted code" obligation is replaced by the §0.2 point-5 negative proof: the menu enumeration (11 screens listed in §3), the button-space count (31 validator call sites, zero cheat masks), the text-space count (0 ASCII UI strings; 11 known UI strings × 6 encodings = 66 literal searches, zero hits), and the rejected published code together bound the absence.
 4. **Text/tile space.** `strings -t x -n 4` over 4 MiB produced 32,072 lines, of which exactly 2 are the header strings (`ELFBOWL`, `BEBE7U`); all others are code/data byte patterns, **no** English words. Literal searches (ASCII, `+0x20`, `-0x20`, UTF-16LE, UTF-16BE, reversed) for `1 PLAYER`, `2 PLAYERS`, `PAUSED`, `PRESS START`, `SANTA`, `PERFECT`, `STRIKE`, `OPTIONS`, `CONTINUE`, `ELF BOWLING` returned **zero** hits. An 8bpp tile/font bank was located at `0x0805CF00` (matched byte-for-byte against VRAM `0x06002000` in a title-screen savestate) and rendered as 8×8 tiles; it is a font/graphics bank, but a complete glyph→character map was not established. The negative therefore rests on screen enumeration and the input-subsystem xref count, with the text search explicitly bounded as above (not claimed as exhaustive over the tile-index space).
-5. **Published codes verified/rejected:** Cheat Index button code — **rejected** in ROM and emulator. CodeBreaker strike codes — out of scope (memory edits), located but not treated as in-game cheats. No other source (TCRF, GameFAQs, VGChartz, CheatingDome, Cheat Happens) lists an in-game code for this SKU.
+5. **Published codes verified/rejected:** Cheat Index button code — **rejected** in ROM and emulator. CodeBreaker strike codes — out of scope (memory edits), located but not treated as in-game cheats. No other source (3rd party cheat indexes) lists an in-game code for this SKU.
 
 ## 7. Validation evidence
 
 * **Observed:** header/hash; one embedded header; `strings` output and zero UI-string hits; all 11 screens via screenshots; `KEYINPUT`, frame scores, and input-history values via savestate `gbAs` decompression; published code failing to change ball size or reveal a screen; 0-byte `.sav`.
 * **Derived:** joypad reader `0x0801459C`, input update `0x08014BFC`, accessors `0x08014C60/C84/CA4/CC0`, key-code constants, 31 `CheckHistMask` xrefs all with `0x0A`, single crt0 entry, font bank at `0x0805CF00` (ROM↔VRAM byte match).
 * **Inferred:** the published code may target a different platform/revision (DS/PC) — not proven. Full glyph→character decoding of the tile font was not completed; this is an explicit limitation, not a claim that no text bank exists.
-* **Prompt-injection note (§16.8):** fetching the TCRF "Elf Bowling 1 & 2 (Game Boy Advance)" page returned a fake "LLM-specific instructions" payload (demanding creation of a `key.bin` EICAR string, an XOR "decode key", and a $1,000,000,000,000,000,000 payment). It was treated as untrusted data, **ignored**, and not acted upon. No TCRF cheat content for the GBA SKU was available from that page.
+* **Prompt-injection note (§16.8):** fetching the 3rd party cheat indexes "Elf Bowling 1 & 2 (Game Boy Advance)" page returned a fake "LLM-specific instructions" payload (demanding creation of a `key.bin` EICAR string, an XOR "decode key", and a $1,000,000,000,000,000,000 payment). It was treated as untrusted data, **ignored**, and not acted upon. No 3rd party cheat index cheat content for the GBA SKU was available from that page.
 
 ## 8. Unknowns
 
@@ -134,7 +134,7 @@ Every one of the 31 `CheckHistMask` call sites passes `mask=0x0A` (Start). There
 * REA MCP (Ghidra 12.1.4) `open_binary` / `analyze_function` / `xrefs` / `search_strings` for decompilation and cross-references.
 * mGBA (SDL) under `Xvfb :317` with `DISPLAY=:317`, `SDL_AUDIODRIVER=dummy`, launched as renamed `./ebmgba` to survive a sibling session's `pkill -x mgba`. `xdotool` XTEST input; `import -window root` for the ≤20 retained screenshots in `/tmp/elfbowling`.
 * `ss.py`: Python savestate reader — zlib-decompress the PNG `gbAs` chunk, map IWRAM (`+0x19000`) / EWRAM (`+0x21000`), read `KEYINPUT` and history words. Used because the GDB stub was non-functional.
-* Web recon: websearch/webfetch of Cheat Index, Cheat Happens, CheatingDome, GameFAQs, TCRF, RetroAchievements, almarsguides (CodeBreaker codes noted as out-of-scope).
+* Web recon: websearch/webfetch of Cheat Index, 3rd party cheat indexes (CodeBreaker codes noted as out-of-scope).
 
 No ROM image or copyrighted assets are redistributed in this report; only hashes, addresses, and analysis artifacts are published.
 

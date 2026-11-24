@@ -29,16 +29,16 @@ The name entered at **Main Menu → New Game → ENTER NAME** is compared at gam
 
 | # | Password | Effect | Evidence |
 |---|---|---|---|
-| 1 | `SAMIAM` | Enemies don't attack / attacks pass through you | index reader at `0x0801C3D6` returns early (AI skip); GameFAQs |
+| 1 | `SAMIAM` | Enemies don't attack / attacks pass through you | index reader at `0x0801C3D6` returns early (AI skip); 3rd party cheat indexes |
 | 2 | `SAMIWAS` | Unlock all missions | `0x0800D1E6` sets 13 mission flags at `0x030025E0`; RAM-verified |
 | 3 | `SAMIBE` | Start with 99 lives | validator writes 99 to `0x03001D60`; re-applied at `0x0800DB0A`; RAM-verified |
 | 4 | `SAMICAN` | **No effect in this build** | index set to 4, but zero readers of `0x03001D40` test 4,5,6 |
 | 5 | `SAMISHOW` | **No effect in this build** | same |
 | 6 | `SAMIKILL` | **No effect in this build** | same |
 
-TCRF lists the last three with "Unknown" effects; this report resolves that: the flags are set but no code path consumes values 4/5/6 (all ten xrefs to `0x03001D40` enumerated; readers test only 1, 2 and 3 — values 0 and 4/5/6 are ignored).
+3rd party cheat index lists the last three with "Unknown" effects; this report resolves that: the flags are set but no code path consumes values 4/5/6 (all ten xrefs to `0x03001D40` enumerated; readers test only 1, 2 and 3 — values 0 and 4/5/6 are ignored).
 
-The GameFAQs button code ("pause, on Resume press Select then Start") was verified: the actual trigger is **Select pressed while `Resume` is highlighted on the GAME PAUSED menu** (Start merely resumes play). An **undocumented variant** — Select alone, or Select followed by A/B/Select — sets the same flag; this was enumerated and RAM-verified.
+The 3rd party cheat indexes button code ("pause, on Resume press Select then Start") was verified: the actual trigger is **Select pressed while `Resume` is highlighted on the GAME PAUSED menu** (Start merely resumes play). An **undocumented variant** — Select alone, or Select followed by A/B/Select — sets the same flag; this was enumerated and RAM-verified.
 
 No debug menu, hidden character select, password generator, checksum system or other code surface exists. The password space is provably closed at exactly six strings (§6b).
 
@@ -135,7 +135,7 @@ Button code (`0x0800C2D0`→`0x0800C366`→`0x08011CE0`): requires two flag bits
 | SAMIAX, XAMIWA, SAMIWAX, SAMIKIL | rejected (one-character substitution) |
 | SAMIWASX, SAMIKILX | rejected (extra 8th character; proves NUL requirement and exact 8-byte match) |
 
-**Novel code.** There is **no unpublished password**: the accepted set is provably closed at six, every one of which appears on GameFAQs/TCRF, and the comparator admits no aliases (no case folding, no wildcard, no length tolerance, no unused bits). I did not fabricate a "generated code" that the game cannot accept. The equivalent §0.2 button-surface deliverable **was** produced and verified: the *undocumented* input **Select alone on `Resume`** (no Start) sets cheat index 1 — published instructions say "press Select then Start"; Start is not part of the trigger, only the resume key. RAM read: pause-only index 0 → pause+Select index 1; plain Start-resume control stays 0. Enumerated 15 combinations: Select→Start, Select→A, Select→B, Select→Select and Select+L→Start all set index 1; A/B/L/R/Up/Down/Left/Right→Start and L+R→Start, and Select on Mission Select/Options/Quit, all leave index 0.
+**Novel code.** There is **no unpublished password**: the accepted set is provably closed at six, every one of which appears on 3rd party cheat indexes, and the comparator admits no aliases (no case folding, no wildcard, no length tolerance, no unused bits). I did not fabricate a "generated code" that the game cannot accept. The equivalent §0.2 button-surface deliverable **was** produced and verified: the *undocumented* input **Select alone on `Resume`** (no Start) sets cheat index 1 — published instructions say "press Select then Start"; Start is not part of the trigger, only the resume key. RAM read: pause-only index 0 → pause+Select index 1; plain Start-resume control stays 0. Enumerated 15 combinations: Select→Start, Select→A, Select→B, Select→Select and Select+L→Start all set index 1; A/B/L/R/Up/Down/Left/Right→Start and L+R→Start, and Select on Mission Select/Options/Quit, all leave index 0.
 
 **Generator/checksum:** none exists — no LDR/BL/pointer path computes a code from game state; the validator is six fixed `strcmp`-style comparisons.
 
@@ -156,6 +156,6 @@ Button code (`0x0800C2D0`→`0x0800C366`→`0x08011CE0`): requires two flag bits
 
 ## 9. Tooling
 
-`file`, `md5sum`/`sha1sum`/`sha256sum`, `strings -t x`, `xxd`, `grep -abo`; `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Keystone; REA/Ghidra 12.1.4 (`open_binary`, `xrefs`, `analyze_function`) for xrefs and pseudocode; mGBA SDL + GDB stub (tested, unusable here: protocol errors) → savestate diff/patch fallback; Xvfb `:315` + openbox + xdotool; Python helpers in `/tmp/jlinjustice`: `ssdecode.py`, `patch_ss.py`, `enter_name.py`, `test_code.py`, `patch_test.py`, `enum_btn.py`, `verify_sel.py`. Web: archived GameFAQs cheats page and archived TCRF page (fetched as data; no instructions in fetched content were acted upon; no prompt-injection payload encountered).
+`file`, `md5sum`/`sha1sum`/`sha256sum`, `strings -t x`, `xxd`, `grep -abo`; `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Keystone; REA/Ghidra 12.1.4 (`open_binary`, `xrefs`, `analyze_function`) for xrefs and pseudocode; mGBA SDL + GDB stub (tested, unusable here: protocol errors) → savestate diff/patch fallback; Xvfb `:315` + openbox + xdotool; Python helpers in `/tmp/jlinjustice`: `ssdecode.py`, `patch_ss.py`, `enter_name.py`, `test_code.py`, `patch_test.py`, `enum_btn.py`, `verify_sel.py`. Web: archived 3rd party cheat index cheats page and archived 3rd party cheat index page (fetched as data; no instructions in fetched content were acted upon; no prompt-injection payload encountered).
 
 No ROM bytes or copyrighted assets are redistributed in this report.

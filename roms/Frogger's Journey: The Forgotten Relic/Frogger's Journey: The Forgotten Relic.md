@@ -26,9 +26,9 @@ Phase 0 result: **single, unmodified retail image**. Scanning all 8 MiB for the 
 
 **No developer-intended in-game cheat/password/button-code system exists in this ROM.** The game is a battery-save action-adventure: it has no password entry screen, no cheat menu, no level-select code surface, and no reachable debug menu.
 
-The one genuine piece of debug material is a cell-position overlay routine at **`0x080189D8`**. It renders `"Player Cell X: {%}"` / `"Player Cell Y: {%}"` (message-table entries 178/179) plus three numeric format fragments. **It is dead code in the retail build**: a full 8 MiB scan found **zero** Thumb `BL` references and **zero** 32-bit data pointers to it (Thumb-bit variant `0x080189D9` included), and its private output flag at `0x02028EB4` is referenced only by that routine and its own literal pool. The TCRF article states that "there exists a working debug code that shows Frogger's cell positions" but leaves the actual code as "To do: Cheat Code"; no such sequence is documented on any list found, and none could be recovered from the image.
+The one genuine piece of debug material is a cell-position overlay routine at **`0x080189D8`**. It renders `"Player Cell X: {%}"` / `"Player Cell Y: {%}"` (message-table entries 178/179) plus three numeric format fragments. **It is dead code in the retail build**: a full 8 MiB scan found **zero** Thumb `BL` references and **zero** 32-bit data pointers to it (Thumb-bit variant `0x080189D9` included), and its private output flag at `0x02028EB4` is referenced only by that routine and its own literal pool. The 3rd party cheat index article states that "there exists a working debug code that shows Frogger's cell positions" but leaves the actual code as "To do: Cheat Code"; no such sequence is documented on any list found, and none could be recovered from the image.
 
-Published material for this title consists only of **CodeBreaker / Game Genie memory-edit codes** (e.g. `8200041C FFFF`, `DE0D2A764ABA`), which are explicitly out of scope here and are *not* in-game codes. GameFAQs' cheats page for this exact SKU (id `915003`) is **empty**; the "level passwords" found in searches belong to *Frogger Advance: The Great Quest*, a different GBA game (§16.11), and were verified absent as literals from this ROM. The widely published Konami code belongs to *Frogger's Adventures 2: The Lost Wand* and other Frogger SKUs, not this one; entering it at the title screen and in-game produced no state change.
+Published material for this title consists only of **CodeBreaker / Game Genie memory-edit codes** (e.g. `8200041C FFFF`, `DE0D2A764ABA`), which are explicitly out of scope here and are *not* in-game codes. 3rd party cheat indexes' cheats page for this exact SKU (id `915003`) is **empty**; the "level passwords" found in searches belong to *Frogger Advance: The Great Quest*, a different GBA game (§16.11), and were verified absent as literals from this ROM. The widely published Konami code belongs to *Frogger's Adventures 2: The Lost Wand* and other Frogger SKUs, not this one; entering it at the title screen and in-game produced no state change.
 
 The negative is bounded rather than assumed: all on-screen surfaces were walked with screenshots and savestate RAM reads, the entire 298-message × 5-language text bank was decoded to ASCII, 57,160 ASCII strings were classified, and the complete 8 MiB was scanned for key-mask code tables. Counts and searches are in §6b.
 
@@ -127,18 +127,18 @@ Because the answer is negative, this section proves the *searched space*, as §0
 
 **Space size statement:** there is no code space to enumerate — the accepted set is **empty** for in-game codes (0 passwords, 0 button codes, 0 cheat menu entries). Consequently no novel code could be minted and no bounds could be proven by rejection; the requirement for a generated unpublished code applies only when a system exists (§0.2). The bounded result above is the applicable deliverable.
 
-**What would change the answer:** a developer/prototype build containing the script that invokes `0x080189D8`, or documentation of the exact input sequence TCRF alludes to. Neither is present in this exact ROM (`SHA-256 3ab7f261…288dd`).
+**What would change the answer:** a developer/prototype build containing the script that invokes `0x080189D8`, or documentation of the exact input sequence 3rd party cheat indexes alludes to. Neither is present in this exact ROM (`SHA-256 3ab7f261…288dd`).
 
 ## 7. Validation evidence
 
 * **Observed** — all eight screens above captured via `scrot` on `:315`; hashes/header from `file`, `xxd`, `md5sum`/`sha1sum`/`sha256sum`; one logo hit; `0x02028EB4` read as `0x11` from both decompressed savestates; 135 EWRAM bytes differed between `ss1`/`ss2`, all attributable to NPC/dialogue/gameplay state, with the debug flag unchanged.
 * **Derived** — Thumb disassembly of `0x08002408` (input sampler), `0x080189D8`–`0x08018A92` (overlay), `0x0801D6FC` (gate getter), `0x080219C4`/`0x080219D4` (cell getters), `0x080002A0` (main dispatch); text-table indexing derived from the 298-entry pointer table and confirmed by decoding indices 178/179.
 * **Inferred** — the purpose of `[global+0x48]` bit 7 (likely an "in menu / in dialogue" state, since the overlay clears itself when it is set) and the role of the overlay as leftover debug infrastructure rather than a shipped feature. Both are consistent with the code but not exercised, because the routine is unreachable.
-* **External claim, unverified** — TCRF's statement that a "working debug code" exists. Treated as data, not as an instruction; the article does not publish the code and no fetched page was followed as a command (§16.8).
+* **External claim, unverified** — a 3rd party cheat index's statement that a "working debug code" exists. Treated as data, not as an instruction; the article does not publish the code and no fetched page was followed as a command (§16.8).
 
 ## 8. Unknowns
 
-* The exact input sequence behind the TCRF claim, if it exists outside this retail build.
+* The exact input sequence behind the 3rd party cheat index claim, if it exists outside this retail build.
 * Whether the overlay was ever invoked by a script that was removed before release; the three format strings and two message rows survive, the call site does not.
 * The five language tables were counted and decoded structurally; the four non-English banks were not proofread word by word, but the same index positions hold the same debug rows and none contains a password-like token.
 * Physical cartridge behavior was not tested; all conclusions are for this exact 8 MiB image.

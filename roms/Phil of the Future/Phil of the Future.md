@@ -17,7 +17,7 @@
 | MD5 | `8dd015022218c0df89bdd4a1a1fc4e7b` |
 | SHA-1 | `ba123af9938484cf1e2ea0fd191c75c90078f035` |
 | SHA-256 | `b97766a8f736bc1888130c75d66fea2ad150b0c64cf38792681bb00faa620c49` |
-| Developer / publisher | Handheld Games / Buena Vista Games, 2006 (from GameFAQs/LaunchBox) |
+| Developer / publisher | Handheld Games / Buena Vista Games, 2006 (from 3rd party cheat indexes) |
 
 Save medium observed: 512-byte EEPROM-style save; first bytes `0a 6c 65 48 64 6e 61 48` = length byte + `Handheld` reversed. Not a code system.
 
@@ -123,7 +123,7 @@ Reimplementation is unnecessary — the space has 4 reachable indices and one un
 * **Observed (RAM)** — savestate `gbAs` reads: cursor `0`, screen state `0`, menu pointer `0x081ede48`, item IDs `[0,1,2,3,0,0]`, all 23 button tests leaving cursor `0`.
 * **Derived** — Ghidra decompilation of `0x0806fa84`, `0x0806fc9c`, `0x0806f968`, `0x08079a8c`; Capstone literal/BL scans; xref enumeration of `0x030046AC`.
 * **Inferred** — the `case 4` branch would display *something* via `FUN_080d1880`; no reachable input and the forced attempt showed nothing, so the intended Debug Menu content is unknown and reported as cut content.
-* **Web (external service, treated as data)** — GameFAQs cheats page (archived 2020 capture) contains **no cheats**; Cheat Happens states "no cheats or cheat codes for Game Boy Advance"; no TCRF page exists. Search result snippets contained no password literals. No prompt-injection payload was encountered in the fetched pages.
+* **Web (external service, treated as data)** — 3rd party cheat index cheats page (archived 2020 capture) contains **no cheats**; 3rd party cheat indexes state "no cheats or cheat codes for Game Boy Advance"; no 3rd party cheat index page exists. Search result snippets contained no password literals. No prompt-injection payload was encountered in the fetched pages.
 
 ## 8. Unknowns
 

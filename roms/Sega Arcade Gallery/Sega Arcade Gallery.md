@@ -35,7 +35,7 @@ Component games identified from the ROM's own credit/name strings and on-screen 
 | `fSEGA 1985` | 0x2154F3 | **Space Harrier** (stage names MOOT/GEEZA/…/ABSYMBEL) |
 | `fSEGA 1987` | 0x215BDB | **After Burner** / **Super Hang-On** data |
 
-The released four games (confirmed by the game-select art and Wikipedia/LaunchBox) are
+The released four games (confirmed by the game-select art and 3rd party cheat indexes) are
 After Burner (1987), Out Run (1986), Space Harrier (1985) and Super Hang-On (1987).
 
 ---
@@ -51,7 +51,7 @@ title-screen option:
 2. Select `SHOW CREDITS`. The credits scroll as letter-bubbles. During credit entries
    **1, 2 and 3** press the code; the game checks the *credit entry index* as well as
    the button mask.
-3. The published sequence (GameFAQs, contributor `slowdusted`) is
+3. The published sequence (3rd party cheat indexes, contributor `slowdusted`) is
    **Left, Right, Left, Right → Up, Down → A**, which toggles a global flag: infinite
    time in Out Run / Super Hang-On, infinite continues in After Burner / Space Harrier.
    Entering it again disables it (different voice sample).
@@ -93,7 +93,7 @@ arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 \
 ```
 (Remove `-M force-arm` on builds that reject it; raw disassembly is ARM at these addresses.)
 
-Web source verified: `https://gamefaqs.gamespot.com/gba/589357-sega-arcade-gallery/cheats`
+Web source verified: 3rd party cheat indexes
 (HTTP 403 on direct fetch; full text recovered from the search-engine indexed copy).
 
 ---
@@ -231,9 +231,8 @@ in the entire in-game system: **2** (the two tables). The title gate is one addi
 never a hidden option — the gate's search space of 4 direction variants is closed.
 
 **Complete enumeration of both accepted sequences** (table dump above):
-1. `L,R,L,R / U,D / A` → toggles `0x030023C5` (published; GameFAQs).
-2. `R,L,R,L / D,U / B` → sets `0x030023C6 = 1` (**novel**, absent from GameFAQs,
-   TCRF, VGChartz and every published list found in §3 web recon).
+1. `L,R,L,R / U,D / A` → toggles `0x030023C5` (published; 3rd party cheat indexes).
+2. `R,L,R,L / D,U / B` → sets `0x030023C6 = 1` (**novel**, absent from 3rd party cheat indexes and every published list found in §3 web recon).
 
 **Novel code minted and entered in-game:** `Right, Left, Right, Left` during the
 `LEAD PROGRAMMER / STEVE CLARK` bubbles, `Down, Up` during `LEAD ARTIST / MARK JONES`,
@@ -285,7 +284,7 @@ the enumerated screens, not an untested guess.
   the credit windows gating; the IWRAM key-state struct layout; the credits init/tick/
   render functions; `0x030023C5` xrefs in all four game modules (cheat reaches gameplay).
 * **Inferred (labelled):** that flag 1 corresponds to "infinite time / infinite
-  continues" exactly as GameFAQs states; the game's own credit wording and the sound
+  continues" exactly as 3rd party cheat indexes state; the game's own credit wording and the sound
   1/27 pair strongly support this but the voice samples were not audible under
   `SDL_AUDIODRIVER=dummy`. The effect of flag 2 (`0x030023C6`) is **not** proven: its
   only other xref is `0x081C2FF8` in the shell; no visible change was captured after

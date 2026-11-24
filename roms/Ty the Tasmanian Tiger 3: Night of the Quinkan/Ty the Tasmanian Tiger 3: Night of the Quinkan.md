@@ -225,7 +225,7 @@ in the code region, which suggests the string is unused by the retail front end.
 2. The exact mapping of the 0x280-byte save-slot fields (the displayed `0%`
    is likely derived from collectible bitfields rather than a single byte).
 3. Whether any *link/transfer* feature (the GBA build is single-player per
-   Wikipedia) could set hidden flags — no such UI exists in this ROM.
+   3rd party cheat indexes) could set hidden flags — no such UI exists in this ROM.
 
 ## 9. Tooling
 

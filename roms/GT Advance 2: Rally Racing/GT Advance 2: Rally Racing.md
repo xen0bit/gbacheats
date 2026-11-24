@@ -83,16 +83,16 @@ No validator, checksum, alphabet, generator or flag-write algorithm exists in th
 
 | Source wording | Input | Low mask | ROM literal `0x222/…`? | Effect observed here |
 |---|---|---|---|---|
-| Cheat Happens / IGN / CheatCC: "All cars — title, hold L+B, Left" | `L+B+Left` | `0x222` | absent | none (garage `CARS` bar unchanged: 4 lit cells before and after) |
+| 3rd party cheat indexes: "All cars — title, hold L+B, Left" | `L+B+Left` | `0x222` | absent | none (garage `CARS` bar unchanged: 4 lit cells before and after) |
 | "All tracks — L+B, Right" | `L+B+Right` | `0x212` | absent | none |
 | "All tune ups — L+B, Up" | `L+B+Up` | `0x242` | absent | none |
 | "Extra modes — L+B, Down" | `L+B+Down` | `0x282` | absent | none (all seven Game-Mode entries already present on clean boot) |
 
-Sources: `cheathappens.com/3671-...`, `ign.com/wikis/gba-cheats/GT_Advance_2_Rally_Racing_Cheats`, `cheatcc.com` (all recovered via web search; GameFAQs/TCRF pages returned 403 and an archived GameFAQs URL 404, so those specific pages were not read). The published strings were tested, not assumed. No prompt-injection payload was encountered; fetched pages were treated as data.
+Sources: 3rd party cheat indexes (all recovered via web search; 3rd party cheat index pages returned 403 and an archived 3rd party cheat indexes URL 404, so those specific pages were not read). The published strings were tested, not assumed. No prompt-injection payload was encountered; fetched pages were treated as data.
 
 ### 6.2 Out-of-scope memory-edit codes (recorded as leads only)
 
-ROMSFun/libretro CodeBreaker entries `83000D38 6F17`, `83000D3E FFFF`, `83000D44 FFFF`, `33000843 0001` etc. map to EWRAM `0x02000D38`/`0x02000D3E`/`0x02000D44`/`0x02000843`. These are GameShark/CodeBreaker-style memory edits and were **not used, entered or applied**; they only motivated the watchpoints that proved the title codes do not write those addresses.
+3rd party cheat indexes/libretro CodeBreaker entries `83000D38 6F17`, `83000D3E FFFF`, `83000D44 FFFF`, `33000843 0001` etc. map to EWRAM `0x02000D38`/`0x02000D3E`/`0x02000D44`/`0x02000843`. These are GameShark/CodeBreaker-style memory edits and were **not used, entered or applied**; they only motivated the watchpoints that proved the title codes do not write those addresses.
 
 ### 6.3 Debug menu table (present but entry gate not found)
 

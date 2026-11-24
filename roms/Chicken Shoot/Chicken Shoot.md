@@ -32,7 +32,7 @@ The evidence is a closed inventory, not a failed search:
 * The complete text bank (`0x003DA000`–`0x003E0000`) contains **325 printable strings**, all menu labels, five-language localisations, credits, level-stats labels, link-error text and the five default highscore names. There is **no** occurrence of `password`, `cheat`, `debug`, `secret`, `unlock`, `gallery`, `code`, `level select`, `sound test`, `test mode` or `bonus` in ASCII, in the `+0x20` (lower-case-as-capital) encoding, or in UTF-16LE.
 * **Ten screen definitions** exist in ROM (language select, main menu, mode select, options, pause, redefine keys, highscore, multiplayer connecting/level select, about/credits, level-stats overlay). Every screen definition was parsed; none has a text-entry or code-entry widget. The only text input in the game is the highscore name field (`-enter name-`), which is a display name, not a validator (see §5).
 * The only anomalous text is `test arcade` / `test classic`, repeated once per language (10 strings). They have **zero pointer references** anywhere in the 4 MiB image: a cut test-mode label set, not a reachable screen.
-* Published cheat sources list nothing: GameFAQs' Chicken Shoot GBA cheat page has no codes/passwords/unlockables; ChapterCheats lists "No Codes, No Passwords, No Unlockables, No Hints or Secrets, No Easter Eggs"; Cheat Happens lists no codes. A known code therefore cannot be tested because none is published, and the ROM contains no candidate literal either.
+* Published cheat sources list nothing: 3rd party cheat indexes' Chicken Shoot GBA cheat page has no codes/passwords/unlockables; 3rd party cheat index lists "No Codes, No Passwords, No Unlockables, No Hints or Secrets, No Easter Eggs"; 3rd party cheat index lists no codes. A known code therefore cannot be tested because none is published, and the ROM contains no candidate literal either.
 * The button-mask search space was enumerated: every contiguous run of valid GBA button masks (16-bit and 32-bit, both held and edge forms) was extracted. **14** 16-bit runs of ≥5 masks with ≥3 distinct values exist; all sit inside graphics/tile data (offset ≥ `0x485A2`, no code or pointer reference), and none matches the Konami or any documented sequence. The canonical Konami mask sequence is **absent** in both directions.
 
 Dynamically the menu shell was exercised on `:244`: main menu, options, mode select and the multiplayer connecting/level-select screen were each identified by reading the live screen-descriptor pointer and the live text-glyph buffer from RAM. The game's menu is cursor/hover-driven: the D-pad moves an 8.8 fixed-point aim cursor (`0x0300541C` X, `0x03005420` Y), `A` confirms the item under it, `B`/`Start` cancel. No button sequence, text entry or hidden screen was found in any reached menu.
@@ -174,9 +174,9 @@ The menu is a light-gun style cursor UI:
 
 | Source | Codes/passwords/unlockables |
 |---|---|
-| GameFAQs `gba/929317-chicken-shoot/cheats` | none (page has no code list) |
-| ChapterCheats GBA page | “No Codes … No Passwords … No Unlockables … No Hints or Secrets … No Easter Eggs” |
-| Cheat Happens GBA page | none |
+| 3rd party cheat indexes `gba/929317-chicken-shoot/cheats` | none (page has no code list) |
+| 3rd party cheat indexes GBA page | “No Codes … No Passwords … No Unlockables … No Hints or Secrets … No Easter Eggs” |
+| 3rd party cheat indexes GBA page | none |
 
 No literal from any published list exists to search, and the ROM contains no such text under any tested encoding.
 

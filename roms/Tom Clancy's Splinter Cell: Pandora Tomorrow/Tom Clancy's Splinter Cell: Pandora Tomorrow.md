@@ -42,7 +42,7 @@ validator:
   field from the cheat space).
 
 Everything the web calls a "password" for this SKU is a **story puzzle
-solution**, not a cheat: GameFAQs' 14 entries are 3 turret wire orders and 11
+solution**, not a cheat: 3rd party cheat indexes' 14 entries are 3 turret wire orders and 11
 binary-computer codes; the Splinter Cell Wiki adds one more computer code
 (Embassy 1 = `3`). They are fixed per-location values revealed by NPCs and
 compared to the computer puzzle's own state — there is no player-mintable code
@@ -138,7 +138,7 @@ comparison against a target code was found on this path.
 * **Missions (Observed, text bank `0x085480`+):** 12 names listed in §4; only
   TRAINING and EMBASSY 1 are selectable on a fresh save (no code unlocks the rest).
 * **Published "passwords" (recon, evidence only — gameplay puzzles, out of cheat scope):**
-  * GameFAQs (14): turret wire orders — Jerusalem `GREEN,YELLOW,RED`;
+  * 3rd party cheat indexes: turret wire orders — Jerusalem `GREEN,YELLOW,RED`;
     Shipyards/Warehouse `GREEN,YELLOW,BLUE,RED`; and 11 computer binary codes:
     Embassy 2 `5`, Saulnier `9,2` / `6,8` / `5,3`, Shipyard `1,2,7`,
     Submarine `4,9,7`, TV Station `3,2,8` / `4,6,9` / `2,6,6` / `8,4,1`,

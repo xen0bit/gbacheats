@@ -202,12 +202,12 @@ from ASCII.
 
 | Source | Code | ROM status |
 |---|---|---|
-| GameFAQs / Cyberly / ggmania | Pocky L2 `H1NVR9c ♪ 2` | format consistent; glyph→index table is tile-indexed so literal `grep` finds no ASCII (expected for this engine) |
-| GameFAQs | Pocky L7 `1dy ♦ mzzLl` | same |
-| GameFAQs | Becky L2 `Z- ♦ nQ ♪ fnQ` | same |
-| GameFAQs | Rocky L2 `CSGNs4c ♠ B` | same |
-| GameFAQs / SuperCheats | Chapter Select button code | **verified live**: CHAPTER selector appears |
-| GameFAQs / SuperCheats | Expert Mode button code | **verified live**: menu recolours |
+| 3rd party cheat indexes | Pocky L2 `H1NVR9c ♪ 2` | format consistent; glyph→index table is tile-indexed so literal `grep` finds no ASCII (expected for this engine) |
+| 3rd party cheat indexes | Pocky L7 `1dy ♦ mzzLl` | same |
+| 3rd party cheat indexes | Becky L2 `Z- ♦ nQ ♪ fnQ` | same |
+| 3rd party cheat indexes | Rocky L2 `CSGNs4c ♠ B` | same |
+| 3rd party cheat indexes | Chapter Select button code | **verified live**: CHAPTER selector appears |
+| 3rd party cheat indexes | Expert Mode button code | **verified live**: menu recolours |
 
 Published codes are plaintext glyph strings, not ASCII bytes in the ROM: a literal
 search for `H1NVR9c`, `mzzLl`, `TSG613d`, `nDTC2D`, `P?mgBgJm.` all returned zero hits.
@@ -236,7 +236,7 @@ codes minted offline.
 * No hard-coded code table exists: a literal search of the whole ROM for every
   published password string returned **zero** hits.
 
-### Novel code (absent from GameFAQs, VGChartz, TCRF and Cyberly)
+### Novel code (absent from 3rd party cheat indexes)
 
 ```
 index sequence: 35 23 12 12 33 2E 03 10 30

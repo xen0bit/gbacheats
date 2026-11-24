@@ -599,7 +599,7 @@ data placement, not with a palette swap.
 | Menu space | reachable screens | 15 screens walked (§6b.4); link/stage-gated screens enumerated statically |
 | Link minigame space | 4 minigames + 4 bonus games | 8 entries, all named and addressed in §6.3; link-gated |
 | Unlockable space | gameplay counters/flags | Red: 100 jump-rope jumps → Th. Liger; Blue: → Turtle King. Gameplay, not a code. |
-| Charabom slots | 30 slots, 2 unused | slots 29/30 (Fly Shark, Elemouse) are documented on TCRF as RAM flags; memory edit, out of scope |
+| Charabom slots | 30 slots, 2 unused | slots 29/30 (Fly Shark, Elemouse) are documented on 3rd party cheat indexes as RAM flags; memory edit, out of scope |
 | Save space | 3 EEPROM files | 8,192-byte `.sav`; no password needed |
 
 No password alphabet exists. The only long printable tables are font/tile
@@ -620,7 +620,7 @@ unfinished search: the negative is established by
    the key state (the hardware SoftReset),
 4. a fully walked reachable menu tree with no password or debug entry,
 5. a save system that makes passwords unnecessary (8 KiB EEPROM, 3 files),
-6. the complete public record: GameFAQs, a Japanese Bomberman compendium
+6. the complete public record: 3rd party cheat indexes, a Japanese Bomberman compendium
    and the manual list only the jump-rope unlock; no code or password is
    published for either edition.
 
@@ -764,7 +764,7 @@ whose code and labels are mapped in §4–§6.
   reached.
 * The original (pre-cracktro) header title cannot be recovered without a
   clean dump; `MAX2-REDADV` may be the scene group's rewrite.
-* The two unused Charaboms are reachable by RAM flags documented on TCRF;
+* The two unused Charaboms are reachable by RAM flags documented on 3rd party cheat indexes;
   no in-game unlock was found and memory edits are outside scope.
 
 ---
@@ -788,7 +788,7 @@ whose code and labels are mapped in §4–§6.
   * `k.py` — xdotool key helper; `shot.sh` — window screenshot.
 * `strings`, `xxd`, `md5sum`, `sha1sum`, `sha256sum`, ImageMagick,
   `xdotool`, `scrot`, `pdftoppm` + `tesseract` (manual OCR), `pdftotext`.
-* Official manual: `gamegear.net` scan, 84 pages (English + French),
+* Official manual: 3rd party cheat indexes scan, 84 pages (English + French),
   OCR'd locally.
 
 Reproduction of the static claims:

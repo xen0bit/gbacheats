@@ -120,10 +120,10 @@ leading-zero codes (e.g. `0311`) are four-digit strings, not three-digit numbers
 
 | Code | Icons (slot 1→4) | Index | World | Level-in-world | Source |
 |---|---|---:|---:|---:|---|
-| 2104 | Spike, Cera, Littlefoot, Star | 0 | 1 | 1 | GameFAQs "Level 2" |
-| 4230 | Star, Spike, Ducky, Littlefoot | 1 | 1 | 2 | GameFAQs "Level 3" |
-| 4412 | Star, Star, Cera, Spike | 2 | 1 | 3 | GameFAQs "Level 4" |
-| 3141 | Ducky, Cera, Star, Cera | 3 | 1 | 4 | GameFAQs "Level 5" |
+| 2104 | Spike, Cera, Littlefoot, Star | 0 | 1 | 1 | 3rd party cheat indexes "Level 2" |
+| 4230 | Star, Spike, Ducky, Littlefoot | 1 | 1 | 2 | 3rd party cheat indexes "Level 3" |
+| 4412 | Star, Star, Cera, Spike | 2 | 1 | 3 | 3rd party cheat indexes "Level 4" |
+| 3141 | Ducky, Cera, Star, Cera | 3 | 1 | 4 | 3rd party cheat indexes "Level 5" |
 | 1320 | Cera, Ducky, Spike, Littlefoot | 4 | 2 | 1 | **novel** |
 | 3402 | Ducky, Star, Littlefoot, Spike | 5 | 2 | 2 | **novel** |
 | 0311 | Littlefoot, Ducky, Cera, Cera | 6 | 2 | 3 | **novel** |
@@ -147,8 +147,7 @@ validator's allow-table has **12 entries**, so the accepted set is exactly
 12/625 (**1.92%**) — a closed set proven by reading every entry of the compare
 table (`0x08029F60`) and by the `CMP r3,#12` miss branch at `0x08003024`.
 
-**Novel codes.** Eight accepted codes appear in no published list (GameFAQs,
-Cheat Happens, almarsguides, 53lu all list only the four Level-2–5 codes).
+**Novel codes.** Eight accepted codes appear in no published list (3rd party cheat indexes all list only the four Level-2–5 codes).
 `1320` was selected for in-game proof:
 * Entered with real UI keypresses: Right/Left to move slots, Down ×1/3/2/0 to
   set Cera/Ducky/Spike/Littlefoot, A to submit.

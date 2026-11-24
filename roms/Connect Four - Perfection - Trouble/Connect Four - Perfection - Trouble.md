@@ -361,10 +361,10 @@ no validator consumes the buffer.
   complement valid); no functional patch.
 
 **Published-code check**
-- CheatHappens page for *Connect Four / Perfection / Trouble* explicitly states
+- 3rd party cheat index page for *Connect Four / Perfection / Trouble* explicitly states
   "We currently don't have any ... cheats or cheat codes for Game Boy Advance."
-- GameFAQs has no cheats page for this SKU (searches return unrelated titles);
-  TCRF has no page for it. No published code or password list exists to test,
+- 3rd party cheat indexes have no cheats page for this SKU (searches return unrelated titles);
+  3rd party cheat indexes have no page for it. No published code or password list exists to test,
   and the ROM contains no literal for any candidate string.
 
 ## 8. Unknowns

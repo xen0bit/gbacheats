@@ -26,7 +26,7 @@
 
 The ROM *does* contain a complete, self-contained **sound-test debug subsystem** (`0x08053xxx`–`0x08059xxx`) with ASCII debug labels (`MODE:PAT`, `MODE:SEQ`, `SEQ No.%02d/%02d %s`) and 61 track-name strings (34 `FF#:` FF1 tracks + 27 `FF$:` FF2 tracks). This subsystem is **dead code**: its four entry functions have zero callers and zero external data xrefs anywhere in the image — every pointer to them lives inside the subsystem's own literal pools. No game scene, menu handler, title-screen handler, or input matcher ever transfers control to it. It is therefore classified as **dead code** (§16.3, type 2), not a gated feature and not a delivered cheat.
 
-Published-code research was attempted against TCRF (live + Wayback 2023 snapshot), GameFAQs, Google, Bing, DuckDuckGo, Mojeek and Jina.ai. All engines returned CAPTCHAs/403/no results; the archived TCRF article documents only unused items and regional differences, **no debug menu or cheat code**. No code literal from any version (Famicom/PSP included) could be located because none is published for this SKU.
+Published-code research was attempted against 3rd party cheat indexes, Google, Bing, DuckDuckGo, Mojeek and Jina.ai. All engines returned CAPTCHAs/403/no results; the archived 3rd party cheat index article documents only unused items and regional differences, **no debug menu or cheat code**. No code literal from any version (Famicom/PSP included) could be located because none is published for this SKU.
 
 ## 3. How to reproduce
 
@@ -121,7 +121,7 @@ draw(work):                            # 0x080553F8
 | Font/tile-indexed text | Verified the visible UI is tile-indexed (no ASCII hits for `NEW GAME`, `CONTINUE`, `CONFIG`, `OPTIONS`, `BESTIARY`); decoded the one ASCII debug bank instead. Its labels are technical (`MODE:SEQ`) and carry a Japanese "test" suffix — developer-only. | No hidden player-facing debug label exists in any encoding searched (ASCII, +0x20 folded case via `strings -i`, UTF-16 scan of the debug bank). |
 | Button-code tables | u16 mask-array scan (§5.4a) driven by the derived active-high mask set; keypad readers located at `0x08011D70` and the lone literal ref to `0x020001F0` at `0x0803E860` | No multi-key sequence array; the `0x0803E860` hit is a data pool, not a matcher. |
 | Debug subsystem reachability | Whole-ROM Thumb BL scan (every 2 bytes, `0xF000/0xF8xx`) + 32-bit literal-pointer scan for the four sound-test entries | BL=0 for all four; all pointer xrefs internal to the module. **Dead code proven.** |
-| Published codes | TCRF (live + Wayback 2023), GameFAQs, Google, Bing, DDG, Mojeek, Jina.ai; CDX queries for archived cheat pages | All blocked/empty; TCRF article contains no code or debug menu. Nothing to verify or reject. |
+| Published codes | 3rd party cheat indexes, Google, Bing, DDG, Mojeek, Jina.ai; CDX queries for archived cheat pages | All blocked/empty; 3rd party cheat index article contains no code or debug menu. Nothing to verify or reject. |
 
 **Button combinations entered on the real screen (oracle = breakpoint at `0x080553F9` + screenshots):**
 `L+R+Start`; `L+R+Select`; `A+B+Start+Select`; `L+R+A+B`; `Start+Select`; `L+R+A+B+Start+Select`; `Up+Down+Left+Right+A+B`; `Up,Up,Down,Down,Left,Right,Left,Right,B,A`; `Left,Right,Left,Right,Up,Down,Up,Down,B,A`; `L+R+Up+Down`; `L+R+Left+Right`; `R+Start`; `L+Start`; `A+Select`; `B+Select`; `L+R+A+B`; `Start+A`; `Start+B`.
@@ -134,7 +134,7 @@ Result: **0** breakpoint hits and **0** debug screens. (`A+B+Start+Select` is th
 * **Observed:** emulator boots to the documented title; button combinations produced no debug screen; the keypad globals and a live `Hit breakpoint 1 at 0x08011D70` register dump were read in mGBA's CLI debugger; screenshots `shot_00`–`shot_29` were in `/tmp/ff12/`.
 * **Derived:** all addresses, the unreferenced status of the sound-test module, the mask values of the keypad globals, the ROM-vs-RAM address translation, and the meaning of the track-name tables — each from disassembly and exhaustive xref scans whose scanner was sanity-checked against a known BL (`0x8055420 → 0x0818C258`).
 * **Inferred:** that the sound-test module was compiled into retail builds inadvertently (typical of TOSE/Square development builds). It is **not** claimed to be reachable; no code path was found.
-* **External (attempted):** web research was blocked by CAPTCHA/403; the one accessible archived TCRF article corroborates the absence of a documented debug menu. Treated as weak corroboration only.
+* **External (attempted):** web research was blocked by CAPTCHA/403; the one accessible archived 3rd party cheat index article corroborates the absence of a documented debug menu. Treated as weak corroboration only.
 
 ## 8. Unknowns
 
@@ -149,6 +149,6 @@ Result: **0** breakpoint hits and **0** debug screens. (`A+B+Start+Select` is th
 * `arm-none-eabi-objdump -D -b binary -marm -M force-thumb --adjust-vma=0x08000000` — disassembly.
 * REA MCP + Ghidra 12.1.4: full 16 MiB raw-ARM import timed out at the 330 s startup deadline; a 25 KiB trimmed window (`/tmp/ff12/soundtest_window.bin`, base `0x08054000`) was analysed instead and used to decompile `FUN_0805501C`, `FUN_080557B4`, `FUN_080557D4`, `FUN_0805661C`. Session closed afterwards.
 * mGBA with `-d` CLI debugger driven through a FIFO (`stdbuf -oL -eL`) for breakpoints and RAM reads; Xvfb `:316` + openbox + xdotool + scrot for screen walking. Used `-d` because sibling sessions hold the single-client GDB stub port.
-* Web tools: `webfetch`/`websearch` against TCRF, Wayback Machine, Google, Bing, DuckDuckGo, Mojeek, Jina.ai — all blocked or empty as documented.
+* Web tools: `webfetch`/`websearch` against 3rd party cheat indexes, Wayback Machine, Google, Bing, DuckDuckGo, Mojeek, Jina.ai — all blocked or empty as documented.
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced here; only addresses, hashes, algorithms and the analyst's own findings are published.

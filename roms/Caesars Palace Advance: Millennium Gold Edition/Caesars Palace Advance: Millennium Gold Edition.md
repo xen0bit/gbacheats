@@ -38,7 +38,7 @@ independent developer-intended systems:
    in mGBA, along with several minted codes).
 2. **Two hidden developer-photo codes** on the same screen: `KB2FVP` (photo 1) and `K2SMN`
    (photo 2). Each displays a full-screen LZ77-compressed 240×160 photograph and returns to
-   the lobby. They are not in any published cheat list and are not documented on TCRF.
+   the lobby. They are not in any published cheat list and are not documented on 3rd party cheat indexes.
 
 The "constant middle" of the four published money passwords (`v#dbbbxb`) is **not** a
 signature or a fixed salt. It is the encoding of the default starting state
@@ -47,7 +47,7 @@ are understood, the published list is a tiny slice of the real space.
 
 Money endpoints are also developer-intended: `$0` shows “You're broke! Maybe you'll have
 better luck next time.”; money **≥ $10,000,000** shows “You're a billionaire — Time to
-retire!”. `$9,999,999` does not trigger it. The published GameFAQs “millionaire above
+retire!”. `$9,999,999` does not trigger it. The published 3rd party cheat indexes “millionaire above
 $1,000,000” tip was **not** reproduced at `$1,000,000` or `$1,000,001`.
 
 ## 3. How to reproduce
@@ -108,10 +108,10 @@ the bytes are `v&bbv#dbbbxbF`, which decodes to `$2,000 / $10,000 / $0`.
 
 | Published effect | Password | Source | In-game result |
 |---|---|---|---|
-| Start with $5,900 | `q#cbv#dbbbxbM` | GameFAQs, SuperCheats, PlanetCheats | **Accepted**, Player `$5900`, Credit `$10000`, Debt `$0` |
+| Start with $5,900 | `q#cbv#dbbbxbM` | 3rd party cheat indexes | **Accepted**, Player `$5900`, Credit `$10000`, Debt `$0` |
 | Start with $16,305 | `W9fbv#dbbbxbB` | same | **Accepted**, Player `$16305` |
 | Start with $527,000 | `?Nbdv#dbbbxbs` | same | **Accepted**, Player `$527000` |
-| Start with $8,527,030 | `1XCBv#dbbbxbM` | GameFAQs | **Accepted**, Player `$8527030` |
+| Start with $8,527,030 | `1XCBv#dbbbxbM` | 3rd party cheat indexes | **Accepted**, Player `$8527030` |
 
 All four are reproduced exactly by the encoder in §5 (uppercase/lowercase are significant).
 The only other published “cheat” (roulette negative-bet overflow) is a gameplay bug, not a
@@ -364,7 +364,7 @@ The corresponding screenshots in the work directory are
 * **Credit/debt semantic caps.** The fields are 18-bit in the password; the game may reject,
   clamp or mis-display values above its intended gameplay range. Only the values above were
   exercised.
-* **The published “millionaire” tip.** GameFAQs says money above `$1,000,000` shows a
+* **The published “millionaire” tip.** 3rd party cheat indexes say money above `$1,000,000` shows a
   millionaire message. This ROM did not do so at `$1,000,001`; only the `$10,000,000+`
   “billionaire” ending was observed. Whether a separate “millionaire” screen exists at an
   intermediate threshold is unresolved.

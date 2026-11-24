@@ -38,7 +38,7 @@ Static reconstruction (all addresses are ROM addresses, file offset = address �
 * **Validator** `0x080057E0` — polls the press buffer, compares each record, ORs the effect flag into `0x03002EA8`. The record with flag `0xFF` additionally writes `0x19` to `0x03002E4C`, which switches the game to the hidden **debug menu** (level select + sound test + "hold Select to go anywhere").
 * **Input path** `0x08001F78` — converts `KEYINPUT` (`0x04000130`) into `held` (`0x0300185C`) and `pressed` (`0x03001EA0`). The validator's own history buffer is `0x03006E60` (10 × `u32`) with index at `0x03006EE8`.
 
-All five table sequences match the published GBA lists exactly (SuperCheats, Neoseeker, GameFAQs; TCRF corroborates the debug sequence and the `0x03002E4C` address). A second, **undocumented** pair of button combos exists in the credits handler (`0x08008C8C`, `0x08008CE0`): L+Select and R+Select gate additional menu state / the debug menu, provided a credits-screen counter has reached `0xFF`.
+All five table sequences match the published GBA lists exactly (3rd party cheat indexes; 3rd party cheat indexes corroborates the debug sequence and the `0x03002E4C` address). A second, **undocumented** pair of button combos exists in the credits handler (`0x08008C8C`, `0x08008CE0`): L+Select and R+Select gate additional menu state / the debug menu, provided a credits-screen counter has reached `0xFF`.
 
 Screen enumeration (observed in mGBA on `:316`): language select, legal/intro, attract demo, "Press START" title, six-item ring main menu (New Game / Continue / Options / Kek Powerizer / 2 Player Challenge / Credits), Options submenu (Music / Sound FX / Difficulty / Language / Erase Data), slot/continue screen, level-select ring (Arbo, Dreejal Vin, Elta Siktar, Kek, Gorm's Lair), Kek Powerizer submenu (Shield / Tracking / Road Rocket / Intruder Alert), credits, and the 2-player "VS" screen.
 
@@ -212,12 +212,12 @@ Because flags are ORed and never cleared by the validator, entering two codes in
 
 | Source | Literal | ROM check |
 |---|---|---|
-| SuperCheats / Neoseeker / GameFAQs | D,D,D,L,L,L,L,U,U,U (debug) | present, `0x08030D10` |
+| 3rd party cheat indexes | D,D,D,L,L,L,L,U,U,U (debug) | present, `0x08030D10` |
 | same | R,R,R,R,L,L,L,R,R,U (immortality) | present, `0x08030C80` |
 | same | L,L,L,R,R,R,L,L,L,U (freeze) | present, `0x08030C50` |
 | same | R,R,R,L,R,R,R,L,R,U (boss levels) | present, `0x08030CE0` |
 | same | R,L,R,R,L,R,R,R,L,U (all levels) | present, `0x08030CB0` |
-| TCRF | GameShark `03002E4C19` (debug) | address confirmed: validator writes `0x19` to `0x03002E4C` at `0x080058A0`–`0x08058A2` |
+| 3rd party cheat indexes | GameShark `03002E4C19` (debug) | address confirmed: validator writes `0x19` to `0x03002E4C` at `0x080058A0`–`0x08058A2` |
 | CodeBreaker | `73002E4C 001C / 33002E4C 0019` (level select via Credits) | address confirmed; the game's own R+Select gate writes the same value |
 
 No GameShark/CodeBreaker/Game Genie code is treated as an in-game cheat here; they were used only to cross-check addresses.
@@ -228,7 +228,7 @@ No GameShark/CodeBreaker/Game Genie code is treated as an in-game cheat here; th
 
 * **Space definition.** The validator accepts exactly **5** sequences, each 10 presses. The theoretical input space is `10^10` press strings over the ten GBA buttons; the accepted set is 5 strings. Field widths: 10 × 32-bit key masks, 1 × 32-bit terminator, 1 × 32-bit effect flag; record stride 0x30; table size 5 × 0x30 = 0xF0 bytes (`0x08030C50`–`0x08030D3F`). No checksum, no reserved bits, no variable-length codes. The loop bound `cmp r5,#4; ble` at `0x080058C8` proves there are exactly five records, not a longer table.
 * **Validator model.** §5.2 is a bit-exact reimplementation of the ROM routine, including the Select reset, the u32-stride history buffer, the ten-mask comparison, the flag OR, the `0xFF` debug path, and the post-loop index clamp. `verify.py` decodes all five records from the ROM and matches them to the published list.
-* **Novel code.** All five accepted sequences are published, so no additional *accepted* sequence can be minted — the table is closed. The unpublished developer surface is instead the **credits-screen combos** at `0x08008C8C`/`0x08008CE0`: `L+Select` (sets flag `0x02`) and `R+Select` with counter `0xFF` (sets screen `0x19`, the debug menu). Neither appears in GameFAQs/Neoseeker/SuperCheats/TCRF. The combined flag value `0x03` obtained by entering codes 0 and 1 sequentially is likewise not on any published list.
+* **Novel code.** All five accepted sequences are published, so no additional *accepted* sequence can be minted — the table is closed. The unpublished developer surface is instead the **credits-screen combos** at `0x08008C8C`/`0x08008CE0`: `L+Select` (sets flag `0x02`) and `R+Select` with counter `0xFF` (sets screen `0x19`, the debug menu). Neither appears in 3rd party cheat indexes. The combined flag value `0x03` obtained by entering codes 0 and 1 sequentially is likewise not on any published list.
 * **Bounds proven by rejection.** §5.2 rejects every press string not exactly equal to one of the five records: a single wrong mask sets `r7 = 1` and jumps to the next record (`0x0800586C`→`0x080058C6`), and an incomplete string never reaches the `idx == 10` branch (`0x0800583E`). The terminator word must be `0xFFFFFFFF` for a record to be reached (each record is skipped only after its ten masks are compared, so the terminator is part of the stored layout). Out-of-range history indices are clamped to 10 at `0x08058CC`–`0x08058D6`.
 
 ---
@@ -246,7 +246,7 @@ No GameShark/CodeBreaker/Game Genie code is treated as an in-game cheat here; th
 
 * The exact frame/timing window in which the validator is called (`0x08005B98` gate `0x03006EB8 == 0`) was not isolated to a single named screen; the attract-mode code path populates the same history buffer, which is why a fresh game starts with seven `Right` entries in it.
 * Whether the credits L+Select branch (`0x03002EA8 = 2`) grants a distinct in-game effect or simply re-selects the immortality flag was not observed on screen.
-* The debug menu's own entries (level select, sound test, "go anywhere") are derived from the published TCRF description plus the `0x19` screen write; a full in-game walk of that screen was not completed in this session.
+* The debug menu's own entries (level select, sound test, "go anywhere") are derived from the published 3rd party cheat index description plus the `0x19` screen write; a full in-game walk of that screen was not completed in this session.
 
 ---
 
@@ -255,7 +255,7 @@ No GameShark/CodeBreaker/Game Genie code is treated as an in-game cheat here; th
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Ghidra via REA MCP (raw-binary ARM load at `0x08000000`), `strings`, `grep`, `xxd`, `struct`.
 * mGBA 0.10.5 on Xvfb `:316` with `SDL_AUDIODRIVER=dummy`; `xdotool` for input, `scrot`/ImageMagick for screenshots.
 * Savestate RAM reader `ssdump.py`, state patcher `patchstate.py`, code injector `injectcode.py`, input helper `press.py`, decoder `verify.py` (all in `/tmp/galidor`).
-* Web sources: SuperCheats (full GBA code list), Neoseeker, GameFAQs search snippets, TCRF search snippet, Almar's Guides CodeBreaker list (address cross-check only). Fetched pages were treated as data; no page contained an instruction that was acted upon.
+* Web sources: 3rd party cheat index search snippets, 3rd party cheat index search snippet, 3rd party cheat indexes CodeBreaker list (address cross-check only). Fetched pages were treated as data; no page contained an instruction that was acted upon.
 
 ---
 

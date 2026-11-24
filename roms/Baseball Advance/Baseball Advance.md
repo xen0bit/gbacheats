@@ -38,7 +38,7 @@ reference image, **not** a local patch. The Demozoo/Mode7 "Baseball Advance
 `0x080000C0` (standard crt0: `mov r0,#0x12; msr cpsr; …`).
 
 Save hardware: SRAM. mGBA created a 32 KiB `Baseball Advance.sav`
-(256 kbit, matches the "Sram v102" entry in the GBAtemp release list). After
+(256 kbit, matches the "Sram v102" entry in the 3rd party cheat indexes release list). After
 menu/season testing the file contained only
 `02 31 14 49 00 00 …` (4 non-zero bytes at offset 0, rest zero; the tail of
 SRAM reads `0xFF`). The game persists via battery save, not passwords.
@@ -70,8 +70,8 @@ Evidence, in short:
    and none is a cheat sequence (they are audio/graphics data). The game has
    exactly **2** `KEYINPUT` literal loads; one is the A+B+Select+Start soft
    reset, the other is the single per-frame input poll at `0x080474D8`.
-4. **Published codes do not exist.** GameFAQs has no cheat entries for this
-   title (its cheats page carries only game info/message board), VGChartz lists
+4. **Published codes do not exist.** 3rd party cheat indexes have no cheat entries for this
+   title (its cheats page carries only game info/message board), 3rd party cheat index lists
    two gameplay tips ("Recommended team", "Stealing"), and the only other
    published codes are CodeBreaker memory writes (out of scope here).
 5. **Developer debug screens exist but are dead code.** The scene table at
@@ -391,10 +391,10 @@ Exactly 30 MLB clubs + the two All-Star teams used by ALL-STAR GAME. No
 
 | Source | Result |
 |---|---|
-| GameFAQs GBA 551520 (Baseball Advance) cheats page | No cheat entries; search snippet and page metadata say the title "has game information and a community message board". Direct fetch 403; snippet read. |
-| VGChartz game 26236 cheats | "Total cheats available: 2" — both are gameplay tips (`Recommended team`, `Stealing`), not codes. |
-| Almar's Guides, Baseball Advance (USA) | CodeBreaker codes only (`320227D8 …` memory writes). Memory-edit codes are out of scope; they are not passwords/button codes. |
-| TCRF | HTTP 403; web.archive.org returned 503/temporarily offline during the session, so no archived TCRF page could be read. |
+| 3rd party cheat indexes GBA 551520 (Baseball Advance) cheats page | No cheat entries; search snippet and page metadata say the title "has game information and a community message board". Direct fetch 403; snippet read. |
+| 3rd party cheat indexes game 26236 cheats | "Total cheats available: 2" — both are gameplay tips (`Recommended team`, `Stealing`), not codes. |
+| 3rd party cheat indexes, Baseball Advance (USA) | CodeBreaker codes only (`320227D8 …` memory writes). Memory-edit codes are out of scope; they are not passwords/button codes. |
+| 3rd party cheat indexes | HTTP 403; web.archive.org returned 503/temporarily offline during the session, so no archived 3rd party cheat index page could be read. |
 | Web searches (`Baseball Advance password`, `… cheat codes hidden team`, `… unlock`) | No published password, button sequence or hidden menu. Hits were other baseball titles (Backyard Baseball, Sports Illustrated for Kids, MLB SlugFest). |
 
 No public code was available to test; there is also no screen that could accept
@@ -554,7 +554,7 @@ signed byte, and the retail writers only emit the 15 values listed above.
   for writing a season save was not isolated.
 * The full value set of the LEVEL option is not enumerated (the screen was
   walked; only VETERAN was displayed in the tested states).
-* Archive.org was offline during the session, so archived GameFAQs/TCRF pages
+* Archive.org was offline during the session, so archived 3rd party cheat index pages
   could not be checked; live pages returned 403 or showed no cheats.
 
 ---

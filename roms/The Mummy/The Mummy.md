@@ -22,7 +22,7 @@ Analysis used a byte-identical copy in `/tmp/mummy/`.
 
 The game has a **developer-intended 4-symbol password system**. The on-screen alphabet is
 32 symbols, `BCDFGHJKLMNPQRSTVWXYZ0123456789*`, so each password is 20 bits. A published
-list of 15 codes exists (GameFAQs/GameGenie/ChapterCheats); **14 of them are structurally
+list of 15 codes exists (3rd party cheat indexes); **14 of them are structurally
 valid against the ROM's own validator, one (`XXNY`) is not**.
 
 The full codec was recovered from three small Thumb functions: a bit permutation
@@ -134,7 +134,7 @@ MSB-first is the **reverse** of the entry order.
 
 ## 6. Tables
 
-Published codes (GameFAQs `gba/582351`, GameGenie, ChapterCheats — all the same 15 strings):
+Published codes (3rd party cheat indexes `gba/582351`, 3rd party cheat indexes — all the same 15 strings):
 
 | Code | packed | payload | validator | mask gate |
 |---|---|---|---|---|
@@ -222,7 +222,7 @@ distinct RAM changes shown; screenshots of the source screens are in
 
 ## 8. Unknowns
 
-* Retail path to the `Enter Code` screen (Bonus Game Modes / Select Level). The GameFAQs
+* Retail path to the `Enter Code` screen (Bonus Game Modes / Select Level). The 3rd party cheat indexes
   description mentions a pause→quit→replay-level→Select Level flow that did not match the
   screens reachable in this AUME41 build.
 * Whether the bit permutation and fold serve a copy-protection purpose or simply

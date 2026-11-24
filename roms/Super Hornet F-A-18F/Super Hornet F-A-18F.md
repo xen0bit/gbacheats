@@ -31,7 +31,7 @@ codes that set `0x030000D0` to 1 or 2; the remaining 38 are level-skip codes
 mission. The on-screen keyboard alphabet is the 21 letters
 `BCDFGHJKLMNPQRSTVWXYZ` at `0x083FB10C`.
 
-Every one of the 40 codes is already in the published lists (SuperCheats' Novice/Ace
+Every one of the 40 codes is already in the published lists (3rd party cheat indexes' Novice/Ace
 tables plus the two codes the game itself prints in its ending messages). The
 complete validator was reversed and its whole accept set enumerated statically;
 the published list matches the ROM table exactly. This is therefore a **bounded
@@ -109,8 +109,8 @@ character is written into the buffer and its font index (`char + 0xE0`) is drawn
 
 | Code | ROM addr | RAM effect | In-game meaning / published source |
 |---|---|---|---|
-| `NHDCDKPM` | `0x083FAFA4` | `0x030000D0 = 1` | Printed in the "out of this world experience" ending message (`0x082A23B`); GameFAQs: enter then complete a mission |
-| `LCMLFLTC` | `0x083FAFAD` | `0x030000D0 = 2` | Printed in the "relive your stick and rudder days" ending message (`0x082A31A`); GameFAQs/SuperCheats: unlimited weapons and fuel |
+| `NHDCDKPM` | `0x083FAFA4` | `0x030000D0 = 1` | Printed in the "out of this world experience" ending message (`0x082A23B`); 3rd party cheat indexes: enter then complete a mission |
+| `LCMLFLTC` | `0x083FAFAD` | `0x030000D0 = 2` | Printed in the "relive your stick and rudder days" ending message (`0x082A31A`); 3rd party cheat indexes: unlimited weapons and fuel |
 
 ### 6.2 Level codes (table base `0x083FAFB6`, stride 9, 38 entries)
 
@@ -157,7 +157,7 @@ widths, checksum bits, or reserved bits to enumerate.
 `0x083FAFA4..0x083FB10A` and independently confirmed by reading the two loop
 bounds in the validator (`cmp r4,#1; bls` for the 2 special codes;
 `cmp r4,#0x25; bls` for the 38 level codes). All 40 are in the published
-SuperCheats list or are the two codes the game itself prints in its endings.
+3rd party cheat index list or are the two codes the game itself prints in its endings.
 A ROM-wide regex scan for 8-letter runs over the 21-letter alphabet found 292
 hits; exactly the 40 contiguous entries at `0x3FAFA4..0x3FB10A` are NUL-terminated
 table entries, the rest are graphics/audio data or the two in-message copies.
@@ -228,8 +228,8 @@ PRACTICE LANDING (screenshots `r0.png`, `screen_options.png`,
   `nav.py` (title→password navigation), `enter.py` (keyboard driver),
   `detect.py` (green-cursor detection), `memread.py` (savestate `gbAs` zlib
   decompress + IWRAM reads), plus the one-shot scan/test scripts.
-* Web recon: SuperCheats full password list (verified literally against the ROM);
-  GameFAQs cheat page returned HTTP 403 to direct fetches, so only its search
+* Web recon: 3rd party cheat indexes full password list (verified literally against the ROM);
+  3rd party cheat index cheat page returned HTTP 403 to direct fetches, so only its search
   snippets were used (they agree with the ROM contents).
 * No ROM or copyrighted asset is redistributed; only addresses, hashes, and
   findings are published.

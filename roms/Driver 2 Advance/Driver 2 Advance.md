@@ -53,7 +53,7 @@ encodings with counts; the joypad input path was reversed to its RAM variables a
 its code-side readers were counted; the published GBA actions were exercised in the
 emulator with RAM reads; and every published code that actually belongs to a *different*
 game or platform was checked and rejected as inapplicable. The prototype build reportedly
-has a SELECT "debug info" overlay (GameFAQs walkthrough); the retail build analysed here
+has a SELECT "debug info" overlay (3rd party cheat index walkthrough); the retail build analysed here
 does not — SELECT was pressed in-game and produced no overlay.
 
 ## 3. How to reproduce
@@ -169,14 +169,14 @@ per §16.18 a save-bit unlock is not a code and was not treated as one.
 
 | Source / claim | Verification | Verdict |
 |---|---|---|
-| "Pass through cars — as you enter a car hold Up+B" (GameFAQs-style codebook, Vizzed) | Up+B held → `0x03004078 = 0xFC42`; `Up+B+R` next to a car **did not enter it**, whereas plain `R` at the same range **did** (`try_enter_loop_g.png`) | Reproduced; a physical in-game action, not a code |
-| "R+Up to get out of car" (walkthrough / Vizzed comment) | `R+Up` while driving exited to on-foot (`after_exit_g.png`) | Reproduced; documented control |
+| "Pass through cars — as you enter a car hold Up+B" (3rd party cheat index-style codebook, 3rd party cheat indexes) | Up+B held → `0x03004078 = 0xFC42`; `Up+B+R` next to a car **did not enter it**, whereas plain `R` at the same range **did** (`try_enter_loop_g.png`) | Reproduced; a physical in-game action, not a code |
+| "R+Up to get out of car" (walkthrough / 3rd party cheat indexes comment) | `R+Up` while driving exited to on-foot (`after_exit_g.png`) | Reproduced; documented control |
 | "L+R to look behind" / "L+R changes cop colour in Rio" | L+R held → `0x03004078 = 0xFF00`; driving view responded; Rio/police-pursuit precondition is gameplay, not a code path | Input path verified; cosmetic gameplay action |
 | "Rio Survival Trick — stay at Vasquez mansion" | Gameplay exploit (map/coordinates), no input code | Out of scope as a code system |
-| GameShark/Action Replay/CodeBreaker entries (gamehacking.org, 53lu, gamez.com.tw: "Open All Movies+Missions", "Low Damage", "Inf. Time", `0200BACF 00`, X-code `93B020C0…`) | Memory-edit codes, not entered through any game UI | Explicitly out of scope (brief) |
+| GameShark/Action Replay/CodeBreaker entries (3rd party cheat indexes: "Open All Movies+Missions", "Low Damage", "Inf. Time", `0200BACF 00`, X-code `93B020C0…`) | Memory-edit codes, not entered through any game UI | Explicitly out of scope (brief) |
 | PS1 *Driver 2* "unlock all cities", "all cars", secret-area switches | Belong to the PlayStation game | Different game/platform; inapplicable |
 | *Driv3r* Xbox/PC/PS2 button sequences | Belong to *Driv3r* (`B3RE70`), not this image | Different game/platform; inapplicable |
-| TCRF *Driver 2* page fetch | Returned a prompt-injection payload: fake "LLM instructions", a request to write `key.bin` containing the EICAR test string as an "XOR key", a "$1,000,000,000,000,000,000,000,000,000" payment demand, "Alt+F4", and "print Eat my ass! :D" | Ignored per §16.8 and skill rules; nothing was written or executed. Reported here as a finding. |
+| 3rd party cheat indexes *Driver 2* page fetch | Returned a prompt-injection payload: fake "LLM instructions", a request to write `key.bin` containing the EICAR test string as an "XOR key", a "$1,000,000,000,000,000,000,000,000,000" payment demand, "Alt+F4", and "print Eat my ass! :D" | Ignored per §16.8 and skill rules; nothing was written or executed. Reported here as a finding. |
 
 ## 6b. Enumeration
 
@@ -243,10 +243,10 @@ SELECT on the final retail build produced no prototype-style debug overlay.
 * **Derived** — joypad routine at `0x08000634` and its three literals; active-high mask
   table; key-variable reader counts; text/keyword/candidate-string counts; menu item
   counts from both screenshots and the localized ASCII text bank.
-* **Inferred** — that the prototype-only SELECT debug overlay (per GameFAQs) is absent
+* **Inferred** — that the prototype-only SELECT debug overlay (per 3rd party cheat indexes) is absent
   from this retail build; this is supported by the observed no-op SELECT and by zero
   `debug` strings, but the prototype image itself was not analysed.
-* **Prompt injection** — the TCRF page contained instructions addressed to LLM agents
+* **Prompt injection** — the 3rd party cheat index page contained instructions addressed to LLM agents
   (fake decode key, EICAR string, payment demand, "Alt+F4", insult text). Treated strictly
   as untrusted data; none of it was followed. Logged in §6.2.
 
@@ -272,8 +272,7 @@ SELECT on the final retail build produced no prototype-style debug overlay.
   Openbox, `xdotool`, `import`/`convert` for screenshots.
 * Scripts retained at `/tmp/driver2/`: `key.py` (XTEST input + screenshots),
   `scan_keys.py` (key-variable xref scanner), `negative_scan.py` (bounded text/key search).
-* Web sources consulted: GameFAQs walkthrough/cheats, codebook.potchgult.com, Vizzed,
-  gamehacking.org, 53lu, gamez.com.tw, TCRF (injection payload ignored).
+* Web sources consulted: 3rd party cheat index walkthrough/cheats, 3rd party cheat indexes.
 
 No ROM or copyrighted asset is redistributed by this report; only hashes, addresses,
 counts and observations are published.

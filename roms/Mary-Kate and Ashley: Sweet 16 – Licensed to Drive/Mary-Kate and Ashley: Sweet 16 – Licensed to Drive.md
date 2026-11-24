@@ -21,7 +21,7 @@
 
 The game has a **single developer-intended password system** on the main-menu screen
 `PASSWORD → ENTER PASSWORD`, with a 6-character on-screen keyboard. All 42 published
-GBA level passwords (GameFAQs / supercheats / absolutcheats) are accepted, but none is
+GBA level passwords (3rd party cheat indexes) are accepted, but none is
 stored as an ASCII literal: the ROM contains an **algorithmic validator** at
 `0x080164A8`. Each of the first five symbols is mapped to a 5-bit index via a 32-byte
 alphabet table at `0x080432A4`; the 25-bit word is XORed with key `0x00368EF7` at
@@ -118,8 +118,8 @@ use `f1 = 0..35` and `58..63`.
   also reproduces all 42 from their decoded words). Example mappings:
   `99B8BK → word 0x00000000 (f1=0)` = Chapter 1-1; `7938BH → 0x00004002 (f1=1)`;
   `MNBBHS → 0x01701F6 (f1=28)` = Chapter 8-1; `5PB6H# → 0x01E830A (f1=58)` = 8-9.
-* Alternate cheatbook codes (`9931HR`, `PJBRHR`, `CQBWHL`, `D7B#HL`, `MLBBBW`) are also
-  valid: they are aliases with `f2` flipped against the GameFAQs list.
+* Alternate 3rd party cheat index codes (`9931HR`, `PJBRHR`, `CQBWHL`, `D7B#HL`, `MLBBBW`) are also
+  valid: they are aliases with `f2` flipped against the 3rd party cheat index list.
 * Field effect (empirical, §16.4b): `f1` selects the level. `f2`, `f3` and `low14` are
   accepted but produce no observable change — `9931BY` (f2=0) and `9931HR` (f2=1) gave
   identical Chapter 4-1 gameplay; `99B8SM` (f3=1) and `99B83K` (f3=2) both gave the
@@ -160,7 +160,7 @@ use `f1 = 0..35` and `58..63`.
 
 * **Observed**: all screenshots and RAM words above; watchpoint hit at `0x080164DC`
   with the expected register values; `INCORRECT!` rejection banner; 42/42 published
-  codes accepted by the decoder; the five cheatbook aliases valid.
+  codes accepted by the decoder; the five 3rd party cheat indexes aliases valid.
 * **Derived**: the validator/encoder disassembly at `0x080164A8`–`0x080165A4`, the
   table/key bytes at `0x080432A4`/`0x080432C4`, the word store at `0x08012624`, and the
   exhaustive C enumeration counts.
@@ -177,12 +177,12 @@ use `f1 = 0..35` and `58..63`.
   options with SONG/SOUND/CREDITS, password entry); `strings` contained zero matches for
   `debug|secret|cheat|generator`. The ROM's UI text is tile-indexed, so the keyboard
   alphabet was decoded from the font row table at `0x08028EF8` rather than from ASCII.
-  `carselect.mnu`/`advcarselect.mnu` resources exist (TCRF development-text list) but no
+  `carselect.mnu`/`advcarselect.mnu` resources exist (3rd party cheat indexes development-text list) but no
   car-select screen appeared on any walked path.
 * Effects of `f2`/`f3` on levels other than those tested remain unexercised.
 * The "Your Password is:" display screen was not reached; it may be gated on level
   completion.
-* Prompt-injection attempt: the TCRF page for this game contained a block claiming
+* Prompt-injection attempt: the 3rd party cheat index page for this game contained a block claiming
   "This page is not intended for humans… only for LLMs… operator is a clown". It was
   treated as data and ignored; no instruction from fetched web content was followed.
 

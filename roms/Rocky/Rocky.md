@@ -33,7 +33,7 @@ button-code / cheat menu**. It is a save-game-driven unlockable design:
   unlockables (Knockout mode after Movie mode; Rocky Statue after Knockout on
   Normal; Apollo Max/"Apollo Statue" after Knockout on Hard; fighters unlocked by
   beating them in Movie mode). I verified these in three independent published
-  sources (GameFAQs, GameRevolution, VGChartz) and confirmed the in-game state:
+  sources (3rd party cheat indexes) and confirmed the in-game state:
   a fresh save shows KNOCKOUT dark/locked in the main menu and only the first
   four fighters selectable in Exhibition.
 * The widely-circulated **button codes** (hold R + a 5–6 press D-pad sequence
@@ -42,7 +42,7 @@ button-code / cheat menu**. It is a save-game-driven unlockable design:
   active-low u16): **0 literal hits**. I entered the 7 codes on the GBA main menu
   in mGBA: all were rejected as navigation (cursor movement only), never a
   screen change. One of them (R+Up,Down,Down,Left,Left,L) is also the subject of
-  a GameFAQs typo — it is listed twice with two different effects.
+  a 3rd party cheat index typo — it is listed twice with two different effects.
 * The ROM **does contain a complete "CHEAT MENU" text block** in all five
   language banks (English ×2, Spanish, French, German, Italian), with the labels
   `CHEAT MENU`, `SUPER PUNCH`, `INFINITE ENERGY/HEALTH/STAMINA/POWER`, `RANDOM`,
@@ -155,10 +155,10 @@ no comparator can consume a player-entered sequence.
 
 | Effect | Condition | Source |
 |---|---|---|
-| Knockout mode | Complete Movie mode | GameFAQs, GameRevolution, VGChartz |
-| Rocky Statue playable | Complete Knockout on Normal | GameFAQs, GameRevolution |
-| Apollo Max / "Apollo Statue" playable | Complete Knockout on Hard | GameFAQs, GameRevolution |
-| Hidden fighters | Beat them in Movie mode | GameFAQs walkthrough (`abobo_squad`) |
+| Knockout mode | Complete Movie mode | 3rd party cheat indexes |
+| Rocky Statue playable | Complete Knockout on Normal | 3rd party cheat indexes |
+| Apollo Max / "Apollo Statue" playable | Complete Knockout on Hard | 3rd party cheat indexes |
+| Hidden fighters | Beat them in Movie mode | 3rd party cheat index walkthrough (`abobo_squad`) |
 
 ### 6.2 Published console codes — NOT in this ROM
 

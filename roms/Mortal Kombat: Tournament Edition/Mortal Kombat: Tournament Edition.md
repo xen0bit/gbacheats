@@ -24,7 +24,7 @@ the cracktro is hooked in behind the crt0. It is an intro only — no trainer or
 appended cheat engine. All analysis below is of this exact image.
 
 Save type: **EEPROM 512 bytes** (`.sav` observed, profile "A", magic `DAMK`).
-Fetched web content (GameFAQs, CheatCC, MoFunZone, Cheatbook, mksecrets.net,
+Fetched web content (3rd party cheat indexes,
 fandom) was treated strictly as data; no prompt-injection payload was found.
 
 ## 2. Executive summary
@@ -194,7 +194,7 @@ seven documented masks at the documented screen with an A confirm.
 
 * **Space size**: 9 × 16 = **144** expressible grid labels (`AA`…`IP`), plus 2
   non-grid special records (ids 145–146). Representable values = 144.
-* **Published coverage**: 143/144 (GameFAQs archived 2018 and mirrors, fetched
+* **Published coverage**: 143/144 (3rd party cheat indexes archived 2018 and mirrors, fetched
   as data). **Only unpublished cell: `IP`**; by the table tail it corresponds to
   `FINAL SECRET!` (id 144, price 5000) / `NO ITEM ASSIGNED` (id 145) — this
   cell→record relation remains **Inferred** (the label is a grid coordinate, not
@@ -234,9 +234,9 @@ read individually (table in §6): each yields the expected BGR555 colour —
 including `0x0000` (black) and `0x03FF` (yellow) — while no combo leaves the
 default `0xFFFF`. Rejection tests (§6) bound the accepted space.
 
-Sources agree on the mechanic and masks: GameFAQs ("Enter this at the screen
+Sources agree on the mechanic and masks: 3rd party cheat indexes ("Enter this at the screen
 where they show you who your opponent is. Hold both buttons until the round
-begins"), Cheat Code Central, MoFunZone, Cheatbook and mksecrets.net. The
+begins"), 3rd party cheat indexes. The
 battle-plan screen is exactly that screen (`wc_blue_plan.png`).
 
 ### 7.2 Code-entry resolution — bounded negative, Observed + Derived

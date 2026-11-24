@@ -39,10 +39,10 @@ reachable from the title and from the in-game pause menu was walked (§3, §7):
   ON/OFF), `Mss` (message speed Fast/Normal/Slow), `Album` (W-weapons/Shields/Monsters), `Skill`
   (W-skills/S-skills/S-supports).
 
-All codes published for this SKU (GameFAQs, GameHacking.org, Ethereal Games, Almar's Guides) are
+All codes published for this SKU (3rd party cheat indexes) are
 GameShark/CodeBreaker/Action Replay **memory-hack codes** (address/value pairs, e.g.
 `00006D2E 000A`, `DB5B5915 1512`). They are out of scope here and cannot exist as ROM literals;
-none were used or verified as in-game codes. The only GameFAQs “secret” is the post-game
+none were used or verified as in-game codes. The only 3rd party cheat indexes “secret” is the post-game
 `NewLand` area, a gameplay unlock, not a code.
 
 One genuine hidden developer screen exists: a **seven-category debug menu** at `0x08007A1C`

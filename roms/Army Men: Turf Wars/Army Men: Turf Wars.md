@@ -69,12 +69,11 @@ bounded negative, not an untested gap:
    (`SINGLE PLAYER → LEVEL SELECT`). It draws 8 nodes; on a fresh boot only
    node 1 responds, nodes 2–8 reject input (no transition, screenshot
    evidence). This is a progress-select, not an all-levels cheat.
-5. **No published password list exists.** Web sources (GameFAQs, TCRF,
-   VGChartz, mirrors, Army Men wiki) publish only GameShark/CodeBreaker
+5. **No published password list exists.** Web sources (3rd party cheat indexes, mirrors, Army Men wiki) publish only GameShark/CodeBreaker
    memory patches for this title; those are memory editors and are outside
-   this engagement's scope. GameFAQs and TCRF returned HTTP 403 to direct
+   this engagement's scope. 3rd party cheat indexes returned HTTP 403 to direct
    fetches; the same pages' search snippets and the mirrored cheat pages
-   (Ethereal Games, Almar's Guides, GameHacking.org, SuperCheats) were
+   (3rd party cheat indexes) were
    checked instead, and none lists a password or button code.
 
 The password/menu strings are therefore a **cut feature**: the developer

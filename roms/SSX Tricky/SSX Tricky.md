@@ -27,7 +27,7 @@
 
 The word `PASSWORD` **does** exist in the ROM exactly once: it is UI string ID **111** in the main 153-entry localised text table (table base `0x0802A050`, bank base `0x0802A053`, string at `0x0802B329`). Static analysis shows it is used only as an **alternate results-screen title** in the 48-way dispatcher at `0x0800C120` (English stub `0x0800C1E4` loads encoded ID `0x276F` = 111; French `0x0800C1FC` → 112 `MOT DE PASSE`; German `0x0800C1EC` → 113 `PASSWORT`). It is not an input surface: no on-screen keyboard, alphabet table, validator, comparison loop or flag-write path reaches it. The three language variants sit beside `TIME CHALLENGE` (108–110) and `GAME OVER` (114–116), i.e. they are title banners for results screens. This screen was not produced by any of the reachable event flows walked (Single Event Race/Showoff/Time Challenge, World Circuit Race/Showoff, results, records, pause), so its exact trigger remains an **unknown** (likely a career-completion/record banner). It is reported as such, not as a cheat.
 
-Published "GBA" codes are console codes misattributed by GameFAQs. They require **Z, X and Y buttons that do not exist on the GBA**; `projectcheatcodes.com` explicitly records "There are no known cheat codes for SSX Tricky on Game Boy Advance." None of the published code strings occur anywhere in this ROM.
+Published "GBA" codes are console codes misattributed by 3rd party cheat indexes. They require **Z, X and Y buttons that do not exist on the GBA**; 3rd party cheat indexes explicitly records "There are no known cheat codes for SSX Tricky on Game Boy Advance." None of the published code strings occur anywhere in this ROM.
 
 ## 3. How to reproduce
 
@@ -128,12 +128,12 @@ The generic message is assembled from the ASCII fragments at `0x0802E117` (`GOLD
 ### Published codes — verification ledger
 | Source | Claim | Result |
 |---|---|---|
-| GameFAQs GBA cheats page | "Unlock all characters, outfits, boards, courses: Hold L+R, A, B, Z, X, Y, Z, B, Y, Z, X, A, Z" | **Unverifiable on GBA**: Z/X/Y are GC buttons, absent on GBA. Literal absent from ROM. |
-| GameFAQs GBA cheats page | "Play as Mix Master Mike: Hold L+R, A,A,Z,A,A,Z,..." | console code; dpad-adapted variant entered in emulator — no effect |
-| GameFAQs GBA cheats page | "Max stats: Hold L+R, B,B,Z,B,B,Z,A,A,Z,A,A,Z" | console code; dpad-adapted variant entered — no effect |
-| GameFAQs GBA cheats page | "Annete board … (does not work on European PAL version)" | explicitly flags a regional split; this ROM is PAL (`AXYE`) |
-| projectcheatcodes.com | "There are no known cheat codes for SSX Tricky on Game Boy Advance" | agrees with static + dynamic findings |
-| supercheats / gamesradar / retrogems | GC/PS2/Xbox L+R button codes | other SKUs (§16.11: title/platform match is not evidence) |
+| 3rd party cheat indexes GBA cheats page | "Unlock all characters, outfits, boards, courses: Hold L+R, A, B, Z, X, Y, Z, B, Y, Z, X, A, Z" | **Unverifiable on GBA**: Z/X/Y are GC buttons, absent on GBA. Literal absent from ROM. |
+| 3rd party cheat indexes GBA cheats page | "Play as Mix Master Mike: Hold L+R, A,A,Z,A,A,Z,..." | console code; dpad-adapted variant entered in emulator — no effect |
+| 3rd party cheat indexes GBA cheats page | "Max stats: Hold L+R, B,B,Z,B,B,Z,A,A,Z,A,A,Z" | console code; dpad-adapted variant entered — no effect |
+| 3rd party cheat indexes GBA cheats page | "Annete board … (does not work on European PAL version)" | explicitly flags a regional split; this ROM is PAL (`AXYE`) |
+| 3rd party cheat indexes | "There are no known cheat codes for SSX Tricky on Game Boy Advance" | agrees with static + dynamic findings |
+| 3rd party cheat indexes / retrogems | GC/PS2/Xbox L+R button codes | other SKUs (§16.11: title/platform match is not evidence) |
 
 ## 6b. Enumeration
 
@@ -187,7 +187,7 @@ The generic message is assembled from the ASCII fragments at `0x0802E117` (`GOLD
 * Python 3 (stdlib `struct`, `zlib`, `re`) — GBA-header scan, text-table decoder, literal/pointer/BL scanners, button-mask encoding search, savestate `gbAs` chunk parser and RAM diffing.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` — raw Thumb disassembly of candidate regions.
 * mGBA 0.10.5 SDL: `-3` viewport, `-d` pty command-line debugger (`r/4`, `r/2`, `w/4`, `b`, `c`, `i`), `.ss1` savestates; Xvfb `:319` + openbox + `xdotool` (XTEST) + `scrot` + ImageMagick `convert` for cropping.
-* Web: GameFAQs cheats page (HTTP 403 direct; data recovered from search snippets), projectcheatcodes.com, plus searches of supercheats/gamesradar/retrogems — all treated as **data**, never as instructions. No prompt-injection payload was encountered in this session; fetched content contained only cheat claims.
+* Web: 3rd party cheat index cheats page (HTTP 403 direct; data recovered from search snippets), 3rd party cheat indexes, plus searches of 3rd party cheat indexes/retrogems — all treated as **data**, never as instructions. No prompt-injection payload was encountered in this session; fetched content contained only cheat claims.
 * Working scripts retained in `/tmp/ssxtricky/`: `helper.py` (input/screenshot), `ss.py` (savestate parser), `dbgserver3.py` (pty debugger driver), `testcode.py` (L+R code entry).
 
 ## 10. Legal note

@@ -20,14 +20,14 @@
 
 ## 2. Executive summary
 
-**There is no password / code-entry system in this game.** There is no on-screen keyboard, no `PASSWORD`/`DEBUG`/`SECRET`/`SOUND TEST` entry, and no hidden debug menu. The entire visible UI text bank was decoded with the game's own text table (Data Crystal TBL, 971 strings from 0x082B8000–0x082C8000): the only mode-related strings are two *in-game instructions* that document the developer-intended button codes (see §4). All other "cheats" published for this SKU are GameShark/CodeBreaker RAM patches, which are out of scope.
+**There is no password / code-entry system in this game.** There is no on-screen keyboard, no `PASSWORD`/`DEBUG`/`SECRET`/`SOUND TEST` entry, and no hidden debug menu. The entire visible UI text bank was decoded with the game's own text table (3rd party cheat indexes TBL, 971 strings from 0x082B8000–0x082C8000): the only mode-related strings are two *in-game instructions* that document the developer-intended button codes (see §4). All other "cheats" published for this SKU are GameShark/CodeBreaker RAM patches, which are out of scope.
 
 What the game *does* contain is a small **save-gated button-code system**:
 
-1. **Boot-time gate (undocumented on any published list):** holding `A+B+Select+Start` at boot, gated by byte `0x02004CE0`, calls four privileged init routines (`0x08000538`–`0x08000576`). This combination appears in no GameFAQs/TCRF/VGChartz list — it is a novel, statically recovered code (§6b).
+1. **Boot-time gate (undocumented on any published list):** holding `A+B+Select+Start` at boot, gated by byte `0x02004CE0`, calls four privileged init routines (`0x08000538`–`0x08000576`). This combination appears in no 3rd party cheat index list — it is a novel, statically recovered code (§6b).
 2. **New Game gates:** hold `L` + choose NEW GAME = **Hard Mode**; hold `R` + choose NEW GAME = **Ultimate Mode**. Both are printed verbatim in the game's own credits text at `0x082BB0FF` and `0x082BB166`, and both are gated by flags in the game-clear save record.
 3. **Credits gate:** hold `A` during the credits to skip (published; no ROM string — effect is in the credits script).
-4. **Ultimate-Mode charge combos:** 7 documented motion+attack sequences (GameFAQs/Reeve guide), implemented as gameplay input matchers.
+4. **Ultimate-Mode charge combos:** 7 documented motion+attack sequences (3rd party cheat indexes/Reeve guide), implemented as gameplay input matchers.
 
 The negative result is bounded: the full byte-encoded text bank was decoded (not just `strings`), the ASCII scan returned **0/75,955** keyword hits, the published code lists were checked against the ROM, and every reachable screen was walked under mGBA with savestate RAM evidence.
 
@@ -42,7 +42,7 @@ The negative result is bounded: the full byte-encoded text bank was decoded (not
   3. `A` on NEW GAME → lengthy scripted intro (multiple dialogue screens; `shot05`–`shot12`, `w03`–`w12`).
   4. Gameplay (`w12`, `w13_pause.ss1`) — the intro is very long and the Start-driven pause sub-screen was not reached inside the available run; its menu entries were recovered from the decoded text bank instead (see §8).
 - Input RAM proof: holding `L` with the emulator running changes the active-high held mask at `0x02004CA4` from `0x000` to `0x200` (`in_base.ss1` vs `in_L.ss1`, 56-byte RAM diff); holding `x+z+BackSpace` yields `0x007` (`multikeys.ss1`).
-- Published codes tested: the GameFAQs/GameFAQs-legacy lists contain **no** password strings; all 25 libretro/ROMSFUN entries are CodeBreaker memory writes (e.g. `3202B634 0080`) and are deliberately not used. The two in-game button codes were verified against the ROM text (§4), not against a password entry screen (none exists).
+- Published codes tested: the 3rd party cheat index-legacy lists contain **no** password strings; all 25 libretro/3rd party cheat index entries are CodeBreaker memory writes (e.g. `3202B634 0080`) and are deliberately not used. The two in-game button codes were verified against the ROM text (§4), not against a password entry screen (none exists).
 
 ## 4. Address map
 
@@ -100,12 +100,12 @@ press = held & ~prev                ; 0x02004CA8
 | # | Code | Gate | ROM evidence | Published? |
 |---|---|---|---|---|
 | 1 | Hold `A+B+Select+Start` at boot | byte `0x02004CE0 == 0` | `0x08000538`–`0x08000576` (this report) | **No** — novel |
-| 2 | Hold `L` + NEW GAME | game-clear save data | text `0x082BB0FF` | Yes (GameFAQs, VGChartz, manuals) |
-| 3 | Hold `R` + NEW GAME | save with all Cyber-Elves used | text `0x082BB166` | Yes (GameFAQs, VGChartz) |
-| 4 | Hold `A` during credits | completed save (`play time >= 1`) | GameFAQs "Skip Credits"; credits script | Yes |
-| 5 | Ultimate-Mode charge combos (7 sequences: Buster L1/L2, Saber, Rod, Shield) | Ultimate Mode active | GameFAQs/Reeve guide | Yes |
+| 2 | Hold `L` + NEW GAME | game-clear save data | text `0x082BB0FF` | Yes (3rd party cheat indexes, manuals) |
+| 3 | Hold `R` + NEW GAME | save with all Cyber-Elves used | text `0x082BB166` | Yes (3rd party cheat indexes) |
+| 4 | Hold `A` during credits | completed save (`play time >= 1`) | 3rd party cheat indexes "Skip Credits"; credits script | Yes |
+| 5 | Ultimate-Mode charge combos (7 sequences: Buster L1/L2, Saber, Rod, Shield) | Ultimate Mode active | 3rd party cheat indexes/Reeve guide | Yes |
 
-### 6.2 Text encoding (Data Crystal TBL)
+### 6.2 Text encoding (3rd party cheat indexes TBL)
 
 `0x00`=space, `0x01`–`0x0A`=`0`–`9`, `0x0B`–`0x24`=`A`–`Z`, `0x25`–`0x3E`=`a`–`z`, `0xE5`=`!`, `0xFC`/`0xFD`=line break, `0xF0 xx`=extended punctuation, `0xFF`=terminator. This is why `strings` found **zero** UI strings.
 
@@ -119,7 +119,7 @@ press = held & ~prev                ; 0x02004CA8
 - **Observed (static bytes):** every address in §4 was read from the exact ROM with the hashes in §1; the two in-game instruction strings were decoded with the TBL at the listed offsets; the boot gate instruction sequence was disassembled with `arm-none-eabi-objdump -M force-thumb` and independently re-read as literal halfwords.
 - **Derived:** the input-state model and the boot validator's effective mask (`0x000F`); the gate byte `0x02004CE0`; the privileged flag array `0x03001748 + 24*n`.
 - **Inferred:** the exact *visible effect* of the boot gate (the called routines initialise privileged tasks/flags; the combination is not documented anywhere and was not reproduced live because mGBA's SDL build does not deliver key-downs that predate window creation — three launch attempts with the four keys held produced `held@boot` of `0x008`, `0x008`, `0x000`, never `0x00F`). This is a harness limitation (guide §16.2), not a ROM finding. The gate itself is proven by the instruction stream.
-- **Public-source hygiene:** GameFAQs, TCRF (via `tcrf.tiago.zip` mirror after the main site 403'd), VGChartz, Data Crystal, ROMSFUN/libretro were fetched and treated strictly as data. No prompt-injection payload was encountered in the fetched content; no instruction found in a web page or ROM string was acted upon.
+- **Public-source hygiene:** 3rd party cheat indexes (via a mirror after the main site 403'd), 3rd party cheat indexes/libretro were fetched and treated strictly as data. No prompt-injection payload was encountered in the fetched content; no instruction found in a web page or ROM string was acted upon.
 
 ## 8. Unknowns
 
@@ -135,7 +135,7 @@ press = held & ~prev                ; 0x02004CA8
 - `xref.py` — 32-bit literal pointer scan (no direct pointers to menu strings; text is ID-referenced).
 - `ss.py`, `capstate.py`, `runtest.py`, `drive.py` — savestate RAM reader, screenshot/key driver, and reproducible boot/menu test harness.
 - `scan_input.py` — Capstone scan of Thumb literal pools for input-state/mask combinations.
-- Web: GameFAQs cheats + guides, VGChartz cheats, TCRF mirror `tcrf.tiago.zip/wiki/Mega_Man_Zero`, Data Crystal `Mega_Man_Zero/TBL`.
+- Web: 3rd party cheat index cheats + guides, 3rd party cheat index cheats, 3rd party cheat index mirror, 3rd party cheat indexes `Mega_Man_Zero/TBL`.
 
 ## 6b. Enumeration
 
@@ -143,7 +143,7 @@ press = held & ~prev                ; 0x02004CA8
 
 **Exhaustive gate enumeration.** The boot validator has exactly one comparison group: `(keys & 0x0C)==0x0C`, `(keys & 1)`, `(keys & 2)` → accepted set is the single mask `0x00F` (A+B+Select+Start); all 1023 other 10-bit masks are rejected by at least one of those three tests. The NEW GAME path accepts exactly two single-key additions (`L=0x200`, `R=0x100`), both additionally gated by separate save flags; there is no third mode key.
 
-**Novel code.** `A+B+Select+Start` at boot (mask `0x00F`) is absent from GameFAQs, VGChartz, TCRF, and every published list consulted. It is a generator-independent value recovered from the ROM's own validator at `0x08000538`; its privileged effect is to set the flag array at `0x03001748`/`0x03001760` and run two privileged init calls. Evidence type: **Derived** from the instruction stream (live replay blocked by the harness limitation documented in §7/§8 — reported explicitly rather than claimed as observed).
+**Novel code.** `A+B+Select+Start` at boot (mask `0x00F`) is absent from 3rd party cheat indexes, and every published list consulted. It is a generator-independent value recovered from the ROM's own validator at `0x08000538`; its privileged effect is to set the flag array at `0x03001748`/`0x03001760` and run two privileged init calls. Evidence type: **Derived** from the instruction stream (live replay blocked by the harness limitation documented in §7/§8 — reported explicitly rather than claimed as observed).
 
 **Bounds proven by rejection.** The boot gate's three AND-tests reject every mask with any of bits 0–3 clear; concretely `A+B+Start` (`0x00B`) fails `(keys & 4)`, and `A+B+Select` (`0x007`) fails `(keys & 8)`. At NEW GAME, `L+R` (`0x300`), `Select` (`0x004`) and `B` (`0x002`) were entered in the emulator with save states taken at a fixed delay; none produced a stable mode-word change, i.e. no undocumented mode is selectable there (RAM diffs `ng2_*.ss1`). Published GameShark/CodeBreaker codes were *not* applied — they are memory edits, outside the in-game scope.
 

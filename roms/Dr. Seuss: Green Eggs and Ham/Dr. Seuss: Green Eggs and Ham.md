@@ -19,8 +19,8 @@
 ## 2. Executive summary
 
 **There is no in-game password, button-code, or cheat system in this ROM.** No published code
-exists for the title (Cheat Happens, CheatingDome and VGChartz all report *zero* cheats; no
-TCRF/GameFAQs cheat page), no password/cheat/code/secret/debug keyword occurs anywhere in the
+exists for the title (3rd party cheat indexes all report *zero* cheats; no
+3rd party cheat index cheat page), no password/cheat/code/secret/debug keyword occurs anywhere in the
 4 MiB image (literal counts all 0), no key-mask sequence table exists, and no validator or
 accepted-code table exists. The only text-entry field is a player **name** field, which has no
 comparison consumer.
@@ -128,9 +128,9 @@ tables at `0x03005550` ("Level Select"), `0x03005558` ("Select a level to view!"
 driven by input, so no code can be minted — the §0.2 "generate a novel code" deliverable is
 not applicable and is replaced by the bounded negative proofs below.
 
-**Published codes tested:** none exist. Cheat Happens ("we currently don't have any …
-cheats"), CheatingDome ("No Cheats or Achievements yet"), VGChartz ("Total cheats
-available: 0"), and the GameFAQs archive page all returned no codes; no TCRF page for this
+**Published codes tested:** none exist. 3rd party cheat indexes ("we currently don't have any …
+cheats"), 3rd party cheat indexes ("No Cheats or Achievements yet"), 3rd party cheat indexes ("Total cheats
+available: 0"), and the 3rd party cheat indexes archive page all returned no codes; no 3rd party cheat index page for this
 title was found. ROM literal counts: `password`=0, `cheat`=0, `secret`=0, `unlock`=0,
 `debug`=0, `code`=0, `generator`=0, `warp`=0 (case-insensitive, 4 MiB).
 

@@ -25,7 +25,7 @@
 
 The published "cheats" for this title fall into two out-of-scope / wrong-SKU categories, both verified:
 
-1. **CodeBreaker / GameShark SP / Xploder memory-edit codes** (Almar's Guides, GameHacking.org) — six codes: master, Access All Stages, Have 100 Tickets, Infinite Health, Unlock Paddleball / Skee-Ball / Wack-A-Bee. These are external memory writes, explicitly excluded by the engagement scope. Decrypting them (Parasyte CBA algorithm) yields written values 0x000D (stage count), 0x0064 (=100 tickets), 0x1000, and three `0x0001` unlock bytes whose low-24-bit addresses cluster at `0x02005551`–`0x02005553`; those RAM bytes are `0x00` in a fresh game (savestate read, §7). This confirms they are memory patches to the game's own unlock/ticket variables, not in-game codes.
+1. **CodeBreaker / GameShark SP / Xploder memory-edit codes** (3rd party cheat indexes) — six codes: master, Access All Stages, Have 100 Tickets, Infinite Health, Unlock Paddleball / Skee-Ball / Wack-A-Bee. These are external memory writes, explicitly excluded by the engagement scope. Decrypting them (Parasyte CBA algorithm) yields written values 0x000D (stage count), 0x0064 (=100 tickets), 0x1000, and three `0x0001` unlock bytes whose low-24-bit addresses cluster at `0x02005551`–`0x02005553`; those RAM bytes are `0x00` in a fresh game (savestate read, §7). This confirms they are memory patches to the game's own unlock/ticket variables, not in-game codes.
 2. **PC/web-game codes from a different SKU** — `VIKING`, `OWLFLY`, `CREATE`, `BIGTOE`, `DVDBUD`, `IGLOOS`, `TOASTY`, `CANVAS`, `ROCKON`, `EGGLIT`, `VROOOM`, `HOLLOW`, `RIBBED`, `FOSSIL`, `HANGER`, `EAGLES`, `QUARRY`, `CAVERN`, `ELDEST`, `SECRET` are for *Foster's Home for Imaginary Friends: Big Fat Awesome House Party* (PC / Cartoon Network web game, "Notey" text-entry), not the GBA action-adventure. **All 20 literals are absent from this ROM** in ASCII, +0x20, UTF-16LE/BE, and constant XOR/add encodings. The fan-forum "secret codes" thread that mentions hat/buddy codes is explicitly about the PC/web game. A German aggregator's claim of an `IMAGINE` "password screen" code is SEO-generated (wrong publisher/date) and `IMAGINE` is absent from the ROM.
 
 The one SEO-style claim specific to a "password screen" (`IMAGINE`) was tested and rejected at the literal level. Every reachable screen was walked in mGBA with savestate/RAM evidence (§3, §7); the complete UI text inventory is tile-indexed (§8) and was enumerated visually on every screen. Keyword search of the entire 4 MiB image in multiple encodings returns **zero** password/cheat/debug strings and only script-dialogue or audio-banner false positives (§6).
@@ -97,9 +97,9 @@ The only relevant decoding performed was:
 
 | Source | Codes | Verdict |
 |---|---|---|
-| Almar's Guides / GameHacking.org | 6 CodeBreaker/GameShark SP/Xploder codes | Memory writes, excluded by scope. Decrypted targets documented in §2/§4. |
-| Cheatbook / awesomehouseparty.fandom / fansite (20 codes: VIKING, OWLFLY, … SECRET) | PC/web "Big Fat Awesome House Party" | Wrong SKU; 0/20 literals present in this ROM under ASCII, +0x20, UTF-16, XOR/add, or letter-shift. |
-| classicemu.com (`IMAGINE` "password screen") | 1 claim | Literal absent (0 hits); source metadata is wrong (publisher/date). Rejected. |
+| 3rd party cheat indexes | 6 CodeBreaker/GameShark SP/Xploder codes | Memory writes, excluded by scope. Decrypted targets documented in §2/§4. |
+| 3rd party cheat indexes / awesomehouseparty.fandom / fansite (20 codes: VIKING, OWLFLY, … SECRET) | PC/web "Big Fat Awesome House Party" | Wrong SKU; 0/20 literals present in this ROM under ASCII, +0x20, UTF-16, XOR/add, or letter-shift. |
+| 3rd party cheat indexes (`IMAGINE` "password screen") | 1 claim | Literal absent (0 hits); source metadata is wrong (publisher/date). Rejected. |
 
 ## 6b. Enumeration
 

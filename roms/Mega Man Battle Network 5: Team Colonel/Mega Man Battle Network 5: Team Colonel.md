@@ -39,8 +39,7 @@ This ROM has a genuine developer-intended in-game cheat system: the **Number
 Trader / Numberman Lotto** machine inside Higsby's chip shop. Entering an
 8-decimal-digit code at that machine awards a Battle Chip, Sub Chip, NaviCust
 part, or Key Item. A complete published list of **51** codes exists
-(The Rockman EXE Zone wiki, corroborated by GameRevolution, IGN, Neoseeker,
-SuperCheats); these are listed in §6.
+(3rd party cheat indexes, corroborated by 3rd party cheat indexes); these are listed in §6.
 
 The 51 codes are **not stored literally in the ROM** — exhaustive searches for
 each code as ASCII, `+0x20`/`-0x20` shifted bytes, u32 little/big-endian, BCD
@@ -50,7 +49,7 @@ award is therefore computed by an algorithm (as in BN3's Number Trader), not by
 a plaintext comparison table. Input alphabet is decimal digits `0`–`9`, length
 exactly 8, so the theoretical input space is **10^8 = 100,000,000** codes.
 Only 51 are published, so unadvertised accepted values plausibly exist (cf. the
-BN4 "Z Saver" lotto number found by digging through code, TREZ 2022).
+BN4 "Z Saver" lotto number found by digging through code, 3rd party cheat indexes 2022).
 
 A second published input system exists — button codes (battle-chip slash
 sequences and NaviCust "compression" codes, §6), plus the standard GBA
@@ -148,9 +147,8 @@ reset, **not** an unlockable cheat.
 
 ### 6.1 Published Numberman / Lotto codes (51, GBA + DS-shared)
 
-Source: The Rockman EXE Zone wiki, `Lotto_Numbers_(MMBN5)` (retrieved 2026-11-18;
-no embedded instructions/payload). Cross-checked against GameRevolution, IGN,
-Neoseeker, SuperCheats and Cheat Index snippets. These are the *in-game codes*
+Source: 3rd party cheat indexes, `Lotto_Numbers_(MMBN5)` (retrieved 2026-11-18;
+no embedded instructions/payload). Cross-checked against 3rd party cheat indexes and Cheat Index snippets. These are the *in-game codes*
 for this title, not GameShark/CodeBreaker values.
 
 | # | Item | Code |
@@ -214,7 +212,7 @@ image. No published code was verified in-game.
 
 ### 6.2 Button codes (published, ROM verification incomplete)
 
-From Neoseeker / Cheat Code Central (Team Colonel cheats pages):
+From 3rd party cheat indexes:
 
 * Battle-chip special slashes (enter during/for the named chip):
   `CrossSwrd Slash: Down, Right, Up`;
@@ -264,10 +262,8 @@ in this ROM. They are recorded as unverified rather than asserted.
 * Unadvertised accepted 8-digit codes probably exist, by analogy with BN4's
   discovered Z Saver code. Not proven.
 
-**Prompt-injection note:** fetched web pages were treated as data. The TREZ
-wiki page and Brave result snippets contained no embedded instructions; no
-"decode key", payment request, or tool directive was followed. GameFAQs,
-Neoseeker, TCRF and IGN direct fetches returned 403 and were not used.
+**Prompt-injection note:** fetched web pages were treated as data. The 3rd party cheat index page and Brave result snippets contained no embedded instructions; no
+"decode key", payment request, or tool directive was followed. 3rd party cheat indexes direct fetches returned 403 and were not used.
 
 ## 8. Unknowns
 

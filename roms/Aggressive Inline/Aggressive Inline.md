@@ -418,12 +418,12 @@ is at `0x087B0A84` in reverse order (`SUPERDUDE`, `MR. ASTRO`, `TUFFGUY`,
 
 | Published code | Source | In ROM? | In emulator? |
 |---|---|---|---|
-| `UDUDLRBR` (all levels) | GameFAQs, Neoseeker, SuperCheats, Geocities, MegaGames | yes, table A | yes, 14 levels incl. ACCLAIM GAMES |
+| `UDUDLRBR` (all levels) | 3rd party cheat indexes | yes, table A | yes, 14 levels incl. ACCLAIM GAMES |
 | `LLBBRRLR` (all skaters) | same lists | yes, table B | yes, 18 skaters |
-| `LBRB` (through Deadman's Sewer) | GameFAQs, Neoseeker, SuperCheats | yes, table C | yes, 8 levels |
-| `LLRB` (through Bob's Scrapyard) | in-game level-intro text; classicgamehacking.blogspot.com (2012) | yes, table D | yes, 11 levels |
-| `Skeleton`, `BIGUPYASELF`, `Justin Bailey`, `QUEZDONTSLEEP`, park-theme `UUDDLRLRBABA` | GameFAQs/other-platform lists | **no** (no code screen / no such strings) | not applicable |
-| `LLRRLRDUUD` (“Get back juice”) | GameFAQs/other-platform mixed list | **no table, no “juice” string** | no observable effect at pause or title |
+| `LBRB` (through Deadman's Sewer) | 3rd party cheat indexes | yes, table C | yes, 8 levels |
+| `LLRB` (through Bob's Scrapyard) | in-game level-intro text; 3rd party cheat indexes | yes, table D | yes, 11 levels |
+| `Skeleton`, `BIGUPYASELF`, `Justin Bailey`, `QUEZDONTSLEEP`, park-theme `UUDDLRLRBABA` | 3rd party cheat indexes/other-platform lists | **no** (no code screen / no such strings) | not applicable |
+| `LLRRLRDUUD` (“Get back juice”) | 3rd party cheat indexes/other-platform mixed list | **no table, no “juice” string** | no observable effect at pause or title |
 
 ## 6b. Enumeration
 

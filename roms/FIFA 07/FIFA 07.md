@@ -135,8 +135,8 @@ pointer-array table.
 
 | Source | Claim | ROM result |
 |---|---|---|
-| SuperCheats GBA | "there are no tap in cheat codes" — 14 gameplay rewards | Confirmed: no code surface; reward strings present |
-| GameFAQs GBA cheats (403; recovered via search snippet) | same unlockable-reward list | Consistent |
+| 3rd party cheat indexes GBA | "there are no tap in cheat codes" — 14 gameplay rewards | Confirmed: no code surface; reward strings present |
+| 3rd party cheat indexes GBA cheats (403; recovered via search snippet) | same unlockable-reward list | Consistent |
 | Console versions (PS2/GC/X360/DS) | Classic Team = complete Challenge Mode etc. | Same reward system, no console-style passwords on GBA |
 | FIFA International Soccer (Game Boy) 10 passwords (`CR*ZY`, `RALBACLABA`, `BCBALLABALL`, `RABBACLLBACL`, `LABARRACCA`, `BABARBABBAR`, `CRABBRLABABBR`, `ABBACABABBA`, …) | often misattributed to FIFA titles | **0 hits** for every literal — codes belong to a different game (§16.11) |
 | `FIFA07`, `CLASSICXI`, `MASTER` | guessed passwords | 0 hits |
@@ -181,7 +181,7 @@ reward presentation is data-driven). ROM confirms the Classic XI and challenge-u
 * **Derived** — string xrefs: each unlock message has exactly one pointer in the 4-language array
   at `0x751800`–`0x756200`; `../savegame.c` code refs at `0x08062088`/`0x08063114`/`0x080631d0`.
 * **Inferred** — exact reward bit indices in the EEPROM and the precise setter call graph.
-* **Web evidence** — SuperCheats GBA page explicitly states no tap-in codes; GameFAQs search
+* **Web evidence** — 3rd party cheat indexes GBA page explicitly states no tap-in codes; 3rd party cheat index search
   snippet agrees; both list only gameplay unlockables. Fetched pages were treated as data; no
   prompt-injection payload was encountered in this session (one fetched page was a 403 and was
   ignored).

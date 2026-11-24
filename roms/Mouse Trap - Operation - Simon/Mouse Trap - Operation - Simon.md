@@ -27,7 +27,7 @@
 
 - **Text/button spaces searched and bounded:** every ASCII string in the image was enumerated. Genuine ASCII consists of 1 header title, 4 engine-debug strings, and 5 filesystem filenames — **zero** occurrences of `password`, `cheat`, `code`, `secret`, `unlock`, `debug`, `hint`, `invalid`, `wrong`, `congrat`, `bonus`, `hidden`, `master`, `level select`, `initials`, or `name`. The font/tile-indexed text bank was decoded: the renderer at `0x08015414` converts stored lowercase ASCII to tile indices via `char - 0x60` (space → 0); the only tile-indexed strings used are the 12 hard-coded high-score names `simon   ` and menu labels rendered as pre-drawn bitmap art. No code alphabet, literal code table, or key-mask sequence table exists.
 - **Button space searched and bounded:** the single keypad reader at `0x080151BC` produces held/pressed/released at `0x030058F4`/`0x03005900`/`0x030058FC`. It has exactly **6 callers**, and those callers test only six single-button masks — `0x1` (A), `0x2` (B), `0x4` (Select), `0x8` (Start), `0x40` (Up), `0x80` (Down). There are **zero** multi-button mask comparisons (no `0x300` L+R, no `0xC` Start+Select, no `0x103`, etc.) and **zero** `0x100`/`0x200` (L/R) literals in any input consumer. No press-history ring buffer, progress index, or sequence validator exists.
-- **Published codes:** web searches (GameFAQs, TCRF via archive, VGChartz-style aggregators, TASVideos, MobyGames) surfaced **no GBA cheats/passwords** for this SKU. Direct TCRF and GameFAQs-cheats fetches returned HTTP 403. No published literal was available to verify — recorded as such, not silently omitted (guide §3.4 rule 4).
+- **Published codes:** web searches (3rd party cheat indexes via archive, 3rd party cheat index-style aggregators, 3rd party cheat indexes) surfaced **no GBA cheats/passwords** for this SKU. Direct 3rd party cheat index-cheats fetches returned HTTP 403. No published literal was available to verify — recorded as such, not silently omitted (guide §3.4 rule 4).
 - **Dynamic:** every reachable screen was walked in mGBA on `:318` with screenshots and savestate RAM evidence (§2 list). Ten button-code candidates (including L+R, L+R+Start, Start+Select, and the Konami sequence) were pressed on the top menu; none opened a hidden screen.
 
 ## 3. How to reproduce
@@ -107,7 +107,7 @@ Neither consumes a user-supplied code.
 | High-score names | RAM/ROM | `simon   ` × 12 (4 levels × 3 ranks) | 12 |
 | GBA-FS files | `0x08027360` | `BG_gbawmap`, `BG_chars`, `BG_palette` (6 variants each) | 3 |
 
-Published codes tested: **none exist** for this SKU (GameFAQs cheats page and TCRF both returned HTTP 403; searches returned only product/marketing pages, a TASVideos timing entry, and No-Intro identity data — no password lists). This is recorded as a bounded negative, not a skipped step.
+Published codes tested: **none exist** for this SKU (3rd party cheat index cheats page and 3rd party cheat indexes both returned HTTP 403; searches returned only product/marketing pages, a 3rd party cheat index timing entry, and 3rd party cheat indexes identity data — no password lists). This is recorded as a bounded negative, not a skipped step.
 
 ## 6b. Enumeration
 

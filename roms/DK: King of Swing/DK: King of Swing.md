@@ -49,7 +49,7 @@ into one 32-bit word, and compares that word against a **three-entry table**:
 There is **no checksum, no key table, no generator and no reserved bit**: the
 validator is an exact 32-bit equality loop over those three constants. The
 entire input space is 10⁸ = 100,000,000 values and the accepted set is exactly
-those three values. All three are on GameFAQs and the Donkey Kong Wiki; the
+those three values. All three are on 3rd party cheat indexes and the Donkey Kong Wiki; the
 published list is complete and correct for this ROM. Consequently **no
 unpublished 8-digit password can exist** — this is an enumerated closed set,
 not an untested gap (see §6b for the exhaustive run and the rejection tests).
@@ -258,7 +258,7 @@ The pointer table at `0x086E6254` continues: `+0x0C` is zero, `+0x10` is
 zero, `+0x14` is `0x08657F22` (“Wrong password!”) and `+0x18` is `0x08657F49`
 (“This password has already been entered.”).
 
-The ROM labels match the GameFAQs labels exactly. No published code was
+The ROM labels match the 3rd party cheat indexes label exactly. No published code was
 rejected and no typo was found.
 
 ### 6.2 Flag bytes
@@ -348,7 +348,7 @@ ROM; they are written by gameplay results and tested as save bits (Derived).
 * Bound (missing one required bit): `L+Up+B` held with no A (`0x242`) for
   >1 s leaves the title at state 1; no password screen (Observed).
 * **Novel, unpublished accepted input:** `L + Up + B + R + A`
-  (held mask `0x343`). This superset is not on GameFAQs or the wiki (they list
+  (held mask `0x343`). This superset is not on 3rd party cheat indexes or the wiki (they list
   only L+Up+B+A) and it opens the hidden password screen: Observed state
   `0x03000002 = 0x17` (23), object allocated and ready.
 * Start supersets are not equivalent in practice: `L+Up+B+Start+A`

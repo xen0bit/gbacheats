@@ -233,8 +233,8 @@ and their outcomes:
 
 ### 6.1 Numberman Lotto passwords (published, 48 unique — **not** verified in ROM)
 
-Source: ChapterCheats "Numberman codes" page (fetched 2026-11-18), cross-checked
-against SuperCheats "Lotto Codes" snippets, GameRevolution and GameFAQs snippets.
+Source: 3rd party cheat indexes "Numberman codes" page (fetched 2026-11-18), cross-checked
+against 3rd party cheat indexes "Lotto Codes" snippets, 3rd party cheat indexes snippets.
 The `*` marker in the source denotes a code that is also found as normal game content.
 
 | Effect | Password | Effect | Password |
@@ -273,7 +273,7 @@ codes claim "Unlocker", so the code→effect map is not one-to-one in the source
 ### 6.2 Navi Customizer compression codes (published, 21 — **not** verified in ROM)
 
 Entered by highlighting a program, holding D-pad Right, then pressing 10 buttons from
-{A,B,L,R}. Source: SuperCheats / ChapterCheats (two independently identical lists).
+{A,B,L,R}. Source: 3rd party cheat indexes (two independently identical lists).
 
 ```
 AirShoes BLBABLBBAA        AttackMAX LLLRRBARBL     BatteryMode AABRABRLLR
@@ -285,7 +285,7 @@ GigaVirus BBRALBLARR       HumourSense ABLARABLRL   KawarimiMagic RBBARBRARB
 I'm Fish BABALRARAA        JungleLand LRLABLBBLA
 ```
 
-One ChapterCheats entry (Reflect) had an empty code and is excluded. Both lists
+One 3rd party cheat index entry (Reflect) had an empty code and is excluded. Both lists
 agree on all 20 populated sequences, which is a good cross-source check.
 
 ---
@@ -353,7 +353,7 @@ rather than a literal comparison table.
    and unlocks the Navi Customizer grid was not identified.
 5. **Header provenance** — who rebuilt the logo/checksum bytes and whether any other
    byte outside `0x00..0xBF` was altered is unknown; the game body plays correctly.
-6. **Prompt injection check** — fetched pages (ChapterCheats, SuperCheats, Brave result
+6. **Prompt injection check** — fetched pages (3rd party cheat indexes, Brave result
    pages) contained advertising, tracking pixels and syndication boilerplate. No text
    in them instructed the analyst to run, download or send anything, and no such
    instruction was acted upon. The ROM's own strings were treated as data throughout.
@@ -382,10 +382,10 @@ Ghidra provider (Ghidra 12.1.4, raw-binary import, base `0x08000000`).
 `numpy` was available; `sympy` was not installed and was not needed.
 
 ### Web sources consulted (treated as data)
-* `chaptercheats.com/cheat/gameboyadvance/17819/mega-man-battle-network-5/pass/2832` — complete 48-code list.
-* `chaptercheats.com/cheats/gameboyadvance/17819/mega-man-battle-network-5-cheat-codes` — compression codes and hints.
-* `supercheats.com/gameboyadvance/megamanbattlenetwork5teamprotoman.htm` — second, agreeing compression-code list.
-* `gamerevolution.com`, `gamefaqs.gamespot.com/gba/924452-...`, `tcrf.net` — snippets only; direct fetches returned 403 / captcha / blocked. GameFAQs cheat page and TCRF have **no** Wayback snapshot under the URLs tried.
+* 3rd party cheat indexes — complete 48-code list.
+* 3rd party cheat indexes — compression codes and hints.
+* 3rd party cheat indexes — second, agreeing compression-code list.
+* 3rd party cheat indexes — snippets only; direct fetches returned 403 / captcha / blocked. 3rd party cheat index cheat page and 3rd party cheat indexes have **no** Wayback snapshot under the URLs tried.
 * Brave Search was the only working search backend; the built-in `websearch` tool returned no results for every query.
 
 ---

@@ -61,7 +61,7 @@ What was established:
    behind Challenge progression. The rings wrap at 7 in both cases (observed
    twice each). Any further content (trophies/all-star sides) is a
    save-progress flag, not a code (§16.18 pattern), and no code can set it.
-4. **One published "code" exists for this SKU and is not a GBA code.** GameFAQs'
+4. **One published "code" exists for this SKU and is not a GBA code.** 3rd party cheat indexes'
    GBA page lists exactly one entry: *Get Unlimited Magic GC — Y, Y, Y, Y, Y, B,
    A, Y, entered at the title screen.* The GBA has no Y button; the "GC" label
    and the button vocabulary identify it as a GameCube-pad code cross-filed on
@@ -293,11 +293,11 @@ text space and the button space so the negative is bounded.
 
 | Claim | Source | Test | Result |
 |---|---|---|---|
-| `Y, Y, Y, Y, Y, B, A, Y` at title screen → Unlimited Magic | GameFAQs GBA cheats page (also cross-listed under the 2-in-1 Skateboarding+Football page) | Title screen reached and held; the sequence requires a **Y** button, which the GBA does not have | **Inapplicable** — GameCube-pad code cross-filed on the GBA page (label `GC`, Y button). Not enterable on this hardware. |
-| `Up, Up, Down, Down, Left, Left, Left, Right, B, A` → Hidden Board | GameFAQs 2-in-1 page | The code is explicitly for *Disney Sports Skateboarding* on the same cart page | Skateboarding-only code; excluded from the Football claim set |
+| `Y, Y, Y, Y, Y, B, A, Y` at title screen → Unlimited Magic | 3rd party cheat indexes GBA cheats page (also cross-listed under the 2-in-1 Skateboarding+Football page) | Title screen reached and held; the sequence requires a **Y** button, which the GBA does not have | **Inapplicable** — GameCube-pad code cross-filed on the GBA page (label `GC`, Y button). Not enterable on this hardware. |
+| `Up, Up, Down, Down, Left, Left, Left, Right, B, A` → Hidden Board | 3rd party cheat indexes 2-in-1 page | The code is explicitly for *Disney Sports Skateboarding* on the same cart page | Skateboarding-only code; excluded from the Football claim set |
 | "Secret teams (Captain Hook's Pirate Squad, Pete's Bad Boys) unlock after winning the main tournament on Normal" | playeretro.cc (SEO aggregator) | Conflicts with the ROM's observable ring (all 7 sides, including Pete's STEAMROLLERS, are selectable at boot); Captain Hook is not part of this game's cast | **Unverified / contradicted** — treat as fabricated |
-| "Game clear unlocks Pete and Mickey All-Star" | GBAtemp blog comment | Consistent with a save-progress unlock of extra sides; not a code | **Consistent** with a save-progress unlock; the side is not input-reachable as a code |
-| CodeBreaker/GameShark lists (Infinite Time, Always 1st Down, etc.) | Ethereal/almars/Neoseeker | RAM-write codes, out of scope as cheats | Used only as address hints; not deliverables |
+| "Game clear unlocks Pete and Mickey All-Star" | 3rd party cheat indexes blog comment | Consistent with a save-progress unlock of extra sides; not a code | **Consistent** with a save-progress unlock; the side is not input-reachable as a code |
+| CodeBreaker/GameShark lists (Infinite Time, Always 1st Down, etc.) | 3rd party cheat indexes/almars/3rd party cheat indexes | RAM-write codes, out of scope as cheats | Used only as address hints; not deliverables |
 
 ### 6b.4 Novel codes
 
@@ -373,7 +373,7 @@ input path that accepts a code, so no code exists that could be unpublished.
 * The `0xFD`-byte/`0x0E000000` block table at `0x00083000` is the save/asset
   block descriptor; its field order was not decoded (§8).
 * Progression unlocks (all-star sides, trophies) are save bits, by analogy with
-  the sibling title and the GBAtemp clear report; the save bit positions were
+  the sibling title and the 3rd party cheat indexes clear report; the save bit positions were
   not decoded because no save data could be produced through menus alone.
 
 ## 8. Unknowns
@@ -385,7 +385,7 @@ input path that accepts a code, so no code exists that could be unpublished.
   state, not an input code. This does not affect the code-system result: no
   input accepts a string or button sequence anywhere in the ROM.
 * Whether clearing the tournament adds extra sides/characters to TEAM SELECT
-  (GBAtemp reports Pete + Mickey All-Star). This would be a save bit set by a
+  (3rd party cheat indexes report Pete + Mickey All-Star). This would be a save bit set by a
   win handler (§16.18), not a code; the 7-team/7-stadium ring is the complete
   set available to input on an empty save.
 * Whether a developer page with art-only labels exists. Strings cannot answer

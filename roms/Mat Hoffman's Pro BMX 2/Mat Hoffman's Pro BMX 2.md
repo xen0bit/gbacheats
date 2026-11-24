@@ -69,7 +69,7 @@ Progression unlocks in this title (locations/tutorial rounds, "locked", "amateur
   `↑↑↓↓←→←→BA`, `L R L R A B`, `L+R+Start`, `B A B A B A`,
   `↑↑↓↓←→←→`, `Select A Select B`, `L L R R ↑ ↓ A B`.
 * Web verification attempt: `websearch` returned no results for all queries;
-  GameFAQs/TCRF/IGN returned HTTP 403, `r.jina.ai` was blocked or returned site
+  3rd party cheat indexes returned HTTP 403, `r.jina.ai` was blocked or returned site
   homepages, and the Wayback CDX API returned empty sets. No published GBA code
   literal was obtained, so there is no external list to verify against the ROM.
   No prompt-injection payload appeared in any fetched page.

@@ -68,16 +68,16 @@ asserted:
    I/O literals (§6.2). A byte-per-press scan produced 2 pointer-bearing
    candidates, both inside graphics. The menu engine tests **one key bit at a
    time**; there is no sequence validator anywhere.
-4. Published cheat sources have **no codes** for this title: TCRF documents
-   only leftover Scrabble debugging text (error strings), Cheat Happens states
-   "We currently don't have any … cheats or cheat codes", ChapterCheats lists
-   none, and GameFAQs' cheats page is empty (403 to fetchers; search snippets
+4. Published cheat sources have **no codes** for this title: 3rd party cheat indexes document
+   only leftover Scrabble debugging text (error strings), 3rd party cheat indexes state
+   "We currently don't have any … cheats or cheat codes", 3rd party cheat index lists
+   none, and 3rd party cheat indexes' cheats page is empty (403 to fetchers; search snippets
    and the other two sources agree). There is nowhere in the game to enter a
    code even if one were published.
 5. All three games are available from the hub from first boot; there is no
    unlock flag, no completion gate, and no progress-gated content.
 
-The only developer-intended "secret" content is the TCRF-listed Scrabble
+The only developer-intended "secret" content is the 3rd party cheat index-listed Scrabble
 debugging text, which is a **fatal filesystem error path**, not a menu: the
 handler at `0x0800B600` prints `GBA FS ERROR (missing file)`, `(compression?)`,
 `Out of IRam (32k)`, `Out of XRam (256k)` and then hangs in `b .` at
@@ -262,10 +262,10 @@ present anywhere in the 4 MiB image.
 
 | Source | Result |
 |---|---|
-| TCRF (`Sorry!, Aggravation, Scrabble Junior`) | Only "Scrabble Junior Debugging Text" (error strings). No codes, no hidden menus. Verified in ROM at `0x080F4BA0`–`0x080F4D6B`. |
-| Cheat Happens (title 40886) | "We currently don't have any … cheats or cheat codes." |
-| ChapterCheats (16032) | Cheats page exists, no codes listed. |
-| GameFAQs (929026) cheats | 403 to automated fetch; search snippet shows only game info/message board, no code list. No other source (VGChartz, Nintendo wiki) lists any. |
+| 3rd party cheat indexes (`Sorry!, Aggravation, Scrabble Junior`) | Only "Scrabble Junior Debugging Text" (error strings). No codes, no hidden menus. Verified in ROM at `0x080F4BA0`–`0x080F4D6B`. |
+| 3rd party cheat indexes | "We currently don't have any … cheats or cheat codes." |
+| 3rd party cheat indexes | Cheats page exists, no codes listed. |
+| 3rd party cheat index cheats | 403 to automated fetch; search snippet shows only game info/message board, no code list. No other source (3rd party cheat indexes, Nintendo wiki) lists any. |
 
 There is therefore **no published code to verify**. §3.4's "known-good anchor"
 step is vacuous for this title; the report records that explicitly rather than
@@ -346,7 +346,7 @@ empty. This is the §0.2 negative-result form.
 ### Bounded space 3 — developer-intended leftovers / debug gates
 
 * **Space:** the whole ROM's dev/error strings and their xrefs.
-* **Result:** the only dev text is the TCRF-listed Scrabble FS error block.
+* **Result:** the only dev text is the 3rd party cheat index-listed Scrabble FS error block.
   Its xrefs (`0x0800B644`, `0x0800B728`, `0x0800B7E8`, `0x0800B868`,
   `0x0800BE70`, `0x0800BF40`, `0x0800BF50`, `0x0800BF54`, `0x0800C594`,
   `0x0800D780`) are all inside the FS loader/error paths; the missing-file
@@ -390,7 +390,7 @@ Stating this as a bounded negative is the correct deliverable here per guide
 * Dictionary range and word count; all keyword hits are inside it.
 * Complete UI string table (392 records, six language columns) and the absence of any
   code/cheat/debug label.
-* FS error handler prints the TCRF text and hangs.
+* FS error handler prints the 3rd party cheat index text and hangs.
 * Key helper semantics and the one-bit-at-a-time menu tests.
 
 **Inferred:**
@@ -432,4 +432,4 @@ Stating this as a bounded negative is the correct deliverable here per guide
 Analysis performed on a locally owned ROM image. No copyrighted assets are
 included; only hashes, addresses, string *types*, and menu labels already
 published by the game's own UI are quoted, plus the short error strings
-documented by TCRF.
+documented by 3rd party cheat indexes.

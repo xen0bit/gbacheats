@@ -25,7 +25,7 @@
 
 The game is a straightforward 3-in-1 board-game compilation. Every reachable screen was walked with mGBA under Xvfb and RAM snapshots (savestate `gbAs` diffs) taken at each transition: title/3-game select, legal notice, player-count (2/3/4), three "PRESS START" game intros, per-player character select, HUMAN/GBA player-type, name-entry on-screen A–Z keyboard, CHOOSE SKILL LEVEL 1/2/3, Toss Across HOW TO PLAY + two CONTROLS pages, and the gameplay/pause/quit-confirm screens of Kerplunk! and Toss Across. Tip It's intro, character-select, player-type and name-entry screens were walked; its in-game board screen was not entered (see §8), which does not affect the cheat conclusion because no code surface exists before or behind it.
 
-No published codes exist to verify: GameFAQs lists no cheats for this SKU, VGChartz reports "Total cheats available: 0", and TCRF documents only an unused graphic containing a hidden developer message ("from Byron") — not an in-game cheat. Consequently there is no validator to reverse, no code space to enumerate, and no novel code to mint. Per §0.2 the negative is bounded below by the screen enumeration, text-space counts, input-handler counts and publication search recorded in §6b/§7.
+No published codes exist to verify: 3rd party cheat index lists no cheats for this SKU, 3rd party cheat indexes report "Total cheats available: 0", and 3rd party cheat indexes document only an unused graphic containing a hidden developer message ("from Byron") — not an in-game cheat. Consequently there is no validator to reverse, no code space to enumerate, and no novel code to mint. Per §0.2 the negative is bounded below by the screen enumeration, text-space counts, input-handler counts and publication search recorded in §6b/§7.
 
 ## 3. How to reproduce
 
@@ -108,7 +108,7 @@ The `\ ] ^ _` bytes in the PLAYER strings are font tile placeholders for player 
 2. **Validator model:** N/A — there is no comparison of the name buffer against any constant. A literal-pointer scan for the buffer region `0x0203E700`–`0x0203E900` returned **0** ROM pointers, and keyword comparison sites are absent.
 3. **Novel codes:** N/A — no code system to mint from.
 4. **Bounds proven by rejection:** N/A for codes; instead the "no system" claim is bounded by: every reachable screen walked (§2/§7), 0 keyword hits across 6 encodings, 14/14 ASCII strings accounted for, the 32-entry tile bank decoded as non-text, all 49 KEYINPUT sites classified, and 7 button sequences pressed at the title screen with no hidden screen produced (montage `bt2_montage.png`).
-5. **Published codes tested:** none published (GameFAQs cheats page empty, VGChartz 0, TCRF dev-message/unused-graphics only). Fetched TCRF text contained no instructions; one search snippet contained the irrelevant string "Join the cacti clubhaus", treated as data and ignored.
+5. **Published codes tested:** none published (3rd party cheat index cheats page empty, 3rd party cheat indexes 0, 3rd party cheat indexes dev-message/unused-graphics only). Fetched 3rd party cheat index text contained no instructions; one search snippet contained the irrelevant string "Join the cacti clubhaus", treated as data and ignored.
 
 ## 7. Validation evidence
 
@@ -125,13 +125,13 @@ The `\ ] ^ _` bytes in the PLAYER strings are font tile placeholders for player 
 
 **Inferred:**
 - Tile values `\ ] ^ _` and `g` in the ASCII bank are font glyph indices for player-number badges and an apostrophe (visually consistent with `IT'S A DRAW` and `PLAYER n WINS`), but the font substitution table itself was not reconstructed bit-for-bit.
-- The TCRF "message from Byron" is an unused graphic; it is not a reachable cheat (no code/menu surface references it).
+- The 3rd party cheat indexes "message from Byron" is an unused graphic; it is not a reachable cheat (no code/menu surface references it).
 
 ## 8. Unknowns
 
 - **Tip It's in-game board screen was not entered.** Its title-strip intro, character-select, HUMAN/GBA and name-entry screens were walked and RAM-snapshotted, but the on-screen keyboard's OK cell could not be reliably reached with the available xdotool timing (the hand/cursor is drawn as a decorative sprite and the grid wraps beyond the visible keys). This is a UI-navigation limitation, not a game gate: no password, code, or unlockable sits behind it. All three games share the same setup engine, and Kerplunk! and Toss Across gameplay + pause + quit were fully walked.
 - The full tile-index→glyph substitution table for the multi-tile font was not reconstructed; only the 'A'→`0x11` mapping was confirmed via RAM. This is sufficient to prove the visible UI strings are not ASCII, but a complete font dump was out of scope for the cheat question.
-- The hidden developer graphic ("from Byron", per TCRF) was not extracted/rendered; it is unused graphics, not a cheat.
+- The hidden developer graphic ("from Byron", per 3rd party cheat indexes) was not extracted/rendered; it is unused graphics, not a cheat.
 
 ## 9. Tooling
 

@@ -31,21 +31,21 @@ generator**. Its cheat surface is exactly three things:
    **Up, Down, Up, Down, Left, Down, Left, Down, A, Start**.
    It unlocks **`SOUND MODE`** (a B.G.M./S.E. sound-test player) as the third row
    of the OPTION menu, which otherwise reads `? ? ?`. The code was published by
-   TCRF; this report verifies it against the ROM and the emulator and characterises
+   3rd party cheat indexes; this report verifies it against the ROM and the emulator and characterises
    the whole 10-press input space.
 2. **A complete KCEK in-house debug bank** (`AGB SYSTEM Ver3.00 BY KCEK`,
    `L+R+START SOFT RESET`, `L+R+SELECT MEM+DMA DEBUG`, `PAGE NO.%d`) with a page
    table that can warp to every internal screen and to per-character animation
    testers. Both advertised key combinations are **inert** at boot, on the title
    and in every menu tested. The only published way in is a RAM write
-   (TCRF's `0200023002`), i.e. debugger evidence, not an in-game cheat.
+   (a 3rd party cheat index's `0200023002`), i.e. debugger evidence, not an in-game cheat.
 3. **Save-bit unlockables** (boards) whose setter lives inside the two-console
    `BOARDS` exchange flow, not on any single-console input path.
 
 The title code is a single hard-coded sequence, not a generative space: the ROM
 holds a 10-slot raw-button history, and only the one sequence advances the
 matcher to its completion value. There is therefore **no novel code to mint** —
-the code space is a fixed string, and the published TCRF code is that string.
+the code space is a fixed string, and the published 3rd party cheat index code is that string.
 This is proved with a RAM latch oracle (accepted = `0x0000000A`, everything else
 `0xFFFFFFFF` or a partial progress value) over 20+ sequences, including every
 in-ROM button-command record and position/variant substitutions.
@@ -234,7 +234,7 @@ accepted string; `0xFFFFFFFF` for all rejected strings; intermediate records
 produce partial values 3/8/9 but never `0x0A`.
 
 **Novel code.** There is none to mint: the accepted set is a single fixed string
-that is already published (TCRF). The button-code deliverable is therefore met by
+that is already published (3rd party cheat indexes). The button-code deliverable is therefore met by
 enumerating the branch and length (one branch, length 10) and pressing
 undocumented combinations, all of which are rejected below. This is a bounded
 negative on the *whole* 10-slot space (the matcher has no generator and no second
@@ -311,8 +311,8 @@ and SOUND MODE appeared in OPTION (screenshots `shot_79`, `shot_80`, `shot_95`).
   a fresh-vs-unlocked diff at the title menu showed no new EWRAM flag byte, which
   suggests the unlock patches the option menu object rather than a save bit.
 * The debug page contents were not entered; the page list is derived from ROM
-  tables, and TCRF's screenshots corroborate it. Its gate is a RAM byte
-  (`0200023002` per TCRF), not an input sequence.
+  tables, and a 3rd party cheat index's screenshots corroborate it. Its gate is a RAM byte
+  (`0200023002` per 3rd party cheat indexes), not an input sequence.
 * The three `? ? ?` option rows other than row 3 stayed inert in every state
   tested (A does nothing); they may be unused placeholders.
 

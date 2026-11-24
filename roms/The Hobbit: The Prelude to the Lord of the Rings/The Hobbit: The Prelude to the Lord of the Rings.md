@@ -68,7 +68,7 @@ neither is a cheat.
   (§16.13). Raw state is 397,312 bytes; IWRAM begins at raw `0x19000`, EWRAM at `0x21000`.
   The name buffer sits at raw `0x1A4D0` → IWRAM `0x030014D0`. Typing `A` changed
   `raw[0x1A4D0]` from `0x20` to `0x41`, proving the mapping (observed).
-* Web recon (§3.4) was attempted but was unproductive: GameFAQs, TCRF and CheatCC returned
+* Web recon (§3.4) was attempted but was unproductive: 3rd party cheat indexes returned
   HTTP 403; the search integration returned no results for eight queries; Google/Bing via a
   real browser returned bot challenges. No published code list was available to verify, so
   the negative rests on ROM-internal enumeration (§6b).

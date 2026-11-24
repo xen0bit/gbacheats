@@ -14,7 +14,7 @@
 | Version | `0x00` |
 | Entry word | `0xEA00002E` (stock retail branch) |
 | Fixed byte / complement / checksum | `0x96` / `0x83` / `0x0000` |
-| CRC32 | `BAF484BE` (matches GameHacking.org USA record) |
+| CRC32 | `BAF484BE` (matches 3rd party cheat indexes USA record) |
 | MD5 | `1b93ef2e096d7eb72e76b8662a3e74ec` |
 | SHA-1 | `2840446005baa66e8b224f756d07caa7de25a5dc` |
 | SHA-256 | `fd88b21fee3c8630d3cb278ffdf788fb10b1981dc83bd776009c3b377268c334` |
@@ -30,7 +30,7 @@ comparisons** in the caller (`444442`, `119119`, `777777`). There is no checksum
 no second algorithmic format: the value is entered as BCD (one decimal digit per nibble) and compared
 bit-for-bit.
 
-The published GameFAQs/victorycheats lists are **incomplete**, not wrong: they omit 26 of the 48 table
+The published 3rd party cheat indexes/3rd party cheat index lists are **incomplete**, not wrong: they omit 26 of the 48 table
 entries. Those 26, plus the two unpublished special values, are genuine novel codes. One of them —
 Easy level 7 = **`684464`** — was typed on the real screen and produced RAM `difficulty=0,
 level_index=6` and the in-game level-7 splash and mission. Bounds were proven with a rejected input
@@ -167,8 +167,7 @@ Index *i* = level number − 1. Values are the literal 6-digit strings; enter ex
 | 15 | 124444 | **122444** | **142444** |
 | 16 | 122846 | **222846** | 212846 |
 
-Bold = absent from every published list consulted (GameFAQs, victorycheats, GameGenie.com,
-chaptercheats, GameHacking.org). † = duplicate `222222`; only the Easy row is reachable.
+Bold = absent from every published list consulted (3rd party cheat indexes). † = duplicate `222222`; only the Easy row is reachable.
 
 ### 6.2 Special codes
 
@@ -193,7 +192,7 @@ No hidden/debug menu, level-select overlay, sound test or button sequence was fo
 all 48,114 ASCII strings found only `CODE` (`0x083FB984`), `ATLUS` / `MASTER V1012`
 (`0x083FBA40/48`) and the localised in-game messages around `0x083FB644`–`0x083FBC08`; the majority
 of UI text is font/tile-indexed, so it was decoded by walking the screens above rather than by
-`strings`. The CodeBreaker "Complete Mission [Press Select+Up]" entry on GameHacking.org is a
+`strings`. The CodeBreaker "Complete Mission [Press Select+Up]" entry on 3rd party cheat indexes are a
 cheat-device button activator (guide §16.20), not an in-game trigger, and is out of scope.
 
 ## 6b. Enumeration

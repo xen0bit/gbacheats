@@ -44,13 +44,13 @@ ones the game acts on directly:
 The remaining 20 payload bits are progress/statistics data produced by the
 game's own encoder from gameplay counters.
 
-All 25 published GameFAQs/SuperCheats/Project-Cheat-Codes passwords were verified
+All 25 published 3rd party cheat indexes passwords were verified
 against the ROM model; every one passes. Two published-list errors were proven:
 
-* GameFAQs and Project Cheat Codes print `GLPKBKRF` for both Level 11 and Level
+* 3rd party cheat indexes print `GLPKBKRF` for both Level 11 and Level
   12. `GLPKBKRF` decodes to level index 11 (Level 12) and its in-game briefing
   is the Level 12 "canyonlands 100%" briefing. The real Level 11 code is
-  `GLDKBKZF` (SuperCheats has it), whose briefing is the Level 11 air-shaft
+  `GLDKBKZF` (3rd party cheat indexes have it), whose briefing is the Level 11 air-shaft
   valve mission.
 * The "Unlimited Ammo" code `RBJPXCKC` is the Level 1 Normal password with an
   all-zero progress payload; the HUD then shows ∞ ammunition.
@@ -116,10 +116,10 @@ Tested codes (all entered through the on-screen keyboard unless noted):
 
 | Code | Source | Result |
 |---|---|---|
-| `MDKMZKCC` | GameFAQs Level 2 | accepted → "Power up generator" |
+| `MDKMZKCC` | 3rd party cheat indexes Level 2 | accepted → "Power up generator" |
 | `LFKMZCDT` | published Level 2 Hard | accepted → "Power up generator" |
-| `GLDKBKZF` | SuperCheats Level 11 | accepted → Level 11 air-shaft-valve briefing |
-| `GLPKBKRF` | GameFAQs Level 11/12 | accepted → Level 12 canyonlands briefing (not L11) |
+| `GLDKBKZF` | 3rd party cheat indexes Level 11 | accepted → Level 11 air-shaft-valve briefing |
+| `GLPKBKRF` | 3rd party cheat indexes Level 11/12 | accepted → Level 12 canyonlands briefing (not L11) |
 | `RBJPXCKC` | published "Unlimited Ammo" | accepted → Level 1, HUD shows ∞ ammo |
 | `RBJPXCKT` | **generated here (novel)** | accepted → Level 1, mode byte `0x80` |
 | `RBJPXCKH` | generated here (mode 0) | accepted → Level 1 |
@@ -321,7 +321,7 @@ Total payload = 6+6+7+7 = 26 bits; 6 are mission/mode, 20 are progress.
 ### Novel code and in-game proof
 
 `RBJPXCKT` (mission index 0, mode 2) is **not present in any published list**
-(GameFAQs archive, SuperCheats, Project Cheat Codes, VGChartz, IGN wiki all lack
+(3rd party cheat indexes archive, 3rd party cheat index wiki all lack
 it; a targeted web search for the literal returns nothing).
 
 1. Entered through the on-screen keyboard — screenshot

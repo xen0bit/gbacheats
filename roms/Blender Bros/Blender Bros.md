@@ -409,8 +409,7 @@ not an in-game code, and is not reproduced here as a cheat.
 scene selector.**
 
 This is the one true code-like field in the game: a three-digit value, all of
-whose meaningful values are absent from every published list (GameFAQs,
-VGChartz, TCRF, mushroom32x and gamehacking describe the menu or give RAM
+whose meaningful values are absent from every published list (3rd party cheat indexes, mushroom32x and 3rd party cheat indexes describe the menu or give RAM
 pokes; none gives a scene table).
 
 Procedure (from a fresh debug menu): `Down` once (cursor on
@@ -483,7 +482,7 @@ no published list documents; screenshots `test1c.png` (TEST2 field map),
 * The only published Blender Bros "cheat" that touches the debug menu is the
   CodeBreaker block above; its effect was reproduced **by installing the same
   pointer with a debugger**, not by the code itself.
-* `almarsguides` "Press L+R To Access Debug Menu / 3D7B82CC 878A4667 /
+* 3rd party cheat indexes "Press L+R To Access Debug Menu / 3D7B82CC 878A4667 /
   439B6256 39859717" is an encrypted GameShark variant of the same poke; not
   executable as a native code and not reproduced as a deliverable.
 * No published code was found that names a password, keypad or button

@@ -397,7 +397,7 @@ bounded negative above, which is the correct result for this SKU.
 
 * The GBA SKU is Barking Lizards' own game and diverges from the Blitz
   Games console/PC SKUs; the published console passwords were copied onto the
-  GBA GameFAQs/SuperCheats pages but have no GBA implementation.
+  GBA 3rd party cheat index pages but have no GBA implementation.
 * Story-gated unlockables (14 Mini Games, Level Select, outfits) are the
   intended progression, not cheat codes.
 

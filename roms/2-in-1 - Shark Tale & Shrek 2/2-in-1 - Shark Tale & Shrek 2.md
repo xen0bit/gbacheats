@@ -345,10 +345,10 @@ not a cheat activation message.
 | Game | Unlockable | Condition | Evidence |
 |---|---|---|---|
 | Shrek 2 | Chapters 2–5 / Books 2–5 | finish prior chapter/book; 40 coins per chapter | chapter screen greyed; published guide |
-| Shrek 2 | `Bonus Mode!` mini-game set | all gold coins (100 %) | string `0x08D61B4`; GameFAQs walkthrough |
-| Shrek 2 | Movie Stills | complete 70 missions | GameFAQs / pack page (published) |
-| Shrek 2 | Puss in Boots | finish last chapter of Book 2 | GameFAQs (published) |
-| Shrek 2 | all mini-games | beat the game 100 % (25 chapters) | GameFAQs (published) |
+| Shrek 2 | `Bonus Mode!` mini-game set | all gold coins (100 %) | string `0x08D61B4`; 3rd party cheat index walkthrough |
+| Shrek 2 | Movie Stills | complete 70 missions | 3rd party cheat indexes / pack page (published) |
+| Shrek 2 | Puss in Boots | finish last chapter of Book 2 | 3rd party cheat indexes |
+| Shrek 2 | all mini-games | beat the game 100 % (25 chapters) | 3rd party cheat indexes |
 | Shark Tale | mini-game per chapter | collect all subway tokens in a chapter | in-ROM text `0x0C0507` |
 | Shark Tale | further map nodes / sub-levels | tokens + level completion | map/level screens (`0/25`) |
 
@@ -356,12 +356,12 @@ not a cheat activation message.
 
 | Source | Claim | Buttons | Test | Result |
 |---|---|---|---|---|
-| GameFAQs pack page (2018 archive) | 3 unlockables only | — | ROM strings + menus | consistent; no codes |
-| GameFAQs pack page (current) | 4 "hold L" Shark Tale codes | X/Y/R (Xbox/GC) | impossible on GBA; sequences searched in ROM | GBA has no X/Y; absent from ROM |
-| GamesRadar "GBA" | level select `Left,Up,A,B ×3,Up ×5` | A/B/d-pad | pause + chapter select | **not enterable** (A activates menu); no unlock |
-| GamesRadar "GBA" | bonus games `…A,B,X,B…` | X | contains X | not a GBA code; absent |
+| 3rd party cheat indexes pack page (2018 archive) | 3 unlockables only | — | ROM strings + menus | consistent; no codes |
+| 3rd party cheat indexes pack page (current) | 4 "hold L" Shark Tale codes | X/Y/R (Xbox/GC) | impossible on GBA; sequences searched in ROM | GBA has no X/Y; absent from ROM |
+| 3rd party cheat indexes "GBA" | level select `Left,Up,A,B ×3,Up ×5` | A/B/d-pad | pause + chapter select | **not enterable** (A activates menu); no unlock |
+| 3rd party cheat indexes "GBA" | bonus games `…A,B,X,B…` | X | contains X | not a GBA code; absent |
 | PS2 Shark Tale | passwords `i am the best`, `yahoo` | text | literal search (case-folded) | **absent** from ROM |
-| VGChartz (Shark Tale GBA) | "0 cheats" | — | — | consistent |
+| 3rd party cheat indexes | "0 cheats" | — | — | consistent |
 | CodeBreaker/GameShark lists | memory patches | — | out of scope | not analysed |
 
 The pack's GBA page mixes console codes into a GBA listing; the GBA games have
@@ -470,7 +470,7 @@ overlays, zero unlocks.
 * Every screen in §6.2 was reached and screenshotted (see `screenshots/`).
 * No cheat/password/debug menu on any screen; Select is a no-op in Shark
   gameplay; Shrek pause has only Resume/Quit Level/Sleep.
-* Published sequences (console translations and the GamesRadar "GBA" code)
+* Published sequences (console translations and the 3rd party cheat indexes "GBA" code)
   produce no visible change, no unlock, no audio cue (audio dummy; state
   inspected visually).
 * Sleep dialog appears in both halves; all input is frozen once it is shown.
@@ -487,7 +487,7 @@ overlays, zero unlocks.
 
 * `Bonus Mode!` is the 100 %-coin reward (string + published walkthrough, not
   played to 100 % here).
-* Movie Stills / Puss in Boots / all-mini-games thresholds are from GameFAQs;
+* Movie Stills / Puss in Boots / all-mini-games thresholds are from 3rd party cheat indexes;
   only the chapter/coin screens were exercised.
 * The `baisoku!` marker is a build/patch artifact (no pointer references it).
 

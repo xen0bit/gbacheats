@@ -239,7 +239,7 @@ not chapter passwords (they fail the chapter checksum by construction).
   four payload bits (the unused low bits of the decoded words) are ignored by the
   packing. Published pairs such as `TSB2`/`48TF` are such aliases, not typos.
 
-### Novel code (absent from GameFAQs, Cheat Happens, Wookieepedia, ROMSFUN, IGN)
+### Novel code (absent from 3rd party cheat indexes)
 **`QRZZ`** — decodes to `(lo=7, b2=10, b3=10)`, i.e. the maximum episode field and
 maximum values of both secondary fields, a combination no published list covers.
 

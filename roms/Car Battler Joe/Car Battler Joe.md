@@ -31,7 +31,7 @@ The game has **two password systems**, not one.
 1. **Secret-machine passwords** — a table of 20 fixed 8-character ASCII strings
    stored in plaintext at `0x399A84`. Entering one in
    Battle League → 1P Only → Password unlocks the corresponding car.
-   All 20 are publicly documented (GameFAQs, fan sites); the ROM table was
+   All 20 are publicly documented (3rd party cheat indexes, fan sites); the ROM table was
    verified to match the public list exactly.
 
 2. **Custom-machine codes** — a general 8-character code over a 32-symbol

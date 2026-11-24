@@ -42,7 +42,7 @@ The game has **two independent code surfaces**, both on the same
 1. **An 18-entry table of fixed 8-character cheat strings** at file
    `0x3A7B5C` (12-byte stride), indexed by a pointer table at `0x3CFF88` and
    tested by the function at `0x0802586C`. Fourteen of the eighteen are
-   published (GameFAQs lists eight upgrades and six level-select codes); **four
+   published (3rd party cheat index lists eight upgrades and six level-select codes); **four
    are in no published list**: `LMBOTFLP`, `IIFHABLH`, `WPTBITWN`, `AALAALAL`.
    Each entry's effect is a byte write to `0x03002098/0x03002099/0x0300209A`;
    all 18 were entered in the emulator and their writes read back with the GDB
@@ -59,10 +59,10 @@ The game has **two independent code surfaces**, both on the same
    (level 0 tutorial, level 3 Aquatica, level 7 Koo Foo Ship).
 
 **Published-code verification:** all 14 published literals are present in the
-ROM. One GameFAQs literal is a typo (`IIALTSMO4`, nine characters; the ROM has
-`IALTSMO4`). The VGChartz "Passwords" (17 characters, e.g.
+ROM. One 3rd party cheat indexes literal is a typo (`IIALTSMO4`, nine characters; the ROM has
+`IALTSMO4`). The 3rd party cheat indexes "Passwords" (17 characters, e.g.
 `nbb3j r2wr2b pz*mk2`) cannot be entered: the screen caps input at 15 symbols
-and those strings are absent from the ROM. The VGChartz label
+and those strings are absent from the ROM. The 3rd party cheat indexes label
 "Four Defense Upgrades = IWTSOWN7" is wrong; `IWTSOWN7` is the Koo Foo Ship
 level code.
 
@@ -310,8 +310,8 @@ IWTSOWN2  TMTWN3PD  IALTSMO4  IOTJOWN5  FILGSOW6  IWTSOWN7
 ALWMAA15  KMIORMAO  LMBOTFLP  IIFHABLH  WPTBITWN  AALAALAL
 ```
 
-Published (archived GameFAQs, 2018-11-26) and verified present: the first 14
-above except that GameFAQs prints `IIALTSMO4` for Arborea. The ROM literal is
+Published (archived 3rd party cheat indexes, 2018-11-26) and verified present: the first 14
+above except that 3rd party cheat indexes prints `IIALTSMO4` for Arborea. The ROM literal is
 `IALTSMO4` (8 chars); the published 9-char form is a typo and was corrected
 in the table above. The four last entries are **not published anywhere**.
 
@@ -393,7 +393,7 @@ world 1/axis 1–3 have no reachable password.
 
 ### Novel codes generated and confirmed in-game
 
-All codes below are absent from GameFAQs, VGChartz, TCRF and the fan wikis.
+All codes below are absent from 3rd party cheat indexes and the fan wikis.
 
 | Code | Decoded | Emulator result |
 |---|---|---|
@@ -413,7 +413,7 @@ The first three were captured as screenshots
 | `*BFY6Y3WHBPZBCT` | wrong checksum (stored 69 vs computed 117) | **rejected**: field cleared, screen stays; no game start (`... - bad checksum rejected.png`) |
 | `MBFY6Y3WHSPZBF*` | checksum valid but `v1 = 7` (> 6) | **rejected**: field cleared, screen stays; no game start (`... - out of range field rejected.png`) |
 | 18-symbol entry | exceeds the 15-symbol cap | only the first 15 symbols are stored; extra presses ignored |
-| 17-char VGChartz code | exceeds the cap and absent from ROM | cannot be entered; not a valid code for this SKU |
+| 17-char 3rd party cheat index code | exceeds the cap and absent from ROM | cannot be entered; not a valid code for this SKU |
 
 ### Published-code check
 
@@ -421,14 +421,14 @@ The first three were captured as screenshots
   `IAGAW4EL`, `IAGAW4WU`, `ALWMAA15`, `KMIORMAO`, `IWTSOWN2`, `TMTWN3PD`,
   `IALTSMO4`, `IOTJOWN5`, `FILGSOW6`, `IWTSOWN7`) are present at
   `0x083A7B5C`–`0x083A7C33`.
-* `IIALTSMO4` (GameFAQs) is **not** present; `IALTSMO4` is. This is a published
+* `IIALTSMO4` (3rd party cheat indexes) is **not** present; `IALTSMO4` is. This is a published
   typo.
-* The two VGChartz user passwords (`nbb3j r2wr2b pz*mk2`,
+* The two 3rd party cheat indexes user passwords (`nbb3j r2wr2b pz*mk2`,
   `nbd3j rswcb pz*c*pk`) contain 17 non-space characters, exceed the 15-symbol
   cap, and are absent from the ROM in ASCII, lowercase and every case variant
   checked. They are unverified/invalid for this ROM.
-* VGChartz labels `IWTSOWN7` as "Four Defense Upgrades"; the ROM handler writes
-  level index 7, not a defense value. The GameFAQs label (Koo Foo Ship) is the
+* 3rd party cheat indexes label `IWTSOWN7` as "Four Defense Upgrades"; the ROM handler writes
+  level index 7, not a defense value. The 3rd party cheat indexes label (Koo Foo Ship) is the
   correct one.
 * The six published level-select codes are accepted and write the correct
   index, but as noted in §2 the byte is not consumed on this build; the 15-symbol

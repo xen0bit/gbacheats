@@ -194,8 +194,7 @@ The R gate is `held == KEY_R` with the UI hint `R →` drawn at the top right of
 ```
 
 Generated from a chosen save struct `S = 15 cd 5b 07 15 00 06 00` (score 123,456,789,
-mode/stage/level fields set), selector 1. It does not appear on GameFAQs, SuperCheats, TCRF,
-Neoseeker or any other published list (all of which use only the five codes in §6).
+mode/stage/level fields set), selector 1. It does not appear on 3rd party cheat indexes or any other published list (all of which use only the five codes in §6).
 
 Observed in mGBA: accepted on the real ENTER PASSWORD screen → started a **CHALLENGE MODE** game on
 **WONDERING**. RAM readback: `0x02002EAC = 0x075BCD15` = **123456789**, exactly the minted score.

@@ -112,7 +112,7 @@ This section states the complete searched space and proves the negative (guide �
 - The subway-token collectible → minigame unlock is a **save-bit progression feature** (dialogue at 0x0803FDCF), not a code system and not controller-triggerable; per §16.18 it is out of scope and not a code.
 
 **4. Published GBA codes — verified absent.**
-- GameFAQs (standalone GBA SKU 919968): no cheats section. GameFAQs 2-in-1 GBA page: all listed codes are XBOX/PS2/GC controller-screen sequences. VGChartz GBA page: "Total cheats available: 0". Cheat Happens GBA: "no cheats or cheat codes". GameHacking.org / Codejunkies "Debug Menu" entries are PS2/GameCube cheat-device codes (L1+L2 / L+Z), not GBA and not developer-intended.
+- 3rd party cheat indexes: no cheats section. 3rd party cheat indexes 2-in-1 GBA page: all listed codes are XBOX/PS2/GC controller-screen sequences. 3rd party cheat indexes GBA page: "Total cheats available: 0". 3rd party cheat indexes GBA: "no cheats or cheat codes". 3rd party cheat indexes "Debug Menu" entries are PS2/GameCube cheat-device codes (L1+L2 / L+Z), not GBA and not developer-intended.
 - No published code literal appears in the ROM under any encoding searched (ASCII, `+0x20`, u16 button masks).
 
 **Conclusion.** The accepted-code space is exactly the empty set; there is no alphabet/length/checksum to enumerate, no novel code to mint, and no bounds to prove by rejection because no validator exists. Bounds were instead proven on the *search* (counts above) and on the *input surfaces* (7 rejected button combos, 1 non-password text field whose buffer is never compared).

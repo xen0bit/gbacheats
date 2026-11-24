@@ -141,22 +141,22 @@ Dark    81 80 81 97 81 A8 81 A1 FF 00         @ 0x2466BA
 Megami  81 89 81 9B 81 9D 81 97 81 A3 81 9F FF 00 @ 0x2466FC
 ```
 
-Hint text (decoded) at `0x24642A`: `Hint: See Nintendo Power
+Hint text (decoded) at `0x24642A`: `Hint: See 3rd party cheat indexes
 Volume 175,` — the digits are the glyph codes `0x73 0x79 0x77` = `1 7 5`
 (digit codes are `0x72..0x7B` = `0..9`). This is the publisher's own pointer to
 the issue that printed the words.
 
 ### 3.4 Published codes tested
 
-Published lists checked (GameFAQs cheats page, Planet Cheats, IGN wiki,
-SuperCheats, VGChartz):
+Published lists checked (3rd party cheat index cheats page, 3rd party cheat index wiki,
+3rd party cheat indexes):
 
 | Source | Words given |
 |---|---|
-| Planet Cheats (`planetcheats.net/cheat163.html`, fetched) | Chot `ATLUS`, Ikonda `LIGHT`, Lucifroz `DARK`, Pandora `MEGAMI`, Starhair `TENSEI` |
-| GameFAQs cheats page (search snippet; page returns 403) | "Get Chot Atlus; Get Ikonda Light …" |
-| GameFAQs Fusion Guide (search snippet) | "the passwords for the Light Version are the same as the Dark Version" |
-| IGN wiki (Dark page) | lists the same five words with the Dark SKU's NPC labels |
+| 3rd party cheat indexes (3rd party cheat indexes, fetched) | Chot `ATLUS`, Ikonda `LIGHT`, Lucifroz `DARK`, Pandora `MEGAMI`, Starhair `TENSEI` |
+| 3rd party cheat index cheats page (search snippet; page returns 403) | "Get Chot Atlus; Get Ikonda Light …" |
+| 3rd party cheat indexes Fusion Guide (search snippet) | "the passwords for the Light Version are the same as the Dark Version" |
+| 3rd party cheat index wiki (Dark page) | lists the same five words with the Dark SKU's NPC labels |
 
 Every one of the five words is present in this ROM as a standalone answer
 script at the addresses above; none is absent, and no sixth standalone answer
@@ -420,7 +420,7 @@ There is no generator and no payload, so — unlike a checksum password system �
 accepted set *is* the five literals. The strongest novel-form candidates are
 case aliases of the same words (`ATLUS`, `atlus`, …), because the keyboard
 offers both cases and the stored forms are mixed case while the published
-lists print uppercase (Planet Cheats prints `ATLUS` and is documented as
+lists print uppercase (3rd party cheat indexes prints `ATLUS` and is documented as
 working). That alias behaviour is reported as **inferred**, not observed: the
 case-normalisation routine was not isolated and no NPC could be reached to
 type the alias (§7). It is not a new payload; it grants the same five demons.

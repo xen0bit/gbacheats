@@ -72,7 +72,7 @@ gate is reported as **Inferred**, not Observed.
   saving `.ssN` PNG savestates (`Shift+F1..F8`) and decompressing their `gbAs` zlib
   chunk (state length `0x61000`; IWRAM at state offset `0x19000`, EWRAM at `0x21000`).
   Script: `ssram.py`. Reload with plain `F1..F8` (verified working).
-* Published codes checked: GameFAQs (archived 2018-12-29) and ChapterCheats both list
+* Published codes checked: 3rd party cheat indexes both list
   exactly the L+R button code and the Extra Mode unlock; both literals were verified in
   the ROM (table at `0x080946E0`; string at `0x0807CD514`). CodeBreaker/Gameshark codes
   from other sites are memory-edit codes and are out of scope.

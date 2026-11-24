@@ -33,7 +33,7 @@ active-high GBA key masks, not as a password/checksum system:
 * **Code B** — `R R L L ↓ ↑ ↓ ↑ → → L L ← ← → ↓ START` → Gilvader and King Gojulas
   Zoid Data + Z Core GV and Z Core KG.
 
-Both were published on GameFAQs/IGN/walkthroughs; this report verifies them at
+Both were published on 3rd party cheat indexes/walkthroughs; this report verifies them at
 the instruction level and goes beyond the published list (§6b). The validator is
 a single Thumb function (`0x0809BAB0`) that runs as a title-screen task, compares
 each incoming key against *both* tables, and grants rewards on a 17-match.
@@ -150,7 +150,7 @@ hex: `0100 0100 0200 0200 0080 0040 0080 0040 0010 0010 0200 0200 0020 0020 0010
 two cores" description. Code B's success branch was executed but its reward
 RAM was not captured (see §8).
 
-**Published-list discrepancy resolved:** one SuperCheats posting omits the
+**Published-list discrepancy resolved:** one 3rd party cheat indexes posting omits the
 second-to-last `Left` of code A. The ROM table contains it at index 14, so that
 posting is a transcription error (guide §16.7).
 

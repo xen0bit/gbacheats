@@ -16,15 +16,15 @@
 | SHA-1 | `d6e985b7fce0219093b644232fd4be5ecd3de746` |
 | SHA-256 | `9faf9865da9f5d9884721832e4c18122319ad3208c295adaee4653cfbf63804a` |
 
-**Phase 0 embedded-header scan:** the full 156-byte Nintendo logo occurs exactly **once**, at header base `0x00000000`. There is no second/sub-image header (not a 2-in-1), no appended trainer, and no GameShark/CodeBreaker host code in the image. The tail of the ROM is ordinary compressed graphics/audio data. Build stamp found in the binary: `NRT2Jul 18 2006 20:13:04` at `0x085093BC` (matches the US D3 release, TCRF "Rev.00").
+**Phase 0 embedded-header scan:** the full 156-byte Nintendo logo occurs exactly **once**, at header base `0x00000000`. There is no second/sub-image header (not a 2-in-1), no appended trainer, and no GameShark/CodeBreaker host code in the image. The tail of the ROM is ordinary compressed graphics/audio data. Build stamp found in the binary: `NRT2Jul 18 2006 20:13:04` at `0x085093BC` (matches the US D3 release, 3rd party cheat indexes "Rev.00").
 
 ## 2. Executive summary
 
-The retail US image contains a **complete,developer debug menu** — it is not stripped. All of its strings, menu tables, dispatch code and stage lists are present and the dispatcher is wired into the game's scene/task table. It is, however, **gated off in the stock image**: the gate byte `0x03003DF4` (IWRAM) reads `0x00` on every reachable screen (title, main menu, character/story, gameplay, results). The published activation method is an external **GameShark memory-patch** (TCRF), which is explicitly out of scope here and is **not** an in-game cheat. Testing the documented hotkey **Select + Up** on title, main menu and in-game produced only normal menu navigation / no change, with the gate byte still `0x00` — i.e. no in-game activation path was found.
+The retail US image contains a **complete,developer debug menu** — it is not stripped. All of its strings, menu tables, dispatch code and stage lists are present and the dispatcher is wired into the game's scene/task table. It is, however, **gated off in the stock image**: the gate byte `0x03003DF4` (IWRAM) reads `0x00` on every reachable screen (title, main menu, character/story, gameplay, results). The published activation method is an external **GameShark memory-patch** (3rd party cheat indexes), which is explicitly out of scope here and is **not** an in-game cheat. Testing the documented hotkey **Select + Up** on title, main menu and in-game produced only normal menu navigation / no change, with the gate byte still `0x00` — i.e. no in-game activation path was found.
 
-**What is in scope and was fully enumerated:** the debug menu itself is a developer-intended feature whose entire content was recovered from ROM tables — 12 selectable top-level entries, a 12-entry "DISP MENU" screen list, a 44-label stage/area select covering stages 1-1 … 10-8, a `LOCALIZE_VER` save editor (SAVE / LOAD / WAIT / OK / version display), a SOUND TEST (BG / SE counters), and an `AREA MENU`. TCRF documents only the top-level names and leaves the test maps and LOCALIZE VER as TODOs; those gaps are closed in §6/§6b.
+**What is in scope and was fully enumerated:** the debug menu itself is a developer-intended feature whose entire content was recovered from ROM tables — 12 selectable top-level entries, a 12-entry "DISP MENU" screen list, a 44-label stage/area select covering stages 1-1 … 10-8, a `LOCALIZE_VER` save editor (SAVE / LOAD / WAIT / OK / version display), a SOUND TEST (BG / SE counters), and an `AREA MENU`. 3rd party cheat indexes document only the top-level names and leaves the test maps and LOCALIZE VER as TODOs; those gaps are closed in §6/§6b.
 
-**No password/entry code system exists.** There is no password alphabet, no code table, no code validator and no password UI anywhere in the image (counts in §6b). The only "codes" published for this game are the GameShark memory patches for the debug menu, which are out of scope. One published in-game unlockable exists (Rock Lee; CheatsGuru) — it is a normal save/story unlock, not a code, and is treated accordingly in §8.
+**No password/entry code system exists.** There is no password alphabet, no code table, no code validator and no password UI anywhere in the image (counts in §6b). The only "codes" published for this game are the GameShark memory patches for the debug menu, which are out of scope. One published in-game unlockable exists (Rock Lee; 3rd party cheat indexes) — it is a normal save/story unlock, not a code, and is treated accordingly in §8.
 
 ## 3. How to reproduce
 
@@ -118,12 +118,12 @@ debug_process():
 | 7 | `STAGE 6` | 9 | start stage group 6 |
 | 8 | `STAGE 7` | 9 | start stage group 7 |
 | 9 | `STAGE 10 (LOCAL TEST)` (`0x0850946C`) | 9 | test maps (see stage labels below) |
-| 10 | `FIGHT` (`0x08509464`) | 8 | battle test (TCRF: does not work) |
+| 10 | `FIGHT` (`0x08509464`) | 8 | battle test (3rd party cheat indexes: does not work) |
 | 11 | `SOUND` (`0x0850945C`) | 10 | sub-screen 3 — SOUND TEST |
 | 12 | `LOCALIZE VER` (`0x0850944C`) | 0 | save editor (see below) |
 | 13 | `END` (`0x08509448`) | 0x15 | exit / terminator |
 
-**DISP MENU / AREA MENU** — table `0x08509918`, 12 entries (view any in-game screen). *Not enumerated by TCRF:*
+**DISP MENU / AREA MENU** — table `0x08509918`, 12 entries (view any in-game screen). *Not enumerated by 3rd party cheat indexes:*
 
 `MAINTITLE`(0x13), `ERROR`(0x12), `LOGO`(0x01), `TUBAZERI`(0x11), `TAISENRSL`(0x10), `TITLE`(0x03), `ENDING`(0x05), `SEISAN`(0x0E), `TAISENTITLE`(0x0D), `SELECT`(0x06), `SAVELOAD`(0x07), `GAMEOVER`(0x0B).
 
@@ -138,9 +138,9 @@ debug_process():
 - 7-10, 7-9, 7-8, 7-7 (7-5-1), 7-6, 7-5 (7-5-0), 7-4, 7-3, 7-2, 7-1
 - 10-8 (HIT VIEW), 10-7, 10-6 (HIGH SPEED), 10-5 (BG VIEW), 10-4 (KAIWA CUTIN), 10-3 (EVENT CUTIN), 10-2, 10-1
 
-The parenthesised variants (`HIT VIEW`, `HIGH SPEED`, `BG VIEW`, `KAIWA CUTIN`, `EVENT CUTIN`, `7-5-0`/`7-5-1`) are TCRF's "test maps to do" — their names and table slots are now documented.
+The parenthesised variants (`HIT VIEW`, `HIGH SPEED`, `BG VIEW`, `KAIWA CUTIN`, `EVENT CUTIN`, `7-5-0`/`7-5-1`) are a 3rd party cheat index's "test maps to do" — their names and table slots are now documented.
 
-**`LOCALIZE VER`** (`0x08509E1C`–`0x08509E6B`) — resolves TCRF TODO: it is a **save-data editor**, with labels `SAVE`, `LOAD`, `WAIT`, blank/blank, `OK`, and a version readout `VER.[` … `]` (`0x08509E60`, `0x08509E68`). The adjacent magic byte string `22 11 44 33 66 55 88 77` at `0x08509E98` is a data/key constant used by this menu.
+**`LOCALIZE VER`** (`0x08509E1C`–`0x08509E6B`) — resolves 3rd party cheat indexes TODO: it is a **save-data editor**, with labels `SAVE`, `LOAD`, `WAIT`, blank/blank, `OK`, and a version readout `VER.[` … `]` (`0x08509E60`, `0x08509E68`). The adjacent magic byte string `22 11 44 33 66 55 88 77` at `0x08509E98` is a data/key constant used by this menu.
 
 **`SOUND TEST`** (`0x08509E6C`–`0x08509E9F`) — `--- SOUND TEST ---`, `SOUND BG:`, `SOUND SE:` — a BGM/SFX index selector with two counters (values table begins `0x08509E98`).
 
@@ -157,10 +157,10 @@ The parenthesised variants (`HIT VIEW`, `HIGH SPEED`, `BG VIEW`, `KAIWA CUTIN`, 
 
 **Complete enumeration** (Derived from the ROM's own tables, not from published lists): 12 selectable top-level functions + END; 12 DISP/AREA screens; 44 stage labels incl. 6 named test-view variants; 5 LOCALIZE_VER controls + version display; 2 SOUND TEST counters; 4 debug sub-processes. Total distinct developer-intended debug functions enumerated: **12 + 12 + 44 + 5 + 2 = 75** menu destinations/controls.
 
-**Novel / unpublished material** (not on TCRF, GameFAQs, VGChartz or CheatsGuru):
-1. The entire DISP/AREA MENU list of 12 screen IDs with their numeric codes (TCRF only says "view any screen").
-2. All six `STAGE 10` test-map labels and their purpose (`HIT VIEW`, `HIGH SPEED`, `BG VIEW`, two CUTIN variants, `10-7`, `10-8`) — TCRF's explicit TODO.
-3. The `LOCALIZE_VER` resolution: SAVE / LOAD / WAIT / OK + `VER.[]`, i.e. a save editor — TCRF's other explicit TODO.
+**Novel / unpublished material** (not on 3rd party cheat indexes):
+1. The entire DISP/AREA MENU list of 12 screen IDs with their numeric codes (3rd party cheat indexes only says "view any screen").
+2. All six `STAGE 10` test-map labels and their purpose (`HIT VIEW`, `HIGH SPEED`, `BG VIEW`, two CUTIN variants, `10-7`, `10-8`) — a 3rd party cheat index's explicit TODO.
+3. The `LOCALIZE_VER` resolution: SAVE / LOAD / WAIT / OK + `VER.[]`, i.e. a save editor — a 3rd party cheat index's other explicit TODO.
 4. Exact gate/selector/sub-screen RAM addresses and the dispatcher pointer table `0x08509BC4`, plus the magic-check function `0x08037C60` and magic string `NRT2`.
 5. The published-list claim that the menu is "accessible at any time with Select+Up" is **false in the stock ROM**: that hotkey is inert until an external patch sets the gate; this was disproved with RAM reads at three screens.
 
@@ -172,7 +172,7 @@ The parenthesised variants (`HIT VIEW`, `HIGH SPEED`, `BG VIEW`, `KAIWA CUTIN`, 
 - **Observed** (savestate patch experiment, analysis only): forcing `0x03003DF4 = 0x01` and `0x03003DF6 = 0` keeps the gate set after reload; forcing scene `0x03004900/01 = 0` did not switch screens because the debug function pointer is not the dispatcher's scene-0 target — evidence that the debug scene is not in the normal scene rotation.
 - **Derived** (disassembly): all addresses, tables, gate logic, item counts, stage labels and submenu handlers in §4–§6. Literal words re-read with `struct.unpack_from` to avoid the `objdump` halfword-endianness trap.
 - **Inferred**: that the `NRT2` magic is what the external GameShark patch writes (the game's own `0x08037BF4` writes it, but its retail callers are not reachable from controller input); not directly observed.
-- **Published codes tested:** TCRF's 12 GameShark lines were located on the web archive and classified as memory-patch codes (out of scope). Their literal values do not appear in the ROM (they are encrypted for the external device). They were **not** applied as player codes. CheatsGuru's "UNLOCK ROCK LEE" is a story/save unlockable, not a code.
+- **Published codes tested:** a 3rd party cheat index's 12 GameShark lines were located on the web archive and classified as memory-patch codes (out of scope). Their literal values do not appear in the ROM (they are encrypted for the external device). They were **not** applied as player codes. a 3rd party cheat index's "UNLOCK ROCK LEE" is a story/save unlockable, not a code.
 
 **Search counts (negative-result bounds):**
 
@@ -193,8 +193,8 @@ Text encoding check: the debug bank and all menu labels are plain NUL-terminated
 
 - The exact byte-level effect of the published GameShark patch was not decoded (encrypted, device-seeded); the gate and magic it targets are documented instead. GameShark codes are out of scope and were not applied.
 - Whether a controller-only sequence exists that writes the `NRT2` magic or calls `0x08037DB5` was not proven absolutely; all BL/xref evidence points to the debug code being self-contained and launched externally. Its callers are listed in §7.
-- Visual walk of the debug menu itself: direct debugger calls to the submenu functions produced black frames because the surrounding normal scene setup was absent. Menu contents were therefore enumerated from the ROM tables (§6/§6b), which is complete for the static menu structure; per-entry runtime side effects (e.g. whether `FIGHT` truly fails) are reported from TCRF as **Inferred**, not re-tested.
-- Rock Lee unlock conditions (CheatsGuru) were not reproduced — it is a normal unlockable outside the code/debug-menu scope.
+- Visual walk of the debug menu itself: direct debugger calls to the submenu functions produced black frames because the surrounding normal scene setup was absent. Menu contents were therefore enumerated from the ROM tables (§6/§6b), which is complete for the static menu structure; per-entry runtime side effects (e.g. whether `FIGHT` truly fails) are reported from 3rd party cheat indexes as **Inferred**, not re-tested.
+- Rock Lee unlock conditions (3rd party cheat indexes) were not reproduced — it is a normal unlockable outside the code/debug-menu scope.
 
 ## 9. Tooling
 
@@ -202,6 +202,6 @@ Text encoding check: the debug bank and all menu labels are plain NUL-terminated
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly; Capstone 5.0.7 for BL/literal scans.
 - mGBA SDL (`mgba -3`, `-d`, `-g`, `-c`) under `Xvfb :316` + `openbox`, `xdotool` XTEST input, `scrot`, ImageMagick `convert` for the 720×480 crop.
 - Custom scripts in `/tmp/naruto2/`: `pad.py`, `walk.py` (input/screenshot/savestate), `ss.py` (zlib `gbAs` savestate reader), `patchss.py` (savestate RAM patcher), `dbgdaemon.py`/`dbgc.py` (pty debugger daemon/client).
-- Web: TCRF page via `web.archive.org` (captured 2024-04-09); CheatsGuru archive. Fetched pages were treated as data; no prompt-injection payload was encountered in this session's fetches.
+- Web: 3rd party cheat index page via `web.archive.org` (captured 2024-04-09); 3rd party cheat indexes archive. Fetched pages were treated as data; no prompt-injection payload was encountered in this session's fetches.
 
 **Legal note:** no ROM image, extracted graphics, music or game text were redistributed. Only addresses, hashes, algorithms and the author's analysis scripts are published.

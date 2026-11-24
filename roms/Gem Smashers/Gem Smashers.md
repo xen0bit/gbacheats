@@ -44,10 +44,10 @@ combination — all 13 button/combination probes on the Special screen left the 
 locked (RAM diff + screenshot). This is an unlockable, documented in §6, not a cheat
 code.
 
-Web research found no password/button code for this SKU: GameFAQs advertises "4 cheat
+Web research found no password/button code for this SKU: 3rd party cheat indexes advertises "4 cheat
 codes and secrets" for the GBA version but its content is access-blocked (403/archived
-CDX failures) and no copy could be retrieved; GameHacking.org lists only GameShark
-*master codes* (out of scope); TCRF has no GBA page; Cheat Slips states "no cheat code
+CDX failures) and no copy could be retrieved; 3rd party cheat index lists only GameShark
+*master codes* (out of scope); 3rd party cheat indexes have no GBA page; 3rd party cheat indexes state "no cheat code
 available". Nothing retrieved was a password or button sequence, so there is no
 published literal to verify against the ROM.
 
@@ -146,7 +146,7 @@ checked:
 | Key-global xrefs | `held`: 9 LDR sites; `pressed`: 71 LDR sites | all are ordinary menu/game input handlers; no sequence matcher |
 | Title-screen button combos | 9 combos (Konami code, L+R+Start, L+R+A+B, Start+Select+A+B, all-directions, A/B alternation, 10×A, Up/Down/Up/Down+B+A, L+R+Up+Down) | no hidden screen; menu cursor moved only |
 | Special-door button probes | 13 single buttons/combos | no door opened; RAM diff after excluding animation showed no persistent unlock flag change |
-| Published codes | GameFAQs (4 "cheats and secrets" advertised, content 403/blocked), GameHacking.org (GameShark master codes — out of scope), TCRF (no GBA page), Cheat Slips ("no cheat code available") | 0 password/button codes retrieved or verifiable |
+| Published codes | 3rd party cheat indexes (4 "cheats and secrets" advertised, content 403/blocked), 3rd party cheat indexes (GameShark master codes — out of scope), 3rd party cheat indexes | 0 password/button codes retrieved or verifiable |
 
 **Novel code:** not applicable — no code system exists to mint from. No code is reported
 as working because none was found or could be generated.
@@ -175,15 +175,15 @@ rejections, recorded with RAM snapshots, not untested assumptions.
 - **Observed** — 9 title combos and 13 Special-door probes produced no hidden screen
   and no persistent unlock (RAM diff with key globals excluded; animation accounts
   for ~3,000 changing bytes per state).
-- **Inferred** — the GameFAQs "4 cheat codes and secrets" are most likely the
+- **Inferred** — the 3rd party cheat indexes "4 cheat codes and secrets" are most likely the
   progression secrets for unlocking the three Special doors / secret levels, since no
   password or button-code surface exists in the ROM; their exact text could not be
   retrieved (site blocks), so this is explicitly not claimed as verified.
 
 ## 8. Unknowns
 
-- The exact wording of GameFAQs' four "cheats and secrets" could not be retrieved
-  (403 on GameFAQs, 503/504/timeouts on web.archive.org CDX, 429 on Brave after the
+- The exact wording of 3rd party cheat indexes' four "cheats and secrets" could not be retrieved
+  (403 on 3rd party cheat indexes, 503/504/timeouts on web.archive.org CDX, 429 on Brave after the
   initial result). No literal from them is therefore claimed to have been tested.
 - The precise gameplay trigger that increments the special-door counter was narrowed to
   the story-completion routine at `0x080293CA` (door count ≤2 check) but not fully

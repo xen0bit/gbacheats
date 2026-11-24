@@ -24,7 +24,7 @@ No cracktro/appended trainer was found; the first 4 KiB is a normal crt0.
 
 This GBA SKU has **one** developer cheat system: a **six-entry pause-menu button-code
 table**. There is no password entry screen and no hidden debug menu. The published
-GameFAQs/GameGenie "invisibility" sequence does **not** exist in this build.
+3rd party cheat indexes "invisibility" sequence does **not** exist in this build.
 
 The six codes are stored as arrays of active-high GBA key masks (`A=1,B=2,Select=4,
 Start=8,Right=0x10,Left=0x20,Up=0x40,Down=0x80,R=0x100,L=0x200`). A single validator
@@ -132,8 +132,8 @@ Key details:
 | 4 | `R, R, L, R, Up` | `100 100 200 100 040` | `0x080393C9` | `4` | `0x0200C7C0`: `0x40→0x44` (bit 2 toggled), play resumes |
 | 5 | `R, Select, R` | `100 004 100` | `0x08039411` | `6` | `0x0200C7C0`: `0x40→0x50` (bit 4 toggled), play resumes |
 
-Published coverage: only entry 1 (GameGenie/Danworld, "Level skip") matches a
-published GBA code. The Freeola/GameFAQs-style "invisibility"
+Published coverage: only entry 1 (3rd party cheat indexes, "Level skip") matches a
+published GBA code. 3rd party cheat index-style "invisibility"
 `Up,Left,A,A,B,L,R,Up,Down` is **not** present in this ROM and does not work:
 pressing A on the pause screen activates "Resume" and B activates "Quit", so the
 sequence leaves the pause screen and returns to the title screen (screenshot
@@ -164,7 +164,7 @@ per slot, but only the 6 stored arrays are accepted.
 codes and on every rejection tested (see below).
 
 **Novel codes (absent from every published list checked).** Web recon covered
-GameFAQs, GameGenie/Danworld, Freeola, SuperCheats, VGChartz, IGN, CheatCC and TCRF.
+3rd party cheat indexes.
 Only `L,R,Down,Down` is published for GBA. The following were minted from the ROM
 table, entered on the real pause screen and RAM-verified:
 

@@ -40,8 +40,7 @@ V W X Z ? # ★ 1
 byte = its grid index; the empty slot is `0x16` (★). The 10-byte input buffer is
 **IWRAM `0x03001C56`–`0x03001C5F`** (observed by savestate diffs).
 
-All **seven** published GBA passwords found on GameFAQs / SuperCheats / ChapterCheats /
-Neoseeker / Mogelpower / VGChartz were accepted by the real screen:
+All **seven** published GBA passwords found on 3rd party cheat indexes were accepted by the real screen:
 
 | Code | Published effect | In-game result |
 |---|---|---|
@@ -168,8 +167,7 @@ carry payload, subject to a semantic range gate that rejects most random prefixe
 **Published-list completeness.** All seven published codes are valid; the space is
 larger than the published list, demonstrated by the novel accepted code below.
 
-**Novel code (not in GameFAQs, SuperCheats, ChapterCheats, Neoseeker, Mogelpower,
-VGChartz, or TCRF): `JVL?*BSWQR`** — grid indices
+**Novel code (not in 3rd party cheat indexes): `JVL?*BSWQR`** — grid indices
 `[6,16,8,20,22,0,14,17,12,13]`; buffer bytes at `0x03001C56`:
 `06 10 08 14 16 00 0e 11 0c 0d`.
 
@@ -235,8 +233,7 @@ Screenshots kept in `/tmp/motogp/` (e.g. `password2.png`,
 * `gdbcli.py` / raw GDB-remote socket client — memory reads and `Z3` read watchpoints
   against mGBA's `-g` stub on port 2345.
 * `Xvfb :319`, `openbox`, `mgba -3`, `xdotool` (XTEST), `scrot`, ImageMagick, PIL.
-* Web sources (read only): GameFAQs, SuperCheats, ChapterCheats, Neoseeker,
-  Mogelpower, VGChartz, TASVideos forum.
+* Web sources (read only): 3rd party cheat indexes forum.
 
 ## 10. Legal note
 

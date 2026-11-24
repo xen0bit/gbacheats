@@ -160,8 +160,7 @@ strings on the real keypad. Two independent 4-bit XOR checks reduce this to
 the emulator (`v1 ≤ 3`, `v2 ∈ {1,13}`, `v3 ∈ {0,4,8}`, plus a partial bound on `v0`)
 reduce the practically accepted set to a small subset of those 65,536.
 
-**Novel codes minted and accepted in-game** (none appears in GameFAQs,
-supercheats, victorycheats, cheatingdome, the ffmasterjose FAQ, or traumerlebnis):
+**Novel codes minted and accepted in-game** (none appears in 3rd party cheat indexes, the ffmasterjose FAQ, or traumerlebnis):
 
 | Code | v-vector | Effect observed |
 |---|---|---|

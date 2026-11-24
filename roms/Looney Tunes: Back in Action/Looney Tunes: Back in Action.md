@@ -136,7 +136,7 @@ only two descriptor tables in the image**, so no input can select it.
 
 ### 6.1 Published console passwords — verification ledger
 
-These come from GameFAQs, IGN, TV Tropes, VGChartz and Wiki pages for the
+These come from 3rd party cheat indexes and Wiki pages for the
 **PS2/GameCube** SKUs. Each was searched in the GBA ROM in seven encodings
 (ASCII, lowercase, UTF-16LE, UTF-16BE, `+0x20`, `−0x20`, 5-bit A–Z packing):
 
@@ -271,6 +271,6 @@ All analysis scripts are listed in §3; the durable artifact is this report.
 **Legal note:** no ROM bytes, graphics, music, or extracted game text are
 redistributed here; only addresses, hashes, counts and findings are published.
 
-*Fetched web pages (GameFAQs, IGN, TV Tropes, VGChartz, CodeBreaker/Action Replay
+*Fetched web pages (3rd party cheat indexes, CodeBreaker/Action Replay
 listings) were treated strictly as data. No instructions found in any fetched page or
 ROM string were executed.*

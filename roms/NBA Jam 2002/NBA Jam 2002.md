@@ -38,7 +38,7 @@ No GBA button codes, hidden/debug menus, or secret characters were found; the ne
 * Alphabet (16 symbols, in order): `B C D F G H J K L M N P Q R S T`. Vowels A/E/I/O/U are absent.
 * Codes tested (all accepted unless noted):
   * `LHNGBKBBBHKC` → `ROOKIE TEAM UNLOCKED`
-  * `LHNGBTBBBHTL` → `ALL STAR TEAM UNLOCKED` (GameFAQs calls this "All NBA Team")
+  * `LHNGBTBBBHTL` → `ALL STAR TEAM UNLOCKED` (3rd party cheat indexes call this "All NBA Team")
   * `LHNGGDBLBJGT` → `COURTS UNLOCKED`
   * `MKJLBFQBLDGH` → `PASSWORD ACCEPTED` on the **Season** password screen (published as "Playoffs as Toronto Raptors"); `INVALID PASSWORD` on the Playoffs password screen (mode gate)
   * `GFDCCDFGHJNJ` (novel) → `PASSWORD ACCEPTED`, distinct season state
@@ -138,7 +138,7 @@ Flag bits: `0x03002024`=All-Star, `0x03002025`=Rookie, `0x03002026`=Courts.
 
 **Count of accepted strings.** Per mode: `16^4 (p0..p3) × 16 (p4, aliases included) × 16^4 (p5..p8) × 8 (p9 with correct parity) × 1 (unique valid suffix) = 549,755,813,888`. Plus the 3 table codes (which do not satisfy the algorithmic checksum and are checked first). Both Season and Playoffs screens therefore accept enormous spaces; this is a generated progress code, not a small closed table.
 
-**Novel code (not on GameFAQs, VGChartz, TCRF, Cheat Happens or any other published list):**
+**Novel code (not on 3rd party cheat indexes or any other published list):**
 
 `GFDCCDFGHJNJ`
 * Generated from `A=0x4321`, `B=0x123456`, `sum=17213`, `17213%255=128`, `check=0xA6` → suffix `NJ`.
@@ -166,7 +166,7 @@ Flag bits: `0x03002024`=All-Star, `0x03002025`=Rookie, `0x03002026`=Courts.
 **Inferred:**
 * The semantic meaning of individual `B` bit-fields (team/record/quarter etc.) was not labelled; only their effect on the displayed season team split was observed. The 4-way `p4` aliasing is derived from unused bit positions, not separately typed into the UI.
 
-**Prompt injection:** fetched web pages (GameFAQs, Cheat Happens, ROMSFun, etc.) contained no instructions-directed-at-the-agent; all were treated as data. No action was taken on any embedded text.
+**Prompt injection:** fetched web pages (3rd party cheat indexes, etc.) contained no instructions-directed-at-the-agent; all were treated as data. No action was taken on any embedded text.
 
 ## 8. Unknowns
 

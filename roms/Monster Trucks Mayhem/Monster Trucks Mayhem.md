@@ -43,7 +43,7 @@ I located the validator at `0x08001068` and fully characterised it:
 
 Two codes that appear in no published list were minted. `ABCDEFGHIJKLMNOPQRS3` was typed character-by-character on the real PASSWORD screen (RAM-verified in the input buffer at `0x030020C5`) and **accepted**: the game wrote the predicted transform `DFHJLNPRTVXZ13579BDP` into RAM at `0x03001C90` and 34 782 state bytes changed as it began loading a career. The decoded fields of an arbitrary minted code are not semantically valid, and the game then hangs on a black screen — a later range/state layer beyond the checksum (labeled *Inferred*, §7). The control `AAAAAAAAAAAAAAAAAAAA` fails the checksum and produces the in-game `INVALID PASSWORD` dialog.
 
-There is **no button-code table** (Konami sequence and reverse absent; 5 candidate single-bit-mask runs, none referenced by an instruction) and **no hidden/debug menu** (every menu item count enumerated statically and visually; Options = 3 screens, Pause = 4 items, Select Truck = 4, Select Event = 2, Select Track = 11). No published in-game code was found on the web (GameFAQs 403, no archive; search engines return nothing relevant), so there is no published literal to verify — the two codes below are therefore necessarily novel.
+There is **no button-code table** (Konami sequence and reverse absent; 5 candidate single-bit-mask runs, none referenced by an instruction) and **no hidden/debug menu** (every menu item count enumerated statically and visually; Options = 3 screens, Pause = 4 items, Select Truck = 4, Select Event = 2, Select Track = 11). No published in-game code was found on the web (3rd party cheat indexes 403, no archive; search engines return nothing relevant), so there is no published literal to verify — the two codes below are therefore necessarily novel.
 
 ROM↔RAM and savestate↔RAM maps, the exact codec, and the acceptance/rejection evidence are in §§4–7 so a second analyst can reproduce everything.
 
@@ -247,9 +247,9 @@ Neither string occurs anywhere in the ROM (`grep -abo` style search) or in any p
 
 ### 6b.5 Published-code space
 
-* GameFAQs `…/922253-monster-trucks/cheats` → HTTP 403, no Wayback snapshot.
+* 3rd party cheat indexes `…/922253-monster-trucks/cheats` → HTTP 403, no Wayback snapshot.
 * `websearch` for `"Monster Trucks Mayhem" GBA password/cheat`, `Monster Trucks GBA password "enter your password"`, and Bing via the browser → no relevant results (Bing returned unrelated "Monster Energy"/job pages).
-* No TCRF/fan-wiki entry describing a password or hidden mode for this SKU.
+* No 3rd party cheat indexes/fan-wiki entry describing a password or hidden mode for this SKU.
 * Therefore there is **no published literal to verify**; the codes above are novel by construction. Fetched pages were treated strictly as data; no prompt-injection payload was encountered in this session.
 
 ---

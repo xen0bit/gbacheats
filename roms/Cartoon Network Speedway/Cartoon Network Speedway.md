@@ -43,7 +43,7 @@ struct and a 12-bit item mask (`field30`) in EWRAM, and the caller also writes
 A novel, unpublished code was minted and verified in the emulator:
 
 - **`40052674`** → `M = 0x1F83FF` (all five 2-bit cup fields = 3, `r0` = 15,
-  `field30 = 0xFFF`). It is not on GameFAQs, Cheat Happens, the Ed, Edd n Eddy
+  `field30 = 0xFFF`). It is not on 3rd party cheat indexes, the Ed, Edd n Eddy
   wiki, or any other published list found. Entered on the real password screen,
   it is accepted, writes the unlock struct, and the Bonus Items → Characters
   screen shows all six character icons coloured (VRAM diff confirms the screen
@@ -225,7 +225,7 @@ ENC = [3, 1, 4, 2, 6, 0, 5]   # ROM 0x083D47F0 / IWRAM 0x03003720
 SHIFT = [1,10,2,3,6,7,0,8,5,11,9,4,6,0,2,3]  # ROM 0x080630FC
 ```
 
-### 6.2 Published codes (GameFAQs + Ed, Edd n Eddy wiki)
+### 6.2 Published codes (3rd party cheat indexes + Ed, Edd n Eddy wiki)
 
 | Code | `M` | `b0..b4` | `r0` | `f10..f14` | `field30` | Published effect |
 |---|---|---|---|---|---|---|
@@ -244,7 +244,7 @@ SHIFT = [1,10,2,3,6,7,0,8,5,11,9,4,6,0,2,3]  # ROM 0x080630FC
 | `96981951` | 1998165 | 11111 | 12 | 11111 | 0xFFF | Unlock Everything |
 | `82010050` | 1025 | 10000 | 0 | 10000 | 0x000 | wiki: Cartoon Speedway championship password |
 
-`38000050` (seen in a prior note, not on GameFAQs) decodes to `M = 85`
+`38000050` (seen in a prior note, not on 3rd party cheat indexes) decodes to `M = 85`
 (`b0..b3 = 1`), consistent with "first four championships won", but is
 recorded here as unverified against a primary list.
 
@@ -281,8 +281,8 @@ recorded here as unverified against a primary list.
 | `g1`, `g10` | 1, 1 |
 | `field30` | `0xFFF` (all 12 item bits) |
 
-This combination appears in **no published list** (GameFAQs, Cheat Happens,
-Ed Edd n Eddy wiki, speedrun/retroachievements pages). It exercises values
+This combination appears in **no published list** (3rd party cheat indexes,
+Ed Edd n Eddy wiki, speedrun/3rd party cheat index pages). It exercises values
 the published lists omit: `b0..b4 = 3` (published codes only use 0/1) and
 `r0 = 15` (published codes use 0,2–9,12).
 
@@ -316,7 +316,7 @@ the published lists omit: `b0..b4 = 3` (published codes only use 0/1) and
 | 2^21 accepted codes | full enumeration, 0 mismatches | Derived |
 | Published codes accepted | `10000010`, `96981951`, `34711154` entered; RAM struct matched static decode; `10000010` unlocked the Cartoon Speedway trophy | Observed |
 | Novel code `40052674` accepted | entered; RAM struct written; Characters screen changed | Observed |
-| Novel code unpublished | GameFAQs/Cheat Happens/wiki searches; not in ROM as a literal | Observed |
+| Novel code unpublished | 3rd party cheat indexes/wiki searches; not in ROM as a literal | Observed |
 | Bad checksum rejected | `00000001` entered; RAM struct unchanged | Observed |
 | Out-of-range rejected | `39999999` entered; RAM struct unchanged | Observed |
 | `field30` unlocks characters/tracks | RAM `field30=0xFFF` + Characters screen icons all coloured + VRAM diff | Observed (screen) + Derived (mapping) |

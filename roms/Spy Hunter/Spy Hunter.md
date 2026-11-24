@@ -168,7 +168,7 @@ respectively (offsets `+0x00`, `+0x6C`, `+0xD8` from the profile base).
 | Erase arcade high scores | Up, Up, Down, L, R, L | Legal screen |
 | "Chicken Blood" | Left, Left, Right, Right, Right, Left, Left, A | Pause, Special Agent mode |
 
-These came from GameFAQs/supercheats, not from this ROM's code. No contiguous
+These came from 3rd party cheat indexes, not from this ROM's code. No contiguous
 mask table for any of them exists in the image (search counts in §6b), so they
 may be implemented as a chain of immediate comparisons or may be wrong/for a
 different revision. They are recorded, not asserted.

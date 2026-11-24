@@ -41,7 +41,7 @@ pause menu (Right opens an in-game DEBUG menu), by the story-mode screen
 (displays a STAGE selector), and by the menu/options code (TIME ATTACK and
 ENDLESS appear on the main menu, and OPTIONS gains LANGUAGE, SOUND TEST,
 ANIMATION and EVENT CHECK).
-The flag is RAM-only and is lost on reset, exactly as GameFAQs says.
+The flag is RAM-only and is lost on reset, exactly as 3rd party cheat indexes say.
 
 The gate is not a table and not a checksum: it is a 7-state equality matcher at
 `0x080042F8`, fed by the pressed-key word. It accepts **exactly one** 7-press
@@ -70,14 +70,14 @@ by the game’s own menus.
 
 ### Public codes checked
 
-* GameFAQs (archived 2025-03-29) “Unlock All Characters”: *“At the Treasure
+* 3rd party cheat indexes “Unlock All Characters”: *“At the Treasure
   logo … quickly enter Right, Left, L, R, Up, Select, Select. You’ll hear Zur
   laugh … Everything will be unlocked until you restart the game.”* This is
   the same sequence reversed in §5.1 and it was reproduced from a cold boot.
-* GameFAQs unlockables (Time Attack = clear Normal, Endless = clear Hard, new
+* 3rd party cheat indexes unlockables (Time Attack = clear Normal, Endless = clear Hard, new
   characters): with debug on, the main menu showed **TIME ATTACK** and
   **ENDLESS**, and the RECORDS gallery showed all 21 character portraits.
-* TCRF’s debug-mode page documents the same trigger and the debug menus; it was
+* a 3rd party cheat index's debug-mode page documents the same trigger and the debug menus; it was
   used to know where to look, and every claim repeated here was re-verified in
   this exact ROM revision.
 * No password screen, password table or password alphabet exists in this ROM.
@@ -392,7 +392,7 @@ selector because of the `2..109` clamp.
 | EVENT CHECK | MSG NO / text ID | `#DUMMY`, `#000`…; observed to 183 (`#821`) |
 
 Animation-checker `CharNo` is not linear: observed 0–19 (characters), then
-`100 (EFFECT)`, then `200 (BG_OBJ)`; TCRF reports `201` as `BG_OBJ2`, giving 22
+`100 (EFFECT)`, then `200 (BG_OBJ)`; 3rd party cheat indexes report `201` as `BG_OBJ2`, giving 22
 values.
 
 ## 6b. Enumeration
@@ -407,7 +407,7 @@ values.
   absorbing failure. Zero-key frames are not symbols and do not count.
 * Therefore the probability that a random 7-press string is accepted is
   `1e-7`; the accepted set is `{ Right, Left, L, R, Up, Select, Select }`.
-  That one string is the published GameFAQs/TCRF code; it was entered from a
+  That one string is the published 3rd party cheat index code; it was entered from a
   cold boot and accepted.
 
 Acceptance/rejection was scored by reading `IWRAM[0x1D7D]` from a savestate
@@ -441,7 +441,7 @@ timeout inside the task.
 * Table: 110 entries.
 * Reachable: **108** (`2..109`), by the clamp at `0x080049E8`.
 * Unreachable despite existing: 0 and 1 (`none`).
-* Novel values entered in the emulator (absent from GameFAQs/TCRF stage lists):
+* Novel values entered in the emulator (absent from 3rd party cheat indexes stage lists):
 
 | Value | Entered as | Observed effect |
 |---:|---|---|
@@ -474,9 +474,9 @@ are enumerated by the table but were not launched one by one.
 
 ### 6b.4 Options/debug extras
 
-* SOUND TEST: 419 entries (`000..418`), observed wrap; this matches TCRF.
+* SOUND TEST: 419 entries (`000..418`), observed wrap; this matches 3rd party cheat indexes.
 * LANGUAGE: 2 values, both rendered (English and Japanese).
-* ANIMATION: 22 CharNo values (`0..19,100,200,201` per observation + TCRF);
+* ANIMATION: 22 CharNo values (`0..19,100,200,201` per observation + 3rd party cheat indexes);
   AnimeNo 0..254; other fields as listed in §6.4.
 * EVENT CHECK: message index and text id advance together; observed
   `0 = #DUMMY`, `1 = #000`, `181 = #819`, `182 = #820`, `183 = #821`.

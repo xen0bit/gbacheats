@@ -35,7 +35,7 @@ menu, and no unlockable hidden menu.** The strings `Invalid Password`, `Password
 text-by-ID renderer is called from eight sites, and none of them ever passes a
 password text ID. The three password text IDs are never drawn on any screen.
 
-The only published "cheat" for the game is a GameFAQs entry saying *"Hold L or R
+The only published "cheat" for the game is a 3rd party cheat index entry saying *"Hold L or R
 on the Main Menu to make the background speed up."* It was tested in the
 emulator; no measurable change was observed, and the generic menu-input routine
 does not read L/R at all, so it cannot be a hidden-menu gate. It is recorded as
@@ -286,8 +286,8 @@ The screen behaves as a save-slot form gallery, not a password screen.
 
 | Source | Code | Test | Result |
 |---|---|---|---|
-| GameFAQs (archived 2018-11-25) | “Hold L or R on the Main Menu to make the background speed up.” | Held L for 8 s at the main menu; 15 frame-pair RMSE samples compared with a no-key run | **Unconfirmed**: mean frame-pair RMSE 10,746 (L) vs 11,192 (baseline); no consistent speed-up. Generic menu input does not read L/R. |
-| GameFAQs / VGChartz / TCRF | Any password | Searched all three; none published. TCRF explicitly states the game has no password system and the strings are unused. | No published password exists to test. |
+| 3rd party cheat indexes | “Hold L or R on the Main Menu to make the background speed up.” | Held L for 8 s at the main menu; 15 frame-pair RMSE samples compared with a no-key run | **Unconfirmed**: mean frame-pair RMSE 10,746 (L) vs 11,192 (baseline); no consistent speed-up. Generic menu input does not read L/R. |
+| 3rd party cheat indexes | Any password | Searched all three; none published. 3rd party cheat indexes explicitly states the game has no password system and the strings are unused. | No published password exists to test. |
 
 ### 6.5 String-search counts
 
@@ -395,7 +395,7 @@ incomplete positive result.
 - The password strings are leftovers from an abandoned password/progress-backup
   feature; they were replaced by the battery-backed save and the `Review
   Progress` screen.
-- The GameFAQs L/R background note is either cosmetic and below the measurement
+- The 3rd party cheat indexes L/R background note is either cosmetic and below the measurement
   threshold, or a false/rumoured code for this revision.
 
 ## 8. Unknowns

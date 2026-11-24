@@ -127,7 +127,7 @@ p6  = (ck >> 2) & 0x1F
 
 **Field widths:** `level` fields s0,s2,s4,s6 = 4 bits (0..15); `lives` fields s1,s3,s5,s7 = 3 bits (0..7); checksum = 7 bits (0..127). Max possible sum = 4×15+4×7 = 88, so the checksum always fits.
 
-**Published codes verified against my decoder (44/44 pass):** GameFAQs (`VMT3XRM`, `NMH0YQR`, `MBJ3BYG`, `4MF0ZLP`, `5PT80KW`, Maul/Obi-Wan/Qui-Gon ladders), Cheat Happens / GameGenie Maul and Mace ladders (`VCJ0D2J`…`VCJ0XYK`, `VC1LCGF`…`VCJGCPH`). None appear literally in ROM — they are generator outputs. Action Replay / CodeBreaker / GameShark codes from the same pages are cheat-device codes and are **out of scope**.
+**Published codes verified against my decoder (44/44 pass):** 3rd party cheat indexes (`VMT3XRM`, `NMH0YQR`, `MBJ3BYG`, `4MF0ZLP`, `5PT80KW`, Maul/Obi-Wan/Qui-Gon ladders), 3rd party cheat indexes Maul and Mace ladders (`VCJ0D2J`…`VCJ0XYK`, `VC1LCGF`…`VCJGCPH`). None appear literally in ROM — they are generator outputs. Action Replay / CodeBreaker / GameShark codes from the same pages are cheat-device codes and are **out of scope**.
 
 ## 6b. Enumeration
 
@@ -162,7 +162,7 @@ The last two rows separate the two layers: the checksum layer is fully proven, w
 
 - Gameplay behaviour of checksum-valid but out-of-domain payloads (level 12–15, lives >7) was not played to completion; the validator accepts them but no screenshot of the resulting stage exists.
 - The engine text bank contains `Level / Map / Scene / Pause / Fade` at `0x0861DB78`–`0x0861DB8C` with single code xrefs (`0x8010200`, `0x80110D8`, `0x80117B0`, `0x80119A8`). No reachable menu item invoked them during the full screen walk; I did not run a three-count dead-code proof, so whether an engine-internal debug overlay is reachable by an unadvertised input remains formally unproven (low likelihood).
-- **Bounded negative for button codes / hidden menus:** web recon of GBA-specific sources (GameFAQs, Cheat Happens, GamesRadar, GameGenie, Almars) lists only the passwords above plus GameShark/ActionReplay/CodeBreaker device codes. Button codes indexed by search engines (`Up Down Up L1 R1 L1`, big-head, radar, PvP, etc.) belong to the 2025 PS5/PS4/Switch remaster and to the Dreamcast/PS2 SKUs — a different SKU (§16.11). A full ASCII sweep found no `DEBUG`, `TEST MENU`, `BIG HEAD`, `RADAR`, `CHECKPOINT` or `Jedi Power Battles On` strings. Every reachable screen was walked (boot splashes, title, 3-item main menu, 2-item OPTIONS, 34-key password keyboard, VALID/INVALID, 4-character PLAYER SELECT, LEVEL SELECT 1–10 + FINAL BATTLE, level intro, gameplay, PAUSED with CONTINUE/QUIT GAME). No button-code surface or hidden menu entry was found on this GBA SKU.
+- **Bounded negative for button codes / hidden menus:** web recon of GBA-specific sources (3rd party cheat indexes) lists only the passwords above plus GameShark/ActionReplay/CodeBreaker device codes. Button codes indexed by search engines (`Up Down Up L1 R1 L1`, big-head, radar, PvP, etc.) belong to the 2025 PS5/PS4/Switch remaster and to the Dreamcast/PS2 SKUs — a different SKU (§16.11). A full ASCII sweep found no `DEBUG`, `TEST MENU`, `BIG HEAD`, `RADAR`, `CHECKPOINT` or `Jedi Power Battles On` strings. Every reachable screen was walked (boot splashes, title, 3-item main menu, 2-item OPTIONS, 34-key password keyboard, VALID/INVALID, 4-character PLAYER SELECT, LEVEL SELECT 1–10 + FINAL BATTLE, level intro, gameplay, PAUSED with CONTINUE/QUIT GAME). No button-code surface or hidden menu entry was found on this GBA SKU.
 
 ## 9. Tooling
 

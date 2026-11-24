@@ -21,7 +21,7 @@ All analysis used a byte-identical copy at `/tmp/wpt/wpt.gba` (MD5 re-checked), 
 
 ## 2. Executive summary
 
-This game has a **developer-intended button-code cheat system**, not a password or text-code system. Three cheats are published on GameFAQs; all three were verified in the ROM and in mGBA:
+This game has a **developer-intended button-code cheat system**, not a password or text-code system. Three cheats are published on 3rd party cheat indexes; all three were verified in the ROM and in mGBA:
 
 | Cheat | Where pressed | Gate | Effect / flag |
 |---|---|---|---|
@@ -118,7 +118,7 @@ title_gate:
 
 Exhaustive static bound: **4** occurrences of the `0x300` key mask near the key globals across the whole 4 MiB image (`0x0800ED50`, `0x0800F060`, `0x080186EA`, `0x0801C43A`); the two cheat handlers write to exactly 2 flag words + 1 flag byte and reference exactly 4 distinct "Cheat Mode!" message pools. The ASCII cheat-bank scan found exactly 3 cheat messages (plus their enable/disable variants and 1 confirmation). Therefore the reachable cheat set is **exactly 3**, not "at least 3".
 
-**Novel code (not in any published list).** GameFAQs specifies "hold L, press R" for each cheat. We entered the undocumented reverse form on the real screen:
+**Novel code (not in any published list).** 3rd party cheat indexes specify "hold L, press R" for each cheat. We entered the undocumented reverse form on the real screen:
 
 - Main Menu → Options (`0x03001900 = 0x0A`), hold **R** then press **L** → "Cheat Mode! / You have enabled the 'All-Seeing' cheat to play open-handed games." (`f_novel_allseeing.png`), `0x0300398C: 0 → 1`.
 - Same reverse form on the title screen toggles Snappy (`f_novel_RL.png`), `0x03002F10: 1 → 0` with the "disabled" message.
@@ -142,7 +142,7 @@ L+R pressed in a single frame was also accepted on the title screen (`boot2.png`
 - **Observed**: every screen transition and message above was captured with `scrot` (evidence in `/tmp/wpt/`); flags read from savestate RAM at the exact addresses in §4; key bits verified by holding each key and reading `0x030014A4`.
 - **Derived**: the input routine at `0x0800851C`, the two key gates and their literal pools, the menu-ID dispatch, and the flag/message writes were disassembled with `arm-none-eabi-objdump -M force-thumb` and cross-checked against observed RAM.
 - **Inferred**: gate `0x080186EA` is a modal-dismiss UI callback (calls `0x8008A18` when L+R absent; no cheat flag or cheat string anywhere in its path); it was never reached during the screen walk, so its precise screen is unresolved.
-- **Not instructions**: all ROM strings and the GameFAQs page were treated as data. No action-parser instructions were found in them.
+- **Not instructions**: all ROM strings and the 3rd party cheat index page were treated as data. No action-parser instructions were found in them.
 
 ## 8. Unknowns
 
@@ -156,6 +156,6 @@ L+R pressed in a single frame was also accepted on the title screen (`boot2.png`
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly; Python `struct` literal/BL/pattern scanners (`scan.py`, `scan2.py`, `find_gates.py`, `find_gates2.py`, `find_ldr.py`) in `/tmp/wpt/`.
 - mGBA 0.10.5 + Xvfb `:317` + openbox; `xdotool` XTEST input (`k.py`, `tight.py`).
 - RAM reads: mGBA `.ss1` `gbAs` zlib chunk parser (`ss.py`, `readflags.sh`); GDB stub batch + persistent command file (`gdbcmds.txt`) that logged all four L+R gates with auto-continue.
-- Web recon: GameFAQs "World Poker Tour – Cheats" (three codes above), plus Cheat Happens AR codes (out of scope) — used only as leads, each checked against ROM bytes.
+- Web recon: 3rd party cheat indexes "World Poker Tour – Cheats" (three codes above), plus 3rd party cheat indexes AR codes (out of scope) — used only as leads, each checked against ROM bytes.
 
 No ROM or copyrighted assets are redistributed here; only hashes, addresses, and original observations are published.

@@ -46,8 +46,7 @@ Two entries are publicly documented:
 * `BIGFISH`  → Dontrelle Willis
 
 This analysis recovered the complete table and the other **seven codes**, none of
-which appears as a code on GameFAQs, VGChartz, TCRF, SuperCheats, Vizzed,
-CheatingDome or the other lists searched:
+which appears as a code on 3rd party cheat indexes or the other lists searched:
 
 | Code | Effect |
 |---|---|
@@ -134,7 +133,7 @@ but deliberately not in the pointer table), `BABY` (prefix of `BABYBEAR`) or
 | `BABYBEAR` | Accepted; `YOU HAVE UNLOCKED SAMMY SOSA` |
 | `BIGFISH` | Accepted; `YOU HAVE UNLOCKED DONTRELLE WILLIS` |
 
-Both match the GameFAQs/VGChartz lists and both are in the ROM table.
+Both match the 3rd party cheat index lists and both are in the ROM table.
 
 ### 3.4 Rejection tests
 
@@ -267,10 +266,10 @@ strings are accepted, regardless of the theoretical name space.
 |---:|---|---|---|---:|---|---|
 | 0 | `NACHOS` | `0x08136EB8` | `2D 20 22 27 2E 32 5E` | 0 | Abner Dubbleplay | No |
 | 1 | `HOOPS` | `0x08136EBF` | `27 2E 2E 2F 32 5E` | 1 | Barry Dejay | No |
-| 2 | `BIGFISH` | `0x08136EC5` | `21 28 26 25 28 32 27 5E` | 2 | Dontrelle Willis | Yes (GameFAQs/VGChartz) |
+| 2 | `BIGFISH` | `0x08136EC5` | `21 28 26 25 28 32 27 5E` | 2 | Dontrelle Willis | Yes (3rd party cheat indexes) |
 | 3 | `LIBERTY` | `0x08136ECD` | `2B 28 21 24 31 33 38 5E` | 3 | Jim Thome | No |
 | 4 | `ANCHOVY` | `0x08136ED5` | `20 2D 22 27 2E 35 38 5E` | 4 | Mike Piazza | No |
-| 5 | `BABYBEAR` | `0x08136EDD` | `21 20 21 38 21 24 20 31` | 5 | Sammy Sosa | Yes (GameFAQs/VGChartz) |
+| 5 | `BABYBEAR` | `0x08136EDD` | `21 20 21 38 21 24 20 31` | 5 | Sammy Sosa | Yes (3rd party cheat indexes) |
 | 6 | `SPACEMAN` | `0x08136EE5` | `32 2F 20 22 24 2C 20 2D` | 6 | Quantum Field | No |
 | 7 | `SHOWTIME` | `0x08136EED` | `32 27 2E 36 33 28 2C 24` | 7 | Humongous Memorial Stadium | No |
 | 8 | `ATLANTIS` | `0x08136EF5` | `20 33 2B 20 2D 33 28 32` | 8 | Aquadome | No |
@@ -422,7 +421,7 @@ The developer menu is **not** reachable in this build:
 
 No button-code cheat system was found:
 
-* No published button code for this game appears on GameFAQs, VGChartz, TCRF or
+* No published button code for this game appears on 3rd party cheat indexes or
   the other lists searched; the only public input codes are the two coach names.
 * Static search found no contiguous array of 16-bit key masks and no
   prefix/index button-sequence table. The only input-driven cheat path is the

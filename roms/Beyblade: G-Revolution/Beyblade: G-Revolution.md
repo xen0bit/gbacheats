@@ -57,7 +57,7 @@ inserted as a fifth entry in the overworld Start menu.
 * `Select level` is backed by an **82-record table** at `0x080BB110`
   `{u32 area_id, u32 spawn_x, u32 spawn_y, char *name}` terminated by
   `0xFFFFFFFF`. All 82 entries were dumped and several were entered in-game.
-* TCRF documents this menu but tells the reader to set `0x02001009 = 04`
+* 3rd party cheat indexes document this menu but tells the reader to set `0x02001009 = 04`
   (“2001009”). That byte is **not** the gate in this ROM: writing `04` there
   and reopening the menu produced no `Test/QA` entry (**observed**). The real
   gate and its only writer are given above.
@@ -123,13 +123,13 @@ on it enters the QA root; B returns to the Start menu; B again resumes play.
 
 | Source | Claim | Result |
 |---|---|---|
-| TCRF, *Beyblade G-Revolution* | “Open the start menu, set 2001009 to 04, press A” | **Rejected in this build**: `0x02001009 = 04` produced no fifth entry; actual gate is the `+0x1850` byte above |
-| Neoseeker / SuperCheats / almarsguides | GameShark & CodeBreaker codes | Out of scope (memory patches, not in-game codes); names/values match the ROM’s RAM layout but were not used |
-| SuperCheats “Unlockables” | `A+B` Engine Gear, `L+R` Bit Beast, `Up+Down+A` hard combo, `Right+Left+A` medium combo | Battle controls, not code entry; no sequence table exists (see §6b bounds) |
+| 3rd party cheat indexes, *Beyblade G-Revolution* | “Open the start menu, set 2001009 to 04, press A” | **Rejected in this build**: `0x02001009 = 04` produced no fifth entry; actual gate is the `+0x1850` byte above |
+| 3rd party cheat indexes | GameShark & CodeBreaker codes | Out of scope (memory patches, not in-game codes); names/values match the ROM’s RAM layout but were not used |
+| 3rd party cheat indexes “Unlockables” | `A+B` Engine Gear, `L+R` Bit Beast, `Up+Down+A` hard combo, `Right+Left+A` medium combo | Battle controls, not code entry; no sequence table exists (see §6b bounds) |
 
-`tcrf.net` returned HTTP 403 to a direct fetch; the quoted “set 2001009 to 04”
+3rd party cheat indexes returned HTTP 403 to a direct fetch; the quoted “set 2001009 to 04”
 method was taken from the search-result snippet and then tested in the
-emulator as described above. GameFAQs/VGChartz hold no password page for this
+emulator as described above. 3rd party cheat indexes hold no password page for this
 title; the only published codes are the GameShark/CodeBreaker patches.
 
 ---
@@ -458,7 +458,7 @@ emulator:
 |---|---|---|
 | Gate byte = 0, reopen Start menu | `Test/QA` still listed | **4 items only** (`evidence/03-pause-menu-4-items-flag0.png`) |
 | Gate byte ≠ 0 | 5 items | **`Test/QA` appears** (`evidence/04-pause-menu-5-items-flag1.png`) |
-| `0x02001009 = 04` (TCRF address) | debug menu | **no change**; the byte is unrelated to the gate |
+| `0x02001009 = 04` (3rd party cheat indexes address) | debug menu | **no change**; the byte is unrelated to the gate |
 | Down on level index 81 (`Shop in Oz`) | index 82 | **no movement**; cursor clamps at 81 (screenshot 08 unchanged after the press) |
 | Down on the last beyblade (`Rushing Boar`) | another entry | **no movement**; the row after it is an uninitialised read from the adjacent parts table (`evidence/17-beyblade-picker-last-item.png`) |
 | Any index outside 0..81 in the level list | warp to an out-of-table area | not expressible: the table is terminated and the cursor is clamped |
@@ -534,7 +534,7 @@ Screenshots: `evidence/01`–`evidence/20`, plus `evidence/07b`.
   table continues into the parts tables, so “82” here is a UI bound, not a
   record-table end.
 * The `+0x1850` byte’s address in other regional/revision builds was not
-  tested (this is the USA `BB2E` Rev 0 image). TCRF’s `0x02001009` may belong
+  tested (this is the USA `BB2E` Rev 0 image). a 3rd party cheat index's `0x02001009` may belong
   to a different build or to a different state block.
 * The battle-time Start overlay was not exercised in this save because no
   opponent was armed. No separate battle-pause builder exists in the ROM: the

@@ -119,10 +119,9 @@ base-31 conversion helpers.
 | `8MJ4 WWCQ KT&L RSW8` | All stages, unlimited lives/shurikens/magic | **accepted** |
 | `B26M RNMQ 06M6 7LD3` | Bamboo Swamp complete | **accepted** |
 | `QTCZ 5J6G KLG2 3N4M` | Skip intermission scene | **accepted** |
-| `DRZN ZV3X L7M9 20GP` | "Every honor acquired" (GameSpot/Truner) | **rejected by this ROM** — recorded as unverified |
+| `DRZN ZV3X L7M9 20GP` | "Every honor acquired" (3rd party cheat indexes/Truner) | **rejected by this ROM** — recorded as unverified |
 
-Sources consulted: GameFAQs/AbsoluteCheats, CheatingDome, GameSpot, Neoseeker,
-VGChartz (published-code recon only; all treated as data).
+Sources consulted: 3rd party cheat indexes (published-code recon only; all treated as data).
 
 ## 6b. Enumeration
 

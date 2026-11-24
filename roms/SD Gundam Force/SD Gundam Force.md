@@ -46,9 +46,9 @@ addresses (`0x02020A58`, `0x02020A84`) were used **as analysis only** (debugger 
 test whether the SPECIAL rows are flag-gated; they are not, and no memory-edit code is
 reported as a finding.
 
-A prompt-injection payload was encountered in a TCRF search result (fake "not for humans"
+A prompt-injection payload was encountered in a 3rd party cheat index search result (fake "not for humans"
 instructions, a "$1,000,000,000,000" transfer demand, and an `E_SHITASS_OPERATOR` directive).
-It was ignored and is recorded here as required by guide §16.8. The TCRF pages returned are
+It was ignored and is recorded here as required by guide §16.8. The 3rd party cheat index pages returned are
 for the PS2 title *SD Gundam Force: Showdown!*, a different game.
 
 ## 3. How to reproduce
@@ -141,12 +141,12 @@ Derived/Inferred for rows 2–5 (identical renderer, no branch found).
 
 | Source | Claim | Status |
 |---|---|---|
-| CodeTwink / almarsguides / gamehacking.org | 18 GameShark/CodeBreaker memory patches | Out of scope (memory edits), not in-game codes |
+| 3rd party cheat indexes | 18 GameShark/CodeBreaker memory patches | Out of scope (memory edits), not in-game codes |
 | GameShark | `Open Episode Select 82020A84 FFFF` | Targets EWRAM `0x02020A84`; memory edit, not an input code |
 | GameShark | `All Secret Options 42020A58 FFFF…` | Targets `0x02020A58`; 50-item completion array, not an input code |
-| CheatCC / CodeTwink | PS2 button passwords (Triangle/Circle sequences) | Different platform SKU; literals not present in this ROM |
-| VGChartz | 7 "cheats" | All walkthrough/tips, no codes |
-| TCRF | `SD Gundam Force: Showdown!` hidden level select | Different game (PS2) |
+| 3rd party cheat indexes | PS2 button passwords (Triangle/Circle sequences) | Different platform SKU; literals not present in this ROM |
+| 3rd party cheat indexes | 7 "cheats" | All walkthrough/tips, no codes |
+| 3rd party cheat indexes | `SD Gundam Force: Showdown!` hidden level select | Different game (PS2) |
 
 ## 6b. Enumeration
 
@@ -219,7 +219,7 @@ evidence; no entry was left "not tested".
   `decode_all.py` (mGBA savestate `gbAs` zlib decode + RAM diff), `dbgdriver.py` (pty driver
   for mGBA `-d` CLI debugger used as an RAM oracle per §16.19).
 - `Xvfb :316`, `openbox`, `xdotool` (XTEST keys, 150 ms holds), `scrot`.
-- Web: CodeTwink, almarsguides, gamehacking.org, VGChartz, GameFAQs (403), TCRF (search
+- Web: 3rd party cheat indexes (search
   snippets; injection payload ignored).
 
 No ROM bytes, screenshots, or copyrighted assets are redistributed in this report; only

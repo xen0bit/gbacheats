@@ -37,7 +37,7 @@ quit signal — not a cheat. No reader of that flag was found in the ROM, and no
 game state changes when it is set (other than the ordinary effect of holding Start).
 
 Web reconnaissance of published codes returned no data: search engines gave generic
-fallback results, GameFAQs/TCRF returned HTTP 403, and archive lookups 404'd. This is
+fallback results, 3rd party cheat indexes returned HTTP 403, and archive lookups 404'd. This is
 recorded as *recon attempted, no codes obtained*, not as evidence of absence.
 
 ## 3. How to reproduce
@@ -69,9 +69,9 @@ Menu path actually walked (all screenshots in `/tmp/worldtennisstars/`):
 Combo test: `combo_state.py` holds A+B+Select+Start, then saves slot 3; `state3.bin`
 is the decompressed `gbAs` chunk of `game.ss3`.
 
-Published-code recon (all attempted, no results): GameFAQs cheats page (403),
-TCRF (403), DuckDuckGo (bot challenge), Bing/Google (generic "world" fallback only),
-Wayback Machine snapshot (404), cheatsguru (transport error).
+Published-code recon (all attempted, no results): 3rd party cheat index cheats page (403),
+3rd party cheat indexes, DuckDuckGo (bot challenge), Bing/Google (generic "world" fallback only),
+Wayback Machine snapshot (404), 3rd party cheat indexes.
 
 ## 4. Address map
 

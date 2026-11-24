@@ -107,8 +107,8 @@ Published codes verified in this ROM:
 
 | Source | Code | Literal in ROM? | In-game result |
 |---|---|---|---|
-| GameFAQs / chaptercheats / supercheats / mariogba | `F4BG*XT5` | No (algorithmic) | **Accepted** — 100% Records screen |
-| chaptercheats | `FJBGWXZF` | No | **Rejected** — INVALID PASSWORD on fresh state |
+| 3rd party cheat indexes | `F4BG*XT5` | No (algorithmic) | **Accepted** — 100% Records screen |
+| 3rd party cheat indexes | `FJBGWXZF` | No | **Rejected** — INVALID PASSWORD on fresh state |
 | AtariAge forum | `KRRKZHNB` | No | Not entered (treated as a progress password, not a super code) |
 
 Undocumented codes recovered from the ROM (in no published list):
@@ -122,7 +122,7 @@ Undocumented codes recovered from the ROM (in no published list):
 
 **Space definition.** Entry surface: 8 positions × 32 symbols = 32^8 = **1,099,511,627,776** representable strings; the payload is 40 bits (8 × 5-bit symbols). Stored-code set: two 6/7-character fixed developer sequences plus at least one algorithmic 8-character progress code family (generator at 0x080F4E60). All published lists combined contain only two 8-character strings; the ROM contains no literal copy of either.
 
-**Novel code.** `CR3D1T` is absent from GameFAQs, chaptercheats, supercheats, mariogba.nl, TCRF and VGChartz results for this title; it is recovered directly from the ROM's obfuscated expected-byte array, exercises a mode (developer credits / mod gate) that no published code mentions, and was entered on the real password screen. RAM/screen evidence: after entry + Start, the 8-slot buffer at 0x03002DEF was cleared (all 0x5F/blank) and the handler took the `r7+0x20 = 1` acceptance branch; no `CR3D1T` string remains in RAM (`state_st1_after.ss1`). The paired stage-2 sequence is `R4P1D0S`.
+**Novel code.** `CR3D1T` is absent from 3rd party cheat indexes, 3rd party cheat index results for this title; it is recovered directly from the ROM's obfuscated expected-byte array, exercises a mode (developer credits / mod gate) that no published code mentions, and was entered on the real password screen. RAM/screen evidence: after entry + Start, the 8-slot buffer at 0x03002DEF was cleared (all 0x5F/blank) and the handler took the `r7+0x20 = 1` acceptance branch; no `CR3D1T` string remains in RAM (`state_st1_after.ss1`). The paired stage-2 sequence is `R4P1D0S`.
 
 **Bounds proven by rejection.**
 - `F4BG*XT0` (one symbol changed in the last position) → `INVALID PASSWORD` on screen and the string `F4BG*XT0` present in the stack copy at 0x0203EA4 — proves the 8th character is significant and that no trivial trailing-symbol alias exists.

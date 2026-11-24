@@ -96,14 +96,14 @@ Up/Down wrap bounds (0 ↔ 5) prove a six-item menu, matching the six labels. Th
 
 **Reachable menu state:** SELECT MENU has exactly 3 items (STORIES, COLLECTIONS, OPTIONS); Mini-Games is hidden until game completion. STORIES has 2 difficulties (NORMAL, HARD). COLLECTIONS has 9 pages × 10 slots. OPTIONS has 1 live item (SCORE); Sound Test is locked.
 
-**Published unlockables (from GameFAQs / GamesRadar / One Piece Wiki; all gameplay-gated, none entered as a code):**
+**Published unlockables (from 3rd party cheat indexes / One Piece Wiki; all gameplay-gated, none entered as a code):**
 - 10 pirate flags (Alvida, Arlong, Black Cat, Buggy, Cook, Kreig's armada, Navy, Red Hair, Straw Hat, Veggie).
 - 9 Luffy upgrades priced 25M–350M bounty (Gum Gum Fruit, Master of the Near Sea, two "More Deadly Techniques", two "Raise Life Limit", Straw Hat, Pandaman, Pansamay).
 - Modes: Boss Battle (collect all coins), Mini-game (finish once); Sound Test (all mini chests + Gaimon).
 - ~20 collection items/statues (Wado, Chakram, Elephant Tuna, etc.).
-- Extra characters (GamesRadar): Smoker, Tashigi, Aokiji — event-mode clear conditions.
+- Extra characters (3rd party cheat indexes): Smoker, Tashigi, Aokiji — event-mode clear conditions.
 
-**Verified published "codes":** none exist for this SKU. GameFAQs' cheat page lists only the unlockables above; its walkthrough §3.2 says "Are there any cheat codes for this game? When I find them they'll be in here" (empty section). VGChartz shows "Total cheats available: 0"; Cheat Happens shows none. The `gbadamud.blogspot` GameShark-style 32-bit codes are memory-edit cheats and are explicitly out of scope. A YouTube "Going Baseball (J) (GBA)" button sequence belongs to a *different game* — a SKU mismatch of the kind described in guide §16.11; it does not appear in this ROM.
+**Verified published "codes":** none exist for this SKU. 3rd party cheat indexes' cheat page lists only the unlockables above; its walkthrough §3.2 says "Are there any cheat codes for this game? When I find them they'll be in here" (empty section). 3rd party cheat indexes show "Total cheats available: 0"; 3rd party cheat indexes show none. The 3rd party cheat indexes GameShark-style 32-bit codes are memory-edit cheats and are explicitly out of scope. A 3rd party cheat index "Going Baseball (J) (GBA)" button sequence belongs to a *different game* — a SKU mismatch of the kind described in guide §16.11; it does not appear in this ROM.
 
 ## 6b. Enumeration
 
@@ -120,7 +120,7 @@ Up/Down wrap bounds (0 ↔ 5) prove a six-item menu, matching the six labels. Th
 | Unconditional B branches into block from outside | 0 | Only intra-block branches found |
 | 32-bit pointers to block (plain and `\|1`) from outside | 0 | Self-references only; the 7 handler pointers are consumed only by the dead menu |
 | Title-screen button combinations tested | 18 (listed in §3) + boot holds L/R/L+R + in-game L | 0 debug screens; only title and SELECT DATA |
-| Published in-game codes verified | 0 published codes exist | GameFAQs/VGChartz/Cheat Happens confirm; blogspot codes are GameShark memory edits (excluded) |
+| Published in-game codes verified | 0 published codes exist | 3rd party cheat indexes confirm; blogspot codes are GameShark memory edits (excluded) |
 
 **Novel code:** not applicable — a system with zero representable codes cannot yield an unpublished example. This is the bounded negative outcome required by §0.2 item 5, not an omitted deliverable.
 

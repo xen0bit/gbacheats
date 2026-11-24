@@ -34,8 +34,8 @@ Evidence in three layers:
    code-related text exist in any of the four encodings searched (ASCII, `+0x20`, UTF-16LE, UTF-16BE)
    across the whole 8 MiB. All 16 published PS2/PC sequences were searched as 5 direction encodings ×
    2 widths × 2 byte orders × forward/reverse (640 literal searches): zero code-region hits.
-2. **Web verification.** The GameFAQs GBA cheats page (archived 2024-01-05) lists **no GBA codes** — every
-   entry is explicitly tagged PS2 or PC. The full 16-code PS2/PC list (GameFAQs + the 2026 decompilation
+2. **Web verification.** The 3rd party cheat indexes GBA cheats page (archived 2024-01-05) lists **no GBA codes** — every
+   entry is explicitly tagged PS2 or PC. The full 16-code PS2/PC list (3rd party cheat indexes + the 2026 decompilation
    write-up) was collected and tested anyway.
 3. **Runtime absence.** All 16 published sequences were entered at both documented entry points
    (GBA **MAIN MENU** and the in-race **PAUSE** menu) under the GDB stub, with before/after dumps of
@@ -203,7 +203,7 @@ all five worlds/tracks and all three special games were selectable from a fresh 
 * **Derived** — single header, stock entry word, no appended trainer (logo scan).
 * **Inferred** — the driver-name field feeds only dialogue substitution; no comparator literal exists
   anywhere in the image.
-* **Fetched-page hygiene** — GameFAQs PS2/PC cheats page returned HTTP 403 directly and was read via
+* **Fetched-page hygiene** — 3rd party cheat indexes PS2/PC cheats page returned HTTP 403 directly and was read via
   `web.archive.org`; the moonbase.lgbt decompilation write-up was treated strictly as data. No
   prompt-injection payload was encountered in either source. No fetched instruction was acted upon.
 
@@ -226,7 +226,7 @@ all five worlds/tracks and all three special games were selectable from a fresh 
 * `gdb-multiarch` persistent session via FIFO; `dump binary memory` for EWRAM/IWRAM; on-disk `.sav`
   for SRAM. `scrot` + ImageMagick crops; `tesseract` for OCR triage (font too stylised for reliable OCR,
   so conclusions rest on RAM + direct screenshot reads).
-* `web.archive.org` snapshot 20240105224016 of the GameFAQs GBA cheats page; moonbase.lgbt 2026
+* `web.archive.org` snapshot 20240105224016 of the 3rd party cheat indexes GBA cheats page; moonbase.lgbt 2026
   decompilation write-up (data only).
 
 No ROM bytes or copyrighted assets are reproduced in this report. All addresses/hashes refer to the

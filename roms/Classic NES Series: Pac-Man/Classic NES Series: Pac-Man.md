@@ -82,7 +82,7 @@ The NES PRG contains exactly **one** controller-read site (`$C143`–`$C162` in 
 NMI handler), and only **eight** consumers of the resulting button byte `$4D`;
 none of them compares a *sequence*, so no key-mask cheat can exist in this image.
 
-The published "GBA codes" are for other platforms. GameFAQs' GBA page mixes in
+The published "GBA codes" are for other platforms. 3rd party cheat indexes' GBA page mixes in
 Commodore-64 `POKE`s, an Atari 2600 easter egg, a **Game Boy** "1/2 full-screen"
 trick, Windows-Mobile/iOS achievement lists and an Xbox 360 gamerpic. None of those
 literals or mechanics exists in this ROM (§6b.5).
@@ -390,7 +390,7 @@ Neither of these appears in any published Pac-Man code list; both were produced
 and confirmed on the running cartridge:
 
 1. **Wrapper system menu** (`L+R`, exactly, no other key). Unpublished as a
-   "secret" anywhere in the GameFAQs/TCRF material for this SKU. Proven by:
+   "secret" anywhere in the 3rd party cheat indexes material for this SKU. Proven by:
    `0x030064BC = 0x0300` while held, handler `0x030064C4` changes
    `0x080029A1 → 0x08002739`, and the five item handlers above are reached by
    `Down`+`A` navigation (each item's handler read from RAM).

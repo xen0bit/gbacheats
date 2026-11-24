@@ -23,7 +23,7 @@ Phase 0 embedded-header scan: the 156-byte Nintendo logo occurs **exactly once**
 
 ## 2. Executive summary
 
-**There is no password, button-code, or developer/debug screen in this ROM.** The game has no text-entry field of any kind, no code comparator, no button-sequence table, and no hidden menu. The only "cheat-like" content is an ordinary *progress-gated unlockable*: a third difficulty slot rendered as `? ? ?` on the DIFFICULTY screen. Published documentation (GameFAQs, archived) identifies it as **Hard mode**, unlocked by beating the game once on Normal. The in-game gate was proven directly: the selector's Down input wraps EASY→NORMAL→EASY and never lands on the greyed third row.
+**There is no password, button-code, or developer/debug screen in this ROM.** The game has no text-entry field of any kind, no code comparator, no button-sequence table, and no hidden menu. The only "cheat-like" content is an ordinary *progress-gated unlockable*: a third difficulty slot rendered as `? ? ?` on the DIFFICULTY screen. Published documentation (3rd party cheat indexes, archived) identifies it as **Hard mode**, unlocked by beating the game once on Normal. The in-game gate was proven directly: the selector's Down input wraps EASY→NORMAL→EASY and never lands on the greyed third row.
 
 The complete reachable menu tree (all screens walked in mGBA, each with a savestate as RAM evidence) is:
 
@@ -109,7 +109,7 @@ There is no comparison of `pressed`/`held` against any multi-button constant any
 | GBA key masks (engine convention) | A=0x001 B=0x002 Select=0x004 Start=0x008 R=0x010 L=0x020 U=0x040 D=0x080 | Derived from input manager at 0x0801174C |
 | KEYINPUT literal occurrences | **1** (0x080117A4) | Full 4 MiB scan |
 | `SELECT MODE` entries | 3 (1 enabled, 2 gated) | Observed |
-| `DIFFICULTY` entries | 3 (2 enabled, 1 gated = Hard) | Observed + GameFAQs |
+| `DIFFICULTY` entries | 3 (2 enabled, 1 gated = Hard) | Observed + 3rd party cheat indexes |
 | `SELECT MISSION` entries selectable | 3 (BANK/HARBOR/AIRPORT) | Observed |
 | `PAUSE` entries | 3 | Observed |
 | Missions documented in FAQ | 6 (adds Cave, Base, Launch Site) | Published FAQ 62442 |
@@ -122,7 +122,7 @@ Gated entries and their status:
 |---|---|---|---|
 | LOAD GAME | SELECT MODE | Grey rendering; Down does not move selector (wraps stay on NEW GAME) | Progress/save flag — **not determined** (no published statement found) |
 | TIME TRIAL | SELECT MODE | Same | Progress/clear flag — **not determined** (FAQ only confirms time trials exist) |
-| `? ? ?` (Hard mode) | DIFFICULTY | Grey rendering; Down from NORMAL wraps to EASY | Beat the game on Normal — **published** (GameFAQs) and consistent with in-engine gating; the clear itself was not played through |
+| `? ? ?` (Hard mode) | DIFFICULTY | Grey rendering; Down from NORMAL wraps to EASY | Beat the game on Normal — **published** (3rd party cheat indexes) and consistent with in-engine gating; the clear itself was not played through |
 
 ## 6b. Enumeration
 
@@ -134,7 +134,7 @@ This title has **no enumerable code space**. The negative is bounded by the foll
 2. **Tile-indexed text space.** Font offset solved as +0x7F from OAM. Searches for `BANK`, `HARBOR`, `AIRPORT`, `SELECT MISSION`, `PRESS START`, `KONAMI`, `QUIT MISSION`, `RESUME`, `PAUSE` encoded as bytes+0x7F, u16LE+0x7F, u16BE+0x7F, and reversed → **0 hits** in ROM and in savestate RAM. A generic scan of all 4,194,304 bytes for runs whose `byte-0x7F` is printable found 44,684 runs, all random code/data noise. Conclusion: text is per-character sprite construction over compressed data; there is no plaintext or tile-index string table to mine.
 3. **Button-code space.** One-hot u16 runs of length ≥4: **60 runs** found; every one inspected is either Thumb/ARM machine code or sprite/animation metadata (e.g. the 12-word run at 0x0803A1E4 sits in a pointer/data table and its apparent "code reference" at 0x8012068 is an `adr` whose bytes merely spell the address — false positive). Byte-per-press runs of length ≥6: **0**. Exact Konami prefix (`40 40 80 80 20 10 20 10 02 01`) as u16 and as bytes: **0 hits**. No key-mask sequence table exists.
 4. **Validator/debug-gate space.** Exactly one keyboard reader (0x0801174C) with one caller (0x0800D678). No code compares accumulated button history against a constant, and no password buffer is read outside the (nonexistent) entry handler.
-5. **Published codes.** Searched web.archive.org GameFAQs (correct id **589463**), TCRF and search engines. GameFAQs cheats page contains exactly one entry — "Unlock Hard mode: Beat the game on Normal difficulty once to unlock Hard mode" — which is an unlockable, not a code. TCRF lists only unused graphics/music/font symbols. **No password or button code has ever been published for this SKU**, so there are no literals to verify; the ROM contains none of the usual code-table structures anyway. (A first pass used guide example id 777281, which 404s; corrected via the Wayback CDX API.)
+5. **Published codes.** Searched web.archive.org 3rd party cheat indexes and search engines. 3rd party cheat index cheats page contains exactly one entry — "Unlock Hard mode: Beat the game on Normal difficulty once to unlock Hard mode" — which is an unlockable, not a code. 3rd party cheat index lists only unused graphics/music/font symbols. **No password or button code has ever been published for this SKU**, so there are no literals to verify; the ROM contains none of the usual code-table structures anyway. (A first pass used guide example id 777281, which 404s; corrected via the Wayback CDX API.)
 6. **Menu/selector space.** Every selector on every reachable screen was walked to its wrap point: SELECT MODE (3 rows, 2 gated), DIFFICULTY (3 rows, 1 gated), SELECT MISSION (3 rows, wraps 3→1), PAUSE (3 rows). No unlabelled 4th row exists on any of them.
 
 ### Unlockables enumerated (no code minting possible)
@@ -170,11 +170,11 @@ No novel code was entered because no code exists to enter; this is a proven nega
 
 **Inferred** (labelled):
 
-* Identity of `? ? ?` as Hard mode (published on GameFAQs; visually consistent with a third, harder slot — the FAQ states keys/enemy counts differ by difficulty and that Easy cannot progress past the Airport mission).
+* Identity of `? ? ?` as Hard mode (published on 3rd party cheat indexes; visually consistent with a third, harder slot — the FAQ states keys/enemy counts differ by difficulty and that Easy cannot progress past the Airport mission).
 * Unlock conditions for LOAD GAME and TIME TRIAL (only that they are progress-gated; the exact flag/writer was not isolated).
 * The 3 extra missions (Cave/Base/Launch Site) being progression-gated: documented in the FAQ but not reached in-engine during this session.
 
-**Prompt-injection check:** fetched GameFAQs/TCRF/FAQ pages were treated as data. No injection payload was encountered in this run; the only imperative-looking text found was normal game dialogue ("A GANG IS ROBBING THE BANK ON THE MAIN STREET!"), ignored as data.
+**Prompt-injection check:** fetched 3rd party cheat indexes/FAQ pages were treated as data. No injection payload was encountered in this run; the only imperative-looking text found was normal game dialogue ("A GANG IS ROBBING THE BANK ON THE MAIN STREET!"), ignored as data.
 
 ## 8. Unknowns
 

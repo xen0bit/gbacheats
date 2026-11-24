@@ -169,7 +169,7 @@ Both code systems are **pure lookup tables** with no checksum, field packing, ge
 
 ### Novel codes — bounded negative
 
-Every accepted value in both tables appears in published lists (GameFAQs, IGN, GGmania, supercheats, TMNTForever, jeuxactu). Because the validators only compare against those fixed records, **the count of novel accepted codes is provably 0** — there is no unadvertised combination to mint. This is the required bounded negative with counts, rather than an untested absence.
+Every accepted value in both tables appears in published lists (3rd party cheat indexes, TMNTForever, jeuxactu). Because the validators only compare against those fixed records, **the count of novel accepted codes is provably 0** — there is no unadvertised combination to mint. This is the required bounded negative with counts, rather than an untested absence.
 
 Rejections actually observed in the emulator:
 

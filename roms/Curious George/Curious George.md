@@ -86,7 +86,7 @@ input buffer and validator in §4).
 
 ### 3.3 Codes tested
 
-Published list (GameFAQs archive, ProjectCheatCodes, SuperCheats, Fandom snippets):
+Published list (3rd party cheat indexes archive, 3rd party cheat indexes snippets):
 `NPTJBHLQ`, `TNTDBHNQ`, `TNTDBHBQ`, `GPSDGHQP`, `PSTDHHSS`, `GQSDBHSP`,
 `BGSDBHGP`, `TNSDBHAG`, `GCMJBHFP`, `HHGDBHQC`, `NPTDBHNG`, `BCHBBHSC`.
 

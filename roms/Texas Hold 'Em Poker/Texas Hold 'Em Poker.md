@@ -26,7 +26,7 @@ The game has a single developer-intended cheat surface: an **18-symbol password 
 player identity, the venue (one of five cities) and a bankroll, and is awarded on-screen when a player
 qualifies for the next tournament.
 
-The published lists (GameFAQs, GameGenie, the brian_sulpher FAQ) contain exactly eight codes: four
+The published lists (3rd party cheat indexes, the brian_sulpher FAQ) contain exactly eight codes: four
 tournaments × {default player, Phil Helmuth}. Those codes are genuine and were reproduced in the
 emulator. They are also **a small corner of a much larger algorithmic space**. The validator is not a
 lookup table: it accepts arbitrary six-character prefixes from the 36-symbol alphabet, provided the
@@ -162,7 +162,7 @@ characterised here is: 6 free prefix symbols × 2 player templates × 1 unique c
 ≈ 2 × 36^6 = **4.35×10^9** codes, of which a large but unmeasured subset decodes to a renderable
 career state. Venue is a sub-field of the prefix (observed values 2–8 all reachable).
 
-**Novel codes (absent from GameFAQs, GameGenie, GameGas, cheatingdome, the brian_sulpher FAQ and all
+**Novel codes (absent from 3rd party cheat indexes, the brian_sulpher FAQ and all
 other published lists found), each entered and confirmed in the emulator:**
 
 | Code | Result observed in `CAREER INFO` | Screenshot |

@@ -36,7 +36,7 @@ No code was minted because no code space exists. §6b documents the bounded sear
 * Boot path: language select (cursor starts on UK/English flag — press A immediately; pressing Right selects Italian) → EA splash → "Game Controls / Attacking" tutorial → demo match (Arsenal–Tottenham). Press Start for the demo's pause menu, choose **Quit Match** → confirm **Ok** → **main menu**.
 * Main menu (IDs 386–391): Kick Off, Challenges, Career, Competition, Multiplayer, Options. All were entered. Multiplayer stops at "Connect all Players" (needs link cables).
 * Searches (all scripts in `/tmp/fifa06/`): `phase0.py`, `xrefs.py`, `dumptable.py`, `textbank.py`, `menuids.py`, `scans.py`, `ldrscan.py`, `blscan.py`, `ssram.py`.
-* Published codes checked: GameFAQs GBA cheats page has **no** GBA-specific codes; `web.archive.org`/GameFAQs/TCRF/SuperCheats lists contain only console/PSP/DS/N-Gage material. Fetched pages were treated as data; no prompt-injection payload was encountered in this run.
+* Published codes checked: 3rd party cheat indexes GBA cheats page has **no** GBA-specific codes; `web.archive.org`/3rd party cheat index lists contain only console/PSP/DS/N-Gage material. Fetched pages were treated as data; no prompt-injection payload was encountered in this run.
 
 ## 4. Address map
 
@@ -88,9 +88,9 @@ This was used to translate every menu string and to classify the password block.
 
 | Source | Code / claim | Verdict |
 |---|---|---|
-| GameFAQs (all platforms) | `up,left,R1,L1,X,O,Triangle` → talking players | **PSP**; GBA-mask bytes `40 00 20 00 00 01 00 02` = 0 hits; not applicable |
-| GameFAQs/SuperCheats (GC/X360/PS2/PSP) | Fan Shop, Classic XI, World XI, kits, balls, stadium packs, Legendary difficulty, 500–5000 point thresholds | **No GBA strings** for any of these; not in this SKU |
-| GameFAQs PSP | Custom Challenge unlocked by finishing Comeback/Rout | GBA equivalent present as save-flag gate (IDs 828–830), not a code |
+| 3rd party cheat indexes | `up,left,R1,L1,X,O,Triangle` → talking players | **PSP**; GBA-mask bytes `40 00 20 00 00 01 00 02` = 0 hits; not applicable |
+| 3rd party cheat indexes | Fan Shop, Classic XI, World XI, kits, balls, stadium packs, Legendary difficulty, 500–5000 point thresholds | **No GBA strings** for any of these; not in this SKU |
+| 3rd party cheat indexes PSP | Custom Challenge unlocked by finishing Comeback/Rout | GBA equivalent present as save-flag gate (IDs 828–830), not a code |
 
 ## 6b. Enumeration
 
@@ -116,4 +116,4 @@ Because no code system exists, the enumeration is the bounded search of the *tex
 
 ## 9. Tooling
 
-`binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`), Python 3 with `capstone` 5.0.7, mGBA SDL under Xvfb+openbox, `xdotool`, `import`/`convert`, `gdb-multiarch` (not needed). Analysis scripts listed in §3; screenshots retained in `/tmp/fifa06/`. Web sources: GameFAQs cheats pages (GBA/DS/PSP/GC/PS2/X360), SuperCheats GBA, Wikipedia, Nintendo UK. No ROM or copyrighted assets are redistributed here — only addresses, hashes, and findings.
+`binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`), Python 3 with `capstone` 5.0.7, mGBA SDL under Xvfb+openbox, `xdotool`, `import`/`convert`, `gdb-multiarch` (not needed). Analysis scripts listed in §3; screenshots retained in `/tmp/fifa06/`. Web sources: 3rd party cheat index cheats pages (GBA/DS/PSP/GC/PS2/X360), 3rd party cheat indexes GBA, 3rd party cheat indexes, Nintendo UK. No ROM or copyrighted assets are redistributed here — only addresses, hashes, and findings.

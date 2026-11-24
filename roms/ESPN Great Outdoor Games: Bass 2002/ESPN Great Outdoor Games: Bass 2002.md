@@ -18,7 +18,7 @@
 | SHA-1 | `d0f1e474c3fc4241dc400f0f52e591ac0798c452` |
 | SHA-256 | `a4eba4cb9d757029dbd74b6c0293d780d07293c42c306a8740ea379f0c89bae5` |
 
-This SHA-1 matches the no-intro USA image (`D0F1E474…`) listed in the BizHawk
+This SHA-1 matches the 3rd party cheat indexes USA image (`D0F1E474…`) listed in the BizHawk
 GBA game database; the PAL release (`Bass Tournament`, `AMGP`) is a different
 ROM. Phase-0 Nintendo-logo scan found exactly **one** GBA header in the file
 (at `0x0`): no appended trainer, no cracktro, no 2-in-1/multi-game pack. The
@@ -52,8 +52,8 @@ The negative result is *bounded*, not assumed:
   `0x08000334`; pressing it in the emulator returns to the title screen — it
   is a console reset convention, not a cheat.
 * Web search found **no published in-game password codes** for this SKU:
-  GameFAQs cheats page is empty (403 direct; archived snapshot 404), VGChartz
-  says "Total cheats available: 0", VideoGamesMuseum and ChapterCheats list
+  3rd party cheat index cheats page is empty (403 direct; archived snapshot 404), 3rd party cheat indexes
+  says "Total cheats available: 0", 3rd party cheat indexes and 3rd party cheat index list
   none. The only circulating "codes" are **CodeBreaker RAM patches** (e.g.
   `Max Power When Casting 320001D6 0008`, `Catch 1 Fish For Max Weight
   4626CAD1 2AD1`) — external memory edits, explicitly out of scope.
@@ -160,9 +160,8 @@ checked. This is a **closed negative result**:
   title screen. All other sites test single buttons. A raw u16 scan of the
   whole ROM for 4+ consecutive single-button masks found no plausible code
   table (hits were uniform `0x01FF` fill in tile/audio data).
-* **Published codes** — searched web.archive GameFAQs (snapshot 404), direct
-  GameFAQs (403), VGChartz ("Total cheats available: 0"), VideoGamesMuseum
-  and ChapterCheats (empty cheat sections). The only published "codes" are
+* **Published codes** — searched web.archive 3rd party cheat indexes, direct
+  3rd party cheat indexes. The only published "codes" are
   CodeBreaker RAM patches (memory edits), which are out of scope and were
   not entered. No developer password list exists for this SKU.
 * **Novel code** — not applicable: with no code system, alphabet, validator or

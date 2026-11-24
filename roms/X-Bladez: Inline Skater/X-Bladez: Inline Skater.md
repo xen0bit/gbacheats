@@ -30,7 +30,7 @@ checksum index = (sum of the first seven symbol indices) >> 1
 
 i.e. `(Σ idx[0..6] & 0xFE) == (idx[7] << 1)`. No table lookup or hard-coded code list is involved. On success the eight symbols are unpacked into an 8-byte payload at `0x03004560` and a 10-byte unlock-flag array at `0x03000890` is written.
 
-The single published code (`CBMBBQLT`, GameFAQs / SuperCheats, "Have full selection of levels") was verified in the emulator. **897,375,600** of 31^8 = 852,891,037,441 strings are accepted (3.26 % of 7-symbol prefixes). Two novel codes were minted and accepted in-game, and four rejection cases (bad checksum, unrepresentable checksum, twice) were confirmed with RAM evidence.
+The single published code (`CBMBBQLT`, 3rd party cheat indexes, "Have full selection of levels") was verified in the emulator. **897,375,600** of 31^8 = 852,891,037,441 strings are accepted (3.26 % of 7-symbol prefixes). Two novel codes were minted and accepted in-game, and four rejection cases (bad checksum, unrepresentable checksum, twice) were confirmed with RAM evidence.
 
 No hidden debug menu was found. The only ASCII text in the 4 MiB image is six state labels at `0x08092ED8`; all game UI is font/tile-index encoded. The sole multi-button gate in the input handler is `A+B+Select+Start` → soft reset (`0x080098C4`).
 
@@ -148,7 +148,7 @@ Pre-code baseline flags: `1100000000` (flags 0 and 1 are set by default).
 
 **Accepted-set size.** A 7-symbol prefix is extendable iff its sum ≤ 61 (so the checksum index `sum>>1` fits 0..30). A dynamic-programming count over all 7-tuples gives **897,375,600** accepted codes — 3.2617 % of 31^7 prefixes. Each accepted prefix has exactly one valid checksum symbol; no other comparison exists in the success path of `0x0800ED00`. This is a *bounded* count, not a sample: the validator was read instruction-by-instruction and its only accept gate is the checksum comparison.
 
-**Novel codes (absent from GameFAQs, SuperCheats and every other published list; the only published code is `CBMBBQLT`):**
+**Novel codes (absent from 3rd party cheat indexes and every other published list; the only published code is `CBMBBQLT`):**
 
 1. **`BBBBBBDC`** — exercises an unadvertised combination: level/count byte 2 instead of the published 8. Verified in emulator: typed buffer `[0,0,0,0,0,0,2,1]`, decoded `[0,0,0,0,0,0,0,2]`, flags changed from `1100000000` to `1111000000` (only flags 2 and 3 added). Screen returned to HOME (accept). Screenshot: `/tmp/xbladez/vnovel_after.png`.
 2. **`MMMMMMK9`** — exercises the maximum representable checksum (Σ=61 → index 30, symbol `9`). Verified: decoded `[9,9,9,9,9,1,2,7]`, flags → `1111111110`.
@@ -169,7 +169,7 @@ Pre-code baseline flags: `1100000000` (flags 0 and 1 are set by default).
 * **Derived** — validator arithmetic and literal addresses from `arm-none-eabi-objdump -M force-thumb` at `0x0800ED00`; checksum formula cross-checks all three accepted codes and all three rejections exactly.
 * **Inferred** — semantic meaning of the five leading payload bytes and the two 2-bit fields (labeled conservatively: only the level/count byte's effect on flags was exercised). The companion routine at `0x0800EC48` appears to be the inverse/repack path but was not called directly from the debugger.
 
-Published-code verification: `CBMBBQLT` (GameFAQs "Have full selection of levels"; SuperCheats "Unlock ALL Levels") is correct for this exact ROM hash and was accepted on the real screen.
+Published-code verification: `CBMBBQLT` (3rd party cheat indexes "Have full selection of levels"; 3rd party cheat indexes "Unlock ALL Levels") is correct for this exact ROM hash and was accepted on the real screen.
 
 ## 8. Unknowns
 

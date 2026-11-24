@@ -30,7 +30,7 @@ CPSR/stack and jumps to `0x0201993D`). The two records and their payload occupy
 the last 283,192 bytes (`0x3BADC8–0x400000`); the AWRJ image alone is 274,208
 bytes. They contain no password/cheat/debug ASCII. They are
 **link/multiboot slave images**, not a second playable game; the `AWRJ` code is
-consistent with TCRF’s note that the Japanese release was the *Game Boy Wars
+consistent with a 3rd party cheat index's note that the Japanese release was the *Game Boy Wars
 Advance 1+2* combination cartridge. All analysis below refers to the main image
 based at `0x08000000` (`rom_address = 0x08000000 + file_offset`).
 
@@ -76,7 +76,7 @@ debug menu**. A complete developer debug lexicon survives at
 at `0x0803CC90–0x0803D5xx`, but the table root has no reference outside that
 cluster, and none of the key-mask comparisons in the image routes to it;
 `L+R+Select` at the main menu and in the editor does not open it. It is dead
-code from a development build, as in AW2. TCRF (archived) documents the same
+code from a development build, as in AW2. 3rd party cheat indexes document the same
 L+R “Nintendo” map and lists no debug menu for this game.
 
 The button-code space is fully enumerated in §6b: the boot delete validator is
@@ -141,8 +141,8 @@ The offline model in `bootcheck.py` rejects the other 1022 states; `0x204`
 **Design Maps.**
 
 A save with Design Maps unlocked is required. The test harness was the
-published GameFAQs save #2112 (“Version 1.1, All CO’s, all maps, Advance
-Campaign unlocked”, Europe), downloaded from Zophar’s Domain and loaded into
+published 3rd party cheat indexes save #2112 (“Version 1.1, All CO’s, all maps, Advance
+Campaign unlocked”, Europe), downloaded from a 3rd party cheat index and loaded into
 this USA Rev.01 image; the save format is compatible. It was used only to reach
 the screen and is not redistributed.
 
@@ -449,21 +449,21 @@ the editor produced no debug screen.
 
 **Published codes tested against the ROM.**
 
-Sources consulted: the Nintendo manual PDF, GameFAQs (live page 403; used the
-archived 2025 capture), IGN wiki, CheatCC, Cheat Happens, TCRF (live 403; used
-the archived capture), and the VGChartz cheat listing. The code-bearing entries
+Sources consulted: the Nintendo manual PDF, 3rd party cheat indexes (live page 403; used the
+archived 2025 capture), 3rd party cheat index wiki, 3rd party cheat indexes (live 403; used
+the archived capture), and the 3rd party cheat index cheat listing. The code-bearing entries
 recovered from those sources are the four rows below; the rest are gameplay
 unlocks, tips, or glitches.
 
 | Published item | Source | Result |
 |---|---|---|
-| Erase data `L+Right+Select` | Nintendo manual, GameFAQs, IGN, CheatCC | **accepted**, prompt observed |
-| In-game reset `Start+Select+B+A` | GameFAQs, Cheat Happens, CheatCC | **accepted**, reset observed |
-| Nintendo Design Map `L+R` at Design Maps | GameFAQs, CheatCC, TCRF | **accepted**, fixed map observed |
-| Advanced Campaign `Select` before Campaign | GameFAQs, CheatCC | **accepted**, banner observed |
-| Skip Field Training (play last mission) | GameFAQs | not a code; gameplay shortcut |
-| CO / map / gold-menu unlocks | GameFAQs | gameplay unlocks, not codes; shop observed |
-| Field Training map-edit glitch | GameFAQs | out of scope; a glitch, not a code |
+| Erase data `L+Right+Select` | Nintendo manual, 3rd party cheat indexes | **accepted**, prompt observed |
+| In-game reset `Start+Select+B+A` | 3rd party cheat indexes | **accepted**, reset observed |
+| Nintendo Design Map `L+R` at Design Maps | 3rd party cheat indexes | **accepted**, fixed map observed |
+| Advanced Campaign `Select` before Campaign | 3rd party cheat indexes | **accepted**, banner observed |
+| Skip Field Training (play last mission) | 3rd party cheat indexes | not a code; gameplay shortcut |
+| CO / map / gold-menu unlocks | 3rd party cheat indexes | gameplay unlocks, not codes; shop observed |
+| Field Training map-edit glitch | 3rd party cheat indexes | out of scope; a glitch, not a code |
 
 **Negative results, bounded.**
 
@@ -512,7 +512,7 @@ unlocks, tips, or glitches.
   600-byte layout table; the three kanji 任天堂 are visible.
 
 **Derived (disassembly, `arm-none-eabi-objdump -M force-thumb`; byte checks
-with Python; TCRF archived page cross-check for the published map).**
+with Python; 3rd party cheat indexes archived page cross-check for the published map).**
 
 * Delete validator bytes at `0x38798`: `2200 a801 8801 200f 4008 280f d006
   a801 8801 2085 0080 4281 d100 2201`.
@@ -570,7 +570,7 @@ with Python; TCRF archived page cross-check for the published map).**
   * `strings4.txt`, `dis0_60000.txt` — recon artifacts.
 * Savestates `.ss1`–`.ss5` were used to return to the main menu / campaign map
   / design map; all are emulator-generated and git-ignored.
-* The external GameFAQs/Zophar save used to reach Design Maps and Advance
+* The external 3rd party cheat indexes save used to reach Design Maps and Advance
   Campaign is not redistributed.
 
 ## Legal note

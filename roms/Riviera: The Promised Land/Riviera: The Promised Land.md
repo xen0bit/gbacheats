@@ -15,7 +15,7 @@
 | Entry branch | `0xEA00002E` → `0x080000C0` (stock crt0) |
 | Embedded GBA headers | exactly **1** (the header at file 0x0; 156-byte Nintendo logo occurs once) — not a multi-game pack |
 | Patch / trainer | none found (no cracktro/trainer strings; stock entry word and logo) |
-| Build stamp in ROM | `May 12 2005 / 14:51:52` at file `0x8B2E4` — matches TCRF's US build ID `8B2E4`; this is the **US revision** |
+| Build stamp in ROM | `May 12 2005 / 14:51:52` at file `0x8B2E4` — matches a 3rd party cheat index's US build ID `8B2E4`; this is the **US revision** |
 | MD5 | `16b5f1c6f8567cbe42f7562fccbb6426` |
 | SHA-1 | `30ee6610aaa77bce2ffd8911058078147d61b925` |
 | SHA-256 | `9c11c7c147eed526318ad471af4c8c3edd2d2d7c0ea68ce01877489ecc8a6626` |
@@ -32,9 +32,9 @@ The title screen has four selector slots but only three are selectable. The four
 
 The game's own Down handler wraps `2 → 0` (`0x0803B554–0x0803B562`, `r4 = 0`), so controller input alone can **never** produce 3 — this is a **gated** hidden debug menu (guide §16.3 case 4), not a button code. Setting that byte to 3 and pressing A opens a black debug screen titled `SELECT START STAGE` with a single-selector list of **81 entries (indices 0–80)**.
 
-TCRF publishes the memory-code equivalent (`3200AEC8 0003`); the literal address `0x0200AEC8` is present twice in the ROM (`0x0803AF6C`, `0x0803B094`) and the gate was verified dynamically. That CodeBreaker code is **not** a finding of this report (memory-edit codes are out of scope) — it is used only as a published anchor to locate the developer menu, which was then reached, walked and enumerated on the real screen.
+3rd party cheat indexes publish the memory-code equivalent (`3200AEC8 0003`); the literal address `0x0200AEC8` is present twice in the ROM (`0x0803AF6C`, `0x0803B094`) and the gate was verified dynamically. That CodeBreaker code is **not** a finding of this report (memory-edit codes are out of scope) — it is used only as a published anchor to locate the developer menu, which was then reached, walked and enumerated on the real screen.
 
-The 81 stage-select entries include **undocumented content absent from TCRF/GameFAQs/VGChartz**: `13 TOWN CAP5`, `14 TOWN CAP6`, `15 TOWN CAP7`, `16 GO TITLE`, and 64 generated stage entries `17..80` rendered as `"NN c-s TITLE"`. A novel entry (**index 80, `80 8-1 TITLE`**) was activated on the real screen, produced a distinct gameplay scene, and the selection value was observed in game state at `0x0200B320`.
+The 81 stage-select entries include **undocumented content absent from 3rd party cheat indexes**: `13 TOWN CAP5`, `14 TOWN CAP6`, `15 TOWN CAP7`, `16 GO TITLE`, and 64 generated stage entries `17..80` rendered as `"NN c-s TITLE"`. A novel entry (**index 80, `80 8-1 TITLE`**) was activated on the real screen, produced a distinct gameplay scene, and the selection value was observed in game state at `0x0200B320`.
 
 "Extra Contents" (title option 2) is an unlockables screen with eight `?????` entries; on a fresh save all are locked and the on-screen character says "Not available yet...". Its UI strings are **font/tile-indexed** (no ASCII hits), so the negative is based on rendered screens, not on `strings`.
 
@@ -120,9 +120,9 @@ The title gate is **not** a checksum code: it is a raw state byte. The space of 
 
 | Index | Label | Published? |
 |---|---|---|
-| 0 | `0 NORMAL` | yes (TCRF) |
-| 1–8 | `1 CHAPTER1` … `8 CHAPTER8` | yes (TCRF) |
-| 9–12 | `9 TOWN CAP1` … `12 TOWN CAP4` | partially (TCRF mentions chapters only) |
+| 0 | `0 NORMAL` | yes (3rd party cheat indexes) |
+| 1–8 | `1 CHAPTER1` … `8 CHAPTER8` | yes (3rd party cheat indexes) |
+| 9–12 | `9 TOWN CAP1` … `12 TOWN CAP4` | partially (3rd party cheat indexes mention chapters only) |
 | 13–15 | `13 TOWN CAP5`, `14 TOWN CAP6`, `15 TOWN CAP7` | **no** |
 | 16 | `16 GO TITLE` | **no** |
 | 17–80 | `17 1-1 TITLE` … `80 8-1 TITLE` (64 entries) | **no** |
@@ -140,14 +140,14 @@ The title gate is **not** a checksum code: it is a raw state byte. The space of 
 
 Therefore no controller sequence can express index ≥ 81.
 
-**Novel code / unpublished entry:** index **80** (`80 8-1 TITLE`) is absent from TCRF, GameFAQs and VGChartz. Reached by one Left press from index 0 (RAM index read `0x0050`), then A on the real `SELECT START STAGE` screen. Observed effect: a distinct gameplay scene (`act80c.png`, blue-lit stage) and selector index reset to 0. A second novel-class entry, index **1** (`1 CHAPTER1`), was used for the clean write proof below.
+**Novel code / unpublished entry:** index **80** (`80 8-1 TITLE`) is absent from 3rd party cheat indexes. Reached by one Left press from index 0 (RAM index read `0x0050`), then A on the real `SELECT START STAGE` screen. Observed effect: a distinct gameplay scene (`act80c.png`, blue-lit stage) and selector index reset to 0. A second novel-class entry, index **1** (`1 CHAPTER1`), was used for the clean write proof below.
 
 **RAM proof of effect (watchpoint at `0x0200B320`):**
 
 * index 1 + A → `Hit watchpoint: new value = 0x00000001, old = 0x00000000`, `r0=1`, `r1=0x0200B320`, PC `0x0803BEDA`, from `str` at `0x0803BED6` followed by the chapter-1 opening scene (`ch1c.png`).
 * index 81 (injected, not controller-reachable) + A → `new value = 0x00000051`, i.e. **81 is written unchecked** into the game-state slot; the label at 81 degrades to `80 8-1` with the `TITLE` field missing (`oor81c.png`) and launching it produces corrupted graphics with the debug title bleeding through (`oor81actc.png`). This proves the semantic bound is enforced only by the input wrapper, not by the accept routine.
 
-**Published-code verification:** TCRF's `3200AEC8 0003` decodes to a byte write of `3` at `0x0200AEC8`; that exact literal exists in the ROM at `0x0803AF6C` and `0x0803B094`, and writing 3 + A reproduces the menu. No password literals, key-mask tables or button codes were found (see §8), and the GameFAQs "Patch Codes" (FAQ 37820) are GameShark memory patches, not in-game codes; VGChartz's six "cheats" are walkthrough tips.
+**Published-code verification:** a 3rd party cheat index's `3200AEC8 0003` decodes to a byte write of `3` at `0x0200AEC8`; that exact literal exists in the ROM at `0x0803AF6C` and `0x0803B094`, and writing 3 + A reproduces the menu. No password literals, key-mask tables or button codes were found (see §8), and the 3rd party cheat indexes "Patch Codes" (FAQ 37820) are GameShark memory patches, not in-game codes; a 3rd party cheat index's six "cheats" are walkthrough tips.
 
 ## 7. Validation evidence
 

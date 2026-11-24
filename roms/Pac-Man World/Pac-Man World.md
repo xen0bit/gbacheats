@@ -14,14 +14,14 @@
 | SHA-1 | `7e9f23753c10494a3f0bbdf0905f3c7ac052b1b3` |
 | SHA-256 | `8e649948f5e4d78a5fa276be1db4b72820c0e06ae5a28a87757c6071b2e4074f` |
 
-**Revision confirmation:** the MD5 and SHA-1 exactly match TASVideos' `Good | Pac-Man World (USA).gba` (TASVideos game id 2065), so the analysed image is the retail USA Rev.00 image.
+**Revision confirmation:** the MD5 and SHA-1 exactly match 3rd party cheat indexes' `Good | Pac-Man World (USA).gba` (3rd party cheat indexes game id 2065), so the analysed image is the retail USA Rev.00 image.
 
 **Phase 0 result:** the 156-byte Nintendo logo occurs exactly once (file offset `0x04`, header at `0x00`) — this is **not** a multi-game cart. The entry word is the stock `b 0x080000C0`; the first 4 KiB is a normal crt0; no cracktro, appended trainer, or patch was found. `file(1)` identifies it as a plain GBA ROM. Header checksum `0x0000` is a rebuilt-header artifact but the complement byte is internally consistent.
 
 ## 2. Executive summary
 **No developer-intended cheat system exists in this ROM.** There is no password entry screen, no cheat/level-select code list, no hidden debug menu, and no button-code sequence that reaches an undocumented screen. The game is a conventional Full Fat 3D-platformer build with a **battery-backed SRAM save** (512-byte `.sav`, 3 slots); progress unlocks are ordinary gameplay progression, not codes.
 
-The only "Level passwords" published for *Pac-Man World GBA* (VGChartz cheat id 62022: `SSBBBBWB`, `TQBBBBQB`, `QFBBBBWD`, `ALBBBBQB`, `FZBBBBWB`, `NWBBBBQB`, `LVBBBBWT`, `MBDBBBQB`, `ZSDBBBWB`, `PQDBSBQB`, `HLDBSBFS`, `VZDBSBVS`, `JWDBSBFS`, `BJDBSBVR`, `WFDBSBVT`) are **the Pac-Man World 2 GBA password list misattributed to this game**: they are byte-for-byte the PW2 codes published by GameFAQs, and **all 15 literals are absent from this ROM** (§6b). GameFAQs has no code entry for this SKU; fan wikis list only CodeBreaker memory patches (Inf. Health `32001C3B 0003`, Inf. Lives `32001C3A 0009`, Invincible `32000AEA 0004`, "Level Skip Select+Up", Super Jump), which are cheat-device RAM writes and out of scope. The advertised Select+Up skip has **no native effect** (tested in gameplay, §7).
+The only "Level passwords" published for *Pac-Man World GBA* (3rd party cheat index cheat id 62022: `SSBBBBWB`, `TQBBBBQB`, `QFBBBBWD`, `ALBBBBQB`, `FZBBBBWB`, `NWBBBBQB`, `LVBBBBWT`, `MBDBBBQB`, `ZSDBBBWB`, `PQDBSBQB`, `HLDBSBFS`, `VZDBSBVS`, `JWDBSBFS`, `BJDBSBVR`, `WFDBSBVT`) are **the Pac-Man World 2 GBA password list misattributed to this game**: they are byte-for-byte the PW2 codes published by 3rd party cheat indexes, and **all 15 literals are absent from this ROM** (§6b). 3rd party cheat indexes have no code entry for this SKU; fan wikis list only CodeBreaker memory patches (Inf. Health `32001C3B 0003`, Inf. Lives `32001C3A 0009`, Invincible `32000AEA 0004`, "Level Skip Select+Up", Super Jump), which are cheat-device RAM writes and out of scope. The advertised Select+Up skip has **no native effect** (tested in gameplay, §7).
 
 The negative is closed by (a) walking every reachable screen in mGBA with savestate RAM evidence, (b) decoding the font/tile-indexed text bank and enumerating the complete 5-language menu-string table (193 distinct strings, zero password/debug/level-select labels), (c) scanning the text and button spaces with explicit counts, and (d) testing all published literals. Residual Full Fat engine debug strings (stack traces, "TRACK 1/2") are uncalled diagnosics, not a reachable debug screen (§8).
 
@@ -37,7 +37,7 @@ The negative is closed by (a) walking every reachable screen in mGBA with savest
   * In-game pause (Start): **Pause / Resume / Exit**, a 2-item ring (`pause1.png`, `pause_nav1..4.png`). Exit returns to title (`pause_exit.png`). No other entry.
   * Boot screens: Nintendo license, Full Fat logo, DSI Games logo, intro cutscene — walked, not treated as the target.
 * **RAM method:** mGBA savestates (`Shift+F1`…`Shift+F9`); the PNG's `gbAs` chunk is zlib-decompressed to a 397,312-byte state; IWRAM maps at raw offset `0x19000`, EWRAM at `0x21000`. Tooling in §9. Per-screen IWRAM hashes were distinct (§7), proving each screen is a different game state, not a redraw.
-* **Codes tested:** all 15 VGChartz "passwords" + 6 further PW2 passwords (literal `grep -abo` against the ROM); native Select+Up in gameplay; 14 button combinations/sequences at the title (§6b).
+* **Codes tested:** all 15 3rd party cheat indexes "passwords" + 6 further PW2 passwords (literal `grep -abo` against the ROM); native Select+Up in gameplay; 14 button combinations/sequences at the title (§6b).
 
 ## 4. Address map
 File offset = ROM address − `0x08000000`.
@@ -78,8 +78,8 @@ Buccaneer Beach, Corsair's Cove, Crazy Cannonade, Crisis Cavern, Manic Mines, Sp
 ### 6.3 Published-password verification (literal search over all 8,388,608 bytes)
 | Source | Code | ROM offset |
 |---|---|---|
-| VGChartz / GameFAQs (PW1 page, misattributed) | `SSBBBBWB`, `TQBBBBQB`, `QFBBBBWD`, `ALBBBBQB`, `FZBBBBWB`, `NWBBBBQB`, `LVBBBBWT`, `MBDBBBQB`, `ZSDBBBWB`, `PQDBSBQB`, `HLDBSBFS`, `VZDBSBVS`, `JWDBSBFS`, `BJDBSBVR`, `WFDBSBVT` | **ABSENT (all 15)** |
-| GameFAQs PW2 (further cross-check) | `SSQBBBLB`, `TQWBBBLB`, `QFWDBLLB`, `BDVJJPNW`, `BJHJJPPP`, `BJJJJPPJ` | **ABSENT (all 6)** |
+| 3rd party cheat indexes | `SSBBBBWB`, `TQBBBBQB`, `QFBBBBWD`, `ALBBBBQB`, `FZBBBBWB`, `NWBBBBQB`, `LVBBBBWT`, `MBDBBBQB`, `ZSDBBBWB`, `PQDBSBQB`, `HLDBSBFS`, `VZDBSBVS`, `JWDBSBFS`, `BJDBSBVR`, `WFDBSBVT` | **ABSENT (all 15)** |
+| 3rd party cheat indexes PW2 (further cross-check) | `SSQBBBLB`, `TQWBBBLB`, `QFWDBLLB`, `BDVJJPNW`, `BJHJJPPP`, `BJJJJPPJ` | **ABSENT (all 6)** |
 | Fan-wiki CodeBreaker codes | `32001C3B 0003`, `32001C3A 0009`, `32000AEA 0004`, `74000130 03BB`, `82001622 0001` | Cheat-device RAM writes — out of scope; no in-game equivalent found |
 
 ## 6b. Enumeration
@@ -95,7 +95,7 @@ Buccaneer Beach, Corsair's Cove, Crazy Cannonade, Crisis Cavern, Manic Mines, Sp
 **Novel codes:** not applicable — with no validator, table, or code surface, no unpublished code can be minted. This is the bounded negative result required by guide §0.2 for a "no system" game, not a partial answer.
 
 **Bounds proven by rejection:**
-1. All 15 VGChartz/GameFAQs "PW1 passwords" and 6 extra PW2 codes rejected at the ROM level (literal absence, §6.3) — the published list is misattributed.
+1. All 15 3rd party cheat indexes "PW1 passwords" and 6 extra PW2 codes rejected at the ROM level (literal absence, §6.3) — the published list is misattributed.
 2. Native `Select+Up` (the published CodeBreaker skip trigger) pressed in gameplay produced only ordinary Pac-Man motion; no level change (`before_selup.png` / `after_selup.png`, 277 sampled-pixel difference from sprite movement).
 3. Modifier+Start on the title "Start" entry produced either the normal intro or only cursor animation — no level select (`mod_*.png`, diff 145 vs 15,421 for the normal path).
 

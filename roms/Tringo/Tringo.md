@@ -26,7 +26,7 @@
 
 The game's entire user-facing text is a 56-entry ASCII string table at file 0x18D94C (offset table) / 0x18DA31 (strings), and all 56 strings are accounted for by reachable screens (title, player name, load/save, options, credits, high scores, select game, gameplay, pause, link states). The only "code-like" input surface is a **player-name field** (alphabet `_` + `A-Z` / `a-z`, 27 symbols per case). Static and dynamic analysis of its buffer (0x02033BBA) shows it is copied with `strcpy` and measured with `strlen` only — there is **no validator** that compares the name to a constant. The scrolling credits/legal text is rendered from a *second, glyph-index* font bank (not ASCII and not present in RAM as ASCII); it was checked with full-byte encoding sweeps as well. Input handling (held 0x02030232, pressed 0x02030230, mirrored to 0x0203014C+0x18/+0x1A) contains 49 literal references, none forming a button-sequence matcher; 134 candidate button-mask runs were inspected and none matches a known cheat sequence.
 
-Published-code reconnaissance found **no in-game codes**: Cheat Happens states "We currently don't have any Tringo cheats or cheat codes"; ChapterCheats lists only a gameplay hint ("press Start to pause for unlimited thinking time"); gbaemulator.net lists 0 codes; GameFAQs returned HTTP 403. This is consistent with the ROM evidence.
+Published-code reconnaissance found **no in-game codes**: 3rd party cheat indexes state "We currently don't have any Tringo cheats or cheat codes"; 3rd party cheat index lists only a gameplay hint ("press Start to pause for unlimited thinking time"); 3rd party cheat index lists 0 codes; 3rd party cheat indexes returned HTTP 403. This is consistent with the ROM evidence.
 
 Per guide §0.2 item 5, this engagement delivers the bounded-negative form of the deliverable: full screen enumeration, counted search space, and explicit rejection evidence, rather than a minted code.
 
@@ -160,7 +160,7 @@ Index 0 = `_` (space), 1–26 = `A`–`Z`; identical lowercase table. 27 symbols
 - Pointer scan: 32-bit pointers into the text-bank region 0x0818D800–0x0818E400 → 21 hits, all within the string table / data blocks; no hidden table.
 - PC-relative literal xref scan: **49** input-struct refs, **15** name-buffer refs, **2** alphabet refs → all accounted for in §4.
 - Button-mask runs: 134 runs ≥4 presses → 0 matches to any documented cheat sequence.
-- Published-code recon: 4 sites (GameFAQs 403; Cheat Happens none; ChapterCheats 1 gameplay hint; gbaemulator.net 0 codes) → 0 in-game codes.
+- Published-code recon: 4 sites (3rd party cheat indexes 403; 3rd party cheat indexes none; 3rd party cheat indexes 1 gameplay hint; 3rd party cheat indexes 0 codes) → 0 in-game codes.
 
 **Novel code / rejection bounds.** Not applicable — no validator exists to mint against. Per the guide's bounded-negative clause (§0.2 item 5), absence is proven *for the spaces above*, with the counts and the screen walk as the evidence. No code was entered, so no acceptance/rejection pair exists to report. The only "rejection" observed was behavioural: entering arbitrary characters in the name field changes only the displayed name (verified in RAM at 0x02033BBA) and never produces a menu/flag change — consistent with a label field, not a code field.
 
@@ -184,6 +184,6 @@ Index 0 = `_` (space), 1–26 = `A`–`Z`; identical lowercase table. 27 symbols
 - `arm-none-eabi-objdump -M force-arm/force-thumb` for crt0, input path and name consumers.
 - mGBA 0.10.5 `-3 -d` CLI debugger on a Python PTY bridge (`dbg_daemon.py` + `dbgcmd.py`), Xvfb `:319`, openbox, `xdotool`, `scrot`.
 - mGBA savestate `gbAs` zlib chunk parser with magic-value calibration (IWRAM raw 0x19000, EWRAM raw 0x21000, palette 0x800, VRAM 0x1000).
-- Web recon via DuckDuckGo HTML + direct fetches (GameFAQs 403; Cheat Happens; ChapterCheats; gbaemulator.net; TCRF 403). Fetched pages were treated as data only.
+- Web recon via DuckDuckGo HTML + direct fetches (3rd party cheat indexes 403; 3rd party cheat indexes; 3rd party cheat indexes; 3rd party cheat indexes; 3rd party cheat indexes 403). Fetched pages were treated as data only.
 
 *Legal note: only findings, addresses, hashes, and tool scripts are published; no ROM bytes or copyrighted graphics/audio are reproduced.*

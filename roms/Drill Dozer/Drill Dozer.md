@@ -93,7 +93,7 @@ rebuilds the chunk/CRC. Patched states were loaded with the debugger `load 1` co
 | Nintendo logo (single header) | file 0x004–0x09F | full-ROM logo scan |
 | Entry branch / crt0 | 0x08000000 / 0x080000D0 | disassembly |
 | Key input register | 0x04000130 | observed live (held-key reads) |
-| **Room-state byte** | **0x02000015** | GameHacking.org "Room Modifier" `32000015 00??`; verified live (0x00/0x16/0x18) |
+| **Room-state byte** | **0x02000015** | 3rd party cheat indexes "Room Modifier" `32000015 00??`; verified live (0x00/0x16/0x18) |
 | **Mega Bit flag (u8)** | **0x0203463B = 0x02** | decrypted CodeBreaker "Have Mega Drill Bit" `E1EE693234E4`; write verified via GDB |
 | Chip count | 0x02034670 | published CodeBreaker `82034670 2710` (tooling only) |
 | Drill-bit level | 0x0203463B | published CodeBreaker `3203463B 0002` (same address as Mega Bit flag in the decrypted listing) |
@@ -111,7 +111,7 @@ non-code data (e.g. 0x082258A9, disassembly is garbage), so no writer was recove
 
 ## 5. Algorithm / observable model
 
-**Enigma Room gate (from StrategyWiki, cross-checked against game behaviour):**
+**Enigma Room gate (from 3rd party cheat indexes, cross-checked against game behaviour):**
 1. Buy the **Mega Bit** in the shop (flag `0x0203463B = 2`).
 2. In the Red Dozers' Training Course, find the **Super-Hard Block** near the entrance
    (a small grey-green block with a white diamond motif) and **drill down** into it.
@@ -344,7 +344,7 @@ pass.
   Mega Bit flag set; unchanged room byte for direct writes 0–24; watchpoint firings;
   crash on invalid room-byte write; state-word and X-coordinate patch sweeps;
   all static search counts reported in §8.
-- **Derived:** gate model from StrategyWiki cross-checked against observed pit fall;
+- **Derived:** gate model from 3rd party cheat indexes cross-checked against observed pit fall;
   code list from four published sources; space size 10,000 / 715 multisets;
   permutation-derived novel codes (§6b).
 - **Inferred:** that the code table uses a custom/runtime-derived representation. The
@@ -378,18 +378,18 @@ RAM patcher, `statesweep.py`, `xsweep.py`, `doorsweep.py`, `encsearch.py`,
 
 ## 12. Sources (published codes, cross-checked)
 
-- StrategyWiki — `Drill_Dozer/Passwords`, `Drill_Dozer/Red_Dozers'_Training_Course`
+- 3rd party cheat indexes — `Drill_Dozer/Passwords`, `Drill_Dozer/Red_Dozers'_Training_Course`
   (Mega Bit → Super-Hard Block → door → Enigma Room; reset value; all code literals;
   order-insensitivity of effect codes).
-- GameFAQs — Drill Dozer Cheats (archived snapshot), `gamefaqs.gamespot.com/gba/928398-drill-dozer/cheats`.
-- CheatingDome — `drilldozer-cheatsp.htm`.
+- 3rd party cheat indexes — Drill Dozer Cheats (archived snapshot), 3rd party cheat indexes.
+- 3rd party cheat indexes — `drilldozer-cheatsp.htm`.
 - TheGreenLightningMRT, "Drill Dozer Bonus — Secret Code Room" (video description).
-- GameHacking.org — Drill Dozer (USA) code list (Room Modifier `32000015 00??`;
+- 3rd party cheat indexes — Drill Dozer (USA) code list (Room Modifier `32000015 00??`;
   Have Mega Drill Bit `E1EE693234E4`; tooling addresses).
-- Almar's Guides / Neoseeker — CodeBreaker master + plain addresses (tool aid only).
+- 3rd party cheat indexes — CodeBreaker master + plain addresses (tool aid only).
 - Nintendo official manual (PDF) — control mapping and menu semantics (A jump, B
   action, R/L drill, START = Save screen).
-- RetroAchievements forum topic 3377 — confirms the community also treats room IDs as
+- 3rd party cheat index forum topic 3377 — confirms the community also treats room IDs as
   an open research question for this title.
 
 **Legal note:** no ROM image or copyrighted graphics/audio are redistributed here; only

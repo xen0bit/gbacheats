@@ -150,9 +150,9 @@ There is no digit in the alphabet; the published `1vdNNbH` is an OCR/transcripti
 
 | Source | Codes | Decoder result |
 |---|---|---|
-| Cheat Happens / absolutcheats / ggmania / cheatbook / mogelpower (13 level codes `dFghjjd…` … `BDChhbj…`) | 13 | all 13 pass; `F0` decodes to 1,2,3,7,8,6,4,5,9,10,11,12,14 (published "level" labels do not match `F0` 1:1) |
+| 3rd party cheat indexes (13 level codes `dFghjjd…` … `BDChhbj…`) | 13 | all 13 pass; `F0` decodes to 1,2,3,7,8,6,4,5,9,10,11,12,14 (published "level" labels do not match `F0` 1:1) |
 | TMQ Horse Game Database (`dFgrrbN…` … `nDCLhDF…`) | 5 | 4 pass verbatim; `1vdNNbH DcMCBLb` passes only after `1`→`l` |
-| cheatingdome 14-char "Part I / Complete" list | 13 | first 5 pass; last 8 all have `chk = 60` with `v1 ≥ chk` (borrow fails) ⇒ inconsistent with this USA validator; likely another region or transcription errors. Recorded as unverified, not silently dropped. |
+| 3rd party cheat indexes 14-char "Part I / Complete" list | 13 | first 5 pass; last 8 all have `chk = 60` with `v1 ≥ chk` (borrow fails) ⇒ inconsistent with this USA validator; likely another region or transcription errors. Recorded as unverified, not silently dropped. |
 
 ## 6b. Enumeration
 
@@ -221,7 +221,7 @@ The game then applies `F0`-dispatch and four level-conditioned range tests, so t
 - REA/Ghidra 12.1.4 via the `reverse-engineer-anything` skill: `open_binary` (raw-binary, ARM, base `0x08000000`), `binary_overview`, `xrefs`, `procedure_pseudo_code`, `procedure_assembly`, `read_bytes`; session closed with `close_binary`.
 - mGBA 0.10.5 under `Xvfb :315` with `SDL_AUDIODRIVER=dummy`, `openbox`, `xdotool` (XTEST events, 50–150 ms holds), `scrot`.
 - Python helpers in `/tmp/spiritstallion/`: `ctl.py` (input/screenshot), `enter_pw.py` (grid navigation and 14-character entry), `decode.py` (published-code decoder), `gen.py` (novel-code solver), `ssdiff.py` (PNG `gbAs` zlib state diff).
-- Web sources: Cheat Happens, absolutcheats, ggmania, cheatbook, mogelpower, cheatingdome, TMQ Horse Game Database (incl. scanned English manual OCR via `pdftoppm` + `tesseract` after installing `poppler-utils`), archived GameFAQs guide 22073. TCRF returned 403 and had no archive snapshot; treated as unavailable, not as evidence.
+- Web sources: 3rd party cheat indexes, TMQ Horse Game Database (incl. scanned English manual OCR via `pdftoppm` + `tesseract` after installing `poppler-utils`), archived 3rd party cheat index guide 22073. 3rd party cheat indexes returned 403 and had no archive snapshot; treated as unavailable, not as evidence.
 
 No ROM bytes or copyrighted assets are reproduced in this report beyond short address/hash/algorithm notes and the cheat strings themselves (which are published developer-intended codes).
 

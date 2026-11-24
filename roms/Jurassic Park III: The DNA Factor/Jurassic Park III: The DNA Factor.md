@@ -35,7 +35,7 @@ as its own revision with its own addresses.
 
 **There is no password or code-entry system in this SKU.** There is no on-screen
 alphabet, no code buffer, no string-comparison validator, no key-mask cheat table, and
-no published password list for the game (GameFAQs lists exactly one secret, a
+no published password list for the game (3rd party cheat index lists exactly one secret, a
 post-gameplay difficulty unlock — see §3).
 
 There **is** a genuine hidden developer screen: a **Level Select / Player Select**
@@ -87,17 +87,17 @@ Select=`BackSpace`, D-pad = arrow keys. Hold keys ~100–250 ms.
    `/tmp/jp3dna/`.
 
 **Published code verification.** Web search + `web.archive.org` snapshot of the
-GameFAQs cheats page (capture 2022-02-10) gives a single entry: *"Harder Game — Play
+3rd party cheat index cheats page (capture 2022-02-10) gives a single entry: *"Harder Game — Play
 the entire game and beat it. After the credits, press START when the Title Screen
 appears, and load up your game."* That is a save/difficulty flag, not a code; no
-password string exists to search for. No TCRF page exists for this title (404).
+password string exists to search for. No 3rd party cheat index page exists for this title (404).
 Cheat-CC stage-select / BGM-test / SE-test entries found by search belong to the
 **Island Attack** sibling SKU, not this image. Literal searches in this ROM for the
 widely published JP passwords `G21G0025`, `I21G0027`, `OVVVVVUP`, `BLUESKY1`, `open
 park` all returned **0 hits**; those are from other Jurassic Park titles/platforms.
 
 **Prompt-injection watch:** fetched web pages and ROM strings were treated strictly as
-data. No instruction-like payload was encountered in the fetched GameFAQs/archive
+data. No instruction-like payload was encountered in the fetched 3rd party cheat indexes/archive
 content in this run.
 
 ## 4. Address map
@@ -190,7 +190,7 @@ is the six-option selector plus the two debug fields above (§6b).
 | +0 | u8 | Level Select | 0–9, wraps | Observed (Right×10 → 0; Left at 0 → 9) |
 | +2 | u8 | Player Select | 0=Man, 1=Woman | Observed (Up toggles; screen text changes) |
 
-**Published codes:** none. GameFAQs' single "Harder Game" secret is a post-game flag,
+**Published codes:** none. 3rd party cheat indexes' single "Harder Game" secret is a post-game flag,
 not a literal code; literal searches for external JP passwords returned zero hits.
 
 ## 6b. Enumeration
@@ -204,8 +204,7 @@ not a literal code; literal searches for external JP passwords returned zero hit
   pressed A, then entered `Right,Right,Right` and `Up` and saved a state: the screen
   read `Level Select 3 / Player Select Woman`, with RAM `struct = 03 00 01 00` and
   scene 9. I then pressed A+Start: scene became 10 and the selected stage loaded with
-  the Woman character. Neither the menu nor this combination appears in GameFAQs,
-  TCRF, VGChartz, or any other published list consulted.
+  the Woman character. Neither the menu nor this combination appears in 3rd party cheat indexes, or any other published list consulted.
 * **Accepted vs rejected (bounds proven).**
   * selector 5 + A → scene 9 (accept).
   * selector 5 + B → scene 0x36/54 (legal screen) — wrong button rejected.
@@ -246,7 +245,7 @@ disassembly; **Inferred** = plausible but not fully exercised.
   The debug screen itself and its controls are fully proven once the selector is set.
 * Target scenes for selector values 1, 3 and 4 (`0x37`, `0x3C`, `0x21`) were read from
   the jump table but not individually rendered.
-* The GameFAQs "Harder Game" unlock was not played through to completion; I verified it
+* The 3rd party cheat indexes "Harder Game" unlock was not played through to completion; I verified it
   is a save/flag effect (no password literal exists), not a typed code.
 * The tile-indexed normal UI text bank was not fully decoded to glyphs; the negative
   for a password screen rests on screen enumeration plus exhaustive ASCII/XOR/additive
@@ -261,6 +260,6 @@ disassembly; **Inferred** = plausible but not fully exercised.
   `gbAs` zlib chunk; no GDB stub was needed for the final evidence (the stub pauses the
   core at boot and exits on client disconnect in this build).
 * `brute.py` for keyboard/RAM differential tests.
-* Web: `web.archive.org` snapshot of the GameFAQs cheats page; web search snippets.
+* Web: `web.archive.org` snapshot of the 3rd party cheat index cheats page; web search snippets.
 * No ROM or copyrighted assets are redistributed here; only hashes, addresses, and
   original observations are published.

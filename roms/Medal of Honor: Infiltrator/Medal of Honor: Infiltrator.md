@@ -42,9 +42,9 @@ surface is the menu; its activation gate was not reproduced in normal play (see
 §8 for the exact bounds of that negative).
 
 Web verification (§3.4) could not be completed: the `websearch` integration
-returned no results for nine queries and direct fetches of GameFAQs, Google and
+returned no results for nine queries and direct fetches of 3rd party cheat indexes, Google and
 Bing were blocked (403 / Cloudflare "Just a moment..." / bot challenge). The
-Wayback CDX API returned empty sets for `*infiltrator*` GameFAQs URLs. No
+Wayback CDX API returned empty sets for `*infiltrator*` 3rd party cheat indexes URLs. No
 published code string was found literally in the ROM. Fetched pages were treated
 as data only; no instruction found in fetched content was acted upon.
 
@@ -167,7 +167,7 @@ Extras rows: `Survival Mode` and `Max-GI mode` are rendered greyed/locked,
 | Direct 32-bit string pointers | whole 16 MiB at 2- and 4-byte alignment to `0x08EF2440..0x08EF24D0` | **0 hits** (cheat menu reached via IDs, not pointers) |
 | Key-mask tables | all u16 runs in `{1,2,4,8,0x10,0x20,0x40,0x80,0x100,0x200}` and active-low complements; ≥3 consecutive anywhere (7,203 runs) and ≥5 consecutive in data region `0x800000..0x1000000` (4,354 runs) | all runs are code operands or compressed graphics; **no** table with distinct keys + terminator |
 | Input combinations in emulator | ~40 sequences on title/Main Menu/gameplay/pause (listed in §3) | no hidden screen, no extra menu row |
-| Published codes | 9 websearch queries + GameFAQs/Bing/Google/Wayback fetches | search blocked (403/bot challenge); **no** published code literal found in ROM |
+| Published codes | 9 websearch queries + 3rd party cheat indexes/Bing/Google/Wayback fetches | search blocked (403/bot challenge); **no** published code literal found in ROM |
 
 **Menu space (the actual cheat surface): fully enumerated** — 10 rows, all
 named above, with the 9 cheat effects named by the shipped UI. "Full Unlocks"

@@ -7,12 +7,12 @@
 - Entry word `0xEA00002E` = stock `b 0x080000C0`. No cracktro/trainer patch; keyword scan for GAMESHARK/CODEBREAKER/TRAINER/CRACK/SUNHORS/MODE7 = 0 hits.
 - Nintendo-logo scan over all 8 MiB: **exactly one** GBA header, at file 0x0 (ROM `0x08000000`). Not a multi-game pack; no second image, no shell.
 - Hashes: MD5 `c8a0ce6010243c1b4a05458344c9fc31`; SHA-1 `c5873294bb79b9252da82b02cc53ee7e8f4e663c`; SHA-256 `7fe009a208fbe46ca523f8c1e553ca015a61c51810d284fe81602cbe8cbee0fb`.
-- Developer Vicarious Visions, publisher Activision; distinct SKU from the April-2004 `Shrek 2` (GameFAQs id 919680; TCRF separate page) — confirmed independently for this image.
+- Developer Vicarious Visions, publisher Activision; distinct SKU from the April-2004 `Shrek 2` (3rd party cheat indexes id 919680; 3rd party cheat indexes separate page) — confirmed independently for this image.
 
 ## 2. Executive summary
 **No developer-intended in-game cheat-code system exists in this ROM.** There is no password screen, no password alphabet/table/validator, no button-code matcher or key-mask sequence table, and no reachable hidden/debug menu. This is a **bounded "no system" result** (guide §0.2 point 5), proven by counting the searched spaces and walking every reachable screen with RAM evidence, not by a failure to find something.
 
-What the game *does* have is ordinary progression content: 25 levels in 5 "scrolls" and four mini-games unlocked by collecting 40 coins in every level of a scroll (GameFAQs; level names verified in ROM). It also contains **unused/cut debug leftovers**: the strings `Defeat Level`, `Defeat Level 100%`, `Slow Motion` and three test-level names (`Puss Test`, `Shrek Test`, `Donkey Test`) sit in the text bank but no retail input path reaches a menu that displays them (corroborated by TCRF, which lists the test levels as "possible test levels — to do: find out how to play these levels").
+What the game *does* have is ordinary progression content: 25 levels in 5 "scrolls" and four mini-games unlocked by collecting 40 coins in every level of a scroll (3rd party cheat indexes; level names verified in ROM). It also contains **unused/cut debug leftovers**: the strings `Defeat Level`, `Defeat Level 100%`, `Slow Motion` and three test-level names (`Puss Test`, `Shrek Test`, `Donkey Test`) sit in the text bank but no retail input path reaches a menu that displays them (corroborated by 3rd party cheat indexes, which lists the test levels as "possible test levels — to do: find out how to play these levels").
 
 Published "Shrek 2 (GBA) Scrapbook button codes" found on the web are **not applicable to this SKU**: the string `Scrapbook` occurs 0 times in this ROM, the pause menu has no Scrapbook entry (only Resume / Quit Level / Sleep / Sound), and the published prefix `Left,Up,A,B` ×3 produced no effect when entered on the title, pause and play screens. Those codes belong to the console versions / the other GBA `Shrek 2` / the 2-in-1 pack, exactly the SKU-confusion trap of guide §16.11.
 
@@ -32,7 +32,7 @@ Published "Shrek 2 (GBA) Scrapbook button codes" found on the web are **not appl
 | UI glyph bytes in text bank | `0x80`=A, `0x81`=B, `0x84`, `0x86`=L, `0x87`=R (e.g. `0x080ABC30` "Press SELECT + \x86 + \x87 to wake"; `0x080ABB28` "\x81 back \x80 select") | Derived (screen + bytes) |
 | Debug action strings | `Defeat Level` `0x080ABC68`; `Defeat Level 100%` `0x080ABC7C`; `Slow Motion` `0x080ABC94` | Derived (strings) |
 | Scroll-name strings | Job Hunt `0x080ABCA4`; Cat and Mouse `0x080ABCB4`; The Showdown `0x080ABCC8`; The Moral of the Story `0x080ABCDC`; Bonus `0x080ABCF8` | Derived |
-| Test-level strings (unused) | Puss Test `0x080ABD04`; Shrek Test `0x080ABD14`; Donkey Test `0x080ABD24` | Derived + TCRF |
+| Test-level strings (unused) | Puss Test `0x080ABD04`; Shrek Test `0x080ABD14`; Donkey Test `0x080ABD24` | Derived + 3rd party cheat indexes |
 | 25 real level names | `0x080ABD34`–`0x080ABF38`, 4-byte-aligned records | Derived |
 | Save | 512-byte Flash/SRAM at `0x0E000000` (`.sav`), checksum words `0xC0DE`/`0x600D` | Observed (file) |
 | RAM screen bytes (savestate) | EWRAM `0x02007420`, `0x02002F3C` — values in §6b | Observed |
@@ -47,7 +47,7 @@ No code that shifts a key history, compares a button-mask run, checks a password
 ## 6. Tables
 - **Scrolls (8 name records, 5 accessible):** Job Hunt, Cat and Mouse, The Showdown, The Moral of the Story, Bonus, *Puss Test, Shrek Test, Donkey Test* (last three unreachable in retail play).
 - **Levels (25):** Into the Forest, Cat Scratches, Rough and Tumble, Swamp Cat, Cat's Cradle / Duck and Cover, Tippytoes, Strength of an Ogre, Fire and Brimstone, Sticks and Stones / Water Slide, Barrel Blockade, Get to the Grove, Kickback, Playing Catch-Up / Woodland Chase, Treetop Flight, Ogre Slayer, Paws of Fury, Leaps and Bounds / Gatecrasher, One Step at a Time, Whiskers of Steel, Tweedle Dum and Dumber, Mine Mice.
-- **Unlockables (not codes):** Duck and Cover, Barrel Blockade, Ogre Slayer, Mine Mice mini-games — 40 coins in every level of scrolls 1–4 respectively (GameFAQs, verified level names in ROM).
+- **Unlockables (not codes):** Duck and Cover, Barrel Blockade, Ogre Slayer, Mine Mice mini-games — 40 coins in every level of scrolls 1–4 respectively (3rd party cheat indexes, verified level names in ROM).
 - **Debug action strings (no reachable menu):** Defeat Level, Defeat Level 100%, Slow Motion.
 - **False positives classified:** `Code: B.Wodok` @`0x77BC35` = Shin'en GAX 3.05 audio-engine banner; `secret` @`0xAC368` = story narration ("holds the secret of killing an ogre"); `bonus` = the Bonus scroll name.
 
@@ -81,15 +81,15 @@ No 6th scroll, debug menu, password field, code-entry panel, or character-select
 
 ## 7. Validation evidence
 - **Observed:** all 8 screens in mGBA; savestate RAM bytes; 0/40 crown counter; no effect from any published/undocumented button combination; "Scrapbook" absent from the ROM.
-- **Derived:** header/logo count; keyword and key-mask counts; key-reader disassembly; string/pointer tables; glyph-byte meanings; TCRF corroboration of unused test levels.
-- **Inferred:** the debug action strings (`Defeat Level`, `Slow Motion`) and test-level names are cut/unreachable content. Confidence moderate-high: no retail screen displays them, no direct pointer xref found beyond their own records, and TCRF classifies them as unused. No gate was proven, so this is a bounded "no reachable path found" (guide §16.3), not absolute proof of dead code.
+- **Derived:** header/logo count; keyword and key-mask counts; key-reader disassembly; string/pointer tables; glyph-byte meanings; 3rd party cheat indexes corroboration of unused test levels.
+- **Inferred:** the debug action strings (`Defeat Level`, `Slow Motion`) and test-level names are cut/unreachable content. Confidence moderate-high: no retail screen displays them, no direct pointer xref found beyond their own records, and 3rd party cheat indexes classifies them as unused. No gate was proven, so this is a bounded "no reachable path found" (guide §16.3), not absolute proof of dead code.
 
 ## 8. Unknowns
-- Whether a debug build/prototype or a non-retail loader could reach the three test levels or the `Defeat Level`/`Slow Motion` options; the gate, if any, was not identified. TCRF likewise leaves this as a to-do.
-- Hidden developer credits (TCRF category) were not fully captured; the visible credits roll is ordinary and no credits-trigger code was found.
+- Whether a debug build/prototype or a non-retail loader could reach the three test levels or the `Defeat Level`/`Slow Motion` options; the gate, if any, was not identified. 3rd party cheat indexes likewise leaves this as a to-do.
+- Hidden developer credits (3rd party cheat indexes category) were not fully captured; the visible credits roll is ordinary and no credits-trigger code was found.
 - The exact save-field encoding for the 40-coin unlock flags was not reversed (progression content, not a cheat code).
 
 ## 9. Tooling
-`strings`, `grep -abo`, `xxd`, Python 3 (struct/re/zlib), `arm-none-eabi-objdump -M force-thumb`, Capstone (LDR-literal and BL-target scans), mGBA 0.10.5 under Xvfb :318 + openbox, xdotool, scrot, savestate `gbAs` zlib parsing. Web: GameFAQs cheats (live 403 → web.archive.org snapshot), TCRF "Shrek 2: Beg for Mercy" and "Shrek 2 (GBA)" (archive), megagames/planetcheats/projectcheatcodes (published button codes — classified as other SKUs). Fetched page text was treated as data only; no prompt-injection encountered.
+`strings`, `grep -abo`, `xxd`, Python 3 (struct/re/zlib), `arm-none-eabi-objdump -M force-thumb`, Capstone (LDR-literal and BL-target scans), mGBA 0.10.5 under Xvfb :318 + openbox, xdotool, scrot, savestate `gbAs` zlib parsing. Web: 3rd party cheat index cheats (live 403 → web.archive.org snapshot), 3rd party cheat indexes "Shrek 2: Beg for Mercy" and "Shrek 2 (GBA)" (archive), 3rd party cheat indexes (published button codes — classified as other SKUs). Fetched page text was treated as data only; no prompt-injection encountered.
 
 **Legal note:** no ROM or copyrighted assets are redistributed; only hashes, addresses, and findings are published.

@@ -174,7 +174,7 @@ The seven short codes are a separate, closed set of exactly 7 table entries.
 **Validator model.** Fully reimplemented in `pirates.py`; agrees with the ROM oracle on
 all 24 published level codes, the Barbossa code, every minted code, and rejected inputs.
 
-**Novel codes (generated, absent from GameFAQs / VGChartz / TCRF / all published lists):**
+**Novel codes (generated, absent from 3rd party cheat indexes / all published lists):**
 
 | Code | level | cheat3 | first | ROM oracle | In-game |
 |---|---|---|---|---|---|
@@ -193,7 +193,7 @@ to 7 — an unadvertised combination — so it is provably not in any published 
 - Level 32: not representable (5-bit field) — encoder cannot produce a code; oracle
   decoder reports no valid code.
 - Garbage `AAAAAAAAAA`, `??????????`, `0123456789`: oracle rejects (rv=0), decoder rejects.
-- Published lowercase "Uberclocked" list (`p4rmjdd5bl`, …) and the Neoseeker alternate
+- Published lowercase "Uberclocked" list (`p4rmjdd5bl`, …) and the 3rd party cheat indexes alternate
   level list are **not accepted** by this ROM's decoder/oracle — different edition or
   transcription errors; recorded as unverified for this image.
 
@@ -235,7 +235,7 @@ it directly. No brute force over 2^22 was needed.
 - `pirates.py` — decoder/encoder and published-code verification.
 - `ss.py` — mGBA savestate `gbAs` zlib parser (RAM evidence).
 - `nav.py` / `input.py` — XTEST keypad navigation and screenshots on display `:317`.
-- Web: GameFAQs, AbsoluteCheats, Speedrun.com, Neoseeker, VGChartz, jeuxvideo.com —
+- Web: 3rd party cheat indexes —
   all fetched as data; no instructions from fetched content were followed.
 
 **Legal note:** no ROM bytes, graphics, or copyrighted assets are reproduced here; only

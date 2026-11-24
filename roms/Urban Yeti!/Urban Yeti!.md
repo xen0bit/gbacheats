@@ -21,7 +21,7 @@ Engine strings confirm the build: `Factor 5`, `MusyX audio tools licensed by`, `
 
 Urban Yeti! has a real, developer-intended password system with **exactly 29 accepted inputs**: two hard-coded special codes and 27 records in an on-cartridge table. There is no checksum, no bit-packing, no button sequence and no algorithmic generator: the validator is a plain, case-sensitive, NUL-terminated `strcmp` against fixed strings. The input surface is eight uppercase letters `A`–`Z` (`0x41`–`0x5A`), so the representable space is `26^8 = 208,827,064,576` strings, of which 29 are accepted.
 
-Published lists (GameFAQs-derived mirrors, Cheat Code Central, Cheatbook, Planet Cheats, TCRF) document `TONYGOLD`, `BSWSBSWS` and the 26 level passwords `BUZZWORD` … `PROVIDER`. **All 28 of those were verified byte-for-byte in the ROM.** Three further published claims — `NTTTTT`, `MFKRPH` and the six-letter set `PBBQBB`/`QBCQBB`/…/`MTTQBB` — are **absent from this image** and are reported as unverified/wrong-edition (§16.7/§16.11).
+Published lists (3rd party cheat index-derived mirrors, 3rd party cheat indexes) document `TONYGOLD`, `BSWSBSWS` and the 26 level passwords `BUZZWORD` … `PROVIDER`. **All 28 of those were verified byte-for-byte in the ROM.** Three further published claims — `NTTTTT`, `MFKRPH` and the six-letter set `PBBQBB`/`QBCQBB`/…/`MTTQBB` — are **absent from this image** and are reported as unverified/wrong-edition (§16.7/§16.11).
 
 The ROM's own table contains one record that **no published list mentions**: `PASSWORD` (record 0, category 0, index 1). It is the missing third member of the first category (published lists begin at `BUZZWORD`, category 0 index 2), i.e. an unadvertised difficulty/variant of the first area. This is the generated, novel code.
 
@@ -117,12 +117,12 @@ Record layout (little-endian, 20 bytes):
 
 | Code | Effect | Evidence |
 |---|---|---|
-| `TONYGOLD` | Secret menu: level select, sound test, difficulty, Mode Play/View (View follows a seagull; quitting returns to the secret menu) | Derived from `0x8040432`–`0x8040474`; matches TCRF/Cheat Code Central |
-| `BSWSBSWS` | "Black Screen White Screen" memory game / strange-graphics mode | Derived from `0x80404AC`–`0x80404CA`; matches TCRF/RetroAchievements |
+| `TONYGOLD` | Secret menu: level select, sound test, difficulty, Mode Play/View (View follows a seagull; quitting returns to the secret menu) | Derived from `0x8040432`–`0x8040474`; matches 3rd party cheat indexes |
+| `BSWSBSWS` | "Black Screen White Screen" memory game / strange-graphics mode | Derived from `0x80404AC`–`0x80404CA`; matches 3rd party cheat indexes |
 
 ### 6.2 Full 27-record table at `0x081FD0D4`
 
-Published level numbers are shown for comparison (Cheatbook/Cheat Code Central). `cat`/`idx` are the ROM's own fields.
+Published level numbers are shown for comparison (3rd party cheat indexes). `cat`/`idx` are the ROM's own fields.
 
 | # | Code | cat | idx | Published level |
 |---:|---|:---:|:---:|---:|

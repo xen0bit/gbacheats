@@ -13,7 +13,7 @@
 | Maker code | `5G` (Majesco) |
 | Version | `0x00` |
 | Entry word | `0xEA00002E` (stock ARM branch, not a cracktro) |
-| Developer | Iridon Interactive AB (confirmed by in-game copyright splash and VGChartz) |
+| Developer | Iridon Interactive AB (confirmed by in-game copyright splash and 3rd party cheat indexes) |
 | MD5 | `9b72e0259be5e4adddd2fed212c9fde7` |
 | SHA-1 | `92aae76deb40a3d63e99c4981dec7e790a67ebca` |
 | SHA-256 | `45dcf6823fe4161274c4702129adf0eb2bdf0b4d73897c21808eabccf85b481c` |
@@ -130,8 +130,7 @@ record:
   `101`, `99`, `0` are rejected.
 
 **Novel crafted unlock (not in any published list).** No published code list exists for this
-title — searched GameFAQs, VGChartz (1 "cheat", actually a level-4 FAQ), Cheat Happens (none),
-Almar's Guides (D-pad only; no combos), and TASVideos (no codes). The crafted value is:
+title — searched 3rd party cheat indexes (1 "cheat", actually a level-4 FAQ), 3rd party cheat indexes. The crafted value is:
 
 > **Field 58 = 1** (byte `0x0203FE18 = 0x10`), progress words = `0`.
 
@@ -201,8 +200,7 @@ static table/string space counted above.
   (Ctrl-C alone prints a snapshot and resumes).
 * `state.py` extracts the zlib `gbAs` chunk from `.ssN` PNG savestates; `patchstate.py` patches
   EWRAM bytes and rebuilds the PNG for deterministic accept/reject tests.
-* Web recon: GameFAQs (403, snippets only), VGChartz, Cheat Happens, Almar's Guides,
-  TASVideos/1712M. Fetched pages were treated as data only; no instructions in them were
+* Web recon: 3rd party cheat indexes/1712M. Fetched pages were treated as data only; no instructions in them were
   followed. No prompt-injection content was encountered.
 
 **Legal note:** no ROM bytes, graphics, music or extracted assets are reproduced here — only

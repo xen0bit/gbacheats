@@ -43,7 +43,7 @@ stub was altered, but all game text and code past 0xC0 are intact. No patch was 
 button-code sequence, no hidden/debug menu and no name-entry "code" surface exists. Every
 "cheat" published for this game is a GameShark/CodeBreaker **RAM patch** (e.g.
 `8200022C 0FFF` "all levels unlocked", `33004340 0014` "infinite health"), which is explicitly
-out of scope for this engagement. Two independent public databases (ChapterCheats, VGChartz)
+out of scope for this engagement. Two independent public databases (3rd party cheat indexes)
 list *no* codes, passwords, unlockables, secrets, glitches or easter eggs for the GBA release.
 
 This is a **bounded negative**, not "I did not find it". It is backed by:
@@ -164,7 +164,7 @@ field and no validator. The *searched* space is therefore enumerated explicitly:
 | Pointers to the font alphabet strings 0x0812D4A4 / 0x0812D5C4 | 2 strings, 2 pointer encodings | 0 references in ROM → glyph table, not a password alphabet |
 | Main-menu entries and their A-button branches | 4 entries | all 4 mapped (section 3); LEVEL SELECT is progress-gated, not a code gate |
 | Save data | 512 B SRAM | high scores + level records; no text-entry field, no code storage |
-| Published in-game codes (ChapterCheats, CheatCodes.com, VGChartz, Almar's Guides) | 4 sites | 0 in-game codes; only cheat-device RAM patches (out of scope) |
+| Published in-game codes (3rd party cheat indexes) | 4 sites | 0 in-game codes; only cheat-device RAM patches (out of scope) |
 
 **Novel codes.** None minted — a novel code cannot exist in a game with no code validator.
 This is the required bounded-negative outcome, not an untested search. In particular, the two

@@ -16,14 +16,14 @@
 | MD5 | `62b5ee4401a0eec948817a69011e71d7` |
 | SHA-1 | `d9e9b232c16214ffaef1f706f8b16829f2700414` |
 | SHA-256 | `7151bc27fd51872140593b42b5c89afc3890ec486d70fb015ad7aa5bc4c40f77` |
-| CRC32 | `0x6EA3F4E4` — matches GameHacking.org's published USA/CRC |
+| CRC32 | `0x6EA3F4E4` — matches a 3rd party cheat index's published USA/CRC |
 | Embedded GBA headers | exactly **one** Nintendo-logo hit at file `0x4` (header base `0x0`). No multiboot, no appended trainer, no second game image. |
 
 The `0x0000` header checksum is a rebuild artifact; the stock entry word and single logo prove the image itself is the retail build.
 
 ## 2. Executive summary
 
-This is a **button-code-only** title. There is **no password system, no code-entry field, no hidden/debug menu and no unlockable** in the GBA image. The only developer-intended cheat published for the GBA SKU is the **"hidden pitches" button code** (hold Left, rotate the D-pad clockwise, press B) — it appears on the GameFAQs GBA cheats page (Wayback capture 2018-11-26), Neoseeker, SuperCheats, GGmania and CheatHappens, all describing the GBA build. All GameShark/CodeBreaker/Action Replay entries and all PS1/PS2/PC/Xbox "Programmer Cheat", "charge the mound", "ball cannon" codes belong to other platforms and are out of scope.
+This is a **button-code-only** title. There is **no password system, no code-entry field, no hidden/debug menu and no unlockable** in the GBA image. The only developer-intended cheat published for the GBA SKU is the **"hidden pitches" button code** (hold Left, rotate the D-pad clockwise, press B) — it appears on the 3rd party cheat indexes GBA cheats page (Wayback capture 2018-11-26), 3rd party cheat indexes, all describing the GBA build. All GameShark/CodeBreaker/Action Replay entries and all PS1/PS2/PC/Xbox "Programmer Cheat", "charge the mound", "ball cannon" codes belong to other platforms and are out of scope.
 
 Static analysis found and decoded the **pitch system** completely: a 9-entry name-pointer table, a D-pad→pitch-index mapping implemented in the pitch-dial handler, and the live RAM variables. The dial normally exposes exactly two pitches (index 4 = Fastball, index 5 = Split), matching the published description. The key-sequence validator itself was **not located**, and the published sequence could **not be reproduced** in this exact ROM after 11 distinct input attempts (including diagonals, held combinations, full rotations and three timing regimes), each checked by before/after `.ss1` savestate RAM diffs: no flag, pitch index or screen-state byte changed. This is a **bounded negative on the accept path** (§0.2 "negative results bounded"), not a claim that the published tip is false — see §8.
 
@@ -106,7 +106,7 @@ Normal play restricts the reachable set to {4,5}; the published code claims to r
 
 * **Pitches (index → name, pointer table `0x08014A94`)**: 0 Knuckle (`0x08014B08`), 1 Curve (`0x08014B00`), 2 Slider (`0x08014AF8`), 3 Change up (`0x08014AEC`), 4 Fastball (`0x08014AE0`), 5 Split (`0x08014AD8`), 6 Sinker (`0x08014AD0`), 7 Forkball (`0x08014AC4`), 8 Screwball (`0x08014AB8`).
 * **Reachable normally**: indices 4 and 5 only (confirmed by live RAM: Right→5, other directions→no write to `0x03007108`).
-* **Published in-game code (GBA)**: hold Left → rotate D-pad clockwise → press B, "unlock the rest of the pitches". Sources: GameFAQs GBA/470807 cheats (archived 2018-11-26), Neoseeker `hhb2002/cheats/gba`, SuperCheats GBA, GGmania cheat 11247, CheatHappens 3675. **Effect not reproduced — see §7/§8.**
+* **Published in-game code (GBA)**: hold Left → rotate D-pad clockwise → press B, "unlock the rest of the pitches". Sources: 3rd party cheat indexes GBA/470807 cheats (archived 2018-11-26), 3rd party cheat indexes `hhb2002/cheats/gba`, 3rd party cheat indexes GBA, 3rd party cheat index cheat 11247, 3rd party cheat indexes 3675. **Effect not reproduced — see §7/§8.**
 * **Out-of-scope published codes**: all GameShark Advance/Action Replay/CodeBreaker entries (score modifiers, no outs, no balls, never strike out), and console-only button codes (PS2 "Programmer Cheat" Square×2 Circle×2 L1 R1 then L1+L2+R1+R2; "charge the mound"; "ball cannon/game status menus"). No literal from any of these appears in the GBA image.
 * **Menu entries (8)**: Exhibition, Season, Playoffs, Home Run, Home Run Derby, Practice, Options, Credits. No Cheat/Code/Debug/Secret/Unlock entry.
 * **Options entries (4)**: Sound Effects, Music, Innings, Automatic Fielding (+ Done). No hidden entry.

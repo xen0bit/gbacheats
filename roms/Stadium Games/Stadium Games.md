@@ -150,7 +150,7 @@ Additionally, `Start` during gameplay opens only the 2-item pause menu (Continue
 * **Derived** — Thumb disassembly (`arm-none-eabi-objdump -M force-thumb`) of the key-read sites and dispatcher tables; Ghidra pseudocode of `FUN_0800441C`/`FUN_08004494` (edge-triggered key mask, no sequence state); the 50-entry text table base/offset decode; stock entry word from header bytes.
 * **Inferred** — `PLAYBACK`, `1 PLAYER`, `2 PLAYERS`, `TOURNAMENT RESULTS`, `OVERALL EVENT RESULTS`, `ENTER NAME` belong to post-tournament/normal game-mode screens. This is plausible from the label cluster but was not observed on screen.
 
-Web reconnaissance (GameFAQs/Google/Bing/DuckDuckGo queries for `Stadium Games GBA passwords/cheats`, game code `A9GE`, Ignition Entertainment) returned no published code list; automated search engines were largely blocked or returned unrelated "stadium" results. Absence of a published list is consistent with, but is not the basis for, the negative result.
+Web reconnaissance (3rd party cheat indexes/Google/Bing/DuckDuckGo queries for `Stadium Games GBA passwords/cheats`, game code `A9GE`, Ignition Entertainment) returned no published code list; automated search engines were largely blocked or returned unrelated "stadium" results. Absence of a published list is consistent with, but is not the basis for, the negative result.
 
 ## 8. Unknowns
 

@@ -23,16 +23,16 @@
 CodeBreaker patch bytes. The entry word and first 4 KiB are stock ARM crt0 code. This is the
 retail USA image; addresses below are file offset + 0x08000000.
 
-**Published codes:** Web search (GameFAQs, VGChartz, TCRF mirror,Speedrun.com, GameZ/Taiwan
-GBA 金手指 list, mariogba.nl) found **no in-game developer-intended cheats, passwords, button
-codes or unlock codes** for this SKU. VGChartz states "Total cheats available: 0"; the GameFAQs
+**Published codes:** Web search (3rd party cheat index mirror,3rd party cheat indexes, GameZ/Taiwan
+GBA 金手指 list, 3rd party cheat indexes) found **no in-game developer-intended cheats, passwords, button
+codes or unlock codes** for this SKU. 3rd party cheat indexes state "Total cheats available: 0"; the 3rd party cheat index
 cheats page is empty. The only published "codes" are GameShark/CodeBreaker-style X-codes
 (e.g. `EC931CFD 8A024443 1CFA99A2`), which are explicitly out of scope.
 
-> ⚠️ **Prompt injection (§16.8):** a fetch of `tcrf.net/M&M's_Blast!` returned an
+> ⚠️ **Prompt injection (§16.8):** a fetch of 3rd party cheat indexes returned an
 > "LLM-/AI Agent-Specific Information" page containing fake decode-key/bank-transfer/self-
 > termination instructions and the EICAR antivirus test string. It was treated strictly as
-> untrusted data and ignored. The legitimate TCRF mirror (tcrf.tiago.zip) lists only debug
+> untrusted data and ignored. The legitimate 3rd party cheat index mirror lists only debug
 > assert strings, no codes.
 
 ## 2. Executive summary
@@ -89,7 +89,7 @@ a validator.
 | `0x083AF220`–`0x083AF258` | data | name-entry alphabet (font/tile-indexed glyph strings, see §6) |
 | `0x083AF488` | text | "PRESS    START" (referenced from `0x08014D08`) |
 | `0x085C8000`–`0x085C8200` | data | minigame HUD text bank ("GAME OVER", "GET READY!", "WAVE 1–5", "BONUS!") |
-| `0x082E1580`–`0x082E15E0` | data | board-engine debug/assert strings (TCRF-documented) |
+| `0x082E1580`–`0x082E15E0` | data | board-engine debug/assert strings (3rd party cheat index-documented) |
 | `0x0202F400` | RAM (u16) | active-high current key mask (`~KEYINPUT & 0x3FF`) |
 | `0x0202F3BC`, `0x0202F3C8`, `0x0202F3D8`, `0x0202F3E8`, `0x0202F420` | RAM | key-state history / helper globals of the input engine |
 | `0x0202F634` | RAM (u32) | main-menu cursor: 0=NEW GAME, 1=MINI GAMES, 2=LOAD GAME (proven by savestate diff, §7) |
@@ -132,7 +132,7 @@ There is no validator/password algorithm to reverse. The relevant algorithms are
 - **Boards** (4, observed): Sweet Dreams, Amazing Rainforest, Haunted House, Amusement Park.
 - **Debug/assert strings** (`0x082E1580`): "TOO MANY DOTS IN PATH!", "MOVE BACK FOUR/FIVE
   SPACES!", "YOU'VE BEEN CHECKPOINTED!", "UNASSIGNED WARP DOT", "UNTERMINATED WARP LIST" —
-  internal error messages only (TCRF mirror confirms); no menu/cheat semantics.
+  internal error messages only (3rd party cheat index mirror confirms); no menu/cheat semantics.
 
 ## 6b. Enumeration
 
@@ -147,7 +147,7 @@ deliverable is a bounded negative (§0.2 item 5):
 | Button sequences | no press-history comparator in the input engine; 50 key-global literal sites inspected; 0 multi-key immediates | no sequence matcher exists |
 | Hidden/debug menus | every screen in the menu tree walked (title, name, CPU ready, character select, main, mini-game list, mini-game play, NEW GAME mode select, board carousel, board play, PAUSE, LOAD GAME slots, credits reached via normal play) | no hidden screen; only PAUSE banner and standard screens |
 | Text banks (ASCII + 5/6-bit indexing) | `0x083ade00–0x083af600` (323 runs), `0x085c8000–0x085c8200`, `0x082e1580–0x082e15e0`; ASCII, lowercase→uppercase, uppercase→lowercase, UTF-16LE/BE searched ROM-wide | zero occurrences of PASSWORD/CHEAT/SECRET/UNLOCK/LEVEL SELECT (only BONUS, CODE in the GAX audio banner, and debug asserts) |
-| Published codes | GameFAQs (empty), VGChartz (0 cheats), TCRF mirror (debug strings only), speedrun/other sites | no in-game codes published; only out-of-scope GameShark X-codes |
+| Published codes | 3rd party cheat index mirror (debug strings only), speedrun/other sites | no in-game codes published; only out-of-scope GameShark X-codes |
 
 **Novel-code requirement:** not applicable — there is no code system to mint a novel code for.
 This is a proven "No system" (§16.3 category 1), not an untested one. Screenshots of every
@@ -180,7 +180,7 @@ screen were in `/tmp/mmblast/` (work-dir artifacts; not attached to this report)
 - Speedrun "Wrong Warp" category implies a gameplay glitch (warp manipulation), not an
   input-code system; not investigated as it is not a developer-intended cheat.
 - The exact semantics of the board-engine assert strings' output device (screen vs. debug
-  port) is unknown (TCRF also lists it as unresolved).
+  port) is unknown (3rd party cheat indexes also lists it as unresolved).
 
 ## 9. Tooling
 

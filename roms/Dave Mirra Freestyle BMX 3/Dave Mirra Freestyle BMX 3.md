@@ -315,8 +315,8 @@ Down, Up, Down, Up, Left, Right, B, R,
 R, L, L, B, B, L, R
 ```
 
-This exact 15-press input does not appear on GameFAQs, VGChartz, TCRF, Neoseeker
-or the cheatingdome/ggmania mirrors (which list only the 8-press T1/T2
+This exact 15-press input does not appear on 3rd party cheat indexes
+or the 3rd party cheat index mirrors (which list only the 8-press T1/T2
 sequences). Entered on the real title screen in mGBA, it produced, in one
 run:
 
@@ -402,8 +402,7 @@ unlock spells `R,R,L,L,B,B,L,R`.
 * `arm-none-eabi-objdump -M force-thumb` for targeted disassembly.
 * Python 3 scripts: pointer/string scanner, mask-table scanner, savestate
   loader/differ, code-sequence driver (kept in `/tmp/davemirra3`).
-* Web sources checked for published literals: GameFAQs, Neoseeker,
-  cheatingdome, ggmania, GameSpot; all listed only the 8-press T1/T2
+* Web sources checked for published literals: 3rd party cheat indexes; all listed only the 8-press T1/T2
   sequences (plus a rejected `L,R,L,R,B,B,R,L` variant).
 
 No ROM, graphics, music or extracted text is redistributed.

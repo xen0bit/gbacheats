@@ -157,5 +157,5 @@ Input alphabet (keyboard table at `0x080DC1E0`): `A B C D E F G H I J K L M N O 
 - `/tmp/dkc2b/patchss.py` — patches savestate bytes (input buffer, length, cursor) for deterministic tests.
 - `/tmp/dkc2b/testcode.py` — submits a code through the real END key and reads the RAM flag.
 - `/tmp/dkc2b/diffstate.py` — diffs two savestates to locate RAM fields (buffer, cursor, flag).
-- Web: GameFAQs, RareGamer, CheatingDome, GGmania, CheatCC, gamezone.de, Bahamut — all nine literals verified in ROM.
+- Web: 3rd party cheat indexes — all nine literals verified in ROM.
 - No ROM or copyrighted assets are redistributed; only addresses, hashes, and our own tooling are published.

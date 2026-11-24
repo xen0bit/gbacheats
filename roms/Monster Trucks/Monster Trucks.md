@@ -8,7 +8,7 @@
 | Size | 4,194,304 bytes (0x400000) |
 | `file` | Game Boy Advance ROM image: "MONSTERTRUCK" (BMCE5G, Rev.00) |
 | Header title | `MONSTERTRUCK` |
-| Game code | `BMCE` (serial AGB-BMCE-USA / AGB-BMCP-EUR, confirmed on GameHacking.org game 5398) |
+| Game code | `BMCE` (serial AGB-BMCE-USA / AGB-BMCP-EUR, confirmed on 3rd party cheat indexes game 5398) |
 | Maker | `5G` |
 | Version / complement | 0x00 / 0x0D |
 | Header checksum | 0x0000 (stored) vs 0x05DA (computed) — rebuilt-header artifact; entry branch is stock |
@@ -41,7 +41,7 @@ The negative is *bounded*, not assumed:
   all are ordinary single-key / "any-of-these" menu-navigation tests; no key-history
   buffer, mask-sequence table, or gate flag write exists;
 * the only published codes for this exact SKU are GameShark/Action Replay memory patches
-  (GameHacking.org), which are outside the in-game-cheat scope; the well-known
+  (3rd party cheat indexes), which are outside the in-game-cheat scope; the well-known
   `9LH5F76543Q5HZT05QP2` belongs to the *different* game Monster Trucks Mayhem and is absent
   from this ROM (0 literal hits).
 
@@ -169,7 +169,7 @@ hidden third main-menu entry — confirmed by pressing Up at the main menu (no c
 | Hidden tracks | full 10-entry selector walked + text bank | none; 10/10 reachable from a fresh save |
 | Hidden/debug menu | all menus + 256-shift keyword search + LZ77 scan | none found |
 | Published codes | `9LH5F76543Q5HZT05QP2` (Mayhem) literal | 0 hits — different game |
-| Published codes | GameHacking.org 5398 (this SKU) | only GameShark/AR memory patches — out of scope, no in-game codes published |
+| Published codes | 3rd party cheat indexes 5398 (this SKU) | only GameShark/AR memory patches — out of scope, no in-game codes published |
 
 Because the code space is empty, §0.2's "mint a novel unpublished code and prove bounds by
 rejection" has no object. The equivalent bounded negative is delivered: the complete input
@@ -210,8 +210,8 @@ candidate code was tested or shown absent from the ROM.
 * mGBA SDL + Xvfb :316 + openbox + xdotool + scrot + ImageMagick for dynamic work.
 * mGBA CLI debugger (`mgba -d`, line-buffered via `stdbuf`) was available but could only
   accept commands while halted; RAM evidence therefore used savestate diffs per guide §16.13.
-* Web sources consulted as data only: GameHacking.org game 5398 (identity + out-of-scope
-  GameShark codes), GameFAQs/TCRF/IGN searches (no in-game codes for this SKU). No
+* Web sources consulted as data only: 3rd party cheat indexes game 5398 (identity + out-of-scope
+  GameShark codes), 3rd party cheat indexes searches (no in-game codes for this SKU). No
   prompt-injection content was encountered in fetched pages.
 
 **Legal note:** no ROM image, extracted graphics, or game assets are reproduced here; only

@@ -15,14 +15,14 @@
 | MD5 | `8ee261b598c4c1189dfaaa3361697c5f` |
 | SHA-1 | `338e4ed81071fa6c55ca7ca3bbbdf84bc3ba8855` |
 | SHA-256 | `4cd9ad352ead5b83473ff9fa9c9515da38923c0ea3d31fd60f7723a818327514` |
-| CRC32 (mGBA/gamehacking.org) | `F6124D7F` (matches the `f6124d7f` word in the mGBA savestate header) |
+| CRC32 (mGBA/3rd party cheat indexes) | `F6124D7F` (matches the `f6124d7f` word in the mGBA savestate header) |
 | Builder | ImaginEngine; published by Infogrames (2002) |
 
 **Phase 0:** `file` reports a GBA ROM; the full-file Nintendo-logo scan found exactly **one** logo, at file offset 0x4 (header 0x0). There is **no embedded second image, no appended trainer, and no patch/cracktro**: the entry word is the stock `0xEA00002E`, not the Mode7/SUNHORS patched variants seen in some releases. The 32 KiB `.sav` is Flash RAM created by mGBA. A scene release named `(U)(Mode7)` exists but this image is not it.
 
 ## 2. Executive summary
 
-**There is no password/cheat-code entry system in this game.** No published source lists a GBA password for it; GameFAQs/VGChartz/ChapterCheats list only *save-bit unlockables* and five gameplay hints. The widely circulated "codes" are GameShark / Action Replay / CodeBreaker RAM patches (e.g. `9CEA5335CF51 7E5840BA58E5` "Unlock All Cards", `77A97429 99D7 00807045 790A` "Have All Characters Unlocked") and are explicitly out of scope. All menus were walked on the real ROM; the only text-entry field is **Options → Name Entry**, and it was proven to be a label, not a validator (entering `TRUNKS` unlocked nothing).
+**There is no password/cheat-code entry system in this game.** No published source lists a GBA password for it; 3rd party cheat index list only *save-bit unlockables* and five gameplay hints. The widely circulated "codes" are GameShark / Action Replay / CodeBreaker RAM patches (e.g. `9CEA5335CF51 7E5840BA58E5` "Unlock All Cards", `77A97429 99D7 00807045 790A` "Have All Characters Unlocked") and are explicitly out of scope. All menus were walked on the real ROM; the only text-entry field is **Options → Name Entry**, and it was proven to be a label, not a validator (entering `TRUNKS` unlocked nothing).
 
 The genuine developer-intended feature is a **Flash-save bitfield that unlocks 9 hidden main personalities across 13 selectable slots**. The fresh save has 4 characters (Goku, Gohan, Frieza, Garlic Jr.); the other 9 slots show `?`. A 15-word array at Flash `0x48..0x84` (EWRAM `0x02008F10..0x02008F4C`) holds the state: **9 words gate one character slot each (nonzero = unlocked), 6 words are unrelated**. Each word is a 32-bit counter/flag — any nonzero value works (1, 2, and 0xFFFFFFFF were all tested), i.e. it is not a strict single-bit mask.
 
@@ -82,9 +82,9 @@ for each of 15 words w[i] at Flash 0x48 + 4*i:
 
 ## 6. Tables
 
-**Slot and flag map.** Initial save has the four base characters; the other nine are gated by words below. Visual identification is from the zoomed portraits, cross-checked with the GameFAQs unlock table.
+**Slot and flag map.** Initial save has the four base characters; the other nine are gated by words below. Visual identification is from the zoomed portraits, cross-checked with the 3rd party cheat indexes unlock table.
 
-| Flash offset | Word | Slot | Character | Published unlock condition (GameFAQs) |
+| Flash offset | Word | Slot | Character | Published unlock condition (3rd party cheat indexes) |
 |---|---:|---|---|---|
 | — | — | Hero 1 | Goku | base |
 | — | — | Hero 2 | Gohan | base |
@@ -101,7 +101,7 @@ for each of 15 words w[i] at Flash 0x48 + 4*i:
 | 0x80 | 14 | Villain 6 | **Vegeta (Villain)** | Beat Cell with King Cold |
 | 0x48, 0x4C, 0x50, 0x60, 0x6C, 0x70 | 0,1,2,6,9,10 | — | no character effect observed | unrelated save fields |
 
-The two Piccolo gates and the two Vegeta gates are separate words even though one published condition unlocks both forms; the game's setter presumably writes both. Two other "cheats" in circulation (`Frieza Smiles card` on VGChartz) are just a mislabelled restatement of the King Cold → Vegeta unlock.
+The two Piccolo gates and the two Vegeta gates are separate words even though one published condition unlocks both forms; the game's setter presumably writes both. Two other "cheats" in circulation (`Frieza Smiles card` on 3rd party cheat indexes) are just a mislabelled restatement of the King Cold → Vegeta unlock.
 
 **Published codes verified against the ROM.** No in-game password string exists. Searched literals: `DBZ1.0` (0x08050A04), `DBZ-CCG-GBA-1` (0x08050A1C), `Main Menu`, `Continue`, `undefined`, `DBZInit`, `Yes`, `No`. GameShark/AR/CB code literals are not present as text. The "Have All Cards (1328)" claim matches a 1328-card collection structure in the save around Flash `0x20..0x1480`, but the patch itself is an external RAM cheat, out of scope.
 
@@ -111,7 +111,7 @@ The two Piccolo gates and the two Vegeta gates are separate words even though on
 
 **Space definition.** The unlock array is 15 32-bit words = 60 bytes = 480 bits of save state. Nine words (offsets 0x54, 0x58, 0x5C, 0x64, 0x68, 0x74, 0x78, 0x7C, 0x80) are *character gates*; each is a nonzero/counter field, so the *behavioural* space is 2^9 = **512 reachable character-unlock combinations** (the other six words do not affect the select screen). There are exactly 13 selectable slots (7 Heroes + 6 Villains), 4 base and 9 gated — no 14th hidden character exists in this build.
 
-**Novel state, not in any published list.** A save was crafted with all nine gates nonzero (and CRC repaired) without beating Cell or satisfying any published condition. On a fresh boot the Choose Character screen showed **all 13 portraits** (`sav_48wide.png`; baseline `sav_base6.png` had only 4). Selecting the previously locked Trunks (Hero slot 4) with the real UI advanced to the **Select A Deck** screen (`sel_trunks.png`), proving the unlocked character is playable, not merely drawn. An even narrower novel state — **Guldo alone** (word 11 at Flash `0x74` = 1) — unlocked only Villain slot 3 (`map_11.png`), a configuration no published guide describes. Neither state comes from any GameFAQs/VGChartz/ChapterCheats list.
+**Novel state, not in any published list.** A save was crafted with all nine gates nonzero (and CRC repaired) without beating Cell or satisfying any published condition. On a fresh boot the Choose Character screen showed **all 13 portraits** (`sav_48wide.png`; baseline `sav_base6.png` had only 4). Selecting the previously locked Trunks (Hero slot 4) with the real UI advanced to the **Select A Deck** screen (`sel_trunks.png`), proving the unlocked character is playable, not merely drawn. An even narrower novel state — **Guldo alone** (word 11 at Flash `0x74` = 1) — unlocked only Villain slot 3 (`map_11.png`), a configuration no published guide describes. Neither state comes from any 3rd party cheat index list.
 
 **Bounds proven by rejection.**
 - Each of the 15 words was set to `1` alone on a fresh, CRC-correct save and the screen captured (`map_00..map_14.png`): exactly 9 words changed exactly one slot each; the other 6 changed nothing.
@@ -125,7 +125,7 @@ The two Piccolo gates and the two Vegeta gates are separate words even though on
 
 - **Observed (emulator):** all menu screens listed in §3; baseline 4-character vs 13-character select screens; single-word unlock screenshots; Trunks playable into deck select; name-entry non-effect; greyed-menu non-effect; save rejection on bad CRC.
 - **Derived (disassembly):** CRC routine/table and validation call path; 15-word zeroing in the new-save initialiser; Flash `0x08` struct base and `0x34D0` CRC location; `DBZInit` validator at 0x08031F98. All literal-pool values were re-read with `struct.unpack_from` before use (avoiding objdump's split-halfword trap).
-- **Inferred:** the in-game *setters* of the nine gates are not individually isolated (no direct literal references to the gate addresses; code addresses them via a base pointer). The published win conditions were taken from GameFAQs/ChapterCheats/VGChartz and were not replayed through a full ladder run; the ROM-side proof is that the nine gates are exactly the nine hidden slots and that setting them produces the documented characters. The association of a given published condition with a given word is by character identity from the published table, not by tracing a Cell-victory branch.
+- **Inferred:** the in-game *setters* of the nine gates are not individually isolated (no direct literal references to the gate addresses; code addresses them via a base pointer). The published win conditions were taken from 3rd party cheat indexes and were not replayed through a full ladder run; the ROM-side proof is that the nine gates are exactly the nine hidden slots and that setting them produces the documented characters. The association of a given published condition with a given word is by character identity from the published table, not by tracing a Cell-victory branch.
 
 ## 8. Unknowns
 

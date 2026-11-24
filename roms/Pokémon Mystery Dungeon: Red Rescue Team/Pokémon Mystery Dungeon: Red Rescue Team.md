@@ -40,7 +40,7 @@ No GameShark/CodeBreaker/memory-edit codes are reported as cheats.
 - **Reach the screen:** the Wonder Mail entry is only shown once a save exists. Create one by starting a new game and using `Start → Other → Quicksave or Give Up → Quicksave → Yes`, then reset. Main menu then reads: Continue / Delete Save Data / Adventure Log / Friend Rescue / Trade Items / **Wonder Mail**. Select Wonder Mail → confirm the instruction text → the 24-slot password keypad appears with the cursor on `N`.
 - **Entering symbols:** the keypad is driven from the game's own `sLayoutInfo[0][85]` adjacency graph (`decomp/src/naming_screen.c:181`). Each entry is `{up, down, left, right, x, y, colorType, letter}`; BFS from the initial position 9 produces a D-pad path to each target symbol, then A inserts it. `Start` jumps to the `END` key; A confirms.
 - **Codes used in this report:**
-  - Published anchor (GameFAQs/SuperCheats): `F ? 4 N + W T ? ? + 6 N F R ? J F ? 6 6 8 5 ? W` — accepted, "Received the Wonder Mail!".
+  - Published anchor (3rd party cheat indexes): `F ? 4 N + W T ? ? + 6 N F R ? J F ? 6 6 8 5 ? W` — accepted, "Received the Wonder Mail!".
   - **Novel (not in any published list):** `F ? C N + W F ? ? + 6 N F R ? J F ? 6 6 8 5 ? W` — accepted; changes the reward from `rewardType=0` (MONEY, 77 Poke) to `rewardType=3` (ITEM_EXTRA, item 77 = MAX_ELIXIR), all other fields identical.
   - Bounds A (bad checksum): same as novel but last symbol `W`→`6` — rejected, "This password is incorrect. Would you like to enter it again?".
   - Bounds B (valid checksum, semantic out-of-range): `F ? H N + W 0 ? ? + 6 N F R ? J F ? 6 6 8 5 ? W` — `rewardType=4` (BLANK_4); checksum valid but rejected by `IsValidWonderMail`.
@@ -163,7 +163,7 @@ For any fixed 93-bit payload there are `2^19` checksum-valid spellings, because 
 
 `F ? C N + W F ? ? + 6 N F R ? J F ? 6 6 8 5 ? W`
 
-Provenance: decoded the published Roselia code, changed **one field** (`rewardType: 0 → 3`, i.e. 77 Poke → MAX_ELIXIR), recomputed the checksum with the ROM-derived encoder, and confirmed the result is not a substring of any GameFAQs/VGChartz/TCRF/MDFW/SuperCheats/cheatcc list retrieved. All other 11 fields are byte-identical to the published code.
+Provenance: decoded the published Roselia code, changed **one field** (`rewardType: 0 → 3`, i.e. 77 Poke → MAX_ELIXIR), recomputed the checksum with the ROM-derived encoder, and confirmed the result is not a substring of any 3rd party cheat indexes/MDFW/3rd party cheat indexes/3rd party cheat index list retrieved. All other 11 fields are byte-identical to the published code.
 
 - Decoder check: `checksum stored == computed` (`0x28 == 0x28`), `rewardType=3`, `itemReward=77` (item 77 = MAX_ELIXIR, `gInvalidItemIDs`-clean, not thrown, not MONEY/USED_TM).
 - **In-game proof:** typed on the Wonder Mail screen with the keypad driver → `shot45.png` shows **"Received the Wonder Mail!"**, the same acceptance message as the published code.

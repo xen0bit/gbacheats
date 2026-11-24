@@ -266,7 +266,7 @@ no-op path. There is no fifth action.
 | literal-pool scan for `0x04000130` | found the key-read routine at `0x080028A2` |
 | Thumb disassembly (`objdump -M force-thumb`) | matcher, branches, flag writes |
 | xdotool + `import -window` | code entry and screenshot evidence |
-| web (GameFAQs via Wayback, VGChartz) | published codes to test and to bound the action set |
+| web (3rd party cheat indexes via Wayback, 3rd party cheat indexes) | published codes to test and to bound the action set |
 
 No ROM, graphics, or text from the game is redistributed here; only addresses,
 algorithms, and short identifiers needed to describe the cheats.

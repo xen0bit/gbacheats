@@ -31,7 +31,7 @@ the canonical logo at `rom[4:0xA0]`.
 header checksum is zero. This is not a random dump error: the title ends in `X` and the checks
 were not recomputed after the title was changed. Treat the image as a *patched* retail build.
 The code and the level-select strings described below match the published retail layout
-(TCRF documents the same screen and the same `0x03002C30` screen-id byte), so the patch did not
+(3rd party cheat indexes document the same screen and the same `0x03002C30` screen-id byte), so the patch did not
 move the code we analyse.
 
 ---
@@ -57,7 +57,7 @@ unlockables.
   unlock** (“CIRCUS ACT 1+”, 25 extra act-name strings) gated by a completion bit.
 * The level select has **no in-game trigger**. All 85 code sites that load the screen-id address
   were enumerated; none writes 13. The only published trigger is the memory-write code
-  `33002C30 000D` (TCRF), which is a GameShark-class action and therefore outside this
+  `33002C30 000D` (3rd party cheat indexes), which is a GameShark-class action and therefore outside this
   engagement's “in-game cheats only” scope. We reproduced its *effect* with the mGBA debugger to
   reverse and enumerate the screen.
 * **Enumeration (new):** the level select edits the current save slot's level byte and covers
@@ -89,7 +89,7 @@ w/1 0x030026dc 0x00      # substate 0 (required; stale substate >3 makes the han
 continue
 ```
 
-This is the equivalent of TCRF's `33002C30 000D`, reproduced here only to inspect the screen.
+This is the equivalent of a 3rd party cheat index's `33002C30 000D`, reproduced here only to inspect the screen.
 The screen then accepts **Left/Right** to change the level and **A/Start** to confirm.
 
 **Menu walk used for the screenshots.** Screens marked “poke” were opened with the debugger after
@@ -112,10 +112,10 @@ have required erasing the test save; all other screens were walked with the pad.
 | Credits (id 37) | Options → CREDITS (code at `0x0801DFD4`); inspected by poke |
 | Level select (id 13) | debugger write; no in-game trigger (see above) |
 
-**Published-code test.** GBA-specific published codes: none. The GameFAQs GBA cheats page
+**Published-code test.** GBA-specific published codes: none. The 3rd party cheat indexes GBA cheats page
 (archived 2023-08-28) lists only **GEN** and **SNES** entries whose sequences use C/X/Y, buttons
 that do not exist on the GBA; they are not expressible on this port. The only GBA-era published
-item is TCRF's `33002C30 000D` memory write, verified above.
+item is a 3rd party cheat index's `33002C30 000D` memory write, verified above.
 
 ---
 
@@ -322,7 +322,7 @@ selecting 24 the Copy Game screen showed `1: AZZ … MUSEUM BOSS`).
 ```
 
 **Novel values (not enumerated in any published list we found).**
-TCRF documents only the code that opens the screen; it does not enumerate it. We generated and
+3rd party cheat indexes document only the code that opens the screen; it does not enumerate it. We generated and
 entered two values that exercise unadvertised corners:
 
 | Value | In-game proof | Effect |
@@ -344,9 +344,9 @@ entered two values that exercise unadvertised corners:
 
 | Source | Code | Test | Result |
 |---|---|---|---|
-| GameFAQs GBA cheats page | 4 blocks, marked GEN/SNES only | buttons C/X/Y absent on GBA | not expressible on this port |
-| TCRF | `33002C30 000D` (GameShark write) | reproduced with debugger write of `0x0D` to `0x03002C30`, substate 0 | screen 13 opens; trigger is a memory edit, not an in-game code |
-| GameFAQs unlockable | complete the game → “CIRCUS ACT 1+” | code path found at `0x0801FE4A` (bit 7 of `slot+0x1E`) | derived, not exercised (no completed save) |
+| 3rd party cheat indexes GBA cheats page | 4 blocks, marked GEN/SNES only | buttons C/X/Y absent on GBA | not expressible on this port |
+| 3rd party cheat indexes | `33002C30 000D` (GameShark write) | reproduced with debugger write of `0x0D` to `0x03002C30`, substate 0 | screen 13 opens; trigger is a memory edit, not an in-game code |
+| 3rd party cheat indexes unlockable | complete the game → “CIRCUS ACT 1+” | code path found at `0x0801FE4A` (bit 7 of `slot+0x1E`) | derived, not exercised (no completed save) |
 
 ---
 
@@ -436,7 +436,7 @@ The apparently computed stores were each traced: every one is followed by a `mov
 strb r0,[r1]` selection (values `9, 10, 11, 12, 14, 18, 19, 20, 22, 23, 24, 25, 27, 37`) or is a
 copy of the pending-screen byte `0x03003474`. That pending byte is written with `0x0A`, `0x0E`,
 `0x1B`, `0x26` and `0x03` only. This is the static basis for “no in-game trigger”; the dynamic
-route (TCRF's code) is a memory write.
+route (a 3rd party cheat index's code) is a memory write.
 
 ### Appendix B — exact proof points
 

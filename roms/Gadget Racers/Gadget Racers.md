@@ -107,12 +107,12 @@ No comparison of `held`/`pressed` against a fixed sequence exists in any reachab
 
 | Source | Code | ROM literal | In-game result |
 |---|---|---|---|
-| GameFAQs / Planet Cheats / AbsolutCheats / ChapterCheats | "Demo mode: press B when Press Start/Enter appears" | no key-mask table found | Pressed at both title prompts; no distinct effect vs. ordinary attract advance |
+| 3rd party cheat indexes | "Demo mode: press B when Press Start/Enter appears" | no key-mask table found | Pressed at both title prompts; no distinct effect vs. ordinary attract advance |
 | Same sites | "Use horn: press Up during a race" | no key-mask table found | Pressed in race: KEYINPUT `0x03FF`→`0x03BF` (RAM-confirmed input), no HUD change; effect is audio-only, harness had `SDL_AUDIODRIVER=dummy` |
 | Same sites | "Medals: collect all parts / bodies / engines, complete all areas" | n/a | Save-bit progress system, not a code |
-| SuperCheats / AbsolutCheats / ChapterCheats | "Rename to DRAGON (JP), then back → Dragon parts" | absent from ROM in all tested encodings | Save diff after DRAGON rename = name bytes only; **inactive in AQAE** |
+| 3rd party cheat indexes | "Rename to DRAGON (JP), then back → Dragon parts" | absent from ROM in all tested encodings | Save diff after DRAGON rename = name bytes only; **inactive in AQAE** |
 
-The GameFAQs "Codes" section (R1/R2/L1/L2 button sequences, 6400000 etc.) is **PlayStation 2** content — the page mixes both platforms; those codes do not apply to the GBA SKU. No GameShark/CodeBreaker codes are reported (out of scope).
+The 3rd party cheat indexes "Codes" section (R1/R2/L1/L2 button sequences, 6400000 etc.) is **PlayStation 2** content — the page mixes both platforms; those codes do not apply to the GBA SKU. No GameShark/CodeBreaker codes are reported (out of scope).
 
 ## 6b. Enumeration
 
@@ -149,7 +149,7 @@ The GameFAQs "Codes" section (R1/R2/L1/L2 button sequences, 6400000 etc.) is **P
 * The DRAGON code is JP-only and stripped from AQAE; the published "(JP)" annotation and the total absence of the literal support this, but the Japanese ROM was not available for a cross-check.
 * The horn is an audio effect (published description + no HUD change observed with audio disabled); the sound itself was not captured.
 
-**Prompt-injection check:** Fetched cheat pages were treated as data. No page contained instructions directed at the analyst; the only anomaly was a DuckDuckGo bot challenge and standard 403 responses from GameFAQs/cheatcc, both handled by using archived copies. Nothing was executed from fetched content.
+**Prompt-injection check:** Fetched cheat pages were treated as data. No page contained instructions directed at the analyst; the only anomaly was a DuckDuckGo bot challenge and standard 403 responses from 3rd party cheat indexes, both handled by using archived copies. Nothing was executed from fetched content.
 
 ## 8. Unknowns
 
@@ -163,7 +163,7 @@ The GameFAQs "Codes" section (R1/R2/L1/L2 button sequences, 6400000 etc.) is **P
 * `arm-none-eabi-objdump -M force-thumb` and Capstone (`CS_MODE_THUMB`) for literal-pool and key-input handler analysis.
 * mGBA 0.x SDL under `Xvfb :318` + openbox, `xdotool` XTEST key events (35–60 ms holds), `scrot`/ImageMagick for crops and montages, PIL-based title-screen frame detector.
 * mGBA `-d` CLI debugger (persistent Python daemon driving `cmds.txt`/`reply.txt`) for one-frame stepping and direct `r/4` RAM reads; GDB stub (`-g`) was tried but this build's stub is incompatible with `gdb-multiarch`.
-* Web: DuckDuckGo/Bing result pages plus `web.archive.org` snapshot of the GameFAQs cheats page for published-code discovery.
+* Web: DuckDuckGo/Bing result pages plus `web.archive.org` snapshot of the 3rd party cheat index cheats page for published-code discovery.
 
 ## 10. Legal note
 

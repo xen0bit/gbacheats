@@ -178,7 +178,7 @@ Observed in the validator: an embedded NUL / short input sets a reject flag (0x0
 | `AlZfv#dbbbxbz` (`A` is in neither alphabet) | Rejected — credits unchanged (0x00FFFFFF) |
 | Short/NUL-terminated input | Reject branch at 0x0801A52 (derived from validator; not separately exercised in-game) |
 
-No published code list was located (§8), so "not in any published list" is based on: no GameFAQs/TCRF/VGChartz page retrievable, no archived snapshot, and no password string present in the ROM other than the generator's own output.
+No published code list was located (§8), so "not in any published list" is based on: no 3rd party cheat index page retrievable, no archived snapshot, and no password string present in the ROM other than the generator's own output.
 
 ## 6b. Enumeration
 
@@ -215,7 +215,7 @@ No published code list was located (§8), so "not in any published list" is base
 
 ## 8. Unknowns
 
-* **Published code lists could not be retrieved.** `websearch` returned no results for every query tried. Direct fetches: GameFAQs cheats page → HTTP 403; TCRF → HTTP 403; Bing/DuckDuckGo → irrelevant or CAPTCHA; `web.archive.org` CDX queries for the GameFAQs page → empty. No snapshot was available. Consequently "novel" means absent from the ROM and from every source reachable here, not certified against an unreadable list. Fetched pages were treated strictly as data; no instructions found in them were followed, and no prompt-injection payload was encountered.
+* **Published code lists could not be retrieved.** `websearch` returned no results for every query tried. Direct fetches: 3rd party cheat index cheats page → HTTP 403; 3rd party cheat indexes → HTTP 403; Bing/DuckDuckGo → irrelevant or CAPTCHA; `web.archive.org` CDX queries for the 3rd party cheat index page → empty. No snapshot was available. Consequently "novel" means absent from the ROM and from every source reachable here, not certified against an unreadable list. Fetched pages were treated strictly as data; no instructions found in them were followed, and no prompt-injection payload was encountered.
 * Whether a keyboard bank/shift control exposes the 32 lowercase/symbol glyphs to a player using only the controller. The validator accepts them and the generator emits them, but the visible keyboard shows only the uppercase set.
 * Exact gameplay meaning of the f2/f3/f4/f5 fields, and whether out-of-range values in those fields are checked by a second semantic gate after the checksum (only credits was exercised to its bounds).
 * A complete list of the slot/table-game sub-screens; the game list and two table games were walked, but not every one of the six slot cabinets individually.

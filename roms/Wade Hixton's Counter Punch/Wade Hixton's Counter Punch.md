@@ -20,8 +20,8 @@
 
 This title has **two developer-intended in-game features**, both reachable on a retail ROM with no cheat device:
 
-1. **A 3-press button code on the in-match pause screen**: `L, R, Select` opens a two-page **DEBUGMODE** overlay (game state, camera mode/position/delta, player and CPU positions, stun, stamina, punch counts and move status). `L`/`R` flip pages; `Select` and `A` arm post-unpause actions. This is documented by TCRF, but the state machine was recovered in full and several undocumented input sequences were generated and verified in-emulator.
-2. **Two hidden developer test entries inside the ordinary OPTIONS menu**: `SOUND TEST` and `MUSIC TEST`, with ranges 0–45 and 0–13 respectively (both wrap). These are reachable and playable from the title screen and are **not documented by TCRF or the published guides** — they are the principal novel finding of this engagement.
+1. **A 3-press button code on the in-match pause screen**: `L, R, Select` opens a two-page **DEBUGMODE** overlay (game state, camera mode/position/delta, player and CPU positions, stun, stamina, punch counts and move status). `L`/`R` flip pages; `Select` and `A` arm post-unpause actions. This is documented by 3rd party cheat indexes, but the state machine was recovered in full and several undocumented input sequences were generated and verified in-emulator.
+2. **Two hidden developer test entries inside the ordinary OPTIONS menu**: `SOUND TEST` and `MUSIC TEST`, with ranges 0–45 and 0–13 respectively (both wrap). These are reachable and playable from the title screen and are **not documented by 3rd party cheat indexes or the published guides** — they are the principal novel finding of this engagement.
 
 There is **no password/code-entry system** in this SKU. The exhaustive search space and bounded negative are recorded in §6b. All CodeBreaker/GameShark/Action Reaper codes published for this game are out of scope and were not used.
 
@@ -170,7 +170,7 @@ on Left/Right at MUSIC TEST  -> idx = (idx +/- 1) mod 14    # 0..13, start music
 * The exact audio tracks/effects selected by each test index were not catalogued by ear; only index changes and playback were observed.
 * Whether the `+0x0E=2` flag is consumed as "lose match" outside the observed round-transition frames was inferred from the code path and the observed KO state.
 
-**Correction to public documentation:** TCRF states `A` works "at any time in either screen". Static dispatch and a RAM-verified test of `L,R,Select,R,A` prove `A` is handled only in PG.1 (`0x08006610`); in PG.2 it is ignored.
+**Correction to public documentation:** 3rd party cheat indexes state `A` works "at any time in either screen". Static dispatch and a RAM-verified test of `L,R,Select,R,A` prove `A` is handled only in PG.1 (`0x08006610`); in PG.2 it is ignored.
 
 ## 8. Unknowns
 

@@ -34,7 +34,7 @@ them on the real in-game screen: `638T--2JWGXY6K` (name `MONST`) was accepted an
 MENU; `XMFVH0T#0CV3TS` (name `AAAAA`) was also accepted. Corrupting one character to break the
 checksum (`638T--2JWGXY6W`) produced the in-game `INVALID PASSWORD` screen, bounding the checksum.
 
-No published password list exists for this SKU. TCRF carries only a CodeBreaker memory-edit code for
+No published password list exists for this SKU. 3rd party cheat indexes carry only a CodeBreaker memory-edit code for
 a crash handler, which is out of scope and is not a literal in the ROM. No hidden debug menu was
 found; the only debug leftovers are crash-handler assertion strings.
 
@@ -186,8 +186,8 @@ bounds. It accepts every generated code and rejects single-character corruptions
 * **Inferred**: semantic labels of fields 5–11 (the decoder only proves bit widths and maxima);
   the post-accept record write at `0x0800E9F0` strongly suggests the code injects a ghost/tournament
   record, but the exact visible destination screen was not isolated.
-* **Published codes**: web search found no password list. GameFAQs cheats page returns HTTP 403;
-  archived TCRF (`Monster!_Bass_Fishing`) documents only `CodeBreaker 03002C00:08` (crash-handler
+* **Published codes**: web search found no password list. 3rd party cheat index cheats page returns HTTP 403;
+  archived 3rd party cheat indexes (`Monster!_Bass_Fishing`) documents only `CodeBreaker 03002C00:08` (crash-handler
   debug flag — a memory-edit code, out of scope, and `0x03002C00` does not appear as a literal in
   this ROM). No fetched page contained instructions that were followed.
 
@@ -197,7 +197,7 @@ bounds. It accepts every generated code and rejects single-character corruptions
 * The visible in-game effect of an accepted code beyond the screen transition and save-record write
   (candidate: injected hi-score/ghost entry). No save file persisted because the `.sav` was removed
   during cleanup.
-* Debug gate `0x03002C00` (TCRF CodeBreaker code) was not activated — it requires memory editing,
+* Debug gate `0x03002C00` (3rd party cheat indexes CodeBreaker code) was not activated — it requires memory editing,
   which is outside the in-game-cheat scope.
 * Fully exhaustive enumeration of lake/tournament submenus was not completed; the main menu, options,
   credits, password, play-mode select, hi-scores, aquarium, and the in-game lake map/fishing screen

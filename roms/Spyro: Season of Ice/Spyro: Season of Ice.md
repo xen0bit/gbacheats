@@ -106,7 +106,7 @@ Published in-game combos (web-sourced; entered after code 6, in Sparx levels): `
 
 **Space definition.** Exactly **8 records**, each **8 presses** drawn from a 4-symbol D-pad alphabet (`R/L/U/D`, active-high masks `0x10/0x20/0x40/0x80`), stored as `u16` little-endian. Nominal sequence space = `4^8 = 65,536` per record; the ROM accepts exactly one 8-press string per record (8 accepted inputs total out of the 65,536 possible 8-press strings), plus a separate `A` submit press that is not part of the compared string. The flag word is 8 bits (bit 0..7), but only nine distinct values are reachable because record 1 sets bits 1 and 0 together: `{0x01,0x03,0x04,0x08,0x10,0x20,0x40,0x80}` plus `0x00`. No variable-length, checksummed or generated code path exists: the validator's loop bounds are `i<=7`, `j<=7` (`0x800D232`, `0x800D1F8`) and the table is a fixed 128-byte copy.
 
-**Novel code.** Record 2 (`0x0805DB94`) is absent from darkSpyro, GameFAQs, ggmania, GameRevolution, AbsoluteCheats and every other consulted list. Generated from the table layout and replayed on the real title screen:
+**Novel code.** Record 2 (`0x0805DB94`) is absent from darkSpyro, 3rd party cheat indexes and every other consulted list. Generated from the table layout and replayed on the real title screen:
 
 ```
 ↑ ↑ → ↓ ↓ ↓ ← ↓  A

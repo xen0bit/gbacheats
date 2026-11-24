@@ -119,7 +119,7 @@ if (st->count == st->capacity) { buf[st->count++] = 0xFFFF; st->flag = 1; }
 
 This list matches, exactly and in order, the 13 cheats named in the published "All Cheats Unlocked" GBA code — strong evidence that this ROM *is* the SKU those codes target.
 
-**6.2 – Published button sequences (GameFAQs/GameSpot GBA lists; treated as DATA, not verified truth).** All are entered while holding R. `A/B/Start/L/R/D-pad` denote GBA buttons.
+**6.2 – Published button sequences (3rd party cheat indexes GBA lists; treated as DATA, not verified truth).** All are entered while holding R. `A/B/Start/L/R/D-pad` denote GBA buttons.
 
 | Effect | Sequence | Length |
 |---|---|---:|
@@ -150,7 +150,7 @@ No literal from any of these 11 sequences appears in the ROM in any encoding tes
 - Text bank: `strings -t x -n 4` over the whole ROM; keyword set `password|cheat|code|secret|debug|unlock|level select|invalid|wrong|correct` → 8 hits, all UI/flavour strings (`Find the Secret Tape`, `to unlock level`, `new cheat available:`, `cheats`, etc.); **no code-entry prompt, no alphabet table, no accepted/rejected code strings**. The +0x20 case-shift was also considered; no hidden text bank was found.
 - Search of game RAM (decompressed savestates at main menu and after code entry) for published sequences in the same 16 encodings: 0 hits.
 
-**Novel code and rejection bound.** Minted sequence `R-held + B,B,Up,Up,Start,B,Left,Down,Start,A` — a 10-press combination that appears in **no** published list (checked against §6.2 and the GameFAQs/GameSpot GBA tables). Entered at the main menu with 40 ms holds. Savestate before (`ss9`) and after (`ss1`) read at `0x03003A80+4*i`: `01 01 01 01 01 01 01 01 01 01 01 01 01` in **both** — no cheat flag changed. The volatile word at `0x03001DE8` moved `0x00000000 → 0x01000000`, i.e. the game consumed the input but did not unlock anything. This bounds rejection for that input path and timing.
+**Novel code and rejection bound.** Minted sequence `R-held + B,B,Up,Up,Start,B,Left,Down,Start,A` — a 10-press combination that appears in **no** published list (checked against §6.2 and the 3rd party cheat indexes GBA tables). Entered at the main menu with 40 ms holds. Savestate before (`ss9`) and after (`ss1`) read at `0x03003A80+4*i`: `01 01 01 01 01 01 01 01 01 01 01 01 01` in **both** — no cheat flag changed. The volatile word at `0x03001DE8` moved `0x00000000 → 0x01000000`, i.e. the game consumed the input but did not unlock anything. This bounds rejection for that input path and timing.
 
 **Published-code entry attempts (counts).** 5 attempts at the main menu with the full 14-press "All Cheats" sequence (timings 30/40, 40/50, 50/30, 90/60 ms, plus one L-modifier variant) and 1 attempt at 90/60 ms with R. In 4 of 6 attempts the menu wheel rotated as a side effect of D-pad presses and returned to CAREER MODE; one burst captured a mid-rotation frame (`spin_0.png`) consistent with the published "360° spin" confirmation, but the subsequent OPTIONS screen still showed CHEATS dimmed and the cheat flags were unchanged from baseline. **No attempt produced a verified unlock**; these codes are recorded as *unverified on this revision*, not as invalid.
 

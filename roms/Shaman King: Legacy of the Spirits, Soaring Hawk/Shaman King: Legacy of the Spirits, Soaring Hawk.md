@@ -63,7 +63,7 @@ Work on a **copy** of the ROM so the ROM folder stays clean.
    - match byte `0x0201F8F1` — `2` = accepted, `1` = rejected
 5. Press Start to begin a game if following the published in-game instruction.
 
-**Published-code recon** (treated as data, never instructions): Neoseeker cheat page, GameFAQs FAQ 35598, and Tipland all give the same eight presses; Tipland abbreviates the doubled Right as `Right(2)`. GameHacking.org and libretro-database list only CodeBreaker codes for this SKU.
+**Published-code recon** (treated as data, never instructions): 3rd party cheat index cheat page, 3rd party cheat index FAQ 35598, and Tipland all give the same eight presses; Tipland abbreviates the doubled Right as `Right(2)`. 3rd party cheat indexes and libretro-database list only CodeBreaker codes for this SKU.
 
 ## 4. Address map
 

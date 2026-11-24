@@ -34,7 +34,7 @@ logo is intact, the image is exactly 8 MiB with no appended payload, and the
 etc.). The only header anomaly is the zeroed header-checksum field (`0x0000`
 instead of `0xCD45`; the complement byte is still correct), which is the normal
 artifact of a header rebuild/trim tool. No code-level patch was observed.
-GameHacking.org lists this serial as `AGB-A9CE-USA`, so the game code is the
+3rd party cheat index lists this serial as `AGB-A9CE-USA`, so the game code is the
 retail one.
 
 ---
@@ -66,7 +66,7 @@ Consequences:
 * The published "PS" codes are **not** PS-only. `0024` was entered on the GBA
   screen and accepted (`CONNECTED`), setting level 8 / lives 3. The GBA and PS
   published lists draw from the same 250-entry table.
-* The "nine lives" variants in the GameFAQs list are simply the `lives = 9`
+* The "nine lives" variants in the 3rd party cheat index list are simply the `lives = 9`
   column (indices ending in 9); other lives values are reachable and
   undocumented.
 * Two novel codes were minted and confirmed in mGBA:
@@ -252,9 +252,8 @@ All 250 records are unique (no duplicate code → no alias indices).
 ### 6.2 Published codes verified against the ROM
 
 All 51 distinct codes in the fetched lists are present in the table and within
-the accepted range. (Sources: GameFAQs GBA "Level Passwords", GameFAQs
-"Alternative Level Passwords PS", the CT Special Force Fandom wiki, CheatCC,
-CheatHappens.)
+the accepted range. (Sources: 3rd party cheat indexes GBA "Level Passwords", 3rd party cheat indexes
+"Alternative Level Passwords PS", the CT Special Force 3rd party cheat index wiki, 3rd party cheat indexes.)
 
 | Code | Index | Level | Lives | Published as |
 |---|---:|---:|---:|---|
@@ -347,8 +346,7 @@ either the table search or the `level > 21` check.
 
 **`7938` — index 9 → internal level 0, lives 9.**
 
-* Not present in the GameFAQs GBA list, the "PS" list, the wiki, CheatCC or
-  CheatHappens.
+* Not present in the 3rd party cheat indexes GBA list, the "PS" list, the wiki, 3rd party cheat indexes.
 * Entered on the unmodified ROM at the password screen → `CONNECTED` briefing
   → the **helicopter prologue mission** (Jill/Raptor dialogue, helicopter over
   desert). The campaign's published lists start at internal level 1; level 0 is
@@ -371,7 +369,7 @@ either the table search or the `level > 21` check.
 
 * Index 83 → internal level 8, lives 3. Observed `CONNECTED` and RAM
   `0x0300000C = 8`, `0x0300314C = 3`.
-* This disproves the GameFAQs platform split for this title: the GBA table
+* This disproves the 3rd party cheat indexes platform split for this title: the GBA table
   contains the PS list.
 
 ### Bounds proven by rejection (observed in mGBA)

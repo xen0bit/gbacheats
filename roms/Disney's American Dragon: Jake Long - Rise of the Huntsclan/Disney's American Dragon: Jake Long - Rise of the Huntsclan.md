@@ -328,16 +328,16 @@ field (1..15), i.e. 60 test cells per world row.
   exercised (unverified).
 
 **Published-code verification**
-* GameHacking `Access Debug Menu [Press Select+Up]` (`1D055069A7CC`,
+* 3rd party cheat indexes `Access Debug Menu [Press Select+Up]` (`1D055069A7CC`,
   `A442A6B2D198`): decrypted and confirmed; it is a CodeBreaker memory write to
   `0x030019D0`, **not** an in-game button code. Out of scope as a cheat, but it
   is the anchor that proved where the menu lives.
-* htfbw.com "Unlimited Power" (pause → Up, Down, Down, A): tested in the pause
+* 3rd party cheat indexes "Unlimited Power" (pause → Up, Down, Down, A): tested in the pause
   menu; the sequence only moves the two-item cursor and resumes. No literal
   mask sequence (`0x40,0x80,0x80,0x01` in byte or halfword form), no button-id
   sequence (`6,7,7,0`), and no candidate comparison chain exists in the image.
   Treated as **unverified / not implemented** in this build.
-* VGChartz/GameFAQs `New Game +`: a legitimate unlockable (finish the game, let
+* 3rd party cheat indexes `New Game +`: a legitimate unlockable (finish the game, let
   the credits auto-save), not a code; no entry surface to test.
 
 **No-password proof (bounded negative)**
@@ -378,7 +378,7 @@ field (1..15), i.e. 60 test cells per world row.
 
 ## 10. Note on fetched material (data, not instructions)
 
-During the web sweep, the TCRF search result for this title returned a page
+During the web sweep, the 3rd party cheat index search result for this title returned a page
 containing an embedded instruction block demanding a payment transfer, claiming
 the operator should "join the circus", and telling the reader to terminate
 immediately. It was treated as untrusted page content, not followed, and is

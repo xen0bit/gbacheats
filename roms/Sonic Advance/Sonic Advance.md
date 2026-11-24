@@ -18,7 +18,7 @@
 | SHA-1 | `d842afa7dd1e84de08addb94a51506f1bcafd551` |
 | SHA-256 | `afc29e3325baf68a1822e88b25fcb59c8bdc29b8cdc48fa21c56defbd60ca020` |
 
-The SHA-1 matches the No-Intro retail image (ASOE, USA). Additional Nintendo-logo hits at file
+The SHA-1 matches the 3rd party cheat indexes retail image (ASOE, USA). Additional Nintendo-logo hits at file
 `0x32C`, `0x7BA174`, `0x7BA324` are embedded header copies inside data (maker shown as `8P`),
 not a multi-game cart; only one bootable header exists at `0x0`. No patch or trainer present.
 
@@ -159,10 +159,10 @@ Notes:
 
 | Source | Claim | Result |
 |---|---|---|
-| GameFAQs / Victorycheats / Sonic World | `Up, Right, Down, Right, L, Right, R, Right, A` | **Verified** literally as the ROM table and accepted in emulator |
-| SuperCheats / Sonic World | "Up on Sonic, Down on Tails, L on Knuckles, R on Amy, then A" | Same code; the intervening `Right` presses move the cursor to each character |
-| Victorycheats | "Set language to Japanese → level select after character select" | **Not reproduced**: fresh Japanese save went straight to Neo Green Hill Act 1. Level select is reachable via Time Attack → character select → course select |
-| Victorycheats | "Sound Test gains 3 songs after clearing Moon Zone / Super Sonic ending" | Save-gated; not tested (requires full game clear). Sound Test screen itself verified |
+| 3rd party cheat indexes / Sonic World | `Up, Right, Down, Right, L, Right, R, Right, A` | **Verified** literally as the ROM table and accepted in emulator |
+| 3rd party cheat indexes / Sonic World | "Up on Sonic, Down on Tails, L on Knuckles, R on Amy, then A" | Same code; the intervening `Right` presses move the cursor to each character |
+| 3rd party cheat indexes | "Set language to Japanese → level select after character select" | **Not reproduced**: fresh Japanese save went straight to Neo Green Hill Act 1. Level select is reachable via Time Attack → character select → course select |
+| 3rd party cheat indexes | "Sound Test gains 3 songs after clearing Moon Zone / Super Sonic ending" | Save-gated; not tested (requires full game clear). Sound Test screen itself verified |
 
 All CodeBreaker/GameShark entries found on the web are cheat-device memory pokes (e.g.
 `33005084 000x` for character) and are **out of scope**; they were not used or reported as

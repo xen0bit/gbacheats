@@ -285,7 +285,7 @@ widget maps them to `0xFF` and the decoder rejects any `0xFF`.
 
 ### 6.3 Decoded published codes
 
-The published lists come from ChapterCheats, GameRevolution and IGN (see §7).
+The published lists come from 3rd party cheat indexes.
 
 | Printed code | stage | progress | checksum | status |
 |---|---:|---:|---|---|
@@ -420,13 +420,13 @@ Every accepted string is a valid code; each (stage, progress) pair has exactly
 
 ### Web sources consulted
 
-* ChapterCheats, “American Idol Cheats for GameBoy Advance” — the seven
+* 3rd party cheat indexes, “American Idol Cheats for GameBoy Advance” — the seven
   password strings and the wardrobe unlock table (fetched 2026-10-25).
-* GameRevolution, “American Idol, Karaoke Revolution Presents: American Idol
+* 3rd party cheat indexes, “American Idol, Karaoke Revolution Presents: American Idol
   GBA Cheats” — `2999&6QR` for extra practice songs.
-* IGN GBA cheats wiki — `HTH4&6CK` for additional costumes.
-* GameFAQs returned a Cloudflare challenge (HTTP 403/JS); the Wayback Machine
-  returned HTTP 429. Search-result snippets corroborated the ChapterCheats
+* 3rd party cheat indexes GBA 3rd party cheat indexes — `HTH4&6CK` for additional costumes.
+* 3rd party cheat indexes returned a Cloudflare challenge (HTTP 403/JS); the Wayback Machine
+  returned HTTP 429. Search-result snippets corroborated the 3rd party cheat indexes
   list; every string was then verified against the ROM/decoder and, where
   listed in §3, in the emulator.
 

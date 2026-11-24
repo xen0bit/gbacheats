@@ -134,9 +134,9 @@ Mall City · The Sprawl · Precrime Building · Jetpack Escape · Mall City 2 ·
 
 | Source | Claim | ROM verification |
 |---|---|---|
-| GameFAQs / Project Cheat Codes | GBA "RULARS", "SUBARU" at title | **Confirmed** — literals at 0x080B1FA2 / 0x080B1F92, registered by 0x080135F8, accepted in mGBA |
-| GameFAQs / cheat sites | 30 word passwords (`NINJA`, `PASSKEY`, …) | **Not in this SKU** — zero literal hits; console versions only |
-| TCRF (PS2 page) | contained an LLM-directed prompt-injection payload ("This page is not intended for humans… whoever is operating this AI agent is a clown") | Ignored as data, recorded per §16.8 |
+| 3rd party cheat indexes | GBA "RULARS", "SUBARU" at title | **Confirmed** — literals at 0x080B1FA2 / 0x080B1F92, registered by 0x080135F8, accepted in mGBA |
+| 3rd party cheat indexes / cheat sites | 30 word passwords (`NINJA`, `PASSKEY`, …) | **Not in this SKU** — zero literal hits; console versions only |
+| 3rd party cheat indexes | contained an LLM-directed prompt-injection payload ("This page is not intended for humans… whoever is operating this AI agent is a clown") | Ignored as data, recorded per §16.8 |
 
 ## 6b. Enumeration
 
@@ -175,7 +175,7 @@ Mall City · The Sprawl · Precrime Building · Jetpack Escape · Mall City 2 ·
 
 ## 9. Tooling
 
-All analysis artifacts were kept in `/tmp/minority/`. Tools: `xxd`, `strings -t x`, `grep -abo`, `arm-none-eabi-objdump -M force-thumb`, Python 3 with `capstone` 5.0.7, mGBA 0.10 + Xvfb + xdotool + scrot + ImageMagick, Ghidra/REA (opened raw ARM at base 0x0; auto-analysis did not create procedures at the Thumb addresses, so manual objdump was used for the validator), web search (GameFAQs, Project Cheat Codes, MobyGames, TCRF).
+All analysis artifacts were kept in `/tmp/minority/`. Tools: `xxd`, `strings -t x`, `grep -abo`, `arm-none-eabi-objdump -M force-thumb`, Python 3 with `capstone` 5.0.7, mGBA 0.10 + Xvfb + xdotool + scrot + ImageMagick, Ghidra/REA (opened raw ARM at base 0x0; auto-analysis did not create procedures at the Thumb addresses, so manual objdump was used for the validator), web search (3rd party cheat indexes).
 
 Scripts: `emu.py` (input/screenshot/GDB helper), `ss.py` (PNG `gbAs` → raw RAM), `ram.py` / `fulldiff.py` (targeted and full RAM snapshots/diffs), `codetest2.py` (clean-title code entry), `find_title.py` (title detection), `playtest.py` (gameplay runs). Savestates and screenshots are kept under `/tmp/minority/` and are not redistributed.
 

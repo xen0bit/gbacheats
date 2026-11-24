@@ -157,7 +157,7 @@ Published strings **absent** from the matcher (searched symbol-index chains and 
 `*1NV1S4BL3*`, `*SHOWT1M3*` (letter O), `*S3L3TON*`. The ROM uses zero (`0`) where these lists
 show `O`, and has no 11-symbol chain at all.
 
-Validation of published 9-char progress passwords (all 19 from GameFAQs / GameFAQs board, verified
+Validation of published 9-char progress passwords (all 19 from 3rd party cheat index board, verified
 against `calc()`): 18 pass; `67NCBZBJC` fails (stored check `0x30`, required `0x48`) and its corrected
 form `67NCBZBMC` passes and starts Stage 3 in-game.
 
@@ -185,7 +185,7 @@ field decoding. This code was derived from the validator, not copied from any we
 was enumerated from `0x0800324C`–`0x08035DE` and each string's effect recorded in §6. Because the
 comparisons are inline immediates (not a table with a length/count field), no other string can be
 accepted by this function. Four unpublished chains (#2, #4, #5, #6, #8) were found that appear in
-no GameFAQs/TCRF list; their effects are labelled Derived (static) because only #7, #9 and #10
+no 3rd party cheat index list; their effects are labelled Derived (static) because only #7, #9 and #10
 were driven in the emulator.
 
 **Button codes.** Bounded negative: no button-combo sequences are published for this SKU, the only
@@ -206,7 +206,7 @@ text only, captured) exposes no cheat list.
 * **Inferred**: friendly names such as "pink laser" / "speed" for the Derived cheat effects; these
   are inferred from the flags set, not from a played-out gameplay result.
 
-Fetched web pages (GameFAQs, retroMaggedon, Cheat Happens, GameFAQs boards) were treated strictly as
+Fetched web pages (3rd party cheat indexes boards) were treated strictly as
 data; no prompt-injection payload was encountered.
 
 ## 8. Unknowns

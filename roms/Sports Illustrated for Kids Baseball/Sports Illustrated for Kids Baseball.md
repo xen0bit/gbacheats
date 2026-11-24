@@ -27,7 +27,7 @@ The ROM contains a **complete, developer-intended static code-entry system**: ni
 
 Static evidence is strong and complete (validator, unlock routine, flag word, all message strings, all table entries, the per-code All-Star data records). In the emulator I walked every screen reachable from the title menu (Season/Load Team/Pick State/Team Colours/Team Name, Exhibition/Team Selection, Link/Connecting, Credits). **No menu path to the code-entry screen was found**, and I could not obtain an in-game accept/reject screenshot. Per the guide's four-way taxonomy this is a **gated/unknown** surface, not a "no system" result: the handlers and messages exist and are fully decoded. The final answer is a **bounded negative with counts** (§6b), not a claim that the code screen is absent.
 
-Web reconnaissance (GameFAQs 403; Google/DuckDuckGo/Bing blocked or irrelevant) found **no published code list** for this SKU. The nine codes in §6 are recovered directly from the ROM and are not taken from any public list.
+Web reconnaissance (3rd party cheat indexes 403; Google/DuckDuckGo/Bing blocked or irrelevant) found **no published code list** for this SKU. The nine codes in §6 are recovered directly from the ROM and are not taken from any public list.
 
 ## 3. How to reproduce
 
@@ -169,7 +169,7 @@ i code         bytes
 2. **Runtime input buffer address** for the code screen. The validator reads `[[ui+0]+28]`; I did not live-break on the validator, so the RAM address of the typed string was not captured.
 3. **Stable GDB access.** The mGBA GDB stub bound port 2345 intermittently and later produced packet errors; RAM evidence therefore came from savestate `gbAs` chunk dumps (§16.13), not a live breakpoint. No live accept was captured.
 4. **Use of flag value 1.** The validator refuses flag 1, but no writer of value 1 was isolated.
-5. **Published-code comparison.** Could not be performed (GameFAQs 403; search engines blocked/irrelevant). The nine codes are ROM-derived.
+5. **Published-code comparison.** Could not be performed (3rd party cheat indexes 403; search engines blocked/irrelevant). The nine codes are ROM-derived.
 
 ## 9. Tooling
 

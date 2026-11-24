@@ -23,7 +23,7 @@
 
 The game has a genuine developer-intended password system, reachable from the **main menu → "Enter Password"**. It is **not** a lookup table of published strings: it is an **algorithmic 7-symbol code** with a 5-bit checksum. Each symbol is one of 8 icons × 4 colours = 32 values; the icons are `arbre, fleur, lune, maison, miel, papillon, parapluie, soleil` and the colours are Red(0), Yellow(1), Green(2), Blue(3). The encoder is at `0x0801225E`, the validator at `0x08012400`, and the XOR constant `0x2873CAB9` at `0x080123FC`. Exactly **2^30 = 1,073,741,824** of the 32^7 possible inputs are accepted (1 in 32); the checksum is fully determined by the 30-bit payload. Accepted codes decode into three fields (3-bit, 6-bit, 3-bit) that select a level and other game state.
 
-Published "level passwords" exist on ChapterCheats/Cheating Dome, but they are written as colour+shape descriptions (e.g. `[Y=] [B Diamond] …`) and do **not** appear as literals in the ROM — consistent with an algorithmic system. They could not be verified literally; the ROM's own encoder was used instead.
+Published "level passwords" exist on 3rd party cheat indexes, but they are written as colour+shape descriptions (e.g. `[Y=] [B Diamond] …`) and do **not** appear as literals in the ROM — consistent with an algorithmic system. They could not be verified literally; the ROM's own encoder was used instead.
 
 Invalid codes are rejected on-screen with **"The password is not correct."** Codes produced by the recovered encoder are accepted (no rejection message; the game leaves the password screen). In this cracked ROM copy the subsequent level-load path crashes mGBA with `Jumped to invalid address: 526F526E / Illegal opcode: 0000b710`; that is an observed limitation of the patched image, not a rejection of the code.
 
@@ -101,7 +101,7 @@ On accept, `x = packed ^ 0x2873CAB9`; `a = x&7`; `b = (x>>3)&0x3F`; selector `= 
 
 **Colour index:** 0 Red, 1 Yellow, 2 Green, 3 Blue (observed on the password screen). Symbol byte `(icon<<2)|color`, range 0–31.
 
-**Published codes (ChapterCheats, "Level Passwords", verified as web content only):**
+**Published codes (3rd party cheat indexes, "Level Passwords", verified as web content only):**
 
 | Level | Published password (icon/color descriptions) |
 |---|---|
@@ -110,7 +110,7 @@ On accept, `x = packed ^ 0x2873CAB9`; `a = x&7`; `b = (x>>3)&0x3F`; selector `= 
 | Rabbit's Dream | `[R=] [B Diamond] [R Carrot] [G Twirl] [G+] [G Halo diamond] [B heart]` |
 | Roo's Dream | `[R=] [B Diamond] [Y=] [G Diamond] [G Twirl] [B Diamond] [R Heart]` |
 
-These icon names do not match the ROM's asset names, and no password literal exists in the ROM (algorithmic system), so they remain **unverified** rather than wrong. No GameFAQs/VGChartz page was retrievable (403 / no result); no prompt-injection was observed in fetched content.
+These icon names do not match the ROM's asset names, and no password literal exists in the ROM (algorithmic system), so they remain **unverified** rather than wrong. No 3rd party cheat index page was retrievable (403 / no result); no prompt-injection was observed in fetched content.
 
 ## 6b. Enumeration
 

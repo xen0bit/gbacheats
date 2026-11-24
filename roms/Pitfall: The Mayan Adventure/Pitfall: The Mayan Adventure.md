@@ -26,7 +26,7 @@ the retail EU build; addresses below apply to this exact image only.
 The game has **one developer-intended button-code system**, entered on the title
 screen. The published sequence `L, Select, A, Select, R, A, L, Select` enables a
 debug mode: the title displays a level label — actually rendered **`FOREST 0`**
-(TCRF says "FOREST 1", which is wrong by one) — a coordinate HUD replaces the
+(3rd party cheat indexes say "FOREST 1", which is wrong by one) — a coordinate HUD replaces the
 hearts in play, and holding Select + L/R skips levels. The effect is backed by a
 single RAM flag at **EWRAM `0x02000350`** (0 = off, 1 = on), verified across nine
 savestates.
@@ -146,7 +146,7 @@ opcodes.
 
 ## 6. Tables
 
-Published GBA codes (GameFAQs via web.archive.org, TCRF via web.archive.org — all
+Published GBA codes (3rd party cheat indexes via web.archive.org, 3rd party cheat indexes via web.archive.org — all
 verified against the ROM/emulator where a literal could be checked):
 
 | Effect | Code | Screen | Verification |
@@ -227,10 +227,9 @@ core (tested for all 10 possible appended buttons and 8 of 10 prepended buttons)
   validator function was not isolated); the `PASSWORD` ASCII string belongs to a
   Game Over/Continue screen.
 
-Published-list provenance: GameFAQs GBA cheats (403 direct, recovered via
-`web.archive.org/web/2022/...`), TCRF GBA page (403 direct, recovered via
-`web.archive.org/web/20210607173545/...`), plus search-result snippets from IGN,
-Neoseeker, GameRevolution, SuperCheats. No prompt-injection payload was seen in
+Published-list provenance: 3rd party cheat indexes GBA cheats (403 direct, recovered via
+`web.archive.org/web/2022/...`), 3rd party cheat indexes GBA page (403 direct, recovered via
+`web.archive.org/web/20210607173545/...`), plus search-result snippets from 3rd party cheat indexes. No prompt-injection payload was seen in
 the fetched pages; one archive fetch returned HTTP 503 and was retried with a
 timestamped URL. The "Begin on Level 6, X, A, Y, A, X…" snippet found in search
 results is a non-GBA platform entry (the GBA has no X/Y buttons) and was

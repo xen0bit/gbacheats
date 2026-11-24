@@ -23,7 +23,7 @@
 Developer/engine strings: `TORUS GAMES`, `BAM! ENTERTAINMENT`, `FPS Engine Team`;
 multi-language script (En/Fr/De/Es/It) at file 0x70000+. The header byte mismatch
 (§16.1) indicates a rebuilt/edited header, but there is no appended trainer, no
-cracktro entry patch, and no second GBA header. GameHacking.org lists CRC32
+cracktro entry patch, and no second GBA header. 3rd party cheat index lists CRC32
 `14C23257` / serial `AGB-AR3E-USA` for the same SKU.
 
 ## 2. Executive summary
@@ -35,7 +35,7 @@ developer-intended cheat surface consists of:
 1. **Button combos.** The in-game Options/Controls screen documents
    `L+R+D-pad` free-look, `L+R+Up/Down` zoom, `Select+A` holster/unholster,
    `Select+B` night vision, plus standard movement/fire/jump/pause-map bindings.
-   A further, *undocumented* combo is published by GameFAQs/supercheats/gamegenie:
+   A further, *undocumented* combo is published by 3rd party cheat indexes/gamegenie:
    **hold `L + R + SELECT + B` for two seconds at a locked door** → a "Trust No
    One" voice, a one-second black-and-white screen flash, and the door becomes
    enterable without its switch. This is the only genuine hidden button cheat.
@@ -44,7 +44,7 @@ developer-intended cheat surface consists of:
    health/ammo and mission select plus Veteran difficulty (Graduate). These are
    progression flags in the 512-byte EEPROM save, not input codes (§16.18).
 
-No GameShark/CodeBreaker codes are in scope. GameHacking.org's "Skip Mission
+No GameShark/CodeBreaker codes are in scope. a 3rd party cheat index's "Skip Mission
 [L+B]" etc. are memory-edit cheats and were deliberately not investigated.
 
 The whole reachable UI was walked on the real ROM (language select, title,
@@ -68,7 +68,7 @@ Quit). No password/cheat/level-select entry surface exists.
   B returns to gameplay.
 * Combo verification: in gameplay, hold `a`+`s`+`BackSpace`+`z` (L+R+Select+B).
   The active-high held-key mask in IWRAM becomes exactly `0x0306`.
-* Published GameFAQs codes tested verbatim against the ROM: `L,R,SELECT,B
+* Published 3rd party cheat index codes tested verbatim against the ROM: `L,R,SELECT,B
   (hold two seconds)` — literal mask verified, effect requires being at a
   locked door (see §8). No password string from any published list exists in
   the ROM because the game has no password system.
@@ -137,8 +137,8 @@ duration counter, consistent with the README-style published descriptions.
 
 ## 6. Tables
 
-**Published in-game cheats (all from GameFAQs archived 2018, supercheats,
-gamegenie, Neoseeker walkthrough):**
+**Published in-game cheats (all from 3rd party cheat indexes archived 2018, 3rd party cheat indexes,
+gamegenie, 3rd party cheat index walkthrough):**
 
 | Effect | Trigger | ROM verification |
 |---|---|---|
@@ -158,7 +158,7 @@ gamegenie, Neoseeker walkthrough):**
 | Pause / Map | `Start` |
 | Change weapon / Jump / Fire | mapped on-screen (Type A/B layout) |
 
-**Unverified published material:** GameHacking.org's `GameShark/CodeBreaker`
+**Unverified published material:** a 3rd party cheat index's `GameShark/CodeBreaker`
 entries (Master Code, "Access All Cheats+Missions", "Skip Mission [L+B]",
 etc.) are memory-edit cheats and are out of scope; none were entered.
 
@@ -252,8 +252,8 @@ walk (§7) and by the ASCII/shifted/UTF-16/font-index searches (§11).
 * mGBA savestates (`.ss1`–`.ss3`): PNG with zlib `gbAs` chunk; decompressed with
   Python `zlib` and byte-diffed (`ssutil.py`) for RAM evidence.
 * `xdotool` XTEST key events, `scrot`, ImageMagick `convert` for screenshots.
-* Web: `web.archive.org` snapshot of GameFAQs cheats (2018), live search
-  snippets for supercheats/gamegenie/Neoseeker/GameHacking.org. Fetched pages
+* Web: `web.archive.org` snapshot of 3rd party cheat index cheats (2018), live search
+  snippets for 3rd party cheat indexes/gamegenie/3rd party cheat indexes. Fetched pages
   were treated as data; no prompt-injection payload was encountered.
 
 ## 10. Legal note

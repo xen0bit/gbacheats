@@ -47,10 +47,9 @@ Findings in order of importance:
    `PASSWORD`, `CHEAT`, `DEBUG`, `SECRET` (case-insensitive); the localized string
    table (0x079AA60, 24 bytes/record, 6 language pointers) contains no alphabet,
    keypad, name-entry, or "enter code" UI. The published material that exists for
-   this SKU (archived GameFAQs cheats page, Almar's Guides, Cheat Happens,
-   GameHacking.org, CheatCodes.com) is **only** Action Replay / CodeBreaker
+   this SKU (archived 3rd party cheat index cheats page, 3rd party cheat indexes) is **only** Action Replay / CodeBreaker
    memory patches ("Unlock All Tracks 2ADDE25E BF09C48B", master code
-   e59de6a7/b3668f3f/4d0fdd7c/a7c40c64); the archived GameFAQs cheat page itself
+   e59de6a7/b3668f3f/4d0fdd7c/a7c40c64); the archived 3rd party cheat index cheat page itself
    lists no entries at all. Those are memory-write codes, not in-game codes, and
    are out of scope. Their literal text and opcode words are absent from the ROM
    (0 occurrences each), as expected for host-side patches.
@@ -379,12 +378,12 @@ strings (IDs 3,5) have no reachable item, and the observed menu ring is 4.
   literal pointer at all; 0x022E3C is referenced by 0x08012974 and is a signed
   16-bit **sine/cosine table** (angle, mirrored at 0x100−i), and 0x67B7DC lies
   inside a compressed graphics block. None is a cheat/button-code table.
-* Published lists: the archived GameFAQs cheats page (Wayback capture 20201009)
+* Published lists: the archived 3rd party cheat index cheats page (Wayback capture 20201009)
   has **no** cheat entries for this game. The only published GBA codes anywhere
-  (Almar's Guides, Cheat Happens, GameHacking.org) are Action Replay/CodeBreaker
+  (3rd party cheat indexes) are Action Replay/CodeBreaker
   memory patches — out of scope, and their ASCII hex and binary opcode words do
   not occur in the image (checked: `2ADDE25E`, `BF09C48B`, `e59de6a7`,
-  `b3668f3f` = 0 hits each). TCRF's page documents only the Shin'en GAX credits
+  `b3668f3f` = 0 hits each). a 3rd party cheat index's page documents only the Shin'en GAX credits
   and error strings and lists no debug menu or code. No published in-game
   password/button code exists to test; the negative is therefore bounded by the
   string/table/input space above, not by a list.

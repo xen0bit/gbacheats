@@ -161,8 +161,8 @@ password/title reject state). The "typed" alphabet is therefore effectively 1–
 **Exhaustive check.** All 625 codes `[a,b,c,d]` with `a,b,c,d ∈ {1..5}` were submitted
 through the real Password screen using the savestate oracle and a screenshot classifier
 calibrated on five known rejects. Result: **0 accepted, 625 rejected**. No code from
-any published list was available to cross-check (GameFAQs returned HTTP 403, Bing and
-DuckDuckGo search results were unrelated/polluted, TCRF and the Wayback Machine returned
+any published list was available to cross-check (3rd party cheat indexes returned HTTP 403, Bing and
+DuckDuckGo search results were unrelated/polluted, 3rd party cheat indexes and the Wayback Machine returned
 404 for this title), so there is no external list to be a "novel code" relative to.
 
 **Novel code / bounds.** Because the accepted set is empty, no code can be minted that

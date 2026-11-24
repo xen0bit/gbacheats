@@ -14,7 +14,7 @@
 | Version (0xBC) | 0x00 |
 | Header checksum (0xBE) | 0x0000; complement byte (0xBD) = 0xDE |
 | Entry word | `0xEA00002E` → stock crt0 at 0x080000C0 |
-| CRC32 | `39B5E771` — matches Data Crystal's **USA** revision (AYWE); JP `A7054D60`, EU `ACA6FFC6` differ |
+| CRC32 | `39B5E771` — matches a 3rd party cheat index's **USA** revision (AYWE); JP `A7054D60`, EU `ACA6FFC6` differ |
 | MD5 | `1e52d66f5f8a7c4f207d80ba4fccf55e` |
 | SHA-1 | `53d4ae06d1b605f8925c53d6c585478d73ff55c0` |
 | SHA-256 | `c4c3ef5c8980996be049a3b6efd1c99b165e565405e040ea428801a14b8c8aa9` |
@@ -27,9 +27,9 @@ The only in-game cheat surface is the **8-digit card Password** system (`PASS WO
 
 The table contains **1026 real passwords**, **60 `FF FF FF FF` no-password entries**, and one unused all-zero sentinel at index 0. The 1026 passwords are **exactly** the 1026 codes on the published fan list (verified as a set-equality test); there is no algorithmic generator, no hidden debug password, and no second code format. The accepted set is therefore a provably closed set of 1026 codes out of 100,000,000 possible eight-digit inputs.
 
-Every published "cheat" for this title (24 entries in libretro/GameFAQs/GameHacking.org) is a **CodeBreaker / GameShark / AR RAM-patch code** for a cheats device, explicitly out of scope. No in-game button code or debug menu was found (bounded search recorded in §6b).
+Every published "cheat" for this title (24 entries in libretro/3rd party cheat indexes) is a **CodeBreaker / GameShark / AR RAM-patch code** for a cheats device, explicitly out of scope. No in-game button code or debug menu was found (bounded search recorded in §6b).
 
-Two accepted codes were confirmed on the real screen with the awarded card rendered: `11714098` → *30,000-Year White Turtle*, `89631139` → *Blue-Eyes White Dragon*. Three rejected inputs establish bounds: `12345678`, `00000000` (the ROM sentinel), and `49587386` (a GameFAQs typo for `49587396`).
+Two accepted codes were confirmed on the real screen with the awarded card rendered: `11714098` → *30,000-Year White Turtle*, `89631139` → *Blue-Eyes White Dragon*. Three rejected inputs establish bounds: `12345678`, `00000000` (the ROM sentinel), and `49587386` (a 3rd party cheat index typo for `49587396`).
 
 ## 3. How to reproduce
 
@@ -64,7 +64,7 @@ Cursor starts on `0`. Move with the D-pad, press **A** to enter a digit. After t
 | `89631139` | Accepted — *Blue-Eyes White Dragon* card rendered |
 | `12345678` | Rejected — display cleared, right panel empty |
 | `00000000` | Rejected — display cleared, right panel empty |
-| `49587386` | Rejected (GameFAQs typo) — display cleared, right panel empty |
+| `49587386` | Rejected (3rd party cheat indexes typo) — display cleared, right panel empty |
 
 ## 4. Address map
 
@@ -127,11 +127,11 @@ Properties: no checksum, no arithmetic transform, no XOR key, no permutation. Co
 | Table entries | 1087 (indices 0–1086 inclusive, bound literal `0x43E`) |
 | Table size | 0x10FC bytes (`0x0834500`–`0x08355FC`) |
 | Index 0 | `00 00 00 00`, unused sentinel — entering `00000000` is rejected |
-| `FF FF FF FF` entries | 60 (56 passwordless cards + 4 tokens, per published FAQ and Yugipedia) |
+| `FF FF FF FF` entries | 60 (56 passwordless cards + 4 tokens, per published FAQ and 3rd party cheat indexes) |
 | Real passwords | 1026 |
 | Return value | table index (1–1086) on hit, 0 on miss |
 
-Published-list discrepancy: GameFAQs lists *Ancient Tool* as `49587386`; the ROM table (index 5) stores **`49587396`**, which is what yugioh-world.com lists. Entering `49587386` is rejected — a verified typo in the GameFAQs guide, not a second code.
+Published-list discrepancy: 3rd party cheat index lists *Ancient Tool* as `49587386`; the ROM table (index 5) stores **`49587396`**, which is what 3rd party cheat index lists. Entering `49587386` is rejected — a verified typo in the 3rd party cheat index guide, not a second code.
 
 ## 6b. Enumeration
 
@@ -140,11 +140,11 @@ Published-list discrepancy: GameFAQs lists *Ancient Tool* as `49587386`; the ROM
 **Closed-set proof** (not merely a table dump — the whole table was enumerated and compared):
 
 1. Decoded all 1087 table rows from `0x0834500` into 8-digit strings.
-2. Fetched the full published password list (yugioh-world.com, 1026 codes, matching the GameFAQs FAQ count) and extracted every 8-digit number: **1026 codes**.
+2. Fetched the full published password list (3rd party cheat indexes, 1026 codes, matching the 3rd party cheat index FAQ count) and extracted every 8-digit number: **1026 codes**.
 3. Set comparison: `ROM passwords − published = ∅` and `published − ROM = ∅`. The ROM's only extra decoded strings are `00000000` (unused sentinel) and `15`×8 (the `FF FF FF FF` no-password marker, not a keypad-reachable code). **There is no code absent from every published list, so no novel code can be minted.** This is a bounded negative, not an untested one.
 4. Cross-check: table counts agree with the external documentation — 1086 cards (1082 + 4 tokens), 1026 with passwords, 60 without.
 
-**Credits for the enumeration result**: the accepted set is a lookup table, not a generator (guide §0.2's "generator/decoder pair" does not exist here; the paired `memcpy`+search at `0x08091738` is the whole path). The alt-art password rule reported by Yugipedia (insert zeros after the first four digits, e.g. `89631139` → `80906030`) is simply two separate rows in the same table — both confirmed present (indices 417 and 418 region) and both already on the published list.
+**Credits for the enumeration result**: the accepted set is a lookup table, not a generator (guide §0.2's "generator/decoder pair" does not exist here; the paired `memcpy`+search at `0x08091738` is the whole path). The alt-art password rule reported by 3rd party cheat indexes (insert zeros after the first four digits, e.g. `89631139` → `80906030`) is simply two separate rows in the same table — both confirmed present (indices 417 and 418 region) and both already on the published list.
 
 **Accepted codes confirmed in-game** (both published, used as decoder anchors):
 
@@ -159,13 +159,13 @@ Published-list discrepancy: GameFAQs lists *Ancient Tool* as `49587386`; the ROM
 |---|---|---|
 | `12345678` | well-formed 8-digit input, no matching table row | `/tmp/worldwide/rej_random.png` |
 | `00000000` | matches ROM sentinel index 0, which is not a card | `/tmp/worldwide/rej_zero.png` |
-| `49587386` | GameFAQs typo; ROM row `5` is `49587396` | `/tmp/worldwide/rej_typo.png` |
+| `49587386` | 3rd party cheat indexes typo; ROM row `5` is `49587396` | `/tmp/worldwide/rej_typo.png` |
 
 **RAM evidence**: with `89631139` accepted, savestate slot 7 raw `0x408B0` (= `0x0201F8B0`) contains `08 09 06 03 01 01 03 09`; control byte at raw `0x408C0` = `0x00` (screen reset after submit). With `11714098` entered but not yet submitted, the same address held `01 01 07 01 04 00 09 08` and control = `0xA7` (high nibble 10 = GET CARD, low nibble 7 = display cursor at the 8th digit).
 
 **Other cheat surfaces — bounded recon**:
 
-- Published cheats for this exact SKU (libretro `.cht`, GameFAQs FAQ 23151 §CodeBreaker, GameHacking.org, ROMSFun) are **24 CodeBreaker/GameShark/AR RAM patches** (e.g. `82018FE4 1F40` infinite LP, `74000130 03BB` Select+Up instant win). These require a cheat device and are out of scope; none is an in-game code.
+- Published cheats for this exact SKU (libretro `.cht`, 3rd party cheat index FAQ 23151 §CodeBreaker, 3rd party cheat indexes) are **24 CodeBreaker/GameShark/AR RAM patches** (e.g. `82018FE4 1F40` infinite LP, `74000130 03BB` Select+Up instant win). These require a cheat device and are out of scope; none is an in-game code.
 - Whole-ROM case-insensitive search for `debug`, `test mode`, `secret menu`, `sound test`, `level select`: **0 hits** in 16,777,216 bytes. The `secret` hits that do exist are TCG card names (*Book of Secret Arts*, *Goblin's Secret Remedy*, *The Portrait's Secret*) and dialogue — §16.7 keyword-context trap.
 - No `PASSWORD`/`PASS WORD` ASCII string exists, yet the screen visibly renders it: confirmed tile/font-encoded text bank, so the negative "no password string" would have been false. The feature was found through the input buffer and validator instead.
 
@@ -193,5 +193,5 @@ Labels follow guide §8.4.
 - mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`; `xdotool windowactivate --sync` + XTEST helper `/tmp/worldwide/key.py`; state-entry helper `/tmp/worldwide/enter_code.py`.
 - Savestate parser: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte raw state, diffed in Python (§16.13).
 - mGBA `-d` pty debugger driver `/tmp/worldwide/dbg.py` / `dbg_live.py` (used to locate the buffer writer at `0x080916C4` with a write watchpoint).
-- Web recon: GameFAQs cheats/FAQ 22840/FAQ 23151, yugioh-world.com full password list, IGN, Yugipedia, Data Crystal, libretro cheat database, GameHacking.org. Fetched pages were treated strictly as data; no instructions found in them were followed.
+- Web recon: 3rd party cheat index cheats/FAQ 22840/FAQ 23151, 3rd party cheat indexes full password list, 3rd party cheat indexes, libretro cheat database, 3rd party cheat indexes. Fetched pages were treated strictly as data; no instructions found in them were followed.
 - All screenshots, savestates, scripts, and the ROM copy were kept in `/tmp/worldwide/`; none were written into the ROM folder. No copyrightable game assets are reproduced here.

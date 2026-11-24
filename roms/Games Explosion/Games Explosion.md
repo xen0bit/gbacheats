@@ -184,14 +184,12 @@ two-player games (e.g. Checkers). DIFFICULTY values: EASY / MEDIUM / HARD.
    and Down (`byte[4]&2`) individually; there is no multi-button sequence, ring buffer, or
    progress index — the structural prerequisites for a button code (guide §5.4a) are absent.
    No published button codes exist for this title.
-5. **Published codes — verified and rejected as out of scope.** Web results (GameFAQs,
-   VGChartz, CheatingDome, Ethereal Games, 53lu) list only four CodeBreaker RAW memory patches:
+5. **Published codes — verified and rejected as out of scope.** Web results (3rd party cheat indexes) list only four CodeBreaker RAW memory patches:
    `10300730C 00000063` (Space Shooter lives), `20330073E8 000F423F` (Space Shooter score),
    `102011024 0000000E` (Avoider money), `102002DE4 0000270F` ("Ice Climber" lives).
    They target volatile RAM addresses, and a literal scan of the 4 MiB ROM found **0 hits**
    for each of 0x0300730C / 0x030073E8 / 0x02011024 / 0x02002DE4 — i.e. they are not ROM
-   data, not in-game codes, and cannot be entered through any screen. No GameFAQs/VGChartz/
-   TCRF in-game password exists.
+   data, not in-game codes, and cannot be entered through any screen. No 3rd party cheat indexes in-game password exists.
 6. **No novel code can be minted** because no validator, alphabet, table of accepted strings,
    or key sequence exists. §0.2's "generate a code absent from published lists" is
    inapplicable; the required substitute — a closed-screen/closed-space proof — is provided

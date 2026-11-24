@@ -58,9 +58,9 @@ Evidence summary:
 * The single input sampler at `0x08000AE0` produces exactly three globals (pressed / held /
   released) and no key-sequence matcher or progress counter.
 * No published codes were available to verify: `websearch` returned no results for six
-  queries; DuckDuckGo and Google served bot challenges; GameFAQs and TCRF returned HTTP 403;
+  queries; DuckDuckGo and Google served bot challenges; 3rd party cheat indexes returned HTTP 403;
   the Wayback CDX/HTTP API returned empty/404/503; the Jina reader proxy was blocked.
-  CheatCodes.com's own search returned **"Your search did not match any results."** for
+  a 3rd party cheat index's own search returned **"Your search did not match any results."** for
   this title. Therefore there is no published in-game code list to reconcile against the ROM.
 
 This is a **"no system"** negative (guide §16.3 category 1), bounded by the searches and
@@ -217,7 +217,7 @@ fresh boot and (b) exhaustive searches of the input/text spaces:
    only input consumer is the sampler at `0x08000AE0`, which has no sequence progress state.
 4. **Code table space:** no hard-coded code strings, no equal-length NUL-padded string
    table, and no 32-bit pointer table to one.
-5. **Published codes:** none found (all cheat sources blocked or empty; CheatCodes.com
+5. **Published codes:** none found (all cheat sources blocked or empty; 3rd party cheat indexes
    explicitly returned no results). There is therefore no published code to test, mint an
    unpublished variant of, or bound by rejection.
 
@@ -264,7 +264,7 @@ not a code/debug gate: nothing in the ROM suggests a hidden screen beyond it.
 * The exact condition that advances the block-smash step was not isolated (10 input
   combinations tested; see §6b). It is a gameplay-skill gate, not a cheat gate.
 * Web verification of published codes was impossible from this environment; the negative
-  rests on the ROM searches and CheatCodes.com's empty result, not on a complete crawl of
+  rests on the ROM searches and a 3rd party cheat index's empty result, not on a complete crawl of
   every cheat site.
 
 ## 9. Tooling

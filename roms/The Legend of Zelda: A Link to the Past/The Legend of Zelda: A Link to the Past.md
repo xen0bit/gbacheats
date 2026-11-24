@@ -18,7 +18,7 @@
 | SHA-1 | `a272055abbbf6c26b0cd54c87395d01699589161` |
 | SHA-256 | `f328f8f07d736288a00c80d31cc1630f3aa02aaf20efdcba73d31dae832b5d76` |
 
-This is the **USA** SKU (complement `0x8A`, CRC32 `8E91CD13` per Data Crystal). All addresses below are for this exact image.
+This is the **USA** SKU (complement `0x8A`, CRC32 `8E91CD13` per 3rd party cheat indexes). All addresses below are for this exact image.
 
 ## 2. Executive summary
 
@@ -40,9 +40,9 @@ All reachable screens were walked in mGBA with screenshots and RAM reads (§3, �
 The negative is proven over the searched spaces with explicit counts (§6b), not by
 absence of a single string.
 
-A TCRF fetch returned the "This page is not intended for humans / instructions are
+A 3rd party cheat index fetch returned the "This page is not intended for humans / instructions are
 only for LLMs" troll text (§16.8); it was treated as data and ignored. The useful
-recon came from Data Crystal's notes page and the standard cheat aggregators.
+recon came from a 3rd party cheat index's notes page and the standard cheat aggregators.
 
 ## 3. How to reproduce
 
@@ -160,7 +160,7 @@ These are state bits in the `TF4S`/`TINI` save records, written by gameplay even
 Per §16.18 they are unlockables, not a code system; no input path sets them.
 
 **Out of scope / not cheats:** all GameShark/CodeBreaker/AR/PAR entries from
-Neoseeker, Supercheats, Almars and StrategyWiki (device RAM patches); the SNES-only
+3rd party cheat indexes; the SNES-only
 debug names `B` / `BAGE` (require a PAR code and are for the SNES SKU, absent here);
 the Chris Houlihan Room (a glitch-triggered emergency room, not an input code).
 

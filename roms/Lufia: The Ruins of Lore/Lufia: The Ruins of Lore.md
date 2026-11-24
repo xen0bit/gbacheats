@@ -14,7 +14,7 @@
 | Version | `0x00` |
 | Fixed byte `0xB2` | `0x96` (present) |
 | Entry branch | `0xEA00002E` (stock `0x080000C0` crt0) |
-| Header checksum | `0x0000`; complement `0x48` (matches Data Crystal US CRC32 `DE5FFCBC`) |
+| Header checksum | `0x0000`; complement `0x48` (matches 3rd party cheat indexes US CRC32 `DE5FFCBC`) |
 | MD5 | `22b31aa8f66e7c6528fd4903a09f030f` |
 | SHA-1 | `a2b7e80a6c7d586ebeec77c8a2c2545fe27e0592` |
 | SHA-256 | `f58cf030045d4049f5fef15032d10a691322d599ea8239d7b49539bfe53657ab` |
@@ -25,7 +25,7 @@
 
 There is **no controller-reachable cheat system** in this GBA SKU: no password screen, no button-code sequence, and no unlockable/debug menu that can be entered with the GBA controls. Every published "cheat" for the game is either a GameShark/CodeBreaker **memory-edit code** (out of scope for this engagement) or an in-game **glitch/exploit** (Infinite Nectar, Sacrifice self-heal, Blue Tea arbitrage), not a code the game validates.
 
-The ROM does contain a substantial set of **developer debug menus** (KANDA / AJIKI / SAITO / YOKOTA / IMAI tasks): a six-entry task selector plus battle-BG/enemy-group pickers, a character/sprite viewer, a sound test, area changers, a teleporter, save-data editors, job selectors, shop/collector tools and communication test screens. Their existence and full contents are proven statically (strings + task table + function pointers, cross-checked against TCRF). They are **hard-gated**: the only documented activation is via CodeBreaker RAM patches writing `0x02001A2C`/`0x0300597E` (menu 1) and the handler slot `0x03005978`/`0x0300597A` (menu 2). No ROM code path writes those gate values from controller input — the gate is a developer-only external hook, not an in-game unlock. This is a **gated feature** (guide §16.3, type 4) whose only writer is an external debugger, so no controller sequence can reach it.
+The ROM does contain a substantial set of **developer debug menus** (KANDA / AJIKI / SAITO / YOKOTA / IMAI tasks): a six-entry task selector plus battle-BG/enemy-group pickers, a character/sprite viewer, a sound test, area changers, a teleporter, save-data editors, job selectors, shop/collector tools and communication test screens. Their existence and full contents are proven statically (strings + task table + function pointers, cross-checked against 3rd party cheat indexes). They are **hard-gated**: the only documented activation is via CodeBreaker RAM patches writing `0x02001A2C`/`0x0300597E` (menu 1) and the handler slot `0x03005978`/`0x0300597A` (menu 2). No ROM code path writes those gate values from controller input — the gate is a developer-only external hook, not an in-game unlock. This is a **gated feature** (guide §16.3, type 4) whose only writer is an external debugger, so no controller sequence can reach it.
 
 The negative is bounded: all controller-reachable screens were walked with screenshots, the entire string table and all font/alphabet tables were searched and classified, and every published code was verified to be a memory edit or a gameplay glitch rather than a validated code.
 
@@ -38,7 +38,7 @@ The negative is bounded: all controller-reachable screens were walked with scree
 - Debug-menu activation attempts (all out-of-scope memory edits, used only as probes, none delivered as a "code"):
   - mGBA savestate `gbAs` chunk edits at `0x03005978`, `0x0300597E`, `0x02001A2C`;
   - mGBA GDB stub `w/4` (port 2345 was held by another agent, so a private `-d` pty debugger was used instead);
-  - mGBA `-c` cheat files in both mGBA formats (`# name` and libretro `cheatN_code`) with CodeBreaker lines `8300597E FF00`, `83001A2C 0020`, `83005978 FDE5`, `8300597A 0805` (TCRF's published values).
+  - mGBA `-c` cheat files in both mGBA formats (`# name` and libretro `cheatN_code`) with CodeBreaker lines `8300597E FF00`, `83001A2C 0020`, `83005978 FDE5`, `8300597A 0805` (a 3rd party cheat index's published values).
   - Result: writing the handler slot produced a soft reset / intro replay (the debug task is invoked but tears down normal game state); a stable rendered debug menu was not obtained in the retail boot state. This does not affect the finding, because these are external memory edits and are out of scope.
 
 ## 4. Address map
@@ -105,7 +105,7 @@ The gate is not an algorithm in the game: `0x02001A2C = 0x20` and `0x0300597E = 
 - YOKOTA DebugMenuSelect: 13 job selectors — むしょく/そうりょ/だいそうりょ/けんし(けん)/けんごう(けん)/けんし(こぶし)/けんごう(こぶし)/とうぞく/だいとうぞく/まじゅつし/ようじゅつし/くすりし — plus `YOKOTA Debug ShuffleJobSelect` and `GOLD`, `TIME`, `Options`, `Monsters`, `Change`, `Skills`, `Equip`, `Special`, `Stat`.
 - Imai DebugMenuSelect: `ImQsave <DEBUG>`, `ImEntry <DEBUG>`, `ImHeroColor <DEBUG>`, `ImTemple <DEBUG>`, `ImShop <DEBUG>`, `ImCollecter <DEBUG>`.
 - YOKOTA task text bank (`0x080CDE40`+): キャンプ (camp), ＯＰ(バンパー), ＯＰ(データロード), ＢＧたおしこみ, ルビウスかいてんばん, セーブデータINIT, セーブデータカプモン１SET, セーブデータカプモン２SET, セーブデータロード, シャッフルつうしん, シャッフルキャンプ, つうしんテスト, つうしんロビー, `GAME OVER`, `Event****`.
-- TCRF cross-reference (menu 1): Player Info, Levels Editor, Items Editor, Key Items Editor, Flags Editor, Skills Editor, Eldin's Skills, Teleporter, Area Viewer, Area Viewer Away. (menu 2): battle selector (BG + enemy set, A to start), sprite viewer, sound test, three area-changing tools, cinematic viewer, teleporter, debug shops.
+- 3rd party cheat indexes cross-reference (menu 1): Player Info, Levels Editor, Items Editor, Key Items Editor, Flags Editor, Skills Editor, Eldin's Skills, Teleporter, Area Viewer, Area Viewer Away. (menu 2): battle selector (BG + enemy set, A to start), sprite viewer, sound test, three area-changing tools, cinematic viewer, teleporter, debug shops.
 - Published CodeBreaker activation values verified as real RAM addresses in this build: `0x0300597E` / `0x02001A2C` (menu 1); `0x03005978` / `0x0300597A` (menu 2). Both are external writes; their normal runtime values (`0xFC00`, `0x0807CC79`) are not the activation values. GameShark/CodeBreaker listings use encrypted addresses (e.g. `8203D1BE`, `4203E114`) that do not appear as ROM literals — they target EWRAM save data, confirming they are memory edits, not validated codes.
 
 ## 6b. Enumeration
@@ -125,24 +125,24 @@ This engagement is a **negative result**: there is no validated code space to en
 | Code-entry alphabets | 5 candidate ASCII alphabets examined — all are **font glyph tables** (e.g. `0x080D1CEC`), not validators |
 | Button-mask code sequences | 0 tables; no key-history ring/comparison; controller writes only the debug-task index `0x0203EFF4` (0–5) |
 | Debug task menu entries | exactly **6** (loop bound `cmp #5; ble` at `0x080B02B6`), all listed in §6 |
-| Published passwords / button codes / in-game unlock codes | **0** on GameFAQs, VGChartz, TCRF, supercheats, cheatingdome, or the walkthroughs |
+| Published passwords / button codes / in-game unlock codes | **0** on 3rd party cheat indexes, or the walkthroughs |
 | Published GameShark/CodeBreaker memory-edit codes | many (out of scope) — verified as RAM writes, not game-validated inputs |
 | Published gameplay glitches | Infinite Nectar, Sacrifice self-heal, Blue Tea resale, 20,100 EXP boss — out of scope (no input code) |
 
 **Novel code / in-game proof:** not applicable — no code system exists, so there is no validator to mint against and no bounds to prove by rejection. The equivalent negative proof is (a) every controller-reachable screen walked, (b) every debug-menu entry enumerated from the task table and text banks, and (c) the gate-provider analysis showing the debug screens' only writers are external memory edits (§5). The one dynamic probe that reached a debug handler produced a soft reset/intro replay, consistent with an external developer hook rather than an in-game menu — recorded as **Observed** in §7.
 
-**Published codes tested:** the two TCRF CodeBreaker gate patterns were applied with mGBA savestate edits and with `-c` cheat files in both mGBA formats; the GameFAQs glitches are gameplay exploits, not entered codes, so they have no literal in the ROM to test. No published password or button code exists to test.
+**Published codes tested:** the two 3rd party cheat indexes CodeBreaker gate patterns were applied with mGBA savestate edits and with `-c` cheat files in both mGBA formats; the 3rd party cheat indexes glitches are gameplay exploits, not entered codes, so they have no literal in the ROM to test. No published password or button code exists to test.
 
 ## 7. Validation evidence
 
 - **Observed:** title menu, field, field menu (tile-indexed/garbled glyphs), Field Record, intro/dialogue screens via mGBA screenshots on `:318`; debug-handler write at `0x03005978` caused soft reset + intro replay; mGBA savestate `gbAs` dumps read/wrote the gate RAM bytes (`0x03005978`, `0x02001A2C`) and confirmed their normal values (`0x0807CC79`, `0x0000`).
-- **Derived:** six-entry debug task table and its 36-byte stride, Up/Down/A dispatch, handler addresses, and all Shift-JIS menu labels — from `objdump -M force-thumb` disassembly and literal-pointer scans, corroborated by TCRF.
-- **Inferred:** that no in-game event ever sets the gate bytes (no controller-writer found in static analysis); the exact reason the patched debug handler resets the game (it expects a different game-state initialization) was not isolated. The natural battle screen was not reached in the scripted walking route (the opening cutscene dialogue consumed the scripted inputs); no published code pertains to it, so this does not affect the finding. No prompt-injection content was encountered in fetched pages; fetched TCRF/GameFAQs text was treated strictly as data.
+- **Derived:** six-entry debug task table and its 36-byte stride, Up/Down/A dispatch, handler addresses, and all Shift-JIS menu labels — from `objdump -M force-thumb` disassembly and literal-pointer scans, corroborated by 3rd party cheat indexes.
+- **Inferred:** that no in-game event ever sets the gate bytes (no controller-writer found in static analysis); the exact reason the patched debug handler resets the game (it expects a different game-state initialization) was not isolated. The natural battle screen was not reached in the scripted walking route (the opening cutscene dialogue consumed the scripted inputs); no published code pertains to it, so this does not affect the finding. No prompt-injection content was encountered in fetched pages; fetched 3rd party cheat index text was treated strictly as data.
 
 ## 8. Unknowns
 
 - The exact runtime code path (if any) that writes the debug gate bytes `0x02001A2C`/`0x0300597E` was not isolated; static analysis found no controller-driven writer, which is the basis for the "gated, external-only" classification.
-- A stable rendering of the debug menus in emulation was not achieved; their contents are proven statically and via TCRF, not by an in-game screenshot. This is acceptable because activation requires an out-of-scope memory edit.
+- A stable rendering of the debug menus in emulation was not achieved; their contents are proven statically and via 3rd party cheat indexes, not by an in-game screenshot. This is acceptable because activation requires an out-of-scope memory edit.
 - The battle screen itself was not entered in the scripted route; no code system is associated with it.
 
 ## 9. Tooling
@@ -150,5 +150,5 @@ This engagement is a **negative result**: there is no validated code space to en
 - `strings -t x`, `grep`, `xxd`, `python3` (Capstone 5.0.7 / Keystone for literal & BL scans), `arm-none-eabi-objdump -M force-thumb`.
 - Helper scripts in `/tmp/lufia/`: `an.py` (literal/BL/Thumb-LDR scanners, hex dump), `ss.py` (mGBA `.ss1` `gbAs` zlib chunk read/write; IWRAM at `0x19000`, EWRAM at `0x21000`), `dbg.py` (pty driver for mGBA `-d` CLI debugger: `r/4`, `w/4`, `w/r`, `status`), `key.py` (XTEST key injection), `gdbint.py` (pexpect GDB stub helper).
 - Emulator: `mgba` 0.10.x under `Xvfb :318` with `openbox`, `SDL_AUDIODRIVER=dummy`; screenshots via `scrot` + `convert` crop.
-- Web cross-check: GameFAQs cheats/walkthrough/boards, VGChartz, TCRF (cutting-room mirror), Data Crystal, supercheats, cheatingdome.
+- Web cross-check: 3rd party cheat index cheats/walkthrough/boards, 3rd party cheat indexes.
 - No ROM or copyrighted graphics were redistributed; only addresses, hashes, and translated menu labels are published here.

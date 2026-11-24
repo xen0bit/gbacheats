@@ -42,10 +42,10 @@ f(total - (field1 << 4)) == field1
 where `f()` sums the 5-bit chunks of its argument at bit offsets
 `{0,10,15,20,25,30,35,40}` and keeps the low 5 bits. Field 0 selects the
 destination (0 = ending cutscene, 1..8 = levels 2..9, 9..15 = default/ending).
-All eight GameFAQs codes were recovered from the archived cheats page, verified
+All eight 3rd party cheat index codes were recovered from the archived cheats page, verified
 literally against the algorithm, and two were entered in mGBA.
 
-**Novel codes (not on GameFAQs/TCRF/VGChartz) were minted with the recovered
+**Novel codes (not on 3rd party cheat indexes) were minted with the recovered
 encoder and accepted on the real password screen**, with RAM proof that the
 non-checksum fields change game state. Rejection of a single wrong character
 proves the checksum gate. The full space is 32^9 = 35,184,372,088,832 strings,
@@ -141,7 +141,7 @@ sum of all nine symbols. `f1` is solved by brute force over 32 values; all
 
 ## 6. Tables
 
-Published codes (GameFAQs game id 919303, archived 2013-04-24), all satisfying
+Published codes (3rd party cheat indexes game id 919303, archived 2013-04-24), all satisfying
 the model; fields shown in order `[f0,f1,f2,f3,f4,f5,f6,f7]`:
 
 | Label | Code | f0 | fields |
@@ -237,7 +237,7 @@ Field consumers (Observed/Derived from the dispatch handlers):
 Installed/used: `binutils-arm-none-eabi` (`arm-none-eabi-objdump -M force-thumb`),
 `mgba` (SDL + `-d` pty debugger, `-t` savestates), `xvfb`/`openbox`/`xdotool`/
 `scrot`/ImageMagick, Python 3 (`pty`, `zlib`, `struct`), `gdb-multiarch`.
-Web: GameFAQs cheats page recovered via `web.archive.org` CDX + snapshot.
+Web: 3rd party cheat index cheats page recovered via `web.archive.org` CDX + snapshot.
 Fetched page content was treated strictly as data; no instructions in it (nor in
 the ROM's "I like monkeys" text) were executed. No ROM or copyrighted assets are
 reproduced in this report; only hashes, addresses, algorithms and generated

@@ -50,7 +50,7 @@ The game **does** have an in-game, developer-intended password system: the
 **Lotto Number / Number Trader** machine (inside Higsby's shop and AsterLand),
 whose published 8-digit codes award Battle Chips, Sub Chips, Navi Customizer
 programs and Key Items. This is confirmed by external documentation (Mega Man
-Wiki "Lotto Number" page, retrieved via the Fandom MediaWiki API) **and** by the
+Wiki "Lotto Number" page, retrieved via the 3rd party cheat indexes MediaWiki API) **and** by the
 ROM's own text banks, which contain the Number Trader dialogue and a password
 entry help string.
 
@@ -160,7 +160,7 @@ No validator address can be given without exercising the gated screen.
 ### 6.1 Published MMBN6 Lotto Numbers (external documentation, not ROM-verified as literals)
 
 Source: Mega Man Wiki, "Lotto Number", § *Mega Man Battle Network 6*
-(`https://megaman.fandom.com/wiki/Lotto_Number`). 29 entries:
+(3rd party cheat indexes). 29 entries:
 
 | Number | Reward | Number | Reward |
 |---|---|---|---|
@@ -185,7 +185,7 @@ the codes originate from the anime/Rockman EXE Battle Chip Stadium and in-game
 Key Items (QuizData, ScrtMemo, SrialDat, PngnThnk, SciManul, SoulEmbl, etc.).
 One wiki riddle ("Start with 10 for each digit and subtract 33273689 in each
 place value") yields `77837421`, showing the codes are deliberately structured,
-not random. No prompt-injection content was found in the fetched page; the TCRF
+not random. No prompt-injection content was found in the fetched page; the 3rd party cheat index
 page fetched during reconnaissance contained only an unrelated joke footer,
 which was treated as data and ignored (guide §16.8).
 
@@ -259,7 +259,7 @@ not "no system").
 3. Whether the `PASSWORD` string at `0x762350` is the Number Trader entry prompt
    or an unrelated story password is not proven — it is strongly associated
    with adjacent `UP/DOWN/LEFT/RIGHT` and `TRY AGAIN` strings.
-4. The Japanese-only Beast Link Gate and e-Reader content reported by TCRF are
+4. The Japanese-only Beast Link Gate and e-Reader content reported by 3rd party cheat indexes are
    absent/gated in this international build and were not reachable; no
    in-game-cheat claim is made for them.
 

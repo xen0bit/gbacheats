@@ -57,7 +57,7 @@ mGBA SDL keymap (RAM-verified by reading `0x04000130` while holding each key):
 
 **Clean baseline:** OPTIONS → `BackUP...` → `Clear Data` → `Yes` resets unlock flags. Baseline cycle is Easy/Normal/Hard/Deadly (artifact `clean_cycle.png`); after the code it is …Deadly → **Impossible** → Easy… (artifacts `ok_cycle.png`, `cyc_now.png`, `v4c_*.png`).
 
-Published sources consulted: GameFAQs FAQ by Kuno (2002-11-28, "Cheats: as of yet there aren't any"), gmania, games-cheats.org, cheatingdome.com, VGChartz, spmoves.com. The gmania/VGChartz wording resolves the ambiguity in the cheatingdome shorthand: the nine presses are **D-pad Left/Right**, not shoulder L/R (the shoulder interpretation was tested first and rejected — `shot_07`…`shot_12`).
+Published sources consulted: 3rd party cheat index FAQ by Kuno (2002-11-28, "Cheats: as of yet there aren't any"), 3rd party cheat indexes. The 3rd party cheat indexes wording resolves the ambiguity in the 3rd party cheat indexes shorthand: the nine presses are **D-pad Left/Right**, not shoulder L/R (the shoulder interpretation was tested first and rejected — `shot_07`…`shot_12`).
 
 ## 4. Address map
 

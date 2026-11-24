@@ -152,7 +152,7 @@ toggle byte[0x02025F94]; clear IO regs; svc SoftReset
 **6.1 Secrets (complete set, ROM table `0x0864C29C` / `0x0864C2B0`, IDs
 `0x0828BE9C`…).** All are `<LOCKED>` on a fresh save (observed).
 
-| ID | Name | Published aggregate (GameFAQs) |
+| ID | Name | Published aggregate (3rd party cheat indexes) |
 |---:|---|---|
 | 0 | armor upgrade | Enhanced Armor |
 | 1 | Strength Enhancement | Enhanced Strength |
@@ -209,7 +209,7 @@ checksum, no code-entry surface). The *cheat/unlock* space is:
 secrets-page name tables end at `MOVIE SHOT 14` / `-1`, the cheat dispatch has
 exactly nine `cmp` branches, and every published GBA "unlockable" maps to one of
 these entries. The three named cheat unlocks and the 14 individually named movie
-shots are ROM detail absent from the aggregated GameFAQs list.
+shots are ROM detail absent from the aggregated 3rd party cheat index list.
 
 **Novel code.** Not applicable and proven so: there is no generator, no
 validator and no input surface that accepts a code (counts below). Per §0.2 the
@@ -310,9 +310,8 @@ fabricated "code".
   ImageMagick `convert`; mGBA `-d` driven through a Python FIFO bridge.
 * Python savestate decoder: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte
   state; EWRAM at `+0x21000`, IWRAM at `+0x19000`.
-* Web sources (treated as data, never instructions): archived GameFAQs GBA
-  cheats page (2018-12-29 snapshot) — lists only the five unlockables; GameFAQs/
-  IGN/GameRevolution console pages — text codes that do not apply to this SKU.
+* Web sources (treated as data, never instructions): archived 3rd party cheat indexes GBA
+  cheats page (2018-12-29 snapshot) — lists only the five unlockables; 3rd party cheat indexes console pages — text codes that do not apply to this SKU.
   No prompt-injection content was encountered.
 * Analyst scripts and screenshots were kept in `/tmp/spidermanmovie/`.
   All emulator processes and all generated `.sav`/`.ss*` files were removed from

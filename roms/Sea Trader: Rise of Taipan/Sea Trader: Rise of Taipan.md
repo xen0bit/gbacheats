@@ -43,10 +43,9 @@ menu** in this game. What the game does have is:
 1. **A genuine, unpublished developer secret** (§6b): entering `GODZILLA` as
    **both** the captain name and the ship name on the "Pirate Setup" screen
    satisfies a hidden validator at `0x080052C0` and invokes a special routine.
-   No published cheat list (GameFAQs, VGChartz, TCRF, gamegenie.com,
-   cheathappens) mentions it. It is reproduced end-to-end in the emulator.
+   No published cheat list (3rd party cheat indexes) mentions it. It is reproduced end-to-end in the emulator.
 2. **Eight in-game award medals** (§6), three of which are absent from the
-   published GameFAQs list. These are ordinary achievement unlocks (§16.18),
+   published 3rd party cheat index list. These are ordinary achievement unlocks (§16.18),
    not codes.
 3. All other published "cheats" are **CodeBreaker/GameShark memory-edit
    codes**, which are out of scope.
@@ -140,7 +139,7 @@ in the ROM is the secret check above; there is no general code validator.
 
 ### 6.1 Award medals (complete set of 8; derived from pointer table + strings)
 
-| # | Medal | Unlock condition | On GameFAQs? |
+| # | Medal | Unlock condition | On 3rd party cheat indexes? |
 |---:|---|---|---|
 | 0 | Green Grocer | Ship 3,000 units of Grocery commodities | **No** |
 | 1 | Materials Master | Ship 3,000 units of Material commodities | Partial ("Materials Award") |
@@ -160,10 +159,10 @@ not codes; no controller input sets them.
 
 | Source | Claim | Verification |
 |---|---|---|
-| GameFAQs cheats | 5 "cheats" | Actually the 5 award milestones above — no codes |
-| GameFAQs strategy guide (20856) | `02001FC8` max taels | GameShark memory edit, out of scope; address wrong for this build |
-| gamehacking.org / almarsguides / CodeBreaker lists | `999,999,999` account etc. | CodeBreaker/GameShark memory edits — out of scope |
-| gamegenie.com / cheathappens / TCRF / VGChartz | — | No password, button code, or debug menu published |
+| 3rd party cheat index cheats | 5 "cheats" | Actually the 5 award milestones above — no codes |
+| 3rd party cheat indexes strategy guide (20856) | `02001FC8` max taels | GameShark memory edit, out of scope; address wrong for this build |
+| 3rd party cheat indexes / CodeBreaker lists | `999,999,999` account etc. | CodeBreaker/GameShark memory edits — out of scope |
+| 3rd party cheat indexes | — | No password, button code, or debug menu published |
 
 ## 6b. Enumeration
 

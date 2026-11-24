@@ -32,7 +32,7 @@ reachable by controller input.** This is a negative result, proved by exhausting
 the relevant spaces (§0.2 point 5), not by failing to find a code.
 
 The only "debug"-named artifact is a block of 29 graphic-resource name strings at
-`0x0801DC9C..0x0801DE7E`, ending in `%DEBUG` (`0x0801DE78`). TCRF documents this
+`0x0801DC9C..0x0801DE7E`, ending in `%DEBUG` (`0x0801DE78`). 3rd party cheat indexes document this
 block as "hidden development-related text" for a debug menu. Static analysis
 shows it is a **resource-manifest string table**, not a menu: `%DEBUG` has exactly
 **one** reference in the whole ROM — a 32-bit data pointer at `0x08007C4C` inside
@@ -45,7 +45,7 @@ The game has 1000 fixed puzzles in 20 LEVELs x 50 puzzles per difficulty group
 (NORMAL MODE) plus a 20-slot user puzzle editor (ORIGINAL MODE). The R-button
 HELP function highlights where a chosen digit already appears (and, on a second
 A press, shades impossible cells); it does **not** reveal the solution. No
-published codes exist for this title on GameFAQs, ChapterCheats, TCRF, or any
+published codes exist for this title on 3rd party cheat indexes, or any
 Japanese review site found; therefore there is no published literal to verify,
 and none to exceed.
 
@@ -88,7 +88,7 @@ and none to exceed.
 | `0x080104FC` | func | puzzle-select input handler (LEVEL 0..19 via L/R, puzzle 0..49 via D-pad) |
 | `0x08014780`, `0x080148F8` | func | other menu/editor input handlers |
 | `0x0800E59C` | func | diagnostic "read all buttons into array" routine; **no callers** |
-| `0x0801DC9C..0x0801DE7E` | data | 29 NUL-terminated `%...` graphic-resource names (TCRF's "debug menu text") |
+| `0x0801DC9C..0x0801DE7E` | data | 29 NUL-terminated `%...` graphic-resource names (a 3rd party cheat index's "debug menu text") |
 | `0x0801DE78` | data | `%DEBUG` string — the last of those 29 names |
 | `0x08007BDC..0x08007C4C` | data | pointer table to those 29 names; `%DEBUG` pointer is the final entry |
 | `0x08007A70..0x08007BD2` | func | resource-registration loop; calls `FUN_0800925C(obj,name,id,1)`; `%DEBUG` registered with `id=0` |
@@ -169,9 +169,9 @@ negative result** with explicit space sizes and counts (§0.2 point 5):
   listed above.
 * **Empirical sequences tested:** 9 (listed in §3). Result: 0 new screens,
   0 hidden flags — every sequence resolved to a normal menu transition.
-* **Published codes:** GameFAQs cheats page (archived snapshot 2020-03-11) lists
-  **no** cheats for Dr. Sudoku; ChapterCheats lists none; TCRF documents only the
-  development text and regional differences, no codes; web/GameFAQs/VGChartz-
+* **Published codes:** 3rd party cheat index cheats page (archived snapshot 2020-03-11) lists
+  **no** cheats for Dr. Sudoku; 3rd party cheat index lists none; 3rd party cheat indexes document only the
+  development text and regional differences, no codes; web/3rd party cheat index-
   style queries and a Japanese review of the JP release (*Minna no Soft Series:
   Numpla Advance*) returned no password/button code. Published-code count = 0.
 * **Novel code / bounds by rejection:** not applicable — minting a code requires

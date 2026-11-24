@@ -14,7 +14,7 @@
 | Entry word | `0xEA00002E` (stock `b +0xB8` → `0x080000C0`) |
 | Fixed byte `0xB2` / complement `0xBD` | `0x96` / `0x96` |
 | Stored header checksum `0xBE` | `0x0000`; recomputed value `0x0096` |
-| Save type | EEPROM 4 kbit (mGBA creates a 512-byte `.sav`; matches the GBAtemp database entry "Eeprom v122 - 4 kbit") |
+| Save type | EEPROM 4 kbit (mGBA creates a 512-byte `.sav`; matches the 3rd party cheat index database entry "Eeprom v122 - 4 kbit") |
 
 **Patch / trainer check.** The embedded GBA-header scan (Nintendo logo at `+4`) finds exactly one
 header, at file offset 0. The entry branch is the stock one, the fixed byte and complement byte are
@@ -42,7 +42,7 @@ The pause menu is `Game Paused → Continue / Quit` (Continue = text id 22, Quit
 screen is `Fouls: On/Off`, `Throw ins: On/Off`, `Game Time: 5/10/15/20/2 Mins`. No
 Hex keyboard, no code field, no "enter password" prompt exists in the UI resource set.
 
-The single published GBA "cheat" found (chaptercheats: *win five games in a row to unlock World Cup
+The single published GBA "cheat" found (3rd party cheat indexes: *win five games in a row to unlock World Cup
 mode*) is not an input code; the ROM contains no World Cup mode label in any menu list, so the claim
 could not be tied to any UI in this image and is recorded as unverified.
 
@@ -240,13 +240,13 @@ was checked (131/131 blocks, 19/19 lists), and id 23 occurs in none.
 
 ### 6b.5 Published codes checked
 
-* GameFAQs GBA cheats page: HTTP 403; Wayback availability API returns no snapshot for
-  `gamefaqs.gamespot.com/gba/581719-david-beckham-soccer/cheats`.
-* chaptercheats GBA page: one entry, "Win five games in a row to unlock World Cup mode" — a
+* 3rd party cheat indexes GBA cheats page: HTTP 403; Wayback availability API returns no snapshot for
+  3rd party cheat indexes.
+* 3rd party cheat indexes GBA page: one entry, "Win five games in a row to unlock World Cup mode" — a
   gameplay condition, not an input code.
-* TCRF: no article for this GBA title; the only search hit is the unrelated *Go! Go! Beckham!*
+* 3rd party cheat indexes: no article for this GBA title; the only search hit is the unrelated *Go! Go! Beckham!*
   GBC/other title.
-* cheatcc: 403.
+* 3rd party cheat indexes: 403.
 * Verified literals: no published GBA password exists, so there is no literal to search. The
   PS2/PC "Continue Game → Password" lists are for a different SKU (same license, different engine)
   and were not applied.
@@ -275,7 +275,7 @@ was checked (131/131 blocks, 19/19 lists), and id 23 occurs in none.
 * The Password label was inherited from the shared multi-platform text database and left unused
   because the GBA build saves to 4 kbit EEPROM (New Game / Continue Game) and therefore needs no
   password. This is consistent with all observations but is an inference about developer intent.
-* The chaptercheats World Cup unlock belongs to another platform/SKU; the GBA image contains
+* The 3rd party cheat indexes World Cup unlock belongs to another platform/SKU; the GBA image contains
   "World Cup" only inside David Beckham's biography text, never as a menu label.
 
 ## 8. Unknowns

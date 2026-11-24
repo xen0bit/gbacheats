@@ -19,7 +19,7 @@ second image, trainer, cracktro, or patch stub. Header checksum is `0x0000` and
 the complement byte is `0x88` (recomputed from bytes `0xA0`–`0xBC` it should be
 `0xA1`), so the header was normalized/rebuilt at some point; the logo, fixed
 `0x96` and stock entry branch are intact. CRC32 `5E8B2644` matches the USA SKU
-listed at GameHacking.org.
+listed at 3rd party cheat indexes.
 
 ## 2. Executive summary
 
@@ -27,8 +27,7 @@ The developer-intended cheat surface is a **7-letter password system** on the
 in-game PASSWORD screen; there is no need for, and no scope here for,
 GameShark/CodeBreaker memory codes. The on-screen keyboard shows 17 letters
 (A–Q) but only eight letter codes (`1`–`8`: **B D F G J L M P**) can pass the
-validator. All 14 codes published at GameFAQs-derived lists, GameGenie,
-SuperCheats, VictoryCheats, CheatsCorner and mariogba.nl are present in the ROM
+validator. All 14 codes published at 3rd party cheat index-derived lists, 3rd party cheat indexes are present in the ROM
 and accepted by the reversed validator.
 
 The accepted space is **1,792 codes** out of `8^7 = 2,097,152` representable
@@ -166,7 +165,7 @@ recorded as **unverified / wrong SKU**, per §16.11.
 * **Distinct effects:** 120 `(level_code, lives)` pairs; all level codes
   `0…14` occur; lives range `2…9`. 224 accepted codes begin with P.
 * **Novel code (observed in emulator):** `PBBDJLP` — codes
-  `08 01 01 02 05 06 08`, not on GameFAQs/GameGenie/VGChartz/TCRF/SuperCheats
+  `08 01 01 02 05 06 08`, not on 3rd party cheat indexes
   or in the 882-code blog list. Entered on the real PASSWORD screen:
   RAM `0x030027DC = 1` (level 1-2) and `0x030020A2 = 9` (nine lives), versus
   published `FJLJBDG` → level 1, lives 6. Screenshot: `pw_novel.png`.

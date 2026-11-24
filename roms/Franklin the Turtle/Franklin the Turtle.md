@@ -21,11 +21,11 @@
 | SHA-1 | `25f215af94412d1b5a7026fceab1a3b6cd2a9e69` |
 | SHA-256 | `0c1f565afc9d39786de4451d5dfffebf8d67a268525188c397cb9bfe05ece83b` |
 
-**Phase 0 result:** one embedded GBA header only (156-byte Nintendo-logo scan found exactly one hit, at file `0x0`, title `FRANKLIN` / code `BFKE`). Stock entry word, no cracktro, no appended trainer, no multiboot/2-in-1 payload. The `CHEATER` string found later is an in-game developer cheat, not a ROM patch. Multiple regional releases exist (USA + Europe Rev1/Rev2 per GameGear Archive); all addresses below are for **this exact BFKE image / SHA-256 above**.
+**Phase 0 result:** one embedded GBA header only (156-byte Nintendo-logo scan found exactly one hit, at file `0x0`, title `FRANKLIN` / code `BFKE`). Stock entry word, no cracktro, no appended trainer, no multiboot/2-in-1 payload. The `CHEATER` string found later is an in-game developer cheat, not a ROM patch. Multiple regional releases exist (USA + Europe Rev1/Rev2 per 3rd party cheat indexes); all addresses below are for **this exact BFKE image / SHA-256 above**.
 
 ## 2. Executive summary
 
-This children's licensed title (Interactive Vision / Artex Studios, 2005) has **no published cheat codes** (CheatingDome and VGChartz both list zero; GameFAQs has a walkthrough only), but it does contain **one undocumented developer cheat**:
+This children's licensed title (Interactive Vision / Artex Studios, 2005) has **no published cheat codes** (3rd party cheat indexes both list zero; 3rd party cheat indexes have a walkthrough only), but it does contain **one undocumented developer cheat**:
 
 > **Enter `CHEATER` as the name of a new profile.**
 
@@ -58,7 +58,7 @@ OPQRSTUVWXYZ!-
 
 (Font quirk: several punctuation glyphs render as accented-looking letters on screen; the stored bytes are the ASCII values above, confirmed by reading the name buffer back as `43 48 45 41 54 45 52 00`.)
 
-Published codes checked: none exist for this SKU (see §2). The `CHEATER` string itself is not documented on GameFAQs, VGChartz, TCRF, CheatingDome, or in web search results as of 2026-11-17.
+Published codes checked: none exist for this SKU (see §2). The `CHEATER` string itself is not documented on 3rd party cheat indexes, or in web search results as of 2026-11-17.
 
 ## 4. Address map
 
@@ -151,7 +151,7 @@ Effect decoding: the 20 bytes at `0x03001F6D + 12*i` are per-level unlock flags.
 
 **Closed-set proof.** `strncmp` (`0x0803AA88`) has exactly **one** literal reference in the image (`0x080045E8`), paired with the literal at `0x080045E4` → `"CHEATER"`. No `memcmp`, inline byte loop, or second comparison function is reachable from the name buffer. The complete UI text bank and the debug literal bank were dumped; neither contains any other short uppercase word used as a comparison literal. Therefore exactly one code exists.
 
-**Novel code.** §0.2 asks for a generated code absent from published lists. Here the "algorithm" is a single equality against one hard-coded literal — there is no field, checksum, or lookup table to vary, so **no second valid spelling can be minted** (and claiming one would be false). The deliverable instead is the **discovery and verification of the undocumented code itself**: `CHEATER` is absent from every published list checked (GameFAQs, VGChartz, TCRF, CheatingDome, web search) yet is accepted on the real screen and produces a visible, RAM-proven state change. This is the strongest possible enumeration result for a one-entry code space.
+**Novel code.** §0.2 asks for a generated code absent from published lists. Here the "algorithm" is a single equality against one hard-coded literal — there is no field, checksum, or lookup table to vary, so **no second valid spelling can be minted** (and claiming one would be false). The deliverable instead is the **discovery and verification of the undocumented code itself**: `CHEATER` is absent from every published list checked (3rd party cheat indexes, web search) yet is accepted on the real screen and produces a visible, RAM-proven state change. This is the strongest possible enumeration result for a one-entry code space.
 
 **Bounds proven by rejection.** `CHEATERX` (wrong 8th byte, so `strncmp` differs) and `CHEATE` (short) were both typed on the real keyboard and saved; the level grid kept all three padlocks and the 20 unlock flags at `0x03001F6D+12*i` remained `00`. A trailing-space variant `CHEATER ` would also fail at byte 7 (`0x20` vs `0x00`) by the same comparison — this follows directly from the validator model.
 

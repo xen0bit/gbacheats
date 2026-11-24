@@ -122,7 +122,7 @@ Button-code space: live code has no key-history buffer or sequence matcher. Scan
 
 **Exhaustive enumeration (§16.9).** The validator was reimplemented from the ROM bytes and run over all 100,000 inputs: **exactly 5 accepted** — `07913, 16200, 29801, 62972, 81395` — and **99,995 rejected**. This turns "I found 5 codes" into "exactly 5 codes exist".
 
-**Novel / unpublished codes.** `16200` and `81395` appear in this ROM's table but in **no published list found** (GameFAQs/VGChartz/TCRF/chaptercheats — the latter explicitly says "No Passwords" for this GBA SKU; the three other codes are published only for the different game *Driven*). They are therefore codes absent from every published list. They were **not entered in-game**: the password screen that consumes them is unreachable (0 BL / 0 pointers; decomp `src/dead/`; RAM dials never leave zero on any walked screen). Claiming an in-game effect for them would be false; the predicted effect above is **Derived** from the dead routine, not Observed.
+**Novel / unpublished codes.** `16200` and `81395` appear in this ROM's table but in **no published list found** (3rd party cheat indexes — the latter explicitly says "No Passwords" for this GBA SKU; the three other codes are published only for the different game *Driven*). They are therefore codes absent from every published list. They were **not entered in-game**: the password screen that consumes them is unreachable (0 BL / 0 pointers; decomp `src/dead/`; RAM dials never leave zero on any walked screen). Claiming an in-game effect for them would be false; the predicted effect above is **Derived** from the dead routine, not Observed.
 
 **Bounds proof by rejection.** 99,995 of 100,000 inputs are rejected by the exact 5-byte compare. The in-game rejection path exists in the dead routine (fail sfx `0x19`, `gCheatCodeWasValid = 0`, no flag write) but cannot be reached on a retail screen; the nearest live observation is that all tested button sequences left `gCheatFlags` and `gCheatCodeWasValid` unchanged at zero.
 
@@ -150,7 +150,7 @@ Button-code space: live code has no key-history buffer or sequence matcher. Scan
 - `ss.py` — parse PNG `gbAs` zlib chunk (offset `0x21000` = EWRAM for this 4 MiB ROM).
 - `gba.py`, `walk.py` — XTEST input on `DISPLAY=:316`, savestate capture and RAM reads.
 - mGBA 0.10.5 SDL under Xvfb `:316` + openbox, screenshots via `scrot`.
-- Cross-reference only: `github.com/shohamc1/heat2002` matching decomp (SHA-1 verified). Web sources checked: GameFAQs-derived cheat aggregators, GameHacking.org, chaptercheats, gamegenie/53lu, ByteMatch. Fetched pages contained no prompt-injection payload; all were treated as data.
+- Cross-reference only: `github.com/shohamc1/heat2002` matching decomp (SHA-1 verified). Web sources checked: 3rd party cheat index-derived cheat aggregators, 3rd party cheat indexes, gamegenie/3rd party cheat indexes. Fetched pages contained no prompt-injection payload; all were treated as data.
 - No ROM or copyrighted assets are reproduced here — only hashes, addresses, algorithms, and the numeric codes themselves.
 
 ---

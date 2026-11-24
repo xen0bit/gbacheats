@@ -28,7 +28,7 @@ Positive evidence for the negative:
 * **The hyperlink graph is closed:** 3,833 contiguous page IDs `0x0001`–`0x0EF9`; 6,566 `<a>` links, 616 `<i>` image refs, 124 image-map `href` links. All 3,829 "content" pages are reachable from the start page; the only 4 pages not reachable by a hyperlink are the four system-UI pages (Options `0002`, Main Menu `0017`, Bookmarks `0018`, Credits `0019`), all reached by the START menu. There are no unlinked/orphan pages and no broken link targets.
 * **The input path has no code matcher.** The main loop tests each key with a single-bit `and` and dispatches one event per key; there is no stored sequence, no multi-button gate, no comparison against a constant mask. The only user-produced strings are four-character *page IDs parsed from on-ROM hyperlinks*, never typed by the player.
 * **Keyword and table searches are empty** for password/cheat/debug/unlock in ASCII, `+0x20`, and UTF-16; no equal-length NUL-padded password table and no button-mask sequence table exist.
-* Published-code search found **no published codes for this SKU**: GameFAQs has no cheats listing (cheats URL 403; Wayback has zero snapshots), TCRF and VGChartz have no code page. Nothing to verify in ROM. **No GameShark/CodeBreaker codes are reported** (out of scope).
+* Published-code search found **no published codes for this SKU**: 3rd party cheat indexes have no cheats listing (cheats URL 403; Wayback has zero snapshots), 3rd party cheat indexes have no code page. Nothing to verify in ROM. **No GameShark/CodeBreaker codes are reported** (out of scope).
 
 ## 3. How to reproduce
 
@@ -120,7 +120,7 @@ This section bounds the negative result by enumerating every plausible code spac
 | Button combinations in emulator | held simultaneously on Content Guide: Select; L+R; L+R+Start+Select; A+B+Start+Select; Up+Down+Left+Right+B; L+R+A+B; R+A+B | page ID/title unchanged except where Start alone legitimately opens Options (`0002`); **no hidden screen, no debug menu** |
 | Hyperlink/page space | 12-byte page table at `0xE818`; BFS over all `<a>`, `<i>`, `href` edges from `0001` | **3,833 pages** (`0001`–`0EF9`, zero gaps); 6,566+616+124 links; 3,829 reachable from start; 4 system pages reachable via START; **0 orphans once system pages are included; 0 dangling link targets** |
 | Font/tile-indexed text | searched every base offset `0..255` for 8-bit and 16-bit encodings of `PRESS START`, `COPYRIGHT`, `POCKET PROFESSOR`, etc. | only literal ASCII `POCKET PROFESSOR` at `0x21FCB` and `KwikNotes` at `0x1ABED`; no encoded hidden strings. In-game text is ASCII markup and was decoded in full; title lettering is bitmap artwork |
-| Published codes | web search + GameFAQs (403 + Wayback "no snapshots"), TCRF, VGChartz, gbaemulator/cheat sites (fetched text treated strictly as data) | **no published code list exists for this SKU**; there is consequently no literal to verify in ROM |
+| Published codes | web search + 3rd party cheat indexes, gbaemulator/cheat sites (fetched text treated strictly as data) | **no published code list exists for this SKU**; there is consequently no literal to verify in ROM |
 | Save-unlockables | EEPROM dump (512 B), bookmark slots | 60 bookmark slots, all `0xFFFF` on a fresh save; bookmarks are a navigation convenience, not a code/unlock system |
 
 **Conclusion of enumeration:** the code space is empty (size 0). There is no novel code to mint, because there is no validator, alphabet, table or key sequence to exercise. This is a *bounded* negative: every space that could contain a developer-intended cheat was searched with the counts above, and every reachable screen was observed with RAM evidence.
@@ -144,7 +144,7 @@ This section bounds the negative result by enumerating every plausible code spac
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for the key reader, main loop and dispatcher.
 * Capstone 5.0.7 (Thumb) for PC-relative literal-pointer scans.
 * mGBA (SDL) on `Xvfb :315` + `openbox`; `xdotool` XTEST events; `scrot` + ImageMagick crop; `Shift+F1` savestates for RAM evidence.
-* Web: search-engine snippets plus direct fetches of GameFAQs (403), the Wayback availability API, TCRF and VGChartz; fetched text treated as untrusted data (no instructions followed).
+* Web: search-engine snippets plus direct fetches of 3rd party cheat indexes, the Wayback availability API, 3rd party cheat indexes; fetched text treated as untrusted data (no instructions followed).
 * No copyrighted assets or ROM bytes are redistributed here; only hashes, addresses and the record of the analysis are published.
 
 ## 10. Prompt-injection / data hygiene

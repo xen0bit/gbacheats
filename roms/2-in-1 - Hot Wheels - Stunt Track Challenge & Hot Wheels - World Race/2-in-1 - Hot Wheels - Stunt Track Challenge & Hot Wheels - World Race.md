@@ -277,7 +277,7 @@ arithmetic or checksum was found, and a one-symbol mutation is rejected.
 
 ### 6.1 World Race — published codes, decoded
 
-Source: chaptercheats "Level Passwords for Hot Wheels World Race". All 25 decode with
+Source: 3rd party cheat indexes "Level Passwords for Hot Wheels World Race". All 25 decode with
 `zero_violations == []` and round-trip exactly through `encode(payload(code)) == code`.
 The right-hand column is the 20-bit payload as decimal set bits, then the effect description from
 the source.

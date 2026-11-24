@@ -30,7 +30,7 @@ bits and per-field ranges, and on success writes a start-state struct at
 `0x03001860` (plus `0x030017D4`, `0x03001500`). Its encoder counterpart at
 `0x08006530` generates the end-of-level password.
 
-All 19 published codes found on SuperCheats/Cheat Happens validate against the model;
+All 19 published codes found on 3rd party cheat indexes validate against the model;
 two were confirmed dynamically on the real ROM screen with GDB breakpoints. The full
 space is **33,554,432 raw codes, of which 79,360 are accepted**, representing
 **39,680 distinct payload states** (2 spellings per state — one unused bit). A
@@ -288,7 +288,7 @@ the menu walk. The only "hidden" character is the save-bit-gated Silver Ranger.
 * `ss.py` to uncompress the mGBA `.ss1` `gbAs` PNG chunk and diff RAM;
   `pw.py` for the decoder/validator/encoder; `key.py`, `enter.py` for XTEST input;
   `findldr.py` for PC-relative literal scans.
-* Web: SuperCheats, Cheat Happens, Wikipedia, RangerWiki (published codes and
+* Web: 3rd party cheat indexes (published codes and
   gameplay context). Fetched pages were treated as data only.
 
 ## 10. Legal / scope note

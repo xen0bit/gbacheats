@@ -29,7 +29,7 @@ Queue position 460. Analyst run on display `:315`, work dir `/tmp/mmbn4red`.
 | MD5 | `d0dee5c06972cb072391cd968a248d52` |
 | SHA-1 | `a97e96a7da03abd70f7953328e511b9fa29179f1` |
 | SHA-256 | `b04adfca9cae47fc9241e70c88e49b16ee9e75d796ab4ee90940401a6c1d5514` |
-| Internal build stamps | `ROCKMANEXE4 20031022` at 0x0489E4; US build time at 0x113CB8 (TCRF) |
+| Internal build stamps | `ROCKMANEXE4 20031022` at 0x0489E4; US build time at 0x113CB8 (3rd party cheat indexes) |
 
 **Phase 0 / patch check.** Full Nintendo-logo scan (156-byte logo at header+4) found exactly **one** GBA header, at file offset 0x0. There is no multi-game image, no appended trainer, and no scene cracktro strings (`SUNHORS`, `CRC BANDIT`, etc. all absent). The crt0 at 0x080000C0 is ordinary Capcom code (ROM copy loops, LDR literal pools, `b` to `0x080001AC`). Header checksum `0x0000` with complement `0x78` is the normal Capcom/GBA rebuilt-header artifact (§16.1), not evidence of a patch. **Verdict: stock US Rev.00 retail image, no trainer.**
 
@@ -41,9 +41,9 @@ This game has two families of developer-intended cheats:
 
 1. **NumberMan Trader "Lotto Numbers"** — eight decimal digits entered on an in-game keypad at Higsby's shop; each valid number grants one Battle Chip, Sub Chip, or NaviCust Program, once per save. This is the primary password system. The community-agreed list contains **exactly 32** codes, and the save format allocates **exactly 32 flag bits** for them. The accepted set is therefore a **closed 32-element table**, not an algorithmic field space: there is no 33rd "novel" code to mint, and any other 8-digit input should be rejected.
 
-2. **Battle-chip command codes** — button sequences held/input while using VarSword, NeoVariSword, and Z Saver, documented on GameFAQs / TREZ (Long Sword, Life Sword, Cross Sword, etc.).
+2. **Battle-chip command codes** — button sequences held/input while using VarSword, NeoVariSword, and Z Saver, documented on 3rd party cheat indexes (Long Sword, Life Sword, Cross Sword, etc.).
 
-A title-screen code (`Left + L + Start` → BassXX) is documented by TCRF **only for the Wii U Virtual Console build**; on this GBA image it does not exist as a feature (§2, "Validation evidence").
+A title-screen code (`Left + L + Start` → BassXX) is documented by 3rd party cheat indexes **only for the Wii U Virtual Console build**; on this GBA image it does not exist as a feature (§2, "Validation evidence").
 
 **Text is not ASCII.** All in-game strings are stored in a custom 1-byte font/tile-index encoding (community `bn4-utf8.tbl`), and much of the script is inside LZ77 blocks. That is why `strings` returns essentially zero UI text and why literal code searches fail. I decoded the alphabet, decoded text banks, and confirmed eight published lotto numbers **literally inside this ROM's compressed text banks** as in-game hint text. The remaining codes are not present as ASCII/u32/BCD/custom-encoded literals anywhere in the 8 MiB image; they are produced by the game's own code path, which I did not isolate (see §8).
 
@@ -110,7 +110,7 @@ Idle `KEYINPUT = 0x03FF`; holding `Return` gave `0x03F7`, confirming Start = bit
 
 ## 6. Tables
 
-**32 published Lotto Numbers (verified against ROM where possible).** "ROM ✓" = the literal was decoded from an LZ77 block of *this* image; "published only" = present in multiple independent published lists but not found as a literal in this ROM. All 32 are listed identically for Red Sun and Blue Moon on GameFAQs, TREZ wiki, MMKB, and the Steam guide.
+**32 published Lotto Numbers (verified against ROM where possible).** "ROM ✓" = the literal was decoded from an LZ77 block of *this* image; "published only" = present in multiple independent published lists but not found as a literal in this ROM. All 32 are listed identically for Red Sun and Blue Moon on 3rd party cheat indexes.
 
 | # | Reward | Code | ROM literal |
 |---:|---|---|---|
@@ -147,7 +147,7 @@ Idle `KEYINPUT = 0x03FF`; holding `Return` gave `0x03F7`, confirming Start = bit
 | 31 | GunSolEX G | 74293099 | published only (omitted from JP guidebooks) |
 | 32 | Z Saver Z | 72794137 | published only (found 2022 by GreigaMaster; omitted from all guides) |
 
-**Button command codes (GameFAQs / TREZ "Command Codes"; documented, not ROM-verified):**
+**Button command codes (3rd party cheat indexes "Command Codes"; documented, not ROM-verified):**
 
 | Chip | Input while holding A | Effect |
 |---|---|---|
@@ -161,7 +161,7 @@ Idle `KEYINPUT = 0x03FF`; holding `Return` gave `0x03F7`, confirming Start = bit
 | NeoVari | ↑, B, ↓, B, ↑, B | DoubleLife |
 | Z Saver | after third slash: ← then B | SuperSonic |
 
-**Title-screen code (VC only, not GBA):** `Left + L + Start` → BassXX in Black Earth 2 via a blank Mod Card (TCRF, under *Virtual Console Differences*). Tested on this GBA image (combo `Left + a + Return` at "PRESS START"): it behaves as a normal Start press; no Mod Card/BassXX surface exists in the GBA build.
+**Title-screen code (VC only, not GBA):** `Left + L + Start` → BassXX in Black Earth 2 via a blank Mod Card (3rd party cheat indexes, under *Virtual Console Differences*). Tested on this GBA image (combo `Left + a + Return` at "PRESS START"): it behaves as a normal Start press; no Mod Card/BassXX surface exists in the GBA build.
 
 ## 6b. Enumeration
 
@@ -191,7 +191,7 @@ Idle `KEYINPUT = 0x03FF`; holding `Return` gave `0x03F7`, confirming Start = bit
 - The 32 accepted values are a fixed table and all other 8-digit inputs are rejected. This follows from the save flag count and published consensus but was **not** confirmed by feeding a rejected input to the game.
 - Button-command inputs are a per-chip state machine, inferred from the failure to find a key-mask array.
 
-**Fetched-page hygiene.** GameFAQs (403 direct, read via `web.archive.org` 2024 capture), TCRF mirror, TREZ wiki, Steam guide, MMO forum, `MMBN-Table-Files`, and `MMBNSaveEditor` were fetched as **data**. No prompt-injection payload or instruction-like content was found in the fetched pages in this run; no fetched instruction was acted upon. (§16.8)
+**Fetched-page hygiene.** 3rd party cheat indexes (403 direct, read via `web.archive.org` 2024 capture), 3rd party cheat index mirror, 3rd party cheat indexes, MMO forum, `MMBN-Table-Files`, and `MMBNSaveEditor` were fetched as **data**. No prompt-injection payload or instruction-like content was found in the fetched pages in this run; no fetched instruction was acted upon. (§16.8)
 
 ## 8. Unknowns
 

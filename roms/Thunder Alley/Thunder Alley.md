@@ -23,7 +23,7 @@ Konami sequence `↑ ↑ ↓ ↓ ← → ← → B A`. It unlocks the fourth mai
 **Demolition Derby** (a "Stay Alive!" demolition mode). The game itself ships the
 hint as plaintext in the ROM at `0x0802A0BC` ("Secret Gameplay Mode / from the
 Title Screen / Up, Up, Down, Down / Left, Right, Left, Right / B Button, A Button"),
-and published lists (SuperCheats, cheatingdome, a German emulation wiki) agree.
+and published lists (3rd party cheat indexes, a German emulation wiki) agree.
 
 The validator is a **fixed 10-mask sequence matcher** at `0x0800F4E4`. It compares
 the *newly-pressed key mask* against a 10-entry `u16` table at `0x08062FD8` using
@@ -35,7 +35,7 @@ emulator (§6b), with in-game proof (flag byte and menu screenshot).
 There is **no password system, no alphabets/tables of textual codes, no checksum
 and no debug menu reachable from retail input** in this image. The accepted outcome
 space is a single flag bit. GameShark/CodeBreaker/Action Replay codes listed on
-GameHacking.org are external cheat-device codes and were **not** analysed (out of
+3rd party cheat indexes are external cheat-device codes and were **not** analysed (out of
 scope).
 
 ## 3. How to reproduce
@@ -142,10 +142,10 @@ Published recon (treated as data):
 
 | Source | Claim | ROM verification |
 |---|---|---|
-| SuperCheats | "At the Title screen input Up, Up, Down, Down, Left, Right, Left, Right, B, A" → unlock Demolition Mode | Exact sequence present at `0x08062FD8`; accepted with `flag=1` |
-| cheatingdome | "Demolition Mode" | Observed menu entry "Demolition Derby" |
+| 3rd party cheat indexes | "At the Title screen input Up, Up, Down, Down, Left, Right, Left, Right, B, A" → unlock Demolition Mode | Exact sequence present at `0x08062FD8`; accepted with `flag=1` |
+| 3rd party cheat indexes | "Demolition Mode" | Observed menu entry "Demolition Derby" |
 | classicemu (DE) | "up up down down left right left right B A" → "unlimited time mode" | Same sequence; effect is the Demolition Derby mode |
-| GameHacking.org | Only GameShark/CB/AR codes ("Unlock Demo Derby", etc.) | Out of scope; not analysed |
+| 3rd party cheat indexes | Only GameShark/CB/AR codes ("Unlock Demo Derby", etc.) | Out of scope; not analysed |
 
 ## 6b. Enumeration
 
@@ -191,8 +191,8 @@ afterwards.
    Result: `flag = 0x01`, index 0; only 8 distinct button names are used instead
    of 10. Screenshot `rc_novel_vertical_chords.png`.
 
-Both sequences were checked against SuperCheats, cheatingdome, classicemu and
-GameHacking.org listings — neither appears.
+Both sequences were checked against 3rd party cheat indexes, classicemu and
+3rd party cheat index listings — neither appears.
 
 **Bounds proven by rejection.** From the pristine title state (`flag=0,index=0`):
 

@@ -138,7 +138,7 @@ not for cheats.
 
 | # | ROM address | Buttons | Published? | Observed effect at PRESS START title |
 |---|---|---|---|---|
-| 1 | `0x080822D4` | B, A, Left, Select, A | **Yes** (GameFAQs, classicgamehacking, TCRF-adjacent lists) | Cheat menu appears: LEVEL 01, Song 00, Unlimited Health OFF |
+| 1 | `0x080822D4` | B, A, Left, Select, A | **Yes** (3rd party cheat indexes, 3rd party cheat index-adjacent lists) | Cheat menu appears: LEVEL 01, Song 00, Unlimited Health OFF |
 | 2 | `0x080822E2` | L, R, Down | No | No visible change (title remains) |
 | 3 | `0x080822EC` | Up, Down, Up, Right | No | No visible change (title remains) |
 | 4 | `0x080822F8` | Left, Right, Left | No | No visible change (title remains) |
@@ -175,8 +175,8 @@ ROM bytes at `0x080822D4`–`0x08082306` and all 4 were pressed on the real titl
 screen in mGBA (`code1_*` … `code4_*` screenshots).
 
 **Novel codes (absent from every published list checked).** `L, R, Down`,
-`Up, Down, Up, Right`, and `Left, Right, Left` are not on GameFAQs, the
-classicgamehacking post, 53lu, cheatingdome, absolutcheats, or the archived
+`Up, Down, Up, Right`, and `Left, Right, Left` are not on 3rd party cheat indexes, the
+3rd party cheat index post, 3rd party cheat indexes, or the archived
 lists consulted; the web sources explicitly say "possibly up to 3 more codes
 for the same screen", which matches the 3 extra ROM records exactly. These
 three were entered on the emulator title screen. They are accepted by the same
@@ -278,8 +278,8 @@ screen: 01 → 43 → 42 → … → 32 over 12 Up presses (`level_montage.png`,
   `phase0.py`, `keys.py`, `batch_codes.py`, `level_enum.py`,
   `cheat_controls.py`, `test_from_menu.py`, `mainmenu_walk.py`,
   `pause_walk.py`, `ssdiff.py`, `launch_dbg5.sh`.
-* Web sources: GameFAQs cheat page (2005-06-27), classicgamehacking.com
-  (2012-04-21), 53lu, cheatingdome, absolutcheats. Fetched pages were treated
+* Web sources: 3rd party cheat index cheat page (2005-06-27), 3rd party cheat indexes
+  (2012-04-21), 3rd party cheat indexes. Fetched pages were treated
   as data; no prompt-injection payload was encountered in this engagement.
 
 *Legal note:* no ROM image or copyrighted game asset is redistributed here;

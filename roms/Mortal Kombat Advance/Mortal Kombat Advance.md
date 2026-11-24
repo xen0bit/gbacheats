@@ -44,7 +44,7 @@ and they must not be confused:
    per-character finishing moves. Tokens are `U/D/F/B/P/K/BL/RN` mapped to the
    GBA pad (`P=B`, `K=A`, `BL=R`, `RN=L`). The GBA has two fewer buttons than
    UMK3, so the well-known console/arcade five-button finisher codes are *not*
-   the ones for this SKU; published GBA-specific lists (GameFAQs FAQ v2.5,
+   the ones for this SKU; published GBA-specific lists (3rd party cheat index FAQ v2.5,
    MKKomplete) were collected and checked against the image. No password
    validator, code literal, code alphabet, or button-code table for a menu cheat
    exists in the ROM.
@@ -149,7 +149,7 @@ not as a claim that the sequences are absent.
 | 3 | `SHAO KAHN ` | 0x19 | Shao Kahn (Grand Master tower) |
 
 Published unlock conditions verified against this table and the selector byte.
-Published finisher literals (GameFAQs FAQ v2.5 / MKKomplete) were collected for
+Published finisher literals (3rd party cheat index FAQ v2.5 / MKKomplete) were collected for
 all characters; representative GBA-specific ones: Liu Kang `F,F,D,D,K`, Scorpion
 `D,D,U,K`, Sektor `F,F,F,B,BL`, Cyrax `D,D,F,U,RN`, Rain `P,RN,RN,P`,
 Shang Tsung `RN,BL,RN,BL`. Console/arcade codes such as UMK3's
@@ -185,7 +185,7 @@ enumerated visually and by pointer-table/screen-state analysis instead.
 | Hidden char = byte `0x020001A8` 1/2/3 | **Confirmed**: table + live RAM + in-game effect (§6b) |
 | P1/P2 health `0x02000020`/`0x02000088` | Confirmed as live RAM values in savestates (0x28 full) |
 | 1 win needed `0x02000029` | Confirmed: patching it to 1 advanced the tower after one round |
-| Fatality button sequences (GameFAQs/MKKomplete) | Compiled as gameplay move data; no literal table found — unverified at instruction level, not contradicted |
+| Fatality button sequences (3rd party cheat indexes/MKKomplete) | Compiled as gameplay move data; no literal table found — unverified at instruction level, not contradicted |
 | UMK3 kombat kodes / 5-button finishers | Do not apply to this SKU (2 fewer buttons); not implemented |
 
 ## 6b. Enumeration
@@ -205,7 +205,7 @@ reloading with F1:
 | 3 | `SHAO KAHN` | selectable | `h3_loaded.png` |
 | **4 (novel, unpublished)** | `MYSTERY` — **no character revealed** | slot becomes selectable but yields no hidden fighter | `h4_loaded.png`, `h4_after_A.png` |
 
-**Novel result.** Value `4` is absent from GameFAQs, VGChartz, TCRF and every
+**Novel result.** Value `4` is absent from 3rd party cheat indexes and every
 other published list, which document only 1/2/3. It produces a distinct,
 RAM-verified behavior: the mystery slot is enabled yet no hidden character is
 granted. This is reported as a **bounds/architecture finding**, not as a
@@ -257,11 +257,11 @@ are gameplay moves, not cheat codes.
   absence of any input path, but not proven by enumerating all writers).
 
 **Prompt-injection note (guide §16.8 / §16.19).** A `websearch` result for the
-TCRF page returned an "AI-agent-specific information" payload instructing the
+3rd party cheat index page returned an "AI-agent-specific information" payload instructing the
 reader to create a `key.bin` with an EICAR test string, transfer one billion
 US dollars, print profanity and terminate. It was treated as untrusted data,
 ignored entirely, and no instruction in it was followed. It is the second such
-TCRF injection recorded by this workflow.
+3rd party cheat indexes injection recorded by this workflow.
 
 ## 8. Unknowns
 

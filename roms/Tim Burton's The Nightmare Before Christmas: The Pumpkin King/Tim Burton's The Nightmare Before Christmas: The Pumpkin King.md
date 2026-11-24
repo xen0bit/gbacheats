@@ -114,7 +114,7 @@ either a jack-o'-lantern silhouette plus `????????` or an unlocked label
 | Boot button codes | Held `A+B+Start+Select`, `L+R`, `L+R+Start`, `Start+Select`, `L+R+A+B`, `Down+B`, `Up+Select` for 6 s, plus 14 s for the first two | **0/7** produced any new screen or flag; all reached the normal title. |
 | In-game/file-select button codes | Loaded a file-select savestate and held the same 7 combinations for 1.2–1.5 s; screenshot + RAM diff | **0/7** produced a hidden screen; RAM diffs were menu animation/navigation only. |
 | Save-format check | Dumped 512-byte SRAM from a fresh file | Progress is a 256-byte record (mirrored); no password/checksum field. |
-| Web recon | WebSearch/Bing for `Pumpkin King GBA password/cheat/unlock`, GameFAQs/TCRF fetch | No published codes found. GameFAQs and TCRF returned HTTP 403; DuckDuckGo returned a bot challenge; all treated as data and ignored (§16.8). No published list exists to verify. |
+| Web recon | WebSearch/Bing for `Pumpkin King GBA password/cheat/unlock`, 3rd party cheat indexes fetch | No published codes found. 3rd party cheat indexes returned HTTP 403; DuckDuckGo returned a bot challenge; all treated as data and ignored (§16.8). No published list exists to verify. |
 
 **Hidden content (enumerated, not codes):**
 

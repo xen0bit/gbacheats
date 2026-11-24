@@ -180,7 +180,7 @@ change these fields in the sampled savestate (the menu likely writes elsewhere).
   hidden "one true code" table; every accepted string is a legitimate level/cheat start.
 - The 17 published codes are a negligible sample of this space.
 
-**Novel codes (not on GameFAQs / Fandom / ROMSFun / any consulted list), entered on the
+**Novel codes (not on 3rd party cheat indexes / any consulted list), entered on the
 real PASSWORD screen and RAM-verified:**
 
 | Novel code | Decoded `out` | State offsets 20..29 (observed in RAM) | Effect / proof |

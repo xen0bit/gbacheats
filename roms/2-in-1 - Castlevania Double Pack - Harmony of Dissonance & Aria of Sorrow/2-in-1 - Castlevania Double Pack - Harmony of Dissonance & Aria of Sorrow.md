@@ -369,7 +369,7 @@ Because both systems are lookups with a fixed 8-byte comparison, "enumeration" m
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb`; Capstone 5 for scripted decode.
 * `gdb-multiarch` and a custom minimal GDB-RSP client (`rsp.py`) over mGBA's stub (`mgba -g`, port 2345): memory read/write, register read/write (`P` packets, little-endian values), breakpoints, single-frame continue.
 * Custom scripts in `/tmp/cv`: `phase0.py` (hashes/header/logo scan), `rsp.py`, `nav.py`/`nav2.py` (xdotool + OCR), `run3.py` (boot → name entry → code test), `konami6/7.py` and `konami_aos.py` (frame-stepped Konami sequence), `dumpall.py` (chunked RAM dumps).
-* Public sources consulted for code lists: vgmuseum `code-hod.htm`, castlevaniadungeon `hod/secrets.htm`, CBR "Castlevania Advance Collection Name Entry Screen Cheat Codes", IGN/GameFAQs snippets for AoS. Every published code was verified against the ROM in its encoded form and then in the emulator.
+* Public sources consulted for code lists: 3rd party cheat indexes `code-hod.htm`, castlevaniadungeon `hod/secrets.htm`, CBR "Castlevania Advance Collection Name Entry Screen Cheat Codes", 3rd party cheat indexes snippets for AoS. Every published code was verified against the ROM in its encoded form and then in the emulator.
 
 ## 10. Legal note
 

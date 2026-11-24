@@ -14,14 +14,14 @@
 | Entry word | `0xEA00002E` (stock ARM branch — no cracktro/trainer) |
 | Header checksum | 0x0000; complement byte 0xBE (expected 0xD7 — header was rebuilt at some point, but the code is the retail image) |
 | MD5 | `923a3437fcf84a5ca26158f7faada412` |
-| SHA-1 | `31bb73186bb98f3d2b80089490f2eeca2861fe5e` (matches the TASVideos "Karnaaj Rally (USA, Europe)" publication) |
+| SHA-1 | `31bb73186bb98f3d2b80089490f2eeca2861fe5e` (matches the 3rd party cheat indexes "Karnaaj Rally (USA, Europe)" publication) |
 | SHA-256 | `524502fd1c66112c2369b1619f214d07f151967e0276a1f0a8a214072de02daf` |
 
 Embedded GBA-header scan: exactly **one** Nintendo-logo hit (file 0x0). No multi-game pack, appended trainer, or patched boot code. Save type is Flash 512 Kbit (`FLASH512_V130` string at file 0x314FC); a 64 KiB `.sav` is created by mGBA.
 
 ## 2. Executive summary
 
-**There is a real, developer-intended code system.** It is not a cheat for cars/tracks: it is the *ranking / hi-score import* feature documented by IGN ("18-character, alphanumeric passwords … entered on the karnaaj.com site"). In-game it lives at **OPTIONS → HI-SCORES → ENTER CODE** and accepts a 6-6-6 character code plus an 8-character name. The ROM contains `CODE ACCEPTED` (0x0830A94) and `CODE INCORRECT` (0x0830AA4).
+**There is a real, developer-intended code system.** It is not a cheat for cars/tracks: it is the *ranking / hi-score import* feature documented by 3rd party cheat indexes ("18-character, alphanumeric passwords … entered on the karnaaj.com site"). In-game it lives at **OPTIONS → HI-SCORES → ENTER CODE** and accepts a 6-6-6 character code plus an 8-character name. The ROM contains `CODE ACCEPTED` (0x0830A94) and `CODE INCORRECT` (0x0830AA4).
 
 The validator at **0x08016F1C** decodes 18 symbols from a 32-symbol alphabet, reconstructs a 32-bit payload, computes a CRC-32 over the payload fields **and the entered name**, and accepts iff four 8-bit checksum fields reconstructed from the code equal that CRC. The whole space is 32^18 = 2^90 strings; 2^32 are checksum-valid for a given name.
 
@@ -135,7 +135,7 @@ On accept, the payload fields are written through the six output pointers
 a 24-bit value from F1/F2/F3, a 32-bit value from F4–F7, and bytes F8/F9/F10,
 then the record is inserted by the helpers at `0x0800136C` / `0x08001290`.
 The exact semantic label of each field (lap time, track index, car, driver) is
-**Inferred** from the hi-score screen and the IGN description, not exercised
+**Inferred** from the hi-score screen and the 3rd party cheat index description, not exercised
 independently.
 
 **Name binding (Derived):** the second loop at `0x08017236` copies the name
@@ -160,7 +160,7 @@ char: B C D F G H J K L M  N  P  Q  R  S  T  V  W  X  Y  Z  0  1  2  3  4  5  6 
 | `BBBBBB-BBBBBF-Y?Y?RQ` | 0x83B9F0BA == 0x83B9F0BA | accepted |
 | `BZZ999-888778-1N1PQR` | 0x9394DBFD == 0x9394DBFD | accepted |
 
-**Published codes:** none for the in-game code system. GameFAQs' cheats page returned HTTP 403; web search, archived indexes, TCRF-style sources, and ROMSFUN/libretro listed only 13 CodeBreaker **memory patches** (e.g. `32016B20 0004` "unlock all cars/tracks", `8201A128 C350` infinite cash). These are out of scope and were not applied. IGN and gaming reviews document the 18-character *website ranking* code, which is exactly the system reversed here. No prompt-injection payload was encountered in fetched pages; fetched content was treated as data.
+**Published codes:** none for the in-game code system. 3rd party cheat indexes' cheats page returned HTTP 403; web search, archived indexes, 3rd party cheat index-style sources, and 3rd party cheat indexes/libretro listed only 13 CodeBreaker **memory patches** (e.g. `32016B20 0004` "unlock all cars/tracks", `8201A128 C350` infinite cash). These are out of scope and were not applied. 3rd party cheat indexes and gaming reviews document the 18-character *website ranking* code, which is exactly the system reversed here. No prompt-injection payload was encountered in fetched pages; fetched content was treated as data.
 
 ## 6b. Enumeration
 
@@ -225,7 +225,7 @@ was cross-checked against two independent codes before minting.
   car, driver, position) — the fields were recovered numerically but their
   labels were not independently proven on the HI-SCORES screen.
 - Whether the game itself ever *displays* a generated code; the website
-  (karnaaj.com, now defunct) performed the encoding externally per IGN. The
+  (karnaaj.com, now defunct) performed the encoding externally per 3rd party cheat indexes. The
   in-game surface is import-only.
 - MULTIPLAYER link-wait screen (needs a second GBA/console) and GHOST MODE
   unlock gate were not exercised.

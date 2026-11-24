@@ -51,8 +51,8 @@ What the game **does** have:
 1. **Two published unlockables** (save-gated, developer-intended): *Extra Levels*
    (one bonus level per kingdom, from a Perfect rank in every level of that kingdom)
    and *Extra Ending Scene* (Perfect in all levels including bonus levels, then beat
-   Onimen). Sources: archived GameFAQs cheats page (Wayback snapshot 2025-01-21) and
-   VGChartz cheats page. Both systems the descriptions depend on are present in the
+   Onimen). Sources: archived 3rd party cheat index cheats page (Wayback snapshot 2025-01-21) and
+   3rd party cheat index cheats page. Both systems the descriptions depend on are present in the
    ROM: a per-level rating screen with `PERFECT!` / `Perfect timing:` strings in all
    six languages, and a 4-slot + Guest EEPROM save.
 2. **A genuine button-sequence matcher** — but it is the game's *combat special-move*
@@ -207,7 +207,7 @@ end word at `0x08352A3C` is 0.
 
 **Unlockables (published set):** exactly 2 — Extra Levels, Extra Ending Scene. Both
 are save-flag unlocks, not codes (guide §16.18: a save-bit unlock is not a code). The
-gate conditions are from external published lists (GameFAQs/VGChartz); their *setter*
+gate conditions are from external published lists (3rd party cheat indexes); their *setter*
 call sites were not isolated, so the gate mechanics are labeled Inferred (§8).
 
 **In-game proof of an undocumented input:** pressed B,R (table record `0x08352934`,
@@ -228,7 +228,7 @@ statically (Derived); the gameplay effect of individual moves is Inferred.
 * **Inferred** — the exact trigger conditions for the 13 undocumented move sequences;
   the unlock gate logic behind Perfect ranks (only the two published conditions and
   the existence of the rating/save UI are known).
-* No prompt-injection payload was found in the archived GameFAQs or VGChartz pages
+* No prompt-injection payload was found in the archived 3rd party cheat index pages
   fetched during web recon; both were treated as data.
 
 ## 8. Unknowns

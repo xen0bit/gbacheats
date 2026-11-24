@@ -34,7 +34,7 @@ revision. The negative is bounded, not assumed:
   memory-edit codes — explicitly out of scope — and (b) **save-bit unlockables**
   (expert difficulty, five extra characters, original finishers) that are
   earned by story/ranking results, not entered as a code (§16.18 of the guide).
-* One user-submitted button sequence exists on SuperCheats
+* One user-submitted button sequence exists on 3rd party cheat indexes
   ("Up Up Left B A A A A Up L+R", labelled "Invinceabillaty"). It is **not
   present in the ROM in any of eight plausible key-mask encodings**, and
   entering it on the title screen, the main menu, and during gameplay produced
@@ -130,7 +130,7 @@ such comparison chain was found (see §6b).
 | Reset Data | "Clear all data, OK to proceed? Yes / No" |
 | Change Battle Cry | character list (Haru …) |
 
-**Published unlockables (data; from GameFAQs/SuperCheats, not ROM-verified):**
+**Published unlockables (data; from 3rd party cheat indexes, not ROM-verified):**
 
 | Unlockable | Condition |
 |---|---|
@@ -150,9 +150,9 @@ offsets were not isolated (§8).
 
 | Source | Claim | Verification |
 |---|---|---|
-| SuperCheats user submission | "Up Up Left B A A A A Up L+R" (invincibility, then Clear Time) | Literal absent in 8 encodings; entered in 3 contexts; no RAM effect → unverified |
-| Neoseeker / SuperCheats / GameHacking | GameShark codes, incl. `73007C28 0003` "Unlock In Game Cheats" | Out of scope (memory edit). Address patched in a savestate for analysis; no menu change → claim unsupported on this revision |
-| GameFAQs | 7 unlockables (above) | Consistent with walkthrough; save-bit based, no entry code |
+| 3rd party cheat indexes user submission | "Up Up Left B A A A A Up L+R" (invincibility, then Clear Time) | Literal absent in 8 encodings; entered in 3 contexts; no RAM effect → unverified |
+| 3rd party cheat indexes | GameShark codes, incl. `73007C28 0003` "Unlock In Game Cheats" | Out of scope (memory edit). Address patched in a savestate for analysis; no menu change → claim unsupported on this revision |
+| 3rd party cheat indexes | 7 unlockables (above) | Consistent with walkthrough; save-bit based, no entry code |
 
 ## 6b. Enumeration
 
@@ -202,7 +202,7 @@ counts above.
   verified literal pools); input mirror `0x03005A70` from
   `0x030046B0 + 0x13C0`; menu/tile-index nature of text.
 * **Inferred** — the GameShark `0x02007C28` claim is probably for a different
-  build or simply inaccurate; the SuperCheats button sequence is probably a
+  build or simply inaccurate; the 3rd party cheat indexes button sequence is probably a
   false/other-edition submission. Both are labelled unverified, not confirmed.
 * No prompt-injection content was encountered in fetched pages or ROM data;
   all fetched text was treated as data.

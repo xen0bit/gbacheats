@@ -28,7 +28,7 @@ The system was fully reversed:
 * A capture hook (`0x08008204`) records each L-gated press into a **7-byte ring buffer**
   (sentinel `0x2D`) in a cheat-manager object and calls the validator (`0x08007FD0`).
 * The validator compares the 7-byte buffer with a table of **5 hard-coded NUL-terminated
-  strings** at `0x08031E68`. All five match the published GameFAQs/Cheat Happens lists.
+  strings** at `0x08031E68`. All five match the published 3rd party cheat index lists.
   Table slots 0 and 2 are NULL (dead flags), so the accepted set is **exactly 5**.
 * Because the buffer is a mod-7 ring, **any sequence whose last seven presses equal one of
   the five codes is accepted** — an unlimited family of unpublished aliases. I minted one
@@ -37,7 +37,7 @@ The system was fully reversed:
   an invalid `L + Left×7` both leave lives at **3**.
 * The ROM also contains **unused/debug menus** ("level skip", "cheats", "level select",
   acts 1–8, danger 1–8, "select controls", "sleep") and a screen-state byte at
-  `0x020038CD` (TCRF values 0x05/0x0A/0x0B). Those screens are gated behind a debug
+  `0x020038CD` (3rd party cheat indexes values 0x05/0x0A/0x0B). Those screens are gated behind a debug
   state variable, not reachable by any tested controller input; they are documented in §8.
 
 ## 3. How to reproduce
@@ -74,7 +74,7 @@ All addresses are GBA bus addresses; file offset = address − `0x08000000`.
 | `0x02000084` | Global pointer to game-state struct; lives at `+0x38` (set to 100 by code) |
 | `0x08035B00–0x08036280` | Text bank (English strings + self-pointer records) |
 | `0x080353D0–0x08035748` | Text-ID → string-pointer table (stride 8) |
-| `0x020038CD` | Screen/debug-state byte (TCRF: 0x05, 0x0A, 0x0B) |
+| `0x020038CD` | Screen/debug-state byte (3rd party cheat indexes: 0x05, 0x0A, 0x0B) |
 | `0x0801E960–0x0801EA96` | Seven menu update hooks that install/call the capture hook |
 
 ## 5. Algorithm
@@ -122,8 +122,8 @@ shifted out.
 Alphabet mapping: `r`=Right, `l`=Left, `u`=Up, `d`=Down, `s`=Select. All codes are exactly
 7 presses; L is a separate held modifier and is not part of the string.
 
-Published sources cross-checked: GameFAQs GBA cheats (The_President, 17/10 votes),
-Cheat Happens GBA, SuperCheats, IGN GBA cheats, Vizzed. All five agree; a full-ROM scan for
+Published sources cross-checked: 3rd party cheat indexes GBA cheats (The_President, 17/10 votes),
+3rd party cheat indexes GBA, 3rd party cheat indexes GBA cheats, 3rd party cheat indexes. All five agree; a full-ROM scan for
 `[rluds]{7}\0` found **exactly these five** (plus one coincidental hit at `0x7B2AF9` in
 non-code data). Console-specific lists (PS2/GameCube/Xbox/PC button combos) do **not**
 apply to the GBA SKU.
@@ -181,7 +181,7 @@ to the published `L + Right×7`; screenshot `novel_gameplay2.png` (work dir).
 * **Debug screens (gated, not code-derived).** The text bank contains `level skip`,
   `cheats`, `level select`, `act 1..8`, `danger 1..8`, `select controls`, `sleep`,
   `press R + L + select to wake`, and unlock messages (`super-hero mode unlocked!`,
-  `secret gallery unlocked!`, `danger room %d unlocked`). TCRF and a published emulator
+  `secret gallery unlocked!`, `danger room %d unlocked`). 3rd party cheat indexes and a published emulator
   walkthrough state that writing `0x05`, `0x0A`, `0x0B` to `0x020038CD` opens SELECT
   CONTROLS, LEVEL SKIP and SLEEP respectively. Those are **Action-Replay-style RAM writes,
   not in-game button codes** and are out of scope; I did not find a controller path that

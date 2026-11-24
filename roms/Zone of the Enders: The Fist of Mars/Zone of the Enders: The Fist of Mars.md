@@ -34,7 +34,7 @@ codes: the gate is the presence of flash save data, not a controller sequence.
 
 Published "cheats" for this title are Action Replay / GameShark / CodeBreaker RAM patches
 (out of scope) plus story-branch unlockables (scene-12 kill comparison → 24- or 25-scene
-ending) — no published password or button code exists. All iPhone/IGN/GameFAQs pages were
+ending) — no published password or button code exists. All iPhone/3rd party cheat index pages were
 blocked to direct fetch (403); the list above was recovered from search-result snippets.
 
 Because no code space exists, §6b delivers a **bounded negative with counts** rather than a
@@ -152,7 +152,7 @@ negative, with the searched spaces and counts stated explicitly:
 
 | Search space | Method | Result |
 |---|---|---|
-| Published in-game codes | 6 web searches; IGN/GameFAQs/TCRF/Neoseeker/GameHacking | **0** passwords, **0** button codes, **0** TCRF page for this SKU; only story branches and cheat-device RAM patches |
+| Published in-game codes | 6 web searches; 3rd party cheat indexes | **0** passwords, **0** button codes, **0** 3rd party cheat index page for this SKU; only story branches and cheat-device RAM patches |
 | Plaintext code literals | `strings -t x -n 4` over all 8 MiB | header title + `FLASH_V126` only; **0** candidate strings |
 | Decoded dialogue/system text bank | Byte-pattern search for encoded keywords `PASSWORD`, `CHEAT`, `DEBUG`, `SECRET`, `ENTER`, `CODE`, `BONUS`, `EXTRA`, `HIDDEN`, `UNLOCK`, `GALLERY`, `SOUND` under mappings ASCII−6 and ASCII−0x20 | `PASSWORD` **15**, `CODE` **15**, `ENTER` **16**, `SECRET` **42**, `HIDDEN` **6**, `BONUS` **2**, `EXTRA` **7**, `DEBUG` **0**, `CHEAT` **0**, `UNLOCK` **0**, `GALLERY` **0**. Every hit was read in context: all are narrative, UI messages, or the word "code" as a plot object |
 | Story password reuse | Literal search for `21 32 29 25 2C` | **2** hits, both in dialogue; **0** uses as a comparison key, input default, or table entry |

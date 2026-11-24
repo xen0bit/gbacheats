@@ -285,7 +285,7 @@ all of them fit in 8 base-26 digits because
 `C = 2 (F24) × 20 (F10) × 11 (F0C) × 11 (F08) × 2 (F04) = 9680` combinations of the
 other fields per level; each row is `C × (maxF1C+1) × (maxF18+1)`.
 
-**Novel code 1 — `DF4NBHFP`** (not in GameFAQs, VGChartz, TCRF or any list checked):
+**Novel code 1 — `DF4NBHFP`** (not in 3rd party cheat indexes or any list checked):
 level 8, `F18=218`, `F10=19`, `F1C=7`, volumes 10/10, swap off, cheat 0.
 * Entered on the real screen: `LEVEL 8` intro accepted.
 * Pause screen: **`CONTINUES 20`** (published codes encode only 3).
@@ -306,7 +306,7 @@ accepted and shows `LEVEL 8`; `HJYZX46N` (`F18=536`) is rejected with
 `INVALID PASSWORD`. This proves the `F18` bound is exact, not merely "large
 values fail".
 
-**Checksum proof.** `K4MFCPNG` (the spelling printed by GameFAQs/Neoseeker) is
+**Checksum proof.** `K4MFCPNG` (the spelling printed by 3rd party cheat indexes) is
 rejected; the ROM literal `K4MFCNPG` is accepted and sets `0x03001A13=1`. The
 offline model agrees with both.
 

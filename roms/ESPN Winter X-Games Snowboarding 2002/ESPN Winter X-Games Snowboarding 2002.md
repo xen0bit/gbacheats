@@ -28,7 +28,7 @@
 * **No input surface / no text surface.** Every reachable screen was walked in the emulator (title, attract/demo, `WINTER X GAMES` menu, `OPTION` menu, gameplay, and the four scene-groups reached by savestate scene-index injection). No code field or hidden "cheat" option appeared. The game's UI text is bitmap/font-indexed, so a 128-sweep of 16 keywords × 8 encodings (ASCII, lower, upper, XOR 0x20, ±0x20, UTF-16LE/BE) over all 4 MiB returned **zero** hits.
 * **No button codes.** The single joypad reader (`0x080005D0`) is referenced by 25 input-state code sites. The only multi-button gate in the whole ROM is the **standard GBA soft-reset chord**: held `A+B+Select+Start` (active-high mask `0x0F`, checked as `A` on the edge plus `B|Select|Start` held) at `0x080016BC`, which sets a flag at `0x030052C8` and switches to scene 28 (a reboot routine). This is a console convention, not a cheat (§16.3 "no system").
 * **No debug menu gate.** Unlike *ESPN Final Round Golf 2002* (same collection), which has a 9-entry debug menu behind a RAM word `0x03002528 == 0x1F`, this ROM has **no** `cmp #0x1F`-style scene gate and no debug-label bank. The `OPTION` screen's `SOUND TEST` / `SCOPE RESET` entries are the closest developer-style options, but they are a normal, reachable options screen, not a hidden menu.
-* **Published codes:** GameFAQs (archived) says "We don't have any cheats posted for this game yet"; Cheat Happens lists none. The only published "secrets" (hidden course at rank SS) are **PS2/Xbox**-only (§16.11). The only GBA "cheats" circulating are external **CodeBreaker memory patches** (e.g. `8300089C 0000` "Always Low Time", `830008A4 FFFF` "Quick Score Gain", `830008A4 869F` "Max Score", master `100005D0 0007`) — out of scope (memory edits, not developer-intended codes).
+* **Published codes:** 3rd party cheat indexes say "We don't have any cheats posted for this game yet"; 3rd party cheat index lists none. The only published "secrets" (hidden course at rank SS) are **PS2/Xbox**-only (§16.11). The only GBA "cheats" circulating are external **CodeBreaker memory patches** (e.g. `8300089C 0000` "Always Low Time", `830008A4 FFFF` "Quick Score Gain", `830008A4 869F` "Max Score", master `100005D0 0007`) — out of scope (memory edits, not developer-intended codes).
 
 **Shared architecture with sibling ESPN GBA titles:** the KCEO/Konami engine here shows the same overall pattern as *Final Round Golf*, *Great Outdoor Games: Bass*, *International Winter Sports* and *X Games Skateboarding*: a font-indexed UI, a scene-index state machine driven from a main loop, a single joypad reader with an active-high mirror in IWRAM, and the soft-reset chord. **No cheat/password/debug-gate constant is shared**: Final Round Golf's `0x03002528 == 0x1F` debug gate and International Winter Sports' unused debug text bank were verified **absent** from this image (the literal `0x03002528` does not occur in this ROM; no debug-string bank exists). Each ROM's negative result was independently established.
 
@@ -54,7 +54,7 @@ The main loop at `0x08000210` increments a frame counter at `0x0300B852` and dis
 
 ### Codes tested
 No in-game code was found or published for the GBA SKU, so none could be entered. The following were checked and excluded:
-- GameFAQs PS2 "Hidden course" (rank SS, Japan `???` square) → wrong platform (§16.11).
+- 3rd party cheat indexes PS2 "Hidden course" (rank SS, Japan `???` square) → wrong platform (§16.11).
 - CodeBreaker memory patches (ROMFSUN/libretro) → external memory edits, out of scope.
 - GBA soft-reset chord `A+B+Select+Start` → confirmed as a system reset, not a cheat.
 
@@ -139,7 +139,7 @@ if (held & 1) and ((held & 0x0E) == 0x0E):        ; A + B|Select|Start
 * `arm-none-eabi-objdump -M force-thumb` and Capstone 5.0.7 — disassembly and literal-pointer scans.
 * Python 3 scripts in `/tmp/espnxgames/`: `key.py` (XTEST input), `gomenu.py` (title detection via white-pixel band), `patchstate.py` (savestate `gbAs` patch + PNG CRC rebuild), `scenes.sh` (scene-index enumeration), plus `state_*.bin` RAM dumps.
 * mGBA 0.10.5 under Xvfb `:318` with `SDL_AUDIODRIVER=dummy`; savestate format: PNG `gbAs` chunk zlib-decompressed to 397,312 bytes, IWRAM at `0x19000`, EWRAM at `0x21000` (§16.13).
-* Web: web.archive.org GameFAQs snapshot (confirmed empty cheats page), GameFAQs current cheats page (PS2/Xbox-only secrets), Cheat Happens, Ethereal Games (Action Replay index, no GBA codes), BizHawk GBA database (hash match), TCRF (no article for this GBA SKU).
+* Web: web.archive.org 3rd party cheat index snapshot (confirmed empty cheats page), 3rd party cheat indexes current cheats page (PS2/Xbox-only secrets), 3rd party cheat indexes (Action Replay index, no GBA codes), BizHawk GBA database (hash match), 3rd party cheat indexes.
 
 ## 10. Legal note
 

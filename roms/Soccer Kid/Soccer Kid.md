@@ -45,7 +45,7 @@ enumerated:
    cheat device or button code: title → OPTIONS. Every value was enumerated by
    driving the real UI and reading the EWRAM text buffers.
 
-The published title-screen button codes on GameFAQs belong to the **SNES, 3DO and
+The published title-screen button codes on 3rd party cheat indexes belong to the **SNES, 3DO and
 Jaguar** SKUs (uniform colours = Jaguar; invincibility/credits/sound-test = SNES;
 level select = 3DO). None of their button-mask sequences exist in this GBA image,
 and L/R and the 3DO sequence produced no visible effect on the GBA title screen.
@@ -256,8 +256,8 @@ P = 0x4F4242FE  W = 0x719DEE49  fold(W) = 0x4745
 ```
 
 Payload: stage 4 (USA), hard, 7 continues, 15 lives, 5 hearts, act field 3,
-extra field `0x4242` — a combination absent from GameFAQs, cheatingdome,
-AtariAge and absolutecheats. Entered through the real password screen; the game
+extra field `0x4242` — a combination absent from 3rd party cheat indexes,
+AtariAge and 3rd party cheat indexes. Entered through the real password screen; the game
 advanced to the world map with USA selected and the trophy display changed
 (`after_novel_c.png`). Live RAM after entry:
 
@@ -290,7 +290,7 @@ published sequences as `u16` GBA key masks (active-high and active-low):
 repetitive graphics data (e.g. 0x200 runs), no controller table. In emulation,
 L/R on the title caused no colour change and the 3DO sequence left the title
 screen unchanged. The published codes are explicitly tagged JAG/SNES/3DO on
-GameFAQs; they are not GBA codes. (The SNES sequences containing A cannot be
+3rd party cheat indexes; they are not GBA codes. (The SNES sequences containing A cannot be
 isolated on the GBA title because A also activates the START menu item.)
 
 ## 7. Validation evidence

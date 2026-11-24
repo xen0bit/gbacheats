@@ -19,13 +19,13 @@
 
 Phase 0: Nintendo-logo scan finds **exactly one** embedded GBA header (at file `0x0`). No appended trainer, no multi-game pack, no patched entry branch. Embedded splash text at ROM `0x083EAAF0` reads `HALLOWEEN / Jan 30 2003 18:41:51 / (C) WWW.MAGICPOCKETS.COM / NOT FOR RELEASE OR PUBLIC PERFORMANCE / PRESS ANY KEY TO CONTINUE` — a dated developer build of the retail image (file command confirms `AWNE6U, Rev.00`).
 
-Developer: Magic Pockets; publisher DreamCatcher (from the splash and GameFAQs metadata).
+Developer: Magic Pockets; publisher DreamCatcher (from the splash and 3rd party cheat indexes metadata).
 
 ## 2. Executive summary
 
 The game has a genuine **developer-intended password system**, not a cheat-device surface. Main menu → **Password** opens a 7-slot keypad using 32 symbols `0123456789BCDFGHJKLMNPQRSTVWXZ/*`. Entering 7 characters and pressing A a further time calls a validator at `0x08345F48`; accepted passwords set a decoded state record (level index, difficulty-like fields, mode flag) and start the game at that level. A generator at `0x08345EC0` is the exact inverse and is reachable as an oracle.
 
-All **14 published level passwords** (archived GameFAQs list) were verified: every one is accepted by the ROM's own validator. They are **not stored as literals** — each is computed from a mixed-radix payload plus a 6-bit XOR checksum, so no published string occurs anywhere in the ROM.
+All **14 published level passwords** (archived 3rd party cheat index list) were verified: every one is accepted by the ROM's own validator. They are **not stored as literals** — each is computed from a mixed-radix payload plus a 6-bit XOR checksum, so no published string occurs anywhere in the ROM.
 
 The published list is not the whole space. Using the game's own generator as an oracle I minted and confirmed:
 - `/CMVCGZ` — payload level index `b5=0`, which **no published code uses** (published codes occupy `b5=1..14`); accepted.
@@ -51,9 +51,9 @@ A debug level-name bank (15 entries `Level H011`…`Level H03B`) and `CACHEVERIF
 
 Helper scripts were in `/tmp/spiritsspells3/` (`oracle.py`, `pworacle.py`, `minter.py`, `verify_code.py`, `levelcheck.py`).
 
-**Codes tested (all from the archived GameFAQs list):** `R6JGF91`, `GH0V3GW`, `D7JDN31`, `/6JT12S`, `PC5R05M`, `6C14X05`, `GB1G40P`, `PG7R05R`, `*2XZMC6`, `4HNZB44`, `4G7ZJ5R`, `4BQR85P`, `N/0RGFG`, `PBQZS5P` — all accepted.
+**Codes tested (all from the archived 3rd party cheat index list):** `R6JGF91`, `GH0V3GW`, `D7JDN31`, `/6JT12S`, `PC5R05M`, `6C14X05`, `GB1G40P`, `PG7R05R`, `*2XZMC6`, `4HNZB44`, `4G7ZJ5R`, `4BQR85P`, `N/0RGFG`, `PBQZS5P` — all accepted.
 
-**Web sources:** GameFAQs GBA cheats page via `web.archive.org` (3 captures, 2018–2025) gave the 14-code list and the "Hard Mode: beat the game once" unlockable. Direct GameFAQs and TCRF fetches returned HTTP 403. All fetched page text was treated as data, not instructions; no prompt-injection payload was encountered.
+**Web sources:** 3rd party cheat indexes GBA cheats page via `web.archive.org` (3 captures, 2018–2025) gave the 14-code list and the "Hard Mode: beat the game once" unlockable. Direct 3rd party cheat indexes fetches returned HTTP 403. All fetched page text was treated as data, not instructions; no prompt-injection payload was encountered.
 
 ## 4. Address map
 
@@ -139,7 +139,7 @@ Alphabet index = `row*8 + col`. Vowels A/E/I/O/U/Y and `Q` is present while `Y` 
 
 **Published 14 codes and their decoded records** (all verified accepted):
 
-| Level (GameFAQs) | Code | W-stored | b4 | b5 | b6 | b7 |
+| Level (3rd party cheat indexes) | Code | W-stored | b4 | b5 | b6 | b7 |
 |---|---|---|---|---|---|---|
 | Cemetery | `GH0V3GW` | 0x01F9 | 0 | 1 | 2 | 0 |
 | The foggy bridge | `/6JT12S` | 0x050C | 0 | 2 | 3 | 0 |
@@ -162,7 +162,7 @@ Alphabet index = `row*8 + col`. Vowels A/E/I/O/U/Y and `Q` is present while `Y` 
 
 **Space definition.** Raw input space = `32^7 = 34,359,738,368` strings. A 6-bit checksum (`0x03000BA4=6`) makes roughly `2^35 / 2^6 = 536,870,912` strings checksum-valid, further reduced by the field range check on `b4` (product table consulted at `0x08345FBE`) and by `b5` being radix 15. Validator model: implemented as described in §5, with the scramble step used as a ROM oracle; it agrees with the game on every code tested (14 accepted published codes, 4 accepted novel codes, 7 rejected codes).
 
-**Complete published set:** 14 codes (archived GameFAQs); every literal is absent from the ROM as ASCII because codes are computed, and every one was confirmed accepted by the ROM validator. No other published list was found (TCRF/GameFAQs direct fetch = 403; archived GameFAQs used instead).
+**Complete published set:** 14 codes (archived 3rd party cheat indexes); every literal is absent from the ROM as ASCII because codes are computed, and every one was confirmed accepted by the ROM validator. No other published list was found (3rd party cheat indexes direct fetch = 403; archived 3rd party cheat indexes used instead).
 
 **Novel codes generated that appear in no published list** (minted with the game's generator, then re-validated through the real validator and in the emulator):
 
@@ -209,7 +209,7 @@ Length is bounded by the UI: exactly 7 slots; no 8th character can be entered.
 ## 9. Tooling
 
 - `arm-none-eabi-objdump -M force-thumb` for raw ROM disassembly; Python + `struct` for literal/pointer scans.
-- `strings -t x`, `grep -abo`, `xxd` for reconnaissance; `web.archive.org` for the GameFAQs cheat list.
+- `strings -t x`, `grep -abo`, `xxd` for reconnaissance; `web.archive.org` for the 3rd party cheat index cheat list.
 - mGBA 0.10.5 GUI under `Xvfb :316` with `openbox`, `xdotool` for input, `scrot`/ImageMagick for screenshots.
 - mGBA CLI debugger (`-d`) over a pty: `r/1|2|4`, `w/1|2|4`, `w/r`, `b/t`, `c`, `status` — used as the validator/generator oracle (guide §16.19).
 - Helper scripts: `/tmp/spiritsspells3/{oracle,pworacle,minter,verify_code,levelcheck,ingame,visual,phase0,static1,static2,blscan}.py`.

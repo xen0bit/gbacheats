@@ -36,14 +36,14 @@ The only in-game, developer-intended cheat surface in this ROM is the NES **MOUN
   * Down or Right: `$59 = ($59 + 1) & 0x1F` (31 → 0 wrap).
   * Start begins the game at the selected mountain; `$59` is the 0-based level byte and the displayed number is `($59 & 0x1F) + 1`.
   * The selector is exactly 32 states (0–31). The 5-bit mask is `AND #$1F` at NES `$F54D`; there are no hidden or out-of-range mountain values reachable from the menu.
-* **Novel state (not in any published code list).** `MOUNTAIN 32` was minted through the menu (not a memory edit) and RAM-verified: title `$59 = 0x1F` and the nametable displays `MOUNTAIN 32` (digit tiles `0x03 0x02`); after Start `$59 = 0x1F`, `$20 = 3`, `$53 = 0`, `$90 = 4`, and the first screen differs from Mountain 1 by 226 of 960 nametable tiles. No published GameFAQs/VGChartz/TCRF/wiki list documents this selector; the published level/mountain codes are RAM pokes (`0059:00`, `0305:00`), not in-game inputs.
+* **Novel state (not in any published code list).** `MOUNTAIN 32` was minted through the menu (not a memory edit) and RAM-verified: title `$59 = 0x1F` and the nametable displays `MOUNTAIN 32` (digit tiles `0x03 0x02`); after Start `$59 = 0x1F`, `$20 = 3`, `$53 = 0`, `$90 = 4`, and the first screen differs from Mountain 1 by 226 of 960 nametable tiles. No published 3rd party cheat indexes/wiki list documents this selector; the published level/mountain codes are RAM pokes (`0059:00`, `0305:00`), not in-game inputs.
 * **Wrapper System Menu.** `L+R` during play opens the series-standard system menu. Its complete item set, read from the ROM's own message records and verified on screen, is `CONTINUE`, `RESET`, `LINKED PLAY`, `SAVE HIGH SCORE`, `SLEEP MODE`. The selector is exactly five items (0–4): the cursor routine wraps `0→4` and `4→0`, and the dispatcher table has exactly five entries. There is **no sixth/unlabelled slot** (unlike the Excitebike design menu).
 * **Secret-code dialog is dead.** The shared wrapper's secret-code messages exist in this ROM:
   * message 51: `SAVE HIGH SCORE AND SECRET CODE!` (`0x080038BB`)
   * messages 52/53: `YES / NO` variants (`0x080038E2`, `0x080038F1`)
   * message 54: `PRESS THE A BUTTON TO USE THIS SECRET CODE.` (`0x08003901`)
   No message-renderer call site passes IDs 50–54, and the actual `SAVE HIGH SCORE` path draws message 45/46. Entered live, `SAVE HIGH SCORE` shows `WAS UNABLE TO SAVE.` (message 46); it never shows the secret-code prompt. The code-dialog is a compiled-but-unwired leftover in this SKU.
-* **Published lists.** GameFAQs' GBA cheats page could not be archived (Wayback CDX returned no snapshot; direct fetch 403). VGChartz lists 0 cheats; IGN's NES Classic guide says “No cheats are currently available” for Ice Climber; TCRF documents only unused graphics and regional/version differences; Cheat Happens lists only two Action Replay memory-edit codes (out of scope). No published in-game code exists to reproduce.
+* **Published lists.** 3rd party cheat indexes' GBA cheats page could not be archived (Wayback CDX returned no snapshot; direct fetch 403). 3rd party cheat index lists 0 cheats; a 3rd party cheat index's NES Classic guide says “No cheats are currently available” for Ice Climber; 3rd party cheat indexes document only unused graphics and regional/version differences; 3rd party cheat index lists only two Action Replay memory-edit codes (out of scope). No published in-game code exists to reproduce.
 
 ## 3. How to reproduce
 
@@ -271,11 +271,11 @@ The `cmp r0,#4; bhi` at `0x08002470` and the 5-entry table make the item space e
 
 | Source | Result |
 |---|---|
-| GameFAQs GBA cheats (`/gba/919772-.../cheats`) | direct fetch 403; Wayback CDX returned no snapshot. No archived in-game list recovered. |
-| VGChartz (`/game/26548/.../cheats`) | “Total cheats available: 0” |
-| Cheat Happens | 2 Action Replay codes only (`f27f40d9 9d9a7538 bf3eebed ee253d6f`, `38a0f2d1 a24bb1a1`); memory writes, out of scope; literals absent from ROM (0 hits) |
-| TCRF `Ice_Climber` | unused hammer-up sprite, regional Topi seal/yeti, FDS version differences; no codes |
-| IGN NES Classic guide | “Ice Climber — No cheats are currently available.” |
+| 3rd party cheat indexes GBA cheats (`/gba/919772-.../cheats`) | direct fetch 403; Wayback CDX returned no snapshot. No archived in-game list recovered. |
+| 3rd party cheat indexes (`/game/26548/.../cheats`) | “Total cheats available: 0” |
+| 3rd party cheat indexes | 2 Action Replay codes only (`f27f40d9 9d9a7538 bf3eebed ee253d6f`, `38a0f2d1 a24bb1a1`); memory writes, out of scope; literals absent from ROM (0 hits) |
+| 3rd party cheat indexes `Ice_Climber` | unused hammer-up sprite, regional Topi seal/yeti, FDS version differences; no codes |
+| 3rd party cheat indexes NES Classic guide | “Ice Climber — No cheats are currently available.” |
 | Libretro/RetroGameSpace cheat DB | Game Genie/AR codes including `0059:00` “Level Select (At Title Screen)”; a RAM poke, and it corroborates `$59` as the level byte |
 
 ## 6b. Enumeration
@@ -295,7 +295,7 @@ The `cmp r0,#4; bhi` at `0x08002470` and the 5-entry table make the item space e
 * After Start: `$59 = 0x1F`, `$20 = 0x03`, `$53 = 0x00`, `$90 = 0x04`.
 * The first screen differs from a Mountain 1 start in 226 of 960 nametable tiles in the sampled run (232 in another run; a few tiles are randomized two-deep blocks). The border/mountain tiles change (e.g. `0xA4/0xAA` → `0x42/0x45`) and the platform rows differ, so the state is not an alias of Mountain 1.
 * Reproduction: reset (`Start+Select+A+B`) → Down ×31 → Start. The same state is reachable with a single **Left** press from `MOUNTAIN 01` (`$59 0x00 → 0x1F`); the manual assigns Up/Down to mountain selection and Left/Right to movement, so Left-as-selector is an unadvertised behavior. The code at `$F54D` treats Right like Down and Left like Up (mask `0x05`).
-* No published list contains this: GameFAQs/VGChartz/TCRF/IGN list no in-game Ice Climber codes at all; the published level/mountain codes are the RAM pokes `0059:00` and `0305:00`, not selector inputs, and `0059:00` forces Mountain 1 rather than 32.
+* No published list contains this: 3rd party cheat index list no in-game Ice Climber codes at all; the published level/mountain codes are the RAM pokes `0059:00` and `0305:00`, not selector inputs, and `0059:00` forces Mountain 1 rather than 32.
 
 ### Bounds proven by rejection
 

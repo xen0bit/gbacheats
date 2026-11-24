@@ -31,11 +31,11 @@
 
 **Embedded-header scan:** the full 156-byte Nintendo logo from offset `0x04` occurs exactly **once** in the image (at `0x04`). No multiboot stub, no appended second header, no trainer. Tail of file is all `0xFF` (no appended trainer data). This is a single, clean retail US image.
 
-Build stamp (TCRF, US Gregar): `REXE6 G 20060110a US` at file offset `0x03F754`, text at `0x1519C8`. The visible title screen reads "©CAPCOM CO., LTD. 2005".
+Build stamp (3rd party cheat indexes, US Gregar): `REXE6 G 20060110a US` at file offset `0x03F754`, text at `0x1519C8`. The visible title screen reads "©CAPCOM CO., LTD. 2005".
 
 **Independence from the sibling image** ( analysed concurrently on display `:318`): the Falzar file is a *different* ROM — `MEGAMAN6_FXX`, code `BR6E`, SHA-256 `a37c1028adb72082b51e142321fa437967bc54b6f46730a53f6581ad455ad670`. Every address, hash, literal offset and RAM value in this report was derived from the Gregar bytes above. No Falzar-based address was carried over. The engines are related (the community `bn6f` disassembly notes that Gregar's PET-region code is Falzar's shifted by `0x1DDC`), so *structure* is shared, but this report does not rely on that.
 
-Note: the shared REA/Ghidra MCP session was switched to the Falzar image by the concurrent agent during this engagement; all conclusions here therefore come from local `objdump`, Python/Capstone, and mGBA evidence against the Gregar file. The fetched TCRF page was checked for prompt-injection payloads and none was found in the retrieved text; its contents were treated strictly as data.
+Note: the shared REA/Ghidra MCP session was switched to the Falzar image by the concurrent agent during this engagement; all conclusions here therefore come from local `objdump`, Python/Capstone, and mGBA evidence against the Gregar file. The fetched 3rd party cheat index page was checked for prompt-injection payloads and none was found in the retrieved text; its contents were treated strictly as data.
 
 ## 2. Executive summary
 
@@ -43,9 +43,9 @@ This ROM contains **two genuine, developer-intended, player-facing code systems*
 
 1. **Navi Customizer "Compression Commands"** — 10-button sequences over `{A, B, L, R}`, entered in the Navi Customizer by highlighting a program piece, holding Right, and inputting the buttons (guide §5.4a pattern). A successful input toggles the piece's compressed state and plays a jingle; per the community wiki, wrong input is silent in BN6 (§16.6 "semantics, not just bytes" applies). The space is `4^10 = 1,048,576` sequences; the published list has ~35 codes (one per usable program, plus a known unusable dummy). **Published literals were located in the ROM** (§6).
 2. **Number Trader / Lottery Chip Machine 8-digit codes** — decimal passwords entered on a numeric keypad in the Central Town chip shop. Space `10^8 = 100,000,000`; a 58-code published list was checked and **10 literals were located in the ROM** (§6).
-3. **Debug text commands** — TCRF lists ~50 two-byte script commands (`0x47` … `0xFE`, e.g. `C9 = Operate Partner Navi (CHEATER)`, `FE = You got: All Chips`). TCRF explicitly describes them as *normally inaccessible*; they are unused script payloads (guide §16.3 category **dead code**), not a reachable menu or a button code. They are documented here as a negative finding, not advertised as cheats.
+3. **Debug text commands** — 3rd party cheat index lists ~50 two-byte script commands (`0x47` … `0xFE`, e.g. `C9 = Operate Partner Navi (CHEATER)`, `FE = You got: All Chips`). 3rd party cheat indexes explicitly describes them as *normally inaccessible*; they are unused script payloads (guide §16.3 category **dead code**), not a reachable menu or a button code. They are documented here as a negative finding, not advertised as cheats.
 
-Out of scope and therefore deliberately not tested as in-game cheats: all GameShark / CodeBreaker / Action Replay / libretro entries found on Almar's Guides, SuperCheats, Neoseeker, ROMSFUN, GameFAQs and GameHacking.org. Those are memory-edit codes and are excluded by the task scope.
+Out of scope and therefore deliberately not tested as in-game cheats: all GameShark / CodeBreaker / Action Replay / libretro entries found on 3rd party cheat indexes. Those are memory-edit codes and are excluded by the task scope.
 
 **Important limitation (stated up front, not hidden):** both real code-entry screens are **story-gated**. On a fresh US save the Navi Customizer is absent from the PET menu and only key item `PET` exists; the game blocks leaving the house with "We'll go after you talk to Mom and Dad!". Central Town's chip shop is several chapters away. The entry screens were therefore *not* reached in this session, so the §0.2 requirement "mint a novel code and confirm it on the real screen" could **not** be discharged. This report gives the complete static characterisation, the exact gates, and the precise remaining steps (§8) rather than claiming a confirmation that did not happen.
 
@@ -147,7 +147,7 @@ Encoding: `A=0x0B B=0x0C L=0x16 R=0x1C`; "gap" = one non-letter byte between adj
 
 Count: **9 of 34 distinct published compression commands** were located with ≤1 interspersed byte; 10 with ≤2. The remainder were not located — their hints are either phrased differently, split across a script control sequence, or simply not present in this US build. This is a *bounded* negative for the searched encodings, not a claim that the codes are invalid.
 
-Full published set (GameFAQs + T REZ wiki, US Gregar) contains, among others: `ABLLAALRBA` SuprArmr, `LBBRBAALRR` Custom1, `RALLAABRBA` Custom2, `ARLALALLAB` MegaFolder1, `LALRBLRLRA` MegaFolder2, `BLBRLLLABA` GigaFolder1, `BBARABLARR` FirstBarrier, `RBBBAAABRL` Shield, `LAABRRLRLR` Reflect, `BLALBRALBA` AntiDamage, `RALABLBBRB` FloatShoes, `ARBABRRBAL` AirShoes, `RRALLRAABB` UnderShirt, `RRABLRARLA` ChipShuffle, `AAALAABLRA` NumberOpening, `BBBABBAARB` SneakRun, `BRBBBBBARR` Battery, `ALARBRARLB` Jungle, `ARAABARRBA` Fish, `LLABLBABLL` Humor, `BABARRLLAB` Poem, `ALAAALLABR` SlipRunner, `BBBAABAABB` AutoHeal, `AALABRALBA` ChargeMAX/SpeedMAX, `LLALLBABBB` ChargeMAX, `RBARALBBBL` Millionaire, `BLBLARLRBB` **dummy** (NaviRuin key item; compresses no part — a documented in-game rejection).
+Full published set (3rd party cheat indexes + 3rd party cheat index wiki, US Gregar) contains, among others: `ABLLAALRBA` SuprArmr, `LBBRBAALRR` Custom1, `RALLAABRBA` Custom2, `ARLALALLAB` MegaFolder1, `LALRBLRLRA` MegaFolder2, `BLBRLLLABA` GigaFolder1, `BBARABLARR` FirstBarrier, `RBBBAAABRL` Shield, `LAABRRLRLR` Reflect, `BLALBRALBA` AntiDamage, `RALABLBBRB` FloatShoes, `ARBABRRBAL` AirShoes, `RRALLRAABB` UnderShirt, `RRABLRARLA` ChipShuffle, `AAALAABLRA` NumberOpening, `BBBABBAARB` SneakRun, `BRBBBBBARR` Battery, `ALARBRARLB` Jungle, `ARAABARRBA` Fish, `LLABLBABLL` Humor, `BABARRLLAB` Poem, `ALAAALLABR` SlipRunner, `BBBAABAABB` AutoHeal, `AALABRALBA` ChargeMAX/SpeedMAX, `LLALLBABBB` ChargeMAX, `RBARALBBBL` Millionaire, `BLBLARLRBB` **dummy** (NaviRuin key item; compresses no part — a documented in-game rejection).
 
 ### 6.2 Number Trader / lottery codes verified in ROM
 
@@ -166,15 +166,15 @@ Encoding: digit `d` → byte `d+1` (`0x01`–`0x0A`), 8 digits, gap-2 regex.
 | `70741543` (AirSpin3 O) | `0x73C6B6` |
 | `09256524` (Spreadgun/Spin Green) | `0x79D92E` |
 
-Count: **10 of 58** published SuperCheats lottery codes located in this image under the searched encoding. The published list also includes `45566783`, `39345472`, `15511679`, `74198795`, `22812406`, `09000465`, `99910954`, `41161139`, `98766899`, `68008194`, `16336487`, `37495453`, `37889678`, `49951337`, `54654618`, `08749780`, `55031325`, `12046210`, `19790420`, `28271002`, `32132348`, `41976910`, `77837421`, `88674125`, `14212857`, `38116449`, `97403000`, `08789369`, `44892547`, `75641392`, `69544569`, `51378085`, `97049899`, `12404002`, `30424514`, `55910601`, `84387543`, `92070765`, `51702791`, `67520179`, `00297421`, `10414878`, `79814666`, `24616497`, `32310827`, `12110031`, `57656595`; these were searched and not found at gap ≤2 (their hints may be absent from the US build; note the list's own comment that Hakushaku/Django codes were removed from the US version).
+Count: **10 of 58** published 3rd party cheat indexes lottery codes located in this image under the searched encoding. The published list also includes `45566783`, `39345472`, `15511679`, `74198795`, `22812406`, `09000465`, `99910954`, `41161139`, `98766899`, `68008194`, `16336487`, `37495453`, `37889678`, `49951337`, `54654618`, `08749780`, `55031325`, `12046210`, `19790420`, `28271002`, `32132348`, `41976910`, `77837421`, `88674125`, `14212857`, `38116449`, `97403000`, `08789369`, `44892547`, `75641392`, `69544569`, `51378085`, `97049899`, `12404002`, `30424514`, `55910601`, `84387543`, `92070765`, `51702791`, `67520179`, `00297421`, `10414878`, `79814666`, `24616497`, `32310827`, `12110031`, `57656595`; these were searched and not found at gap ≤2 (their hints may be absent from the US build; note the list's own comment that Hakushaku/Django codes were removed from the US version).
 
 ### 6.3 Debug commands (dead code, not a player cheat)
 
-TCRF, `Mega Man Battle Network 6` → "Debug Text": `47` Cannot Converse, `65` All mail sent, `6F`/`AB`/`AC`/`AD` HP banners, `AE` All mail received, `AF` BOKTAI TRADER DISPLAY, `B5` Green Town Chip Trader SP Display, `B6` Navi Change Box Display, `B7` BugFrag trader display (untranslated Japanese string in the US build), `B8`/`BF` BBS entry, `C0`–`C2` request completion, `C3` Got Rush Food, `C9` Operate Partner Navi (CHEATER), `CA` Virus Battle Set (CHEATER), `CB` Max Virus, `D1` HP Memory, `D3`–`D5` Reg Up, `D8`/`D9`/`DA` Extra Deck/Folder2, `DC`–`E2` minigames, `E6`–`F0` character changes, `F1` Beast/Cross change OK, `F2` ProtoMan, `F4` Hidden Gate Display, `F6` You got PA, `FE` You got: All Chips. Classified per guide §16.3 as **dead code**: no reachable front end was found in the walked screens and TCRF calls them "normally inaccessible".
+3rd party cheat indexes, `Mega Man Battle Network 6` → "Debug Text": `47` Cannot Converse, `65` All mail sent, `6F`/`AB`/`AC`/`AD` HP banners, `AE` All mail received, `AF` BOKTAI TRADER DISPLAY, `B5` Green Town Chip Trader SP Display, `B6` Navi Change Box Display, `B7` BugFrag trader display (untranslated Japanese string in the US build), `B8`/`BF` BBS entry, `C0`–`C2` request completion, `C3` Got Rush Food, `C9` Operate Partner Navi (CHEATER), `CA` Virus Battle Set (CHEATER), `CB` Max Virus, `D1` HP Memory, `D3`–`D5` Reg Up, `D8`/`D9`/`DA` Extra Deck/Folder2, `DC`–`E2` minigames, `E6`–`F0` character changes, `F1` Beast/Cross change OK, `F2` ProtoMan, `F4` Hidden Gate Display, `F6` You got PA, `FE` You got: All Chips. Classified per guide §16.3 as **dead code**: no reachable front end was found in the walked screens and 3rd party cheat indexes call them "normally inaccessible".
 
 ## 6b. Enumeration
 
-**Compression-command space.** Alphabet `{A,B,L,R}`, fixed length 10, no checksum symbol, toggle semantics → `4^10 = 1,048,576` representable button strings. Published surface: ~35 distinct documented strings (≈0.0033% of the space). **Novel codes generated here** (absent from GameFAQs, T REZ wiki and every ROM literal searched in §6.1):
+**Compression-command space.** Alphabet `{A,B,L,R}`, fixed length 10, no checksum symbol, toggle semantics → `4^10 = 1,048,576` representable button strings. Published surface: ~35 distinct documented strings (≈0.0033% of the space). **Novel codes generated here** (absent from 3rd party cheat indexes, 3rd party cheat index wiki and every ROM literal searched in §6.1):
 
 - `AAAAAAAAAA` — all-A sequence; valid *format*, no known part mapping.
 - `LLLLLLLLLL`, `RBRBRBRBRB`, `ABABABABAB` — equally well-formed members of the unused 1,048,541 strings.
@@ -213,7 +213,7 @@ TCRF, `Mega Man Battle Network 6` → "Debug Text": `47` Cannot Converse, `65` A
 
 **Inferred** (labelled, not claimed as observed):
 - That the published compression codes are genuine in-game sequences rather than fan inventions — supported by their presence in the ROM's text bank, but not confirmed by entering them.
-- That the debug commands are dead code — supported by TCRF's wording and the absence of a front end in the walked screens; a live breakpoint on a command handler was not set.
+- That the debug commands are dead code — supported by a 3rd party cheat index's wording and the absence of a front end in the walked screens; a live breakpoint on a command handler was not set.
 - That the two sibling versions share engine structure but not addresses — supported by the distinct hashes/headers and the community `bn6f` offset-shift note.
 
 ## 8. Unknowns
@@ -223,7 +223,7 @@ TCRF, `Mega Man Battle Network 6` → "Debug Text": `47` Cannot Converse, `65` A
 3. **Exact gate for the Navi Customizer:** fresh save has only key item `PET`, the PET's MegaMan STATUS screen has two pages and no NaviCust row, and the story blocks leaving the house with "We'll go after you talk to Mom and Dad!". Likely unlocked by an early story flag / NaviCust Support Center event; the writer of that flag was not located.
 4. **Number Trader gate:** the machine is in the Central Town chip shop; the chapter-1 walkthrough position was not reached.
 5. **25 of 34 compression codes and 48 of 58 lottery codes were not found** at gap ≤2 in the searched encodings. Their hint text may use longer control sequences or be absent in the US build.
-6. **Debug-command reachability** was not closed by a breakpoint; conclusion rests on TCRF's description plus screen enumeration.
+6. **Debug-command reachability** was not closed by a breakpoint; conclusion rests on a 3rd party cheat index's description plus screen enumeration.
 
 **Minimal steps to complete (reproducible):** advance the story until `0x02009A30` byte 0 can be `0x24` through normal input; verify the NaviCust list at `0x0201DA80` (4 bytes/entry) and mode byte at `0x02009A30+2`; hold Right and input `RRALLRAABB` (UnderShirt, starts installed per the wiki) while watching the piece's MB footprint; then input `AAAAAAAAAA` and record rejection. For the Number Trader, reach Central Town's green machine, enter verified `87341489`, then `12345678`; read GameState zenny at `0x02001B80+0x5C` and the item-flag bytes before/after. Both need a captured savestate at the entry screen so each test costs one keypress.
 
@@ -234,6 +234,6 @@ TCRF, `Mega Man Battle Network 6` → "Debug Text": `47` Cannot Converse, `65` A
 - Capstone 5.0.7 / Keystone (installed; used for encoding searches).
 - mGBA (CLI `-d` debugger bridged through a Python `pty` + command-file watcher), Xvfb `:315`, openbox, xdotool, scrot, ImageMagick.
 - `patchstate.py` (savestate `gbAs` recompression with CRC fix-up), `key.py` (focus/key/crop helper), `lzsearch.py` (GBA LZ77 decompressor + code search).
-- Web sources treated as data: TCRF mirror (fetched clean), GameFAQs cheats (403 direct; search snippets used), T REZ wiki NaviCustomizer page, RockmanEXEZone `bn6-utf8.tbl`, `dism-exe/exe6f` and `saschb2b/Mega-Man-Battle-Network-Cyberworld-Endless` ROM maps. No fetched instruction was executed.
+- Web sources treated as data: 3rd party cheat index mirror (fetched clean), 3rd party cheat index cheats (403 direct; search snippets used), 3rd party cheat index wiki NaviCustomizer page, RockmanEXEZone `bn6-utf8.tbl`, `dism-exe/exe6f` and `saschb2b/Mega-Man-Battle-Network-Cyberworld-Endless` ROM maps. No fetched instruction was executed.
 
 No ROM bytes or copyrighted assets are reproduced in this report beyond short address-anchored byte strings needed to reproduce the search.

@@ -19,7 +19,7 @@
 | SHA-1 | `8999c32301ef811da086e9599d7e7d6cf1533a70` |
 | SHA-256 | `02a951f2918e13052f4b28844106093a28a3f9c78739434b1e49a2839babc333` |
 
-**Embedded-header / patch scan:** a 156-byte Nintendo-logo scan over the whole image returns exactly **one** hit, at file offset `0x4` (the normal header). There is no second GBA image, no multiboot stub and no appended trainer header. Publisher/developer per the GameFAQs game detail: Full Fat / Destination Software, 13 Nov 2003.
+**Embedded-header / patch scan:** a 156-byte Nintendo-logo scan over the whole image returns exactly **one** hit, at file offset `0x4` (the normal header). There is no second GBA image, no multiboot stub and no appended trainer header. Publisher/developer per the 3rd party cheat indexes game detail: Full Fat / Destination Software, 13 Nov 2003.
 
 ## 2. Executive summary
 
@@ -27,7 +27,7 @@
 
 Key findings:
 
-1. **No published codes to verify.** The archived GameFAQs *cheats* page for this exact GBA SKU is empty ("Know Something We Don't? You can submit new cheats…"), and the GameFAQs walkthrough states "As far as I know, there are no secret codes or cheats." All other search hits (`priscilla`, `Noah`, `1123`, `5656`, etc.) belong to the **PC/SNES/J2ME/PS** versions and are absent from this ROM under ASCII, +0x20, UTF-16 and 5/6-bit packings (§16.11/§16.7).
+1. **No published codes to verify.** The archived 3rd party cheat indexes *cheats* page for this exact GBA SKU is empty ("Know Something We Don't? You can submit new cheats…"), and the 3rd party cheat index walkthrough states "As far as I know, there are no secret codes or cheats." All other search hits (`priscilla`, `Noah`, `1123`, `5656`, etc.) belong to the **PC/SNES/J2ME/PS** versions and are absent from this ROM under ASCII, +0x20, UTF-16 and 5/6-bit packings (§16.11/§16.7).
 2. **The only keyboard is a name-entry label.** City/mayor names are typed on a 38-cell on-screen keyboard (0-9 A-Z `.` `?` backspace OK). The buffer is IWRAM `0x030006A0` (16 bytes, stored lowercase, rendered as capitals). All 12 static code references to it pass it to a byte-copy routine at `0x08062C40` (verified: `ldrb`/`strb` loop to NUL) — **never** to a comparator. Per §16.2b this is a label, not a validator.
 3. **A button-combo matcher exists but is dead code.** `0x0809DA3C` implements "all bits of a key mask seen within 65 frames" against the held-key global `0x03003790`. It has **0** BL callers, **0** 32-bit literals (including the Thumb-bit `addr|1` form) and **0** PC-relative literal loads. The associated key-recording init functions (`0x0809D8CC`, `0x0809D930`, `0x0809D950`, `0x0809D968`) likewise have 0 BL callers. Live game code only tests single key bits (e.g. `0x08064B96` masks `0x08` = Start; `0x08067358` masks `0x01` = A). Undocumented button combos pressed on the title screen produce no new screen (§16.3 "dead code", §16.21 three-count test).
 4. **No hidden menus.** Every reachable screen was walked (see §7). Title Options = MUSIC ON / SOUND ON / BACK only. Pause = header "PAUSED" + CONTINUE / OPTIONS / QUIT (the apparently blank row was just the un-rendered header). Options has exactly 3 pages and the disaster list exactly 8 entries. The scenario list has exactly 4 entries and the map list exactly 4.
@@ -133,7 +133,7 @@ Counts that bound the negative:
 
 | Surface checked | Count / result |
 |---|---|
-| Published GBA codes (GameFAQs cheats, walkthrough, web) | **0** — cheats page empty; walkthrough says none |
+| Published GBA codes (3rd party cheat index cheats, walkthrough, web) | **0** — cheats page empty; walkthrough says none |
 | Literal code/cheat strings in ROM (`password`, `cheat`, `code`, `secret`, `unlock`, `debug`, PC/SNES codes) | **0** cheat-related; 100% of hits are engine asserts, building names or scenario prose |
 | Password/validator entry screens walked | 0 (only the city/mayor name label field) |
 | strcmp-family consumers of the name buffer | **0** (all 12 refs → `strcpy` at `0x08062C40`) |
@@ -166,7 +166,7 @@ Counts that bound the negative:
 
 ## 9. Tooling
 
-All scripts in `/tmp/simcity2000`: `phase0.py` (hash/header/logo scan), `allstrings.txt` (`strings -t x -n 4`), `scan.py` (32-bit pointer, Thumb-BL and PC-relative-LDR scanners), `keyscan.py` (key-mask run scanner), `ss.py` (mGBA `gbAs` zlib extractor + RAM diff/hexdump), `snap.sh` (screenshot+savestate helper), `key.py` / `combo.py` (xdotool input), `gdbram.sh` (abandoned GDB dump helper). Disassembly via `arm-none-eabi-objdump -M force-thumb`. Web sources: archived GameFAQs cheats page (empty) and walkthrough 53430 (archived).
+All scripts in `/tmp/simcity2000`: `phase0.py` (hash/header/logo scan), `allstrings.txt` (`strings -t x -n 4`), `scan.py` (32-bit pointer, Thumb-BL and PC-relative-LDR scanners), `keyscan.py` (key-mask run scanner), `ss.py` (mGBA `gbAs` zlib extractor + RAM diff/hexdump), `snap.sh` (screenshot+savestate helper), `key.py` / `combo.py` (xdotool input), `gdbram.sh` (abandoned GDB dump helper). Disassembly via `arm-none-eabi-objdump -M force-thumb`. Web sources: archived 3rd party cheat index cheats page (empty) and walkthrough 53430 (archived).
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced here; only hashes, addresses, algorithms and original findings are published.
 

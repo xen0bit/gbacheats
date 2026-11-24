@@ -25,7 +25,7 @@ Embedded-header scan: the 156-byte Nintendo logo occurs exactly **once** (file o
 
 The input subsystem was fully enumerated statically: the joypad reader at `0x08004040` produces a 10-bit active-high `held` word at `0x030016D4` and an edge word at `0x030016D8`. Across the entire ROM there are only **8** literal references to the held word and **9** to the edge word, resolving to **11 reader call sites**. None implements a cheat sequence: they are menu navigation (Start/B/Up/Down repeat), a Left+Right character-toggle at the character-select screen (`0x08002A46`), and the standard `A+B+Select+Start` soft reset (`0x08008C2`/`0x0800918`). Twelve classic button sequences were also pressed on the title screen with no effect.
 
-The console (PS2/Xbox) versions' advertised cheats — the password `My Character` + L2, and the `My Character`→White-button God Mode / Slow Motion / Extra Logos toggles — are **absent** from this GBA image: `My Character` has 0 literal hits in any encoding, there is no L2 button, no password screen, and no "My Character" menu or bonus screen. GameFAQs lists no GBA cheats; all published GBA "codes" are CodeBreaker/GameShark memory patches (Access All Modes, Unlimited Ammo, Unlimited Bawls, Rapid Fire, Have All Trophies, Invincible), which are explicitly out of scope per the engagement rules and are external patch codes, not ROM content.
+The console (PS2/Xbox) versions' advertised cheats — the password `My Character` + L2, and the `My Character`→White-button God Mode / Slow Motion / Extra Logos toggles — are **absent** from this GBA image: `My Character` has 0 literal hits in any encoding, there is no L2 button, no password screen, and no "My Character" menu or bonus screen. 3rd party cheat index lists no GBA cheats; all published GBA "codes" are CodeBreaker/GameShark memory patches (Access All Modes, Unlimited Ammo, Unlimited Bawls, Rapid Fire, Have All Trophies, Invincible), which are explicitly out of scope per the engagement rules and are external patch codes, not ROM content.
 
 The only unlockable-like state is normal progression: three tournament trophies (Rookie/Amateur/Pro → Bronze/Silver/Gold) shown in the Trophy Room and stored in the save record. This is a save-bit progression feature, not a cheat.
 
@@ -124,9 +124,9 @@ Every consumer of `pressed`/`held` was located and disassembled (11 call sites).
 
 | Source | Codes | ROM verification |
 |---|---|---|
-| almarsguides / gamehacking.org (GBA) | Master `90F66381 7339 …`; Access All Modes `F4EFAAA7 BBEA`; Unlimited Ammo `1F005559 4697`; Unlimited Bawls `265D785F 81F2`; Rapid Fire `2A348C53 7089`; All Trophies `B7557A56 F03A …`; Invincible `A2741852 0069 …` | CodeBreaker/GameShark encrypted patch codes. Not ASCII/text; no corresponding in-game entry surface. Explicitly excluded by scope. |
-| GameFAQs/GameSpot (PS2/Xbox) | Password `My Character` + L2 → God Mode / Slow Motion / Extra Logos; `My Character` → White button | 0 literal hits for `My Character` in ASCII/case/UTF-16; no password screen or My Character menu on GBA. Different SKU/engine. |
-| TCRF | — | HTTP 403; no GBA-specific secrets found via mirrors/search. |
+| 3rd party cheat indexes | Master `90F66381 7339 …`; Access All Modes `F4EFAAA7 BBEA`; Unlimited Ammo `1F005559 4697`; Unlimited Bawls `265D785F 81F2`; Rapid Fire `2A348C53 7089`; All Trophies `B7557A56 F03A …`; Invincible `A2741852 0069 …` | CodeBreaker/GameShark encrypted patch codes. Not ASCII/text; no corresponding in-game entry surface. Explicitly excluded by scope. |
+| 3rd party cheat indexes | Password `My Character` + L2 → God Mode / Slow Motion / Extra Logos; `My Character` → White button | 0 literal hits for `My Character` in ASCII/case/UTF-16; no password screen or My Character menu on GBA. Different SKU/engine. |
+| 3rd party cheat indexes | — | HTTP 403; no GBA-specific secrets found via mirrors/search. |
 
 **Save/unlockables:** only trophy progression (Rookie/Amateur/Pro → No trophy/Bronze/Silver/Gold). No cheat flags, no hidden characters/teams/modes beyond the two selectable characters and three tournaments.
 
@@ -149,7 +149,7 @@ Every consumer of `pressed`/`held` was located and disassembled (11 call sites).
 * **Derived** — input routine `0x08004040` and all 11 key-state reader call sites disassembled with `arm-none-eabi-objdump -M force-thumb`; literal pools decoded with `struct.unpack_from`; no cheat sequence/gate present in the closed reader set. Complete text bank and encoding searches in §6b.
 * **Inferred** — the console-only cheat names were inferred to be absent on GBA from the title/engine mismatch and 0 literal hits, corroborated by the complete ASCII bank.
 
-No prompt-injection payload was encountered in the web material fetched; all fetched pages were treated as data. TCRF returned HTTP 403 and was recorded as unverified.
+No prompt-injection payload was encountered in the web material fetched; all fetched pages were treated as data. 3rd party cheat indexes returned HTTP 403 and was recorded as unverified.
 
 ## 8. Unknowns
 

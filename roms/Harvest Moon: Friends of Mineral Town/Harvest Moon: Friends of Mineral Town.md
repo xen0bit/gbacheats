@@ -69,7 +69,7 @@ The scene system is a linked task scheduler: `main` seeds a task at `0x080036F8`
 - **Diary menu rows**: `Diary` → Save (`Write in diary.`) / Load (`Read diary.`), slot Data 1 / Data 2; `Buttons` → 1 / 2 (Control Pad Walk/Run, R Button Run/Walk); `Clock` Yes/No; `Face` Yes/No; `Name` Yes/No. Strings: "There is no saved data.", "Save failed.", "Load failed.", "The saved data may be corrupted.", "Load?", "Overwrite?" (`0x0E878C`–`0x0E8914`).
 - **Seven icon-menu entries**: Diary, Rucksack, World Map, Farm Map, Earnings, Memo, Tutorial (`0x0E86A8`–`0x0E8A28`). Tutorial submenu: Crops / Animals / Useful Tips / Exit. Exhaustive; no eighth slot.
 - **Title options**: `start`; `continue` appears only once a save exists. No Options, Password, Gift or Debug entry.
-- **Cheat-device codes (out of scope, catalogued only)**: GameFAQs FAQ 26955, Neoseeker CB/GS lists, `harvestmoon.fandom.com/wiki/Gameshark_Codes_(FoMT)`, supercheats. All are direct SRAM/EWRAM pokes (e.g. `32004080 E100`, `820068B4 E0FF`, master codes `0000E882 000A / 100D1BF8 0007`, `98D7716AE281 2FEC9AA2DBAB 71D84B76AC98`). Button-conditioned members (`SEL+L` till field, `B+L` speed-up) are cheat-device *conditions* on RAM writes, not in-game button codes. chaptercheats lists this SKU as "No Codes, No Passwords, No Unlockables".
+- **Cheat-device codes (out of scope, catalogued only)**: 3rd party cheat index FAQ 26955, 3rd party cheat indexes CB/GS lists, 3rd party cheat indexes. All are direct SRAM/EWRAM pokes (e.g. `32004080 E100`, `820068B4 E0FF`, master codes `0000E882 000A / 100D1BF8 0007`, `98D7716AE281 2FEC9AA2DBAB 71D84B76AC98`). Button-conditioned members (`SEL+L` till field, `B+L` speed-up) are cheat-device *conditions* on RAM writes, not in-game button codes. 3rd party cheat index lists this SKU as "No Codes, No Passwords, No Unlockables".
 
 ## 6b. Enumeration
 
@@ -106,7 +106,7 @@ Negative-search space checked (all counts from this ROM/hash):
 
 **Inferred** — that the game has no unfinished/cut debug screen: no ASCII label, pointer, key-mask table or task entry for one was found, and no input reached one. This is labelled inference, not direct observation of a dead code path.
 
-**Fetched web pages** (GameFAQs, Neoseeker, Fandom, supercheats, chaptercheats) were treated strictly as data. No instruction-bearing/prompt-injection payload was encountered in this session's fetches.
+**Fetched web pages** (3rd party cheat indexes) were treated strictly as data. No instruction-bearing/prompt-injection payload was encountered in this session's fetches.
 
 ## 8. Unknowns
 

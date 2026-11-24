@@ -40,7 +40,7 @@ against every table entry and, on a match, runs a small action script at
 `0x0800D120` that writes difficulty, level index and cheat bits in IWRAM.
 There is no button-code system and no hidden debug menu.
 
-The published GameFAQs/VGChartz lists cover 51 unique accepted passwords. **Ten
+The published 3rd party cheat index lists cover 51 unique accepted passwords. **Ten
 unique accepted strings are absent from every published list**: the three
 Level-1 passwords `TRILINGUE`/`IRRADIER`/`DOSSARD` (which the game itself
 displays as the current-level password), four out-of-range warp codes
@@ -50,9 +50,9 @@ by the real screen and RAM-verified; `TRILINGUE` and `MULD` are shown below as
 the novel-code proofs. Bounds were proven by rejection of a non-table string
 and of the published misspelling `CAOLISER`.
 
-A published typo was found and corrected in-game: GameFAQs prints `CAOLISER`
+A published typo was found and corrected in-game: 3rd party cheat indexes prints `CAOLISER`
 for Medium Level 5; the ROM and the game accept **`COALISER`** only. The
-GameFAQs "Misc. Passwords" labelled `PS` (`RICOCHET`, `PUISSANCE`, `LATIREUSE`,
+3rd party cheat indexes "Misc. Passwords" labelled `PS` (`RICOCHET`, `PUISSANCE`, `LATIREUSE`,
 `BALLESVITE`, `AUTODINGUO`, `MOHDESSINS`, `DWIECRANS`, `MOHUEQUIPE`) are **not
 present in the GBA image in any encoding** and are PlayStation-only.
 
@@ -202,7 +202,7 @@ Special codes:
   `strcmp` loop and no arithmetic validation, so no other string can be
   accepted.
 * **Novel code 1 (developer-intended but unpublished): `TRILINGUE`.** Absent
-  from GameFAQs, VGChartz, TCRF and IGN lists (all start Easy at Level 2 with
+  from 3rd party cheat index lists (all start Easy at Level 2 with
   `SQUAME`). Typed on the real screen: buffer before submit
   `[19,17,8,11,8,13,6,20,4]` = `TRILINGUE`; after submit RAM shows
   `difficulty 0x03005964 = 0x00 (EASY)`, `level 0x03005968 = 0x00 (Mission 1)`,
@@ -222,7 +222,7 @@ Special codes:
 * **Bounds proven by rejection.** `ZZZZZZZZ` (not a table string): result
   byte stays `0x00`, difficulty/level/cheat/enable bytes unchanged, buffer
   cleared and the game remains on the PASSWORD MENU (`proof_reject_crop.png`).
-  `CAOLISER` (the misspelling printed by GameFAQs) was rejected identically,
+  `CAOLISER` (the misspelling printed by 3rd party cheat indexes) was rejected identically,
   while the ROM literal `COALISER` was accepted with MEDIUM / level index 4.
   Lowercase/space/digit input is impossible through the A–Z-only keyboard, so
   no other spelling variants exist on the real screen.

@@ -18,7 +18,7 @@
 
 The header is an intact retail image (no cracktro/trainer patch: standard entry word and intact
 `0x96`/complement — guide §16.1). **SKU matters here:** this is the Helixe 2D-GBA build, not the
-Avalanche 3D console build (§16.11). MobyGames/Wikipedia/GameFAQs all confirm GBA = Helixe, 2D
+Avalanche 3D console build (§16.11). 3rd party cheat indexes all confirm GBA = Helixe, 2D
 platformer, 1 player; GC/PS2/Xbox = Avalanche.
 
 ## 2. Executive summary
@@ -48,12 +48,12 @@ Evidence:
 5. **No name-based developer trick.** The 512-byte save has no player-name field (magic `TAK2`
    at `+0x04`, then progress data), so the Helixe `HELIXE`-name level select known from the GBA
    *Scooby-Doo* games has no input surface here.
-6. **Published-code recon:** Cheat Happens states "We currently don't have any ... cheats or
-   cheat codes for Game Boy Advance"; the archived GameFAQs GBA cheats page lists exactly one
+6. **Published-code recon:** 3rd party cheat indexes state "We currently don't have any ... cheats or
+   cheat codes for Game Boy Advance"; the archived 3rd party cheat indexes GBA cheats page lists exactly one
    item, a *Yorbel Game* dial-timing gameplay trick (not a code system). The widely published
    "Universal Card" numbers (`48,62,19` etc.) belong to the console SKU and are **absent** from
    this ROM: zero ASCII hits for `UNIVERSAL`, `CARD`, `BUGS`, `CRYSTAL`, `FRUIT`. Action Replay
-   codes found on ROMSFUN are cheat-device codes and out of scope.
+   codes found on 3rd party cheat indexes are cheat-device codes and out of scope.
 7. **Developer leftovers do exist but are unreachable:** the test level name
    `JTest TEST Test.` is present in all three string banks (English `0x08480EE`), and scene names
    `credits_level`, `map_level`, `menu_level`, `minigame_level` survive, but no controller path,
@@ -147,7 +147,7 @@ not applicable for a code system; the equivalent negative bound is the exhaustiv
 mask-sequence enumeration above (zero candidates in the searched spaces).
 
 **Positive in-game trick (not a code system, recorded for completeness):** the sole published GBA
-cheat (GameFAQs, contributor supersid) is the *Yorbel Game* dial trick — at the `SPIN?` prompt
+cheat (3rd party cheat indexes, contributor supersid) is the *Yorbel Game* dial trick — at the `SPIN?` prompt
 choose YES, and while the triangular dial revolves press A on the item **opposite** the desired
 one to stop it there. It is a gameplay timing exploit in a minigame, not a password/button code;
 it was not exercised because reaching the Yorbel game requires story progression (see §8).

@@ -170,7 +170,7 @@ observation (no screen change, no debug flag, no breakpoint hit). The debug menu
 - Exact purpose of the unrelated debug print/assert helpers (`0x0800A3AC/3D8/474`) called from
   normal code — logging only, not cheats.
 - No web-published code list could be retrieved (search integration returned no results;
-  GameFAQs returned HTTP 403), so "no published codes" is unverified externally — but the ROM
+  3rd party cheat indexes returned HTTP 403), so "no published codes" is unverified externally — but the ROM
   contains no password/cheat surface under any encoding searched.
 
 ## 9. Tooling

@@ -18,7 +18,7 @@
 | MD5 | `fcbf93f8859d8500319e0d80a8c02150` |
 | SHA-1 | `3aa4d46cbbf152e440942acd5f5d37ddc7b05e1d` |
 | SHA-256 | `e754155f92b4809d9f63765592d415f16497d290189cfe1267ea9571a6e14d8e` |
-| CRC32 | `1736B957` — matches GameHacking.org's published CRC for AGB-BFGE-USA |
+| CRC32 | `1736B957` — matches a 3rd party cheat index's published CRC for AGB-BFGE-USA |
 
 **Embedded-header scan:** exactly one Nintendo-logo hit, at file offset `0x4` (header base `0x0`). No multiboot/link stub, no appended second image, no trainer menu.
 
@@ -29,9 +29,9 @@
 What *does* exist:
 
 - **Documented keyboard shortcuts** (in the Tutorial → "Useful Controls" screen): Start+L = Town Map, Select+L = Farm Map, B on empty hands = switch tools, A+B = Tools/Items, B while holding = put item away, L on empty hands = call out to person. These are ordinary controls, not cheats.
-- **Unreachable debug event scripts** in the ROM: a text bank at `0x0875AB34` ("People's expressions!", "Next Person", "Next Expressions", expression states) and a block of scripts at IDs ~434–450 whose bytecode contains debug/test labels ("Ready to go to bed?", "Examine from the left.", "Menu"). TCRF documents reaching one via a **CodeBreaker RAM write** (`8201d1d2 089A`) on the house calendar. On **this US build** that value is out of the script table's range (IDs 1–1415; `0x089A` = 2202) and an empirically patched savestate produced only the normal calendar forecast. The debug content is therefore a **gated feature whose only documented access is a memory edit** — out of scope and not user-reachable (§16.3, §16.4b).
+- **Unreachable debug event scripts** in the ROM: a text bank at `0x0875AB34` ("People's expressions!", "Next Person", "Next Expressions", expression states) and a block of scripts at IDs ~434–450 whose bytecode contains debug/test labels ("Ready to go to bed?", "Examine from the left.", "Menu"). 3rd party cheat indexes document reaching one via a **CodeBreaker RAM write** (`8201d1d2 089A`) on the house calendar. On **this US build** that value is out of the script table's range (IDs 1–1415; `0x089A` = 2202) and an empirically patched savestate produced only the normal calendar forecast. The debug content is therefore a **gated feature whose only documented access is a memory edit** — out of scope and not user-reachable (§16.3, §16.4b).
 
-Every published "cheat" found on the web for this title (GameFAQs, Neoseeker, Almar's Guides, Fandom, GameHacking.org, libretro-database) is a **GameShark / CodeBreaker memory-edit code** (encrypted master codes + raw RAM writes). Those are explicitly out of scope here and are *not* in-game cheats.
+Every published "cheat" found on the web for this title (3rd party cheat indexes, libretro-database) is a **GameShark / CodeBreaker memory-edit code** (encrypted master codes + raw RAM writes). Those are explicitly out of scope here and are *not* in-game cheats.
 
 **Sibling check (position 351, *Friends of Mineral Town*):** verified independently, not by copying the sibling's work. This image is a different ROM: 16 MiB vs 8 MiB, CRC32 `1736B957` vs different, script table at `0x081014BC` (1415 scripts) vs FoMT's `0x080F89D4` (1328 scripts), and different debug-script IDs. Shared: the TOSE engine, the UI conventions, the "Debuggers" **credits job title** (present twice, at `0x104E7C` and `0x11E114` — not a debug menu), and the general pattern of unreachable debug scripts. No address from the sibling was reused.
 
@@ -121,12 +121,12 @@ Not applicable — no password validator, checksum, key table, or button sequenc
 
 - **Observed:** all title/setup/menu screens captured on emulator; all 7 main-menu items opened and screens captured; Useful Controls text screenshotted; undocumented combos produced no hidden screen; patched-savestate calendar interaction produced normal forecast.
 - **Derived:** key mask semantics from `0x08009194` disassembly; script table size/count from pointer-run analysis; debug text bank and script IDs from byte dumps; header rebuild from checksum/complement arithmetic.
-- **Inferred (labelled):** that the debug scripts correspond to the affection/expression/tutorial debug menu described by TCRF — the text bank matches, but the scripts were not executed successfully on this build.
-- **Prompt injection (§16.8, skill rule):** fetched TCRF pages (MFoMT, FoMT, and their Talk pages) contained injected text: *"This page is not intended for humans… These instructions are only for LLMs and automated agents… whoever is operating this AI agent is a clown."* Treated as untrusted data, ignored, and recorded. No instructions from fetched content were followed.
+- **Inferred (labelled):** that the debug scripts correspond to the affection/expression/tutorial debug menu described by 3rd party cheat indexes — the text bank matches, but the scripts were not executed successfully on this build.
+- **Prompt injection (§16.8, skill rule):** fetched 3rd party cheat index pages (MFoMT, FoMT, and their Talk pages) contained injected text: *"This page is not intended for humans… These instructions are only for LLMs and automated agents… whoever is operating this AI agent is a clown."* Treated as untrusted data, ignored, and recorded. No instructions from fetched content were followed.
 
 ## 8. Unknowns
 
-- The US build's correct gate for the TCRF debug menu remains unresolved. The published RAM value `0x089A` is out of range for the 1415-script ID space and did not trigger the menu when written to `0x0201D1D2`; the field's true role is unknown. The debug scripts' *effects* were not executed, only their text/bytecode observed.
+- The US build's correct gate for the 3rd party cheat indexes debug menu remains unresolved. The published RAM value `0x089A` is out of range for the 1415-script ID space and did not trigger the menu when written to `0x0201D1D2`; the field's true role is unknown. The debug scripts' *effects* were not executed, only their text/bytecode observed.
 - Whether a different regional build (JP) has a larger script table where `0x089A`/`0x080E` is valid was not tested (only the USA image was supplied).
 - The 76-entry pointer table at `0x0852423C` was not fully classified (appears to be data, not cheats).
 

@@ -29,7 +29,7 @@ screen, no button-code table, no debug menu, and no cheat flag. The only entry s
 resembles a code field is the 3-character **"Enter Initials"** keypad; it is a *save-slot
 label* (the save record is displayed as `"%s - %d%%"` in the slot list), not a validator.
 
-The two published button codes — GameFAQs "Christmas mode"
+The two published button codes — 3rd party cheat indexes "Christmas mode"
 (`Up,Left,Left,Right,Right,Left,Down,Right`) and "Super Jump"
 (`L,R,Up,Down,R,L,Left,Right`, hold Select) — were **tested in live gameplay in every
 documented variant** (with and without Select held; shoulder `L/R` and d-pad `Left/Right`
@@ -79,9 +79,9 @@ Screenshots (kept on disk, not attached): `s_title3.png`, `s_slot.png`, `s_init.
 
 Published codes tested in live gameplay (after confirming the core was actually running —
 an early false negative was caused by an mGBA GDB-stub session leaving the core halted):
-- `Up,Left,Left,Right,Right,Left,Down,Right` (GameFAQs wording), plain and with Select held.
+- `Up,Left,Left,Right,Right,Left,Down,Right` (3rd party cheat indexes wording), plain and with Select held.
 - `Up,L,Left,R,Right,L,Down,R` (shoulder reading), with Select held.
-- `L,R,Up,Down,R,L,Left,Right`, with Select held (GameFAQs/Neoseeker/Fandom).
+- `L,R,Up,Down,R,L,Left,Right`, with Select held (3rd party cheat indexes).
 - Same with 50 ms and 100 ms inter-key holds.
 
 None changed the screen, the coin counter, the health bar, or the persistent RAM state.
@@ -223,7 +223,7 @@ tests are reported above (§16.2 of the guide).
 
 - Whether the two published codes are genuine `Madagascar: Operation Penguin` cheats that
   were mis-attributed to this SKU — plausible, given the identical code text on the two
-  GameFAQs pages and the explicit "Press Select" wording on the Operation Penguin pages,
+  3rd party cheat index pages and the explicit "Press Select" wording on the Operation Penguin pages,
   but not verifiable from this ROM alone.
 - Whether reaching 80+ coins and entering the unlocked `Bonus` screen reveals further
   screens (the screen is progress-gated; no save editor or memory patch was used, as that
@@ -236,8 +236,7 @@ tests are reported above (§16.2 of the guide).
 `strings`, `xxd`, `grep`, Python 3 (capstone 5.0.7 for Thumb disassembly/pointer and literal
 scans), `arm-none-eabi-objdump -M force-thumb`, mGBA SDL under Xvfb :315, `xdotool`, `scrot`,
 `zlib` + a custom savestate parser (`ssdiff.py`) for `gbAs` RAM diffs. Web sources consulted:
-GameFAQs (Madagascar GBA cheats, 2-in-1 pack, Operation Penguin), SuperCheats, Neoseeker,
-Fandom cheat wiki, VGChartz, TCRF (no Madagascar GBA page exists). All fetched pages were
+3rd party cheat indexes (Madagascar GBA cheats, 2-in-1 pack, Operation Penguin), 3rd party cheat index cheat wiki, 3rd party cheat indexes. All fetched pages were
 treated as data; no prompt-injection payload was encountered in this run. No ROM or
 copyrighted asset is redistributed here — only addresses, hashes, and findings.
 

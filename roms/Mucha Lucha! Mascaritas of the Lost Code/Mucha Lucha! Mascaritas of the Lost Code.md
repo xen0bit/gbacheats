@@ -25,9 +25,9 @@ Embedded-header scan (full 156-byte Nintendo-logo match over the whole image) fo
 This is a Digital Eclipse beat-'em-up with **no password/code-entry system and no reachable debug menu**. The complete set of in-game "cheat"/unlock content is:
 
 1. **Six save-bit unlockables** (2 characters, 3 signature moves, 1 permanent meter reward), earned by story progress; their six English messages plus Spanish/French variants are a fixed pointer table at ROM `0x831C9DC..0x831CA30`.
-2. **One published button code** — "10 Extra Lives" from GameFAQs (also mirrored on visualboyadvance.org): `Down, Select, Up, Down, L, R, Down, Up, R, L, Up, A`, claimed to be entered after pressing Start during gameplay. **This code did not reproduce** on this ROM: the literal sequence is absent in every encoding tried, and entering it on the pause screen, during gameplay, and on the title screen (with three timing profiles, verified keymap) left the lives counter unchanged at 3. It is reported as **unverified/rejected**, not as a working code.
+2. **One published button code** — "10 Extra Lives" from 3rd party cheat indexes (also mirrored on 3rd party cheat indexes): `Down, Select, Up, Down, L, R, Down, Up, R, L, Up, A`, claimed to be entered after pressing Start during gameplay. **This code did not reproduce** on this ROM: the literal sequence is absent in every encoding tried, and entering it on the pause screen, during gameplay, and on the title screen (with three timing profiles, verified keymap) left the lives counter unchanged at 3. It is reported as **unverified/rejected**, not as a working code.
 3. **Mega attack** (`A+B` with full blue meter) and **second signature attack** (defeat first boss) are ordinary gameplay mechanics / save-bit unlocks, not codes.
-4. GameShark/CodeBreaker master codes on GameHacking.org are memory-edit codes and are **out of scope** for this engagement.
+4. GameShark/CodeBreaker master codes on 3rd party cheat indexes are memory-edit codes and are **out of scope** for this engagement.
 
 No hidden character, hidden level, password screen, or debug screen was found on any reachable screen. The negative is bounded by: full screen enumeration (§3), ASCII + `strings` sweep (§3/§6), key-mask sequence scans in 9 encodings (§6), and a sweep of common hidden-menu button combos in-game (§6b).
 
@@ -107,12 +107,12 @@ The unlockable system is a save-bit flag model (§16.18 of the guide): a message
 
 | Source | Claim | ROM verification |
 |---|---|---|
-| GameFAQs / visualboyadvance.org | 10 Extra Lives: after Start, `Down, Select, Up, Down, L, R, Down, Up, R, L, Up, A` | **Not found** as literal in any of 9 encodings; **rejected** in emulator (lives stayed 3) |
-| GGmania / CheatingDome / VGChartz | The Flea unlock: defeat final boss | Consistent with ROM string table + locked silhouette at character select |
-| GGmania | Buena Girl unlock: defeat second boss (wiki: Ep.3 L1) | Consistent with ROM string table + locked silhouette |
-| CheatingDome / VGChartz | Mega attack: A+B with full blue meter | Gameplay mechanic, no code surface |
-| CheatingDome | Second attack: defeat first boss | Save-bit unlock |
-| GameHacking.org | GameShark/CodeBreaker codes | Out of scope (memory-edit), not examined |
+| 3rd party cheat indexes | 10 Extra Lives: after Start, `Down, Select, Up, Down, L, R, Down, Up, R, L, Up, A` | **Not found** as literal in any of 9 encodings; **rejected** in emulator (lives stayed 3) |
+| 3rd party cheat indexes | The Flea unlock: defeat final boss | Consistent with ROM string table + locked silhouette at character select |
+| 3rd party cheat indexes | Buena Girl unlock: defeat second boss (wiki: Ep.3 L1) | Consistent with ROM string table + locked silhouette |
+| 3rd party cheat indexes | Mega attack: A+B with full blue meter | Gameplay mechanic, no code surface |
+| 3rd party cheat indexes | Second attack: defeat first boss | Save-bit unlock |
+| 3rd party cheat indexes | GameShark/CodeBreaker codes | Out of scope (memory-edit), not examined |
 
 ### 6.2 Unlockable message table (6 messages × 3 languages, pointers at `0x831C9DC..0x831CA30`)
 
@@ -150,8 +150,8 @@ Searched as: u16 LE, u16 BE, u8, u32 LE, active-low (`~mask & 0x3FF`), fixed-hig
 - **Observed:** all screenshots (title, main, load, options, character select, level select, gameplay, pause, post-code HUD); saved `.sav` (512 bytes); savestate RAM reads; empirically verified keymap via held-button RAM; lives counter before/after code (3 → 3).
 - **Derived:** joypad routine and RAM addresses from Thumb disassembly at `0x08310984`; unlock-message pointer table from literal scan; absence of multi-button comparison chains from xref analysis of `0x03001CA8/0x03001CB4`.
 - **Inferred:** precise save-bit positions and boss→bit mapping (the messages and locked silhouettes prove the bits' *existence*, but defeating each boss was not played through, so the exact bit indices and triggers remain inferred from the published guide).
-- **Rejected/unverified:** the GameFAQs 10-extra-lives button code (evidence above).
-- **Prompt-injection watch:** no fetched page contained instructions directed at the analyst; TCRF/wiki text was treated as data. GameHacking.org content was read only as a list of out-of-scope memory codes.
+- **Rejected/unverified:** the 3rd party cheat indexes 10-extra-lives button code (evidence above).
+- **Prompt-injection watch:** no fetched page contained instructions directed at the analyst; 3rd party cheat indexes/wiki text was treated as data. 3rd party cheat indexes content was read only as a list of out-of-scope memory codes.
 
 ## 8. Unknowns
 
@@ -164,7 +164,7 @@ Searched as: u16 LE, u16 BE, u8, u32 LE, active-low (`~mask & 0x3FF`), fixed-hig
 - `arm-none-eabi-objdump -M force-thumb` for joypad/handler disassembly; Capstone 5.0.7 for literal/BL/xref scans.
 - Python helpers in `/tmp/muchalucha/`: `phase0.py`, `btnsearch.py`, `btnsearch2.py`, `xref.py`, `xref2.py`, `xref3.py`, `dumpf.py`, `unlock_xref.py`, `ss.py` (mGBA `.ss1` `gbAs` zlib parser), `probe.py`, `probe2.py`, `keymap.py`, `ui.py`.
 - mGBA savestate-diff RAM reading (guide §16.13) because the GDB stub port was contended by other sessions; no GDB stub was used against this ROM.
-- Web sources: GameFAQs cheat page (403 on direct fetch; content obtained from search index), visualboyadvance.org, GGmania, CheatingDome, VGChartz, GameHacking.org, Mucha Lucha fandom wiki.
+- Web sources: 3rd party cheat index cheat page (403 on direct fetch; content obtained from search index), 3rd party cheat indexes, Mucha Lucha fandom wiki.
 
 ## 10. Legal note
 

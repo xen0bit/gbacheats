@@ -128,7 +128,7 @@ A full Python implementation is `/tmp/legoknights/pw.py`; the brute-force enumer
 
 ## 6. Tables
 
-**Published codes (GameFAQs / Cheat Happens, all ten verified against the model and accepted in-game):**
+**Published codes (3rd party cheat indexes, all ten verified against the model and accepted in-game):**
 
 | Effect | Code | Decoded word | Flags set |
 |---|---|---|---|
@@ -160,7 +160,7 @@ cursor starts on `B`, `Down` from the grid cycles `Done → Delete → Quit`.
   bijectively to a 21-flag progress state; re-encoding the decoded flags of every published code
   reproduces that same code exactly (all ten match).
 * **Novel code**: **`BBRBFBS`** (word `0x00080209`, flags `{12,15}` = Trials of Jayko plus one
-  artifact). This combination is in none of the GameFAQs, Cheat Happens, VGChartz, or TCRF
+  artifact). This combination is in none of the 3rd party cheat indexes
   lists consulted. Entered on the real password screen: RAM at `0x02000F64` after submission has
   only indices 12 and 15 set; `0x02000F7C = 0x00080209`. `BBRBFBS` satisfies the offline
   validator; effect observed in emulator.
@@ -199,7 +199,7 @@ cursor starts on `B`, `Down` from the grid cycles `Done → Delete → Quit`.
   artifacts) come from the published effect labels and the in-game Trophy Room; the bijection
   itself is proven, the exact per-flag prose label for each of the 21 bits is not individually
   exercised.
-* **Web content**: GameFAQs, Cheat Happens and 2-in-1-cheats pages were treated as data. One
+* **Web content**: 3rd party cheat indexes and 2-in-1-cheats pages were treated as data. One
   searched-for "secret menu" entry was found to belong to the *Bionicle* half of the
   2-in-1 cartridge, not this game. No prompt-injection payload was encountered in the fetched
   pages; nothing in fetched content was executed.

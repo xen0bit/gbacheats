@@ -144,15 +144,15 @@ bits 0–63 world state and pickups; 64–66 start location; 67 reset bit;
 
 | Claim (source) | ROM evidence | Verdict |
 |---|---|---|
-| Time Attack code Up,Left,Right,Down (GameFAQs) | table `0x0845F452` exactly `[0x40,0x20,0x10,0x80,0xFFFF]`; unique in 8 MiB | **verified in ROM**; on-screen path gate-blocked |
-| NES debug password `BOMBS_ MISSLE SCREW_ ATACK_` (GameFAQs) | not stored as literal; special hardcoded NES code | published; not literal-searchable |
+| Time Attack code Up,Left,Right,Down (3rd party cheat indexes) | table `0x0845F452` exactly `[0x40,0x20,0x10,0x80,0xFFFF]`; unique in 8 MiB | **verified in ROM**; on-screen path gate-blocked |
+| NES debug password `BOMBS_ MISSLE SCREW_ ATACK_` (3rd party cheat indexes) | not stored as literal; special hardcoded NES code | published; not literal-searchable |
 | NES `999999 999999 KKKKKK KKKKKK` = Hard Mode | decodes valid, shift 69, checksum 0x14 | **verified by decoder** |
 | NES `000000 000020 000000 000020` Suitless | decodes valid, shift 0, checksum 0x80 | **verified by decoder** |
 | NES `000000 000008 000000 000008` Reset | decodes valid, shift 0, checksum 0x08 | **verified by decoder** |
 | NES `000000 000000 200000 000008` Screw Attack | decodes valid, shift 0, checksum 0x08 | **verified by decoder** |
 | all-zero code | decodes valid, shift 0, checksum 0x00 | **verified by decoder** |
 
-No GameShark/CodeBreaker code is reported as a finding. The GameFAQs
+No GameShark/CodeBreaker code is reported as a finding. The 3rd party cheat indexes
 "Alarm Never Sounds 600BC5C0 000091E0" and m2k2 debug-menu codes are
 memory-edit codes and are explicitly out of scope.
 

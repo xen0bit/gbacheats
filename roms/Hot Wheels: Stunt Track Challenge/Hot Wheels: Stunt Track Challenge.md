@@ -42,7 +42,7 @@ A Drome Racers 6-character cheat validator (`0x08121684`, codes `IAMCAR`, `LOGRA
 it has zero BL callers and zero pointer references, and its codes contain vowels that
 the 21-symbol keypad cannot produce. It is not reachable in-game. No button-code gate
 or hidden debug screen was found; the debug-menu-looking text in `0x793630`, `0x793F3C`,
-`0x798B9C`, `0x799BD8` is unreferenced leftover text (TCRF "Unused Text"), consistent
+`0x798B9C`, `0x799BD8` is unreferenced leftover text (3rd party cheat indexes "Unused Text"), consistent
 with the guide's "dead code" category (§16.3).
 
 **No unpublished code exists for this system.** The validator is a closed 52-string
@@ -57,11 +57,11 @@ negative, not an untested one.
 - Menu path from power-on: title/main menu → **OPTIONS** (5× Down from GAME SHOW; CHAMPIONS LEAGUE is greyed/skipped while locked) → **PASSWORD**.
 - Keypad grid: row 0 `B C D F G H J`, row 1 `K L M N P Q R`, row 2 `S T V W X Y Z`, command row `DELETE / QUIT / DONE`. Move with D-pad, press A per character. After the 8th character, navigate to DONE and press A. Valid codes advance to a cutscene/menu with a RAM flag change; invalid codes are silently ignored (stay on the password screen, no RAM change).
 - Verification method: mGBA `.ss1` savestates are PNG files with a zlib-compressed `gbAs` chunk. `zlib.decompress` yields a 397,312-byte (0x61000) raw state; IWRAM is at raw `0x19000` (GBA `0x03000000`), EWRAM at `0x21000` (GBA `0x02000000`). I patched the two input-buffer copies at GBA `0x03003D5C` / `0x03003DFC` (raw `0x1CD5C` / `0x1CDFC`) to set codes exactly, then submitted with DONE.
-- Published pages consulted (archived via web.archive.org because GameFAQs/TCRF return 403):
-  - GameFAQs cheats: `https://gamefaqs.gamespot.com/gba/920566-hot-wheels-stunt-track-challenge/cheats`
-  - GameFAQs board "EVERY Password for the game...": `.../boards/920566-hot-wheels-stunt-track-challenge/62356812`
-  - GameFAQs guide (SpeedDeoxys) `faqs/79675/unlocks-and-codes`
-  - TCRF `https://tcrf.net/Hot_Wheels:_Stunt_Track_Challenge_(Game_Boy_Advance)` and `/Unused_Text`
+- Published pages consulted (archived via web.archive.org because 3rd party cheat indexes return 403):
+  - 3rd party cheat index cheats: 3rd party cheat indexes
+  - 3rd party cheat index board "EVERY Password for the game...": `.../boards/920566-hot-wheels-stunt-track-challenge/62356812`
+  - 3rd party cheat index guide (SpeedDeoxys) `faqs/79675/unlocks-and-codes`
+  - 3rd party cheat indexes and `/Unused_Text`
   No prompt-injection payload was found in the fetched pages; all fetched text was treated as data.
 
 ## 4. Address map
@@ -153,7 +153,7 @@ Published-code verification results (literal search + emulator entry):
 | `SSLNZHMR` | yes (`0x79AB14`) | accepted; Stunt School champion outro; RAM `0x03002410=0x07` |
 | `LLSCSKGQ` | **no** | rejected (no RAM change, stays on password screen) |
 | `LLSCFQJC` | **no** | rejected (no RAM change, stays on password screen) |
-| `HWGSPSBB` | yes (`0x79A958`) | present; TCRF notes it is functionally useless (first-stage unlock) |
+| `HWGSPSBB` | yes (`0x79A958`) | present; 3rd party cheat index notes it is functionally useless (first-stage unlock) |
 | `SMASHMOUTH` (2-in-1 / PC code) | no | unrelated SKU; not applicable |
 | Drome Racers 6-letter codes | yes, but dead | unreachable (validator has no callers; vowels not on keypad) |
 
@@ -173,11 +173,11 @@ found **exactly 52** code-like strings (plus one compressed-data false positive
 bases referenced by `0x0813A524`; there is no fifth table and no generator function.
 
 **Novel-code result — bounded negative.** I could not mint a code absent from every
-published list, because none exists. The union of the GameFAQs cheats page (51 codes),
-the GameFAQs "direct copy from the ROM" board post (51 codes), the SpeedDeoxys FAQ, and
-TCRF covers all 52 ROM entries. The two corrections I derived from the ROM table —
-`LLSCSFGQ` and `LLSCFQJL` — are absent from the *primary* GameFAQs cheats page (which
-prints the rejected typos `LLSCSKGQ` / `LLSCFQJC`) but do appear in the GameFAQs board
+published list, because none exists. The union of the 3rd party cheat index cheats page (51 codes),
+the 3rd party cheat indexes "direct copy from the ROM" board post (51 codes), the SpeedDeoxys FAQ, and
+3rd party cheat indexes cover all 52 ROM entries. The two corrections I derived from the ROM table —
+`LLSCSFGQ` and `LLSCFQJL` — are absent from the *primary* 3rd party cheat index cheats page (which
+prints the rejected typos `LLSCSKGQ` / `LLSCFQJC`) but do appear in the 3rd party cheat index board
 post and the SpeedDeoxys FAQ, so they are not truly unpublished. Both were nevertheless
 generated from the ROM table, entered on the real password screen, and RAM-verified;
 this is the strongest novel-code evidence this closed system permits.
@@ -209,6 +209,6 @@ valid alphabet + correct length is necessary but not sufficient; membership in t
 - `arm-none-eabi-objdump -D -b binary -marm -M force-thumb --adjust-vma=0x08000000` and Capstone 5.0.7 for disassembly/scans.
 - Python scripts in `/tmp/hwstunt/`: `scan_refs.py` (literal pointer scan), `pw.py` (keypad navigation), `ss.py` / `patchss.py` (savestate parse/patch), `submit.py` (code submission + RAM read), `walk.py` (screen walk), `dbgsrv.py`/`dbg.py` (attempted `-d` PTY debugger).
 - mGBA SDL under `Xvfb :318` + Openbox; `xdotool` with explicit keydown/keyup holds; `import`/`convert` for screenshots, `tesseract` for OCR.
-- Web: `websearch` + `webfetch` via `web.archive.org` snapshots (direct GameFAQs/TCRF fetches are 403).
+- Web: `websearch` + `webfetch` via `web.archive.org` snapshots (direct 3rd party cheat indexes fetches are 403).
 
 No ROM bytes or copyrighted assets are redistributed in this report; only addresses, hashes, and the author-generated analysis scripts are documented.

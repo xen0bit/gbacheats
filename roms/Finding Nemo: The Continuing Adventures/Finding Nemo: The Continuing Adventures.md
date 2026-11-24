@@ -22,7 +22,7 @@ Phase 0: single Nintendo logo hit (header at file `0x0`), stock entry word `0xEA
 
 The game has a genuine **in-game password system** on the main-menu *Password* screen. It is **not** the widely-published 5-symbol alphabet style: the screen accepts a **10-symbol password** drawn from a 32-symbol keyboard (`BCDFGHJKL / MNPQRSTVW / XYZ123456 / 789!?`). The 10th symbol is a checksum character computed from the first nine; the payload encodes which bonus characters are present on the main menu / in Gallery.
 
-- No published code list exists for this SKU (web searches on GameFAQs, generic cheat queries, and archive-style queries returned nothing). The ROM therefore contains no literal "published code" to verify; the game's own generated code (`Z6CV?S9Q7M`) served as the known-good anchor.
+- No published code list exists for this SKU (web searches on 3rd party cheat indexes, generic cheat queries, and archive-style queries returned nothing). The ROM therefore contains no literal "published code" to verify; the game's own generated code (`Z6CV?S9Q7M`) served as the known-good anchor.
 - The validator was located statically at `0x0806A058` (called only from the OK handler `0x08069C20`) and reimplemented offline; the checksum model agrees with the ROM on both accepted and rejected inputs.
 - **Two novel, unpublished codes were minted and accepted in-game**, each producing a different visible character and a distinct RAM progress-flag value: `B6CV?S9Q7V` and `ZBCV?S9Q7P`.
 - Bounds were proven by rejection: wrong-checksum inputs, wrong-length inputs, and checksum-correct but semantically out-of-range inputs all produced "Password Error" (§0.2 / §16.5).

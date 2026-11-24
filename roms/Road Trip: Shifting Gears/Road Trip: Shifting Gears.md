@@ -20,7 +20,7 @@ This is the US release of Takara's *Choro Q Advance 2* (JP) / *Gadget Racers* (E
 
 ## 2. Executive summary
 
-The game has **one** developer-intended cheat: the six-letter driver-name password **`DRAGON`**, entered at Options → Change Name, which unlocks the Dragon-series parts (GameFAQs "Passwords" entry). The code is real and present in the ROM — but **not as ASCII**: all in-game text is stored as one-byte font/tile indices, so `strings` finds only the link-debug printf bank at 0x29812C, never the password or any menu label.
+The game has **one** developer-intended cheat: the six-letter driver-name password **`DRAGON`**, entered at Options → Change Name, which unlocks the Dragon-series parts (3rd party cheat indexes "Passwords" entry). The code is real and present in the ROM — but **not as ASCII**: all in-game text is stored as one-byte font/tile indices, so `strings` finds only the link-debug printf bank at 0x29812C, never the password or any menu label.
 
 `DRAGON` is stored as the 7-byte font-index field `0F 1D 0C 12 1A 19 0A` (plus `0x5F` terminator) at ROM `0x083EF898`, inside the system-menu pointer table at `0x083EF8A0`. The validator at `0x08013D04` compares the 7-byte saved driver-name field against that single literal, byte for byte. On success it calls a mark-unlock helper eight times, granting the completion marks that gate the Dragon (Devil/Angel-tier equivalent) parts. There is no checksum, no PRNG, no key table and no second algorithmic password format: the accepted space is exactly one string. I typed `DRAGON` on the real Name Entry screen and RAM-verified both the on-screen input buffer (`0x03002E88`) and its copy in the save structure (`0x02000F28`); an invalid name (`AAAAAA`) fails at the very first byte comparison.
 
@@ -37,7 +37,7 @@ No button-code table, hidden debug menu, or additional published code was found 
    - `x/8bx 0x03002E88` → `0f 1d 0c 12 1a 19 0a 5f`
    - after confirming, `x/8bx 0x02000F28` → `0f 1d 0c 12 1a 19 0a 5f`
 7. Rejection test: type `AAAAAA` (six A presses) and confirm; `0x03002E88` becomes `0c 0c 0c 0c 0c 0a 0a 5f`, which fails the first `cmp r0, r3` at 0x08013D18 (expected 0x0F).
-8. Published code verified: GameFAQs (archived) "Unlock Dragon Parts — enter DRAGON as your name", at `web.archive.org/web/20181126/https://gamefaqs.gamespot.com/gba/915135-road-trip-shifting-gears/cheats`. Cheat Happens lists no codes for this SKU; the GameFAQs list contains exactly one password and one progress-based unlockable (Super Cups).
+8. Published code verified: 3rd party cheat indexes "Unlock Dragon Parts — enter DRAGON as your name", at `web.archive.org/web/20181126/https://gamefaqs.gamespot.com/gba/915135-road-trip-shifting-gears/cheats`. 3rd party cheat index lists no codes for this SKU; the 3rd party cheat index list contains exactly one password and one progress-based unlockable (Super Cups).
 
 ## 4. Address map
 
@@ -148,7 +148,7 @@ if that guard byte is zero, call `0x080189F0(slot, offset)`, which ORs `0x05` in
 - **Observed (emulator + RAM):** fresh boot, NOTE screen, title, New Game, Name Entry keyboard; `DRAGON` typed through the on-screen keyboard; `x/8bx 0x03002E88` = `0f 1d 0c 12 1a 19 0a 5f`; after confirming, `x/8bx 0x02000F28` = the same bytes; gate byte `0x02000F4D = 0x28` (bit 2 set). Rejection candidate `AAAAAA` produces `0c 0c 0c 0c 0c 0a 0a 5f` at 0x03002E88.
 - **Observed (static bytes):** literal `0F 1D 0C 12 1A 19 0A 5F` at file offset 0x3EF898; pointer 0x083EF8AC; encoded mark labels in 0x3EF8F0–0x3EF975; build tag at 0x3F5528.
 - **Derived (disassembly):** the byte-by-byte comparator at 0x08013D04–0x08013D34; exact success condition (7 bytes, index reaches 7); the eight mark-unlock calls at 0x08013D36–0x08013DD4 and their parameters; the mark-base table at 0x083EFCB0; the mark-set helper's `OR 0x05` semantics at 0x080189F0; the rejection path at 0x08013D18/0x08013D32.
-- **Inferred:** that the eight marks correspond to the six "Complete/Clear Mark" strings plus two unlabeled marks, and that these gate the Dragon parts (consistent with GameFAQs "unlocks all Dragon parts" and the presence of `Dragon*` part names). The unlock *effect* is derived from the call sequence, not from a captured "unlocked" popup: in the New Game flow the validator's gate was not observed to fire; GameFAQs places the entry point at Options → Change Name, whose exact in-game navigation was not reached in this session.
+- **Inferred:** that the eight marks correspond to the six "Complete/Clear Mark" strings plus two unlabeled marks, and that these gate the Dragon parts (consistent with 3rd party cheat indexes "unlocks all Dragon parts" and the presence of `Dragon*` part names). The unlock *effect* is derived from the call sequence, not from a captured "unlocked" popup: in the New Game flow the validator's gate was not observed to fire; 3rd party cheat indexes places the entry point at Options → Change Name, whose exact in-game navigation was not reached in this session.
 - **No code system elsewhere:** the only ASCII strings in the image are the link-debug printf bank at 0x29812C; no button-mask table, debug-menu selector, or second password literal was found in the searched spaces (full-ROM 32-bit pointer scans for the table/password, all PC-relative literal loads of those pointers, all font-encoded name-like runs).
 
 ## 8. Unknowns
@@ -164,5 +164,5 @@ if that guard byte is zero, call `0x080189F0(slot, offset)`, which ORs `0x05` in
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly.
 - mGBA SDL (`mgba -g -3`) under Xvfb :315 + openbox; `xdotool` XTEST input; `scrot` + ImageMagick `convert`/`montage` for screenshots.
 - mGBA GDB stub (`gdb-multiarch`, `target remote :2345`) for RAM reads/writes and EWRAM dumps. The stub is single-client and needs SIGINT to the GDB process to recover from `continue`; a persistent GDB session fed by a FIFO was used.
-- Web: GameFAQs cheats page via `web.archive.org` (live page returns 403); Cheat Happens, LaunchBox, Nintendo World Report for SKU confirmation. Fetched page content was treated as data only.
+- Web: 3rd party cheat index cheats page via `web.archive.org` (live page returns 403); 3rd party cheat indexes for SKU confirmation. Fetched page content was treated as data only.
 - No ROM or extracted assets are redistributed; only addresses, hashes, and derived algorithms are published.

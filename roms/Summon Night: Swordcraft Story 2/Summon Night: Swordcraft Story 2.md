@@ -16,7 +16,7 @@
 | MD5 | `03eea2d57de9c16b5f10055e8e4e2893` |
 | SHA-1 | `cbc4382b1fff2e1b2d3112ae8fbf290aec662121` |
 | SHA-256 | `e267f052a3f138534f198bd33992d640568f80bf807e322c85c7b4cf6dd504ac` |
-| Region / SKU | USA, `AGB-BSKE-USA` (CRC32 `1EAC1F48` per GameHacking.org) |
+| Region / SKU | USA, `AGB-BSKE-USA` (CRC32 `1EAC1F48` per 3rd party cheat indexes) |
 
 Single Nintendo logo hit at header offset `0x04`; this is one image, not a multigame pack.
 Header checksum `0x0000` is the usual rebuilt-header artifact; the complement byte is intact.
@@ -128,7 +128,7 @@ switch (gate) {
 | 7 | `Save` (`0x0808F970`) | — | always (UI button) |
 | 8 | `Exit` (`0x0808F964`) | — | always (UI button) |
 
-Unlock *conditions* in the right column are from published guides (GameFAQs/Neoseeker/
+Unlock *conditions* in the right column are from published guides (3rd party cheat indexes/
 Japanese wikis), treated as leads; the bits and labels are from the ROM.
 
 ### 6.2 In-game COMMAND menu (walked in emulator)

@@ -207,7 +207,7 @@ claim.
 
 ### Web reconnaissance (blocked — recorded)
 
-GameFAQs `…/gba/561998-tiger-woods-pga-tour-2004/cheats` returned HTTP 403 to `webfetch` and a
+3rd party cheat indexes `…/gba/561998-tiger-woods-pga-tour-2004/cheats` returned HTTP 403 to `webfetch` and a
 Cloudflare "Verify you are human" challenge in `agent-browser`; Google returned a reCAPTCHA;
 Bing/DuckDuckGo returned animal results for the game title. **No published code list could be
 retrieved**, so there is no public list to verify against. This is recorded as an environment

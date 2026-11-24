@@ -23,7 +23,7 @@ No patch, trainer, or appended cheat engine was found.
 
 ## 2. Executive summary
 
-**There is no password system, no typed cheat code, and no button-code/sequence system in this GBA game.** Published "cheats" for the GBA SKU are three **gameplay-gated save unlockables** (Boss Mode, Extra Mode, Meta-Nightmare Mode) plus one glitch; TCRF's "debug rooms" require an external GameShark code and are therefore out of scope. Codes widely published for the NES original *Kirby's Adventure* (↑+A+Select for Extra Game, Start+Select for permanent copy ability, etc.) do **not** affect the GBA build — all were tested on live screens and rejected (§6b).
+**There is no password system, no typed cheat code, and no button-code/sequence system in this GBA game.** Published "cheats" for the GBA SKU are three **gameplay-gated save unlockables** (Boss Mode, Extra Mode, Meta-Nightmare Mode) plus one glitch; a 3rd party cheat index's "debug rooms" require an external GameShark code and are therefore out of scope. Codes widely published for the NES original *Kirby's Adventure* (↑+A+Select for Extra Game, Start+Select for permanent copy ability, etc.) do **not** affect the GBA build — all were tested on live screens and rejected (§6b).
 
 The developer-intended hidden surface that **does** exist is a **GAME SELECT** menu reached by pressing **Start on the FILE SELECT screen** (not on the title screen). It contains four entries: START GAME, SUB-GAMES (three playable minigames), SOUND TEST (MUSIC/SOUND jukebox, track select), and ERASE A FILE (with YES/NO confirmation). Every entry was entered and its effect observed; all are available on a 0%-complete save file, so none is gated.
 
@@ -121,17 +121,17 @@ Modes: MUSIC / SOUND (Left/Right). Track counter starts at 0; Up/Down changes it
 
 ### 6.4 Published codes classified (web verification)
 
-Source: GameFAQs cheat page (live 403; fetched via `web.archive.org/web/20241003080557/...`) and TCRF (via `web.archive.org/web/20250105165234/...`).
+Source: 3rd party cheat index cheat page (live 403; fetched via `web.archive.org/web/20241003080557/...`) and 3rd party cheat indexes (via `web.archive.org/web/20250105165234/...`).
 
 | Published item | Source | Verdict for this GBA SKU |
 |---|---|---|
-| Boss Mode — beat the game once | GameFAQs GBA | Save-bit unlockable, gameplay-gated. Not a code. |
-| Extra Mode — 100% in Adventure Mode | GameFAQs GBA | Save-bit unlockable, gameplay-gated. Not a code. |
-| Meta-Nightmare Mode — beat Nightmares on Extra | GameFAQs GBA | Save-bit unlockable, gameplay-gated. Not a code. |
-| Trick Mr. Frosty (level 1-4) | GameFAQs GBA | Glitch, not a code. |
-| Random Abilities (2+ swallowed enemies) | GameFAQs GBA | Gameplay behaviour, not a code. |
-| Debug rooms (Room 149–153), HAL Room | TCRF | Require **GameShark** codes — out of scope (§ scope). |
-| ↑ + A + Select (Extra Game), Start+Select (permanent ability), 30 lives, Sound Test unlock, etc. | GameFAQs **NES** / Extra Mode wiki | NES-original codes. Tested on GBA title/file-select: **no effect** (§6b). |
+| Boss Mode — beat the game once | 3rd party cheat indexes GBA | Save-bit unlockable, gameplay-gated. Not a code. |
+| Extra Mode — 100% in Adventure Mode | 3rd party cheat indexes GBA | Save-bit unlockable, gameplay-gated. Not a code. |
+| Meta-Nightmare Mode — beat Nightmares on Extra | 3rd party cheat indexes GBA | Save-bit unlockable, gameplay-gated. Not a code. |
+| Trick Mr. Frosty (level 1-4) | 3rd party cheat indexes GBA | Glitch, not a code. |
+| Random Abilities (2+ swallowed enemies) | 3rd party cheat indexes GBA | Gameplay behaviour, not a code. |
+| Debug rooms (Room 149–153), HAL Room | 3rd party cheat indexes | Require **GameShark** codes — out of scope (§ scope). |
+| ↑ + A + Select (Extra Game), Start+Select (permanent ability), 30 lives, Sound Test unlock, etc. | 3rd party cheat indexes **NES** / Extra Mode wiki | NES-original codes. Tested on GBA title/file-select: **no effect** (§6b). |
 | Extra Mode via ↑+A+Select | wiki snippet, ambiguous edition | Not reproducible on this GBA build. |
 
 No published item supplied a literal to search for in the ROM — consistent with there being no code table. No prompt-injection payload was encountered in the fetched pages; all fetched content was treated as data.
@@ -161,13 +161,13 @@ Plus each single button on FILE SELECT (A=start game, B=back, Start=hidden menu;
 
 **Novel code / deliverable.** §0.2's "mint an unpublished code" does not apply because no code space exists. The equivalent deliverables — full branch enumeration and an undocumented input pressed in-game — are provided above. No GameShark/CodeBreaker/memory-edit code is reported, by scope.
 
-**Unlockables.** The three GameFAQs unlockables are completion-gated save bits, not reachable by any button/password tested. TCRF's debug rooms are gated behind an external cheat device and are not a developer-intended input path.
+**Unlockables.** The three 3rd party cheat indexes unlockables are completion-gated save bits, not reachable by any button/password tested. a 3rd party cheat index's debug rooms are gated behind an external cheat device and are not a developer-intended input path.
 
 ## 7. Validation evidence
 
 - **Observed** — title, FILE SELECT, GAME SELECT, SUB-GAMES, Quick Draw, SOUND TEST, ERASE confirmation, gameplay and Start-help in mGBA on :319; screenshots in `shots/`; RAM values in the table above from savestate `gbAs` chunks (IWRAM at state offset 0x19000, EWRAM at 0x21000, state length 0x61000).
 - **Derived** — input routine at 0x080011DC and its literal pool; key-state addresses; save signature reference at 0x080B7B02; embedded header bases; tile-indexed text conclusion from ROM scans + VRAM tilemap.
-- **Inferred** — that the three unlockables are SRAM bits set by completion routines (consistent with GameFAQs and the SRAM helpers at 0x0D2xxx–0x0F0xxx); the exact setter call sites were not isolated. The four embedded images are attributed to the three link-capable sub-games by content and naming, not by a verified loader xref.
+- **Inferred** — that the three unlockables are SRAM bits set by completion routines (consistent with 3rd party cheat indexes and the SRAM helpers at 0x0D2xxx–0x0F0xxx); the exact setter call sites were not isolated. The four embedded images are attributed to the three link-capable sub-games by content and naming, not by a verified loader xref.
 - **Negative results** — absence of password system and button codes is bounded by the text and button searches quantified in §6b, not by a failed single search.
 
 ## 8. Unknowns
@@ -186,7 +186,7 @@ Plus each single button on FILE SELECT (A=start game, B=back, Start=hidden menu;
 - mGBA (SDL) under Xvfb `:319` + openbox; `xdotool` XTEST input; `scrot`/ImageMagick screenshots; custom `gba.py` driver.
 - `buttonprobe.py` — savestate restore + multi-button combo probe with RAM diff.
 - `ram.py` — mGBA `.ss1` `gbAs` zlib-chunk parser for IWRAM/EWRAM reads and diffs (§16.13).
-- Web: `websearch`; `webfetch` via `web.archive.org` for GameFAQs and TCRF (direct fetches 403).
+- Web: `websearch`; `webfetch` via `web.archive.org` for 3rd party cheat indexes.
 - No ROM or copyrighted assets are redistributed; only hashes, addresses, and original findings are published.
 
 ## 10. Cross-check with sibling ROM

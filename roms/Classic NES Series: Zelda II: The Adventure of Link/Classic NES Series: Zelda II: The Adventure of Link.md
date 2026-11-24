@@ -77,7 +77,7 @@ real menu surfaces:
 4. **The four-button reset `A+B+Select+Start` is a second wrapper-level input.**
    Held word `0x000F` installs the same reset handler as System Menu slot 1
    (`0x080036D1`), drives NES frame counter `$15` to 0 and clears `$0777`–`$0779`.
-   It is not on the GameFAQs GBA cheat page.
+   It is not on the 3rd party cheat indexes GBA cheat page.
 
 5. **New Game Plus** (the little triangle on a completed file) is a gated
    unlockable: `$07A0 == 1` marks the new-game-plus load path at `$B2BC`, which
@@ -357,10 +357,10 @@ the wrapper's sleep/display-off path (`0x08003729` timer then `0x0800374D`).
 ### Novel, unpublished inputs (verified in the emulator)
 
 1. **`A8C` name** — a digit-bearing spelling absent from every published list
-   (GameFAQs only documents `ZELDA` for Zelda 1). Entered on the real name-entry
+   (3rd party cheat indexes only documents `ZELDA` for Zelda 1). Entered on the real name-entry
    screen; SRAM `0x0203002C` read `DA D8 DC F4 F4 F4 F4 F4`; the file started
    and live `$777`–`$779` read `01 01 01` (Observed).
-2. **`A+B+Select+Start` reset chord** — not listed on the GameFAQs GBA page.
+2. **`A+B+Select+Start` reset chord** — not listed on the 3rd party cheat indexes GBA page.
    Held word `0x000F` installed `0x080036D1`; NES `$15` went 112→0 and
    `$777`–`$779` went `01 01 01`→`00 00 00` (Observed).
 3. **`L+R` System Menu** (gate + three slots) — not listed for this SKU;
@@ -381,11 +381,11 @@ the wrapper's sleep/display-off path (`0x08003729` timer then `0x0800374D`).
 
 ### Published-list check
 
-* GameFAQs GBA `Quicksave` (Start, then Select+Up) — verified verbatim; the
+* 3rd party cheat indexes GBA `Quicksave` (Start, then Select+Up) — verified verbatim; the
   options and their effects were enumerated beyond the published text.
-* GameFAQs GBA `New Game Plus` — code path verified at `$07A0`/`$B2BC`; not
+* 3rd party cheat indexes GBA `New Game Plus` — code path verified at `$07A0`/`$B2BC`; not
   triggered because it requires a completed game.
-* GameFAQs NES Game Genie codes — memory-edit codes, out of scope; none are
+* 3rd party cheat indexes NES Game Genie codes — memory-edit codes, out of scope; none are
   in-game inputs.
 * No published password/name code for this SKU exists to test; the `ZELDA`
   name stat claim is a Zelda 1 behavior, disproved here.

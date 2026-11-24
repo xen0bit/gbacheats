@@ -18,7 +18,7 @@
 | SHA-1 | `05c7c1bea2b0cb77976e07c8f2a8b0ef5d1f5685` |
 | SHA-256 | `1cf4376fb235252b43b4365527914e356a9af9c6299eee90ab6b138bae05f6bd` |
 
-The SHA-1/MD5 match the verified No-Intro/TASVideos dump for the US/EU
+The SHA-1/MD5 match the verified 3rd party cheat indexes dump for the US/EU
 release, so the ROM is not a modified image. The complement and header
 checksum fields are wrong **in the verified dump itself**; they are recorded
 here as a shipped-header quirk, not evidence of a patch.
@@ -56,8 +56,7 @@ Slot contents (all 8 enumerated; strings at ROM `0x080374A0`):
 | 6 | `xxxxxxxx` | `0x0200805A` | entity predicate (forced true) | sentinel, unreachable |
 | 7 | `xxxxxxxx` | `0x0200805B` | entity predicate (forced true) | sentinel, unreachable |
 
-The four real strings are exactly the four codes published on GameFAQs and
-SuperCheats. All four were verified against the ROM literal and accepted by the
+The four real strings are exactly the four codes published on 3rd party cheat indexes. All four were verified against the ROM literal and accepted by the
 game. The claim on some fan pages that **Hard Mode must be unlocked first is
 false**: every code worked on a fresh, 0 %-complete Game 1 save (observed).
 
@@ -71,7 +70,7 @@ its flag back off (also not documented publicly).
 The four `xxxxxxxx` slots are **not reachable from the controller**. The
 key→character mapper has no branch that produces `x`; `x` is outside the
 reachable alphabet. Slot 4 (`0x02008058`) is the debug-HUD flag documented by
-TCRF under CodeBreaker address `02008058:01`; that is a memory edit and is out
+3rd party cheat indexes under CodeBreaker address `02008058:01`; that is a memory edit and is out
 of scope here. Slots 2, 6 and 7 are likewise only settable by memory edit.
 
 ## 3. How to reproduce
@@ -101,7 +100,7 @@ Code entry / test:
 2. To verify the flag directly, save a state (`Shift+F1`…`Shift+F10`) while
    still paused and parse it (see §9).
 
-Published codes (GameFAQs archive snapshot 2023-07-25, SuperCheats) and result:
+Published codes (3rd party cheat indexes archive snapshot 2023-07-25, 3rd party cheat indexes) and result:
 
 | Effect | Published presses | Mapped string | In ROM? | Result |
 |---|---|---|---|---|
@@ -145,11 +144,11 @@ walked UI: `Select a Stage` (`0x9394C`), `Defeat Level` (`0x93B50`),
 reachable from a menu; the pause menu exposes only Resume/Quit Level/Sleep/
 Sound, and the title exposes only Start Game/View Credits.
 
-Published-source handling: GameFAQs returned 403 directly and was read from the
-Wayback snapshot of 2023-07-25; SuperCheats was fetched directly; TCRF returned
+Published-source handling: 3rd party cheat indexes returned 403 directly and was read from the
+Wayback snapshot of 2023-07-25; 3rd party cheat indexes were fetched directly; 3rd party cheat indexes returned
 403 directly and was read from the 2024-12-17 Wayback snapshot; the fandom page
 returned 403, so only its search snippet was used and its claims were tested
-against the ROM/emulator. VGChartz was not needed. Every published code was
+against the ROM/emulator. 3rd party cheat indexes were not needed. Every published code was
 checked as a literal in the ROM before being tested in-game.
 
 Key-mask scans were also run: the published sequences encoded as `u16` button
@@ -316,14 +315,14 @@ Case matters: `l`/`r` (D-pad) are not `L`/`R` (shoulders).
 
 ### 6.3 Published lists vs ROM
 
-* GameFAQs (archive 2023-07-25): four codes, exactly the four ROM strings.
-* SuperCheats: same four; a second submitter gives the 8-press super jump
+* 3rd party cheat indexes: four codes, exactly the four ROM strings.
+* 3rd party cheat indexes: same four; a second submitter gives the 8-press super jump
   (`L,R,L,R,Up,Up,Down,Down`), which is the one in the ROM.
 * great-games.fandom search snippet: gives a 9-press super jump
   (`L,R,L,R,Up,Up,Up,Down,Down`) and says codes require Hard Mode. The 9-press
   string is absent from the ROM and was rejected in the emulator; Hard Mode was
   not unlocked and all four real codes worked.
-* TCRF: `CodeBreaker 02008058:01` enables the debug display. `0x02008058` is
+* 3rd party cheat indexes: `CodeBreaker 02008058:01` enables the debug display. `0x02008058` is
   slot-4’s flag; the display format string and reader are mapped above. This is
   a memory-edit route, not a controller code, and is out of scope.
 
@@ -438,7 +437,7 @@ there.
 ## 8. Unknowns
 
 * Exact original purpose of sentinel slots 2, 6 and 7. Slot 4 is identified by
-  code and by TCRF; slot 2 has no reader; 6/7 are broad entity predicates.
+  code and by 3rd party cheat indexes; slot 2 has no reader; 6/7 are broad entity predicates.
 * The sound cue emitted after a match was not characterised (the call site and
   buffer are recorded, but the audio was run with `SDL_AUDIODRIVER=dummy`).
 * Slot 1 (no-hit) flag is verified in RAM and its reader paths are mapped, but

@@ -119,7 +119,7 @@ inside the one 32 MiB image.
   limits until the Tournament.") until the intro story is advanced (`sac15.png`).
   To start the tournament: challenge (**R**, not A) the five *stationary* duelists in
   Clock Tower Square — in this English build they are **Yugi, Mai, Bonz (spiky hair),
-  Underwoods (green hair) and Tsunami**, per the English GameFAQs walkthrough
+  Underwoods (green hair) and Tsunami**, per the English 3rd party cheat index walkthrough
   (intensive08, v2.0, §6.1). Note that the Japanese-version guide (nycoolboy, DM7)
   names *Weevil / Mako / Rex* instead; those are the wrong five for this ROM and were
   what the fifth and sixth passes chased. Order in the English guide: Yugi (start

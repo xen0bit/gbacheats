@@ -60,7 +60,7 @@ an algorithmic password:
 * **Every published list checked prints the first code as `B-DAMAN`. The ROM
   stores `GO B-DAMAN`.** `B-DAMAN` is rejected; `GO B-DAMAN` is accepted and
   grants 1000 B-Dabucks. `GO B-DAMAN` appears in no published list found
-  (GameFAQs and ChapterCheats snippets, VGChartz, B-Daman Wiki/Fandom search),
+  (3rd party cheat indexes snippets, 3rd party cheat indexes/3rd party cheat index search),
   so it is a genuinely unpublished accepted code.
 
 No button-code table and no reachable debug menu were found. The developer
@@ -294,8 +294,8 @@ or list-visibility flag; this was not proven (see §8).
 
 ### 6.2 Published-list correction
 
-All fetched published tables (GameFAQs snippet, ChapterCheats Bronze page,
-VGChartz, B-Daman Wiki/Fandom search results) print the 1000-B-Dabuck code as
+All fetched published tables (3rd party cheat indexes snippet, 3rd party cheat indexes Bronze page,
+3rd party cheat indexes/3rd party cheat index search results) print the 1000-B-Dabuck code as
 `B-DAMAN`. The ROM string is `GO B-DAMAN` (encoded bytes
 `17 1F 10 12 51 14 11 1D 11 1E 00`). The validator accepts only the latter;
 `B-DAMAN` and `B-DAMAN` with any padding are rejected.

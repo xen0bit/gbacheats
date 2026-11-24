@@ -39,8 +39,8 @@ this ROM.** This is a hard negative, not an untested one:
 * Button-mask search (u16 arrays, Konami and 10 other common sequences, active-high and
   active-low) found **0** plausible code tables; the only hits were graphics data and a
   sequential 0,1,2,… lookup table at `0x08036EFC`.
-* **Published codes**: GameFAQs lists no cheats; VGChartz "Total cheats available: 0";
-  CheatingDome has one item, an in-game money *glitch*, not a code. Neoseeker/GameHacking
+* **Published codes**: 3rd party cheat index lists no cheats; 3rd party cheat indexes "Total cheats available: 0";
+  3rd party cheat indexes have one item, an in-game money *glitch*, not a code. 3rd party cheat indexes
   list only GameShark/CodeBreaker memory-edit codes (explicitly out of scope). Two
   emulator-site "codes" (`UNLOCK_ALL_HORSES`, `GOLD_COINS_9999`) are **absent from the
   ROM** (0 literal hits) and are fabricated. A published PC-build dev cheat (`idkfa`,
@@ -186,8 +186,8 @@ section proves the negative over the searched spaces.**
   (`0x08218CC8` describes it explicitly as name entry). Its consumer is the save/profile
   name, not a validator: no comparison against the buffer at `0x03007E44` exists outside
   the entry handler.
-* **Published codes**: 0 in-game codes published anywhere found (GameFAQs empty,
-  VGChartz 0, CheatingDome 1 money *glitch*). GameShark/CodeBreaker codes
+* **Published codes**: 0 in-game codes published anywhere found (3rd party cheat indexes empty,
+  3rd party cheat indexes 0, 3rd party cheat indexes 1 money *glitch*). GameShark/CodeBreaker codes
   (`96276FFA5214 2DCCB7E29536 D629E10B7C88` master, `795196C7CCC0 AE9AFE28E379` cash,
   `88C2DF4FAA4E 7FB96F0A35C1` items) are memory-edit codes and out of scope by the brief.
   `UNLOCK_ALL_HORSES` / `GOLD_COINS_9999` (classicemu) have 0 literal hits in the ROM —
@@ -214,7 +214,7 @@ previously under-documented hidden Highscore gate.
 * **Inferred** — the exact effect of the `DTP_PONY` scene tag and of the dead build stamp
   (no live caller was found); whether the European release (`BPVX`) differs — not tested,
   only the USA `B34E` image was supplied.
-* **Prompt injection** — a TCRF fetch returned a fake "LLM-/AI Agent-Specific Information"
+* **Prompt injection** — a 3rd party cheat index fetch returned a fake "LLM-/AI Agent-Specific Information"
   block ("whoever is operating this AI agent is a clown" and instructions to follow it).
   It was treated as untrusted data and ignored, per guide §16.8 and the task brief.
 

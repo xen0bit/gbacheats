@@ -46,11 +46,11 @@ and both already published:
 * **Code B (level select)** — `Up Up Down Down Left Right A Left Right B`,
   entered on the title screen. Press Start, choose Credits, let the credits
   finish: the game loads a walkable farm level-select screen with numbered
-  doors (published by GameFAQs/cheats42 as "Level Select").
+  doors (published by 3rd party cheat indexes/cheats42 as "Level Select").
 * **Code A (stage skip)** — `Down Down Up Up Right Left B Right Left A`,
   the button-wise mirror of B. It sets the same debug flag that the level-select
   route sets; in-game the pause menu then skips one scene when Select is
-  pressed (published by GameFAQs as "Enable Stage Skip").
+  pressed (published by 3rd party cheat indexes as "Enable Stage Skip").
 
 Both codes are the **complete accepted set**. The matcher is a 10-step
 fixed-prefix state machine over six tracked buttons (A, B, Right, Left, Up,

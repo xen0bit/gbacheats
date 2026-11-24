@@ -52,10 +52,10 @@ credits handler with **zero call sites and no other literal reference**; IDs 4�
 point to `0x0800021D` (`bx lr`, a no-op). Therefore no hidden screen is reachable
 through the dispatcher.
 
-**Published codes.** GameFAQs' Fortress cheats page is empty (verified via
-web.archive.org capture `20230507151512`); no TCRF page exists for this title;
+**Published codes.** 3rd party cheat indexes' Fortress cheats page is empty (verified via
+web.archive.org capture `20230507151512`); no 3rd party cheat index page exists for this title;
 web searches for `<Fortress GBA> password / cheat / code / unlock` produced no
-code list — only the gameplay FAQ by mimicmasterax (GameFAQs FAQ 13620), which
+code list — only the gameplay FAQ by mimicmasterax (3rd party cheat index FAQ 13620), which
 documents controls and 4 eras and contains no password/cheat section. There are
 therefore no published codes to verify against the ROM; this is recorded, not
 silently omitted. One search result (`maje...games.com/fortress-gba`) contained
@@ -203,8 +203,8 @@ The negative is bounded as follows.
    same 59 single/pair inputs + 4 combos were applied from a reloaded savestate
    and the RAM screen pointer at `0x02008DE0` was read after each; it never
    changed from `0x08001015`. No hidden button code exists.
-5. **Published codes:** none published for this SKU (GameFAQs cheats empty,
-   no TCRF page, no other source found); nothing to verify/test. The single
+5. **Published codes:** none published for this SKU (3rd party cheat index cheats empty,
+   no 3rd party cheat index page, no other source found); nothing to verify/test. The single
    gameplay FAQ contains no codes.
 6. **Bounds proof (negative form).** The dispatcher bound (IDs 0–7, only 0–2
    live) and the two zero-xref results for the credits handler are the formal
@@ -251,7 +251,7 @@ The negative is bounded as follows.
   `0x61000`), EWRAM at raw `0x21000`, IWRAM at `0x19000` (guide §16.13).
   Helper scripts: `/tmp/fortress/ss.py`, `diff_ss.py`, `gba.py`,
   `combo_test2.py`, `menu_combo.py`.
-- Web sources treated strictly as data (§16.8): archived GameFAQs cheats &
+- Web sources treated strictly as data (§16.8): archived 3rd party cheat index cheats &
   FAQ 13620. No code was found, so no literal verification was possible.
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced here; only

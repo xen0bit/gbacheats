@@ -15,7 +15,7 @@
 | MD5 | `0c4fd4cf211b2b712fd090ef1b95adfd` |
 | SHA-1 | `3fd4735edc6b9e1ee04243c24280d14475b9a191` |
 | SHA-256 | `87a857dee5dfb5d48c706abbc103fa148461abc58833c8336cf11f21bcf5ed2a` |
-| Developer / publisher | 3d6 Games / THQ (per GameFAQs and TCRF; also in credits text at `0x0830A1D8`) |
+| Developer / publisher | 3d6 Games / THQ (per 3rd party cheat indexes; also in credits text at `0x0830A1D8`) |
 
 All addresses below are ROM (`0x08……`) unless stated otherwise; file offset = address − `0x08000000`.
 
@@ -23,7 +23,7 @@ All addresses below are ROM (`0x08……`) unless stated otherwise; file offset 
 
 **Confirmed in-game cheat.** On the `SELECT GAME` screen reached from `MARATHON` (or `ULTRA`), hold **L** and press **Select**. This unlocks a seventh mode, **POPULAR** (classic Tetris), at the bottom of the mode list. The unlock is written into the menu object in EWRAM: the mode-descriptor pointer table gains entry `0x0837FDE8`, the item count goes `6 → 7`, and the cursor jumps to index `6`. Tested in mGBA 0.10.5; screenshot and RAM evidence below. The gate is a **bit test**, not an exact-mask comparison: `L+R+Select` also unlocks, while `Select` alone, `R+Select`, and `L+B` do not.
 
-**Password surface — bounded negative.** The ROM contains an `Enter Password` string, an `Invalid Password` string and a `Password` string, all as entries in one 40-entry string table, but this build has **no reachable password screen**. Every reachable screen was walked (§6b); the 20-entry menu-descriptor table contains no password menu; the only xrefs to the three password strings are the string-table slots themselves (zero code references across 40,521 analyzed Thumb instructions); no password alphabet, mask sequence, or comparison table was found. This is a "dead UI string / cut feature" negative, not "not tested". The game's FAQ and GameFAQs cheats list no password feature; the "password-only save" label found on one web page refers to a *different* GBA title with the same name (guide §16.11).
+**Password surface — bounded negative.** The ROM contains an `Enter Password` string, an `Invalid Password` string and a `Password` string, all as entries in one 40-entry string table, but this build has **no reachable password screen**. Every reachable screen was walked (§6b); the 20-entry menu-descriptor table contains no password menu; the only xrefs to the three password strings are the string-table slots themselves (zero code references across 40,521 analyzed Thumb instructions); no password alphabet, mask sequence, or comparison table was found. This is a "dead UI string / cut feature" negative, not "not tested". The game's FAQ and 3rd party cheat index cheats list no password feature; the "password-only save" label found on one web page refers to a *different* GBA title with the same name (guide §16.11).
 
 **Other published cheats** (title-screen starscape: R speeds up, L reverses) are animation-only and were not reduced to a flag; the L+Select unlock is the only developer-intended code reducible to a state change.
 
@@ -116,7 +116,7 @@ Inputs that navigate away (Start, A while L held) destroy the screen object, so 
 
 ## 6b. Enumeration
 
-**Button-code space.** The dispatcher is a two-button gate with prefix length 2 (`L` held ∩ `Select` newly pressed). All 10 combinations listed in §6 plus 13 main-menu combinations were pressed in the emulator. Exactly two combinations open the new branch (L+Select, L+R+Select); both select the same single new menu entry (`POPULAR`). The new branch has exactly one action — starting classic Tetris — so the code set is fully enumerated: **one developer code, one hidden mode**. Novelty: this exact sequence with its in-game effect is published (GameFAQs, chaptercheats, aaacheatcodes), so it is *not* a novel published-list code; the **novel artifact** produced here is the previously undocumented acceptance of `L+R+Select` (no published list mentions that R is tolerated) plus the exact RAM writes (`0x02003A90`, `0x02003AC4`, `0x02003AD4`) that constitute the unlock. Bounds were proven by the in-game rejections in §6.
+**Button-code space.** The dispatcher is a two-button gate with prefix length 2 (`L` held ∩ `Select` newly pressed). All 10 combinations listed in §6 plus 13 main-menu combinations were pressed in the emulator. Exactly two combinations open the new branch (L+Select, L+R+Select); both select the same single new menu entry (`POPULAR`). The new branch has exactly one action — starting classic Tetris — so the code set is fully enumerated: **one developer code, one hidden mode**. Novelty: this exact sequence with its in-game effect is published (3rd party cheat indexes, aaacheatcodes), so it is *not* a novel published-list code; the **novel artifact** produced here is the previously undocumented acceptance of `L+R+Select` (no published list mentions that R is tolerated) plus the exact RAM writes (`0x02003A90`, `0x02003AC4`, `0x02003AD4`) that constitute the unlock. Bounds were proven by the in-game rejections in §6.
 
 **Password space — proven bounded negative with counts.**
 
@@ -139,7 +139,7 @@ Conclusion: the accepted password-input space in this ROM is the **empty set** (
 - **Observed (RAM)** — savestate `gbAs` chunk diff before/after L+Select: `0x02003A90: 0 → 0x0837FDE8`, `0x02003AC4: 6 → 7`, `0x02003AD4: 0 → 6`. Verified again independently; `reject_test.py` shows the rejections in §6.
 - **Derived** — menu/resource structures and string IDs from Ghidra decompilation and literal scans; input masks from `FUN_082F1D44`.
 - **Inferred** — the exact source-level form of the gate (bit test vs. key-equality) is inferred from the observed acceptance of L+R+Select and rejection of R+Select; no breakpoint was taken on the gate instruction itself.
-- **Untrusted web content** — a fetch of TCRF's "Notes:Game Boy Color Bootstrap ROM" page returned a fake "LLM / AI Agent-Specific Information" block instructing agents to create `key.bin` containing an EICAR test string and use it as an XOR key. Treated as data (prompt injection), ignored, and reported here per guide §16.8 / skill discipline.
+- **Untrusted web content** — a fetch of a 3rd party cheat index's "Notes:Game Boy Color Bootstrap ROM" page returned a fake "LLM / AI Agent-Specific Information" block instructing agents to create `key.bin` containing an EICAR test string and use it as an XOR key. Treated as data (prompt injection), ignored, and reported here per guide §16.8 / skill discipline.
 
 ## 8. Unknowns
 
@@ -154,6 +154,6 @@ Conclusion: the accepted password-input space in this ROM is the **empty set** (
 - `arm-none-eabi-objdump -M force-thumb` for spot disassembly; Capstone 5.0.7 / Keystone available.
 - Ghidra 12.1.4 headless (`analyzeHeadless`, raw-binary import, `ARM:LE:32:v7`, base `0x08000000`) with custom scripts `FindRefs.java`, `FindConsts.java`, `Decomp.java`, `CreateAndDecomp.java`, `ScanResUsers.java` in `/tmp/tetrisworlds/`.
 - Python helpers in the same folder: `key.py`, `scan.py`, `parse_state.py` (PNG `gbAs` zlib chunk → raw 397,312-byte state; IWRAM at `0x19000`, EWRAM at `0x21000`), `diffstates.py`, `combos.py`, `combo_counts.py`, `reject_test.py`.
-- Web recon: GameFAQs cheats/FAQ (via Wayback), chaptercheats, aaacheatcodes, TCRF search snippets. All treated as data.
+- Web recon: 3rd party cheat index cheats/FAQ (via Wayback), 3rd party cheat indexes, aaacheatcodes, 3rd party cheat index search snippets. All treated as data.
 
 **Legal note:** No ROM bytes, graphics, or audio are redistributed. Only addresses, hashes, algorithms, and observations are published.

@@ -41,7 +41,7 @@ and **112 sound effects**, matching the plaintext sound-ID bank at `0x4EC4C`.
 "Save All Animals" sets 10 bytes at `0x0300446A` to `0xFF`; "Unlock Bonus
 Content" writes the save record and returns to the title screen.
 
-The published CodeBreaker code from TCRF (`74000130 00FF 33004A80 0006`, then
+The published CodeBreaker code from 3rd party cheat indexes (`74000130 00FF 33004A80 0006`, then
 L+R) was verified literally in the ROM and reproduced in the emulator. **The
 gate is exact:** writing `5` lands on Game Over, `7` lands on Options, `6` opens
 the cheat menu — so the menu state is one value in the game's screen-state word,
@@ -172,7 +172,7 @@ values, of which exactly one (`6`) is the undocumented debug screen; the other
 values name ordinary screens. The menu itself has a fixed 5-entry root; each
 entry was entered and its full sub-enumeration recorded (§5).
 
-**Novel / unpublished content.** TCRF documents only that the menu exists and
+**Novel / unpublished content.** 3rd party cheat indexes document only that the menu exists and
 lists its five entries generically. This report adds, from live enumeration:
 the exact 5 Adventure areas and their per-area level sets (including the
 separate `Tutorial` entry and area-dependent level counts 5 vs 6), the 5 Scrat

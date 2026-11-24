@@ -17,11 +17,11 @@
 | SHA-1 | `87d8cc357cbace0539fb5a4520fac8b4a4aaa6c4` |
 | SHA-256 | `2f8e638b8c687d7208006ee4e245e27be8aad7111ecbfeaef3a16a3a52739db6` |
 
-The SHA-1 matches the "Good" dump listed by TASVideos for this title. This is the same game that the sibling agent analyses as *That's So Raven 2: Supernatural Style*; the two are distinct ROMs and all findings below were re-derived independently from this image.
+The SHA-1 matches the "Good" dump listed by 3rd party cheat indexes for this title. This is the same game that the sibling agent analyses as *That's So Raven 2: Supernatural Style*; the two are distinct ROMs and all findings below were re-derived independently from this image.
 
 ## 2. Executive summary
 
-**Bounded negative: this ROM contains no developer-intended password, button-code, or hidden/debug-menu system.** The only cheat-like content is a normal save-bit unlockable — 16 yearbook photos (GameFAQs: "complete all of the bonus missions in each level").
+**Bounded negative: this ROM contains no developer-intended password, button-code, or hidden/debug-menu system.** The only cheat-like content is a normal save-bit unlockable — 16 yearbook photos (3rd party cheat indexes: "complete all of the bonus missions in each level").
 
 Evidence, in four independent layers:
 
@@ -30,7 +30,7 @@ Evidence, in four independent layers:
 3. **Button-code scan (derived).** `getKeys()` at `0x08009A30` returns `~KEYINPUT & 0x3FF` (active-high masks A=1…L=0x200). The two published Raven-2 sequences (Costume, Unlimited Energy) were searched in both orders, active-high and active-low, as `u16` and `u8` arrays: **0 hits** in this ROM and 0 in the sibling ROM. A whole-ROM scan for runs of ≥6 consecutive non-zero single-key `u16` masks found **2 runs**, both in high compressed data (`0x082F84A8`, `0x08566638`), neither in executable code. No key-history comparison table exists.
 4. **Gated/dead-feature check.** `Secret Chicken Levels` (string ID 43) is unreachable: the episode selector shows exactly five icons (star = `Bonuses`, `1`–`4` = the four episodes) and all five were entered/labelled on screen. The only other candidate, the yearbook, is a 16-slot photo gallery gated by save bits (§7).
 
-A prompt-injection payload was encountered on the TCRF page for this title ("This page is not intended for humans … whoever is operating this AI agent is a clown"). It was ignored, treated as data, and recorded here per guide §16.8. The substantive TCRF content for Raven 1 lists only unused placeholder dialogue, no debug menu; the debug-menu and button-code material on that wiki belongs to Raven 2 and was not transferred to this report.
+A prompt-injection payload was encountered on the 3rd party cheat index page for this title ("This page is not intended for humans … whoever is operating this AI agent is a clown"). It was ignored, treated as data, and recorded here per guide §16.8. The substantive 3rd party cheat indexes content for Raven 1 lists only unused placeholder dialogue, no debug menu; the debug-menu and button-code material on that wiki belongs to Raven 2 and was not transferred to this report.
 
 ## 3. How to reproduce
 
@@ -65,7 +65,7 @@ There is no password algorithm. The only nontrivial transformations are:
 
 * **Key encoding:** `active_high = ~(*(volatile u16*)0x04000130) & 0x3FF`; button masks A=0x001, B=0x002, Select=0x004, Start=0x008, Right=0x010, Left=0x020, Up=0x040, Down=0x080, R=0x100, L=0x200.
 * **Initials entry:** 3 positions; 30 selectable glyphs (`A`–`Z`, `_`, `!`, `?`, `$`), plus two arrow cells (backspace/forward) and a non-selectable `OK` label. Acceptance is Start, not a comparison: no `strcmp`/checksum consumes the buffer; the bytes are copied into the save record and formatted with `"%s - %d%%"`.
-* **Unlockable state:** 16 photo flags in the save record; a locked slot renders a padlock. GameFAQs' unlock condition (all bonus missions in each level) is a gameplay trigger, not a code.
+* **Unlockable state:** 16 photo flags in the save record; a locked slot renders a padlock. 3rd party cheat indexes' unlock condition (all bonus missions in each level) is a gameplay trigger, not a code.
 
 ## 6. Tables
 

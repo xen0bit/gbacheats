@@ -27,8 +27,8 @@ an embedded second image (multiboot/link payload — this title supports linked
 multiplayer minigames). No trainer/menu patch was found; the code tables below live
 in the first image. The `ALBE` string occurs only at `0xAC` and `0x3C12F4`.
 
-**SKU check (§16.11):** this is GameFAQs game **474317** (Saffire, 2001) — *not* the
-2003 Mobius/THQ *Bionicle* (GameFAQs 915361). The widely published "Secret Menu"
+**SKU check (§16.11):** this is 3rd party cheat indexes game **474317** (Saffire, 2001) — *not* the
+2003 Mobius/THQ *Bionicle* (3rd party cheat indexes 915361). The widely published "Secret Menu"
 button code `L,L,R,L,Select,Start,A` belongs to the **Mobius** game; the active-high
 and active-low u16 byte sequences are both **absent** from this ROM (0 hits), and it
 is reported as a wrong-SKU lead, not a code for this target.
@@ -150,7 +150,7 @@ length transform, or field decoding. The EWRAM flags are the persisted unlock st
 | Name | Effect | Published? | Evidence |
 |---|---|---|---|
 | `Takua` | default name; cleared on first keypress | n/a | observed + derived |
-| `8MR472` | unlock Ussal Crab Race; flag `0x0203CACC=1` | yes (GameFAQs, Cheat Happens) | literal at `0x08403DD8`; RAM flag |
+| `8MR472` | unlock Ussal Crab Race; flag `0x0203CACC=1` | yes (3rd party cheat indexes) | literal at `0x08403DD8`; RAM flag |
 | `9MA268` | unlock Boat Race; flag `0x0203CACE=1` | yes | literal `0x08403DE0`; RAM flag |
 | `5MG834` | unlock Koli Football; flag `0x0203CAD0=1` | yes | literal `0x08403DE8`; RAM flag |
 | `3LT154` | unlock Kewa Bird Riding; flag `0x0203CAD2=1` | yes | literal `0x08403DF0`; RAM flag |
@@ -161,14 +161,14 @@ length transform, or field decoding. The EWRAM flags are the persisted unlock st
 | `Saffire` | developer-name check; returns to title boot | **no** | literal `0x08403E08`, screenshot `shot_Saffire.png` |
 | `DiePinky` | developer-name check; returns to Saffire logo | **no** | literal `0x08403E10`, screenshot `shot_DiePinky.png` |
 | `EvilGeorge` | developer-name check; returns to legal/title | **no** | literal `0x08403E1C`, screenshot `shot_EvilGeorge.png` |
-| `B9RBRN` | **rejected** (published "Master Code" is false) | yes (Cheat Happens) | absent from ROM; no flags, normal flow |
+| `B9RBRN` | **rejected** (published "Master Code" is false) | yes (3rd party cheat indexes) | absent from ROM; no flags, normal flow |
 | `Don-Mike` | not a code — untranslated-text placeholder | n/a | `0x084057E8` |
 
-Note on published labels (§16.7): Cheat Happens assigns the six codes to
-"Gali/Kopaka/Lewa/Onua/Pohatu/Tahu mini-game", while GameFAQs assigns the same six
+Note on published labels (§16.7): 3rd party cheat indexes assigns the six codes to
+"Gali/Kopaka/Lewa/Onua/Pohatu/Tahu mini-game", while 3rd party cheat indexes assigns the same six
 literals to the six actual minigames (Ussal Crab Race, Boat Race, Koli Football,
 Kewa Bird Riding, Snowball Fight, Lava Surfing). The literals are identical; the
-Cheat Happens labels are wrong.
+3rd party cheat indexes label are wrong.
 
 ## 6b. Enumeration
 
@@ -186,7 +186,7 @@ in the ROM: 12 are the name-screen/state-handler comparisons above, one is
 `0x080A0F2` (a second `"SCredits"` check), and one is `0x8017FAC` (`"Don-Mike"`,
 a localization placeholder). No further code literal exists.
 
-**Novel codes (absent from GameFAQs / Cheat Happens / VGChartz / TCRF).**
+**Novel codes (absent from 3rd party cheat indexes).**
 `Credits` and `SCredits` were found in the ROM, entered through the real End
 control, and produced in-game effects:
 
@@ -262,7 +262,7 @@ provided above, and the negative is closed by the exhaustive pointer/strcmp coun
   full game save (not played through here).
 * The second embedded GBA header at `0x3C1248` (multiboot/link image) was not
   booted; no cheat strings were found in it, but it was not fully enumerated.
-* No prompt-injection payload was encountered in fetched pages; the TCRF URL for
+* No prompt-injection payload was encountered in fetched pages; the 3rd party cheat indexes URL for
   this title returned HTTP 403 and no content. Fetched cheat pages were treated as
   data only.
 

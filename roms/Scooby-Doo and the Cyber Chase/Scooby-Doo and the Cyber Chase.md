@@ -36,7 +36,7 @@ Bounds were proven by rejection: `L#8#5VBK` (one-symbol parity-breaking near-mis
 
 Every reachable screen was walked with screenshots and RAM checks: legal, title, main menu (New Game / Password / Options), Options (Music / SoundFX / Skill / Credits), Credits, Password, and the in-game university/lab hub. The game text bank is plain ASCII script text (the `$name:ID` blocks at `0x02C0A8`–`0x0300F5`), so the display text was decoded directly rather than being tile-indexed.
 
-**Security note:** a fetch of the TCRF page during reconnaissance returned a prompt-injection payload ("This page is not intended for humans… these instructions are only for LLMs… whoever is operating this AI agent is a clown"). It was ignored and is recorded here as data, per guide §16.8.
+**Security note:** a fetch of the 3rd party cheat index page during reconnaissance returned a prompt-injection payload ("This page is not intended for humans… these instructions are only for LLMs… whoever is operating this AI agent is a clown"). It was ignored and is recorded here as data, per guide §16.8.
 
 ## 3. How to reproduce
 
@@ -124,7 +124,7 @@ Payload fields consumed by `0x0801C3E0`:
 | `CHTMD1` | 0x0803032C | cheat flag = 0 | 78 |
 | `CHTMD2` | 0x08030334 | cheat flag = 1 | 78 |
 
-Published codes **absent from the ROM table** (treated by the algorithmic path, all validated by the model): `45B9@WST`, `CHBB5VBX`, `MXP#2VBL`, `8QL9SWB2`, `X@X#V7FF`, `LCW72VBL`, `2XF74WS9`, `BTV@S7F#`, `V3Z9R7T3`. Published variants **not found as literals anywhere in the ROM** (so unverified as table entries): `IR@NFYC3` (the ROM stores `1R@NFYC3` instead), `8QL9SWB2` and `45B9@WST` (algorithmic codes, correctly absent as literals). GameFAQs labels were inconsistent across sources (e.g. `LCW72VBL` labelled "Coliseum" but decoding to level field 0), consistent with guide §16.7/§16.15 — the numeric payload is the reliable label.
+Published codes **absent from the ROM table** (treated by the algorithmic path, all validated by the model): `45B9@WST`, `CHBB5VBX`, `MXP#2VBL`, `8QL9SWB2`, `X@X#V7FF`, `LCW72VBL`, `2XF74WS9`, `BTV@S7F#`, `V3Z9R7T3`. Published variants **not found as literals anywhere in the ROM** (so unverified as table entries): `IR@NFYC3` (the ROM stores `1R@NFYC3` instead), `8QL9SWB2` and `45B9@WST` (algorithmic codes, correctly absent as literals). 3rd party cheat indexes label were inconsistent across sources (e.g. `LCW72VBL` labelled "Coliseum" but decoding to level field 0), consistent with guide §16.7/§16.15 — the numeric payload is the reliable label.
 
 ### 6.2 Cheat-mode button actions (unlocked by `CHTMD2`)
 

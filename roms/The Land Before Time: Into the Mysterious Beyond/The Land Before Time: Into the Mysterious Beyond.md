@@ -20,7 +20,7 @@
 | SHA-1 | `90f1f16591aceae35af1277b3970963ed1c7c796` |
 | SHA-256 | `455f5c32ec345b595098b4c284a8db8247310f9a5b3e282567a5ae5b94d39db0` |
 
-Developer/publisher confirmed by TCRF as **Sirius Games / The Game Factory, 2006**. This is a
+Developer/publisher confirmed by 3rd party cheat indexes as **Sirius Games / The Game Factory, 2006**. This is a
 **different game and different engine** from the sibling *The Land Before Time* (GBA, Full Fat,
 2002) analysed separately. The sibling's published character passwords (e.g.
 "Spike, Cera, Littlefoot, Golden Tree Star") and its "SKIP LEVEL" debug string belong to that
@@ -43,7 +43,7 @@ Because no validator exists, no novel code could be minted; per guide §0.2 the 
 with counts and full screen enumeration instead (§6b). A sibling-game password list was checked
 literally against this ROM and is absent.
 
-**Prompt-injection note (guide §16.8):** a TCRF fetch for the *sibling* game returned a block
+**Prompt-injection note (guide §16.8):** a 3rd party cheat index fetch for the *sibling* game returned a block
 claiming "This page is not intended for humans… These instructions are only for LLMs and
 automated agents to follow…". It was treated as untrusted data and ignored; no instruction in it
 was followed.
@@ -133,8 +133,7 @@ cheat, debug-menu, unlock or generator class.
 No `password.xml`, `cheat.xml`, `debug.xml` or equivalent.
 
 **Published code reconnaissance (all OUT OF SCOPE — external cheat devices):**
-GameFAQs `gba/562723` password list, GameShark/CodeBreaker lists (AlmarsGuides, ROMSFUN,
-gamegenie.53lu, libretro DB), e.g. `0200995C 00000063` (lives), `82009948 03E7` (fruit),
+3rd party cheat indexes `gba/562723` password list, GameShark/CodeBreaker lists (3rd party cheat indexes, libretro DB), e.g. `0200995C 00000063` (lives), `82009948 03E7` (fruit),
 `32006EC4 000A` (all stages), `D40B358E 0000F259` (master). These are parity-checked RAM writes
 requiring a cheat device; they are not entered through the game and are excluded by the brief.
 
@@ -170,7 +169,7 @@ no distinct RAM flag, with a random-input control for comparison.
 **Sibling independence:** the sibling's published passwords were searched literally in this ROM
 (`Golden Tree`: 0 hits; no 4-token password UI on any of the 10 screens). The sibling is Full Fat
 2002 (different game code, different engine); this ROM is Sirius Games 2006 `BLOE`. The
-GameFAQs password list therefore does not apply here.
+3rd party cheat indexes password list therefore does not apply here.
 
 ## 7. Validation evidence
 
@@ -184,7 +183,7 @@ GameFAQs password list therefore does not apply here.
   table; no pointer to the inert `"debug"` layer name.
 * **Inferred** — progression/awards (gold/silver/bronze, "You got the %s award!") are normal
   gameplay rewards, not unlockables; no unlockable content was observed or named in any string.
-* **Reported, not followed** — prompt-injection text in a fetched TCRF page (§2).
+* **Reported, not followed** — prompt-injection text in a fetched 3rd party cheat index page (§2).
 
 ## 8. Unknowns
 

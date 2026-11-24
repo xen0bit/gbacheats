@@ -25,7 +25,7 @@
 
 ## 2. Executive summary
 
-Two button-code cheats are published for this exact SKU: **Level Skip = `BBABBABBAAAAB`** (Cheat Happens, GameFAQs mirror, okay.fandom, planetcheats) and **More Health = `BAABAACA`** (okay.fandom). Both were treated as data, never as instructions.
+Two button-code cheats are published for this exact SKU: **Level Skip = `BBABBABBAAAAB`** (3rd party cheat index mirror, okay.fandom, 3rd party cheat indexes) and **More Health = `BAABAACA`** (okay.fandom). Both were treated as data, never as instructions.
 
 Exhaustive static and dynamic work found **no developer-intended password/code-entry system** in this ROM:
 
@@ -85,7 +85,7 @@ File offset = ROM address − `0x08000000` for this single-image 4 MiB ROM.
 
 | Item | Value |
 |---|---|
-| Published Level Skip code | `BBABBABBAAAAB` (13 presses: B B A B B A B B A A A A B) — Cheat Happens 2003-01-16; also okay.fandom, planetcheats |
+| Published Level Skip code | `BBABBABBAAAAB` (13 presses: B B A B B A B B A A A A B) — 3rd party cheat indexes 2003-01-16; also okay.fandom, 3rd party cheat indexes |
 | Published More Health code | `BAABAACA` (8 presses: B A A B A A C A; `C` unexplained — likely "Control"/D-pad) — okay.fandom |
 | CodeBreaker RAM addresses (out of scope, used only as RAM anchors) | lives `0x0200D7D0`, health `0x0200F36C`, shout `0x0200D7D8`, timer `0x0200EF38` |
 | Button masks (active-high) | A=0x001, B=0x002, Select=0x004, Start=0x008, Right=0x010, Left=0x020, Up=0x040, Down=0x080, R=0x100, L=0x200 |

@@ -33,7 +33,7 @@ The ROM's text UI is drawn from font/tile indices, so ASCII `strings` only surfa
 
 **There is no password, code-entry, level-select or sound-test system in this GBA port.** Progress is stored in a 32 KiB battery save (SRAM; mGBA creates a 32768-byte `.sav`). The title/main/options/player/difficulty/party/pause/save screens were all walked; the only text-entry-like surface is the difficulty/player menu, and the only hidden input gates are button combinations.
 
-There is exactly **one cheat**: the hidden *full power-up* gate. It matches the single published GBA code on GameFAQs ("Full Power-Up Cheat") but the ROM shows the exact rule and its side effects:
+There is exactly **one cheat**: the hidden *full power-up* gate. It matches the single published GBA code on 3rd party cheat indexes but the ROM shows the exact rule and its side effects:
 
 * while the **heart/extra-heart pickup handler** runs (`0x0802530C`), if the *held* virtual key word has **Start and Select both down** (`(held & 0x3000) == 0x3000`, `0x08025316`), the game immediately:
   * sets hearts to 10/10 (`0x020008E9`, `0x020008EA`),
@@ -221,7 +221,7 @@ Only `0x08025316` implements a cheat; the others are ordinary menu/gameplay chec
 
 **Accepted set.** The gate is `(held & 0x3000) == 0x3000`, so the accepted set is every state with bits 12 and 13 set: **256 of 1024** (`0x3000`–`0x3FFF`). Eight bits are don't-care. The branch count is exactly **one** (the `BNE` at `0x08025322` skips everything).
 
-**Published code (verified against the ROM).** GameFAQs' only GBA entry, "Full Power-Up Cheat" (break a yellow block → heart → pause → hold Start+Select → unpause → pick up heart), is exactly the ROM branch above. There are no published passwords for this GBA SKU; the SNES versions' lists do not apply (no password screen exists here).
+**Published code (verified against the ROM).** 3rd party cheat indexes' only GBA entry, "Full Power-Up Cheat" (break a yellow block → heart → pause → hold Start+Select → unpause → pick up heart), is exactly the ROM branch above. There are no published passwords for this GBA SKU; the SNES versions' lists do not apply (no password screen exists here).
 
 **Novel/unpublished accepted input (verified).** With real keys **Start+Select+Down** held (virtual `0x3400`, which no published list mentions), the ROM's own handler accepted it and wrote the full effect set. This exercises the unadvertised "extra buttons are ignored" property of the mask.
 

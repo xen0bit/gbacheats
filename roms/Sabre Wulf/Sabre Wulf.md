@@ -42,7 +42,7 @@ What the game *does* have is:
    (`LHT EDITOR`, `SEQ EDITOR`, `INFO`, `OBJ VRAM`, `MALLOC`, `PROCESSING`,
    `Spr View`, `Tasks`, `Ai Setup`, player-stat labels). Its string-table has
    **zero** genuine pointer cross-references and it is shown on no reachable
-   screen — it is unreachable left-over text, exactly as TCRF calls it
+   screen — it is unreachable left-over text, exactly as 3rd party cheat indexes call it
    ("possible debug menu").
 5. **A+B+Select+Start = soft reset**, verified statically (0x0800079A–0x08007AE,
    calls BIOS `SoftReset` at 0x080878EC) and in the emulator (returns to THQ
@@ -85,7 +85,7 @@ Menu walk (all observed on screen with RAM reads at each step):
 | `0x08000000`–`0x08000440` | crt0, input reader, module dispatcher | Derived (disassembly) |
 | `0x08000778`–`0x08007B6` | input handler: `held=~KEYINPUT`, `pressed=held&~prev`; A+B+Select+Start check | Derived |
 | `0x080878EC` | BIOS SoftReset wrapper (`mov sp; svc 1; svc 0`) | Derived + Observed (reset) |
-| `0x0808951C` | development/debug text block (dead) | Derived + TCRF |
+| `0x0808951C` | development/debug text block (dead) | Derived + 3rd party cheat indexes |
 | `0x0808C79C`–`0x0808C7C8` | orphaned debug-menu label table (6 labels + 0xFFFF terminator) | Derived |
 | `0x08089888/0x080898C8/0x08089908` | 16-entry engine module function-pointer tables (live, not debug UI) | Derived |
 | `0x0828BBE4`–`0x0828BC18` | orphaned 13-string debug stat-label table | Derived |
@@ -153,10 +153,10 @@ No screen offers "Debug", "Cheat", "Password", "Level Select" or any code entry.
 
 | Published claim | Source | ROM verification | Scope |
 |---|---|---|---|
-| `03001410 00000066` → test map | TCRF | **Verified**: index 102 of level table = TEST LEVEL (`0x08079941E`); address is the live level index | Memory edit — out of scope |
-| `330002CA 0001` unlock Orchids Menu | CodeBreaker (Almar's) | Address lies in EWRAM save-flag image; wrote it live, no menu change observed in this rev | Memory edit — out of scope |
-| `330002CB 0001` unlock Photographs | CodeBreaker (Almar's) | Same as above; corresponding in-game string `Photographs` at `0x080799486` exists | Memory edit — out of scope |
-| Gold medal unlocks Challenge level / all Rare Records unlock alternate bg | GameFAQs, IGN | Verified in-game text at `0x08079B153`, `0x0807AA323`, `0x0807AA34D` | Genuine unlockable |
+| `03001410 00000066` → test map | 3rd party cheat indexes | **Verified**: index 102 of level table = TEST LEVEL (`0x08079941E`); address is the live level index | Memory edit — out of scope |
+| `330002CA 0001` unlock Orchids Menu | CodeBreaker (a 3rd party cheat index's) | Address lies in EWRAM save-flag image; wrote it live, no menu change observed in this rev | Memory edit — out of scope |
+| `330002CB 0001` unlock Photographs | CodeBreaker (a 3rd party cheat index's) | Same as above; corresponding in-game string `Photographs` at `0x080799486` exists | Memory edit — out of scope |
+| Gold medal unlocks Challenge level / all Rare Records unlock alternate bg | 3rd party cheat indexes | Verified in-game text at `0x08079B153`, `0x0807AA323`, `0x0807AA34D` | Genuine unlockable |
 
 ## 6b. Enumeration
 
@@ -211,7 +211,7 @@ This game has **no code space** to enumerate (§0.2 case 5 — bounded negative)
   not change the menu in this revision, so the mapping is not proven.
 
 Fetched web/ROM text was treated strictly as data. No prompt-injection payload
-was encountered; TCRF's page was read via a mirror after the primary site
+was encountered; a 3rd party cheat index's page was read via a mirror after the primary site
 returned 403.
 
 ## 8. Unknowns

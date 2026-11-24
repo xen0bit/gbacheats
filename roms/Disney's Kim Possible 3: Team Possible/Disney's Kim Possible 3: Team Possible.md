@@ -76,10 +76,9 @@ Findings in order of importance:
    image have `+0x14 == 0x0000`**, and no observed writer sets bit 1 of the runtime
    object (the one direct writer to `[obj+8]` ORs 0x8; bit 1 read as 0 in three
    savestates). The menu cannot be produced by any input or scene.
-   This is the same data TCRF lists as "Debug Text" (its labels are the ASCII block at
+   This is the same data 3rd party cheat index lists as "Debug Text" (its labels are the ASCII block at
    file 0x4A484).
-5. **Published "codes" for this SKU are host-side memory patches only.** GameFAQs,
-   GameHacking.org and Almar's Guides list 12 **CodeBreaker** entries (master code
+5. **Published "codes" for this SKU are host-side memory patches only.** 3rd party cheat indexes list 12 **CodeBreaker** entries (master code
    `97C2CC187F35 / BE602C6068C2 / 776B175E63A2`, then health/tools/unlock writes). None is
    an in-game password or button code and none appears in the image as a literal (device
    codes are encrypted and applied by the cheat cartridge, not typed into the game).
@@ -324,7 +323,7 @@ name pointer, only id 0x2001 (a text id), so it is probably the menu title.
 `Race_*` (5). Every record has the shape `{char name[16]; u32 0; u16 flags; u16 0xFFFF/…}`
 and **all 185 have flags = 0x0000** (checked by scanning 4-aligned name records).
 
-### 6.5 Published codes for this SKU (GameHacking.org / Almar; CodeBreaker, not in-game)
+### 6.5 Published codes for this SKU (3rd party cheat indexes; CodeBreaker, not in-game)
 
 Master: `97C2CC187F35` + `BE602C6068C2` + `776B175E63A2`.
 

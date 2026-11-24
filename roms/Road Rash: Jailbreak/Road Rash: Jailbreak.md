@@ -40,12 +40,12 @@ aliasing: the validator is a byte-exact, case-sensitive `strcmp` against the tab
 strings. The 36 slots are partitioned into five flag-gated slices
 (20 + 6 + 3 + 3 + 4) selected by the calling screen's mode word.
 
-All 33 accepted strings appear in published GameFAQs-derived lists
-(GameGenie, GGMania, PlanetCheats, SuperCheats, GameRevolution). Therefore **no
+All 33 accepted strings appear in published 3rd party cheat index-derived lists
+(3rd party cheat indexes). Therefore **no
 unpublished code string exists in this build** — a proven negative (§6b). The
 positive findings are (a) the complete machine-readable address map and
 five-slice architecture, which no published source documents, and (b) the exact
-in-game effect of `RIGHTS`, which GGMania lists as "Unknown": it is accepted and
+in-game effect of `RIGHTS`, which 3rd party cheat index lists as "Unknown": it is accepted and
 sets a game-state byte (details in §6b).
 
 Verified in the emulator: `GEAR` (tracks 2–3 unlocked), `MENACE` (master /
@@ -210,8 +210,8 @@ checksum field, no reserved bits, and no second encoding.
 | 17 | `0x083EC8D0` | SLAP | 35 | `0x083EC9BC` | ALAKAZAMM |
 
 **Novel codes — proven negative.** Every one of the 33 strings occurs verbatim in
-at least one published list (GameGenie: 31 of them; GGMania adds PRESSURE, RIGHTS,
-BREAKDOWN; PlanetCheats adds BREAKDOWN; SuperCheats/GameRevolution confirm the
+at least one published list (3rd party cheat indexes: 31 of them; 3rd party cheat indexes adds PRESSURE, RIGHTS,
+BREAKDOWN; 3rd party cheat indexes adds BREAKDOWN; 3rd party cheat indexes confirm the
 master codes). A literal `grep` of all 33 against the ROM found each exactly once
 in the string bank, and the pointer table contains no additional slot. Because the
 validator is an exact `strcmp` with no alias conversion, **there is no string that
@@ -221,7 +221,7 @@ a full cross-check of the five published sources. The genuinely new information
 from this engagement is the architecture itself (five flag-gated slices, exact
 addresses, eager check, stack buffer) and the resolved effect of `RIGHTS`:
 
-* `RIGHTS` is accepted (`Password ok`, `rgtv.png`); GGMania labels it "Unknown".
+* `RIGHTS` is accepted (`Password ok`, `rgtv.png`); 3rd party cheat indexes label it "Unknown".
   It belongs to slice 26–28 and writes the game-state structure rooted at
   `0x03002000` (the savestate `ss3`→`ss4` diff shows no change in the shared flag
   byte `0x03002047`, i.e. its effect is distinct from the master codes).

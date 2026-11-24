@@ -60,7 +60,7 @@ is the gate for the two "press Select to unlock" actions documented in the publi
 * **Unlock all mini-games** — mini-game screen ORs `0x0000001F` into the mini-game bitfield.
 
 There is **no password system** and **no other button-code table** in the Charlie half. The
-published GameFAQs / Project Cheat Codes / GameGenie code is byte-for-byte the ROM table.
+published 3rd party cheat indexes / 3rd party cheat index code is byte-for-byte the ROM table.
 
 The cheat was confirmed dynamically with the mGBA debugger by invoking the ROM's own validator
 with the real button masks: the correct sequence drives the internal index to 6 and sets
@@ -202,9 +202,9 @@ Both are gated on `Select` **and** the flag at `0x0200087C`:
 
 | Source | Published code | ROM table match |
 |---|---|---|
-| GameFAQs (Cloud20390) | Left, Right, L, R, Start, Select | exact |
-| Project Cheat Codes | dpadLeft, dpadRight, bttnL, bttnR, bttnStart, bttnSelect | exact |
-| GameGenie.com | Left, Right, L, R, Start, Select | exact |
+| 3rd party cheat indexes | Left, Right, L, R, Start, Select | exact |
+| 3rd party cheat indexes | dpadLeft, dpadRight, bttnL, bttnR, bttnStart, bttnSelect | exact |
+| 3rd party cheat indexes | Left, Right, L, R, Start, Select | exact |
 
 The follow-up actions ("highlight ADVENTURE + Select", "highlight MINI-GAMES + Select") match
 the two flag-gated Select handlers above.
@@ -238,7 +238,7 @@ is therefore "all supersequences of `Left,Right,L,R,Start,Select`".
 
 **`Left, Up, Right, Down, L, R, Start, Select`**
 
-This is not on GameFAQs, Project Cheat Codes, GameGenie, VGChartz or TCRF (those list only the
+This is not on 3rd party cheat indexes (those list only the
 6-press code). It exercises the undocumented subsequence property of the matcher.
 
 Dynamic proof (mGBA debugger, invoking the ROM validator with the real key-state variable):

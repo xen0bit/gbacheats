@@ -65,7 +65,7 @@ Screenshots and savestates for every step were in `/tmp/supermonkey/` (e.g. `p_n
 | `0x08045120` | Screen setter (value from FE navigation stack) | Derived (4 call sites enumerated) |
 | `0x08044DC4` | Navigation-stack pop returning the next screen ID | Derived |
 | `0x080450D0` | Screen-ID getter via `[0x030004B0+0x64]+4` | Derived |
-| `0x030019D3` | Stage ID for Main Game / Golf (TCRF; literal at `0x080084A4`) | Derived + web recon |
+| `0x030019D3` | Stage ID for Main Game / Golf (3rd party cheat indexes; literal at `0x080084A4`) | Derived + web recon |
 
 ## 5. Algorithm
 
@@ -116,7 +116,7 @@ Mask legend: `01`=A, `02`=B, `10`=Right, `20`=Left, `40`=Up, `80`=Down. The on-s
 
 **Space definition.** The complete in-game code space is the ROM table: **4 fixed sequences**, alphabet of 6 used button masks `{A,B,Up,Down,Left,Right}` drawn from the 10 possible GBA buttons, lengths 7 and 10, terminated by a zero word, one word (32 bits) per press, no checksum and no free field. Slot stride is 0x2C (44 bytes = 11 words); all four slots fit in `0x083E9D64`–`0x083E9E13`. A whole-ROM scan for every other run of ≥4 u32 words drawn from single-bit key masks found **exactly these four sequences** (other hits at `0x081AD594`, `0x082E1DA8`, `0x082E23A4`, `0x083F9F50`, `0x083FD4B0` are graphics/other data, not reachable button tables). Therefore the accepted button-code set is closed at 4 entries: 3 with effects, 1 dead.
 
-**Novel code.** `Right, Right, Left, Left, Right, Left, A` (slot 1, name `mirrormode`) appears on none of TCRF, GameFAQs, IGN, Bananapedia, Sega Retro or Nintendo Fandom. Entered on the real title screen in mGBA; RAM after entry: `title index @0x03000680 = 0x00`, `progress @0x030006CC = 0x07`, `code index @0x030006E0 = 0x02`. A live change-watchpoint trace confirmed the sequence walks the continuation loop to the terminator and reaches `0x08000E80` (success path), with each press advancing progress 1→7. The title stays `SUPER MONKEY BALL JR` (`mirror_long.png`). **Derived** reason: the dispatcher at `0x08000DEE` tests indices 1, 3 and 4 only; index 2 has no case and returns 0. This is a shipped, accepted-but-unfinished developer code, not a typo in a published list.
+**Novel code.** `Right, Right, Left, Left, Right, Left, A` (slot 1, name `mirrormode`) appears on none of 3rd party cheat indexes or Nintendo 3rd party cheat indexes. Entered on the real title screen in mGBA; RAM after entry: `title index @0x03000680 = 0x00`, `progress @0x030006CC = 0x07`, `code index @0x030006E0 = 0x02`. A live change-watchpoint trace confirmed the sequence walks the continuation loop to the terminator and reaches `0x08000E80` (success path), with each press advancing progress 1→7. The title stays `SUPER MONKEY BALL JR` (`mirror_long.png`). **Derived** reason: the dispatcher at `0x08000DEE` tests indices 1, 3 and 4 only; index 2 has no case and returns 0. This is a shipped, accepted-but-unfinished developer code, not a typo in a published list.
 
 **Published codes confirmed in-game** (full-speed mGBA, title screen, RAM read from the `gbAs` savestate chunk):
 
@@ -130,7 +130,7 @@ Mask legend: `01`=A, `02`=B, `10`=Right, `20`=Left, `40`=Up, `80`=Down. The on-s
 
 **Debug-menu enumeration (gated, not a controller code).** Three ROM-resident debug screens were opened by forcing the FE screen index at `0x030004B4` to the documented values and re-writing it each frame (a debugger stand-in for the published CodeBreaker activator; **not** an in-game cheat):
 * `0x00` — "Super Monkey Ball GBA Mini FE": `Level: 1`, `Mode: Fight`, `Tweak Screen`, `Multiplayer`, `Build Date: Oct 3 2002 17:14:24` (`fd_00.png`).
-* `0x0A` — "Tweak Screen": `Pinball bumper force 20`, `(Monkey) 3`, `(Draw Distance) 1`, plus the remaining physics/framerate parameters listed in TCRF (`fd_0a.png`).
+* `0x0A` — "Tweak Screen": `Pinball bumper force 20`, `(Monkey) 3`, `(Draw Distance) 1`, plus the remaining physics/framerate parameters listed in 3rd party cheat indexes (`fd_0a.png`).
 * `0x17` — "Advanced Options": `Draw distance: Medium`, `Screen Resolution: Full (240x160)`, `Display framerate: Off`, `Unlock Everything`, `Add 2000 play points` (`fd_17.png`).
 
 *Gated-feature negative, bounded:* the screen ID is set only by `0x08045120` from a navigation-stack pop (`0x08044DC4`); controller walks of title → main → options → select-game never produced `0x00`, `0x0A` or `0x17` (observed values: `0x01`, `0x03`, `0x10`). L+R pressed on title and main menu changed nothing. A full Thumb scan found **zero** `cmp/tst/ands …, #0x300` instructions, i.e. no in-engine L+R test. A single RAM write is overwritten on the next frame. The `L+R` in the published CB recipe is the cheat device's activation condition (guide §16.20), so these menus are developer/debug-only and outside the in-game cheat scope.
@@ -146,7 +146,7 @@ Mask legend: `01`=A, `02`=B, `10`=Right, `20`=Left, `40`=Up, `80`=Down. The on-s
 ## 8. Unknowns
 
 * Whether slot 1 (`mirrormode`) was intended to mirror the video output or was simply cut; no code references it beyond the matcher.
-* Exact contents of the lower Tweak Screen parameters were read from TCRF rather than each scrolled page in the emulator; the three visible rows were confirmed on screen.
+* Exact contents of the lower Tweak Screen parameters were read from 3rd party cheat indexes rather than each scrolled page in the emulator; the three visible rows were confirmed on screen.
 * Full list of reachable FE screen IDs was sampled by walking, not exhaustively enumerated from the layfile screen table.
 * No attempt was made to complete normal-game progression to unlock mini-games legitimately; the unlock effect was verified via the title code's save write and the documented behaviour.
 

@@ -48,7 +48,7 @@ once, and consumes the encounter if wrong:
 | `Tensei` | Starhair | `0x0824570A` |
 | `Dark`   | Lucifroz | `0x0824593E` |
 
-These five are the values that circulate on GameFAQs/IGN/wikis; every one of
+These five are the values that circulate on 3rd party cheat indexes/wikis; every one of
 them is present in this exact ROM, once, in the script block that also contains
 the matching "X joins your party!" message. The accepted set is therefore
 **closed and finite: exactly five strings**. There is no checksum, no field
@@ -135,8 +135,8 @@ Dark   81 80 81 97 81 A8 81 A1        @ 0x24593E
 
 ### 3.4 Published codes tested
 
-Published lists (GameFAQs cheats page, IGN wiki, the SuperCheats Fusion Guide
-§6, Neoseeker thread) all give the same five values listed in §2. Every one is
+Published lists (3rd party cheat index cheats page, 3rd party cheat index wiki, the 3rd party cheat indexes Fusion Guide
+§6, 3rd party cheat index thread) all give the same five values listed in §2. Every one is
 present in the ROM at the offsets above; none is absent, and no additional
 answer string exists in the script bank. No published code was rejected by the
 ROM.

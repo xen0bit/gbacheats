@@ -210,17 +210,17 @@ observable gate and the published unlock conditions are recorded in §6.
 | Medium | after the Princess Aurora section |
 | Hard | after the Princess Cinderella section |
 
-This matches the published GameFAQs walkthrough ("Medium is accessed after
+This matches the published 3rd party cheat index walkthrough ("Medium is accessed after
 completing the Princess Aurora section; Hard is accessed after completing the
 Princess Cinderella section"). The labels `Tutorial Easy Medium Hard` are text
 IDs 970, 924, 937, 927.
 
 ### 6.3 Published codes (all device codes, not in-game)
 
-Almar's Guides, GameHacking.org (game 4303) and the cheats.fandom CodeBreaker
-page list only CodeBreaker codes, and GameHacking identifies them for
-**Europe `AGB-BQNP`**. VGChartz's cheats page for the game reports
-"Total cheats available: 0 / No cheats available for this game"; TCRF has no
+3rd party cheat indexes and the cheats.fandom CodeBreaker
+page list only CodeBreaker codes, and 3rd party cheat indexes identify them for
+**Europe `AGB-BQNP`**. a 3rd party cheat index's cheats page for the game reports
+"Total cheats available: 0 / No cheats available for this game"; 3rd party cheat indexes have no
 indexed page for this title (the site returned 403 to automated fetches, and
 search snippets show no article).
 

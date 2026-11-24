@@ -123,14 +123,14 @@ There is **no validator, checksum, alphabet or lookup table** for a password/che
 * **Observed (text decode):** VRAM 4bpp tiles rendered to PNG from savestates (`font_region2.png`, `game_vram.png`) — the font-indexed bank reads directly as the menu labels listed in §6, with no hidden entry.
 * **Derived:** soft-reset gate at `0x08001C78` (branch set fully enumerated); input handler `0x080013E0`/`0x0800134C`; unreferenced FE6 header copies; keyword/zero counts over raw ROM and all decompressed banks.
 * **Inferred:** the `E_*`/`Gmap*`/`bmenu` strings at `0x08205…` are leftover developer symbol names from an internal profiler, not a reachable menu (no xrefs found to them; no such labels in decoded VRAM text).
-* **Web/published codes:** GameFAQs, TCRF and Neoseeker pages returned HTTP 403 / Cloudflare "Just a moment" challenges; the Wayback availability API returned no snapshot and the CDX query returned `[]`. StrategyWiki's FE8 Controls page was retrieved successfully: it documents only A+B+Select+Start = soft reset, Select = mini-map, Start = skip events — **no passwords or cheats**. No published code literal from any Fire Emblem title was found in this ROM. Fetched pages contained no prompt-injection payloads (§16.8 check performed); they were treated as data.
+* **Web/published codes:** 3rd party cheat index pages returned HTTP 403 / Cloudflare "Just a moment" challenges; the Wayback availability API returned no snapshot and the CDX query returned `[]`. a 3rd party cheat index's FE8 Controls page was retrieved successfully: it documents only A+B+Select+Start = soft reset, Select = mini-map, Start = skip events — **no passwords or cheats**. No published code literal from any Fire Emblem title was found in this ROM. Fetched pages contained no prompt-injection payloads (§16.8 check performed); they were treated as data.
 
 ## 8. Unknowns
 
 * The exact purpose of the two unreferenced embedded FE6 headers (`0x08B1A0B8`, `0x08B247F4`) is inferred to be link-transfer game-info data; no code references them, so they cannot be a hidden mode.
-* The in-game system menu (Save/Suspend/Options/Map/Support) was not separately entered during the scripted prologue: Start displays the tactical map overlay there and Select had no visible effect in that state. Its entries are nonetheless enumerated from the decoded VRAM label bank (§6), which showed no debug entry, and from StrategyWiki's controls. No hidden entry was observed on any screen that was opened.
+* The in-game system menu (Save/Suspend/Options/Map/Support) was not separately entered during the scripted prologue: Start displays the tactical map overlay there and Select had no visible effect in that state. Its entries are nonetheless enumerated from the decoded VRAM label bank (§6), which showed no debug entry, and from a 3rd party cheat index's controls. No hidden entry was observed on any screen that was opened.
 * No screenshot of a post-game save (cleared file) was available, so the save-gated post-game modes themselves were not entered; they are ordinary progression unlockables, not codes.
-* Web cheat sites were blocked, so the published-code verification is negative-by-absence-in-ROM (0 literal matches) plus the accessible StrategyWiki controls page, rather than a complete crawl of every cheat aggregator.
+* Web cheat sites were blocked, so the published-code verification is negative-by-absence-in-ROM (0 literal matches) plus the accessible 3rd party cheat indexes controls page, rather than a complete crawl of every cheat aggregator.
 
 ## 9. Tooling
 

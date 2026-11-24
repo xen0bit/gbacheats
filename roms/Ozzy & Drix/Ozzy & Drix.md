@@ -17,7 +17,7 @@
 | SHA-256 | `a420ee02383d1a50055c23a494c57131502cbb45b29feab6ba999dff9f9f7b8e` |
 | Embedded headers | exactly one Nintendo logo hit, at file `0x4`; no trainer, no cracktro, no multiboot stub |
 
-Identity note (§16.1/§16.11): this is the retail USA Raylight/Midway GBA SKU. GameSpot/GameFAQs say "Raylight Studios" while `file(1)` labels the maker `5D`; the code under analysis is the only header in the image.
+Identity note (§16.1/§16.11): this is the retail USA Raylight/Midway GBA SKU. 3rd party cheat indexes say "Raylight Studios" while `file(1)` labels the maker `5D`; the code under analysis is the only header in the image.
 
 ## 2. Executive summary
 
@@ -39,10 +39,10 @@ Codes tested on this screen (all entered with real button presses):
 
 | Code | Origin | Decoded (f1,f3) | RAM after submit | Result |
 |---|---|---|---|---|
-| `Y3WF?` | Spriters-Resource comment (gallery/all characters) | (1,8) | `P+0x18=01`, `P+0x1C=08`, `P+0x1D=00` | accepted → all-character gallery / ending |
-| `WMVBN` | GameFAQs, labelled "Level 1" | (3,2) | `P+0x18=03`, `P+0x1C=02` | accepted |
-| `NXVBQ` | GameFAQs, labelled "Level 2" | (4,2) | `P+0x18=04`, `P+0x1C=02` | accepted |
-| `RNBC3` | GameFAQs, labelled "Level 3" | (4,3) | `P+0x18=04`, `P+0x1C=03` | accepted |
+| `Y3WF?` | 3rd party cheat indexes comment (gallery/all characters) | (1,8) | `P+0x18=01`, `P+0x1C=08`, `P+0x1D=00` | accepted → all-character gallery / ending |
+| `WMVBN` | 3rd party cheat indexes, labelled "Level 1" | (3,2) | `P+0x18=03`, `P+0x1C=02` | accepted |
+| `NXVBQ` | 3rd party cheat indexes, labelled "Level 2" | (4,2) | `P+0x18=04`, `P+0x1C=02` | accepted |
+| `RNBC3` | 3rd party cheat indexes, labelled "Level 3" | (4,3) | `P+0x18=04`, `P+0x1C=03` | accepted |
 | `YPWBT` | **novel, minted here** | (7,2) | `P+0x18=07`, `P+0x1C=02` | accepted → different boss scene |
 | `V3WF7` | **novel filler alias** | (1,8) | `P+0x18=01`, `P+0x1C=08` | accepted, same effect as `Y3WF?` |
 | `BLBBL` | **novel, min boundary** | (0,1) | `P+0x18=00`, `P+0x1C=01` | accepted |
@@ -51,7 +51,7 @@ Codes tested on this screen (all entered with real button presses):
 | `Y3WFB` | bad checksum (last char changed) | — | unchanged (`02`,`01`) | `WRONG PASSWORD` on screen |
 | `F9WF0` | correct checksum, `field1` raw = 12 (out of range) | — | unchanged (`02`,`01`) | rejected |
 
-GameHacking.org also lists 7 codes for `AGB-BOZE-USA`; those are GameShark/Cheat-device memory patches, out of scope for this engagement, and were not tested as in-game codes.
+3rd party cheat indexes also lists 7 codes for `AGB-BOZE-USA`; those are GameShark/Cheat-device memory patches, out of scope for this engagement, and were not tested as in-game codes.
 
 ## 4. Address map
 
@@ -135,7 +135,7 @@ Reimplementation: `codec.py` in the work dir `/tmp/ozzydrix/` matches the ROM on
 | `NXVBQ` | 67 | 4 | 2 | 108 | 2 | 72 | "Level 2" | `4, 2` |
 | `RNBC3` | 70 | 4 | 1 | 108 | 3 | 72 | "Level 3" | `4, 3` |
 
-The GameFAQs "Level n" labels do not equal either field directly; the payloads above are the ground truth. `Y3WF?` (f3=8, the largest published scene field) jumps to the all-character gallery/ending, which is why the Spriters-Resource comment describes it as an all-characters unlock.
+The 3rd party cheat indexes "Level n" labels do not equal either field directly; the payloads above are the ground truth. `Y3WF?` (f3=8, the largest published scene field) jumps to the all-character gallery/ending, which is why the 3rd party cheat indexes comment describes it as an all-characters unlock.
 
 ## 6b. Enumeration
 
@@ -148,7 +148,7 @@ The GameFAQs "Level n" labels do not equal either field directly; the payloads a
 
 **Validator run over the whole space** (the Python model, cross-checked against the ROM on 11 inputs): exactly **40,960** accepted codes = **80** valid `(f1,f3)` pairs × **512** filler spellings each. Every pair has exactly 512 spellings; no reserved-bit holes inside the 20-bit payload. This turns "I found 4 published codes" into an exact count.
 
-**Novel codes (absent from GameFAQs, Spriters-Resource, TCRF, VGChartz or any wiki), all entered on the real RESUME GAME screen and RAM-verified:**
+**Novel codes (absent from 3rd party cheat indexes or any wiki), all entered on the real RESUME GAME screen and RAM-verified:**
 
 | Code | f1 | f3 | RAM after entry | Effect |
 |---|---|---|---|---|
@@ -170,7 +170,7 @@ The GameFAQs "Level n" labels do not equal either field directly; the payloads a
 **Observed (emulator / savestate RAM):**
 * Title → main menu (4 entries, selector `0x0200043C` wraps 3→0) → each entry walked: START GAME → Tonsils cutscene; GALLERY → 3D model viewer (L/R rotate, arrows cycle, locked = single Ozzy model); OPTIONS → MUSIC YES/NO, FX YES/NO, CREDITS, EXIT; RESUME GAME → `ENTER PASSWORD`.
 * Entering `Y3WF?` on that screen: typed buffer `Y3WF?`, then `P+0x18=01`, `P+0x1C=08`, `P+0x1D=00` in state RAM, followed by the all-character gallery, ending dialogue and credits.
-* The four GameFAQs codes and five novel codes produced exactly the `P` bytes predicted by the model; the two bad inputs produced `WRONG PASSWORD` / no state change.
+* The four 3rd party cheat index codes and five novel codes produced exactly the `P` bytes predicted by the model; the two bad inputs produced `WRONG PASSWORD` / no state change.
 * The full options and gallery screens, the post-password gallery/ending and the credits roll were walked visually.
 
 **Derived (static disassembly):**
@@ -194,6 +194,6 @@ The GameFAQs "Level n" labels do not equal either field directly; the payloads a
 * `Xvfb :318`, `openbox`, `mgba -3 -g`, `xdotool`, `scrot`, ImageMagick (`convert`, `compare`).
 * `/tmp/ozzydrix/codec.py` — Python codec (pack/unpack/encode/decode) and full-space enumeration.
 * `/tmp/ozzydrix/helper.py`, `test_codes.py` — xdotool input driver and savestate-RAM reader (zlib-decompress mGBA `gbAs` chunk).
-* Web: GameFAQs cheats page via `web.archive.org/web/20150920021750/http://www.gamefaqs.com/gba/914926-ozzy-and-drix/cheats` (3 passwords) and the Spriters-Resource comment (`Y3WF?`); GameHacking.org and VGChartz checked. Fetched pages were treated as data; no prompt-injection payload was encountered in this run.
+* Web: 3rd party cheat index cheats page via `web.archive.org/web/20150920021750/http://www.gamefaqs.com/gba/914926-ozzy-and-drix/cheats` (3 passwords) and the 3rd party cheat indexes comment (`Y3WF?`); 3rd party cheat indexes checked. Fetched pages were treated as data; no prompt-injection payload was encountered in this run.
 
 **Legal note:** no ROM, extracted graphic, music or game asset is redistributed here — only addresses, algorithms, hashes and self-authored code are published.

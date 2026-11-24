@@ -58,9 +58,9 @@ Bounds were proven by rejection: `XFOREST` (magic word not at start) and `ZZZZ` 
 5. Navigate to **OK**, press **A**, then advance the bus-station cutscene with **A**.
 6. Read the effects in IWRAM; for deck codes the flags are set once the game reaches the overworld.
 
-**Published codes verified in ROM** (all 11 literals present at `0x081FB0C8+8*i`, see §6): `FOREST`, `FURY`, `WALTER`, `TOMB`, `BRIGHT`, `RICHY`, `HONEY`, `XRAY`, `GAMER`, `DUALIST`, `DEV TEAM`. GameFAQs/VGChartz/Freeola list only `FOREST` (deck), the five-tournament deck unlocks, and the beat-the-game Duel Room / Image Gallery; the remaining names were recovered from a community forum and verified against the ROM bytes.
+**Published codes verified in ROM** (all 11 literals present at `0x081FB0C8+8*i`, see §6): `FOREST`, `FURY`, `WALTER`, `TOMB`, `BRIGHT`, `RICHY`, `HONEY`, `XRAY`, `GAMER`, `DUALIST`, `DEV TEAM`. 3rd party cheat index list only `FOREST` (deck), the five-tournament deck unlocks, and the beat-the-game Duel Room / Image Gallery; the remaining names were recovered from a community forum and verified against the ROM bytes.
 
-**Out-of-scope published data**: libretro/GameHacking.org CodeBreaker codes (e.g. `830043BC FFFF` infinite money, `430043C2 6262...` all cards) are external RAM patches. They were not applied; their target addresses independently corroborate the save/state fields identified here (money `0x030043BC`, cards from `0x030043C2`, preset decks `0x03004542+`).
+**Out-of-scope published data**: libretro/3rd party cheat indexes CodeBreaker codes (e.g. `830043BC FFFF` infinite money, `430043C2 6262...` all cards) are external RAM patches. They were not applied; their target addresses independently corroborate the save/state fields identified here (money `0x030043BC`, cards from `0x030043C2`, preset decks `0x03004542+`).
 
 ## 4. Address map
 
@@ -151,7 +151,7 @@ Keypad cells, 8×5 grid: `A–Z`, `1 2 3 4 5 6 7 8 9 0`, `-`, unlabelled **space
 | `FORESTX` | name buffer `46 4F 52 45 53 54 58 00`; `memcmp(...,"FOREST",6)` matches | `0x03004550 = 01` (Nature flag set); money unchanged |
 | `RICHY99` | name buffer `52 49 43 48 59 39 39 00`; `memcmp(...,"RICHY",5)` matches | `0x030043BC = 58 02 00 00` = 600 (doubled from 300) |
 
-These spellings appear on GameFAQs, VGChartz, TCRF, Freeola, SuperCheats, and the community forum: **nowhere**. They exercise an unadvertised combination (prefix acceptance) that the published lists omit.
+These spellings appear on 3rd party cheat indexes, and the community forum: **nowhere**. They exercise an unadvertised combination (prefix acceptance) that the published lists omit.
 
 **Bounds proven by rejection.**
 - `XFOREST` (magic word present but not at offset 0) → flags all 0, money `0x012C`; rejected. (Observed, savestate `ss2`.)

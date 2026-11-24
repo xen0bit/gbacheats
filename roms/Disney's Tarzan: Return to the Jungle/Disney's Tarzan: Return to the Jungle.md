@@ -90,7 +90,7 @@ Evidence, summarised:
   `0x080003E0`/`0x0800065C`, `Secret Found` ← `0x08020D0A`). The patch test in
   §6b.1 proves the ASCII label bank *is* live, so the missing reference is
   meaningful: a planned secrets/cheat page that was cut before shipping.
-* **Published codes are all device codes.** GameFAQs/Almar/Ethereal/GameHacking
+* **Published codes are all device codes.** 3rd party cheat indexes
   lists for the GBA SKU contain only CodeBreaker codes (infinite health, unlock
   all movies, "Press Select to skip level", …). None of them is an in-game
   password or button sequence, and the ROM confirms there is no surface to enter
@@ -276,7 +276,7 @@ testing `0x40`/`0x80` for Up/Down and `1`/`2` for A/B).
 | Label triplets | 4,352 file bytes (`0x715EA4–0x7172F4`) | byte scan for every triplet address outside the table | every displayed label has ≥1 pointer; `0x715FD0` has **0** |
 | Button-code tables | all 4,194,304 2-byte offsets | 432 runs of ≥3 key masks; of those 5 are pointer-referenced | none is a code sequence (palette words, graphics, `"AAA"` literal, 1/2/4/8 glyph table) |
 | Multi-button masks | 58 key-mirror read sites | disassembled 40 instructions after each literal load | no `AND`/`CMP` with `0x300`, `0x30C`, `0x3FF` or any L/R/Select combination |
-| Published code literals | 11 CodeBreaker codes from Ethereal/Almar/GameHacking | searching the ROM for each token/address | codes are device memory patches; no in-game equivalent exists |
+| Published code literals | 11 CodeBreaker codes from 3rd party cheat indexes | searching the ROM for each token/address | codes are device memory patches; no in-game equivalent exists |
 | Hidden screens | main menu, options, movies, slot select, name entry, pause, quit confirm, credits, high scores | navigated and screenshotted; combos pressed at title and main menu | no additional screen |
 
 ### 6b.2 How the "label is live" test was done (patch experiment)

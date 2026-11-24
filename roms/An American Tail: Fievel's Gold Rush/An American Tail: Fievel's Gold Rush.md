@@ -195,7 +195,7 @@ always emits exactly six alphabet symbols.
 
 The word is exactly 30 bits (six 5-bit symbols); there are no spare bits.
 
-### 6.2 Published codes (source: 53lu / SuperCheats list) and verification
+### 6.2 Published codes (source: 3rd party cheat indexes / 3rd party cheat index list) and verification
 
 | Published | Claimed | ROM result | Corrected canonical code | Verified |
 |---|---|---|---|---|
@@ -205,7 +205,7 @@ The word is exactly 30 bits (six 5-bit symbols); there are no spare bits.
 | `CCL1H1` | Level 5 | **Valid**, World 5, Lives 3 | — | `147_ccl1h1` |
 | `6VJSHV` | Level 6 | **Valid**, World 6, Lives 3 | — | `148_6vjshv` |
 
-The public list was recovered from 53lu and SuperCheats (GameFAQs and IGN
+The public list was recovered from 3rd party cheat indexes (3rd party cheat indexes
 returned HTTP 403 to automated fetches); every recovered code was then tested in
 the ROM/emulator rather than trusted as text.
 

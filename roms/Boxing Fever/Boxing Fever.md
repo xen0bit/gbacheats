@@ -360,9 +360,8 @@ accepted by the main screen, but both take the `sub = 0` no-op branch.
 | `G319G65C` | `0x00E078E9` | same fields, different unused bits | Buffer write + A | PSYCHO vs BYCLOP (same screen) |
 | `376377CH` | `0xFF1F78ED` | same fields, unused bits all 1 | Buffer write + A | PSYCHO vs BYCLOP (same screen) |
 
-`66BB9FB9` is absent from every published list checked (GameFAQs-derived
-mirrors, CheatingDome, Neoseeker, Ethereal Games, VictoryCheats, GameGenie,
-GGMania, Almar's Guides, GameHacking.org). It exercises character 15 (Psycho),
+`66BB9FB9` is absent from every published list checked (3rd party cheat index-derived
+mirrors, 3rd party cheat indexes). It exercises character 15 (Psycho),
 which no published password uses (the published set uses only characters 1 and 7).
 
 ### Bounds proved by rejection

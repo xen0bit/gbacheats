@@ -386,7 +386,7 @@ relevant rejection is the entry gate:
   `0x02003EA0 = 0x49`.
 
 **Published-code audit.** Searches for the game's cheats return only
-CodeBreaker/GameShark RAM codes (Almar's Guides, GameHacking.org); GameFAQs'
+CodeBreaker/GameShark RAM codes (3rd party cheat indexes); 3rd party cheat indexes'
 cheats page returns 403 and has no Wayback snapshot, and the archived
 walkthrough has no cheat/password section. There is therefore **no
 published in-game code to test**; the published CodeBreaker addresses do,

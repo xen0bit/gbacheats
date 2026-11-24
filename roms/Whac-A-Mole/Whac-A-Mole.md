@@ -36,8 +36,7 @@ a different string set (`FX Volume`, `Music Volume`, `View Credits`, `Rounds`,
 `Difficulty`, `Game Type`, …). It is an unreferenced leftover from another build of
 the engine, not a hidden feature.
 
-Web recon (Cheat Happens, GameFAQs, LaunchBox, GamesDatabase, GameSpot, Project Cheat
-Codes, Fandom) found **no published codes at all** for this SKU; Cheat Happens states
+Web recon (3rd party cheat indexes) found **no published codes at all** for this SKU; 3rd party cheat indexes state
 explicitly that no cheats exist. Per §16.11 the title/platform match was checked against
 the actual header code (`BWEE`) and the ROM bytes, so a "wrong SKU" published list is
 not hiding here.

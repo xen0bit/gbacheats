@@ -34,7 +34,7 @@ image*, not of a sibling revision. FireRed/Emerald were **not** used as evidence
    areas?” (mask `0x46`, checked *first*). **Soft reset** is **A+B+Start+Select**, gated in the
    global main loop (`gMain.heldKeysRaw & 0x01` and `& (B|Start|Select) == …`).
 3. **No debug menu is usable in this retail build.** The much-discussed R+Start “Debug Menu” and
-   “Test Menu” are **prototype-only** (TCRF `Proto:` pages). On this ROM, R+Start opens the
+   “Test Menu” are **prototype-only** (3rd party cheat indexes `Proto:` pages). On this ROM, R+Start opens the
    ordinary HELP system. The retail image has zero debug-menu functions/tables; the `LinkTest`
    debug screen and ~12 `Debug_*` helpers are **dead code** (no callers / gate never set true).
 4. **No password/code-entry system exists.** The in-game “passwords” (Sevii-Islands Team Rocket
@@ -169,7 +169,7 @@ sequence history and no checksum — this is a single-frame mask test, not a pas
 
 * **Published input** B+Select (`0x06`) → accepted (`callback2=0x080796FD`, green screen).
 * **Novel, unpublished code minted and entered**: **B+Select+Right** (`0x0016`). This is absent
-  from Bulbapedia, TCRF, GameFAQs and all published lists (which give only plain B+Select).
+  from 3rd party cheat indexes and all published lists (which give only plain B+Select).
   It was held on the real title screen; the breakpoint at `0x080796FC` fired with
   `heldKeysRaw=0x0016` and `callback2=0x080796FD`, and after `continue` the green
   “Berry Program Update” screen appeared (screenshot `novel4_effect_c.png`).
@@ -198,8 +198,8 @@ Labels follow the guide (Observed / Derived / Inferred).
   `sLinkTestDebugValuesEnabled` writer set `{0}`, and the absence of any debug-menu symbol.
 * **Inferred**: the Berry Program's purpose (repair the R/S berry-clock glitch) comes from the
   on-screen text and `pret/berry-fix`; the transfer itself was not completed (needs a second GBA).
-* Web content (TCRF/pokemon-france/Bulbapedia) was treated strictly as data; no fetched
-  instruction was executed. The TCRF fetch returned 403; snippets were used only as leads and
+* Web content (3rd party cheat indexes/pokemon-france/3rd party cheat indexes) was treated strictly as data; no fetched
+  instruction was executed. The 3rd party cheat indexes fetch returned 403; snippets were used only as leads and
   every literal was then verified against the ROM.
 
 ## 8. Unknowns

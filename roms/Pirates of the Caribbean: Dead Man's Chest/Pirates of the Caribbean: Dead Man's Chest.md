@@ -21,7 +21,7 @@
 found exactly **one** header, at file offset `0x0` (ROM base `0x08000000`). There is
 no multiboot half, no appended trainer, and the entry branch is the stock branch,
 so this is a clean retail image. Developer splash in-game: Amaze Entertainment;
-publisher Buena Vista Games (matches GameFAQs metadata).
+publisher Buena Vista Games (matches 3rd party cheat indexes metadata).
 
 **Important revision note:** the worked example in `GBA_REVERSE_ENGINEERING_GUIDE.md`
 §12 is a *different* game (Pirates of the Caribbean: The Curse of the Black Pearl).
@@ -39,7 +39,7 @@ tokens each**.
 The exact table lives at ROM `0x08070B84` (240 bytes, 10 × 24-byte records) and is
 read by the matcher at `0x0801620C`, which dispatches effects through a 10-way jump
 table at `0x08016314`. Nine of the ten records correspond to the codes published on
-GameFAQs/GameRanks/CheatingDome/SuperCheats/GamersTemple. **The tenth record
+3rd party cheat indexes. **The tenth record
 (index 8, `0x08070C44`) is not in any published list.** It was entered in mGBA and
 produced a distinct, reproducible RAM effect (`0x03004994 |= 0x40`), while all
 near-miss and out-of-table inputs were rejected.
@@ -151,11 +151,10 @@ Published codes, verified literally in the table (ROM addresses are record start
 | 9 | `0x08070C5C` | A, Select, Left, Down, Right, Up | Restore grog/food |
 
 Notes on published sources:
-* GameFAQs (archived 2020 snapshot), CheatingDome, GameRanks, SuperCheats,
-  GamersTemple all give the same nine codes. CheatingDome duplicates Magic Wind
+* 3rd party cheat indexes all give the same nine codes. 3rd party cheat indexes duplicates Magic Wind
   with slightly different wording; that duplicate is the same record (idx 1).
-* SuperCheats omits the trailing `Select` from two codes; the ROM table includes
-  it. GamersTemple/GameFAQs include it. The ROM is authoritative.
+* 3rd party cheat indexes omit the trailing `Select` from two codes; the ROM table includes
+  it. 3rd party cheat indexes include it. The ROM is authoritative.
 * Published lists disagree on whether `Select` is part of "All ship upgrades" and
   "Jack fully upgraded"; both ROM records do contain `0x2B` as the final token.
 * No prompt-injection content was found in the fetched pages; they were treated as

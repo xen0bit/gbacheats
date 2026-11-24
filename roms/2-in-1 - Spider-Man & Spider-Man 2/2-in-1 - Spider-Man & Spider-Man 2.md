@@ -41,9 +41,9 @@ The prior triage conclusion — "only `Cheatlevel`/level-name debug leftovers, n
 1. **Reachable menu (overturned).** Half 1 contains a real, developer-intended **SECRETS menu with 17 entries** (header `SECRETS PAGE n`; the string `CHEATS` also exists in the same text table) and ON/OFF toggles: ARMOR UPGRADE, STRENGTH ENHANCEMENT, LEVEL CHEAT, and MOVIE SHOT 1–14. It is not a debug leftover. In a fresh save every entry is `<LOCKED>`; setting the game's own unlock-state bytes makes the page render `ARMOR UPGRADE OFF`, `STRENGTH ENHANCEMENT OFF`, `LEVEL CHEAT OFF`, `MORE`, `EXIT`, and the following pages render MOVIE SHOT 1–14. The in-game detail text gives the unlock conditions ("SECRET WILL BE UNLOCKED FOR FINISHING THE GAME", "COMPLETE THE GAME AND COLLECT ALL GOLDEN SPIDERS", "COMPLETE THE GAME WITH OVER 150,000 POINTS"). Selecting an entry toggles it, and selecting a movie shot plays the clip. This was exercised in mGBA.
 2. **Dead debug path (confirmed).** The strings `Cheatlevel`, `Done Cheatlevel`, `Level Cheat`, `Cheat Zap` are attached to two pause-menu button handlers. Both handlers are gated by one function, `0x0900074C`, whose entire body is `movs r0,#0; bx lr`. In mGBA, A+L in the pause menu (with LEVEL CHEAT enabled) and B+R+L+A both reach the gate call, receive `r0 = 0`, and branch to the "no cheat" path. The command-copy instructions after the gate are never executed. This is a build-time removal, not a save/clear gate.
 3. **Half 0's level-select text is completion-gated UI, not a debug menu.** `Level Select:` (text ID 65), `Unlock All Moves` (ID 48) and `Unlock All Levels` (ID 49) are ordinary entries in the English UI text table at `0x0812C110`. In a fresh save the OPTIONS menu has exactly four entries (SOUND, MUSIC, CREDITS, EXIT) and the SECRETS menu exactly fourteen (`SECRET 01`–`SECRET 14`, all locked); the three completion strings are not rendered. No cheat/debug strings exist in half 0's code. The published name code `FLUWDEAR` cannot exist here: the name field is three characters and the literal is absent from the whole 32 MiB file.
-4. **Published codes verified.** The GameFAQs 2-in-1 page lists a Spider-Man 2 title-screen button code (Up, Down, Right, A) and the name `FLUWDEAR`; neither is implemented in this build (no button-mask sequence in ROM, the sequence simply operates the title menu, and FLUWDEAR is unenterable). `ARACHNID` occurs only inside the power-up name `ARACHNID STRENGTH`, not as a code. The published *unlockables* for Spider-Man: The Movie (Cheat Mode, Enhanced Armor, Enhanced Strength, Level Select, Movie Clips) do exist and are exactly the 17-entry menu above.
+4. **Published codes verified.** The 3rd party cheat indexes 2-in-1 page lists a Spider-Man 2 title-screen button code (Up, Down, Right, A) and the name `FLUWDEAR`; neither is implemented in this build (no button-mask sequence in ROM, the sequence simply operates the title menu, and FLUWDEAR is unenterable). `ARACHNID` occurs only inside the power-up name `ARACHNID STRENGTH`, not as a code. The published *unlockables* for Spider-Man: The Movie (Cheat Mode, Enhanced Armor, Enhanced Strength, Level Select, Movie Clips) do exist and are exactly the 17-entry menu above.
 
-A previously unpublished selection was made in-game: **MOVIE SHOT 14** (not individually listed on GameFAQs, which only says "Movie Clips"), plus undocumented two-toggle combinations (screens in §6b).
+A previously unpublished selection was made in-game: **MOVIE SHOT 14** (not individually listed on 3rd party cheat indexes, which only says "Movie Clips"), plus undocumented two-toggle combinations (screens in §6b).
 
 ## 3. How to reproduce
 
@@ -311,11 +311,11 @@ In a fresh save the list is exactly `SECRET 01`–`SECRET 14` (text IDs 34–47)
 
 | Published item (source) | Literal in ROM | Result |
 |---|---|---|
-| `FLUWDEAR` (GameFAQs 2-in-1 / Spider-Man 2 name code) | **absent** in both halves | Rejected: name entry is 3 chars, so an 8-char name cannot be entered. Tested at the name screen. |
-| Up, Down, Right, A (GameFAQs Spider-Man 2 title Invincibility) | no 3- or 4-mask sequence in either half, as `u16` masks `40 00 80 00 10 00 01 00`, active-low `BF 03 7F 03 EF 03 FE 03`, or bytes | Rejected: the sequence operates the title menu (moves to LOAD and selects it); no cheat state or indicator. |
+| `FLUWDEAR` (3rd party cheat indexes 2-in-1 / Spider-Man 2 name code) | **absent** in both halves | Rejected: name entry is 3 chars, so an 8-char name cannot be entered. Tested at the name screen. |
+| Up, Down, Right, A (3rd party cheat indexes Spider-Man 2 title Invincibility) | no 3- or 4-mask sequence in either half, as `u16` masks `40 00 80 00 10 00 01 00`, active-low `BF 03 7F 03 EF 03 FE 03`, or bytes | Rejected: the sequence operates the title menu (moves to LOAD and selects it); no cheat state or indicator. |
 | `ARACHNID` (console/PC cheat) | only `0x092958D0 "ARACHNID STRENGTH"` (power-up name) | Not a code in this build. |
 | `IMIARMAS`, `LVLSKIPPER`, `WARPULON` | absent | Not implemented in this build. |
-| Armor Upgrade / Strength Enhancement / Level Select / Movie Clips (GameFAQs Spider-Man: The Movie unlockables) | present at `0x09659EC8` table / `0x0928D7FC..` | Confirmed menu entries, with ON/OFF and movie playback. |
+| Armor Upgrade / Strength Enhancement / Level Select / Movie Clips (3rd party cheat indexes Spider-Man: The Movie unlockables) | present at `0x09659EC8` table / `0x0928D7FC..` | Confirmed menu entries, with ON/OFF and movie playback. |
 
 ## 6b. Enumeration
 
@@ -325,7 +325,7 @@ In a fresh save the list is exactly `SECRET 01`–`SECRET 14` (text IDs 34–47)
 * **Full list:** §6.1, read from `0x09659EC8` (17 pointers = 17 × 4 bytes), descriptors at `0x09659DFC` (17 × 12 bytes), names at `0x0928D7FC..0x0928DAEC`, descriptions at `0x0928DAFC..0x0928DCEF`.
 * **Unlock state:** 17 bytes at `0x02038FE0+0xA1`; enable bits at `0x0202A6C0+0xC`; per-entry toggle bytes `0x02025EF4..F6`.
 * **Novel selection (not in any published list):**
-  * **MOVIE SHOT 14** — GameFAQs lists only "Movie Clips"; it does not enumerate the 14 shots. Selected at PAGE 3 and played in mGBA (Green Goblin / alley scene). `evidence/half1_movieshot14.png`.
+  * **MOVIE SHOT 14** — 3rd party cheat index lists only "Movie Clips"; it does not enumerate the 14 shots. Selected at PAGE 3 and played in mGBA (Green Goblin / alley scene). `evidence/half1_movieshot14.png`.
   * **STRENGTH ENHANCEMENT ON + LEVEL CHEAT ON** (`evidence/half1_secrets_unlocked.png`) and **ARMOR UPGRADE ON + LEVEL CHEAT ON** (`/tmp/spiderman/w4_game.png`) — combinations not documented on any published list; each toggle is individually published only as a generic unlockable.
 * **Effect of LEVEL CHEAT ON:** pause screen gains `CHEAT <level name>` (observed `CHEAT THE CRADLE WILL FALL`). The post-gate debug warp (`0x0902B018`) remains blocked by `0x0900074C`.
 

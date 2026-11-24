@@ -18,7 +18,7 @@
 | MD5 | `39f8a42133df444eeb7bf0b2194d6286` |
 | SHA-1 | `601b5012f77001d2c5c11b31304afafc45a70d0b` |
 | SHA-256 | `61a8324c5179f0f8f6b0078aaa1237ea7ac0b3c5a8370c5ba8136c513a22cf2d` |
-| Build stamp | `ROCKMANEXE2 20011016` at file `0x30D40` (matches TCRF US offset) |
+| Build stamp | `ROCKMANEXE2 20011016` at file `0x30D40` (matches 3rd party cheat indexes US offset) |
 
 **Embedded-header scan:** a search for the exact 156-byte Nintendo logo found **exactly one** header, at file offset `0x0`. This is a single retail image — no appended trainer, no second game, no patch/cracktro. The entry word and the first 4 KiB are stock ARM crt0 code. No patch/trainer to report.
 
@@ -30,7 +30,7 @@ All UI text is **font/tile-indexed**, not ASCII: `strings` returns only garbage 
 
 One **hard-coded button-code validator** does exist in the ROM (§4, §5, §6). Its table at `0x0801C7F8` encodes eight presses **Left, Left, Right, Left, Right, Left, Right, Right**, and completing it writes value `8` to script variable `0x85`. It is fully decoded from disassembly (Derived), but it is **gated behind save-integrity state**: with the valid 32 KB SRAM save the gate byte is 2, so the validator never runs; on a fresh/no-save game I entered the exact sequence on the title screen, in the pause menu and in the overworld and observed **no distinct effect** beyond ordinary input. It is therefore reported as a **gated/dead path in every reachable state tested** (guide §16.3, category 4), not as a usable cheat. No password alphabet, generator, or accepted-code table was found anywhere.
 
-**Published codes:** TCRF (archived 2024 snapshot) documents **no in-game cheat or password** for this game — only an *external* GameShark "map warp" used to reach the unused "Last Room", which is out of scope. Searches of GameFAQs/VGChartz/search engines were blocked by CAPTCHA/bot checks; no published in-game code literal was available to verify. This is recorded as an unresolved web-recon limitation, not a claim that codes exist.
+**Published codes:** 3rd party cheat indexes document **no in-game cheat or password** for this game — only an *external* GameShark "map warp" used to reach the unused "Last Room", which is out of scope. Searches of 3rd party cheat indexes/search engines were blocked by CAPTCHA/bot checks; no published in-game code literal was available to verify. This is recorded as an unresolved web-recon limitation, not a claim that codes exist.
 
 ## 3. How to reproduce
 
@@ -135,7 +135,7 @@ No password alphabet table, no accepted-string table, and no code→effect table
 | Known password alphabets (`0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ`, `BCDFGHJKLMNPQRSTVWXYZ0123456789`, …) | whole ROM | 0 (`0123456789` appears 4× coincidentally) |
 | `strcmp`-style literal tables | scan for NUL-padded equal-length string runs | none |
 
-**Published codes tested.** None available: TCRF lists no in-game code; GameFAQs/VGChartz/search engines were blocked. The external GameShark map-warp mentioned by TCRF is not an in-game code and was not used.
+**Published codes tested.** None available: 3rd party cheat index lists no in-game code; 3rd party cheat indexes/search engines were blocked. The external GameShark map-warp mentioned by 3rd party cheat indexes are not an in-game code and was not used.
 
 **Conclusion of enumeration.** Code-space size for the one found system: 1 table × 8 masks; no mintable variant exists because the terminator is the only branch and the single effect has no parameterization. No novel code could be generated — the system is a fixed, gated sequence, and there is no password system to enumerate.
 
@@ -149,7 +149,7 @@ No password alphabet table, no accepted-string table, and no code→effect table
 
 * The in-game meaning of script variable `0x85` and any consumer that reads it — the gate could not be opened in any reachable state, so the effect of a successful completion was never observed.
 * Whether a save edited to fail both integrity checks while remaining playable would enable the sequence; the needed SRAM layout for such an edit was not fully established.
-* Web sources other than the archived TCRF page were inaccessible (CAPTCHA/bot blocks), so the absence of published codes could not be independently confirmed beyond TCRF.
+* Web sources other than the archived 3rd party cheat index page were inaccessible (CAPTCHA/bot blocks), so the absence of published codes could not be independently confirmed beyond 3rd party cheat indexes.
 
 ## 9. Tooling
 

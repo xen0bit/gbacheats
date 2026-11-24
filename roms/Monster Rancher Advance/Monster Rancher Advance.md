@@ -28,7 +28,7 @@ The system has two layers:
 1. **579 hard-coded passwords** (developer shortcuts, e.g. `Rika`, `Justice`, `98%SPEED`) in a table at `0x0813B3C8`–`0x0813E23C`. A substring search against this table runs *before* the algorithm; if any hard-coded word appears as a substring, the algorithmic result is replaced.
 2. **An algorithmic generator** (the real code space). Four Thumb routines at `0x0800FCD8`, `0x0800FD64`, `0x0800FE58`, `0x0800FF64` each fold the character codes into an accumulator, then use a bit-permutation and index one of four ROM tables based at `0x080CBE34`. This means arbitrary, unpublished codes can be minted.
 
-I reimplemented the generator in Python (`decode.py`), recovered the complete 63-symbol character map, and validated it against the published IGN "Ultimate Passwords FAQ": **400/400** `NONE` passwords and **4397/4400** trait passwords decoded exactly (the three failures are ambiguous space notation in the FAQ). I also confirmed the main hash live via the ROM's own function through the mGBA GDB stub (§16.19 oracle): calling `0x0800FF64` with buffer `[3,3,1,2]` returned main byte `0x08`, exactly as my decoder predicts.
+I reimplemented the generator in Python (`decode.py`), recovered the complete 63-symbol character map, and validated it against the published 3rd party cheat indexes "Ultimate Passwords FAQ": **400/400** `NONE` passwords and **4397/4400** trait passwords decoded exactly (the three failures are ambiguous space notation in the FAQ). I also confirmed the main hash live via the ROM's own function through the mGBA GDB stub (§16.19 oracle): calling `0x0800FF64` with buffer `[3,3,1,2]` returned main byte `0x08`, exactly as my decoder predicts.
 
 Novel codes absent from all **18,673** published passwords were generated (e.g. `BCAhn` → Pixie/Pixie, stat-array 4, Sharp Horn). On-screen entry at the Shrine was exercised; a generated word produced a monster on the real Regeneration result screen (screenshot retained in the work dir). The 5-character input cap and the bounded index tables are the proven bounds.
 
@@ -40,7 +40,7 @@ Novel codes absent from all **18,673** published passwords were generated (e.g. 
 
 **Code-entered observation.** At the Regeneration keyboard, characters are selected with the D-pad and typed with A; END submits. A five-character input triggers the "I will now regenerate your monster" dialogue automatically (input cap at starting breeder rank). Advancing the dialogue shows the monster on the regeneration result screen with its `No. NNN` and name. Screenshots of the title, main menu, name entry, Shrine, Regeneration screen, and generated-monster result are retained in `/tmp/monsterrancher1/`.
 
-**Published codes verified against ROM.** GameFAQs/IGN/CheatCC lists were checked; literals such as `Rika`, `Justice`, `Ninja`, `PAI`, `Samurai`, `night1`, `Hobo`, `Noah`, `pal`, `GHNNINOO` are present in the hard-coded table under the font-index encoding (not ASCII — `strings` finds none of them). The 579-word list from the IGN FAQ (ROM range given there as `0813B3D6`–`0813E230`) maps to this ROM at file `0x13B3C8`–`0x13E23C`; the FAQ's first entries `98%SPEED`, `FROMFREE`, `SEAINSUN`, `RICECAKE`, `SQUIRREL`, `ASSASSIN`, `Delusion`, `Missouri`, `Cardinal`, `Bulldoze`, `Boyscout`, `12345678`, `87654321`, `Seahorse` were decoded directly from ROM bytes and match exactly.
+**Published codes verified against ROM.** 3rd party cheat index lists were checked; literals such as `Rika`, `Justice`, `Ninja`, `PAI`, `Samurai`, `night1`, `Hobo`, `Noah`, `pal`, `GHNNINOO` are present in the hard-coded table under the font-index encoding (not ASCII — `strings` finds none of them). The 579-word list from the 3rd party cheat index FAQ (ROM range given there as `0813B3D6`–`0813E230`) maps to this ROM at file `0x13B3C8`–`0x13E23C`; the FAQ's first entries `98%SPEED`, `FROMFREE`, `SEAINSUN`, `RICECAKE`, `SQUIRREL`, `ASSASSIN`, `Delusion`, `Missouri`, `Cardinal`, `Bulldoze`, `Boyscout`, `12345678`, `87654321`, `Seahorse` were decoded directly from ROM bytes and match exactly.
 
 **Prompt injection:** fetched cheat pages contained only copyright notices and affiliate/advertising text; no instruction-like payload was found. All fetched text was treated as data.
 
@@ -53,7 +53,7 @@ Novel codes absent from all **18,673** published passwords were generated (e.g. 
 | Table base descriptor | `0x080CBE34` | `0x0CBE34` | u32 offsets `0x10,0x110,0x150,0x490` |
 | Main-type table | `0x080CBE44` | `0x0CBE44` | 256 bytes, values 0..19 |
 | Sub-type table | `0x080CBF44` | `0x0CBF44` | 64 bytes, values 0..22 |
-| Stat-variation table | `0x080CBF84` | `0x0CBF84` | 64×13 signed bytes (entry 0 = `FF FB 0F 06 0B FB FC 04 06 06 FC 06 FA`, matches IGN array 0) |
+| Stat-variation table | `0x080CBF84` | `0x0CBF84` | 64×13 signed bytes (entry 0 = `FF FB 0F 06 0B FB FC 04 06 06 FC 06 FA`, matches 3rd party cheat indexes array 0) |
 | Trait table | `0x080CC2C4` | `0x0CC2C4` | 256 bytes, values 0..54 or `0xFF` |
 | Main hash | `0x0800FF64` | `0xFF64` | 8-bit accumulator → 256-entry table |
 | Sub hash | `0x0800FCD8` | `0xFCD8` | 6-bit (odd-bit) → 64-entry table |
@@ -126,17 +126,17 @@ symbols: .=63 $=64 !=65 ?=66 ^=67 ;=68 +=69 *=70 /=71 -=72 %=73 ==74
 
 (Three FAQ passwords with an embedded space symbol show a transcription ambiguity; all other symbols are uniquely determined.)
 
-**Stat-variation arrays** are 64 records of 13 signed bytes at `0x080CBF84` (identical to IGN's list). Array 55 is the "best" array `[11,10,11,21,5,8,6,6,9,8,4,1,13]`; every published "ultimate" password uses it.
+**Stat-variation arrays** are 64 records of 13 signed bytes at `0x080CBF84` (identical to a 3rd party cheat index's list). Array 55 is the "best" array `[11,10,11,21,5,8,6,6,9,8,4,1,13]`; every published "ultimate" password uses it.
 
 **Traits** are values 0..54 at `0x080CC2C4` (0=Fire Know … 49=Sharp Horn, 50=Sharp Bld., 255=no bonus trait).
 
 ## 6b. Enumeration
 
-**Space definition.** Character alphabet = 63 symbols + space (64 input values); length observed 1..5 at starting breeder rank (5 is the cap). Outputs are bounded by the four tables: main 256 buckets (20 families), sub 64 buckets (23 values incl. 3 specials), stats 64 buckets, trait 256 buckets (55 meaningful values + `0xFF`). Maximum representable distinct algorithmic results is `20 × 23 × 64 × 55 = 1,619,200`, though the bit-permutations and table frequencies make the distribution strongly non-uniform (IGN reports e.g. Zan main appears only twice in the 256-entry main table).
+**Space definition.** Character alphabet = 63 symbols + space (64 input values); length observed 1..5 at starting breeder rank (5 is the cap). Outputs are bounded by the four tables: main 256 buckets (20 families), sub 64 buckets (23 values incl. 3 specials), stats 64 buckets, trait 256 buckets (55 meaningful values + `0xFF`). Maximum representable distinct algorithmic results is `20 × 23 × 64 × 55 = 1,619,200`, though the bit-permutations and table frequencies make the distribution strongly non-uniform (3rd party cheat indexes report e.g. Zan main appears only twice in the 256-entry main table).
 
 **Validator/enumerator model.** `decode.py` reimplements the four hashes and reproduces the ROM exactly; `gen.c` / `gen_row0.c` invert the process by brute force with early pruning. All four hashes are integer-add/multiply folds — no external PRNG — so the model is complete.
 
-**Novel code (not in any published list).** `BCAhn` — my encoder targeted Pixie main=0/sub=0, stat-array **4** (a non-optimal array: `[8,-1,25,21,-2,5,6,0,8,8,4,0,-8]`, i.e. LIF+25), bonus trait 47 (Sharp Horn). Decoder output: `(0, 0, stats=4, trait=47)`. It is absent from the 18,673 passwords parsed from the GameFAQs/IGN/cheat-site lists, and contains no hard-coded password substring. A second novel code `CAB` (Pixie-family route) was likewise absent from all published lists.
+**Novel code (not in any published list).** `BCAhn` — my encoder targeted Pixie main=0/sub=0, stat-array **4** (a non-optimal array: `[8,-1,25,21,-2,5,6,0,8,8,4,0,-8]`, i.e. LIF+25), bonus trait 47 (Sharp Horn). Decoder output: `(0, 0, stats=4, trait=47)`. It is absent from the 18,673 passwords parsed from the 3rd party cheat indexes/cheat-site lists, and contains no hard-coded password substring. A second novel code `CAB` (Pixie-family route) was likewise absent from all published lists.
 
 **In-game proof.** On-screen entry at the Regeneration screen was exercised repeatedly; a generated word produced the regeneration result screen bearing a monster number and name (screenshots `Cdb_result2_crop.png` / `CAB_result3_crop.png` in the work dir). The ROM's own main-hash function, called through the GDB stub with a crafted buffer, returned main `0x08` for codes `[3,3,1,2]`, matching the Python model byte-for-byte. **Caveat (Observed vs Inferred):** the exact character string that reached the input buffer during the keypress-driven runs could not be read back, because the keyboard's buffer base address was not isolated; the resulting monster is *Observed*, the identity of the typed string is *Inferred* from the navigation sequence. The offline-generated novel codes are *Derived* and ROM-oracle-confirmed, but a keypress-for-keypress replay of `BCAhn` was not achieved before the session ended.
 
@@ -156,7 +156,7 @@ symbols: .=63 $=64 !=65 ?=66 ^=67 ;=68 +=69 *=70 /=71 -=72 %=73 ==74
 - Exact EWRAM address of the live 8-slot input buffer (the `0xFFFF`-terminated u16 array copied by `0x0800FAC4`); the savestate region at `0x02009EC4` held zeroed/tilemap data after typing, so it was not the buffer.
 - The three ambiguous space-symbol passwords in the FAQ (likely transcription artifacts).
 - Whether higher breeder ranks raise the five-character cap beyond 5; only the starting rank was tested.
-- The 7 hidden stat fields (IGN lists 13 values per array but only 6 are visible); their in-game meaning was not investigated.
+- The 7 hidden stat fields (3rd party cheat index lists 13 values per array but only 6 are visible); their in-game meaning was not investigated.
 
 ## 9. Tooling
 

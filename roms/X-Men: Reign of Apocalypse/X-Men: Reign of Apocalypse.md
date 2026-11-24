@@ -29,7 +29,7 @@ The apparent debug lead, `Debug V\n` at `0x08092CE0`, is a red herring: `main()`
 
 The store is **512-byte SRAM**, all `0xFF` on a fresh boot — no password-save convention.
 
-Web reconnaissance was attempted but the search tools and GameFAQs/TCRF returned 403/captcha/bot-challenge responses; no published code list could be retrieved. This does not affect the static result, which is based on the exact hashed image.
+Web reconnaissance was attempted but the search tools and 3rd party cheat indexes returned 403/captcha/bot-challenge responses; no published code list could be retrieved. This does not affect the static result, which is based on the exact hashed image.
 
 ## 3. How to reproduce
 
@@ -158,7 +158,7 @@ No password alphabet, no checksum table, no code record table, and no button-mas
 
 * The gate controlling single-player character availability (which makes 12 of the 16 names selectable) was not located. It is not `0x020075E4`.
 * UI headings are tile-baked; a hypothetical hidden menu with no ASCII label and no new handler could not be excluded by string search alone. Screen enumeration and handler analysis found none.
-* Published-code recon was blocked by 403/captcha on GameFAQs, TCRF, Google and Bing; the negative is therefore independent of any published list.
+* Published-code recon was blocked by 403/captcha on 3rd party cheat indexes, Google and Bing; the negative is therefore independent of any published list.
 * The 60-second A+Start and all-four-button reset paths were derived from disassembly but not triggered in the emulator.
 
 ## 9. Tooling

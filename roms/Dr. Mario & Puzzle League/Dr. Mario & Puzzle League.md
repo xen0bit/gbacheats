@@ -25,7 +25,7 @@ The remaining 12 hits are dev/multiboot stubs (e.g. `GC-GBA Probe` / `AGBJ` at f
 
 **There is no in-game cheat-code system in this ROM.** No password entry screen, no button-code sequence, no hidden debug menu, and no unlock-by-code exists in either the Dr. Mario or the Puzzle League half. Everything the public cheat sites call a "code" for this SKU is a **save-bit unlockable** obtained by normal play (reaching an ending / clearing a required level), which is §16.18 territory, not a code system (guide §0.2 "negative results bounded").
 
-Evidence, in one paragraph: (1) a full-ROM `strings -t x -n 4` pass produced **51,894 strings and zero hits** for `password`, `cheat`, `debug`, `secret`, `unlock`, `warp`, `gameshark`, `codebreaker`, `level select`, `enter code`, `master code`, `sound test` (counts in §7); the only "test" text is leftover Shift-JIS developer dialog copied from *Densetsu no Stafy 3* at file `0x6200D9`/`0x620131`. (2) Every menu screen in both games was walked in mGBA (§3, §7) — no code-entry widget exists on any of them. (3) The published "cheats" are unlock conditions, not inputs; the Vertical-mode message exists at file `0x622D9C` but only appears after a save flag is set. (4) All documented button codes for other Dr. Mario SKUs were tested and do nothing (§6b). (5) The only extra difficulties (S-Hard/V-Hard, TCRF) are reachable **only** by direct RAM writes (e.g. `03002A54:03`), i.e. memory-edit codes, explicitly out of scope here.
+Evidence, in one paragraph: (1) a full-ROM `strings -t x -n 4` pass produced **51,894 strings and zero hits** for `password`, `cheat`, `debug`, `secret`, `unlock`, `warp`, `gameshark`, `codebreaker`, `level select`, `enter code`, `master code`, `sound test` (counts in §7); the only "test" text is leftover Shift-JIS developer dialog copied from *Densetsu no Stafy 3* at file `0x6200D9`/`0x620131`. (2) Every menu screen in both games was walked in mGBA (§3, §7) — no code-entry widget exists on any of them. (3) The published "cheats" are unlock conditions, not inputs; the Vertical-mode message exists at file `0x622D9C` but only appears after a save flag is set. (4) All documented button codes for other Dr. Mario SKUs were tested and do nothing (§6b). (5) The only extra difficulties (S-Hard/V-Hard, 3rd party cheat indexes) are reachable **only** by direct RAM writes (e.g. `03002A54:03`), i.e. memory-edit codes, explicitly out of scope here.
 
 The development-intended extras **are** catalogued in §6b (Vertical Mode unlocks, bonus objects, epilogue/special videos, sound test), with their gating and bounds.
 
@@ -91,12 +91,12 @@ This consumes only the *current* and *previous* key words — a two-frame differ
 
 | Source | Published "code" | Reality / verified in ROM |
 |---|---|---|
-| GameFAQs / VGChartz / SuperCheats | "Unlock Vertical Mode — beat 1P Line mode level 6-5; enables Timed/Marathon/Garbage vertically" | Gameplay-gated save flag. Only function of the unlock is the BMG message at `0x622D9C` and an extra entry in the 1P list; absent on a fresh save (observed). |
-| SuperCheats | "Unlock Vertical Mode in Dr. Mario — beat Level 20 in Classic" | Same class: level-20 clear sets a save bit; max selectable level is 20 (proved by rejection at `21`, §6b). |
-| SuperCheats | "Unlock Horizontal Mode (Panel de Pon) — score >10,000 in Endless" | Same class; mode-name discrepancy between sites is a transcription issue (Vertical vs Horizontal), not a second code. |
-| Super Luigi Bros | Bonus objects at virus levels 5/10/15, SMB theme on 4+ clears, epilogue and special videos | Passive gameplay rewards; no input codes. |
-| TCRF (GBA page) | S-Hard/V-Hard difficulties, unused test graphics, leftover Stafy-3 text | Unused/development material. S-Hard/V-Hard are reachable only with direct RAM writes (`03002A54:03` / `:04`), i.e. memory-edit codes — out of scope. |
-| TCRF (Dr. Mario **64** page) | Password screen opened with `Z+R+L+D-pad Left` in Classic/Marathon/Score Attack | **Wrong platform.** GBA has no Z button; no password text or decoder exists in this ROM (§7). |
+| 3rd party cheat indexes | "Unlock Vertical Mode — beat 1P Line mode level 6-5; enables Timed/Marathon/Garbage vertically" | Gameplay-gated save flag. Only function of the unlock is the BMG message at `0x622D9C` and an extra entry in the 1P list; absent on a fresh save (observed). |
+| 3rd party cheat indexes | "Unlock Vertical Mode in Dr. Mario — beat Level 20 in Classic" | Same class: level-20 clear sets a save bit; max selectable level is 20 (proved by rejection at `21`, §6b). |
+| 3rd party cheat indexes | "Unlock Horizontal Mode (Panel de Pon) — score >10,000 in Endless" | Same class; mode-name discrepancy between sites is a transcription issue (Vertical vs Horizontal), not a second code. |
+| 3rd party cheat indexes | Bonus objects at virus levels 5/10/15, SMB theme on 4+ clears, epilogue and special videos | Passive gameplay rewards; no input codes. |
+| 3rd party cheat indexes | S-Hard/V-Hard difficulties, unused test graphics, leftover Stafy-3 text | Unused/development material. S-Hard/V-Hard are reachable only with direct RAM writes (`03002A54:03` / `:04`), i.e. memory-edit codes — out of scope. |
+| 3rd party cheat indexes | Password screen opened with `Z+R+L+D-pad Left` in Classic/Marathon/Score Attack | **Wrong platform.** GBA has no Z button; no password text or decoder exists in this ROM (§7). |
 | Generic NES cheat lists | "hold B + A at title → debug flag → stage select" | Tested on both titles — no effect (§6b). |
 
 **Menu limits (all "counts" are exact, from screen enumeration + counting the wrap points):**
@@ -147,7 +147,7 @@ This consumes only the *current* and *previous* key words — a two-frame differ
 - **Vertical Mode — Puzzle League:** reach the ending of a 1P mode (published lists disagree on the exact stage: "Line 6-5" vs "Puzzle 6-10"; the disagreement is in the *published* labels, not in a code). Adds vertical play modes.
 - **Bonus objects / SMB jingle / epilogue & special videos — Dr. Mario:** triggered by specific virus levels (5/10/15/20) and clear conditions; passive rewards, no input.
 - **Sound test — Dr. Mario:** always available via OPTIONS→OTHER→SOUNDS (not hidden).
-- **Unused but not unlockable:** S-Hard / V-Hard and unused "Try Again?" graphics exist in the data (TCRF) but are reachable only by RAM patching, not by any controller input — out of scope for this report.
+- **Unused but not unlockable:** S-Hard / V-Hard and unused "Try Again?" graphics exist in the data (3rd party cheat indexes) but are reachable only by RAM patching, not by any controller input — out of scope for this report.
 
 ## 7. Validation evidence
 
@@ -173,7 +173,7 @@ This consumes only the *current* and *previous* key words — a two-frame differ
 
 - Exact EEPROM bit/byte positions of the Vertical-mode unlock flags were not isolated. Reaching the in-game ending was not performed (it requires clearing level 20 / a full puzzle-mode run); a save-state/GDB route to capture the flag write was blocked by a flaky GDB stub on this 8 MiB image (savestate `gbAs` IWRAM offset mapping did not match the 4 MiB layout documented in the guide). This does **not** affect the "no code system" conclusion, which rests on the complete absence of any input surface.
 - The two published unlock descriptions use inconsistent names ("Vertical" vs "Horizontal", "Line 6-5" vs "Puzzle 6-10"); which is literally correct at the level/banner layer was not resolved because the ending was not reached. Both are gameplay gates, not codes.
-- The unused S-Hard/V-Hard difficulties and "Try Again?" graphics are documented by TCRF but were not triggered, since doing so requires direct RAM writes (out of scope).
+- The unused S-Hard/V-Hard difficulties and "Try Again?" graphics are documented by 3rd party cheat indexes but were not triggered, since doing so requires direct RAM writes (out of scope).
 - Early `Xvfb`/`openbox` PID files were cleaned up by an external process; the display was verified live throughout and the correct PIDs were used for teardown.
 
 ## 9. Tooling
@@ -184,6 +184,6 @@ This consumes only the *current* and *previous* key words — a two-frame differ
 - Capstone 5.0.7 Thumb scan for PC-relative literal loads into the 9 `KEYINPUT` pools; custom u16 key-mask-run scanner.
 - mGBA (SDL) under Xvfb `:317` + openbox, `xdotool` XTEST input, `import -window root` screenshots, `shift+F1/F2` savestates.
 - `sstool.py` (savestate `gbAs` zlib extractor and diff helper) — written but the 8 MiB IWRAM mapping remained ambiguous; not used for a final claim.
-- Web research via web.archive.org snapshots of TCRF *Dr. Mario 64*, TCRF *Dr. Mario & Puzzle League*, Mario Wiki, GameFAQs (403 — used search snippets), SuperCheats, Super Luigi Bros, VGChartz. Fetched pages were treated as data; no instructions in them were followed.
+- Web research via web.archive.org snapshots of 3rd party cheat indexes *Dr. Mario 64*, 3rd party cheat indexes *Dr. Mario & Puzzle League*, 3rd party cheat indexes. Fetched pages were treated as data; no instructions in them were followed.
 
 **Legal note:** no ROM image, extracted graphics, music, or text assets are redistributed here — only hashes, addresses, and original findings.

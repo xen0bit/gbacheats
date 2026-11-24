@@ -39,7 +39,7 @@ Using the recovered model I minted novel codes and confirmed them on the real pa
 
 Bounds proven by in-game rejection: wrong checksum (`D#BB#J`, `F#BB#K`, `H#BB#M`), mission below range (`B#BB#F`, mission 0), mission above range (`2#BB#7`, mission 22; `4#BB#9`, `6#BB##`, `##BB#G`), and out-of-range secondary fields (`C#DB#<check>: no check value is accepted`, `C#BBBK`, `C#BC#K`).
 
-Published 3-character GameFAQs codes (`D%K`, `F%L`, `1B#`) are a different format/length and are rejected by this UI; `1B#` was entered and rejected. All publically listed codes found on the web are 3 characters, so every 6-character code above is absent from every published list.
+Published 3-character 3rd party cheat index codes (`D%K`, `F%L`, `1B#`) are a different format/length and are rejected by this UI; `1B#` was entered and rejected. All publically listed codes found on the web are 3 characters, so every 6-character code above is absent from every published list.
 
 ## 3. How to reproduce
 
@@ -162,15 +162,15 @@ The model agrees with the game on every accepted **and** rejected input tested.
 | `D#BB#J`, `F#BB#K`, `H#BB#M` | near-miss (bad check) | 6 | REJECTED |
 | `B#BB#F`, `2#BB#7`, `4#BB#9`, `6#BB##`, `##BB#G` | correct check, out-of-range mission | 6 | REJECTED |
 | `C#DB#*`, `C#BBBK`, `C#BC#K` | other fields changed | 6 | REJECTED (no accepted check for `C#DB#`) |
-| `D%K`, `F%L` | GameFAQs | 3 | not usable — format is 6 chars |
-| `1B#` | GameFAQs "Unlock Everything" | 3 | REJECTED |
+| `D%K`, `F%L` | 3rd party cheat indexes | 3 | not usable — format is 6 chars |
+| `1B#` | 3rd party cheat indexes "Unlock Everything" | 3 | REJECTED |
 | `BBBBBB` | invalid probe | 6 | REJECTED |
 
 ### 6.3 Published codes (web, treated as data)
 
-- GameFAQs: three 3-character codes. All characters are in the alphabet but the length does not match this 6-character UI; `1B#` tested and rejected. No 6-character code appears in any published list found.
+- 3rd party cheat indexes: three 3-character codes. All characters are in the alphabet but the length does not match this 6-character UI; `1B#` tested and rejected. No 6-character code appears in any published list found.
 - Cheat Wiki CodeBreaker list (`3300018F 0014`, `83000192 FFFF`, …) — raw memory-edit device codes, out of scope. The cited EWRAM addresses are `FF` in this build's savestates; patching them was abandoned.
-- Neoseeker returned HTTP 403; no Wayback snapshot. Nothing on TCRF/VGChartz for this SKU.
+- 3rd party cheat indexes returned HTTP 403; no Wayback snapshot. Nothing on 3rd party cheat indexes for this SKU.
 
 ## 6b. Enumeration
 

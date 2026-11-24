@@ -72,9 +72,9 @@ What was proven, and how:
   submenu (Get Close / My Room / Living Room / Entrance / Go for Walk). No
   entry in any of these leads to a code screen; each menu item’s own help text
   (ROM 0x08043ADC–0x08043BC4) was read and matches what the screen shows.
-* **Published codes.** None exist. ChapterCheats states “No Codes, No
-  Passwords, No Unlockables”; VGChartz lists one cheat, which is a
-  walkthrough/tips entry; GameFAQs has guides but no cheats page (HTTP 403 to
+* **Published codes.** None exist. 3rd party cheat indexes state “No Codes, No
+  Passwords, No Unlockables”; 3rd party cheat index lists one cheat, which is a
+  walkthrough/tips entry; 3rd party cheat indexes have guides but no cheats page (HTTP 403 to
   this session, no Wayback snapshot). The franchise’s only GBA “unlock” writeup
   belongs to the *sibling* `Dogz` (game code `B82E`): “Always Together Mode”,
   an ending reward with no input code. That string is **not** in this image

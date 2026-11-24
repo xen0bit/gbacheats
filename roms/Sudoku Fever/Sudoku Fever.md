@@ -24,7 +24,7 @@ The retail image is untouched (stock entry branch, non-zero header checksum). RO
 
 **There is no cheat-code surface in this SKU.** No password entry, no button-code matcher, no hidden/debug menu, and no unlockable flag exists. The game's "cheats" are ordinary, fully visible menu features: **Solve Puzzle**, **Reveal Square**, and the **Sudoku Solver** mode (enter any grid and have the game compute a solution). All are reachable from the normal START menu / title screen and require no code.
 
-This is a **bounded negative**, not an absence of testing: every reachable screen was walked in mGBA, the complete ASCII UI text bank was decoded and matched to screens, every menu pointer table was dumped and counted, the 13-state screen dispatcher was enumerated, the key-input path was disassembled (simple edge detection, no sequence buffer), and the ROM was searched for password/debug/secret strings in ASCII, UTF-16LE/BE, `+0x20`-shifted ASCII, and XOR-`0xFF` — all with zero hits. Published-code recon found none (Cheat Happens explicitly says "We currently don't have any Sudoku Fever cheats or cheat codes for Game Boy Advance"; GameFAQs lists no cheats).
+This is a **bounded negative**, not an absence of testing: every reachable screen was walked in mGBA, the complete ASCII UI text bank was decoded and matched to screens, every menu pointer table was dumped and counted, the 13-state screen dispatcher was enumerated, the key-input path was disassembled (simple edge detection, no sequence buffer), and the ROM was searched for password/debug/secret strings in ASCII, UTF-16LE/BE, `+0x20`-shifted ASCII, and XOR-`0xFF` — all with zero hits. Published-code recon found none (3rd party cheat indexes explicitly says "We currently don't have any Sudoku Fever cheats or cheat codes for Game Boy Advance"; 3rd party cheat index lists no cheats).
 
 Reveal Square and Solve Puzzle were confirmed in-game with screenshots and savestate RAM diffs.
 
@@ -123,7 +123,7 @@ Each screen handler reads the held copy and ANDs a single button mask (e.g. `1` 
 | Password/cheat/debug/unlock keyword hits (ASCII) | 0 | — |
 | Same keywords in UTF-16LE, UTF-16BE, `+0x20` shift, XOR `0xFF` | 0 | — |
 | Konami mask-sequence byte pattern `[40 40 80 80 20 10 20 10 02 01]` | 0 | No button-code table |
-| Published codes (Cheat Happens, GameFAQs, Wikipedia, fan wikis) | 0 | Recon found none; nothing to verify |
+| Published codes (3rd party cheat indexes, fan wikis) | 0 | Recon found none; nothing to verify |
 | Button sequences pressed on title | 7 | No state change beyond normal menu activation |
 
 **Developer-intended helpers (not codes, but the only cheat-like features):**

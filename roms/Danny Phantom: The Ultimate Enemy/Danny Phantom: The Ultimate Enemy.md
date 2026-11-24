@@ -58,7 +58,7 @@ The "absence" recorded in earlier drafts is now explained: the codes are not sto
 letter is stored as a **sprite pair `(tile, y)`** — the exact grid cell the cursor was on — and the
 validator compares those pairs.
 
-**The 5–7 letter GameGenie codes cannot be entered on this screen.** The commit path is hard-capped
+**The 5–7 letter 3rd party cheat index codes cannot be entered on this screen.** The commit path is hard-capped
 at four letters (`cmp count,#3; bhi → validate`), the buffer is four 8-byte letter records, and the
 validator contains exactly six four-letter blocks and no other accept branch. Entering a 7-letter
 word leaves at most four committed letters; the fifth A validates (and fails) instead of appending.
@@ -378,7 +378,7 @@ alphabet-only space is **26⁴ = 456,976**).
 The validator is a hard-coded chain of six exact 8-dword comparisons. Therefore:
 
 **Accepted set = {JAZZ, SEEK, DASH, ECTO, VLAD, RUSH} — exactly 6 cell sequences**, all of which
-are on the published GameFAQs/GameGenie list. This is a *closed lookup table*: the accepted set is
+are on the published 3rd party cheat indexes/3rd party cheat index list. This is a *closed lookup table*: the accepted set is
 fully characterised, and there is no algorithmic payload, no checksum, and no field to vary.
 
 ### Rejection bound (Observed)

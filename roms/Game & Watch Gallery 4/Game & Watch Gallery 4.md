@@ -87,7 +87,7 @@ There is no validator to reverse. The text system is worth recording because it 
 
 ## 8. Unknowns
 
-* **Web verification of published codes: not completed.** `websearch` returned no results for all queries; direct fetches were blocked (TCRF 403, GameFAQs via Wayback 404/CDX 503, Google/Bing/DDG unusable from this environment). Per §16.8 this is recorded rather than silently omitted. Because the ROM has no code-entry surface or code table, the absence of a verified published list does not change the conclusion.
+* **Web verification of published codes: not completed.** `websearch` returned no results for all queries; direct fetches were blocked (3rd party cheat indexes 403, 3rd party cheat indexes via Wayback 404/CDX 503, Google/Bing/DDG unusable from this environment). Per §16.8 this is recorded rather than silently omitted. Because the ROM has no code-entry surface or code table, the absence of a verified published list does not change the conclusion.
 * Exact custom encoding of the gallery message-bank strings (font tiles and conversion tables were located, but message bytes were not reversed to ASCII). This is a text-format unknown, not a cheat-system gap.
 * The precise star threshold that unlocks each Gallery Corner item was not played through; the flags themselves were located in SRAM.
 

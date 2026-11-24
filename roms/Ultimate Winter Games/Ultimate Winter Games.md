@@ -30,8 +30,8 @@ The validator accepts **exactly 81,000 of the 43,046,721 possible 8-digit string
 This count was proven by running a bit-exact C reimplementation over the entire input
 space and by dynamic confirmation of accepted and rejected codes.
 
-No published password list exists for this SKU: the GameFAQs cheats page for game
-`925079` is empty ("Know Something We Don't?"), and TCRF returns 403. Every code
+No published password list exists for this SKU: the 3rd party cheat index cheats page for game
+`925079` is empty ("Know Something We Don't?"), and 3rd party cheat indexes return 403. Every code
 reported below is therefore novel. Several generated codes were entered on the real
 in-game screen, accepted, and verified by both screenshot and savestate RAM diff.
 No button code or hidden debug menu was found (bounded negative, §8).
@@ -162,7 +162,7 @@ track-zero) and their counts sum exactly to the rejected space. `nonzeroA=54000`
 documents that A is a genuine 3-valued field, not a constant — an early draft of the
 decoder wrongly assumed `q` was always divisible by 3; the C sweep caught it.
 
-**Novel codes (none appears in any published list; GameFAQs' cheats page is empty).**
+**Novel codes (none appears in any published list; 3rd party cheat indexes' cheats page is empty).**
 All were typed on the real Enter Password screen and accepted:
 
 | Code | A | F | e | b,c,d | Screenshot | In-game result |
@@ -213,8 +213,8 @@ With `12294654` the same diff gives `0x02001EDC = 1` (A=1) and `0x02001E64 = 2`.
   found no button-code/debug-menu labels; the only debug leftovers are the password
   validator's `illegal password` / `char not found` strings, both reached only on the
   password screen. No L+R / Start+Select gate was observed. Curling has no password path.
-* **No published code list exists** for this SKU (GameFAQs 925079 cheats page empty;
-  TCRF 403), so there is no external list to cross-check; verification rests on the ROM
+* **No published code list exists** for this SKU (3rd party cheat indexes 925079 cheats page empty;
+  3rd party cheat indexes 403), so there is no external list to cross-check; verification rests on the ROM
   validator plus in-game acceptance.
 * Exact per-(sport,track,A) time/score limit tables were treated as game data and not
   fully reversed; only the sampled entries in §6 are claimed.

@@ -29,7 +29,7 @@ no checksum/arithmetic generator — the accepted set is a hard-coded 12-row mas
 held in an 8-entry ring buffer against each row; a match sets bit *i* of the global cheat
 flags word at `0x030026C8` and plays a confirmation sound.
 
-- The 10-entry lists on GameRevolution and Neoseeker omit two codes; **GameFAQs lists all
+- The 10-entry lists on 3rd party cheat indexes omit two codes; **3rd party cheat index lists all
   12** (the omissions are *Blue Spyro* and *Unlock Sparx Panic*). All 12 ROM rows were
   entered in the emulator and the flags word reached `0x00000FFF`.
 - The matcher is a **suffix matcher**: extra presses before the 8-press window are ignored.
@@ -122,7 +122,7 @@ No checksum, XOR key, permutation, or arithmetic generator exists in this path.
 | 10 | 10 | `0x400` | L R U U R L R U | View All Worlds in Atlas |
 | 11 | 11 | `0x800` | R D U R L U R D | All Breath Types |
 
-All 12 rows are present in the GameFAQs list; the GameRevolution/Neoseeker 10-item
+All 12 rows are present in the 3rd party cheat index list; the 3rd party cheat indexes 10-item
 lists omit rows 0 and 6.
 
 ### 6.2 Input alphabet
@@ -196,7 +196,7 @@ state (`W+0x7C0 = 0`, `W+0x7D4 = 1`) rather than opening a menu.
 - **Inferred:** the precise purpose of the `L+R+Start` state write at `0x08057610` (likely a
   save/reset confirm on the title screen) and the exact identity of the descriptor loaded by
   `0x08054828(6)` for Blue Spyro were not fully exercised. The published effect labels are
-  from GameFAQs/Neoseeker and were visually confirmed only for Blue Spyro and Sparx Panic.
+  from 3rd party cheat indexes and were visually confirmed only for Blue Spyro and Sparx Panic.
 
 ## 8. Unknowns
 

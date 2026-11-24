@@ -31,7 +31,7 @@ Two developer-intended button codes were found, reversed and confirmed on the em
 1. **Title-screen hidden scene code — hold L + B + Right.** The check at `0x080101CC` tests `(held_keys & 0x212) == 0x212` (B = bit 1, Right = bit 4, L = bit 9). On success it writes `0x030019EC = 10`, `0x03000CBC = 19`, `0x03000CC4 = 19`, opening the **erase-confirmation scene** (“ready to erase the data on this game pak?”). Extra buttons are ignored by the mask, so unpublished variants such as **L + B + Right + Start** also work.
 2. **Pet-shop money code — hold L + Down + Select, press B.** The check at `0x080091A0` (inside the state-5 pet-shop handler) tests `(held_keys & 0x284) == 0x284` (Select = bit 2, Down = bit 7, L = bit 9) and `(pressed_keys & 2) != 0` (B). On success it adds `0x1388` (5,000) to the two money copies at `0x030005DC` and `0x03001304`, and refuses to run when the value is above `0x1869F` (99,999).
 
-Both codes were entered with real XTEST key events; the effects were read back from RAM. The published GameShark/CodeBreaker lists for this SKU are memory edits (out of scope); the TCRF GameShark code `03000CC409` (sound test) was verified against the ROM.
+Both codes were entered with real XTEST key events; the effects were read back from RAM. The published GameShark/CodeBreaker lists for this SKU are memory edits (out of scope); the 3rd party cheat indexes GameShark code `03000CC409` (sound test) was verified against the ROM.
 
 ## 3. How to reproduce
 
@@ -61,7 +61,7 @@ The pet shop is main state **5** (handler `0x080090E8`). In a normal playthrough
 
 Observed: both change `0x3E8 → 0x1770` (1000 → 6000). Novel variant **L + Down + Select + Start + B** (held `0xFE8C`) also changes 1000 → 6000.
 
-### 3.3 Sound test (TCRF published code)
+### 3.3 Sound test (3rd party cheat indexes published code)
 
 Write `0x03000CC4 = 9`; the state-9 handler at `0x08005F60` is entered. This matches the published GameShark code `03000CC409`.
 
@@ -227,7 +227,7 @@ The check is `(held & 0x284) == 0x284` **and** `(pressed & 2) != 0`. The require
 
 ### 6b.3 Negative result: no password / cheat table
 
-A full scan of the decoded script banks and of the raw ROM found **no** password alphabet, no password validator, no password literal table, and no GameShark-style button table other than the two checks above. The words `password`, `cheat`, `code`, `secret`, `unlock`, `gallery`, and `breed` do not occur in the 16-bit script encoding anywhere in the ROM. The only code-like strings are the debug note at `0x08194F40` and the two button checks. The published GameShark/CodeBreaker lists for this SKU are memory edits, not in-game codes, and are therefore out of scope; the TCRF GameShark code `03000CC409` was verified (state 9 = sound test).
+A full scan of the decoded script banks and of the raw ROM found **no** password alphabet, no password validator, no password literal table, and no GameShark-style button table other than the two checks above. The words `password`, `cheat`, `code`, `secret`, `unlock`, `gallery`, and `breed` do not occur in the 16-bit script encoding anywhere in the ROM. The only code-like strings are the debug note at `0x08194F40` and the two button checks. The published GameShark/CodeBreaker lists for this SKU are memory edits, not in-game codes, and are therefore out of scope; the 3rd party cheat indexes GameShark code `03000CC409` was verified (state 9 = sound test).
 
 ## 7. Validation evidence
 
@@ -246,7 +246,7 @@ A full scan of the decoded script banks and of the raw ROM found **no** password
 | Money cap at 99,999 | **Observed** (100,000 → 100,000) |
 | Sound test at state 9 | **Observed** (write 9 to `0x03000CC4`, handler `0x08005F60` entered) |
 | Scene 10 is the erase confirmation | **Derived** from decoded text at `0x0819640E` |
-| Unused “too early to go to bed” text | **Observed** (decoded at `0x0819529C`; matches TCRF) |
+| Unused “too early to go to bed” text | **Observed** (decoded at `0x0819529C`; matches 3rd party cheat indexes) |
 | State 7/8 = cat select / name entry | **Inferred** from the breed-list pointers and the handler’s sub-state table; not fully exercised |
 
 ## 8. Unknowns
@@ -255,7 +255,7 @@ A full scan of the decoded script banks and of the raw ROM found **no** password
 * The state-7/8 name-entry/cat-select flow was not completed in the emulator; the tutorial stopped at the name-entry sub-state. The pet-shop code was therefore demonstrated with the state forced at `0x03000CC4` and the two money copies initialised by the debugger; the button presses themselves were real XTEST events.
 * The pet-shop money guard was proven at 100,000 but not re-proven at 104,999/105,000 because the debugger lost the handler loop after several forced state changes.
 * The GameShark/CodeBreaker lists for this SKU are encrypted memory edits; they were not decrypted or verified as literals.
-* The “Debug” graphic reported by TCRF in the living-room tiles was not independently extracted (media ban; no screenshots).
+* The “Debug” graphic reported by 3rd party cheat indexes in the living-room tiles was not independently extracted (media ban; no screenshots).
 
 ## 9. Tooling
 

@@ -457,10 +457,10 @@ six team slots were not isolated (see §8).
 
 | Published item | Source | Verdict in this ROM |
 |---|---|---|
-| CodeBreaker master code `0000351C 000A` / `1003F8A4 0007`; ball/strike/out codes | Neoseeker, Almar's Guides, 53lu, SuperCheats | Device codes, not in-game; outside scope. No in-game equivalent. |
-| "Homerun Celebration: press R while running the bases" | SuperCheats GBA page | An in-game control, not a code. `R` was pressed in live play (no menu/state change); the HR-trot branch is a gameplay animation and was not reproduced (see §8). |
-| "Cheat menu: press L", "hold L+R for uniforms", "R+Left/R+Down home runs", "Select to hit harder", "A during credits" | GameFAQs GBA page (search snippets; page returns 403 and has no Wayback snapshot) | No such text/table/state in this ROM; L/R/Select tests produced no menu or state change. These are 2003/console paraphrases. |
-| Unused JPEG image | TCRF (archived 2021 snapshot) | Confirmed the ROM contains 270 baseline JPEGs (112×160 trading-card art). No debug menu or code is documented by TCRF. |
+| CodeBreaker master code `0000351C 000A` / `1003F8A4 0007`; ball/strike/out codes | 3rd party cheat indexes | Device codes, not in-game; outside scope. No in-game equivalent. |
+| "Homerun Celebration: press R while running the bases" | 3rd party cheat indexes GBA page | An in-game control, not a code. `R` was pressed in live play (no menu/state change); the HR-trot branch is a gameplay animation and was not reproduced (see §8). |
+| "Cheat menu: press L", "hold L+R for uniforms", "R+Left/R+Down home runs", "Select to hit harder", "A during credits" | 3rd party cheat indexes GBA page (search snippets; page returns 403 and has no Wayback snapshot) | No such text/table/state in this ROM; L/R/Select tests produced no menu or state change. These are 2003/console paraphrases. |
+| Unused JPEG image | 3rd party cheat indexes | Confirmed the ROM contains 270 baseline JPEGs (112×160 trading-card art). No debug menu or code is documented by 3rd party cheat indexes. |
 
 ## 6b. Enumeration
 

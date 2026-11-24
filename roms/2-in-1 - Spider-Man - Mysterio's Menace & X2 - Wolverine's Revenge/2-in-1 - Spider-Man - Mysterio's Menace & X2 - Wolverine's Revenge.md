@@ -49,7 +49,7 @@ is `NULL`: the action's reader still exists at `0x08820734`, but no input can
 reach it. The “level skip / cheats / level select / acts / danger / level names”
 strings are *not* a reachable menu in this pack: they belong to an unfinished
 debug menu selected by RAM byte `0x020038CD` (values `0x05`, `0x0A`, `0x0B`),
-and no intended input writes those values. This agrees with TCRF, which
+and no intended input writes those values. This agrees with 3rd party cheat indexes, which
 documents those screens as memory-write-only unused content.
 
 **Spider-Man: Mysterio's Menace (base `0x08020000`)** has a 5-character,
@@ -59,7 +59,7 @@ capitals). The ROM validator is split into three functions that reproduce the
 published checks exactly: a five-bit parity block, a difficulty mask
 (`0x8208`, `0x0200`, `0x0008`), and level-consistency tests. Of the 2^25
 packed values, **86,016** pass all three checks. 24 of the 25 codes collected
-from the published lists (GameFAQs plus the community encoder/decoder) decode
+from the published lists (3rd party cheat indexes plus the community encoder/decoder) decode
 and re-encode exactly; the 25th (`CRDT5`, “view the credits”) fails all three
 checks and is either special-cased elsewhere or wrong for this revision — it is
 recorded here as unverified.
@@ -165,7 +165,7 @@ passwords can be checked against the ROM model with the supplied script
 | `0x08835E98` | Debug-menu labels (`level skip`, `cheats`, `level select`, `act 1..8`, `danger 1..8`, level names) |
 | `0x0883D7C0` | Level-skip menu descriptor (`next section`, `slow motion`, `super jump`, `power up!`) |
 | `0x0883D7D0` | Level-skip item labels |
-| `0x020038CD` | Debug menu selector byte (TCRF: `05` select-controls, `0A` level skip, `0B` sleep) |
+| `0x020038CD` | Debug menu selector byte (3rd party cheat indexes: `05` select-controls, `0A` level skip, `0B` sleep) |
 
 Cheat object layout (all fields confirmed live at `0x02003D14`):
 
@@ -335,7 +335,7 @@ the payload bits.
 | Invincibility | 6 | `d u d d u d s` | flag 6 |
 
 All five strings are at `0x08831D08`/`D10`/`D18`/`D20`/`D28`; they match the
-public GameFAQs Slot Select list exactly.
+public 3rd party cheat indexes Slot Select list exactly.
 
 ### 6.2 Spider-Man published codes vs. the ROM model
 
@@ -351,7 +351,7 @@ level checks (`n = 0x1A789A1`). It is not the normal 25-bit format or is
 special-cased in a branch not found by a literal scan; it is **not** claimed as
 verified.
 
-### 6.3 Generated novel codes (not on GameFAQs/TCRF/VGChartz)
+### 6.3 Generated novel codes (not on 3rd party cheat indexes)
 
 | Code | Fields | Why novel |
 |---|---|---|
@@ -388,7 +388,7 @@ Rejection examples (format cannot express these):
   `danger 1..8`, and the nine level names (`canadian wilderness` … `magneto's
   lair`); level-skip entries `next section`, `slow motion`, `super jump`,
   `power up!`. Selector byte `0x020038CD`; documented values `0x05`, `0x0A`,
-  `0x0B` (TCRF). No intended input writes it; every menu in both halves was
+  `0x0B` (3rd party cheat indexes). No intended input writes it; every menu in both halves was
   walked and no debug entry appeared. This is the bounded negative for the
   “cheat menu” lead.
 
@@ -425,7 +425,7 @@ Rejection examples (format cannot express these):
 * X2: **LEVEL SELECT** (acts 1–8 for the current level) *is* reachable from
   Start during the level-intro/“REVENGE AWAKENING” splash and lets the player
   warp between acts of that level. It is not the debug “level skip” screen of
-  TCRF (which is titled LEVEL SKIP and has NEXT SECTION/SLOW MOTION/SUPER
+  3rd party cheat indexes (which is titled LEVEL SKIP and has NEXT SECTION/SLOW MOTION/SUPER
   JUMP/POWER UP!). Screenshot `shots/10_act3.png`.
 * Spider-Man: main menu, difficulty, map, in-level status (Select), pause,
   save/load screens walked; Select opens the status/equipment panel in-level
@@ -438,7 +438,7 @@ Rejection examples (format cannot express these):
 * X2 recorder/checker/effects, object layout, five sequence strings, orphan id 2,
   L-gate, and the “last seven characters only” semantics.
 * X2 debug menus are data + a RAM selector; no writer of `0x020038CD` was found
-  in code reachable from input. TCRF independently reports they are memory-write
+  in code reachable from input. 3rd party cheat indexes independently reports they are memory-write
   only (`020038CD:05/0A/0B`).
 * Spider-Man password alphabet, packing, parity, difficulty and level checks,
   field decode, and the 86,016-value count.
@@ -471,7 +471,7 @@ Rejection examples (format cannot express these):
   isolated.
 * **X2 debug menu selector:** the exact writer of `0x020038CD` was not located
   statically (the struct has no absolute literal). The negative rests on the
-  full menu walk, the absence of any in-game label, and TCRF’s memory-write
+  full menu walk, the absence of any in-game label, and a 3rd party cheat index's memory-write
   documentation.
 * X2 flag 2’s effect: reader at `0x08820734` writes a value from `0x083EA40`
   into `+0xA8`; the semantic name of the removed action is unknown.
@@ -511,7 +511,7 @@ algorithms, hashes and generated codes are published.
   the emulator; the sixth (id 2) is structurally unreachable.
 * **X2 hidden/debug menu:** exists only as unused data/selector; no intended
   input path in the 2-in-1 build. The reachable “LEVEL SELECT” from the level
-  intro is a different, working act-warp screen, not the TCRF LEVEL SKIP menu.
+  intro is a different, working act-warp screen, not the 3rd party cheat indexes LEVEL SKIP menu.
 * **Spider-Man passwords:** algorithm fully recovered (alphabet, 25-bit packing,
   five parity equations, difficulty mask, level checks), 86,016 valid values,
   24/25 published codes verified, two novel codes generated (`TB778`, `L03-T`),

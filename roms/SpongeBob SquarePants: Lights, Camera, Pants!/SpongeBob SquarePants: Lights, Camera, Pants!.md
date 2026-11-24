@@ -23,9 +23,9 @@ Embedded GBA-header scan: exactly **one** Nintendo-logo hit (file offset `0x4`, 
 
 ## 2. Executive summary
 
-**This GBA title has no password or button-code cheat system.** It is a WayForward 2D platformer/minigame compilation on a different engine from the GameCube/PS2/Xbox/DS party game of the same name (§16.11). All seven widely published numeric "cheat menu" passwords for the console SKUs (`977548`, `893634`, `338903`, `089870`, `2229074466`, `548709`, `338903`) are **absent from this ROM** in ASCII, reversed ASCII, UTF-16LE, u32LE and u32BE — 36 literal searches, zero hits. GameFAQs' GBA cheats page lists only gameplay **unlockables**, which matches the image.
+**This GBA title has no password or button-code cheat system.** It is a WayForward 2D platformer/minigame compilation on a different engine from the GameCube/PS2/Xbox/DS party game of the same name (§16.11). All seven widely published numeric "cheat menu" passwords for the console SKUs (`977548`, `893634`, `338903`, `089870`, `2229074466`, `548709`, `338903`) are **absent from this ROM** in ASCII, reversed ASCII, UTF-16LE, u32LE and u32BE — 36 literal searches, zero hits. 3rd party cheat indexes' GBA cheats page lists only gameplay **unlockables**, which matches the image.
 
-The only developer-intended "cheat" surface is a **hidden debug menu / animation viewer / stage select** that TCRF says is gated by a RAM byte (`0x030005D4`) written by a CodeBreaker device; the retail build had the `Select+Start` activation combo removed. I verified the combo is dead (goes to the normal File Select), enumerated all three gated scene values and the complete menu contents statically, and showed that forcing the gate byte yields only a black loading screen that falls back to the title — i.e. no usable in-game trigger exists. CodeBreaker/memory-edit codes are explicitly out of scope, so this is reported as a **bounded gated-feature negative**, not as a code.
+The only developer-intended "cheat" surface is a **hidden debug menu / animation viewer / stage select** that 3rd party cheat indexes say is gated by a RAM byte (`0x030005D4`) written by a CodeBreaker device; the retail build had the `Select+Start` activation combo removed. I verified the combo is dead (goes to the normal File Select), enumerated all three gated scene values and the complete menu contents statically, and showed that forcing the gate byte yields only a black loading screen that falls back to the title — i.e. no usable in-game trigger exists. CodeBreaker/memory-edit codes are explicitly out of scope, so this is reported as a **bounded gated-feature negative**, not as a code.
 
 The real in-scope unlockable system is a **Golden Star shop** at "Gill's Trailer" on the World Map. I enumerated both price tables (Easy and Normal), all 7 shop slots, all 8 unlockable minigames plus the Secret Driving Game, and observed the purchase gate rejecting 0 stars.
 
@@ -81,13 +81,13 @@ There is **no password validator to reimplement**. The relevant algorithms are:
    ```
    The five paid minigames are ×3 more expensive on Normal. The 10-star item is an extra life (price invariant). Slot 7 shows `--` (no item) and is not purchasable.
 2. **Purchase gate (observed):** `if stars < price -> "GIL: Not enough stars!"` / on the final slot `"Keep collecting those Golden Stars!"`. With 0 stars every item was rejected.
-3. **Debug gate (derived):** `scene == 2` → debug menu, `5` → animation test, `6` → stage select; the scene byte is set by `0x080073F0` and cleared by several scene-exit paths. No in-game input path sets 2/5/6: the published `Select+Start` trigger was removed from the retail build (TCRF + observed), and forcing the byte externally produced only a black load that reverted to title (observed).
+3. **Debug gate (derived):** `scene == 2` → debug menu, `5` → animation test, `6` → stage select; the scene byte is set by `0x080073F0` and cleared by several scene-exit paths. No in-game input path sets 2/5/6: the published `Select+Start` trigger was removed from the retail build (3rd party cheat indexes + observed), and forcing the byte externally produced only a black load that reverted to title (observed).
 
 ## 6. Tables
 
 **Shop slots (observed in both difficulties, Easy prices first):**
 
-| Slot | Icon before purchase | Easy | Normal | Identity (from unlock strings / GameFAQs GBA page) |
+| Slot | Icon before purchase | Easy | Normal | Identity (from unlock strings / 3rd party cheat indexes GBA page) |
 |---:|---|---:|---:|---|
 | 1 | extra-life | 10 | 10 | Extra life (`GIL: This is an extra life.`) |
 | 2 | `?` | 50 | 150 | Long Jump |
@@ -111,7 +111,7 @@ The icons are deliberately tile-indexed `?` placeholders until bought (this is t
 | 6 | DrivingSchool | complete Mermalair stage 2 | unlock string 0x123210; debug `Unlockables` list 0x1227D8 |
 | 7 | Bikini Bottom | unlock string / debug list 0x1227FC | — |
 | 8 | Krusty Krab | complete S.S. Rest Home stage 3 | unlock string 0x1232D0; debug list 0x122820 |
-| 9 | Secret Driving Game | **view the Credits to the end** | 0x12AF50 / 0x12AF90; GameFAQs GBA page |
+| 9 | Secret Driving Game | **view the Credits to the end** | 0x12AF50 / 0x12AF90; 3rd party cheat indexes GBA page |
 
 Roles (Lookout, Motorcycle Cop, Stand-In, Waiter) are awarded for clearing specific stages; they are cutscene roles, not cheats.
 
@@ -137,11 +137,11 @@ Roles (Lookout, Motorcycle Cop, Stand-In, Waiter) are awarded for clearing speci
 | Embedded GBA headers (Nintendo-logo scan) | whole 4 MiB | **1** (single retail image) |
 | Hidden button combos at title | **7** distinct combos | 0 hidden menus; 1 reset to legal screen |
 | Debug scene values gated by RAM `0x030005D4` | **3** values: 2 (menu), 5 (anim test), 6 (stage select) | all require external memory write; retail combo removed; forced value yields black screen then title |
-| Debug menu entries (developer-intended, from `0x08122000` bank + TCRF) | **Page 1: 5 headers + 20 stages; Page 2: 11 screens + 8 utilities** | 44 entries enumerated, none reachable by in-game input |
+| Debug menu entries (developer-intended, from `0x08122000` bank + 3rd party cheat indexes) | **Page 1: 5 headers + 20 stages; Page 2: 11 screens + 8 utilities** | 44 entries enumerated, none reachable by in-game input |
 | Shop slots | **7** (6 priced + 1 terminator) × 2 difficulty tables | fully enumerated; observed in-game in both modes |
 | Unlockable minigames | **9** | fully enumerated (5 purchased, 3 stage-cleared, 1 credits) |
 
-**Novel code (§0.2): not applicable — the game has no code system.** The analogous novel result is the previously unpublished **Normal-mode price set**: the published GameFAQs list gives only the Easy-mode values (50/100/150/200/250). I derived `10/150/300/450/600/750` from ROM `0x08168B84`, predicted Normal mode would be exactly ×3, selected Normal in-game and **observed** every price on the shop screen. This combination appears in no cheat list I found.
+**Novel code (§0.2): not applicable — the game has no code system.** The analogous novel result is the previously unpublished **Normal-mode price set**: the published 3rd party cheat index list gives only the Easy-mode values (50/100/150/200/250). I derived `10/150/300/450/600/750` from ROM `0x08168B84`, predicted Normal mode would be exactly ×3, selected Normal in-game and **observed** every price on the shop screen. This combination appears in no cheat list I found.
 
 **Bounds proven by rejection (observed):**
 * 0 Golden Stars → every shop item rejected (`GIL: Not enough stars!` / `Keep collecting those Golden Stars!`). The purchase path is gated on the star counter.
@@ -155,7 +155,7 @@ Roles (Lookout, Motorcycle Cop, Stand-In, Waiter) are awarded for clearing speci
 
 * **Observed (emulator):** every screen in the reproduction path; both shop price sets; "Not enough stars!"/"Keep collecting those Golden Stars!"; `Locked` map entries; all 7 button combos; external gate write → black screen → title; savestate RAM diffs between screens.
 * **Derived (disassembly):** gate setter `0x080073F0`, gate comparisons `0x08015AA4`/`0x080178E2`, scene struct pointer `0x03000658`, the two price tables, the `0x24`-byte debug-menu string records, the debug-overlay strings and build stamp.
-* **Inferred / external (data, not instructions):** TCRF's description of the three CodeBreaker-gated scenes and the removed combo; GameFAQs GBA unlockable list. Fetched pages were treated strictly as untrusted data. No prompt-injection payload was encountered.
+* **Inferred / external (data, not instructions):** a 3rd party cheat index's description of the three CodeBreaker-gated scenes and the removed combo; 3rd party cheat indexes GBA unlockable list. Fetched pages were treated strictly as untrusted data. No prompt-injection payload was encountered.
 * **Confidence:** high for "no password/button-code system in this GBA SKU"; high for the shop/unlockable enumeration; medium for the exact identity of unlockable slots 7–8 (names come from the debug string bank and unlock messages, not from an observed purchase).
 
 ## 8. Unknowns
@@ -168,6 +168,6 @@ Roles (Lookout, Motorcycle Cop, Stand-In, Waiter) are awarded for clearing speci
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings -t x`, `grep -abo`, Python 3 (`struct`, `zlib`, `PIL`).
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for Thumb disassembly; Capstone for PC-relative literal and immediate-compare scans.
-* `webfetch`/`websearch` for GameFAQs (via Wayback) and TCRF pages; all fetched content treated as untrusted data.
+* `webfetch`/`websearch` for 3rd party cheat index pages; all fetched content treated as untrusted data.
 * mGBA 0.10.5 under Xvfb `:315` + openbox; `xdotool` XTEST input; `scrot` screenshots; savestate `gbAs`/zlib patcher (`patchstate.py`) and GDB-remote client (`gdbrc.py`) written in `/tmp/spongelights/`.
 * Legal: no ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms and findings are published. Analyzer processes and generated `.sav`/`.ss*` artifacts were removed at the end (see final reply).

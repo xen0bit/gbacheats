@@ -31,7 +31,7 @@ What the game *does* have is ordinary **save-gated unlockable content**, which i
 * Custom Clubs from Custom Tickets earned in story mode.
 * "Get Clubs" (up to 16 Special clubsets via Wireless Adapter) is a documented **unused** mode.
 
-Published GBA "cheat codes" for this title are GameShark/CodeBreaker memory patches, which are explicitly out of scope. No published password list exists for this SKU; the cheat pages that might host one (GameFAQs, TCRF, Neoseeker) were unreachable from this environment (Cloudflare "Just a moment…" / captcha), so the negative is additionally backed by the ROM-side searches below and by three wiki articles that were fetched successfully and contain no password codes.
+Published GBA "cheat codes" for this title are GameShark/CodeBreaker memory patches, which are explicitly out of scope. No published password list exists for this SKU; the cheat pages that might host one (3rd party cheat indexes) were unreachable from this environment (Cloudflare "Just a moment…" / captcha), so the negative is additionally backed by the ROM-side searches below and by three wiki articles that were fetched successfully and contain no password codes.
 
 ## 3. How to reproduce
 
@@ -104,14 +104,14 @@ This engagement is a **negative**: there is no code space to enumerate. The sear
 | Screens walked (Observed) | boot logos, splash, character montage, title, story character creation, clubhouse interior, overworld, scripted golf event, NPC dialogues | mGBA screenshots + `.ss1` savestates |
 | Novel code / bounds-by-rejection | **N/A — no code system exists.** No code can be minted, none can be rejected. | §0.2 negative-result clause |
 
-**Published-code verification:** no password list is published for this SKU; no published literal could be searched because none exists. The three cheat-hosting sites that could contradict this (GameFAQs, TCRF, Neoseeker) returned Cloudflare/captcha blocks; Wikipedia, MarioWiki and StrategyWiki were fetched successfully and document only gameplay-gated unlockables (§2). No prompt-injection text was encountered in fetched content.
+**Published-code verification:** no password list is published for this SKU; no published literal could be searched because none exists. The three cheat-hosting sites that could contradict this (3rd party cheat indexes) returned Cloudflare/captcha blocks; 3rd party cheat indexes were fetched successfully and document only gameplay-gated unlockables (§2). No prompt-injection text was encountered in fetched content.
 
 ## 7. Validation evidence
 
 * **Observed** — Emulator screenshots of every screen listed in §6b; title `PRESS START`, intro, character creation text, field, golf event, house interior. SRAM `.sav` content (magic, taunts, names) dumped and inspected. ROM header/hash/logo scan output.
 * **Derived** — Ghidra/REA pseudocode for `0x08000440` and `0x08014A3C`; objdump disassembly of the KEYINPUT reader at `0x0801539A` and Start handler at `0x0804E652`; Thumb literal-pointer scan of 4,579 targets; all full-ROM counts in §6b.
 * **Inferred** — The 16-byte ASCII slots at `0x1872D4`+ are developer labels (format and content strongly indicate this; no xrefs or runtime use were observed). The purpose of the font table at `0x16A37A` is inferred from its glyph order and the absence of ASCII UI strings.
-* **Limitations** — The Wii U VC build and non-US regional builds were not analyzed; this report applies to `BMGE` (Rev.00), SHA-256 above. The In-Game Options/Quick Play menu was not reached in the prologue-limited emulator session; its existence and contents are taken from MarioWiki and are gameplay menus (no password entry is documented there). The GCN link and Wireless Adapter "Get Clubs" paths are unreachable in a single-ROM emulator and are reported from documentation.
+* **Limitations** — The Wii U VC build and non-US regional builds were not analyzed; this report applies to `BMGE` (Rev.00), SHA-256 above. The In-Game Options/Quick Play menu was not reached in the prologue-limited emulator session; its existence and contents are taken from 3rd party cheat indexes and are gameplay menus (no password entry is documented there). The GCN link and Wireless Adapter "Get Clubs" paths are unreachable in a single-ROM emulator and are reported from documentation.
 
 ## 8. Unknowns
 

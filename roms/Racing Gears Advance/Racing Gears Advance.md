@@ -25,7 +25,7 @@ The game implements a **button-code system**, not a password/keypad system. Ten
 developer codes are stored as NUL-terminated arrays of active-high GBA key masks
 (`u16`, no R bit) at ROM `0x0877C5C`–`0x0877CE6`, followed immediately by a closed
 descriptor table of ten 12-byte records at `0x0877CE8`–`0x0877D60`. There is no
-eleventh record: the next word is unrelated data. The published GameFAQs list of
+eleventh record: the next word is unrelated data. The published 3rd party cheat index list of
 ten codes matches the ROM table exactly.
 
 Entering a code on the "NEXT TRACK"/garage screen while holding **R** sets one bit
@@ -146,7 +146,7 @@ Key masks per code (active-high, R excluded; R is the gate):
 Descriptor fieldB is a per-code 32-bit value; for codes 6–9 its low halfword is
 a power of two that does not match the §6 flag bit (SPRINT/ENDURANCE and
 TAXMAN/CASHCROP are exchanged), so its semantics are **unknown** and it is not
-claimed to be the flag. Published effects (GameFAQs/GameGenie) for the ten codes
+claimed to be the flag. Published effects (3rd party cheat indexes) for the ten codes
 are the standard ones; `EQUALIZER` is published as "???", and its only proven
 effect here is flag bit 1 / the EQUALIZER label.
 
@@ -160,7 +160,7 @@ table ends there. The runtime flag is a 10-bit mask (`0x0001`–`0x0200`) with
 **no unassigned bits** — every bit 0–9 maps to one table entry. Therefore no
 eleventh code can exist in this system.
 
-**Published-list comparison.** All ten GameFAQs codes were found literally in
+**Published-list comparison.** All ten 3rd party cheat index codes were found literally in
 the ROM table and all ten were accepted in the emulator. No published code was
 absent or mis-transcribed.
 
@@ -222,7 +222,7 @@ found in ROM strings or fetched pages were followed.
   method; the published 3-code combination behavior was not reproduced.
 * Whether any gameplay-only cheat (hidden car/track, debug screen) exists behind
   a save-bit gate that requires completing circuits; unlockables listed by
-  GameFAQs are progression-based (licenses/characters), not input codes, and no
+  3rd party cheat indexes are progression-based (licenses/characters), not input codes, and no
   hidden debug menu was reached by menu walking.
 
 ## 9. Tooling
@@ -235,6 +235,6 @@ found in ROM strings or fetched pages were followed.
 * mGBA CLI debugger via a pty (`pty_dbg.py`) — `watch/w` on `0x0203823C` located
   the writer at `0x0800FAF0`.
 * `state.py` — parse mGBA `.ssN` PNG `gbAs` zlib chunk and diff EWRAM/IWRAM.
-* Web: GameFAQs cheats page and GameGenie page (published codes), Wikipedia.
+* Web: 3rd party cheat index cheats page and 3rd party cheat index page (published codes), 3rd party cheat indexes.
 
 No ROM or copyrighted assets are redistributed in this report.

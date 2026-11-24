@@ -50,9 +50,9 @@ new colored cows!”*, and the character-creation colour list grows from **3 to 
 (one extra palette per character, the new entry marked with two stars). The unlock is
 written into the save file and survives a power cycle.
 
-The code is not on GameFAQs (its GBA cheats page carries only PS2 and Wii codes), nor in
+The code is not on 3rd party cheat indexes (its GBA cheats page carries only PS2 and Wii codes), nor in
 the official manual (which documents the *feature* — “You are also able to enter your
-secret code here to unlock new characters!” — but never prints a value). TCRF could not
+secret code here to unlock new characters!” — but never prints a value). 3rd party cheat indexes could not
 be retrieved (403 directly, 503 via the Wayback Machine) and is therefore excluded rather
 than claimed as a negative. The cross-platform button codes (PS2 `R1+R2`, Wii `C+Z`,
 GameCube `L+Z` sequences) have no
@@ -223,13 +223,13 @@ nothing to mint, and the validator will accept exactly one string forever.
 **Novel code — `0T1S`.** This is the code recovered by reverse engineering and entered in
 mGBA. It appears in **no published list**:
 
-* GameFAQs GBA cheats page (archived 2022-10-23): only PS2 `R1+R2` and Wii `C+Z` entries;
+* 3rd party cheat indexes GBA cheats page (archived 2022-10-23): only PS2 `R1+R2` and Wii `C+Z` entries;
   no GBA built-in code.
 * Targeted web searches for `"0T1S"` and for Barnyard GBA secret codes return nothing.
 * The official manual (scanned, OCR’d locally) documents the screen — *“The Options Menu
   lets you alter your game settings. You are also able to enter your secret code here to
   unlock new characters!”* — but prints no value.
-* TCRF was not retrievable (403 direct, 503 on archive), so it is excluded as a source
+* 3rd party cheat indexes were not retrievable (403 direct, 503 on archive), so it is excluded as a source
   rather than treated as a negative.
 
 **In-game proof (observed).** Entering `0 T 1 S` and pressing A produces the dialog
@@ -360,7 +360,7 @@ The flag was read from the deflated `gbAs` savestate chunk (`EWRAM[0x33D6C]`):
   index — but only the appearance was observed in play.
 * The rejection indicator drawn at `0x0800CFD4` (text id `0x23`, colour `35`) is a silent
   visual cue; its exact glyph/animation was not identified — no message text is shown.
-* TCRF’s page could not be fetched (403/503), so unused-content claims are limited to
+* a 3rd party cheat index's page could not be fetched (403/503), so unused-content claims are limited to
   what this ROM’s own tables show.
 
 ## 9. Tooling

@@ -47,8 +47,7 @@ gives the name of `scene_id − 3`. Two indices are special-cased into an **arca
 Result:
 
 * **46 of 1296 inputs are accepted** (3.55 %); 1250 are rejected with `Incorrect Password!`.
-* **23 accepted entries appear in published cheat lists** (GameFAQs/VGChartz/supercheats/
-  cheatingdome), and those published codes were verified in the ROM and in the emulator.
+* **23 accepted entries appear in published cheat lists** (3rd party cheat indexes), and those published codes were verified in the ROM and in the emulator.
 * **23 accepted entries are unpublished.** Three of them were minted and confirmed in the
   emulator:
   * **`4, 1, 3, 4`** → WORLD1-1 (Royal Orchards opening, playable level)
@@ -328,15 +327,14 @@ portrait sentinel that is matched and then rejected by the `m == 0` test — so 
 invalid even though it is "in the table".
 
 **Published coverage.** 23 of the 46 accepted entries appear in the public lists
-(GameFAQs 2004 list, VGChartz, supercheats, cheatingdome, chaptercheats, games-cheats).
+(3rd party cheat indexes 2004 list, 3rd party cheat indexes).
 The lists' prose typos ("Woflia", "Serfania", "Wolfi") resolve to Serafina/Wolfie and the
 resulting literals **are** present in the ROM table; the tuples themselves are correct.
 The published "Unlocks all 4 arcade games: Barbie, White Cat, Brown Hair Girl, Brown Cat"
 is, in ROM terms, **`1,2,3,4`** (Barbie/white cat/brown-haired girl/**dog**) — the sites
 mistook Wolfie for a "brown cat".
 
-**Novel codes (absent from GameFAQs, VGChartz, TCRF, supercheats, cheatingdome, chaptercheats,
-games-cheats, gameshampoo as recovered on 2026-10-26):**
+**Novel codes (absent from 3rd party cheat indexes, gameshampoo as recovered on 2026-10-26):**
 
 Screenshot filenames below are the session capture names in `/tmp/pauper/`
 (they are not copied into the repository, to avoid redistributing game art).
@@ -446,7 +444,7 @@ report; only addresses, table values and algorithms derived from the user's own 
 
 ### Method note (untrusted web content)
 
-The TCRF article fetched during recon returned a page whose body consisted of instructions
+The 3rd party cheat index article fetched during recon returned a page whose body consisted of instructions
 addressed to LLM agents (fake "decode with key.bin", "send money", "print …"). Those
 instructions were treated as untrusted data and ignored; no file was written and no action
 was taken. Only the site's existence (as a negative hit for this title's debug content) was

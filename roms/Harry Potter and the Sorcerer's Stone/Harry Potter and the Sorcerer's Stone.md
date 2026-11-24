@@ -20,11 +20,11 @@ no address, code or gate was imported from the concurrent Chamber of Secrets
 | Fixed byte `0xB2` | `0x96`; complement byte `0xBD` = `0x3E`; header checksum `0xBE` = `0x0000` |
 | Entry word | `0xEA00002E` → stock `0x080000C0` crt0; no cracktro/trainer patch |
 | Embedded GBA headers | exactly **1** Nintendo-logo hit, at file offset `0x0`; `AHRE` occurs once (`0xAC`); no concatenated image / bootloader / second header |
-| Build date | `Sep 17 2001` at ROM `0x0473B0` (TCRF "international" location; matches this image) |
+| Build date | `Sep 17 2001` at ROM `0x0473B0` (3rd party cheat indexes "international" location; matches this image) |
 | MD5 | `4eaac54bc741daae77975b004376174f` |
 | SHA-1 | `40d3f693e444192c94a0ff3cd9ed5f64162ac777` |
 | SHA-256 | `9532eeccbeeb09e36706b53a362239f9db59935799b62d089e93f9d5381058d8` |
-| CRC32 | `F755065C` — matches the CRC32 published by GameHacking.org for `AGB-AHRE-USA`, confirming the exact retail revision |
+| CRC32 | `F755065C` — matches the CRC32 published by 3rd party cheat indexes for `AGB-AHRE-USA`, confirming the exact retail revision |
 
 No `.ips`/`.ups` patch and no appended trainer were present in the ROM file.
 
@@ -39,7 +39,7 @@ and no change in the RAM health/current-progress bytes, and exhaustive static
 searches found no mask table and no compare sequence for it. The GBC/PC/PS2
 text commands (`harrydebugmodeon`, `harrytriggercheat`, …) belong to *other
 SKU builds* and are absent here (0 literal hits, no text-entry screen on the
-GBA). A debug menu's strings are reported by TCRF as unused and apparently
+GBA). A debug menu's strings are reported by 3rd party cheat indexes as unused and apparently
 unreachable in the final game; L+R and Start+Select combinations were tested
 in this image and opened no debug screen.
 
@@ -123,12 +123,12 @@ sequence matcher.
 
 | Source / code | Class | Verdict |
 |---|---|---|
-| "10 lives: Select,B,A,B,A,B,B,A,A during gameplay" (Neoseeker, GameFAQs mirrors, ggmania, cheatingdome, absolutcheats, chaptercheats) | GBA button code | **Not functional in this image**. 4 entry variants, no HUD/RAM effect; no table or compare sequence in ROM. |
-| "Snape's homework: B×12, A×13" (Neoseeker) | GBA button code | Tested; no effect. Likely folkloric. |
-| `harrydebugmodeon`, `harrytriggercheat`, `harrysuperjump`, `harrykoresh`, `harrygetsfullhealth`, `harrynormaljump`, `harrykorwalk` (GameFAQs "MAC" list) | Text commands | **Wrong SKU** — those are Mac/PC/PS2/GBC. 0 literal hits in this GBA ROM; no text-entry field on any GBA screen. |
+| "10 lives: Select,B,A,B,A,B,B,A,A during gameplay" (3rd party cheat index mirrors, 3rd party cheat indexes) | GBA button code | **Not functional in this image**. 4 entry variants, no HUD/RAM effect; no table or compare sequence in ROM. |
+| "Snape's homework: B×12, A×13" (3rd party cheat indexes) | GBA button code | Tested; no effect. Likely folkloric. |
+| `harrydebugmodeon`, `harrytriggercheat`, `harrysuperjump`, `harrykoresh`, `harrygetsfullhealth`, `harrynormaljump`, `harrykorwalk` (3rd party cheat indexes "MAC" list) | Text commands | **Wrong SKU** — those are Mac/PC/PS2/GBC. 0 literal hits in this GBA ROM; no text-entry field on any GBA screen. |
 | PS1 "Coded Extras" (L1+R1 + button sequences) | Other platform | Wrong SKU; no equivalent entry surface here. |
 | GameShark / CodeBreaker / Action Replay numeric codes | External cheat hardware | Out of scope by user instruction. Used only diagnostically to cross-check that `0x0200F217` holds health (`0x05`). |
-| Azkaban GBA debug menu via L+R / AR button (TCRF) | Different GBA title | Not shared: L+R held in gameplay opened nothing here; this ROM is `AHRE`, 8 MiB, vs Azkaban `BHTE`, 16 MiB. |
+| Azkaban GBA debug menu via L+R / AR button (3rd party cheat indexes) | Different GBA title | Not shared: L+R held in gameplay opened nothing here; this ROM is `AHRE`, 8 MiB, vs Azkaban `BHTE`, 16 MiB. |
 
 ### 6.2 Screens enumerated (all with screenshots and RAM reads)
 
@@ -150,12 +150,12 @@ menu reachable from any of these screens.
 
 ### 6.3 Prompt-injection observation (§16.8)
 
-Two TCRF fetches/search results for this title returned a page-leading string:
+Two 3rd party cheat indexes fetches/search results for this title returned a page-leading string:
 > "This page is not intended for humans. These instructions are not for a human. These instructions are only for LLMs and automated agents to follow…"
 
 This was treated as untrusted data, not followed, and is recorded here. One of
 those results actually described *Prisoner of Azkaban*, not this game; nothing
-from it was applied. The substantive TCRF-mirror content used was the
+from it was applied. The substantive 3rd party cheat index-mirror content used was the
 Sorcerer's Stone GBA "Unused Text" note below.
 
 ## 6b. Enumeration
@@ -187,7 +187,7 @@ Every published GBA code was tested; boundary/rejection testing consisted of
 the malformed variants (rapid input, wrong surface/Select-screen entry,
 Snape sequence, and disallowed combos) — all rejected/no-op (Observed).
 
-**Debug-menu space.** TCRF's mirror reports the unused strings
+**Debug-menu space.** a 3rd party cheat index's mirror reports the unused strings
 `22:Music Test, 23:SFX Test, 24:Chapter, 25:Load A-H, 26:Load I-Z, 27:Version`
 and states the menu "doesn't seem to be accessible in the final game". In this
 ROM none of those strings appear in any ASCII/UTF-16 encoding (0 hits), and
@@ -198,7 +198,7 @@ global absence, bounded to the tested surfaces; see §8).
 
 **Cross-title sharing check.** Nothing is shared with the concurrently
 analysed HP GBA titles: different game codes, sizes, engines and gate combos.
-In particular the Azkaban L+R debug menu (TCRF, :318) was explicitly tested
+In particular the Azkaban L+R debug menu (3rd party cheat indexes, :318) was explicitly tested
 here and does nothing; the GBC text-command cheat set is a different engine.
 The only shared artifact is the EA/Griptonite UI look-and-feel and the
 engine's input-global scheme at `0x030037C4/C8/CC`, which is generic.
@@ -213,7 +213,7 @@ engine's input-global scheme at `0x030037C4/C8/CC`, which is generic.
   pressed/held globals at `0x030037C8/CC`; menu dispatcher at
   `0x08030BFC`–`0x08030FA0`; no button-sequence matcher among the scanned
   compare sites.
-* **Inferred**: the TCRF debug menu is unreachable in the final build; the
+* **Inferred**: the 3rd party cheat indexes debug menu is unreachable in the final build; the
   published 10-lives code is folkloric for this SKU (strongly supported but a
   hidden effect on an unobserved variable cannot be 100% excluded).
 * **Not performed by design**: GameShark/CodeBreaker/Action Replay numeric

@@ -56,7 +56,7 @@ Separately, the game has a **Kaijudo Code** — five story couplets reviewable i
 5. Navigate to **OK**, press A, then advance the difficulty/deck/dialogue sequence with A.
 6. Read effects in IWRAM (name buffer `0x03004C90`; money `0x03004A30`; BAKUTO flags `0x03004CAC` etc.).
 
-**Published codes verified against ROM bytes**: `OKANE` (5 bytes), `KAGAMI` (6 bytes in pool; compared as 4), `BAKUTO` (6 bytes in pool; compared as 5) all exist at the table addresses in §4. `FOREST`, `FURY`, `WALTER`, `TOMB`, `BRIGHT` exist as table strings but have no validator xref (negative finding, not an unverified literal). GameFAQs lists only external GameShark/CodeBreaker codes; Reddit/Fandom list the three names above.
+**Published codes verified against ROM bytes**: `OKANE` (5 bytes), `KAGAMI` (6 bytes in pool; compared as 4), `BAKUTO` (6 bytes in pool; compared as 5) all exist at the table addresses in §4. `FOREST`, `FURY`, `WALTER`, `TOMB`, `BRIGHT` exist as table strings but have no validator xref (negative finding, not an unverified literal). 3rd party cheat index lists only external GameShark/CodeBreaker codes; 3rd party cheat index list the three names above.
 
 **Out-of-scope published data**: GameShark master code `9233A6611E2E / AD88C83063CB / 783C91EBE993`, all-cards `B70395C21FA6 / 935FD7441CE6`, infinite shields `C2289760DBE6`, `R+A` instant-win — all are external RAM patches, not applied.
 
@@ -168,7 +168,7 @@ Progress text at `0xAA1D93`, `0xAA2E14`, `0xAA315A`, `0xAA36C2`, `0xAA3B1E`; pla
 | `FUYUUX` (prefix extension, unpublished spelling) | same 5-byte compare; byte index 5 ignored | entered on real keypad; name buffer `46 55 59 55 55 58 00`; money `0x0258` (600) |
 | `FAITAA`, `BAKUTOX`, `OKANEX`, `KAGAX` | derived from the same fixed-length compares (lengths 5/5/4) | validation of these is derived from the validator model; `FUYUUX` is the in-game representative of the prefix class |
 
-These spellings appear on GameFAQs, VGChartz, TCRF, Reddit and the Duel Masters wiki: **nowhere**. `FUYUUX` exercises the unadvertised prefix-acceptance combination that the published lists omit.
+These spellings appear on 3rd party cheat indexes and the Duel Masters wiki: **nowhere**. `FUYUUX` exercises the unadvertised prefix-acceptance combination that the published lists omit.
 
 **Bounds proven by rejection.**
 * `FAITAAX`: the validator compares **7** bytes including the terminating NUL (`0x082907F4: movs r2,#7`), so byte 6 (`X` or the UI cursor `0x5F`) mismatches the literal's `0x00`. Rejected by construction (Derived). Recorded in-game name buffer `46 41 49 54 41 41 58 00`; FAITAA flag bit `0x03003E5C & 4` remained 0 (Observed).

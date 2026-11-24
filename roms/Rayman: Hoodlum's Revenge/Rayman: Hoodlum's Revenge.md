@@ -18,7 +18,7 @@
 | SHA-1 | `f65700dcfc827a3e84c9dd19d6f5e55af019ac81` |
 | SHA-256 | `fe9184c36995ae11cb096cd3eed645292747af4f7eeb72b797aa170a551f8512` |
 | Developer (on-screen legal screen) | Backbone Entertainment; MusyX by Factor 5 |
-| Published-cheat source | RayWiki "List of cheats in Rayman Hoodlums' Revenge" (snapshot `20240323044028` on web.archive.org); GameFAQs lists 8 entries but most are GameShark/CodeBreaker (out of scope) |
+| Published-cheat source | 3rd party cheat indexes "List of cheats in Rayman Hoodlums' Revenge" (snapshot `20240323044028` on web.archive.org); 3rd party cheat index lists 8 entries but most are GameShark/CodeBreaker (out of scope) |
 
 **Embedded-header scan:** the 156-byte Nintendo logo occurs once (file `0x4`). This is a single game image, not a multiboot/multicart pack. No appended trainer or cracktro was found; the entry word is the stock branch and the first 4 KiB disassembles as a normal crt0.
 
@@ -157,5 +157,5 @@ Observed effects:
 - `dbg.py` + `dcmd.py` — mGBA `-d` CLI debugger bridge (mGBA GDB stub port 2345 was occupied by another process, so the pty debugger and savestate diffing were used for RAM evidence).
 - `ssdiff.py` — decompress mGBA `.ssN` `gbAs` PNG chunk and diff EWRAM/IWRAM.
 - `key.py`, `chord.py` — XTEST input helpers on `DISPLAY=:316`.
-- Web: DuckDuckGo HTML search, Wayback Machine snapshot of RayWiki (Cloudflare blocked direct GameFAQs/RayWiki fetches); fetched page content treated strictly as data.
+- Web: DuckDuckGo HTML search, Wayback Machine snapshot of 3rd party cheat indexes (Cloudflare blocked direct 3rd party cheat indexes fetches); fetched page content treated strictly as data.
 - No ROM or copyrighted assets are redistributed; only addresses, hashes, masks and tool scripts are published.

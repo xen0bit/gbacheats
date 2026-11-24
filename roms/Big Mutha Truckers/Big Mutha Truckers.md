@@ -65,7 +65,7 @@ What the port **does** contain is a small, hidden **button-code table**:
 **Code 1 (published):** `Up L Right Right A B Down Down R` → sets bit 0. A new
 game started afterwards uses **Evil Bob's truck**: the character-select screen
 shows a different (silver/black) rig for the same character (Bobbie Sue).
-This matches the only published GBA code (GameFAQs: "Access Evil Bob's Truck").
+This matches the only published GBA code (3rd party cheat indexes: "Access Evil Bob's Truck").
 
 **Code 2 (not published anywhere):** `Up Down Left R B A Right L` → sets bit 1.
 It is accepted by the same validator, produces the same flash/SFX, and is proven
@@ -122,7 +122,7 @@ Hold each button ~120–200 ms with a gap of similar length.
 
 | # | Sequence | Masks (`u16`) | Published? |
 |---|---|---|---|
-| 1 | Up, L, Right, Right, A, B, Down, Down, R | `0040 0200 0010 0010 0001 0002 0080 0080 0100` | Yes (GameFAQs GBA) |
+| 1 | Up, L, Right, Right, A, B, Down, Down, R | `0040 0200 0010 0010 0001 0002 0080 0080 0100` | Yes (3rd party cheat indexes GBA) |
 | 2 | Up, Down, Left, R, B, A, Right, L | `0040 0080 0020 0100 0002 0001 0010 0200` | **No** |
 
 ### Memory proof (no GameShark/CodeBreaker used)
@@ -323,13 +323,13 @@ shipped codes.
 
 ### 6.3 Published-code cross-check
 
-The only published GBA code found (GameFAQs, GBA cheats page; archived
+The only published GBA code found (3rd party cheat indexes, GBA cheats page; archived
 2018-11-26 snapshot) is:
 
 > Access Evil Bob's Truck — press **Up L Right Right A B Down Down R** at the title
 > screen; the screen will flash if done correctly.
 
-It matches the table's first record (id 1) exactly (9 masks). IGN's and GameFAQs' *console* pages
+It matches the table's first record (id 1) exactly (9 masks). 3rd party cheat indexes' *console* pages
 list a text cheat menu (`VARLEY`, `GINGERBEER`, `PUBLICTRANSPORT`, `USETHEFORCE`,
 `LOTSAMONEY`, `LAZYPLAYER`, `VICTORS`, `JINGLEBELLS`, `ATJCEHJMJ`,
 `CHEATINGMUTHATRUCKER`); none of those strings exists in this ROM in any case
@@ -404,7 +404,7 @@ whose pointer targets a run of button masks returns only:
 | Read watchpoint on `0x02000145` through the new-game and multiplayer-profile init paths | fires only in `0x080006B4`, whose mask is `1` |
 
 This code is in the shipped table, so it is developer-intended. It is **not** in
-any published list (GameFAQs GBA page has only the Evil Bob code; the console
+any published list (3rd party cheat indexes GBA page has only the Evil Bob code; the console
 cheat pages list text words that do not exist in this build).
 
 ### Bounds proven by rejection

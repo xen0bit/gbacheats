@@ -19,7 +19,7 @@
 | MD5 | `e0533faf6aa36e3111669574f1c5df92` |
 | SHA-1 | `30db467effa5014806d42db57e2299398a51355b` |
 | SHA-256 | `f937fa93b97b14b9fb9fce98844c534f936222d21d1fdb5f1af42292bad32c85` |
-| CRC32 | `0x49DDA5E6` — matches GameHacking.org listing for `AGB-B3SE-USA` (En,Ja,Fr,De,Es,It) |
+| CRC32 | `0x49DDA5E6` — matches 3rd party cheat index listing for `AGB-B3SE-USA` (En,Ja,Fr,De,Es,It) |
 
 **Embedded-header scan (§0):** a 156-byte Nintendo-logo scan found **8** headers: the real one at `0x0` plus seven at `0xE2F09C`, `0xE31504`, `0xE338B4`, `0xE35D28`, `0xE380E8`, `0xE3A474`, `0xE3C820`. The seven carry maker `8P`, complement `0x60`, title `SONICADVANC3`, code `B3SE`, and a ~9 KB payload each; the last one has the stock crt0 literal at `+0xC0`. They are small embedded (multiboot-style) sub-images, **not** an appended trainer or boot patch — the main image's entry word and crt0 are unmodified, and CRC32 matches the published retail image. They contain no password/code tables (keyword scan of all seven regions found only the header string and compressed data).
 
@@ -27,7 +27,7 @@
 
 ## 2. Executive summary
 
-Sonic Advance 3 has **one** developer-intended in-game cheat surface: a **six-press button code** on the main menu that unlocks the otherwise unreachable **"Secret Stage Mode"** scene (scene ID `108` = `0x6C`). The published code is **Up, R, Down, L, Right, Left** (GameFAQs' L/R order is the correct one; CheatCC/CheatingDome/GGmania's "Up, L, Down, R, …" is wrong). It is gated on all seven Chaos Emeralds: the validator requires `(byte at IWRAM 0x03000562 & 0x7F) == 0x7F`.
+Sonic Advance 3 has **one** developer-intended in-game cheat surface: a **six-press button code** on the main menu that unlocks the otherwise unreachable **"Secret Stage Mode"** scene (scene ID `108` = `0x6C`). The published code is **Up, R, Down, L, Right, Left** (3rd party cheat indexes' L/R order is the correct one; 3rd party cheat indexes "Up, L, Down, R, …" is wrong). It is gated on all seven Chaos Emeralds: the validator requires `(byte at IWRAM 0x03000562 & 0x7F) == 0x7F`.
 
 The implementation is a single 6-entry `u16` key-mask table at ROM `0x080D6340`, read by a strict sequence matcher at `0x08088EF4`. On completion it calls the scene setter `0x080BA1F4` with `r0=0x6C` and writes the resulting scene-definition pointer `0x082AED2C` into EWRAM `0x020025C0`. There is a single action branch; no second code table, no password/alphabet system, and no hidden debug menu reachable by controller input. All other published "cheats" for this SKU are CodeBreaker/GameShark memory patches (explicitly out of scope), and the unlockables (characters, sound test, boss time attack, Extra Zone) are save-flag progression rewards, not codes.
 
@@ -157,12 +157,12 @@ Bytes: `40 00 00 01 80 00 00 02 10 00 20 00`. Raw literal search in the 16 MiB i
 
 | Source | Claim | ROM verification |
 |---|---|---|
-| GameFAQs cheat page | `Up, R, Down, L, Right, Left` after all 7 special stages | **Confirmed** — exact literal match at `0x080D6340`, gate logic matches "all 7 emeralds" |
-| CheatCC / CheatingDome / GGmania / Supercheats | `Up, L, Down, R, Right, Left` | **Wrong** — byte sequence `40 00 00 02 80 00 00 01 10 00 20 00` is absent from the ROM. These are transcriptions with R and L swapped. |
-| GameFAQs | R cycles GBA color schemes on the main menu | Not independently verified; no dedicated mask table/handler found in ROM for this claim. Recorded as unverified. |
-| GameFAQs/Supercheats | Unlockables: Sound Test, Amy, Cream, Knuckles, Extra Zone, boss time attack, Special Stage mode | These are progression/save-flag unlocks (cf. cheat-device addresses `0x03000540`, `0x03000558`, `0x03000562`), not controller codes. Out of scope. |
-| CodeBreaker/GameShark lists (supercheats, gamehacking.org, anti-gsc, gbadamud) | Infinite rings/lives, all characters/levels, etc. | All are raw RAM patch codes (`83xxxxxx`/`33xxxxxx`…). **Out of scope** by task definition; not reported as findings. |
-| TCRF `Sonic the Hedgehog/Debugging_Info` | level select for a *different* game (Sonic 1) | Not applicable to this SKU; no SA3 level-select code found. |
+| 3rd party cheat index cheat page | `Up, R, Down, L, Right, Left` after all 7 special stages | **Confirmed** — exact literal match at `0x080D6340`, gate logic matches "all 7 emeralds" |
+| 3rd party cheat indexes | `Up, L, Down, R, Right, Left` | **Wrong** — byte sequence `40 00 00 02 80 00 00 01 10 00 20 00` is absent from the ROM. These are transcriptions with R and L swapped. |
+| 3rd party cheat indexes | R cycles GBA color schemes on the main menu | Not independently verified; no dedicated mask table/handler found in ROM for this claim. Recorded as unverified. |
+| 3rd party cheat indexes | Unlockables: Sound Test, Amy, Cream, Knuckles, Extra Zone, boss time attack, Special Stage mode | These are progression/save-flag unlocks (cf. cheat-device addresses `0x03000540`, `0x03000558`, `0x03000562`), not controller codes. Out of scope. |
+| CodeBreaker/GameShark lists (3rd party cheat indexes) | Infinite rings/lives, all characters/levels, etc. | All are raw RAM patch codes (`83xxxxxx`/`33xxxxxx`…). **Out of scope** by task definition; not reported as findings. |
+| 3rd party cheat indexes `Sonic the Hedgehog/Debugging_Info` | level select for a *different* game (Sonic 1) | Not applicable to this SKU; no SA3 level-select code found. |
 
 ## 6b. Enumeration
 
@@ -198,7 +198,7 @@ Up+A, R+B, Down+Select, L+Start, Right+L, Left+R
 masks: 0x041 0x102 0x084 0x208 0x210 0x120
 ```
 
-Entered through the validator as the game's real key-state word with gate `0x7F`; observed progress `0000→0001→0002→0003→0004→000A`, and final RAM read `0x020025C0 == 0x082AED2C` (secret-stage scene definition). This combination appears on no GameFAQs/VGChartz/TCRF/wiki list.
+Entered through the validator as the game's real key-state word with gate `0x7F`; observed progress `0000→0001→0002→0003→0004→000A`, and final RAM read `0x020025C0 == 0x082AED2C` (secret-stage scene definition). This combination appears on no 3rd party cheat indexes/wiki list.
 
 **Bounds proven by rejection:**
 - Wrong button at any state → progress `0xFFFF` (recorded above).
@@ -213,7 +213,7 @@ Entered through the validator as the game's real key-state word with gate `0x7F`
 
 - **Observed (emulator):** every UI screen in §3; `KEYINPUT` values for the keymap; validator returns/progress advances from the live function called in mGBA; `0x020025C0 == 0x082AED2C` after the novel combination; savestate-diff effect.
 - **Derived (disassembly):** the entire validator model in §5 from `0x08088EF4` with PC-resolved literals (`0x03000530`, `0x03003F8C`, `0x080D6340`); action call `0x080BA1F4(0x6C)`; scene record/descriptor tables at `0x080EB420`/`0x080EB3F0`; scene-name table at `0x08D73DE`.
-- **Inferred:** that scene 108 is the "Secret Stage Mode" / bonus-stage mode described by GameFAQs — the source name is absent from the scene-name table, and the target scene was not rendered on screen during this run (see §8). Confidence moderate; the gate condition, table contents, and scene pointer are observed, the *label* is inferred from the published description.
+- **Inferred:** that scene 108 is the "Secret Stage Mode" / bonus-stage mode described by 3rd party cheat indexes — the source name is absent from the scene-name table, and the target scene was not rendered on screen during this run (see §8). Confidence moderate; the gate condition, table contents, and scene pointer are observed, the *label* is inferred from the published description.
 - **Prompt-injection check:** fetched web pages and ROM strings were treated as data. No instructions embedded in them were executed.
 
 ## 8. Unknowns
@@ -229,5 +229,5 @@ Entered through the validator as the game's real key-state word with gate `0x7F`
 - mGBA `-d` pty debugger bridged through a FIFO (`pty_bridge.py`, `dbg.py`, `oracle2.py`, `callfn.py`) for paused RAM reads/writes and direct function calls; `r/1|2|4`, `w/1|2|4`, `w/r`, `break/t`, `save N`.
 - Savestate diffing (`ssdiff.py`): PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte raw state; IWRAM at raw `0x19000`, EWRAM at `0x21000`.
 - `arm-none-eabi-objdump -M force-thumb` + Capstone 5.0.7 PC-relative literal resolution and pointer/mask-table scanners (Python).
-- `strings`, `xxd`, `grep`, Python `struct`/`zlib`/`re`; web search of GameFAQs, CheatCC, CheatingDome, GGmania, Supercheats, GameHacking.org, anti-gsc (treated as untrusted data).
+- `strings`, `xxd`, `grep`, Python `struct`/`zlib`/`re`; web search of 3rd party cheat indexes.
 - Working files and screenshots: `/tmp/sonic3/` (`title_screen.png`, `demo_screen.png`, `intro_cutscene.png`, `strings_all.txt`, scripts above). No ROM or copyrighted assets are redistributed in this report.

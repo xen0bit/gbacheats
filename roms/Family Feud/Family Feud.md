@@ -13,7 +13,7 @@
 | Revision | `0x00` (`file`: "B2FE54, Rev.00") |
 | Fixed `0x96` / complement / version | `0x96` / `0xE3` / `0x00` |
 | Header checksum | `0x0000` (normal rebuilt-header artifact; complement byte intact) |
-| Developer / publisher | Atomic Planet Entertainment / Global Star Software, 2006 (credits + GameFAQs/GamesDatabase) |
+| Developer / publisher | Atomic Planet Entertainment / Global Star Software, 2006 (credits + 3rd party cheat indexes) |
 | MD5 | `079f35bf49c4c64aca46ac5b82c358e6` |
 | SHA-1 | `37262e445c866f67cf0ff77cd64e2ce82454125a` |
 | SHA-256 | `6a50e8699f744b8cf474ba4fde343a8ff41d8456e138c489181f8882b21bf9d1` |
@@ -28,7 +28,7 @@
 * The only text-entry surfaces are the **family-name editor** and the **survey-answer entry** keyboard. Both use the same on-screen QWERTY/alphabetical grid (26 letters + SPACE/DEL/ENTER + a `BOARD` layout toggle). A 36-letter alphabet and 26-letter grids are the input space; **no literal table, comparison routine, or flag write consumes either buffer as a code** (§4, §6b).
 * The game's entire ASCII text estate was classified: **2,169** strings in the UI/credits/dialogue bank (`0x1FD000–0x208000`) and **14,104** in the survey/answer bank (`0x208000–0x26C000`). All 82 keyword hits (`password`/`cheat`/`code`/`secret`/`debug`/`press`/`hold`/`button`, plus `+0x20`-shifted, UTF-16LE/BE variants) are legitimate survey answers, questions, or credit lines — e.g. `something that ends with the word 'code'.`, `Cheat sheet`, `Cheating`. There is no hidden code string in ASCII, shifted ASCII, or UTF-16.
 * The screen dispatcher's function-pointer table at `0x0826C648` has **231 entries**; all in-game screen transitions target a small subset. Two screens that exist in the table but have **no incoming transition at all** — Volume (`0x0800DA44`, state 14) and Brightness (`0x0800DBF0`, state 15) — are dead code, not secret menus. The Options menu has a 3rd slot (index 1) that is a wired-but-unlabelled no-op; pressing A on it changes nothing.
-* Published codes: **none exist for this GBA SKU.** Cheat Happens says "no Family Feud cheats or cheat codes for Game Boy Advance"; the archived GameFAQs GBA cheats page is empty. The frequently published `L+R+Start+Select` "family select" is for the **SNES** game and the `FAMILY` wardrobe password is for the **Wii/PC Ludia** game; both were checked against the ROM and the GBA build has neither surface. `Start+Select+A+B` on GBA is a plain soft-reset (`0x080024AC`), not a cheat.
+* Published codes: **none exist for this GBA SKU.** 3rd party cheat indexes say "no Family Feud cheats or cheat codes for Game Boy Advance"; the archived 3rd party cheat indexes GBA cheats page is empty. The frequently published `L+R+Start+Select` "family select" is for the **SNES** game and the `FAMILY` wardrobe password is for the **Wii/PC Ludia** game; both were checked against the ROM and the GBA build has neither surface. `Start+Select+A+B` on GBA is a plain soft-reset (`0x080024AC`), not a cheat.
 
 ## 3. How to reproduce
 
@@ -117,7 +117,7 @@ Text entry (family name / survey answer) is a direct glyph-to-buffer append with
 
 **Reachability enumeration:** of the 231 function-table entries, every state-change call site (262 calls to `0x08005778`, 173 to `0x080057C8`) was decoded for its `r0` state value. States 14 (Volume) and 15 (Brightness) have **zero** incoming transitions; state 11 also has none. These are dead screens, not hidden features. The Options menu bound is 3 (`0x030024DC=2`), so index 1 is a real slot; setting the cursor to 1 and pressing A produced no state change — a dead slot, not a secret.
 
-**Published codes tested (all verified against ROM):** SNES `L+R+Start+Select` (no code surface on GBA; tested, no effect), Wii/PC `FAMILY` wardrobe password (different game; name field accepts it but no effect), GBA-specific published codes (none exist per Cheat Happens, GameFAQs GBA cheats page via web.archive.org, and the 100-GBA-ROM study at remyhax.xyz). No novel code could be minted because **no code system exists**; the closest "novel" observation is the unreachable Options slot 1 and the dead Volume/Brightness screens, both proved by rejection/no-op.
+**Published codes tested (all verified against ROM):** SNES `L+R+Start+Select` (no code surface on GBA; tested, no effect), Wii/PC `FAMILY` wardrobe password (different game; name field accepts it but no effect), GBA-specific published codes (none exist per 3rd party cheat indexes GBA cheats page via web.archive.org, and the 100-GBA-ROM study at remyhax.xyz). No novel code could be minted because **no code system exists**; the closest "novel" observation is the unreachable Options slot 1 and the dead Volume/Brightness screens, both proved by rejection/no-op.
 
 **Bounds proven:** entering `FAMILY` as a family name (accepted as text, no flag); forcing dead Options slot 1 (no-op); holding Start+Select+A+B (soft reset, not a cheat). These bound the "no hidden code" conclusion on every surface the game exposes.
 

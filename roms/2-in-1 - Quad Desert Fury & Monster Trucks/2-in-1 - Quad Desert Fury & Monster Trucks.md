@@ -97,7 +97,7 @@ All content is available from boot.
 * **Pack shell (B).** Exactly two entries (Quad Desert Fury, Monster Trucks),
   `Up`/`Down` + `Start`; 8 multi-button combinations, including the Konami sequence
   and `L+R+Select`, produced no response (§6.4, §7).
-* **Published codes:** none exist. GameFAQs' cheat pages for both games return 403 and
+* **Published codes:** none exist. 3rd party cheat indexes' cheat pages for both games return 403 and
   have no Wayback snapshot; search results for both titles surface only generic
   GameShark `.CHT` archives (out of scope), never an in-game code (§6b.4).
 
@@ -412,10 +412,10 @@ confirmed statically where the menu is data-driven:
 
 | Source | Result |
 |---|---|
-| GameFAQs `918720-quad-desert-fury/cheats` | HTTP 403; no Wayback snapshot; search snippet shows no cheat section (only "game information and a community message board") |
-| GameFAQs `922253-monster-trucks/cheats` | same |
+| 3rd party cheat indexes `918720-quad-desert-fury/cheats` | HTTP 403; no Wayback snapshot; search snippet shows no cheat section (only "game information and a community message board") |
+| 3rd party cheat indexes `922253-monster-trucks/cheats` | same |
 | General web search for both titles + `password`/`cheat`/`code`/`unlock` | no in-game codes; only generic GameShark/CodeBreaker `.CHT` collections for the 2-in-1 (out of scope) |
-| TCRF / fan wikis | no entry describing unused or hidden modes for either title |
+| 3rd party cheat indexes / fan wikis | no entry describing unused or hidden modes for either title |
 
 Every "published" item found is a memory-patch (GameShark) code, not a game input;
 there is nothing to re-enter in the emulator and nothing to verify. `roms/INDEX.md`
@@ -482,7 +482,7 @@ was not touched.
 * Save-backed progression (Challenge Mode wins, Career money) was not reverse
   engineered; no `.sav` data was written during this session. No code is known to
   feed it.
-* GameFAQs could not be fetched directly (403) and has no archive snapshot; the
+* 3rd party cheat indexes could not be fetched directly (403) and has no archive snapshot; the
   "no published codes" statement rests on search results and on the absence of any
   code string in the ROM.
 

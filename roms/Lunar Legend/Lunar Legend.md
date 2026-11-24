@@ -30,7 +30,7 @@ The negative is bounded, not assumed: every reachable screen was walked to a sav
   - `NEW GAME` → story scenes → field; Start opens the in-game (pause) menu: icon carousel with `Save/Load Game`, `Status Display`, `Nall's Skills`, `Battle Settings`, `Back`.
 - **RAM proof method**: mGBA savestates (`.ss1`) are PNG with a zlib `gbAs` chunk; decompress to a 397,312-byte state. Per §16.13 the IWRAM image begins at state offset `0x19000` (so `0x03000000` maps to state `+0x19000`), EWRAM at `+0x21000`. Tilemap rows at EWRAM `0x02005840/80`, `0x02005900/40/c0` were decoded with the font mapping below.
 - **Codes tested**: none applicable (no code surface). Button codes tested on the title screen: `L+R`, `Start+Select`, `A+B+Start+Select`, Konami `Up Up Down Down Left Right Left Right B A`, `L+R+Start`.
-- **Sources checked**: GameFAQs cheats/walkthrough, GameFAQs Genome_X guide, GamingDome, VGChartz, LunarNET Secrets Guide, TCRF (fetch 403; CDX snapshot query returned no result).
+- **Sources checked**: 3rd party cheat index cheats/walkthrough, 3rd party cheat indexes Genome_X guide, 3rd party cheat indexes (fetch 403; CDX snapshot query returned no result).
 
 ## 4. Address map
 
@@ -69,7 +69,7 @@ Complete list of distinct user-facing UI strings recovered from both banks (this
 
 **Save flag**: the two locked Options rows are gated by game completion (published sources: "Beat the Game Once to Unlock Sound and Music Test"). This is a save-bit unlock, not a code — per §16.18 it is not reported as a cheat system.
 
-**Published codes (web) verified against ROM**: none present. All GameFAQs/VGChartz/GamingDome listings are CodeBreaker RAM patches (`83004AC2 03E7` etc.), bug exploits, or save-flag unlocks. The story word "GREEN EARTH" (Phacia's Ruid password, a plot item) was searched literally and in both text encodings — **0 hits**: it is dialogue, not an input.
+**Published codes (web) verified against ROM**: none present. All 3rd party cheat index listings are CodeBreaker RAM patches (`83004AC2 03E7` etc.), bug exploits, or save-flag unlocks. The story word "GREEN EARTH" (Phacia's Ruid password, a plot item) was searched literally and in both text encodings — **0 hits**: it is dialogue, not an input.
 
 ## 6b. Enumeration
 
@@ -86,7 +86,7 @@ Space definition: **the code space is empty**. Concretely:
 - **Observed**: title/options/load/pause/field/dialogue screens screenshotted; RAM tilemaps at `0x02005840…` decoded to exact English words; save states written and reloaded reproducibly; `.sav` created with slot data (`100RANUL…`). Button-combo attempts produced only normal transitions in RAM diffs.
 - **Derived**: font/tile mapping and both text encoding schemes (validated by exact decode of visible labels); string-bank pointer xrefs from u32 literal scan; Thumb disassembly of the A=0xAC text renderer at `0x08012180`.
 - **Inferred**: the two `???` rows are `MUSIC`/`SOUNDS` (matching published unlock descriptions) and gated by a completion save flag; the battle and menu screens were located via the decoded UI bank but not reached interactively in the time budget (see Unknowns). These do not affect the no-code conclusion.
-- **Prompt-injection handling**: TCRF returned HTTP 403 and the archive CDX query returned no snapshot; no fetched page contained injected instructions. Web content was treated strictly as data.
+- **Prompt-injection handling**: 3rd party cheat indexes returned HTTP 403 and the archive CDX query returned no snapshot; no fetched page contained injected instructions. Web content was treated strictly as data.
 
 ## 8. Unknowns
 

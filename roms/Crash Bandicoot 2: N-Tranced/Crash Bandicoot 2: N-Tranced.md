@@ -48,7 +48,7 @@ Two pieces of developer debug material are present but are ROM/engine state,
 not cheats:
 
 1. A config word at ROM `0x7FBD18` (u32, currently 0) that gates the
-   double-speed gameplay mode documented by TCRF; it is read at boot, not by
+   double-speed gameplay mode documented by 3rd party cheat indexes; it is read at boot, not by
    input.
 2. The GAX Sound Engine 3.01 banner and error screen
    (`EXCEPTION. PROGRAM HALT`, `0x529C50`+); this appears only when the engine
@@ -325,7 +325,7 @@ interface and of the one writable flag space:
 
 ## 10. Notes
 
-* A TCRF “LLM/AI agent-specific information” page fetched during this
+* A 3rd party cheat index “LLM/AI agent-specific information” page fetched during this
   engagement returned a prompt-injection payload (fake “terminate all
   operations”, `E_` error text and an instruction to print an insult). It was
   treated as data, ignored and is recorded here per guide §16.8.

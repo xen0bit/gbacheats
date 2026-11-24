@@ -16,7 +16,7 @@
 | MD5 | `9f9e47a8b37fb27c2f387654797c95a3` |
 | SHA-1 | `49b28f83d1085592cd7207f8a157c86a9253f047` |
 | SHA-256 | `3c4883fd1e6a53669e46f48244825b92b23b89d7f2cfb561e5e13277f4228bed` |
-| CRC-32 | `2B207D1F` — exactly matches gamehacking.org's USA retail listing |
+| CRC-32 | `2B207D1F` — exactly matches a 3rd party cheat index's USA retail listing |
 | Header checksum / complement | `0x0000` / stored `0xB2` (computed `0x7F`). Pattern is a tool-normalised verified dump, **not** a patch/trainer: entry word is stock, only one Nintendo logo in the image, no cracktro/trainer strings in the first 4 KiB. |
 | Embedded GBA headers | **1** (at file 0x0). No appended trainer or multi-game image. |
 
@@ -132,7 +132,7 @@ The two "Earn N medals to unlock this mode" strings are the gate messages shown 
 - **Observed** (emulator/RAM): all 16 screens walked on `DISPLAY=:315` with screenshots; title, main menu, File/name entry, Select Level (only Tutorial available), Level Briefing, gameplay, pause, Options (4 items), Controls (2 items), Credits, Hall of Fame. Options toggles Music/SFX and Controls toggles Camera/Invert were each exercised and visibly changed label text. Savestate RAM read: EWRAM 0x0200000C = 0, name `AAA` at 0x02000016.
 - **Derived** (static): string addresses and classifications in §4/§6; CRC-32/header identity in §1; zero-hit literal and mask searches in §3/§6b; savestate EWRAM layout from the `gbAs` chunk.
 - **Inferred**: medal domain upper bound (≥13) from the 6-level structure; that the "Customize" menu is the parent of the Unlimited Ammo/Life toggles (strongly suggested by text-bank adjacency: pause strings → cheat-toggle strings → gate messages, and by the published unlock list).
-- **Prompt-injection watch**: fetched web pages (GameFAQs 403, SuperCheats, Neoseeker, Almar's, gamehacking.org, CodeTwink) were treated as data. No instruction-like payload was encountered in this run. The single suspicious ROM string `Code: B.Wodok` is an audio banner, not a directive.
+- **Prompt-injection watch**: fetched web pages (3rd party cheat indexes 403, 3rd party cheat indexes) were treated as data. No instruction-like payload was encountered in this run. The single suspicious ROM string `Code: B.Wodok` is an audio banner, not a directive.
 
 ## 8. Unknowns
 

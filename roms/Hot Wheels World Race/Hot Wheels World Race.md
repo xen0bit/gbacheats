@@ -104,7 +104,7 @@ where `field[i] = (P >> (5*i)) & 31`.
 
 **Per-position offsets `A`:** `[21,24,14,19,6,10,26,22]`. The all-zero payload therefore displays as **`PLXR51JN`** — this is the code shown on a fresh password screen. The published list's `PLXR 5INN` is an OCR error (`I` is not in the GBA alphabet; the real code uses digit `1`).
 
-**Verified published GBA codes (all 27 decode and round-trip):** `PVXR51JN` … `F15W3ZQ2`; full list from GameFAQs/chaptercheats, including `PLXR51JN` for zero progress and `F15W3ZQ2` for maximum progress. `FQ5RLBLX` ("super password" from absolutcheats) decodes to an ordinary progress state (`0x04094E02098`) — it is not a special format.
+**Verified published GBA codes (all 27 decode and round-trip):** `PVXR51JN` … `F15W3ZQ2`; full list from 3rd party cheat indexes, including `PLXR51JN` for zero progress and `F15W3ZQ2` for maximum progress. `FQ5RLBLX` ("super password" from 3rd party cheat indexes) decodes to an ordinary progress state (`0x04094E02098`) — it is not a special format.
 
 **Payload bit meanings (inferred from the published progression, confidence medium):**
 - bit 8: base flag (present in every non-zero code)
@@ -119,7 +119,7 @@ where `field[i] = (P >> (5*i)) & 31`.
 
 * **Space definition:** 8 symbols × 5 bits = 40-bit payload. Input space = 32^8 = **1,099,511,627,776** strings. Reserved-bit filter (10 bits) leaves **2^30 = 1,073,741,824** format-valid payloads. 22 payload bits are used by the game's progress logic; the remaining 8 are redundant/unused aliases (different strings can map to the same progress state — compare `QVXR51JN` vs `PVXR51JN`, which differ only in reserved bit 0).
 * **Validator model:** implemented in Python (see §9); it round-trips all 27 published codes, predicts acceptance of both novel codes, and predicts rejection of the reserved-bit code, all confirmed in the emulator.
-* **Novel codes (not on GameFAQs, VGChartz, TCRF, chaptercheats, absolutcheats or any wiki):**
+* **Novel codes (not on 3rd party cheat indexes or any wiki):**
   * `PVXR51JP` — payload `0x0008000100` (class-2 flag set, zero drivers). Entered in-game → accepted (fireworks → main menu). RAM counters `(0,0,0,0,0)` → `(2,0,1,0,0)`; flag word `0x4030C50A` → `0xF1FFC50A`.
   * `F15W3GJX` — payload `0x00401DE221D8` (all 5 teams, 10 drivers, class 1 — a combination no published list lists). Entered in-game → accepted.
   Both differ from a published code in exactly one character and exercise unadvertised field combinations.
@@ -145,6 +145,6 @@ where `field[i] = (P >> (5*i)) & 31`.
 * Python 3 with `capstone` 5.0.7 (installed), plain `struct`/`zlib` for literal scans and savestate decoding.
 * `mgba` (SDL, `/usr/local/bin/mgba`) under `Xvfb :319` + `openbox`; `xdotool` XTEST input; `scrot`/`import` screenshots; `convert` crops.
 * `enter.py` (keypad navigator), `ssdiff.py` (gbAs savestate extractor/differ), `key.py` (XTEST key helper) in `/tmp/hwvr/`.
-* Web sources: GameFAQs GBA cheats and FAQ by silver-wonder, chaptercheats GBA level-password list, absolutcheats (GBA "super password"), plus console-version pages used only to exclude non-GBA codes. Fetched pages were treated as data; no prompt-injection was encountered in this run.
+* Web sources: 3rd party cheat indexes GBA cheats and FAQ by silver-wonder, 3rd party cheat indexes GBA level-password list, 3rd party cheat indexes, plus console-version pages used only to exclude non-GBA codes. Fetched pages were treated as data; no prompt-injection was encountered in this run.
 
 **Legal note:** no ROM bytes, graphics, audio, or extracted assets are redistributed here — only hashes, addresses, algorithms, and independently generated codes.

@@ -144,7 +144,7 @@ row set. A direct A-press on a locked row produces no visible effect; both masks
 
 ### 6.1 Cheat names (pointer table 0x08048D48; strings at 0x08048C74)
 
-| Index | String ROM address | Name | Published unlock (GameFAQs / cheatcodes.com) |
+| Index | String ROM address | Name | Published unlock (3rd party cheat indexes) |
 |---:|---|---|---|
 | 0 | 0x08048C74 | stud mode | 100% Arcade, Tony Hawk |
 | 1 | 0x08048C80 | rail balance | 100% Arcade, Bob Burnquist |
@@ -265,9 +265,8 @@ about the whole accessible text bank, not a blind `strings` miss.
   raw 0x21000, IWRAM at 0x19000 (guide §16.13). Scripts in `/tmp/thug/`: `ss.py`,
   `diffss.py`, `scan1.py`, `scan2.py`, `xref.py`, `btnsearch.py`, `btnfull.py`, `negative.py`,
   `keyin.py`, `k.py`, `kcode.py`, `dbg.py`.
-* Web recon (data only, never instructions): GameFAQs GBA/PC/PS2/GC cheat pages and FAQ 28373,
-  cheatcodes.com "The Cheats And How To Unlock Them", Neoseeker GBA cheats, Planet Cheats,
-  SuperCheats, Almars CodeBreaker address list.
+* Web recon (data only, never instructions): 3rd party cheat indexes GBA/PC/PS2/GC cheat pages and FAQ 28373,
+  3rd party cheat indexes "The Cheats And How To Unlock Them", 3rd party cheat indexes GBA cheats, 3rd party cheat indexes CodeBreaker address list.
 
 No ROM or copyrighted assets are redistributed; only hashes, addresses, algorithms and findings
 are published. All emulator artifacts were written to `/tmp/thug/`, not the ROM folder.

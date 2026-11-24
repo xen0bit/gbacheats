@@ -34,7 +34,7 @@ Two cheat families are published for this title:
    hard-coded equality check, not an algorithmic password system: the complete accepted
    set is exactly one string out of 26^6 = 308,915,776 possible names.
 
-2. **20 three-button "level select" codes** published by GameFAQs/GameGenie (e.g.
+2. **20 three-button "level select" codes** published by 3rd party cheat indexes (e.g.
    `Up,Up,Left` → level 2 easy). These are **not reachable in this retail image**: the
    described "Code" option does not exist in any menu. The manual enumerates the Pause
    Menu as CHANGE GAME / SAVE / CONTINUE / CHANGE LEVEL / HIGH SCORES, and every menu in
@@ -111,7 +111,7 @@ uses the literal at 0x086AA2C0.
 |---|---|---|
 | `ISPYER` | Bonus Riddle Round-Up level | Observed twice; literal at 0x086AA2C0 |
 
-### 6.2 Published button codes (from GameFAQs / GameGenie — NOT verified in this build)
+### 6.2 Published button codes (from 3rd party cheat indexes — NOT verified in this build)
 Format: three D-pad presses; digits in parentheses mean repeats of the preceding button.
 
 | Level | Easy | Medium | Hard | Expert |

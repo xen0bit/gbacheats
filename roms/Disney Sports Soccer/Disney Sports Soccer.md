@@ -51,14 +51,14 @@ What the ROM does contain:
    The debug root page list (9 entries: `LOGO`, `TITLE`, `SELECT`, `GAME`,
    `GSELECT`, `SAMPLE`, `MINIGAME`, `TRAINING`, `PENALTYKICK`) is at ROM
    `0x08B2691C`; it is only referenced by the dev-menu renderer at `0x0800B6F4`.
-   TCRF documents this menu and a "secret kart racing mode" (the `CART_SAMPLE`
+   3rd party cheat indexes document this menu and a "secret kart racing mode" (the `CART_SAMPLE`
    page with a Goemon sprite). It is developer content, not a player cheat.
 2. **The documented `L+R+START` / `L+R+SELECT` combos do nothing.** Both were
    tried simultaneously at boot, on the title, on the PLAYMODE menu and in a
    match. `Start` alone opens PLAYMODE (from the title) or the pause menu (in a
    match); the L+R prefix changes nothing and no reset occurs. `L+R+SELECT`
    produces no screen and no RAM change in any of those states.
-3. **TCRF's RAM gate does not reproduce.** TCRF says `02000430:02` enables the
+3. **a 3rd party cheat index's RAM gate does not reproduce.** 3rd party cheat indexes say `02000430:02` enables the
    debug menu. In this image `0x02000430` is the low byte of a 0x44-byte-stride
    scene/object array based at `0x02000400` (initialised at `0x08001D08`), and it
    behaves as the **current scene id**, not an input flag: 1 at boot, 3 on the
@@ -69,11 +69,11 @@ What the ROM does contain:
    PLAYMODE and match setup, and the 4-byte literal `0x02000270` occurs **0**
    times in the image.
 4. **The published "GBA" code is the GameCube code.** Search results for
-   GameFAQs' GBA cheats page and a Japanese cheat blog both return
+   3rd party cheat indexes' GBA cheats page and a Japanese cheat blog both return
    *Y, Y, Y, Y, Y, B, A, Y* for unlimited magic (the archived 2021 GBA cheats
    page itself has no cheats). The GBA has no Y button; the sequence is the
    GameCube pad code (the GameCube release has the same "unlimited magic"
-   cheat). VGChartz lists 0 cheats for the GBA SKU. The literal `YYYYYBAY`
+   cheat). 3rd party cheat index lists 0 cheats for the GBA SKU. The literal `YYYYYBAY`
    occurs 0 times in the ROM. GBA-feasible re-mappings
    (`Select×5,B,A,Select` and `L×5,B,A,L`) were pressed on the title: no
    transition and no confirmation screen.
@@ -159,7 +159,7 @@ ROM address = `0x08000000 + file offset`.
 | `0x08B26AC8` | debug page descriptor table, 3 words × 10 rows (constructor/destructor/draw) |
 | `0x08B26608` | pointer to the debug page constructor `0x0800B521` inside a larger screen-handler pointer table |
 | `0x02000400` | base of the 0x44-byte object/scene array (0x80 slots) |
-| `0x02000430` | scene/mode id byte (TCRF's "debug" address) — 1 boot, 3 title/menu, 4 PLAYMODE/stadium, 7 attract, 14 demo |
+| `0x02000430` | scene/mode id byte (a 3rd party cheat index's "debug" address) — 1 boot, 3 title/menu, 4 PLAYMODE/stadium, 7 attract, 14 demo |
 | `0x02000270` | all-zero; no literal reference; not a gate |
 | `0x02003070` | input/state base; `+0x397C` new press, `+0x397E` previous held, `+0x3980` release, `+0x3984`/`+0x39A4` copies used by game code |
 | `0x020095E8`–`0x02009621` | debug print fields (team ids, stage, ball team, side, CPU level, specials, trap, judge, control, levels) |
@@ -174,7 +174,7 @@ table in the image is the font's ASCII→tile map (`0x11A6C0`, `0x11A750`), used
 drawing all UI text. No screen in §6b accepts typed characters. The negative is a
 property of the *absence of an input surface*, not of a missed comparison.
 
-### 5.2 Scene id and the TCRF address
+### 5.2 Scene id and the 3rd party cheat indexes address
 
 `0x08001D08` initialises an array at `0x02000400` of `0x80` records, stride
 `0x44` (`base + n*0x44`, end pointer at `0x02006DDC`). `0x02000430` is record 0,
@@ -191,7 +191,7 @@ offset `+0x30`. In every savestate examined the value tracks the current screen:
 Writing `0x02` there (savestate patch, verified read-back) does not change the
 screen at boot, on the title, or in PLAYMODE; the scene manager rewrites the byte
 at the next transition. Therefore it is an **output** (current scene), not the
-input gate TCRF's memory code assumes, and it cannot open the debug menu in this
+input gate a 3rd party cheat index's memory code assumes, and it cannot open the debug menu in this
 build. `0x02000270` is zero in all of those states and the literal is absent.
 
 ### 5.3 Developer menu (present, unreachable)
@@ -247,7 +247,7 @@ Root labels (`0x08B2691C`, 9): `LOGO`, `TITLE`, `SELECT`, `GAME`, `GSELECT`,
 
 Sample pages (`0x08B26940` onward): `EXE SAMPLE`, `OBJ_SAMPLE`, `ANI_SAMPLE`,
 `ANI3D_SAMPLE`, `CART_SAMPLE`, `EXJOY_SAMPLE`, `SIO_SAMPLE`, `JOYBUS_SAMPLE`,
-`SAVE_LOAD_SAMPLE`, then `STAFF_ROLL`. TCRF's descriptions (from its own
+`SAVE_LOAD_SAMPLE`, then `STAFF_ROLL`. a 3rd party cheat index's descriptions (from its own
 research, not re-verified here because the menu is unreachable) are: sprite-limit
 demo, Donald object test, animation tests, 3D Pluto/basketball demo, a Goemon-kart
 physics sandbox ("secret kart racing mode"), external-joypad and SIO/Joybus tests,
@@ -299,18 +299,18 @@ spaces.
 | Button-mask runs, u16, ≥4 consecutive | 523 runs | inspected by class; all are code/data noise or single-bit padding, not press tables |
 | Button-mask runs, u8, ≥4 consecutive | 7,152 runs | ditto (instruction bytes dominate) |
 | Same-mask runs, u16, ≥4 repeats | 499 runs | no `[X,X,X,X,X, B, A, X]` sequence; closest is a 5×`0x0001` animation-curve table at `0x0E9B8A`, not a matcher |
-| Published GBA codes | 1 claim (GameFAQs/Japanese blog `YYYYYBAY`) | GameCube pad code; literal absent; GBA has no Y |
-| Published GBA code databases | GameFAQs (0 real GBA cheats), VGChartz (0), TCRF (debug/RAM only) | nothing else to test |
+| Published GBA codes | 1 claim (3rd party cheat indexes/Japanese blog `YYYYYBAY`) | GameCube pad code; literal absent; GBA has no Y |
+| Published GBA code databases | 3rd party cheat indexes | nothing else to test |
 | Menus/screens walked | 28 distinct screens/submenus | listed in §3 |
 | Hidden/debug menu | 9 root pages + 9 sample pages + option domains | enumerated in §6.2; no player entry |
-| TCRF RAM gate | 2 addresses | `0x02000430` inert/overwritten; `0x02000270` zero and unreferenced |
+| 3rd party cheat indexes RAM gate | 2 addresses | `0x02000430` inert/overwritten; `0x02000270` zero and unreferenced |
 
 ### 6b.2 Novel/unpublished results
 
 No code can be minted because no validator exists. The novel, publishable
 results of this pass are:
 
-1. **The TCRF gate is not a gate in USA Rev.00.** `0x02000430` is a scene id
+1. **The 3rd party cheat indexes gate is not a gate in USA Rev.00.** `0x02000430` is a scene id
    (1/3/4/7/14 observed) written by the scene manager; a patched `2` is
    overwritten and opens no screen at boot, title, PLAYMODE or attract demo.
    This corrects a widely repeated memory-code claim.
@@ -333,11 +333,11 @@ results of this pass are:
 
 | Claim | Source | Test | Result |
 |---|---|---|---|
-| `Y×5, B, A, Y` = unlimited magic | GameFAQs GBA cheats page; Japanese blog | literal search; GBA has no Y; pressed `Select×5,B,A,Select` and `L×5,B,A,L` on the title | **rejected**: the sequence is the GameCube pad code and cannot be typed on a GBA; re-mapped sequences produced no transition |
-| GBA has 4 cheat codes | GameFAQs page count on some mirrors | page content | the four codes belong to the GameCube entry; the archived 2021 GBA cheats page has none |
-| GBA cheats: 0 | VGChartz GBA cheats page | page content | confirmed (0) |
-| `02000430:02` enables debug menu | TCRF | savestate patch at boot, title, PLAYMODE, demo; read-back | **inert**; byte is a scene id and is rewritten |
-| `02000270:07` type gate | sibling Basketball report / TCRF lineage | savestate read at four states; literal scan | **zero/unreferenced**; not a gate here |
+| `Y×5, B, A, Y` = unlimited magic | 3rd party cheat indexes GBA cheats page; Japanese blog | literal search; GBA has no Y; pressed `Select×5,B,A,Select` and `L×5,B,A,L` on the title | **rejected**: the sequence is the GameCube pad code and cannot be typed on a GBA; re-mapped sequences produced no transition |
+| GBA has 4 cheat codes | 3rd party cheat index page count on some mirrors | page content | the four codes belong to the GameCube entry; the archived 2021 GBA cheats page has none |
+| GBA cheats: 0 | 3rd party cheat indexes GBA cheats page | page content | confirmed (0) |
+| `02000430:02` enables debug menu | 3rd party cheat indexes | savestate patch at boot, title, PLAYMODE, demo; read-back | **inert**; byte is a scene id and is rewritten |
+| `02000270:07` type gate | sibling Basketball report / 3rd party cheat indexes lineage | savestate read at four states; literal scan | **zero/unreferenced**; not a gate here |
 | `L+R+START` soft reset | in-ROM string `0x0F30A0` | simultaneous hold at boot, title, PLAYMODE and in match | behaves exactly like `Start` alone (PLAYMODE / pause menu); **no soft reset** |
 | `L+R+SELECT` MEM+DMA debug | in-ROM string `0x0F30BC` | simultaneous hold at boot/title/PLAYMODE/in match | **inert** (no screen, no RAM change) |
 | All-Star Pete Team unlock | Japanese cheat wiki | team ring observed | **GameCube-only**; GBA ring has 6 and wraps |
@@ -349,7 +349,7 @@ results of this pass are:
 * **Wrong published code**: the literal `YYYYYBAY` is absent (count 0); the GBA
   has no Y, so the published sequence is unreachable by construction. GBA
   re-mappings on the title produced no screen change or transition.
-* **TCRF gate**: `0x02000430 = 2` at boot, title and PLAYMODE produced no menu;
+* **3rd party cheat indexes gate**: `0x02000430 = 2` at boot, title and PLAYMODE produced no menu;
   the value was observed reverting to the scene id. `0x02000270` is zero.
 * **Challenge Cup**: Right and Down on `LEVEL 1` do not advance it on an empty
   save (rejection of levels >1 until the save advances).
@@ -400,7 +400,7 @@ results of this pass are:
 
 **Inferred:**
 
-* TCRF's `02000430:02` was authored against a different revision/layout in
+* a 3rd party cheat index's `02000430:02` was authored against a different revision/layout in
   which the same byte offset is a "next screen" input; in this USA build it is
   the current-scene output.
 * The five/six debug handlers' label mapping (7 pointers for 9 labels) is not
@@ -412,7 +412,7 @@ results of this pass are:
   scene-id layout; only USA Rev.00 was tested.
 * Exact label→handler mapping inside the debug root (7 pointers, 9 labels).
 * Visual effects of the debug sample pages were not exercised (unreachable);
-  their names and TCRF's descriptions are the only evidence.
+  their names and a 3rd party cheat index's descriptions are the only evidence.
 * Complete EEPROM save-record layout and the Challenge-Cup/item unlock bit
   positions were not decoded byte-for-byte; only the resulting selectable sets
   were observed.

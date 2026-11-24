@@ -83,9 +83,9 @@ text/button spaces characterised with counts.
 * Button-code combos entered on title/menu screens: Konami sequence, L+R+Start,
   A+B+Start+Select. No extra screen appeared; only the documented Start→name-entry transition.
 * No published code was tested because no published code for this SKU could be retrieved:
-  GameFAQs and TCRF returned HTTP 403, DuckDuckGo returned a CAPTCHA, Bing returned only
+  3rd party cheat indexes returned HTTP 403, DuckDuckGo returned a CAPTCHA, Bing returned only
   unrelated "need" dictionary results, and the Wayback CDX API returned an empty set for the
-  GameFAQs cheats URL. Verification therefore rests on exhaustive local enumeration (§6b).
+  3rd party cheat index cheats URL. Verification therefore rests on exhaustive local enumeration (§6b).
 
 ## 4. Address map
 

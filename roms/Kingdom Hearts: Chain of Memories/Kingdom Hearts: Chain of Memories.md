@@ -146,7 +146,7 @@ one the external patch changes; no in-game input routine was found that writes `
 | `0x08128508` | ＯＰＥ ＳＡＶＥ | OPE SAVE |
 | `0x0812851C`–`0x0812856C` | ＭＯＶＩＥ１ … ＭＯＶＩＥ５ | MOVIE1–MOVIE5 |
 
-18 entries. This matches TCRF's US/JP debug-menu list exactly. The EU-only additions
+18 entries. This matches a 3rd party cheat index's US/JP debug-menu list exactly. The EU-only additions
 (ENDROLL, LANGUAGE, JOURNAL, WORLDSEL, CONTINUE) do **not** appear in this USA image — another
 confirmation of the region.
 
@@ -162,13 +162,12 @@ confirmation of the region.
 
 | Source | Code | Verified in ROM? |
 |---|---|---|
-| TCRF / KH13 (US/JP debug menu) | `3203493C 0006` → byte `6` @ `0x0203493C` | Yes — RAM literal at `0x0805E900` etc.; shipped debug labels present |
-| TCRF (EU debug menu) | `320348DC 0006` → byte `6` @ `0x020348DC` | Literal present (`0x0810704`), but EU-only entries absent; this is the USA build |
-| GameFAQs / Neoseeker / SuperCheats / ROMSFUN | "Infinite HP", "Max CP", "All Cards (Select+L+R)", "Gain level (Select+Up)", "Infinite MP", etc. | All GameShark/CodeBreaker/Action-Replay RAM writes; no password/button-code form; out of scope |
-| GameFAQs walkthrough | `Start,Select,A,B,L+R = Reset` | Confirmed empirically (system reset screen) — a system function, not a cheat |
+| 3rd party cheat indexes | `3203493C 0006` → byte `6` @ `0x0203493C` | Yes — RAM literal at `0x0805E900` etc.; shipped debug labels present |
+| 3rd party cheat indexes | `320348DC 0006` → byte `6` @ `0x020348DC` | Literal present (`0x0810704`), but EU-only entries absent; this is the USA build |
+| 3rd party cheat indexes | "Infinite HP", "Max CP", "All Cards (Select+L+R)", "Gain level (Select+Up)", "Infinite MP", etc. | All GameShark/CodeBreaker/Action-Replay RAM writes; no password/button-code form; out of scope |
+| 3rd party cheat index walkthrough | `Start,Select,A,B,L+R = Reset` | Confirmed empirically (system reset screen) — a system function, not a cheat |
 
-Prompt-injection check: all fetched pages (TCRF mirror, GameFAQs, KH13, ROMSFUN,
-Neoseeker, SuperCheats, gamehacking.org) were treated strictly as data. No injected
+Prompt-injection check: all fetched pages (3rd party cheat index mirror, 3rd party cheat indexes) were treated strictly as data. No injected
 instructions, fake decoder keys, or payment requests were encountered.
 
 ## 6b. Enumeration
@@ -226,7 +225,7 @@ gameplay menus with no cheat/debug entries.
 * **Derived**: mode dispatcher and `bhi` bound at `0x0805EEB0`; 5-entry jump table;
   clear-to-zero writer at `0x0805E8B8`; register/table structure at `0x09ECEB40`; debug init
   at `0x0800AC34`; the four "no system / dead / cut / gated" classification.
-* **Inferred**: that the debug menu's *visual contents* match TCRF exactly (the shipped
+* **Inferred**: that the debug menu's *visual contents* match 3rd party cheat indexes exactly (the shipped
   label table matches, but the menu itself was never displayed because the required
   continuous external write is out of scope and mGBA's cheat timing did not reproduce it).
   This is explicitly labelled as inferred, not observed.

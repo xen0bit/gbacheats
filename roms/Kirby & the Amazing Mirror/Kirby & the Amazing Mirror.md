@@ -34,7 +34,7 @@ Evidence for the negative (all primary where possible):
 
 1. **Every reachable screen was walked** in mGBA with screenshots and saved RAM states (§7): boot logos, story intro, title, attract demo, FILE SELECT, GAME SELECT + START submenu, SUB-GAMES + per-game submenu, COLLECTION ROOM (40-slot grid + color selector), ERASE A FILE, and in-game + Tips. None has a code-entry field, a button-code prompt, or a debug menu.
 2. **Text/bank checks**: all UI text is drawn from a font/tile bank (`strings` finds only the removed sound-test debug names at file `0x3852F0`, e.g. `boss_kyotu`, `select`, `pause`). A keyword scan across ASCII, case-folded ASCII, `+0x20`, `-0x20`, UTF-16LE and UTF-16BE returned **0 hits** for 30+ cheat keywords. 1,206 successfully decompressed GBA-LZ77 blocks contained **0** keyword hits.
-3. **Published codes verified**: GameFAQs (6 unlockables) and Cheat Code Central (~12 unlockables + 1 trick) list only unlockables/tricks — no password/button code. The widely published numeric strings (`02020FE6:03C9` debug room, `02020FE3:1B` unused state, CodeBreaker/ActionReaper lists) are **memory-edit codes**, explicitly out of scope. TCRF states the debug menu was removed from the final game; its dev text survives only as a data table.
+3. **Published codes verified**: 3rd party cheat index list only unlockables/tricks — no password/button code. The widely published numeric strings (`02020FE6:03C9` debug room, `02020FE3:1B` unused state, CodeBreaker/ActionReaper lists) are **memory-edit codes**, explicitly out of scope. 3rd party cheat indexes state the debug menu was removed from the final game; its dev text survives only as a data table.
 4. **Input-handler scan**: 9 Thumb PC-relative loads of `0x04000130` (KEYINPUT). The main-game ones at `0x0815250C`, `0x081526AE`, `0x081527D2` implement the standard `A+B+Select+Start` soft-reset check (`movs r0,#15; bics r5,r1; cmp r5,#15`) and normal key-state bookkeeping — **no key-mask sequence tables, no progress index, no action dispatch**. No button-code surface exists.
 
 ## 3. How to reproduce
@@ -60,8 +60,8 @@ Evidence for the negative (all primary where possible):
 | Item | Address (ROM / file offset) | Evidence |
 |---|---|---|
 | GBA header / entry | `0x08000000` / `0x0` | Observed; stock `0xEA00002E` |
-| Dev sound-test text table | `0x083852F0` / `0x3852F0` | Derived: `boss_kyotu`, `select`, `pause`, `ply_1`…; matches TCRF's US offset |
-| Build date string | `0x08F32D94` / `0xF32D94` | Derived (TCRF US offset; not re-read directly) |
+| Dev sound-test text table | `0x083852F0` / `0x3852F0` | Derived: `boss_kyotu`, `select`, `pause`, `ply_1`…; matches a 3rd party cheat index's US offset |
+| Build date string | `0x08F32D94` / `0xF32D94` | Derived (3rd party cheat indexes US offset; not re-read directly) |
 | KEYINPUT literal loads (main) | `0x0815250C`, `0x081526AE`, `0x081527D2` | objdump; soft-reset / normal key bookkeeping only |
 | KEYINPUT loads (embedded images) | `0x08D7B4BC`, `0x08D9E0AC`, `0x08E2A410`, `0x08E62504`, `0x08E8F59C` | Capstone scan; per-image copies |
 | Embedded GBA headers | `0x08D6DD04` … `0x08E8490C` (10 copies) | Logo scan, §1 |
@@ -80,7 +80,7 @@ if (held & 0xF) == 0xF:        // A+B+Select+Start simultaneously
     -> reset / soft-boot path
 ```
 
-The documented snorkel trick (CheatCC) is a gameplay input, not a code: with Sword/Master, at shallow water press `Up+B` (Master: `Down+B+Up` in order). It does not unlock content and was not treated as a code.
+The documented snorkel trick (3rd party cheat indexes) is a gameplay input, not a code: with Sword/Master, at shallow water press `Up+B` (Master: `Down+B+Up` in order). It does not unlock content and was not treated as a code.
 
 ## 6. Tables
 
@@ -106,8 +106,8 @@ The documented snorkel trick (CheatCC) is a gameplay input, not a code: with Swo
 
 | Source string | Meaning | Disposition |
 |---|---|---|
-| `02020FE6:03C9` | TCRF debug room after losing a life | GameShark-style RAM write; **rejected as out of scope** |
-| `02020FE3:1B` | TCRF unused Kirby state | RAM write; out of scope |
+| `02020FE6:03C9` | 3rd party cheat indexes debug room after losing a life | GameShark-style RAM write; **rejected as out of scope** |
+| `02020FE3:1B` | 3rd party cheat indexes unused Kirby state | RAM write; out of scope |
 | `32xxxxxx xxxx` CodeBreaker / `156E6B51…` Action Replay lists | item/ability/HUD edits | RAM writes; out of scope |
 | `0x08F32D94` build date `Mon Apr 12 19:58:05 2004` | identity cross-check | Consistent with US Rev.00 |
 
@@ -126,8 +126,8 @@ Because there is no code system, §0.2's "mint a novel code" deliverable is repl
 | Shifted / Unicode text (`+0x20`, `-0x20`, UTF-16LE/BE) | Full 16 MiB scan | **0** hits for all 30+ keywords |
 | Compressed text (GBA LZ77 blocks) | Decompressed 1,206 valid blocks | **0** keyword hits |
 | Button-code key-mask tables / progress index | 9 KEYINPUT xrefs disassembled | **0** sequence comparators; only soft-reset |
-| Debug menu entries | TCRF + screen walk | Removed from final build; **0** reachable entries |
-| Publishable in-game codes | GameFAQs + CheatCC + TCRF (archived) | **0** passwords/button codes; only unlockables |
+| Debug menu entries | 3rd party cheat indexes + screen walk | Removed from final build; **0** reachable entries |
+| Publishable in-game codes | 3rd party cheat indexes | **0** passwords/button codes; only unlockables |
 
 **Unlockable space — enumerated**
 
@@ -151,13 +151,13 @@ Savestates retained during analysis (ROM folder, `.ss1`–`.ss9`): ss1 = GAME SE
 
 **Derived** (static): header/logo scan, keyword scans, LZ77 decompression counts, KEYINPUT xrefs and soft-reset disassembly, embedded-header identity, save-image layout.
 
-**Inferred** (published, not exercised in emulator): the exact triggers for Arena/Boss Rush/Ability Room/Power Center/Meta Knight's Sword/CD Player/Heart Container/Secret Mirror/Sound Test and the snorkel trick. They are developer-intended unlockables per GameFAQs/CheatCC but were not played through in this session; no claim is made that their effects were observed.
+**Inferred** (published, not exercised in emulator): the exact triggers for Arena/Boss Rush/Ability Room/Power Center/Meta Knight's Sword/CD Player/Heart Container/Secret Mirror/Sound Test and the snorkel trick. They are developer-intended unlockables per 3rd party cheat indexes but were not played through in this session; no claim is made that their effects were observed.
 
 ## 8. Unknowns
 
 - Exact bit/byte offsets of individual unlock flags in the 32 KiB save image were not isolated (the fresh save leaves most of the image at `0xFF`; a completed save would be needed).
 - The precise number of selectable Kirby colors and the full list of the 40 Collection-Room items could not be read without unlocking them; only the locked grid and color cycler were observed.
-- The original debug menu's entry list is documented by TCRF only indirectly (its dev text table survives); it is unreachable in the retail build, so its effects cannot be exercised.
+- The original debug menu's entry list is documented by 3rd party cheat indexes only indirectly (its dev text table survives); it is unreachable in the retail build, so its effects cannot be exercised.
 - Whether the 11 embedded headers are strictly multiboot payloads or additional localised images was not determined; all carry identical identity and are not separately bootable from the title screen.
 
 ## 9. Tooling
@@ -166,7 +166,7 @@ Savestates retained during analysis (ROM folder, `.ss1`–`.ss9`): ss1 = GAME SE
 - Python 3 + `capstone` 5.0.7 — header parse, multi-encoding keyword scan, LZ77 decompressor, KEYINPUT xref scan, savestate `gbAs` zlib reader, image-diff state detection.
 - `arm-none-eabi-objdump -M force-thumb` — input-handler disassembly.
 - mGBA 0.10.5 SDL under `Xvfb :315` + `openbox`; `xdotool`, `scrot`, ImageMagick (`montage`, `convert`).
-- `webfetch` via `web.archive.org` for GameFAQs, CheatCC and TCRF (direct fetches returned 403). Fetched pages were treated as data; **no prompt-injection payload was encountered** in any fetched page.
+- `webfetch` via `web.archive.org` for 3rd party cheat indexes. Fetched pages were treated as data; **no prompt-injection payload was encountered** in any fetched page.
 - Scripts: `/tmp/kirbymirror/{phase0,stringscan,lzscan,keyscan,ssread,explore,find_gamesel,fontfind}.py`.
 
 **Legal note:** no ROM dump, extracted graphics, music, or full game text is redistributed here. Only hashes, addresses, counts, and original observations are published.

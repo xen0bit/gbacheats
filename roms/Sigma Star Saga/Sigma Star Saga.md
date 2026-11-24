@@ -10,7 +10,7 @@
 | Size | 8,388,608 bytes (0x800000) |
 | Header title | `SIGMA STAR` (in-game splash: *Sigma Star Saga*) |
 | Game code / maker | `B3GE` / `AF` (Atari Europe; code revision 00) |
-| CRC32 | **A8B80A7C** — matches the "Sigma Star Saga (USA, Europe)" CRC published on GameHacking.org / libretro, so published USA/EU codes apply to this image |
+| CRC32 | **A8B80A7C** — matches the "Sigma Star Saga (USA, Europe)" CRC published on 3rd party cheat indexes / libretro, so published USA/EU codes apply to this image |
 | MD5 | `29b048b4b36b3fda168850003f2ee844` |
 | SHA-1 | `132222e0c0ddacb6281cc2eb4489ed6c8719dac2` |
 | SHA-256 | `0fa1daa6099ce9a1d96163e5eeed0ef9a19c4f79f9a03de7d49237892d2ef940` |
@@ -24,7 +24,7 @@ Phase 0 conclusion: clean retail image, no cracktro/trainer/patch detected.
 
 **There is no password or in-game cheat-code system in this ROM.** The full-ROM literal search finds
 zero occurrences of `PASSWORD`, `PASS WORD`, `CHEAT`, `DEBUG`, `SECRET` or `UNLOCK` in ASCII,
-lowercase, UTF-16LE or UTF-16BE. Progression is an EEPROM save (GameFAQs' unlockables — New Game+,
+lowercase, UTF-16LE or UTF-16BE. Progression is an EEPROM save (3rd party cheat indexes' unlockables — New Game+,
 Sigma ship, extra endings — are save-flag unlockables, not codes). No on-screen keyboard or code-entry
 surface exists on any of the screens walked (§7).
 
@@ -33,7 +33,7 @@ a scene/cutscene select with three submenus (`SCRIPT MENU`, `RPG MENU`, `SHOOTER
 action menu (17 actions), a 270-entry internal level/room list, and an `ENEMY_TESTER` label. Its
 renderer lives at `0x08017538` and reads a menu-data bank at `0x080ED000`. The only published way to
 reach it is an **external cheat device** — an Action Replay / GameShark / CodeBreaker program
-(TCRF, GameHacking.org, libretro database). With the stock controller and no cheat device, L+R and
+(3rd party cheat indexes, libretro database). With the stock controller and no cheat device, L+R and
 Select+Start (the combos those cheats use as activators) were pressed on the title screen and in-game
 and **never opened the debug screen**; the scene-state RAM word at `0x03001630` was unchanged by L+R
 and went to the title value `0x0C` (not a debug value) after Select+Start. This is a *gated feature*
@@ -98,7 +98,7 @@ scene/menu-data tables — no retail input path was found.
 
 `0` TITLE, `1` FILE SELECT, `2` OPENING CRAWL, `3` GAME OVER, `4` WIN, `5`–`14` CINEMA 01…10,
 `15` THE END, `16` REWARD FIGHTER, `17` REWARD PERFECT, `18` REWARD BESTEND, `19` END SAVE,
-`20` **SCRIPT MENU**, `21` **RPG MENU**, `22` **SHOOTER MENU**. (TCRF notes the script menu is blank
+`20` **SCRIPT MENU**, `21` **RPG MENU**, `22` **SHOOTER MENU**. (3rd party cheat index notes the script menu is blank
 and the shooter menu freezes — consistent with these being developer-only scenes.)
 
 **RPG MENU debug actions @ `0x080ED020`, stride `0x24` (1 title + 17 actions):**
@@ -115,10 +115,10 @@ and the shooter menu freezes — consistent with these being developer-only scen
 
 | Source | Code | ROM verification |
 |---|---|---|
-| TCRF | AR `F96A20FE 1DFD09E5 E216BE85 4A18E1BB` + Start+Select → debug menu | CRC matches; loaded in mGBA as a research tool, **did not** open the debug screen (title/intro only) |
-| GameHacking.org | CB `74000130 00FF / 33001630 0002` "Press L&R anywhere for debug menu" | target `0x03001630` exists and is the scene byte; keypad condition is a cheat-device activator, no matching game code |
-| libretro/GameHacking | CB `74000130 03F3 / 33001630 0024` "Select+Start to finish the game" | `0x03F3` = Select+Start active-low; zero literal xrefs in game code |
-| GameHacking | master `0000DB77 000A 10003870 0007` | applied with `33001630 0002`; game reset-looped, no usable debug screen |
+| 3rd party cheat indexes | AR `F96A20FE 1DFD09E5 E216BE85 4A18E1BB` + Start+Select → debug menu | CRC matches; loaded in mGBA as a research tool, **did not** open the debug screen (title/intro only) |
+| 3rd party cheat indexes | CB `74000130 00FF / 33001630 0002` "Press L&R anywhere for debug menu" | target `0x03001630` exists and is the scene byte; keypad condition is a cheat-device activator, no matching game code |
+| libretro/3rd party cheat indexes | CB `74000130 03F3 / 33001630 0024` "Select+Start to finish the game" | `0x03F3` = Select+Start active-low; zero literal xrefs in game code |
+| 3rd party cheat indexes | master `0000DB77 000A 10003870 0007` | applied with `33001630 0002`; game reset-looped, no usable debug screen |
 
 ## 6b. Enumeration
 
@@ -158,7 +158,7 @@ and the only cheat-like content (the debug subsystem) was fully enumerated from 
 * **Derived (static):** menu tables and counts (§4, §6); scene setter `0x080047B0` and its 49 BL
   callers; debug renderer `0x08017538` with `0x24`-stride item loop and ID-based dispatch; PC-relative
   xref scans showing no key-combatibility for the advertised masks.
-* **Inferred:** that the three debug submenus behave as TCRF describes (script menu blank, shooter
+* **Inferred:** that the three debug submenus behave as 3rd party cheat indexes describe (script menu blank, shooter
   menu freezes) — the strings and their placement support this, but the screens could not be entered
   without a cheat device, so this is not an observation.
 

@@ -37,8 +37,8 @@ card that has no password.
   alphabet conversion, XOR, permutation or checksum.
 
 A novel code, **`43063758`** (card index 550), was identified from the ROM table.
-It is absent from the two fully retrievable published lists (cheatcodes.com's
-791 codes; the GameFAQs lists available via search snippets) and Yugipedia has
+It is absent from the two fully retrievable published lists (a 3rd party cheat index's
+791 codes; the 3rd party cheat index lists available via search snippets) and 3rd party cheat indexes have
 no password page for it (HTTP 404). Its acceptance is proven by the ROM's own
 validator path, and its bounds by the table counts and rejection branch.
 
@@ -225,7 +225,7 @@ index 2. No other table base is referenced by the three validator functions
 |---|---|
 | Code | **`43063758`** |
 | ROM table index | 550 (offset `0x08E11378`) |
-| Published-list status | Absent from cheatcodes.com's 791-code Reshef list; absent from GameFAQs snippets retrieved; `https://yugipedia.com/wiki/43063758` returns HTTP 404 (no card/password page). |
+| Published-list status | Absent from a 3rd party cheat index's 791-code Reshef list; absent from 3rd party cheat indexes snippets retrieved; 3rd party cheat indexes returns HTTP 404 (no card/password page). |
 | Acceptance evidence | **Derived + dynamically executed in mGBA**: present as eight digit bytes in the main table; `entry_state()` classifies it as valid (2); `compare()` returns 10 against a keypad buffer holding the same digits; caller then takes the card-unlock + `message(0xC9)` path. |
 | In-game execution | Keypad reached through the real terminal and digits typed on screen; a full accept-message screenshot was not captured (see §8). The ROM validator itself was called in-emulator (below) and returned **accept**. |
 
@@ -254,13 +254,13 @@ This is an **observed in-emulator accept/reject** of the ROM's search function,
 not a screenshot of the UI message; it closes the "derived only" gap for the
 validator's decision.
 
-For contrast, the other nine ROM passwords missing from the cheatcodes.com list
+For contrast, the other nine ROM passwords missing from the 3rd party cheat index list
 were each found in another published source and are therefore **not** novel:
 `03366982` (Alligator's Sword Dragon), `17679043` (Penguin Torpedo),
-`28913279` (Ruklamba the Spirit King), `54285230` (Aeris, GameFAQs),
+`28913279` (Ruklamba the Spirit King), `54285230` (Aeris, 3rd party cheat indexes),
 `55908887` (Orgoth the Relentless), `79106360` (Morphing Jar #2),
-`80280944` (Giant Rex), `80558357` (Command Angel, GameFAQs),
-`81306586` (Nightmare Penguin, GameFAQs). The 6 published codes absent from
+`80280944` (Giant Rex), `80558357` (Command Angel, 3rd party cheat indexes),
+`81306586` (Nightmare Penguin, 3rd party cheat indexes). The 6 published codes absent from
 this ROM's table (`10438194`, `10510953`, `14126321`, `15125587`, `28470714`,
 `69474262`) are **rejected** by this build — a useful cross-SKU warning (§16.7,
 §16.11).
@@ -288,7 +288,7 @@ on-screen `message(0x39)` screenshot was not captured (§8).
   (0/1/2 from `entry_state`, 10/11 from `compare`), accept/reject message IDs,
   special-code bit handlers, novel code acceptance.
 * **Inferred** — friendly card names attached to table indices (cross-checked
-  against published lists/Yugipedia, not against an in-game card-name table).
+  against published lists/3rd party cheat indexes, not against an in-game card-name table).
 * No prompt-injection content was encountered or acted on in fetched pages or
   ROM strings.
 
@@ -308,9 +308,9 @@ on-screen `message(0x39)` screenshot was not captured (§8).
    derived. A second analyst should, from the shop-interior savestate, clear
    the shop dialogs slowly (the text box has a typewriter effect), approach the
    terminal from the right, and avoid crossing the `OK` cell while typing.
-2. The GameFAQs Reshef card list could not be fetched directly (HTTP 403), so
+2. The 3rd party cheat indexes Reshef card list could not be fetched directly (HTTP 403), so
    "not in any published list" is bounded by the sources actually retrieved
-   (cheatcodes.com full list, Yugipedia password index, GameFAQs search
+   (3rd party cheat indexes full list, 3rd party cheat indexes password index, 3rd party cheat index search
    snippets) rather than every possible list.
 3. The exact card name for index 550 (`43063758`) was not recovered from the
    ROM's own name table; only its index and password are certain.

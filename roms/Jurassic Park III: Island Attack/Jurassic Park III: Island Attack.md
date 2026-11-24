@@ -32,7 +32,7 @@ This title has **no password screen, no button-code system, and no reachable hid
 
 All text is **font/tile-indexed**, not ASCII: `strings` returns only code noise, and the real text bank is a stream of 16-bit little-endian words `glyph,0x20` with glyph `0x00` = space. After decoding, an exhaustive keyword search over the whole text bank (4,840 extracted sequences, ~0x60000–0xA0000) found **zero** occurrences of `password`, `cheat`, `debug`, `secret`, `unlock`, `code`, `select`, `music`, `stage select`, `sound test`, `survival`, etc. The on-screen keyboards/menus offer no input surface for a code.
 
-The published "GBA cheats" for this SKU (GameFAQs/cheathappens/absolutcheats) are **unlock conditions only**; there is no published password or controller sequence to verify as a literal. A CaH4e3 search snippet describing `303030`/`F0F0F0` "stage select" codes was traced to *Amazing Penguin*, not this game (§16.7/§16.11 caution). The CodeBreaker/GameShark codes sold for this title are external memory patches and are explicitly out of scope.
+The published "GBA cheats" for this SKU (3rd party cheat indexes) are **unlock conditions only**; there is no published password or controller sequence to verify as a literal. A CaH4e3 search snippet describing `303030`/`F0F0F0` "stage select" codes was traced to *Amazing Penguin*, not this game (§16.7/§16.11 caution). The CodeBreaker/GameShark codes sold for this title are external memory patches and are explicitly out of scope.
 
 Because no code system exists, the deliverable here is a **proven negative** (§0.2 point 5): every reachable screen was walked with RAM evidence, the text and button spaces were searched with counts, all published material was checked, and six undocumented button combinations were entered in the emulator with no effect.
 
@@ -87,7 +87,7 @@ Verified end-to-end: the Rom region `0x0806EF8C` decodes to readable English, e.
 
 | Source | Claim | Verification |
 |---|---|---|
-| GameFAQs cheats (archived 2018-11-26), cheathappens, absolutcheats | Stage Select unlock: complete one story level | Consistent across 3 sources; in-game menu initially has only `STORY MODE`/`OPTIONS`, so the entry is gated |
+| 3rd party cheat index cheats (archived 2018-11-26), 3rd party cheat indexes | Stage Select unlock: complete one story level | Consistent across 3 sources; in-game menu initially has only `STORY MODE`/`OPTIONS`, so the entry is gated |
 | Same | BGM Test / SE Test unlock: complete story mode | Options initially has only `BUTTON CONFIG`/`DATA CLEAR`/`EXIT`; both test entries absent |
 | Same | Survival Mode unlock: complete story mode | Not present initially; gated |
 | CaH4e3 `gb_cheats.php` search snippet (`303030`, `019-D0D-E6A`, "select up to 40 levels") | Attributed by the search engine to this title | **False attribution** — the surrounding section is *Amazing Penguin* (and the `019-D0D-E6A` block is *Bubble Bobble Part 2*). Not applicable to this SKU. |
@@ -156,4 +156,4 @@ The 512-byte save begins with reversed developer magic `12elibom` = `mobile21` a
 * `arm-none-eabi-objdump -M force-thumb`, `capstone` 5.0.7, Python 3.
 * `strings`, `xxd`, `grep`; custom scripts in `/tmp/jp3island/`: `phase0.py`, `static1.py`, `textenc.py`, `lzscan.py`, `textbank.py`, `decode2.py`, `fulltext.py`, `kwsearch.py`, `kwlower.py`, `kwbrute.py`, `keyscan.py`, `ssdump.py`, `sssearch.py`, `ssregions.py`, `dbg.py`, `walk3.py`, `codetest.py`, `codetest_ui.py`, `ui.py`, `mash.py`.
 * mGBA `-d` CLI debugger driven through a Python `pty` (`dbg.py`) for per-frame RAM reads; mGBA `Shift+F1/F2` savestates with a Python `zlib`/PNG `gbAs` decompressor for full-RAM snapshots.
-* Web sources accessed as data only (GameFAQs via web.archive.org 20181126022852, cheathappens, absolutcheats, TASVideos, CaH4e3). No instructions found in fetched content were followed. No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms, and derived findings are reported.
+* Web sources accessed as data only (3rd party cheat indexes via web.archive.org 20181126022852, 3rd party cheat indexes, CaH4e3). No instructions found in fetched content were followed. No ROM or copyrighted assets are redistributed; only addresses, hashes, algorithms, and derived findings are reported.

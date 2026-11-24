@@ -178,10 +178,10 @@ surface cannot mint additional codes.
 
 | Source | Claim | ROM evidence | In-game result |
 |---|---|---|---|
-| GameFAQs / TCRF | Left,Right,L,R,Up,Up,Down,Select → invincible + level select | exact `u16` table at `0x0807C948`, 1 hit in 4 MiB | **Accepted**: flags `01 01`, slot 6 becomes `SPACESHIP 00%` |
-| GameFAQs (EU only) | Down,Up,Down,Up,Down,Up,Up,Select → developer comments | 0 hits in u16/u32/byte/reversed/active-low | Rejected, flags `00 00` |
-| GameFAQs (EU only) | Left,Right,Up,Down,Left,Right,Select,Select → developer photo | 0 hits in all five encodings | Rejected, flags `00 00` |
-| TCRF Blackthorne page (different game) | Left,Left,R,R,Up,Up,Down,Select | 0 hits in all five encodings | Rejected, flags `00 00` |
+| 3rd party cheat indexes | Left,Right,L,R,Up,Up,Down,Select → invincible + level select | exact `u16` table at `0x0807C948`, 1 hit in 4 MiB | **Accepted**: flags `01 01`, slot 6 becomes `SPACESHIP 00%` |
+| 3rd party cheat indexes | Down,Up,Down,Up,Down,Up,Up,Select → developer comments | 0 hits in u16/u32/byte/reversed/active-low | Rejected, flags `00 00` |
+| 3rd party cheat indexes | Left,Right,Up,Down,Left,Right,Select,Select → developer photo | 0 hits in all five encodings | Rejected, flags `00 00` |
+| 3rd party cheat indexes Blackthorne page (different game) | Left,Left,R,R,Up,Up,Down,Select | 0 hits in all five encodings | Rejected, flags `00 00` |
 
 This image is `ALVE` (US), consistent with the EU-only claims being absent.
 

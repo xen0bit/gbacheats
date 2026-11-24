@@ -68,8 +68,8 @@ button cheat in this image**. The complete in-game cheat/selection surface is:
    unchanged, and extra buttons do nothing.
 
 Consequently the published four **8-digit debug values** (`01110000`,
-`00001100`, `10000000`, `00000011`) are inapplicable to this SKU: GameFAQs
-labels that menu “Japanese version”, and the US image contains only the entry
+`00001100`, `10000000`, `00000011`) are inapplicable to this SKU: 3rd party cheat indexes
+label that menu “Japanese version”, and the US image contains only the entry
 check, not the menu body. This engagement is closed as a **bounded negative**
 per guide §0.2.5: the menu space is enumerated (5 wrapper slots), the button
 space is bounded (one sequence table in the entire 16 KiB PRG), the published

@@ -30,13 +30,13 @@ Save hardware: `EEPROM_V122` string at `0x6F6EAC`; mGBA creates a 512-byte `Sile
 
 **There is no password, button-code, or hidden debug menu system in this GBA SKU.** The only 30-symbol alphabet in the ROM (`ABCDEFGHIJKLMNOPQRSTUVWXYZ.&? ` at `0x08700320`) is the *ranking name-entry* alphabet; its only code consumer is the pointer at `0x08053D1C`, i.e. the high-score name screen. No `PASSWORD`/`CHEAT`/`SECRET`/`UNLOCK` literal exists anywhere in the 8 MiB image, and the first three presses of every published button sequence produce **zero** key-mask table hits (§6b).
 
-The developer-intended "cheat" surface is a **save-data unlockable system** (guide §16.18): one hidden mode (`ADVANCE STORY`) and a set of option values gated behind Shooting-Range SS ranks. GameFAQs (USA) publishes the intended gates: ADVANCE STORY = clear Arcade Mode; Continue 2/3 at 11/17 SS ranks; player life 6/7/8 at 1/3/5; Time Limit +20/+30 at 7/10. Those are *unlockables*, not codes.
+The developer-intended "cheat" surface is a **save-data unlockable system** (guide §16.18): one hidden mode (`ADVANCE STORY`) and a set of option values gated behind Shooting-Range SS ranks. 3rd party cheat indexes publish the intended gates: ADVANCE STORY = clear Arcade Mode; Continue 2/3 at 11/17 SS ranks; player life 6/7/8 at 1/3/5; Time Limit +20/+30 at 7/10. Those are *unlockables*, not codes.
 
 The widely mirrored "Silent Scope GBA" button code (`Up, Right, Down, Left, Up, Square, Triangle`) is a **mislabelled PlayStation 2 code** — Square/Triangle do not exist on GBA — and the corresponding key-mask prefix has **0** hits in this ROM. Recorded as unverified/false for this SKU.
 
-We minted a **published-list-free unlock**: setting EEPROM byte `0x3A` to `0xFF` before boot makes `ADVANCE STORY` appear on the main menu (Observed, screenshot + save-byte read). With byte `0x3A = 0x00` the entry is absent. This is a novel, reproducible method not on GameFAQs/TCRF/ VGChartz; the published method (clear Arcade Mode) was not executed.
+We minted a **published-list-free unlock**: setting EEPROM byte `0x3A` to `0xFF` before boot makes `ADVANCE STORY` appear on the main menu (Observed, screenshot + save-byte read). With byte `0x3A = 0x00` the entry is absent. This is a novel, reproducible method not on 3rd party cheat indexes; the published method (clear Arcade Mode) was not executed.
 
-TCRF's only GBA finding — crash-handler text at `0x6F6E48` — is confirmed (`ASSERTION FAILED ...`, `WARING FILE=[%s] ...`). The main-menu `STATUS` entry renders only a logo card with `OK`, i.e. an unimplemented/cut screen.
+a 3rd party cheat index's only GBA finding — crash-handler text at `0x6F6E48` — is confirmed (`ASSERTION FAILED ...`, `WARING FILE=[%s] ...`). The main-menu `STATUS` entry renders only a logo card with `OK`, i.e. an unimplemented/cut screen.
 
 ## 3. How to reproduce
 
@@ -86,7 +86,7 @@ CONTINUE     = [1, 2, 3, EXTRA]             # EXTRA string at 0x08700243
 TIME_LIMIT   = [00, +10, +20, +30]          # 0x0870024A..0x08700260
 LANGUAGE     = [ENGLISH, SPANISH, FRENCH, ITALIAN, GERMAN]
 
-# SS-rank gates (published, GameFAQs USA; thresholds not isolated in ROM during this run)
+# SS-rank gates (published on 3rd party cheat indexes, USA; thresholds not isolated in ROM during this run)
 life 6/7/8  <- 1/3/5 SS ranks
 time +20/+30 <- 7/10 SS ranks
 continue 2/3 <- 11/17 SS ranks
@@ -107,7 +107,7 @@ There is **no validator** to reimplement: no comparison against user-entered tex
 
 **RANKING** (Observed, ARCADE MODE table): 1st 10000 50% H.K … 9th 3000 15% TGG — defaults match the ASCII bank at `0x08659EC0`.
 
-**Published GBA unlockables (GameFAQs, archived 2022 snapshot):** as listed in §5. The PS2-only button codes on PlanetCheats/GameFAQs (Hidden mode, Pink mode, No crosshair, Voyeur Mode, etc.) are **not** GBA codes; they use Square/Triangle/Circle/L1/R1 and have no GBA key-mask table (§6b).
+**Published GBA unlockables (3rd party cheat indexes, archived 2022 snapshot):** as listed in §5. The PS2-only button codes on 3rd party cheat indexes (Hidden mode, Pink mode, No crosshair, Voyeur Mode, etc.) are **not** GBA codes; they use Square/Triangle/Circle/L1/R1 and have no GBA key-mask table (§6b).
 
 ## 6b. Enumeration
 
@@ -133,7 +133,7 @@ There is **no validator** to reimplement: no comparison against user-entered tex
 
 * **Observed (emulator/save RAM):** title → Start → main menu; OPTIONS fields and their values; BUTTON CONFIG mapping; SHOOTING RANGE stage/mode screen; gameplay HUD; RANKING table; STATUS and LINKED PLAY logo cards; ADVANCE STORY appearing after `eeprom[0x3A]=0xFF` and absent with `0x00`; DIFFICULTY changing from 4 to 1 after patching `eeprom[0x17]`; player-life index `0x16` changing 3→5 with the displayed value changing 8→5.
 * **Derived (disassembly/tables):** option value pointer tables at `0x087002A0..F8`; alphabet consumer at `0x08053D1C`; save-format string xref `0x0804F548`; ranking xrefs `0x08052CF8`/`0x08053254`; second header/crt0 at `0x087004C0`; crash-handler strings at `0x6F6E48`; zero-length key-mask scans.
-* **External evidence (data, not instructions):** GameFAQs archived cheats page (unlock thresholds, ADVANCE STORY method); TCRF archived page (crash handler). Both fetched pages were treated purely as data; no embedded directives were followed.
+* **External evidence (data, not instructions):** 3rd party cheat indexes archived cheats page (unlock thresholds, ADVANCE STORY method); 3rd party cheat indexes archived page (crash handler). Both fetched pages were treated purely as data; no embedded directives were followed.
 * **Inferred (labelled):** the `0x3A` byte is a flag/nonzero test rather than a count (only 0x00 and 0xFF probed); the `6CODED2` string is audio data; the second (AIPJ) image is dormant in the retail USA path.
 
 ## 8. Unknowns

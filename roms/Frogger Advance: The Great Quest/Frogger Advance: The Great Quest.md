@@ -21,7 +21,7 @@ lands at `0x0807D400`, and `MODE7 PRESENTS / FROM KONAMI / GBA/USA/64MBS` is at 
 release artifact, not an in-game cheat. The `0x0000` header checksum is the usual rebuilt-
 header artifact (complement `0x99` is intact).
 
-Developer messages noted by TCRF are present at file `0x3185A` onwards (`i missed the
+Developer messages noted by 3rd party cheat indexes are present at file `0x3185A` onwards (`i missed the
 george forman grill, …`), and the ROM contains the credits block at `0x3113C`.
 
 ## 2. Executive summary
@@ -34,7 +34,7 @@ accept paths on the five-symbol Password screen:
    is shown for each; `VV518` is advertised in-game at `0x301DC`). Verified in emulator.
 2. **An undocumented input `T0B0R`** (`0x0802BA32`–`0x0802BA84`) which opens a hidden
    developer-message slideshow ("I MISSED THE GEORGE FORMAN GRILL, I AM NOT MISSING THE
-   CUPCAKES!"), matching the TCRF developer messages. **Confirmed in emulator; it appears
+   CUPCAKES!"), matching the 3rd party cheat indexes developer messages. **Confirmed in emulator; it appears
    in no published code list.**
 3. **A full algorithmic password system**: 5 symbols × 32-value alphabet, a 20-bit
    base-9 payload (4 digits + a level 0–99), and a 5-bit checksum. The validator at
@@ -164,7 +164,7 @@ input space). In addition there are the 4 plaintext table codes and the `T0B0R` 
 check, none of which satisfy the algorithmic validator (e.g. `VV518` decodes to level
 144 and is rejected by it).
 
-**Novel codes generated (absent from every published list — TCRF, GameFAQs, VGChartz all
+**Novel codes generated (absent from every published list — 3rd party cheat indexes all
 checked; no password lists exist for this SKU):**
 
 | Code | Fields | Oracle | In-game proof |
@@ -184,7 +184,7 @@ checked; no password lists exist for this SKU):**
 
 **Published-code verification.** Literal search finds all four table codes at
 `0x08031075..0x0803108B`; `VV518` also appears in the in-game hint at `0x301DC`. Web
-research: TCRF's page documents only developer messages (no passwords); GameFAQs returns
+research: a 3rd party cheat index's page documents only developer messages (no passwords); 3rd party cheat indexes return
 403; Bing/DuckDuckGo searches for these literals return no code lists. Therefore the four
 ROM literals are the complete published/intended set, and `59GDF` et al. are genuinely
 novel.
@@ -226,7 +226,7 @@ novel.
   raw offset `0x19000`; this supplied the RAM evidence for slots, digits, level and flags.
 * `setcode.py` automated symbol entry with per-slot RAM verification; `xdotool` + `scrot`
   drove the UI on `DISPLAY=:318`.
-* Web: web.archive.org TCRF snapshot (developer messages), GameFAQs (403), Bing and
+* Web: web.archive.org 3rd party cheat index snapshot (developer messages), 3rd party cheat indexes, Bing and
   DuckDuckGo searches (no published password lists found). Fetched page content was
   treated strictly as data; no instructions in fetched content were followed.
 

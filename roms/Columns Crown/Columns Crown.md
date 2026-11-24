@@ -89,12 +89,11 @@ Boot-to-menu path used for the dynamic evidence:
    `0` = Trade Magic Gems (`0x080147A8`), `1` = Rankings (`0x08015BA8`),
    `2` = Erase Data (`0x08004CC4` + clears `03002A24`).
 
-Published codes tested: no in-game code list exists for this SKU. GameFAQs,
-Almar's Guides and CodeJunkies list only CodeBreaker/GameShark memory writes
+Published codes tested: no in-game code list exists for this SKU. 3rd party cheat index list only CodeBreaker/GameShark memory writes
 (e.g. `33003DDF 0063`, `43002A40 0505 / 0000001B 0002`,
 `83003E06 8080`). Those were treated as **address hints only**, not as codes;
 each address was checked against the real state block (§4) and is a memory
-edit, not a developer-intended input. No GameFAQs/VGChartz/TCRF in-game code
+edit, not a developer-intended input. No 3rd party cheat indexes in-game code
 for Columns Crown GBA was found to test.
 
 ## 4. Address map
@@ -323,8 +322,7 @@ This title has **no code/password space**. The enumerable surfaces are:
 **Gem 24 = "Gives you a guaranteed win. Requirement: 66".**
 
 * It is the 25th entry of the description pointer table at `0x087CC33C`
-  (`ptr[24] = 0x087CC33C → 0x080228F0`), while the manual, GameFAQs, VGChartz,
-  TCRF and every cheat page describe **24** gems.
+  (`ptr[24] = 0x087CC33C → 0x080228F0`), while the manual, 3rd party cheat indexes and every cheat page describe **24** gems.
 * It is present in the collection layout table as record 24 (`gem_id 0x18`)
   and is inside the renderer's 25-slot loop; it is the only gem with a
   "guaranteed win" power.

@@ -29,7 +29,7 @@ characters** of that buffer against a two-entry NUL-terminated string table:
 
 - `uLlRrLdR` — **Christmas / Holiday Mode** (published as Up, L, Left, R, Right, L, Down, R).
   Effect observed: game starts "Mission 0: Christmas Fiasco / Defeat Mr. Chew", the hidden boss
-  rematch described by TV Tropes (Christmas tree, snowballs, squeaky-toy medals).
+  rematch described by 3rd party cheat indexes (Christmas tree, snowballs, squeaky-toy medals).
 - `LRudRLlr` — **Super Jump** (published as L, R, Up, Down, R, L, Left, Right).
   Effect proven in RAM: flag byte at `0x020065FD` toggles `0x00 -> 0x01`.
 
@@ -146,7 +146,7 @@ otherwise. During dialogue/cutscene it stays 0 and no presses are recorded.
 
 **Code table** — two 12-byte records:
 
-| # | ROM addr | String | GameFAQs published sequence | Effect | Flag |
+| # | ROM addr | String | 3rd party cheat indexes published sequence | Effect | Flag |
 |---|---|---|---|---|---|
 | 0 | `0x080C987C` | `uLlRrLdR` | Up,L,Left,R,Right,L,Down,R | Christmas / Mission 0 | `0x020065FC` |
 | 1 | `0x080C9888` | `LRudRLlr` | L,R,Up,Down,R,L,Left,Right | Super Jump | `0x020065FD` |
@@ -165,7 +165,7 @@ symbols). Its buffer is consumed only as the save-slot display name (§16.2b).
 **Space definition.** The code space is a fixed lookup of **exactly 2** strings of length 8 over
 an 8-symbol effective alphabet (`u r l d R L B` + space for unmapped keys). The raw 8-press space
 is 8^8 = **16,777,216** histories, of which exactly **2** are accepted — both present in the
-published GameFAQs list, and both verified against the ROM bytes. The validator has no checksum,
+published 3rd party cheat index list, and both verified against the ROM bytes. The validator has no checksum,
 no field layout, and no generator; the entire table was enumerated from `codeptr[0..1]` and the
 validator loop bound (`i < 2`), and cross-checked by running the game's own validator over unknown
 inputs (rejections below).
@@ -202,14 +202,14 @@ non-matching suffix left the flags unchanged, confirming the suffix-exact compar
 - **Derived (disassembly/decompilation)**: mask→char mapping and 10-entry modulo at
   `0x0800E7E4`; suffix extraction, `strcmp`, XOR flag toggle and buffer clear at `0x0800E5F4`;
   exactly 2 loop iterations; gate at `0x08005658`.
-- **Inferred**: "Christmas Mode" is the same Holiday Mode described externally (TV Tropes);
+- **Inferred**: "Christmas Mode" is the same Holiday Mode described externally (3rd party cheat indexes);
   the debug-string menu (`Defeat Section`, `Slow Motion` at `0x080DB3CC/E0/F8`) appears to be
   dead/cut or gated content — no reachable entry was found, and no code xrefs to those pointers
   were observed (only data-table references). The sibling `Madagascar.gba` contains the identical
   three debug strings, confirming they belong to the shared Vicarious Visions engine rather than
   an Operation-Penguin-specific feature.
 
-Fetched web content was treated strictly as data. GameFAQs pages returned 403; the archived
+Fetched web content was treated strictly as data. 3rd party cheat index pages returned 403; the archived
 2018 snapshot at `web.archive.org` supplied the two published sequences, which were then verified
 against the ROM. No prompt-injection payload was encountered in the pages used.
 

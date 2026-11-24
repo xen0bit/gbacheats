@@ -62,7 +62,7 @@ and all four are absent:
    non-zero after play, and there is no name or flag field beyond the season struct. The
    15 stadiums split into compile-time per-mode lists (7 in Season, 8 in Exhibition,
    10 distinct, 5 never selectable), and the 12 Backyard team names are fixed data.
-   The three stadium "unlockables" on GameFAQs (`Aquadome`, `Humongous Memorial
+   The three stadium "unlockables" on 3rd party cheat indexes (`Aquadome`, `Humongous Memorial
    Stadium`, `Quantum Field`) belong to Backyard Baseball 2006 — those strings do
    not exist anywhere in this ROM.
 
@@ -294,7 +294,7 @@ Exhibition lists were both cycled to the wrap point in the emulator.
 
 Screenshots: `shots/m_f1.png`–`shots/m_f3.png` (Season, 7 entries, wraps after
 Tropical Gardens), `shots/m_ef1.png`–`shots/m_ef2.png` (Exhibition, 8 entries,
-wraps after Phillips Phield). The GameFAQs "unlock" names `Aquadome Stadium`,
+wraps after Phillips Phield). The 3rd party cheat indexes "unlock" names `Aquadome Stadium`,
 `Humongous Memorial Stadium` and `Quantum Field` are **not in this ROM**
 (`grep -abo` = 0 hits for each), so that published table is Backyard Baseball 2006
 content pasted onto the football page.
@@ -353,13 +353,13 @@ The debug root's menu table at `0x083CB788` holds the strings
 | Published input | Source | Verification | Result |
 |---|---|---|---|
 | `BABYBEAR` … `ATLANTIS` (9 coach names) | Backyard Baseball 2006 (sibling product) | literal search in football ROM | Not present (0 hits for both plain and `ASCII-0x21`/`0x5E` forms); no name-entry surface |
-| `Walter Payton` as coach name | GameFAQs, original Backyard Football (GBA, 2002) | only possible entry point (`Coaches Sign In → CREATE NEW COACH`) | No name prompt; flow goes to `Difficulty Level` |
-| `MRCLANKY` (Dummies Team) | GameFAQs, Backyard Football (PC) | same entry point | Same: no input surface |
-| `Aquadome Stadium` | GameFAQs GBA 929549, archived 2016-09-02 | ROM string search | Not in ROM (0 hits); table is baseball data |
+| `Walter Payton` as coach name | 3rd party cheat indexes, original Backyard Football (GBA, 2002) | only possible entry point (`Coaches Sign In → CREATE NEW COACH`) | No name prompt; flow goes to `Difficulty Level` |
+| `MRCLANKY` (Dummies Team) | 3rd party cheat indexes, Backyard Football (PC) | same entry point | Same: no input surface |
+| `Aquadome Stadium` | 3rd party cheat indexes GBA 929549, archived 2016-09-02 | ROM string search | Not in ROM (0 hits); table is baseball data |
 | `Humongous Memorial Stadium` ("Go to the Playoffs") | same | ROM string search + stadium lists | Not in ROM; no such stadium in either list |
 | `Quantum Field` ("Win a Championship season") | same | ROM string search + save-size analysis | Not in ROM; no unlock storage exists |
 
-GameFAQs' own metadata says "3 cheat codes and secrets"; the archived page contains
+3rd party cheat indexes' own metadata says "3 cheat codes and secrets"; the archived page contains
 exactly those three *unlockable* rows and no code entry.
 
 ## 6b. Enumeration
@@ -494,7 +494,7 @@ the `m_*.png` contact sheets), `strings4.txt`, `sav_with_season.bin` and `bf.sav
 - [x] Hash/header the ROM; exact SHA-256 recorded; single-image logo scan.
 - [x] Record the patched header fields (complement/checksum).
 - [x] `strings` recon and keyword classification (23 unique terms, 1 debug hit).
-- [x] Web search + archived GameFAQs page; all published inputs checked.
+- [x] Web search + archived 3rd party cheat index page; all published inputs checked.
 - [x] Boot on a private display; walk title, main, all modes, options, extras,
       season path, coach sign-in, gameplay, pause, credits.
 - [x] Search for the baseball coach-name encoding and fixed-slot tables (0 found).

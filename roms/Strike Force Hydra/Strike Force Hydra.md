@@ -31,7 +31,7 @@ The validator checks only the most recent 6, 7 or 9 button presses. Older slots 
 * Path: title → `A` → main menu (`START GAME` / `OPTIONS`) → `START GAME` → zone intro → in-flight → `Start` to reach `PAUSED`.
 * Codes are entered **only while paused**. `Start` is the unpause key and must not be used as a code press (the pause handler checks the newest slot for mask `0x0008`).
 * RAM evidence: mGBA `.ss1` savestate, PNG `gbAs` chunk zlib-decompressed; IWRAM begins at decompressed offset `0x19000`, so `0x03000D50` is at file offset `0x19D50`. Helper scripts in `/tmp/strikeforce/` (`ss.py`, `game.py`, `trial.py`, `testseq.py`, `ptybridge.py`, `dbg.py`).
-* Codes from public lists (GameFAQs "Strike Force Hydra — Cheats", and a July 2026 Rings of Saturn article that names `0x08002530` and `0x03000D5A..0xD72`) were used as leads and verified against the bytes; published GameShark/CodeBreaker/AR codes were explicitly out of scope.
+* Codes from public lists (3rd party cheat indexes "Strike Force Hydra — Cheats", and a July 2026 Rings of Saturn article that names `0x08002530` and `0x03000D5A..0xD72`) were used as leads and verified against the bytes; published GameShark/CodeBreaker/AR codes were explicitly out of scope.
 
 ## 4. Address map
 
@@ -99,7 +99,7 @@ Blocks D and E additionally require scene word `0x03000CB8 != 8`. All blocks fal
 | D | `0x080025E8` | B, A, Down, Up, A, Left, A, Select, Select | 9 | Skip to next zone + SFX | `0x03000CB8`: 1→2; screenshot: Zone 2A |
 | E | `0x08002632` | L, R, Up, Down, B, A, Left, Up, B | 9 | View ending + SFX | screenshot: "YOUR MISSION IS COMPLETE!" |
 
-All five match the published GameFAQs list exactly (verified literal-by-literal against the comparison chain). CodeBreaker/Action Replay entries found during recon are cheat-device codes and were not tested or reported as in-game codes.
+All five match the published 3rd party cheat index list exactly (verified literal-by-literal against the comparison chain). CodeBreaker/Action Replay entries found during recon are cheat-device codes and were not tested or reported as in-game codes.
 
 ## 6b. Enumeration
 

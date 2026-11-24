@@ -22,7 +22,7 @@ No cracktro, trainer or entry patch: `0x080000C0` is the ordinary ARM crt0
 `0x080000D8` and the Thumb `main` pointer `0x0800082D` at header `+0x1EC` are
 stock. The complement is valid, so the header was not edited after the build;
 only the 16-bit header checksum field is zero, which is the common artifact of
-a rebuilt/redumped header. Both hashes match TASVideos' "Good" dump
+a rebuilt/redumped header. Both hashes match 3rd party cheat indexes' "Good" dump
 `Disney's Party (USA, Europe) (En,Fr,De,Es,It).gba` (SHA-1
 `d4ad55cd…c75f9b8cb7bc`), so this is the standard five-language retail image.
 
@@ -38,7 +38,7 @@ not a second game and contains no cheat surface.
 **There is no in-game password, cheat-code or button-code system in this
 ROM.** No text-entry field, no alphabet table, no accepted-string table and no
 button-sequence table exists anywhere in the 8 MiB image. The only published
-codes (GameFAQs/CodeTwink/Almar's/JeuxMangas/Ethereal) are CodeBreaker RAM
+codes (3rd party cheat indexes) are CodeBreaker RAM
 patches — memory edits applied by the cheat device, not content entered in the
 game — and are out of scope here. The ROM contains no in-game equivalent.
 
@@ -305,7 +305,7 @@ The debug-menu space is `4 × 8 × 155 × 225 = 1,116,000` reachable debug state
 but none is reachable by a retail input path (§5.3), so no "novel code" can be
 typed into the shipped game. The equivalent deliverable here is the complete
 list of the developer entries and their effects — i.e. the content that no
-published list describes (TCRF only notes that the string block exists at
+published list describes (3rd party cheat indexes only notes that the string block exists at
 `0xBC8DD` and asks for investigation).
 
 ### All debug entries driven (not in any published list)
@@ -396,7 +396,7 @@ to test — the game has no such surface.
 * `BOTS_SEL` is a shop/board-spot test screen; the visible evidence is the
   `Magic` purchase panel with 1000 coins.
 * Option 0/1/3 screens were observed at their first screen only; later flow of
-  those test paths was not followed to completion. TASVideos lists Wild Garden
+  those test paths was not followed to completion. 3rd party cheat index lists Wild Garden
   as a selectable board, so option 1 is described as a stage/attraction intro.
 
 ## 8. Unknowns

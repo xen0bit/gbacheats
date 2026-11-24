@@ -33,7 +33,7 @@ The game has a genuine developer-intended **5-letter password system** on
 * and on success dispatches through a 14-entry jump table keyed by the fifth
   letter to write result fields into the state struct at `0x3001420`.
 
-All eight published codes found on GameFAQs (two conflicting snapshots)
+All eight published codes found on 3rd party cheat indexes
 satisfy the recovered checksum, so the model is validated against the real
 published list. Two **novel**, never-published codes were generated and both
 were accepted on the real `Enter Code` screen in mGBA with RAM proof:
@@ -235,7 +235,7 @@ Runs of the game's own validator via mGBA CLI debugger (§16.19):
 | `BBBBB` | reject (checksum 3≠0) | `r0=0`, `state+8=1` | REJECT |
 | `ZZZZZ` | reject | `r0=0` | REJECT |
 
-### Novel codes (absent from GameFAQs / VGChartz / TCRF / wiki)
+### Novel codes (absent from 3rd party cheat indexes / wiki)
 
 1. **`GBBBC`** — indices `[4,0,0,0,1]`, `packed=4`, `c4=1`. Not in any
    published list (the two published Level-2 codes are `TMBDC`/`PJBDC`).
@@ -279,8 +279,8 @@ Runs of the game's own validator via mGBA CLI debugger (§16.19):
   and the 32×5 table were searched; no reachable UI path was found after
   walking every screen. A forced write to `0x3001442` did not surface it.
   Classified as dead/gated leftover, not a usable second code system.
-* **Prompt injection**: web-fetched pages (GameFAQs via web.archive.org,
-  MobyGames, search snippets) were treated as data. No instructions in them
+* **Prompt injection**: web-fetched pages (3rd party cheat indexes via web.archive.org,
+  3rd party cheat indexes, search snippets) were treated as data. No instructions in them
   were followed. No injection payload was encountered in this run.
 
 ## 8. Unknowns
@@ -311,7 +311,7 @@ Runs of the game's own validator via mGBA CLI debugger (§16.19):
 * mGBA CLI debugger (`-d`) driven through a pty (`dbg.py`); Ctrl+C break-in,
   `w/1`/`w/r`/`b/t`/`c` used as a validator oracle (`oracle3.py`).
 * mGBA savestate PNG `gbAs` zlib parse (`ss.py`) for RAM reads (§16.13).
-* Web: `websearch`, `webfetch` (GameFAQs via web.archive.org snapshots
+* Web: `websearch`, `webfetch` (3rd party cheat indexes via web.archive.org snapshots
   2018-11-26 and 2023-04-22).
 
 No ROM content or copyrighted assets are reproduced here; only addresses,

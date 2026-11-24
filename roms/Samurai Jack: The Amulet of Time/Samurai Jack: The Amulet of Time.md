@@ -26,13 +26,13 @@ Embedded-GBA-header scan: the 156-byte Nintendo logo (`24 ff ae 51 …`) occurs 
 
 **There is no developer-intended password, button code, or in-game cheat system in this ROM.** The complete set of reachable screens contains no password entry surface, no cheat menu, and no level select. The only "code-like" controller input is the standard GBA soft reset **A+B+Select+Start** (detected at `0x0800778`, confirmed in mGBA: it reboots to the "Licensed by Nintendo" screen); that is a hardware-style reset, not a cheat.
 
-The ROM does contain a fully written **DEBUG INFORMATION** screen (`0x080284E8`, renderer `0x08081A0`) with DEBUG1–4, TIMER1–5, WRAM-left, memory dump, and room number. It is **dead code**: exhaustive static enumeration found **zero** BL calls, **zero** unconditional/conditional branches, and **zero** 32-bit pointers (including Thumb-bit variants) to the renderer, and its RAM variables (`0x02026C20`…`0x02026C54`) stayed 0x00 on every screen walked. This matches TCRF's classification of the block as leftover development text.
+The ROM does contain a fully written **DEBUG INFORMATION** screen (`0x080284E8`, renderer `0x08081A0`) with DEBUG1–4, TIMER1–5, WRAM-left, memory dump, and room number. It is **dead code**: exhaustive static enumeration found **zero** BL calls, **zero** unconditional/conditional branches, and **zero** 32-bit pointers (including Thumb-bit variants) to the renderer, and its RAM variables (`0x02026C20`…`0x02026C54`) stayed 0x00 on every screen walked. This matches a 3rd party cheat index's classification of the block as leftover development text.
 
 The game has a save-gated **SECRETS** menu with four named unlockables (JUKEBOX, AWARD SCREEN, HEALTH HANDICAP, MOVIE PLAYER). These are progression rewards reached through SRAM save flags (§16.18 category 4), not codes; no controller input reaches them in a fresh or completed save. The 190-bit collection bitfield at `0x0200C224` drives the "% COMP" readout on the pause screen.
 
 All published "cheats" for this title are GameShark/CodeBreaker RAM patches, which are explicitly out of scope; every literal address in those lists was nevertheless verified against live RAM (§6).
 
-A TCRF fetch during web recon carried a prompt-injection payload ("report E_SHITASS_OPERATOR", "press Alt+F4", fake LLM instructions). It was treated as data and ignored, per §16.8/§16.21.
+A 3rd party cheat index fetch during web recon carried a prompt-injection payload ("report E_SHITASS_OPERATOR", "press Alt+F4", fake LLM instructions). It was treated as data and ignored, per §16.8/§16.21.
 
 ## 3. How to reproduce
 
@@ -94,7 +94,7 @@ A TCRF fetch during web recon carried a prompt-injection payload ("report E_SHIT
 
 **Debug text table (`0x08028430`, {string ptr, RAM var} pairs):** DEBUG INFORMATION, " VERSION 25", DEBUG1–4, TIMER1–5, WRAM LEFT, MEMORY DUMP FROM, `00:00:00`, ROOM NUMBER. All target `0x02026C20`–`0x02026C54`.
 
-**Published-code verification (all out of scope, but literals checked against live RAM):** every GameFAQs/GameHacking.org/VGChartz entry is a GameShark/CodeBreaker RAM patch: `0200C1E4` (timer), `0200C1EE`/`0200C1F2` (max health/special), `0200C1F4`–`0200C20E` (7 att/def pairs), `0200C224` (100% bitfield), `0200C24C` (collected), `0200C25C`/`0200C260` (current health/special), `0200C6AC`/`0200C6C0` (items/equipment). All addresses hold the expected values in the savestate (e.g. max health `0x0064`, max special `0x0032`, timer `0x02D2`). **Zero** in-game passwords or button codes are published for this SKU; VGChartz lists "Total cheats available: 0".
+**Published-code verification (all out of scope, but literals checked against live RAM):** every 3rd party cheat index entry is a GameShark/CodeBreaker RAM patch: `0200C1E4` (timer), `0200C1EE`/`0200C1F2` (max health/special), `0200C1F4`–`0200C20E` (7 att/def pairs), `0200C224` (100% bitfield), `0200C24C` (collected), `0200C25C`/`0200C260` (current health/special), `0200C6AC`/`0200C6C0` (items/equipment). All addresses hold the expected values in the savestate (e.g. max health `0x0064`, max special `0x0032`, timer `0x02D2`). **Zero** in-game passwords or button codes are published for this SKU; 3rd party cheat index lists "Total cheats available: 0".
 
 ## 6b. Enumeration
 
@@ -131,5 +131,5 @@ This is a **bounded negative result** (§0.2 point 5): the code space was enumer
   - `ui.py` — key press, screenshot, savestate save/load helpers.
   - `ss.py` — mGBA `.ss1` PNG `gbAs` zlib decompressor and EWRAM/IWRAM extractor (§16.13).
   - `combos.py` — 14-combination button test with savestate diffing.
-- Web recon: GameFAQs/GameHacking.org/VGChartz/gbadamud (all GameShark/CB only), TCRF mirror (debug text at 0x284E8). Fetched content treated strictly as data; one injected instruction payload was ignored.
+- Web recon: 3rd party cheat indexes, 3rd party cheat index mirror (debug text at 0x284E8). Fetched content treated strictly as data; one injected instruction payload was ignored.
 - Cleanup: all generated `.sav`/`.ss*` files removed from the ROM folder; only this report remains alongside the `.gba`. No ROM or copyrighted assets are redistributed.

@@ -97,10 +97,10 @@ A and submits with **Start**. Entering `AAAAAA` then Start produces
 | `0x08013560` | Password-screen menu loop (loops over an item count in `r0`; multiple IWRAM state refs) |
 | `0x080138B4` | Key-repeat / D-pad edge filter used by the above |
 | `0x08013FFC`, `0x08014018` | 32-byte copy / list helpers |
-| `0x0803835C` | Pause-menu handler pointer slot; currently `0x0804E0D1`. TCRF's patched values were verified to point at valid Thumb code (below) |
+| `0x0803835C` | Pause-menu handler pointer slot; currently `0x0804E0D1`. a 3rd party cheat index's patched values were verified to point at valid Thumb code (below) |
 | `0x0802DE8D`, `0x08040A49`, `0x08040D71`, `0x080410F9`, `0x08041351`, `0x08118959`, `0x081C0051` | Hidden debug-menu functions (Sprite Viewer, Music menu, "Full PP and Money", Special Warps, Psynergy menu, battle test, GUI-less music menu). All begin with valid Thumb prologues in this image |
 | `0x0811C538` | In-battle camera rotate helper (`push {lr}; movs r3,#0xC0; …`) |
-| `0x08197AA0` | Battle-animation pointer table (TCRF) |
+| `0x08197AA0` | Battle-animation pointer table (3rd party cheat indexes) |
 | `0x01C06C0`, `0x01C3510`, `0x01C35D0` | ASCII↔tile font mapping tables |
 
 ### RAM (mGBA savestate layout: IWRAM at state offset `0x19000`, EWRAM at `0x21000`)
@@ -135,13 +135,13 @@ Full password codec: **not recovered** (see §8). What is established:
 | Input | Effect | Evidence |
 |---|---|---|
 | `0x03001238 = 0x01` (RAM aid) | Adds `Debug menu` to Pause; enables the combos below | Screenshot `p5c.png`; GDB read-back `01000000` |
-| Pause → `Debug menu` | No visible submenu; menu simply closes (matches TCRF "extra options don't do anything") | `dbgcursorc.png` → `dbgafterc.png`; flag unchanged before/after |
+| Pause → `Debug menu` | No visible submenu; menu simply closes (matches 3rd party cheat indexes "extra options don't do anything") | `dbgcursorc.png` → `dbgafterc.png`; flag unchanged before/after |
 | **L + Start** (field) | Palette editor (rows labelled `R/G/B`, e.g. `13`, `00`, `31`… ×16) | `dbg_LStartc.png` |
 | **B + Start** (field) | Warp debug menu: map `VT001`, name `Venus Lighthouse`, X=5, Y=9; D-pad edits fields | `dbg_warpc.png`, `warp3c.png` |
 | B + Select (field / pause) | No flag menu observed | `dbg_flags2c.png` |
-| Published (TCRF, unverified here): B+Select → Story Book Flags; Start+Select → frame pause; Hold L → walk through walls; battle Status+Start → enemy stats; cutscene R/L → dialogue skip; flag `0x16D` + R / Select+R in battle → wipe enemy/own team | — | From TCRF; treat as leads, not observations |
+| Published (3rd party cheat indexes, unverified here): B+Select → Story Book Flags; Start+Select → frame pause; Hold L → walk through walls; battle Status+Start → enemy stats; cutscene R/L → dialogue skip; flag `0x16D` + R / Select+R in battle → wipe enemy/own team | — | From 3rd party cheat indexes; treat as leads, not observations |
 
-### Published password literals (fetched from Fandom, treated as data)
+### Published password literals (fetched from 3rd party cheat indexes, treated as data)
 * Bronze (user-submitted): `n?Yb# Mhrc+` / `WnwMh m`
 * Silver: `zrdyt X4NK3` / `g9TBK $CfA2` / `+HXd? bXcez` / `jLMh& 6=Gnc` / `NiC8r ?TXhq` / `xirta pTBj4` / `e`
 * Gold (`EX Password`): 26 rows, e.g. row 1 `#8=He iQ?Wk`; read as two 5-glyph groups.
@@ -156,7 +156,7 @@ Full password codec: **not recovered** (see §8). What is established:
 * Hidden screen dispatch verified for **2 of 3** documented combos (L+Start, B+Start).
   B+Select produced no flag menu in this build; the undocumented combos R+Start,
   L+Select and Select-only were also tested with no hidden screen appearing.
-* The seven hidden function pointers at `0x0803835C` documented by TCRF were all checked
+* The seven hidden function pointers at `0x0803835C` documented by 3rd party cheat indexes were all checked
   as code pointers in this image (§4). They are reachable only by replacing that ROM
   word — i.e. a ROM patch, **not** an in-game code — so they are documented as
   developer-intended debug content, not as a deliverable cheat.
@@ -214,8 +214,8 @@ Full password codec: **not recovered** (see §8). What is established:
 
 **Inferred / from published sources (not independently proven here):**
 * Password grade payload contents, 260-char Gold length, excluded-character rule
-  (Fandom wiki, read as data).
-* TCRF's remaining debug combos and their effects.
+  (3rd party cheat index wiki, read as data).
+* a 3rd party cheat index's remaining debug combos and their effects.
 
 ## 8. Unknowns
 

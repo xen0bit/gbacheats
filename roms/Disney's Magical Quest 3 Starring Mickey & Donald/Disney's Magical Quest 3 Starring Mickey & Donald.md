@@ -46,12 +46,12 @@ Evidence chain (details in §6b):
   (0…3 the four entries; 4, 6…9 OPTIONS; 5 the party battle list) — no unknown
   screen, hence no fifth entry (§6b).
 * All seven published *stage passwords* are SNES-era, 4-name sequences
-  (GameFAQs/visualboyadvance/VGChartz list them for the SNES SKU). An exhaustive
+  (3rd party cheat indexes/visualboyadvance/3rd party cheat index list them for the SNES SKU). An exhaustive
   consistency scan for the 28-symbol sequence (byte and u16 encodings, any
   bijective symbol→value map) returns **0 hits** anywhere in the 8 MiB image.
 * Losing all lives returns to the title screen; no password/continue-code screen
   appears at death or at game over (observed, §6b).
-* The SNES debug flag (`$7E00FE`, TCRF) and its debug UI (`1 Player / 2 Player /
+* The SNES debug flag (`$7E00FE`, 3rd party cheat indexes) and its debug UI (`1 Player / 2 Player /
   2 Players`, OBJECT VIEWER, V-RAM DUMP, COLOR CHECK, MAP ATARI, SOUND TEST) were
   **not ported**: none of those strings or screen objects exist in the image, and
   the SNES flag's WRAM offset mirrored into GBA RAM (`0x020000FE`) has no effect.
@@ -266,7 +266,7 @@ None of them accepts a code.
   consistent hits): **0 hits, both widths**. The table is not in the GBA image.
 * **No entry surface.** With no password screen reachable from any of the 12
   screens, the SNES passwords cannot be entered at all; the published list
-  applies to the SNES SKU (GameFAQs labels it "Stage Passwords SNES"; the
+  applies to the SNES SKU (3rd party cheat indexes label it "Stage Passwords SNES"; the
   visualboyadvance page copies the SNES instruction "select the second option at
   the main menu", but on this GBA build the second option is LOAD GAME).
 * **Game over.** Starting a new game (lives x3) and running into the stage-1
@@ -283,11 +283,11 @@ None of them accepts a code.
 
 | Source | What it lists | Verified against this ROM |
 |---|---|---|
-| GameFAQs (GBA cheats page, 918954) | snippet "Passwords / Stage Passwords SNES / Select the second option at the main…" — the passwords are labelled SNES | page returns 403; the passwords themselves were checked via the mirror below and the SNES label is confirmed by the GBA menu having no password entry |
-| visualboyadvance.org ROM page | 7 stage passwords (4 cast names each) | 28-symbol consistency scan: 0 hits (byte and u16) |
-| VGChartz (game 15113) | "Total cheats available: 0" | consistent with the negative result |
-| neoseeker / 53lu / etherealgames / gbadamud | only GameShark / CodeBreaker **master codes** (`937725CAAA41`, `FFC4D2F3D0EE`, `E47BD9FD9E48`) | memory-write codes, not in-game cheats; out of scope by the brief, and no in-game equivalent exists |
-| TCRF (*Mickey to Donald: Magical Adventure 3*, SNES) | debug flag at WRAM `$7E00FE` (PAR `C0FE0001`), debug menu, stage select, sound test, object viewer | debug UI strings and screen objects absent from the GBA image (keyword counts §6.2); mirroring the flag to GBA `0x020000FE`/`0x030000FE` produced no debug behaviour (the IWRAM write instead corrupts live state and hangs the game) |
+| 3rd party cheat indexes | snippet "Passwords / Stage Passwords SNES / Select the second option at the main…" — the passwords are labelled SNES | page returns 403; the passwords themselves were checked via the mirror below and the SNES label is confirmed by the GBA menu having no password entry |
+| 3rd party cheat indexes ROM page | 7 stage passwords (4 cast names each) | 28-symbol consistency scan: 0 hits (byte and u16) |
+| 3rd party cheat indexes | "Total cheats available: 0" | consistent with the negative result |
+| 3rd party cheat indexes | only GameShark / CodeBreaker **master codes** (`937725CAAA41`, `FFC4D2F3D0EE`, `E47BD9FD9E48`) | memory-write codes, not in-game cheats; out of scope by the brief, and no in-game equivalent exists |
+| 3rd party cheat indexes (*Mickey to Donald: Magical Adventure 3*, SNES) | debug flag at WRAM `$7E00FE` (PAR `C0FE0001`), debug menu, stage select, sound test, object viewer | debug UI strings and screen objects absent from the GBA image (keyword counts §6.2); mirroring the flag to GBA `0x020000FE`/`0x030000FE` produced no debug behaviour (the IWRAM write instead corrupts live state and hangs the game) |
 
 ### Novel code
 

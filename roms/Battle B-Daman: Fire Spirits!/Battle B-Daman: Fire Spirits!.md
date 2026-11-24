@@ -41,7 +41,7 @@ Bronze pass the field accepts exactly 10 characters, which is why only the six
 Bronze phrases (all exactly 10 characters) are reachable at that point. Silver
 phrases are 12–13 characters and Gold phrases 15, matching the 13/15 caps.
 
-The published lists (GameFAQs archive, SuperCheats) contain **all 23 table entries**;
+The published lists (3rd party cheat indexes archive, 3rd party cheat indexes) contain **all 23 table entries**;
 the only published code absent from the ROM is `HIDDEN SWORD` (11 chars, absent
 literally, and its 10-char prefix is rejected). Consequently **the entire accepted
 space is published**: there is no unpublished Zero Code to mint. This report proves
@@ -222,7 +222,7 @@ it also matches the 10/13/15 length caps.
 
 | # | Code (exact) | Len | Tier | Reward list | Published? |
 |---:|---|---:|---|---|---|
-| 0 | `GO YAMATO!` | 10 | Bronze | 1500 ₿ | Yes (GameFAQs/SuperCheats) |
+| 0 | `GO YAMATO!` | 10 | Bronze | 1500 ₿ | Yes (3rd party cheat indexes) |
 | 1 | `HEY TOMMI!` | 10 | Bronze | 2000 ₿ | Yes |
 | 2 | `B-DAFIRING` | 10 | Bronze | 3000 ₿ | Yes |
 | 3 | `SHOOT IT!!` | 10 | Bronze | parts 408,409,410 (Saber Barrel, L/R Shield Stand) | Yes |
@@ -283,8 +283,8 @@ so the Silver/Gold reachability is derived, not observed. The cap mechanism
 itself was proven by the patched-byte test below.
 
 **Novel codes.** None is possible. The accepted set is the 23 table strings; a
-line-by-line comparison with the archived GameFAQs list (2020-04-06 capture) and
-SuperCheats shows every one of the 23 is published, and the only extra published
+line-by-line comparison with the archived 3rd party cheat index list (2020-04-06 capture) and
+3rd party cheat indexes show every one of the 23 is published, and the only extra published
 entry (`HIDDEN SWORD`) is absent from the ROM. We therefore did not fabricate a
 "novel" string: any string outside the table is rejected, and any string inside it
 is already published. The negative is bounded by the enumeration above, not by a

@@ -27,7 +27,7 @@ The validator at `0x08014A60` compares four raw ASCII bytes against a 20-entry p
 
 Findings that correct the published record:
 
-* The ROM's level-19 password is **`JRST`**, not `JAST`. `JAST` appears in GameFAQs, Neoseeker, CheatCC and others; it is **rejected** by the game (`A` is not even in the alphabet). `JRST` is accepted.
+* The ROM's level-19 password is **`JRST`**, not `JAST`. `JAST` appears in 3rd party cheat indexes and others; it is **rejected** by the game (`A` is not even in the alphabet). `JRST` is accepted.
 * The widely copied "Level Passwords PS" list (`KVNF`, `WKGA`, `DFVJ`, `WMCV`, `XNAD`, `HPJQ`, `QGAV`, `PVHS`, ...) is **not present in this GBA image** in any encoding; it belongs to the PlayStation SKU. Only the `BGNR … WMBT` set is in the ROM.
 * `WMBT` (index 19) accepts and unlocks/selects all 20 levels — the published "level select" claim is confirmed.
 

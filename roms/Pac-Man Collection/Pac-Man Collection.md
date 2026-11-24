@@ -26,7 +26,7 @@ The complete accepted space is **exactly 101 of 21³ = 9,261 possible strings (1
 
 A second developer-intended unlock is **Appendix mode**: on the Pac-Attack mode menu, highlight Puzzle Mode, hold Right, press A (verified in emulator; it adds a fixed-cluster variant and exposes the Start / Password / Cancel submenu).
 
-**Published-list error found:** every consulted published list (GameFAQs, IGN, CheatingDome, Planet Cheats, CheatCC, Gamespot, VGChartz mirrors) gives level 68 = `PPS`. The ROM table entry 67 is **`PPY`** (`0D 0D 15`). `PPY` is accepted in the emulator and starts **STAGE 68**; `PPS` is rejected. `PPY` is therefore a code absent from every published list, minted from the ROM table and confirmed in-game — the §0.2 novel-code deliverable.
+**Published-list error found:** every consulted published list (3rd party cheat index mirrors) gives level 68 = `PPS`. The ROM table entry 67 is **`PPY`** (`0D 0D 15`). `PPY` is accepted in the emulator and starts **STAGE 68**; `PPS` is rejected. `PPY` is therefore a code absent from every published list, minted from the ROM table and confirmed in-game — the §0.2 novel-code deliverable.
 
 ## 3. How to reproduce
 
@@ -162,6 +162,6 @@ Other in-game options/UI (not codes): Pac-Attack mode menu and Appendix mode; sh
 - mGBA command-line debugger (`mgba -d`) driven over a pty (`pty_dbg.py`, `send.py`), with SIGINT to break in; `r/4`, `watch/r`, `watch/w`, breakpoints.
 - mGBA `.ss1` savestates decompressed with `ssdump.py` (zlib `gbAs` chunk) and diffed for RAM discovery; 8 slots used.
 - Python analysis: `analyze_pw.py`, `fit_formula.py`, `gf2_fit.py`, `lcg_fit.py`, `find_table.py`, `find_packed.py`, `find_table2.py`, `enumerate.py`, `enter_code.py`.
-- Web: GameFAQs (403 — used search snippets), CheatingDome, Planet Cheats (full lists), IGN, CheatCC; fetched pages treated as data (no injected instructions acted upon; one mirror carried unrelated VMProtect/antivirus boilerplate which was ignored).
+- Web: 3rd party cheat indexes; fetched pages treated as data (no injected instructions acted upon; one mirror carried unrelated VMProtect/antivirus boilerplate which was ignored).
 
 No ROM image or copyrighted assets are redistributed here; only addresses, hashes, algorithms and tools are published.

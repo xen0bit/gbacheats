@@ -161,8 +161,8 @@ Accepted / rejected examples (oracle r0):
   rejected inputs (cross-checked against the oracle for the four rows in §6).
 - **Novel code minted**: `****U*` (indices `62,62,62,62,20,63`), produced by
   decoding state `v1=0x0001, v2=0x0000`. It appears on no published list
-  (chaptercheats lists only `B7BBxB` and a star-symbol description;
-  supercheats lists `Xstar(*)B?k7`). Oracle r0=1; entering it on the real
+  (3rd party cheat index lists only `B7BBxB` and a star-symbol description;
+  3rd party cheat index lists `Xstar(*)B?k7`). Oracle r0=1; entering it on the real
   password screen returned to the main menu, and a savestate diff showed
   IWRAM `0x030000E4: 0x00 → 0x01` and `0x030000F6: 0x01 → 0x21`, proving a
   different unlock state from the baseline code.
@@ -186,13 +186,13 @@ Accepted / rejected examples (oracle r0):
   not captured because the screen transition to the main menu happens within
   one frame; acceptance is evidenced by the menu return, oracle r0, and RAM diff.
 - **Published codes** (fetched as data; no instructions from fetched pages were
-  followed): chaptercheats `B7BBxB` ("Unlock Everything") and
-  `v gold star w gold star = gold star`; supercheats `Xstar(*)B?k7`. None occur
+  followed): 3rd party cheat indexes `B7BBxB` ("Unlock Everything") and
+  `v gold star w gold star = gold star`; 3rd party cheat indexes `Xstar(*)B?k7`. None occur
   as literals in the ROM under ASCII, case-shift, +/−1, XOR, 6-bit packing or
   index encodings, confirming an algorithmic validator. `B7BBxB` specifically
   fails the ROM's range checks — probably a transcription error in the list.
-  A GameFAQs cheats archive was located via CDX but Wayback returned HTTP 429;
-  a Super Cheats Q&A comment claims GBA codes are bogus — that claim is
+  A 3rd party cheat index cheats archive was located via CDX but Wayback returned HTTP 429;
+  a 3rd party cheat index Q&A comment claims GBA codes are bogus — that claim is
   contradicted by the ROM evidence above (a real validator exists and accepts
   generated codes). Web sources contained no prompt-injection instructions.
 

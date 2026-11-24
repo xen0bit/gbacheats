@@ -15,7 +15,7 @@
 | SHA-1 | `a2f940ae658d2527f78a901a2ef5a66929397579` |
 | SHA-256 | `45ceea50d1ffd033cf984a6ab96cdb2c8851767b2bfcb78a3c653187537669a2` |
 
-The SHA-1 matches the ROM used by TASVideos submission #7799 exactly, so published
+The SHA-1 matches the ROM used by 3rd party cheat indexes submission #7799 exactly, so published
 notes about *this* build apply. Developer: Tantalus Interactive; engine banner:
 GAX Sound Engine (Shin'en) — the `Code: B.Wodok` string at `0x085FCA1` is an
 audio-engine credit, not a cheat.
@@ -38,7 +38,7 @@ state is therefore reported as a *gated/derived* feature whose player-facing
 trigger was not established — not as a working cheat.
 
 All "cheat codes" published for this title on the web are GameShark /
-CodeBreaker / Action Replay device codes (out of scope). TCRF lists only unused
+CodeBreaker / Action Replay device codes (out of scope). 3rd party cheat index lists only unused
 graphics and dummy files for this SKU — no in-game codes.
 
 ## 3. How to reproduce
@@ -219,7 +219,7 @@ starts credits; it does not unlock levels, toys, or minigames.
   ImageMagick `convert`. mGBA's GDB stub accepted connections but never replied
   to `qSupported`, and its `-d` debugger dumped core when a breakpoint was hit;
   RAM evidence therefore came from decompressed savestates (§16.13).
-* Web recon: GameFAQs/TASVideos/TCRF/search snippets — all published GBA
+* Web recon: 3rd party cheat indexes/search snippets — all published GBA
   "cheats" are device codes; treated as data only.
 
 No ROM bytes or copyrighted assets are reproduced in this report; only

@@ -351,8 +351,8 @@ from any input path — see the rejection proof below.
   ("YOU DON'T HAVE ENOUGH DENKI STARS FOR THIS PUZZLE."), and no puzzle
   starts. This is the in-game rejection that bounds the unlock system.
 
-**Published codes tested.** GameFAQs has no cheat page for the GBA SKU,
-CheatHappens lists none, and no password list exists for this version. The only
+**Published codes tested.** 3rd party cheat indexes have no cheat page for the GBA SKU,
+3rd party cheat index lists none, and no password list exists for this version. The only
 circulating GBA codes are two libretro **CodeBreaker** entries — an enable code
 and "Infinite Time" (`83006A2C 0000`) — i.e. emulator memory writes, not
 in-game content; they are explicitly out of scope here and were not used as

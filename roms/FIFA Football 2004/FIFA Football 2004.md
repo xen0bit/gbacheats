@@ -92,9 +92,9 @@ Save unlock data is a 512-byte EEPROM image at `0x02034C30`; the routine at `0x0
 | Source | Claim | ROM verification | Verdict |
 |---|---|---|---|
 | emuinfo.pl "Fifa 2004 (PL)" | `MOMONEY`, `HOOLIGAN`, `BURNABY`, `SIZZLE`, `DIZZY`, `LIGHTSOUT` | 0 hits in ASCII, lowercase, +0x20, −0x20, UTF-16LE/BE over all 8 MiB | Unverified; cheat-device labels, not in-game codes |
-| Almars/GameShark GBA | Master code `00006496 000A` etc. | Cheat-device memory patches | Out of scope (not developer-intended) |
-| GameFAQs/TGDB "Three cheats GC" | Big Ball / Walls / Flying via GBA–GameCube link | No code strings; link screen is a passive "Waiting for connection" screen; unlock text at `0x08477D48` | Real unlocks, but link-gated, not typed codes |
-| GameFAQs "Unlock More Teams GBA" | Defeat tournament with Brazil 4 times | Progression text at `0x08478264` ("You won the ladder tournament") | Gameplay unlock, not a code |
+| 3rd party cheat indexes/GameShark GBA | Master code `00006496 000A` etc. | Cheat-device memory patches | Out of scope (not developer-intended) |
+| 3rd party cheat indexes/TGDB "Three cheats GC" | Big Ball / Walls / Flying via GBA–GameCube link | No code strings; link screen is a passive "Waiting for connection" screen; unlock text at `0x08477D48` | Real unlocks, but link-gated, not typed codes |
+| 3rd party cheat indexes "Unlock More Teams GBA" | Defeat tournament with Brazil 4 times | Progression text at `0x08478264` ("You won the ladder tournament") | Gameplay unlock, not a code |
 | Console/PC guides | Seoul/Yokohama stadiums, third kits | `stadium`=0, `classic`=0, kit unlock strings absent as codes | Console-version content, not GBA codes |
 
 ## 6b. Enumeration
@@ -123,7 +123,7 @@ No undocumented state was produced; the only state changes are normal menu navig
 
 * **Observed:** all 13 screen families listed in §3, screenshots saved on disk; main-menu index `0x03007EB8` read as 0,1,2,3,4 across five savestates matching the highlighted row; 512-byte all-`0xFF` save image at EWRAM `0x02034C30`; four greyed competitions; three button combos producing only ordinary navigation.
 * **Derived:** single embedded header; input ring buffer is edge detection (`0x08017978: eors/ands`) and reset (`memset` 0x40 at `0x08018D14`), with no code-table comparison; save checksum/link-write routine at `0x0802E4C0`; published literals absent in six encodings; `KEYINPUT` has exactly three literal references.
-* **Inferred:** the 4 locked competitions unlock through progression and/or GameCube link (consistent with GameFAQs and the ROM's unlock text at `0x08477D48`), but a full season/link session was not played, so the precise unlock bit and its setter are not individually proven. This does not affect the code-system negative.
+* **Inferred:** the 4 locked competitions unlock through progression and/or GameCube link (consistent with 3rd party cheat indexes and the ROM's unlock text at `0x08477D48`), but a full season/link session was not played, so the precise unlock bit and its setter are not individually proven. This does not affect the code-system negative.
 
 ## 8. Unknowns
 

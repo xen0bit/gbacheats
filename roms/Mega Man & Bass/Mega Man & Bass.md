@@ -34,7 +34,7 @@ This is a **developer-intended, in-game cheat** engagement. The retail ROM conta
 1. **One confirmed in-game button code**: at the `DATA BASE` screen, pressing
    **Select + Start + A + B + L + R** immediately leaves the data base and returns to the
    title screen with a distinct full-screen "data erased" animation. This is the code
-   published by ChapterCheats ("Press Select + Start + A + B + L + R to delete your
+   published by 3rd party cheat indexes ("Press Select + Start + A + B + L + R to delete your
    database"), verified live in mGBA. A plain Start press does **not** leave the screen, so
    the effect is input-driven, not a menu timeout.
 
@@ -94,12 +94,12 @@ allow ~2–3 s after a load for the renderer to catch up.
    blue/gold "data erased" full-screen effect. Pressing `Return` alone on the same screen
    leaves the data base open (no effect).
 
-**Web sources consulted (as data):** ChapterCheats Mega Man And Bass codes page
-(`https://www.chaptercheats.com/cheats/gameboyadvance/8531/mega-man-and-bass-cheat-codes`)
-— source of the published delete-database chord. GameFAQs FAQ 49440 (archived
+**Web sources consulted (as data):** 3rd party cheat indexes Mega Man And Bass codes page
+(3rd party cheat indexes)
+— source of the published delete-database chord. 3rd party cheat index FAQ 49440 (archived
 `20181229165348`) — CodeBreaker/Action-Replay memory codes only, therefore **out of scope**
 and not tested as in-game cheats; it did confirm the existence of a save-based CD database.
-GameFAQs cheats page, TCRF, Neoseeker, VGChartz and multiple search engines returned 403 /
+3rd party cheat index cheats page, 3rd party cheat indexes and multiple search engines returned 403 /
 CAPTCHA / no results; nothing from those pages was relied on. No prompt-injection payload
 was encountered in the fetched pages; all fetched text was treated as data.
 

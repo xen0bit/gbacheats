@@ -139,7 +139,7 @@ Screenshots (work dir `/tmp/boktai1`): `shot0.png`, `s1.png`,
 `imenu1.png`, `tab1.png`, `tab2.png`, and Abyss shots `w14.png`, `amap.png`,
 `darkmap4.png`, `code2.png`.
 
-**Late-game save used for the Abyss:** GameFAQs save 13291 (Dark_Forte,
+**Late-game save used for the Abyss:** 3rd party cheat indexes save 13291 (Dark_Forte,
 "after Delusion Forest", Solar Tree, Hard, 03:52), a SharkPort/GameShark
 container. The container payload starts at 0x5A (header length varies) and is a
 64 KiB SRAM/hardware-order image; the game reads slot 2 (`DATA.2 = Hatikan`).
@@ -178,12 +178,12 @@ little-endian u16 words:
 chunk16[0..3] = xor16, sum16, size, 0xFFFF      (LE u16, at the chunk offset)
 ```
 
-This reproduces all nine chunks of both GameFAQs saves byte-for-byte
+This reproduces all nine chunks of both 3rd party cheat indexes saves byte-for-byte
 (global 0x18, slot headers 0xE8/0x228, World 0x740/0x11C0, Stat 0xB98/0x1618,
 extra 0x19A8/0x1BA8).
 
 Set the warp, rebuild the checksums, and write **0x2000 bytes** (mGBA's EEPROM
-dump is 0x2000; the GameFAQs files carry a 16-byte container footer). This is
+dump is 0x2000; the 3rd party cheat indexes files carry a 16-byte container footer). This is
 how the second-pass Abyss screenshots were taken. Save edits that also changed
 the slot header area without matching the Stat are rejected; keep them equal.
 
@@ -242,7 +242,7 @@ the progress byte was never written by hand.
 
 ### Save (EEPROM 8 KiB)
 
-mGBA writes a **0x2000-byte** EEPROM image. The GameFAQs `.sav` files are
+mGBA writes a **0x2000-byte** EEPROM image. The 3rd party cheat indexes `.sav` files are
 0x2010 bytes: the same 0x2000 image plus a 16-byte (all-0xFF) container footer.
 Work in the **logical** image (8-byte-chunk reversal of the hardware order) and
 keep exactly 0x2000 bytes when handing the save to mGBA.
@@ -255,7 +255,7 @@ xor16, sum16, size, 0xFFFF        (sum/xor over the block's LE u16 words)
 ```
 
 (Equivalently: read the raw/hardware image as big-endian u16 — the chunk is then
-`0xFFFF, size, sum16, xor16`.) This reproduces all nine chunks of both GameFAQs
+`0xFFFF, size, sum16, xor16`.) This reproduces all nine chunks of both 3rd party cheat indexes
 saves byte-for-byte; the first-pass note `ffff, size, sum16, xor16` described
 the raw byte order but was implemented in the logical order, which is why copied
 slots were rejected as `NO DATA`.
@@ -274,7 +274,7 @@ slots were rejected as `NO DATA`.
 
 Slot 2 Stat fields used here: map ID +0x100 (0x1300), init script +0x10C
 (0x130C), area ID +0x2DC (0x14DC), position +0xF0 (0x12F0); slot 1 uses
-0x880/0x88C/0xA5C/0x870. The GameFAQs container is **hardware byte order**:
+0x880/0x88C/0xA5C/0x870. The 3rd party cheat indexes container is **hardware byte order**:
 each 8-byte doubleword is reversed relative to the logical layout. Convert with
 an 8-byte chunk reversal, edit, reverse back, then rebuild checksums with the
 corrected tool `/tmp/boktai2/sav.py` (the first-pass
@@ -535,7 +535,7 @@ the script directory or the string bank.
 * Abyss arrival in mGBA (`w14.png`, `amap.png`), map name ABYSS 1F, map ID 288,
   area 28, position from GDB.
 * Exact Konami sequence entered in the Abyss entrance; no chest (`code2.png`).
-* GameFAQs late-game saves load as `DATA.1 = Django` / `DATA.2 = Hatikan`;
+* 3rd party cheat indexes late-game saves load as `DATA.1 = Django` / `DATA.2 = Hatikan`;
   file-select slot validity is sensitive to header edits.
 * **Second pass:** map 288 playable at `(0x05BF,0,0x0F41)` (walking moves
   `x/z`, menus open); map 289's live collision map (EWRAM 0x0202A404) holds
@@ -560,7 +560,7 @@ the script directory or the string bank.
   state shows the normal main loop and IWRAM audio mixer still running.
   Evidence dumps: `/tmp/boktai3/d288b.bin`, `d289b.bin`
   (EWRAM+IWRAM).
-* Save checksum format reproduced byte-for-byte on both GameFAQs saves:
+* Save checksum format reproduced byte-for-byte on both 3rd party cheat indexes saves:
   logical image, LE-u16 `xor,sum,size,0xFFFF` per block.
 
 **Derived**
@@ -639,7 +639,7 @@ the script directory or the string bank.
   PC/LR capture), `bdis2.py` (disassembler that handles the last script),
   `move.py`/`poke.py`/`sample.py` (walk, poke, PC histogram).
 * Public references used for cross-checks: Boktai Hacking Wiki (ROM/RAM maps,
-  bytecode, script directory, save checksums, collision map), GameFAQs
+  bytecode, script directory, save checksums, collision map), 3rd party cheat indexes
   guides/cheats, SolDec opcode documentation.
 
 ## Legal note

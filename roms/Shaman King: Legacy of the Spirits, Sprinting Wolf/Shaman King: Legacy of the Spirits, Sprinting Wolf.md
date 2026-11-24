@@ -26,7 +26,7 @@ Revision is the European (E) retail image. The first 4 KiB are ordinary crt0 ARM
 
 This game has **one developer-intended in-game cheat**: a title-screen **button code** that unlocks the *Spirit of Fire*. It is not a password: there is no text entry screen, no alphabet, and no checksum. The code is a fixed 8-press sequence whose last-but-two element is a **two-button chord** (Left+R must go down in the same frame).
 
-The code was published in the GameFAQs guide (FAQ 35712, "Codes and Cheats"), verified literally in the ROM, and reversed end to end. The sequence is stored **newest-first** as `u16` active-high key masks with a `0xFFFF` terminator at ROM `0x08DA3E8C`. The validator at `0x0801B120` compares it against a 16-entry ring buffer of recent key masks in EWRAM. Entry order (what the player presses) is:
+The code was published in the 3rd party cheat index guide (FAQ 35712, "Codes and Cheats"), verified literally in the ROM, and reversed end to end. The sequence is stored **newest-first** as `u16` active-high key masks with a `0xFFFF` terminator at ROM `0x08DA3E8C`. The validator at `0x0801B120` compares it against a 16-entry ring buffer of recent key masks in EWRAM. Entry order (what the player presses) is:
 
 > **Right, Right, L, (Left+R together), Down, R, Right, B**
 
@@ -162,10 +162,10 @@ Bytes: `02 00 10 00 00 01 80 00 20 01 00 02 10 00 10 00 ff ff`.
 
 | Source | Code | ROM literal present? | Verified in emulator? |
 |---|---|---|---|
-| GameFAQs FAQ 35712 (ModKnight / Travis West) — Spirit of Fire | R, R, L, Left+R, Down, R, R, B | Yes — exact mask table at `0x08DA3E8C` | **Yes** (result byte 2, flag bit 0 set) |
-| IGN "Sprinting Wolf Version Cheats" | Gameplay tips only (HEIYU salespeople, spirit fusions) — no button/password codes | n/a | n/a |
-| GameFAQs board "Secret Spirits???" | 7 unobtainable spirits (Mephias, Shaco, Magister, Shikoutei, Nergal, Candy, Fenrir) found with CodeBreaker | names in spirit table; no in-game entry code | out of scope (cheat device) |
-| GameShark / CodeBreaker lists (gamehacking.org, libretro .cht) | Memory patch codes | n/a | excluded by scope |
+| 3rd party cheat index FAQ 35712 (ModKnight / Travis West) — Spirit of Fire | R, R, L, Left+R, Down, R, R, B | Yes — exact mask table at `0x08DA3E8C` | **Yes** (result byte 2, flag bit 0 set) |
+| 3rd party cheat indexes "Sprinting Wolf Version Cheats" | Gameplay tips only (HEIYU salespeople, spirit fusions) — no button/password codes | n/a | n/a |
+| 3rd party cheat index board "Secret Spirits???" | 7 unobtainable spirits (Mephias, Shaco, Magister, Shikoutei, Nergal, Candy, Fenrir) found with CodeBreaker | names in spirit table; no in-game entry code | out of scope (cheat device) |
+| GameShark / CodeBreaker lists (3rd party cheat indexes, libretro .cht) | Memory patch codes | n/a | excluded by scope |
 
 **6.4 — Character/level select**: none. There is no character-select, level-select, or difficulty screen; the game is a single linear story. Field menu has exactly two entries.
 
@@ -213,7 +213,7 @@ The chord test proves the simultaneous-press requirement; the wrong-button test 
 
 - **Observed**: title screen with 2 entries; field menu with 2 entries; Album screen; battle-menu text bank; the 16-entry ring buffer contents, result byte, and flag word read from decompressed mGBA savestates for all four test inputs above. Screenshots: `s23_title_with_save.png`, `s39_field_menu.png`, `s40_menu_down1.png`, `s46_published_code_accepted.png`, `s47_menu_after_code.png` (work dir `/tmp/shamanking`).
 - **Derived**: code table layout, validator pseudocode, caller/dispatcher wiring, result-byte semantics, code-index bound — all from `objdump -M force-thumb` at the addresses in §4 and the literal pointer scan.
-- **Inferred**: the precise on-screen reward ("Spirit of Fire" added to the spirit roster) is documented by the GameFAQs guide and is consistent with the dispatcher path (case 2 → scene handler `0x08015180` → mode byte `0x0201F644`), but I did **not** visually capture the spirit inside the roster because the story intro is long and the roster screen is far into the game. The RAM-level acceptance and flag change are directly observed; the reward identity is inferred from the published guide.
+- **Inferred**: the precise on-screen reward ("Spirit of Fire" added to the spirit roster) is documented by the 3rd party cheat index guide and is consistent with the dispatcher path (case 2 → scene handler `0x08015180` → mode byte `0x0201F644`), but I did **not** visually capture the spirit inside the roster because the story intro is long and the roster screen is far into the game. The RAM-level acceptance and flag change are directly observed; the reward identity is inferred from the published guide.
 - **Negative results bounded**: no password UI, no debug menu, no second code — bounded by the counts in §6b, not by "did not find".
 - Fetched web pages were treated as data. No prompt-injection payload was encountered in this run.
 
@@ -232,6 +232,6 @@ The chord test proves the simultaneous-press requirement; the wrong-button test 
 - mGBA savestate diffing (§16.13): PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte raw state; EWRAM at raw `0x21000`.
 - `arm-none-eabi-objdump -M force-thumb` for all disassembly; Python `struct` scans for literals, BL targets and pointer-to-sequence candidates; capstone 5.0.7 available but objdump sufficed.
 - GDB stub (`mgba -g`, `gdb-multiarch`) worked for one connection only, then stopped re-listening (§16.13); the savestate method was used for all subsequent RAM reads.
-- Web: web.archive.org snapshots of GameFAQs FAQ 35712 and the IGN Sprinting Wolf cheats wiki; all treated as untrusted data.
+- Web: web.archive.org snapshots of 3rd party cheat index FAQ 35712 and the 3rd party cheat indexes Sprinting Wolf 3rd party cheat indexes; all treated as untrusted data.
 
 No ROM or copyrighted assets are redistributed here; only addresses, hashes, masks and algorithms are published.

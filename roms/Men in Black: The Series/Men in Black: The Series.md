@@ -36,7 +36,7 @@ fixed-stride ROM tables — there is no checksum, PRNG, or algorithmic password 
   scans (6 entries, then 3). A match writes the level index to `0x0300022C` or sets one
   of three flag bytes at `0x03005D58..5A`; a miss shows "Incorrect Password".
 
-All eight nonblank codes agree with published GameFAQs/CheatCC/GameRevolution lists
+All eight nonblank codes agree with published 3rd party cheat index lists
 (one site's `FCHTRMNS` is a typo for `FGHTRMNS`). GBC-only numeric codes (`0601`,
 `2409`, `1943`, …) do **not** occur in this GBA image — different SKU (§16.11).
 
@@ -162,8 +162,8 @@ Accepted strings (ROM bytes, 8 chars each, no NUL — fixed stride):
 | 2 | cheat | `LLWPNSDD` | All weapons | `0x03005D58 = 00 00 01 00` |
 
 Published-code verification: all eight nonblank literals are present verbatim in the
-ROM at `0x3441DE` onward. `FCHTRMNS` (CheatCC, blogspot, Planet Cheats) is a typo;
-the ROM and GameFAQs/GameRevolution use `FGHTRMNS`. The GameFAQs "View Ending"
+ROM at `0x3441DE` onward. `FCHTRMNS` (3rd party cheat indexes, blogspot, 3rd party cheat indexes) is a typo;
+the ROM and 3rd party cheat indexes use `FGHTRMNS`. The 3rd party cheat indexes "View Ending"
 effect attributed to `NFNTMMDD` was **not** reproduced (see §8).
 
 ## 6b. Enumeration
@@ -209,7 +209,7 @@ to the 22-symbol alphabet rather than 26+ letters.
   validator structure, two scan bounds (6, 3), literal pointers at `0x4218/421C/4220`,
   flag writes, 22-handler dispatch table at `0x0834A564`, state byte `0x0300022A`.
 * **Inferred**: that the GBC "Access Codes"/levitation/Noisy Cricket features described
-  on GameFAQs belong to the Game Boy Color SKU — none of their numeric literals
+  on 3rd party cheat indexes belong to the Game Boy Color SKU — none of their numeric literals
   (`0601`, `2409`, `1943`, `0309`, `3107`, `2710`, `2705`, `1807`) occur in this ROM.
 
 ## 8. Unknowns
@@ -235,8 +235,7 @@ to the 22-symbol alphabet rather than 26+ letters.
   `arm-none-eabi-objdump -M force-thumb`, REA/Ghidra 12.1.4 (`open_binary` raw-binary
   ARM @ `0x08000000`, `procedure_pseudo_code`, `resolve_containing_procedure`,
   `procedure_callers`).
-* Web sources checked: GameFAQs, CheatCC, GameRevolution, GGmania, Planet Cheats,
-  CheatHappens, gbadamud. Fetched content contained no prompt-injection payloads and
+* Web sources checked: 3rd party cheat indexes. Fetched content contained no prompt-injection payloads and
   was treated as data only.
 
 **Legal note:** no ROM bytes, graphics, audio, or full game text are redistributed here;

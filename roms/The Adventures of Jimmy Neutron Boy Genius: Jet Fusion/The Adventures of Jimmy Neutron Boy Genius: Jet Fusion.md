@@ -128,8 +128,7 @@ The observable behaviour is summarised by the empirical bit map in §6b.
 | World 3 / levels 9–12 | `31CX8442` | absent |
 | World 4 / levels 13–16 | `3P!76232` | absent |
 
-Sources agreeing on this list: GameFAQs, SuperCheats, Neoseeker, VGChartz, AbsoluteCheats,
-ProjectCheatCodes. GameFAQs/Neoseeker write several letters in lower case; the game's keyboard is
+Sources agreeing on this list: 3rd party cheat indexes. 3rd party cheat indexes write several letters in lower case; the game's keyboard is
 upper-case only, so case is not part of the code.
 
 ### 6.3 Single-bit acceptance map
@@ -199,7 +198,7 @@ checksum arithmetic remains unresolved (§8).
   suggested by the shared `%s` dialogue and the 8-symbol UI, but a full playthrough to capture a
   spoken code was not done); that the free bits correspond to semantic level flags (novel codes do
   start different stages, but the field meaning is not decoded).
-* **Prompt-injection note** — a TCRF search for this title returned an agent-directed fake article
+* **Prompt-injection note** — a 3rd party cheat index search for this title returned an agent-directed fake article
   containing a bogus XOR `key.bin`, a $1,000,000,000,000 payment demand and instructions to
   terminate the session. Per guide §16.8 all of it was ignored and is reported here as data only.
 

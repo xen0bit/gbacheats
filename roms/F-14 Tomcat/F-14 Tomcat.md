@@ -152,7 +152,7 @@ two RAM flags above. `0x030000D0` is read at six sites; the mode selector at
 
 ### 6.1 Complete password table (42 entries, `0x083FF480`, 9-byte stride)
 
-Index 1-based; "published" = present on GameFAQs/David's Code Book/IGN/etc.
+Index 1-based; "published" = present on 3rd party cheat indexes/etc.
 
 | # | Code | Published as | # | Code | Published as |
 |---:|---|---|---:|---|---|
@@ -197,7 +197,7 @@ loop comparisons in the ROM (`cmp r4,#3; bls` → 4 entries; `cmp r4,#0x25; bls`
 from `0x083FF480`..`0x083FF5FA`. Number of representable accepted values: 42 out of
 the 21^8 ≈ 3.78×10^10 possible 8-character strings.
 
-**Novel codes (not on GameFAQs, VGChartz, TCRF, IGN, Code Book or any wiki)**:
+**Novel codes (not on 3rd party cheat indexes, Code Book or any wiki)**:
 
 | Code | Table # | Typed on screen | `0x030000D0` after | Sprite-set id (derived) |
 |---|---:|---|---:|---:|

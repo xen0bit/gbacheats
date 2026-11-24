@@ -30,11 +30,11 @@ The only in-game button codes are three exact key-mask gates in the main engine:
 
 1. **`A+B+Select+Start` held exactly (mask `0x0F`)** → immediate soft reset
    (`RegisterRamReset` + `SoftReset`, SWI 1 + SWI 0). Documented in the official
-   manual, absent from the GameFAQs cheat list.
+   manual, absent from the 3rd party cheat index cheat list.
 2. **`Select+R` newly pressed exactly (mask `0x104`)** → sleep mode via BIOS
-   `Stop` (SWI 3), gated by a state byte. Published on GameFAQs.
+   `Stop` (SWI 3), gated by a state byte. Published on 3rd party cheat indexes.
 3. **`L+R+A+B+Start+Select` held exactly (mask `0x30F`) for ≥179 frames** →
-   save-erase / reset state transition. Published on GameFAQs, SLB and Reddit
+   save-erase / reset state transition. Published on 3rd party cheat indexes
    ("hold at power-on until prompted to delete"). Confirmed here to fire
    mid-game as well (the validator is in a per-frame state handler, not only
    in the boot path).
@@ -137,10 +137,10 @@ after `& 0x3FF` (Gates 1/3) or directly for `pressed` (Gate 2).
 
 | Published code | Mask | Validator | Effect | Published? |
 |---|---|---|---|---|
-| `A+B+Select+Start` | `0x0F` held | `0x08001BE0` | soft reset | Official manual; *not* in GameFAQs cheat list |
-| `Select+R` | `0x104` pressed | `0x08001C1A` | BIOS Stop (sleep) | GameFAQs |
-| `Select+L` | `0x204` | — | not implemented here; no `0x204` compare in the gated input path | GameFAQs (claimed deactivate) |
-| `L+R+A+B+Start+Select` at power-on | `0x30F` held ≥179 frames | `0x08028914` | erase save / reset | GameFAQs, SLB, Reddit |
+| `A+B+Select+Start` | `0x0F` held | `0x08001BE0` | soft reset | Official manual; *not* in 3rd party cheat index cheat list |
+| `Select+R` | `0x104` pressed | `0x08001C1A` | BIOS Stop (sleep) | 3rd party cheat indexes |
+| `Select+L` | `0x204` | — | not implemented here; no `0x204` compare in the gated input path | 3rd party cheat indexes |
+| `L+R+A+B+Start+Select` at power-on | `0x30F` held ≥179 frames | `0x08028914` | erase save / reset | 3rd party cheat indexes |
 
 `Select+L` (published as the sleep deactivator) has **no validator** in this
 ROM's input path. The raw constant `0x204` / `0x1FB` does occur in ROM, but only
@@ -179,11 +179,11 @@ no lookup table of codes.
   `0x0810D690`, `0x08230390`); all are audio/sample data, no sequence table.
 * Hidden-menu count: every reachable screen listed in §3 was walked; no
   unlabelled menu entry, no debug overlay, no level-select screen. The iQue
-  debug build described on TCRF is a *different build* and is not present in
+  debug build described on 3rd party cheat indexes are a *different build* and is not present in
   this AMZE01 image.
 
 **Novel-code result: bounded negative.** Every accepted combination is on a
-published list (GameFAQs and/or the official manual); no code absent from those
+published list (3rd party cheat indexes and/or the official manual); no code absent from those
 lists is accepted by the ROM. The requested "mint a novel accepted code" is
 therefore impossible for this target, and the bounded negative is the correct
 deliverable: the complete gate set is three masks, enumerated above.
@@ -235,7 +235,7 @@ the visible sleep effect is **Inferred**, not observed.
   later menu (no complete xref graph was built for those bytes).
 * Whether mGBA's SWI 3 implementation produces a visible sleep on real hardware;
   not testable here.
-* The exact on-screen erase prompt mentioned by SLB ("prompted to delete") was
+* The exact on-screen erase prompt mentioned by 3rd party cheat indexes were
   not reached — the observed transition went straight to the intro/next title.
 * Font glyph-to-character index table was decoded visually from VRAM tile data,
   not exported as a complete mapping; sufficient to establish tile-index text.
@@ -243,7 +243,7 @@ the visible sleep effect is **Inferred**, not observed.
 ## 9. Tooling
 
 * `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings` — Phase 0/1.
-* `webfetch` of an archived TCRF page and an archived GameFAQs cheat page
+* `webfetch` of an archived 3rd party cheat index page and an archived 3rd party cheat index cheat page
   (both direct fetches returned 403; Wayback copies used). Fetched pages were
   treated as data only; no instructions in them were followed.
 * Custom Python scanners using `capstone` (Thumb) and `struct`: PC-relative

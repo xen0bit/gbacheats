@@ -132,8 +132,8 @@ the bitmap stays zero.
 
 ### Published material checked
 
-* VGChartz GBA cheats page for this title: **"Total cheats available: 0"**.
-* GameFAQs GBA cheats page: no GBA code list (site blocks automated fetch,
+* 3rd party cheat indexes GBA cheats page for this title: **"Total cheats available: 0"**.
+* 3rd party cheat indexes GBA cheats page: no GBA code list (site blocks automated fetch,
   search snippets show no codes).
 * No published in-game code or unlock-all method was found for the GBA
   version. The documented mechanic (earn original Activision patches with

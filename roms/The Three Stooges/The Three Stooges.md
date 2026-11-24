@@ -52,7 +52,7 @@ No GameShark/CodeBreaker/AR codes were used or reported.
    | `BBBBBB` (default) | A on real screen | `WRONG` |
    | `PN9P2B` (one char altered) | RAM patch + A | `WRONG` |
 
-Web reconnaissance was attempted (websearch; GameFAQs, IGN, CheatCC, TCRF, DDG, Google)
+Web reconnaissance was attempted (websearch; 3rd party cheat indexes, DDG, Google)
 but every source returned 403 / captcha / empty results. Consequently **no published
 password list was available** — every code above was generated from the reversed
 algorithm and is therefore absent from any list.

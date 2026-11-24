@@ -34,10 +34,10 @@ widely published title-screen unlock code, but **the code is unreachable (dead
 code) in this European build**: entering it, or any variant, has no observable or
 RAM-visible effect.
 
-* **Published code** (CheatCC, Neoseeker, ChapterCheats, CheatBook, GameFAQs Q&A,
+* **Published code** (3rd party cheat indexes Q&A,
   and a 2005 Kanzenshuu forum post quoting Bandai's official site):
   `L, R, Up, Down, L, R, Left, Right, R, R, Right` on the title screen → claimed to
-  unlock a fourth mini-game, all bonus characters and extras. A SuperCheats Q&A on
+  unlock a fourth mini-game, all bonus characters and extras. A 3rd party cheat index Q&A on
   the same page reports "it doesn't work … Mine also don't work in any screen",
   which agrees with this image.
 * **ROM evidence (Derived):** the exact 11-press sequence is stored once, as active-high
@@ -286,7 +286,7 @@ claim that a working code generator was found.
   instance on connection in this environment; the `-d` pty debugger was used
   instead (guide §16.2/§16.13). Savestate (`gbAs` zlib chunk) diffing was attempted
   first and abandoned as too noisy across animation frames.
-* Web: search snippets plus Kanzenshuu forum; direct fetches of TCRF and GameFAQs
+* Web: search snippets plus Kanzenshuu forum; direct fetches of 3rd party cheat indexes
   returned HTTP 403 and are recorded as unverified-by-fetch (the code text is
   corroborated by four independent cheat sites found via search).
 

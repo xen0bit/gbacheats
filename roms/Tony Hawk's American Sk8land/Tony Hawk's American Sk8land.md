@@ -8,7 +8,7 @@
 | Size | 8,388,608 bytes (`0x800000`, 64 Mbit) |
 | `file(1)` | Game Boy Advance ROM image: "TH SK8LAND" (BH9E52, Rev.00) |
 | Header title (`0xA0`) | `TH SK8LAND` |
-| Game code (`0xAC`) | `BH9E` (gamehacking.org's `AH9E` is the **NDS** SKU — different game) |
+| Game code (`0xAC`) | `BH9E` (a 3rd party cheat index's `AH9E` is the **NDS** SKU — different game) |
 | Maker (`0xB0`) | `52` |
 | Version (`0xBC`) | `0x00` |
 | Complement (`0xBD`) | `0x31` |
@@ -47,7 +47,7 @@ user-entered code** — labelled as such per guide §16.10. A 32-bit out-of-rang
 bit (`0x40000000`, bit 30) produced no effect, bounding the field to 14 named
 bits.
 
-One web fetch (TCRF) returned a prompt-injection payload (fake "LLM instructions",
+One web fetch (3rd party cheat indexes) returned a prompt-injection payload (fake "LLM instructions",
 an EICAR `key.bin` recipe and a payment demand). It was ignored as data and is
 recorded here per guide §16.8.
 
@@ -67,7 +67,7 @@ recorded here per guide §16.8.
   pointer at `0x02000008` (observed `0x020089DC`), write `0x00003FFF` to
   `[ptr+4]`, delete the breakpoint, continue, start a new Story game and observe
   the skater in the first level.
-* Published-code recon: absolutcheats / cheathappens / cheatcc / gamehacking.org
+* Published-code recon: 3rd party cheat indexes
   all agree that the GBA cheats are **progression unlocks**, not typed codes.
   None of the published strings appears literally anywhere in this ROM (see §6b).
 

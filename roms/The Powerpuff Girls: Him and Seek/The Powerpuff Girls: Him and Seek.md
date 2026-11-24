@@ -21,7 +21,7 @@ Save hardware: 512-byte EEPROM. Magic `C0 DE 60 0D` little-endian (`0xC0DE600D`)
 EEPROM `0x04` and `0x1C`; three 0x18-byte slot records, flag byte at slot+4
 (EEPROM `0x08`, `0x20`, `0x38`).
 
-Web recon (GameFAQs 403, Google/DuckDuckGo blocked/empty) produced **no published
+Web recon (3rd party cheat indexes 403, Google/DuckDuckGo blocked/empty) produced **no published
 code list** for this SKU. Nothing in the ROM matches the console/PC Powerpuff
 Titles' code lore; per §16.11 no title+platform assumption was made.
 

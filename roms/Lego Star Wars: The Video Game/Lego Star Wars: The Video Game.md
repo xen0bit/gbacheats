@@ -28,7 +28,7 @@ No 32-bit pointer (any alignment, including `0x0A`/`0x0C` ROM mirrors and Thumb-
 
 The GBA SKU of LEGO Star Wars implements developer cheats as **button sequences entered on the in-game PAUSE menu**, backed by a **fixed 63-entry lookup table at ROM `0x0852178`** (`0x34` bytes per record). There is **no alphanumeric password UI** and **no GameShark/CodeBreaker surface** in scope.
 
-- Every published 6-character alphanumeric code (`987UYR`, `LA811Y`, `4PR28U`, `IG72X4`, … — GameFAQs/VGChartz/darkbricks/RadioTimes list these for the **console/PC** SKU) is **absent from this ROM** in plain ASCII, lowercase, reversed, XOR-`0x20` and UTF-16LE. They are not GBA codes. This is consistent with §16.11 (same franchise name, different game per platform) and with the LEGO Games Wiki statement that the GBA version *replaced* the Extras menu with button codes.
+- Every published 6-character alphanumeric code (`987UYR`, `LA811Y`, `4PR28U`, `IG72X4`, … — 3rd party cheat indexes/RadioTimes list these for the **console/PC** SKU) is **absent from this ROM** in plain ASCII, lowercase, reversed, XOR-`0x20` and UTF-16LE. They are not GBA codes. This is consistent with §16.11 (same franchise name, different game per platform) and with the 3rd party cheat indexes statement that the GBA version *replaced* the Extras menu with button codes.
 - The GBA button codes that *are* published (infinite stamina, 10 studs, hyper thrusters, more speed, repair bot, six saber colours, character codes) are all present in the table and were verified in the emulator.
 - The table contains **many codes absent from every published list** — 18 music codes, three extra stud/damage codes, two "Created something" codes, "Sheep Mode", two "Strange colors" codes, a food code and an unusual-action code. All were entered in-game and produced their confirmation dialogue in RAM.
 - Bounds are proven by rejection: a one-button near-miss of a novel code produces no dialogue and no state change.
@@ -141,7 +141,7 @@ Observed properties:
 | `0x250` | "Something unusal you have done!" | #62 |
 | `0x242` / `0x0000` | no message in pause context | #00, #61 |
 
-**Complete 63-entry code table**. Notation: `Up/Dwn/Lft/Rgt` = D-pad; `L`/`R` = shoulder buttons; `Sta` = Start, `Sel` = Select. `P` marks codes also documented on GameFAQs / LEGO Games Wiki / darkbricks / MarioGBA / GameGenie; `N` marks codes found **only** in this ROM.
+**Complete 63-entry code table**. Notation: `Up/Dwn/Lft/Rgt` = D-pad; `L`/`R` = shoulder buttons; `Sta` = Start, `Sel` = Select. `P` marks codes also documented on 3rd party cheat indexes; `N` marks codes found **only** in this ROM.
 
 ```
 #00 N  Up Dwn Lft Rgt Rgt Rgt Rgt Rgt Lft Rgt Up Dwn Lft Rgt Up Up Up Up Up Lft    no msg in pause
@@ -213,7 +213,7 @@ Observed properties:
 
 **Space definition.** The button-code space is exactly the 63 records at `0x0852178`, lengths 4–20 presses, drawn from 10 key bits (active-high masks). No checksum field, no generator function, no second alphabet. Representable accepted values: **61 confirmed accepted in the pause context; #00 and #61 produced no confirmation in that context** (they may be context-gated or unused — see Unknowns). No inputs outside the table were found to be accepted (one near-miss tested explicitly; the main-menu path rejected two published sequences).
 
-**Novel codes (not in GameFAQs, VGChartz, TCRF, LEGO Games Wiki, darkbricks, MarioGBA or GameGenie).** All were entered in the emulator and produced a RAM-visible effect:
+**Novel codes (not in 3rd party cheat indexes).** All were entered in the emulator and produced a RAM-visible effect:
 
 | # | Sequence | Observed result |
 |---|---|---|

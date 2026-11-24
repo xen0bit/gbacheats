@@ -35,7 +35,7 @@ The game has **one developer-intended button code and no password/code-entry sys
 Entering the Konami sequence **Up, Up, Down, Down, Left, Right, Left, Right, B, A** on the
 **title screen** sets an unlock flag; pressing **R** on the four-option main menu then opens a
 hidden **"MAGICIAN'S REALM"** level-select screen with three timed entries ("MAGICAL MIXUP").
-This matches the published GameRevolution/GameFAQs-family code; it was verified in the ROM,
+This matches the published 3rd party cheat index-family code; it was verified in the ROM,
 re-entered in the emulator, and confirmed by RAM diff.
 
 The implementation is a single fixed 10-mask lookup table at `0x082B13B4` (u16 active-high
@@ -147,8 +147,7 @@ Up=0x040, Down=0x080, R=0x100, L=0x200`.
 
 Bytes at file `0x2B13B4`: `40 00 40 00 80 00 80 00 20 00 10 00 20 00 10 00 02 00 01 00 00 00`.
 
-**Published codes checked:** GameRevolution, VictoryCheats, Cheat Happens, AbsoluteCheats,
-GameGenie.com and the Frogger Wiki all give the same 10-button sequence; all verified against
+**Published codes checked:** 3rd party cheat indexes and the Frogger Wiki all give the same 10-button sequence; all verified against
 the table above and re-entered successfully. The CodeBreaker/GameShark entries
 (`90AB05BA 8B66...`, `830036AC 6300`, `820036AC 0013`) are external memory cheats, explicitly
 excluded from scope. No password strings were published or found.

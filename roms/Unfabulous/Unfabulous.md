@@ -172,7 +172,7 @@ record. This is why naive `strings` output looks like `N5J8HZZ16DB5M519FH4B20C5`
 
 ### 6.2 Published level codes (recon, web)
 
-Sources: mariogba.nl, GameSpot, AbsoluteCheats. Eleven 4-name sequences:
+Sources: 3rd party cheat indexes. Eleven 4-name sequences:
 `Addie,Geena,Addie,Ben`; `Ben,Addie,Zach,Brandywine`; `Brandywine,Geena,Addie,Ben`;
 `Brandywine,Zach,Brandywine,Geena`; `Brandywine,Addie,Addie,Zach`;
 `Zach,Brandywine,Addie,Addie`; `Ben,Zach,Ben,Addie`; `Ben,Geena,Addie,Brandywine`;

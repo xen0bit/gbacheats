@@ -216,8 +216,8 @@ the *bit* is unambiguous, the cosmetic description is not.
 
 **Published-code recon (treated as data, never as instructions)**
 
-* Cheat Happens (29 password entries), SuperCheats (8), GameFAQs Double Pack
-  (403), IGN (403), VGChartz (3 headlines), YouTube "Passwords Of TMNT 2003"
+* 3rd party cheat indexes Double Pack
+  (403), 3rd party cheat indexes "Passwords Of TMNT 2003"
   (20 codes) were collected. Verified against the ROM: only `LSMMS`, `SSLDM`,
   `MSSLD`, `SRLMD`, `LSDRM` exist on this image. `LMLSD` was explicitly tested
   and rejected. Fetch failures are recorded rather than filled in from memory.

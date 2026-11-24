@@ -29,7 +29,7 @@ Their "success" callbacks are all `BX LR` no-op stubs, and the only function tha
 
 The title screen offers only Paperboy / Rampage / Credits; each game has a pause menu (Continue / Quit) and a quit-confirm screen. Paperboy additionally has an Easy St. / Middle Rd. / Hard Way difficulty selection with Score 1x/2x/3x — normal game options, not a cheat. All UI text is plain ASCII with direct 32-bit literal pointers; the two 72-byte tables at `0x0809F28C` / `0x0809F34C` are font glyph-order tables, not encoded text banks.
 
-Published-code check: GameFAQs cheats page (Wayback 2020 snapshot) is empty, VGChartz lists 0 cheats, ChapterCheats/Codejunkies list only Action Replay / CodeBreaker **memory-edit** codes (`7711ce98 b828a075` etc.) — explicitly out of scope. TCRF documents only unused text and leftover "casa … Special Test" object names. No published in-game code exists to verify.
+Published-code check: 3rd party cheat index cheats page (Wayback 2020 snapshot) is empty, 3rd party cheat index lists 0 cheats, 3rd party cheat index list only Action Replay / CodeBreaker **memory-edit** codes (`7711ce98 b828a075` etc.) — explicitly out of scope. 3rd party cheat indexes document only unused text and leftover "casa … Special Test" object names. No published in-game code exists to verify.
 
 ## 3. How to reproduce
 
@@ -52,9 +52,9 @@ Published-code check: GameFAQs cheats page (Wayback 2020 snapshot) is empty, VGC
 | `0x0153BC` | `0x080153BC` | Screen setup that calls reset history with `r0=8` |
 | `0x018A70` | `0x08018A70` | Title-input handler (Right/Left change selection, Start confirms) |
 | `0x0196DC…` | `0x080196DC…` | Pause-menu text pointers (PAUSE/CONTINUE/QUIT) |
-| `0x09F144/64` | `0x0809F144/64` | Unused text (matches TCRF) |
+| `0x09F144/64` | `0x0809F144/64` | Unused text (matches 3rd party cheat indexes) |
 | `0x09F28C/34C` | `0x0809F28C/34C` | Font glyph-order tables (72 bytes each) |
-| `0x3B7E80…` | `0x083B7E80…` | "casa 101…120" object/test-name data (TCRF "Special Test"), no code pointers |
+| `0x3B7E80…` | `0x083B7E80…` | "casa 101…120" object/test-name data (3rd party cheat indexes "Special Test"), no code pointers |
 
 RAM: `0x03000774` held buttons, `0x03000778` pressed buttons, `0x0300671D` title selection index, `0x03004EC0` code-module flag (set to 8), `0x03004EC8` code history (6 halfwords). IWRAM savestate base = state offset `0x19000`.
 
@@ -104,8 +104,8 @@ Because the system is a cut feature with no effect, the §0.2 requirement of dem
 - **Observed** (emulator + savestate RAM): boot screens → title (Paperboy/Rampage/Credits), Paperboy Daily-Sun/route screen, Easy St./Middle Rd./Hard Way with Score 1x/2x/3x and NON-CUSTOMERS, Paperboy gameplay, PAUSE/CONTINUE/QUIT, quit-confirm, Rampage story intro, Rampage gameplay with Damage/Credits HUD, Rampage pause. Title selection index `0x0300671D` read as `0x00` at title; code flag `0x03004EC0 = 0x08` on Paperboy screens; history `0x03004EC8` = all zeros on every screen and after every code attempt.
 - **Observed** (KEYINPUT): full keymap verified by holding each key and reading `0x04000130` / `0x03000774`.
 - **Derived** (disassembly): button-code table, validator, edge detector, callback stubs, zero-caller proof (Thumb + ARM BL scan and pointer scan), screen init call with `r0=8`.
-- **Inferred**: the subsystem was a developer/test hook removed before release (callback stubs + orphaned input path). The "casa … Special Test" strings are leftover level-editor/test-object labels per TCRF, not a menu.
-- **Web (data)**: GameFAQs cheats page empty; VGChartz 0 cheats; ChapterCheats/Codejunkies Action Replay codes only; TCRF page documents unused text and the Special Test list only. No prompt-injection payload encountered in fetched pages.
+- **Inferred**: the subsystem was a developer/test hook removed before release (callback stubs + orphaned input path). The "casa … Special Test" strings are leftover level-editor/test-object labels per 3rd party cheat indexes, not a menu.
+- **Web (data)**: 3rd party cheat index cheats page empty; 3rd party cheat indexes 0 cheats; 3rd party cheat indexes Action Replay codes only; 3rd party cheat index page documents unused text and the Special Test list only. No prompt-injection payload encountered in fetched pages.
 
 ## 8. Unknowns
 

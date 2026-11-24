@@ -35,8 +35,8 @@ career is required before any cheat can be toggled.
 The widely circulated `WATCH_ME_EXPLODE` / `MOON$HOT` / `FBIAGENT` / `SSBSTS`
 strings are **console (PS2/PC/Xbox) cheats**. They are absent from this GBA ROM
 in every encoding tested (§6b). The GBA-specific published sources
-(GameFAQs GBA cheats page, Planet Tony Hawk GBA page, KirbyRockz GBA guide)
-list only cash/Pro-Challenge unlockables and no code-entry screen; the SuperCheats
+(3rd party cheat indexes GBA cheats page, Planet Tony Hawk GBA page, KirbyRockz GBA guide)
+list only cash/Pro-Challenge unlockables and no code-entry screen; the 3rd party cheat indexes
 "GBA" page that repeats `Watch_me_xplode` is cross-platform contamination
 (guide §16.7/16.11).
 
@@ -82,7 +82,7 @@ are published (§3) but were not exercised in-game.
      `CONTINUE / VIEW GOALS / VIEW TRICKS / SKATE SHOP / MAIN MENU` — no CHEATS
      row, unlike the console SKUs (`pause_menu.png`, `tonyhawk_start.png`).
 * Published-code reconciliation (web recon, treated as data):
-  * GameFAQs **GBA** page: only "Misc. Unlockables GBA" (Pro Challenge, movies,
+  * 3rd party cheat indexes **GBA** page: only "Misc. Unlockables GBA" (Pro Challenge, movies,
     The Zone, Turbo Mode, secret characters) and "Unlockables GBA" — no typed codes.
   * Planet Tony Hawk **GBA** page: "Cheats … purchased … after you've completed
     a Pro Challenge … Skate Shop under Checklists … hit A … yellow circle".

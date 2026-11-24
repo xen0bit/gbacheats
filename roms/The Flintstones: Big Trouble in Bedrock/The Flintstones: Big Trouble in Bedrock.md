@@ -30,7 +30,7 @@ The strongest evidence is structural:
 1. The game has exactly **8 application scenes**, recovered statically from the scene dispatcher at `0x08004A4`. All 8 are identified by their surviving `./src/*.c` error strings: cutscene view, splash, map screen, option menu (×2), credits, legal screen and language select. None is a password, cheat or debug screen.
 2. There is exactly **one** `KEYINPUT` (`0x04000130`) reader in the whole 4 MiB image — the poller at `0x080123A0`. It converts to active-high and increments **eight per-button hold counters**; it holds no press-history buffer and performs no sequence comparison. Only three literal pointers to its input-state struct exist, all inside that one function.
 3. Every text bank that survives as ASCII was extracted and read: 43,433 strings total, of which 457 are `{C:nn}{B/N}`-tagged script records (391 unique) — **all of them are credits roll staff names and roles**. Zero matches for `password`, `cheat`, `code`, `secret`, `debug`, `level select`, `unlock` in any bank. A second, tile-index font renders the menus; its strings are not ASCII, but the complete menu item set is fixed in code and was enumerated by walking every screen (titles 2, Options 6, Pause 2, quit-confirm 2) — none is a cheat entry.
-4. Web recon (§3.4) found **no published password/cheat list** for this title (search integrations returned no results; GameFAQs/TCRF/IGDB returned HTTP 403). No literal from a published list was available to seed a table search, so the negative rests on the static and dynamic counts above.
+4. Web recon (§3.4) found **no published password/cheat list** for this title (search integrations returned no results; 3rd party cheat indexes returned HTTP 403). No literal from a published list was available to seed a table search, so the negative rests on the static and dynamic counts above.
 
 No GameShark/CodeBreaker/Action Replay codes were used or reported (out of scope).
 
@@ -156,7 +156,7 @@ This is a **bounded negative**. No code space exists, so no novel code could be 
 | u16 button-mask-like runs | 1,249 runs of ≥4 plausible mask values | **0** form a button sequence; all are palette/lookup/graphics data |
 | Konami prefix `UUDDLRLRBA` | active-high/active-low × u16/bytes, whole ROM | **0** hits (one coincidental `UUDD` byte hit at file `0x3D17DA`, inside compressed graphics) |
 | App scenes | 8 dispatcher entries, all handlers disassembled | **0** debug/cheat/password scenes |
-| Published codes (web recon) | multiple search engines + 3 direct sites | **0** lists found; GameFAQs/TCRF/IGDB HTTP 403, DDG bot challenge |
+| Published codes (web recon) | multiple search engines + 3 direct sites | **0** lists found; 3rd party cheat indexes HTTP 403, DDG bot challenge |
 
 Because no accepted set exists, §16.9's "run the validator over the whole space" degenerates to "the validator does not exist"; the negative is closed by the scene count, the input-xref count and the text-bank enumeration rather than by an untested assumption.
 

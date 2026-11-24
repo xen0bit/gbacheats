@@ -253,12 +253,12 @@ Modifier: `(held & 0x300) != 0` → hold **L** and/or **R**.
 | Source | Codes | Kind | In scope? |
 |---|---|---|---|
 | libretro `Breath of Fire II (USA, Europe) (Code Breaker).cht` | 10 | CodeBreaker memory writes (`82xxxxxx`, `83xxxxxx`) | No — memory edit |
-| GameHacking.org | ~140 | GameShark / AR / CB memory writes | No — memory edit |
-| GameFAQs item-patch FAQ | 48 × 2 lines | GameShark item writes | No — memory edit |
-| Fandom / Township FAQ | 1 unlockable | Recruit Sumner → 35-track sound test | Yes — developer-intended unlockable |
+| 3rd party cheat indexes | ~140 | GameShark / AR / CB memory writes | No — memory edit |
+| 3rd party cheat indexes item-patch FAQ | 48 × 2 lines | GameShark item writes | No — memory edit |
+| 3rd party cheat indexes / Township FAQ | 1 unlockable | Recruit Sumner → 35-track sound test | Yes — developer-intended unlockable |
 
 No published list contains an in-game password or a controller sequence for
-the GBA SKU. (The SNES Game Genie debug codes on TCRF are for the SNES build;
+the GBA SKU. (The SNES Game Genie debug codes on 3rd party cheat indexes are for the SNES build;
 their RAM addresses `7E:xxxx` do not exist here.)
 
 ## 6b. Enumeration
@@ -272,7 +272,7 @@ strings collapse to one accepting string. Enumerated actions: one
 
 **Novel code (not in any published list).**
 `L/R + Up, Up, Down, Down, Left, Right, Left, Right, Select, Start`.
-No GameFAQs, TCRF, VGChartz, GameHacking or wiki page lists a GBA controller
+No 3rd party cheat indexes or wiki page lists a GBA controller
 code for this game; the only published BoF2 material is memory-write codes.
 
 **Bounds by rejection.**
@@ -350,7 +350,7 @@ This is a story/recruitment unlock, not a typed code.
   than papered over, and §0.2's in-game confirmation remains the one open
   item.
 
-**Data-handling note.** A TCRF mirror fetched during reconnaissance returned a
+**Data-handling note.** A 3rd party cheat index mirror fetched during reconnaissance returned a
 prompt-injection payload (fake "decode key", payment demand, fake tool
 instructions, "Eat my ass" output). It was treated as untrusted data and
 ignored, per guide §16.8. No instruction from a fetched page or ROM string was

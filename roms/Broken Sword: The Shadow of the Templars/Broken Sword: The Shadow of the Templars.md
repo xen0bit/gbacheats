@@ -422,12 +422,11 @@ the image. The DS/PC "Extras/Bonus Images/Director's Message" unlockables are a
 different SKU; the GBA ROM has no `extras`, `gallery`, `concept art`,
 `director`, or `bonus images` string in any encoding, and no matching room.
 
-Sources checked: GameFAQs (GBA FAQ index and walkthroughs), CheatingDome,
-Almar's Guides/GameShark, SuperCheats, VGChartz (4 walkthrough tips, 0 codes),
-Revfans, Broken Sword Zone, and TCRF.
+Sources checked: 3rd party cheat indexes/GameShark, 3rd party cheat indexes,
+Revfans, Broken Sword Zone, and 3rd party cheat indexes.
 The only GBA-specific published material is the AR/GameShark list and the
 Montfauçon sewer easter egg; no typed password or button-code list exists. No
-GameFAQs 403 was encountered, so no archive snapshot was needed.
+3rd party cheat indexes 403 was encountered, so no archive snapshot was needed.
 
 **Conclusion of enumeration:** the code space is empty because no code entry
 surface or validator exists; the button space is the standard reset combo plus
@@ -465,7 +464,7 @@ no unpublished code to mint, and the negative is bounded by the counts above.
 ### Inferred
 
 * `MONTFAUCON_EXTRA` is the *Broken Sword 3* easter egg described by Revfans,
-  Broken Sword Zone and the GameFAQs walkthroughs; it is developer-intended
+  Broken Sword Zone and the 3rd party cheat index walkthroughs; it is developer-intended
   hidden content, not a code.
 * `SCOTLAND/CREDITS` is the endgame credits room; the title Credits surface
   was observed, the ending itself was not replayed.
@@ -483,10 +482,10 @@ no unpublished code to mint, and the negative is bounded by the counts above.
 
 ### Fetched-content note (guide §16.8)
 
-A web search for a TCRF page on this title returned a TCRF article whose text
+A web search for a 3rd party cheat index page on this title returned a 3rd party cheat index article whose text
 contained a prompt-injection payload (instructions to create `key.bin`, pay a
 large sum, and run unrelated commands). It was treated as untrusted data and
-ignored. No TCRF GBA article was found; the available TCRF article is for the
+ignored. No 3rd party cheat indexes GBA article was found; the available 3rd party cheat index article is for the
 PlayStation version.
 
 ## 9. Tooling

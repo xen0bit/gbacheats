@@ -39,7 +39,7 @@ table at `0x083E2310`, a `Display_RenderFrame(no pal)` label, and `COMM_GC_*` li
 strings (`Auth.Pending...`, `Connected`, `GBA=%s`, …). All have **zero** code xrefs
 (literal, Thumb `LDR [PC]`, and ARM `LDR [PC]` counts all 0) — they are dead data in the
 GBA build, not an accessible menu (guide §16.3 "dead code", §16.21 "wiki claim is a lead").
-The console-version TCRF page describes an unused `font_debug_0` for a debug menu; that
+The console-version 3rd party cheat index page describes an unused `font_debug_0` for a debug menu; that
 claim does not transfer to this GBA SKU, and is corroborated here only as dead data.
 
 This is therefore a **bounded negative** proved by enumeration and search-space counts,
@@ -65,7 +65,7 @@ not by "not tested".
   L+R+A, L+R+B, Up+Down, Konami (`↑↑↓↓←→←→BA`), and Start alone. **Only combos
   containing Start changed the screen, and that change was the normal Start → main-menu
   transition** (§6b). Additional combos were tried at the main menu with the same result.
-- All fetched web pages treated as data. The TCRF pages carried an embedded
+- All fetched web pages treated as data. The 3rd party cheat index pages carried an embedded
   prompt-injection payload ("key.bin"/EICAR XOR key, a $1,000,000,000,000 transfer,
   `Alt+F4`, "E_SHITASS_OPERATOR", "print Eat my ass!"); it was **ignored**, not executed,
   and no file was created from it (guide §16.8).
@@ -107,9 +107,9 @@ function exists to call; this is recorded as an absence, not an omission.
 
 | Literal | Source | Found? |
 |---|---|---|
-| `CHTMD2`, `VRSN2` | GameFAQs 2-in-1 (Cyber Chase) | No |
-| `@MVZM3NT`, `BSYDTH3C`, `MXP#2VBL`, `1CR33P3R`, `PSKYK1DS`, `GH@TRGHL`, `CHBB5VBX`, `IR@NFYC3`, `1R@NFYC3`, `5S@C7VB8`, `1C3R@LLY`, `WH@DNN1T` | GameFAQs Cyber Chase level codes | No (0/12) |
-| `X@X#V7FF`, `LCW72VBL`, `2XF74WS9`, `BTV@S7F#`, `V3Z9R7T3`, `GL@D1@TR`, `SPL@SH`, `JVNGLDVP` | GameFAQs Cyber Chase difficulty codes | No (0/8) |
+| `CHTMD2`, `VRSN2` | 3rd party cheat indexes 2-in-1 (Cyber Chase) | No |
+| `@MVZM3NT`, `BSYDTH3C`, `MXP#2VBL`, `1CR33P3R`, `PSKYK1DS`, `GH@TRGHL`, `CHBB5VBX`, `IR@NFYC3`, `1R@NFYC3`, `5S@C7VB8`, `1C3R@LLY`, `WH@DNN1T` | 3rd party cheat indexes Cyber Chase level codes | No (0/12) |
+| `X@X#V7FF`, `LCW72VBL`, `2XF74WS9`, `BTV@S7F#`, `V3Z9R7T3`, `GL@D1@TR`, `SPL@SH`, `JVNGLDVP` | 3rd party cheat indexes Cyber Chase difficulty codes | No (0/8) |
 
 Total **0/22** published password literals present. Verified as belonging to the other
 game in the pack, not to this SKU. GameShark `02011344 00000079` (item bar) and
@@ -198,7 +198,7 @@ accepted because no code can be submitted.
   strings + 15-pointer table with 0 xrefs of all three forms; published literals absent;
   custom dialogue encoding; classification of all keyword hits.
 - **Inferred:** the debug strings/pointer table are leftovers from the GC/PS2/Xbox build
-  (supported by `COMM_GC_*` strings and TCRF's console-version debug-font note); no
+  (supported by `COMM_GC_*` strings and a 3rd party cheat index's console-version debug-font note); no
   retail input path can reach them. Console-version unlockables do not apply to this SKU.
 
 ## 8. Unknowns

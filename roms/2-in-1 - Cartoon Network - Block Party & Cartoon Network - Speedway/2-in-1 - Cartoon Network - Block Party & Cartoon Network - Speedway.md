@@ -449,7 +449,7 @@ order. The id order is the one the 9-bit rank encodes.
 
 ### 6.5 Speedway published codes
 
-Collected from Vizzed (full page, live) and GameFAQs/CheatHappens snippets (GameFAQs
+Collected from 3rd party cheat indexes snippets (3rd party cheat indexes
 returned 403 to automated fetch; only snippets were available). **None of these strings
 occurs in the ROM image** (literal search), so the codes are computed, not stored.
 
@@ -529,7 +529,7 @@ Field semantics established from the validator and from in-game effects:
 
   Total ≈ 3.63·10^22 (2^74.9) before the "players must be contiguous" rule prunes a
   minority. The *published* Block Party code space is empty — no Block Party code appears
-  on GameFAQs, Vizzed, TCRF or any wiki, because every code describes one save state.
+  on 3rd party cheat indexes or any wiki, because every code describes one save state.
 * **Novel codes generated and confirmed:** `VJC5BBBBBC?BC?BC` (characters Sarah+Cow,
   round-trips), `VSBSBBC?BC?BC?BC` (Cow), `VSBXBBC?BC?BC?BC` (Chicken),
   `VSB1BBC?BC?BC?BC` (Johnny Bravo), `VSBDBBC?BC?BC?BC` (Courage),

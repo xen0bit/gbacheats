@@ -131,11 +131,11 @@ Published codes checked against this image:
 
 | Source | Claim | ROM / emulator result |
 |---|---|---|
-| Neoseeker, ggmania, cheatingdome, ewzzy.com | US: Nickname `ALL`, Last `WRESTLER`, First `CLEAR`, Exchange Off, Middle blank → all wrestlers | **Verified** (`200/200`); literals present at `0x08B1934/38/46` |
+| 3rd party cheat indexes | US: Nickname `ALL`, Last `WRESTLER`, First `CLEAR`, Exchange Off, Middle blank → all wrestlers | **Verified** (`200/200`); literals present at `0x08B1934/38/46` |
 | Same sources | "Old Command" easter egg: `ALL` / `STYLE` / `CLEAR` → "Noooo! It's Old Command" | Not tested (§8) |
 | Same sources | Japanese-katakana name variant | Not applicable to this US image; not tested |
 | Same sources | Talent Search / Ironman / Practice unlocks | Save-bit unlocks, not codes (§16.18) |
-| GameHacking.org / libretro / almarsguides | CodeBreaker/GameShark codes | Out of scope (memory edits) |
+| 3rd party cheat indexes / libretro / 3rd party cheat indexes | CodeBreaker/GameShark codes | Out of scope (memory edits) |
 
 Name-entry alphabet (40 glyphs, in grid order): `A B C D E F G H I J K L M N O P Q R S T U V W X Y Z , . ? ! 0 1 2 3 4 5 6 7 8 9`.
 
@@ -149,7 +149,7 @@ the validator accepts **exactly one name triple**; there is no checksum or algor
 field to sweep, and no key-mask/button sequence. The full published list contains one US unlock triple, one
 US easter-egg triple, and one JP katakana triple.
 
-**Novel code generated and confirmed (absent from GameFAQs / Neoseeker / TCRF / VGChartz / all checked guides).**
+**Novel code generated and confirmed (absent from 3rd party cheat indexes / all checked guides).**
 
 ```
 Nickname = ALL ; Last Name = WRESTLER ; First Name = CLEAR

@@ -88,8 +88,7 @@ appeared on any screen.
 
 ### 3.2 Published codes tested
 
-GameFAQs guide 35590, GameHacking.org game 4820, Almars Guides, gbadrome, ROMSFun and
-chaptercheats agree on one list: an "Enable Code" `0000ACBE 000A` + `1003EEA4 0007`, then
+3rd party cheat index guide 35590, 3rd party cheat indexes game 4820, 3rd party cheat indexes Guides, gbadrome, 3rd party cheat indexes agree on one list: an "Enable Code" `0000ACBE 000A` + `1003EEA4 0007`, then
 `830026F0 03E7` (Quick Level), `83003180 270F` (Sickles), `430031D8 0909 00000019 0002`
 (Max Cards), `4300320A FFFF 00000003 0002 83003210 0BFF` (Almost All Cards),
 `43003190 0303 0000001B 0002` (Full Folio Bruti), plus per-character SP/MP/stat codes and

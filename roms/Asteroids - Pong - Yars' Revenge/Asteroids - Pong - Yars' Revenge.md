@@ -61,7 +61,7 @@ mirrored addresses to map.
 | `0x165000`–`0x17BFFF` | 176 KiB | Shell data: menu strings, 8×8 font, marquees, tilemaps, scoreboard tables |
 | `0x17C000`–`0x3FFFFF` | 2.56 MiB | Midnight Club: Street Racing asset bank (text, cars, races, bios) + tables appended by this build (`0x28377C` scene table, `0x28618C` graphics, `0x3FF000` pointer/graphics table) |
 
-The Midnight Club leftovers are documented on TCRF (`x1A10A0` onward). This
+The Midnight Club leftovers are documented on 3rd party cheat indexes (`x1A10A0` onward). This
 report goes further: the **menu code that consumes that bank is still linked
 and executable** at scene 3 (§2.4).
 
@@ -117,8 +117,8 @@ The value is a 2-bit field at `0x0300374A`, masked with `& 3`
 space is **0,1,2,3** and nothing else. It is displayed literally (the menu can
 and does show `GAME TYPE 0`), default `1`, and wraps `3 → 0`.
 
-Value `0` is not in any published list (GameFAQs documents only the fake
-invulnerability code; TCRF documents only unused text). It was selected through
+Value `0` is not in any published list (3rd party cheat indexes document only the fake
+invulnerability code; 3rd party cheat indexes document only unused text). It was selected through
 the normal menu and observed in gameplay (§6b.5). The four values are read by
 the game logic at `0x08001B34`, `0x08001E2C`, `0x08001FD4`, `0x0800235C`,
 `0x08002414`, `0x0800285C`, `0x080028FE`, `0x08002988`, `0x0800317C`;
@@ -272,7 +272,7 @@ Forcing `scene=3` gives the Midnight Club menu; forcing `scene=4/5/6` with
 | `0x08170568` | 40-symbol initials alphabet `._ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789*` |
 | `0x08170594` | `CONTINUE GAME`, `ABORT GAME` (2-item overlay) |
 | `0x081705BC` | `PUSH START`, `HIGH SCORES`, `PUSH START TO CONTINUE` |
-| `0x081A10A0` | start of Midnight Club text bank (TCRF-documented) |
+| `0x081A10A0` | start of Midnight Club text bank (3rd party cheat index-documented) |
 | `0x081A1DBC` | `PASSCODE IS` (dead) |
 | `0x081A1FC8` | `PASSCODE ENTRY` (dead) |
 | `0x081A1E94` | `PAUSE MENU`, `RESET RACE`, `BACK TO MAIN MENU` (dead) |
@@ -452,12 +452,12 @@ format strings `P%i %8i %3i %3i`, `P%i %8i %3i`. The initials instructions
 
 | Source | Code | Result |
 |---|---|---|
-| GameFAQs (GBA 929035) | `B A A B A B B A B B A B B` — "Invulnerability at mode selection" | **Rejected.** Entered at the title (the only screen where A/B are inert, since every menu confirms with A), then Asteroids 1P played 45 s fast-forward: ship destroyed, `GAME OVER`, score 280 (`t_after45.png`). No mask table or sequence matcher exists in the ROM (§6b.3). |
-| GameFAQs (same page) | `CHEATONX` password + `Select` for level select | **Rejected.** Literal absent (`grep -abo "CHEATONX"` = not found); there is no password field; `Select` is never read; "zone/level select" does not exist in this compilation. |
-| GameFAQs glitch | fly behind the Asteroids scoreboard | Not a code (2600/arcade gameplay quirk); out of scope. |
-| GameFAQs easter egg | `HSWWSH` in Yars | 2600 in-game trick, not ASCII in this ROM; not verified (§8). |
-| Ethereal Games | Action Replay / GameShark codes | Memory patches, out of scope; not usable as in-game input. |
-| TCRF | unused Midnight Club text | Confirmed independently; extended here with the executable scene-3 menu. |
+| 3rd party cheat indexes | `B A A B A B B A B B A B B` — "Invulnerability at mode selection" | **Rejected.** Entered at the title (the only screen where A/B are inert, since every menu confirms with A), then Asteroids 1P played 45 s fast-forward: ship destroyed, `GAME OVER`, score 280 (`t_after45.png`). No mask table or sequence matcher exists in the ROM (§6b.3). |
+| 3rd party cheat indexes | `CHEATONX` password + `Select` for level select | **Rejected.** Literal absent (`grep -abo "CHEATONX"` = not found); there is no password field; `Select` is never read; "zone/level select" does not exist in this compilation. |
+| 3rd party cheat indexes glitch | fly behind the Asteroids scoreboard | Not a code (2600/arcade gameplay quirk); out of scope. |
+| 3rd party cheat indexes easter egg | `HSWWSH` in Yars | 2600 in-game trick, not ASCII in this ROM; not verified (§8). |
+| 3rd party cheat indexes | Action Replay / GameShark codes | Memory patches, out of scope; not usable as in-game input. |
+| 3rd party cheat indexes | unused Midnight Club text | Confirmed independently; extended here with the executable scene-3 menu. |
 
 ---
 

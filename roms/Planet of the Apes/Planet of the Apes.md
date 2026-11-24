@@ -184,7 +184,7 @@ which is on no published list.
 | 8 | `QK6293` | ditto |
 | 9 | `JDDUTJ` | ditto |
 | 10 | `046PJ#` | ditto |
-| 11 | `3#9QLS` | GameFAQs et al. truncate to `3` |
+| 11 | `3#9QLS` | 3rd party cheat indexes et al. truncate to `3` |
 | 12 | `C12KYY` | published literal |
 | 13 | `CBCYPH` | published literal |
 
@@ -213,8 +213,7 @@ the system is algorithmic.
 * **Validator model:** §5.2 agrees with the ROM checker on both a crafted accept
   and a crafted reject (debugger oracle), and with the game on `9BBBBB` (accept)
   and `BBBBBB` (reject).
-* **Novel code:** `9BBBBB` — absent from GameFAQs, Cheat Happens,
-  GameRevolution, Cheat Code Central and VGChartz lists — entered on the real
+* **Novel code:** `9BBBBB` — absent from 3rd party cheat indexes lists — entered on the real
   wheel and accepted (screenshots `s_9bc.png`, `s_9b_result.png`,
   `s_9b_game2c.png`; control `s_bbbbb_resultc.png`).
 * **Button-code surface:** one 6-entry table; `cmp r0,#6` at `0x0800A462`;

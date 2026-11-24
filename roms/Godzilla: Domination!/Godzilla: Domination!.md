@@ -28,7 +28,7 @@ scene index **2** in the game's scene-state machine (IWRAM byte `0x030025F8`, mi
 `0x030425F8`). Setting that byte to 2 immediately replaces the current screen with a two-column
 list of all **47** in-game scene names.
 
-The published method (TCRF) is the CodeBreaker code `74000130 00FF 330425F8 0002` plus "press
+The published method (3rd party cheat indexes) is the CodeBreaker code `74000130 00FF 330425F8 0002` plus "press
 L+R". **The L+R press is not an in-game trigger** — it is the CodeBreaker button-activator
 condition for applying the byte write. I proved (screenshot `s_gate2_nolr.png`) that writing
 `0x02` to the byte alone opens the menu with no controller input at all. This is a correction to

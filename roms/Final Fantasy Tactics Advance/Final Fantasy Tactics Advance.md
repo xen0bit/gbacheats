@@ -21,9 +21,9 @@ Phase 0 result: entry word `0xEA00002E` (stock `b 0x080000C0` crt0), Nintendo lo
 
 **There is no in-game cheat/password/button-code system and no reachable hidden debug menu in this ROM.** The only input surfaces that accept controller text are (a) the three-entry title menu and its colour-mode submenu, (b) the save/load menu, (c) the player/clan **name-entry** screen, and (d) normal battle/menu navigation. The name-entry screen is a label field, not a validator (§16.2b): its alphabet is `A-Z / a-z / . , -` plus a `123` tab, it is pre-filled with `Marche`, and no comparison against user text exists in the decoded text bank or in the `strcmp`/`memcmp`-style scan.
 
-The one developer button code that **does** exist is the **soft reset `A+B+Start+Select`** (active-high key mask `0x000F`), verified in the emulator: it immediately reboots to the Square Enix logo. It is documented publicly (IGN "Quick Reset", CheatCodeCentral "In game reset") and is a system convenience, not a cheat.
+The one developer button code that **does** exist is the **soft reset `A+B+Start+Select`** (active-high key mask `0x000F`), verified in the emulator: it immediately reboots to the Square Enix logo. It is documented publicly (3rd party cheat indexes "Quick Reset", CheatCodeCentral "In game reset") and is a system convenience, not a cheat.
 
-Every published "cheat code" for this game is a GameShark / CodeBreaker / Action Replay **memory patch** (encrypted 8-hex-digit codes such as `82001F54 FFFF`, `42000098 03E7`, `D0000020 0004`) — explicitly out of scope and not interpreted by the ROM. No published password list, no published debug button combo, and no password screen exist for this SKU. TCRF's FFTA page lists only unused dialogue and regional differences; the "battlefield select debug menu" documented by TCRF belongs to the **PlayStation** *Final Fantasy Tactics*, a different game.
+Every published "cheat code" for this game is a GameShark / CodeBreaker / Action Replay **memory patch** (encrypted 8-hex-digit codes such as `82001F54 FFFF`, `42000098 03E7`, `D0000020 0004`) — explicitly out of scope and not interpreted by the ROM. No published password list, no published debug button combo, and no password screen exist for this SKU. a 3rd party cheat index's FFTA page lists only unused dialogue and regional differences; the "battlefield select debug menu" documented by 3rd party cheat indexes belongs to the **PlayStation** *Final Fantasy Tactics*, a different game.
 
 The game's true unlockables (Expert Missions, Judge Missions, five secret characters, credits) are ordinary **save-flag/progress gates** (§16.18), not codes: nothing in the controller input path writes those flags.
 
@@ -102,11 +102,11 @@ Alphabet visible on screen: `A B C ... Z / a b c ... z / . , -`, plus a `123` ta
 
 | Code | Mask (active-high) | Effect | Evidence |
 |---|---|---|---|
-| `A+B+Start+Select` | `0x000F` | Warm reboot to Square Enix logo | Observed (screenshot + 103,675-byte state delta); published by IGN/CheatCC |
+| `A+B+Start+Select` | `0x000F` | Warm reboot to Square Enix logo | Observed (screenshot + 103,675-byte state delta); published by 3rd party cheat indexes |
 
 ### 6.5 Unlockables (progress/save-flag gated, not codes)
 
-From GameFAQs/CheatCC (corroborated by TCRF's unused-dialogue notes): Expert Missions — beat the game once, star appears next to the name; Judge Missions — clear all 300 numbered missions, then visit Bervenia Palace; secret characters Babus (Left Behind + With Babus), Shara (A Maiden's Cry + enter a town), Ritz (Mortal Snow), Cid (all 300 missions), Ezel (Gossip in Card Shop → Reconciliation); Credits — 300 missions + Judge missions. All are things the **game sets** on story/mission completion; no controller input writes them.
+From 3rd party cheat indexes (corroborated by a 3rd party cheat index's unused-dialogue notes): Expert Missions — beat the game once, star appears next to the name; Judge Missions — clear all 300 numbered missions, then visit Bervenia Palace; secret characters Babus (Left Behind + With Babus), Shara (A Maiden's Cry + enter a town), Ritz (Mortal Snow), Cid (all 300 missions), Ezel (Gossip in Card Shop → Reconciliation); Credits — 300 missions + Judge missions. All are things the **game sets** on story/mission completion; no controller input writes them.
 
 ## 6b. Enumeration
 
@@ -146,15 +146,15 @@ From GameFAQs/CheatCC (corroborated by TCRF's unused-dialogue notes): Expert Mis
 | Random names | `0x005680DC` | 725 | 725 |
 | **Total** | | **2,757** | **2,757 (100%)** |
 
-Keyword census over all 2,757 decoded strings: `debug` 0, `password` 0, `cheat` 0, `warp` 0, `sound test` 0, `battle test` 0, `level select` 0, `code` 0, `test` 0, `invalid` 0, `develop` 0, `hidden` 1 (`Hidden Vein`, a mission), `secret` 3 (`Secret Books` item + mission, `Stone Secret` mission), `demo` 2 (substring of `Demon Bell`, `Demon Redux`). `dummy`/`Dummy` placeholders: 110 in the universal table, plus unused mission-name tails — consistent with Data Crystal's published count. `strings -t x -n 4` on the raw ROM produced **zero** English keyword hits (all output is binary/font data), which is why the font decode was mandatory before a negative could be claimed.
+Keyword census over all 2,757 decoded strings: `debug` 0, `password` 0, `cheat` 0, `warp` 0, `sound test` 0, `battle test` 0, `level select` 0, `code` 0, `test` 0, `invalid` 0, `develop` 0, `hidden` 1 (`Hidden Vein`, a mission), `secret` 3 (`Secret Books` item + mission, `Stone Secret` mission), `demo` 2 (substring of `Demon Bell`, `Demon Redux`). `dummy`/`Dummy` placeholders: 110 in the universal table, plus unused mission-name tails — consistent with a 3rd party cheat index's published count. `strings -t x -n 4` on the raw ROM produced **zero** English keyword hits (all output is binary/font data), which is why the font decode was mandatory before a negative could be claimed.
 
 ### Published-code verification
 
-Every code found by web search (GameFAQs FAQ 26118/25621/40618, CheatCC, Ethereal Games, 53lu, ROMSFUN, supercheats) is a GameShark/CodeBreaker/Action-Replay **memory patch** or an encrypted 12-hex PAR3 code. Examples verified against the ROM text: `82001F54 FFFF` (money), `42000098 03E7` (HP), `D0000020 0004` (Select-to-win), `74000130 00FF` (L+R weaken enemies), master code `000037AE 000A / 10000488 0007`. None is a literal in the ROM (they are external patch instructions), none is in scope, and none was applied. **No password literal, no published debug combo, and no PS2/console-version code applies to this SKU.** The one published button code (`A+B+Start+Select`) was entered and confirmed.
+Every code found by web search (3rd party cheat index FAQ 26118/25621/40618, 3rd party cheat indexes) is a GameShark/CodeBreaker/Action-Replay **memory patch** or an encrypted 12-hex PAR3 code. Examples verified against the ROM text: `82001F54 FFFF` (money), `42000098 03E7` (HP), `D0000020 0004` (Select-to-win), `74000130 00FF` (L+R weaken enemies), master code `000037AE 000A / 10000488 0007`. None is a literal in the ROM (they are external patch instructions), none is in scope, and none was applied. **No password literal, no published debug combo, and no PS2/console-version code applies to this SKU.** The one published button code (`A+B+Start+Select`) was entered and confirmed.
 
 ### Cross-check with sibling sessions (independent)
 
-TCRF documents an extensive debug menu for *Final Fantasy IV Advance* (TOSE engine, debug room reached by memory patch) and unused text for *Final Fantasy I & II: Dawn of Souls*. Those are different engines/SKUs; nothing found here is shared with the GBA titles analysed on `:316`/`:317`. The PS1 *Final Fantasy Tactics* battlefield debug menu likewise does not exist in this GBA image.
+3rd party cheat indexes document an extensive debug menu for *Final Fantasy IV Advance* (TOSE engine, debug room reached by memory patch) and unused text for *Final Fantasy I & II: Dawn of Souls*. Those are different engines/SKUs; nothing found here is shared with the GBA titles analysed on `:316`/`:317`. The PS1 *Final Fantasy Tactics* battlefield debug menu likewise does not exist in this GBA image.
 
 ## 7. Validation evidence
 
@@ -173,7 +173,7 @@ TCRF documents an extensive debug menu for *Final Fantasy IV Advance* (TOSE engi
 
 * `mgba -3` (SDL) + `Xvfb :315` + `openbox`, `xdotool` XTEST input, `import -window root` screenshots.
 * `decode.py` / `decode2.py` — Python charset decoders for the four pointer tables (output `decoded_full.txt`, 2,757 rows). `keyscan.py`, `buttonscan.py` — Capstone/raw Thumb scans for `KEYINPUT` literals and key-mask comparisons. `combo_test.py` + PIL/numpy — 36-combo sweep with image-difference classification. `savestate.py` — parse mGBA `.ss1` PNG, zlib-decompress `gbAs` chunk, diff IWRAM. `objdump -M force-thumb` for the key routine at `0x08000482`.
-* Web sources: TCRF FFTA page (archived 2023-11-27), Data Crystal FFTA ROM map / string tables, GameFAQs FAQs 26118/25621/40618 and cheats page, CheatCC, Ethereal Games, 53lu, IGN GBA cheats.
+* Web sources: 3rd party cheat indexes FFTA page (archived 2023-11-27), 3rd party cheat indexes FFTA ROM map / string tables, 3rd party cheat index FAQs 26118/25621/40618 and cheats page, 3rd party cheat indexes GBA cheats.
 * No ROM or copyrighted asset is redistributed; only hashes, addresses, algorithms, and my own scripts are reported.
 
 ---

@@ -30,7 +30,7 @@ This ROM has **no reachable password, button-code or password-style unlock
 system**. Every text entry point, menu and in-game screen was walked on
 emulation; the only occurrences of the words *password*, *cheat* and *unlock*
 in the image are (a) a block of **Nicktoons Racing leftovers** (same Climax
-engine, documented by TCRF) that contains the literal `Enter Password` at
+engine, documented by 3rd party cheat indexes) that contains the literal `Enter Password` at
 0x6DA94, and (b) the strings of a **six-entry developer cheat menu** at
 0x9992C–0x999A0.
 
@@ -56,7 +56,7 @@ register-propagating scan over the whole executable region (0x0–0x80000,
 Capstone, tracking `ldr =addr` plus constant `add`/`sub`/`mov`) found exactly
 one store to the address — `0x0800DB5C`, value 0 — and no second writer. The
 branch is therefore never taken: the menu is
-**dead code** left over from the April 2004 prototype (TCRF: the prototype
+**dead code** left over from the April 2004 prototype (3rd party cheat indexes: the prototype
 had a level select with a cheat menu opened with L/R). Holding L or R on the
 retail map, alone or with A/B/Select/Start, does not open it.
 
@@ -68,7 +68,7 @@ unlockable progression (levels/experiments), which is save data, not a code.
 
 The published first-game code (`hold R+Select and press A` on *Lilo &
 Stitch* 2002) was tested on this SKU: it produces no effect and in fact
-suppresses the A press. The sequel's published lists (GameFAQs/Almar's) contain
+suppresses the A press. The sequel's published lists (3rd party cheat indexes) contain
 only CodeBreaker memory-edit codes, which are out of scope; no in-game
 password or button-code list exists.
 
@@ -129,7 +129,7 @@ here.
 | `0x030012FE` | 1 | “invincibility” flag |
 | `0x0800DB24`…`0x0800DB44` | — | map-screen init that clears `0x03001420`…`0x03001438` and the gate |
 | `0x0806D960` | 4×N | global UI label-pointer table (contains both Lilo 2 and Nicktoons leftovers) |
-| `0x6D7E8` | — | start of Nicktoons Racing leftover text (TCRF-confirmed) |
+| `0x6D7E8` | — | start of Nicktoons Racing leftover text (3rd party cheat index-confirmed) |
 | `0x6DA94` | — | `Enter Password` — Nicktoons Racing leftover, no Lilo 2 menu uses it |
 
 crt0 initialises IWRAM from ROM in three blocks (`0x0800010C`…`0x08000138`):
@@ -261,9 +261,9 @@ password entry screen in this game.
 
 ### Why the hidden menu is in no published list
 
-GameFAQs, Almar's and the CodeBreaker mirrors publish only memory-edit codes
+3rd party cheat indexes and the CodeBreaker mirrors publish only memory-edit codes
 for this SKU (e.g. `32009E86 0006` infinite health); none mention a cheat
-menu. TCRF documents only the leftover text and the unused level icon, not
+menu. 3rd party cheat indexes document only the leftover text and the unused level icon, not
 the menu. The menu exists in the image and was exercised here; its gate makes
 it unreachable on a retail cart without a memory edit.
 
@@ -350,7 +350,7 @@ it unreachable on a retail cart without a memory edit.
 * The cheat block was not found to be persisted to the 512-byte EEPROM save;
   a fresh boot did not show the extra `Extras` entries. Whether the prototype
   wrote it to save is outside this image.
-* `0x00860F10` (TCRF's unused-level-icon address) is larger than this 8 MiB
+* `0x00860F10` (a 3rd party cheat index's unused-level-icon address) is larger than this 8 MiB
   file; it could not be reproduced as a file offset here and is treated as an
   unverified external note.
 

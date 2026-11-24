@@ -23,7 +23,7 @@ Embedded-header scan: scanning all 0x400000 bytes for the 156-byte Nintendo logo
 found **exactly one** header, at file offset 0x0. There is no multiboot stub, no
 second game image, no scene cracktro patch at the entry word, and no appended
 trainer. The boot splash screens are Activision → Taito → **Torus Games**
-(`www.torus.com.au`, string at file 0x5C882); the VGChartz SKU record identifies
+(`www.torus.com.au`, string at file 0x5C882); the 3rd party cheat indexes SKU record identifies
 this as *Space Invaders EX* / *Space Invaders* (GBA), Torus Games, 2002.
 
 ## 2. Executive summary
@@ -69,7 +69,7 @@ of the encodings searched (§16.11: same title, different game).
 
 | # | Sequence | Published? | Effect |
 |---|---|---|---|
-| 0 | B, A, Select, Select, B, A, Left, Left | Yes (SuperCheats/GameFAQs) | Cheat menu → level select; observed landing on the **PLUTO** planet intro |
+| 0 | B, A, Select, Select, B, A, Left, Left | Yes (3rd party cheat indexes) | Cheat menu → level select; observed landing on the **PLUTO** planet intro |
 | 1 | Left, A, Select, Select, Up, Up | Yes | Invincibility in Classic Mode (published label; not isolated in-game) |
 | 2 | **Left, R, L, Right, Left, R, L, Right** | **No — novel** | Undocumented unlock; accepted with index 2 |
 | 3 | B, A, Down, B, A, Down, B, Up, Select | Yes | Maniacal Skill Level (published label; not isolated in-game) |
@@ -154,13 +154,13 @@ the cheat registrar (it is outside every registered sequence).
 
 | Published source | Literal / sequence | Verified? |
 |---|---|---|
-| SuperCheats / GameFAQs (GBA) | B,A,Sel,Sel,B,A,L,L | Yes — table record 0, matched in emulator |
-| SuperCheats / GameFAQs (GBA) | Left,A,Sel,Sel,Up,Up | Yes — record 1, matched in emulator (`r1=1`) |
-| SuperCheats / GameFAQs (GBA) | B,A,Down,B,A,Down,B,Up,Sel | Yes — record 3, matched in emulator (`r1=3`) |
-| GamesRadar / GameFAQs "9 lives" (Right×3,Down,Circle,Left,Down) | — | Not in table; Circle-button wording belongs to the PS1 version |
-| GameFAQs/IGN/Game Boy "CLSS1281999DBM" | absent from ROM | GBC SKU; `grep -abo` and case-insensitive `clss` both zero hits |
+| 3rd party cheat indexes | B,A,Sel,Sel,B,A,L,L | Yes — table record 0, matched in emulator |
+| 3rd party cheat indexes | Left,A,Sel,Sel,Up,Up | Yes — record 1, matched in emulator (`r1=1`) |
+| 3rd party cheat indexes | B,A,Down,B,A,Down,B,Up,Sel | Yes — record 3, matched in emulator (`r1=3`) |
+| 3rd party cheat indexes "9 lives" (Right×3,Down,Circle,Left,Down) | — | Not in table; Circle-button wording belongs to the PS1 version |
+| 3rd party cheat indexes/Game Boy "CLSS1281999DBM" | absent from ROM | GBC SKU; `grep -abo` and case-insensitive `clss` both zero hits |
 | Game Boy level passwords `wwyx tc2n qw79vy` etc. | absent from ROM | GBC SKU, not this image |
-| TCRF "To do: debug code" claim | none found | no published trigger; debug renderer is dead code (below) |
+| 3rd party cheat indexes "To do: debug code" claim | none found | no published trigger; debug renderer is dead code (below) |
 
 Fetched web pages were treated strictly as data; no instruction found in them
 was executed.
@@ -185,7 +185,7 @@ sequence not equal to one of these four — there is no larger latent space.
 | 2 | `0x0805C74E` | Left,R,L,Right,Left,R,L,Right | **breakpoint hit, `r3=0x0805C74E`, `r1=2`** — novel |
 | 3 | `0x0805C762` | B,A,Down,B,A,Down,B,Up,Sel | breakpoint hit, `r3=0x0805C762`, `r1=3` |
 
-**Novel code (not in GameFAQs, VGChartz, TCRF, SuperCheats or any wiki):**
+**Novel code (not in 3rd party cheat indexes or any wiki):**
 
 ```
 Left, R-shoulder, L-shoulder, Right, Left, R-shoulder, L-shoulder, Right

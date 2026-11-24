@@ -41,8 +41,7 @@ accepted codes — one published, one not published anywhere.**
 2. **Code A (published, verified):** `Up Up Down Down Left Left Left Right B A`
    → sets bit 9 (`0x0200`) of `0x02008110` → unlocks Mickey's third board
    **ANGER HARNESSED** (SPD/JMP/AIR bars visibly higher than the two stock
-   boards). Every published page found (cheatingdome, Planet Cheats,
-   supercheats, Neoseeker) lists this sequence, with two different labels
+   boards). Every published page found (3rd party cheat indexes) lists this sequence, with two different labels
    ("Hidden board" and "Bonus level") that turn out to be the same code.
 3. **Code B (unpublished, this report):** `Up Up Down Down L R L R R A`
    (shoulder buttons L and R, not the d-pad) → sets bit 12 (`0x1000`) of
@@ -329,8 +328,7 @@ Text / button spaces searched (to bound the "no other system" claim):
 
 **Code B — `Up, Up, Down, Down, L, R, L, R, R, A`** unlocks the **M.M.** board.
 
-* Not in any published list: the lists found (cheatingdome, Planet Cheats,
-  supercheats, Neoseeker, GameFAQs mirrors and the VisualBoyAdvance ROM page)
+* Not in any published list: the lists found (3rd party cheat indexes, 3rd party cheat index mirrors and the VisualBoyAdvance ROM page)
   all reproduce code A with d-pad buttons only; none mentions the shoulder
   buttons for this game.
 * Entered through the actual title screen (no RAM patch): the flag word
@@ -370,9 +368,9 @@ aliases.
 
 | Claim | Source | Test | Result |
 |---|---|---|---|
-| "Hidden board: on the code menu, enter Up,Up,Down,Down,Left,Left,Left,Right,B,A" | cheatingdome, VisualBoyAdvance ROM page | typed on the `Press Start` title | **works** — ANGER HARNESSED, flag `0x0203`. There is no separate "code menu": the matcher only runs on the title |
-| "Bonus level: press Up(2), Down(2), Left(3), Right, B, A at the code screen" | cheatingdome, supercheats | typed as the 7-press variant | **rejected** (flag `0x0003`); it is a truncated transcription of code A, and code A's effect is a board, not a level |
-| "At the title screen … press up,up,down,down,left,left,left,right,B,A; you'll hear a signal … a powered-up board called Anger Harnessed" | Neoseeker (filed under the GC page) | typed on the GBA title | **works on GBA** — same code A, same board name; the GC-page entry is a mis-filed GBA code |
+| "Hidden board: on the code menu, enter Up,Up,Down,Down,Left,Left,Left,Right,B,A" | 3rd party cheat indexes, VisualBoyAdvance ROM page | typed on the `Press Start` title | **works** — ANGER HARNESSED, flag `0x0203`. There is no separate "code menu": the matcher only runs on the title |
+| "Bonus level: press Up(2), Down(2), Left(3), Right, B, A at the code screen" | 3rd party cheat indexes | typed as the 7-press variant | **rejected** (flag `0x0003`); it is a truncated transcription of code A, and code A's effect is a board, not a level |
+| "At the title screen … press up,up,down,down,left,left,left,right,B,A; you'll hear a signal … a powered-up board called Anger Harnessed" | 3rd party cheat indexes | typed on the GBA title | **works on GBA** — same code A, same board name; the GC-page entry is a mis-filed GBA code |
 | GameShark / CodeBreaker address lists | various | out of scope | used only as address hints; none of the listed addresses matched this ROM's flag word |
 
 ## 7. Validation evidence

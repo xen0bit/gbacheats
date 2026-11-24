@@ -21,7 +21,7 @@ Hashes also recorded in `/tmp/magicring/`. Addresses below are for this exact im
 
 The game has a **4-symbol numeric password system** reached from `Title → CONTINUE`. The on-screen keypad alphabet is exactly the digits **1–8** (no 0, no 9), so the full space is **8⁴ = 4,096** codes. The validator at `0x0801D38C` is **algorithmic**, not a lookup of the published strings: it reads the four digits back from the shadow-OAM sprite tile indices, packs them into 12 bits, applies a 2-bit XOR mask, splits the result into three fields, checks a 2-bit checksum and a 15×3 acceptance table, and on success writes the character/level globals and starts the game.
 
-Exhaustive reimplementation of the validator gives **exactly 36 accepted codes out of 4,096 (0.88%)**. All 12 codes published on GameFAQs/IGN/Neoseeker/CheatCC decode and validate. **24 of the 36 accepted codes are absent from every published list**; one of them (`5488`, Tom with field value 1) was entered on the real screen, accepted, and RAM-verified. Two rejection classes were proven in-game: a checksum-valid code with a reserved field zero (`8111`) and a checksum-invalid code (`2111`) both return to the character-select screen.
+Exhaustive reimplementation of the validator gives **exactly 36 accepted codes out of 4,096 (0.88%)**. All 12 codes published on 3rd party cheat indexes decode and validate. **24 of the 36 accepted codes are absent from every published list**; one of them (`5488`, Tom with field value 1) was entered on the real screen, accepted, and RAM-verified. Two rejection classes were proven in-game: a checksum-valid code with a reserved field zero (`8111`) and a checksum-invalid code (`2111`) both return to the character-select screen.
 
 No developer/debug menu, button sequence, hidden alphabet, or second code format was found. In-game text is font/tile-based (zero ASCII hits for `password`, `debug`, `cheat`, `level select`, etc. in 8 MiB), and the keypad handler was fully disassembled (only three actions: type digit, backspace, submit).
 
@@ -110,7 +110,7 @@ T3 entries of `0x15` (21) are unrepresentable by the 4-bit r5 and make that r4 r
 2856(1,9,12) 1176(0,5,9)  6718(0,5,14) 5228(1,9,13) 8238(0,8,11)* 5348(1,5,9)*
 2748(0,7,8)  1358(1,7,7)  8358(0,4,7)  3868(1,2,4)  6878(0,1,2)* 5488(1,1,1)
 ```
-`*` = appears in a published list (12 codes). **24 codes are novel** (not on GameFAQs, IGN, Neoseeker, CheatCC, or SuperCheats).
+`*` = appears in a published list (12 codes). **24 codes are novel** (not on 3rd party cheat indexes).
 
 **Novel code proven in game.** `5488` → `(char=1, field5=1, field4=1)`: no published list gives Tom a level-1 code (published Tom codes begin at `3783` / Chapter 2). Entered on the keypad (`novel5488_pre.png`), accepted (`novel5488_result.png` — "Now Tom, you keep an eye on this magic ring…"), and RAM-verified: `0x03005340=0x01`, `0x030063D4=0x01`, `0x03005FFC=0x02`. A published control `3783` gave `0x03005340=0x01`, `0x030063D4=0x03`, confirming the decoder's field assignment. A second novel code, `6718` (`char=0, field5=5, field4=14`), is accepted (Jerry game starts) but loads corrupt level graphics — an accepted-but-unplayable combination, documented rather than counted as a useful unlock.
 

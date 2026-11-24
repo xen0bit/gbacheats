@@ -86,7 +86,7 @@ button-cheat table:
   published cheat lists mention) and then toggles a flag, sets a bit in the
   save profile, or writes a stat.
 
-Everything publicly documented for GT (GameFAQs/Cheat Code Central) was found
+Everything publicly documented for GT (3rd party cheat indexes) was found
 verbatim in the in-game table, plus **four menu codes that are not on any
 published list**: the unlock-all-characters code, the +20,000 Zeni code, and
 two secret-flag codes. Two of those four (unlock-all and Zeni) were confirmed
@@ -393,7 +393,7 @@ bit is set in both bitfields at `profile+0x28` and `profile+0x2C`.
 (`0x0020`/`0x0010`); `Lb`/`Rb` are the **shoulder** buttons
 (`0x0200`/`0x0100`).
 
-The public names come from the GameFAQs/CheatCC GT lists and are attached by
+The public names come from the 3rd party cheat indexes GT lists and are attached by
 order; the byte-level effects are from the disassembly.
 
 ### 6.2 Title-menu codes — ROM `0x0885A8C8` (file `0x85A8C8`)
@@ -455,9 +455,9 @@ fires exactly once per entry, on its final button.
 
 ### 6b.2 Published vs. novel
 
-Every published GT code (GameFAQs, Cheat Code Central) is present and matches
+Every published GT code (3rd party cheat indexes) is present and matches
 the ROM byte-for-byte: all 8 in-game codes (the lists are split between the
-two sources; "Refill health" is only on Cheat Code Central) and 5 title
+two sources; "Refill health" is only on 3rd party cheat indexes) and 5 title
 character codes.
 
 Four title-menu entries appear in **no published list**:

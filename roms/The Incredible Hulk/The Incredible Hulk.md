@@ -16,7 +16,7 @@
 | SHA-1 | `7076ec6b68098b9ace9d8e5f4a6bbfdc66c32e4e` |
 | SHA-256 | `e00e5da3e7ce372945a1a863096dcee63ce4d760e028deac8d525838006097db` |
 
-GameFAQs identifies the SKU as Pocket Studios / Universal Interactive, 2003-05-27.
+3rd party cheat indexes identify the SKU as Pocket Studios / Universal Interactive, 2003-05-27.
 All addresses below are ROM addresses (`file offset + 0x08000000`) unless marked RAM.
 
 ## 2. Executive summary
@@ -131,8 +131,8 @@ So the mode-1 code is exactly `(B, Left, Up, Down) x 4`.
 
 | Item | Value |
 |---|---|
-| Published 7-button code | D, R, D, R, L, L, U (GameFAQs, Cheat Happens) |
-| SuperCheats 8-button variant | D, R, D, R, L, L, L, U — **rejected** (see §6b) |
+| Published 7-button code | D, R, D, R, L, L, U (3rd party cheat indexes) |
+| 3rd party cheat indexes 8-button variant | D, R, D, R, L, L, L, U — **rejected** (see §6b) |
 | Novel 16-button code | B, L, U, D, B, L, U, D, B, L, U, D, B, L, U, D |
 | Key masks | A=0x001, B=0x002, Select=0x004, Start=0x008, Right=0x010, Left=0x020, Up=0x040, Down=0x080, R=0x100, L=0x200 |
 | Mode-0 state table | `0x08013fd4` (8 pointers) |
@@ -158,8 +158,7 @@ path. The only other `0x0801caec` caller cluster outside the pause handler is
 at `0x080121fa`–`0x080122e6` (third machine, unconfirmed) and single callers at
 `0x08012934`, `0x0803bda`, `0x0803c7a`, `0x08056bc` (menu/dialogue handling).
 
-**Novel code.** `B, Left, Up, Down` × 4 is absent from GameFAQs, Cheat Happens,
-SuperCheats, CodeTwink, Almar's Guides, GameHacking.org and Cheat Happens — all
+**Novel code.** `B, Left, Up, Down` × 4 is absent from 3rd party cheat indexes — all
 of which publish only the 7-button level skip or cheat-device patches. It was
 entered on the real keypad during gameplay with the gate byte patched to 1, and
 the ROM's own state machine set `0x03000474: 00 → 01` (savestate `ss5` vs the

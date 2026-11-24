@@ -46,7 +46,7 @@ There is no password-entry field anywhere. The "level passwords" published for
 *Noddy* are for the **Game Boy** title *Noddy and the Birthday Party* (character-name
 codes such as "Tessie, Noddy, Big Ears, Tessie"), a different SKU and engine (§16.11).
 The only codes published for this GBA SKU are CodeBreaker/GameShark raw memory patches,
-which are explicitly out of scope; none of their literals appear in the ROM. A TASVideos
+which are explicitly out of scope; none of their literals appear in the ROM. A 3rd party cheat index
 forum submission for this exact GBA game independently states that the level select is
 available from the start and that the game has no unlockables and no 100% category.
 That claim was treated as data and re-verified locally rather than trusted.

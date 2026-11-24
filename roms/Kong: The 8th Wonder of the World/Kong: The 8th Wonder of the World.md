@@ -34,12 +34,12 @@ header, not the game. No trainer menu exists in the image.
 **This SKU has no developer-intended cheat system: no password screen, no
 button code, no hidden/level-select/debug menu, and no unlockable content
 beyond ordinary collectibles.** All "Kong GBA level passwords" published on
-GameFAQs, SuperCheats, GameGenie, VGChartz, Mogelpower, Planet Cheats, etc.
+3rd party cheat indexes, etc.
 (`JASON88`, `CHIROS20`, `TANN29`, `SHAMAN70`, `LUA28`, `LORNA26`, `APBATO9`,
 `RAMONE52`, `ONIMOUS52`, `JENKINS48`, `KEEPAL52`, and the variant set
 `JASON01`/`CHIROS53`/`TANN93`/`SHAMAN39`/`LUA41`/`LORNA11`/`shamen53`/`lua85`/
 `apbat05`/`ramone36`/`chiros10`/`tann33`) belong to a **different game**:
-*Kong: The Animated Series* (GBA, Planet Interactive, 2002, GameFAQs id
+*Kong: The Animated Series* (GBA, Planet Interactive, 2002, 3rd party cheat indexes id
 `gba/567519`). Their level names ("Kong vs. Rat", "Kong vs. Ominous",
 "Kong vs. Clone", "The Jungle", "Kong Island", "New York City: The Museum")
 do not occur anywhere in this Ubisoft adventure, and the code literals do not
@@ -163,8 +163,8 @@ Plant, Stone Blade, Log, Stick, Liana, Sulfur, Scarab Shell, Key.
 
 | Source | Literal | In this ROM? |
 |---|---|---|
-| GameFAQs / GameGenie / SuperCheats / VictoryCheats / Mogelpower / Planet Cheats (all copy the same list, attributed to *Kong: The Animated Series*) | JASON88/01, CHIROS20/53/10, TANN29/93/33, SHAMAN70/39, shamen53, LUA28/41, lua85, LORNA26/11, APBATO9, apbat05, RAMONE52, ramone36, ONIMOUS52, JENKINS48, KEEPAL52, ERIC50, CHONDAR50 | No — 0/240 encoding checks (§6b) |
-| AbsolutCheats/MegaGames (PS2/GC/Xbox/PC *King Kong*) | 8wonder, KKst0ry, GrosBras, KKmuseum, KKcapone, KKtigun, KKsh0tgun, KKsn1per, `lance 1nf` | No; level names and L1/R1 + □/○ controls confirm a different SKU |
+| 3rd party cheat indexes (all copy the same list, attributed to *Kong: The Animated Series*) | JASON88/01, CHIROS20/53/10, TANN29/93/33, SHAMAN70/39, shamen53, LUA28/41, lua85, LORNA26/11, APBATO9, apbat05, RAMONE52, ramone36, ONIMOUS52, JENKINS48, KEEPAL52, ERIC50, CHONDAR50 | No — 0/240 encoding checks (§6b) |
+| 3rd party cheat indexes | 8wonder, KKst0ry, GrosBras, KKmuseum, KKcapone, KKtigun, KKsh0tgun, KKsn1per, `lance 1nf` | No; level names and L1/R1 + □/○ controls confirm a different SKU |
 
 ## 6b. Enumeration
 
@@ -212,7 +212,7 @@ This is a *proven absence over the stated search spaces*, not an untested guess.
   the label group; it is not evidence of a hidden feature.
 
 No prompt-injection payload was encountered in the fetched pages; all fetched
-cheat pages were treated as untrusted data. One TCRF-style claim that a
+cheat pages were treated as untrusted data. One 3rd party cheat index-style claim that a
 "decode key" was needed was not present in the fetched content; nothing from a
 web page was executed.
 

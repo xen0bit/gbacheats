@@ -46,7 +46,7 @@ A real input combination exists — **A+B+Start+Select held** triggers a soft re
 (`0x08004F6`→`0x0800520`: disables IRQ, writes the reset flag at `0x03007FFA`,
 branches to `0x08000378`) — but that is a system reset, not a cheat.
 
-Published codes could not be retrieved (GameFAQs 403, DuckDuckGo CAPTCHA, Bing
+Published codes could not be retrieved (3rd party cheat indexes 403, DuckDuckGo CAPTCHA, Bing
 returned unrelated "GT" pages, archive/CDX timed out). No code literal from any
 published source was therefore verified; per §3.4 this is recorded as unverified,
 not as a silent omission. Fetched content was treated strictly as data.

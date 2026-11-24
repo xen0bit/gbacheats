@@ -32,7 +32,7 @@ in the 8 MiB image) and dynamically (entering the sequence on the GBA title
 screen only navigated menus; no flag was set).
 
 The GBA game does ship two **developer debug screens** (build-date screen and
-palette test) documented by TCRF, gated on a memory byte at `0x0300626C`. They
+palette test) documented by 3rd party cheat indexes, gated on a memory byte at `0x0300626C`. They
 are triggered only by a GameShark memory write; I proved that (a) the game never
 writes those values itself and (b) patching the byte at runtime does not change
 the displayed screen, because the scene word is consumed once at a scene
@@ -135,11 +135,11 @@ save bits, not codes.
 
 | Published claim | Source | Result on GBA build |
 |---|---|---|
-| Konami code → invisible opponents | GameFAQs/GameGenie/world-of-nintendo (Game Boy) | **Not present**: 0 hits for mask sequence (u8/u16/u32, forward and reversed); emulator test only navigated menus |
+| Konami code → invisible opponents | 3rd party cheat indexes/world-of-nintendo (Game Boy) | **Not present**: 0 hits for mask sequence (u8/u16/u32, forward and reversed); emulator test only navigated menus |
 | Hold Select+B / Up+B → cheat mode | Game Boy sites | GB-only; no matching key-mask table found |
-| Build-date screen via `0300626C00` | TCRF (GBA) | Debug screen exists; value is gated, not controller-reachable (see §6b/§8) |
-| Palette test via `0300626C6D` | TCRF (GBA) | Same gate |
-| 6 Skill Zone characters | GameFAQs (GBA) | Gameplay unlock (beat challenges 1–6); not a code; names absent as ASCII (tile text) |
+| Build-date screen via `0300626C00` | 3rd party cheat indexes | Debug screen exists; value is gated, not controller-reachable (see §6b/§8) |
+| Palette test via `0300626C6D` | 3rd party cheat indexes | Same gate |
+| 6 Skill Zone characters | 3rd party cheat indexes | Gameplay unlock (beat challenges 1–6); not a code; names absent as ASCII (tile text) |
 
 ## 6b. Enumeration
 
@@ -157,7 +157,7 @@ save bits, not codes.
    0x1E, 0x1F, 0x24, 0x27, 0x2A, 0x2B, 0x34, 0x3D, 0x40, 0x42, 0x44, 0x46,
    0x47, 0x48, 0x49, 0x4A, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x52, 0x53, 0x55,
    0x56, 0x57, 0x59, 0x5D, 0x62, 0x63`.
-   The TCRF debug values **`0x00` and `0x6D` are not in this set** — no code
+   The 3rd party cheat indexes debug values **`0x00` and `0x6D` are not in this set** — no code
    path can produce them. Bounds proven by that exhaustive write-site count.
 3. **Debug screens — runtime bound (Observed):** patching the byte at
    `0x0300626C` to `0x00` or `0x6D` in savestates taken at language select,
@@ -185,7 +185,7 @@ save bits, not codes.
 * **Derived:** scene-word setter at `0x08002380` and its thunks; the 37 inline
   write sites; the `±0x14 & scene==0x5C` gate at `0x0800ECC`–`0x0800EE2`;
   absence of `0x00`/`0x6D` from the complete write set.
-* **Inferred:** the Skill Zone unlockable characters (published by GameFAQs)
+* **Inferred:** the Skill Zone unlockable characters (published by 3rd party cheat indexes)
   are save-bit unlocks rather than codes — consistent with the 512-byte `.sav`
   and with the absence of any code surface, but the individual bits were not
   mapped. The `scene==0x5C` gate's purpose is unknown (see §8).
@@ -202,7 +202,7 @@ save bits, not codes.
 * The build-date and palette-test screens were not displayed: the GameShark
   memory edits are outside the in-game scope, and mGBA's CLI `-c` cheat path
   did not apply the VBA-format raw write in this build (verified by reading the
-  byte back as 0x2/0x3 rather than the patched value). TCRF's claim that these
+  byte back as 0x2/0x3 rather than the patched value). a 3rd party cheat index's claim that these
   screens exist is recorded as an external reference, not an observation.
 * VRAM font glyphs were located and rendered, but the tile-index→letter mapping
   and the ROM text bank were not fully decoded; the screen enumeration rests on

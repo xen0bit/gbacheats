@@ -71,11 +71,11 @@ screen:
 2. **Two hard-coded hidden cheat passwords**, `_NDTH_` and `_FLYM_`, validated by a second
    routine that bypasses the progress decoder and sets bits 0 and 1 of the progress-flags
    word. The public lists name these "Invincibility" and "Unlock all levels"; the ROM's
-   second literal is 6 symbols (`_FLYM_`), while GameFAQs prints an unenterable 7-symbol
+   second literal is 6 symbols (`_FLYM_`), while 3rd party cheat indexes prints an unenterable 7-symbol
    `_FLYMF_` with an extra `F`.
 
 Published codes were verified against the ROM rather than trusted: of the **84** six-symbol
-entries on the GameFAQs/AbsolutCheats lists, **74 decode with a correct checksum**
+entries on the 3rd party cheat indexes/3rd party cheat index lists, **74 decode with a correct checksum**
 (including the whole level chain 1-1 … 9-7); the 10 failures are 8 distinct transcription
 errors (two entries are duplicates) plus one 7-symbol "level select" string that cannot be
 typed at all. One of the typos (`HLNZXJ`) was also entered in the emulator and **rejected
@@ -243,7 +243,7 @@ validator only uses `type`. Types rejected: **50, 51, 74, 75** (these are exactl
 
 ### 6.4 Published passwords verified against the ROM
 
-Every GameFAQs/AbsolutCheats password was decoded offline; ✔ = checksum valid, ✘ = rejected
+Every 3rd party cheat indexes password was decoded offline; ✔ = checksum valid, ✘ = rejected
 by the model *and* (spot-checked) by the game. Node = decoded map index.
 
 | Published name | Code | Node | Valid |
@@ -343,7 +343,7 @@ position and that the checksum model is right.
 
 | Code | Payload | Node | Typed on keypad? | Effect (screenshot) |
 |---|---|---|---|---|
-| `CGRLNH` | `0x000000` | 0 | **yes** (40 presses) | Accepted; mission map opens at **Gotham's Rooftops**, only the first node lit (`gnov1.png`, `gnov2.png`). Not on GameFAQs/VGChartz/TCRF/AbsolutCheats. |
+| `CGRLNH` | `0x000000` | 0 | **yes** (40 presses) | Accepted; mission map opens at **Gotham's Rooftops**, only the first node lit (`gnov1.png`, `gnov2.png`). Not on 3rd party cheat indexes. |
 | `NLDPGS` | `0x058000` | 88 | **yes** (49 presses) | Accepted; mission map opens on the full map at **The Showdown** (`gfinal_map.png`); A starts the final-location cutscene "Thus it ends as all battles should end…" (`gfinal_intro.png`) and the playable final area (`gfinal_game2.png`). Published 9-7 is `V65YJP` (same node, different payload bits); `NLDPGS` itself appears in no list. |
 | `0201QX` | `0x03C000` | 60 | buffer-injected | "The Batcave" map position (`gi60.png`) — node 60 is absent from every published list (published Bat Cave is `BBBBBW`, node 66). |
 | `82NP64` | `0x05D000` | 93 | buffer-injected | Full-map position ("The Showdown" node; published end-credits code is `NV252B`, same node, payload `0x05D006`). |

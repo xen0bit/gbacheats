@@ -30,8 +30,8 @@ external trainer is present.
 hidden debug menu in this ROM.** The result is a *bounded negative* (§0.2), not an
 untested absence:
 
-* No published code exists for this SKU. TCRF documents only development error text;
-  the GameFAQs FAQ is gameplay strategy only; GameFAQs/CheatCodes/Cheat Happens list no
+* No published code exists for this SKU. 3rd party cheat indexes document only development error text;
+  the 3rd party cheat index FAQ is gameplay strategy only; 3rd party cheat indexes/3rd party cheat index list no
   codes at all (§3.4). There is therefore nothing to "verify in the ROM" — and a literal
   scan confirms no code string exists.
 * A case-insensitive scan of all 4 MiB in ASCII, `+0x20`-shifted ASCII and UTF-16LE/BE
@@ -46,7 +46,7 @@ untested absence:
   screen, in-game screens, and the Risk pause screen. Every menu is a D-pad selection
   list; there is **no character-entry field, on-screen keyboard, code-entry surface or
   hidden options row** anywhere. Menu item counts are enumerated in §6b.
-* The "debug" text at `0x08394F70` (TCRF's only hidden-content finding) is reached by
+* The "debug" text at `0x08394F70` (a 3rd party cheat index's only hidden-content finding) is reached by
   an ARM literal pool at `0x08019A28` inside a filesystem-error reporting routine, not
   by any menu or input gate.
 
@@ -76,11 +76,11 @@ Menu path (all RAM-snapshotted):
 4. QUIT from any game returns to the compilation title.
 
 Published sources checked (fetched as data only):
-`https://tcrf.net/Risk,_Battleship,_Clue` (via web.archive.org, 2024 snapshot) —
+3rd party cheat indexes (via web.archive.org, 2024 snapshot) —
 "hidden development-related text" only, block at `394F70`;
-`https://gamefaqs.gamespot.com/gba/929028-risk-battleship-clue/faqs/44269` (via
+3rd party cheat indexes (via
 web.archive.org) — strategy tips, zero cheats;
-`cheatcodes.com` (404) and `cheathappens.com` — no cheats for this SKU.
+3rd party cheat indexes (404) and 3rd party cheat indexes — no cheats for this SKU.
 
 ## 4. Address map
 
@@ -216,7 +216,7 @@ basis of the conclusion.
 * `arm-none-eabi-objdump -M force-thumb` / ARM mode for literal-pool and error-handler
   disassembly.
 * mGBA 0.x SDL (`-3`), Xvfb `:317`, openbox, xdotool, scrot, ImageMagick `convert`.
-* Web: `webfetch` of archived TCRF and GameFAQs FAQ (treated strictly as data).
+* Web: `webfetch` of archived 3rd party cheat index FAQ (treated strictly as data).
 
 No ROM or extracted assets were redistributed. Only addresses, hashes, algorithms and
 tooling are published. Generated `.ss1`/`.sav` artifacts were removed from the ROM

@@ -27,7 +27,7 @@ SKU.** The only developer-intended button code found is a **soft reset: A+B+Sele
 confirmed in the emulator, and near-miss combinations were rejected.
 
 The widely published "Level 21/22/47" passwords (`MFBBDQDBMHDK`, `PFBBDQDBMMJSD`,
-`RPBFGDDBJLJD`) are **from the Game Boy Color SKU**. GameFAQs itself files them under the
+`RPBFGDDBJLJD`) are **from the Game Boy Color SKU**. 3rd party cheat indexes themselves files them under the
 heading **"Level passwords GBC"**, even on its GBA page. They are a §16.11 SKU trap. None
 appears anywhere in the 4 MiB GBA image under ASCII, lowercase, UTF-16LE/BE, or ±0x20
 shifts (18 literal checks, 0 hits), and the GBA image contains no code-entry surface.
@@ -165,12 +165,12 @@ in the ROM that consumes a button mask outside ordinary menu/gameplay movement i
 single exact test `press_mask & 0x0F == 0x0F` at `0x0801322`; there is exactly **one**
 action branch (reset). Undocumented combos (L+R etc.) produced no debug screen.
 
-**Published codes tested:** the three GameFAQs literals (`MFBBDQDBMHDK`,
+**Published codes tested:** the three 3rd party cheat indexes literals (`MFBBDQDBMHDK`,
 `PFBBDQDBMMJSD`, `RPBFGDDBJLJD`) were searched in the ROM under 6 encodings
 (ascii, lowercase, UTF-16LE, UTF-16BE, +0x20, −0x20) = **18 literal checks, 0 hits**.
 The 21-consonant alphabet `BCDFGHJKLMNPQRSTVWXYZ` (implied by the codes, which contain
 no vowels) and variants are also absent (0 hits), as are all 26-letter/digit alphabets
-tried. GameFAQs labels these codes "Level passwords **GBC**"; the GBA SKU has no
+tried. 3rd party cheat indexes label these codes "Level passwords **GBC**"; the GBA SKU has no
 password menu. Verdict: published codes are for a different SKU, not a ROM typo.
 
 **Bounds proven by rejection:** the reset code requires the exact low nibble 0x0F.
@@ -204,7 +204,7 @@ was present in all five. Zero code references to `0x03006C00` exist in the ROM.
   could not be exercised: the only consumer is dead level-select code.
 - The tutorial page count was not exhaustively numbered (all pages advanced with A/B and
   none contained input fields).
-- TCRF's GBC page and the GameFAQs cheat page were blocked (403 / CAPTCHA); GBC-side
+- a 3rd party cheat index's GBC page and the 3rd party cheat index cheat page were blocked (403 / CAPTCHA); GBC-side
   details were taken from search snippets only and are not used as GBA evidence.
 - No font/tile-indexed text bank needed decoding: every UI label was found as plain
   ASCII in the 281-entry localized pointer table.

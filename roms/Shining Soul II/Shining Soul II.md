@@ -28,7 +28,7 @@ Header oddity (recorded, not consequential): the complement byte at 0xBD is `0x3
 Two developer-intended cheat surfaces exist in this ROM, and both were reversed and confirmed in mGBA:
 
 1. **Sound Test — a 13-press button code** at the boot logos, plus a second gate at the title/main menu. The expected key-mask sequence is a 13-byte table at ROM `0x0856F468`; the validator at `0x08091758` compares each press against a progress index and, when all 13 match, calls scene-setter `0x08058588(0x33)`. Published listings give 12 directions and often omit the **13th press, B**; the ROM proves B is required. Entered correctly in the emulator (including the trailing B), the game opens a **Sound Test screen** (piano keyboard, "shining soul II", L/R volume, A/B buttons) — observed directly.
-2. **Name codes — a 16-entry lookup table** used at character creation. Entering a specific handle as the character name grants a starting bonus. The strings are stored as u16 font-glyph indices in the credits text bank; the pointer table is at ROM `0x083DA1D0`. Thirteen entries match published GameFAQs lists; **three entries (`Undead`, `Flying`, `Press`) are present in the ROM but absent from every published list**. `Yoshi` was verified in-game to grant DEX 20 (baseline 15), and `Undead` was verified in-game to be accepted (status screen renders `NAME:Undead`). The published spelling `Saophen` is a typo for the ROM's `Saohen`.
+2. **Name codes — a 16-entry lookup table** used at character creation. Entering a specific handle as the character name grants a starting bonus. The strings are stored as u16 font-glyph indices in the credits text bank; the pointer table is at ROM `0x083DA1D0`. Thirteen entries match published 3rd party cheat index lists; **three entries (`Undead`, `Flying`, `Press`) are present in the ROM but absent from every published list**. `Yoshi` was verified in-game to grant DEX 20 (baseline 15), and `Undead` was verified in-game to be accepted (status screen renders `NAME:Undead`). The published spelling `Saophen` is a typo for the ROM's `Saohen`.
 
 Save-bit unlockables (Advanced Mode, the secret Dark Wizard) also exist but are gated behind a completed playthrough, not a code; they are documented in §8 as inferred/gated, not as codes.
 
@@ -164,7 +164,7 @@ The per-index bonus values were not recovered from code (no static xref to the R
 | 19 | **Flying** | *not published* | present in ROM (static) |
 | 20 | **Press** | *not published* | present in ROM (static) |
 
-Published sources checked: GameFAQs cheats page, Planet Cheats, GameRevolution, GameHacking.org, Almar's Guides, CodeJunkies, and an Action Replay patch document. GameShark/CodeBreaker/Action Replay codes on those pages are cheat-device memory patches and are **out of scope**; they were read only for address hints and are not reported as in-game cheats.
+Published sources checked: 3rd party cheat index cheats page, 3rd party cheat indexes, and an Action Replay patch document. GameShark/CodeBreaker/Action Replay codes on those pages are cheat-device memory patches and are **out of scope**; they were read only for address hints and are not reported as in-game cheats.
 
 ## 6b. Enumeration
 
@@ -205,7 +205,7 @@ Published sources checked: GameFAQs cheats page, Planet Cheats, GameRevolution, 
 * **Per-index name-code effect dispatcher** — the code that maps string index → stat/item grant was not located (no static xref to the RAM name buffer or the string table; GDB stub was single-client and unreliable in this environment). Effects in §6.2 are from published lists plus the two in-game checks; only `Yoshi`'s DEX +5 is directly confirmed. `Undead` showed no stat change; an item or flag effect is not excluded.
 * `Flying` and `Press` were confirmed only statically (present as table entries); their in-game effects were not exercised.
 * Sound Test track count / complete control list: A, Left, Right were seen to change the display; B/exit and the full track count were not exhaustively enumerated (the ASCII SE-label bank suggests dozens of tracks).
-* **Unlockables** (gated, not codes): GameFAQs documents Advanced Mode and a secret Dark Wizard ("???") unlocked by clearing normal mode with any character; Planet Cheats additionally names "Gilspie". These are save-bit unlocks gated behind a clear flag, not input codes; reaching them requires a full playthrough, which was not performed. Reported as leads, not confirmed cheats.
+* **Unlockables** (gated, not codes): 3rd party cheat indexes document Advanced Mode and a secret Dark Wizard ("???") unlocked by clearing normal mode with any character; 3rd party cheat indexes additionally names "Gilspie". These are save-bit unlocks gated behind a clear flag, not input codes; reaching them requires a full playthrough, which was not performed. Reported as leads, not confirmed cheats.
 * The SEGA balloon easter egg (sacrificing S/E/G/A letters in the Temple of Light) is a gameplay easter egg requiring deep progression; not exercised.
 
 ## 9. Tooling

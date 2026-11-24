@@ -22,7 +22,7 @@ Developer strings in ROM: `Developed by WayForward Technologies.` (legal screen,
 
 ## 2. Executive summary
 
-**No in-game password / code-entry system exists in this GBA SKU.** Published "GBA" cheats (`SPONGE`, `PANTS`, `PATRICK`, `HOTROD`, `SPACE`, from SuperCheats) are copies of the GameCube/DS "Extras → Enter Codes" lists; none of them, nor any other code-like string, is present in the ROM under any of the ~20 encodings tested (§6b). Every reachable frontend screen was walked; there is no "Extras" door, no "Enter Codes" option, and no text bank containing those labels (§7).
+**No in-game password / code-entry system exists in this GBA SKU.** Published "GBA" cheats (`SPONGE`, `PANTS`, `PATRICK`, `HOTROD`, `SPACE`, from 3rd party cheat indexes) are copies of the GameCube/DS "Extras → Enter Codes" lists; none of them, nor any other code-like string, is present in the ROM under any of the ~20 encodings tested (§6b). Every reachable frontend screen was walked; there is no "Extras" door, no "Enter Codes" option, and no text bank containing those labels (§7).
 
 **What does exist is a real developer debug menu**, statically recovered: scene id `2` builds a 15-entry "DEBUG MENU" (title at 0x080848EC, list at 0x0824A2F8), with four sibling submenus (CINEMA/CHAPTER/WORLD/MINI-GAME, 12/13/11/15 entries). Entries include `UNLOCK MINI-GAMES`, `ERASE SAVED GAMES`, `DEBUG AUDIO`. This is in-scope developer-intended hidden content, enumerated in §6 and §6b. A direct RAM patch of the scene-request byte to `2` (savestate offset 0x1B2F0 = IWRAM 0x030022F0) resets the game to the legal screen, so the retail reachability gate for that menu is **unproven** (§8).
 
@@ -129,14 +129,14 @@ Record 16 at 0x0824A514 is a `0x00FF` terminator — the list is exactly 15 entr
 
 | Code | Published effect (source) | ROM literal hits |
 |---|---|---|
-| SPONGE | Punk SpongeBob (SuperCheats GBA) | only in story text at 0x24B03C, 0x25D154… — not a code table |
-| PANTS | SpongeBob Plankton (SuperCheats GBA) | lowercase `pants` in 7 language text blocks (stride 0x4340), not a code table |
-| PATRICK | Patrick Tux (SuperCheats GBA) | only story text |
-| HOTROD | new vehicle (SuperCheats GBA / GC / DS) | lowercase `hotrod` at 0xE417F is a credit string `"hotrod skydive" © Martin Schioele`; others story text |
+| SPONGE | Punk SpongeBob (3rd party cheat indexes GBA) | only in story text at 0x24B03C, 0x25D154… — not a code table |
+| PANTS | SpongeBob Plankton (3rd party cheat indexes GBA) | lowercase `pants` in 7 language text blocks (stride 0x4340), not a code table |
+| PATRICK | Patrick Tux (3rd party cheat indexes GBA) | only story text |
+| HOTROD | new vehicle (3rd party cheat indexes GBA / GC / DS) | lowercase `hotrod` at 0xE417F is a credit string `"hotrod skydive" © Martin Schioele`; others story text |
 | SPACE | new ship (GC/DS; GBA page lists it) | lowercase `space` at 0x26599A/0x2659E9, story text |
 | GUDGEON, PORKPIE, GASSY, HOVER, PILOT, ROCFISH, BRAIN, LASER | GC/DS/PS2/Wii lists | **absent in every encoding tried** |
 
-Verdict: none is a developer-intended GBA code in this image; the GBA SuperCheats list is inherited from the console version (guide §16.11).
+Verdict: none is a developer-intended GBA code in this image; the GBA 3rd party cheat index list is inherited from the console version (guide §16.11).
 
 ## 6b. Enumeration
 

@@ -61,7 +61,7 @@ Confirmed in mGBA with controller input only:
 * Control run without a password: Level Select → Right → A on level 2 does
   nothing, i.e. the same input is rejected while the array entry is 0.
 
-All eleven codes match the published GameFAQs list exactly, and the on-screen
+All eleven codes match the published 3rd party cheat index list exactly, and the on-screen
 alphabet (21 consonants, three rows of seven) contains exactly the characters
 the codes use.
 
@@ -350,7 +350,7 @@ All eleven codes use only these 21 letters. There is no digit, punctuation or
 wildcard symbol, so the entry screen cannot express anything outside this
 alphabet.
 
-Public list for comparison (GameFAQs, Wayback capture 2018-11-26,
+Public list for comparison (3rd party cheat indexes, Wayback capture 2018-11-26,
 `web.archive.org/web/20181126021449/https://gamefaqs.gamespot.com/gba/561536-a-sound-of-thunder/cheats`):
 
 ```

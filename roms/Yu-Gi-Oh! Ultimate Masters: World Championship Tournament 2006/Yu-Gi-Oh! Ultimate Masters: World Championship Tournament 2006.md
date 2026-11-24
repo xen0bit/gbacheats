@@ -27,7 +27,7 @@ This pass **closes the §0.2 gap** left by the earlier report:
 
 1. **Comparator isolated and fully recovered.** The 8 digits are packed into a single u32 at IWRAM `0x03005870` with **one decimal digit per hex nibble** (e.g. `46986414` → `0x46986414`, *not* decimal `0x02CCE16E`). The search loop is at `0x080E02D0`; it de-obfuscates each card-record password with an LCG-derived XOR key (`0x080EF370` → `0x080EF35C` → `0x080F5E00`). Full algorithm in §5.
 2. **Offline validator reimplemented and cross-checked**: 16/16 agreement on accepted and rejected inputs (§7).
-3. **Novel code minted and accepted on the real screen**: `00732302` → **Temple of Skulls** (card record 142), absent from the SuperCheats 1,584-token published list and from the card name list itself. On-screen popup + RAM proof (found index 142, cost 500, DP 3000→2500 internal) in §3, §6b.
+3. **Novel code minted and accepted on the real screen**: `00732302` → **Temple of Skulls** (card record 142), absent from the 3rd party cheat indexes 1,584-token published list and from the card name list itself. On-screen popup + RAM proof (found index 142, cost 500, DP 3000→2500 internal) in §3, §6b.
 4. **Rejection bound**: 1,170 further accepted-but-unpublished codes found by running the whole 67,616-entry card table through the validator; a one-digit near-miss (`00732303`) was entered and rejected with `-ERROR-` (§6b).
 5. **Bounds**: 100,000,000 representable strings, exactly 2,751 accepted (2.751%), 99,997,249 rejected — a closed-set bounded characterisation, no longer a "comparator not isolated" gap.
 
@@ -113,7 +113,7 @@ The DP cost is `*(u32*)(0x09CEDFA4 + 4*i)`; the UI charges it after the YES conf
 - **Input alphabet**: `0`–`9`, 8 positions, stored as `u16` at `0x03005860`, packed nibble-wise into `0x03005870`.
 - **Card table**: 67,616 records; password u32 at `0x09B94CC`, cost u32 at `0x09CEDFA4`.
 - **Hint table**: 14 × 20-byte masked records at `0x09E5F71E` (in-game advertising).
-- **Published code set**: SuperCheats "Actual full password list" — **1,584 unique 8-digit tokens** (fetched and parsed 2026-11-21 from the print view; the earlier `publist.html` copy was a Cloudflare challenge page and contained zero tokens).
+- **Published code set**: 3rd party cheat indexes "Actual full password list" — **1,584 unique 8-digit tokens** (fetched and parsed 2026-11-21 from the print view; the earlier `publist.html` copy was a Cloudflare challenge page and contained zero tokens).
 - Message strings and menu labels: see prior-pass address map; unchanged.
 
 ## 6b. Enumeration
@@ -135,7 +135,7 @@ The DP cost is `*(u32*)(0x09CEDFA4 + 4*i)`; the UI charges it after the YES conf
 
 **Validator / oracle agreement: 16/16.** Accepted: `46986414` (idx 37/38/39), `16255442` (idx 1553), `23771716` (idx 375), `00732302` (idx 142). Rejected: `11111111`, `00000000`, `00732303`, `12345678`, and all eight single-digit mutations of `46986414` (`56986414`, `47986414`, `46086414`, `46996414`, `46987414`, `46986514`, `46986424`, `46986415`).
 
-**Novel code entered on the real screen.** `00732302` — absent from the 1,584-token SuperCheats list (and its card, Temple of Skulls, is not named there at all). On the PASSWORD screen: card popup "TEMPLE OF SKULL", then confirmation "You need 500 DP to acquire this card. Will you pay?" → YES → **`Acquired card Temple of Skulls.`** (screenshots `novel_final.png`, `novel_granted_screen.png`). RAM proof from `ram_novel_accepted.raw` / `ram_novel_granted.raw`: digits `[0,0,7,3,2,3,0,2]`, packed password `0x00732302`, found index **142** (exactly the validator's prediction), cost **500**, DP **3000 → 2500**, UI state `0x17 → 0x1B`.
+**Novel code entered on the real screen.** `00732302` — absent from the 1,584-token 3rd party cheat index list (and its card, Temple of Skulls, is not named there at all). On the PASSWORD screen: card popup "TEMPLE OF SKULL", then confirmation "You need 500 DP to acquire this card. Will you pay?" → YES → **`Acquired card Temple of Skulls.`** (screenshots `novel_final.png`, `novel_granted_screen.png`). RAM proof from `ram_novel_accepted.raw` / `ram_novel_granted.raw`: digits `[0,0,7,3,2,3,0,2]`, packed password `0x00732302`, found index **142** (exactly the validator's prediction), cost **500**, DP **3000 → 2500**, UI state `0x17 → 0x1B`.
 
 **Rejection bound / near-miss.** Changing the last digit (`00732303`) — a value the validator also rejects — was entered on the same screen and produced `-ERROR-` with DP unchanged at 2500 (`nearmiss.png`). This is a one-nibble near-miss rejection immediately adjacent to an accepted novel code. The earlier `11111111`, all-zero, reuse and eight single-digit mutation rejections (§3) are subsumed by the full 67,616-record enumeration above.
 

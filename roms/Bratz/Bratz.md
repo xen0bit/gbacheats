@@ -395,8 +395,8 @@ Up`), while the positions left of centre are still `?`.
 * `tog2_song.png` — observed effect (three consecutive revealed thumbnails).
 * `tog2_menu.png` — return to the main menu after acceptance.
 
-Published-code search: GameFAQs returned 403 for this title; archive.org was
-temporarily offline; VGChartz lists 0 cheats for the related `Bratz: Rock Angelz`
+Published-code search: 3rd party cheat indexes returned 403 for this title; archive.org was
+temporarily offline; 3rd party cheat index lists 0 cheats for the related `Bratz: Rock Angelz`
 GBA. Searches for the 15 literals and for "Bratz GBA password/cheat" returned only
 `Rock Angelz` / `Forever Diamondz` material (`SIZZLN`, `FLAUNT`, `YASMIN`, `FIERCE`,
 etc.), which uses different 5–8 letter codes on a different engine. None of the 15

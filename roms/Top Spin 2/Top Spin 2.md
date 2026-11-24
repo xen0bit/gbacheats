@@ -163,8 +163,8 @@ R=`0x100`, L=`0x200`. Sleep mask = `0x304`.
    exact mask `0x304` (observed `held=0xFF04`, flags `0x00030002` then
    `0x00020002`, `shot_debug.png`). This isolates the mask, not a checksum.
 5. **Published-code reconciliation.** No published *in-game* code was found:
-   Cheat Happens "no cheats", VGChartz "Total cheats available: 0", GameFAQs
-   returned HTTP 403, Codejunkies lists only DS Action Replay RAM patches
+   3rd party cheat indexes "no cheats", 3rd party cheat indexes "Total cheats available: 0", 3rd party cheat indexes
+   returned HTTP 403, 3rd party cheat index lists only DS Action Replay RAM patches
    (`94…/62…/B2…` with Select activators) — cheat-device codes, explicitly
    out of scope. No literal from those lists occurs in this GBA image.
 6. **Debug-menu negative.** 2 orphan debug text blocks were found

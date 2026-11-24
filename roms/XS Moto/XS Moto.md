@@ -192,7 +192,7 @@ of the code value.
 * **There is no accept/reject predicate to test.** No in-game entry surface exists, so a
   near-miss rejection cannot be produced. This is stated as a fact, not omitted.
 
-**Published-code recon (bounded).** GameFAQs 403, DDG bot CAPTCHA, Google challenge,
+**Published-code recon (bounded).** 3rd party cheat indexes 403, DDG bot CAPTCHA, Google challenge,
 Bing irrelevant, Wayback 404, four `websearch` queries returned nothing (prior pass).
 
 **Gate proof — exact, byte level (this pass's main result).**

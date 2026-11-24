@@ -49,11 +49,11 @@ The only "text entry" in the game is a 3-character **ENTER NAME** screen for the
 
   | Sequence | Where | Source | Result |
   |---|---|---|---|
-  | `R L R L U D U D` | main menu | GameFAQs "Last Level" | **Accepted** — Arcade Mode unlocked (control) |
+  | `R L R L U D U D` | main menu | 3rd party cheat indexes "Last Level" | **Accepted** — Arcade Mode unlocked (control) |
   | `R L R L U U U U` | main menu | **novel — not in any published list** | **Accepted** — Arcade Mode unlocked from a fresh save |
   | `R L R L U D U U` | main menu | near-miss | **Rejected** — no unlock |
-  | `U U L L R L R` | pause screen | GameFAQs "Infinite Lives" | Entered; no visible change observed (see Unknowns) |
-  | `L D R R U U U`, `U D U L R D U` | pause screen | GameFAQs "Unlock All Levels" / "Unlimited Shield" (PS2/GC-labelled) | Entered; no visible change observed |
+  | `U U L L R L R` | pause screen | 3rd party cheat indexes "Infinite Lives" | Entered; no visible change observed (see Unknowns) |
+  | `L D R R U U U`, `U D U L R D U` | pause screen | 3rd party cheat indexes "Unlock All Levels" / "Unlimited Shield" (PS2/GC-labelled) | Entered; no visible change observed |
 * Evidence screenshots (all in `/tmp/zapper/`, **outside** the ROM folder): `clean_menu2.png`, `keytest_Return.png` (locked control), `arcade_after_code.png` (published code), `novel_code_test.png` (novel code), `options_screen.png`, `multiplayer_screen2.png`, `paused2.png`.
 
 ## 4. Address map
@@ -74,7 +74,7 @@ The only "text entry" in the game is a 3-character **ENTER NAME** screen for the
 | `0x03001760` | RAM table | runtime function-pointer table (14 entries). Index 1 = `0x080D6D61` (the applier above); index 2 = `0x080C861D`; index 6 = `0x080E40E9`; default `0x080D7085`. Initialised by `0x080D6CD0`. **Derived** from a savestate RAM dump + disassembly. |
 | `0x083292EB` (`0x3292EB`) | text | 3-character name-entry alphabet |
 | `0x08329B8`–`0x0832C1C` (`0x329B8`–`0x32C1C`) | text bank | UI/strings; no PASSWORD/CODE debug screen present |
-| `0x08359B0` (`0x3359B0`) | text | `AGB DEBUG ASSERT: PRESS A L AND R TO ATTEMPT TO CONTINUE ...` — a crash handler, not a cheat menu (matches TCRF) |
+| `0x08359B0` (`0x3359B0`) | text | `AGB DEBUG ASSERT: PRESS A L AND R TO ATTEMPT TO CONTINUE ...` — a crash handler, not a cheat menu (matches 3rd party cheat indexes) |
 | `0x04000130` | I/O | KEYINPUT; exactly **one** literal reference in the whole 4 MiB (`0x080D71CC`) — no keypad-IRQ path (`0x04000132`: 0 references) |
 
 File offset = ROM address − `0x08000000`.
@@ -99,7 +99,7 @@ No pseudocode for the sequence matcher is claimed. The published acceptance set 
 
 ## 6. Tables
 
-Published codes (GameFAQs GBA page, verified against the web archive snapshot; PS2/GC/XBOX-labelled entries recorded but not attributed to this SKU):
+Published codes (3rd party cheat indexes GBA page, verified against the web archive snapshot; PS2/GC/XBOX-labelled entries recorded but not attributed to this SKU):
 
 | Effect | Sequence (hold L) | Screen |
 |---|---|---|
@@ -121,13 +121,13 @@ Observed acceptance at the main menu:
 
 **Space definition.** The input surface is button sequences, not text. Each step is one d-pad press (4 directions, `0x10/0x20/0x40/0x80`) with L (`0x200`) held; published lengths are 7 or 8 presses. The raw step space is therefore `4^7 + 4^8 = 81,920` distinct ordered press sequences; with the L modifier held throughout, each step's combined key mask is one of `0x210/0x220/0x240/0x280`. No checksum symbol, reserved bit, or alphabet was found — this is a fixed-sequence matcher.
 
-**Novel code (deliverable).** `R L R L U U U U` (hold L throughout), entered on the main menu from a **freshly deleted `zapper.sav`**, unlocks Arcade Mode. Evidence: `novel_code_test.png` (mode-select screen with Time Attack / Orb Challenge / Ghost Race). The string `RLRLUUUU`, and the button sequence `Right Left Right Left Up Up Up Up`, appears in **none** of the GameFAQs, IGN, TCRF, planetcheats, or Ethereal Games lists recovered in recon. It differs from the published `RLRLUDUD` in the final three presses.
+**Novel code (deliverable).** `R L R L U U U U` (hold L throughout), entered on the main menu from a **freshly deleted `zapper.sav`**, unlocks Arcade Mode. Evidence: `novel_code_test.png` (mode-select screen with Time Attack / Orb Challenge / Ghost Race). The string `RLRLUUUU`, and the button sequence `Right Left Right Left Up Up Up Up`, appears in **none** of the 3rd party cheat indexes, or 3rd party cheat index lists recovered in recon. It differs from the published `RLRLUDUD` in the final three presses.
 
 **Bounds by rejection.** From a fresh save, `R L R L U D U U` (one press changed from the published code at position 8) does **not** unlock Arcade Mode; the control path still requires completing a level (`keytest_Return.png`). The unlock is observable on-screen, so this is a real accept/reject boundary, not a decoder-only claim.
 
 **Bounded negative searches (with counts).**
 
-* Literal table search: the 5 published sequences were searched in **12 representation families** — u16/u32 active-high d-pad masks, L-combined masks, active-low (`~v & 0x3FF`), byte-swapped words, 4-byte stride / hold+press pairs, 8 direction-index permutations × 3/4-bit packing, 24 permutations × 2/3-bit bit-packing, font/tile indices from the game's own alphabet, ASCII and UTF-16 uppercase/lowercase/reversed, and GameFAQs-standard forward/reverse orderings. **0 plausible code-table hits**; the only exact byte hits were in an ADPCM/delta-audio region around `0x06B000`–`0x06D000` and were rejected by context.
+* Literal table search: the 5 published sequences were searched in **12 representation families** — u16/u32 active-high d-pad masks, L-combined masks, active-low (`~v & 0x3FF`), byte-swapped words, 4-byte stride / hold+press pairs, 8 direction-index permutations × 3/4-bit packing, 24 permutations × 2/3-bit bit-packing, font/tile indices from the game's own alphabet, ASCII and UTF-16 uppercase/lowercase/reversed, and 3rd party cheat index-standard forward/reverse orderings. **0 plausible code-table hits**; the only exact byte hits were in an ADPCM/delta-audio region around `0x06B000`–`0x06D000` and were rejected by context.
 * Runtime input-consumer enumeration via mGBA `-d` read watchpoints, 25–30 consecutive stops per screen:
   * main menu — pressed: 3 distinct PCs (`0x080CB254`, `0x080CB2F6`, `0x080CB31A`); held: 2 (`0x080D71C2`, `0x080E3F68`)
   * gameplay — pressed: 5 distinct PCs (`0x080D0F00`, `0x080D0F56/66/76/86`); held: 2 (`0x080D71C2`, `0x080E3F68`)

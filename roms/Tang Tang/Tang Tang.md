@@ -24,7 +24,7 @@
 | SHA-256 | `9516720fb776c6e88a196884ece798360358f7ce32c91fcdfd34b056d1132b3d` |
 
 The SHA-1 matches the base ROM used by the 2026 *Tang Tang QoL* romhack
-(romhacking.net/hacks/9901), confirming this is the stock USA revision, not a
+(3rd party cheat indexes/hacks/9901), confirming this is the stock USA revision, not a
 trained/cracked image.
 
 ## 2. Executive summary
@@ -239,7 +239,7 @@ which bounds the "hidden service menu" claim to the hack, not this image.
   counts); the ASCII→tile font mapping at `0x08011FF4`/`0x08012050`;
   timer/lives/score addresses from their literal-pool references.
 * **Inferred** — the debug data bank at `0x0818F140+` was *intended* as a
-  developer menu (TCRF independently lists the same strings and flags it
+  developer menu (3rd party cheat indexes independently lists the same strings and flags it
   "needs investigation"); whether it was ever reachable in an earlier build is
   unknown. The TIME OVER → HIGH SCORE → level restart chain was observed only
   from injected state, not from waiting out a real timer.
@@ -250,7 +250,7 @@ which bounds the "hidden service menu" claim to the hack, not this image.
   image has no caller; no prototype was available).
 * The exact purpose of the `1P/2P`, `REVERSE`, `CHALLENGER COMES`, `TYPE 1/2`
   strings — they are unreachable in the retail UI; likely cut multiplayer /
-  difficulty options (TCRF speculates the same).
+  difficulty options (3rd party cheat indexes speculates the same).
 * The `ARE YOU SURE` / `THIS WILL OVERWRITE` confirmation screen was not
   triggered: the emulated EEPROM held only a high score, not a game-in-progress
   record. It is present in the text bank and its code path exists, but it was

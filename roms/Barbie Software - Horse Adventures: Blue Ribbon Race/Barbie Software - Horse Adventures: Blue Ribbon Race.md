@@ -58,7 +58,7 @@ password** entered from **Continue Game**.
   validator, giving **4 accepted spellings per state**.
 * The game contains both a decoder (`0x080B47E4`) and an encoder
   (`0x080B46EC`/`0x080B4700`/`0x080B47A4`), so arbitrary game states can be
-  minted. The single published code (`BBBV8+SBB`, GameFAQs) is just the
+  minted. The single published code (`BBBV8+SBB`, 3rd party cheat indexes) is just the
   "everything complete" preset; it is **not stored as a literal** anywhere in
   the ROM.
 * The password is also the save mechanism: the cartridge produces a 0-byte
@@ -115,7 +115,7 @@ This reduces each experiment to one key sequence.
 
 | Input | Result (observed) |
 |---|---|
-| `BBBV8+SBB` | **Password Accepted**; course select = Primrose Hill Final Race; all ribbons, gold trophy, gold coin strip. GameFAQs code. |
+| `BBBV8+SBB` | **Password Accepted**; course select = Primrose Hill Final Race; all ribbons, gold trophy, gold coin strip. 3rd party cheat index code. |
 | `B6M-VQLBB` | **Password Accepted**; final race; trophy case shows 2 firsts, 2 seconds, 2 thirds, 2 empty and a faded trophy; coin strip gold. Novel. |
 | `BCBV8+SLB` | **Password Accepted**; final race; one red (2nd) ribbon in the trophy case. Novel. |
 | `BBBV8+SBL` | **Password Accepted**; identical state to `BBBV8+SBB` (alias using ignored bit 43). Novel. |
@@ -323,12 +323,12 @@ ignored bits and are accepted with the same state.
 
 | Source | Code | Status in this ROM |
 |---|---|---|
-| GameFAQs (GBA cheats page, archived 2018-11-26, contributed by ReyVGM) — "All horses and everything complete." | `BBBV8+SBB` | Verified accepted in mGBA; decodes to the complete state. |
-| Giant Bomb wiki trivia — "Use the password BBBV8 SBB" | `BBBV8 SBB` (space) | Same code with a typo; the character set has no space, so the published form is not enterable. |
+| 3rd party cheat indexes (GBA cheats page, archived 2018-11-26, contributed by ReyVGM) — "All horses and everything complete." | `BBBV8+SBB` | Verified accepted in mGBA; decodes to the complete state. |
+| 3rd party cheat index wiki trivia — "Use the password BBBV8 SBB" | `BBBV8 SBB` (space) | Same code with a typo; the character set has no space, so the published form is not enterable. |
 
 Only these two published strings were found. No other GBA password appears in
-the published sources searched (GameFAQs, Giant Bomb, and the fan wikis
-reached by search); no TCRF or VGChartz code page surfaced.
+the published sources searched (3rd party cheat indexes, and the fan wikis
+reached by search); no 3rd party cheat index code page surfaced.
 
 ---
 

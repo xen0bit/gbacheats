@@ -22,7 +22,7 @@
 | Embedded GBA headers | 1 (logo at file 0x04; full 156-byte logo matches) |
 | Region / revision | USA, Rev.00 |
 
-The SHA-1 exactly matches TASVideos' "Castlevania - Harmony of Dissonance (USA).gba" (Good dump), so this is the USA retail build.
+The SHA-1 exactly matches 3rd party cheat indexes' "Castlevania - Harmony of Dissonance (USA).gba" (Good dump), so this is the USA retail build.
 
 **Patch / trainer:** none. The entry word is the stock `b 0x080000C0`, the complement check matches, and the only embedded header is the game's own. No cracktro, no appended trainer.
 

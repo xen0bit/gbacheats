@@ -49,7 +49,7 @@ this exact image (nothing carried over from the sibling FireRed/Emerald reports)
    (`GREAT BATTLE`, `CHALLENGE CONTEST`, `OVERWHELMING LATIAS`, `COOL LATIOS`,
    `SUPER HUSTLE`) give berries, one per day. Literal table `0x083DB69C`
    (10 × `u16`), validator `0x080E812C`. All five match the published
-   GameFAQs list byte-for-byte.
+   3rd party cheat index list byte-for-byte.
 3. **Title-screen button codes** (exact mask equality): `B+SELECT+UP` (`0x046`)
    → "Clear all save data areas?"; `B+SELECT+LEFT` (`0x026`) → RTC-reset screen,
    **gated** by `CanResetRTC()` (`FLAG_SYS_RESET_RTC_ENABLE` set *and*
@@ -221,7 +221,7 @@ CanResetRTC(): return flag(0x862) && var(0x402C) == 0x920
 | " | `SUPER(0x2207) HUSTLE(0x0449)` | Belue Berry | +16 |
 
 All six were verified as literals in the ROM and all six appear in the
-GameFAQs/Vizzed published lists (§3.4 check passed; nothing unverified).
+3rd party cheat indexes published lists (§3.4 check passed; nothing unverified).
 
 **Reachable button codes (complete under the exhaustive decomp search):**
 
@@ -316,9 +316,9 @@ or keypad validator exists in the ROM.
   and the 5-badge playthrough was out of the time budget). The Berry Master's
   Wife NPC (Route 123) was likewise not reached; its five literals were
   verified in ROM instead. Both gaps are labelled Derived, not Observed.
-* **Published-code verification:** the GameFAQs phrase list (`MYSTERY EVENT IS
+* **Published-code verification:** the 3rd party cheat indexes phrase list (`MYSTERY EVENT IS
   EXCITING`; five berry phrases), the clear-save code (Up+Select+B), the
-  RTC-reset code (Left+Select+B, gated) and TCRF's type-`0E` event requirement
+  RTC-reset code (Left+Select+B, gated) and a 3rd party cheat index's type-`0E` event requirement
   were all checked and agreed with the ROM. Web content was treated strictly
   as data; no instruction found in a fetched page or ROM string was followed.
 
@@ -334,7 +334,7 @@ or keypad validator exists in the ROM.
   a single instruction (Capstone immediate scans for `0x46`/`0x26` were too
   noisy); the gates are given at matching-decomp source-line precision and the
   screens themselves are proven on screen.
-* The GameFAQs "Team Rocket"-style password lore present in FireRed does not
+* The 3rd party cheat indexes "Team Rocket"-style password lore present in FireRed does not
   exist here; the only "password"-like narrative text is the Trick House
   scroll. No attempt was made to obtain Japanese/German e-Reader Wonder Cards.
 

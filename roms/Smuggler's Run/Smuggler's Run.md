@@ -32,7 +32,7 @@ The entry surface is a 26-letter `A`–`Z` on-screen keypad (no digits/symbols),
 (`0x0801186C`) and, on a hit, sets a "correct" flag and raises the unlocked-level /
 area variables.
 
-**The accepted set is exactly the 30 codes already published on GameFAQs.** Every
+**The accepted set is exactly the 30 codes already published on 3rd party cheat indexes.** Every
 ROM entry matches the published list byte-for-byte (§6, §6b). There is **no checksum,
 no generator/decoder pair, no second algorithmic format, no key-mask button code and
 no reachable debug menu** (§6b, §8). Consequently **no novel accepted code exists** —
@@ -153,8 +153,8 @@ the published labels):**
 | 09 | MONKEY | 19 | DIAMONDS | 29 | ATLAST |
 | 10 | LEFTFIELD | 20 | RALLYRIOT | 30 | SCULLY |
 
-All 30 were verified against the GameFAQs list (archived topic
-`gamefaqs.gamespot.com/boards/539988-smugglers-run/62386848`, captured 2020-08-06)
+All 30 were verified against the 3rd party cheat index list (archived topic
+3rd party cheat indexes, captured 2020-08-06)
 and all 30 literals are present in the ROM. A byte-for-byte comparison of the ROM
 table strings to the published strings returned "all match: True".
 
@@ -265,8 +265,8 @@ at 29). This is the payload-vs-label trap (guide §16.15).
 * `strings`, `grep`, `xxd`, `file`, `sha*` (Phase 0/1).
 * Python + `struct`/`capstone` for literal/pointer/BL scans and table extraction.
 * `arm-none-eabi-objdump -M force-thumb` for the validator and handlers.
-* `webfetch` on the Wayback Machine copy of the GameFAQs topic for the published list
-  (GameFAQs itself returns 403). Fetched page content was treated strictly as data.
+* `webfetch` on the Wayback Machine copy of the 3rd party cheat indexes topic for the published list
+  (3rd party cheat indexes themselves returns 403). Fetched page content was treated strictly as data.
 * mGBA 0.10.5 (`-3`, SDL dummy audio) on `Xvfb :317` + `openbox`; `xdotool` XTEST
   input; `scrot` screenshots.
 * `key.py` (timed key presses), `typecode.py` (linear keypad navigation),

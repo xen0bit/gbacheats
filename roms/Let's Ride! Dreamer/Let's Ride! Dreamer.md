@@ -122,7 +122,7 @@ Because no code system exists, §0.2's "mint a novel code / prove bounds by reje
 
 - The precise index→glyph transform for the `0x081C160` display bank remains unresolved. Tried: direct glyph-table lookup (`0x08386B88`, all offsets −0..−0xFF), all 256 single-byte XOR keys, all 256 additive constants, case-only (`^0x20`) mapping, UTF-16, and `+0x20` shift. No readable text resulted. Given its location and the debug string, it is assessed as course/prompt display data, not a code table. This does not affect the negative result: the ROM-wide keyword/text-bank/input-handler/search counts in §6b are independent of this bank's encoding.
 - The four profile-screen display icons (counts 0) and three horse-creation icons (counts 5/6/3) were observed but their exact meaning (hours, achievements, unlocked disciplines) was not labelled by the game text; they are not selectable and show no code entry.
-- Web: GameFAQs returned 403, TCRF 403 and no Wayback snapshot, Bing/DDG returned no game-relevant results, and the web-search integration's daily quota was exhausted. No published code was available to verify; the ROM-side negative stands on its own.
+- Web: 3rd party cheat indexes returned 403, 3rd party cheat indexes 403 and no Wayback snapshot, Bing/DDG returned no game-relevant results, and the web-search integration's daily quota was exhausted. No published code was available to verify; the ROM-side negative stands on its own.
 
 ## 9. Tooling
 

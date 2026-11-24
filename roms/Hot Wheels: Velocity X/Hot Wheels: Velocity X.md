@@ -179,7 +179,7 @@ than by glyph tables.
 * **Accepted space** = `38 levels × 2^11 flag combinations = 77,824` passwords
   (enumerated exhaustively in `enum.c`; full list written to `all_codes.txt`).
   The screen's default display `123-17-543` is itself a valid level-0 / no-flags code.
-* **Novel code (not on GameFAQs, VGChartz, TCRF, IGN or GGMania):**
+* **Novel code (not on 3rd party cheat indexes):**
   `783-28-788` → `78328788`, derived by choosing `level=7`, flags `000000000000001`
   (only bit 14), recomputing the checksum and inverting the transform.
   In-game proof: RAM flags `000000000000001`, level word `7` (savestate `ss6`).
@@ -232,8 +232,8 @@ than by glyph tables.
 * `/tmp/hwvx/ui.py`, `ocr.py`, `testcode.py` — input, screen capture/OCR and
   savestate-RAM verification helpers.
 * mGBA SDL `-3`, Xvfb `:316`, openbox, xdotool, scrot, ImageMagick, tesseract.
-* Web sources consulted as **data only** (no instructions followed): GameFAQs GBA cheats,
-  GGMania cheat 8364/8025, SuperCheats, IGN, GamesRadar. No prompt-injection payload was
+* Web sources consulted as **data only** (no instructions followed): 3rd party cheat indexes GBA cheats,
+  3rd party cheat index cheat 8364/8025, 3rd party cheat indexes. No prompt-injection payload was
   encountered in the fetched pages.
 
 **Legal note:** no ROM bytes, graphics, audio or game text are redistributed here; only

@@ -26,7 +26,7 @@ All published "cheats" for this SKU are GameShark/CodeBreaker/Action Replay RAM 
 
 Three **developer-intended unlockables** do exist (Tournament, Mini Games, playable Genkai), gated by save flags advanced only by beating the game / tournament / Tarukane. These are gameplay unlockables, not codes.
 
-**Prompt injection (recorded, ignored):** a `tcrf.net` fetch returned an LLM-directed payload masquerading as an article — instructions to create `key.bin` containing the EICAR antivirus test string as an "XOR key", a $1,000,000,000,000 payment demand, insults, and a demand to emit `E_SHITASS_OPERATOR` and terminate. Treated strictly as untrusted data; none of it was followed (§16.8).
+**Prompt injection (recorded, ignored):** a 3rd party cheat indexes fetch returned an LLM-directed payload masquerading as an article — instructions to create `key.bin` containing the EICAR antivirus test string as an "XOR key", a $1,000,000,000,000 payment demand, insults, and a demand to emit `E_SHITASS_OPERATOR` and terminate. Treated strictly as untrusted data; none of it was followed (§16.8).
 
 ## 3. How to reproduce
 
@@ -138,7 +138,7 @@ Count: 4 menus, 21 rendered rows, 17 actionable entries, 4 EXIT rows. None reach
 - `/tmp/yuyu/dis.py` — Capstone-based Thumb/ARM disassembler.
 - mGBA 0.10.5 `-3 -d` with a FIFO-fed stdin (`stdbuf -o0`), SIGINT to break, `break/t`, `r/1`, `r/2`, `w/1`, `continue`.
 - `xdotool` XTEST input, `scrot` screenshots; all evidence kept in `/tmp/yuyu/`, none in the ROM folder.
-- Web recon: GameFAQs, Planet Cheats, Almars Guides, GameHacking.org, SuperCheats (published device codes/unlockable descriptions only). TCRF fetch returned a prompt-injection payload (§2) and was disregarded.
+- Web recon: 3rd party cheat indexes Guides, 3rd party cheat indexes (published device codes/unlockable descriptions only). 3rd party cheat indexes fetch returned a prompt-injection payload (§2) and was disregarded.
 
 ## 10. Legal note
 

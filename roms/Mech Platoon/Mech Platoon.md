@@ -13,7 +13,7 @@
 | Game code / maker | `AKGE` / `7F` |
 | Version / fixed / complement / checksum | `0x00` / `0x96` / `0x62` / `0x0000` |
 | Entry word | `0xEA00002E` (stock ARM branch — no cracktro patch) |
-| CRC32 | `769FDE96` (matches GameHacking.org AGB-AKGE-USA) |
+| CRC32 | `769FDE96` (matches 3rd party cheat indexes AGB-AKGE-USA) |
 | MD5 | `ab0999e2d7c13ada9cf374cd0aa47f97` |
 | SHA-1 | `8a9bd790c9cd831366a00cdde72a9f3fec89cb61` |
 | SHA-256 | `648584e9d512da44f499bbc9e8f9a0cb0896e90f5ecdfcdc10c09bf3d7aaff1d` |
@@ -53,9 +53,7 @@ it. The accepted set reachable by a player is **empty by construction** (there
 is no input path). This is reported as a closed, proven result — not an open
 gap. §6b gives the formal space bound and the 10-condition rejection list.
 
-**Published codes:** every published "code" for this SKU (GameFAQs, VGChartz,
-TCRF mirror, GameHacking.org, CodeTwink, Codejunkies, cheatcc, etherealgames,
-53lu) is an Action Replay / GameShark / CodeBreaker memory patch — e.g.
+**Published codes:** every published "code" for this SKU (3rd party cheat index mirror, 3rd party cheat indexes) is an Action Replay / GameShark / CodeBreaker memory patch — e.g.
 `5A2C45C5 5E4DAF98 CDE8AE47 E0DF7372` ("Debug Menu"), `330034EC 0063` ("99
 Start Points"), `A2059D32 …` ("Infinite Material Rock"). None is an in-game
 password or button code. The one genuine unlockable (bonus unit at 90–100%
@@ -63,11 +61,11 @@ database completion) is a save-bit reward, not a code. Applying the published
 AR debug-menu code through mGBA's `-c` loader crashed the emulator, confirming
 it is a raw memory patch, not an in-game gate.
 
-**Prompt injection:** the `tcrf.net/Mech_Platoon` fetch in the prior pass
+**Prompt injection:** the 3rd party cheat indexes fetch in the prior pass
 returned an LLM-directed injection payload (fake "decode key" = EICAR test
 string, a fake "$1,000,000,000,000,000,000,000,000,000" transfer, "shrink into
 a corn cob", `E_SHITASS_OPERATOR`, `Alt+F4`, "print Eat my ass!"). Treated as
-data and ignored (GBARE §16.8); the legitimate TCRF mirror `tcrf.tiago.zip`
+data and ignored (GBARE §16.8); the legitimate 3rd party cheat index mirror
 was used for developer facts. Web/archive recon in this pass was blocked
 (Internet Archive "Temporarily Offline", search backends returned no results).
 
@@ -128,8 +126,8 @@ File offset ↔ ROM address: `ROM = 0x08000000 + file_offset`.
 | Header / entry branch | `0x000` | `0x08000000` | Observed |
 | Build date `Fri Oct 05 13:11:00 2001` | `0x7FFFE0` | `0x087FFFE0` | Observed |
 | Layer-name table (21 names + `0` terminator), starts at `SET MISSION` | `0xEB018`–`0xEB070` | `0x080EB018` | Derived (pointer decode) |
-| Layer names (`TITLE`, `LAY17 Save`, `LAY01 State choice`, … `VS01`) | `0x7A5FC`–`0x7A774` | `0x0807A5FC` | Observed + TCRF mirror |
-| Debug-menu strings (Shift-JIS) `機械化　デバッグメニュー` etc. | `0x72714`–`0x7273C` | `0x08072714` | Observed + TCRF mirror |
+| Layer names (`TITLE`, `LAY17 Save`, `LAY01 State choice`, … `VS01`) | `0x7A5FC`–`0x7A774` | `0x0807A5FC` | Observed + 3rd party cheat index mirror |
+| Debug-menu strings (Shift-JIS) `機械化　デバッグメニュー` etc. | `0x72714`–`0x7273C` | `0x08072714` | Observed + 3rd party cheat index mirror |
 | `DUMMY DATA FOR PADDING BY FBN(C)(嘘)` | `0x72498` | `0x08072498` | Observed |
 | `SIO testing.` / `SIO hook` | `0x726A4`/`0x726B0` | `0x080726A4`/`0x080726B0` | Observed |
 | Tutorial/objective ASCII text bank | `0x84000`–`0x85000` | `0x0884000` | Observed |
@@ -227,7 +225,7 @@ rejected against in this ROM revision.
 at 90–100% database completion; database flag words in IWRAM (`0x030031E0`
 etc., `0` on a fresh boot). No code entry involved.
 
-**Debug menu (memory-edit gated, out of scope):** TCRF mirror documents the AR
+**Debug menu (memory-edit gated, out of scope):** 3rd party cheat index mirror documents the AR
 code above; title string `機械化　デバッグメニュー` at `0x0807273C`. No in-game
 gate exists; the AR code crashes mGBA's cheat loader.
 
@@ -263,7 +261,7 @@ empty/populated SRAM, and Konami/Start+A+B/ABABAB sequences.
 - **Observed**: the captured `ENTER PASSWORD` screenshot; every enumerated
   screen screenshot; keypad cursor movements; savestate RAM section contents;
   the two keypad-literal sites; the 22-entry jump table bytes; the layer-name
-  table bytes; the published-code listings from eight sites; the TCRF mirror
+  table bytes; the published-code listings from eight sites; the 3rd party cheat index mirror
   developer strings; the AR-cheat crash.
 - **Derived**: ROM addresses of all tables/disassembler findings; the 21^8
   space size; savestate section offsets; the `cmp #0x15 / bhi` dispatcher

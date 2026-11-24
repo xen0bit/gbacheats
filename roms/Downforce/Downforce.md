@@ -27,8 +27,8 @@ Downforce has a **5-digit decimal password system** reached from the main menu's
 * The on-screen code is 5 digits `d0 d1 d2 d3 d4`. Only **two** of them carry the payload: `V = 10*d1 + d3`, `V ∈ 1..99`. The remaining three digits (`d0,d2,d4`) are a deterministic check computed from a 512-entry u16 random table.
 * The validator at `0x08000BA4` recovers `V` from digits 1 and 3, regenerates the canonical 5-digit code via `0x08000D0C`, compares all five bytes, and on success writes unlock-flag masks and returns `V`. `V=0` and any wrong-check code return `-1`.
 * The whole space is **99 accepted codes out of 100,000** possible 5-digit strings. It was enumerated exhaustively with the reversed model.
-* **Published-list error found:** GameFAQs/SuperCheats list `12711` for the Skye car. That code is **rejected** by the ROM; the correct generated code for that payload is `42216`. `42216` is absent from every published list, was generated from the algorithm, entered in the emulator, and RAM-verified.
-* The PS2 button sequences on the same GameFAQs page (Square/Triangle/Circle/L1/R1) belong to the **console version** and do not apply to GBA; CodeBreaker/GameShark entries are memory-edit codes and are out of scope.
+* **Published-list error found:** 3rd party cheat index list `12711` for the Skye car. That code is **rejected** by the ROM; the correct generated code for that payload is `42216`. `42216` is absent from every published list, was generated from the algorithm, entered in the emulator, and RAM-verified.
+* The PS2 button sequences on the same 3rd party cheat index page (Square/Triangle/Circle/L1/R1) belong to the **console version** and do not apply to GBA; CodeBreaker/GameShark entries are memory-edit codes and are out of scope.
 
 ## 3. How to reproduce
 
@@ -124,7 +124,7 @@ Notes (matching the assembly exactly):
 | 4th hidden car — Vinnie | 17993 | 79 | generated | accepted |
 | 3rd hidden car — Skye | **12711** | 21 | **not generated** | **rejected** — published error |
 
-Sources: GameFAQs "Continue Codes – Unlocked via Natural Progression", SuperCheats, a2zweblinks; all list the same eight 5-digit codes. The PS2 button codes on the same GameFAQs page are for the console SKU and were not treated as GBA input.
+Sources: 3rd party cheat indexes "Continue Codes – Unlocked via Natural Progression", 3rd party cheat indexes, a2zweblinks; all list the same eight 5-digit codes. The PS2 button codes on the same 3rd party cheat index page are for the console SKU and were not treated as GBA input.
 
 ### 6.2 Code field layout
 

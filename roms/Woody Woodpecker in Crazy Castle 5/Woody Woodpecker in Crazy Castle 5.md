@@ -169,7 +169,7 @@ observed to return the game to the title splash, i.e. a soft reset, not a cheat.
    guide's §16.18 cases — the mini-games are ordinary gameplay pickups.
 
 6. **Web/published-code reconnaissance.** Attempted (guide §3.4) via the
-   available search integration and direct fetches (GameFAQs, TCRF, Google,
+   available search integration and direct fetches (3rd party cheat indexes, Google,
    Bing, DuckDuckGo). Search returned no results for this title; direct
    fetches were 403 / bot-challenge. **No published code could be located or
    verified.** This is recorded as a limitation, not treated as evidence of
@@ -201,7 +201,7 @@ above.
 
 * Web-based confirmation of "no published codes" could not be obtained
   because all search/fetch routes were blocked; a human with normal web
-  access should re-check GameFAQs/TCRF for this exact SKU (`AWWE`, Rev.00).
+  access should re-check 3rd party cheat indexes for this exact SKU (`AWWE`, Rev.00).
 * The 1,922 + 1,680 spurious key-mask runs were sampled, not individually
    adjudicated; none had a validator xref, which is the discriminating test.
 * Multiplayer screens requiring a second cartridge/link were not entered;

@@ -31,7 +31,7 @@ The stored `0xEA` is exactly the computed header checksum, while the checksum fi
 1. **No code-entry surface exists.** There is no text-entry screen, no alphabet/keypad screen, no `PASSWORD`/`CODE` UI, and no buffer that is compared against user text. The only input devices are the title screen, the three-slot file menu, the pause menu, the map overlay, and the in-world NPC/event script.
 2. **No code data exists.** A full 4 MiB scan found no `PASSWORD`, `CHEAT`, `DEBUG`, `SECRET`, `UNLOCK`, `GALLERY`, `OPTIONS`, `BONUS`, `EXTRAS`, `MINI GAME`, `LEVEL SELECT`, `SOUND TEST`, or `PRESS START` string in ASCII, lowercase, `+0x20`, `-0x20`, or UTF-16LE. The dialogue bank is ASCII (`0x0801D124`); all menu labels (`PAUSE`, `SAVE`, `CONTINUE`, `QUIT`, `SELECT A FILE`, `MINIGAMES`) are pre-rendered tile graphics, which is why string scans miss them.
 3. **No button-sequence validator exists.** The joypad routine is at `0x08003D88`; its edge-pressed word is `0x03006670`. A scan of all 2,097,152 halfword positions found 388 runs of four or more button masks, 213 runs of five or more, and exactly one run of six or more containing L/R (`0x083BD608`); that run has no pointer reference and is data. The only pointer-referenced mask-looking run is `0x0801D0C4`, which is a sine/geometry coefficient table used by the rotation code at `0x08001C84`/`0x08004814`, not an input table. The Konami sequence (`Up Up Down Down Left Right Left Right B A`) is absent in both u16 and byte form.
-4. **No in-game codes are published.** GameFAQs' cheat page and the usual mirrors publish only CodeBreaker/GameShark **device** codes for this SKU (e.g. `83007390 8C96` timer, `830073F0 0034` infinite paint). Those are RAM writes, not in-game codes, and are outside this engagement's scope. No password/button list exists to verify. TCRF documents only an unused ending song.
+4. **No in-game codes are published.** 3rd party cheat indexes' cheat page and the usual mirrors publish only CodeBreaker/GameShark **device** codes for this SKU (e.g. `83007390 8C96` timer, `830073F0 0034` infinite paint). Those are RAM writes, not in-game codes, and are outside this engagement's scope. No password/button list exists to verify. 3rd party cheat indexes document only an unused ending song.
 5. **The game-select hub is an event list, not a code surface.** The `MINIGAMES` board is the game's event/mini-game list. Its scene handler is `0x08010724`. The unlock count is `0x030074E4`, computed from a 3×5 table of 15 progress flags at `0x03007320`; the cursor is `0x030074E8` and the index→ID table is 16 halfwords at `0x080E43B8`. With zero unlocks the board is blank; with the 15 flags set (analysis aid) it renders numbers 1–15 and a blank 16th slot. The count loop caps the normal list at 15, but the navigation code has a special case at `0x08010B54`: with all 15 events unlocked, the input **Down, Down, A** from the initial cursor (slot 1) moves to slot 9, then to the blank 16th slot, and A writes area/event ID `0x0017` to `0x03004300`. This is the only unadvertised entry found; it is a blank slot, not a password or a cheat.
 6. **The only menus are:** title (Start only), file select (3 files + erase with YES/NO), pause (SAVE / CONTINUE / QUIT), map overlay (Select), hub, cabin interiors, and the `MINIGAMES` board. There is no options/sound/gallery/debug screen, and Select/L/R/A/B/D-pad on the title produce no alternate screen.
 
@@ -195,7 +195,7 @@ The hub HUD shows four flag slots (red X until collected); the intro script asks
 
 ### 6.4 Published cheat-device codes (out of scope)
 
-The only published codes for this SKU are CodeBreaker/GameShark RAM writes, e.g. from the EmuCheatz list:
+The only published codes for this SKU are CodeBreaker/GameShark RAM writes, e.g. from the 3rd party cheat index list:
 
 ```
 Camp Lazlo Leaky Lake Games (US)
@@ -243,7 +243,7 @@ No novel code can be minted because no code format exists. The equivalent delive
 | Erase confirmation | `ERASE THIS FILE?` → A, then B (NO) | Returns to file list; file 1 remains `CAMPGROUNDS` |
 | Text-entry surface | Search all reachable menus | No text field, no alphabet grid, no `PASSWORD`/`CODE` label |
 | Button sequence | Konami u16/byte; all mask runs | 0 Konami hits; only pointer-referenced run is geometry data |
-| Published in-game codes | GameFAQs/EmuCheatz/TCRF | Only CodeBreaker RAM writes; no in-game list |
+| Published in-game codes | 3rd party cheat indexes | Only CodeBreaker RAM writes; no in-game list |
 
 ### 6b.5 Negative results bounded (search counts)
 
@@ -297,7 +297,7 @@ So the blank slot is not a password/cheat, but it is an unadvertised 16th event/
 
 * The human-readable name/asset for event ID `0x0017` was not located; the table value is known but the corresponding graphic/name asset was not isolated.
 * The exact tool that rewrote the header check fields is unknown; the code and data are stock.
-* TCRF's page could not be read directly (Cloudflare 403); the search snippet reports only “An unused ending song. The game does not have an ending cutscene”, which is consistent with the absence of a debug menu. No prompt-injection content was encountered in the fetched material.
+* a 3rd party cheat index's page could not be read directly (Cloudflare 403); the search snippet reports only “An unused ending song. The game does not have an ending cutscene”, which is consistent with the absence of a debug menu. No prompt-injection content was encountered in the fetched material.
 
 ## 9. Tooling
 

@@ -14,7 +14,7 @@
 | Entry point | ARM branch `EA00002E` → `0x080000C0` (standard crt0) |
 | Complement check | `0xBD = 0x92` (matches the computed value) |
 | Header u16 @0xBE | `0x0000` (unusual, but the CRC32 below matches the known-good USA dump) |
-| CRC32 | `4A49272B` (matches GameHacking.org's USA `AGB-BEYE-USA` entry) |
+| CRC32 | `4A49272B` (matches a 3rd party cheat index's USA `AGB-BEYE-USA` entry) |
 | MD5 | `de37c8d6f9b8cd56dfd81ca0f754e54b` |
 | SHA-1 | `cd527c8c24e20e33913fc45199e64b3e6138a6e5` |
 | SHA-256 | `a9f4bdb4d7f889fb099aed794f5c03548c2f5e12fb9a1d3463278835f72db41c` |
@@ -70,11 +70,11 @@ internal data source).
 | `menu` | 4 | "Main Menu" / debug allocator warnings |
 | `sound test` / `test mode` | 0 / 0 | none |
 
-Published sources used for anchoring and later verification: GameRevolution's
+Published sources used for anchoring and later verification: a 3rd party cheat index's
 `Beyblade: Ultimate Blader Jam GBA Cheats` page (the five-button list), the
-htfbw.com `Beyblade GBA Cheats` page (button list incl. "right,right,right,left"),
-and GameHacking.org / Ethereal Games CodeBreaker pages (RAM anchors only). No
-GameFAQs page was needed; no archived snapshot was required.
+3rd party cheat indexes `Beyblade GBA Cheats` page (button list incl. "right,right,right,left"),
+and 3rd party cheat indexes CodeBreaker pages (RAM anchors only). No
+3rd party cheat index page was needed; no archived snapshot was required.
 
 ## 3. How to reproduce
 
@@ -259,7 +259,7 @@ Raw blobs (all little-endian, verified with `struct.unpack`):
 
 | Sequence | Source | Result |
 |---|---|---|
-| Right, Left, Left, Up, A | GameRevolution / htfbw ("Get Next Level") | **absent**: no blob, no detector advances, no state change |
+| Right, Left, Left, Up, A | 3rd party cheat indexes / htfbw ("Get Next Level") | **absent**: no blob, no detector advances, no state change |
 | Right, Right, Right, Left | htfbw ("fully charged meter") | absent from both tables (P1 is Right,Left,Right,Left) |
 | B, L, R, Down "at Start screen" | blog | correct, but it is the title screen, not the main menu |
 

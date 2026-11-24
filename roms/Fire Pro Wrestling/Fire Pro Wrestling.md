@@ -25,7 +25,7 @@
 
 This image has **one** developer-intended, player-enterable cheat: the **"unlock all wrestlers" name code** in `Edit → Edit Wrestler → Name Entry`. It is a *hard-coded triple*, not a password system: set Nickname `ALL`, First Name `STYLE`, Last Name `CLEAR`, Exchange `Off`, Middle = the square "space" icon, then press Start. The code was typed on the real Name Entry screen in mGBA and accepted; the edit menu then rendered the entered values and the wrestling roster included the "hidden" talent named in the published lists (`OMEGA`, `KLEEBO`, `ANONOMYS`, `JOE`, `HAROCK`, `GENOA`, `PEPE`, `COLE`, `JONES`, `NEVELO`, …).
 
-There is **no password/keypad screen**, **no published button code**, and **no reachable debug menu** in this SKU. The ROM does contain a large block of test-menu / sound-test text (`H_TEST_MENU`, `1.SOUND_TEST`, `SOUND_TEST`, `BGM:`, `SE:`, `VOICE_1..6`, `THEME_1..31`, …), but a full 32-bit pointer/literal scan of all 8 MiB found **zero** references into that string region (`0x08ADF00..0x08AE600`); TCRF independently classifies it as *unused text*. This is a **dead-code** feature (guide §16.3 case 2), not a gated or reachable hidden menu.
+There is **no password/keypad screen**, **no published button code**, and **no reachable debug menu** in this SKU. The ROM does contain a large block of test-menu / sound-test text (`H_TEST_MENU`, `1.SOUND_TEST`, `SOUND_TEST`, `BGM:`, `SE:`, `VOICE_1..6`, `THEME_1..31`, …), but a full 32-bit pointer/literal scan of all 8 MiB found **zero** references into that string region (`0x08ADF00..0x08AE600`); 3rd party cheat indexes independently classifies it as *unused text*. This is a **dead-code** feature (guide §16.3 case 2), not a gated or reachable hidden menu.
 
 ## 3. How to reproduce
 
@@ -45,7 +45,7 @@ Keymap used: A=`x`, B=`z`, L=`a`, R=`s`, Start=`Return`, Select=`BackSpace`, D-p
 6. Press **Start**. The screen returns to `WRESTLER EDIT MENU` and the entered names are shown in the preview panel.
 7. Press B repeatedly to return to the main menu, then `Exhibition → 1P → Normal → … → WRESTLER SELECT`; the extra wrestlers are selectable.
 
-Published codes checked: GameFAQs/Neoseeker, CheatCC, Cheat Happens, Cheating Dome, GameRevolution, AAA Cheat Codes, geocities GBA code page — all give the same triple. (GameShark/CodeBreaker entries on GameRevolution/Almars are out of scope: they are external memory-edit devices, not in-game codes.)
+Published codes checked: 3rd party cheat indexes GBA code page — all give the same triple. (GameShark/CodeBreaker entries on 3rd party cheat indexes are out of scope: they are external memory-edit devices, not in-game codes.)
 
 ## 4. Address map
 
@@ -115,7 +115,7 @@ There is no alphabet checksum, no key table, no generator function and no variab
 - Exhaustive literal search of all 8,388,608 bytes: `CLEAR` occurs **0** times, `STYLE` only inside descriptive menu text ("A SPECIFIC STYLE"), `password`/`cheat`/`unlock`/`secret` **0** times each. There is no plaintext code table to enumerate.
 - Thumb `cmp rN,#imm8` scanner: **0** clean code clusters whose immediates spell `CLEAR`, `STYLE`, or `ALL`.
 - Debug-menu reachability: **0** 32-bit literal pointers into `0x08ADF00..0x08AE600` across the entire image; the only pointers into the wider `0x08AD000..0x08B0000` band land in compressed graphics/audio or in the AI-logic text bank (`0x08AD660..0x08ADDC0`), never in the sound-test block. The feature is dead code.
-- Button-code surface: **0** published button codes for this SKU (searched GameFAQs/Neoseeker/TCRF/VGChartz-style sources); no `password`/`code` entry screen exists in the menu tree (§3), and raw key-mask scans for the series' sound-test combo (`Down+Right+Select`) and `L+R` produced only high-entropy data hits (417 and 119 respectively), not a code table. No button code was found.
+- Button-code surface: **0** published button codes for this SKU (searched 3rd party cheat index-style sources); no `password`/`code` entry screen exists in the menu tree (§3), and raw key-mask scans for the series' sound-test combo (`Down+Right+Select`) and `L+R` produced only high-entropy data hits (417 and 119 respectively), not a code table. No button code was found.
 
 **Bounds / rejection.** The single-code space was exercised with an on-screen **near-miss**: `ALLA / STYLE / CLEA` (nickname and last-name each altered by one character) was typed on the real Name Entry screen and committed with Start. It did **not** behave as the published code — the game simply stored those names as an ordinary created wrestler (`ALLA`, `STYLE CLEA` shown in the edit preview) rather than executing the unlock. This is an **Observed** rejection of an out-of-set input; it bounds the accepted value to the exact literal triple rather than a prefix or a checksum family. (The confirmation of the *positive* unlock effect is the roster observation described in §2/§3.)
 
@@ -127,7 +127,7 @@ There is no alphabet checksum, no key table, no generator function and no variab
 - **Observed** — near-miss `ALLA / STYLE / CLEA` (`nearmiss_a.png`, `nm_start.png`) did not unlock.
 - **Derived** — header parse, hashes, single-header logo scan, literal/pointer/xref counts, font/tile-index bank decoding (16-bit control words `0x829B/0x829C` in the text bank at `0x08ADD00`).
 - **Inferred** — the precise validator instruction sequence and the exact RAM bit that gates wrestler select. The input contract and acceptance behaviour are fully reproducible; the internal comparison was not isolated to a single address.
-- **Prompt injection:** none encountered. Fetched web pages (TCRF mirror, cheat sites) were treated as data only; no instructions from them were executed. No downloaded patch/trainer was applied.
+- **Prompt injection:** none encountered. Fetched web pages (3rd party cheat index mirror, cheat sites) were treated as data only; no instructions from them were executed. No downloaded patch/trainer was applied.
 
 ## 8. Unknowns
 

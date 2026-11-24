@@ -89,7 +89,7 @@ Other notes: A and B are edge-triggered; if both are pressed in one frame A wins
 
 ## 6. Tables
 
-Published lists consulted (all as "hold L+R, press …"): SuperCheats (4 codes: God `AABAAAAA`, Level Skip `ABAABBBA`, All Weapons `ABBAAAAA`, Warp to Boss `ABAABBAA`), World-of-Nintendo (All Weapons, Level Skip, Advance-to-Boss), GameRevolution snippet (God Mode). AAA-CheatCodes listed God/Weapons/Skip without sequences. **None lists `AABABBBB`.**
+Published lists consulted (all as "hold L+R, press …"): 3rd party cheat indexes (4 codes: God `AABAAAAA`, Level Skip `ABAABBBA`, All Weapons `ABBAAAAA`, Warp to Boss `ABAABBAA`), World-of-Nintendo (All Weapons, Level Skip, Advance-to-Boss), 3rd party cheat indexes snippet (God Mode). AAA-CheatCodes listed God/Weapons/Skip without sequences. **None lists `AABABBBB`.**
 
 Code table at file `0x003B5A9E` (ROM `0x083B5A9E`), five 8-byte records:
 

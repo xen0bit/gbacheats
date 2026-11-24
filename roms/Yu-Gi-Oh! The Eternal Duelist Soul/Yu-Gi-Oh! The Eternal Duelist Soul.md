@@ -172,7 +172,7 @@ accepted: 757 / 100000000
   18591904 -> ACCEPT
 ```
 
-**Novel codes: none exist.** Every one of the 757 accepted values appears in the complete published EDS password list (`ooh44`/Teara GameFAQs FAQ 19748 v1.5, which lists exactly 757 passwords among 820 cards). I first suspected `18591904` (slot 223, Final Destiny) was unpublished because a *generic cross-game* list omits it; the dedicated EDS list and GameFAQs cheats page both contain it. That false lead is recorded per §16.7/§16.11 rather than reported as a novel code. Because the validator is an exact fixed-table lookup with no algorithmic generator, the §0.2 "mint a novel accepted code" deliverable is **impossible for this target** and is replaced by this exhaustive bounded negative.
+**Novel codes: none exist.** Every one of the 757 accepted values appears in the complete published EDS password list (`ooh44`/Teara 3rd party cheat index FAQ 19748 v1.5, which lists exactly 757 passwords among 820 cards). I first suspected `18591904` (slot 223, Final Destiny) was unpublished because a *generic cross-game* list omits it; the dedicated EDS list and 3rd party cheat index cheats page both contain it. That false lead is recorded per §16.7/§16.11 rather than reported as a novel code. Because the validator is an exact fixed-table lookup with no algorithmic generator, the §0.2 "mint a novel accepted code" deliverable is **impossible for this target** and is replaced by this exhaustive bounded negative.
 
 **Bounds proven by rejection (observed in emulator):**
 
@@ -206,8 +206,8 @@ Labels: **Observed** = emulator screenshot/RAM read; **Derived** = instruction s
 | Exactly 757 of 10^8 inputs accepted | Derived: exhaustive run of faithful reimplementation | High |
 | Post-submit digit scramble | Derived (`0x0807C830` RNG loop) + Observed (display changes to random digits after submit) | High |
 | `->%4X` debug print | Derived from string `0x08087F98` and its xref at `0x0807C71E`; not seen rendered (right panel stayed black in captures) | Medium |
-| "Already owned" second-layer rejection | Published behaviour (Yugipedia, GameFAQs); not isolated dynamically | Inferred |
-| Hold-R fast duel | Published (Yugipedia trivia / instruction-style cheat lists); not exercised | Inferred |
+| "Already owned" second-layer rejection | Published behaviour (3rd party cheat indexes); not isolated dynamically | Inferred |
+| Hold-R fast duel | Published (3rd party cheat indexes trivia / instruction-style cheat lists); not exercised | Inferred |
 | No hidden button-code sequence / debug menu | Bounded negative: screen walk + string/mask scans (§6b) | Medium |
 
 ## 8. Unknowns

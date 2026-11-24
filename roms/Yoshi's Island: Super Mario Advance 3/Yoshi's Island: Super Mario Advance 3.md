@@ -194,9 +194,9 @@ Alphabet: none — this is a button sequence, not a typed code.
 
 | Source | Claim | ROM verdict |
 |---|---|---|
-| GameFAQs, SuperCheats, Cheat Happens, TMK | GBA: Select + L,L,B,A,R on stage select | **Confirmed** — exactly the table at `0x08164A4C/58` |
-| GameFAQs (SNES section), Neoseeker | SNES: Select + X,X,Y,B,A | Different platform; no X/Y in GBA button mask |
-| One SuperCheats user comment | "L,L,B,R,R" | **Contradicted** — step 4 mask is `0x0001` = A, not R |
+| 3rd party cheat indexes, TMK | GBA: Select + L,L,B,A,R on stage select | **Confirmed** — exactly the table at `0x08164A4C/58` |
+| 3rd party cheat indexes | SNES: Select + X,X,Y,B,A | Different platform; no X/Y in GBA button mask |
+| One 3rd party cheat indexes user comment | "L,L,B,R,R" | **Contradicted** — step 4 mask is `0x0001` = A, not R |
 | CodeBreaker/GameShark lists | unlimited lives, all levels, etc. | Out of scope (cheat-device codes, not in-game) |
 
 ### 6.3 Unlockables (save-progress, not codes)
@@ -291,8 +291,7 @@ reset — this is the in-game rejection bound for a mistyped sequence.
   debugger via `dbg.py` + `dbgcmd.py` FIFO wrapper
 * `ssram.py` — mGBA `.ssN` PNG `gbAs` zlib chunk → raw RAM (IWRAM `0x19000`,
   EWRAM `0x21000`)
-* Web recon: GameFAQs, The Mushroom Kingdom, SuperCheats, Cheat Happens, IGN,
-  MarioWiki. Fetched pages were treated as data only; no instructions in them
+* Web recon: 3rd party cheat indexes. Fetched pages were treated as data only; no instructions in them
   were followed.
 
 ## 10. Legal note

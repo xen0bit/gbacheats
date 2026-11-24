@@ -59,7 +59,7 @@ offset `0x4`), so it is a single-ROM image, not a multi-game pack.
   **Snow White 5/8 treasures** with every other princess at 0/8. This state
   appears in no published list (published bonus code is the all-treasures code).
 * **Bounds proven by rejection:** a single-character corruption of that code is
-  rejected; two published GameFAQs codes (`FlLC0kkL9FgWnW1FlRsZ`,
+  rejected; two published 3rd party cheat index codes (`FlLC0kkL9FgWnW1FlRsZ`,
   `FvDMvtxV5pqwxwPfvr2z`) are rejected by the ROM and fail the recovered
   checksum — the published list contains transcription errors.
 * The password space is **50^20 ≈ 9.09 × 10^33 strings**, of which about

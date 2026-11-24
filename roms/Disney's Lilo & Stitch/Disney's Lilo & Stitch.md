@@ -318,7 +318,7 @@ spellings that pass. `f6` is written to `0x02000A48` and has **no gameplay
 reader** — the only read is the encoder at `0x08001EB8` — so its 8 values are
 behaviourally identical during play (`8` aliases per behaviour).
 
-**Novel codes generated (absent from GameFAQs / Fandom / IGN lists).**
+**Novel codes generated (absent from 3rd party cheat index lists).**
 
 | # | Icon sequence | Bytes | Fields | Result |
 |---|---|---|---|---|

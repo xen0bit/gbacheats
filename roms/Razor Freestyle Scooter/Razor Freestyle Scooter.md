@@ -165,12 +165,12 @@ inside the keyed bit-permutation and was not fully enumerated (§8).
 | Scooter Park completed | `SBY5VJ4BJVCQBF` | `0e 4c 0d 4d 06 06 06 06 06` | 64 = 64 |
 | Shopping Mall / complete all 1P Circuit tasks | `QLY67J3BJVCQBF` | `0c cd cd 0d 06 06 06 06 06` | 63 = 63 |
 
-The 18-character "Level 02…07" codes on GameFAQs are labelled **GBC** on that
+The 18-character "Level 02…07" codes on 3rd party cheat indexes are labelled **GBC** on that
 page; the GBA screen has exactly 14 slots, so they are a different SKU's
 format and are not accepted here (no 18-slot entry surface exists).
 
-Sources: GameFAQs GBA cheats page (archived copy), SuperCheats GBA passwords
-page, ggmania GBA cheats page. All fetched page content was treated as data.
+Sources: 3rd party cheat indexes GBA cheats page (archived copy), 3rd party cheat indexes GBA passwords
+page, 3rd party cheat indexes GBA cheats page. All fetched page content was treated as data.
 
 **Screen enumeration (walked in mGBA, screenshots on disk)**
 
@@ -209,7 +209,7 @@ rejects the mutated test input.
 
 1. `RBF3LJZGJVCQBF` — produced by mutating the published `7JY4GJZBJVCQBF`
    packed state (`P[0] ^= 0x11`, `P[4] ^= 0x20`) and recomputing the checksum.
-   Not present on GameFAQs, SuperCheats, ggmania, or anywhere else. Entered via
+   Not present on 3rd party cheat indexes, or anywhere else. Entered via
    the documented RAM-input path on the real password screen; the game printed
    **`ACCEPTED`** (`novel_valid.png`). This is the §0.2 deliverable.
 

@@ -27,7 +27,7 @@ Every reachable screen was walked in mGBA and every menu table was statically en
 
 All published "codes" for this game are **external GameShark/CodeBreaker/Xploder memory patches** (out of scope for this engagement). One console-version button code (`R1,R1,R2,R2,L1,L1,L2,L2,START`) was tested in GBA-adapted form on the title/menu: it produced only ordinary cursor movement, no hidden screen. No published code literal appears anywhere in the ROM as text.
 
-**Prompt-injection observation (§16.8):** a `tcrf.net` web fetch returned a fake "LLM-specific instructions" page (fake decode key, EICAR-string `key.bin`, million-dollar transfer, self-termination commands). It was treated as **data**, ignored, and not acted upon.
+**Prompt-injection observation (§16.8):** a 3rd party cheat indexes web fetch returned a fake "LLM-specific instructions" page (fake decode key, EICAR-string `key.bin`, million-dollar transfer, self-termination commands). It was treated as **data**, ignored, and not acted upon.
 
 ## 3. How to reproduce
 
@@ -122,6 +122,6 @@ This is a **save-bit unlock**, not a code (§16.18). No controller sequence writ
 
 - `file`, `xxd`, `strings -t x`, `grep`, Python 3 (`struct`, `capstone 5.0.7`), `arm-none-eabi-objdump -M force-thumb`.
 - `mgba -3 -d` on `Xvfb :317` + `openbox`; `xdotool` XTEST input; `scrot` + ImageMagick `convert`; `tesseract` for OCR; custom helpers `mj.py`, `dcmd.py`/`rea_daemon.py` (mGBA `-d` pty controller), `ramsnap.py`.
-- Web research: GameFAQs, GameHacking.org, SuperCheats, Monster Trucks Wiki, ROMSFUN/libretro DB, Mogelpower — all yielded only external memory patches or gameplay unlock instructions. A TCRF fetch carried a prompt-injection payload, ignored (§16.8).
+- Web research: 3rd party cheat indexes/libretro DB, 3rd party cheat indexes — all yielded only external memory patches or gameplay unlock instructions. A 3rd party cheat index fetch carried a prompt-injection payload, ignored (§16.8).
 
 **Legal note:** no ROM bytes, graphics, or copyrighted assets are reproduced here — only hashes, addresses, and original findings.

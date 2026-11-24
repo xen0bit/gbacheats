@@ -36,7 +36,7 @@ The one genuine debug leftover is an ASCII Sim-template name **`CheaterX`** at R
 `0x0806DA4C`, length 16). It is a data-table entry, not a code, a validator, or a UI prompt.
 
 Web reconnaissance produced no usable data: the websearch integration returned "No search
-results found" for every query, and direct fetches of GameFAQs, IGN, and TCRF all returned HTTP
+results found" for every query, and direct fetches of 3rd party cheat indexes all returned HTTP
 403. No published code could be recovered or checked; this is recorded as a limitation, not as
 evidence of absence.
 
@@ -198,7 +198,7 @@ candidate handler/table was found at all. One minor gated/unused artifact exists
   an unloaded bank cannot be excluded. The §6b negative is therefore bounded to the searched
   encodings (ASCII, glyph-index, literal-pool, mask/alphabet tables) and the walked screens,
   exactly as stated.
-* Web/public-code reconnaissance failed (search tool returned no results; GameFAQs, IGN, TCRF
+* Web/public-code reconnaissance failed (search tool returned no results; 3rd party cheat indexes
   all HTTP 403). Published codes for this exact SKU remain unverified.
 
 ## 9. Tooling

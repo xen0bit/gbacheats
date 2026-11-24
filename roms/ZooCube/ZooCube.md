@@ -59,7 +59,7 @@ pointer or BL references and is unreachable dead data.
    from flashing red to green; **Game Select → Level** — levels 2–7 become green; **Type** —
    KO Blind becomes green.
 
-Published GBA cheats: none found. GameFAQs/SuperCheats/Neoseeker codes are for other platforms;
+Published GBA cheats: none found. 3rd party cheat index codes are for other platforms;
 zero of the five searched literals (`OPENSESAME`, `ENTERPRISE`, `OQJAMA`, `MCKLLB`, `PASSWORD`)
 appear anywhere in this ROM.
 
@@ -155,7 +155,7 @@ press produces a multi-bit mask that cannot match any table entry. Representable
 bounds the length at 10. Exactly **one** table is reachable (the second table has zero xrefs).
 
 **Novel code.** **← ← → → ↑ ↓ ↑ ↓ L R**. No GBA cheat list exists in the recon sources
-(GameFAQs, SuperCheats, Neoseeker, CodeJunkies, cheathappens); the widely published
+(3rd party cheat indexes); the widely published
 `OPENSESAME`/`ENTERPRISE` strings are for GameCube/PS2/PC and are absent from this ROM. The code
 therefore appears in no published GBA list. It exercises an unadvertised combination — it sets
 all three unlock fields at once, including Warp Speed, which the retail FAQ says requires beating
@@ -221,6 +221,6 @@ instead of red. Earlier, before the code, `spd_montage.png` showed those same sp
   savestates `ZooCube.ssN` parsed with a local `gbAs` PNG-chunk/zlib reader (IWRAM at state
   offset `0x19000`, EWRAM at `0x21000` — this game leaves EWRAM entirely zero).
 - xdotool exact key injection with 0.03 s holds / 0.15 s gaps; `scrot` + ImageMagick crops.
-- Web recon: GameFAQs/SuperCheats/Neoseeker game pages and the GBA-specific FAQ by Lisanne.
+- Web recon: 3rd party cheat indexes game pages and the GBA-specific FAQ by Lisanne.
 - All evidence (screenshots, scripts, savestates, work ROM copy) was in `/tmp/zoocube`,
   not in the ROM folder. No ROM or copyrighted assets are redistributed by this report.

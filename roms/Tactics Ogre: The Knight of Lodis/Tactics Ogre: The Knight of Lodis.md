@@ -111,7 +111,7 @@ Composer credits as rendered: `REZON` and `YmoH.S`. Six entries (08, 25, 26, 27,
 2. The validator contains exactly **two** 9-byte `memcmp` calls against these literals (`0x0812F580`, `0x0812F5D2`). A third `memcmp` at `0x0812F720` is a 16-byte comparison in a 32-entry × 0x68-byte *unit* table (active-unit name lookup), and is reached from a different state-machine branch — it is not a code check.
 3. No generator, checksum, XOR key, PRNG or per-character arithmetic exists on either accepted path; both are literal comparisons. Therefore no code outside the two literals can be accepted by this screen.
 
-**Novel codes.** None can exist: the accepted set is a closed 2-element lookup table, and both elements are already published (tacticsogre.com "Secrets", ChapterCheats, Neoseeker). Per §0.2 this is reported as a **bounded negative**, not glossed over. Every other name I tried (including `CDEFGHIJ`, `MUSICXON`, `AAAAAAAA`) produced the ordinary name-confirmation dialog.
+**Novel codes.** None can exist: the accepted set is a closed 2-element lookup table, and both elements are already published (3rd party cheat indexes "Secrets", 3rd party cheat indexes). Per §0.2 this is reported as a **bounded negative**, not glossed over. Every other name I tried (including `CDEFGHIJ`, `MUSICXON`, `AAAAAAAA`) produced the ordinary name-confirmation dialog.
 
 **Novel evidence produced anyway.** Although no novel *code* is possible, four *unpublished representational facts* were established and RAM-verified:
 - the exact 8-symbol→byte encoding of the name buffer (no published source documents it);

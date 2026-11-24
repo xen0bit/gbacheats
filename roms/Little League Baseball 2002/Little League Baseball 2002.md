@@ -25,7 +25,7 @@
 
 ## 2. Executive summary
 
-**Result: this game has no developer-intended cheat system.** There is no password screen, no password/cheat validator, no button-code sequence table, no hidden/debug menu reachable by controller input, and no unlockable content gated on controller input. Everything published for this title is a CodeBreaker/GameShark-style **memory patch** (out of scope). GameFAQs, Cheat Happens and TCRF have no in-game codes or guides for this SKU.
+**Result: this game has no developer-intended cheat system.** There is no password screen, no password/cheat validator, no button-code sequence table, no hidden/debug menu reachable by controller input, and no unlockable content gated on controller input. Everything published for this title is a CodeBreaker/GameShark-style **memory patch** (out of scope). 3rd party cheat indexes have no in-game codes or guides for this SKU.
 
 The negative is bounded, not assumed:
 
@@ -48,7 +48,7 @@ The negative is bounded, not assumed:
 5. ROSTERS → **Team Roster**; CREDITS → scrolling credits; DIFFICULTY / INNINGS cycle with Left/Right.
 6. START GAME → **Select Team** (HUMAN vs CPU, star ratings) → **Select Field** (3 fields) → **Pre-Game Menu** (PLAY BALL / BATTING ORDER / OPTIONS) → **Batting Order** → PLAY BALL → **in-game (batting / pitching / fielding)** → `Start` → **Paused** (MUSIC / SOUND FX / EXIT GAME).
 
-**Codes tested:** none exist to test as in-game codes. The only published "codes" are 15 libretro CodeBreaker memory patches (e.g. `8300002E 00??` away score, `10024EA4 0007` enable) — these write RAM directly and are explicitly out of scope. No GameFAQs/Cheat-Happens/TCRF in-game code was found or claimed.
+**Codes tested:** none exist to test as in-game codes. The only published "codes" are 15 libretro CodeBreaker memory patches (e.g. `8300002E 00??` away score, `10024EA4 0007` enable) — these write RAM directly and are explicitly out of scope. No 3rd party cheat indexes in-game code was found or claimed.
 
 ## 4. Address map
 
@@ -107,7 +107,7 @@ Per §0.2, the "space" is formally empty for developer-intended cheats:
 | Key-mask gate branches (reads of held/pressed globals) | 1 raw `0x04000130` reference; 41 held-mask pool refs | 1 combo gate (`0x0F`) = soft reset; no cheat gate |
 | Cross-references to debug screen-name table / `"TEST TEXT"` | raw pointer, Thumb LDR literal, Thumb ADR, u16 offset | 0 code references; table is unreachable developer data |
 | Reachable screens | 13 (English + Spanish) | none offers a code entry, unlock, or debug menu |
-| Published in-game codes | GameFAQs, Cheat Happens, TCRF, ROMSFUN/libretro | 0 in-game codes published; 15 CodeBreaker RAM patches (out of scope) |
+| Published in-game codes | 3rd party cheat indexes/libretro | 0 in-game codes published; 15 CodeBreaker RAM patches (out of scope) |
 
 **Novel code minted:** not applicable — there is no code system to enumerate. Per §0.2 this is a *proven negative* over the spaces above, not an untested assumption. Bounds are proven by (a) exhaustive literal/alphabet/pointer scans and (b) in-game rejection of every candidate input surface: the only input-accepting screen is the language selector, which accepts exactly English/Spanish, and every button combination tested either navigated normally or triggered the documented soft reset.
 

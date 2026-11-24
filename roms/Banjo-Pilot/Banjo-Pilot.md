@@ -65,9 +65,9 @@ The negative result is bounded by four independent lines of evidence:
    graphics tile bytes (`0x0806B900`, `0x0806B90C`), audio sample data
    (`0x08695xxx`, `0x08781A33`, `0x08A5001F`) or early header/crt0 bytes
    (`0x08000BE8`); none is a button sequence.
-4. **Published lists.** GameFAQs' Banjo-Pilot "Cheats" page (archived
-   2023-02-02), Rare Gamer's unlockables guide and TCRF all describe only
-   Cheato purchases and in-game achievements — zero codes. TCRF's only unused
+4. **Published lists.** 3rd party cheat indexes' Banjo-Pilot "Cheats" page (archived
+   2023-02-02), a 3rd party cheat index's unlockables guide and 3rd party cheat indexes all describe only
+   Cheato purchases and in-game achievements — zero codes. a 3rd party cheat index's only unused
    text findings are `REVERSE CONTROLS` and `NOT USED 1`–`NOT USED 4`, which
    were verified in the ROM and are not reachable from any menu.
 
@@ -132,9 +132,9 @@ Menu paths:
 
 Published material checked (all 403 on direct fetch; archives used):
 
-* GameFAQs Banjo-Pilot cheats, Wayback `20230202172139`.
-* Rare Gamer "Banjo-Pilot Unlockables Guide".
-* TCRF `Banjo-Pilot`, Wayback `20260910234901`.
+* 3rd party cheat indexes Banjo-Pilot cheats, Wayback `20230202172139`.
+* 3rd party cheat indexes "Banjo-Pilot Unlockables Guide".
+* 3rd party cheat indexes `Banjo-Pilot`, Wayback `20260910234901`.
 
 ## 4. Address map
 
@@ -243,7 +243,7 @@ the four displayed costs and the rejection are observed (see §8).
 All 21 names are contiguous in the English text bank and are the shop's item
 strings. "Observed" means shown in the shop on a fresh save; "gated" means the
 string exists but the entry is filtered out until its condition is met. Prices
-are from the shop (observed) or GameFAQs (published); character prices are not
+are from the shop (observed) or 3rd party cheat indexes; character prices are not
 published and their entries are gated, so they are unresolved.
 
 | # | String address | Item | Price | Condition | Fresh-save visibility |
@@ -304,8 +304,8 @@ No punctuation, no lowercase, no 4th slot.
 |---|---|---|
 | `LANGUAGE`, `ENGLISH`, `FRAN`, `DEUTSCH`, `ESPA`, `ITALIANO` | `0x08CF80B4`… | not in this build's Options menu (EU text carried in the shared bank) |
 | `MULTIPLAYER WEAPONS` | `0x08CF80F4` | not in the single-cart Options menu |
-| `REVERSE CONTROLS` | `0x08CF8130` | unused (TCRF agrees) |
-| `NOT USED 1`–`NOT USED 4` | `0x08CFC50C` | unused (TCRF agrees) |
+| `REVERSE CONTROLS` | `0x08CF8130` | unused (3rd party cheat indexes agree) |
+| `NOT USED 1`–`NOT USED 4` | `0x08CFC50C` | unused (3rd party cheat indexes agree) |
 | `SELECT A SLOT` / `ENTER YOUR NAME` | `0x08CF7EC8` / `0x08CF7EDC` | name/records screens, not a code field |
 
 ## 6b. Enumeration
@@ -323,7 +323,7 @@ and were enumerated on screen.
 search: a generated string has nowhere to be entered. The equivalent
 "undocumented combination" deliverable is the catalogue in §6.1 — in
 particular the Jinjo-GP flying-saucer effect, which is absent from the
-GameFAQs and Rare Gamer lists, and the exact four-entry fresh-save subset.
+3rd party cheat indexes and 3rd party cheat index lists, and the exact four-entry fresh-save subset.
 
 **Bounds proven by rejection (observed):**
 
@@ -367,7 +367,7 @@ GameFAQs and Rare Gamer lists, and the exact four-entry fresh-save subset.
 | Cheat-sequence tables with a prefix and action dispatch | 0 |
 | Multi-comparison chains against the key word | 0. The `1/2/4/8/16/32/64` chain at `0x0803FC3A` tests the UI state word at `0x0203CA78`, not `0x0201848C` |
 
-**Published list verification.** The GameFAQs page contains 21 Cheato shop
+**Published list verification.** The 3rd party cheat index page contains 21 Cheato shop
 entries, 7 cup entries and one gameplay hint ("press A just before the race
 starts for a boost") and **zero codes**. Its 21 shop entries match the 21 ROM
 strings exactly, including the four visible ones with identical names and

@@ -28,7 +28,7 @@ Embedded-header scan (full 156-byte Nintendo-logo match): **exactly one** header
 * A separate 75-symbol table at `0x083F7374` is the on-screen **keyboard alphabet** for the New Game name-entry field, not a password alphabet. Its consumer (`0x08002800`–`0x080028C0`) only writes characters into a 24-byte name buffer at IWRAM `0x030005E0`; the save/load routines (`0x08009374`, `0x080096C4`) only **copy** that buffer to/from the save record. No code compares it with a constant (§16.2b: it is a label, not a validator).
 * The screen-state dispatcher has exactly **22 states (4–25)** via a jump table at `0x080020E8`. Every reachable state was identified from the menu flow / string bank. There is no debug state, no state outside the 22 whose handler is not the default loop.
 * Button-code space: the input shadow is at IWRAM `0x030000E0` (active-high, from `KEYINPUT` at `0x04000130` via `0x08000280`). No table of key-mask sequences exists: Konami-style sequences are absent as `u16` and `u8` arrays, and a mask-array scan found only random false positives in code/compressed data. Controlled key presses on the title produced no persistent flag beyond normal menu state.
-* Published-code checks: VGChartz lists **0 cheats** for this exact GBA SKU; Cheat Happens lists none; GameFAQs has no *Pet Resort* cheat page (only the different SKU *Paws & Claws: Pet Vet*, whose codes `kayoo`, `all buildings`, `money`, `droopy`, `momo` were tested against this ROM in ASCII, upper-case, alphabet-index, UTF-16LE and `+0x20` encodings — none present; the lone ASCII `money` at `0x3FB7D3` is part of the dialogue word "Available money:").
+* Published-code checks: 3rd party cheat index lists **0 cheats** for this exact GBA SKU; 3rd party cheat index lists none; 3rd party cheat indexes have no *Pet Resort* cheat page (only the different SKU *Paws & Claws: Pet Vet*, whose codes `kayoo`, `all buildings`, `money`, `droopy`, `momo` were tested against this ROM in ASCII, upper-case, alphabet-index, UTF-16LE and `+0x20` encodings — none present; the lone ASCII `money` at `0x3FB7D3` is part of the dialogue word "Available money:").
 
 Consequently §0.2's "mint a novel code" deliverable does not apply: no code space exists to enumerate. §6b documents the bounded negative with exact counts.
 
@@ -117,7 +117,7 @@ This title has **no code system**, so the enumeration deliverable is the proof o
 | Button-code tables | Konami sequence (u16 + u8) and its reverse; strict single-mask arrays ≥5 | 0 hits; all mask-array hits were misaligned code/compressed-data noise |
 | Screen states | Jump table `0x080020E8` | exactly 22 states (4–25); every one maps to a menu/save/gameplay handler; no debug state |
 | Menus | Visually walked with RAM reads | Title 4 entries; name-entry; difficulty 3; scenario 6 (all available); in-game pause 4 selectable + 5 unreachable blanks; ride breed 2; ride pause 3; credits; LOAD SCORE 4 slots |
-| Published-code sites | VGChartz, Cheat Happens, GameFAQs, web search | 0 codes for this SKU; *Pet Vet* codes belong to a different title and are absent here |
+| Published-code sites | 3rd party cheat indexes, web search | 0 codes for this SKU; *Pet Vet* codes belong to a different title and are absent here |
 
 **Bounds proven by rejection:** there is no code entry surface to accept or reject a value. The nearest negative bounds are structural: (a) the pause selector refuses to move past index 3 (Down held at "Load Game" leaves the highlight unchanged), so its five blank rows are unreachable; (b) all 6 scenarios are selectable immediately, so there is no locked/unlockable scenario to mint; (c) screen states outside 4–25 take the default loop, so no hidden screen can be entered by state manipulation through any reachable menu.
 
@@ -128,7 +128,7 @@ No novel code was generated because no validator, table, alphabet or entry surfa
 * **Observed**: screenshots of every screen listed in §3; `0x03000558 = 0x09` on LOAD SCORE; `KEYINPUT = 0x03FF` at rest; RAM dumps before/after key sequences; full 4 MiB hash/header scan.
 * **Derived**: all addresses in §4; 263-string and 75-symbol tables; 22-state jump table; name-field consumer analysis; key-mask and literal searches.
 * **Inferred**: that scenarios/blank pause rows are intentionally placeholders (their labels and selector bounds strongly indicate it, but no developer statement exists).
-* **Prompt injection**: none encountered in fetched pages (VGChartz / Cheat Happens / GameFAQs snippets were treated as data only).
+* **Prompt injection**: none encountered in fetched pages (3rd party cheat indexes snippets were treated as data only).
 
 ## 8. Unknowns
 

@@ -22,7 +22,7 @@
 
 A copy of this exact image was analysed in `/tmp/santa3/game.gba` (byte-identical). No single-game
 published cheat list could be retrieved: web searches for this exact SKU returned no relevant results and
-GameFAQs returned HTTP 403. Recon therefore rested on the ROM itself.
+3rd party cheat indexes returned HTTP 403. Recon therefore rested on the ROM itself.
 
 ## 2. Executive summary
 

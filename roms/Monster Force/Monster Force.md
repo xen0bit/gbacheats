@@ -31,7 +31,7 @@ small set of **button chords** checked by four inline validators that read the s
 state (active-high masks: `A=0x001, B=0x002, Select=0x004, Start=0x008, Right=0x010, Left=0x020,
 Up=0x040, Down=0x080, R=0x100, L=0x200`).
 
-Four published codes were found on GameFAQs/Cheating Dome/Freeola/StrategyWiki and **all four were
+Four published codes were found on 3rd party cheat indexes and **all four were
 verified in ROM and in the emulator**:
 
 | Effect | Screen | Chord | Verified |
@@ -48,7 +48,7 @@ stat panel) were walked visually. **No hidden/debug menu, password entry, level-
 sound-test screen was found.** Arena/character unlocks other than the chord above are story or save
 bits (§16.18), not cheats.
 
-The 10 CodeBreaker codes circulating on ROMSFUN/libretro are raw memory edits and are **out of
+The 10 CodeBreaker codes circulating on 3rd party cheat indexes/libretro are raw memory edits and are **out of
 scope** (no GameShark/CodeBreaker/memory-edit codes reported here).
 
 ## 3. How to reproduce
@@ -128,9 +128,9 @@ gameplay, `0x0F` pause, `0x10` results, `0x16` shop/results-transition.
 Published literals checked (all **present/confirmed** as behavior, not stored strings — these are
 button chords, so a literal `grep` for them is not meaningful):
 
-* Cheating Dome, Freeola, StrategyWiki, GameFAQs: the four chords in §2. Verified in ROM code and
+* 3rd party cheat indexes: the four chords in §2. Verified in ROM code and
   in emulator. No OCR/typo variants encountered.
-* ROMSFUN/libretro 10 CodeBreaker entries: memory edits (`0x030007DA`, `0x03000840`, …), out of
+* 3rd party cheat indexes/libretro 10 CodeBreaker entries: memory edits (`0x030007DA`, `0x03000840`, …), out of
   scope; deliberately not applied.
 
 Text bank keyword census: `password` **0** hits, `cheat` **0**, `debug` **0**, `secret` **0**,
@@ -154,8 +154,7 @@ extra buttons are aliases. I minted and entered:
 
 Result (**Observed**): game-state word `0x03000760` changed `0x0000000F → 0x0000000B` and the
 screen returned to the "Welcome to Spooky Cemetery / Atom Quota" level-intro panel
-(`pause_alias3_before.png` → `pause_alias3_after.png`). This alias appears on no GameFAQs, VGChartz,
-TCRF, StrategyWiki, Cheating Dome or Freeola page. It proves the exit-level check ignores the
+(`pause_alias3_before.png` → `pause_alias3_after.png`). This alias appears on no 3rd party cheat index page. It proves the exit-level check ignores the
 direction bits and that the reachable chord space is larger than the published table.
 
 A second alias class follows from the same mask logic: `L+R+B` + *simultaneous* `Down+Right` should
@@ -196,8 +195,7 @@ unreliable and were not used as evidence.
   effect, not isolated to an HP-refill reader); the exit-level validator's precise address and
   instruction form (empirically confirmed effect only); arena unlocks are save/story bits.
 
-**Prompt-injection check:** fetched cheat pages (Cheating Dome, ROMSFUN, StrategyWiki, Freeola,
-GameFAQs) were treated as data; none contained instructions attempting to redirect the analysis,
+**Prompt-injection check:** fetched cheat pages (3rd party cheat indexes) were treated as data; none contained instructions attempting to redirect the analysis,
 and no such instruction was followed.
 
 ## 8. Unknowns

@@ -29,9 +29,9 @@ Embedded-header scan: the 156-byte Nintendo logo occurs exactly once, at file of
 * All keypad input in the 4 MiB image is read at **three** `ldrh` sites, all inside one routine at `0x08002DB8`. The only other way to obtain key state would be a literal `0x04000130`, which does not occur anywhere in the ROM, or a `0x04000100 + 0x30` construction, which also does not occur.
 * That routine edge-detects each of the ten buttons and dispatches to callbacks installed per screen at `0x03002954` (direction repeat), `0x03002958` (release) and `0x0300295C` (press). There are **four** distinct callback sets (title, file-select/menus, gameplay, name entry). Three of the four press callbacks are a bare `bx lr`; the only real one (`0x0800D0A0`) acts on A alone. No callback keeps a press history, ring buffer, or chord mask. A multi-button sequence therefore has nowhere to be matched.
 * The only text-entry surface is the profile name field. It offers exactly the 62 alphanumeric symbols `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789` (literal at `0x151DB0`) plus `del`/`end` cells, and caps at 8 characters. The name buffer `0x03004A97` is referenced only by the name-entry code; the copied profile record at `0x03004A20` is used for display/save/high-score comparison of *scores*, never of name bytes. The ROM contains **two `strcmp` calls in total** (`0x0801EC28`, `0x0801EC34`), both in the decimal-number parser comparing against `"C"` and `"."`. No user string is ever compared with a constant.
-* Published lists agree there is nothing to publish: VGChartz lists **0 cheats**, SuperCheats has no GBA cheats/codes (only FAQs), GameFAQs has no cheats page for this title (and no Wayback snapshot of one), and TCRF documents **only the hidden development text**, no codes or debug menu. There is consequently no published code to test; every candidate surface was tested directly.
+* Published lists agree there is nothing to publish: 3rd party cheat index lists **0 cheats**, 3rd party cheat indexes have no GBA cheats/codes (only FAQs), 3rd party cheat indexes have no cheats page for this title (and no Wayback snapshot of one), and 3rd party cheat indexes document **only the hidden development text**, no codes or debug menu. There is consequently no published code to test; every candidate surface was tested directly.
 
-The one genuinely hidden, developer-authored artifact is the **default high-score / "Best Words" table**, which contains PopCap staff handles instead of player names: `Alison/Nick/John/Jeff/Pamela` (5,000–1,000 points) and `Warpig/Bfiete/Tuco/Sen/Don` tagged `design/code/test/art/biz` (500–100 points). `High Scores → B Reset → Yes` restores these rows. It is an easter egg, not a cheat: it changes no gameplay state. The second developer artifact is the large trace-printf string block at `0x0F6BB8`–`0x0F7C00`, documented by TCRF and also present here; those strings are unconditional logging, not a menu.
+The one genuinely hidden, developer-authored artifact is the **default high-score / "Best Words" table**, which contains PopCap staff handles instead of player names: `Alison/Nick/John/Jeff/Pamela` (5,000–1,000 points) and `Warpig/Bfiete/Tuco/Sen/Don` tagged `design/code/test/art/biz` (500–100 points). `High Scores → B Reset → Yes` restores these rows. It is an easter egg, not a cheat: it changes no gameplay state. The second developer artifact is the large trace-printf string block at `0x0F6BB8`–`0x0F7C00`, documented by 3rd party cheat indexes and also present here; those strings are unconditional logging, not a menu.
 
 ## 3. How to reproduce
 
@@ -94,7 +94,7 @@ All addresses are ROM addresses; file offset = address − `0x08000000`.
 | `0x08013CE0`, `0x08013DA4` | code | loaders that install the two default tables |
 | `0x0801EC28`, `0x0801EC34` | code (Thumb) | the ROM's only two `strcmp` calls |
 | `0x083DB1F0`, `0x083DB1BC` | data | constants `"C"` and `"."` used by those calls |
-| `0x0F6BB8`–`0x0F7C00` | data | developer trace-printf strings (TCRF-documented) |
+| `0x0F6BB8`–`0x0F7C00` | data | developer trace-printf strings (3rd party cheat index-documented) |
 | `0x151EAD` | data | undecoded 38-byte glyph/substitution table (not referenced by any pointer; see §8) |
 
 ## 5. Algorithm
@@ -185,7 +185,7 @@ Names at `0x15008B`, values at `0x1500C0`; second table names at `0x1500D4`, dep
 * Callback installers: `0x03002954`/`0x03002958`/`0x0300295C` each have **10** writer sites forming **8** installer functions = **4** distinct handler sets. Press callbacks: **4**, of which **3** are `bx lr`. Direction callbacks: **4**, of which **2** are `bx lr`. Release callbacks: **4**, each a single-mask switch.
 * String comparison: the ROM has exactly **2** `strcmp` calls (`0x0801EC28`, `0x0801EC34`), both in the floating-point/`atof` path (`"C"`, `"."`). The name buffer `0x03004A97` has **2** code xrefs, both in the name-entry handler; the profile record `0x03004A20` is used for score comparison/display/save, not for name comparison.
 * Key-mask sequence scan: aligned u16 runs of ≥4 values drawn from `{1,2,4,8,0x10,0x20,0x40,0x80,0x100,0x200}` over the whole image = **164**; **0** is referenced by a 32-bit code pointer (the one data coincidence was in `0xFF` padding). None lies in executable code next to an input reader. No mask table exists beyond the four 4-pointer installer blocks.
-* Debug gates: no `debug` string, no debug menu label, no state selector. The trace-printf block is called unconditionally; TCRF documents it as hidden development text only.
+* Debug gates: no `debug` string, no debug menu label, no state selector. The trace-printf block is called unconditionally; 3rd party cheat indexes document it as hidden development text only.
 
 ### 6b.3 Novel codes
 
@@ -207,10 +207,10 @@ Names at `0x15008B`, values at `0x1500C0`; second table names at `0x1500D4`, dep
 
 No published in-game code exists for this title, so there was nothing to enter and nothing to disprove:
 
-* **VGChartz** Bookworm (GBA) cheats page: “Total cheats available: 0 / No cheats available for this game.”
-* **SuperCheats** GBA Bookworm: no cheats/codes; only FAQ/walkthrough links.
-* **GameFAQs** GBA 919765: only a word-list FAQ; the cheats URL returns 403 and the Wayback CDX has **no snapshot** of a cheats page for it.
-* **TCRF** `Bookworm (Game Boy Advance)`: documents the `0xF6BB8` development text only; no codes, no debug menu.
+* **3rd party cheat indexes** Bookworm (GBA) cheats page: “Total cheats available: 0 / No cheats available for this game.”
+* **3rd party cheat indexes** GBA Bookworm: no cheats/codes; only FAQ/walkthrough links.
+* **3rd party cheat indexes** GBA 919765: only a word-list FAQ; the cheats URL returns 403 and the Wayback CDX has **no snapshot** of a cheats page for it.
+* **3rd party cheat indexes** `Bookworm (Game Boy Advance)`: documents the `0xF6BB8` development text only; no codes, no debug menu.
 * **remyhax “100 GBA crackmes”** article: Bookworm is not among the titles with a published or novel in-game code.
 
 ## 7. Validation evidence

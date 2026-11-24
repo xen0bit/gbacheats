@@ -17,8 +17,8 @@
 | SHA-1 | `25d1c4c412ada421b88a88dba89a0ffd23f6f75d` |
 | SHA-256 | `d98a1f93478f2d45bf237edfb60f952ef9eaeda210e3d624571b3f529970643c` |
 
-Header record: `file` reports the exact SKU as `"TOMB RAIDER" (AL9E41, Rev.00)`. RetroAchievements lists
-the USA CRC32 as `556F40FA`; ROM content matches the multi-language USA/EU SKU described by GameFAQs.
+Header record: `file` reports the exact SKU as `"TOMB RAIDER" (AL9E41, Rev.00)`. 3rd party cheat index lists
+the USA CRC32 as `556F40FA`; ROM content matches the multi-language USA/EU SKU described by 3rd party cheat indexes.
 
 ## 2. Executive summary
 
@@ -29,7 +29,7 @@ The game has no battery save: on reaching a level the game reveals that level's 
 The entire system is a **closed hard-coded table of exactly 33 codes** (32 level starts + `ARIA` for
 the credits). There is no checksum, no bit-packed payload, no generator, and no algorithmic second
 format. The validator packs the four typed symbols into one little-endian u32 and compares it against
-33 ASCII records; the loop bound is 33. All 33 records are present in the published GameFAQs list
+33 ASCII records; the loop bound is 33. All 33 records are present in the published 3rd party cheat index list
 (one published entry, `WEFK`, is a typo for the ROM's `WEFX`).
 
 Because the accepted set is provably closed and fully published, **no novel accepted code exists**;
@@ -140,8 +140,8 @@ Field/layout facts:
 - Checksum: none. Reserved/unused bits: none.
 - Records: 8-byte stride, 4 ASCII bytes + 4 zero bytes, so a u32 load at the record base is the whole code.
 
-Published-list verification: every one of the 33 ROM codes appears on the GameFAQs level-password
-list. The second GameFAQs list uses `WEFK` for the Angkor Wat chapter; `WEFK` is **absent** from the
+Published-list verification: every one of the 33 ROM codes appears on the 3rd party cheat indexes level-password
+list. The second 3rd party cheat index list uses `WEFK` for the Angkor Wat chapter; `WEFK` is **absent** from the
 ROM and rejected in-game, while `WEFX` is present and accepted — a published typo, not a second code.
 
 ## 6b. Enumeration
@@ -167,7 +167,7 @@ PRLD -> level 1    WEFX -> level 19   ARIA -> level 54 (credits)
 **Novel codes.** None exist. This is a **bounded negative**, not an untested gap: the whole
 36⁴ space was enumerated against an exact model of the ROM validator, the model's accepted set
 equals the ROM's 33-record table byte-for-byte, the validator has a hard 33-iteration bound and a
-single typed-input call site, and every accepted value is already on the public GameFAQs list.
+single typed-input call site, and every accepted value is already on the public 3rd party cheat index list.
 There is no algorithmic encoder, no second alphabet, no checksum collision and no unused payload
 bit that could mint a 34th spelling. Consequently no novel accepted code can be generated, entered
 or RAM-verified for this SKU.
@@ -211,7 +211,7 @@ closed table (no algorithmic fallback accepts near-misses).
 - **Inferred:** the internal level-ID numbers' human-facing names (the ROM stores numeric IDs, and
   the public list supplies the level labels). `ARIA`'s ID 54 is interpreted as credits because the
   emulator actually showed the credits.
-- **Unverified published data:** all 33 GameFAQs codes were verified against the ROM bytes; `WEFK`
+- **Unverified published data:** all 33 3rd party cheat index codes were verified against the ROM bytes; `WEFK`
   is the one entry that is wrong.
 
 ## 8. Unknowns

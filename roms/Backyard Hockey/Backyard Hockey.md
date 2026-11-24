@@ -350,25 +350,25 @@ the two table entries above as the locked pair.
 
 | Published code | Source | GBA disposition |
 |---|---|---|
-| `Ikan Trace` | GameFAQs/VGChartz/SuperCheats, labelled **PC** | Not expressible: 10 chars incl. space; coach field is 7 × A–Z. Truncation `IKANTRC` tested; no special team |
+| `Ikan Trace` | 3rd party cheat indexes, labelled **PC** | Not expressible: 10 chars incl. space; coach field is 7 × A–Z. Truncation `IKANTRC` tested; no special team |
 | `Ivanna Tipe` | same | Not expressible (space; 11 chars) |
 | `Mike McMeeting` | same | Not expressible (space; 14 chars) |
-| `Beverly Backstop` | GameFAQs GBA page, section labelled **PC** | Not expressible: no player-name text entry; Custom Player is a 15-preset spinner |
+| `Beverly Backstop` | 3rd party cheat indexes GBA page, section labelled **PC** | Not expressible: no player-name text entry; Custom Player is a 15-preset spinner |
 | `Buddy Cheque` | same | Not expressible |
 | `Lemon Boy` | same | Not expressible |
-| Mr. Schinkel's Pool | GameFAQs **Rinks (GBA)** | Progression unlockable, not a code |
-| Tech State University | GameFAQs **Rinks (GBA)** | Progression unlockable, not a code |
+| Mr. Schinkel's Pool | 3rd party cheat indexes **Rinks (GBA)** | Progression unlockable, not a code |
+| Tech State University | 3rd party cheat indexes **Rinks (GBA)** | Progression unlockable, not a code |
 
 The GBA page's two code sections are explicitly headed `PC`; the only
 GBA-specific contribution is the rink unlockables. That matches the ROM: it
 contains neither the pun names nor a player-name keyboard.
 
-Published sources checked: GameFAQs GBA page
-`gamefaqs.gamespot.com/gba/915416-backyard-hockey/cheats` (direct fetch 403;
+Published sources checked: 3rd party cheat indexes GBA page
+3rd party cheat indexes (direct fetch 403;
 text recovered from search snippets and the archived/duplicated PC pages),
-Neoseeker and CheatCC Backyard Hockey PC cheat pages, SuperCheats, TCRF's
+3rd party cheat indexes Backyard Hockey PC cheat pages, 3rd party cheat indexes
 `Backyard_Hockey` page (unused sounds only), and the GBA manual PDF at
-`videogamemanual.com` (scanned; the coach-name limit is visible there and was
+3rd party cheat indexes (scanned; the coach-name limit is visible there and was
 confirmed in-game). No GBA-specific password or button-code list was found on
 any of them.
 

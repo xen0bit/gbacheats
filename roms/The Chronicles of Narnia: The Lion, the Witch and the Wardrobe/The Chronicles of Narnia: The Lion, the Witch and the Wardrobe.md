@@ -108,9 +108,9 @@ Token legend: `R`/`L` = shoulder buttons; `Right`/`Left` = D-pad; `S/D` = Select
 | 10 | `0x0804C2B4` | S/D, B, L, S/D, A, Left | `0x4BF` | Undocumented in most lists ("new code") |
 | 11 | `0x0804C2CC` | A, A, B, B, L, R | `0x381` | Undocumented in most lists ("new code") |
 
-All 12 rows satisfy `checksum == Σ token[j] × WEIGHTS[j]`, verified in Python (`decode.py`). Rows 10 and 11 match the two "new codes" on classicgamehacking.com, confirming the table is the same SKU.
+All 12 rows satisfy `checksum == Σ token[j] × WEIGHTS[j]`, verified in Python (`decode.py`). Rows 10 and 11 match the two "new codes" on 3rd party cheat indexes, confirming the table is the same SKU.
 
-Published sources consulted (data only): supercheats.com, cheathappens.com, classicgamehacking.com, gamerstemple.com, gamehacking.org, etherealgames.com, almarsguides.com. Action Replay / CodeBreaker / GameShark codes from those pages are **out of scope** and were not used.
+Published sources consulted (data only): 3rd party cheat indexes. Action Replay / CodeBreaker / GameShark codes from those pages are **out of scope** and were not used.
 
 ## 6b. Enumeration
 
@@ -121,7 +121,7 @@ Every published spelling of this effect uses **Down** (or, incorrectly, D-pad Ri
 * In-game proof: history filled `[0x29,0x13,0x2B,0x1F,0x1F,0x25]`, checksum reached `0x390` after five presses, then `0x03004180` became `0x04` on the sixth (Observed via savestate diff), and the "Chapter 2 / Edmund and the White Witch" banner appeared (Observed, screenshot `novel3.png`).
 * Other unpublished aliases are available for codes 3, 5, 6, 8, 9 by mixing Select/Down at the `S/D` positions (e.g. `Left, A, Left, Select, Select, Down` for code 3).
 
-**Bounds proven by rejection:** `Up, Right(D-pad), Down, Left, Left, Right` — the spelling given by supercheats/cheathappens — produced checksum increments `0x52 → 0xC1 → 0x198 → 0x271 → 0x3C6` (final would be `0x5A7`, absent from the checksum table). `0x03004180` remained `0x00`, history reset, no chapter change (Observed, screenshot `rejected.png`). This bounds both the shoulder-vs-D-pad distinction and the checksum filter.
+**Bounds proven by rejection:** `Up, Right(D-pad), Down, Left, Left, Right` — the spelling given by 3rd party cheat indexes — produced checksum increments `0x52 → 0xC1 → 0x198 → 0x271 → 0x3C6` (final would be `0x5A7`, absent from the checksum table). `0x03004180` remained `0x00`, history reset, no chapter change (Observed, screenshot `rejected.png`). This bounds both the shoulder-vs-D-pad distinction and the checksum filter.
 
 **Screen walk (RAM-backed):** language select → legal → title → main menu (New Game / Load Game / Multiplayer / Options) → Chapter Select (scene `0x0A`) → gameplay (scene `0x11`) → Pause (scene `0x01`) → item menu (scene `0x08`) → "No Skills." / "No Items." overlays. No password entry field, hidden debug menu, or additional code surface was found on any reachable screen. All 12 validator dispatch branches are accounted for above.
 

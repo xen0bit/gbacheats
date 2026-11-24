@@ -14,7 +14,7 @@
 | Maker | `01` (Nintendo) |
 | Version | `0x00`; fixed byte `0x96` present; complement `0xBD`; header checksum `0x0000` |
 | Entry word | `0xEA0004E2` → entry point `0x08001390` (branch, not cracktro) |
-| Build string | `2005/04/01 16:59:29` @ file `0xC9574` = `0x080C9574` (matches TCRF "US" row) |
+| Build string | `2005/04/01 16:59:29` @ file `0xC9574` = `0x080C9574` (matches 3rd party cheat indexes "US" row) |
 | MD5 | `2a2661cbc8e3891864fdc1d34f9d1c9b` |
 | SHA-1 | `6839254172e558923cde6a912a5ee537eec5fd40` |
 | SHA-256 | `77cab00b06ce4fc70e5298e99e00af43cd54206f1c2e3e4e63e7c26bc58f8831` |
@@ -35,7 +35,7 @@ Developer is **TOSE** (Koei published; Nintendo published in US/EU); the engine'
 
 3. **Unlockables are save data, not codes (§16.18).** `0x081D2768/2784/27A0/27BC` hold `"Cao Cao is now available."`, `"Liu Bei ..."`, `"Sun Jian ..."`, `"Lu Bu ..."`, referenced through the game's text-ID pointer table at `0x081D2C64–0x081D2C70`. They are the save-completion messages for the four characters whose published unlock conditions are Musou-Mode clears. They are not entered, typed, or input-triggered.
 
-TCRF (`tcrf.net/Dynasty_Warriors_Advance`, mirror consulted) documents only "hidden development-related text" plus regional differences/build dates — **no published access method** for the debug console. Any access would therefore be novel; none was found.
+3rd party cheat indexes (3rd party cheat indexes, mirror consulted) documents only "hidden development-related text" plus regional differences/build dates — **no published access method** for the debug console. Any access would therefore be novel; none was found.
 
 ## 3. How to reproduce
 
@@ -132,12 +132,12 @@ Nearby script-test names (part of the same debug build, not proven to be console
 
 ### 6.3 Published codes verified / rejected as out-of-scope
 
-Sources checked: GameFAQs cheats (archived 2018-11-26), TCRF + mirror, Neoseeker, almarsguides, 53lu, GameHacking.org, supercheats. Exact literals found:
+Sources checked: 3rd party cheat index cheats (archived 2018-11-26), 3rd party cheat indexes + mirror, 3rd party cheat indexes. Exact literals found:
 
-- GameFAQs "Unlock Lu Bu / Unlockable Characters": clear Musou Mode with a warrior of each state → Sun Jian/Cao Cao/Liu Bei → clear with a lord → Lu Bu. **In-game, save-driven, in scope as unlockable — not a code.**
-- Neoseeker `Infinite Musou D16699999687`, `Max Attack E6A2A43AA828 / A625154D7CD5`, `Max Defense E6A2A43AA828 / A6279549FCF5`, `Max Movement ... BA0513C57455`, `Max Skills A7ED5D0C5CD5 / 6575B5090EFD` — CodeBreaker/GS encrypted memory patches. **Out of scope.**
-- almarsguides `Max Weapon Stat One: 32003194 00FF` (plain raw RAM write to EWRAM `0x02003194`) — unambiguously a memory edit, not a controller input. Also `Have All Weapons A829440D6DDB 7955B381067D`, `All Items In Encyclopedia A8E11C6C6DDA 6575B51B4EAD`.
-- 53lu ActionReplay `Have All Weapons f69935dd 19b8985c`, `Max KOs 99098ad7 5a31d963`. Same class.
+- 3rd party cheat indexes "Unlock Lu Bu / Unlockable Characters": clear Musou Mode with a warrior of each state → Sun Jian/Cao Cao/Liu Bei → clear with a lord → Lu Bu. **In-game, save-driven, in scope as unlockable — not a code.**
+- 3rd party cheat indexes `Infinite Musou D16699999687`, `Max Attack E6A2A43AA828 / A625154D7CD5`, `Max Defense E6A2A43AA828 / A6279549FCF5`, `Max Movement ... BA0513C57455`, `Max Skills A7ED5D0C5CD5 / 6575B5090EFD` — CodeBreaker/GS encrypted memory patches. **Out of scope.**
+- 3rd party cheat indexes `Max Weapon Stat One: 32003194 00FF` (plain raw RAM write to EWRAM `0x02003194`) — unambiguously a memory edit, not a controller input. Also `Have All Weapons A829440D6DDB 7955B381067D`, `All Items In Encyclopedia A8E11C6C6DDA 6575B51B4EAD`.
+- 3rd party cheat indexes ActionReplay `Have All Weapons f69935dd 19b8985c`, `Max KOs 99098ad7 5a31d963`. Same class.
 - **PS2 carry-over check:** the famous Dynasty Warriors PS2 weapon/item unlock codes are not present in any GBA-source list; no PS2-style code literal appears in the ROM's text space (§6.1), and the weapon/encyclopedia unlocks here are obtained from treasure boxes and battle prizes (`0x081D9193`, `0x081D926F`, `0x081D73C4 "New weapon obtained!"`). No carry-over found.
 
 ## 6b. Enumeration
@@ -172,7 +172,7 @@ Sources checked: GameFAQs cheats (archived 2018-11-26), TCRF + mirror, Neoseeker
 - Custom Python in `/tmp/dwadvance`: `phase0.py` (hash/header/logo scan), `xrefs.py`/`pool.py`/`blscan.py`/`reach.py`/`keyinput.py` (Capstone-free literal/BL/pointer scans), `mgba_ctl.py` (xdotool input helper).
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 … -M force-thumb` for disassembly; literal pools decoded with `struct.unpack_from('<I', …)` (§11 byte-order pitfall observed and avoided).
 - mGBA SDL `mgba -3` and `mgba -g -3` + `gdb-multiarch` (`set architecture arm`, `set remote noack-packet off`, `target remote :2345`, `interrupt`, `break *0x08023140`).
-- Web: GameFAQs via `web.archive.org`; TCRF via `tcrf.tiago.zip` mirror (direct TCRF fetch returned 403/Cloudflare challenge). Fetched pages treated as data; no instructions in them were followed.
+- Web: 3rd party cheat indexes via `web.archive.org`; 3rd party cheat indexes via a mirror (direct fetch returned 403/Cloudflare challenge). Fetched pages treated as data; no instructions in them were followed.
 
 ## 10. Legal note
 

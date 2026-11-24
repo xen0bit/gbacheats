@@ -30,7 +30,7 @@ screen of the main menu. It is a pure 5-entry lookup table: a 5-digit code
 byte-for-byte against five 5-byte records. The validator at `0x08019B08` returns
 the matching index (0–4) or −1.
 
-Published lists (GameFAQs, VGChartz mirrors, Cheat Happens, traumerlebnis.de,
+Published lists (3rd party cheat index mirrors, 3rd party cheat indexes,
 etc.) advertise only three codes: `29801` (all cars/tracks/drivers/bonus levels),
 `07913` (GameStop car), `62972` (Master car). **All three are present in the ROM
 and work.** The ROM table contains **two additional codes that appear in no
@@ -136,7 +136,7 @@ exactly 5. No letters, no checksum characters, no terminator byte in the record
   5 accepted, matching the ROM table. This is a closed-set proof at the §16.9
   standard. The accept path is a simple table compare, so a debugger oracle
   (§16.19) adds nothing; static loop-bound proof + exhaustive model suffice.
-- **Novel codes** (absent from GameFAQs, VGChartz mirrors, TCRF, and every other
+- **Novel codes** (absent from 3rd party cheat index mirrors, 3rd party cheat indexes, and every other
   source searched — verified by targeted web search for both literals):
   - `16200` — entered on the real password screen, accepted, flag `0x020335EC`
     changed 0→1 (savestate diff: only 3 bytes changed). Screenshot:

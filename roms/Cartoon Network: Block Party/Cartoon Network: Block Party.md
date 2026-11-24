@@ -246,7 +246,7 @@ return ACCEPT
 
 ## 6. Tables
 
-### 6.1 Published tournament passwords (GameFAQs)
+### 6.1 Published tournament passwords (3rd party cheat indexes)
 
 | Board | A | Published | Verified |
 |---|---:|---|---|
@@ -325,8 +325,7 @@ bits (`2^77`).
 Total valid ≈ `2^75.45`; distinct states ≈ `2^74.87`; **4.019 %** of the 16-symbol
 space is accepted.
 
-**Novel codes (not in any published list).** GameFAQs, Wikipedia, StrategyWiki and
-Cheat Happens list only the four tournament passwords (and codes for the *Cartoon
+**Novel codes (not in any published list).** 3rd party cheat index list only the four tournament passwords (and codes for the *Cartoon
 Network Speedway* companion game, which do not apply to this SKU). The following were
 generated from the reversed format, are absent from every published list, and were
 **entered and accepted on the real password screen**:
@@ -385,7 +384,7 @@ re-displays it as `Z1BDBBBBBC?BC?BC` (mixed = 0). The 9-bit mixed field therefor
 * No debug/cheat strings exist in the image (`DEBUG`, `CHEAT`, `SECRET`, `UNLOCK`,
   `HACK` are absent; the only `TEST` hit is `LEAD TESTERS` in the credits). No
   button-mask code table was found near the title screen or input handler.
-* All four published codes were entered; three loaded the boards named on GameFAQs,
+* All four published codes were entered; three loaded the boards named on 3rd party cheat indexes,
   the 15-character fourth did nothing.
 * The corrected Extreme code and three novel codes were accepted and produced the
   board intro for the selected board.

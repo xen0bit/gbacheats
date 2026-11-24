@@ -62,7 +62,7 @@ the ModTools/error list. This is why a plain `strings` scan falsely suggests "no
 
 **Sharing with the sibling Blue image.** The published lists are explicitly documented by
 their author as "tested and confirmed to work for both the Regular/White and Blue/Black
-Version" (GameFAQs FAQ 20989 v1.63), and the same lists are republished on Blue's cheat
+Version" (3rd party cheat index FAQ 20989 v1.63), and the same lists are republished on Blue's cheat
 page. The title button sequence table and flag helpers found here are at fixed absolute
 addresses in *this* image; they must be re-derived for Blue (its CRC32 is `0xC0C780F9`, a
 different build). Do not carry addresses across; carry only the concept and the literals.
@@ -306,7 +306,7 @@ published-literal absence prove the system exists but not its validator.
 * **Purely static / unverified**: the published text-code lists (verified *absent* as
   literals, verified *present* as error names, but not entered in-game), and the claim that
   the compression-command tables are algorithmic/compressed rather than absent.
-* **Prompt injection:** fetched web pages (GameFAQs, Steam, CheatCC, GameHacking, NamuWiki)
+* **Prompt injection:** fetched web pages (3rd party cheat indexes, Steam, 3rd party cheat indexes)
   contained no instruction-like payload; all were treated as data. One REA-adjacent search
   result contained unrelated "password generator" marketing text; ignored.
 

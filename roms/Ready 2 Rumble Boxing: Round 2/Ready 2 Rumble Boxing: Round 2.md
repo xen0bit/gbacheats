@@ -25,7 +25,7 @@ The game has a **developer-intended 13-symbol password system** for Championship
 * Natural UI path: **Main Menu → Championship → character select → highlight one of the three blank boxer slots → A** opens the password keypad. (The bottom-of-screen `ENTER PASSWORD` label is the hint for that cell.) START confirms; B exits.
 * Alphabet: `BCDFGHJKLMNPQRSTVWXYZ0123456789$` (32 symbols, 5 bits each) at `0x0816477A`.
 * One XOR check character, **one ignored "check" character**, and 11 payload characters. Validator at `0x080130E8`; generator at `0x08012F98`.
-* All ten GameFAQs/GBA passwords that satisfy the algorithm round-trip bit-for-bit through the reimplemented encoder. The published **Afro Thunder** password is a typo (`$KBBNGGG$C37G`); the correct one is **`$KBBNGGG$C3VG`**, confirmed in-game (A. Thunder, 100/100/100). A separate site's `$8DDNGGG$C7JB` for Angel Rivera is also wrong (canonical `$8DNNGGG$C7JB`).
+* All ten 3rd party cheat indexes/GBA passwords that satisfy the algorithm round-trip bit-for-bit through the reimplemented encoder. The published **Afro Thunder** password is a typo (`$KBBNGGG$C37G`); the correct one is **`$KBBNGGG$C3VG`**, confirmed in-game (A. Thunder, 100/100/100). A separate site's `$8DDNGGG$C7JB` for Angel Rivera is also wrong (canonical `$8DNNGGG$C7JB`).
 * A **novel, unpublished code `$WF7P2JN4B7G5`** was generated, typed on the real keypad, accepted, and RAM-verified to produce STR 55 / STM 42 / SPD 70 (all published codes use 100/100/100).
 * Bounds proven live: a broken XOR check is rejected, an out-of-range stat (101) with valid checks is rejected, and changing the ignored 13th symbol is *accepted* while the game regenerates the canonical value — proving an alias class.
 * A GBA button-code table at `0x083F4104` holds three sequences. Two match published unlock codes; the third appears unpublished. The table and its validator/flags were located statically; one live acceptance was observed but the input harness was timing-sensitive (see §8).
@@ -109,12 +109,12 @@ then the display routine maps each value through `A`. Hence `v[12]` is a *displa
 
 ## 6. Tables
 
-Published passwords (GameFAQs GBA page, archived 2025-11-14; also cheatcc / projectcheatcodes):
+Published passwords (3rd party cheat indexes GBA page, archived 2025-11-14; also 3rd party cheat indexes):
 
 | Boxer | Published | Status |
 |---|---|---|
 | Afro Thunder | `$KBBNGGG$C37G` | **invalid** — corrected `$KBBNGGG$C3VG`, accepted in-game |
-| Angel "Raging" Rivera | `$8DNNGGG$C7JB` | verified; cheatingdome's `$8DDNGGG$C7JB` is invalid |
+| Angel "Raging" Rivera | `$8DNNGGG$C7JB` | verified; a 3rd party cheat index's `$8DDNGGG$C7JB` is invalid |
 | Jet "Iron" Chin | `$WF7PGGG$C779` | verified in-game |
 | Joey T. | `$2KPWGGG$C7YZ` | verified by algorithm |
 | Johnny "Bad" Blood | `$KHJPGGG$C3XX` | verified by algorithm |
@@ -159,9 +159,9 @@ distinct decoded game states (identity64 × records16 × progress11 × money128 
                            = 760,565,626,568,704 ≈ 7.61e14
 ```
 
-**Validator model.** `pw.py` reimplements both directions; it accepts all 10 algorithm-valid published codes, reproduces them byte-for-byte from fields, and rejects the typo'd Afro Thunder / cheatingdome codes.
+**Validator model.** `pw.py` reimplements both directions; it accepts all 10 algorithm-valid published codes, reproduces them byte-for-byte from fields, and rejects the typo'd Afro Thunder / 3rd party cheat index codes.
 
-**Novel code (not on GameFAQs, cheatcc, TCRF, VGChartz or any other list that was checked):**
+**Novel code (not on 3rd party cheat indexes or any other list that was checked):**
 
 ```
 $WF7P2JN4B7G5   →  v = [31,17,3,28,11,23,6,10,25,0,28,4,26]

@@ -269,8 +269,7 @@ char:  V  W  X  Y  Z  0  1  2  3  4  5  6  7  8  9  ?
 
 ### 6.2 Public codes verified against the offline validator
 
-All 27 strings below pass `valid(to_val(code))`. They come from the IGN / GameFAQs / Fandom /
-planetcheats lists (fetched 2026-11-20, treated as data only) and the earlier 2-in-1 report.
+All 27 strings below pass `valid(to_val(code))`. They come from the 3rd party cheat indexes lists (fetched 2026-11-20, treated as data only) and the earlier 2-in-1 report.
 `A,B,C` are the encoded unary group values; `free` = `W` bits 16–17.
 
 | Code | Published effect | A,B,C | mark | free | `H` | `B` |
@@ -343,8 +342,8 @@ marker set, `W` bit 16 set, **zero** treasures, `B=0`:
 H0X1S2 -> val 0x2EEB4AA5 -> W = 0x0001FFFF, H = 0x0000, B = 0
 ```
 
-It appears in no GameFAQs / IGN / Fandom / planetcheats / VGChartz list (a web search for the
-literal returns only an unrelated Reddit thread), and it is distinct from the `H0X1J2` used in
+It appears in no 3rd party cheat indexes / 3rd party cheat index list (a web search for the
+literal returns only an unrelated 3rd party cheat index thread), and it is distinct from the `H0X1J2` used in
 the earlier 2-in-1 report (that one has `W=0x0000FFFF`).
 
 **In-game proof (all Observed in this run):**
@@ -442,7 +441,7 @@ the `BBBCBB` case isolates the reserved-bit layer from the unary layer.
 | `codec.py` (work dir) | `to_val`, `split`, `join`, `valid`, `encode`; exact enumeration and published-code check |
 | mGBA 0.10.5 `-d` debugger over a PTY | `b/t` breakpoints, `r/4`/`r/2`/`r/1` live RAM reads |
 | Xvfb + openbox + xdotool + scrot + ImageMagick + tesseract | screen walk and state detection |
-| web search (IGN/GameFAQs/Fandom/planetcheats) | published-code recon; pages treated strictly as data |
+| web search (3rd party cheat indexes) | published-code recon; pages treated strictly as data |
 
 Work artifacts (screenshots, scripts, logs) were kept in `/tmp/spongedutchman/`;
 notably `shots/p_novel2_levelcard.png`, `shots/p_novel_levelcard.png`,

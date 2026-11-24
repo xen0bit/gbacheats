@@ -17,7 +17,7 @@
 | MD5 | `e0dceb3ee3be70e72b425fdf455c7237` |
 | SHA-1 | `1682d023933bf758c78ce2c18b503efd4f0803b9` |
 | SHA-256 | `d0c1f9e77211b3be4e18b731d417627fe6c5dcde6b4306b2d2437d28c9b3ee68` |
-| Developer / publisher | Culture Brain / Buena Vista Interactive (GameFAQs entry) |
+| Developer / publisher | Culture Brain / Buena Vista Interactive (3rd party cheat index entry) |
 
 Phase 0 checks:
 
@@ -33,7 +33,7 @@ The game has a **developer button-code cheat system**, not a password system:
 * Pressing **A** on that overlay arms a five-slot entry mode. The five slots are drawn as small crown icons.
 * Each accepted code is exactly **five button presses** from the alphabet `{A, B, L, R}`. The full input space is therefore `4^5 = 1024`.
 * The ROM contains one 45-byte table at ROM `0x0842386` (file `0x42386`) holding **nine** 5-character strings. The validator is a fixed exact-match lookup over those nine entries, then sets bit *i* of a 32-bit flag word for the matching entry *i*.
-* All nine entries are published: the archived GameFAQs cheat page (Wayback capture 2020-02-15) and SuperCheats `#13939` list the same nine sequences. VGChartz lists 0 cheats. The ROM table order is the published *name* order, not the order the fan sites list them in. Every published literal is byte-for-byte present in the ROM.
+* All nine entries are published: the archived 3rd party cheat index cheat page (Wayback capture 2020-02-15) and 3rd party cheat indexes `#13939` list the same nine sequences. 3rd party cheat index lists 0 cheats. The ROM table order is the published *name* order, not the order the fan sites list them in. Every published literal is byte-for-byte present in the ROM.
 * The accepted set is **9 of 1024**, with 1015 rejections. Because the accept test is an exact nine-entry table lookup (no generator, no checksum, no second alphabet), **no unpublished accepted code can exist**. This is proven below rather than asserted.
 * Unlock bits are RAM-only in the menu object (`0x03007EA4`); entering a code did not write the 512-byte SRAM image. Cheats must be re-entered after a power cycle unless a later game save serialises the menu object (not established here).
 * Effects observed: bit 0 sets lives to 99, bit 1 fills the vitality meter, bit 5 makes Select skip a level, bit 8 populates the Movie Clips gallery with the 15 clips. Bit 3's name is shown on unlock. Bits 2, 4, 6, 7 names are in the ROM; their isolated effects were not observed on level 1.
@@ -76,10 +76,10 @@ There is **no level-select screen, no sound-test, no password screen and no debu
 
 ### Public code sources checked
 
-* GameFAQs cheat page, Wayback capture `20200215095949` of `https://gamefaqs.gamespot.com/gba/925931-disneys-cinderella-magical-dreams/cheats` — all nine sequences.
-* SuperCheats cheat `#13939` (`supercheats.com/gameboyadvance/disneys-cinderella-magical-dreams/13939/cheat-codes/`) — all nine sequences.
-* VGChartz game 26506 cheats page — “Total cheats available: 0”.
-* Direct GameFAQs fetch returned 403; the Wayback capture above was used instead. The SuperCheats text was fetched directly.
+* 3rd party cheat index cheat page, Wayback capture `20200215095949` of 3rd party cheat indexes — all nine sequences.
+* 3rd party cheat index cheat `#13939` (3rd party cheat indexes) — all nine sequences.
+* 3rd party cheat indexes game 26506 cheats page — “Total cheats available: 0”.
+* Direct 3rd party cheat indexes fetch returned 403; the Wayback capture above was used instead. The 3rd party cheat index text was fetched directly.
 
 Every one of the nine published literals is present in the ROM table at `0x0842386`.
 
@@ -256,7 +256,7 @@ Diagnostic (not a game code): writing `0x000003FF` to `0x03007EA4` in a savestat
 
 ### Accepted set (complete)
 
-Exactly the nine records in 6.1. All nine are present in the archived GameFAQs list and in the SuperCheats list; VGChartz has no entries. A scripted comparison of the published name→buttons map against the ROM table returns 9/9 matches, 0 mismatches.
+Exactly the nine records in 6.1. All nine are present in the archived 3rd party cheat index list and in the 3rd party cheat index list; 3rd party cheat indexes have no entries. A scripted comparison of the published name→buttons map against the ROM table returns 9/9 matches, 0 mismatches.
 
 Published order is different (sites list alphabetically or by convenience); table order is the name order used by the game's text IDs (`name_id = bit + 22`).
 

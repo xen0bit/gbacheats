@@ -21,13 +21,13 @@
 
 ## 2. Executive summary
 
-There is **no in-game password system, no button-code system, and no hidden/debug menu** in this ROM. What the game does have is a normal **save-bit unlockable system**: 4 of the 12 racers, plus track/area completion data, are stored as flags in the EEPROM save and mirrored into EWRAM. The flags are set by **story-mode race completion at a difficulty threshold** (RetroAchievements documents the conditions; this report confirms the flag layout and the code path in the ROM).
+There is **no in-game password system, no button-code system, and no hidden/debug menu** in this ROM. What the game does have is a normal **save-bit unlockable system**: 4 of the 12 racers, plus track/area completion data, are stored as flags in the EEPROM save and mirrored into EWRAM. The flags are set by **story-mode race completion at a difficulty threshold** (3rd party cheat indexes document the conditions; this report confirms the flag layout and the code path in the ROM).
 
 The published "cheats" for this title (CodeBreaker / Action Replay / Gameshark: "Unlock Donkey", "Unlock All Racetracks", "Instant Win", etc.) are **external cheat-device memory patches, not developer-intended codes**, and are therefore out of scope. They were still used as *leads*: every published address was checked against the ROM and its effect proven by direct RAM patching with savestates (guide §16.13). All four character-flag addresses are correct and map exactly to the four "?" slots on the Select Racer screen (screenshots `proof_all_unlocked.png`, `proof_byte0.png` … `proof_byte3.png`).
 
 All UI text is **font/tile-index encoded** (not ASCII): `strings` finds only the header title and the lowercase developer tag `shrkkart` at 0x5FB478; none of the visible strings ("SELECT RACER", "LICENSED BY NINTENDO", "CONTINUE", …) appear in ASCII, single-byte XOR/add, or 16-bit encodings. VRAM tiles were rendered to confirm a custom glyph/sprite tile bank. The negative conclusion therefore rests on **complete screen enumeration (11 screens) + input-surface analysis (4 KEYINPUT references, no comparator) + key-mask table scans (counts in §6b)**, not on an empty `strings` output.
 
-A fetched TCRF page returned a **prompt-injection payload** (fake "LLM instructions", EICAR `key.bin` creation, a $1,000,000,000,000 payment demand, obscenities and a "terminate" order). It was treated as untrusted data and ignored, per guide §16.8/§16.21. No instruction from it was followed.
+A fetched 3rd party cheat index page returned a **prompt-injection payload** (fake "LLM instructions", EICAR `key.bin` creation, a $1,000,000,000,000 payment demand, obscenities and a "terminate" order). It was treated as untrusted data and ignored, per guide §16.8/§16.21. No instruction from it was followed.
 
 ## 3. How to reproduce
 
@@ -103,7 +103,7 @@ Reimplementation is unnecessary (no accept/reject input space); the flag model i
 
 Each is a boolean byte, 0 = locked ("?" icon), 1 = selectable. Source bits are 12–15 of `u16 @ 0x02027C54`.
 
-### 6.2 In-game unlock conditions (from RetroAchievements descriptions; code path in §5)
+### 6.2 In-game unlock conditions (from 3rd party cheat indexes descriptions; code path in §5)
 
 | Character | Condition |
 |---|---|
@@ -154,7 +154,7 @@ Each is a boolean byte, 0 = locked ("?" icon), 1 = selectable. Source bits are 1
 - All visible UI strings were tested against **plain ASCII, all 255 single-byte XOR keys, all 255 add/sub shifts, consecutive-alphabet bases 0–220, and 16-bit LE/BE variants** — **zero** matches. Text is font/tile-index or script-VM encoded; a montage of VRAM tiles (raw 0x11000 region of a state) confirms a custom glyph/sprite tile bank. Hence absence of a "PASSWORD" string in ASCII is *not* by itself evidence of absence — the conclusion rests on the 11 walked screens plus the input-surface scans above.
 - No password-entry widget, alphabet selector, or on-screen keypad exists on any walked screen.
 
-**Published lists verification:** 9 CodeBreaker + 13 Action Replay + 8 GameShark codes were found on ROMSFUN, Almar's Guides, 53lu, Anti-GSC and gamehacking.org. Every one is an external cheat-device RAM/ROM patch. The four character addresses were confirmed to be real and were effect-verified in emulation (§6.1); the published unlock *conditions* match the in-game story system. No published *in-game* code exists to mint beyond.
+**Published lists verification:** 9 CodeBreaker + 13 Action Replay + 8 GameShark codes were found on 3rd party cheat indexes. Every one is an external cheat-device RAM/ROM patch. The four character addresses were confirmed to be real and were effect-verified in emulation (§6.1); the published unlock *conditions* match the in-game story system. No published *in-game* code exists to mint beyond.
 
 ## 7. Validation evidence
 
@@ -176,8 +176,8 @@ Each is a boolean byte, 0 = locked ("?" icon), 1 = selectable. Source bits are 1
 - Python 3 + `struct`/`zlib`/Pillow: header parse, Nintendo-logo scan, literal/BL scanners, savestate `gbAs` decompress/patch/recompress (with CRC fix), VRAM tile rendering.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
 - mGBA 0.10.5 (`-3`), Xvfb `:317`, openbox, xdotool (XTEST), scrot; savestate slot 1 via Shift+F1/F1.
-- Web research: websearch of ROMSFUN, Almar's Guides, gamehacking.org, 53lu, Anti-GSC, RetroAchievements, fandom/wiki. The TCRF fetch was a prompt-injection trap and was discarded.
+- Web research: websearch of 3rd party cheat indexes, fandom/wiki. The 3rd party cheat indexes fetch was a prompt-injection trap and was discarded.
 
 ## 10. Legal / data-handling note
 
-No ROM or copyrighted asset is redistributed here — only hashes, addresses, and the analyst's own observations. Fetched web pages, ROM strings, and emulator content were treated strictly as data; the prompt-injection payload on the fetched TCRF page was ignored and reported (§2).
+No ROM or copyrighted asset is redistributed here — only hashes, addresses, and the analyst's own observations. Fetched web pages, ROM strings, and emulator content were treated strictly as data; the prompt-injection payload on the fetched 3rd party cheat index page was ignored and reported (§2).

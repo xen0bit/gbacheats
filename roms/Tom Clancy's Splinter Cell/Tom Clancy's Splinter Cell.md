@@ -21,7 +21,7 @@
 
 **Phase 0 result:** one GBA header only; no appended image, no multiboot stub, no
 scene cracktro/trainer. This is the US retail revision (`AO4E`), **not** the PAL
-debug prototype documented by Hidden Palace.
+debug prototype documented by 3rd party cheat indexes.
 
 ## 2. Executive summary
 
@@ -188,13 +188,13 @@ a **separate-ROM** finding, not a gated feature of this image.
 * **Derived:** input-handler disassembly; string/pattern scan counts; mission-name
   pointer table parse; entry-word target `0x0807FD330`.
 * **Inferred:** save-slot field layout and the meaning of published cheat-device
-  patch addresses; GameFAQs unlock descriptions (4% vs the walkthrough's 60% is
+  patch addresses; 3rd party cheat indexes unlock descriptions (4% vs the walkthrough's 60% is
   unreconciled — report the ROM string, not the wiki).
 
 ## 8. Unknowns
 
 * The exact numeric completion threshold for bonus missions (ROM text says `4%`,
-  the GameFAQs walkthrough says `60%`); not exercised because it requires
+  the 3rd party cheat index walkthrough says `60%`); not exercised because it requires
   finishing missions.
 * Whether the `SECRET` mission slot can ever be selected after all achievements;
   only its locked state was observed.

@@ -160,7 +160,7 @@ These codes do **not** occur as ASCII anywhere in the ROM (literal searches for 
 * both novel codes below;
 * both rejected inputs.
 
-**Novel codes (not in GameFAQs, SuperCheats, IGN, TCRF or any wiki consulted).**
+**Novel codes (not in 3rd party cheat indexes or any wiki consulted).**
 
 | Code | Payload fields | Evidence |
 |---|---|---|
@@ -198,6 +198,6 @@ These codes do **not** occur as ASCII anywhere in the ROM (literal searches for 
 * `/tmp/biblegame/enter_pw.py` — XTEST password entry driver (20-symbol cycle, ≥100 ms holds).
 * `/tmp/biblegame/calib.py` — input-timing calibration via savestate reads.
 * Python decoder/encoder/checksum helpers (inline in `/tmp/biblegame`); mGBA savestate `gbAs` zlib chunk decoded with `zlib.decompress`, IWRAM at raw offset `0x19000`, password buffer at `0x1DDF0`.
-* Web recon: GameFAQs (403, recovered via search snippet), SuperCheats (two pages fetched), IGN (403). All fetched page text treated strictly as data.
+* Web recon: 3rd party cheat indexes (403, recovered via search snippet), 3rd party cheat indexes. All fetched page text treated strictly as data.
 
 No ROM data or copyrighted assets are redistributed here; only addresses, hashes, algorithms and the author's own generated codes are published.

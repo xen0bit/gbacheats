@@ -149,13 +149,13 @@ These 14 are **rejected** by the master validator (all return `None`), i.e. they
 
 | Published code | Source | Decoded level | Payload | ROM result |
 |---|---|---|---|---|
-| `RTVBT4` | GameFAQs / Neoseeker / VGChartz | 9 | `0xAB` | accepted; level map |
-| `BSWFRW` | GameFAQs / A2ZCheats | 20 | `0xFBCAB` | accepted by oracle |
-| `bbbb9d`…`91vb3n` | A2ZCheats | 1…15 (labels off by one) | mostly `0xAB`/`0x2D`/`0x1AD`/`0x1FFFF` | accepted by model |
-| `450qmm` | A2ZCheats ("level 17") | — | — | **rejected** — bad checksum/typo |
-| `y1lvro` | A2ZCheats | — | — | contains `O`, which is not in the alphabet — transcription error |
+| `RTVBT4` | 3rd party cheat indexes | 9 | `0xAB` | accepted; level map |
+| `BSWFRW` | 3rd party cheat indexes | 20 | `0xFBCAB` | accepted by oracle |
+| `bbbb9d`…`91vb3n` | 3rd party cheat indexes | 1…15 (labels off by one) | mostly `0xAB`/`0x2D`/`0x1AD`/`0x1FFFF` | accepted by model |
+| `450qmm` | 3rd party cheat indexes | — | — | **rejected** — bad checksum/typo |
+| `y1lvro` | 3rd party cheat indexes | — | — | contains `O`, which is not in the alphabet — transcription error |
 
-GameFAQs' "RTVBT4 = all levels and mini-games" label does not match the decoded payload (level 9, payload 0xAB); `BSWFRW` decodes to level 20 / 0xFBCAB. Report payloads, not published labels (§16.15).
+3rd party cheat indexes' "RTVBT4 = all levels and mini-games" label does not match the decoded payload (level 9, payload 0xAB); `BSWFRW` decodes to level 20 / 0xFBCAB. Report payloads, not published labels (§16.15).
 
 ## 6b. Enumeration
 
@@ -168,7 +168,7 @@ TOTAL = 2,651,087 accepted passwords (0.247 % of the raw space)
 ```
 (count confirmed both analytically and with an independent C loop). Also **exactly 14** cheat-table codes (§6.2).
 
-**Novel codes minted (absent from GameFAQs, VGChartz, TCRF, Neoseeker, A2ZCheats and all other consulted lists):**
+**Novel codes minted (absent from 3rd party cheat indexes and all other consulted lists):**
 
 * **`TPHC19`** — level 20, payload `0xABCDE`, indices `[15,11,5,1,23,31]`. Entered on the real Password screen: accepted (green paw, level-select map). RAM proof: `0x03001E70 = 0x000ABCDE`, `0x03001E74 = 0x14` (cf. before-entry 0/0); the payload/level stayed constant while navigating the map. Screenshots: `novel_before.png`, `novel_after.png`.
 * `MB0G25` — level 15, payload `0x1234` — accepted by the ROM oracle (return 1).

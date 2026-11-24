@@ -38,7 +38,7 @@ developer-intended features are:
 1. **Sound Test** (Options → third entry) — BGM tracks **001–050** and SE
    tracks, with wraparound at both ends (observed by entering 001…050 and
    pressing Left from 001). It is a track player, not a code-entry surface.
-2. **Three story-completion unlockables** published by GameFAQs — Bingo
+2. **Three story-completion unlockables** published by 3rd party cheat indexes — Bingo
    mini-game (beat Amy), Slots mini-game (beat Tails), Samba de Amigo table
    (beat Knuckles) — plus the "SuperSonic Stage / true last stage" secret
    (enter Ring Mode in every zone). These are gameplay/save-state unlocks,
@@ -113,7 +113,7 @@ These are measured RAM changes, not visual inference.
 | `0x0802DD8` | dispatcher for that text screen; **0 xrefs** | Derived (full-ROM BL/B/Bcond/u32 scan) |
 | `0x080ADE1C` | development text table: `0 SONIC + / 0 NIGHTS + / 0 SAMBA + / 0 ROULETTE + / 0 BINGO + / 0 SLOT + / 0 ABORT + / 0 NAVI + / 0 LANG + / WRITE / STORY + / DEFAULT` | Derived (bytes + decoder) |
 | `0x080ADF44` | adjacent Shift-JIS (`0x8140`-padded) text bank | Derived |
-| `0x080CD9FC` | internal sound-effect/BGM names (`se_199`, `sng_…`, `SND_BGM_050` …) — TCRF-confirmed | Derived + web |
+| `0x080CD9FC` | internal sound-effect/BGM names (`se_199`, `sng_…`, `SND_BGM_050` …) — 3rd party cheat index-confirmed | Derived + web |
 | `0x080CCEF8` … | Samba-table word list `RIO/WAMBA/CHUMBA/BONGO/BINGO/LINDA/AMIGO/SAMBA` | Derived |
 | `0x080CB78C` | SRAM magic `SONIC_PB`; referenced from `0x08048ED0`, `0x0804916C`, `0x0804962C` (save verify/CRC) | Derived |
 | `0x066C3C`, `0x067080`, `0x0AA33C`, `0x0AB29A` | the only four ordered button-mask tables (Button Config display order / tutorial key-hints) | Derived |
@@ -156,11 +156,10 @@ this image.
 
 **Published-code verification.** Raw case-insensitive byte searches for
 `password`, `cheat`, `secret`, `unlock`, `debug`, `code`, `level select` each
-return **0** hits in all 8,388,608 bytes. The GameFAQs pages (archived
-2025-03-29), Sonic Retro "Hidden content" (oldid 306047), and TCRF
-(oldid 2185127) contain **no** in-game password or button code for this SKU:
-GameFAQs lists only the three unlockables + SuperSonic secret; Sonic Retro
-lists only CodeBreaker RAM writes; TCRF documents only internal sound names.
+return **0** hits in all 8,388,608 bytes. The 3rd party cheat index pages (archived
+2025-03-29), 3rd party cheat indexes "Hidden content" (oldid 306047), and 3rd party cheat indexes contain **no** in-game password or button code for this SKU:
+3rd party cheat index lists only the three unlockables + SuperSonic secret; 3rd party cheat index
+lists only CodeBreaker RAM writes; 3rd party cheat indexes document only internal sound names.
 The widely copied "character select level select" sequence is for *Sonic
 Advance* in the Combo Pack, and the "01,09,09,02,01,01,02,04" sound-test
 sequence is the Sonic 2 debug code — both were rejected as wrong-SKU leads.

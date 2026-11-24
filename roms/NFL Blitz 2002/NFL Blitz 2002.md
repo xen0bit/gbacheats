@@ -24,7 +24,7 @@
 
 The game is an arcade football title with a **button-count cheat system on the "Vs."/match-up screen** and a **title-screen button sequence that unlocks two secret teams**. This is a developer-intended system, not a GameShark/CodeBreaker surface.
 
-Published GBA sources (GameFAQs, world-of-nintendo, MoFunZone, GGmania, all cross-checked) agree on five match-up count codes and one title code:
+Published GBA sources (3rd party cheat indexes, world-of-nintendo, 3rd party cheat indexes, all cross-checked) agree on five match-up count codes and one title code:
 
 | Effect | Published code |
 |---|---|
@@ -108,13 +108,13 @@ No validator/algorithm could be recovered, so none is claimed. What **is** estab
 
 | # | Effect | Code | Sources agree? |
 |---|---|---|---|
-| 1 | Infinite Turbo | `4-3-2 R` | Yes (GameFAQs, MoFunZone, GGmania, world-of-nintendo) |
-| 2 | No random fumbles | `3-2-1 R` | GGmania, MoFunZone, world-of-nintendo; **absent from GameFAQs GBA list** |
+| 1 | Infinite Turbo | `4-3-2 R` | Yes (3rd party cheat indexes, world-of-nintendo) |
+| 2 | No random fumbles | `3-2-1 R` | 3rd party cheat indexes, world-of-nintendo; **absent from 3rd party cheat indexes GBA list** |
 | 3 | Shadow players | `3-1-3 R` | Yes |
-| 4 | Ogre field | `1-3-2 R` | Yes (GameFAQs calls it "Play on Ogre Field") |
+| 4 | Ogre field | `1-3-2 R` | Yes (3rd party cheat indexes call it "Play on Ogre Field") |
 | 5 | Snow field | `2-2-5 R` | Yes |
-| 6 | Invisible Players | `4-1-3 R` | **GameFAQs GBA only**; contradicts #2 (same slot, different effect); no `04 01 03` u32 triple anywhere in ROM |
-| 7 | Secret teams (Ogres, Midway) | `A,B,Select,Up,Right,Down` on title screen | GameFAQs GBA only; **strings verified in ROM** |
+| 6 | Invisible Players | `4-1-3 R` | **3rd party cheat indexes GBA only**; contradicts #2 (same slot, different effect); no `04 01 03` u32 triple anywhere in ROM |
+| 7 | Secret teams (Ogres, Midway) | `A,B,Select,Up,Right,Down` on title screen | 3rd party cheat indexes GBA only; **strings verified in ROM** |
 
 **ROM-resident team pointer table (derived, `0x083AED90`):**
 `[0]=CARDINALS … [30]=REDSKINS, [31]=OGRES (0x081C3564), [32]=MIDWAY (0x081C356C)`.
@@ -131,11 +131,11 @@ No validator/algorithm could be recovered, so none is claimed. What **is** estab
 | Title code as key masks (active-high, active-low, reversed, `u16`/`u32`/bytes) | whole 4 MiB | **0** |
 | Packed 3-bit/4-bit and BCD forms of all five triples | whole 4 MiB | no clustered table |
 
-**Prompt-injection check.** Fetched web pages (GameFAQs, MoFunZone, GGmania, DuckDuckGo) contained no instructions directed at the analyst; DuckDuckGo returned a bot CAPTCHA. All fetched text was treated as data. No instruction found in any page or ROM string was executed.
+**Prompt-injection check.** Fetched web pages (3rd party cheat indexes, DuckDuckGo) contained no instructions directed at the analyst; DuckDuckGo returned a bot CAPTCHA. All fetched text was treated as data. No instruction found in any page or ROM string was executed.
 
 ## 6b. Enumeration
 
-**Space definition (published format).** Three counters, each 0–5 on the console versions (6 values) and 1–5 on the published GBA lists (5 values), plus one enable token (`R` on GBA; four directions on the other platforms). Upper bound for the GBA-published shape: `5 × 5 × 5 = 125` expressible triples; 5 are published (4%). Console shape: `6 × 6 × 6 × 4 = 864`, of which the GameFAQs console pages list ~55. There is **no checksum** in this format. The team unlock is a separate 6-press sequence, not part of the counter space.
+**Space definition (published format).** Three counters, each 0–5 on the console versions (6 values) and 1–5 on the published GBA lists (5 values), plus one enable token (`R` on GBA; four directions on the other platforms). Upper bound for the GBA-published shape: `5 × 5 × 5 = 125` expressible triples; 5 are published (4%). Console shape: `6 × 6 × 6 × 4 = 864`, of which the 3rd party cheat indexes console pages list ~55. There is **no checksum** in this format. The team unlock is a separate 6-press sequence, not part of the counter space.
 
 **Enumeration of what the ROM actually contains.**
 * The ROM contains exactly **33 team-name entries**, two of which (`OGRES`, `MIDWAY`) are secret. That set is fully enumerated at `0x083AED90`–`0x083AEE10`.

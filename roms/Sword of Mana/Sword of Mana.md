@@ -37,7 +37,7 @@ This is a **bounded negative**, not "not tested":
   game; no debug/sound-test/level-select entry exists.
 * Static enumeration over the full 16 MiB found no code alphabet, no validator, no
   comparison table, no button-mask sequence and no debug gate (counts in §6b).
-* A GameFAQs walkthrough (FAQ 25327) states: *"There was originally a Password option on the
+* A 3rd party cheat index walkthrough (FAQ 25327) states: *"There was originally a Password option on the
   Main Title screen."* This is consistent with a **cut feature**: the final ROM has no
   reachable password surface. (Claim from a third-party walkthrough — **Inferred** as to why;
   the ROM evidence for absence is independent of it.)

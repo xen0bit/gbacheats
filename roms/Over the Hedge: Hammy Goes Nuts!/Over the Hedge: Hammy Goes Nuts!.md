@@ -48,7 +48,7 @@ The negative is bounded, not assumed:
 * Every reachable menu was walked on `DISPLAY=:319` with RAM dumps at each state.
 
 Web verification of published codes could not be completed: the search integrations and
-direct fetches (Google, DuckDuckGo, Bing, GameFAQs, TCRF, Wayback CDX) were blocked or
+direct fetches (Google, DuckDuckGo, Bing, 3rd party cheat indexes, Wayback CDX) were blocked or
 returned no results. No published GBA code strings were available to search for, so the
 negative rests on ROM-internal exhaustive searches above (recorded as an Unknown in §8).
 
@@ -262,7 +262,7 @@ exists in this SKU. No code was minted because there is no validator to mint aga
 * The exact save byte/bit holding Story completion and each individual unlock flag was not
   isolated, so the gate setters' call sites were not enumerated (§16.18 standard). The
   gates themselves are proven by their messages and observed rejection.
-* Published-code web verification was unavailable (search engines and GameFAQs/TCRF/Wayback
+* Published-code web verification was unavailable (search engines and 3rd party cheat indexes/Wayback
   blocked or empty). No published code literal was therefore tested; the negative is
   ROM-internal.
 * The Sound Test and Challenge *unlocked* states were not screenshotted, because unlocking

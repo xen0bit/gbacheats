@@ -139,8 +139,8 @@ mismatches), so that codec was not carried over unchanged.
 
 ### 6.1 Published codes verified against this ROM
 
-Sources: SuperCheats ("Unlock ALL…", "Level passwords", "Alternative ending
-password") and the GameFAQs walkthrough by Kaas (Passwords section). The two
+Sources: 3rd party cheat indexes ("Unlock ALL…", "Level passwords", "Alternative ending
+password") and the 3rd party cheat index walkthrough by Kaas (Passwords section). The two
 lists use different level labels for the same strings (a one-level offset —
 guide §16.15); the strings themselves agree.
 
@@ -151,9 +151,9 @@ guide §16.15); the strings themselves agree.
 | `SD2` | alternative ending after beating the game | 3-character movie code; post-game gate not reached |
 | `CBBCBBBB` … `SDBY3MT4` | 20 progress passwords, levels 1.2 … 5.4 | no rejection screen observed; no code typo found; progress effect not isolated |
 
-GameFAQs lists exactly 20 progress passwords ending at `SDBY3MT4`; SuperCheats
+3rd party cheat index lists exactly 20 progress passwords ending at `SDBY3MT4`; 3rd party cheat indexes
 adds `5DBY3MT8` and `!V?Y3T?8`. The "Passwords for all levels" sub-list on
-SuperCheats (`BDBCBBBB`, `LBGCLBBG`, `MBG1BVBJ`, `LDG1CVBG`, `MDGWPVBG`,
+3rd party cheat indexes (`BDBCBBBB`, `LBGCLBBG`, `MBG1BVBJ`, `LDG1CVBG`, `MDGWPVBG`,
 `LBB9TBBJ`, `MBB9TBBG`) is inconsistent with the main list and was treated as an
 unverified submission, not as ROM evidence.
 

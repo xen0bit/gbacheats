@@ -18,7 +18,7 @@
 | SHA-1 | `d7935449c72eb1beb4a9f7e9007855d4357e3155` |
 | SHA-256 | `a50aff4c7478692ec04082e9b9e7c4f3b5c3216ff8ff1cb467c92326c56d9009` |
 
-Published GBA codes (GameFAQs, Cheat Happens, mariogba.nl, all agreeing): master/unlock
+Published GBA codes (3rd party cheat indexes, all agreeing): master/unlock
 `HKSGP`; level codes `NRBGB`, `RWHGK`, `NGGGC`, `BMFGT`, `LRHGF`, `NRPGD`,
 `RLPGJ`, `LWRGH`, `JGSGF` (Ending). None appears literally anywhere in the ROM —
 the system is algorithmic, not a preset table. Console (PS2/Xbox) button codes and
@@ -198,8 +198,7 @@ checksum-only survivors before scene gate = 2^14 = 16,384 payloads
 the scene lookup — the validator writes the four globals and returns 1, so this is a
 **Derived** count from the complete instruction path.)
 
-**Novel code generated and confirmed in-game** (absent from GameFAQs, Cheat Happens,
-mariogba.nl and every other published list checked):
+**Novel code generated and confirmed in-game** (absent from 3rd party cheat indexes and every other published list checked):
 
 * **`VRTGC`** — payload `0x0E8F`, scene **58** (grid row0 col1, unadvertised), field
   7, f1=1, f2=0, check 4/4. Entered on the real PASSWORD screen in mGBA → accepted;

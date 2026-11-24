@@ -21,7 +21,7 @@
 
 ## 2. Executive summary
 
-The GBA release has **no developer-intended password, cheat menu, or working button code that I could confirm in this ROM**. There is exactly one published GBA cheat — GameFAQs and Supercheats both list *"Unlock Everything: at the main menu hold L+R and press A, B, Right, Up, Left, Down"* — but it is **not implemented (or is non-functional) in the analysed AHOE52 image**:
+The GBA release has **no developer-intended password, cheat menu, or working button code that I could confirm in this ROM**. There is exactly one published GBA cheat — 3rd party cheat indexes both list *"Unlock Everything: at the main menu hold L+R and press A, B, Right, Up, Left, Down"* — but it is **not implemented (or is non-functional) in the analysed AHOE52 image**:
 
 * entered on a clean boot at the main menu, with slow and fast timing, the sequence merely navigates the ordinary menus;
 * the cover-gated level locks remain in place (e.g. **THE WORKS — "NEED 25 COVERS TO UNLOCK LEVEL"**, **LONDON UNDERGROUND — "NEED 11 COVERS TO UNLOCK LEVEL"**);
@@ -115,10 +115,10 @@ if published_button_code_present: # no such test exists in this image
 
 | Source | Effect | Code | Entry point |
 |---|---|---|---|
-| GameFAQs (web.archive snapshot 2021-01-17), "Codes / Cheat Codes", contributor Starky27 | Unlock Everything | Hold L+R, press A, B, Right, Up, Left, Down | main menu |
-| Supercheats.com GBA cheats page | "Unlock Everthing" | At the main menu hold L+R and press A, B, Right, Up, Left, Down | main menu |
+| 3rd party cheat indexes (web.archive snapshot 2021-01-17), "Codes / Cheat Codes", contributor Starky27 | Unlock Everything | Hold L+R, press A, B, Right, Up, Left, Down | main menu |
+| 3rd party cheat indexes GBA cheats page | "Unlock Everthing" | At the main menu hold L+R and press A, B, Right, Up, Left, Down | main menu |
 
-GameFAQs lists exactly **one** GBA cheat for this game. The 35 "cheats" on the GameFAQs *Game Boy Color* page belong to a different SKU and were correctly excluded (§16.11). CodeBreaker/GameShark lists (almarsguides, jeuxmangas) are memory-edit codes and are out of scope.
+3rd party cheat index lists exactly **one** GBA cheat for this game. The 35 "cheats" on the 3rd party cheat indexes *Game Boy Color* page belong to a different SKU and were correctly excluded (§16.11). CodeBreaker/GameShark lists (3rd party cheat indexes) are memory-edit codes and are out of scope.
 
 **Key-state tables:** custom 8-bit encoding from `0x080063E0` (Section 5). Raw active-high GBA masks: A=`0x001`, B=`0x002`, Select=`0x004`, Start=`0x008`, Right=`0x010`, Left=`0x020`, Up=`0x040`, Down=`0x080`, R=`0x100`, L=`0x200`; with L+R = `0x300`. Encoded published sequence would be `D0 E0 C8 C1 C4 C2` (each press OR'd with L+R) or `10 20 08 01 04 02` bare.
 
@@ -160,9 +160,9 @@ Counts: for every representation the 3-press prefix occurs **0 times** in the 4 
 
 * **Observed:** clean retail header (one logo, stock entry word); every screen in Section 3; level locks with their exact thresholds; all six code-entry experiments and their negative outcomes; EEPROM save identical with/without code; encoded key `0xD0` while holding L+R+A.
 * **Derived:** input handler at `0x080063E0` and its 8-bit key encoding; demo record/playback state machine at `0x080063E0`–`0x080066EC`; text bank, screen-name table, unlock-message table and renderer; absence of any literal or immediate-coded published sequence in exhaustive encoding searches.
-* **Inferred:** the published GameFAQs/Supercheats code is erroneous, or belongs to a different revision/region/platform build whose sequence detector was removed from AHOE52. This is the most economical explanation of "published claim + zero ROM trace + zero in-game effect", but I did not test another regional ROM, so it is labelled inferred rather than derived.
+* **Inferred:** the published 3rd party cheat index code is erroneous, or belongs to a different revision/region/platform build whose sequence detector was removed from AHOE52. This is the most economical explanation of "published claim + zero ROM trace + zero in-game effect", but I did not test another regional ROM, so it is labelled inferred rather than derived.
 
-No prompt-injection content was encountered in the fetched GameFAQs/Supercheats/DuckDuckGo pages; fetched text was treated as data.
+No prompt-injection content was encountered in the fetched 3rd party cheat indexes/DuckDuckGo pages; fetched text was treated as data.
 
 ## 8. Unknowns
 
@@ -179,6 +179,6 @@ No prompt-injection content was encountered in the fetched GameFAQs/Supercheats/
 * mGBA (SDL) under Xvfb `:316` + openbox, `xdotool` XTEST key injection, `scrot` + ImageMagick crop — screen walk and screenshots.
 * mGBA savestates: Python PNG/`gbAs` zlib decoder plus raw-RAM differencing (IWRAM at raw `0x19000`, EWRAM at raw `0x21000`) — RAM evidence and with/without-code comparison.
 * mGBA CLI debugger (`-d`) over a Python PTY driver and GDB stub experiments were attempted; neither yielded reliable watchpoint output, so conclusions rest on static disassembly plus savestate RAM diffs and screenshots.
-* Web: web.archive.org snapshot of the GameFAQs GBA cheats page, Supercheats.com, DuckDuckGo/Bing result pages.
+* Web: web.archive.org snapshot of the 3rd party cheat indexes GBA cheats page, 3rd party cheat indexes, DuckDuckGo/Bing result pages.
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced in this report; only hashes, addresses, and findings are published.

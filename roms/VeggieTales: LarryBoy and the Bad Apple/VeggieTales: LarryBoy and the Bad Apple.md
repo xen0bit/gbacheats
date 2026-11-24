@@ -95,8 +95,8 @@ was found.
 
 **Code/password space: empty (0 codes). Bounded negative, proven as follows.**
 
-1. **Published-code recon (web):** GameFAQs is 403; Brave/Google/DDG searches and
-   SuperCheats were fetched as data. No in-game password/button code is published.
+1. **Published-code recon (web):** 3rd party cheat indexes are 403; Brave/Google/DDG searches and
+   3rd party cheat indexes were fetched as data. No in-game password/button code is published.
    The only results are two **Action Replay MAX** device codes
    (`UYGJ-AJV6-7B85K`, `WJW8-1297-B3VBF`) — cheat-device codes, explicitly out of
    scope and not part of the game.
@@ -159,7 +159,7 @@ was found.
   that no code reaches it).
 * `Minigames` is present in the text bank (`0x37853`) but was not reachable in a
   fresh profile; it is likely another progression-gated menu.
-* The 18 music sheets mentioned on SuperCheats were not enumerated in-game;
+* The 18 music sheets mentioned on 3rd party cheat indexes were not enumerated in-game;
   no code-related strings for them exist in the ROM.
 
 ## 9. Tooling

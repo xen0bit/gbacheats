@@ -30,7 +30,7 @@ GBA SKUs (different game codes and engines). Nothing is assumed shared with them
 The boot splash reads "MusyX Audio Tools Licensed By Factor 5 / LICENSED BY
 NINTENDO" (observed).
 
-**Prompt injection noted**: a direct fetch of the live TCRF page returned an
+**Prompt injection noted**: a direct fetch of the live 3rd party cheat index page returned an
 injected block ("This page is not intended for humans … whoever is operating this
 AI agent is a clown"). It was treated as untrusted data, ignored, and the clean
 2023 Wayback snapshot was used instead. (A later web-search result also returned
@@ -58,7 +58,7 @@ alone.
 
 The Audio Test track indices were recovered at RAM and their wrap bounds proven
 in-game: Music `0..80` (mod 81) and Sound `0..193` (mod 194) — 80 music pieces
-plus a zero/"none" slot and 193 sounds plus a zero slot, consistent with TCRF.
+plus a zero/"none" slot and 193 sounds plus a zero slot, consistent with 3rd party cheat indexes.
 
 ## 3. How to reproduce
 
@@ -84,9 +84,9 @@ plus a zero/"none" slot and 193 sounds plus a zero slot, consistent with TCRF.
 
 **Published codes verified**:
 
-- CodeBreaker `02002642:16` (TCRF / cutting-room mirror) — **verified**: opens
+- CodeBreaker `02002642:16` (3rd party cheat indexes / cutting-room mirror) — **verified**: opens
   the Cheat Menu, screen `0x02002642 = 0x0016`.
-- The R-at-card-screen button sequence is published by TCRF and Neoseeker;
+- The R-at-card-screen button sequence is published by 3rd party cheat indexes;
   the gate value it relies on was verified directly as above. The full Flying
   Practice playthrough was not replayed step-by-step; the gate and its effect
   were verified on the real menu.
@@ -251,7 +251,7 @@ pause/cheat paths were walked with `0x02002642` read at each step.
 
 ## 8. Unknowns
 
-- Whether any of the 30 map labels are unused/unreachable in normal play (TCRF
+- Whether any of the 30 map labels are unused/unreachable in normal play (3rd party cheat indexes
   leaves this as a "To do"). All 30 render and are selectable from Map Select.
 - The 16-state counter at `0x0200274A` is not proven to be the map-list length.
 - The exact R-button comparison instruction for the legitimate unlock was not

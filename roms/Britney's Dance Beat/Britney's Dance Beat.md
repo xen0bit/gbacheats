@@ -392,7 +392,7 @@ prefixes:
 * aliases: every state has 1 or 2 accepted spellings (the `X` vs `X+256`
   truncation), never more
 
-**Novel codes (not in GameFAQs / VGChartz / SuperCheats / IGN / GameRevolution /
+**Novel codes (not in 3rd party cheat indexes /
 any list found):**
 
 | Code | k | state | In-game proof |

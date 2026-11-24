@@ -35,7 +35,7 @@ The ROM contains a complete validator, encoder and decoder:
   to EWRAM and IWRAM and sets three "unlock" flag bytes when `A`, `C` or `D` exceed 3.
 
 Public recon found exactly one published password, `LLGGL` ("Final boss",
-ChapterCheats). It is valid and verified in the ROM and emulator. It is **not** the
+3rd party cheat indexes). It is valid and verified in the ROM and emulator. It is **not** the
 deliverable: the format permits **262,144 valid spellings** mapping to **131,072
 distinct decoded states**. I generated and entered several codes absent from every
 published list, including `nlgjn` (changes field `A` from 4 to 5, RAM-verified),
@@ -146,7 +146,7 @@ A faithful Python reimplementation was in `/tmp/spymuppets/pw.py`.
 | Check nibble | `c3 & 3 = (c0+c1+c2) & 3` |
 | Unused bits | `c3` bit 4: ignored by decoder (`c3 >> 2 & 3`) → 2 spellings per state |
 | Field widths | `A = c0>>1` (0..15), `B = c0&1 \| (c1&1)<<1` (0..3), `C = c1>>1` (0..15), `D = c2` (0..31), `slot = (c3>>2)&3` (0..3) |
-| Published list | `LLGGL` = final boss (ChapterCheats, 2007). GameFAQs reports "1 cheat" but the page returned HTTP 403; unverified. |
+| Published list | `LLGGL` = final boss (3rd party cheat indexes, 2007). 3rd party cheat indexes report "1 cheat" but the page returned HTTP 403; unverified. |
 
 ## 6b. Enumeration
 
@@ -210,9 +210,9 @@ tuples above with flags `01 01 01`.
   characters, difficulties or levels) was not finished; the mode-select screen
   and its folder list were only partially enumerated (two folder entries seen:
   `REY GAMBA`, `PEGGY GALORE`, with a 4×4 grid of `????` placeholders).
-- The GameFAQs "1 cheat" page was HTTP 403; it may list a code besides `LLGGL`.
+- The 3rd party cheat indexes "1 cheat" page was HTTP 403; it may list a code besides `LLGGL`.
   All codes generated here are absent from the one code found on the open web
-  (ChapterCheats) and from the ROM's own text/table banks.
+  (3rd party cheat indexes) and from the ROM's own text/table banks.
 - **Bounded negative for other cheat surfaces**: `strings -t x` over all
   8,388,608 bytes found **0** occurrences of `debug`, `level select`, `cheat`,
   `wireframe` (case-insensitive). The only "unlock"-like string is `unlocked:`
@@ -230,8 +230,8 @@ tuples above with flags `01 01 01`.
 - Model/encoder/decoder: `/tmp/spymuppets/pw.py`.
 - Keyboard automation / test harness: `k.py`, `enter.py`, `testcode.py`.
 - `arm-none-eabi-objdump -M force-thumb`, Python `struct`/`zlib`.
-- Web recon: DuckDuckGo result page, ChapterCheats password page (data only),
-  GameFAQs cheats page (403). No fetched text was treated as instructions.
+- Web recon: DuckDuckGo result page, 3rd party cheat indexes password page (data only),
+  3rd party cheat index cheats page (403). No fetched text was treated as instructions.
 - No ROM or copyrighted assets are redistributed by this report.
 
 ## 10. Cleanup

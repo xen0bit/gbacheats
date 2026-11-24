@@ -113,7 +113,7 @@ There is no password/checksum algorithm in this build. The only algorithmic stru
 | Thumb literal loads of `0x300` (L+R) | 2 | `0x08C53E08`, `0x08CD3ABA`, both in data, not reachable validators |
 | Thumb `LDR` literal references to key-mask globals `0x030038D8`–`0x03003904` | 67 sites | All menu sliders / control helpers; none implements a press-sequence matcher |
 
-**Published-code verification:** every published button code retrieved (GameFAQs, Fable12 FAQ, total-cheats, CheatBook) is explicitly labelled **GameCube, PS2, or Xbox** ("hold L+R/L1,R1,L2,R2, then A,Down,Down,Down" etc.). Not one is labelled GBA. The GBA lists contain only the three save-flag unlockables, mechanics glitches (Legolas Overdraw, hit-through-walls, Moria Troll item farming, hidden area), and CodeBreaker RAM patches (excluded from scope). Searching the ROM for the console codes' literal text and for their button-mask encodings returned zero hits.
+**Published-code verification:** every published button code retrieved (3rd party cheat indexes, Fable12 FAQ, total-cheats, 3rd party cheat indexes) is explicitly labelled **GameCube, PS2, or Xbox** ("hold L+R/L1,R1,L2,R2, then A,Down,Down,Down" etc.). Not one is labelled GBA. The GBA lists contain only the three save-flag unlockables, mechanics glitches (Legolas Overdraw, hit-through-walls, Moria Troll item farming, hidden area), and CodeBreaker RAM patches (excluded from scope). Searching the ROM for the console codes' literal text and for their button-mask encodings returned zero hits.
 
 **Novel code:** none minted — there is no validator/oracle. Per the brief, this is replaced by the bounded negative above plus the dynamic rejection test (§7).
 

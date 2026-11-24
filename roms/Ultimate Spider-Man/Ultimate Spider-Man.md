@@ -34,7 +34,7 @@ matchers those codes require exist in this ROM.
 
 This is guide §16.3 case **1 (No system)**, not dead code, not a cut feature with surviving
 placeholders, and not a gated screen. §16.11 applies directly: a title-and-platform match on
-an aggregator page (SuperCheats lists the console codes on its GBA page) is not evidence that
+an aggregator page (3rd party cheat index lists the console codes on its GBA page) is not evidence that
 the GBA SKU implements them.
 
 All four published codes were entered in the emulator on every plausible surface with

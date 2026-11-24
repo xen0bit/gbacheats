@@ -100,8 +100,8 @@ No validator, checksum, encoder, decoder, or code table exists — nothing to re
 
 | Source | Codes | Disposition |
 |---|---|---|
-| ROMSFUN / libretro DB, Almar's Guides, gamehacking.org | Enable `0000BD71 000A` + `1000F518 0007`; Always Ball 1 of 5 `83000354 0001`; Faster Score Gain `830015A0 FFFF`; Max Score `830015A0 E0FF 830015A2 05F5` | CodeBreaker/GameShark **RAM write patches** (e.g. `0x83000354` writes EWRAM `0x02000354`), not developer-intended codes — excluded by scope. Literal search in ROM: **0 hits** for all four master/codes, confirming they are not embedded strings. |
-| GameFAQs (direct 403; archived page 404), TCRF (403; no archived page), Cheat Happens, Neoseeker, VGChartz-class indexes | No password, button code, unlockable, or hidden-menu entries published for this title | Verified via search results/snippets |
+| 3rd party cheat indexes / libretro DB, 3rd party cheat indexes | Enable `0000BD71 000A` + `1000F518 0007`; Always Ball 1 of 5 `83000354 0001`; Faster Score Gain `830015A0 FFFF`; Max Score `830015A0 E0FF 830015A2 05F5` | CodeBreaker/GameShark **RAM write patches** (e.g. `0x83000354` writes EWRAM `0x02000354`), not developer-intended codes — excluded by scope. Literal search in ROM: **0 hits** for all four master/codes, confirming they are not embedded strings. |
+| 3rd party cheat index-class indexes | No password, button code, unlockable, or hidden-menu entries published for this title | Verified via search results/snippets |
 
 No page returned prompt-injection or instructions; all fetched pages were treated as data.
 
@@ -135,7 +135,7 @@ Because no code system exists, §0.2's enumeration requirement is discharged by 
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7 (`scan_input.py`).
 * mGBA SDL under Xvfb `:317`; `xdotool` + `import`/ImageMagick for input and screenshots (`emu.py`, `collect.py`, `combos.py`).
 * Savestate `gbAs` zlib extraction (`state.py`, `probe.py`) — the reliable RAM read path when the mGBA GDB stub cannot be interrupted.
-* Web search/fetch for published codes (GameFAQs, TCRF, Cheat Happens, ROMSFUN/libretro, Almar's Guides, gamehacking.org).
+* Web search/fetch for published codes (3rd party cheat indexes/libretro, 3rd party cheat indexes).
 
 No ROM bytes, graphics, or extracted assets are redistributed here — only hashes, addresses, and the analysis tooling.
 

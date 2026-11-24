@@ -50,7 +50,7 @@ All in-game text is tile-index encoded (a letter substitution, not ASCII), so
 `strings` alone would miss every menu label. All five language banks were
 decoded and enumerated; no debug/cheat/password labels exist in any of them.
 
-Published-code research: GameFAQs, TCRF, cheatcc, DuckDuckGo, Bing, Google and
+Published-code research: 3rd party cheat indexes, DuckDuckGo, Bing, Google and
 the Wayback Machine CDX API were attempted; all returned 403/503, a bot
 challenge, or no results in this environment. The two names were therefore
 derived from the ROM itself, not from a published list.

@@ -25,7 +25,7 @@ no multi-game pack, appended trainer, or cracktro; the entry word is the stock A
 
 The GBA build has **one developer-intended cheat**: a button code entered on the **Main Menu**.
 There is **no password entry screen**, no on-screen keyboard, and no hidden debug menu in this
-SKU. The published code (GameFAQs / Cheat Happens) is real and was verified bit-for-bit in the
+SKU. The published code (3rd party cheat indexes) is real and was verified bit-for-bit in the
 ROM:
 
 > **Hold R, then press Start → Select → L → Select → Start** on the Main Menu.

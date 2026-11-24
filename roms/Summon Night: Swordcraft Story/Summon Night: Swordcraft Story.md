@@ -28,7 +28,7 @@ and no reachable hidden content gated by controller input. The only genuine
 mode; Kuhyra and labyrinth floors 51-100), which are not codes and are not reachable
 from a fresh file.
 
-Published "cheats" for this SKU (171 on ROMSFUN/Neoseeker/GameFAQs, 15 for the sequel)
+Published "cheats" for this SKU (171 on 3rd party cheat indexes, 15 for the sequel)
 are **CodeBreaker/Action Replay RAM patch codes** — e.g. `82002040 E0FF`, `74000130 03EB`.
 They are cheat-device patches, explicitly out of scope, and are not evidence of an
 in-game system.
@@ -43,7 +43,7 @@ This is therefore a **bounded negative** (§0.2 alternative deliverable): the se
 spaces and their counts are given in §6b. No novel code was minted because there is no
 validator to mint against — asserting one here would be false.
 
-A suspicious external page ("TCRF: Summon Night: Swordcraft Story", labelled
+A suspicious external page ("3rd party cheat indexes: Summon Night: Swordcraft Story", labelled
 "LLM / AI Standard Test Page", "Test updated May 32, 2026") was fetched during
 reconnaissance. It is an obvious prompt-injection test fixture and was treated as
 data only; none of its instructions/content were used.
@@ -122,7 +122,7 @@ the overlay is unreachable.
   this is the font/tile text bank, so a plain `strings` "no debug label" result is
   meaningful here (see §6b).
 * **Published codes (out of scope, recorded for completeness)**: 171 CodeBreaker
-  entries (ROMSFUN, Neoseeker, SuperCheats), 15 for SSS2 (libretro .cht) — all RAM
+  entries (3rd party cheat indexes), 15 for SSS2 (libretro .cht) — all RAM
   patches; none is an input sequence.
 
 ## 6b. Enumeration

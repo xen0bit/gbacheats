@@ -65,7 +65,7 @@ The evidence is threefold:
    nothing; only `Start` in gameplay opens the pause menu.
 
 The only published codes for this title are **CodeBreaker memory patches**
-(Almar's Guides: master code, "Access All Minigames", unlimited health and two
+(3rd party cheat indexes: master code, "Access All Minigames", unlimited health and two
 meter codes). They are device-level RAM writes, not in-game codes, and are
 outside this report's scope; the game itself provides no field in which to
 enter them. Consequently there is no valid code space to enumerate, no

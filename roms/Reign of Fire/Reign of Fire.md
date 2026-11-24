@@ -22,9 +22,9 @@ Developer/publisher (from credits screens): Crawfish Interactive / Bam Entertain
 
 The game has a genuine **developer-intended 9-symbol password system**, reachable from the title screen (`PASSWORD`). It is algorithmic, not a lookup table: the decoder at `0x080116D0` reads nine 5-bit symbol indices from EWRAM `0x02002A90`, packs them into six bytes, applies a byte transform, and checks a 5-bit additive checksum. On success it writes a 32-bit payload (sixteen 2-bit mission fields) plus three flag bytes, returns `r0=1`, and the game shows **"Password Accepted"**, rolls the credits, and enables the RANKINGS/level-select screen.
 
-Published codes were found on GameFAQs (Wayback), GameGenie and Planet Cheats:
+Published codes were found on 3rd party cheat indexes:
 * `9XL?GSB78` — "unlock all levels": **verified valid** in the ROM and in the emulator.
-* `RLF2T8T?6` — "unlock level 2" (Planet Cheats only): **rejected** by the game ("Wrong Password / Try Again!") — a published-list error (§16.7).
+* `RLF2T8T?6` — "unlock level 2" (3rd party cheat indexes only): **rejected** by the game ("Wrong Password / Try Again!") — a published-list error (§16.7).
 
 The validator was reimplemented bit-for-bit in Python (`decoder.py`, `encoder.py`). Novel checksum-valid codes were minted and accepted on the real screen; one of them (`DY39ZK44D`) triggers an **unadvertised congratulations cutscene** ("Congratulations on using your own initiative and excelled. You are now ready for the toughest …", "The eggs are nearly ready to hatch …") and starts **MISSION 6**, an effect no published list describes. Bounds were proven in-game by rejecting a bad checksum and an out-of-range symbol. No debug menu or button code exists in this image (bounded negative, §7).
 
@@ -42,8 +42,8 @@ The validator was reimplemented bit-for-bit in Python (`decoder.py`, `encoder.py
 **Codes tested:**
 | Code | Origin | Result |
 |---|---|---|
-| `9XL?GSB78` | GameFAQs/GameGenie/Planet Cheats | Password Accepted → credits → RANKINGS enabled |
-| `RLF2T8T?6` | Planet Cheats | Wrong Password / Try Again! |
+| `9XL?GSB78` | 3rd party cheat indexes | Password Accepted → credits → RANKINGS enabled |
+| `RLF2T8T?6` | 3rd party cheat indexes | Wrong Password / Try Again! |
 | `DY39ZK44D` | **generated here** | Password Accepted → unique congratulations cutscene → MISSION 6 |
 | bad checksum (slot0 `D`→`F`) | generated here | Wrong Password / Try Again! |
 | out-of-range symbol 44 in slot0 | generated here | Wrong Password / Try Again! |
@@ -117,7 +117,7 @@ All vowels (A E I O U) are omitted. The next grid cells (32=`-`, 33+, red) are c
 ## 6b. Enumeration
 
 * **Space definition:** 9 typed symbols × 32 values = `32^9 = 35,184,372,088,832` raw entries. The decoder consumes 13 symbols (9 typed + 4 fixed zero), packs 65 bits into 9 bytes, and uses only the first 6 bytes (48 bits): 32 payload bits + flag bits + a 5-bit additive checksum. Since the checksum is 5 bits, the accepted set is `≈ 32^8 = 1,099,511,627,776` distinct 9-symbol codes (exactly one low-5-bit value of the final symbol per fixed prefix). Payload capacity is `4^16 = 4.29e9` mission-field combinations plus 3 flag bits.
-* **Published space:** 2 codes found across GameFAQs (Wayback `20181126`), GameGenie, Planet Cheats. One (`9XL?GSB78`) verified; one (`RLF2T8T?6`) rejected by the game. Neither contains any of the generated codes below.
+* **Published space:** 2 codes found across 3rd party cheat indexes (Wayback `20181126`), 3rd party cheat indexes. One (`9XL?GSB78`) verified; one (`RLF2T8T?6`) rejected by the game. Neither contains any of the generated codes below.
 * **Novel codes generated (absent from every published list), all passing the offline validator:**
   * `DY39ZK44D` — fields `[1]*16`; **accepted in-game**, unique congratulations cutscene + MISSION 6 (screenshots `novel_accepted_c.png`, `novel_msg2_c.png`, `novel_msg3_c.png`, `novel_msg4_c.png`, `after_cut_c.png`).
   * `DY3X?7641` — fields `[1]*8+[3]*8` (offline valid).
@@ -139,7 +139,7 @@ All vowels (A E I O U) are omitted. The next grid cells (32=`-`, 33+, red) are c
 
 * The `LOCK-OUT` string exists but six wrong submissions never displayed it; its gate (maybe a much higher failure count or another mode) was not proven.
 * The precise mapping of the 16 mission fields and 3 flag bytes to specific unlocks/difficulty was not enumerated field-by-field (the generated all-1 code produced MISSION 6 and a unique cutscene, which is sufficient to prove a distinct effect but not a full field semantics table).
-* `RLF2T8T?6` may be a valid code for a different regional revision or a transcription error in Planet Cheats; only this `AR9E` image was analyzed.
+* `RLF2T8T?6` may be a valid code for a different regional revision or a transcription error in 3rd party cheat indexes; only this `AR9E` image was analyzed.
 
 ## 9. Tooling
 

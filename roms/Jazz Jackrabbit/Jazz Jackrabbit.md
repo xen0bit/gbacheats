@@ -23,7 +23,7 @@ This GBA port has **no password/entry screen, no hidden debug menu, and no unloc
 - one 120-byte table at `0x083DC938` = 5 codes × 12 masks, checked by `0x0830F5C8` with a 5-way jump table at `0x083DC9B0`;
 - one 24-byte table at `0x083DB338` = 1 code × 12 masks, checked by `0x08309F28`.
 
-Both validators use the same simple algorithm (§5): copy the expected masks to the stack, shift a 12-entry key-history array, compare all 12 entries, dispatch an effect, then clear the history. The six sequences are **exactly** the six published GBA codes (GameFAQs/GameSpot/SuperCheats); no unpublished valid sequence can exist because both tables are closed lookup sets. CodeBreaker/GameShark entries (memory edits) and the DOS/PC codes (`BACKSPACE+P`, `F10+F11+F12`) found in web searches do **not** apply to this SKU and are out of scope.
+Both validators use the same simple algorithm (§5): copy the expected masks to the stack, shift a 12-entry key-history array, compare all 12 entries, dispatch an effect, then clear the history. The six sequences are **exactly** the six published GBA codes (3rd party cheat indexes); no unpublished valid sequence can exist because both tables are closed lookup sets. CodeBreaker/GameShark entries (memory edits) and the DOS/PC codes (`BACKSPACE+P`, `F10+F11+F12`) found in web searches do **not** apply to this SKU and are out of scope.
 
 All six codes were entered in mGBA and confirmed by RAM reads (see §6b). Wrong 12-button combinations were entered and rejected with unchanged flags, proving the bounds.
 
@@ -106,7 +106,7 @@ Key masks in the table are stored little-endian `u16`, one per button press.
 
 Note codes 2–4 are one-shot per save slot (flag at save+28), as published. Codes 0, 1 and 5 are idempotent once their flag is set.
 
-**Out-of-scope / unverified web hits:** CodeBreaker/GameShark codes (`33002566 00FF`, `830058F0 C350`, etc.) are memory edits, not in-game cheats; the GameFAQs PC page's `BACKSPACE+P` and `F10/F11/F12` belong to the DOS/console originals and do not appear in this GBA image under any encoding checked.
+**Out-of-scope / unverified web hits:** CodeBreaker/GameShark codes (`33002566 00FF`, `830058F0 C350`, etc.) are memory edits, not in-game cheats; the 3rd party cheat indexes PC page's `BACKSPACE+P` and `F10/F11/F12` belong to the DOS/console originals and do not appear in this GBA image under any encoding checked.
 
 ## 6b. Enumeration
 

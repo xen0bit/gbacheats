@@ -445,11 +445,11 @@ table count, so no hidden item exists.
 
 | Source | Result |
 |---|---|
-| VGChartz (`/game/26322/bmx-trick-racer/cheats`) | "Total cheats available: 0 — No cheats available for this game" |
-| CheatingDome (`cheatingdome.com/gba/bmxtrickracer-cheats.htm`) | "No Cheats or Achievements yet" |
-| GameFAQs (`/gba/582392-bmx-trick-racer/cheats`) | HTTP 403 to automated fetch; no codes page is linked from the game's GameFAQs entry, and search snippets surface no codes; archived copies return 404/429 |
-| TCRF (`tcrf.net/BMX_Trick_Racer`) | HTTP 403 to automated fetch; search results show no cut-content/cheat page |
-| CheatHappens (`show_board.asp?titleID=39694`) | no cheats, message board only |
+| 3rd party cheat indexes (`/game/26322/bmx-trick-racer/cheats`) | "Total cheats available: 0 — No cheats available for this game" |
+| 3rd party cheat indexes (3rd party cheat indexes) | "No Cheats or Achievements yet" |
+| 3rd party cheat indexes (`/gba/582392-bmx-trick-racer/cheats`) | HTTP 403 to automated fetch; no codes page is linked from the game's 3rd party cheat index entry, and search snippets surface no codes; archived copies return 404/429 |
+| 3rd party cheat indexes (3rd party cheat indexes) | HTTP 403 to automated fetch; search results show no cut-content/cheat page |
+| 3rd party cheat indexes (`show_board.asp?titleID=39694`) | no cheats, message board only |
 
 There is no public code to verify or test, which is consistent with the ROM
 containing none.

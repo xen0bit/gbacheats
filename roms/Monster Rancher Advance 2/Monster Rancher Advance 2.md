@@ -25,7 +25,7 @@ MRA2 has a genuine, developer-intended **password system** — the Shrine's **Ta
 
 The system is the direct descendant of MRA1's (the four hash routines are byte-for-byte recognizable), with two structural changes: **sub** is now an 8-bit index into a 256-byte table (MRA1 used 6 bits/64 bytes), and a **(main, sub) legality check** runs after the sub hash. It has two layers:
 
-1. **119 hard-coded passwords** (developer shortcuts, e.g. `Valhalla`, `SUN_BURN`, `MRA2`, `Nintendo`, `CTHULHU`) in a linked-list table at `0x08217368`–`0x082173CE`, lengths 2–8. A length-indexed substring lookup runs *before* the algorithm. **107 of these 119 are absent from the GameFAQs password guide.**
+1. **119 hard-coded passwords** (developer shortcuts, e.g. `Valhalla`, `SUN_BURN`, `MRA2`, `Nintendo`, `CTHULHU`) in a linked-list table at `0x08217368`–`0x082173CE`, lengths 2–8. A length-indexed substring lookup runs *before* the algorithm. **107 of these 119 are absent from the 3rd party cheat indexes password guide.**
 2. **An algorithmic generator** — four Thumb routines at `0x0801E7C8`/`0x0801E86C`/`0x0801E960`/`0x0801EA6C` fold the character codes into 16-bit accumulators and index four ROM tables based at `0x081E9AD0`. Arbitrary, unpublished codes can be minted.
 
 I reimplemented the generator in Python (`decode.py`), validated it against **all 347 published passwords** (331/347 main families match exactly; the remainder are hard-coded overrides or FAQ transcription artifacts) and against the **ROM's own generator called from the mGBA debugger** (§16.19 oracle): published `Thor`, hard-coded `Valhalla`, and novel `QZXP`/`ZZZZ`/`AAAA` all produced byte-identical output structs.
@@ -42,7 +42,7 @@ I reimplemented the generator in Python (`decode.py`), validated it against **al
 
 **Oracle reproduction (needs mGBA `-d`).** With the ROM's `-d` pty debugger: disable interrupts (`w/4 0x04000208 0`), place u16 char codes + `0xFFFD` terminator at `0x02000000`, zero an output struct at `0x02000100`, set `r0=0x02000000, r1=0x08217368, r2=0x081E9AD0, r3=0x02000100, lr=0x08000101, cpsr=0x20 (Thumb), pc=0x0801E561`, set `break/t 0x08000100`, `continue`. The output struct appears at `0x02000100`.
 
-**Published codes verified against ROM.** GameFAQs FAQ 20384 ("Monster Generation Guide", archived at `web.archive.org/web/2023id_/…/faqs/20384`) lists 347 passwords; the cheats page adds a numeric `9677581` code (unverified in this ROM). Literals such as `Thor`, `Valhalla`, `Crystal`, `MRA2`, `GARU` were searched under the font-index encoding; `Valhalla`, `W_Angel`, `SUN_BURN` etc. are present in the hard-coded table, and `Thor`, `MALONE`, `Laughter` etc. decode algorithmically to the published first class. `strings` finds **no** password literals (text is font/tile-indexed; only `"Monster Farm Advance2 Save Data"` is plaintext) — the font-index bank at `0x081F49BC` was decoded directly (guide §11).
+**Published codes verified against ROM.** 3rd party cheat index FAQ 20384 ("Monster Generation Guide", archived at `web.archive.org/web/2023id_/…/faqs/20384`) lists 347 passwords; the cheats page adds a numeric `9677581` code (unverified in this ROM). Literals such as `Thor`, `Valhalla`, `Crystal`, `MRA2`, `GARU` were searched under the font-index encoding; `Valhalla`, `W_Angel`, `SUN_BURN` etc. are present in the hard-coded table, and `Thor`, `MALONE`, `Laughter` etc. decode algorithmically to the published first class. `strings` finds **no** password literals (text is font/tile-indexed; only `"Monster Farm Advance2 Save Data"` is plaintext) — the font-index bank at `0x081F49BC` was decoded directly (guide §11).
 
 **Prompt injection:** fetched cheat pages contained only copyright/advertising text; no instruction-like payload was found. All fetched text was treated as data.
 
@@ -138,7 +138,7 @@ The hard-coded lookup (`0x0801E9DC`) runs first: descriptor `u16[8-L]` gives the
 
 **Validator/enumerator model.** `decode.py` reimplements all four folds, bit permutations, table lookups and the special-pair legality check; `parse_hardcoded.py` enumerates the entire 119-entry linked list. Both agree with the ROM byte-for-byte (oracle below). The folds are pure integer add/multiply — no PRNG — so the model is complete.
 
-**Novel codes (not in any published list).** Verified absent from the 347 GameFAQs passwords and from the 119 hard-coded records:
+**Novel codes (not in any published list).** Verified absent from the 347 3rd party cheat indexes passwords and from the 119 hard-coded records:
 
 | Code | In pub? | In hardcoded? | ROM-oracle output (main, sub, stats[0..12], trait) |
 |---|---|---|---|
@@ -168,7 +168,7 @@ The hard-coded lookup (`0x0801E9DC`) runs first: descriptor `u16[8-L]` gives the
 
 ## 8. Unknowns
 
-- The numeric code `9677581` from the GameFAQs cheats page ("gold Zuum Golizards") was **not** found under any encoding in this ROM and was not exercised in-game; it may belong to a different revision or be a transcription artifact.
+- The numeric code `9677581` from the 3rd party cheat index cheats page ("gold Zuum Golizards") was **not** found under any encoding in this ROM and was not exercised in-game; it may belong to a different revision or be a transcription artifact.
 - Sixteen published passwords whose algorithmic family does not match the FAQ label; attributed to hard-coded overrides or FAQ typos, not individually replayed.
 - Whether raising breeder rank lifts the 4-character input cap beyond 4 (only the starting rank was tested).
 - The `0xFFF4` keyboard token and the exact rendering of the 30..39 special subtypes were not fully mapped.
@@ -179,7 +179,7 @@ The hard-coded lookup (`0x0801E9DC`) runs first: descriptor `u16[8-L]` gives the
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all four hash routines, generator, lookup and keyboard enumerator.
 - Python 3 + `struct`/`json`: `decode.py` (generator reimplementation), `parse_hardcoded.py` (119-entry table enumeration), `state.py` (mGBA `.ss1` `gbAs` zlib chunk reader, guide §16.13), `ui.py` (Xvfb/xdotool driver).
 - mGBA 0.10.5 `-d` pty debugger (helper `session.py`) for the §16.19 oracle: IME off, registers/PC/LR written, breakpoint at `0x08000100`, output struct read at `0x02000100`.
-- Web: `web.archive.org` snapshot of GameFAQs FAQ 20384 (347 passwords) and the cheats page.
+- Web: `web.archive.org` snapshot of 3rd party cheat index FAQ 20384 (347 passwords) and the cheats page.
 - Env: `Xvfb :317`, `openbox`, `SDL_AUDIODRIVER=dummy`; all emulator artifacts were written to a ROM **copy** in `/tmp/mra2`, never into the ROM folder.
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced in this report; only hashes, addresses, algorithms, and tool scripts are published.

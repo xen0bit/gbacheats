@@ -52,7 +52,7 @@ the absence of a consumer is proven for this image.
 The widely published console master code
 (`Up, Right, Down, Left, Right, Right, Up, Down, Left, Right, Up, Left, Right,
 Right, Down` + face button) **is not in this ROM in any key-mask encoding** and
-does nothing on the GBA beyond navigating menus. GameFAQs' GBA cheats page copies
+does nothing on the GBA beyond navigating menus. 3rd party cheat indexes' GBA cheats page copies
 that console code; it is not a GBA code.
 
 ## 3. How to reproduce

@@ -12,17 +12,17 @@
 | Game code | `BG3E` (header reports `BG3E70`, maker `70`) |
 | Maker | `70` |
 | Version | 0x00 (Rev.00) |
-| Complement byte | 0x84 — matches Data Crystal's published `Checksum 84` |
+| Complement byte | 0x84 — matches a 3rd party cheat index's published `Checksum 84` |
 | Header checksum | `0x0000` (rebuilt-header artifact; computed value would be 0x00B6) |
 | Entry word | `0xEA00002E` → stock `0x080000C0` branch, **no cracktro / trainer patch** |
 | MD5 | `3a74fce97f1ea2b28c2a50ec3df0acee` |
 | SHA-1 | `f1c4b07554d2a3b1ad2f325307051e775ce68087` |
 | SHA-256 | `940ad5f01db4465b8877dfe739510cbf34f4ea3d390f3df13519808bc36f059e` |
-| CRC32 | `0x01C1707F` — exact match to Data Crystal's retail dump |
+| CRC32 | `0x01C1707F` — exact match to a 3rd party cheat index's retail dump |
 
 **Embedded GBA-header scan:** the full 156-byte Nintendo logo occurs exactly **once**, at file offset 0x000004 (the header at 0x0). This is a single standalone retail image, not a 2-in-1 cart or a concatenated pack. The double-pack re-release with *Dragon Ball GT: Transformation* is a different ROM and was **not** analysed here.
 
-Developer/publisher metadata from TCRF and Data Crystal: Webfoot Technologies (developer), Atari SA / Infogrames (publisher), US release 2004-09-14. The engine is a C++ bytecode interpreter (see the embedded source paths in §6).
+Developer/publisher metadata from 3rd party cheat indexes: Webfoot Technologies (developer), Atari SA / Infogrames (publisher), US release 2004-09-14. The engine is a C++ bytecode interpreter (see the embedded source paths in §6).
 
 ## 2. Executive summary
 
@@ -31,10 +31,10 @@ Developer/publisher metadata from TCRF and Data Crystal: Webfoot Technologies (d
 What *is* present:
 
 * A **save-bit unlockable**, not a code: Gogeta is unlocked by returning all 15 Z-Fighter Exhibits and all 25 Hercule Exhibits (§16.18 of the guide — a save-flag unlock, not a cheat system). Post-game modes are likewise progress-gated.
-* One **minigame-specific input exploit** published for this title: the *Perfect Fusion* dance input `Up, B, Left, Down, A` (GameFAQs, standalone Buu's Fury page). This is a fixed in-game input sequence used during the fusion minigame, **not** a global code system with an enumerable space. Its literal byte encoding was not found in this image by the exhaustive search in §6b; dynamic confirmation would require post-game fusion access, which was not reached (see §8).
+* One **minigame-specific input exploit** published for this title: the *Perfect Fusion* dance input `Up, B, Left, Down, A` (3rd party cheat indexes, standalone Buu's Fury page). This is a fixed in-game input sequence used during the fusion minigame, **not** a global code system with an enumerable space. Its literal byte encoding was not found in this image by the exhaustive search in §6b; dynamic confirmation would require post-game fusion access, which was not reached (see §8).
 * **Dead development leftovers**: crash-handler strings and Windows source paths (§6); no reachable debug screen.
 
-**The four "Developer cheat codes" widely published for `Buu's Fury / GT: Transformation` belong to Dragon Ball GT: Transformation, not to this image.** They are listed under the *GT: Transformation Cheats* heading on the combined GameFAQs page and are absent from the standalone Buu's Fury cheats page. All four were tested at this game's title screen and main menu with no effect, and none of their button-mask encodings occurs anywhere in this ROM. Nothing is shared with the concurrently analysed GT image at the code/table level; the two titles share only the Webfoot engine lineage and the later double-pack cartridge.
+**The four "Developer cheat codes" widely published for `Buu's Fury / GT: Transformation` belong to Dragon Ball GT: Transformation, not to this image.** They are listed under the *GT: Transformation Cheats* heading on the combined 3rd party cheat index page and are absent from the standalone Buu's Fury cheats page. All four were tested at this game's title screen and main menu with no effect, and none of their button-mask encodings occurs anywhere in this ROM. Nothing is shared with the concurrently analysed GT image at the code/table level; the two titles share only the Webfoot engine lineage and the later double-pack cartridge.
 
 The game also contains anti-piracy checks (save-type detection → "This game will not run on this hardware" in Grand Kai's mansion), which are copy protection, not cheats.
 
@@ -58,7 +58,7 @@ The game also contains anti-piracy checks (save-type detection → "This game wi
 
 | Source / code | Buttons entered | Result |
 |---|---|---|
-| Prototype debug menu (TCRF prototype article) | L L R R Up Down Left Right | No effect; title screen unchanged |
+| Prototype debug menu (3rd party cheat indexes prototype article) | L L R R Up Down Left Right | No effect; title screen unchanged |
 | GT "20,000 Secret Shop Zenie" | Up Down B Left Right B L R B Up Left Down L R L R B | No effect; no menu/flag change |
 | GT "Unlock All Characters" | Down Up Left Left Down Up Left Left Down Up Left Left Up Up Down Up B | No effect |
 | GT "Unlock All Planets" | Up Up Down Right Down Right Up Left Left Up B | No effect |
@@ -72,22 +72,22 @@ Observed differences in title captures were confined to the animated menu cursor
 |---|---|---|
 | 0x000000 / `0x08000000` | Header; stock ARM entry `0xEA00002E` | Observed (xxd) |
 | 0x0000A0 / `0x080000A0` | Title `DBZBUUSFURY`, code `BG3E`, maker `70`, complement 0x84 | Observed |
-| 0x004160 / `0x08004160` | `T:\Source\ByteCodeInterpreter\ByteCodeInterpreter.cpp` | Observed (strings + TCRF) |
+| 0x004160 / `0x08004160` | `T:\Source\ByteCodeInterpreter\ByteCodeInterpreter.cpp` | Observed (strings + 3rd party cheat indexes) |
 | 0x004818 / `0x08004818` | `T:\Source\GameData.cpp` | Observed |
 | 0x008A5C / `0x08008A5C` | `T:\Source\AreaEntry.cpp` | Observed |
 | 0x013BAC / `0x08013BAC` | `T:\Source\CharacterData.cpp` (also shown on assertion screen) | Observed |
-| 0x041844, 0x04225C / `0x08041844`, `0x0804225C` | NUL-terminated `SPAGHETTI` (developer joke, twice) | Observed (TCRF lists 0x4225A; actual string starts 0x4225C) |
-| 0x0480F4 / `0x080480F4` | Crash-handler strings: `Invalid Operation`, `Divide By Zero`, `Overflow`, `Underflow`, `Inexact Result`, `Heap memory corrupted`, `Unknown signal` | Observed + TCRF |
-| 0x05553C / `0x0805553C` | `Expected dialog to start with a code block` / `Internal equipment consistency error!` | TCRF |
-| 0x06B7400 / `0x0806B7400` | `Energy attack level set for attack which doesn't exist for player!` etc. | TCRF |
-| 0x07B5B64–0x07B5B7C / `0x0807B5B64`– | Table of seven **compressed** text-bank pointers (`0x0879BF2C`, `0x087A04F0`, `0x087A46C8`, `0x087A8AD8`, `0x087AD118`, `0x087B1558`, `0x087B5AA0`) — why `strings` finds almost no game text | Data Crystal + observed |
+| 0x041844, 0x04225C / `0x08041844`, `0x0804225C` | NUL-terminated `SPAGHETTI` (developer joke, twice) | Observed (3rd party cheat index lists 0x4225A; actual string starts 0x4225C) |
+| 0x0480F4 / `0x080480F4` | Crash-handler strings: `Invalid Operation`, `Divide By Zero`, `Overflow`, `Underflow`, `Inexact Result`, `Heap memory corrupted`, `Unknown signal` | Observed + 3rd party cheat indexes |
+| 0x05553C / `0x0805553C` | `Expected dialog to start with a code block` / `Internal equipment consistency error!` | 3rd party cheat indexes |
+| 0x06B7400 / `0x0806B7400` | `Energy attack level set for attack which doesn't exist for player!` etc. | 3rd party cheat indexes |
+| 0x07B5B64–0x07B5B7C / `0x0807B5B64`– | Table of seven **compressed** text-bank pointers (`0x0879BF2C`, `0x087A04F0`, `0x087A46C8`, `0x087A8AD8`, `0x087AD118`, `0x087B1558`, `0x087B5AA0`) — why `strings` finds almost no game text | 3rd party cheat indexes + observed |
 | 0x092CD0–0x093E90 / `0x08092CD0`– | Bytecode/script record table (fixed-stride records: opcode byte, ids, u16 fields, two ROM pointers). Three apparent "button sequence" byte matches fall inside this table and are coincidences | Observed (xxd) |
-| `0x0800419C` | Show logos | Data Crystal |
-| `0x0803D7FA` | Show main screen (menu dispatcher; loops on a bytecode-screen state machine) | Data Crystal + objdump |
-| `0x08008A1C` | Area/map loader breakpoint: `r1` = `MapInfo*` | Data Crystal |
-| `0x0801226A` | Message-display breakpoint: `r1` = text id (32-bit) | Data Crystal |
+| `0x0800419C` | Show logos | 3rd party cheat indexes |
+| `0x0803D7FA` | Show main screen (menu dispatcher; loops on a bytecode-screen state machine) | 3rd party cheat indexes + objdump |
+| `0x08008A1C` | Area/map loader breakpoint: `r1` = `MapInfo*` | 3rd party cheat indexes |
+| `0x0801226A` | Message-display breakpoint: `r1` = text id (32-bit) | 3rd party cheat indexes |
 | `0x03007FF8` (BIOS) | Key-input mirror; only two literals reference it (0x8040E9C / 0x8040F94, CRT region) | Observed (literal scan) |
-| `0x0300xxxx` / `0x0202D0B8` | Runtime globals and active sprite pointer used by CodeBreaker/ROM-hack tooling | Data Crystal; **out of scope**, documented only to classify published codes |
+| `0x0300xxxx` / `0x0202D0B8` | Runtime globals and active sprite pointer used by CodeBreaker/ROM-hack tooling | 3rd party cheat indexes; **out of scope**, documented only to classify published codes |
 
 mGBA savestate layout (guide §16.13) was not needed: no state-changing cheat was found, so no RAM flag exists to diff.
 
@@ -118,15 +118,15 @@ There is no password validator, checksum, generator, or lookup table to reimplem
 
 | Published item | Source | In this ROM? | In-game effect |
 |---|---|---|---|
-| "20,000 Secret Shop Zenie", "Unlock All Characters", "Unlock All Planets", "Unlock Post-Game Modes" (button sequences) | GameFAQs combined page `gba/931746`, under **GT: Transformation** | No mask encoding found | No effect on title or main menu |
-| Perfect Fusion `Up, B, Left, Down, A` | GameFAQs standalone `gba/920530`, "Secrets" | No literal encoding found | Not dynamically reached (§8) |
-| Gogeta unlock via 15 Z + 25 Hercule Exhibits | GameFAQs / TCRF | Save-flag unlock (not a code) | Not a cheat system |
-| CodeBreaker / GameShark / Action Replay lists (Neoseeker, SuperCheats, Ethereal Games) | various | Out of scope by brief (memory-edit codes); addresses e.g. 0x03001560 are RAM writes, not developer cheats | Not tested (out of scope) |
-| Prototype debug menu (L L R R U D L R, zone/sound select) | TCRF prototype article | No encoding found; TCRF states menu exists in **every prototype**, not the retail build | No effect on retail title screen |
+| "20,000 Secret Shop Zenie", "Unlock All Characters", "Unlock All Planets", "Unlock Post-Game Modes" (button sequences) | 3rd party cheat indexes combined page `gba/931746`, under **GT: Transformation** | No mask encoding found | No effect on title or main menu |
+| Perfect Fusion `Up, B, Left, Down, A` | 3rd party cheat indexes standalone `gba/920530`, "Secrets" | No literal encoding found | Not dynamically reached (§8) |
+| Gogeta unlock via 15 Z + 25 Hercule Exhibits | 3rd party cheat indexes | Save-flag unlock (not a code) | Not a cheat system |
+| CodeBreaker / GameShark / Action Replay lists (3rd party cheat indexes) | various | Out of scope by brief (memory-edit codes); addresses e.g. 0x03001560 are RAM writes, not developer cheats | Not tested (out of scope) |
+| Prototype debug menu (L L R R U D L R, zone/sound select) | 3rd party cheat indexes prototype article | No encoding found; 3rd party cheat indexes state menu exists in **every prototype**, not the retail build | No effect on retail title screen |
 
 **Button-mask search space searched:** 8 distinct sequences (5 GT/prototype + Perfect Fusion + 2 GT gameplay codes taken from the combined page) × {active-high/active-low u8, u16 LE/BE, u32 LE; forward and reversed} plus 8 alternative key-index orders → roughly 250 full-file scans. Raw hits: 3, all inspected at byte level and rejected as false positives (one in the bytecode record table at 0x92D09, one in the same table at 0x93E51, one in a sine/audio curve table at 0x341C1B).
 
-**Anti-piracy (context only, not a cheat):** save-type check at Grand Kai's mansion, Babidi-ship switch, and the Chapter-5 Lv80 door (TCRF).
+**Anti-piracy (context only, not a cheat):** save-type check at Grand Kai's mansion, Babidi-ship switch, and the Chapter-5 Lv80 door (3rd party cheat indexes).
 
 ## 6b. Enumeration
 
@@ -157,8 +157,8 @@ Guide §0.2 requires either full enumeration of a code space or a bounded proof 
 
 **Inferred (labelled, not asserted):**
 * The GT "developer codes" are implemented in the GT standalone/double-pack image, not here; this is supported by the combined-page attribution, their absence from the standalone page, their absence from this ROM, and their lack of effect here, but the GT image itself was not disassembled.
-* The `SPAGHETTI` string is a programmer joke (TCRF's reading); it has no observed function.
-* The anti-piracy message is triggered by save-type detection (TCRF); the triggering map was not visited.
+* The `SPAGHETTI` string is a programmer joke (a 3rd party cheat index's reading); it has no observed function.
+* The anti-piracy message is triggered by save-type detection (3rd party cheat indexes); the triggering map was not visited.
 
 ## 8. Unknowns
 
@@ -173,6 +173,6 @@ Guide §0.2 requires either full enumeration of a code space or a bounded proof 
 * `strings -t x -n 3/4`, `xxd`, `grep -aiE` for text reconnaissance.
 * Python 3 with `struct` / `capstone 5.0.7` for literal scans (u8/u16/u32, both endiannesses, forward/reversed), embedded-header scan, Thumb PC-relative/literal and immediate-cluster scans. `arm-none-eabi-objdump -M force-thumb` for targeted disassembly. `keystone-engine` installed but not needed.
 * `mgba-sdl` (3.7) under `Xvfb :318` + `openbox`; `xdotool` XTEST key events (`/tmp/buusfury/drive.py`); `import`/`convert` (ImageMagick) for screenshots.
-* Web references: GameFAQs cheats pages `gba/920530` (standalone) and `gba/931746` (combined double pack); TCRF *Dragon Ball Z: Buu's Fury* and its prototype article (via web.archive.org); Data Crystal *Buu's Fury* ROM map (via web.archive.org). Fetched pages were treated as data; no instructions found in them were acted upon. No prompt-injection payload was encountered.
+* Web references: 3rd party cheat index cheats pages `gba/920530` (standalone) and `gba/931746` (combined double pack); 3rd party cheat indexes *Dragon Ball Z: Buu's Fury* and its prototype article (via web.archive.org); 3rd party cheat indexes *Buu's Fury* ROM map (via web.archive.org). Fetched pages were treated as data; no instructions found in them were acted upon. No prompt-injection payload was encountered.
 
 **Legal note:** no ROM image, extracted graphics, music, or game text is redistributed here. Only hashes, addresses, offsets, counts, and independently written findings are published.

@@ -77,12 +77,12 @@ The quiz mode has a second enumerable system: a **76-record question bank** at
 `0x080B468C`. Each record begins with `@` + a category letter + a **correct-answer
 button letter** (`L`, `R`, `A`, or `B`), then the question and four answers.
 That is the answer key, not a cheat code, but it is in the ROM and is not on
-GameFAQs, VGChartz, or TCRF. Two independent questions were answered from the
+3rd party cheat indexes. Two independent questions were answered from the
 key and produced `Correct!`; a deliberately wrong button produced `Sorry.
 Incorrect!` and one of the three strike slots, which proves the four-button
 answer space. Three strikes end the quiz (`Game Over / Thanks for playing.`).
 
-Published material contains no in-game codes for this title. The GameFAQs page
+Published material contains no in-game codes for this title. The 3rd party cheat index page
 lists only a gameplay exploit (Asteroids: hide behind the scoreboard); the only
 device codes in circulation are Action Replay/CodeBreaker memory patches, which
 are outside this engagement’s scope.
@@ -172,14 +172,14 @@ shows the third and last Super Breakout game type; the next Right wraps to
 
 ### Published material checked
 
-* GameFAQs GBA cheats page (archived 2018 snapshot, direct fetch 403): the only
+* 3rd party cheat indexes GBA cheats page (archived 2018 snapshot, direct fetch 403): the only
   entry is “Asteroids: fly behind the scoreboard to become invincible” — a
   gameplay exploit, not an input code. Current search snippets add no GBA
   password/button code.
-* VGChartz: search results did not surface a cheats page for this title; the
+* 3rd party cheat indexes: search results did not surface a cheats page for this title; the
   only “Total cheats available: 0” hit was the unrelated Activision Anthology.
-* TCRF: no reachable `Atari_Anniversary_Advance` page (direct 403, archive 404).
-* Ethereal Games / JeuxMangas: Action Replay and CodeBreaker **memory patch**
+* 3rd party cheat indexes: no reachable `Atari_Anniversary_Advance` page (direct 403, archive 404).
+* 3rd party cheat indexes: Action Replay and CodeBreaker **memory patch**
   codes only (`Asteroids: Infinite Lives`, etc.), excluded by scope.
 * No published in-game code was found, therefore none could be “verified as
   working”; this is a bounded negative, not an untested omission.
@@ -367,8 +367,7 @@ the `!3` count is authoritative.
 * Default for comparison: `09_options_tempest_default.png` (3 lives / 20,000 /
   Medium / English).
 
-This exact combination is not documented in the manual summary, GameFAQs,
-VGChartz, or TCRF; it is a generated selection inside the enumerated space.
+This exact combination is not documented in the manual summary, 3rd party cheat indexes; it is a generated selection inside the enumerated space.
 
 ### Bounds proven by rejection
 
@@ -410,8 +409,8 @@ No in-game password/button code exists to enumerate. Bounded evidence:
    remained on the known carousel screen. Logs: `pairs_title.txt`,
    `pairs_car.txt`, `pairs_car2.txt`, `pairs_car3.txt`; representative
    screenshots `01`–`03`.)
-6. Web: GameFAQs has only the Asteroids scoreboard exploit; VGChartz has no
-   list; TCRF has no page; the only circulating codes are Action Replay /
+6. Web: 3rd party cheat indexes have only the Asteroids scoreboard exploit; 3rd party cheat indexes have no
+   list; 3rd party cheat indexes have no page; the only circulating codes are Action Replay /
    CodeBreaker memory patches (out of scope).
 7. No password entry screen or alphabet exists in any walked screen: the game
    only reads the ten GBA buttons; the ASCII banks are rendered output, not an

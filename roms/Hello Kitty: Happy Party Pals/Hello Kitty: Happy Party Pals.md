@@ -27,10 +27,10 @@ There are **two validator modes** sharing one function at `0x0801ABC0`, gated by
 1. **Stage mode** (`[0x03002640]==1`): exact UTF-16LE compare against **six** fixed strings held in the game's string bank at indices 216–221.
 2. **Item mode** (`[0x03002640]==0`): a **per-position dual-table** check. For each of 8 positions the entered letter must equal either `MYCHOICE[i]` (table A, ROM `0x081CE2D2`) or `URSPRKTY[i]` (table B, code literal `0x0801AECC`). Choosing B at a position grants one of eight items via `0x08016418`. Because all 16 position-pairs are distinct, this admits **2⁸ = 256** distinct codes.
 
-Total accepted space: **6 + 256 = 262** inputs (with `MYCHOICE` belonging to both sets). Published GameFAQs/SuperCheats lists contain only a handful; a novel code was minted and accepted in-game (§6b).
+Total accepted space: **6 + 256 = 262** inputs (with `MYCHOICE` belonging to both sets). Published 3rd party cheat index lists contain only a handful; a novel code was minted and accepted in-game (§6b).
 
 Published-list corrections found and proven in the ROM/emulator:
-* GameFAQs "GAMERIRL" is a typo — the ROM literal is **`GAMEGIRL`** (Accepted vs Denied, §7).
+* 3rd party cheat indexes "GAMERIRL" is a typo — the ROM literal is **`GAMEGIRL`** (Accepted vs Denied, §7).
 * The `UY*` codes are real but belong to item mode, not the stage table; they are *not* stored as whole strings in the ROM (they are combinations of the two 8-letter tables).
 
 ## 3. How to reproduce
@@ -128,7 +128,7 @@ show "Accepted"
 
 On-screen keyboard: exactly A–Z (26 symbols); Down decrements with wrap (A→Z), Up increments. No digits or symbols are reachable.
 
-Published codes checked (GameFAQs 2018 snapshot via web.archive.org, SuperCheats, VGChartz, Fandom):
+Published codes checked (3rd party cheat indexes 2018 snapshot via web.archive.org, 3rd party cheat indexes):
 `MYCHOICE`, `UYSHOICE`, `UYSHOKE`, `UYCHOICE`, `UYSPOKCY`, `UYCPHOICE`, `YARDBASH`, `MYPICNIC`, `SUSHIYUM`, `GAMERIRL`, `BEACHFUN`, `URSPRKTY`.
 `GAMERIRL` is absent from the ROM; `GAMEGIRL` is present. The `UY*` strings are absent from the ROM as whole literals — they are combinations of the two tables (verified: `UYSHOICE` = B,A,B,A,A,A,A,A → Accepted). `UYCPHOICE` is 9 characters and cannot be entered in the 8-slot UI (reported as unverified/likely typo).
 
@@ -140,7 +140,7 @@ Published codes checked (GameFAQs 2018 snapshot via web.archive.org, SuperCheats
 * Item mode: each of 8 slots independently accepts one of two letters ⇒ **2⁸ = 256** accepted strings. The two 8-letter seeds are `MYCHOICE` (all A) and `URSPRKTY` (all B); every one of the 255 non-all-B combinations is unreported in the published lists. `MYCHOICE` aliases into the stage set (dual-mode alias).
 * Grand total: **262** accepted inputs across both modes (256 + 6, with one overlap). No reserved bits or checksum exist; the mode gate at `0x03002640` selects the active set.
 
-**Novel code minted and accepted in-game:** **`MRSPRKTY`** — slot 0 from table A (`M`), slots 1–7 from table B (`R,S,P,R,K,T,Y`). It grants items 48, 50, 36, 77, 63, 43 and 106 but *not* item 76 (the one `U`/slot-0 branch). It appears in no GameFAQs/VGChartz/TCRF/Fandom/SuperCheats list. Entered on the real Secret Password screen with the D-pad; result `Accepted` (screenshot `novel3_v.png`), and play started with the normal "Kitty must invite 8 friends." state rather than the all-areas state produced by `URSPRKTY` — a visibly distinct outcome, proving the per-position semantics.
+**Novel code minted and accepted in-game:** **`MRSPRKTY`** — slot 0 from table A (`M`), slots 1–7 from table B (`R,S,P,R,K,T,Y`). It grants items 48, 50, 36, 77, 63, 43 and 106 but *not* item 76 (the one `U`/slot-0 branch). It appears in no 3rd party cheat index list. Entered on the real Secret Password screen with the D-pad; result `Accepted` (screenshot `novel3_v.png`), and play started with the normal "Kitty must invite 8 friends." state rather than the all-areas state produced by `URSPRKTY` — a visibly distinct outcome, proving the per-position semantics.
 
 **Bounds proven by rejection (observed, not inferred):**
 * `ZZZZZZZZ` — 8 legal letters but matches neither table at slot 0 → **Denied** (`test_ZZZZZZZZ_v.png`). This proves the alphabet alone is insufficient; position-specific membership is enforced.
@@ -167,12 +167,12 @@ Published codes checked (GameFAQs 2018 snapshot via web.archive.org, SuperCheats
 
 **Inferred / not fully exercised:**
 * The writer of the mode byte at `0x03002640` was not traced; observed values were 1 on a fresh boot and 0 after loading the saved password-screen state. The report therefore does not claim exactly which game state selects item mode, only that both modes are reachable and both were exercised.
-* The exact in-game identity of item IDs 76/48/50/36/77/63/43/106 was not read from the inventory screen; item names in GameFAQs (`Hagota Paddle Boat`, `Diamond Necklace`, `Gameboy`, `Red Fish`, `Energy Drink`, …) are plausible but unverified per slot.
+* The exact in-game identity of item IDs 76/48/50/36/77/63/43/106 was not read from the inventory screen; item names in 3rd party cheat indexes (`Hagota Paddle Boat`, `Diamond Necklace`, `Gameboy`, `Red Fish`, `Energy Drink`, …) are plausible but unverified per slot.
 
 ## 8. Unknowns
 
 * Which condition sets `0x03002640` to 0 vs 1 (save-file state, story progress, or entry point). Both branches were reached and validated, but the gate's writer is untraced.
-* Whether the 9-character `UYCPHOICE` from GameFAQs is a transcription error or belongs to an unreachable mode (the UI has only 8 slots).
+* Whether the 9-character `UYCPHOICE` from 3rd party cheat indexes are a transcription error or belongs to an unreachable mode (the UI has only 8 slots).
 * Per-item display names for the eight grant IDs.
 * No hidden/debug menu was found on any screen walked; no button-code sequence was observed. The only hidden surface is the password system documented above.
 

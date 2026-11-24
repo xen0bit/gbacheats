@@ -54,7 +54,7 @@ The game has **two independent developer-intended input systems**:
    (cheat slot #2), and displays the message descriptor at `0x08032B14`.
 
    Verified published progress codes: `0k0hgd` (Section 1, Numbuh Five) and the
-   rest of the GameFAQs/Vizzed list decode and pass the ROM checksum. The
+   rest of the 3rd party cheat index list decode and pass the ROM checksum. The
    complete representable space is **32^6 = 1,073,741,824** inputs; the
    checksum + range layer leaves at most `2^28` accepted values (≤268 million;
    the 2-bit check alone passes 1 in 4 payloads, and the range checks only
@@ -246,7 +246,7 @@ else:
 Vowels and `l` are absent, which is why the published codes look like
 `0k0hgd`, `5?8pv6`, `3307?*`.
 
-### 6.2 Published passwords (GameFAQs / Vizzed / emu-land)
+### 6.2 Published passwords (3rd party cheat indexes / emu-land)
 
 `1mc001` (sooper secret), `0k0hgd`, `0v2bbd`, `8jgqhd`, `wfddcd`, `wvwbcd`,
 `9kjqgd`, `1v8nvp`, `1krntd`, `52rptp`, `9khqjd`, `528sv7`, `3307?*`,
@@ -313,7 +313,7 @@ cbbbcb      symbols: c(1) b(0) b(0) b(0) c(1) b(0)
   every other byte in `0x0200448C..0x020044A7` stayed zero. This matches the
   offline decode exactly.
 * The string `cbbbcb` is not in any of the 16 published passwords listed in
-  §6.2, nor in the GameFAQs/Vizzed/emu-land tables those came from.
+  §6.2, nor in the 3rd party cheat indexes/emu-land tables those came from.
 
 **Bounds proven by rejection.**
 

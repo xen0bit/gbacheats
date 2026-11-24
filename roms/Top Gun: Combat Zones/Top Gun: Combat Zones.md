@@ -165,7 +165,7 @@ code = char(v0) char(v1) char(v2) char(filler) char(v4) char(v5) '0' char(anythi
 * **Observed (emulator/screenshots/RAM)**: language, main menu, keypad, pause-screen password display, all code results above; `0x02005E8C` read as `00` before and `01` after `3KL1PS00` from decompressed mGBA savestate PNGs (`stateC.ss1.raw`, `unlocked.ss2.raw`).
 * **Derived (disassembly)**: validator addresses, checksum/field equations, alphabet tables, keyboard input variables, unlock flag writer.
 * **Inferred**: meaning of individual 3-bit fields (`modeA/modeB/f56/f78/f910/f1113/f1415`) is inferred from the branch structure; `modeB=2` and `modeA=1` were *observed* to change the mission, other field→level mappings were not exhaustively walked.
-* **Published-list verification**: 4-digit codes and `SHPONGLE` were fetched from GameFAQs/Gamer's Temple/Planet Cheats; the 4-digit codes were not found as literals in the ROM and are rejected/ignored by this SKU; `SHPONGLE` maps to the `3KL1PS` prefix check which *was* verified in-game.
+* **Published-list verification**: 4-digit codes and `SHPONGLE` were fetched from 3rd party cheat indexes; the 4-digit codes were not found as literals in the ROM and are rejected/ignored by this SKU; `SHPONGLE` maps to the `3KL1PS` prefix check which *was* verified in-game.
 * **Prompt-injection check**: fetched pages and ROM strings were treated as data; no instructions from them were executed.
 
 ## 8. Unknowns

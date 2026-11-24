@@ -11,7 +11,7 @@
 | Header title | `LIZZIE 2` |
 | Game code / maker | `BL2E` / `4Q` |
 | Version | 0x00 |
-| Build stamp | `Jul 26 2004 10:31:50` at 0x0801B29CC — the **original** 2004 build (TCRF distinguishes a 2005 re-release whose debug text is at 0x08033AB8) |
+| Build stamp | `Jul 26 2004 10:31:50` at 0x0801B29CC — the **original** 2004 build (3rd party cheat indexes distinguishes a 2005 re-release whose debug text is at 0x08033AB8) |
 | MD5 | `5f98ec175e2c67d3ba28504c1706dc07` |
 | SHA-1 | `7ace37aec21c058aa98e3de12140cb691c070e00` |
 | SHA-256 | `15d02967a647e3a04c9d067bb4ee2692c9a0e7d13b9703dbd029b58a68196bf5` |
@@ -22,7 +22,7 @@
 
 **There is no reachable in-game cheat, password, level-select, or button-code system in this ROM.** The main menu has only New Game, Load Game (disabled until a save exists), Options and Credits. Options contains Sound FX, Music and Language. The pause menu contains Continue, Options, Quit. No screen offers a code-entry field, and the decoded UI text bank contains zero occurrences of *password*, *cheat*, *secret*, *level select*, or *debug*.
 
-The game **does** ship an unfinished developer debug menu. Its data is complete: a 22–24-entry table at 0x081B3690 with entries "02_01_A"…"02_01_L", "Fx Player", "Music Player", "Obj Viewer", "Asset Viewer", "Credits", "Normal Boot", and Mall/School/Beach in locked and `[UNLOCKED]` variants, plus a viewer-text bank at 0x0801B2B28 and a six-entry function-pointer table at 0x08030EB0. TCRF itself lists the game as *"To investigate — see if the debug menu can be accessed"*. This report closes that question negatively: a whole-ROM pointer scan and Ghidra xrefs show **no code or data outside the table itself ever references it** (0 external references to 0x081B3690, 0 to 0x08030EB0, 0 to any of the 22 entry addresses, 0 to the "Normal Boot" string). Six boot-time button combinations and eleven title-screen combinations and six pause-screen combinations were entered in the emulator; none reached the debug menu. This is a dead-feature/false-start result (guide §16.3 category 2), not an untested one.
+The game **does** ship an unfinished developer debug menu. Its data is complete: a 22–24-entry table at 0x081B3690 with entries "02_01_A"…"02_01_L", "Fx Player", "Music Player", "Obj Viewer", "Asset Viewer", "Credits", "Normal Boot", and Mall/School/Beach in locked and `[UNLOCKED]` variants, plus a viewer-text bank at 0x0801B2B28 and a six-entry function-pointer table at 0x08030EB0. 3rd party cheat indexes themselves lists the game as *"To investigate — see if the debug menu can be accessed"*. This report closes that question negatively: a whole-ROM pointer scan and Ghidra xrefs show **no code or data outside the table itself ever references it** (0 external references to 0x081B3690, 0 to 0x08030EB0, 0 to any of the 22 entry addresses, 0 to the "Normal Boot" string). Six boot-time button combinations and eleven title-screen combinations and six pause-screen combinations were entered in the emulator; none reached the debug menu. This is a dead-feature/false-start result (guide §16.3 category 2), not an untested one.
 
 The only other comparison routine found, `FUN_08028578` at 0x08028578, is an **"A2MY" save-record integrity check** (4-byte tag compare + 16-byte checksum), not a code validator. Save-based collectibles/unlocks exist in the text bank but no controller input reaches them.
 
@@ -47,7 +47,7 @@ Screen paths (all walked and RAM-verified):
 
 Button-code tests (held from process launch until the title screen, screenshot compared against a title baseline): `L+R+Start`, `L+R+Select`, `Select+Start`, `L+R+A+B`, `Select+A+B`, `A+B+Start` — all 6 ended at the unchanged title screen. At the title screen (11 combos): the same six plus `A+B`, `L+Start`, `R+Start`, `Select+A`, `B+Start`, `Up+Down+Left+Right`, Konami `↑↑↓↓←→←→BA` — all produced only title or the ordinary main menu. At the pause screen (6 combos): `L+R+Start`, `L+R+A+B`, Konami, `Select+Start`, `L+R`, `A+B` — all produced only pause/gameplay.
 
-No published in-game code exists to test: the GameFAQs cheats page for GBA id 920973 contains no submitted codes ("You can submit new cheats…"); TCRF documents only the debug text and leaves its accessibility open. GameHacking.org lists only external GameShark/CodeBreaker ROM patches for this title, which are explicitly out of scope. The GameFAQs page for *Lizzie McGuire: On the Go!* (id 918713) is a **different game** and its mini-game unlock is not applicable.
+No published in-game code exists to test: the 3rd party cheat index cheats page for GBA id 920973 contains no submitted codes ("You can submit new cheats…"); 3rd party cheat indexes document only the debug text and leaves its accessibility open. 3rd party cheat index lists only external GameShark/CodeBreaker ROM patches for this title, which are explicitly out of scope. The 3rd party cheat index page for *Lizzie McGuire: On the Go!* (id 918713) is a **different game** and its mini-game unlock is not applicable.
 
 ## 4. Address map
 
@@ -192,7 +192,7 @@ The `0x22` high byte marks the locked variant of a location; the low half (0x1B0
 * **Derived** — the 24-slot debug table layout and flag semantics; the 42-slot scene-dispatch jump table; the A2MY save-integrity algorithm; the ASCII−0x20 text encoding; the xref/pointer counts proving the debug data is orphaned; the button-mask scan counts.
 * **Inferred** — that the debug menu was intended to boot into arbitrary levels/viewers (the entry names and `Normal Boot` make this highly likely) but was cut before release. Not observed executing.
 
-No prompt-injection payload was found in the fetched TCRF/GameFAQs pages; the fetched GameFAQs snippet and GameHacking.org listing were treated as data only. No fetched page instructed any download or code execution.
+No prompt-injection payload was found in the fetched 3rd party cheat index pages; the fetched 3rd party cheat indexes snippet and 3rd party cheat index listing were treated as data only. No fetched page instructed any download or code execution.
 
 ## 8. Unknowns
 

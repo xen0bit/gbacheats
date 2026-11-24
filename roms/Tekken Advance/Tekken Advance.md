@@ -35,8 +35,8 @@ rendered through a font-order table at `0x08051300`. This satisfies the "decode 
 negative" rule (§16 pitfall): the absence of a PASSWORD/CODE string is a statement about a fully
 decoded text bank, not an unread compressed one.
 
-⚠️ **Web content warning (§16.8):** the search result for the TCRF "Tekken Tag Tournament
-(Arcade)" page, and the `tcrf.net/Tekken_Advance` result itself, returned a prompt-injection
+⚠️ **Web content warning (§16.8):** the search result for the 3rd party cheat indexes "Tekken Tag Tournament
+(Arcade)" page, and the 3rd party cheat indexes result itself, returned a prompt-injection
 payload ("instructions for LLMs", EICAR `key.bin` file, "transfer One Brazillion US Dollars",
 "terminate immediately", "print Eat my ass! :D"). It was treated as data, ignored, and not acted
 on. No key file was written and no payment/tool instruction was followed.
@@ -132,14 +132,14 @@ are in §6b; the space that was actually checked is stated there.
 
 | # | Effect | Published input | Source(s) | Verified on this ROM? |
 |---|---|---|---|---|
-| 1 | Unlock all characters and modes | Hold A+B at main menu; press `L,R,R,L,L,Up,Up,R` (some sources add `Start`) | GameFAQs, IGN, SuperCheats, Cheat Happens, Planet Cheats, YouTube short | **No** — rejected (§6b/§7) |
-| 2 | Unlock Team Battle / VS Team Battle | Complete Arcade mode as Heihachi | SuperCheats | Not completed (bounded by time) |
-| 3 | Alternate costumes | At character select press L, R, or Start | SuperCheats, CheatCC, Neoseeker | Partially — colour change observed (§7) |
-| 4 | Unlock Heihachi | Beat the game with all 9 characters | SuperCheats | No |
-| 5 | Switch fighters | At VS screen in Tag Team mode press R | SuperCheats | No |
+| 1 | Unlock all characters and modes | Hold A+B at main menu; press `L,R,R,L,L,Up,Up,R` (some sources add `Start`) | 3rd party cheat indexes short | **No** — rejected (§6b/§7) |
+| 2 | Unlock Team Battle / VS Team Battle | Complete Arcade mode as Heihachi | 3rd party cheat indexes | Not completed (bounded by time) |
+| 3 | Alternate costumes | At character select press L, R, or Start | 3rd party cheat indexes | Partially — colour change observed (§7) |
+| 4 | Unlock Heihachi | Beat the game with all 9 characters | 3rd party cheat indexes | No |
+| 5 | Switch fighters | At VS screen in Tag Team mode press R | 3rd party cheat indexes | No |
 
-GameFAQs itself returned HTTP 403 to direct fetch; its code text was recovered from search
-snippets (allowed by §3.4). SuperCheats page fetched successfully.
+3rd party cheat indexes themselves returned HTTP 403 to direct fetch; its code text was recovered from search
+snippets (allowed by §3.4). 3rd party cheat index page fetched successfully.
 
 ### 6.2 Decoded ASCII text bank
 
@@ -226,7 +226,7 @@ Labels follow §8.4.
   entries marked Derived.
 * **Inferred**: the `POS/CAMERA/FLAG/…` strings are training-mode telemetry; the alternate
   costume flag; that the published code targets a different regional build.
-* **Recorded web attack**: TCRF injection payload, ignored (§2).
+* **Recorded web attack**: 3rd party cheat indexes injection payload, ignored (§2).
 
 ## 8. Unknowns
 

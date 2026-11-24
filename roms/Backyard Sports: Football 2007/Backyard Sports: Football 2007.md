@@ -42,7 +42,7 @@ are the same Torus engine debug strings and dead debug-screen code already
 documented for *Backyard Football 2006*: the `Debug Screen` root at
 `0x0800449C` and its menu table at `0x0803AD910` have **zero** references (no
 32-bit pointer, no Thumb/ARM `BL`, no Thumb-tagged pointer) anywhere in the
-4 MiB image. They are dead developer tooling, not a hidden menu. TCRF lists the
+4 MiB image. They are dead developer tooling, not a hidden menu. 3rd party cheat index lists the
 same debug text and documents no access method; the retail build also leaves
 the engine's entity-debug strings at `0x0803A79C8` (`Flag for deletion`,
 `Entity Options:`), again without a game-menu reference.
@@ -174,7 +174,7 @@ diff of IWRAM (`0x03000000`–`0x03008000`) and EWRAM
 
 | Input | Where | Observed result |
 |---|---|---|
-| `Up Up Left Right B Down` (GameFAQs/IGN *Backyard Baseball 2007* GBA "Unlimited Turbo") | Matchup | `B` is the matchup BACK button: the screen returns to Difficulty Level before `Down`; sequence cannot be completed as a code (`shots/21_baseball_code_back.png`). |
+| `Up Up Left Right B Down` (3rd party cheat indexes *Backyard Baseball 2007* GBA "Unlimited Turbo") | Matchup | `B` is the matchup BACK button: the screen returns to Difficulty Level before `Down`; sequence cannot be completed as a code (`shots/21_baseball_code_back.png`). |
 | `Up Up Down Down A` (*Backyard Basketball* GBA "Hot hands") | Matchup | Up/Down do nothing on the static matchup; final `A` advances to kickoff. No stat/flag/HUD change. |
 | `Down Up Down Up A` (*Backyard Basketball* "Super speed") | Matchup | Same: A advances; no effect. |
 | `Select Select B B Start` (*Backyard Basketball* "All dunks") | Matchup | `B` backs out; sequence is consumed as navigation. |
@@ -284,7 +284,7 @@ Profiling      -> 0x08004824 (Show raw numbers, profiling counters, Back)
 No instruction anywhere references `0x0800449C` or `0x0803AD910` (0 BL, 0
 BLX, 0 ARM BL, 0 aligned/Thumb-tagged 32-bit pointers). The three sub-handlers
 are called only from the root, so the whole suite is unreachable from game
-code. This matches TCRF's independent note that the game has hidden
+code. This matches a 3rd party cheat index's independent note that the game has hidden
 development text and does not document any way to open it.
 
 ### 5.3 Create-a-player (normal feature, not a code system)
@@ -351,7 +351,7 @@ choices; none is compared against a code table.
 
 | Source | Input | ROM literal? | In-game result |
 |---|---|---|---|
-| GameFAQs/IGN, *Backyard Baseball 2007* GBA | `Up Up Left Right B Down` | n/a (button code) | Rejected: B leaves matchup for Difficulty |
+| 3rd party cheat indexes, *Backyard Baseball 2007* GBA | `Up Up Left Right B Down` | n/a (button code) | Rejected: B leaves matchup for Difficulty |
 | *Backyard Basketball* GBA (2002) | `Up Up Down Down A` | n/a | Consumed as navigation; A starts game |
 | *Backyard Basketball* GBA (2002) | `Down Up Down Up A` | n/a | Consumed as navigation |
 | *Backyard Basketball* GBA (2002) | `Select Select B B Start` | n/a | B backs out; not enterable |
@@ -360,11 +360,11 @@ choices; none is compared against a code table.
 | *Baseball 2007* unlock | `Grand Slam` / `Paul Konerko` | **0 hits** | Not this game |
 | *Football 2006/2008* published names | `Area 51`, `Aquadome`, `Quantum Field`, `Humongous Memorial` | **0 hits** | Not this game |
 
-The GameFAQs page for *Backyard Sports Football 2007* (GBA) has a Cheats tab
+The 3rd party cheat index page for *Backyard Sports Football 2007* (GBA) has a Cheats tab
 but no in-game code entries surfaced (direct fetch returns HTTP 403); the only
-community material found is a GBAtemp `.CHT` file, which is GameShark/Action
+community material found is a 3rd party cheat index `.CHT` file, which is GameShark/Action
 Replay memory-edit content and is out of scope. No in-game code for this title
-was found on GameFAQs, IGN, or TCRF.
+was found on 3rd party cheat indexes.
 
 ### 6.3 Debug strings (verbatim, for identification)
 
@@ -492,9 +492,9 @@ any table/matcher is the stronger, whole-ROM bound.
   * `state.py`, `diffstate.py` — mGBA `gbAs` savestate extraction and IWRAM/
     EWRAM diff.
 * `arm-none-eabi-objdump -M force-thumb` for the input poll and debug code.
-* Reference pages: TCRF `Backyard Sports Football 2007` (debug text, archived
-  2024-05-28); GameFAQs GBA page (Cheats tab, no in-game entries surfaced);
-  IGN *Backyard Baseball 2007* GBA cheats page (nearest published combo).
+* Reference pages: 3rd party cheat indexes `Backyard Sports Football 2007` (debug text, archived
+  2024-05-28); 3rd party cheat indexes GBA page (Cheats tab, no in-game entries surfaced);
+  3rd party cheat indexes *Backyard Baseball 2007* GBA cheats page (nearest published combo).
 
 ## 10. Legal note
 

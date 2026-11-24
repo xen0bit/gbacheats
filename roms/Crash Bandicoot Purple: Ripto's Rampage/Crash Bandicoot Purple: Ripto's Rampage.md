@@ -39,7 +39,7 @@ Dynamically verified in mGBA:
 * **L + R** at the Mode menu opens the keypad; the 8×4 grid was learned by pressing A on 31 cells and reading the entry buffer at `0x0201AF3C`.
 * Entering **`TR4V1S`** changes the palette (published effect: grey tint) — palette RAM changed in 45 entries, all in the object-palette bank.
 * Entering **`J450N`** is accepted and changes the palette (published effect: green pants) — 43 palette entries changed.
-* Entering the **GameFAQs spelling `J45S0N`** produces **no palette change**: it is rejected. The ROM's real entry is `J450N`; IGN and Bandipedia list `J450N` correctly, so this is a GameFAQs transcription error, not a novel code.
+* Entering the **3rd party cheat indexes spelling `J45S0N`** produces **no palette change**: it is rejected. The ROM's real entry is `J450N`; 3rd party cheat indexes and 3rd party cheat index list `J450N` correctly, so this is a 3rd party cheat index transcription error, not a novel code.
 * The accepted set is **closed at 22 table entries**: the validator is 22 exact `strcmp`s, and every table entry appears in at least one published list. No unpublished code can be minted for this ROM (see §6b).
 * **`SW1NGS3T`** starts the hidden **Spyro Party USA** mini-game; after entry the EWRAM contains a complete `CRASH-PARTY` overlay title block and `Spyro Party USA`, `Interactive Game`, `Start game`, `Session %d`, `Round %d`, `You got a gem!`. The mini-game is embedded and functional, but its strings are not visible to `strings` on the ROM (they are loaded from a compressed bank at run time).
 * The 10-character entries **`STR4WB3RRY`** and **`WVMP4FR00T`** cannot be submitted: with all 10 slots filled, the END/ACCEPT cell stops responding (observed: buffer stays `STR4WB3RRY`, no result screen). Deleting one character restores submission. They are in the table, but are unreachable through the retail keypad.
@@ -186,7 +186,7 @@ bl 0x0801F09C                  ; run scene/script
 
 ### 6.1 Code table (`0x0806AB68`, exact file bytes)
 
-| # | Code | Address | Published effect (GameFAQs) | Dynamic status |
+| # | Code | Address | Published effect (3rd party cheat indexes) | Dynamic status |
 |---:|---|---|---|---|
 | 0 | `CR4SH` | `0x0806AB68` | +100 wumpa | submitted; branch derived (§8) |
 | 1 | `G3CK0` | `0x0806AB70` | +200 wumpa | not individually typed |
@@ -252,9 +252,9 @@ The Trading screen reached from the Mode menu contains the world list and the st
 
 **Enumeration method.** The table was dumped end-to-end from the ROM (addresses in §6.1); the validator's literal loads were enumerated with a PC-relative literal scanner to prove the set is closed at 22. The keypad grid was enumerated cell-by-cell at run time (31 cells; END handled separately), confirming the alphabet is exactly the 32 ASCII symbols above.
 
-**Novel-code result: none can exist.** The validator is a pure exact-string table lookup (22 × `strcmp`, no checksum, no key, no generator), so the accepted set is exactly the 22 constants at `0x0806AB68`–`0x0806AC28`. Every one of those 22 appears in at least one published list: the GameFAQs page has 22 rows covering the whole table (with one spelling error, `J45S0N` for `J450N`), and IGN/Bandipedia carry the same codes including the correct `J450N`. A value not in the ROM table is rejected regardless of its checksum (there is no checksum to satisfy), so there is **no unpublished accepted code to mint** for this title. The deliverable here is therefore the closure proof plus a corrected published entry, not a forged novelty.
+**Novel-code result: none can exist.** The validator is a pure exact-string table lookup (22 × `strcmp`, no checksum, no key, no generator), so the accepted set is exactly the 22 constants at `0x0806AB68`–`0x0806AC28`. Every one of those 22 appears in at least one published list: the 3rd party cheat index page has 22 rows covering the whole table (with one spelling error, `J45S0N` for `J450N`), and 3rd party cheat indexes carry the same codes including the correct `J450N`. A value not in the ROM table is rejected regardless of its checksum (there is no checksum to satisfy), so there is **no unpublished accepted code to mint** for this title. The deliverable here is therefore the closure proof plus a corrected published entry, not a forged novelty.
 
-One published-list byte was corrected where it mattered: `J45S0N` was typed in mGBA and produced **zero** effect-palette change (rejected), while `J450N` was accepted and produced a 43-entry palette delta. That is a real game-verified correction to the GameFAQs list, but `J450N` is published elsewhere and is not claimed as novel.
+One published-list byte was corrected where it mattered: `J45S0N` was typed in mGBA and produced **zero** effect-palette change (rejected), while `J450N` was accepted and produced a 43-entry palette delta. That is a real game-verified correction to the 3rd party cheat index list, but `J450N` is published elsewhere and is not claimed as novel.
 
 **Bounds proven by rejection.**
 
@@ -290,7 +290,7 @@ One published-list byte was corrected where it mattered: `J45S0N` was typed in m
 
 **Inferred**
 
-* Effect labels in §6.1 are the published GameFAQs labels; only `TR4V1S`, `J450N`, `SW1NGS3T` were positively observed here.
+* Effect labels in §6.1 are the published 3rd party cheat indexes label; only `TR4V1S`, `J450N`, `SW1NGS3T` were positively observed here.
 * `CR4SH` wumpa `+100` is derived from the branch but was not isolated in RAM: the state diff after submitting it showed no `+100` field, so the counter is outside the heap region compared, or the branch was gated by a previously set used bit. This is explicitly an unresolved dynamic check, not a rejection.
 * `J450N`'s 43-entry palette delta is consistent with the published "green pants" effect (object palette), but the exact affected sprite was not visually inspected (media ban).
 * The Mode menu's Story Mode entry did not transition from a freshly created slot with synthetic input in this harness; Party and Trading did. The cause (save-initialisation gate vs. harness timing) was not isolated; the pause/options screens therefore were not reached, but their strings (`PAUSE`, `Resume`, `Restart`, `Quit Game`, `Options`, `Music`, `Sleep`) exist at `0x0806FDD4`–`0x0806FE75`.

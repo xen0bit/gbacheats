@@ -46,7 +46,7 @@ OLD mode and one for NEW mode, at `0x08381228` and `0x08381298`. Each table
 holds **six codes plus a sentinel**. Three codes are shared by both tables
 (the two undocumented codes and EXTEND); the other three are version-specific.
 
-The published GBA lists (GameFAQs/Vizzed) contain seven codes. All seven were
+The published GBA lists (3rd party cheat indexes) contain seven codes. All seven were
 verified byte-for-byte against the two tables. The four OLD-mode public codes
 (EXTEND, Original, Power-up, Super) were entered on the OLD title and their
 flags read back; the three NEW-mode variants were matched against the NEW
@@ -299,8 +299,7 @@ bit 1: flag 0x02 is dead in the main image.
 | `0x10` | Left, Left, Left, L, Right, R, R, L | `03 03 03 06 02 07 07 06` |
 | `0x00` | sentinel | `0A 00 …` |
 
-Bold rows are absent from every published list checked (GameFAQs, Vizzed,
-Game Revolution, TCRF, arcade-history). The other four per version are the
+Bold rows are absent from every published list checked (3rd party cheat indexes). The other four per version are the
 public codes (seven distinct public strings in total); the OLD rows were
 confirmed dynamically by their flag values, the NEW rows are table-derived:
 
@@ -330,7 +329,7 @@ takes the index past 8 resets the buffer. The inter-key window is 60 frames
 **12**. There is no algorithm, checksum, or wildcard: the accepted set is the
 hard-coded table.
 
-**Novel codes (not in GameFAQs / Vizzed / Game Revolution / TCRF):**
+**Novel codes (not in 3rd party cheat indexes):**
 
 1. **`L, L, R, Select, Right, Left, Select, L`** → flag `0x00000001`.
    Entered on the OLD title screen; mGBA debugger read of `0x03002FEC`

@@ -26,7 +26,7 @@ The game has **exactly two developer-intended button codes**, both entered on th
 * **A, R, L, A** — unlocks the two secret characters.
 * **B, R, L, B** — unlocks Extra Mode (bonus levels / the "EXTRA" indicator).
 
-Both are published on GameFAQs and Cheat Happens, and both were verified in the
+Both are published on 3rd party cheat indexes, and both were verified in the
 emulator with RAM evidence. The implementation is a tiny hard-coded table at
 `0x080902E8` (16 bytes = 2 codes × 4 button masks) plus a validator at
 `0x08030FA0`. There is no checksum, no alphabet, no generator and no second
@@ -40,7 +40,7 @@ including the natural "both codes at once" chord **A+B, R, L, A+B** — are
 *rejected*: the validator clears both progress counters before the accept test,
 so an extra button at any step aborts the run. This is a bounded negative
 (§0.2), not an untested gap. No GameShark/Action Replay/CodeBreaker codes are
-reported; the Action Replay list at Cheat Happens is out of scope.
+reported; the Action Replay list at 3rd party cheat indexes are out of scope.
 
 ## 3. How to reproduce
 

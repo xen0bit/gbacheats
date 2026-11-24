@@ -10,11 +10,11 @@
 | Size | 4,194,304 bytes (0x400000) |
 | `file` | Game Boy Advance ROM image: "NICKTOONSUNI" (BNUE78, Rev.00) |
 | Header title | `NICKTOONSUNI` (12 bytes, `0xA0`–`0xAB`) |
-| Game code | `BNUE` — **USA** release (CRC32 `0x75C35F7C` matches AGB‑BNUE‑USA on GameHacking.org) |
+| Game code | `BNUE` — **USA** release (CRC32 `0x75C35F7C` matches AGB‑BNUE‑USA on 3rd party cheat indexes) |
 | Maker | `78` (THQ), fixed byte `0x96` at `0xB2`, version `0x00` |
 | Entry word | `0xEA00002E` → `0x080000C0` (stock crt0; **no cracktro/intro patch**) |
 | Complement byte | `0x14`; header checksum `0x0000` (observed as shipped) |
-| Build stamp @ `0x08053400` | `"August 11 2005"`, `"17:09:22"`, `"Release"` (matches TCRF US build) |
+| Build stamp @ `0x08053400` | `"August 11 2005"`, `"17:09:22"`, `"Release"` (matches 3rd party cheat indexes US build) |
 | MD5 | `d5a97a8360ee0ee2651dc2c5ae1f8f30` |
 | SHA‑1 | `e5c1ec46087fdbdb5eca8b3ca98f83ed4bb36620` |
 | SHA‑256 | `384c205161cb828cb5aadbd0f147d3bcee4908ff3d94dcd645338f2ceba5bf6e` |
@@ -37,7 +37,7 @@
 
 **The only in‑game cheat system is a closed, 11‑entry password table.** The "Continue Game" screen accepts exactly seven uppercase letters `A`–`Z`. The validator at `0x08000C4C` performs eleven exact `strcmp` calls (via `0x0803731C`) against a table of 11 NUL‑terminated strings copied from ROM `0x0803C4F2C` into a stack array at IWRAM `0x030010B4`. There is **no checksum, no generator, no formula, no aliasing** — the accepted set is exactly the 11 published level passwords, and nothing else. All 11 published codes were verified literally in the ROM and accepted by the emulator; six non‑table strings (including a one‑character near‑miss and a novel `ZZZZZZZ`) were injected and **rejected**, proving the bounds.
 
-The ROM also contains a fully implemented but **unreachable developer cheat menu** at `0x0804D090` with five entries (`ALL CHEATS ON`, `UNLOCK EVERYTHING`, `UNLOCK ALL LEVELS`, `INVINCIBILITY`, `RESET EVERYTHING`), its own screen handler (`0x0800510C`), draw routine (`0x08005364`), input handler (`0x080052F0`) and five‑way action dispatcher (`0x0800521C`). Its handler is present in the screen table at `0x0803B45C` (index 23), but **no reachable input path selects that screen** — consistent with TCRF's "there is currently no known way to access it". I forced the screen by patching the saved CPU PC to `0x0800510D`/`0x080051F9` and verified the menu draws and its selection advances with Down; that is a debugger injection, **not** an in‑game unlock, and is labelled as such.
+The ROM also contains a fully implemented but **unreachable developer cheat menu** at `0x0804D090` with five entries (`ALL CHEATS ON`, `UNLOCK EVERYTHING`, `UNLOCK ALL LEVELS`, `INVINCIBILITY`, `RESET EVERYTHING`), its own screen handler (`0x0800510C`), draw routine (`0x08005364`), input handler (`0x080052F0`) and five‑way action dispatcher (`0x0800521C`). Its handler is present in the screen table at `0x0803B45C` (index 23), but **no reachable input path selects that screen** — consistent with a 3rd party cheat index's "there is currently no known way to access it". I forced the screen by patching the saved CPU PC to `0x0800510D`/`0x080051F9` and verified the menu draws and its selection advances with Down; that is a debugger injection, **not** an in‑game unlock, and is labelled as such.
 
 **Conclusion for §0.2:** a novel *accepted* code cannot exist — the validator's loop bound is a hard 11 and the comparison is an exact `strcmp`; this is a proven closed set, not an untested one. The deliverable is therefore the complete enumeration (11/11 accepted, representative novel strings rejected) plus the complete cheat‑menu enumeration with its dead‑gate proof. No GameShark/Action Replay/CodeBreaker codes were used or reported; those found on the web are out of scope.
 
@@ -149,7 +149,7 @@ Each action writes into the player/state struct (base from `0x08052xxx` literals
 
 The list order in ROM is reverse‑level (index 0 → level 2, index 10 → level 12), the same "newest‑first" trick seen in §16.12 — a forward search for the published level order looks inverted until the table is dereferenced.
 
-**Published list verification:** Neoseeker, ChapterCheats, SuperCheats and woodyplays all list these same 11 strings; the Neoseeker `MERMIAD` is an OCR typo — the ROM and the other three sites have `MERMAID`. GameHacking.org / ROMSFUN list GameShark/Action Replay codes (out of scope; the ROMSFUN codes target the **DS** version at `0x022D6CB0` and were not applied).
+**Published list verification:** 3rd party cheat indexes and woodyplays all list these same 11 strings; the 3rd party cheat indexes `MERMIAD` is an OCR typo — the ROM and the other three sites have `MERMAID`. 3rd party cheat index list GameShark/Action Replay codes (out of scope; the 3rd party cheat index codes target the **DS** version at `0x022D6CB0` and were not applied).
 
 **Key mask** (active‑high `~KEYINPUT & 0x3FF`): A=0x001, B=0x002, Select=0x004, Start=0x008, Right=0x010, Left=0x020, Up=0x040, Down=0x080, R=0x100, L=0x200.
 
@@ -185,16 +185,16 @@ The password screen restricts this to indices 10–35 (`A`–`Z`).
 
 **Novel codes:** None exist. Every accepted string is on every published list; the validator has no algorithmic branch beyond the 11 exact comparisons. The guide's "mint an unpublished *accepted* code" deliverable is therefore **impossible for this SKU** — I state this as a proven negative, not an omission. The closest novel vectors (`ZZZZZZZ`, `JAZMINF`, …) were generated and *rejected* in the emulator, which bounds the space at exactly 11. This follows §0.2 point 5 ("negative results bounded") and §16.9 (run the game's own validator over the space; here the loop bound makes the full 8 billion‑string space unnecessary — 11 comparisons exhaust it).
 
-**Cheat menu enumeration (dead feature):** 5 entries, each with its dispatch address above. I forced the screen via a debugger PC patch — screenshots `forced_cheatmenu_crop.png` and `forced_cheatmenu_loop_crop.png` — and RAM‑verified that Down moves the highlight (`cheat_states.png`) and A activates an action (`cheat_before.ss1` → `cheat_after.ss1`, 150 changed bytes in the state). **No in‑game input path reaches the screen**: its handler pointer exists at `0x0803B45C` (index 23) but no reachable state machine value selects index 23; TCRF independently records "there is currently no known way to access it". On the PS2/GC SKUs the equivalent menu is unlocked by Nickelodeon cross‑save files — a mechanism the GBA cart has no hardware or code path for.
+**Cheat menu enumeration (dead feature):** 5 entries, each with its dispatch address above. I forced the screen via a debugger PC patch — screenshots `forced_cheatmenu_crop.png` and `forced_cheatmenu_loop_crop.png` — and RAM‑verified that Down moves the highlight (`cheat_states.png`) and A activates an action (`cheat_before.ss1` → `cheat_after.ss1`, 150 changed bytes in the state). **No in‑game input path reaches the screen**: its handler pointer exists at `0x0803B45C` (index 23) but no reachable state machine value selects index 23; 3rd party cheat indexes independently records "there is currently no known way to access it". On the PS2/GC SKUs the equivalent menu is unlocked by Nickelodeon cross‑save files — a mechanism the GBA cart has no hardware or code path for.
 
-**Unlockables:** the only advertised GBA unlockable is the credits, obtained by beating the four villains in Prof. Calamitous' Lab (SuperCheats) — a story flag, not a code. No button code was found: the two input handlers in the password and cheat screens test only single‑frame key masks (`0x9`, `0x6`, `0x40`, `0x80`, `0x10`, `0x20`), with no press history, ring buffer, or long‑sequence table; the `0x0804DA30` byte run is inert data with no reachable xref. The PS2 "hold L2, X, Right, Left, Down, Triangle + R1 for 10 s" code belongs to a different SKU and does not apply.
+**Unlockables:** the only advertised GBA unlockable is the credits, obtained by beating the four villains in Prof. Calamitous' Lab (3rd party cheat indexes) — a story flag, not a code. No button code was found: the two input handlers in the password and cheat screens test only single‑frame key masks (`0x9`, `0x6`, `0x40`, `0x80`, `0x10`, `0x20`), with no press history, ring buffer, or long‑sequence table; the `0x0804DA30` byte run is inert data with no reachable xref. The PS2 "hold L2, X, Right, Left, Down, Triangle + R1 for 10 s" code belongs to a different SKU and does not apply.
 
 ## 7. Validation evidence
 
 * **Observed** (emulator / savestate RAM): all screens in §3; `JAZMINE` accepted via on‑screen typing with buffer `0x030025A8 = "JAZMINE"` and transition to Fenton Lab; all 11 table strings accepted with level words 1–11; six novel strings rejected with level word 0; cheat menu drawn and navigated under forced PC; `.sav` remains 0 bytes.
 * **Derived** (disassembly / decompilation): validator loop bound `cmp r4,#0x0a; ble` at `0x08000C8C`; `strcmp` at `0x0803731C`; character ring in `FUN_08000C08`; pointer table at `0x0803C4F2C`; cheat menu dispatch table at `0x08005238`; screen handler pointer at `0x0803B45C`.
-* **Inferred**: exact gameplay meaning of each cheat‑menu action (the 5 dispatch branches are enumerated, but only the selection highlight/activation was exercised under forced PC, not a full playthrough with each flag); the gate that would select screen index 23 is absent from reachable paths (negative inference from "no writer found", reinforced by TCRF).
-* **Prompt‑injection watch:** fetched pages (TCRF mirror, Neoseeker, ChapterCheats, SuperCheats, GameHacking.org, ROMSFUN) were treated as data. No instruction, payment, or "decode key" payload was observed in this run; none was acted upon. §16.8 applied.
+* **Inferred**: exact gameplay meaning of each cheat‑menu action (the 5 dispatch branches are enumerated, but only the selection highlight/activation was exercised under forced PC, not a full playthrough with each flag); the gate that would select screen index 23 is absent from reachable paths (negative inference from "no writer found", reinforced by 3rd party cheat indexes).
+* **Prompt‑injection watch:** fetched pages (3rd party cheat index mirror, 3rd party cheat indexes) were treated as data. No instruction, payment, or "decode key" payload was observed in this run; none was acted upon. §16.8 applied.
 
 ## 8. Unknowns
 
@@ -211,7 +211,7 @@ The password screen restricts this to indices 10–35 (`A`–`Z`).
 * REA MCP with Ghidra 12.1.4 (raw‑binary import, base `0x08000000`, `arm`/`v7`) for `procedure_pseudo_code` on the validator/input handlers; session closed after use.
 * mGBA SDL with `-3 -d`, CLI debugger driven through a FIFO (`stdbuf -o0 -e0`) because the GDB stub at port 2345 returned protocol timeouts; `r/4`, `w/4`, `x/1` used while paused.
 * Savestate tooling: `.ss1` PNG `gbAs` chunk is zlib; raw length 397,312 bytes; IWRAM at raw `0x19000` (GBA `0x03000000`), EWRAM at `0x21000`. Scripts `ssdiff.py`, `patchss.py`, `enterpw.py`, `batchtest.py`, `forcepc.py` in `/tmp/nicktoonsunite/`.
-* `websearch`/`webfetch` for published codes and TCRF (data only).
+* `websearch`/`webfetch` for published codes and 3rd party cheat indexes.
 
 ## 10. Legal note
 

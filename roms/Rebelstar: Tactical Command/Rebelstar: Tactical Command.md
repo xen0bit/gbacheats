@@ -47,7 +47,7 @@ Published "cheats" for this SKU are two **gameplay glitches/tips**, not codes:
 "Redistributing Skill Points" (press Left to remove points from Medic/Psionic)
 and "Throwing Grenades" (stand ≥6 tiles from the blast). Both are out of the
 requested scope (not developer-intended codes). GameShark/Action Replay master
-codes on GameHacking.org are external memory-edit devices and are explicitly
+codes on 3rd party cheat indexes are external memory-edit devices and are explicitly
 excluded. No password, button sequence or unlockable is published anywhere.
 
 ## 3. How to reproduce
@@ -145,12 +145,12 @@ code writes a cheat flag.
 
 | Source | Claim | Verification |
 |---|---|---|
-| GameFAQs cheats (`gba/927210-rebelstar-tactical-command/cheats`) | "Redistributing Skill Points" (press Left to remove Medic/Psionic points) | Gameplay glitch, not a code; out of scope. No literal code to search. |
-| VGChartz cheats (`game/18698/…/cheats`) | 2 entries: "Redistributing Skill Points", "Grenades" | Same two tips; no password/button code published. |
-| CheatingDome (`gba/rebelstartacticalcommand-cheats.htm`) | Same two entries | Confirms no code system is published. |
-| CheatsGuru (`gba/rebelstar_tactical_command/cheats`) | "0 cheats in our list" | Confirms negative. |
-| GameHacking.org (game 5770/5771) | GameShark/ActionReplay/CodeBreaker master codes | Memory-edit device codes, explicitly out of scope; not tested. |
-| TCRF | No article for this title | No hidden-content documentation exists. |
+| 3rd party cheat index cheats (`gba/927210-rebelstar-tactical-command/cheats`) | "Redistributing Skill Points" (press Left to remove Medic/Psionic points) | Gameplay glitch, not a code; out of scope. No literal code to search. |
+| 3rd party cheat index cheats (`game/18698/…/cheats`) | 2 entries: "Redistributing Skill Points", "Grenades" | Same two tips; no password/button code published. |
+| 3rd party cheat indexes (`gba/rebelstartacticalcommand-cheats.htm`) | Same two entries | Confirms no code system is published. |
+| 3rd party cheat indexes (`gba/rebelstar_tactical_command/cheats`) | "0 cheats in our list" | Confirms negative. |
+| 3rd party cheat indexes | GameShark/ActionReplay/CodeBreaker master codes | Memory-edit device codes, explicitly out of scope; not tested. |
+| 3rd party cheat indexes | No article for this title | No hidden-content documentation exists. |
 
 ### 6.2 Debug-looking strings and their xref counts
 
@@ -241,8 +241,7 @@ search spaces:
 (struct/zlib/hashlib scanning, savestate `gbAs` extraction), Capstone 5.0.7,
 `arm-none-eabi-objdump -M force-thumb`, mGBA (`-3`, `-g`, `-d`, `-t`),
 Xvfb `:318` + openbox, xdotool/scrot/ImageMagick, REA + Ghidra (raw ARM import,
-`xrefs`, `close_binary`), websearch/webfetch (GameFAQs, VGChartz, CheatingDome,
-CheatsGuru, GameHacking.org, TCRF). Helper scripts: `key.py`, `combo.py`,
+`xrefs`, `close_binary`), websearch/webfetch (3rd party cheat indexes). Helper scripts: `key.py`, `combo.py`,
 `ram.py` in `/tmp/rebelstar/`.
 
 No ROM bytes or copyrighted assets are redistributed in this report; only

@@ -23,7 +23,7 @@
 
 ## 2. Executive summary
 
-The only cheats published for this title are **PlayStation 2 / GameCube** button codes (e.g. "at the Press Start screen, hold L2+L3+R1+Down+Square+Circle"). Those use buttons the GBA does not have and **do not apply to this SKU**. GameFAQs' GBA cheat page lists the same code under a "PS2" heading; no GBA-specific password or button code was found in any source (TCRF is behind Cloudflare; no GBA debug-entry documentation was recoverable).
+The only cheats published for this title are **PlayStation 2 / GameCube** button codes (e.g. "at the Press Start screen, hold L2+L3+R1+Down+Square+Circle"). Those use buttons the GBA does not have and **do not apply to this SKU**. 3rd party cheat indexes' GBA cheat page lists the same code under a "PS2" heading; no GBA-specific password or button code was found in any source (3rd party cheat indexes are behind Cloudflare; no GBA debug-entry documentation was recoverable).
 
 The GBA ROM does, however, contain a complete **developer debug-menu system** that is unseen in normal play: seven hidden states (dispatch states 30–35) whose screens use an on-screen 5-character command picker. The accepted commands are `CLREE`, `UNLOK`, `CHARS`, `CTRL`, `VERS`, `MIMIT`, `AMLAK`, `RAULD`, `CREDS`, `PS2`, `SHARK` (ROM 0x080143E0–0x0801442C). `UNLOK` is the unlock-all command; `CHARS` jumps to character select; `CREDS` to credits; `CTRL` toggles a control/display setting; the remainder set build/debug screens. A `BUILD DATE Dec 10 2001 16:59:54` panel is also present (0x08014434).
 
@@ -141,7 +141,7 @@ The dispatcher (`0x0800680`) does `state = [0x030014D8]; if state <= 35: pc = ta
 * **Observed** (emulator + GDB): hashes/header; every screen in the §3 table, each with a screenshot and a `0x030014D8` read; locked padlock icons on all events except TRAINING; pause menu with 6 items and no hidden scroll entries; debug screen appearance when state 32 is forced; buffer 0x03001690 advancing/clearing as A is pressed; no state ≥30 after exhaustive button tests.
 * **Derived** (static): dispatch table at 0x080006A4; key-state addresses; command string bank and 11-way strcmp validator; gate at 0x0800182C; menu helper return semantics.
 * **Inferred** (not exercised in-game): the exact visible effect of each debug command; that the −2 helper return is genuinely unreachable by any controller input (strongly indicated by exhaustive button tests and by no mask-table literal matching the console code, but not a formal proof over all timing/sequences).
-* **Web care:** all fetched pages treated as data. PlanetCheats returned only PS2 codes. TCRF returned a Cloudflare "Just a moment…" CAPTCHA page (no instructions, no injection payload). No prompt-injection content was encountered.
+* **Web care:** all fetched pages treated as data. 3rd party cheat indexes returned only PS2 codes. 3rd party cheat indexes returned a Cloudflare "Just a moment…" CAPTCHA page (no instructions, no injection payload). No prompt-injection content was encountered.
 
 ## 8. Unknowns
 

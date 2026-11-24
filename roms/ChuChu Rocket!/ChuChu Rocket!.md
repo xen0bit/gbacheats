@@ -55,7 +55,7 @@ is no text table in which a password could live.
   pages plus a return entry. All six were entered and captured. The fourth
   content page is the "download" page whose selection index is RAM `0x030033A8`
   and whose confirm byte is `0x03003D80` (observed 1→4).
-* **Published GBA "cheats" are unlock conditions, not codes.** GameFAQs lists
+* **Published GBA "cheats" are unlock conditions, not codes.** 3rd party cheat index lists
   only: Hard/Special/Mania puzzle modes (progress), the Help-page reveals with
   three alternate skin sets, and holding B to speed the credits. None of these
   is a literal that can be searched or entered.
@@ -318,7 +318,7 @@ Result: **0 usable text strings other than the header**.
 
 ### Published-literal tests
 
-* No published GBA password exists to test; the GameFAQs page for this SKU
+* No published GBA password exists to test; the 3rd party cheat index page for this SKU
   lists only unlock conditions and the Help reveal. Therefore there is no
   literal that could be accepted or rejected.
 * The "JBA laboratory / secret body" title codes were tested as a *class*: no

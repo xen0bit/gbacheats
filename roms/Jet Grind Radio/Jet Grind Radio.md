@@ -172,7 +172,7 @@ EWRAM MD5 first 12 hex shown):
 | SLEEP confirmation | `p_upupA` capture | "HOLD L+R+SELECT TO WAKE UP" |
 | MULTI + CREDITS menu row | `chord_konami` capture | confirms 4th entry |
 
-**Unlockables (save bits, not codes).** From the GameFAQs CB addresses, mapped
+**Unlockables (save bits, not codes).** From the 3rd party cheat indexes CB addresses, mapped
 to observed RAM (fresh game, blank save):
 
 | EWRAM | Purpose | Observed | CB device writes (out of scope) |
@@ -183,7 +183,7 @@ to observed RAM (fresh game, blank save):
 | `0x02008154/58/5C/60` | JET Technique | `00 00 00 00` | `01` per area |
 | `0x02008155/59/5D/61` | JET Crush | `00 00 00 00` | `01` per area |
 
-Published unlock conditions (GameFAQs FAQ 25922, Endz0r v1.10): Poison Jam =
+Published unlock conditions (3rd party cheat index FAQ 25922, Endz0r v1.10): Poison Jam =
 JET rank on all Kogane-Cho levels; Love Shockers = all Shibuya-Cho; Noise Tanks
 = all Benten-Cho; Professor K = beat Final Stage; "Sega Scream" intro =
 advance the boot screens with Start instead of waiting. These are progression
@@ -216,7 +216,7 @@ find it"):**
 | Input-struct xrefs | all 32 PC-relative references | 0 sequence validators |
 | Button-mask tables | whole 8 MiB, `u16` runs ≥4, code region filtered | 0 tables; Konami / L+R+Start absent |
 | KEYINPUT literals | 3 occurrences (`0x08020888`, `0x08020908`, `0x0804CD10`) | all ordinary input plumbing |
-| Published in-game codes | GameFAQs GBA FAQ, GameFAQs cheats, TCRF GBA, Cheat Happens, VGChartz | 0 in-game codes; all are device memory edits or save-bit unlocks |
+| Published in-game codes | 3rd party cheat indexes GBA FAQ, 3rd party cheat index cheats, 3rd party cheat indexes GBA, 3rd party cheat indexes | 0 in-game codes; all are device memory edits or save-bit unlocks |
 | Reachable screens | 12 screens booted and RAM-fingerprinted | no code-entry surface on any |
 
 This is a **"No system"** negative (guide §16.3 case 1), not dead code, a cut

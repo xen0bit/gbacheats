@@ -23,7 +23,7 @@ The only developer-intended in-game cheat surface in this GBA SKU is a **four-sy
 
 The complete algorithm was recovered from `0x0800FE8C` / `0x0800FDC8` / `0x0800FE10` and reimplemented offline; the model agrees with every published code except `1234` (rejected by the game) and `2800` (uses digit `0`, outside the alphabet). Two codes that appear in **no published list** were minted and accepted on the real screen with RAM confirmation: **`8713`** (`lives=7, level=5, flag=1`) and **`1367`** (`lives=4, level=1, flag=1`). Three rejection cases were verified in RAM: bad checksum (`1234`), out-of-range level (`2348`, level field = 10), and gate violation (`3488`, level field 1 but lives = 7).
 
-No GBA button codes or hidden debug menu were found. The widely copied button sequences on GameFAQs are explicitly labelled "Cheat Codes PS" and do not apply to this SKU. The `DEBUG_ASSERT*` strings at `0x31418`–`0x336C4` are engine instrumentation, not a user-facing cheat menu.
+No GBA button codes or hidden debug menu were found. The widely copied button sequences on 3rd party cheat indexes are explicitly labelled "Cheat Codes PS" and do not apply to this SKU. The `DEBUG_ASSERT*` strings at `0x31418`–`0x336C4` are engine instrumentation, not a user-facing cheat menu.
 
 ## 3. How to reproduce
 

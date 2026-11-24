@@ -113,7 +113,7 @@ codes and on all accepted/rejected generated codes tested in mGBA.
 13 R 14 S 15 T 16 V 17 W 18 X 19 Y 20 Z 21 1 22 2 23 3
 24 4 25 5 26 6 27 7 28 8 29 9 30 ! 31 ?
 ```
-(A, E, I, O, U and 0 are omitted. Several GameFAQs codes such as `AK?`, `A3W`, `AY4` and the
+(A, E, I, O, U and 0 are omitted. Several 3rd party cheat index codes such as `AK?`, `A3W`, `AY4` and the
 "level 1 = bh7" list contain symbols outside this alphabet and cannot be entered on this SKU;
 they are recorded as unverified/likely wrong-edition.)
 

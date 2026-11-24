@@ -47,7 +47,7 @@ Static evidence agrees with the screen enumeration:
 * All game text is ordinary ASCII and is rendered by `0x08006E84` / `0x08007000` (`char - 32` × 32-byte glyph). Region/animal/weapon strings live plainly at `0x0475A80..0x0475D70` and again at `0x0600AC0..0x0600BB0`. A password screen would therefore have left plaintext labels; none exist.
 * The registered screen/action class set is complete and contains no Options/Password/Cheat/Debug class: `TitleAct`, `SelectAct`, `DescriptionAct`, `GunSelectAct`, `HunterAct`, `ShootAct` (+ `ShootDeer/Bear/Elk/Moose/Sheep/Animal`), `CallsAndScentsAct`, `QuitAct`, `WarningAct`, `SummaryAct`, `TrophyAct`, `CongratsAct`.
 * There is no button-sequence table: scanning the whole code region (`0x0..0x2C0000`) for u16/u32 arrays of the ten GBA button masks finds **0 plausible sequences**. All 119 u16 mask runs and all 13 u32 mask runs lie at `≥0x408CC8` in graphics/data, not code. The 313 "plausible" byte-level runs are ordinary instruction bytes, not tables.
-* The published codes that exist for the *Cabela's* franchise are for other SKUs and are console commands or GameShark/CodeBreaker memory edits (out of scope). Their literals are absent from this image: `bgh_unlockLevels`, `bgh_needMoney`, `bgh_animalfreeze`, `cuckoo`, `nextstand`, `getthere`, `cheat_availableitems`, `Mod_givemission` → 0 occurrences each. GameFAQs' GBA page (game 563171) advertises no cheats, only game information/message board; VGChartz, CheatCC and TCRF have no GBA cheat/password list for this SKU. (Direct GameFAQs fetch returns HTTP 403 to this environment; the no-cheats statement is from the indexed page summary, and no GBA code literals exist to verify in any case.)
+* The published codes that exist for the *Cabela's* franchise are for other SKUs and are console commands or GameShark/CodeBreaker memory edits (out of scope). Their literals are absent from this image: `bgh_unlockLevels`, `bgh_needMoney`, `bgh_animalfreeze`, `cuckoo`, `nextstand`, `getthere`, `cheat_availableitems`, `Mod_givemission` → 0 occurrences each. 3rd party cheat indexes' GBA page (game 563171) advertises no cheats, only game information/message board; 3rd party cheat indexes have no GBA cheat/password list for this SKU. (Direct 3rd party cheat indexes fetch returns HTTP 403 to this environment; the no-cheats statement is from the indexed page summary, and no GBA code literals exist to verify in any case.)
 
 The code space is therefore **empty**: alphabet = ∅, length = 0, validator = none, entry surface = none.
 
@@ -175,7 +175,7 @@ Button masks: see §4. No mask table is stored in the ROM (see §6b).
 | u8 button-mask runs | whole region | 4,029 raw runs, 313 length/diversity candidates; all are instruction bytes, none a table |
 | Registered action classes | all type-name registrations | 11 screen classes + 6 `Shoot*` subclasses; no Options/Password/Cheat/Debug class |
 | Menu screens walked | title, copyright, 16 hunt entries, 16 description cards, 6 weapons, Stalk, Hunt, Calls & Scents, quit | all reachable UI walked |
-| Published GBA codes | GameFAQs GBA page, VGChartz, CheatCC, TCRF | none published |
+| Published GBA codes | 3rd party cheat indexes GBA page, 3rd party cheat indexes | none published |
 | Published other-SKU literals | 9 PC/console command strings | 0 occurrences in ROM |
 
 **Novel code.** None can be minted, because there is no acceptor. The equivalent deliverable for a negative engagement is the bounded proof above: a second analyst can re-run the same scans and re-walk the same screens. In the emulator, every code-like input tested (Konami, `L+R+Select`, `A+B+START+SELECT`, `Select` at every screen) produced no hidden screen and no state change beyond normal menu navigation.
@@ -219,7 +219,7 @@ Button masks: see §4. No mask table is stored in the ROM (see §6b).
 
 * `binutils-arm-none-eabi` (objdump, Thumb/ARM), Capstone 5.0.7, Python 3.
 * mGBA 0.10.5 SDL under Xvfb `:224` + openbox; `xdotool`, `scrot`, ImageMagick (`convert`, `compare`, `montage`).
-* `tesseract-ocr` on the US manual PDF (`videogamemanual.com`) for the control/menu/trophy-room descriptions.
+* `tesseract-ocr` on the US manual PDF (3rd party cheat indexes) for the control/menu/trophy-room descriptions.
 * mGBA PNG savestates parsed with a small Python script (PNG `gbAs` chunk → zlib → mGBA 0x61000 state; EWRAM at `+0x21000`, IWRAM at `+0x19000`, VRAM at `+0x1000`, I/O at `+0x400`).
 * Search scripts: printable-string extractor, multi-encoding keyword scan, Thumb PC-relative literal scanner, u8/u16/u32 mask-run scanner, screenshot cycle-hash comparator.
 * Working artifacts (not shipped): `/tmp/cabela/` — screenshots, savestates, scan scripts, cycle frames.

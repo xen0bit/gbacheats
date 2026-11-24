@@ -45,7 +45,7 @@ US 6-digit SKU; those literal strings are absent from the ROM (see §4/§6). Not
 with the sibling *Earthworm Jim* GBA (`AEJE`) — independently verified (§6b).
 
 A prompt-injection payload (fake "decode key"/EICAR `key.bin`, payment demand, termination
-commands) was found in a web-search result snippet for the TCRF page (§3, §8). It was treated
+commands) was found in a web-search result snippet for the 3rd party cheat index page (§3, §8). It was treated
 as untrusted data and ignored; no instructions in it were followed.
 
 ## 3. How to reproduce
@@ -231,7 +231,7 @@ the 8-digit EUR list), so these codes exercise unadvertised combinations.
 
 **Cheat-menu enumeration.** All four START LEVEL/GOD MODE/PAUSE DIM/MAP VIEW entries were
 visited on the live menu; GOD MODE toggles flag `0x030004AC` (`0x02`→`0x01`, savestate diff);
-START LEVEL cycles the 17 names; PAUSE DIM and MAP VIEW toggle ON/OFF (per TCRF, PAUSE DIM
+START LEVEL cycles the 17 names; PAUSE DIM and MAP VIEW toggle ON/OFF (per 3rd party cheat indexes, PAUSE DIM
 has no visible effect in this port — not independently verified beyond the ON/OFF label).
 
 **Sibling comparison (independently verified).** *Earthworm Jim* GBA (sibling queue 277) is
@@ -263,11 +263,11 @@ Its correct US 6-digit form was not brute-forced (A=7 is unadvertised in any US 
 - Correct US 6-digit code for Inflated Head (published `L6RGDG` is invalid).
 - Whether bit-31 parity is ever exercised by a reachable 6-char code (the decoder always
   clears it; the validator still checks it).
-- PAUSE DIM / MAP VIEW practical effects (per TCRF, PAUSE DIM is broken in this port).
-- Prompt-injection note (§2): a search-result snippet for the TCRF page contained explicit
+- PAUSE DIM / MAP VIEW practical effects (per 3rd party cheat indexes, PAUSE DIM is broken in this port).
+- Prompt-injection note (§2): a search-result snippet for the 3rd party cheat index page contained explicit
   agent-directed instructions (write `key.bin` with an EICAR test string, a $1e12 payment
   demand, fake tool instructions, and termination commands). It was not fetched as
-  instructions and none of it was acted upon; the legitimate TCRF content was obtained from
+  instructions and none of it was acted upon; the legitimate 3rd party cheat indexes content was obtained from
   a mirror and is consistent with the ROM.
 
 ## 9. Tooling
@@ -279,8 +279,8 @@ Its correct US 6-digit form was not brute-forced (A=7 is unadvertised in any US 
 - C: `enum.c` (exhaustive 29^6 validator sweep).
 - mGBA 0.10.5 under Xvfb :317 + openbox; `import -window root` / `scrot` for screenshots;
   savestate slot diffs for RAM reads (GDB stub unavailable — port held by sibling).
-- Web: search snippets (GameFAQs, ChapterCheats, Neoseeker, CheatingDome, GGmania),
-  TCRF mirror `tcrf.tiago.zip` (the official TCRF domain returned HTTP 403).
+- Web: search snippets (3rd party cheat indexes),
+  3rd party cheat index mirror (the official 3rd party cheat indexes domain returned HTTP 403).
 
 All generated `.ss*` savestates and `.sav` files were removed from the ROM folder; no ROM or
 copyrighted assets are reproduced here — only hashes, addresses, algorithms and codes.

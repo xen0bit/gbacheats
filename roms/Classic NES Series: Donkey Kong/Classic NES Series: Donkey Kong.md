@@ -33,8 +33,8 @@ The file contains a shared "Classic NES Series" GBA wrapper (code/message bank n
 * The ROM *does* contain the shared wrapper's secret-code strings:
   `SAVE HIGH SCORE AND SECRET CODE?`, `YES/NO`, `PRESS THE A BUTTON TO USE THIS SECRET CODE.`
   (message records 51–54 at file 0x3B00–0x3B20). **They are dead strings in this SKU**: the save path at `0x080023C8` chooses directly between "HIGH SCORE SAVED." (message 45) and "WAS UNABLE TO SAVE." (message 46); no code in the ROM loads message IDs 51–54 into the text renderer, and there is no code-entry screen, alphabet, or input buffer anywhere in the image. The same strings exist in other Classic NES Series titles (e.g. Bomberman) where an "Enter Secret Code" screen is wired; that screen is not present here.
-* The emulated NES Donkey Kong has no password/level select/debug menu (TCRF documents only unused *code* data — an unused 300-point reward and an unused barrel pattern — reachable only with Game Genie memory patches, which are out of scope). Its only "secrets" are gameplay glitches.
-* Published lists confirm the negative: GameFAQs' GBA Donkey Kong cheats page contains only Apple II ("APL2"), C64 POKEs, and arcade/ColecoVision/Intellivision glitches; there are **zero GBA-specific codes**. TCRF's Donkey Kong (NES) page lists no button code or level select.
+* The emulated NES Donkey Kong has no password/level select/debug menu (3rd party cheat indexes document only unused *code* data — an unused 300-point reward and an unused barrel pattern — reachable only with Game Genie memory patches, which are out of scope). Its only "secrets" are gameplay glitches.
+* Published lists confirm the negative: 3rd party cheat indexes' GBA Donkey Kong cheats page contains only Apple II ("APL2"), C64 POKEs, and arcade/ColecoVision/Intellivision glitches; there are **zero GBA-specific codes**. a 3rd party cheat index's Donkey Kong (NES) page lists no button code or level select.
 
 So the deliverable is a bounded negative: every menu was enumerated, every text space was searched with counts, the shared secret-code strings were located and shown to be unreferenced, published codes were checked literally, and the button-code space contains no sequence table.
 
@@ -157,19 +157,19 @@ IDs **51, 52, 53, 54 are absent from every draw path**. The save path is a direc
 * **Derived** — the message table (55 records), message IDs drawn at every call site, and the absence of IDs 51–54; the keypad edge-detector at `0x08001494`; the 0-hit u16 mask-sequence scan; the 0-hit ASCII/font-code keyword scans; the 0-hit published-code literal search.
 * **Derived** — the second embedded GBA header at 0xCFC0 and the three copies of the wrapper text bank; no cracktro/trainer signatures.
 * **Inferred** — the unused secret-code dialog is a shared-wrapper leftover that is compiled but not wired for this title (the strings survive in the bank because the wrapper is common across the series). It is not reachable by any input in this image.
-* **Inferred** — the NES DK ROM is the ordinary NES release (no code system); TCRF documents only unused code paths requiring memory patches, which are out of scope.
+* **Inferred** — the NES DK ROM is the ordinary NES release (no code system); 3rd party cheat indexes document only unused code paths requiring memory patches, which are out of scope.
 
 ## 8. Unknowns
 
 * Exact save-data layout/EEPROM geometry (mGBA's empty save contains ROM-header bytes; forced/uninitialised save). This does not affect the cheat conclusion.
 * Whether a different regional build of the same wrapper enables the secret-code dialog for this title; in this FDKE image it is provably unreferenced.
-* Exact NES ROM revision inside the emulator package (not needed for the code question; TCRF covers all revisions and none has a password/level select).
+* Exact NES ROM revision inside the emulator package (not needed for the code question; 3rd party cheat indexes cover all revisions and none has a password/level select).
 
 ## 9. Tooling
 
 * `mgba` 0.10.5 (SDL) on `Xvfb :248` + `openbox`; `xdotool` for input; mGBA CLI debugger over a FIFO for breakpoints/memory reads; mGBA `.ssN` savestates parsed with Python (`zlib`, `struct`).
 * `arm-none-eabi-objdump -M force-thumb` for static disassembly, Capstone 5.0.9 for operand/immediate scans, custom Python for the message-table dump, VRAM tilemap/text rendering, keyword and key-mask scans.
-* Web sources: GameFAQs archived GBA cheats page for Classic NES Series: Donkey Kong; TCRF Donkey Kong (NES) via web.archive.org; manual-derived System Menu option list (videogamemanual.com / GameGear archive snippet); SuperCheats Bomberman Classic NES secret-code list (used only to establish the shared feature and to test literals).
+* Web sources: 3rd party cheat indexes archived GBA cheats page for Classic NES Series: Donkey Kong; 3rd party cheat indexes Donkey Kong (NES) via web.archive.org; manual-derived System Menu option list (3rd party cheat indexes snippet); 3rd party cheat indexes Bomberman Classic NES secret-code list (used only to establish the shared feature and to test literals).
 
 ## 10. Legal note
 

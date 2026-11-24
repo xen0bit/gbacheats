@@ -35,7 +35,7 @@ The evidence is threefold.
 
 1. **Text space.** The ROM contains 43,820 printable strings of length ≥ 4. Case-insensitive counts for `password`, `passwd`, `cheat`, `debug`, `secret`, `unlock`, `gallery`, `extras`, `bonus`, `sound test`, `level select`, `warp`, and `skip` are all **zero**. The localized equivalents (`mot de passe`, `Passwort`, `contraseña`, `código`, `truco`, `Triche`, `geheim`) are also **zero**. The complete English UI label bank is 38 strings plus `Credits`; every label is a menu item, a gameplay/result label, or a story string. There is no keyboard, alphabet grid, text box, or submit/backspace control anywhere in the label set.
 2. **Button space.** The engine’s two key-input helpers were located at `0x080163D4` (edge-press with a `0x03001414` shadow word) and `0x08016484` (held query). A full ARM BL scan finds 68 calls to the edge helper and 51 to the held helper. The button indices passed are only `0,1,3,4,5,6,7` (A, B, Start, Right, Left, Up, Down). **Select (2), R (8), and L (9) are never read by menu code.** Each call tests a single button, and no progress/sequence counter is referenced by the helpers or their call sites. Dynamic probes at the title (Select, L, R, Up, Down, A+B, L+R, Select+Start, L+R+Start, Konami sequence) produced no hidden screen; only A/Start enter the normal Play path.
-3. **Published sources.** VGChartz reports “Total cheats available: 0”. GameFAQs returns 403 and its archive snapshot is unavailable. The only published Babar codes are CodeBreaker/GameShark *memory-device* codes (Almar’s Guides, emucheatz), which are not enterable in-game and are outside this report’s scope. No published native password or button code exists to test.
+3. **Published sources.** 3rd party cheat indexes report “Total cheats available: 0”. 3rd party cheat indexes return 403 and its archive snapshot is unavailable. The only published Babar codes are CodeBreaker/GameShark *memory-device* codes (a 3rd party cheat index's Guides, 3rd party cheat indexes), which are not enterable in-game and are outside this report’s scope. No published native password or button code exists to test.
 
 The only unlockable content is normal save progression: the level-selector map shows a single starting node for a fresh profile, and the ROM contains nine level definitions (`level1.xml` … `level9.xml`) and nine level-title strings. Progression is stored in EEPROM; there is no code path that unlocks levels from button input.
 
@@ -272,11 +272,11 @@ At the options screen, Select/L/R also produced no change. At the profile and ma
 
 | Source | Findings | Classification |
 |---|---|---|
-| VGChartz (`/game/26218/.../cheats`) | “Total cheats available: 0” | no published cheats |
-| GameFAQs cheats page | HTTP 403; web-archive snapshot 404 | unavailable, no native list recovered |
-| Almar’s Guides | Master Code, Access All Levels, 99 Crowns, Exit Key, Stop Timer | **CodeBreaker memory-device codes** |
-| emucheatz | 99 Crowns, Score, 5× Combo | **CodeBreaker/GameShark memory-device codes** |
-| Fan wikis / TCRF | no Babar code page found | no native codes |
+| 3rd party cheat indexes (`/game/26218/.../cheats`) | “Total cheats available: 0” | no published cheats |
+| 3rd party cheat index cheats page | HTTP 403; web-archive snapshot 404 | unavailable, no native list recovered |
+| a 3rd party cheat index's Guides | Master Code, Access All Levels, 99 Crowns, Exit Key, Stop Timer | **CodeBreaker memory-device codes** |
+| 3rd party cheat indexes | 99 Crowns, Score, 5× Combo | **CodeBreaker/GameShark memory-device codes** |
+| Fan wikis / 3rd party cheat indexes | no Babar code page found | no native codes |
 
 The CodeBreaker/GameShark codes are memory writes applied by an external device or emulator cheat engine. They are **not enterable in the game**, are excluded by the stated scope, and are deliberately not reproduced here. There is no in-game screen on which to test them.
 
@@ -307,7 +307,7 @@ The honest bound is structural: **there is no text-input state to reject a strin
 | Key helpers and bit convention | **Derived** + **Observed** | ARM disassembly at `0x080163D4`/`0x08016484`; read-watchpoint hit at `0x080163F4` with `r3=0x04000130`, `r1=0x3FF`, `LR=0x0800CE94` |
 | Only A/B/Start/arrows are polled | **Derived** | BL scan: 68 edge + 51 held call sites; indices `{0,1,3,4,5,6,7}` |
 | No text/code UI | **Derived** | complete 38+1 label bank; zero password/cheat/debug strings; no keyboard/alphabet/submit labels |
-| No native published codes | **Observed** | VGChartz 0; GameFAQs 403; only CodeBreaker lists found |
+| No native published codes | **Observed** | 3rd party cheat indexes 0; 3rd party cheat indexes 403; only CodeBreaker lists found |
 | Save-based level progression | **Observed** | profile label changes from `Empty` to `Level 1 / Balloon Ride` after entering the level |
 | Nine level titles/definitions | **Derived** | string bank `0x083E3E04`+; archive directory `0x080736D4` |
 

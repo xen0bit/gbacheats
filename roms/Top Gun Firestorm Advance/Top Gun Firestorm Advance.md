@@ -33,7 +33,7 @@ a *group* to `0x03002BC0` and a *level* to `0x03000AF0` and starts the mission;
 any mismatch draws four green **X** marks.
 
 The table is **3 groups × 12 levels = 36 valid codes** out of `9^4 = 6561`
-representable inputs. Public lists (GameFAQs, Cheat Happens, ChapterCheats)
+representable inputs. Public lists (3rd party cheat indexes)
 publish only the 11 group-0 codes for levels 2–12, and **one of those 11 is
 mis-transcribed** (level 6). Twenty-five accepted codes are absent from every
 published list.
@@ -165,7 +165,7 @@ lists; visual identities are from the captured font/tile pictures
 ### 6.2 Complete accepted-code table (all 36)
 
 `g` = group, `L` = level. "Published" marks the 11 group-0 codes that appear on
-GameFAQs/Cheat Happens/ChapterCheats (the corrected ROM form is shown for L6).
+3rd party cheat indexes (the corrected ROM form is shown for L6).
 
 | # | g | L | values | symbols | published |
 |---:|---:|---:|---|---|:--:|
@@ -208,7 +208,7 @@ GameFAQs/Cheat Happens/ChapterCheats (the corrected ROM form is shown for L6).
 
 ### 6.3 Published-list discrepancy
 
-GameFAQs/Cheat Happens/ChapterCheats all print level 6 as
+3rd party cheat indexes all print level 6 as
 `AA Gun, Top View Car, Boat, Top View Car` = `[8,2,4,2]`. Entering that exact
 code yields **X marks** (`pub_l6_typo_afterA.png`). The ROM record for
 group 0 / level 6 is `[8,6,4,2]` = `AA Gun, Side View Car, Boat, Top View Car`,
@@ -274,7 +274,7 @@ the one archived cheat page that was readable contained only code lists.
 * Exact semantics of the `group` field (difficulty vs. campaign) and its detailed
   gameplay effects were not measured; only the written global and the visibly
   different briefing were confirmed.
-* A web page (GeoCities "Gameboy Advance Passwords and Codes") advertises a
+* A web page (3rd party cheat indexes "Gameboy Advance Passwords and Codes") advertises a
   title-screen button sequence `L, Select, A, Select, R, A, L, Select` plus
   "Select + shoulder to change levels". That list is a generic compilation and
   the entry is **not attributed to this game**. A bounded search of this ROM for

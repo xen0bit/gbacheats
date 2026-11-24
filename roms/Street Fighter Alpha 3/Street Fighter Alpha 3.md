@@ -81,7 +81,7 @@ Screen walk (screenshots `walk_*.png`, `*_c.png` in work dir):
 | GAME OPTION submenu | Option Mode, Start | difficulty, speed, damage, rounds, ISM, guard… |
 | Score Ranking | Mode Menu | reachable |
 
-Published codes tested (all from GameFAQs/IGN/StrategyWiki, fetched 2026-11-20):
+Published codes tested (all from 3rd party cheat indexes, fetched 2026-11-20):
 
 ```
 All Characters : Left,Right,Down,Right,L,L,A,L,L,B,R,A,Up

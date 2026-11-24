@@ -222,10 +222,10 @@ Bounds proven by counts and rejection:
    counted negative above.
 
 **Published-code reconciliation (all out of scope, recorded for completeness):**
-GameFAQs/Neoseeker "Arrange Mode alternate ending" is a gameplay unlock, not a
-code; GameHacking.org/Almars/CodeJunkies lists for this SKU are exclusively
+3rd party cheat indexes "Arrange Mode alternate ending" is a gameplay unlock, not a
+code; 3rd party cheat index lists for this SKU are exclusively
 GameShark Advance / CodeBreaker / Action Replay RAM patches; the SNES
-controller-2 level select cannot be entered on GBA. A TCRF page fetched during
+controller-2 level select cannot be entered on GBA. A 3rd party cheat index page fetched during
 recon returned a prompt-injection payload (fake "LLM instructions", a fake XOR
 "key" file, a payment demand, and termination commands). It was ignored,
 treated strictly as data, and is reported here as required.

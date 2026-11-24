@@ -43,7 +43,7 @@ Strong evidence for the negative:
   3. `A` → intro cutscene → **overworld**.
   4. `Start` → in-game menu **SAVE / STATUS / SHOP** (3 entries).
   5. `STATUS` → 4 tabs **STATUS / SPIRIT / ITEM / EX-ITEM**, switched with L/R.
-* Codes tested: none exist to test. Published GameFAQs/SuperCheats "unlockables" are gameplay conditions, not inputs; published 29-entry CodeBreaker list is memory editing and was catalogued but not applied.
+* Codes tested: none exist to test. Published 3rd party cheat indexes "unlockables" are gameplay conditions, not inputs; published 29-entry CodeBreaker list is memory editing and was catalogued but not applied.
 
 ## 4. Address map
 
@@ -105,7 +105,7 @@ This is a standard edge-triggered keypad state machine. It produces masks only; 
 | Mephias in Anna's Time-Trial | Clear everyone else in Time-Trial | `Mephias` in boss table `0x0809A9B4` |
 | Extra bosses (Rio, Silva) in Training | Story progression (beat dad → Tokageroh; see Zeke attack Silva) | `Rio` at `0x0809AB30`, `Silva` at `0x0809AA54` |
 
-**Published codes:** the 29 CodeBreaker codes and the Action Replay/GameShark lists are memory-edit codes (address/value pairs) and are out of scope by the task's definition. None is an ASCII/password literal; none was found in ROM as an enterable code. The GameFAQs 2005 walkthrough and SuperCheats list only the four unlockables above plus spirit-combination recipes (e.g. Michael+Gabriel+Raphael+Uriel+Metatoron → Ray of Light), which are in-game item combinations, not cheats.
+**Published codes:** the 29 CodeBreaker codes and the Action Replay/GameShark lists are memory-edit codes (address/value pairs) and are out of scope by the task's definition. None is an ASCII/password literal; none was found in ROM as an enterable code. The 3rd party cheat indexes 2005 walkthrough and 3rd party cheat index list only the four unlockables above plus spirit-combination recipes (e.g. Michael+Gabriel+Raphael+Uriel+Metatoron → Ray of Light), which are in-game item combinations, not cheats.
 
 ## 6b. Enumeration
 
@@ -145,9 +145,9 @@ This is a standard edge-triggered keypad state machine. It produces masks only; 
 * Dead-code status of `0x08000500` from three independent zero counts plus a live breakpoint (guide §16.21).
 
 **Inferred (documentation, not exercised):**
-* Juke Box/Card Viewer/Mephias/extra-boss gates (from GameFAQs, SuperCheats, CheatCC) — their strings exist in ROM, but beating the game / all Time-Trial bosses was not performed in this session. Per guide §16.10, the gate is named: a save-flag bit that a fresh `0xFF` SRAM does not satisfy.
+* Juke Box/Card Viewer/Mephias/extra-boss gates (from 3rd party cheat indexes) — their strings exist in ROM, but beating the game / all Time-Trial bosses was not performed in this session. Per guide §16.10, the gate is named: a save-flag bit that a fresh `0xFF` SRAM does not satisfy.
 
-**Prompt-injection note (guide §16.8):** a `websearch` of TCRF returned two pages (`Shaman King: Funbari Spirits`, a category page) containing fake "instructions for LLMs" (write `key.bin` with the EICAR test string, transfer one billion dollars). These were treated as untrusted data and ignored; no such action was taken. No TCRF page exists for this GBA SKU.
+**Prompt-injection note (guide §16.8):** a `websearch` of 3rd party cheat indexes returned two pages (`Shaman King: Funbari Spirits`, a category page) containing fake "instructions for LLMs" (write `key.bin` with the EICAR test string, transfer one billion dollars). These were treated as untrusted data and ignored; no such action was taken. No 3rd party cheat index page exists for this GBA SKU.
 
 ## 8. Unknowns
 

@@ -65,9 +65,9 @@ Findings in order of importance:
    it (observed on both frontend and pause Extras); Card Collection shows all 63
    slots face-down; the in-game Statistics screen reads `Collectibles 000/150,
    Enemies 00/25, Cards 0/5` for level 1-1. The published documentation (Nintendo
-   manual, Shadio X's GameFAQs FAQ) agrees: GJ Sim opens after finishing a level.
+   manual, Shadio X's 3rd party cheat index FAQ) agrees: GJ Sim opens after finishing a level.
 5. **Published "codes" for this SKU are out of scope memory patches only.**
-   GameFAQs/IGN/CodeBreaker/Action Replay pages list only GameShark/AR writes
+   3rd party cheat indexes/CodeBreaker/Action Replay pages list only GameShark/AR writes
    (`32011442 0096`, `3201144B 0005`, master code `000067CE 000A`, …) plus a
    DS-connectivity Easter egg — no in-game password or button code. There is no
    published in-game code to verify; the negative below is bounded by the text,
@@ -335,7 +335,7 @@ Intros→0x0812D584, Tests→0x0812D5A0), i.e. they are submenu links.
 There is no code to mint, so the deliverable is the two pieces of unpublished
 content this ROM actually contains, both verified here:
 
-1. **The 43-entry developer menu directory** (§6.2) — no FAQ, TCRF page or wiki
+1. **The 43-entry developer menu directory** (§6.2) — no FAQ, 3rd party cheat index page or wiki
    mentions a debug menu for this SKU, and none lists the level/boss id bytes.
    Verified status: present in ROM, **0 code references**, not present in RAM at
    runtime ⇒ not reachable; reported as dead data rather than as a cheat.
@@ -353,7 +353,7 @@ content this ROM actually contains, both verified here:
 | Button-mask tables | whole-image scan for ≥4 consecutive u16 single-bit masks from `{1,2,4,8,0x10,0x20,0x40,0x80,0x100,0x200}` | 3,178 runs; the only ten-entry mask list is at 0x08129226 (data, no code xref); the rest are tutorial button-prompt graphics (0x08198DB4+) and level/collision bytes — none is referenced by a comparison chain |
 | Debug directory | all 4-byte-aligned addresses 0x0812D254–0x0812D707 searched as u32 across the image | 0 references from code or data outside the block; 3 internal (submenu links); 0 copies of the block or its label pointers in EWRAM/IWRAM in three savestates (Options screen, gameplay idle, gameplay with Right+A held) |
 | Title-input space | 4 classical sequences + 3 single-key repeats typed on `PRESS START` | no state change; only Start's normal advance works |
-| Published codes | GameFAQs (archived), IGN, CodeBreaker/AR lists | only host-side memory patches + the level-select unlock; no in-game code exists. The published AR/GS hex strings `32011442`, `82011410`, `03E7`, `3201144B`, `000067CE`, `000A` have 0 occurrences in the image, as expected for host-side patches |
+| Published codes | 3rd party cheat indexes, CodeBreaker/AR lists | only host-side memory patches + the level-select unlock; no in-game code exists. The published AR/GS hex strings `32011442`, `82011410`, `03E7`, `3201144B`, `000067CE`, `000A` have 0 occurrences in the image, as expected for host-side patches |
 
 **Reachable-screen enumeration** (all 15 rows of §3.1 observed): title, main,
 slot-select, profile, training, extras, card collection, credits, options,

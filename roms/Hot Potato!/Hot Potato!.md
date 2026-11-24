@@ -151,10 +151,10 @@ prove by rejection; the negative itself is bounded below.
   code region produced 1,852 candidates; all examined hits lie in sample/graphic
   data and have **no code xref**. Zero comparator tables against `0x030005FC`
   sequences were found.
-* Published codes: GameFAQs cheats page for GBA id 525413 returned HTTP 403 both
-  directly and through a text proxy; web searches of GameFAQs, TCRF, VGChartz,
+* Published codes: 3rd party cheat index cheats page for GBA id 525413 returned HTTP 403 both
+  directly and through a text proxy; web searches of 3rd party cheat indexes,
   and general engines returned only sales/review/boxart/video pages — **no
-  published password or button code for this SKU**. (The "Hot Potato" hit on a TCRF
+  published password or button code for this SKU**. (The "Hot Potato" hit on a 3rd party cheat index
   user sandbox concerns the unrelated GB game *Sabotage* and was ignored as data.)
   With no published literal, there was nothing to verify against the ROM; §3
   button sweeps cover the alternative.

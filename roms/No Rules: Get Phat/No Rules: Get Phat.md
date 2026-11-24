@@ -38,7 +38,7 @@ matching in-ROM **generator** ("PASSWORD SHOW" in the debug menu's string bank)
 that is the exact inverse; the validator, not the generator, defines the accepted
 space.
 
-All seven published GameFAQs/IGN codes were verified against a bit-exact
+All seven published 3rd party cheat index codes were verified against a bit-exact
 reimplementation: **six are valid; one (`NKTDDLS18J24`, "Level 3") fails the
 checksum** in this ROM. The corrected string `NKTDDLS18J2Y` was derived and
 confirmed in-game.
@@ -46,7 +46,7 @@ confirmed in-game.
 Three passwords absent from every published list were minted from the recovered
 model and accepted on the real screen:
 
-* `1TTYNLP18J32` — starts **Level 1** (SuperCheats explicitly documents
+* `1TTYNLP18J32` — starts **Level 1** (3rd party cheat indexes explicitly documents
   "Level 1 – Password: None"), verified in emulator.
 * `1KTYNLP18J3Z` — unique unpublished cutscene ("THE KEEPER OF THE COCOA
   SOUL…"), verified in emulator.
@@ -192,9 +192,9 @@ bits (aliases), e.g. published Boss2 `PPTDDLS18J26` vs generated
 | Level 4 | `JTRFNLKH8J3V` | ACCEPT | 0 | 9 | 13 | 0 | 34 | 57599 | 2 |
 | Boss 4 | `TFQFNL9H8J2R` | ACCEPT | 11 | 9 | 15 | 0 | 66 | 57599 | 1 |
 
-GameFAQs spells Level 4 `JTRFNLKH8J3v`; lowercase `v` is not in the on-screen
+3rd party cheat indexes spells Level 4 `JTRFNLKH8J3v`; lowercase `v` is not in the on-screen
 alphabet — the correct symbol is `V`. The five alternate codes on an older
-SuperCheats page (`71!W6LP20QBD`, `QM!W6LP3!DVT`, `TMTFNL6KT3LK`,
+3rd party cheat index page (`71!W6LP20QBD`, `QM!W6LP3!DVT`, `TMTFNL6KT3LK`,
 `LHTFNL6K7JLL`, `W59DDLJQGKW8`) all pass this ROM's validator with F1raw=3
 and differing F3/F6; they are recorded as verified-but-unattributed, not
 treated as the canonical list. No published code string appears literally in
@@ -239,12 +239,11 @@ Each accepted password has 7 aliases from the unused bits (eight spellings per
 field tuple). F1raw ∈ {1,2} collapses onto F1=3, adding two more spellings per
 F1=3 tuple.
 
-**Novel codes minted and confirmed in the emulator** (none appears on GameFAQs,
-IGN, GamesRadar, TCRF, SuperCheats, VGChartz, or mariogba.nl):
+**Novel codes minted and confirmed in the emulator** (none appears on 3rd party cheat indexes):
 
 | Code | Fields changed from published Boss 1 | In-game proof |
 |---|---|---|
-| `1TTYNLP18J32` | F0 14 → 8 | Accepted; opening cutscene then Level 1 gameplay with SCORE 0000000. SuperCheats lists "Level 1 – Password: None". |
+| `1TTYNLP18J32` | F0 14 → 8 | Accepted; opening cutscene then Level 1 gameplay with SCORE 0000000. 3rd party cheat index lists "Level 1 – Password: None". |
 | `1KTYNLP18J3Z` | F0 14 → 10 | Accepted; unique cutscene ("THE KEEPER OF THE COCOA SOUL…"). |
 | `1!TYNLP18J36` | F0 14 → 12 | Accepted; unique boss cutscene ("YA PICKED THE WRONG 'HOOD, PUNKazz!"). |
 | `NKTDDLS18J2Y` | correction of published Level 3 | Accepted; Level 3 cutscene. |
@@ -294,7 +293,7 @@ checksum-valid code is still rejected by the semantic layer.
   exercised live; the entry list is a static enumeration only.
 * The exact semantic names of F1–F7 beyond their numeric gates and F0's
   level-ID role.
-* The five alternate SuperCheats passwords pass the validator but their
+* The five alternate 3rd party cheat indexes passwords pass the validator but their
   intended labels/region were not established.
 
 ## 9. Tooling
@@ -308,8 +307,7 @@ checksum-valid code is still rejected by the semantic layer.
 * Scripts in `/tmp/norules/`: `gba.py`, `enter_code.py`, `pwmodel.py`,
   `pwencode.py`, `stateutil.py`.
 * Web sources consulted (treated strictly as untrusted data; no instructions
-  in fetched content were acted upon): GameFAQs, IGN, GamesRadar,
-  SuperCheats, mariogba.nl, TCRF search results. No prompt-injection payload
+  in fetched content were acted upon): 3rd party cheat indexes, 3rd party cheat index search results. No prompt-injection payload
   was encountered in this engagement's fetches.
 
 Generated emulator artifacts (`.ss1`–`.ss5`) were removed from the ROM folder;

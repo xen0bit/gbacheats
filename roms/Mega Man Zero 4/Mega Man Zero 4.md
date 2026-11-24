@@ -12,7 +12,7 @@
 | Game code / maker | `B4ZE` / `08` (Capcom); region USA |
 | Version | `0x00` |
 | Entry word | `0xEA00002E` → `0x080000C0` (stock crt0) |
-| Header complement / checksum | `0x6A` / `0x0000` (as shipped by No-Intro image) |
+| Header complement / checksum | `0x6A` / `0x0000` (as shipped by 3rd party cheat indexes image) |
 | MD5 | `0d1e88bdb09ff68adf9877a121325f9c` |
 | SHA-1 | `596993205a1895a6f51e80749407fb069b907628` |
 | SHA-256 | `61c344754f25f8ec56531731718d9b60e561662bc86e8589f4426493cf42aaec` |
@@ -37,7 +37,7 @@ Cyber Elf command-attack system**: with a Hacker elf at level 7 equipped, a shor
 directional motion (e.g. Down, Down-Forward, Forward + weapon) performs a charged
 attack instantly. This is a **gameplay ability gated by save/elf state**, not a
 secret code: it is documented in the game's own Cyber Elf description and in the
-GameFAQs FAQ (mech_gouki, 2005), and its "entry screen" is the ordinary Elf tab of
+3rd party cheat index FAQ (mech_gouki, 2005), and its "entry screen" is the ordinary Elf tab of
 the pause menu. Seven published motions exist (five distinct 3-step direction
 arcs plus the 6-step double charge). No eighth motion was found by static search
 of the input-driven state machine, and the ability could not be exercised in this
@@ -120,7 +120,7 @@ There is **no password algorithm to reimplement**. Negative proof, by category:
 ## 6. Tables
 
 **Published in-game command motions (Hacker Lv7), normalized to facing right.**
-Source: GameFAQs 47680 / 36641 / 71018, supercheats, NamuWiki; all independent
+Source: 3rd party cheat indexes 47680 / 36641 / 71018, 3rd party cheat indexes; all independent
 copies agree. These are ability inputs, not enterable codes.
 
 | # | Published effect | Direction sequence (facing right) | Distinct arc |
@@ -135,7 +135,7 @@ copies agree. These are ability inputs, not enterable codes.
 published lists cover both by convention. No sixth arc appears in any list.
 
 **Published cheat-device codes (out of scope, listed only to classify them).**
-GameFAQs 47680 / supercheats 14290 / romsfun: e.g. `32035910 0009` (9 lives),
+3rd party cheat indexes 47680 / 3rd party cheat indexes 14290 / 3rd party cheat indexes: e.g. `32035910 0009` (9 lives),
 `820366A4 0020` (infinite energy), `3202E8E7 0014` (mission 100%). All target
 **EWRAM `0x02xxxxxx`** — they are RAM patches, not ROM literals and not
 developer codes. The US "enable code" `0000D460 000A` also targets RAM.
@@ -187,8 +187,7 @@ exists. Testers should not interpret "no novel code" as an unfinished search.
   `0x5000`) are the Hacker command-attack selector — consistent with the
   direction masks and published motions, but not exercised because the Hacker
   Lv7 elf gate was not satisfied in this save.
-* **Web hygiene:** TCRF returned HTTP 403 (no content). GameFAQs/SuperCheats/
-  ROMSFUN/NamuWiki pages were treated strictly as data; no instruction-like
+* **Web hygiene:** 3rd party cheat indexes returned HTTP 403 (no content). 3rd party cheat indexes/3rd party cheat index pages were treated strictly as data; no instruction-like
   content from them was followed, and no prompt-injection payload was observed
   in the fetched material (§16.8).
 

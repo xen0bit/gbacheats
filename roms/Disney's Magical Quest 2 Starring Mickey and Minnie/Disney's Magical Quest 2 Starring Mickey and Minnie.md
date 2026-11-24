@@ -192,7 +192,7 @@ why the record count (49/51/49) exceeds the number of visible words.
 
 ### 6.3 Published codes (SNES/Genesis only — not enterable on this SKU)
 
-GameFAQs cheat pages (contributors Regulus_VII, Dark_Goku) and the SubSane walkthrough give
+3rd party cheat index cheat pages (contributors Regulus_VII, Dark_Goku) and the SubSane walkthrough give
 4-icon sequences for the 1994 console versions:
 
 ```
@@ -204,7 +204,7 @@ Frozen Plains  : Minnie, Mickey, Donald, Goofy
 Baron's Castle : Mickey, Goofy, Donald, Minnie
 ```
 
-The two GameFAQs lists (GEN "Level 02–06" and SNES "1–5") are ten rows that collapse to five
+The two 3rd party cheat index lists (GEN "Level 02–06" and SNES "1–5") are ten rows that collapse to five
 of these sequences; the walkthrough adds the stage-1 row.
 
 These are character-icon sequences on the console Password screen. This GBA image has no

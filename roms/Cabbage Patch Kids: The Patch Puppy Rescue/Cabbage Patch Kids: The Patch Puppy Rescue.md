@@ -231,7 +231,7 @@ Effects are labelled **Inferred** (see §7); only the strings and page record ar
 
 ### 6.2 Published unlockables (not codes)
 
-Public cheat lists (GameFAQs/CheatingDome/PlanetCheats/VGChartz, all identical) contain
+Public cheat lists (3rd party cheat indexes, all identical) contain
 only one entry: *collect 40 crystals in a level to unlock a playroom object*:
 
 | Level | Playroom object |

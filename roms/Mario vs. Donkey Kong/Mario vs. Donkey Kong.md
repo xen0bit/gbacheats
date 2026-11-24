@@ -39,8 +39,7 @@ Two controller-triggered developer features were found and proven in the emulato
    (`0x08039C58`–`0x08039C86`) and enumerated: single static overlay, B or Start exits.
 2. **Select + Start + A + B held simultaneously → jump to title screen** (scene mode `0x07`),
    restoring from any non-title scene. This combination is **in neither the manual nor any
-   published cheat list checked** (GameFAQs, TCRF, Super Mario Wiki, SLB, Neoseeker,
-   GameHacking.org, Almar's Guides, CheatCC/fandom, gbadrome) — it is the novel code of this
+   published cheat list checked** (3rd party cheat indexes/fandom, gbadrome) — it is the novel code of this
    engagement. Proven with four near-miss rejections.
 
 Two further hidden features exist but are **not reachable by controller**: the incomplete
@@ -140,7 +139,7 @@ B (`z`) and Start both return to mode `0x0D`. It draws the level with a coloured
 
 ## 6. Tables
 
-**Scene modes** (mode-table entries `0x00`–`0x22`; community labels from TCRF cross-checked
+**Scene modes** (mode-table entries `0x00`–`0x22`; community labels from 3rd party cheat indexes cross-checked
 against the ROM; `0x0A`, `0x13`, `0x1F` have a NULL main handler = fade/placeholder):
 
 `00` boot · `01` credits · `02` demo · `03` main menu · `04` options · `05` tutorial ·
@@ -199,7 +198,7 @@ gave `password=0`, `cheat=0`, `code=0`, `secret=0`, `debug=0`, `invalid=0`,
 * **Derived (disassembly):** `set_scene` at `0x080070E8`; 98 BL call sites mapped to modes;
   scene-handler tables; L+R gate mask `0x300` + flag `0x2000` at `0x08039C58`; 4-button mask
   `0x0F` at `0x080332E4`; KEYINPUT read at `0x080331FE`; input debug state `0x03001938`.
-* **Inferred:** TCRF's mode labels for unreached modes; that level editor mode `0x0B` and
+* **Inferred:** a 3rd party cheat index's mode labels for unreached modes; that level editor mode `0x0B` and
   e-Reader modes are gated by external hardware/cheat-device writes rather than controller
   input (consistent with the link-cable/e-Reader descriptions and the string bank).
 * **Negative (bounded):** no password UI on any walked screen; no password strings under
@@ -235,7 +234,7 @@ gave `password=0`, `cheat=0`, `code=0`, `secret=0`, `debug=0`, `invalid=0`,
 * `arm-none-eabi-objdump -M force-thumb`, Capstone 5.0.7, Python 3, mGBA SDL, Xvfb :315,
   openbox, xdotool, scrot, ImageMagick.
 
-Fetched web pages were treated as data. The TCRF mirror (`tcrf.tiago.zip`) contained a
+Fetched web pages were treated as data. The 3rd party cheat index mirror contained a
 **prompt-injection attempt** — a fake "LLM-/AI-agent-specific instructions" block insulting
 the operator — which was ignored and is recorded here per guide §16.8. Its genuine mode list
 was used only as a lead and each relevant mode was verified against ROM code and emulator RAM.

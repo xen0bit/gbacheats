@@ -144,8 +144,8 @@ Because `0x08000F44` clears exactly the bits that encode `chkfield`, the checksu
 **Novel code (not in any published list):** `(P)(N)(F)4(J)(W)7(H)` = `2B 2A 23 19 26 31 1C 25`. Fields: f10=979, f6=6, f5=7, f3=6, f9=87, f2=0, f1=1, f4=1, f2b=1, f1b=0, chk=7. Accepted in-game via the real keyboard UI.
 
 **Published codes checked:**
-- GameFAQs/Gamespot/Vizzed 8-char circled codes belong to this SKU. `DBD7M(V)GZ` has exactly one valid decoder mapping when the ambiguous `(V)` is `7` → `02 00 02 1C 09 30 04 14`, f4=0, f10=2; in-game it loads the green Retroland area with 2 coins. `NBODLH(D)L` has two valid mappings (f4=3). `D(B)(Y)B4V(H)V` has many; `xcqdkvlp` has none under this keyboard's alphabet — likely transcription errors from a different region/font.
-- The 12-char `?+!-$` codes on the same GameFAQs page are for the sibling game *Jimmy Neutron: Boy Genius*; no literal appears in this ROM and the symbols are absent from this SKU's keyboard. Recorded as not applicable, not as "broken".
+- 3rd party cheat indexes 8-char circled codes belong to this SKU. `DBD7M(V)GZ` has exactly one valid decoder mapping when the ambiguous `(V)` is `7` → `02 00 02 1C 09 30 04 14`, f4=0, f10=2; in-game it loads the green Retroland area with 2 coins. `NBODLH(D)L` has two valid mappings (f4=3). `D(B)(Y)B4V(H)V` has many; `xcqdkvlp` has none under this keyboard's alphabet — likely transcription errors from a different region/font.
+- The 12-char `?+!-$` codes on the same 3rd party cheat index page are for the sibling game *Jimmy Neutron: Boy Genius*; no literal appears in this ROM and the symbols are absent from this SKU's keyboard. Recorded as not applicable, not as "broken".
 
 ## 6b. Enumeration
 

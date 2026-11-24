@@ -22,7 +22,7 @@
 **Patch/trainer check.** The entry branch is the stock `EA00002E`, the first 4 KiB
 contains the normal crt0 and no cracktro/trainer banner. Searches for
 `SUNHORS`, `CRC BANDIT`, `MODE7`, `TRAINER`, `CRACK`, `PATCH`, `cracktro`
-returned 0 hits. The SHA-1 matches the No-Intro USA dump
+returned 0 hits. The SHA-1 matches the 3rd party cheat indexes USA dump
 (`Care Bears - The Care Quests (USA) (En,Fr,Es)`), so this is the clean retail
 image. The header checksum field is 0, which is common in this collection's
 dumps; the complement byte is valid.
@@ -56,10 +56,10 @@ The evidence is fourfold:
    alphabet table, and no function that reads user text. The input layer merely
    exposes ten per-button held/previous bytes; menus read single buttons.
 
-Published-code check: VGChartz, CheatHappens and CheatingDome all list **0
-cheats** for this game. GameFAQs and TCRF blocked automated fetches (HTTP 403)
+Published-code check: 3rd party cheat indexes all list **0
+cheats** for this game. 3rd party cheat indexes blocked automated fetches (HTTP 403)
 and search snippets show no code list. One low-quality site
-(`classicemu.com`) publishes `HEART99` and `UNLOCKALL`; both strings are absent
+(3rd party cheat indexes) publishes `HEART99` and `UNLOCKALL`; both strings are absent
 from the ROM in ASCII, lower-case, upper-case, UTF-16LE, UTF-16BE and
 `-0x20`-shifted encodings (0 hits each), and the ROM has no screen on which
 letters can be entered. They are fabricated and unenterable.
@@ -126,11 +126,11 @@ Published codes tested:
 
 | Source | Claim | Result |
 |---|---|---|
-| VGChartz | "Total cheats available: 0" | No codes to test |
-| CheatHappens | "no cheats or cheat codes" | No codes to test |
-| CheatingDome | "No Cheats or Achievements yet" | No codes to test |
-| GameFAQs / TCRF | pages returned HTTP 403 to automated fetch | No list recovered; search snippets show none |
-| classicemu.com | `HEART99`, `UNLOCKALL` | Both absent from ROM in 6 encodings; no text-entry screen exists; rejected as fabricated |
+| 3rd party cheat indexes | "Total cheats available: 0" | No codes to test |
+| 3rd party cheat indexes | "no cheats or cheat codes" | No codes to test |
+| 3rd party cheat indexes | "No Cheats or Achievements yet" | No codes to test |
+| 3rd party cheat indexes | pages returned HTTP 403 to automated fetch | No list recovered; search snippets show none |
+| 3rd party cheat indexes | `HEART99`, `UNLOCKALL` | Both absent from ROM in 6 encodings; no text-entry screen exists; rejected as fabricated |
 
 Button tests performed (all with screenshots):
 
@@ -311,9 +311,9 @@ anywhere else in the image.
 
 | Code | Source | In ROM? | Enterable? | Verdict |
 |---|---|---|---|---|
-| `HEART99` | classicemu.com | No (6 encodings, 0 hits) | No text-entry screen | Fabricated |
-| `UNLOCKALL` | classicemu.com | No (6 encodings, 0 hits) | No text-entry screen | Fabricated |
-| (none) | VGChartz / CheatHappens / CheatingDome | — | — | 0 genuine cheats listed |
+| `HEART99` | 3rd party cheat indexes | No (6 encodings, 0 hits) | No text-entry screen | Fabricated |
+| `UNLOCKALL` | 3rd party cheat indexes | No (6 encodings, 0 hits) | No text-entry screen | Fabricated |
+| (none) | 3rd party cheat indexes | — | — | 0 genuine cheats listed |
 
 ## 6b. Enumeration
 
@@ -384,7 +384,7 @@ space is empty and that every screen/button surface has been enumerated.
 
 | Claim | Type | Evidence |
 |---|---|---|
-| ROM identity and clean USA dump | Observed | Hashes above; No-Intro SHA-1 match |
+| ROM identity and clean USA dump | Observed | Hashes above; 3rd party cheat indexes SHA-1 match |
 | No patch/trainer | Observed | Stock entry `EA00002E`, stock crt0, 0 keyword hits |
 | Title has 3 entries | Observed + Derived | Screenshots; resource names and pointer table at 0x480; handler 0x080004CC |
 | Quest selector has 12 entries | Observed + Derived | 12 screenshots; handler 0x08000A80; right-wrap code at 0x080026BE |
@@ -412,7 +412,7 @@ space is empty and that every screen/button surface has been enumerated.
   completed and its `Level Complete` banner observed. The `CONGRATULATIONS`
   ending string is a normal completion message; the state/input/scene analysis
   above is independent of completion and cannot hide a code system.
-* **GameFAQs/TCRF.** Both returned HTTP 403 to automated fetches; no archived
+* **3rd party cheat indexes.** Both returned HTTP 403 to automated fetches; no archived
   cheat list was recovered. The three accessible cheat databases list zero
   codes, and the two claimed codes on one low-quality site were disproved.
 

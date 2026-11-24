@@ -47,7 +47,7 @@ menu** — with a cheat-count of 5 all five visible rows are checked and no sixt
   and the code auto-submits on the 8th symbol. `B` is Back.
 - Save a state at the empty password screen (`Shift+F1`) to avoid replaying the ~15 s intro.
 - Published anchors used: `VDG*GNCJ` (Level 01), `Q17K99*W` (Level 15), `LVCDVVVV`
-  (Gardener 1), `VT*CH3G3` (Triple Jump — SuperCheats prints `Vt*CH3G3`, a lowercase-t OCR
+  (Gardener 1), `VT*CH3G3` (Triple Jump — 3rd party cheat indexes prints `Vt*CH3G3`, a lowercase-t OCR
   error; the ROM alphabet is uppercase-only).
 - Novel codes entered on that screen: `QH8KRHTC`, `VQ7K48D4`.
 - Rejection tests: `QH8KRHTD` (one checksum symbol changed), `BBBBBBBB` (length prefix `B`
@@ -182,8 +182,8 @@ The first symbol is `ALPHA[4*ndigits]`, i.e. only `G` (1 digit), `L` (2), `Q` (3
 | Pirate 2 | `QK8F2TC3` | 1 | 5 | 0 | 8 | 0 |
 | Triple Jump | `VT*CH3G3` | 2 | 0 | 1 | 14 | 1 |
 
-Source: SuperCheats list plus the Great Games Wiki mirror (403 on direct fetch, recovered from
-search snippets and the SuperCheats page). All 21 literals were checked against the ROM model;
+Source: 3rd party cheat index list plus the 3rd party cheat index mirror (403 on direct fetch, recovered from
+search snippets and the 3rd party cheat index page). All 21 literals were checked against the ROM model;
 none appears as an ASCII string in the image (algorithmic codes, not a lookup table).
 
 ### 6.2 Cheat flags ↔ Cheats menu
@@ -207,7 +207,7 @@ accepted string is a legitimate start. The intended field space is
 codes bit-for-bit from the decoded fields, so the novel codes below are genuine forward tests,
 not perturbations of known strings.
 
-**Novel codes (absent from SuperCheats, GameFAQs, Great Games Wiki and every consulted list),
+**Novel codes (absent from 3rd party cheat indexes and every consulted list),
 typed on the real PASSWORD screen and confirmed in mGBA:**
 
 | Novel code | Decoded fields | In-game proof |
@@ -257,7 +257,7 @@ row does not appear when all flags are set.
   isolate their readers.
 - `cheatcount > 5` is not rejected by the validator (all such values set the same five flag
   bits), so those are aliases of `cheatcount = 5`, not distinct unlock states.
-- The SuperCheats submission `vgsvh8y` (lowercase, 7 characters) is outside the format and was
+- The 3rd party cheat indexes submission `vgsvh8y` (lowercase, 7 characters) is outside the format and was
   treated as an invalid/unverified public submission, not a code variant.
 - No button-code sequence or debug menu was found in addition to the password system; the
   search space was the full UI string-pointer table (`0x0805E780`–`0x0805E910`), the 32-symbol

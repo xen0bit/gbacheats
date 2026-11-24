@@ -57,9 +57,9 @@ whole searchable space, not inferred from a failed lookup (guide §0.2.5,
   control-byte-interleaved encodings. The widely published code list is for
   **PS2 / GameCube / Xbox / Arcade** (entered as a character *name*); the
   GBA SKU has no name-entry surface at all. Independent corroboration:
-  ChapterCheats' GBA page says "No Codes, No Passwords, No Unlockables";
-  GameFAQs' only GBA-specific entry is an out-of-scope "walk through walls"
-  gameplay exploit; TCRF's debug menus are PS2/Xbox/GameCube only.
+  3rd party cheat indexes' GBA page says "No Codes, No Passwords, No Unlockables";
+  3rd party cheat indexes' only GBA-specific entry is an out-of-scope "walk through walls"
+  gameplay exploit; a 3rd party cheat index's debug menus are PS2/Xbox/GameCube only.
 * No novel code could be minted because no code system exists. Sections
   6b/7 therefore give the enumeration of the *empty* space with exact
   counts and rejection-style bounds (there is no accepted input to enter).
@@ -161,9 +161,9 @@ Published-code verification table (all **absent** from this ROM):
 
 | Source | Codes | Result |
 |---|---|---|
-| GameFAQs GBA cheats (GC-tagged table) | 40 6-letter codes (10000K, 1ANGEL, INVULN, 000000, BAT900, SJB964, EGG911, POJO, PEEKIN, …) | 0 literals in ROM under ASCII / case-fold / +0x20 / UTF-16LE / UTF-16BE / reversed / control-byte-interleaved |
-| GameFAQs PS2 passwords | 28 codes (BAT900, GAM666, NUD069, …) | 0 literals |
-| TCRF console debug menu | DBRNKR, AAAAAA, MNTHRX, ARIENT, ADMBLY, ZANZI, NICO | 0 literals (the 7 `AAAAAA` hits are compressed-graphics coincidence at 0x7697C etc.) |
+| 3rd party cheat indexes GBA cheats (GC-tagged table) | 40 6-letter codes (10000K, 1ANGEL, INVULN, 000000, BAT900, SJB964, EGG911, POJO, PEEKIN, …) | 0 literals in ROM under ASCII / case-fold / +0x20 / UTF-16LE / UTF-16BE / reversed / control-byte-interleaved |
+| 3rd party cheat indexes PS2 passwords | 28 codes (BAT900, GAM666, NUD069, …) | 0 literals |
+| 3rd party cheat indexes console debug menu | DBRNKR, AAAAAA, MNTHRX, ARIENT, ADMBLY, ZANZI, NICO | 0 literals (the 7 `AAAAAA` hits are compressed-graphics coincidence at 0x7697C etc.) |
 | Generic password alphabets | 4 known alphabets | 0 hits; only the font map at 0x7369D |
 
 ## 6b. Enumeration

@@ -29,7 +29,7 @@ is a *gameplay control* or a *save-bit unlockable*, not a code:
 * **Quick start / turbo start** — press A on the final (4th) countdown stone head
   (timing, not a code).
 * **Throw item forward** — hold L+Up while racing (a held chord on the item-use
-  button; plain L drops behind). Published on GameRevolution/CheatingDome.
+  button; plain L drops behind). Published on 3rd party cheat indexes.
 * **Replay camera** — hold B after the result time disappears, then D-pad to change
   view (post-race control).
 * **Four hidden characters** — Bear Tank, King, Vic Viper, Ebisumaru, unlocked by
@@ -150,8 +150,7 @@ IDs 0–7 are present as bytes `00 01 02 03 04 05 06 07` at `0x0201BCEA` on a fr
 save; 8–11 are `00`, i.e. absent. (*Note:* published CodeBreaker labels for IDs 6/7
 are Dracula/Moai; the ROM order above is what the save list stores.)
 
-**Unlock conditions** (developer-intended, from GameFAQs FAQ 12483, GameRevolution,
-Neoseeker; no code entry involved): Bear Tank — diamond in Cyber Field 2 GP; King —
+**Unlock conditions** (developer-intended, from 3rd party cheat index FAQ 12483, 3rd party cheat indexes; no code entry involved): Bear Tank — diamond in Cyber Field 2 GP; King —
 diamond on hidden island in Sky Bridge 2 GP; Vic Viper — diamond on hidden island in
 Moon Road GP; Ebisumaru — unlock Bear, then beat record times on Ganbare Dochu 1 & 2
 with Bear. License classes C→B→A→S gate the extra cups.
@@ -215,8 +214,7 @@ unchanged in the secret-bit region), bounding the name-entry surface as a non-va
   GameShark/CodeBreaker RAM addresses were used only to locate the save block and
   were independently confirmed (they are not findings and are out of scope).
 * **No prompt injection encountered** in fetched web content; all pages were treated
-  as data. (TCRF returned HTTP 403; GameFAQs FAQ, GameRevolution, Neoseeker, Almar's,
-  CheatingDome and the "100 GBA crackmes" summary were used as lead data only.)
+  as data. (3rd party cheat indexes returned HTTP 403; 3rd party cheat index FAQ, 3rd party cheat indexes and the "100 GBA crackmes" summary were used as lead data only.)
 
 ## 8. Unknowns
 

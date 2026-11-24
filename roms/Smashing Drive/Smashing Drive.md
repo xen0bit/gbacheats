@@ -35,7 +35,7 @@ from **Options → Password**. It is algorithmic, not a lookup table, and is ful
   shift (2 = Rush Hour, 3 = Night Owl, 4 = Dusk & Wired / "All Tracks"). There is no code for
   level 1 (Early Bird), which is the default.
 
-The public GameFAQs list (`1DC4`, `M2CC`, `PXB&`) was verified against the ROM and in the
+The public 3rd party cheat index list (`1DC4`, `M2CC`, `PXB&`) was verified against the ROM and in the
 emulator. **`PXB&` is a transcription error: the game rejects it; `PXB8` is the correct code.**
 There is an in-game *generator* (0x080053BC) that mints a fresh valid password whenever the game
 offers "To unlock level … use this password:"; it randomises the two non-semantic fields, which is
@@ -170,11 +170,11 @@ Decoded published/novel codes:
 
 Bits 13–14 of the 15-bit word are unused (alias space).
 
-**Published codes (GameFAQs, archived 2018 snapshot of
-`gamefaqs.gamespot.com/gba/922021-smashing-drive/cheats`):** `1DC4`=Night Owl, `M2CC`=All Tracks,
+**Published codes (3rd party cheat indexes, archived 2018 snapshot of
+3rd party cheat indexes):** `1DC4`=Night Owl, `M2CC`=All Tracks,
 `PXB&`=Rush Hour. All three literals are absent from the ROM as ASCII — they are algorithmic, as
 proved by the validator above. `PXB&` contains a character outside the alphabet and is rejected;
-`PXB8` is the real code. No other published code list (TCRF/VGChartz) yielded GBA-specific codes;
+`PXB8` is the real code. No other published code list (3rd party cheat indexes) yielded GBA-specific codes;
 the widely copied "Extra Money: Y,B,Y,B,X,A,X,A,Down,Up" is a GameCube/Xbox map-screen code and
 does not apply to this SKU (the GBA game has no map screen).
 
@@ -277,7 +277,7 @@ walked, that is a bounded "cut string" negative.
 * mGBA 0.10.5 + Xvfb `:315` + openbox + `xdotool`/`scrot`; SDL audio disabled with
   `SDL_AUDIODRIVER=dummy`. The GDB stub was unreliable in this build, so RAM reads used
   savestate decompression (guide §16.13) instead.
-* Web: archived GameFAQs cheat page via `web.archive.org` (snippet used as a lead, then verified
+* Web: archived 3rd party cheat index cheat page via `web.archive.org` (snippet used as a lead, then verified
   in ROM and emulator). Fetched pages were treated as data only.
 
 No copyrighted ROM data or assets are redistributed here — only addresses, algorithms, hashes and

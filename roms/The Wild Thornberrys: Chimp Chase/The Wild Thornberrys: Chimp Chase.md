@@ -38,7 +38,7 @@ started a Jungle-level game with an unlockable character, and its decoded state 
 verified in RAM at `0x02014BD4` = `00 00 01 02`. Four rejection tests bound the check
 and field ranges: one bad checksum and three checksum-valid-but-out-of-range codes.
 
-Web recon found **no published code list** for this SKU (GameFAQs/TCRF return 403;
+Web recon found **no published code list** for this SKU (3rd party cheat indexes return 403;
 search engines return nothing). The single hard-coded generator preset `crdts123`
 (`0x082F09D8`) is **rejected** by the password screen — it is unreachable through the
 keyboard (and no 8-symbol code decodes to its state `{1,2,3,4}`), so the credits
@@ -160,7 +160,7 @@ every 32 random strings. The state range checker removes further codes as listed
 character on the real PASSWORD screen with xdotool; the game displayed "password
 accepted, press START to play" and, after Start, entered the Jungle level. The decoded
 state was read from `0x02014BD4` in an mGBA savestate: `00 00 01 02`. No published list
-exists for this SKU (web recon: 0 results, GameFAQs/TCRF 403); the only hard-coded
+exists for this SKU (web recon: 0 results, 3rd party cheat indexes 403); the only hard-coded
 code, `crdts123`, is not enterable/accepted. The codec source is in the work dir
 (`pw.py`) and the code is reproducible from encoder input state `[00,00,01,00]`.
 

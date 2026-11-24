@@ -121,14 +121,14 @@ The unlockable card system is **save-bit based**, not code based: counters (sold
 
 | Source | Code literal | ROM verification |
 |---|---|---|
-| TCRF / randomhoohaas | `08006524:F8CF` (USA debug) | Original halfword at file `0x6524` = `0x0E00`; patch bytes verified |
-| TCRF / randomhoohaas | `08006529:F8CF` (EU/JP debug) | Different revision; not present in this USA image |
-| TCRF / randomhoohaas | `08079750:45C5` (JP region select) | File `0x79750` = `79 45 00 08` → pointer `0x08004579` ✓ |
-| ROMSFUN/libretro | `4200CD70 FFFF × 0x0D` (All Cards) | EWRAM `0x0200CD70` work area exists; zeroed on fresh file ✓ |
-| ROMSFUN/libretro | `8200CD68 0600` (All Missions) | EWRAM `0x0200CD68` exists ✓ |
-| GameFAQs | Unlockable conditions (kill 100/200/300/999 soldiers; rescue 10…90 prisoners; clear missions quickly; die with no kills → Washout; 99 cards → All Cards; dungeon card → Dungeon stage) | All named rewards exist in the ROM card table; Washout condition reproduced in emulator ✓ |
+| 3rd party cheat indexes / randomhoohaas | `08006524:F8CF` (USA debug) | Original halfword at file `0x6524` = `0x0E00`; patch bytes verified |
+| 3rd party cheat indexes / randomhoohaas | `08006529:F8CF` (EU/JP debug) | Different revision; not present in this USA image |
+| 3rd party cheat indexes / randomhoohaas | `08079750:45C5` (JP region select) | File `0x79750` = `79 45 00 08` → pointer `0x08004579` ✓ |
+| 3rd party cheat indexes/libretro | `4200CD70 FFFF × 0x0D` (All Cards) | EWRAM `0x0200CD70` work area exists; zeroed on fresh file ✓ |
+| 3rd party cheat indexes/libretro | `8200CD68 0600` (All Missions) | EWRAM `0x0200CD68` exists ✓ |
+| 3rd party cheat indexes | Unlockable conditions (kill 100/200/300/999 soldiers; rescue 10…90 prisoners; clear missions quickly; die with no kills → Washout; 99 cards → All Cards; dungeon card → Dungeon stage) | All named rewards exist in the ROM card table; Washout condition reproduced in emulator ✓ |
 
-No published in-game password or button code was found on GameFAQs (archived), TCRF (archived), VGChartz/ROMsfun, GameHacking, or randomhoohaas.
+No published in-game password or button code was found on 3rd party cheat indexes, or randomhoohaas.
 
 ## 6b. Enumeration
 
@@ -137,7 +137,7 @@ No published in-game password or button code was found on GameFAQs (archived), T
 - **Button space:** searched for consecutive `u16` key-mask arrays for L+R (`0x300`), Start+Select (`0x00C`), A+B (`0x003`), Up/Down (`.`, `0x080`) and four plausible 3–4 press sequences (including reversed order) across the whole 8 MiB: **0 hits** for every multi-press sequence. The raw single-mask byte counts (e.g. 8126 for `0x0300`) are compressed-graphics noise, not tables.
 - **Screens walked (all reachable screens, original ROM):** SNK splash, title, file select, option, difficulty, soldier select, base camp, card list, prisoner list, mission confirm, mission map, gameplay HUD, normal pause, mission failed, card-earned notification — each with a savestate and screenshot. Debug screens walked on the patched copy: debug main menu, DIP1, DIP2, stage select (incl. area cycling), test stage, complete confirm, data-update confirm.
 
-**Novel code / unadvertised combination.** Because no code system exists, the equivalent deliverable is an unpublished debug access combination. The exact 16-bit patch (`CF F8` at file `0x6524`) plus `Start → Down×3 → A` reaches STAGE SELECT, and `Right → A` selects the hidden `1-02` (Girida-O) area — a stage not reachable from the normal mission map. This combination appears in no GameFAQs/VGChartz/TCRF list (those publish only the patch itself). It was entered in the emulator; the stage-select list and the area change were observed on screen (screenshots `dbg_stagesel.png`, `dbg_stagesel_down.png`).
+**Novel code / unadvertised combination.** Because no code system exists, the equivalent deliverable is an unpublished debug access combination. The exact 16-bit patch (`CF F8` at file `0x6524`) plus `Start → Down×3 → A` reaches STAGE SELECT, and `Right → A` selects the hidden `1-02` (Girida-O) area — a stage not reachable from the normal mission map. This combination appears in no 3rd party cheat index list (those publish only the patch itself). It was entered in the emulator; the stage-select list and the area change were observed on screen (screenshots `dbg_stagesel.png`, `dbg_stagesel_down.png`).
 
 **Bounds proven by rejection.**
 1. Writing only the low byte `0xCF` at `0x6524` (the literal BizHawk instruction) was tested: Start during gameplay shows the **normal** pause menu, not the debug menu → the gate requires the full 16-bit `0xF8CF`.
@@ -150,7 +150,7 @@ No published in-game password or button code was found on GameFAQs (archived), T
 - **Observed:** every screen listed in §6b was reached in mGBA and screenshotted; the Washout card changed the CARD counter `000/100`→`001/100`; the debug menu opened with the 16-bit patch and all 8 entries plus submenus were displayed; invincibility survived subsequent gameplay.
 - **Derived:** tables and addresses in §4 from `xxd`/`strings`/pointer scans; the 200-record card/prisoner name table and the 8-entry debug menu from ROM data; the gate mechanism from A/B patch testing; RAM flag deltas from decompressed savestate diffs.
 - **Inferred (labelled):** the exact semantic field names of `0x0200464E` / `0x0200CD85` (card-collection deltas) and the full write effect of COMPLETE/DATA UPDATE on the save file were not isolated; the menu confirmations and the 100/100 card table prove intent, but the save-memory write itself was not re-read after a SAVE.
-- **No prompt injection encountered** in the GameFAQs, TCRF, or randomhoohaas pages; all fetched content was treated as data.
+- **No prompt injection encountered** in the 3rd party cheat indexes, or randomhoohaas pages; all fetched content was treated as data.
 
 ## 8. Unknowns
 

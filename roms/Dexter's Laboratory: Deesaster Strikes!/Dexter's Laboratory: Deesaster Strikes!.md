@@ -24,12 +24,12 @@ Notes:
   hits exactly one header, at file `0x0`. No multi-game shell, no second image.
 * **No patch/trainer.** Entry word is the stock branch; the first 4 KiB is the
   normal crt0 + IRQ stubs. There is no cracktro string, no appended payload,
-  and CRC32 `E948D412` matches the known USA dump listed on GameHacking.org.
+  and CRC32 `E948D412` matches the known USA dump listed on 3rd party cheat indexes.
 * The empty header checksum `0x0000` with a complement byte that does not match
   the recomputed value is how this title shipped (the same header is present in
   every documented dump); it is not evidence of editing here — the CRC proves it.
 * **Build/version inside the ROM:** `DEBUG INFORMATION` / `  VERSION 02/08/01`
-  at file `0x20EDC` / `0x20EF0`. Per TCRF the 1.1 re-issue says `14/08/01`, so
+  at file `0x20EDC` / `0x20EF0`. Per 3rd party cheat indexes the 1.1 re-issue says `14/08/01`, so
   this image is the **initial release (v1.0)**, i.e. the build with the
   final-level wrench softlock.
 * Audio: `GAX Sound Engine v2.01b (Jun 22 2001)` / `Shin'en Multimedia. Code:
@@ -85,11 +85,10 @@ The ROM's `DEBUG INFORMATION` overlay (`0x0800504C`) exists but is **dead code**
 zero BL callers and zero pointer literals anywhere in the image.
 
 **Published sources checked** (button-code pages only; GameShark/CodeBreaker/
-Action Replay RAM lists are out of scope by instruction): ggmania.com cheat
-4379, GameRevolution guide 28598, cheatbook.de, games-cheats.org,
-cheatingdome.com and the gbadamud blog. All six carry the same nine
+Action Replay RAM lists are out of scope by instruction): 3rd party cheat index cheat
+4379, 3rd party cheat index guide 28598, 3rd party cheat indexes and the 3rd party cheat indexes blog. All six carry the same nine
 L/R strings (with the two defects above); none list STRONG DEXTER, ROBOTS ARE
-WEAK, SLOW ENEMIES or DEXTER-ROO. TCRF documents the text table and the debug
+WEAK, SLOW ENEMIES or DEXTER-ROO. 3rd party cheat indexes document the text table and the debug
 strings but no code system.
 
 ## 3. How to reproduce

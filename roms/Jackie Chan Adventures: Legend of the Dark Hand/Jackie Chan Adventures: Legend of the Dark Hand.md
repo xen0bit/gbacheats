@@ -23,7 +23,7 @@ Embedded-header scan (156-byte Nintendo logo `24 ff ae 51 69 9a a2 21 3d 84 82 0
 
 The game has **one** developer-intended cheat surface: a **button-code system on the title screen** ("Press Start"). The engine registers **exactly five** button sequences at boot of the title screen; entering any of them unlocks a hidden **"SECTION 13" menu** (NEW GAME / TRAINING / OPTIONS / CONTINUE) instead of going straight into the opening cutscene. The publicly documented code — hold **R**, press **B, A, Left, Down, Up, Right** — is record #1 and was verified both literally in ROM and in the emulator.
 
-Four further records are **not in any published list** (CheatingDome/GameFAQs list only the one code). They were enumerated from the ROM table, generated as key presses, entered in the emulator, and each produced the unlock menu. The complete space is therefore small and closed: 5 records, each `{u16 hold-mask, u16 sequence…, 0xFFFF terminator}`.
+Four further records are **not in any published list** (3rd party cheat index list only the one code). They were enumerated from the ROM table, generated as key presses, entered in the emulator, and each produced the unlock menu. The complete space is therefore small and closed: 5 records, each `{u16 hold-mask, u16 sequence…, 0xFFFF terminator}`.
 
 A **password UI** exists in the image (PASSCSR / PASSBUT / PASSDIG / INTPASSDIGIT entities, a 4×32 character grid and a 0x0801B518 screen driver) but **no accepted password literal or encoder/decoder table** was found, and no reachable screen displays it: CONTINUE on the unlocked menu is inert with a blank (0xFF-filled) 512-byte SRAM. The report treats this as a **gated/unreachable feature**, not as "no code system" — the button codes are real and working. The game's on-screen text is **font/tile-indexed** (§11), so `strings` finds only debug entity names; a tile-index table at file `0x22330..0x22386` (byte values `0x0A..0x3F`) was located and decoded.
 
@@ -114,7 +114,7 @@ The five records at `0x083C51FC` (masks are active-high key bits; sequence is on
 
 | # | ROM addr | hold mask (buttons) | sequence (press order) | len | dispatch id | published? |
 |---|---|---|---|---:|---:|---|
-| 1 | `0x083C51FC` | `0x100` = **R** | B, A, Left, Down, Up, Right | 6 | `0x36` | **YES** (CheatingDome, Cheat Happens, GameFAQs-style lists: "hold R and press B, A, Left, Down, Up, Right") |
+| 1 | `0x083C51FC` | `0x100` = **R** | B, A, Left, Down, Up, Right | 6 | `0x36` | **YES** (3rd party cheat index-style lists: "hold R and press B, A, Left, Down, Up, Right") |
 | 2 | `0x083C520C` | `0x202` = **B+L** | A, Up, Up, Up, Down, Down, Down | 7 | `0x39` | no |
 | 3 | `0x083C521E` | `0x201` = **A+L** | B, Left, Up, Right, Down | 5 | `0x38` | no |
 | 4 | `0x083C522C` | `0x300` = **R+L** | B, A, Left, A, Right, A, Left, A | 8 | `0x37` | no |
@@ -126,7 +126,7 @@ Every record ends in `0xFFFF`. A sixth candidate at `0x083C5246` (`0000 274c 080
 
 **Space size (proven closed).** The title controller issues exactly five BLs to the registration function (`0x8004682, 0x800468A, 0x8004692, 0x800469A, 0x80046A2`); a whole-ROM BL scan for `0x0801918C` returns only those five. A whole-ROM BL scan for the validator `0x08019090` returns only one caller (`0x80046D8`, the title controller), so there is no second button-code screen. Records are terminated by the literal `0xFFFF` at `0x80191C8`, and the registration loop counts to that terminator — so the accepted set is exactly the five strings in §6 (sequence length 1–8, hold mask ∈ {0x000,0x100,0x201,0x202,0x300}).
 
-**Novel codes (not on GameFAQs / VGChartz / TCRF / any wiki).** The web search found only record 1 published. Records 2–5 were minted from the ROM table and entered on the real title screen:
+**Novel codes (not on 3rd party cheat indexes / any wiki).** The web search found only record 1 published. Records 2–5 were minted from the ROM table and entered on the real title screen:
 
 * Record 2 (hold B+L, A↑↑↑↓↓↓) — `rec2c.png` → SECTION 13 menu.
 * Record 3 (hold A+L, B←↑→↓) — `rec3b_afterc.png` → SECTION 13 menu.
@@ -152,7 +152,7 @@ A caveat is important and is reported as such: record 5 accepts **Start alone**,
 * **Derived** (disassembly): the 5-record table, `0xFFFF` terminators, register/check functions, the 12-byte entry layout, the history-ring matcher, the five action ids, the password entity descriptors and 4×32 grid code at `0x0801BF3E`, the font tile-table at `0x0822330`.
 * **Inferred**: the semantic meaning of action ids `0x30/0x36/0x37/0x38/0x39` (all produce the same visible menu; per-code flag differences were not isolated); that the password screen is reached only through one of the seven UI handlers at §4 but no player-accessible path to those handlers was found.
 
-Published-code verification: the literal string of the published button sequence is present as key masks exactly once at file `0x3C51FE` (u16 sequence `02 00 01 00 20 00 80 00 40 00 10 00`), immediately preceded by mask `0x0100` (R) and followed by `0xFFFF`. The published "infinite health / lives / moon jump" etc. found on ROMSFUN/Cheat Happens are CodeBreaker/Action-Replay memory patches (e.g. `32006218 0064`) and are **not** in-game cheats; they were not tested (out of scope).
+Published-code verification: the literal string of the published button sequence is present as key masks exactly once at file `0x3C51FE` (u16 sequence `02 00 01 00 20 00 80 00 40 00 10 00`), immediately preceded by mask `0x0100` (R) and followed by `0xFFFF`. The published "infinite health / lives / moon jump" etc. found on 3rd party cheat indexes are CodeBreaker/Action-Replay memory patches (e.g. `32006218 0064`) and are **not** in-game cheats; they were not tested (out of scope).
 
 ## 8. Unknowns
 

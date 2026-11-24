@@ -28,7 +28,7 @@ The three things that superficially look like a code surface were all checked an
 
 1. **A 27-symbol alphabet** `ABCDEFGHIJKLMNOPQRSTUVWXYZ ` at `0x087FB870`. Its only consumers (`0x080298A0`–`0x08029A60`) increment a cursor over 0..26 and write the selected glyph into a 3-byte name buffer at `0x03003004`–`0x03003014`, then draw it via `setAnimationFrame`. This is the **high-score / best-time name-entry field**, not a password (§16.2b). No `strcmp`/`memcmp` reads that buffer for validation.
 2. **An ASCII string bank** at `0x087FBE..0x087FC3..` holding all menu labels. Fully decoded (§6). It contains `CONTINUE / NEW GAME / LOAD GAME / ADVENTURE / TIME ATTACK / TIME ATTACK / HIGH SCORES / BEST TIMES / PAUSED / SAVE & QUIT / RETRY / YES / NO / STAFF CREDITS` and ending strings. There is **no** `PASSWORD`, `CHEAT`, `SECRET`, `UNLOCK`, `WARP` or `LEVEL SELECT` string in ASCII, `+0x20` case-shifted form, UTF-16LE or UTF-16BE (all counts = 0).
-3. **Published "cheats"** are GameShark/CodeBreaker RAM patches (lives `0x03000000`, score `0x03000004`, stars `0x03000014`/`0x0300578C`, stage `0x03000030`, etc., documented by cturt) — explicitly out of scope (memory-edit codes), and not developer-intended. GameFAQs' archived cheat page lists **only three unlockables**, no passwords or button codes.
+3. **Published "cheats"** are GameShark/CodeBreaker RAM patches (lives `0x03000000`, score `0x03000004`, stars `0x03000014`/`0x0300578C`, stage `0x03000030`, etc., documented by cturt) — explicitly out of scope (memory-edit codes), and not developer-intended. 3rd party cheat indexes' archived cheat page lists **only three unlockables**, no passwords or button codes.
 
 Every reachable screen was booted and walked on the real emulator with RAM evidence (§7). The menu dispatcher's complete domain is `{0,1,2,3}` and its three 6-entry jump tables have only 5 unique targets each (duplicate defaults) — no unlabelled menu index. No novel code was minted because **no code space exists**; this is a proven negative, not an untested one.
 
@@ -128,7 +128,7 @@ These are not codes; they are save-bit/content gates. cturt's "cheats" list (liv
 | Button-mask sequences | every `u16` in ROM tested against active-low masks with 1–4 buttons: **1,291** runs of >=3 consecutive valid masks; **112** runs containing exact single-button masks | All runs are sequential byte patterns (`0x15D,0x15E,0x15F`, etc.) in compressed graphics/audio at `>=0x08041302`; no alternating button-mask table, no progress index/validator |
 | Menu state domain | dispatcher `0x0801700C`; 3 six-entry jump tables at `0x081DF2B8/2D0/2E8` | Domain `{0,1,2,3}`; 5 unique targets per table (duplicated defaults); no unlabelled menu |
 | Embedded images / patches | Nintendo-logo scan across 8 MiB | 1 header only; no trainer or second game |
-| Published codes | GameFAQs (archived 2018-11-26), CheatCC, IGN, TCRF, cturt reverse-engineering notes | 3 gameplay unlockables, 0 passwords/button codes; GameShark/CodeBreaker codes are memory edits (out of scope) |
+| Published codes | 3rd party cheat indexes, cturt reverse-engineering notes | 3 gameplay unlockables, 0 passwords/button codes; GameShark/CodeBreaker codes are memory edits (out of scope) |
 
 **Novel code:** not applicable — no code space to mint from. **Bounds proven by rejection:** attempted title-screen button codes (`L+R+Start+A+B`, Konami sequence, `L+R+Start`) did not open any screen or change menu state; only the normal attract timer (`0x0300162C`) advanced. Unknown-menu-index injection is impossible because the dispatcher maps every value `>=2` to the same `YES/NO` menu (no hidden branch).
 
@@ -136,9 +136,9 @@ These are not codes; they are save-bit/content gates. cturt's "cheats" list (liv
 
 * **Observed** (emulator + GDB, display `:319`): boot logos, character attract, title `PRESS START`, `HIGH SCORES` with names ADE/CMP/KEV/CAI/KAA, multi-world attract gameplay, gameplay at stage `0` with lives `2`/score `0`, `PAUSED / CONTINUE / SAVE & QUIT`, `LOAD GAME / NEW GAME`, save-file creation (512 B EEPROM), return to title with save, and unaffected state after three button-code attempts. `KEYINPUT` verified active-low.
 * **Derived** (disassembly): menu renderer and its two-item literal pools; title state machine and complete jump tables; 27-symbol name-entry loop; string bank contents; resource table; save layout; EEPROM magic in ROM.
-* **Inferred** (not fully exercised): `ADVENTURE/TIME ATTACK` and `YES/NO` menus were proven from their literal pools and reachable code paths but were not captured in a clean screenshot because the attract loop kept advancing during manual navigation; their item counts and strings are nevertheless exact. The save-bit unlock setters were not exhaustively enumerated; GameFAQs' three conditions are taken as published truth and are consistent with the `stars`/`stage` RAM variables.
+* **Inferred** (not fully exercised): `ADVENTURE/TIME ATTACK` and `YES/NO` menus were proven from their literal pools and reachable code paths but were not captured in a clean screenshot because the attract loop kept advancing during manual navigation; their item counts and strings are nevertheless exact. The save-bit unlock setters were not exhaustively enumerated; 3rd party cheat indexes' three conditions are taken as published truth and are consistent with the `stars`/`stage` RAM variables.
 
-No prompt-injection payload was found in the fetched GameFAQs/TCRF pages; fetched content was treated as data only.
+No prompt-injection payload was found in the fetched 3rd party cheat index pages; fetched content was treated as data only.
 
 ## 8. Unknowns
 
@@ -151,5 +151,5 @@ No prompt-injection payload was found in the fetched GameFAQs/TCRF pages; fetche
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for all disassembly.
 * Python 3 scripts (in `/tmp/mariopinball/`): header/hash fingerprint, literal-pointer scan, Thumb `BL` target scan, keymask-run scan, ASCII/UTF-16 keyword scan, screenshot-difference attract detector.
 * mGBA `-g -3` under `Xvfb :319` + `openbox`; persistent `gdb-multiarch` on port 2345 with `interrupt` / `x/..wx` / `continue&`; XTEST input via `xdotool`; `scrot` + ImageMagick `convert`/`montage`.
-* Cross-reference: archived GameFAQs cheats page (2018-11-26 snapshot), TCRF `Notes:Mario Pinball Land`, cturt.github.io/pinball.html (reverse-engineering notes).
+* Cross-reference: archived 3rd party cheat index cheats page (2018-11-26 snapshot), 3rd party cheat indexes `Notes:Mario Pinball Land`, cturt.github.io/pinball.html (reverse-engineering notes).
 * No ROM or copyrighted assets were redistributed; only addresses, hashes, algorithms and tool scripts are published.

@@ -22,7 +22,7 @@
 
 **Independence from sibling titles (verified):** the set also contains *Justice League: Chronicles* (code `BJLE5D`, MD5 `1b953a…`) and *Justice League: Injustice for All* (code `AJLE5D`, MD5 `b2c954…`). This image's code `BJHE` occurs only in this ROM; none of the code-table bytes, cheat strings or engine strings found here are shared. Franchise name alone is not evidence (guide §16.11); treat this as a separate Shin'en engine.
 
-**Scope note:** GameShark/CodeBreaker/GameHacking.org master codes found on the web are out of scope and were not applied. Only developer-intended title-screen button codes and progression unlockables were analyzed.
+**Scope note:** GameShark/CodeBreaker/3rd party cheat indexes master codes found on the web are out of scope and were not applied. Only developer-intended title-screen button codes and progression unlockables were analyzed.
 
 ## 2. Executive summary
 
@@ -32,7 +32,7 @@ All 7 published codes were located literally in the ROM, independently decoded, 
 
 The whole space is characterised: the accepted 10-press set is exactly the 7 table records; bit `0x80` of the flag byte has no code. Two unpublished inputs were nevertheless accepted in-game — an 11-press string with an unrecorded `L` prefix, and a chained two-code input producing the unadvertised combined flag `0x30`. Bounds were proven by four rejected inputs plus four non-triggering system key combos.
 
-The Extras menu (4 entries: Making of…, Boss Rush, Theater, Superman Race) renders blank bars with a fresh save; its labels exist as a 5-record ASCII table at `0x1EB05C`. These are **progression save-bit unlocks** (beat Circe / Grodd / game per GameFAQs and the in-game "…unlocked!" messages), not code-gated: no button-code validator writes anything except `0x03003D88`. No hidden debug screen or debug strings exist in this image.
+The Extras menu (4 entries: Making of…, Boss Rush, Theater, Superman Race) renders blank bars with a fresh save; its labels exist as a 5-record ASCII table at `0x1EB05C`. These are **progression save-bit unlocks** (beat Circe / Grodd / game per 3rd party cheat indexes and the in-game "…unlocked!" messages), not code-gated: no button-code validator writes anything except `0x03003D88`. No hidden debug screen or debug strings exist in this image.
 
 ## 3. How to reproduce
 
@@ -115,7 +115,7 @@ Consistency check against observed RAM: after entering "All heroes" the state sh
 
 ## 6. Tables
 
-### 6.1 The seven codes (all match published GameFAQs list byte-for-byte)
+### 6.1 The seven codes (all match published 3rd party cheat index list byte-for-byte)
 
 | # | Record ROM | Bytes (`B` + 8 dirs + `Select`) | Published effect | Flag bit | Emulator RAM |
 |---:|---:|---|---|---:|---:|
@@ -127,7 +127,7 @@ Consistency check against observed RAM: after entering "All heroes" the state sh
 | 5 | `0x081F467E` | `02 40 80 40 40 80 80 40 80 04` (B U D U U D D U D S) | All lives | `0x40` | `0x40` ✓ |
 | 6 | `0x081F4688` | `02 80 80 80 80 20 10 20 10 04` (B D D D D L R L R S) | All powers | `0x20` | `0x20` ✓ |
 
-Mask encoding (active-high): `A=0x01 B=0x02 Select=0x04 Start=0x08 Right=0x10 Left=0x20 Up=0x40 Down=0x80 R=0x100 L=0x200`. GameFAQs' "Start with five Justice Icons" is the same input as "All heroes" (code 4), not an eighth record.
+Mask encoding (active-high): `A=0x01 B=0x02 Select=0x04 Start=0x08 Right=0x10 Left=0x20 Up=0x40 Down=0x80 R=0x100 L=0x200`. 3rd party cheat indexes' "Start with five Justice Icons" is the same input as "All heroes" (code 4), not an eighth record.
 
 ### 6.2 Flag byte `0x03003D88`
 
@@ -137,7 +137,7 @@ Bits `0x01,0x02,0x04,0x08,0x10,0x20,0x40` are set by codes 0–6; `0x80` is neve
 
 `Arena Mode` (`0x1EB05C`), `Making of...` (`0x081EB09C`), `Boss Rush` (`0x081EB0DC`), `Theater` (`0x081EB11C`), `Superman Race` (`0x081EB15C`). The Extras menu shows 4 entries; with an empty save all four render as blank cyan/white bars — locked placeholders, not an absent text bank (the labels and the `EXTRAS MENU` header are plain ASCII and the font works elsewhere).
 
-Published/screen-confirmed unlock conditions (GameFAQs, supercheats, cheatingdome; corroborated by in-game strings at `0x1EE91C`–`0x1EEA7C`):
+Published/screen-confirmed unlock conditions (3rd party cheat indexes; corroborated by in-game strings at `0x1EE91C`–`0x1EEA7C`):
 
 | Unlockable | Condition | In-game message |
 |---|---|---|
@@ -152,7 +152,7 @@ These are progression save-bit gates (guide §16.18), not cheat codes: the seven
 
 ### 6.4 Web verification
 
-GameFAQs (cheat page 933902), cheatingdome, supercheats and absolutcheats all list the same seven hold-B sequences; the slight variants (e.g. supercheats' `D,D,D,D,L,R,U,D`) are transcription errors — the ROM record is `D,D,D,D,L,R,L,R`. No prompt-injection payload was observed in the fetched pages; all fetched text was treated as data.
+3rd party cheat indexes all list the same seven hold-B sequences; the slight variants (e.g. 3rd party cheat indexes' `D,D,D,D,L,R,U,D`) are transcription errors — the ROM record is `D,D,D,D,L,R,L,R`. No prompt-injection payload was observed in the fetched pages; all fetched text was treated as data.
 
 ## 6b. Enumeration
 
@@ -160,7 +160,7 @@ GameFAQs (cheat page 933902), cheatingdome, supercheats and absolutcheats all li
 
 **Validator oracle.** The comparison loop at `0x08012044` is a plain byte-for-byte compare of `history(9-i)` against `code[i]`. I reimplemented it in Python and checked it against the observed ring-buffer dump after each of the seven codes; it agrees with the ROM on every accepted input and on every rejected input below. Because the loop has no branches other than the 10 comparisons and the seven call sites are the only writers of `0x03003D88`, the enumeration is exhaustive: **there is no eighth 10-press code** and no way to set bit `0x80` through input.
 
-**Novel codes generated and accepted in-game (absent from GameFAQs / VGChartz / TCRF / all wiki lists):**
+**Novel codes generated and accepted in-game (absent from 3rd party cheat indexes / all wiki lists):**
 
 1. **Unpublished input string `L` + All-powers sequence** — press `L` (unrecorded because B is not held), then hold B and enter `D,D,D,D,L,R,L,R,Select`. The extra leading press lies outside the 10-entry window. Result: flag byte `0x03003D88 = 0x20`, ring index `1`, with the ring contents identical to the plain code (proving the leading `L` was ignored). No published list contains an 11-press variant.
 2. **Unpublished combined effect `All heroes + All powers`** — enter the two 10-press codes back-to-back. Result: flag byte `= 0x30` (`0x10 | 0x20`), an unadvertised simultaneous combination; separately, "All heroes" alone was carried into gameplay and changed the HUD roster from 3 to 5 character portraits.

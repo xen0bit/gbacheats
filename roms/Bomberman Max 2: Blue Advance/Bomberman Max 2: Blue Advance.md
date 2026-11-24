@@ -442,7 +442,7 @@ None of those tokens is a password, cheat, debug or secret label.
 | Button-sequence space | 10 buttons, ordered sequences and simultaneous chords | only one simultaneous gate exists: `0x0F` (A+B+Select+Start) → SoftReset. No ROM sequence table and no per-press progress counter were found. |
 | Link minigame space | 4 minigames + 4 bonus games | 8 entries, all named and addressed in §6.2; link-gated |
 | Unlockable space | gameplay flags | published Blue-version unlock: 100 jump-rope jumps → Turtle King. This is a gameplay counter, not a code. |
-| Charabom slots | 30 slots, 2 unused | TCRF documents slots 29/30 (Fly Shark, Elemouse) behind RAM flags `0x02005CC0`/`0x02005CD0`; memory edit, out of scope |
+| Charabom slots | 30 slots, 2 unused | 3rd party cheat indexes document slots 29/30 (Fly Shark, Elemouse) behind RAM flags `0x02005CC0`/`0x02005CD0`; memory edit, out of scope |
 
 No password alphabet exists. The only long printable tables in the ROM
 are font/tile maps (e.g. `0x08175980`, `0x0806D6C2`), not input
@@ -486,10 +486,10 @@ The public lists are:
 
 | Source | Content | Test result |
 |---|---|---|
-| GameFAQs cheats page (Wayback capture 2026-02-17) | three endings, Red-only jump-rope unlock | no code strings; nothing to enter |
-| TCRF `Bomberman_Max_2` (Wayback capture 2025-04-15) | unused Charaboms 29/30 via RAM `02005CC0`/`02005CD0` | memory edit, outside scope |
+| 3rd party cheat index cheats page (Wayback capture 2026-02-17) | three endings, Red-only jump-rope unlock | no code strings; nothing to enter |
+| 3rd party cheat indexes `Bomberman_Max_2` (Wayback capture 2025-04-15) | unused Charaboms 29/30 via RAM `02005CC0`/`02005CD0` | memory edit, outside scope |
 | Japanese Bomberman cheat compendium (menokenkou) | Blue: 100 jump-rope jumps → Turtle King | gameplay unlock, no code |
-| Ethereal Games / libretro `.cht` | Action Replay / CodeBreaker codes | memory edits, outside scope |
+| 3rd party cheat indexes / libretro `.cht` | Action Replay / CodeBreaker codes | memory edits, outside scope |
 
 ### 6b.4 Why the negative is complete for this ROM
 
@@ -579,7 +579,7 @@ The public lists are:
 * The mode table's 43 handlers were not each mapped to a named screen;
   only mode `0x02` (title) and mode `0x23` (selector) are pinned.
 * The two unused Charaboms (Fly Shark, Elemouse) are reachable by RAM
-  flags documented by TCRF; no in-game unlock was found and memory
+  flags documented by 3rd party cheat indexes; no in-game unlock was found and memory
   edits are outside scope.
 * The Mode7 patch could in principle modify bytes other than the entry
   word; no such modification was observed, and the original crt0 and

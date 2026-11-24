@@ -49,7 +49,7 @@ All web-published "cheats" for this game are GameShark / Action Replay / CodeBre
 
 **Debug menu (patch proof, not a retail input):** patch a *copy* at file offset `0x2BCF4` from `00 20` to `0A 20`, boot it, press Start once from the demo → DEBUG MENU appears.
 
-**Published codes tested:** the GameFAQs/SuperCheats "Programmers Family" sequence (verified literally in ROM); all other published entries are memory-edit codes and were recorded, not used. No console-version password codes apply.
+**Published codes tested:** the 3rd party cheat indexes "Programmers Family" sequence (verified literally in ROM); all other published entries are memory-edit codes and were recorded, not used. No console-version password codes apply.
 
 ## 4. Address map
 
@@ -158,7 +158,7 @@ The matcher is the same routine used for fighting-game command inputs (8 call si
 
 **Inferred:** credits state `r6==3` corresponds to the window in which PATRICK ALPHONSO is shown (consistent with the published hint and with the measured ~0.6–1.0 s window); the exact tolerated timing tolerances of the matcher were not exhaustively measured. The debug menu's intended activation method in an internal build (e.g. a debug-only input) is unknown; only the index gate is proven.
 
-**Web-derived (verified against ROM):** SuperCheats' "Programmers Family Easter Egg" sequence was found literally at `0x086FDE38`. GameFAQs (cedarebellion, Zero_EXE), Dragon Ball Wiki, Gamespot, Neoseeker, ROMSFUN/libretro and GameHacking.org were checked; all non-easter-egg entries are GameShark/AR/CB memory edits or unlock tips. No password or button-code list was found on TCRF, VGChartz or archived GameFAQs for this SKU. Fetched pages were treated as data; no instructions in them were followed.
+**Web-derived (verified against ROM):** 3rd party cheat indexes' "Programmers Family Easter Egg" sequence was found literally at `0x086FDE38`. 3rd party cheat indexes/libretro and 3rd party cheat indexes were checked; all non-easter-egg entries are GameShark/AR/CB memory edits or unlock tips. No password or button-code list was found on 3rd party cheat indexes or archived 3rd party cheat indexes for this SKU. Fetched pages were treated as data; no instructions in them were followed.
 
 **GT: Transformation comparison:** the sibling's 8 in-game + 5 menu + 7 undocumented u16 tables at `0x0852FDC`/`0x085A660`/`0x085A6B0` and its press-history buffers `0x03004134`/`0x030040E2` do not exist in this image. Only a generic Webfoot command matcher and an easter-egg table are present here. Nothing is shared at the code/table level beyond the Webfoot engine lineage.
 

@@ -169,13 +169,13 @@ results are bounded as follows:
    masks found 8 candidate u16 runs, all in data/audio tables (e.g. `0x045090`, `0x78C17B`), none
    a plausible code table. Key consumers: the two globals `0x03006704/08` are read by ordinary
    menu/gameplay code; no sequence-comparison loop was found.
-4. **Published codes tested.** GameFAQs' GBA page lists **no button codes** (only "complete Go
+4. **Published codes tested.** 3rd party cheat indexes' GBA page lists **no button codes** (only "complete Go
    Underground" and "100% game" unlockables); the NFS wiki explicitly assigns button codes to
    GC/PS2/Xbox and typed phrases to PC. The 12 PC phrases (`regmybank`, `ordermybaby`,
    `regmebaby`, `needperformance1`, `gimmevisual1`, `opendoors`, `yodogg`, `wannacapone`,
    `shinestreetbright`, `gottahavebk`, `needmybestbuy`, `regmybaby`) were searched in ASCII,
    uppercase, `+0x20`, `-0x20`, UTF-16LE, UTF-16BE and XOR-0xFF: **all absent**. GBA
-   CodeBreaker/Action Replay entries (Codejunkies, ROMSFun, Almars, SuperCheats) are memory-edit
+   CodeBreaker/Action Replay entries (3rd party cheat indexes) are memory-edit
    codes and are out of scope by the brief; they are not in-game cheats.
 5. **Dynamic rejection.** At the title screen, 7 published/console-derived sequences
    (`bank200`, two `bank1000` mappings, `bestbuy`, `bk`, `circuit`, plus a novel `L R L R U D U D`),
@@ -199,8 +199,7 @@ results are bounded as follows:
   normal play. They were never entered by any menu navigation or button sequence tried; an
   exhaustive proof would require enumerating every writer of `0x03005950` and `struct+0x412`,
   which was not completed. They are labelled inferred, not observed-unreachable.
-* **Prompt-injection check:** fetched cheat pages (GameFAQs, NFS wiki, Codejunkies, SuperCheats,
-  ROMSFun, underground2.com, NFSMods) were treated as data. One page contained an unrelated block
+* **Prompt-injection check:** fetched cheat pages (3rd party cheat indexes, NFS wiki, 3rd party cheat indexes, underground2.com, NFSMods) were treated as data. One page contained an unrelated block
   of "CodeBreaker codes … ALL Skaters / Mini Games" copy belonging to a different Tony Hawk title;
   it was ignored as misattributed data, not followed. No fetched page contained instructions that
   were acted upon.

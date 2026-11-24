@@ -19,7 +19,7 @@
 | Build string | file `0x3FE0B4` → ROM `0x0BFE0B4`: `PRO BEACH SOCCER` / `Jun 18 2003 17:07:46` / `WWW;MAGICPOCKETS;COM` / `NOT FOR RELEASE OR PUBLIC PERFORMANCE.` |
 | Developer / publisher | Magic Pockets / DreamCatcher Interactive (US SKU) |
 
-The build string and CRC/serial match the TCRF mirror entry for the US release, so addresses below are specific to this revision. No multi-game header, cracktro, or appended trainer was found.
+The build string and CRC/serial match the 3rd party cheat index mirror entry for the US release, so addresses below are specific to this revision. No multi-game header, cracktro, or appended trainer was found.
 
 ## 2. Executive summary
 
@@ -31,7 +31,7 @@ This is a bounded negative, not "did not find": every reachable menu screen was 
 1. **Observed** — 6 main-menu entries, 7 option entries, 4 pause entries, 25 team slots (20 playable + 5 `???`), 25 opponent slots, 4 cups, 4 leagues; no hidden/undocumented entry.
 2. **Derived** — key state globals at IWRAM `0x030044DC` (`held & ~prev`, i.e. newly-down), `0x030044CC` (`(held ^ prev) & prev`, i.e. newly-up), `0x03007C4E` (previous held), written by routine at `0x083E4DDA`; no validator consumes a code buffer.
 3. **Derived** — save data is a set of 120-byte, checksummed profile records (checksum routine `0x083D9BD0`, constant `0x1234`; loader `0x083D9D78`); unlock state lives in save data, not in typed input.
-4. **Inferred** — the 5 `???` team cells are the All-Star teams listed by GameFAQs; their setters are competition-win paths (no controller-only path was found, and no published or ROM-internal code grants them).
+4. **Inferred** — the 5 `???` team cells are the All-Star teams listed by 3rd party cheat indexes; their setters are competition-win paths (no controller-only path was found, and no published or ROM-internal code grants them).
 
 ## 3. How to reproduce
 
@@ -87,7 +87,7 @@ There is no code algorithm to reimplement. The two algorithms actually present a
 * **Pause (4)**: Continue, Sounds, Restart Match, Quit Match.
 * **Team grid (25 cells)**: 5×5; 20 national flags selectable, 5 `???` cells in column 5 (rows 1–5) are locked; pressing A on a `???` cell does nothing (observed). Opponent grid shows the same 20 unlocked flags.
 * **Tournaments**: type Cup/League; venues Bangkok, Rio, Marseille, Venice (4 each). Competition unlockables published for this SKU: World Trophy + World Championship (win Pro Beach Soccer Tour), Africa All Stars (Marseille Cup), America All Stars (Venice Cup), Asia All Stars (Venice League), Europe 1 All Stars (World Championship), Europe 2 All Stars (Marseille League), World All Stars (World Trophy).
-* **Published "cheats"**: Bicycle Kick (hold L to flip the ball up, press B in the air, then A) and Super Dribble (L+R during "State of Grace") — documented in the manual and on GameFAQs/VGChartz; these are controls, not codes. GameHacking.org entries are CodeBreaker/GameShark RAM patches and are explicitly out of scope.
+* **Published "cheats"**: Bicycle Kick (hold L to flip the ball up, press B in the air, then A) and Super Dribble (L+R during "State of Grace") — documented in the manual and on 3rd party cheat indexes; these are controls, not codes. 3rd party cheat index entries are CodeBreaker/GameShark RAM patches and are explicitly out of scope.
 
 ## 6b. Enumeration
 
@@ -113,7 +113,7 @@ There is no code algorithm to reimplement. The two algorithms actually present a
 * **Observed (static bytes)**: header/hashes, build string at `0x3FE0B4`, filler string repeated from `0x3FD9E2`, keyboard strings at `0x3F7F00`, mask-input routine bytes at `0x3E4DDA`.
 * **Derived (disassembly)**: key-state globals and their arithmetic; profile checksum/loader/writer at `0x083D9BD0` / `0x083D9D78` / `0x083E507C`; menu handler at `0x083D770A` tests held/pressed masks with no sequence state.
 * **Derived (scan counts)**: the enumeration table in §6b.
-* **Inferred**: mapping of the 5 `???` cells to the five All-Star teams named by GameFAQs, and the competition→unlock mapping from the published list (not independently exercised: winning a tournament was not completed).
+* **Inferred**: mapping of the 5 `???` cells to the five All-Star teams named by 3rd party cheat indexes, and the competition→unlock mapping from the published list (not independently exercised: winning a tournament was not completed).
 * **Unresolved**: direct identification of the individual save-bit offsets for each unlock (the savestate byte-patching experiment was inconclusive because the modified state failed to reproduce the team-select screen); the exact semantic effect of the Bicycle Kick/Super Dribble moves beyond the manual description.
 
 ## 8. Unknowns
@@ -131,4 +131,4 @@ There is no code algorithm to reimplement. The two algorithms actually present a
 
 ## 10. Legal note
 
-No ROM bytes, graphics, music, or extracted assets are redistributed here. Only hashes, addresses, algorithms, scan counts, and observations are published. Fetched web pages were treated as data; one TCRF mirror URL returned 404 and the successful search snippet was used only as a lead. No prompt-injection content was encountered or acted on.
+No ROM bytes, graphics, music, or extracted assets are redistributed here. Only hashes, addresses, algorithms, scan counts, and observations are published. Fetched web pages were treated as data; one 3rd party cheat index mirror URL returned 404 and the successful search snippet was used only as a lead. No prompt-injection content was encountered or acted on.

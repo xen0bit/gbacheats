@@ -29,7 +29,7 @@ developer-intended hidden feature is a full **DEBUG MENU** with 12 selectable en
 plus three additional standalone developer screens. All of them are driven by a single
 byte in IWRAM: the scene ID at `0x03001258`.
 
-Published TCRF "codes" (`0300125802/03/04/0F`) are raw RAM writes that set this byte;
+Published 3rd party cheat indexes "codes" (`0300125802/03/04/0F`) are raw RAM writes that set this byte;
 all four were verified against the ROM and reproduced in the emulator (§6). They are
 **memory-edit codes and are not in-scope deliverables** — but the underlying developer
 screens are real, shipped content and are enumerated in full below.
@@ -140,13 +140,13 @@ debug menu (scene 2), root handler ~0x08025A00:
 
 There is no checksum, no alphabet, no string comparison, and no length check. The
 "code space" is the 8-bit scene ID, of which four values (2, 3, 4, 0x0F) are the
-developer screens documented by TCRF and the rest are ordinary game scenes.
+developer screens documented by 3rd party cheat indexes and the rest are ordinary game scenes.
 
 ## 6. Tables
 
 **Published RAM-write codes — verification results:**
 
-| TCRF code | Value written | Screen observed | `0x03001258` read back | Result |
+| 3rd party cheat index code | Value written | Screen observed | `0x03001258` read back | Result |
 |---|---|---|---|---|
 | `0300125802` | 0x02 | DEBUG MENU (12 entries) | 0x02 | ✓ |
 | `0300125803` | 0x03 | CHR TEST (tile mosaic, "Stage PAUSE") | 0x03 | ✓ |
@@ -154,7 +154,7 @@ developer screens documented by TCRF and the rest are ordinary game scenes.
 | `030012580F` | 0x0F | "Delete saved data? YES NO" | 0x0F | ✓ |
 
 All four strings/literals were also checked against the ROM: the debug-menu text is at
-`0x08158360` exactly as TCRF states. No GameFAQs / VGChartz / CheatCodes.com code exists
+`0x08158360` exactly as 3rd party cheat indexes state. No 3rd party cheat index code exists
 for this title (all three report zero cheats; verified via archived pages). These are
 **memory-edit codes, not in-scope cheats** — recorded only as verification of the
 developer screens.
@@ -196,13 +196,13 @@ state is in `0x02004710`/`0x02004712`/`0x0300490C`.
 **Space definition:** the selector is a single unsigned byte at `0x03001258`, so the
 representable space is 256 values (0x00–0xFF). 36 entries of the init table at
 `0x081B7668` were dumped; every probed value dispatches to a real scene. The developer
-subset documented by TCRF is `{0x02, 0x03, 0x04, 0x0F}` (4 values). No checksum, field
+subset documented by 3rd party cheat indexes are `{0x02, 0x03, 0x04, 0x0F}` (4 values). No checksum, field
 width, reserved bits, or alphabet exists to enumerate further; completeness for the
 *debug-menu* surface is established by (a) the 12-record table at `0x081BE034` being
 fully walked, and (b) the init table being indexed directly by the byte with no hidden
 qualifier.
 
-**Novel value (not on GameFAQs / VGChartz / TCRF / any wiki): `0x13`.**
+**Novel value (not on 3rd party cheat indexes / any wiki): `0x13`.**
 Minted by patching `0x03001258` to `0x13` in a title-screen savestate and booting with
 `-t`. Result: `0x03001258 == 0x13` and the game displays the distinct cutscene
 "Is that your Pocket Dog I hear!" with a door graphic — a screen no published code lists.
@@ -278,7 +278,7 @@ Labels: **Observed** = emulator screenshot / savestate RAM read / live debugger;
 - mGBA CLI debugger (`-d`) driven through a PTY for the live breakpoint proof
   (`dbg2.py`/`dbg3.py`, `dbgcmd.sh`); GDB stub on :2345 was unavailable (held by another
   process), so the PTY debugger and savestate diffing were used instead (guide §16.13).
-- Web: TCRF via `web.archive.org` snapshot (403 direct); GameFAQs/VGChartz/CheatCodes.com
+- Web: 3rd party cheat indexes via `web.archive.org` snapshot (403 direct); 3rd party cheat indexes
   checked and contain no codes for this SKU. Fetched page content was treated as data;
   no prompt-injection payload was encountered in this session.
 

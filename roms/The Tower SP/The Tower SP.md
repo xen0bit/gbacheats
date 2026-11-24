@@ -18,7 +18,7 @@
 
 Build strings (all **Observed** in ROM bytes): `Ver2005-12-02` at file `0x1C0`,
 `THE TOWER Ver042501` at `0xD5C84`, `THE TOWER Ver050701` at `0xE72C4`.
-These are exactly the US offsets listed on TCRF, so the image is the US Rev.00 build.
+These are exactly the US offsets listed on 3rd party cheat indexes, so the image is the US Rev.00 build.
 `file(1)` agrees: `Game Boy Advance ROM image: "THE TOWER SP" (BTRE8P, Rev.00)`.
 
 ## 2. Executive summary
@@ -228,8 +228,8 @@ code".
 * Whether the two `Debug`-labelled item records ever render under a debug build;
   their `0xFFFF` fields look like deliberate disable markers, but no debug build
   was available.
-* GameFAQs' cheat subpage returned HTTP 403 to automated fetch; search snippets,
-  the official manual, TCRF and contemporary reviews exposed no in-game code
+* 3rd party cheat indexes' cheat subpage returned HTTP 403 to automated fetch; search snippets,
+  the official manual, 3rd party cheat indexes and contemporary reviews exposed no in-game code
   list. If a private/print guide lists one, it is not corroborated by any string,
   table or input path in this ROM.
 

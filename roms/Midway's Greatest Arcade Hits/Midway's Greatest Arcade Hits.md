@@ -252,8 +252,8 @@ discharged as a bounded negative over the complete searched spaces:
    savestate diffs (§3): only `A`-bearing combos launched a game; no other
    combo changed the screen or set a new flag.
 4. **Published codes.** All automated sources were blocked or returned no
-   usable data: GameFAQs cheats page 403 (direct and via `r.jina.ai`),
-   TCRF 403, web.archive.org snapshots 404, DuckDuckGo captcha, Mojeek
+   usable data: 3rd party cheat index cheats page 403 (direct and via `r.jina.ai`),
+   3rd party cheat indexes 403, web.archive.org snapshots 404, DuckDuckGo captcha, Mojeek
    captcha, Bing returned unrelated pages, Google returned a consent page,
    and the search tool returned no results for every query. **No published
    code string was obtained, so no literal could be searched for or tested.**

@@ -20,8 +20,8 @@
 | MD5 | `211f243e032b967e01ff97907b29f56a` |
 | SHA-1 | `7b7835b655f34efec44ed090821257d5e1378275` |
 | SHA-256 | `6bfe1697ddf12438ea53fea2927c4927253f1d924a2ce3c81829bb134c5315e9` |
-| Build tag @ 0x08060F38C | `HARRY POTTER\x01\x01Sep 10 2003  14:53:30` → US/Europe build (matches TCRF) |
-| Developer / publisher | Magic Pockets / Electronic Arts (build strings + TCRF) |
+| Build tag @ 0x08060F38C | `HARRY POTTER\x01\x01Sep 10 2003  14:53:30` → US/Europe build (matches 3rd party cheat indexes) |
+| Developer / publisher | Magic Pockets / Electronic Arts (build strings + 3rd party cheat indexes) |
 
 Phase 0 findings:
 
@@ -50,7 +50,7 @@ Phase 0 findings:
 | Item | ROM / file offset | Runtime address | Evidence |
 |---|---|---|---|
 | GBA header | file 0x000 | 0x08000000 | Observed (xxd) |
-| Build tag | file 0x60F38C | 0x0860F38C | Observed (TCRF cross-check) |
+| Build tag | file 0x60F38C | 0x0860F38C | Observed (3rd party cheat indexes cross-check) |
 | Unused demo text | file 0x60F3D1 | 0x0860F3D1 | Observed |
 | `* Engine by www.MagicPockets.com*` padding | file 0x7AF818 | 0x087AF818 | Observed |
 | Shin'en GAX banner `Code: B.Wodok` | file 0x7AE89E | 0x087AE89E | Observed — audio engine banner, **not** a code (guide §16.11) |
@@ -114,7 +114,7 @@ No password/checksum/button sequence algorithm exists. The only algorithmic cont
 
 ## 6. Tables
 
-* **Published cheat data**: GameFAQs (archived 2023, `gba/914744…/cheats`), ROMSFUN (11 "cheats"), Cheat Happens, TCRF. Every entry is a CodeBreaker/GameShark RAM patch (e.g. `33003B57 0000`, `83003B34 3600`, `33003A85 00FF`, `83004022 FFFF`) or a platform-specific unlockable; **none is a password or button code**, and none was found as a literal in the ROM. Verified as out of scope.
+* **Published cheat data**: 3rd party cheat indexes (archived 2023, `gba/914744…/cheats`), 3rd party cheat indexes. Every entry is a CodeBreaker/GameShark RAM patch (e.g. `33003B57 0000`, `83003B34 3600`, `33003A85 00FF`, `83004022 FFFF`) or a platform-specific unlockable; **none is a password or button code**, and none was found as a literal in the ROM. Verified as out of scope.
 * **Unlockables (developer-intended, in scope as game design)**: 105 Quidditch Cards earned through matches/challenges; card thresholds unlock brooms (Nimbus 2000/2001, Firebolt), teams (Bulgaria at 65 cards) and stadiums/World Cup. These are earned save-data bits, not codes; collected count observed as `0/105` on the HUD.
 * **Button masks**: table in §4.
 * **Debug-menu strings**: table in §4 — 4 top-level entries + 26 submenu entries, enumerated exhaustively.
@@ -134,7 +134,7 @@ No password/checksum/button sequence algorithm exists. The only algorithmic cont
 | Button-mask table scan (`u16` runs of 1–2 bit masks, length ≥4) | whole ROM, 2-byte steps | 604 runs; all are compressed graphics/sound data runs of a repeated mask (0x87A…–0x87AD…) or BIOS stubs — **no button-code table** |
 | Button-combination probes | title (9 combos incl. L/R variants), main Options (6), cards (5), pause/in-game (3) | no debug screen; RAM EWRAM delta = 0 for all title L/R combos |
 | Menu-ring enumeration | pause Options (2 slots), main Options (5 slots) | wrapped to slot 0 with no hidden 6th entry |
-| Published-code verification | GameFAQs/ROMFUN/TCRF/CheatHappens | all codes are out-of-scope memory patches; 0 password strings, 0 button sequences |
+| Published-code verification | 3rd party cheat indexes | all codes are out-of-scope memory patches; 0 password strings, 0 button sequences |
 
 **Novel code minting**: impossible by design — no validator to invert. **Bounds by rejection**: the only in-game input gate discovered (L+R+Select) was exercised and produced the documented Sleep Mode screen, not a debug screen; all other tested combinations were rejected by the UI (no state change, EWRAM delta 0). The debug menu's own bounds are fully enumerated above (4 top-level + 26 submenu labels), so if a future build exposes it the complete item set is known in advance.
 
@@ -150,7 +150,7 @@ No password/checksum/button sequence algorithm exists. The only algorithmic cont
 * Whether the compressed text bank's token expansion has alias collisions exploitable only by RAM editing — not investigated (out of scope).
 * Effects of the 4 debug actions and 26 submenu labels: not observed.
 * Header checksum/complement anomaly: recorded but not explained; no functional effect observed.
-* No prompt-injection content was encountered in fetched web pages (TCRF via web.archive.org, GameFAQs via web.archive.org, ROMSFUN, Cheat Happens). All fetched text was treated as data. The `Code: B.Wodok` ROM string is an audio-engine banner, not an instruction.
+* No prompt-injection content was encountered in fetched web pages (3rd party cheat indexes via web.archive.org, 3rd party cheat indexes via web.archive.org, 3rd party cheat indexes). All fetched text was treated as data. The `Code: B.Wodok` ROM string is an audio-engine banner, not an instruction.
 
 ## 9. Tooling
 

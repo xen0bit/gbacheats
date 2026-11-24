@@ -42,7 +42,7 @@ the episode field to 0..5, so up to **3,072 codes** are accepted on a fresh save
 All ten published codes were verified against the reconstructed validator, and
 **five codes absent from every published list were minted and accepted in-game**,
 including one that unlocks the hidden **Finale** stage.
-The ROMSFUN/libretro "9 CodeBreaker codes" are cheat-device codes and out of scope.
+The 3rd party cheat indexes/libretro "9 CodeBreaker codes" are cheat-device codes and out of scope.
 
 ## 3. How to reproduce
 
@@ -169,7 +169,7 @@ c=2: 1 2 1 0      c=6: 6 2 5 5
 c=3: 2 1 0 6      c=7: 2 5 5 4
 ```
 
-**Published codes (GameFAQs + Cheat Happens), all verified against the ROM:**
+**Published codes (3rd party cheat indexes), all verified against the ROM:**
 
 | Effect | Portrait indices | Decoded `local` |
 |---|---|---|
@@ -193,7 +193,7 @@ reimplemented validator over all 32,768 inputs. The secondary episode bound
 `local[0] <= 5` leaves at most 6 × 512 = **3,072** codes on a fresh save; the
 forbidden-stage bitmask may remove a save-dependent subset of those.
 
-**Novel codes, absent from GameFAQs / Cheat Happens / ROMSFUN / wiki lists, minted with
+**Novel codes, absent from 3rd party cheat indexes / wiki lists, minted with
 the encoder in §5 and confirmed in mGBA** (all submitted from the real Password
 screen's `O.K.` button; screenshot filenames are in the work dir):
 

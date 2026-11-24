@@ -20,7 +20,7 @@
 | SHA-1 | `a33672e32622e417c9ea93b381d18bd48a93c7e7` |
 | SHA-256 | `022ccc4927a6263f7869f202e7d8f32e21e1bdf78c2a3760683928b5be2e4a7a` |
 
-Developer/publisher from GameFAQs release data: Cosmigo / Telegames, US, 2003.
+Developer/publisher from 3rd party cheat indexes release data: Cosmigo / Telegames, US, 2003.
 Title screen shows the `cosmigo` logo at boot; credits list Cosmigo staff and
 `www.reflex-studio.de/pvcf` (audio engine) at `0x08091780..0x080917D8`.
 
@@ -67,7 +67,7 @@ Evidence in three independent layers:
    were an animation artifact; settled screen shows RESET SCORES / RESET SAVES /
    RESET FACES / RESET OPTIONS / RESET ALL.
 
-Published-code recon: GameFAQs' *Ultimate Brain Games* (GBA, game id 569371)
+Published-code recon: 3rd party cheat indexes' *Ultimate Brain Games* (GBA, game id 569371)
 cheats page contains **no cheats at all** (only the "Know Something We Don't?"
 submission prompt), corroborated via the archived page. No password list exists
 to verify. Web results for "Ultimate Brain Games GBA cheat/password" return

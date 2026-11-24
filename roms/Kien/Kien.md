@@ -24,7 +24,7 @@
 
 Kien has a **developer-intended 9-character progress-password system** on the title screen (`NEW GAME / PASSWORD / OPTIONS`). The answer is a **closed lookup table of exactly 8 accepted strings**, not an algorithmic checksum code: a 4-byte-optimized `strcmp` compares the typed 9-byte input against 8 fixed NUL-terminated strings laid out as 2 heroes × 4 quests.
 
-The ROM contains 8 plaintext passwords at `0x0802DB60` (12-byte stride). Four (`K*`) match the published GameFAQs-derived list for Kjan's quests II–V. **The other four (`E*`) — Elandel's quests II–V — are in the ROM but appear in no published code list found** (cheat-database.com, Cheat Happens, GameFAQs, TCRF were checked). All 8 were accepted in-game; `EE10LVQ1M` was additionally typed on the real password screen and RAM-verified.
+The ROM contains 8 plaintext passwords at `0x0802DB60` (12-byte stride). Four (`K*`) match the published 3rd party cheat index-derived list for Kjan's quests II–V. **The other four (`E*`) — Elandel's quests II–V — are in the ROM but appear in no published code list found** (3rd party cheat indexes were checked). All 8 were accepted in-game; `EE10LVQ1M` was additionally typed on the real password screen and RAM-verified.
 
 The full space is 8 acceptors out of 36^9 ≈ 1.015×10^14 representable 9-symbol strings. Single-character mutations, empty/all-zero input, and out-of-alphabet hero/level bytes are rejected to the title screen. No button-code table, no hidden debug menu, and no algorithmic second code system were found; the string bank is plain ASCII, so the negative does not depend on undecoded font/tile text.
 
@@ -106,7 +106,7 @@ There is **no checksum, no bit-packing, no key table, and no character substitut
 
 | ROM pointer | String | Hero | Quest | Published? |
 |---|---|---|---|---|
-| `0x0802DBB4` | `KA10LVQ1M` | Kjan (warrior) | II — Astral Amulet | Yes (cheat-database.com, GameFAQs-derived list) |
+| `0x0802DBB4` | `KA10LVQ1M` | Kjan (warrior) | II — Astral Amulet | Yes (3rd party cheat index-derived list) |
 | `0x0802DBA8` | `KB18LVQ2L` | Kjan | III — VS Tujon | Yes |
 | `0x0802DB9C` | `KC30LVQ3G` | Kjan | IV — Supreme Keys | Yes |
 | `0x0802DB90` | `KD70LVQ4S` | Kjan | V — VS Khaalbak | Yes |
@@ -123,7 +123,7 @@ Pointer-table layout at `0x087D6C0C`: offsets `0,4,8,12` = Kjan II–V; offsets 
 
 ### 6.3 Published-code verification
 
-Source: `https://cheat-database.com/display/cheat.php?id=171577` ("Kien — Quest Passwords", GBA), listing `KA10LVQ1M` (Quest II), `KB18LVQ2L` (III), `KC30LVQ3G` (IV), `KD70LVQ4S` (V). All four literals exist verbatim in the ROM and were accepted in-game. Cheat Happens lists no Kien GBA cheats; GameFAQs cheats page returned 403 and no additional list was recovered. No TCRF page was found. **No prompt-injection content was encountered in the fetched pages; all fetched text was treated as data.**
+Source: 3rd party cheat indexes ("Kien — Quest Passwords", GBA), listing `KA10LVQ1M` (Quest II), `KB18LVQ2L` (III), `KC30LVQ3G` (IV), `KD70LVQ4S` (V). All four literals exist verbatim in the ROM and were accepted in-game. 3rd party cheat index lists no Kien GBA cheats; 3rd party cheat index cheats page returned 403 and no additional list was recovered. No 3rd party cheat index page was found. **No prompt-injection content was encountered in the fetched pages; all fetched text was treated as data.**
 
 ## 6b. Enumeration
 
@@ -152,7 +152,7 @@ Source: `https://cheat-database.com/display/cheat.php?id=171577` ("Kien — Ques
 * Python + `capstone`/`struct` for literal/pointer scans; custom `pwrq`-independent scripts in `/tmp/kien/`.
 * mGBA CLI debugger (`mgba -d` over a pty) for read watchpoints and PC capture; GDB stub is **not compiled into this mGBA 0.10.5 build** (no listener on :2345).
 * Custom scripts: `ss.py` (mGBA `.ss1` `gbAs` zlib state reader/differ), `patchss.py` (patch 9-byte buffer in savestates), `kb.py` (XTEST input), `enter3.py` (verified password entry), `oracle_batch.py` (accept/reject oracle), `template.py` (glyph matching).
-* Web sources: cheat-database.com cheat id 171577 (published code list); Cheat Happens (empty); GameFAQs (403).
+* Web sources: 3rd party cheat index cheat id 171577 (published code list); 3rd party cheat indexes; 3rd party cheat indexes.
 * No ROM or copyrighted assets are redistributed here — only hashes, addresses, algorithms, and findings.
 
 ---

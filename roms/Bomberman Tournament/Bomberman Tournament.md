@@ -48,8 +48,8 @@ are present and otherwise unreferenced by the story code.
 
 **There is no password system, no button code and no cheat menu reachable by
 normal play in this game.** What exists is a **developer test menu** that is
-compiled in and gated by a single build constant, exactly as TCRF documents.
-This report goes past TCRF's one-line note: it maps the gate to the engine's
+compiled in and gated by a single build constant, exactly as 3rd party cheat indexes document.
+This report goes past a 3rd party cheat index's one-line note: it maps the gate to the engine's
 scene machine, enumerates all 16 menu entries and their effects, measures the
 bounded sub-selectors (sound test, mini-game selector), and returns the first
 description of the hidden **256-bit flag editor** and its RAM location.
@@ -80,9 +80,9 @@ description of the hidden **256-bit flag editor** and its RAM location.
    `0x04`. The flags are RAM-only: a reset (POWER ON / `Ctrl+R`) clears them.
 5. **No code surface.** All 4 MiB were searched for `password`, `passcode`,
    `cheat`, `code`, `ABCDEFGHIJKLMNOPQRSTUVWXYZ`, and every menu was walked.
-   Zero hits, zero password screens. GameFAQs has exactly **one** entry on its
+   Zero hits, zero password screens. 3rd party cheat indexes have exactly **one** entry on its
    cheat page and it is a gameplay trick (``use elekong in muiltiplayer mode``),
-   not a code; TCRF documents only the ROM patch. The code space is therefore
+   not a code; 3rd party cheat indexes document only the ROM patch. The code space is therefore
    **empty**, and §6b states that as a bounded negative rather than a guess.
 
 ---
@@ -120,7 +120,7 @@ only flashes a transient `Pause` label.
 
 ### Reaching the test menu (developer gate)
 
-Patch **one byte** in a *copy* of the ROM — this is TCRF's documented build
+Patch **one byte** in a *copy* of the ROM — this is a 3rd party cheat index's documented build
 constant, not a cheat code:
 
 ```
@@ -414,13 +414,13 @@ select is presented, and the debug `CHAR BOMB` screen shows the Karabon grid
 empty on a fresh cart. The story-mode pause surface did not expose a menu in the
 sections played (only a transient `Pause` label).
 
-**Published list check.** GameFAQs (archived page fetched, `477602`) lists
+**Published list check.** 3rd party cheat indexes (archived page fetched, `477602`) lists
 exactly one cheat for this game — `use elekong in muiltiplayer mode` (walk
 through blocks after dying with Elekong equipped) — a gameplay trick with no
 code. It is **not verified** here (requires a save with Elekong); recorded as
-unverified rather than omitted. TCRF documents the test menu but publishes only
+unverified rather than omitted. 3rd party cheat indexes document the test menu but publishes only
 a GameShark code, which is out of scope as a code; its *target* was verified
-(§6b.2). No password list exists on GameFAQs, TCRF, VGChartz or any wiki
+(§6b.2). No password list exists on 3rd party cheat indexes or any wiki
 searched, consistent with the binary.
 
 ### 6b.2 Debug menu: complete enumeration, 16 entries
@@ -524,7 +524,7 @@ form available:
    passcode, cheat code, button code), each with the search space stated.
 
 No GameShark/CodeBreaker/memory-patch codes are presented as cheats; the byte at
-`0x08000CBA` is the developer's build switch, documented by TCRF and verified
+`0x08000CBA` is the developer's build switch, documented by 3rd party cheat indexes and verified
 here against the instruction stream.
 
 ---
@@ -582,7 +582,7 @@ here against the instruction stream.
   scene-50 path was proven dead statically; the other four sites are gated on
   `arg==0/1` of their own screens and were not individually driven to a state
   with that sub-mode.
-* **GameFAQs Elekong trick** was not reproduced (needs an Elekong save).
+* **3rd party cheat indexes Elekong trick** was not reproduced (needs an Elekong save).
 * **Two-player link features** (`Group`, `Host a Game`, `MULTI BOOT`) were only
   observed in their "Not Linked" state.
 

@@ -47,8 +47,7 @@ selected by the mode argument of the console function (`0x0800E768`):
   levels) — **4 commands**: `PASSWORD, JAG, VINCE, JV`.
 
 Nine of the eleven cheat-console commands are the well-known published
-passwords. **`TI` and `FAIL` are not on GameFAQs, GameSpot, jeuxvideo.com,
-CodeTwink, Almar's Guides or any other published list found**, and both are
+passwords. **`TI` and `FAIL` are not on 3rd party cheat indexes or any other published list found**, and both are
 accepted by the retail ROM:
 `TI` turns on a hidden numeric debug read-out in the top-left of the HUD;
 `FAIL` writes `0x1FFF` to the level failsafe word.
@@ -135,8 +134,8 @@ their RAM writes and/or HUD effects recorded (§6, §6b). Published codes
 mode gate (§5.4).
 
 Every published string was also verified against the ROM bytes: `HEA AMMO KEY
-COOR FRE WEAP GOD ARM MON` (GameFAQs/GameSpot/jeuxvideo) and `JAG VINCE`
-(GameFAQs "Unlocking Level 10") are all present literally in the table at
+COOR FRE WEAP GOD ARM MON` (3rd party cheat indexes) and `JAG VINCE`
+(3rd party cheat indexes "Unlocking Level 10") are all present literally in the table at
 `0x18CB0..0x18D1F`, so none of them is a fan invention or a typo.
 
 ## 4. Address map
@@ -396,9 +395,9 @@ is the button sequence).
 
 ### Novel codes (present in the ROM, absent from every published list)
 
-Neither `TI` nor `FAIL` appears in the GameFAQs/GameSpot password list, the
-jeuxvideo.com list, CodeTwink, Almar's Guides, the CodeBreaker/GameShark
-archives, or the GameFAQs "Unlocking Level 10" note (which lists only `JAG`
+Neither `TI` nor `FAIL` appears in the 3rd party cheat indexes password list, the
+3rd party cheat index list, 3rd party cheat indexes, the CodeBreaker/GameShark
+archives, or the 3rd party cheat indexes "Unlocking Level 10" note (which lists only `JAG`
 and `VINCE`).
 
 **(a) `TI` — accepted, effect visible:**

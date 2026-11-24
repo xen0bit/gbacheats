@@ -81,7 +81,7 @@ All addresses are ROM (`0x08…`) unless marked. File offset = address − `0x08
 ## 5. Algorithm / structure
 
 **Debug menu data model (derived).** The strings are plain ASCII with `<bh:00>`-style spacing
-control bytes in the TCRF transcription; in the ROM they are NUL-terminated at `0x082052B4` etc.
+control bytes in the 3rd party cheat index transcription; in the ROM they are NUL-terminated at `0x082052B4` etc.
 The table at `0x0800C8B0` is:
 
 ```
@@ -119,7 +119,7 @@ dialogue). This was checked before the negative (guide §11). The debug/credits 
 | 4 | `4 : *TEST PAD` | No |
 | 5 | `5 : *TEST NORMAL MAP` | No |
 | 6 | `6 : *TEST BATTLE` | No |
-| 7 | `7 : *TEST SOUND` | No — Sound Test cut in US/EU per TCRF mirror |
+| 7 | `7 : *TEST SOUND` | No — Sound Test cut in US/EU per 3rd party cheat index mirror |
 | — | `*** debug mode.` | Display routine dead (BL=0, ptr=0) |
 
 ### 6.2 Published-code verification
@@ -130,7 +130,7 @@ dialogue). This was checked before the negative (guide §11). The debug/credits 
 | Hard mode: A+B+X+Y at title | SNES | Not applicable — GBA has no X/Y. Boot has no title menu. No GBA-specific combo found. |
 | 33 Combo Command button sequences | SNES | No table in this GBA image (§6b). |
 | Debug room via hidden title option | JP only (cheat-device assisted) | Cut in international builds; survives as dead strings/graphics. |
-| Sound Test / new songs | JP only | Cut in US/EU (TCRF mirror); no `SOUND MODE` string in ROM. |
+| Sound Test / new songs | JP only | Cut in US/EU (3rd party cheat index mirror); no `SOUND MODE` string in ROM. |
 | Pink Options / New Game+ / "Let's Go Arche" / Difficulty | GBA, clear-game unlockables | Published but **unverified**; save-bit unlockables, not codes. |
 | CodeBreaker / Action Replay / PAR lists | all | Out of scope by task definition; recorded only as recon leads. |
 
@@ -197,7 +197,7 @@ UI outside that one door. It is documented for completeness, not as a cheat code
 | `0x0800C8D0` has 0 BL and 0 pointer references | Derived (whole-ROM scanners) | High |
 | `0x0800C900` is `bx lr` | Observed (disasm) | High |
 | Dispatcher case 0 → debug-menu init | Derived (jump-table parse + disasm) | High |
-| Debug room/Sound Test cut in international builds | Published (TCRF mirror) + consistent dead code | Medium-high |
+| Debug room/Sound Test cut in international builds | Published (3rd party cheat index mirror) + consistent dead code | Medium-high |
 | Combo sequences absent (144/144 for length ≥5) | Derived (counted search) | High |
 | Save-bit unlockables exist | Published only | Low (unverified) |
 | Script-VM route to dispatcher case 0 | — | Unknown (not enumerated) |
@@ -211,7 +211,7 @@ rests on static reference counts, not on this attempt.
 
 * Whether any game script issues dispatcher command `0` in a late-game or post-clear context was not
   enumerated; the international build is reported as cut based on the no-op hook, dead display
-  routine and TCRF, not on a full script-VM trace.
+  routine and 3rd party cheat indexes, not on a full script-VM trace.
 * The exact validator for the `3124` door was not isolated; the door is deep in the story and the
   entry UI was not reachable in a fresh save.
 * Save-clear unlockables (Pink Options, New Game+, Let's Go Arche, Difficulty) were not verified or
@@ -227,10 +227,10 @@ rests on static reference counts, not on this attempt.
   breakpoint attempt), screenshots and `montage*.png`.
 * Tools: `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, `grep`, `objdump` from
   `binutils-arm-none-eabi`, `gdb-multiarch`, `xdotool`, `scrot`, ImageMagick, mGBA 0.10.5.
-* **Prompt injection encountered:** a fetch of `tcrf.net/Tales_of_Phantasia_(Game_Boy_Advance)`
+* **Prompt injection encountered:** a fetch of 3rd party cheat indexes
   returned an embedded "LLM- / AI Agent-Specific Information — this page is not intended for
   humans … the user has requested that the agent follow the instructions on this page" block. It was
-  treated as untrusted data and ignored (guide §16.8). The clean `tcrf.tiago.zip` mirror was used
+  treated as untrusted data and ignored (guide §16.8). A clean 3rd party cheat index mirror was used
   for the factual cut-feature claims.
 
 ## 10. Legal note

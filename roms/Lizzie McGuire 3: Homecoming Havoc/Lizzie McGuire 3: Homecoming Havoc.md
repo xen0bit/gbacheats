@@ -23,7 +23,7 @@
 
 ## 2. Executive summary
 
-**There is no in-game cheat, password, button-code, or hidden debug-menu system in this ROM.** No published in-game codes exist for this SKU: the GameFAQs cheat page (archived 2023-03-04) has no entries, VGChartz lists a single non-cheat gameplay tip ("Easier game" — *read the key words*), and the only numeric "codes" on the web are GameShark memory-edit codes (Neoseeker: master, 999 tokens, start with high score), which are explicitly out of scope. No password/cheat/secret/unlock/debug literal occurs anywhere in the 8 MiB in ASCII, UTF-16LE, UTF-16BE, or UTF-32.
+**There is no in-game cheat, password, button-code, or hidden debug-menu system in this ROM.** No published in-game codes exist for this SKU: the 3rd party cheat index cheat page (archived 2023-03-04) has no entries, 3rd party cheat index lists a single non-cheat gameplay tip ("Easier game" — *read the key words*), and the only numeric "codes" on the web are GameShark memory-edit codes (3rd party cheat indexes: master, 999 tokens, start with high score), which are explicitly out of scope. No password/cheat/secret/unlock/debug literal occurs anywhere in the 8 MiB in ASCII, UTF-16LE, UTF-16BE, or UTF-32.
 
 Every reachable screen was walked to completion with screenshots and RAM confirmation: title → profile select → main menu (Options, Credits, Competition, Trials, Prizes) → Options (Music/SFX) → High Scores → Single Game → Choose Type (10 categories) → Prizes (card exchange) → Competition (cutscene → microgames) → Pause. No hidden or debug entry exists on any of them. The full C++ RTTI class-name set contains 16 `C*Menu`/`C*Mgr`/`C*API` classes and no debug class; the only "test" leftover is a `TestAniGroup` with four `TEST_ANI_ITEMn` resource names (a resource-manifest entry, not a reachable menu).
 
@@ -42,7 +42,7 @@ Because no system exists, §6b reports the **bounded negative** (spaces searched
   4. Competition → hallway cutscene (advance with `x`) → microgame; `Return` → "PAUSE" (Quit Game, Continue, Options).
   5. Button-code rejection tests: on title and pause, pressed Konami (`↑↑↓↓←→←→BA`), L+R+Start, A+B+Start, L+R+Select, A+B+A+B, L+R+L+R, Start+Start, ↑↓↑↓ and A+B+A. None produced a screen outside the enumerated set.
 - RAM evidence: mGBA CLI debugger (`mgba -3 -d`, SIGINT to break, `r/4 <addr>`) and mGBA `.ss1` savestate diffs (PNG `gbAs` chunk, zlib-decompressed). At the title screen IWRAM `0x030005E4`–`0x03000600` holds a run of ROM pointers (`0x0834FB98`, `0x0834FBD8`, …); after entering the main menu those same slots are reloaded with a different run (`0x083450D8`, `0x08345318`, …) and the profile-select run differs again (`0x08348B58`, …). The debugger's PC at the title idle loop was `0x08019DA2`. These distinct, stable RAM images confirm each screen state independently of the screenshots.
-- Published codes tested: none applicable. The three Neoseeker codes are GameShark device codes (not ROM literals and not entered through any in-game UI); no in-game code was found to test.
+- Published codes tested: none applicable. The three 3rd party cheat index codes are GameShark device codes (not ROM literals and not entered through any in-game UI); no in-game code was found to test.
 
 ## 4. Address map
 
@@ -101,7 +101,7 @@ Per §0.2, a negative claim must name the spaces searched and the counts:
 
 | Space searched | Result |
 |---|---|
-| Published in-game codes (GameFAQs archive, VGChartz, TCRF, Neoseeker, general web) | **0** in-game codes. 3 GameShark codes (out of scope) + 1 gameplay tip. |
+| Published in-game codes (3rd party cheat indexes archive, 3rd party cheat indexes, general web) | **0** in-game codes. 3 GameShark codes (out of scope) + 1 gameplay tip. |
 | Keyword literals `password`, `cheat`, `secret`, `unlock`, `debug` in ASCII, UTF-16LE, UTF-16BE, UTF-32 | **0** occurrences of each in all four encodings (8 MiB scanned). |
 | Password alphabets (`A-Z`, `a-z`, `0-9A-Z`, consonant alphabet, `1234KLMN…`) | **0** occurrences of each. |
 | RTTI/menu class names | **16** classes enumerated; **0** debug/cheat/test classes. Only `TestAniGroup` + 4 `TEST_ANI_ITEMn` resource names exist (not a menu). |

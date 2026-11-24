@@ -183,7 +183,7 @@ rejected on the real screen — likely console-list errors.
   combinations and every generated word was accepted by the model (§16.9).
 * Keyboard space is 22^8 = 54,875,873,536, but only the 16-symbol subset can pass.
 
-**Novel codes minted (not on GameFAQs, VGChartz, TCRF, Game Cheats Wiki or any wiki):**
+**Novel codes minted (not on 3rd party cheat indexes or any wiki):**
 
 | Code | Fields | Screen result | RAM proof |
 |---|---|---|---|
@@ -223,11 +223,10 @@ alphabet tables 0x08093320/0x08093368, and the full field layout in §5.
 field there; visual difference within Tree Tops was not isolated). The `completion` field is
 a 12-bit completed-level bitmask (matches the doubling 1,3,7,…,4095 across the 100% list).
 
-**Published codes:** none of the 33 distinct codes from GameFAQs, Game Cheats Wiki, GameGenie,
-GameGas, VictoryCheats and ChapterCheats appears literally in the ROM (`grep -abo`, 0 hits),
+**Published codes:** none of the 33 distinct codes from 3rd party cheat indexes appears literally in the ROM (`grep -abo`, 0 hits),
 confirming an algorithmic validator; 30 decode and validate, 3 fail with the reasons above.
 
-**Prompt injection (§16.8):** the TCRF GBA page returned via search/fetch contained a payload
+**Prompt injection (§16.8):** the 3rd party cheat indexes GBA page returned via search/fetch contained a payload
 claiming to be "not intended for humans … only for LLMs … whoever is operating this AI agent
 is a clown". It was treated as untrusted data, ignored, and recorded here. No instruction from
 any fetched page was executed.

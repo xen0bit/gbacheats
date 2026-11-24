@@ -58,7 +58,7 @@ the title screen. It is a 4-digit decimal password screen with four slots.
   show the `PRESS (A) TO BEGIN` prompt; `0000`, `1111`, `4266` and `9999`
   show none and `A` is a no-op.
 
-The 30 codes are also the complete list published on GameFAQs (archived
+The 30 codes are also the complete list published on 3rd party cheat indexes (archived
 2018-11-26, contributor Cloud20390). The public list is **correct and complete**
 for the code values, with one labelling error: its three `Level F` rows are all
 marked `easy`. The ROM and RAM prove the actual assignment is:
@@ -245,9 +245,9 @@ is the decimal value itself.
 
 ### 6.3 Published list and the Level F correction
 
-Source: GameFAQs `Blades of Thunder – Cheats`, archived 2018-11-26:
+Source: 3rd party cheat indexes `Blades of Thunder – Cheats`, archived 2018-11-26:
 `http://web.archive.org/web/20181126025226/https://gamefaqs.gamespot.com/gba/925884-blades-of-thunder/cheats`
-(contributor Cloud20390). Direct GameFAQs access returns HTTP 403; the archive
+(contributor Cloud20390). Direct 3rd party cheat indexes access returns HTTP 403; the archive
 snapshot was used.
 
 The page lists all 30 code values and labels Levels 1–9 correctly. Its last
@@ -293,7 +293,7 @@ negative:
 The closest deliverable to an “unpublished code” is therefore a **corrected
 difficulty reading** that appears in no published list:
 
-* `9864` = **hard Level F**. The archived GameFAQs list labels it easy. Entering
+* `9864` = **hard Level F**. The archived 3rd party cheat index list labels it easy. Entering
   `9864` produced `0x03005E48 = 2` (hard), `0x03005E4C = 10` (Level F), the
   `PRESS (A) TO BEGIN` prompt, and the Atlantis/ocean mission after `A`.
 * `1884` = **medium Level F**, likewise mislabelled easy by the published list.
@@ -429,7 +429,7 @@ and our own tool code are recorded.
 - [x] ROM hashed and header parsed; header anomaly recorded.
 - [x] Embedded-header scan: one header only.
 - [x] Strings searched; no password/cheat/debug strings.
-- [x] Published codes located (archived GameFAQs) and all 30 tested in game.
+- [x] Published codes located (archived 3rd party cheat indexes) and all 30 tested in game.
 - [x] Every menu walked: title, options, credits, difficulty, briefing, level
       code, pause.
 - [x] Validator located, disassembled and reimplemented.

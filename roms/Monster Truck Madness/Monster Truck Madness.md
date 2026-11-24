@@ -55,7 +55,7 @@ The only text-entry field is the player **NAME ENTRY** screen (`A-Z 0-9 .`), whi
 
 * Input path ground truth (debugger used as oracle, guide §16.19): mGBA `.ss1` chunks parsed with `zlib.decompress(gbAs chunk)` → raw 397,312-byte state; **KEYINPUT lives at raw-state offset `0x530`** (little-endian u16): `0x03FF` with no key held, `0x01FF` with `A`/L held, `0x03F7` with `Return`/Start held. This proves the emulator delivered real GBA button events; the lack of any resulting hidden screen is a game property, not a harness failure.
 * Button codes tested on title/pause (15 combinations, `combo00.png`…`combo14.png`): `L+R`, `L+R+Start`, `A+B+Start+Select`, Konami sequence `↑↑↓↓←→←→BA`, `Start+A`, `Start+B`, `Select+A`, `Select+B`, `L+Up`, `R+Down`, `L+R+A`, `L+R+B`, `Select+Start`, `A A B B ↑ ↓`, `←→←→A`. Every combination either did nothing or advanced along the normal title→player-select→name-entry path; none produced a new screen.
-* Published codes tested: all of the PC/N64 literals above were searched in the ROM (§4) and none is present. GBA-specific sources (GameFAQs cheats page via web.archive 2018-11-26; IGN GBA Cheats snippet; GBA FAQ by Dubble_G) list **no password or button code at all** — only the Nugget unlock.
+* Published codes tested: all of the PC/N64 literals above were searched in the ROM (§4) and none is present. GBA-specific sources (3rd party cheat index cheats page via web.archive 2018-11-26; 3rd party cheat indexes GBA Cheats snippet; GBA FAQ by Dubble_G) list **no password or button code at all** — only the Nugget unlock.
 
 ## 4. Address map
 
@@ -124,11 +124,11 @@ Hidden 11th: **Nugget** (chicken truck, internal `chook`), awarded for all 30 Ti
 
 | Source | Claim | Result |
 |---|---|---|
-| CheatBook/PC, Fandom racing wiki, GameFAQs N64 | `FRAME`, `DANCE`, `trex`, `kill`, `leveurb`, `gold`, `chuck`, `demo`, `BRPS`, `YRDR`, `JMPNG`, `JMPR`, `CFFNYN`, `Y_WNT_T`, `G^NJ2L0`, `GBGJ5MTL`, … | **Wrong SKU** — PC/N64 games. Literal search in this GBA image: 0 hits (the `FRAME` hits at `0x2C82C`/`0x2E0??` are the substring of `FRAMEPOOL`; `kill`/`demo` hits are unrelated binary bytes). |
-| GameFAQs GBA cheats (archived) | Nugget: "Beat ALL Time Trial Records From Rookie To Professional" | GBA-correct; save-bit unlock, not a code |
-| IGN GBA Cheats (snippet) | "Unlockable Vehicles" with race-placement conditions | GBA-correct; race-result unlocks, not codes |
-| TCRF | no page exists for the GBA SKU (archive CDX: empty) | — |
-| Cheat Happens | "we currently don't have any Monster Truck Madness cheats or cheat codes for Game Boy Advance" | consistent with this analysis |
+| 3rd party cheat indexes/PC, 3rd party cheat indexes racing wiki, 3rd party cheat indexes N64 | `FRAME`, `DANCE`, `trex`, `kill`, `leveurb`, `gold`, `chuck`, `demo`, `BRPS`, `YRDR`, `JMPNG`, `JMPR`, `CFFNYN`, `Y_WNT_T`, `G^NJ2L0`, `GBGJ5MTL`, … | **Wrong SKU** — PC/N64 games. Literal search in this GBA image: 0 hits (the `FRAME` hits at `0x2C82C`/`0x2E0??` are the substring of `FRAMEPOOL`; `kill`/`demo` hits are unrelated binary bytes). |
+| 3rd party cheat indexes GBA cheats (archived) | Nugget: "Beat ALL Time Trial Records From Rookie To Professional" | GBA-correct; save-bit unlock, not a code |
+| 3rd party cheat indexes GBA Cheats (snippet) | "Unlockable Vehicles" with race-placement conditions | GBA-correct; race-result unlocks, not codes |
+| 3rd party cheat indexes | no page exists for the GBA SKU (archive CDX: empty) | — |
+| 3rd party cheat indexes | "we currently don't have any Monster Truck Madness cheats or cheat codes for Game Boy Advance" | consistent with this analysis |
 
 ## 6b. Enumeration
 
@@ -153,7 +153,7 @@ The one genuine hidden element, **Nugget**, is a save-bit unlock: its "bounds" a
 * **Observed** (emulator): every screen in §3; 10 trucks / 10 tracks with padlock states; 4 main-menu items, 3 options items, 3 pause items; 15 button combos with no hidden result; KEYINPUT values from a parsed mGBA savestate.
 * **Observed** (static): hashes/header/embedded-header scan; all string/encoding/key-mask counts in §6b; `EEPROM_V` and 3-slot save layout.
 * **Derived** (Capstone): entry/crt0/`main` chain (`0x080000C0` → `0x08004278` → `0x080273EC`), input edge-detect routine at `0x08028320`, TRACKUNLOCK loader literal at `0x0801FB04`.
-* **Inferred** (published GBA FAQ/IGN/GameFAQs): exact unlock conditions per truck and the "all 30 Time Trial records" requirement for Nugget — consistent with the locked states observed, but not earned by completing all 30 races in this session. The save-bit setter/readers were not individually decompiled; the classification as a save-bit unlock follows §16.18 from the observed locked/unlocked UI behavior plus the published requirement.
+* **Inferred** (published GBA FAQ/3rd party cheat indexes): exact unlock conditions per truck and the "all 30 Time Trial records" requirement for Nugget — consistent with the locked states observed, but not earned by completing all 30 races in this session. The save-bit setter/readers were not individually decompiled; the classification as a save-bit unlock follows §16.18 from the observed locked/unlocked UI behavior plus the published requirement.
 
 ## 8. Unknowns
 
@@ -167,6 +167,6 @@ The one genuine hidden element, **Nugget**, is a save-bit unlock: its "bounds" a
 * `capstone` 5.0.7 (`dis2.py`), `arm-none-eabi-objdump` — Thumb/ARM disassembly; `scan_lit.py` for PC-relative literal xrefs.
 * Custom Python scripts in `/tmp/monstertruck/`: `header.py` (header + embedded-header scan), `mtools.py`/`nav.py`/`nav2.py`/`mg_nav.py` (Xvfb/XTEST input, screenshots, OCR state detection), `parse_ss.py` (mGBA `.ss1` `gbAs`-chunk zlib decode and RAM offset discovery), `restab.py` (resource-name pointer dump).
 * `tesseract` for screen-state detection; `python3-pillow`/`numpy` for image diffs; `Xvfb :318` + `openbox`; `mgba` 0.10.5 and `vba` 1.8.0 (installed via apt for cross-check); `gdb-multiarch` against VBA's `-G tcp:55555` stub and mGBA's stub.
-* Web: web.archive snapshots of GameFAQs GBA cheats (2018-11-26), Monster Trucks Wiki GBA page (2023-02-25), GameFAQs/IGN N64 + PC pages for wrong-SKU comparison, Dubble_G GBA FAQ PDF (pdftotext). Fetched pages were treated as data; no prompt-injection payload was encountered.
+* Web: web.archive snapshots of 3rd party cheat indexes GBA cheats (2018-11-26), 3rd party cheat indexes GBA page (2023-02-25), 3rd party cheat indexes N64 + PC pages for wrong-SKU comparison, Dubble_G GBA FAQ PDF (pdftotext). Fetched pages were treated as data; no prompt-injection payload was encountered.
 
 **Legal note:** no ROM image, extracted graphics, music, or game text is redistributed here; only addresses, hashes, algorithms and observations are published.

@@ -156,7 +156,7 @@ LANGUAGE US/FR), CREDITS, in-game pause (CONTINUE/PASSWORD/OPTIONS/QUIT), genera
 sign, Velma's Notebook clue minigame. No other input-gated entry found.
 
 ### 6.3 Published corpus
-97 unique literals collected (GameFAQs, supercheats, cheatingdome, GameGenie, jeuxvideo,
+97 unique literals collected (3rd party cheat indexes,
 VinnyVideo walkthrough). **0** occur in ROM. 91 are well-formed; 80 validate under the model,
 11 are published typos (each repairable by a single symbol change).
 

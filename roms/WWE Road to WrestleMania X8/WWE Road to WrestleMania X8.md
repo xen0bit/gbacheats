@@ -129,7 +129,7 @@ This title has **no code space to enumerate**. Per guide §0.2, a bounded negati
 
 **6. Unlockables (in scope, but gameplay-gated):** 102 Shopzone items and title-history/gauntlet-ranking data are stored in the 512-byte EEPROM save. The Shopzone is empty on a fresh save and fills via match results; no controller sequence or code was found that sets those bits. These are developer-intended progression rewards, not cheats.
 
-**7. Web recon:** Searches of GameFAQs, Almar's Guides, GameHacking.org, CodeTwink, ROMSFun, Vizzed, Wikipedia and others returned only external GameShark/CodeBreaker codes and gameplay-unlock lists. **Published in-game passwords/button codes: 0.** (One fetched wiki page asserted "No cheats or unlockables available"; treated as a lead, not authority. No prompt-injection payload was encountered; fetched content was treated as data.)
+**7. Web recon:** Searches of 3rd party cheat indexes and others returned only external GameShark/CodeBreaker codes and gameplay-unlock lists. **Published in-game passwords/button codes: 0.** (One fetched wiki page asserted "No cheats or unlockables available"; treated as a lead, not authority. No prompt-injection payload was encountered; fetched content was treated as data.)
 
 ## 7. Validation evidence
 

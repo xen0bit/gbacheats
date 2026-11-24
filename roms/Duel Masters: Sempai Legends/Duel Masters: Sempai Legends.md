@@ -32,7 +32,7 @@
 
 * **Observed** — every reachable screen was walked in mGBA: title/main menu, new-game deck select, the full 10-entry in-game Start menu and each of its seven reachable sub-screens, the Credits sequence, and the `LINK` location. No screen offers a password/cheat/code/debug entry point.
 * **Derived** — the ROM's entire string corpus (112,001 strings) contains **0** occurrences of `password`, `cheat`, `debug`, `unlock`, `level select`, `hidden`, `bonus`, or `gallery`; the only 9 `secret` hits are ordinary NPC dialogue and the only 5 `code` hits are the phrase "Welcome to our Code Club". The ROM has exactly four KEYINPUT readers (§4), all simple `~KEYINPUT & 0xFFFF` accessors; no key-mask code table or sequence gate was found.
-* **Verified** — the one in-game unlockable published by GameFAQs/CheatingDome ("Duel Room — beat the game") is present and **confirmed locked** on a fresh save (screenshot `shot_30.png`/`shot_34.png`). The widely circulated GameShark/CodeBreaker lists are external memory patches, not in-game codes, and are out of scope; they were still checked and are addressed in §6.
+* **Verified** — the one in-game unlockable published by 3rd party cheat indexes are present and **confirmed locked** on a fresh save (screenshot `shot_30.png`/`shot_34.png`). The widely circulated GameShark/CodeBreaker lists are external memory patches, not in-game codes, and are out of scope; they were still checked and are addressed in §6.
 
 Consequently §0.2's "mint a novel code" deliverable does not apply: there is no code space. The required proof for the no-system case is provided instead in §6b (screen enumeration, searched-space counts, and published-code disposition).
 
@@ -83,12 +83,12 @@ Every menu handler consumes this value for ordinary cursor movement/activation. 
 
 | Source | Claim | Disposition |
 |---|---|---|
-| GameFAQs Cheats (gba/917343) | Unlockable: `Duel Room` — "Beat game" | **Confirmed present and locked** on fresh save (`shot_34.png`). Earned by story completion (CheatingDome specifies defeating Mr. X). Save-progress gate, not a code. |
-| CheatingDome | Duel Room after beating game / Mr. X | Same as above; consistent |
-| CheatingDome | Rare cards via repeated special trades; gypsy deck-swap workaround; Fire Deck recommendation | Gameplay strategy/hints, not codes |
-| CheatingDome | "Special Cards" — in a trade shop, save & quit, `Continue`, then `Special` shows different cards | In-game save-scum exploit exploiting trade RNG; **unverified in emulator** (requires mid-game trade-shop access). Not a password/button code. |
-| GameFAQs (Duel Masters **3**, gba/311635) | `GETBADGES`, `7ダダダンジーャチ`, etc. | **Different game** (Amble/Atlus, Japanese). Literals absent from this ROM (`GETBADGES` at `-1`, all others absent). Not applicable — §16.11 |
-| libretro GameFAQs/CodeBreaker `.cht`, Answers.com | GameShark/CodeBreaker 32-bit patch codes ("Have All Cards", "Max Level", "999 Wins", etc.) | **Out of scope** (external memory-edit codes). They target EWRAM save fields (`0x02005220`–`0x0200522C`), confirming a normal save record, not an in-game code surface. One published entry is internally inconsistent: `cheat9` sets **both** wins and losses to 999 while labelled "999 Wins,0 Losses" (§16.7). |
+| 3rd party cheat indexes Cheats (gba/917343) | Unlockable: `Duel Room` — "Beat game" | **Confirmed present and locked** on fresh save (`shot_34.png`). Earned by story completion (3rd party cheat indexes specify defeating Mr. X). Save-progress gate, not a code. |
+| 3rd party cheat indexes | Duel Room after beating game / Mr. X | Same as above; consistent |
+| 3rd party cheat indexes | Rare cards via repeated special trades; gypsy deck-swap workaround; Fire Deck recommendation | Gameplay strategy/hints, not codes |
+| 3rd party cheat indexes | "Special Cards" — in a trade shop, save & quit, `Continue`, then `Special` shows different cards | In-game save-scum exploit exploiting trade RNG; **unverified in emulator** (requires mid-game trade-shop access). Not a password/button code. |
+| 3rd party cheat indexes | `GETBADGES`, `7ダダダンジーャチ`, etc. | **Different game** (Amble/Atlus, Japanese). Literals absent from this ROM (`GETBADGES` at `-1`, all others absent). Not applicable — §16.11 |
+| libretro 3rd party cheat indexes/CodeBreaker `.cht`, 3rd party cheat indexes | GameShark/CodeBreaker 32-bit patch codes ("Have All Cards", "Max Level", "999 Wins", etc.) | **Out of scope** (external memory-edit codes). They target EWRAM save fields (`0x02005220`–`0x0200522C`), confirming a normal save record, not an in-game code surface. One published entry is internally inconsistent: `cheat9` sets **both** wins and losses to 999 while labelled "999 Wins,0 Losses" (§16.7). |
 | Pirates/Car Battler Joe-style literals (`L1TTLVN`, `HAMA!333`, `SIZZLN`, `POWEROVER`) | — | All absent (`-1`); no cross-gamecode surface |
 
 **Unlockable medal/plaque set (Derived from `0x5B6840`–`0x5B6D80`):** eight tournament rewards are displayed as eight red `?` on the STATS screen until earned: Greenwood medal (2 duelists), Briar Hills medal (2), Clearwater medal (2), Rush City **plaque** (3), Caramel City **plaque** (3), Lakeburg tournament (4 + finalist), plus two further 2-/3-/5-duelist tournaments including the National tournament. They are set by story/tournament completion, never by input.
@@ -111,7 +111,7 @@ This section discharges §0.2's "negative results bounded" requirement for a tit
 
 * **Observed** — screenshots `shot_00.png`–`shot_46.png` on `:318`: splash, title, deck select, all Start-menu sub-screens, Options, Stats (8 `?`), Credits, Duel Room greyed, title idle character animation, `LINK` location. Savestate `game.ss1`/`game.ss2` and 512-byte `game.sav` captured; EWRAM save mirrors located at state offsets `0x1DF1C`/`0x1E30A`.
 * **Derived** — header and embedded-header parse; hash/entry-word/fixed-0x96 checks proving a stock image; string keyword counts and literal cross-checks; the complete four-site KEYINPUT scan and disassembly as `~KEYINPUT` accessors; the key-mask table scan; publication of a second linked engine image at `0x080D0004`; the medal/plaque field layout from ROM text.
-* **Inferred** — the secondary header at `0x080D0004` is a link/multiboot engine image (its exact runtime role was not exercised); the trade-shop "Special Cards" exploit is reported from CheatingDome and was not reproduced; Card-array field meanings inferred from published patch targets rather than from the game's own save encoder.
+* **Inferred** — the secondary header at `0x080D0004` is a link/multiboot engine image (its exact runtime role was not exercised); the trade-shop "Special Cards" exploit is reported from 3rd party cheat indexes and was not reproduced; Card-array field meanings inferred from published patch targets rather than from the game's own save encoder.
 
 No claims were promoted from inference to observation. Fetched web pages were treated strictly as data; no prompt-injection payload was encountered in the pages retrieved for this report.
 
@@ -130,6 +130,6 @@ No claims were promoted from inference to observation. Fetched web pages were tr
 * Capstone 5.0.7 (`CS_ARCH_ARM`, `CS_MODE_THUMB`) for PC-relative literal-load discovery and `keystone-engine` availability check.
 * Custom scripts in `/tmp/duelsempai/`: `find_keyinput.py` (literal + LDR scan), `blscan.py` (Thumb BL callers), `scan_keys.py` (key-mask table scan), `key.py` (XTEST input helper), `ssdiff.py` (savestate `gbAs` chunk decompress + diff), `ptydbg.py`/`dbgserver*.py` (mGBA CLI-debugger pty harness, abandoned in favour of savestate diffing because the GDB stub port 2345 was held by a concurrent session — no other session's process was touched).
 * mGBA under Xvfb `:318` + openbox; `import -window root` for screenshots (≤20 retained on disk in the work dir, none attached to this reply).
-* Web sources: GameFAQs cheats/FAQ pages, CheatingDome, libretro-database `.cht`, IGN, CheatHappens, Answers.com — consulted for published-code verification only.
+* Web sources: 3rd party cheat index cheats/FAQ pages, 3rd party cheat indexes, libretro-database `.cht`, 3rd party cheat indexes — consulted for published-code verification only.
 
 **Legal note:** no ROM bytes or copyrighted assets are redistributed here; only addresses, hashes, counts, and original observations are published.

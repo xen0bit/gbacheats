@@ -17,7 +17,7 @@
 | SHA-1 | `c701dd6e6042b550051ed2f476ada9b84538f412` |
 | SHA-256 | `01a84afb5dc8444101fb64deb1560cf9353a80522d55da2ad3f990d069ceab97` |
 | `file` identification | Game Boy Advance ROM image: "UMUSCLE" (AK2EB2, Rev.00) |
-| GameHacking.org CRC32 | `BB85AD55`, serial `AGB-AK2E-USA` (matches this image) |
+| 3rd party cheat indexes CRC32 | `BB85AD55`, serial `AGB-AK2E-USA` (matches this image) |
 
 **Release integrity (§16.1):** this image is a **VENOM scene release with a cracktro**, not a stock retail boot. The entry word branches to file offset `0xFB5190`, and the boot screen shows "VENOM PRESENTS ULTIMATE MUSCLE! (C) BANDAI". The stock crt0 at `0x080000C0` is intact and the game runs normally after the intro is skipped. The header complement byte is `0xBC` where a stock header would compute `0xD5` over bytes `0xA0..0xBC`, confirming the header was edited by the release. The cracktro is a trainer-style intro, **not** an in-game cheat feature (no cheat options are exposed by it). The intro does not print ASCII (`VENOM` is tile-rendered), which is why `strings` finds no intro text.
 
@@ -99,7 +99,7 @@ No comparison against controller-mask constants or user-entered text was found i
 Kid Muscle, Terry Kinnikuman, Wally Tusket, Dik Dik Van Diemen, Jeager, Hydrazon, Eskara, Road Ramey(?), Chalbone(?), Pumpin(?), Kevin Maul, Tiranoc(?), Checkmate, Forkoless, Hanzo, Bone Kool(?), King Muscle, Ramenman, Buffaloman. (Names read from the rendered profile banner; ambiguous glyph readings marked `?`. Locked versions are *not* listed here.)
 
 ### Published unlockables (web recon; save-bit, not codes)
-| Unlockable | Condition (GameFAQs / Neoseeker / AbsoluteCheats, consistent) |
+| Unlockable | Condition (3rd party cheat indexes, consistent) |
 |---|---|
 | King Muscle | Complete the game without losing (Story) |
 | Sgt. Kinnikuman | Win Survival Mode on Hard |
@@ -108,7 +108,7 @@ Kid Muscle, Terry Kinnikuman, Wally Tusket, Dik Dik Van Diemen, Jeager, Hydrazon
 | Young King Muscle | Win Story Mode on Easy without losing |
 
 ### Out-of-scope published material
-GameHacking.org / CodeTwink / 53lu list GameShark, CodeBreaker and MaxCatz RAM patches (e.g. `33006E05 00FF` infinite health, master code `0000DE7B 000A 1003C398 0007`). These are cheat-device codes, not developer-intended in-game cheats, and were **not** tested or reported as findings.
+3rd party cheat indexes / 3rd party cheat index list GameShark, CodeBreaker and MaxCatz RAM patches (e.g. `33006E05 00FF` infinite health, master code `0000DE7B 000A 1003C398 0007`). These are cheat-device codes, not developer-intended in-game cheats, and were **not** tested or reported as findings.
 
 ## 6b. Enumeration
 

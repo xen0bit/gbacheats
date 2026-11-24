@@ -25,7 +25,7 @@ Title/version verified against the boot screen and Sega logo.
 
 **Bounded negative.** This GBA SKU has **no developer-intended password, button-code, or hidden debug-menu entry surface**. The only user text-entry widget is the World Tour *Player Edit → NAME* keyboard (alphabet `A-Z a-z 0-9 . _ END`); it is consumed as a profile label, not compared against any code constant. Every published "Virtua Tennis" code belongs to a **different SKU**:
 
-- `BRA` / `CAN` / `IND` / `ITA` / `JPN` / `NED` / `SUI` / `CRO` are **PC/Dreamcast** three-letter character codes (GameFAQs' GBA page is a mis-tagged copy of the PC entry: it literally says "PC" and "(Not for PC)"). **None of these strings exists in the GBA ROM** in ASCII, UTF-16LE/BE, UTF-32, or packed-u32 form.
+- `BRA` / `CAN` / `IND` / `ITA` / `JPN` / `NED` / `SUI` / `CRO` are **PC/Dreamcast** three-letter character codes (3rd party cheat indexes' GBA page is a mis-tagged copy of the PC entry: it literally says "PC" and "(Not for PC)"). **None of these strings exists in the GBA ROM** in ASCII, UTF-16LE/BE, UTF-32, or packed-u32 form.
 - "Hold L + Up,Down,Up,Down,Square,Triangle,Square" etc. are **PSP *Virtua Tennis: World Tour*** codes; the corresponding GBA button-mask tables are absent (0 byte-level hits).
 
 The four additional characters advertised by the manual are unlocked by **gameplay** (Master via Arcade, King via World Circuit), not by input. The ROM contains 17 character records (16 named + a dummy `Fake`, internal ID `0x12`), but no code path writes their unlock state from the keypad.
@@ -128,7 +128,7 @@ Screen dispatch was enumerated by walking all reachable screens (§3). The "debu
 - **Observed**: all screens listed in §3 via screenshots; savestates `ss1` (main menu) and `ss2` (OPTIONS) decompressed from the mGBA PNG `gbAs` chunk — 397,312 bytes each, 38,440 differing bytes in 2,055 runs (`ssdiff.py`), confirming live RAM/VRAM state changes per screen. mGBA CLI debugger reads of `0x03000800..0x03000804` and `0x03000000` (`keyprobe.py`, `rmem.py`). Rejection of the PSP code and of L/R/Select combinations on character select.
 - **Derived**: keyread/accessor addresses and all 22 BL sites from raw Thumb disassembly (`arm-none-eabi-objdump -M force-thumb`); string/pointer tables from `strings -t x` and `struct.unpack_from` pointer scans; character record stride and IDs from raw bytes.
 - **Inferred (lower confidence)**: unlock conditions (Master/King) come from the retail manual and community guides for this SKU, not from an executed gameplay completion in this session. The `Fake` record is labelled a dummy from its name and ID gap, not from a disassembly of its consumer.
-- **Unverified**: no published code was successfully entered, because no entry surface exists; the GameFAQs GBA page's "PC" codes are treated as mis-tagged, not as rejected GBA codes.
+- **Unverified**: no published code was successfully entered, because no entry surface exists; the 3rd party cheat indexes GBA page's "PC" codes are treated as mis-tagged, not as rejected GBA codes.
 
 ## 8. Unknowns
 
@@ -144,7 +144,7 @@ Screen dispatch was enumerated by walking all reachable screens (§3). The "debu
 - Python `struct` scans for literal pointers, packed code strings, and button-mask runs
 - mGBA 0.10.5 (`-3`, `-g`, `-d`, savestates F1/F2), Xvfb :315 + openbox, `xdotool`, `scrot`, ImageMagick
 - REA/Ghidra 12.1.4 was opened on the ROM but raw-ARM auto-analysis did not create Thumb functions; all conclusions rest on objdump + emulator evidence instead. The REA session was closed.
-- Web recon: GameFAQs cheats/FAQ, SuperCheats, cheatinfo.de, IGN/Sega Retro, Speedrun Demos Archive forum (GBA unlock discussion), PSP code sites (correctly excluded as different SKU). Fetched pages were treated as data only.
+- Web recon: 3rd party cheat index cheats/FAQ, 3rd party cheat indexes, 3rd party cheat index forum (GBA unlock discussion), PSP code sites (correctly excluded as different SKU). Fetched pages were treated as data only.
 
 ## 10. Legal note
 

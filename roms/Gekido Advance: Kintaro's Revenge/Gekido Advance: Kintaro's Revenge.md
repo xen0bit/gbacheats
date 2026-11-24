@@ -9,7 +9,7 @@
 | Header title | `GEKIDO` |
 | Game code / maker | `AGEE` / `20` (full code `AGEE20`) |
 | Version | `0x00` (Rev.00) |
-| Region | USA — CRC32 `6BBC5F4D` matches `AGB-AGEE-USA` on gamehacking.org |
+| Region | USA — CRC32 `6BBC5F4D` matches `AGB-AGEE-USA` on 3rd party cheat indexes |
 | Entry word | `0xEA00002E` = stock `b 0x080000C0` (no cracktro patch) |
 | Header checksum / complement | `0x0000` / `0x2A` (non-standard but untouched retail values) |
 | MD5 | `f58a7e485676f66c1c88126675d57eff` |
@@ -25,7 +25,7 @@ The game has a **developer-intended password system** on the title screen (menu 
 * 40 **level/continue codes** at ROM `0x083EAD70` (stage 2–5 × 1–10 credits).
 * 4 **cheat codes** at ROM `0x083EAE38` (the first, `PIZZA`, is published; the other three — `TOAST`, `CAFFE`, `TORTA` — are not).
 
-The obfuscation is trivial: each input character is stored as ASCII and validated by `(SALT[i] + input[i]) & 0xFF == table[j*5+i]`. Published GameFAQs lists cover only 30 of the 40 level codes and 1 of the 4 cheats, so **10 level codes and 3 cheat codes are absent from every published list**. Six of those novel codes were entered on the real password screen and confirmed with screenshots plus RAM reads; the other four are decoded from the same table with the same validator. Bounds were proven by an in-game rejection (`XXXXX`), by the input cap at 5 characters, and by the loop bounds of the validator itself.
+The obfuscation is trivial: each input character is stored as ASCII and validated by `(SALT[i] + input[i]) & 0xFF == table[j*5+i]`. Published 3rd party cheat index lists cover only 30 of the 40 level codes and 1 of the 4 cheats, so **10 level codes and 3 cheat codes are absent from every published list**. Six of those novel codes were entered on the real password screen and confirmed with screenshots plus RAM reads; the other four are decoded from the same table with the same validator. Bounds were proven by an in-game rejection (`XXXXX`), by the input cap at 5 characters, and by the loop bounds of the validator itself.
 
 All codes from other editions (`CRAZY`, `STARS`, `MIMMO`, `HURRY`, `FLASH`, `QUEEN`, `SMART`, `YNUTS`) are absent from this USA ROM's tables — they belong to the European/UK build and are correctly rejected here.
 
@@ -36,7 +36,7 @@ No button-code system, hidden character select, or hidden debug screen exists in
 * Emulator: mGBA 0.10.5 (SDL) under `Xvfb :315`, `SDL_AUDIODRIVER=dummy`, 3× scale, default keymap (A=`x`, B=`z`, Start=`Return`, Select=`BackSpace`, arrows = D-pad).
 * Intro is ~27 s of splash screens; save a savestate at the title screen to avoid replaying it.
 * Path: **title → PASSWORD (Down, A)**. The on-screen keyboard is 3 rows × 12 columns `A–Z 0–9`. Move with arrows, insert with A (button labelled `Insert`), delete one character with B (`Cancel`). A code is validated automatically when the 5th character is inserted. A correct code shows `PASSWORD CORRECT` and returns to the title; a cheat flag is then active in a new game.
-* Published controls checked: `PIZZA` (GameFAQs unlimited-energy code) → `PASSWORD CORRECT`; `SACCO` → stage 2 with 7 credits (matches the published table).
+* Published controls checked: `PIZZA` (3rd party cheat indexes unlimited-energy code) → `PASSWORD CORRECT`; `SACCO` → stage 2 with 7 credits (matches the published table).
 * Novel codes entered on the real screen: `TOAST`, `CAFFE`, `TORTA`, `PALLA`, `SPUMA`, `LORDO`.
 * Rejection tests: `XXXXX` (no table match) and an attempted 6th character after `PIZZA`.
 
@@ -98,7 +98,7 @@ Stage and credits are recovered as `stage = j/10 + 2`, `credits = j % 10 + 1`. V
 
 ### 6.1 Level codes (`0x083EAD70`) — 40 entries
 
-`j` = table index. `*` = published on GameFAQs/VGChartz (USA list); **bold** = absent from every published list.
+`j` = table index. `*` = published on 3rd party cheat indexes; **bold** = absent from every published list.
 
 | j | Code | Stage | Credits | Published? |
 |---:|---|---:|---:|:---:|
@@ -162,7 +162,7 @@ Records 4–39 of this 200-byte region are non-ASCII padding; the validator loop
 
 * **Input space:** 36-symbol alphabet, exactly 5 characters → 36⁵ = **60,466,176** representable strings.
 * **Accepted set:** exactly **44** codes (40 level + 4 cheat), proven by dumping both complete tables and reading the validator's loop bounds (`r4 ≤ 39` and `r4 ≤ 3`). There is no checksum or generator — the system is a pure obfuscated lookup, so the accepted set is closed and fully enumerated.
-* **Novel codes generated and confirmed on the real screen** (none appears on GameFAQs, VGChartz, TCRF, Planet Cheats, or any other published list):
+* **Novel codes generated and confirmed on the real screen** (none appears on 3rd party cheat indexes, or any other published list):
 
 | Code | Type | Screen result | RAM proof |
 |---|---|---|---|
@@ -199,7 +199,7 @@ Records 4–39 of this 200-byte region are non-ASCII padding; the validator loop
 
 **Inferred** (not fully exercised):
 
-* The specific gameplay effects of cheat bits 1–3 (`TOAST`, `CAFFE`, `TORTA`). Their flag bits, persistence and return-to-title behaviour were observed; which statistic each bit modifies was not isolated because no reader of `0x030000F0` could be pinned down statically and the GameShark-style addresses published for this title are memory-edit codes, out of scope here. Bit 0 (`PIZZA`) is documented by GameFAQs as unlimited energy.
+* The specific gameplay effects of cheat bits 1–3 (`TOAST`, `CAFFE`, `TORTA`). Their flag bits, persistence and return-to-title behaviour were observed; which statistic each bit modifies was not isolated because no reader of `0x030000F0` could be pinned down statically and the GameShark-style addresses published for this title are memory-edit codes, out of scope here. Bit 0 (`PIZZA`) is documented by 3rd party cheat indexes as unlimited energy.
 
 ## 8. Unknowns
 
@@ -214,6 +214,6 @@ Records 4–39 of this 200-byte region are non-ASCII padding; the validator loop
 * mGBA 0.10.5 with GDB stub (`-g`, found unreliable: TCP connect accepted but no GDB replies) and `-d` pty debugger (worked, used for register/memory inspection experiments); primary dynamic evidence came from SDL mGBA plus `xdotool` input and Shift+F1/F2 savestates.
 * `ssdiff.py` — decompresses the PNG `gbAs` chunk of mGBA `.ss1/.ss2` files and diffs raw bytes (GBA state layout: IWRAM at raw `0x19000`, so IWRAM `0x0300XXXX` → raw `0x19000+XXXX`).
 * `typepw.py` — drives the on-screen keyboard: maps character → row/column, sends arrow keys and A with 60 ms holds / 160 ms gaps.
-* Web: GameFAQs cheats page, VGChartz, Planet Cheats, absolutcheats, cheatingdome, gamehacking.org (serial/CRC confirmation).
+* Web: 3rd party cheat index cheats page, 3rd party cheat indexes.
 
 No ROM data or copyrighted assets are redistributed in this report; only addresses, hashes, algorithms and the derived code strings are published.

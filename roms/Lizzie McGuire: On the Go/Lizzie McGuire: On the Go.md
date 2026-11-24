@@ -6,7 +6,7 @@
 - File: `roms/Lizzie McGuire: On the Go/Lizzie McGuire: On the Go.gba`
 - Size: 4,194,304 bytes (0x400000, 4 MiB)
 - Header title: `LIZZIEMCGUIR`; game code `BLME`; maker `4Q`; version 0x00
-- CRC32 `0x70DED768` — exact match for theGameHacking.org USA entry
+- CRC32 `0x70DED768` — exact match for 3rd party cheat indexes USA entry
   `Lizzie McGuire - On the Go! (USA) AGB-BLME-USA` (4M, CRC 70DED768).
 - MD5   `d6b12981296a8e3c67796f94e2d7aff3`
 - SHA-1 `084add8893bae03836d33a1c7bdede5f12741663`
@@ -26,8 +26,7 @@ This is a Digital Eclipse minigame compilation, not a password-driven game.
 **There is no password/code entry screen and no button-code sequence.** The
 only developer-intended cheat is a **magic name string** entered in the PDA's
 Best Friends name field: **`cheater`** (all lowercase). It is a hard-coded
-7-byte string comparison, not a checksum system. The published GameFAQs /
-SuperCheats code was verified against the ROM and exercised in mGBA; the
+7-byte string comparison, not a checksum system. The published 3rd party cheat index code was verified against the ROM and exercised in mGBA; the
 unlock flag bytes in RAM flip from 0 to 1 and every Games / Fun With Friends
 menu entry changes from `--Locked--` to its real title.
 
@@ -136,7 +135,7 @@ The progression path (separate, not a cheat) reads the level counter at
 **Magic names (complete):**
 | String | Effect | Address of comparison | Published? |
 |---|---|---|---|
-| `cheater` (lowercase, 7 bytes) | Unlock all Games + Fun With Friends entries | `0x08003442` | Yes (GameFAQs, SuperCheats) |
+| `cheater` (lowercase, 7 bytes) | Unlock all Games + Fun With Friends entries | `0x08003442` | Yes (3rd party cheat indexes) |
 
 **Flag bytes at `0x02005C70`** (index → meaning, derived from readers at
 `0x08000794`..`0x080007F6` and `0x0800E102`..`0x0800E200`; the cheat sets 2..10):
@@ -178,10 +177,10 @@ the single level-1 clear was observed to set offset 2 via `0x0800912A`–`0x0800
   immediates. A `string`-based scan for `password|cheat|code|secret|unlock`
   found no other candidate (the only `secret` hits are horoscope prose, and
   `unlock` appears once in the instructions text at `0x1EB3DA`).
-- **Published codes tested:** `cheater` (GameFAQs cheat ID, SuperCheats
+- **Published codes tested:** `cheater` (3rd party cheat index cheat ID, 3rd party cheat indexes
   ID#11326) — **verified** in ROM at `0x08003442` and **accepted on screen**
-  with RAM proof (flags all 1). GameHacking.org Action Replay/CodeBreaker
-  codes and almarsguides codes are memory-edit cheats and are explicitly out
+  with RAM proof (flags all 1). 3rd party cheat indexes Action Replay/CodeBreaker
+  codes and 3rd party cheat index codes are memory-edit cheats and are explicitly out
   of scope; they were not tested.
 - **Novel code:** none possible — there is no second format and no generator.
   Per §0.2, a single-literal system reaches full enumeration with the one
@@ -226,7 +225,7 @@ do not trigger the validator — they are not used as evidence of acceptance.
 - No button-code table exists; a small set of common combos was tested live,
   but absence is primarily proven by the static result (no key-mask sequence
   table found; keypad reader at `0x08003DCE` feeds only menu/game input).
-- The GameFAQs "level 20 / every 5 levels" claim was verified only at the
+- The 3rd party cheat indexes "level 20 / every 5 levels" claim was verified only at the
   code level (thresholds 5/10/15/18/24), not by playing to level 20.
 
 ## 9. Tooling

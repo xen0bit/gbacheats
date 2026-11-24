@@ -136,7 +136,7 @@ Sentence at `0x083553D8`: "ENTER THESE CODES ON PLAYER SELECT SCREEN IN EITHER A
 Decoded `(type, param)` pairs: chr0 `(0,3)(5,8)(4,2)(2,6)(3,1)(3,0)`; chr1 `(3,6)(4,5)(2,3)(0,4)(1,7)(10,1)`; chr2 `(2,7)(4,3)(1,5)(5,9)(1,1)(6,2)`; chr3 `(0,2)(1,4)(0,0)(3,5)(1,6)(3,7)`; chr4 `(7,4)(0,1)(4,7)(0,5)(2,0)(4,6)`; chr5 `(2,5)(0,7)(3,4)(1,3)(5,10)(2,2)`; chr6 `(8,6)(4,0)(2,4)(4,1)(1,2)(3,3)`; chr7 `(2,1)(0,6)(9,7)(1,0)(3,2)(4,4)`. Type `>11` is rejected by the dispatcher.
 
 ### 6.3 Published codes
-All GameFAQs/StrategyWiki/IGN codes are arcade/PS/Saturn/DC forms; the GBA FAQ's "Morrigan + Select, D×3, L×3, A" was entered at player select and rejected (normal match started; `akuma_attempt.png` from prior session). Literal u16 mask searches for the four published sequences returned 0 hits.
+All 3rd party cheat index codes are arcade/PS/Saturn/DC forms; the GBA FAQ's "Morrigan + Select, D×3, L×3, A" was entered at player select and rejected (normal match started; `akuma_attempt.png` from prior session). Literal u16 mask searches for the four published sequences returned 0 hits.
 
 ## 6b. Enumeration
 

@@ -115,7 +115,7 @@ Published codes verified against the ROM and oracle:
 | "Skip to level 12" | `Fjq0VRTs` | no | **14** |
 | "Skip to level 13" | `s6FX2GLm` | no | **15** |
 
-Sources: GameFAQs cheats page (403 direct, recovered from search snippets), Freeola retro-cheats (full 14-entry list), Neoseeker, AbsoluteCheats, SuperCheats. All 14 literals were searched in the ROM: only the two `THQ…` strings are present; the twelve level codes are algorithmic. No prompt-injection payload was encountered in the fetched pages (§16.8); fetched text was treated as data.
+Sources: 3rd party cheat index cheats page (403 direct, recovered from search snippets), 3rd party cheat indexes retro-cheats (full 14-entry list), 3rd party cheat indexes. All 14 literals were searched in the ROM: only the two `THQ…` strings are present; the twelve level codes are algorithmic. No prompt-injection payload was encountered in the fetched pages (§16.8); fetched text was treated as data.
 
 ## 6b. Enumeration
 

@@ -22,7 +22,7 @@
 
 The entry branch, logo and crt0 are stock; there is no cracktro, trainer or
 appended payload. The complement/header checksum mismatch shows the 256-byte
-header was rebuilt/edited (this is the cancelled GBA build; GameFAQs lists the
+header was rebuilt/edited (this is the cancelled GBA build; 3rd party cheat index lists the
 GBA SKU as "Canceled"). All analysis below is against this exact image.
 
 ## 2. Executive summary
@@ -33,7 +33,7 @@ The game has **two independent, developer-intended code layers**:
    Password screen: `1B1GM4CNCH33S3`, `1ST0L3TH3C0L0R`, `T0VGHG0THCH1CK`,
    `M4NV4CH4MP10NS`. Each sets a mode value in bits 16-18 of `0x03000200`
    (`0x10000`…`0x40000`) and starts a new game. These are the four codes
-   published on GameFAQs; all four literals are present in the ROM.
+   published on 3rd party cheat indexes; all four literals are present in the ROM.
 2. **A general 14-symbol progress password** over a 32-symbol alphabet
    (21 consonants + `0-9` + `?`), with a 14-byte XOR key, a 5-bit checksum
    formed from bit 0 of characters 0-4 vs characters 5-9, and the remaining
@@ -256,7 +256,7 @@ the pause menu without printing one.
 
 ### 6.1 Published codes verified in the ROM
 
-All four GameFAQs GBA passwords are literal NUL-terminated strings in 16-byte
+All four 3rd party cheat indexes GBA passwords are literal NUL-terminated strings in 16-byte
 slots at `0x08713F18`–`0x08713F58`, immediately after the 21-symbol alphabet.
 No other fixed-slot 14-character code table was found in the image (the
 surrounding `0x713F00`–`0x713F70` region holds the alphabet, the four strings,
@@ -307,7 +307,7 @@ key. Codes for checksum classes 0–7 with all other fields zero:
 | 6 | `HN5JRSLX8N0TKF` | not entered |
 | 7 | `GN5JRTLX8N0TKF` | not entered |
 
-**Novel codes (absent from GameFAQs, VGChartz, TCRF and every list checked).**
+**Novel codes (absent from 3rd party cheat indexes and every list checked).**
 `GP6JRTMY8N0TKF` and `HN6JRSLY8N0TKF` were typed on the real Password screen
 with the on-screen keyboard, submitted with the check mark, and the game
 accepted them: both played the intro cut-scene, and `HN6JRSLY8N0TKF` went on

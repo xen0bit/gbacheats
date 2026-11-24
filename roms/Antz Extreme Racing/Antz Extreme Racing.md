@@ -52,7 +52,7 @@ level list.
   `level` = level index 0..11 (displayed 1..12), `f24` = garage-item set
   (table of 7 masks), `tokens` = 0..98 in steps of 2, `f32` = 0 or 4
   (effect not identified).
-* Published GameFAQs list = 12 level codes. All 12 are accepted by the ROM,
+* Published 3rd party cheat index list = 12 level codes. All 12 are accepted by the ROM,
   but they only ever use `f16=6`, player Z, item set 255, 98 tokens,
   `f32=0`, and the zero item list. The "Level 13" entry is mislabelled: it
   decodes to **LEVEL 1, Opened Levels 12**.
@@ -274,7 +274,7 @@ alphabet is stored ASCII at `0x08329518`.
 The caller (`0x08321E6C`) writes 1 or 2 to `0x03000664` depending on whether
 `f20==8 && level==0`, then returns the screen state.
 
-### 6.4 Published codes (GameFAQs / fandom / supercheats), verified in ROM
+### 6.4 Published codes (3rd party cheat indexes / fandom / 3rd party cheat indexes), verified in ROM
 
 All 12 are accepted by `0x08326004` (Unicorn) and by the emulator UI.
 

@@ -58,7 +58,7 @@ entered on the real password screens in mGBA:
 * `1XTBQ50K3LCVDKX5F2K8BJ` (bot, LW, published nowhere) — **accepted**, LW slot
   filled with `BOT: BCB A  25-60 LBS.` (shot `129_botaccepted.png`).
 * `4D3K2SG2V6LRM2D` (team, seeds `25/55/22/41`, published nowhere) — **accepted**
-  (shot `134_companion_accepted.png`); it makes the published GameFAQs
+  (shot `134_companion_accepted.png`); it makes the published 3rd party cheat indexes
   Lightweight code `D60PPQ63NLS1V3H9GGYNCM` work (shot `140_pub_accepted2.png`).
 * Aliases and rejections are documented in §6b/§7.
 
@@ -271,12 +271,12 @@ accepted strings per payload (`M`/`3` for the tested code).
 A new game starts with team seeds `[0, 0, 32, 0]`. The published Lightweight
 code `D60PPQ63NLS1V3H9GGYNCM` has checksum **25**, so it is rejected in the LW
 slot (seed 0). It becomes valid only after a team password that sets seed0 = 25
-is loaded. The GameFAQs list gives only bot codes, never the companion team
+is loaded. The 3rd party cheat index list gives only bot codes, never the companion team
 codes, which is why the codes appear broken to most players.
 
 ## 6. Tables
 
-### 6.1 Published GameFAQs codes (all 22 chars)
+### 6.1 Published 3rd party cheat index codes (all 22 chars)
 
 Offline results from the ROM's own validator (`0x080316C8`), all four classes ×
 all 64 seeds:
@@ -345,7 +345,7 @@ on this index; it also changes the mixed-radix layout for SHW.
   accepted and normalised to the canonical `…CM` (last symbol 9), shot
   `171_alias_result.png`.
 
-### Novel codes (none appears on GameFAQs, VGChartz, TCRF or any wiki)
+### Novel codes (none appears on 3rd party cheat indexes or any wiki)
 
 | # | Code | Type | Effect (observed) |
 |---|---|---|---|

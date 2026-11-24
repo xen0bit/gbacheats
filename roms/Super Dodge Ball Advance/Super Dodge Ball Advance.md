@@ -26,7 +26,7 @@ normal retail US revision, not a rebuilt/Scene-patched image.
 validator, no published or hidden button code, and no hidden/debug menu. The "cheats" published
 for this title are exclusively **progression-gated save-bit unlockables** (Dream Teams A–E and
 Special Championship Mode) plus out-of-scope Action Replay/GameShark codes. Publishing recon
-(GameFAQs, Giant Bomb, Wikipedia, Cheat Happens, Grokipedia) returned only unlock conditions and
+(3rd party cheat indexes) returned only unlock conditions and
 AR codes — no passwords or button sequences.
 
 The negative is **bounded, not merely "not found"**: the entire 4 MiB image was scanned for cheat
@@ -131,7 +131,7 @@ Six standard password alphabets searched (`A-Z`, `0-9A-Z`, `a-z`, `A-Z0-9`, `234
 
 ### 6.5 Unlockable set (published + ROM-corroborated)
 
-| Unlockable | Condition (GameFAQs) | ROM corroboration |
+| Unlockable | Condition (3rd party cheat indexes) | ROM corroboration |
 |---|---|---|
 | Special Championship Mode | Beat Championship Mode | `0x08059C20` "Special Championship mode&" |
 | Dream Team C / Iron Men | Beat Championship Mode (first completion) | `0x08059320` "Dream Team." |

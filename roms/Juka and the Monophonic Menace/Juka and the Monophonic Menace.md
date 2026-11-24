@@ -19,13 +19,13 @@
 
 **Embedded-header scan (Phase 0):** a full-file scan for the 156-byte Nintendo logo found exactly one hit, at file offset `0x00000004` (header base `0x00000000`). There is no second GBA header, no multiboot stub, and no appended trainer block. The `0x0000` header checksum plus a non-trivial complement `0x7E` is consistent with a rebuilt retail header, not a hacked image. **Conclusion: single retail PAL Rev.00 image, no patch/trainer.**
 
-Scope note: the only published "cheat codes" findable for this SKU are **CodeBreaker memory-patch codes** (almarsguides.com); those are memory-edit codes and are explicitly out of scope. No in-game password, button code, or hidden debug menu is published for this game.
+Scope note: the only published "cheat codes" findable for this SKU are **CodeBreaker memory-patch codes** (3rd party cheat indexes); those are memory-edit codes and are explicitly out of scope. No in-game password, button code, or hidden debug menu is published for this game.
 
 ## 2. Executive summary
 
 **No developer-intended in-game cheat/password/button-code system exists in this ROM.** This is a bounded negative result, not an absence of effort:
 
-* Web recon found **zero** published in-game cheats (VGChartz "Total cheats available: 0"; GameFAQs hosts only a walkthrough; no TCRF article; the only "cheats" page is CodeBreaker memory patches).
+* Web recon found **zero** published in-game cheats (3rd party cheat indexes "Total cheats available: 0"; 3rd party cheat indexes host only a walkthrough; no 3rd party cheat index article; the only "cheats" page is CodeBreaker memory patches).
 * The ROM contains **no** plaintext UI/debug text in any encoding tested: 305,388 `strings` runs ≥4 chars, and literal counts of `PASSWORD`, `CHEAT`, `DEBUG`, `SECRET`, `UNLOCK`, `CODE`, `ENTER`, `INVALID`, `LEVEL SELECT`, `MENU`, `OPTIONS`, `SELECT`, `CONTINUE` are **all 0** in ASCII, UTF-16LE and case-shifted (`+0x20`) ASCII. All visible text is font/tile-indexed (e.g. "Sleep Potion" is plainly readable in-game but has no byte-string in the 16 MiB image).
 * There is no password entry surface: the only title/option screens are the language selector and the "Juka … Monophonic Menace / Start" title card. The in-game screens are field gameplay, dialogue, the R-button potion selector, and a main menu that is **story-gated** (gate proven in §4/§7).
 * Button-code tables were searched as u16/u8 single-key-mask runs; no code-referenced table was found. Eight conventional button sequences were pressed on both the title and gameplay screens with no effect (§6b).
@@ -98,7 +98,7 @@ Because no code system exists, this section records the **search spaces and thei
 * Only one hardware `KEYINPUT` reference in the whole image (`0x08000814`, crt0), and the only key consumers are generic helpers (`0x08000228/0x08000244/0x08000274`) and normal menu movement. No press-history ring buffer or validator was found.
 * Eight sequences pressed on both **title** and **gameplay** screens, with a title savestate reload between each: Konami `↑↑↓↓←→←→BA`, its reverse, `L+R+Start+Select`, `A+B+Start`, `↑↑+B+A`, `Select+Start`, `L+R` alone, and all ten buttons. **All produced only normal game/menu transitions — no debug screen, unlock, or state change.**
 
-**Published-code verification:** VGChartz cheat list = 0 entries; GameFAQs = walkthrough only, no password list; TCRF = no article; the sole "cheats" page is CodeBreaker (memory patch, out of scope). There is therefore no in-game code literal to verify in the ROM; the CodeBreaker codes were **not** tested because they are memory-edit codes, outside the requested scope.
+**Published-code verification:** 3rd party cheat index cheat list = 0 entries; 3rd party cheat indexes = walkthrough only, no password list; 3rd party cheat indexes = no article; the sole "cheats" page is CodeBreaker (memory patch, out of scope). There is therefore no in-game code literal to verify in the ROM; the CodeBreaker codes were **not** tested because they are memory-edit codes, outside the requested scope.
 
 **Screen enumeration (all reachable screens walked):** ZOO Digital Publishing logo → Orbital Media logo → Language select → Title card → story prologue/dialogue → teleporter chamber (field) → courtyard/tutorial overlays (highlighted target + R prompt, ingredient-jar HUD) → **R-button potion menu** (`Sleep Potion ×01`; Left/Right/Select/B exercised) → combat/tutorial dialogue → spiral teleport transition → lab room with Bufo. Select was tested at every gameplay/dialogue/lab state; the main menu never opened because `0x030049E5` remained 0. **This is the one menu screen that is provably gated, not merely unvisited** (§4, §7); the gate flags, dispatcher and opener are mapped, and the game actively rewrites the flag, so no controller input in the explored segment can reach it.
 
@@ -107,13 +107,13 @@ Because no code system exists, this section records the **search spaces and thei
 * **Observed** (emulator/savestate): every screen in §6b; R opens the potion menu, B closes it; Select does not open the main menu in any reachable state; all eight button sequences have no cheat effect. `KEYINPUT` decoded from savestate offset `0x530` confirms the physical→GBA key mapping. Savestate diff gameplay vs. potion menu: 1,490 IWRAM bytes and 2,403 EWRAM bytes differ, proving the two are distinct RAM states rather than an overlay misread. Gate flags read from IWRAM: `0x030049E5 = 0`, `0x030055DD = 0` (gameplay) / `1` (title), `0x030055E2 = 0xFF`, `0x03004530 = 0xFFFF`.
 * **Derived** (static): header/logo scan; string/keyword counts; button-mask run counts with xref filtering; Ghidra decompilation of the main loop (`0x08000498`), system handler (`0x08000850`), Select dispatcher (`0x08000980`) and menu opener (`0x08008424`); input-helper semantics at `0x08000228/0x08000244/0x08000274`.
 * **Inferred**: the exact story event that sets `0x030049E5` is a scripted writer (xrefs `0x0800CB98`, `0x0800D28E`, `0x080174F4`); it was not driven to 1 within the explored early-game segment. The menu's contents (Recipes/Notes/Creatures/Quests/Collections/Instruments/Progress, per the published walkthrough) are therefore reported from the walkthrough, not from a screen I reached — this is the only claim not backed by an observed screen.
-* **Prompt-injection check:** all fetched web pages (VGChartz, GameFAQs walkthrough snippets, Wikipedia, almarsguides) were treated as data. No instructions, payment requests, or "decode key" payloads were found in them on this run; none were acted upon.
+* **Prompt-injection check:** all fetched web pages (3rd party cheat index walkthrough snippets, 3rd party cheat indexes) were treated as data. No instructions, payment requests, or "decode key" payloads were found in them on this run; none were acted upon.
 
 ## 8. Unknowns
 
 * The exact narrative trigger for `0x030049E5` (one of the three writers at `0x0800CB98`/`0x0800D28E`/`0x080174F4`) and hence the main-menu screen itself were not reached; completing the full ~9–13 h story was out of scope. The gate is mapped, so a later analyst can resume at that flag.
 * Font/tile glyph mapping was not fully decoded. This is acceptable for the negative because (a) every reachable screen was read visually, and (b) zero keyword literals were found in ASCII/UTF-16LE/case-shifted encodings; a tile-indexed hidden string would still have to be drawn by a screen or a code path, none of which were observed.
-* PAL-specific Frostinator bug (Wikipedia trivia) was not investigated; it is a gameplay bug, not a cheat.
+* PAL-specific Frostinator bug (3rd party cheat indexes trivia) was not investigated; it is a gameplay bug, not a cheat.
 
 ## 9. Tooling
 

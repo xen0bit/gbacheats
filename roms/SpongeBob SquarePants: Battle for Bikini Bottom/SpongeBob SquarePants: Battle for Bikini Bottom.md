@@ -242,7 +242,7 @@ Strings were found because they are ASCII, but the password keyboard itself is r
 **250,112 accepted (23.8525 %)**, exactly `128 × Σ_{L=1..28} 2^B(L) = 128 × 1,954`.
 Per-level counts: L1–3: 256 each; L4–6: 512; L7–10: 1,024; L11–13: 2,048; L14–17: 4,096; L18–20: 8,192; L21–24: 16,384; L25–28: 32,768.
 
-### Novel codes (not on GameFAQs, IGN, CheatCC, TCRF or any wiki) and in-game proof
+### Novel codes (not on 3rd party cheat indexes or any wiki) and in-game proof
 
 | Generated code | Payload | How derived | In-game proof |
 |---|---|---|---|
@@ -290,5 +290,5 @@ These turn "the game rejects out-of-range values" into measured results for both
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb/-M force-arm` for disassembly (note: this build rejects `-M force-arm`; ARM ranges disassemble correctly by default).
 - mGBA 0.10.5 under Xvfb `:319` with openbox; `xdotool` XTEST input; `scrot` screenshots; `gdb-multiarch` (one successful register/RAM read at PC `0x08017746`).
 - mGBA `.ss1` savestates parsed by extracting the zlib-compressed `gbAs` PNG chunk for RAM diffs (§16.13).
-- Web sources consulted as data: GameFAQs, IGN, CheatCC, GamesRadar, SuperCheats password lists for this GBA SKU; all literals verified against the ROM.
+- Web sources consulted as data: 3rd party cheat indexes password lists for this GBA SKU; all literals verified against the ROM.
 - Legal note: no ROM bytes, graphics, music or game text are redistributed here; only hashes, addresses, algorithms and independently generated codes are published.

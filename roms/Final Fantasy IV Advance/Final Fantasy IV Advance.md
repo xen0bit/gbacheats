@@ -16,7 +16,7 @@
 | Fixed byte | 0x96 at 0xB2 (normal) |
 | Complement / checksum | 0x29 at 0xBD / 0x0000 at 0xBE–BF |
 | Entry word | `0xEA00041E` at 0x00 → ARM branch to `0x08001080` (stock crt0) |
-| CRC32 (external, gamehacking.org) | `FEEEBDE4` |
+| CRC32 (external, 3rd party cheat indexes) | `FEEEBDE4` |
 | MD5 | `c74dd5cc3ab6e5d4ac53b1677e1abd69` |
 | SHA-1 | `c49be22eaf999774d5f2983e12ed4aace2950f36` |
 | SHA-256 | `fdc7a48c4cf22746bf13c9a953d92d92f73e76218d0173495d4692c3d6c91abd` |
@@ -46,7 +46,7 @@ and no reachable debug menu. The evidence is fourfold:
    (`0x080D5128`–`0x080D5400`), a sound-effect name table `S_0`..`S_218`
    (`0x080C9A28`–`0x080C9F18`), and a large romanised-Japanese development
    resource-name table (`0x081040CC` onward: maps, characters, battle animations,
-   enemies). TCRF documents the full text of an extensive debug menu
+   enemies). 3rd party cheat indexes document the full text of an extensive debug menu
    (*Map / Effects / Battle / Shop / Monsters / Characters / Events / Sound /
    Flags / Resume / Switch / Status / Clear SRAM*, plus NPC/PTN viewer, event
    viewer, shop list, character editor, flag editor). **Those menu strings are
@@ -54,8 +54,7 @@ and no reachable debug menu. The evidence is fourfold:
    is entered by GameShark/CodeBreaker codes that overwrite save RAM
    (`8200E04E 015D` → map 0x015D = "Search 349"; plus `8200E3C4 0078`,
    `8200E3C8 0068`) — an external memory-edit device, explicitly out of scope.
-3. **All published "cheats" are memory patches.** GameFAQs, GameHacking.org,
-   cheatcc, ethereal-games and libretro `.cht` lists contain only Action Replay /
+3. **All published "cheats" are memory patches.** 3rd party cheat indexes, ethereal-games and libretro `.cht` lists contain only Action Replay /
    GameShark / CodeBreaker codes (enable code + direct RAM writes: infinite HP,
    Gil, "No Random Battles" `3200E064 0001`, "Enter Debug Room", "Access Music
    Select", "Walk Through Walls (Hold R)"). Not one is a password, a button code,
@@ -67,7 +66,7 @@ and no reachable debug menu. The evidence is fourfold:
    normal single-key or d-pad control (no multi-button cheat mask).
 
 The menu/debug text is stored in the game's **font/tile-index encoding**, not
-ASCII: none of the visible strings (`PUSH ANY BUTTON`, `New Game`) or the TCRF
+ASCII: none of the visible strings (`PUSH ANY BUTTON`, `New Game`) or the 3rd party cheat indexes
 debug labels occur as ASCII bytes in the ROM, even though `FINAL FANTASY IV`
 does (`0x080D5828`). A bounded decode attempt is documented in §8.
 
@@ -125,7 +124,7 @@ All addresses are ROM (`0x08000000 + file offset`) unless marked RAM.
 | Development name tables (maps, characters, animations, enemies) | `0x081040CC` onward | Observed |
 | Copyright/version string | `0x080D5828` (`FINAL FANTASY IV`, `2001SQUARE/STING`, `0129`) | Observed |
 | Save-format ID | `0x086D9AC0` (`SRAM_V113`) | Observed |
-| Debug-room map ID | `0x015D` (= 349, "Search 349") — set only by external GameShark save patch | External (TCRF) + code) |
+| Debug-room map ID | `0x015D` (= 349, "Search 349") — set only by external GameShark save patch | External (3rd party cheat indexes) + code) |
 | Candidate font-index table (uncertain) | `0x080F6C34` (256-byte table, A–Z→0..25) | Derived, unconfirmed |
 
 ## 5. Algorithm
@@ -185,7 +184,7 @@ single-button A/B/Select/Start confirmation. No site compares a simultaneous
 multi-button mask to a cheat gate. Documented combo `A+B+Start+Select` (0x00F)
 is a title reset, not a cheat; no other documented or undocumented combo exists.
 
-**Debug-menu item space (from TCRF, external):** 13 top-level entries
+**Debug-menu item space (from 3rd party cheat indexes, external):** 13 top-level entries
 (`Map, Effects, Battle, Shop, Monsters, Characters, Events, Sound, Flags,
 Resume, Switch, Status, Clear SRAM`) plus 6 debug-room NPCs (dancer, Mysidian
 Elder, shopkeeper, Golbez, FuSoYa, white mage). In this US build the menu is
@@ -214,9 +213,9 @@ console.**
 - **Derived:** input routine at `0x080013E4` and its 21 call sites from Thumb
   disassembly; absence of cheat-gate masks; GameShark literals resolve to RAM
   writes (e.g. `0x0200E04E = 0x015D`).
-- **External (authoritative, treated as data):** TCRF's transcript of the debug
-  menu and debug-room access, and GameHacking.org/GameFAQs/cheatcc code lists
-  proving every published "cheat" is a memory patch. (One TCRF fetch was
+- **External (authoritative, treated as data):** a 3rd party cheat index's transcript of the debug
+  menu and debug-room access, and 3rd party cheat indexes/3rd party cheat index code lists
+  proving every published "cheat" is a memory patch. (One 3rd party cheat indexes fetch was
   HTTP-403; the archived Wayback copy was used. No instructions found in any
   fetched page were acted upon.)
 - **Inferred:** the debug-menu labels are stored in the game's font/tile-indexed
@@ -233,7 +232,7 @@ console.**
   tilemap inspection from a title-menu savestate. The game clearly uses a custom
   script/text compression ("message special code" system), so the absence of an
   ASCII hit does **not** mean the strings are absent — it only means no plaintext
-  cheat table exists. TCRF's independent transcript establishes what those
+  cheat table exists. a 3rd party cheat index's independent transcript establishes what those
   encoded strings say. This does not affect the conclusion: even if decoded,
   the menu has no controller entry point.
 - The exact soft-reset (`A+B+Start+Select`) handler address was not isolated
@@ -256,8 +255,7 @@ console.**
   inline readers).
 - mGBA `-3` under `Xvfb :317` + `openbox`, `SDL_AUDIODRIVER=dummy`;
   `xdotool` XTEST input, `import -window root`/`import -window <id>` screenshots.
-- Web: TCRF via `web.archive.org` (403 on live), GameHacking.org, GameFAQs,
-  cheatcc, ethereal-games, libretro database (all fetched as data only).
+- Web: 3rd party cheat indexes via `web.archive.org` (403 on live), 3rd party cheat indexes, ethereal-games, libretro database (all fetched as data only).
 
 **Legal note:** no ROM bytes or copyrighted assets are reproduced in this
 report; only hashes, addresses, algorithms and original tooling are published.

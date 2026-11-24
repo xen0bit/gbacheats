@@ -234,7 +234,7 @@ value written by the published CodeBreaker code `32008F34 00FF`.
 
 ### 6.3 Published list corrections
 
-* "All Jamal Enemies: press Right six times" (ggmania) is **wrong** for this ROM: Right ×6
+* "All Jamal Enemies: press Right six times" (3rd party cheat indexes) is **wrong** for this ROM: Right ×6
   leaves `0x020094BC = 0x00` (no effect); Right ×7 sets `0xE8`. The seven-press row is correct.
 * All other published literals match the ROM table byte-for-byte.
 
@@ -257,7 +257,7 @@ This is a closed set, not a checksum format: there is no field, no checksum and 
 Enumerating all 823,543 seven-symbol strings against the 13-record `strcmp` table returns exactly
 the 12 rows in §6.1 (derived directly from the ROM table and the matcher at `0x080044E0`).
 
-### Novel accepted inputs (not on GameFAQs / VGChartz / TCRF / 53lu / TASVideos)
+### Novel accepted inputs (not on 3rd party cheat indexes)
 
 These are unpublished **input strings** that the game accepts; the *effects* they reach are the
 published actions, because the table is closed.

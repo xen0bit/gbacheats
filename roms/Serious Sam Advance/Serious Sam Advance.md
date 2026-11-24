@@ -162,9 +162,9 @@ every stored string is itself an accepted input.
 | **novel** | new game, Normal | `MEDIUM_\0` (slot 8 = NUL, not `_`) |
 | **novel** | new game, Hard | `HARD____` |
 
-Published sources: SuperCheats "Unlock Levels" list (all 33, fetched as data),
-cross-checked with the GameFAQs snippet (`CHIPPER`, `BETTERER`, `BOBBINS`,
-`FORREST` match). GameFAQs states "33 cheat codes and secrets" — the three
+Published sources: 3rd party cheat indexes "Unlock Levels" list (all 33, fetched as data),
+cross-checked with the 3rd party cheat indexes snippet (`CHIPPER`, `BETTERER`, `BOBBINS`,
+`FORREST` match). 3rd party cheat indexes state "33 cheat codes and secrets" — the three
 difficulty-label codes are absent from every published list checked.
 
 ### 6.2 Debug-menu strings (present, no reachable screen found)
@@ -197,8 +197,7 @@ the published codes spanning all three difficulties (`CHIPPER`, `BOBBINS`,
 29 published codes are accepted as well (their bytes are present verbatim in
 the table and the comparison is exact byte equality).
 
-**Novel codes generated and accepted (absent from GameFAQs, SuperCheats,
-VGChartz and TCRF):**
+**Novel codes generated and accepted (absent from 3rd party cheat indexes):**
 
 1. `EASY____` — typed/written, submitted with A → story screen → new game at
    Easy (4 starting lives observed in a separate run). Screenshot:
@@ -226,7 +225,7 @@ Options, Scores, Credits, Multi Player, difficulty select, briefing, gameplay,
 pause, quit-confirm) and none renders "Cheats"/"Level Select"/"God Mode";
 (b) L+R+Start, L+R+Select, Start+Select+A+B and the Konami sequence on the
 title screen produced no debug screen; (c) no published source lists an access
-method (TCRF has no page for this SKU; the one wiki-style "Cheat Code" claim
+method (3rd party cheat indexes have no page for this SKU; the one wiki-style "Cheat Code" claim
 found was an unspecific lead, treated as data). Therefore the debug labels are
 either dead leftover data or a feature behind an unlocated gate; this report
 does **not** claim they are reachable.
@@ -274,8 +273,8 @@ fetched web text was treated as data.
 * Analysis scripts in `/tmp/serioussam/`:
   `ssread.py` (state RAM reader), `patchss.py` (buffer patcher),
   `testpw.py` (submit-and-screenshot driver), `enterpw.py`, `key.py`.
-* Web: SuperCheats (full 33-code list, fetched as data), GameFAQs snippet,
-  search-result snippets; TCRF/GameFAQs direct fetches returned 403.
+* Web: 3rd party cheat indexes (full 33-code list, fetched as data), 3rd party cheat indexes snippet,
+  search-result snippets; 3rd party cheat indexes direct fetches returned 403.
 
 *Legal note:* no ROM data or copyrighted assets are redistributed here — only
 addresses, hashes, algorithms, and the game's short password strings.

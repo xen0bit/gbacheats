@@ -144,7 +144,7 @@ Down=0x080, R=0x100, L=0x200`. This is the Konami code with L+R held and a trail
 
 ### 6.3 Published codes
 
-Web search (GameFAQs-style queries, 2026-11-20) returned no published codes for this GBA SKU.
+Web search (3rd party cheat index-style queries, 2026-11-20) returned no published codes for this GBA SKU.
 No code string appears literally in the ROM (the code lives as button masks, not ASCII). This
 report's code is therefore not copied from any published list.
 

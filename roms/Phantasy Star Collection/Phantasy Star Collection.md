@@ -155,10 +155,10 @@ if (*(u16*)0x02024364 & 0x0F) == 0x0F:   # A+B+Select+Start simultaneously
 
 | Source | Claim | Result |
 |---|---|---|
-| GameFAQs / Cheating Dome | "Press Up or Down when the picture of Phantasy Star appears" to select Episodes 2/3 | **Verified** statically (0x08000602/0x08000674) and in emulator (index 1/2, logo change) |
-| GameFAQs | PS2 "Pause + hold B = slow motion"; "mash B to avoid encounters"; item-dup glitches | Classified as gameplay glitches (GameFAQs labels them Secrets/Glitches), not developer code systems; not part of the verified button-code surface |
-| ROMSFUN / SuperCheats / GameHacking.org | CodeBreaker/GameShark codes | Out of scope (memory-edit codes), not tested by design |
-| GameFAQs "Save State Hacking Guide" references | save-state editing | Out of scope (memory edit), not tested by design |
+| 3rd party cheat indexes | "Press Up or Down when the picture of Phantasy Star appears" to select Episodes 2/3 | **Verified** statically (0x08000602/0x08000674) and in emulator (index 1/2, logo change) |
+| 3rd party cheat indexes | PS2 "Pause + hold B = slow motion"; "mash B to avoid encounters"; item-dup glitches | Classified as gameplay glitches (3rd party cheat indexes label them Secrets/Glitches), not developer code systems; not part of the verified button-code surface |
+| 3rd party cheat indexes | CodeBreaker/GameShark codes | Out of scope (memory-edit codes), not tested by design |
+| 3rd party cheat indexes "Save State Hacking Guide" references | save-state editing | Out of scope (memory edit), not tested by design |
 
 ## 6b. Enumeration
 
@@ -173,12 +173,12 @@ action space is:
 * sequence lengths: 1 press for every action; the state wraps with period 3.
 
 **Novel / unpublished code.** The Select key is **not** in any published list
-(GameFAQs says only Up/Down). Pressing **Select alone** at the game select screen
+(3rd party cheat indexes say only Up/Down). Pressing **Select alone** at the game select screen
 from the default PS1 state moved `0x0202436C` from `0x00` to `0x01` and changed the
 logo to "Phantasy Star II" (screenshot `btn_Select_c.png`, savestate RAM read). The
 undocumented **A+B+Select+Start** combo was also pressed in-game and returned to
 the collection splash (`combo4_after_c.png`). Neither appears in the consulted
-GameFAQs/Cheating Dome/VGChartz-style lists.
+3rd party cheat index-style lists.
 
 **Bounds proof by rejection.**
 
@@ -224,7 +224,7 @@ Evidence files (`/tmp/phantasystar/`): `ct_*.raw`, `bnd_*.png`,
 * Shell UI text is rasterised into image data rather than stored as decodable
   strings; the negative in §6b is therefore based on the enumerated input surface
   and the ASCII credit bank, not on a complete string table of UI labels.
-* The PS2 "hold B in pause" item is a published gameplay glitch (GameFAQs
+* The PS2 "hold B in pause" item is a published gameplay glitch (3rd party cheat indexes
   classifies it as a Secret), not a developer code path; it was not required to
   characterise the button-code system, which is fully enumerated above.
 

@@ -27,7 +27,7 @@
 1. The debug-screen entry at `0x08000760` has **0** BL/XREF callers (manual Thumb BL scan + Ghidra xrefs).
 2. `CheatMenuState`'s string pointer `0x0803DDFC` occurs exactly **2** times in the ROM — both are *data* literals (`0x0801ACA4`, `0x0801B298`) used only as a class-name label in two UI-builder functions. Those two branches call `0x0801B870`, which is a 2-byte empty stub (`bx lr`). No cheat logic is behind them.
 3. The cheat-flag/keypad observer names occur only in RTTI type-info tables (`0x0803D124`, `0x0803D134`, `0x0803DAC8`, `0x0803DB10`); there are **0** code xrefs, and no keypad/alphabet/validator tables exist.
-4. No published GBA codes exist to verify: VGChartz lists **0** cheats for this SKU, GameFAQs' GBA cheats page is empty (no archived snapshot). The `UnlockAllItems` / `UnlockAllTours` console passwords belong to the PC/Xbox SKUs and their literals are **absent** from this ROM in ASCII, +0x20, or UTF-16LE. CodeJunkies Action Replay codes are external hardware codes and are out of scope.
+4. No published GBA codes exist to verify: 3rd party cheat index lists **0** cheats for this SKU, 3rd party cheat indexes' GBA cheats page is empty (no archived snapshot). The `UnlockAllItems` / `UnlockAllTours` console passwords belong to the PC/Xbox SKUs and their literals are **absent** from this ROM in ASCII, +0x20, or UTF-16LE. 3rd party cheat indexes Action Replay codes are external hardware codes and are out of scope.
 5. Live breakpoints on both cheat-menu class-name writes (`0x0801AC66`, `0x0801B258`) and on the debug screen (`0x08000760`) never fired while touring every reachable screen and pressing every tested key combination.
 
 The *legitimate* progression content is a save-bit unlock system (locked lakes, challenge completion), documented in §6/§7 as a non-code unlockable (§16.18).
@@ -121,7 +121,7 @@ Because no code system exists, the enumeration is of the *search space that was 
 | `CheatMenuState` string pointers | full-file u32 scan | **2**, both data labels (`0x0801ACA4`, `0x0801B298`) |
 | Code/keypad/validator tables | `strings -t x` (58,685 strings) keyword scan for password/cheat/code/debug/secret/unlock; u32 searches for password literals and 0x030F-style key masks; RTTI xref counts | no alphabet table, no validator, no key-mask table; keypad/cheat-flag names only in type-info |
 | Live breakpoint proof | breakpoints at `0x0801AC66`, `0x0801B258`, `0x08000760`, full menu tour + combos | 0 hits; emulator ran continuously |
-| Published codes | GameFAQs (empty, no archive), VGChartz (0 cheats), CodeJunkies (Action Replay — out of scope), PC/Xbox console passwords | nothing to verify/enter |
+| Published codes | 3rd party cheat indexes, PC/Xbox console passwords | nothing to verify/enter |
 
 **No novel code could be minted because there is no validator or generator to enumerate.** This is a proven "no system" result (§16.3 case 1 + case 2), not an untested one.
 

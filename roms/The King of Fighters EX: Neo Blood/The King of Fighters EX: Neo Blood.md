@@ -25,7 +25,7 @@ This is the `AKOE` US/EU SKU. All addresses are valid for this exact hash only. 
 
 ## 2. Executive summary
 
-**Bounded negative (high confidence): no player-usable code system was found in this ROM.** There is no password entry screen, no password validator/table, no button-code sequence validator, and no reachable hidden debug menu. The game does contain an ordinary **save-data unlockable system** (Wikipedia lists Iori Yagami, Geese Howard and the strikers K', Maxima, Vanessa and Yamazaki as unlockables) and 512-byte EEPROM records; those are earned by play, not typed.
+**Bounded negative (high confidence): no player-usable code system was found in this ROM.** There is no password entry screen, no password validator/table, no button-code sequence validator, and no reachable hidden debug menu. The game does contain an ordinary **save-data unlockable system** (3rd party cheat index lists Iori Yagami, Geese Howard and the strikers K', Maxima, Vanessa and Yamazaki as unlockables) and 512-byte EEPROM records; those are earned by play, not typed.
 
 Evidence in brief:
 
@@ -96,7 +96,7 @@ The unlockables are a save-bit design (guide §16.18 pattern): unlock flags in E
 
 **Joypad masks (active-high GBA standard):** A=0x001, B=0x002, Select=0x004, Start=0x008, Right=0x010, Left=0x020, Up=0x040, Down=0x080, R=0x100, L=0x200.
 
-**Unlockables (external source, not verified in-game):** Wikipedia lists Iori Yagami and Geese Howard as unlockable fighters, plus K', Maxima, Vanessa and Ryuji Yamazaki as unlockable strikers.
+**Unlockables (external source, not verified in-game):** 3rd party cheat index lists Iori Yagami and Geese Howard as unlockable fighters, plus K', Maxima, Vanessa and Ryuji Yamazaki as unlockable strikers.
 
 ## 6b. Enumeration
 
@@ -133,7 +133,7 @@ This is a **no-code-system** engagement, so the §0.2 deliverables are stated as
 - The tile-index/pre-rendered text bank for character names and story text was **not fully decoded**; therefore the negative for hidden messages in *that particular encoding* is not proven. The negative rests on the ASCII/UTF-16 scan plus the full screen walk (no code-entry UI was visible).
 - The EEPROM flag semantics (which bit unlocks Iori/Geese/K'/Maxima/Vanessa/Yamazaki) were not isolated; 0x4A/0x4B were observed to change but their bit meanings were not derived.
 - The yellow `?` slot at character select was not exhaustively tested with every cursor position; it behaved as an ordinary selection slot during the combos tried.
-- Web reconnaissance was blocked: GameFAQs, TCRF, Fandom direct, CheatCC, Google, Bing, DuckDuckGo, Mojeek and Brave either returned 403/CAPTCHA or no results through this environment; only Wikipedia was reachable. All "published code" claims are therefore unverified for this ROM.
+- Web reconnaissance was blocked: 3rd party cheat indexes direct, 3rd party cheat indexes, Google, Bing, DuckDuckGo, Mojeek and Brave either returned 403/CAPTCHA or no results through this environment; only 3rd party cheat indexes were reachable. All "published code" claims are therefore unverified for this ROM.
 
 ## 9. Tooling
 

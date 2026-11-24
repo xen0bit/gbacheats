@@ -129,7 +129,7 @@ All literals were searched with `grep -abo`-equivalent byte search: **none are s
 | Unlock Yellow Yahoo | `W8T52Q` | 17,29,15,26,23,12 | 11662 | 1 | 0 | 25/25 ✓ |
 | Unlock Brown Bully | `J[]T7KH` | — | — | — | — | **published string corrupt** |
 
-`J[]T7KH` (GameFAQs/TCRF-family mirrors) is 7 glyphs and contains two characters outside the 31-symbol alphabet, so it cannot be typed. Restricting the search to `c0=J`, `c2=T`, `c4=K`, `valB=2` yields `J9T8KH` as the closest checksum-valid 6-symbol spelling (J,9,T,8,K,H — matches 5 of the 6 visible glyphs). Marked **Inferred**; not re-entered on screen.
+`J[]T7KH` (3rd party cheat index-family mirrors) is 7 glyphs and contains two characters outside the 31-symbol alphabet, so it cannot be typed. Restricting the search to `c0=J`, `c2=T`, `c4=K`, `valB=2` yields `J9T8KH` as the closest checksum-valid 6-symbol spelling (J,9,T,8,K,H — matches 5 of the 6 visible glyphs). Marked **Inferred**; not re-entered on screen.
 
 `valB` maps 0–8 to the nine unlockable robots and 9 to "Game Finished"; Red Rocker is the default at game start. Note a discrepancy: after entering published `LSTL2B` (labelled "Black Bruiser"), the CLASSIC champion carousel displayed **BLUE BOMBER** as the newly selectable champion. Published robot labels should therefore not be trusted (guide §16.15).
 
@@ -156,7 +156,7 @@ All literals were searched with `grep -abo`-equivalent byte search: **none are s
 
 For each accepted string `c5` is uniquely determined, so there are no free checksum aliases. The semantic payload is 19 bits (valA low 10 + valA bit15 + valB 4 + valC 4); the other 11 bits are the fixed `c2` field and the checksum.
 
-**Novel codes generated and accepted in-game** (neither appears on GameFAQs, VGChartz, TCRF or any wiki consulted):
+**Novel codes generated and accepted in-game** (neither appears on 3rd party cheat indexes or any wiki consulted):
 
 | Code | c[] | valA | valB | valC | Result | RAM proof |
 |---|---|---|---|---|---|---|

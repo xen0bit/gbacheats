@@ -15,7 +15,7 @@
 | SHA-1 | `6dcab3a6a888cc992e0b9432b828e692424e404b` |
 | SHA-256 | `e560a4e55220805d3590284c5953f7c5ffe3a0f32785bf14caddf00e7134dc6c` |
 
-Web recon (GameFAQs, TCRF, the Game-Data-Mining unlockables page) found **no published GBA cheat/password list** for this title; the widely published button codes belong to the PS2/GC build, and the 8-character passwords belong to the earlier *Breakin' Da Rules* GBA game. Treat those as different SKUs (guide §16.11). Fetched pages were treated as data only; no instruction-like content was acted on.
+Web recon (3rd party cheat indexes, the 3rd party cheat indexes unlockables page) found **no published GBA cheat/password list** for this title; the widely published button codes belong to the PS2/GC build, and the 8-character passwords belong to the earlier *Breakin' Da Rules* GBA game. Treat those as different SKUs (guide §16.11). Fetched pages were treated as data only; no instruction-like content was acted on.
 
 ## 2. Executive summary
 
@@ -148,7 +148,7 @@ Both are bijections of `0..29`; `T2 == inverse(T1)` (verified in Python).
 | 2 | `7B45XV` | `0x0201D54E = 1` | input buffer `37 42 34 35 58 56 00` |
 | 3 | `BRNTHM` | `0x0201D54F = 1` | input buffer `42 52 4E 54 48 4D 00` |
 
-None of these four strings appears in any published GBA list for this game (GameFAQs, TCRF, Game-Data-Mining, general web search); they are reported here for the first time.
+None of these four strings appears in any published GBA list for this game (3rd party cheat indexes, general web search); they are reported here for the first time.
 
 ### Class thresholds
 

@@ -32,7 +32,7 @@ Confirmed in-game button code:
   Observed twice, from a battle map and from the title screen. It is a
   developer-intended system shortcut, not a content cheat.
 
-Claimed but **not reproduced** in this revision (GameFAQs board):
+Claimed but **not reproduced** in this revision (3rd party cheat index board):
 
 * From the Banpresto logo, `A+B+Start+Select` while holding `Start` is said to jump
   directly to the quicksave. Tested with a real save present under four timing
@@ -41,10 +41,10 @@ Claimed but **not reproduced** in this revision (GameFAQs board):
 
 Published cheats for this title are out of scope or progression-based:
 
-* GameFAQs/VGChartz list only **New Game+** (beat the game with Kyosuke and Ryusei)
+* 3rd party cheat index list only **New Game+** (beat the game with Kyosuke and Ryusei)
   and **Secret Robots/Characters/Weapons/Items** (stage/level/kill conditions).
   These are save-flag unlockables (guide §16.18), not input codes.
-* Neoseeker/Akurasu CodeBreaker and GameShark lists are cheat-device codes — excluded
+* 3rd party cheat indexes/Akurasu CodeBreaker and GameShark lists are cheat-device codes — excluded
   by the task scope.
 * The widely published "System menu → Down, Up, Left, Right, L, R → music player"
   button code belongs to **Original Generation 2**, not this game. Entered verbatim
@@ -155,7 +155,7 @@ code); the behaviour itself is Observed (§7).
 | Password alphabets / code tables | **0 found** (see §6b counts) |
 | Button-code sequence tables | **0 found** |
 | Hidden/debug menu entries | **0 reachable** |
-| Unlockables (progression, save-flag) | New Game+ (clear with Kyosuke and Ryusei); Secret Robots/Characters/Weapons/Items (stage-specific conditions e.g. R-Gun on stage 30, Valcion Kai <10% HP on stage 28, Shishiso Blade 50 kills + Zengar on stage 26 on Hard, Hero Symbol level 35 on stage 35, Kai on Kyosuke route). Source: GameFAQs/Freeola — **Inferred** for this exact revision (not played through). |
+| Unlockables (progression, save-flag) | New Game+ (clear with Kyosuke and Ryusei); Secret Robots/Characters/Weapons/Items (stage-specific conditions e.g. R-Gun on stage 30, Valcion Kai <10% HP on stage 28, Shishiso Blade 50 kills + Zengar on stage 26 on Hard, Hero Symbol level 35 on stage 35, Kai on Kyosuke route). Source: 3rd party cheat indexes — **Inferred** for this exact revision (not played through). |
 | In-game button combos | Soft reset `A+B+Start+Select` — **Observed**. Quicksave-jump at logo — claimed, **not reproduced**. `A+R` dialogue skip and `A+B+Start+Select`+hold-Start quicksave load — board claims, **not tested exhaustively**. |
 
 ## 6b. Enumeration
@@ -223,7 +223,7 @@ code format exists to mint against.
 * **Derived** — Thumb disassembly of the IWRAM key routine `0x03007348` and its
   literals; stock crt0/entry word; `strings`/binary-scan counts; absence of
   `0x04000130` in engine code.
-* **Inferred** — unlockable conditions (from GameFAQs/Freeola, not replayed to
+* **Inferred** — unlockable conditions (from 3rd party cheat indexes, not replayed to
   endgame); the quicksave-jump board claim (tested and rejected here); the precise
   soft-reset branch (behaviour proven, instruction not isolated); header edit
   rationale.

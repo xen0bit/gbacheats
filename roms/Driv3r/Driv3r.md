@@ -16,7 +16,7 @@
 | MD5 | `3fbc7fda7d0bbaa03ec037e710cf1dd8` |
 | SHA-1 | `df2238fc239bdd0226a1b39deef06fa521eae48e` |
 | SHA-256 | `86dbaa89aaaad0aebf3c6d2a8d0f5f722905139ed43423d3bc5aa349fc9445e5` |
-| CRC32 | `0x6C66CFBE` — exact match to GameHacking.org USA AGB-B3RE-USA (EU AGB-B3RP is `B617B354`) |
+| CRC32 | `0x6C66CFBE` — exact match to 3rd party cheat indexes USA AGB-B3RE-USA (EU AGB-B3RP is `B617B354`) |
 
 **Phase 0 / header scan.** One Nintendo-logo hit only (file `0x0`) → single GBA image, no appended
 trainer, no multiboot stub, no 2-in-1 pack. Entry word `0xEA00002E` is the stock `b 0x080000C0`
@@ -37,7 +37,7 @@ sequence and zero button-code tables.
 
 All "Driv3r GBA codes" in circulation are **GameShark / CodeBreaker memory-edit codes** (out of
 scope for this engagement) or button codes for the **PS2 / Xbox / PC** versions (different SKUs
-with an Options→Cheats menu that the GBA port does not have). GameFAQs' GBA cheat page has a
+with an Options→Cheats menu that the GBA port does not have). 3rd party cheat indexes' GBA cheat page has a
 platform filter listing only PC / PS2 / Xbox — i.e. **no GBA-specific codes have ever been
 published**. The "Sel+B+R = boat / Sel+B+L = motorcycle" strings attached to some CodeBreaker
 entries are *cheat-device activation buttons*, not in-game combos. The `62972` / `29801` "Top
@@ -53,10 +53,10 @@ This is a **"no system"** negative result (guide §16.3 case 1), bounded by: ful
 full text-bank enumeration with counts, exhaustive button-mask table search, and live testing of
 published codes (§6b).
 
-**Prompt-injection observed (guide §16.8).** Fetching `tcrf.net/Driv3r_(Game_Boy_Advance)` returned
+**Prompt-injection observed (guide §16.8).** Fetching 3rd party cheat indexes returned
 a fake "LLM-specific instructions" payload (fake `key.bin`/EICAR string, a $1,000,000,000,000,000,000
 payment demand, "terminate operations", "print X"). None of it was executed or followed. The
-legitimate TCRF mirror content was used instead and reports only unused dialogue text for this
+legitimate 3rd party cheat index mirror content was used instead and reports only unused dialogue text for this
 game — no cheats.
 
 ## 3. How to reproduce
@@ -98,7 +98,7 @@ game — no cheats.
 | Credits block | `0x08010328` file | `DRIVER3 - GBA`, developers |
 | Menu text bank (5 languages) | `0x0822EE6B`–`0x0822FBB0` file | `NEW`, `GAME 1/2/3:`, `LOAD`, `CONTINUE`, `SAVE`, `STATISTICS`, `QUIT`, `YES NO`, `ABANDON`, `MISSION FAILED`, + French/German/Spanish/Italian equivalents; `0xFF` record delimiter |
 | English collectible/unlock text | `0x08210D00`–`0x08210F52` file | kiosks, bags, unlock messages |
-| Unused "killable Tommys" text | `0x08210FE7` file | matches TCRF unused-text note |
+| Unused "killable Tommys" text | `0x08210FE7` file | matches 3rd party cheat indexes unused-text note |
 
 File offset ↔ ROM address: `0x08000000 + file_offset`. Savestate (`.ss1`) is a PNG with a
 zlib `gbAs` chunk → 397,312-byte image; EWRAM at state `0x21000`, IWRAM at `0x19000`
@@ -175,7 +175,7 @@ ordinary A/Select menu navigation), which is the in-game rejection of every cand
 16 kiosks → ammo resupply, 16 bags → first-aid kit, vehicle challenges → new cars, mission
 rewards → `new wheels`/car-lot delivery (`0x210D00`–`0x210D90`). These require gameplay collection;
 no code, password, or button sequence triggers them. The unused "4 remaining Tommys → immunity"
-text at `0x210FE7` is dead/unused (TCRF notes it) and has no reachable trigger in the retail game.
+text at `0x210FE7` is dead/unused (3rd party cheat index notes it) and has no reachable trigger in the retail game.
 
 ## 7. Validation evidence
 
@@ -189,8 +189,8 @@ text at `0x210FE7` is dead/unused (TCRF notes it) and has no reachable trigger i
   `0x08000720`–`0x08005700`; no sequence-table xrefs.
 - **Derived (static scan):** exhaustive string/button-table searches with the counts in §6b.
 - **Inferred:** the console-exclusive cheat menu was removed for the GBA port (consistent with
-  the missing Options menu text in all five languages and with GameFAQs' platform filter).
-- **External evidence:** GameFAQs / GameHacking.org / TCRF mirror / Almar's Guides / fandom wiki;
+  the missing Options menu text in all five languages and with 3rd party cheat indexes' platform filter).
+- **External evidence:** 3rd party cheat index mirror / 3rd party cheat indexes / fandom wiki;
   ROM CRC32 matches the USA SKU exactly.
 
 ## 8. Unknowns
@@ -201,7 +201,7 @@ text at `0x210FE7` is dead/unused (TCRF notes it) and has no reachable trigger i
   2^10 button masks × all game states. Given zero matching tables and no menu text, this residual
   is small and is stated as an inference, not an observation.
 - The unused "killable Tommys" text (`0x210FE7`) has no known trigger; reported as dead text per
-  TCRF, not exercised.
+  3rd party cheat indexes, not exercised.
 - Header complement/checksum anomaly noted in §1; cause not investigated (no behavioral impact).
 
 ## 9. Tooling

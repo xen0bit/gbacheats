@@ -33,8 +33,8 @@ this exact hash; another revision may differ.
 No developer cheat-code system (button sequence, password screen, debug menu)
 was found in this ROM. The evidence:
 
-1. **Public lists agree.** The GameFAQs GBA cheats page (via Wayback),
-   SuperCheats, Vizzed and IGN list exactly one in-game unlockable for the GBA
+1. **Public lists agree.** The 3rd party cheat indexes GBA cheats page (via Wayback),
+   3rd party cheat index list exactly one in-game unlockable for the GBA
    build — **Blackjack mode (earn 2,500 style points)** — and no button-sequence
    cheats. The PS2/GameCube/Xbox builds have pause-entered 5-button codes and
    platinum/gold unlock ladders; none of that exists on GBA.

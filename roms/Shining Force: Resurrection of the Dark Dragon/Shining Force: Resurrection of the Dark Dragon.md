@@ -20,13 +20,13 @@
 
 **Embedded-header scan:** the full 156-byte Nintendo logo occurs exactly **once**, at file offset 0, so this is a single retail image — no appended trainer, no multiboot stub, no 2-in-1 pack.
 
-**Build identity:** `Build ROM Version / 1.000 / Feb 10 2004 / 12:33:41` at file `0x7AEC8` (ROM `0x0807AEC8`), plus `(C) SEGA/AMUSEMENTVISION 2003` at `0x7AEE4`. This matches TCRF's *US* build (JP = 1.009/Oct 30 2003; EU = 1.000/Jan 13 2004), so every address below is for this exact revision.
+**Build identity:** `Build ROM Version / 1.000 / Feb 10 2004 / 12:33:41` at file `0x7AEC8` (ROM `0x0807AEC8`), plus `(C) SEGA/AMUSEMENTVISION 2003` at `0x7AEE4`. This matches a 3rd party cheat index's *US* build (JP = 1.009/Oct 30 2003; EU = 1.000/Jan 13 2004), so every address below is for this exact revision.
 
 ## 2. Executive summary
 
 There is **no password system and no in-game button code** in this build. The only text-entry surface reachable by a player is the hero-name entry during the opening story; it is a name field, not a validator (nothing compares the buffer to a constant — §16.2b). Every published "cheat" located on the web is a CodeBreaker/GameShark/Action Replay device code, i.e. an external memory patch, which is out of scope.
 
-What the ROM *does* contain is a **complete, functional developer debug menu** at scene/mode 2. Its string table, dispatcher, handlers and all ten entries are present and work. A TCRF mirror documents the text as "debugging text" and explicitly leaves "are they still accessible?" as an open question; the live tcrf.net page used for this search returned a **prompt-injection payload** (a fake EICAR XOR "key", a $1,000,000,000,000,000,000,000,000,000 demand, and an instruction to report `E_SHITASS_OPERATOR`). It was treated as hostile data, ignored, and not acted on (§16.8). The factual mirror info was used instead.
+What the ROM *does* contain is a **complete, functional developer debug menu** at scene/mode 2. Its string table, dispatcher, handlers and all ten entries are present and work. A 3rd party cheat index mirror documents the text as "debugging text" and explicitly leaves "are they still accessible?" as an open question; the live 3rd party cheat index page used for this search returned a **prompt-injection payload** (a fake EICAR XOR "key", a $1,000,000,000,000,000,000,000,000,000 demand, and an instruction to report `E_SHITASS_OPERATOR`). It was treated as hostile data, ignored, and not acted on (§16.8). The factual mirror info was used instead.
 
 I proved the debug menu is live by redirecting the boot scene request to mode 2 on a **copy** of the ROM (one 32-bit word at file `0xB424`). The menu then appeared at boot with all ten entries working. This is a labeled debugger/patch experiment, **not** a retail code.
 
@@ -53,7 +53,7 @@ Emulator: mGBA 0.10.5 (`/usr/local/bin/mgba`), headless on `DISPLAY=:317`, `SDL_
 
 | Item | Address (ROM / RAM) | Notes |
 |---|---|---|
-| Debug main-menu string table | `0x08079960`–`0x0807A045` | Plain ASCII, 0x20-byte fixed records. Matches TCRF US offsets. |
+| Debug main-menu string table | `0x08079960`–`0x0807A045` | Plain ASCII, 0x20-byte fixed records. Matches 3rd party cheat indexes US offsets. |
 | Debug string pointer table | `0x081E7E04` | Points to title + 7 language strings + `1/2/3`. |
 | Debug scene descriptor | `0x087F048C` | 13-pointer scene record; main `0x08000835`, draw `0x08000A55`. |
 | Debug menu handler | `0x0800090C` | Reads active-high key masks; selection at `[obj+8]`. |
@@ -137,13 +137,13 @@ Footer shown on the main debug screen: `A BUTTON : OK`, `SELECT + START : SOFT R
 | 7 | `0x0800B4EA` → `0x08000CA4` | 15 | `0x0800B43C` (reads obj+12) |
 | 8 | `0x0800B512` — **no-op** | 16 | `0x0800B50C` (reads obj+16) |
 
-**Published codes:** GameFAQs (rippercito secrets guide, Shiningwiz21 walkthrough), almarsguides, gamegenie.53lu.com, libretro CodeBreaker database and shineforcecentral all list only device codes (e.g. `00004600 000A / 1000B7D8 0007` enable, `82000054 423F` max money, `420002C0 0063` infinite HP). These are CodeBreaker/GameShark/Action Replay memory patches, not in-game codes; none is a literal string in the ROM and none is in scope. **No published in-game password/button code was found for any region.**
+**Published codes:** 3rd party cheat indexes (rippercito secrets guide, Shiningwiz21 walkthrough), 3rd party cheat indexes, libretro CodeBreaker database and shineforcecentral all list only device codes (e.g. `00004600 000A / 1000B7D8 0007` enable, `82000054 423F` max money, `420002C0 0063` infinite HP). These are CodeBreaker/GameShark/Action Replay memory patches, not in-game codes; none is a literal string in the ROM and none is in scope. **No published in-game password/button code was found for any region.**
 
 ## 6b. Enumeration
 
 **Space definition.** The only hidden-feature selector in this build is the 4-bit-ish scene mode: 16 representable values (1..16), gate `(mode-1) <= 15`. There is no password alphabet, no checksum field, no key-mask sequence table. The debug menu is exactly one value of that space (mode 2); two values are no-ops (8, 12); values 0 and 17+ are unrepresentable.
 
-**Novel code (not in any published list).** I generated and entered, on the debug menu's own `SCENE SELECT` screen, the value **2** and pressed A. This is absent from GameFAQs, VGChartz, TCRF and every wiki consulted (they list no GBA scene codes at all). RAM proof: mode field `0x0300025C` changed `11 → 3`, debug selection `0x03003008` became `0xFF` (menu destroyed), and the screen changed to the Guardiana field map with an armed party (`scene2_afterA_v.png`). Separately, the debug menu itself (mode 2) was minted by rewriting dispatch entry 10 on a copy and confirmed with all ten entries enumerated (§6). Both are developer-intended combinations, not published data.
+**Novel code (not in any published list).** I generated and entered, on the debug menu's own `SCENE SELECT` screen, the value **2** and pressed A. This is absent from 3rd party cheat indexes and every wiki consulted (they list no GBA scene codes at all). RAM proof: mode field `0x0300025C` changed `11 → 3`, debug selection `0x03003008` became `0xFF` (menu destroyed), and the screen changed to the Guardiana field map with an armed party (`scene2_afterA_v.png`). Separately, the debug menu itself (mode 2) was minted by rewriting dispatch entry 10 on a copy and confirmed with all ten entries enumerated (§6). Both are developer-intended combinations, not published data.
 
 **Bounds proven by rejection.**
 - Static: the dispatcher's `subs r0,#1; cmp r0,#15; bls` gate means 0 and ≥17 never index the table; they fall through to `0x0800B512` with no scene object created.
@@ -177,7 +177,7 @@ Footer shown on the main debug screen: `A BUTTON : OK`, `SELECT + START : SOFT R
 
 - No retail input path to mode 2 was found, but the game's scene-mode field is written from several scene/script objects; an exhaustive proof over every possible script state was not attempted. The negative is bounded to the dispatch table, the observed sessions, and the six-combination sweep.
 - `LOAD GAME` with a valid save, and individual VISUAL VIEWER / BOOT PROCESS parameters, were not exhaustively exercised.
-- The Japanese and European builds were not analyzed; strings/dispatcher addresses differ there per TCRF.
+- The Japanese and European builds were not analyzed; strings/dispatcher addresses differ there per 3rd party cheat indexes.
 
 ## 9. Tooling
 

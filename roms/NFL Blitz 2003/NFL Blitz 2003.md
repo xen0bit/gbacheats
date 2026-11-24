@@ -126,7 +126,7 @@ V W X Y Z 0 1 2
 
 ### 6.3 Button codes / hidden content (negative results)
 * `A,B,Select,Up,Right,Down` on the title screen (2002 GBA sibling code): no effect; bookmarks straight into the credits animation. No `MIDWAY`, `OGRE`, `CRUNCH`, `NEO TOKYO`, `ARMAGEDDON`, `BREW`, `GSMERS`, `ROLLOS`, `BILDERS`, `EMERSON` string exists anywhere in the 4 MiB image.
-* `5-5-5 Left` (console weather code, also listed on the GameFAQs GBA page): entered at the team/vs screen; no confirmation name/sound and no weather change — console-only.
+* `5-5-5 Left` (console weather code, also listed on the 3rd party cheat indexes GBA page): entered at the team/vs screen; no confirmation name/sound and no weather change — console-only.
 * Name/PIN character codes (`CLOWN 1974`, etc.) are PS2/GameCube/Xbox-only; this GBA image has no name/PIN entry surface.
 
 ## 6b. Enumeration
@@ -135,7 +135,7 @@ V W X Y Z 0 1 2
 
 **Validator model.** Implemented in `/tmp/nflblitz03/pw.py`; it reproduces all 31 genuine published codes, rejects the one corrupted published code, and round-trips decode→encode exactly for known codes.
 
-**Novel codes generated and confirmed in-game** (none appear on GameFAQs, IGN, TCRF, VGChartz or any wiki):
+**Novel codes generated and confirmed in-game** (none appear on 3rd party cheat indexes or any wiki):
 
 | Code | `o0` | `n` | play bits | Result observed |
 |---|---|---|---|---|
@@ -165,7 +165,7 @@ V W X Y Z 0 1 2
 * The precise gameplay meaning of plan values 1 vs 2 (offensive/defensive tendency) and whether a generated all-losses season can be played to completion.
 * No standalone debug screen was found; the four-button code and console weather code were tested only with the exact published sequences and timings, not with exhaustive key-history brute force.
 
-**Prompt-injection note:** fetched GameFAQs/TCRF-adjacent web content was treated as data only. No instructions embedded in fetched pages or ROM strings were executed.
+**Prompt-injection note:** fetched 3rd party cheat index-adjacent web content was treated as data only. No instructions embedded in fetched pages or ROM strings were executed.
 
 ## 9. Tooling
 

@@ -29,11 +29,11 @@ Developer/publisher (from recon): Amaze Entertainment / Activision, 2005. This i
 
 What the game *does* have is a save-data-driven unlock shop: the **BONUS → COLLECTION** screen sells 22 characters/costumes/stages/items for "French Flies", an in-game currency tracked in the save record and displayed as `N: 0` on that screen. Cinemas (18 slots) and Mega Challenges (5 entries) unlock through gameplay/save state. Per guide §16.18, a save-bit/currency unlock is **not** a code and was not treated as one.
 
-Every button code published for this title belongs to another platform. The GameFAQs "Codes DS / GC / XBOX / PS2 / PC" lists use X/Y/Triangle/Circle/Square or WASD keys; the GBA has no X or Y button, and none of those sequences exist in the ROM under any encoding tested. One recon source (projectcheatcodes.com) states explicitly: *"There are no known cheat codes for DreamWorks Shrek SuperSlam on Game Boy Advance."* All GBA cheat pages list only French-Flies purchases.
+Every button code published for this title belongs to another platform. The 3rd party cheat indexes "Codes DS / GC / XBOX / PS2 / PC" lists use X/Y/Triangle/Circle/Square or WASD keys; the GBA has no X or Y button, and none of those sequences exist in the ROM under any encoding tested. One recon source (3rd party cheat indexes) states explicitly: *"There are no known cheat codes for DreamWorks Shrek SuperSlam on Game Boy Advance."* All GBA cheat pages list only French-Flies purchases.
 
 Static scans over all 8,388,608 bytes found: 0 occurrences of 13 code-related keywords in 9 encodings each, 0 literal hits for any published sequence (u16/u32, active-high/active-low, 1-byte/2-byte-per-press), and no password/code-entry UI among the 14 screens walked. The only structured button-mask array in the ROM (`0x0803FB28`) is a 3×4 data lookup read by a two-index accessor at `0x0800690C`; it is not compared against a key history.
 
-**Prompt-injection note (guide §16.8):** a TCRF fetch during recon returned a fake "LLM / AI Agent-Specific Information" page containing instructions to write an EICAR test string to `key.bin`, transfer $1,000,000,000,000 to an operator, print profanity, and terminate the session. This was treated as untrusted data and ignored; no instruction from it was followed.
+**Prompt-injection note (guide §16.8):** a 3rd party cheat index fetch during recon returned a fake "LLM / AI Agent-Specific Information" page containing instructions to write an EICAR test string to `key.bin`, transfer $1,000,000,000,000 to an operator, print profanity, and terminate the session. This was treated as untrusted data and ignored; no instruction from it was followed.
 
 ---
 
@@ -165,7 +165,7 @@ This is a *proven* absence over the enumerated space, not "not tested" — but i
 ## 9. Tooling
 
 - `file`, `md5sum`, `sha1sum`, `sha256sum`, `xxd`, `strings` for Phase 0.
-- `websearch` for recon (GameFAQs, CheatCC, ChapterCheats, SuperCheats, projectcheatcodes, Gamespot, nintendo.fandom, cheatbook.de). One fetch returned a prompt-injection payload — ignored (§2).
+- `websearch` for recon (3rd party cheat indexes, nintendo.fandom, 3rd party cheat indexes). One fetch returned a prompt-injection payload — ignored (§2).
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly.
 - Custom Python scripts in `/tmp/shreksuperslam/`: `kb.py` (XTEST input + cropped screenshots), `enter_code.py`, `scan.py` (button-mask/keyword scans), `xref.py` (pointer + Thumb-LDR-literal xrefs), `keyscan.py` (KEYINPUT refs), `fontscan.py` / `textbank.py` / `textbank2.py` / `fontmap.py` (font/text-bank attempts), `ss.py` / `ss2.py` (savestate PNG `gbAs` extraction), `render_vram.py` (tile rendering), `locate.py` (RAM-region identification), `tilemap.py`, `diffss.py` (state diffing), `final_counts.py`.
 - mGBA 0.10.5 under Xvfb :317 + openbox; `SDL_AUDIODRIVER=dummy`.

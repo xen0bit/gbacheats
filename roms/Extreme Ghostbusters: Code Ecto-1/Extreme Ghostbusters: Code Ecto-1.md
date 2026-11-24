@@ -220,7 +220,7 @@ S T V W X Z / *
 (row 1 col 2 is `B`, col 3 `C`, col 4 `D` — the stylised slime font makes `B`/`D`
 look similar; the ROM alphabet string is authoritative.)
 
-**Published codes (gameFAQs/Cyberly/IGN/supercheats, all cross-checked against the ROM):**
+**Published codes (3rd party cheat indexes, all cross-checked against the ROM):**
 
 | Level | Code | Fields (verified by decoder) |
 |---|---|---|
@@ -234,7 +234,7 @@ look similar; the ROM alphabet string is authoritative.)
 | Closer to the Underworld | `MD*XN7KTJ` | \[5,4,12,3,12,3\] |
 | Racing 3 | `VD*PJKFTS` | \[13,4,12,3,12,3\] |
 | In the Wings | `MDZ9KK/T8` | \[6,4,12,3,12,3\] |
-| Ethereal Ball | `MD2TK4XTK` | \[7,4,12,3,12,3\] |
+| 3rd party cheat indexes Ball | `MD2TK4XTK` | \[7,4,12,3,12,3\] |
 | On Stage | `WS0PJ6LTC` | \[8,4,12,3,12,3\] |
 | Broadway Star Theater Boss | `VS31JL9TW` | \[17,4,12,3,12,3\] |
 | Racing 4 | `LDK9K6HTC` | \[14,4,12,3,12,3\] |
@@ -335,8 +335,8 @@ the pause/menu handlers only process D-pad/A/B/Start for the documented options.
 * The purpose of the auxiliary byte tables at 0x082D9E48/0x082DA480 (likely font
   metrics and a scan-order table) — not required to characterise the code space.
 
-**Prompt-injection check:** fetched cheat pages (Cyberly, IGN, GameFAQs snippets,
-supercheats) were treated as data; no embedded instructions, payment requests or
+**Prompt-injection check:** fetched cheat pages (3rd party cheat indexes snippets,
+3rd party cheat indexes) were treated as data; no embedded instructions, payment requests or
 fake "decode keys" were encountered (contrast §16.8).
 
 ---

@@ -191,9 +191,9 @@ Searches were run on the exact bytes of this ROM, case-insensitive, plus shifted
 | `AKAMA`, `OKUDA`, `FUJIMOTO`, `URATA`, `HELP ME` | Castlevania III name codes | absent |
 | `L1TTLVN`, `CR3D1TS` | unrelated GBA password lists | absent |
 | `PASSWORD`, `SOUND TEST`, `STAGE SELECT`, `DEBUG`, `CHEAT`, `SECRET`, `UNLOCK`, `KONAMI` | keyword scan | absent (ASCII, shifted, UTF-16) |
-| `L + R` System Menu | GameFAQs (Classic NES Series) | **verified working** |
-| `Start + Select + A + B` reset | GameFAQs (Classic NES Series) | **verified working** |
-| `SLEEP MODE` menu entry | GameFAQs (Classic NES Series) | **not drawn/labelled** in this build; only the two slots above are labelled |
+| `L + R` System Menu | 3rd party cheat indexes | **verified working** |
+| `Start + Select + A + B` reset | 3rd party cheat indexes | **verified working** |
+| `SLEEP MODE` menu entry | 3rd party cheat indexes | **not drawn/labelled** in this build; only the two slots above are labelled |
 
 `strings -n 4` yields 10,968 strings but **none** are ASCII UI text: the wrapper and the
 NES game both store text as tile indices, so keyword absence is not by itself proof.

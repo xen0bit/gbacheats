@@ -127,20 +127,20 @@ The checksum deliberately sums **raw ASCII bytes**, not decoded symbol values, a
 
 | Published label | Code | Valid? | Decoded stage (0-based) | Note |
 |---|---|---|---|---|
-| Level 2 (games-cheats.org) | `BBC02BBNDGBG` | yes | 1 | additional published code |
+| Level 2 (3rd party cheat indexes) | `BBC02BBNDGBG` | yes | 1 | additional published code |
 | Level 4 (all sites) | `BBDQWC8XDJBQ` | **NO** | 3 | stored ck 209, computed 195 — rejected in emulator |
-| Level 4 (ggmania) | `BBLVTBSF?HB5` | **NO** | 6 | stored ck 175, computed 183 — rejected; also mislabeled |
+| Level 4 (3rd party cheat indexes) | `BBLVTBSF?HB5` | **NO** | 6 | stored ck 175, computed 183 — rejected; also mislabeled |
 | **Corrected level 4** | `BBDQFC8XDJBQ` | yes | 3 | minted by fixing checksum LSB (`W`→`F`); accepted in emulator |
 | Level 5 | `BBH9QBSD6HBV` | yes | 4 | accepted in emulator |
-| Level 5 (games-cheats.org) | `BBJ1FBD8NHBV` | yes | 4 | alias: different bones/f28, same stage |
+| Level 5 (3rd party cheat indexes) | `BBJ1FBD8NHBV` | yes | 4 | alias: different bones/f28, same stage |
 | Level 7 | `BBJQWC8ZFHB5` | yes | 6 | — |
 | Level 11 | `BBS9XBSF7HCM` | yes | 10 | — |
 | Level 14 | `BBXGSB4HTHH1` | yes | 13 | — |
 | Level 16 | `BB38LNBTTHH9` | yes | 15 | — |
-| Level 16 (ggmania) | `BB1TRB6WTHH9` | yes | 15 | alias, same stage |
+| Level 16 (3rd party cheat indexes) | `BB1TRB6WTHH9` | yes | 15 | alias, same stage |
 | Level 20 | `BB9DCB4JCHJS` | yes | 19 | — |
 | Level 22 | `BCC5XCVRTHD2` | yes | 21 | — |
-| "Final level" (ggmania) | `BCFSHBPH7HD2` | yes | 21 | same stage as level 22; different progress fields |
+| "Final level" (3rd party cheat indexes) | `BCFSHBPH7HD2` | yes | 21 | same stage as level 22; different progress fields |
 | Novel stage 17 (not published) | `BBH9?BSD6GDG` | yes | 17 | **novel**, see §6b |
 
 ### 6.3 Undocumented literal passwords (0x0802C9E4)
@@ -167,7 +167,7 @@ Readers of these bits were located by Thumb PC-relative literal scans: bit0 at `
 
 The checksum is a deterministic function of the other 50 bits, so exactly `2^50` strings are valid. Because two of the ten C-group bits are never read by the validator, these collapse to `2^48` distinct semantic states, **4 spellings each**. Position 9 can only ever be one of `B,C,D,F,G,H,J,K` (3-bit MSB), which matches every published code.
 
-**Novel codes (not on GameFAQs, VGChartz, TCRF, ggmania, Neoseeker, cheats-dome or games-cheats.org), all typed on the real keyboard and RAM-verified:**
+**Novel codes (not on 3rd party cheat indexes, cheats-dome or 3rd party cheat indexes), all typed on the real keyboard and RAM-verified:**
 
 | Code | Field exercised | Observed RAM after submit | Result |
 |---|---|---|---|

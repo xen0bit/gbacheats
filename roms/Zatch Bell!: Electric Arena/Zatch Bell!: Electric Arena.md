@@ -16,7 +16,7 @@
 | SHA-1 | `96b67004d7592ae118936e8988c96880d9880f60` |
 | SHA-256 | `64f09e7100c5734047b375da09ee9207ae95d249b65e0bc28433839b9fac0cf9` |
 
-**Scope note.** Only developer-intended input was investigated: the in-game button code, hidden debug menus and unlockables. CodeBreaker/GameShark/Action Replay codes found during web recon (ROMSFun, Neoseeker, libretro DB) are explicitly out of scope and were not used. Fetched pages were treated as data; no prompt-injection was encountered.
+**Scope note.** Only developer-intended input was investigated: the in-game button code, hidden debug menus and unlockables. CodeBreaker/GameShark/Action Replay codes found during web recon (3rd party cheat indexes, libretro DB) are explicitly out of scope and were not used. Fetched pages were treated as data; no prompt-injection was encountered.
 
 ## 2. Executive summary
 
@@ -24,7 +24,7 @@ The game contains exactly **one** in-game button code, on the **title screen**:
 
 > **Up, L, R, Down, L, R, L, Left, Right, R**
 
-Entering it turns the title background red (visual confirmation), writes `0x01` to the volatile flag byte at `0x02024616`, redraws five VRAM tile rows and plays sound effect `0x5C`. This matches the only published code for this SKU (Cheat Happens / CheatCodes.com). The unlock itself (Rauzaruk Zatch & Kiyo / item #27) is **gated** on 26 Zatch Collection items plus a Story Mode completion; with a fresh 0%-collection save the title accepts the code and shows red, but the collection screen still reads `0%`. The published "100% in Zatch Collection" prerequisite is therefore not required for *code acceptance* — it is a prerequisite for the downstream unlock.
+Entering it turns the title background red (visual confirmation), writes `0x01` to the volatile flag byte at `0x02024616`, redraws five VRAM tile rows and plays sound effect `0x5C`. This matches the only published code for this SKU (3rd party cheat indexes). The unlock itself (Rauzaruk Zatch & Kiyo / item #27) is **gated** on 26 Zatch Collection items plus a Story Mode completion; with a fresh 0%-collection save the title accepts the code and shows red, but the collection screen still reads `0%`. The published "100% in Zatch Collection" prerequisite is therefore not required for *code acceptance* — it is a prerequisite for the downstream unlock.
 
 The whole code space was bounded: one `u16` mask table of 10 entries plus a zero terminator, one validator, one success action, no checksum, no password entry UI and no second mask table. Eight undocumented/rejected input strings were pressed in the emulator (near-miss, reversed, 9-press truncation, the Electric Arena **2** password sequence, extra wrong key, long wrong-key hold, etc.), all rejected with the flag remaining `0x00`. A novel, unadvertised accepted variant — the published sequence with multi-second neutral pauses inserted — was generated and accepted in-game (`flag = 0x01`, red title).
 
@@ -136,7 +136,7 @@ Notable derived detail: the neutral-frame counter is reset to **0** on every cor
 
 **Novel code minted and accepted in-game.** Not in any published list: the published sequence with a **6.0 s neutral pause inserted between presses 3 and 4** — `Up, L, R, [6 s release], Down, L, R, L, Left, Right, R`. Result: **accepted**, flag `0x02024616 = 0x01`, red title (`t3_gap_6.0s.png`). The same held with 0.20/0.45/0.70/3.0 s gaps also passed. This is a new, developer-unadvertised input string obtained from the validator's wrap-around timer behaviour, and its acceptance is proven by both the visual and the RAM byte.
 
-**Bounding the unlock gate.** With a fresh save the Zatch Collection screen reads `0%` (`screen_collection.png`); the code's red confirmation is therefore reachable without the 26-item prerequisite, but the Rauzaruk Zatch & Kiyo / item `#27 The Shining Red Spell Book` reward is not granted. The gate is a downstream save-state check (published guides and RetroAchievements both require 26 items + Story completion), not part of the button validator.
+**Bounding the unlock gate.** With a fresh save the Zatch Collection screen reads `0%` (`screen_collection.png`); the code's red confirmation is therefore reachable without the 26-item prerequisite, but the Rauzaruk Zatch & Kiyo / item `#27 The Shining Red Spell Book` reward is not granted. The gate is a downstream save-state check (published guides and 3rd party cheat indexes both require 26 items + Story completion), not part of the button validator.
 
 **Debug menu negative is bounded, not absolute.** The menu script, command tokens and 18-byte command-name table were found and decoded (§6), but no retail input path to it was found on the title, main menu, collection screen or VS link screen, and three common hidden-menu chords produced nothing. It is therefore classified as **gated/unknown reachability** (guide §16.3), not "no debug menu".
 

@@ -19,7 +19,7 @@
 | CRC32 | `0x2F3A5D31` |
 
 The retail USA image (`AGB-AQDE-USA`, En/Fr/Es) has CRC32 `0x579BA507`
-(GameHacking.org). This file is a **modified image**: the entry word is redirected
+(3rd party cheat indexes). This file is a **modified image**: the entry word is redirected
 to an appended ARM blob at `0x087F1400`, the header checksum is zeroed, and the
 menu text is a Chinese translation. The scene-release tag pattern for this edit is
 `[hIR00]` ("intro removed"); the loader at the tail crashes on cold boot
@@ -139,7 +139,7 @@ simple checksum, and the inverse could not be written without the entry/validato
 
 ## 6. Tables
 
-### 6.1 Published level/boss codes (GameFAQs walkthrough, `faqs/28278`)
+### 6.1 Published level/boss codes (3rd party cheat index walkthrough, `faqs/28278`)
 
 | Level | Code | Level | Code | Level | Code |
 |---|---|---|---|---|---|
@@ -155,8 +155,7 @@ simple checksum, and the inverse could not be written without the entry/validato
 | Boss Yu Shu Lien | `6ZMK` | Boss Lo | `N/28` | Boss Li Mu Bai | `31D4` |
 | Boss Jade Fox | `HZ75` | | | | |
 
-Alternate codes printed by other sites (ChapterCheats, CheatingDome,
-SuperCheats, GameRevolution): `0XS8/8XDD` (1-2), `KP3C/KPKF` (1-3),
+Alternate codes printed by other sites (3rd party cheat indexes): `0XS8/8XDD` (1-2), `KP3C/KPKF` (1-3),
 `KPK4/K532` (1-4), `SPRQ/JZM/` (1-5), `6ZMS/FNRT` (2-1), `5F17/FX5/` (2-2),
 `543N/OKDZ` (2-3), `8XR3/NMZQ` (2-4), `NX31/1MF4`, `9Q6Q/1WF5`,
 `9QNT/9W95`, `XXPG/3N1Z`, `CKBH/3X3/` (chapter 3). The sources disagree; only

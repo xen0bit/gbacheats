@@ -31,7 +31,7 @@ The negative is **bounded and positive-evidence based**, not an absence of searc
 * 11,641 strings were extracted. Counts of security-relevant keywords: `password` 0, `cheat` 0, `debug` 0, `unlock` 0, `code` 0, `level select` 0, `sound test` 0, `menu` 0, `options` 0; `secret` 6 (all localized gameplay hints such as "Make a BIG X on this wave for SECRET WARP !!"); `initials` 1 (the high-score field). The UI text bank at `0x080867C`–`0x0808930` (plus French/German/Italian/Spanish banks) is plain ASCII and was enumerated in full — no hidden menu labels.
 * The engine's joypad consumers (13 functions that read the key-state globals) were enumerated from literal-pool xrefs. **Every** comparison against key state is a *single-button* mask (`0x01` A, `0x02` B, `0x04` Select, `0x08` Start, `0x10`–`0x80` D-pad, `0x100` R, `0x200` L). No multi-bit key mask is ever tested, so no combination/button code can exist in this build. Multi-bit immediates that do occur in those functions (e.g. `0x1E`, `0x78`, `0x0B`) are loop counters/array bounds, not key masks.
 * Dynamic fuzzing of all 10 single keys and 8 combinations (L+R, A+B, Start+Select, L+R+Start, etc.) on the game-select screen produced only normal transitions — no hidden screen (montage `fuzz_montage.png`).
-* Published-code checks: the archived GameFAQs GBA cheats page (2020-03-11 capture) has an **empty** cheats list; VGChartz reports "Total cheats available: 0" for this SKU. GameHacking.org lists 2 entries for AGB-B68E-USA, both GameShark memory-patch codes (out of scope). The widely published Klax/GBC tile passwords and `UUDDUDUDUUDD` wave-select code, and Marble Madness GBC pause sequence, are from different SKUs; none is present or reachable here (no password screen; no multi-button validator).
+* Published-code checks: the archived 3rd party cheat indexes GBA cheats page (2020-03-11 capture) has an **empty** cheats list; 3rd party cheat indexes report "Total cheats available: 0" for this SKU. 3rd party cheat index lists 2 entries for AGB-B68E-USA, both GameShark memory-patch codes (out of scope). The widely published Klax/GBC tile passwords and `UUDDUDUDUUDD` wave-select code, and Marble Madness GBC pause sequence, are from different SKUs; none is present or reachable here (no password screen; no multi-button validator).
 
 ## 3. How to reproduce
 
@@ -125,7 +125,7 @@ Because no code system exists, §0.2's enumeration is replaced by a **bounded ex
 | Key-mask tables / multi-button comparisons | 13 key-state consumer functions, all literal-pool xrefs | 0 multi-button masks; codes of the `UUDDUDUDUUDD` / L+R+Start form are impossible |
 | Dynamic input fuzz | 10 single keys + 8 combos on game select; every single key on title, wave select, gameplay and both pause menus | no new screen; only documented transitions |
 | Reachable screens | boot(3) + shell(2) + MM(4) + Klax(9) | all walked with screenshot + savestate RAM snapshot (table below) |
-| Published GBA codes | GameFAQs GBA cheats (archived), VGChartz, GameHacking.org, TCRF (403) | 0 developer codes; the 2 GameHacking.org entries are GameShark memory patches (out of scope) |
+| Published GBA codes | 3rd party cheat indexes GBA cheats (archived), 3rd party cheat indexes | 0 developer codes; the 2 3rd party cheat index entries are GameShark memory patches (out of scope) |
 
 **Novel code minted: none — by construction.** There is no validator, table, alphabet, or field/checksum format from which a novel code could be generated; §0.2's "mint a code absent from published lists" is therefore unsatisfiable for this target. This is the bounded-negative case of §16.3 case 1 ("no system"): the absence is proved over the enumerated string, text, key-mask, screen and published-code spaces above, rather than by a single negative probe.
 
@@ -151,7 +151,7 @@ Because no code system exists, §0.2's enumeration is replaced by a **bounded ex
 
 ## 7. Validation evidence
 
-**Observed (emulator / savestate):** all screens in the §6b table; the 4 MiB single-header layout; the keyboard map read from `KEYINPUT`; the 3-card wave select and its clamping; both 2-entry pause menus; the credits roll to its end and return to game select; rejection of the GB wave-select sequence; the empty archived GameFAQs GBA cheats list and VGChartz zero-cheat count.
+**Observed (emulator / savestate):** all screens in the §6b table; the 4 MiB single-header layout; the keyboard map read from `KEYINPUT`; the 3-card wave select and its clamping; both 2-entry pause menus; the credits roll to its end and return to game select; rejection of the GB wave-select sequence; the empty archived 3rd party cheat indexes GBA cheats list and 3rd party cheat indexes zero-cheat count.
 
 **Derived (disassembly):** the joypad poll and held/edge globals at `0x08011334`; the 13 key-state consumers and their exclusively single-button comparisons; the high-score qualify check at `0x080096E8` and its caller `0x0802F04`; the initials-screen builder at `0x0800928C`; the main loop and boot delay.
 

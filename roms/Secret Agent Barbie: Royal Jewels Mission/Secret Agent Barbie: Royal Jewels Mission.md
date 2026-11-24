@@ -51,7 +51,7 @@ Codes exercised (all typed through the real UI, not patched into RAM):
 
 | Code | Source | Result |
 |---|---|---|
-| `BBBBCG` | GameFAQs/ChapterCheats — Royal Tower | accepted → HQ (observed) |
+| `BBBBCG` | 3rd party cheat indexes — Royal Tower | accepted → HQ (observed) |
 | `QBBBBT` | **novel (generated)** — first char `Q`=12 | accepted → HQ, map header `PASSWORD: QBBBBT` (observed) |
 | `BTTTTT` | **novel (generated)** — all secret bits on level 0 | accepted → HQ (observed) |
 | `CBBDCK` | checksum-corrected published London Subway | accepted → HQ (observed) |
@@ -120,7 +120,7 @@ Notes:
 | Sunny City | `PCRTTN` | 11,1,13,15,15,10 | 7 | 10 = N | ✓ checksum |
 | All secrets unlocked | `TTTTTS` | 15,15,15,15,15,14 | 11 | 14 = S | ✓ checksum |
 
-Published sources: GameFAQs cheat page (403 on direct fetch; snippet recovered), ChapterCheats "More Passwords" and "Unlock everything" pages, IGN GBA cheats index. All 12 usable literals were **absent as ASCII strings in the ROM** (`grep`/`bytes.find` returned zero hits for each), proving the system is algorithmic rather than a plaintext table.
+Published sources: 3rd party cheat index cheat page (403 on direct fetch; snippet recovered), 3rd party cheat indexes "More Passwords" and "Unlock everything" pages, 3rd party cheat indexes GBA cheats index. All 12 usable literals were **absent as ASCII strings in the ROM** (`grep`/`bytes.find` returned zero hits for each), proving the system is algorithmic rather than a plaintext table.
 
 ### Field interpretation (inferred, confidence labels)
 * `index[0]` — starting level / mission selector. Observed: values 0..15 all accepted; published list uses 0..11; 15 also appears in the all-secrets code. **(Derived from published payload pattern; novel values 12..15 accepted in-game.)**
@@ -131,7 +131,7 @@ Published sources: GameFAQs cheat page (403 on direct fetch; snippet recovered),
 
 **Space.** UI alphabet size 16, length 6 → `16^6 = 16,777,216` representable strings. The checksum makes exactly one 6th character valid for each of the `16^5` first-five combinations, so the accepted space is **`16^5 = 1,048,576` codes**. Enumeration of the first-five space: `index[0] ∈ 0..15`, `index[1..4] ∈ 0..15` each; `index[5] = (Σ + 3) & 15`. No reserved bits and no unused symbol were found; every value 0..15 is selectable in every slot.
 
-**Novel codes (absent from GameFAQs, VGChartz, TCRF, IGN and ChapterCheats lists), generated with `encode()` and accepted in-game:**
+**Novel codes (absent from 3rd party cheat index lists), generated with `encode()` and accepted in-game:**
 
 | Novel code | Payload | In-game proof |
 |---|---|---|
@@ -175,7 +175,7 @@ Additional generated codes `RBBBBB`, `SBBBBC`, `TBBBBD` (first chars 13/14/15) w
 * `strings -a -t x`, `grep -abo`, `xxd`, `arm-none-eabi-objdump -M force-thumb`, Capstone literal-load scanner.
 * mGBA 0.10.5 under `Xvfb :315` + `openbox`, `SDL_AUDIODRIVER=dummy`, `xdotool` XTEST input, `scrot` + ImageMagick (`convert`/`montage`) for contact sheets.
 * mGBA **CLI debugger** (`mgba -d` with a FIFO on stdin; `x/1`, `r/4`, `watch/r`, `save`/`load 1`, `reset`), interrupted with `kill -INT <pid>`. The GDB stub (`-g`) was tried first but proved unreliable ("Cannot access memory"/protocol errors) and was abandoned in favour of the CLI debugger and savestate diffs.
-* Web: GameFAQs (403; snippet), ChapterCheats (two pages), IGN index — fetched as data only; no instructions from fetched content were followed.
+* Web: 3rd party cheat indexes index — fetched as data only; no instructions from fetched content were followed.
 
 ## 10. Legal note
 

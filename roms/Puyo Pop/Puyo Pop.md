@@ -31,7 +31,7 @@ Embedded-header scan (156-byte Nintendo logo, §2) found **two** headers:
 * The main state machine has **39 dispatch states** (`0x00`–`0x26`, table at `0x08020660`); every reachable menu/gameplay screen was walked on mGBA with screenshots and live RAM reads. There is no password screen and no debug menu among them.
 * `strings -t x -n 4` yields 79,706 items but **zero readable English words** — all text is pre-rendered into VRAM glyph tiles (the font/text bank is a bitmap-rendered tile atlas, not an ASCII or tile-index string bank). Menu labels were decoded from live frames/screenshots (`SELECT MODE`, `SINGLE/DOUBLE/EVERYBODY/ENDLESS PUYO POP`, `OPTIONS`, `DIFFICULTY`, `MESSAGE SPEED`, `ROUNDS`, `RANKING`, `GALLERY`, `LANGUAGE`, `RETURN TO DEFAULT`, `RETURN`, `ENDLESS PUYO POP / TOKOTON / NORMAL MODE / TASK MODE`, `NAME ENTRY`, gameplay HUD `LEVEL/PUYO/MAX CHAINS`). Literal searches for `password|cheat|code|debug|secret|unlock|level` found no code-related strings; the only real ASCII is the header.
 * 8 published/common button sequences × 2 encodings (u16/u8) × 2 orders = **32 raw mask searches** found no plausible code table. Three codes were also entered live (see §7) and rejected.
-* TCRF's GBA *Puyo Pop* page documents only unused sounds and regional differences — **no debug menu or cheat**.
+* a 3rd party cheat index's GBA *Puyo Pop* page documents only unused sounds and regional differences — **no debug menu or cheat**.
 
 What the game *does* have is a **save-flag unlockable system** (in scope, §0.2 "unlockables"): six areas gated by sign items, two hidden characters, and a hidden Sound Test behind Gallery card 18. These are stored in the 512-byte SRAM and deserialized into named RAM variables. The published "Unlock All Levels: `03000268 000000FF`" Gameshark code was verified to target the genuine area-unlock bitmask (`0x03000268`), but as a memory-edit code it is **out of scope** for reporting as a usable cheat; the in-game unlock routes are documented below.
 
@@ -112,7 +112,7 @@ boot:
 unlocked_areas = [0x03000268]                     # bit i = area i reachable
 ```
 
-Published in-game unlock routes (GameFAQs, verified against the game's structure):
+Published in-game unlock routes (3rd party cheat indexes, verified against the game's structure):
 * WELCOME SIGN → Hajimari Forest (start).
 * Beat Seriri in Hajimari Forest → MERCHANT SIGN → Goldtown.
 * Beat Nohoho in Goldtown → WARRIOR SIGN → Gachinko Dungeon.
@@ -161,10 +161,10 @@ Observed states: `0x06` (SEGA/Sonic Team splash + title), `0x08` (all menu scree
 
 | Source | Claim | Verification |
 |---|---|---|
-| GameFAQs (gba/551521) | 4 cheats/secrets, all gameplay unlocks | Consistent with ROM/save structure; no typed code listed |
-| TCRF | No debug menu; only unused sounds + regional differences | Confirmed (archived page) |
-| GameFAQs/VGChartz *Puyo Pop Fever* | `UP DOWN SELECT A` character select; hold SELECT+UDLR unlock; L+R+SELECT CPU KO | **Wrong SKU** (different game). Tested in this ROM: all three rejected |
-| CodeJunkies / almarsguides Gameshark | "Unlock All Levels `03000268 000000FF`" | Address is genuine (`0x0801F27C` literal; live watchpoint confirms). Memory-edit code — out of scope; documented only as proof of the address |
+| 3rd party cheat indexes | 4 cheats/secrets, all gameplay unlocks | Consistent with ROM/save structure; no typed code listed |
+| 3rd party cheat indexes | No debug menu; only unused sounds + regional differences | Confirmed (archived page) |
+| 3rd party cheat indexes *Puyo Pop Fever* | `UP DOWN SELECT A` character select; hold SELECT+UDLR unlock; L+R+SELECT CPU KO | **Wrong SKU** (different game). Tested in this ROM: all three rejected |
+| 3rd party cheat indexes Gameshark | "Unlock All Levels `03000268 000000FF`" | Address is genuine (`0x0801F27C` literal; live watchpoint confirms). Memory-edit code — out of scope; documented only as proof of the address |
 
 ## 6b. Enumeration
 
@@ -208,7 +208,7 @@ Tools used: `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, Python 3 (
 
 Scripts written in `/tmp/puyopop/`: `key.py` (input), `ss.py` (mGBA `.ss1` `gbAs` zlib state dumper — validated, raw 397,312 bytes), `walk.py`, `walk3.py`, `ram.py` (GDB breakpoint oracle pattern, §16.19), `dbgserver.py`/`dbg.py`/`mdbg.py` (persistent mGBA `-d` FIFO front end with per-frame breakpoint at `0x08020612`), `dump.py`, `vramdump.py`, `tiles.py`/`tiles8.py`/`objtiles.py`/`obj8.py`/`bitmap.py` (VRAM/palette/font rendering), `keysearch.py`, `findmem.py`.
 
-Web sources (treated strictly as data): GameFAQs cheats for GBA *Puyo Pop* (id 551521, via web.archive.org 20240406170159), TCRF *Puyo Pop (Game Boy Advance)* (archived 20250105203639), VGChartz/GameFAQs pages for *Puyo Pop Fever* (used only to establish the wrong-SKU comparison), CodeJunkies/almarsguides Gameshark listing (used only to verify the RAM address). No instructions from fetched pages were executed.
+Web sources (treated strictly as data): 3rd party cheat index cheats for GBA *Puyo Pop* (id 551521, via web.archive.org 20240406170159), 3rd party cheat indexes *Puyo Pop (Game Boy Advance)* (archived 20250105203639), 3rd party cheat index pages for *Puyo Pop Fever* (used only to establish the wrong-SKU comparison), 3rd party cheat indexes Gameshark listing (used only to verify the RAM address). No instructions from fetched pages were executed.
 
 ## 10. Legal note
 

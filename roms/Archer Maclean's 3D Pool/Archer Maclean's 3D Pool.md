@@ -58,7 +58,7 @@ The negative is bounded, not assumed:
   sequence table. Fourteen sequences were pressed on the live main menu,
   including the Konami code and its reverse; none produced a hidden screen.
 * **Published codes.** No GBA cheat/password list for this title exists
-  (GameFAQs GBA entry has no cheats; VGChartz has no page; TCRF has none). The
+  (3rd party cheat indexes GBA entry has no cheats; 3rd party cheat indexes have no page; 3rd party cheat indexes have none). The
   only published Archer Maclean passwords found are for *Super Dropzone*
   (`51853435`, `41693261`); both literals are absent from this ROM. There was
   therefore no published code to confirm, and that absence is recorded rather
@@ -445,10 +445,10 @@ new label, a counter, a flag change, or an unlock.
 
 ### Published codes
 
-* GameFAQs GBA entry `919006` has no cheats content. Direct fetch returns HTTP
-  403; Wayback CDX returns no snapshots for the `/cheats` URL; the GameFAQs
+* 3rd party cheat indexes GBA entry `919006` has no cheats content. Direct fetch returns HTTP
+  403; Wayback CDX returns no snapshots for the `/cheats` URL; the 3rd party cheat indexes
   franchise listing links no cheats page for the GBA entry.
-* VGChartz has no cheats page for this game; no TCRF page was found.
+* 3rd party cheat indexes have no cheats page for this game; no 3rd party cheat index page was found.
 * The only published Archer Maclean passwords located belong to *Super Dropzone*
   (SNES/GBA): `51853435` and `41693261`. Both are absent from this ROM
   (literal search returns `-1`).

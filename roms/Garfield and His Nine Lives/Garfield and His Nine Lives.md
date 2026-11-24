@@ -36,7 +36,7 @@ No published GBA codes could be retrieved (all cheat sites blocked/offline — �
 - Boot: Lucky Jump Games splash → The Game Factory splash → "CHOOSE A LANGUAGE" (English/Français/Español) → "PRESS START" title → main menu.
 - **Reset code**: on any screen, press **A+B+Select+Start** simultaneously. Observed: screen-state word `0x02002040` goes `0x1E` (main menu) → `0x00000000` (boot/license) and the license screen is drawn. Adding L+R (`L+R+A+B+Select+Start`) is **rejected** — screen stays in menu/pause. Requires a neutral frame (no A/B/Select/Start/L/R) beforehand — see §5.
 - Screens walked with screenshots on disk: language select, PRESS START title, main menu, OPTIONS (SOUND FX / MUSIC / CREDITS), CREDITS ("DEVELOPED BY LUCKY JUMP GAMES"), save-slot select, difficulty (EASY/MEDIUM/HARD), level 1 "ARBUCKLE FARM" gameplay, pause (CONTINUE GAME / QUIT GAME), quit-confirmation ("ARE YOU SURE? YES / NO").
-- Web sources attempted (all are data only; no instructions from them were followed): GameFAQs cheats page (403, then Cloudflare "Just a moment…" via text proxy), TCRF (no page / 403), IGN FAQ (403/rate-limited), `web.archive.org` CDX (temporarily offline / 503), Bing and DuckDuckGo (no relevant hits). **No published code list was obtained.**
+- Web sources attempted (all are data only; no instructions from them were followed): 3rd party cheat index cheats page (403, then Cloudflare "Just a moment…" via text proxy), 3rd party cheat index FAQ (403/rate-limited), `web.archive.org` CDX (temporarily offline / 503), Bing and DuckDuckGo (no relevant hits). **No published code list was obtained.**
 
 ## 4. Address map
 

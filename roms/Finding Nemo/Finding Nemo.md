@@ -44,8 +44,8 @@ accepted completion per prefix. Crucially, most prefixes have *no* valid
 completion, proving a semantic/range layer in addition to the symbol relation.
 
 **Novel code (§6b):** prefix `(23,5,26)` yields exactly one completion,
-`i3=23`, i.e. **`2H52`**. It is absent from GameFAQs, Fandom, TCRF and VGChartz
-(VGChartz does list a *different*, also-accepted code `2?52` with `i1=31`, so
+`i3=23`, i.e. **`2H52`**. It is absent from 3rd party cheat indexes
+(3rd party cheat indexes do list a *different*, also-accepted code `2?52` with `i1=31`, so
 `2H52` is not a transcription of it). It was typed on the real keyboard,
 accepted, and reached **Select Level → Jellyfish Forest**; RAM shows level 8
 (`0x02002F60 = 0x08`, `0x02003414 = 0x08`). Screenshot: `novel2c.png`.
@@ -162,7 +162,7 @@ transcribed `I` in published lists (normalised before testing).
 
 `1H51`, `2G51`, `BGN1`, `MHP1`, `L2P1`, `4XP1`, `3N6J`, `MP3K`, `L67K`,
 `45ZK`, `3NGH`, `4PHC`, `HZ51`, `ZZ51`, `8061`, `M6HM`, `H0C0`, `R00M`,
-`?RP0`, plus the distinct VGChartz code `2?52` (accepted; `i1=31`).
+`?RP0`, plus the distinct 3rd party cheat index code `2?52` (accepted; `i1=31`).
 
 ### 6.3 Black-box oracle: full 32-value `i3` sweeps (14 prefixes, 448 probes)
 
@@ -230,7 +230,7 @@ Every rejection returns to the keyboard with the display reset to
   an explicit bound, not a claim of completeness.
 * **Novel code:** **`2H52`** = indices `(23,5,26,23)`, minted from the
   `(23,5,26)` sweep. It is on no published list (and is distinct from the
-  accepted VGChartz string `2?52`). Typed on the real screen it reaches
+  accepted 3rd party cheat indexes string `2?52`). Typed on the real screen it reaches
   **Jellyfish Forest** with level 8 in RAM; screenshot `novel2c.png`, RAM dumps
   `ram_2h52.json` (vs `ram_1h51.json`, `ram_m6hm.json`).
 * **Bounds proven by rejection:** six distinct rejected inputs (§6.5), plus

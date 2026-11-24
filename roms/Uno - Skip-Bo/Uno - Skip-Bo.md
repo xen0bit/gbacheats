@@ -30,7 +30,7 @@ Evidence in brief:
 1. The entire UI text bank is a single table of **1,930 pointers = 386 distinct strings × 5 languages** at `0x08040AC4`. A full enumeration of all 386 English strings (and case-insensitive sweeps of the whole 4 MiB image) returns **zero** hits for `PASSWORD`, `CHEAT`, `DEBUG`, `SECRET`, `UNLOCK`, `MASTER`, `LEVEL SELECT`, `TEST MODE`.
 2. The only text-input widget uses the 40-symbol keypad alphabet at `0x0803EFB8` (`ABCDEFGHIJKLMNOPQRSTUVWXYZ'-0123456789` + backspace/blank/confirm glyphs). The preset names `AARON … ZACH` are labels. The buffer is consumed as `%s` by the score/in-game displays; there is no comparison against a secret constant.
 3. There is exactly **one** literal `0x04000130` (KEYINPUT) in the whole ROM (`0x0802B3B4`), read by exactly **one** function (`0x0802B3AC`) with exactly **one** caller (`0x0802B99C`) — a generic 6-virtual-button input manager. There is no second polling path for a button code, and no Konami-style key-mask table exists (0 hits for the classic sequence in active-high *and* active-low encodings, 16-bit and 32-bit).
-4. Web recon found **no published in-game codes**: the GameFAQs GBA cheats page is empty and VGChartz reports "Total cheats available: 0". The only GBA cheat files in circulation for this title are GameShark/Action-Replay `.CHT` files (external devices — explicitly out of scope).
+4. Web recon found **no published in-game codes**: the 3rd party cheat indexes GBA cheats page is empty and 3rd party cheat indexes report "Total cheats available: 0". The only GBA cheat files in circulation for this title are GameShark/Action-Replay `.CHT` files (external devices — explicitly out of scope).
 5. No feature is gated: all 15 backgrounds, 4 music tracks, 3 Special Modes, 6 Challenge entries, and all Quick Play / Custom Game options are selectable from a fresh save.
 
 ## 3. How to reproduce
@@ -130,7 +130,7 @@ This section records the bounded negative required by §0.2.
 | ASCII runs outside the table (potential debug leftovers) | 42,676 runs examined; 292 word-like | All 292 were continuations of localized UI text at accented-character boundaries; no debug/assert strings (`assert`/`fatal`/`warning` 0 hits; `illegal`×2 and `exception`×1 are card-rule text) |
 | Key-input hardware literals | 1 (`0x04000130`) | 1 reader, 1 caller → generic input manager only |
 | Classic Konami mask sequence (↑↑↓↓←→←→BA and B→Start variant) | 4 encodings × 2 inversions × 2 widths = 8 searches | 0 hits anywhere in ROM |
-| Published-code recon | GameFAQs cheats page, VGChartz, general web | 0 in-game codes published; only external-device `.CHT` files exist |
+| Published-code recon | 3rd party cheat index cheats page, 3rd party cheat indexes, general web | 0 in-game codes published; only external-device `.CHT` files exist |
 | Reachable screens | 16 screen types walked in emulator | No hidden menu item, no gated option, no unlockable |
 | Backgrounds / music tracks / challenge levels | 15 / 4 / 6 | All freely selectable from a fresh save |
 
@@ -145,7 +145,7 @@ Because the accepted set is **empty**, there is no code to mint and no "novel co
 - **Derived**: the 1,930-pointer string table and 386 unique English strings were decoded directly from ROM bytes at `0x08040AC4`; keyword counts are byte-exact. The single KEYINPUT literal/reader/caller chain was verified by Capstone literal scanning and a Thumb BL scan over all 4 MiB.
 - **Derived**: the keypad alphabet and its trailing glyph bytes at `0x0803EFB8` were read directly; no secret symbol exists.
 - **Inferred**: that the name buffer is display-only. Its consumers are `%s` formatting in the score/game UI, and no comparison against a constant was found, but an exhaustive dataflow trace of the keyboard widget was not completed.
-- **External (data, not instruction)**: GameFAQs cheats page empty; VGChartz "Total cheats available: 0". Fetched pages were treated strictly as data.
+- **External (data, not instruction)**: 3rd party cheat index cheats page empty; 3rd party cheat indexes "Total cheats available: 0". Fetched pages were treated strictly as data.
 
 ## 8. Unknowns
 

@@ -32,7 +32,7 @@ two `strcmp` call sites, both inside the name-confirm handler.
 
 The two literals are developer in-jokes:
 
-1. `Simsalabim` (file 0x2DDF0) — documented on The Cutting Room Floor.
+1. `Simsalabim` (file 0x2DDF0) — documented on 3rd party cheat indexes.
 2. `Rødgrød med fløde` (file 0x2DDFC, `ø` stored as the single byte `0xF8`) —
    a Danish shibboleth, matching the Danish developer. **Not present in any
    published cheat list found.**
@@ -216,8 +216,8 @@ Each literal is referenced by exactly one literal pool (`0x0800DED4`,
 accepted set for the entire name field is **exactly 2 values**, not a family.
 
 **Novel code (absent from every published list checked).** `Rødgrød med fløde`
-— TCRF documents `Simsalabim` and the debug strings but not this second string;
-GameFAQs' cheat page for this title has no codes (403 to fetch, search snippets
+— 3rd party cheat indexes document `Simsalabim` and the debug strings but not this second string;
+3rd party cheat indexes' cheat page for this title has no codes (403 to fetch, search snippets
 show no password section); no web hit for this string on any Davis Cup page.
 
 **In-game proof.** The string was entered character by character through the

@@ -25,7 +25,7 @@ Credits text at ROM `0x1EDCA0` names Creature Labs / Engine Software / Gameware 
 
 The GBA port has **two distinct developer-intended systems** on one screen ("Please Enter A Level Code", reached from Title → Continue Game):
 
-1. **13 published ten-character level passwords** (GameFAQs / SuperCheats). They are **not stored as plaintext** in the ROM (all 13 searched literally, including reversed/lower/`+0x20`/packed variants — all absent). They are decoded algorithmically by the state machine at `0x0800307C`–`0x0800390C`. Characters 1 and 4 encode a progression index in the range 4–40; characters 2–3 are a two-digit numeric field; characters 5–10 are decoded as three 2-character tokens by `0x08002284`/`0x080024F4`. All 13 published codes were verified against the on-screen decoder and two were entered in mGBA successfully.
+1. **13 published ten-character level passwords** (3rd party cheat indexes). They are **not stored as plaintext** in the ROM (all 13 searched literally, including reversed/lower/`+0x20`/packed variants — all absent). They are decoded algorithmically by the state machine at `0x0800307C`–`0x0800390C`. Characters 1 and 4 encode a progression index in the range 4–40; characters 2–3 are a two-digit numeric field; characters 5–10 are decoded as three 2-character tokens by `0x08002284`/`0x080024F4`. All 13 published codes were verified against the on-screen decoder and two were entered in mGBA successfully.
 
 2. **Two previously unpublished hidden debug codes**, found as immediate comparisons in the same state machine:
    - `DNX3??????` — unlocks debug mode by incrementing a gate word at IWRAM `0x03006350` (observed 0 → 1). The remaining six characters are not tested; their value is irrelevant. The code itself does not start a game.
@@ -140,7 +140,7 @@ Index 29 (0x20) is rendered as the red backspace arrow. A second table at `0x083
 | 12 | K42YBNPNMX |
 | 13 | M72LBNXRKT |
 
-Source: GameFAQs GBA cheat page (403 when fetched directly; recovered from search snippets) and SuperCheats "Unlockables" page, which was fetched in full. No literal for any of these appears anywhere in the ROM.
+Source: 3rd party cheat indexes GBA cheat page (403 when fetched directly; recovered from search snippets) and 3rd party cheat indexes "Unlockables" page, which was fetched in full. No literal for any of these appears anywhere in the ROM.
 
 ### Hidden debug codes (this report)
 
@@ -151,7 +151,7 @@ Source: GameFAQs GBA cheat page (403 when fetched directly; recovered from searc
 
 ### Amiga / Mega Drive codes — not GBA codes
 
-`CHEAT` (Cake/Hammer/Earth/Apple/Tap), `POWER` and `LIVES` item-order cheats are published for the Amiga/Mega Drive/DS versions (Sega Retro, CheatCC, SuperCheats). They are **not** button or password codes in this GBA image and were not verified here; no corresponding GBA menu or code entry was found.
+`CHEAT` (Cake/Hammer/Earth/Apple/Tap), `POWER` and `LIVES` item-order cheats are published for the Amiga/Mega Drive/DS versions (3rd party cheat indexes). They are **not** button or password codes in this GBA image and were not verified here; no corresponding GBA menu or code entry was found.
 
 ## 6b. Enumeration
 
@@ -165,7 +165,7 @@ Source: GameFAQs GBA cheat page (403 when fetched directly; recovered from searc
 - The normal progression field covers 37 values (4–40) via `0x080037A4`'s 37-entry jump table.
 - Published lists contain 13 codes; the expressible space is many orders of magnitude larger.
 
-**Novel codes (absent from GameFAQs, SuperCheats, VGChartz, TCRF)**
+**Novel codes (absent from 3rd party cheat indexes)**
 
 1. `DNX3AAAAAA` — unlock code. RAM proof: `0x03006350` 0x0 → 0x1 (savestate diff).
 2. `JT01ZZZZZZ` / `JT01AAAAAA` — level 1. RAM proof: `0x03001968` = 1.
@@ -201,6 +201,6 @@ The debug system is closed: `0x0800307C`'s loop has exactly two special dispatch
 - Python/Capstone scripts in `/tmp/jamespond/`: `scan.py` (pointer + PC-relative literal scans), `xrefs.py` (literal → loader xrefs), `ss.py` (mGBA `.ss1` PNG `gbAs` zlib parser; raw state IWRAM at 0x19000, EWRAM at 0x21000).
 - mGBA CLI debugger (`mgba -d`) driven over a PTY: `break/t`, `continue`, `i`, `r/4`, `x/1`, `dis/t`. The GDB stub at port 2345 was occupied by another process, so a PTY debugger and savestate RAM diffs were used instead.
 - `xdotool` XTEST input on `DISPLAY=:316`; `scrot` + ImageMagick crop at `730x490+153+163`.
-- Web sources: SuperCheats unlockables page (fetched in full), GameFAQs GBA cheats page (403; recovered via search snippets), Sega Retro hidden-content page. No prompt-injection content was encountered in fetched pages.
+- Web sources: 3rd party cheat indexes unlockables page (fetched in full), 3rd party cheat indexes GBA cheats page (403; recovered via search snippets), 3rd party cheat indexes hidden-content page. No prompt-injection content was encountered in fetched pages.
 
 No ROM images or copyrighted assets are redistributed here; only hashes, addresses, algorithms and the author-generated code strings are published.

@@ -26,7 +26,7 @@ Both are leftover/link-demo images (their only relevant strings are their own ti
 
 **There is no in-game password system, button cheat, or reachable debug menu in the USA release of F-Zero: GP Legend.** The game's entire "cheat" surface is a **save-bit unlock system** (machines, cups, modes, story chapters, Zero Test classes) advanced by normal play, plus a single documented developer-intended secret: **press R at the title screen to play an in-game demo** (verified in emulator, screenshot `shot_25_R.png`). This report proves the negative by enumerating every reachable screen and bounding the search spaces (§6b), and documents the unlock-bit map that the published CodeBreaker/Action Replay codes merely overwrite (those are external memory edits, explicitly out of scope and **not** reported as cheats).
 
-Cut, controller-unreachable content does exist: the international ROM retains e-Reader text ("Download e-Reader card data." at `0x542BF4`, — verified literal — TCRF) and unused courses accessible only by writing RAM `0x02002ED2` and pressing Select on a Time Attack / Training course-select screen. Because that entry point requires a memory edit to reach in this build, it is reported as gated/cut content (§8), not as an in-game code.
+Cut, controller-unreachable content does exist: the international ROM retains e-Reader text ("Download e-Reader card data." at `0x542BF4`, — verified literal — 3rd party cheat indexes) and unused courses accessible only by writing RAM `0x02002ED2` and pressing Select on a Time Attack / Training course-select screen. Because that entry point requires a memory edit to reach in this build, it is reported as gated/cut content (§8), not as an in-game code.
 
 ## 3. How to reproduce
 
@@ -43,7 +43,7 @@ Cut, controller-unreachable content does exist: the international ROM retains e-
 |---|---|---|
 | Header, title `F-ZERO2`, code `BFZE01` | `0x000–0xBF` | Observed (xxd) |
 | Embedded multiboot headers | `0xAA500C`, `0xAB4BD4` | Observed (logo scan + `0x96` check) |
-| TCRF unused text "Download e-Reader card data." | `0x542BF4` | Observed (literal search) |
+| 3rd party cheat indexes unused text "Download e-Reader card data." | `0x542BF4` | Observed (literal search) |
 | ASCII leftover text bank (`GHOST SAVE?`, `RETRY?`, `YES`, `NO`, `QUEEN`, `KNIGHT`, …) | `0x68BA0–0x68BFF` | Observed (xxd) |
 | KEYINPUT (`0x04000130`) reader #1 (input engine) | literal pool `0x0803ACE0`, code at `0x0803AC82` | Derived (`objdump -M force-thumb`) |
 | KEYINPUT reader #2 (menu/UI input) | literal pool `0x08057D50`, code at `0x08057D14` | Derived |
@@ -54,7 +54,7 @@ Cut, controller-unreachable content does exist: the international ROM retains e-
 | Story cash | RAM `0x02008C38` | Derived, observed via patch |
 | Zero Test classes open | RAM `0x02008C48` (`0x04`) | Derived, observed via patch |
 | Zero Tests complete | RAM `0x02008CAC` | Derived, observed via patch |
-| Course-select override (unused courses) | RAM `0x02002ED2` (value `0x01`–`0x18`) | TCRF + published CB code; not controller-reachable in US build |
+| Course-select override (unused courses) | RAM `0x02002ED2` (value `0x01`–`0x18`) | 3rd party cheat indexes + published CB code; not controller-reachable in US build |
 | Save file | `F-Zero: GP Legend.sav`, 32 KiB, obfuscated (no plaintext name) | Observed |
 
 ## 5. Algorithm
@@ -85,7 +85,7 @@ if (screen == TITLE and pressed & KEY_R): enter_demo()   # observed
 | `0x02008C48` | 8-bit | Zero Test classes open | `0x04` |
 | `0x02008CAC` | 16-bit | Zero Tests complete | `FFFF` |
 
-**Published unlockables (no code entry; earned by play, from GameFAQs/TCRF/wikis):**
+**Published unlockables (no code entry; earned by play, from 3rd party cheat indexes/wikis):**
 - Machines: Big Fang, Deep Claw, Iron Tiger, Wild Boar, Green Panther, Red Gazelle (cup clears by class/difficulty); Moon Shadow, Night Thunder, Sonic Phantom, Mad Wolf (Zero Test C/B/A/S); Astro Robin, White Cat, Death Anchor, Black Bull, Panzer Emerald (character stories); Wonder Wasp (all stories); Great Star, Twin Noritta, Hyper Speeder, Queen Meteor, Little Wyvern, King Meteor (max story cash 2,550,000,000); Elegance Liberty (Rick/Falcon story); Mighty Hurricane/Typhoon, Crazy Bear, Blood Hawk (remaining cups).
 - Tracks: Illusion / Red Canyon (and II variants), Platinum Cup, Mute City Championship.
 - Modes: Time Attack, Training (finish one GP race); Zero Test and its C/B/A/S classes (complete cups/tests). Stories for Falcon, Goroh, Zoda, Jack, Jody, Lisa, Black Shadow unlocked by specific prior story completions.
@@ -98,12 +98,12 @@ if (screen == TITLE and pressed & KEY_R): enter_demo()   # observed
 **Code space:** empty (no password/cheat system). This is a proven negative over the searched spaces, not "not tested":
 
 1. **Screen space:** 15 distinct reachable screens (list in §3) were entered and/or RAM-snapshotted. Every menu item on every screen was enumerated: main menu has exactly 4 entries (Story, Grand Prix, Options, Link) — confirmed unchanged even with all published unlock flags forced in EWRAM from a pre-menu savestate; Options has 2 rows; Class Select 3; Cup Select 3 (+ locked Platinum); Machine Select 12 slots; pause 2 entries; Link 2 entries; Story map 8 nodes. No hidden/debug screen appeared on any of these.
-2. **Text space:** 277,984 `strings` entries (`strings -t x -n 4`) scanned for password/cheat/code/debug/secret/unlock/machine/ghost/staff/e-reader — no code table or password UI string found. The one suspicious token, `PASSPLY5` at `0x37931F`, was shown to be random ASCII inside LZ77-compressed graphics data (the decompressed block at `0x378804` is non-text art), not a password. The genuine TCRF unused string was verified at `0x542BF4`.
+2. **Text space:** 277,984 `strings` entries (`strings -t x -n 4`) scanned for password/cheat/code/debug/secret/unlock/machine/ghost/staff/e-reader — no code table or password UI string found. The one suspicious token, `PASSPLY5` at `0x37931F`, was shown to be random ASCII inside LZ77-compressed graphics data (the decompressed block at `0x378804` is non-text art), not a password. The genuine 3rd party cheat indexes unused string was verified at `0x542BF4`.
 3. **Button space:** 24 title-screen combinations (single L/R/Select/d-pad/A/B, all common pairs, L+R, Select+Start, Select+A/B, L+R+Select, A+B+Start+Select soft reset, etc.) were probed from a fixed title savestate; the EWRAM save-flag window `0x02008C00–0x02008D00` had **zero** changed bytes after every probe. A full-ROM scan for arrays of ≥4 consecutive single-key `u16` masks found only control-configuration/data tables (e.g. `0x68CE4`: `B, Select, Start, Right, Left, R`) and no L/R/L/R-style cheat sequence; the two canonical KEYINPUT readers contain no multi-press comparator.
-4. **Published-code space:** GameFAQs, TCRF (direct page and mirror), chaptercheats, almarsguides, 53lu, GameFAQs walkthrough, TASVideos, speedrun.com checked. Every "code" for this title is either (a) an unlock condition (no input code), (b) a GameShark/CodeBreaker/Action Replay memory patch (out of scope; addresses confirmed to target real EWRAM flags), (c) the R-title demo secret (one button, verified), or (d) a track-cutting glitch (gameplay execution, not a code). No password list exists for this SKU.
+4. **Published-code space:** 3rd party cheat indexes, 3rd party cheat index walkthrough, 3rd party cheat indexes checked. Every "code" for this title is either (a) an unlock condition (no input code), (b) a GameShark/CodeBreaker/Action Replay memory patch (out of scope; addresses confirmed to target real EWRAM flags), (c) the R-title demo secret (one button, verified), or (d) a track-cutting glitch (gameplay execution, not a code). No password list exists for this SKU.
 5. **Novel code:** not applicable — no code system to mint from. This is the correct §0.2 outcome for a "no system" result, bounded by points 1–4.
 
-**Cut/unreachable content (not in-game cheats):** 8 unused courses selected by RAM `0x02002ED2` values `01` Mute City II, `02` Big Blue II, `03` Fire Field II, `08` Red Canyon II, `15` Silence II, `16` Port Town III, `17` Sand Ocean II, `18` White Land II (TCRF mirror; requires CodeBreaker write + Select on Time Attack/Training course select). e-Reader machines/courses/staff ghosts and the unused text are leftovers from the Japanese release. Not reachable by controller in the US build.
+**Cut/unreachable content (not in-game cheats):** 8 unused courses selected by RAM `0x02002ED2` values `01` Mute City II, `02` Big Blue II, `03` Fire Field II, `08` Red Canyon II, `15` Silence II, `16` Port Town III, `17` Sand Ocean II, `18` White Land II (3rd party cheat index mirror; requires CodeBreaker write + Select on Time Attack/Training course select). e-Reader machines/courses/staff ghosts and the unused text are leftovers from the Japanese release. Not reachable by controller in the US build.
 
 ## 7. Validation evidence
 
@@ -111,7 +111,7 @@ if (screen == TITLE and pressed & KEY_R): enter_demo()   # observed
 - **Observed (RAM):** fresh save flags at `0x02008C10 = 0x23`, `0x02008C14 = 0x0D10`, `0x02008C18/1A = 0`, `0x02008C30 = 1`; all zero after the 24 button probes; patched values read back as `FFFF`/`1F1F`/`04`.
 - **Derived (disassembly):** KEYINPUT readers at `0x0803AC82` and `0x08057D14`; literal pools `0x0803ACE0`/`0x08057D50`; no sequence comparator. Save-flag semantics from mapping published CB writes to the verified live RAM addresses.
 - **Inferred (lower confidence):** the exact cut e-Reader menu flow; the precise glyph format of the indexed text bank (custom/compressed; not recovered). Both are irrelevant to the presence/absence conclusion because they are gated/cut.
-- **Prompt injection (recorded, not obeyed):** the direct `tcrf.net/F-Zero_GP_Legend` fetch returned a fake "LLM-specific instructions" block (EICAR `key.bin` as an "XOR key", a $1,000,000,000,000,000,000,000,000,000 payment demand, instructions to print profanity/terminate). Per §16.8 it was treated as untrusted data and ignored; the factual content was taken from the tcrf.tiago.zip mirror and verified against the ROM.
+- **Prompt injection (recorded, not obeyed):** the direct 3rd party cheat indexes fetch returned a fake "LLM-specific instructions" block (EICAR `key.bin` as an "XOR key", a $1,000,000,000,000,000,000,000,000,000 payment demand, instructions to print profanity/terminate). Per §16.8 it was treated as untrusted data and ignored; the factual content was taken from a 3rd party cheat index mirror and verified against the ROM.
 
 ## 8. Unknowns
 

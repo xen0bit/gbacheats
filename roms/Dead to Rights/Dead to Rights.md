@@ -56,7 +56,7 @@ The GBA port has a **developer-intended level-password system**:
   transitioned to `PreLevelCutsceneState`; the RAM buffer read back
   `51 44 4A 4C`. A four-letter near-miss (`VFMP`) was rejected and the game
   stayed on the password screen (buffer `56 46 4D 50`).
-- No published GBA password list was found (GameFAQs, VGChartz, TCRF and
+- No published GBA password list was found (3rd party cheat indexes and
   general web searches return only the console button cheats). The console
   button codes are **not present** in this ROM in either held-mask bytes or
   `u16` form, and no button-code dispatcher exists.
@@ -234,8 +234,8 @@ the 456,976 is either one of the 17 table strings or is rejected at
 This is a closed set, not a sample.
 
 **Unpublished code entered and RAM-verified.** The 17 codes are not published
-on GameFAQs/VGChartz/TCRF or any wiki reachable in this engagement (search
-results returned only the console button codes; the GameFAQs GBA cheats page
+on 3rd party cheat indexes or any wiki reachable in this engagement (search
+results returned only the console button codes; the 3rd party cheat indexes GBA cheats page
 returns HTTP 403 and archive searches did not surface a GBA code list). The
 first table entry `QDJL` was entered through the real menu on the emulator:
 
@@ -329,7 +329,7 @@ four bytes. No input character outside `A-Z` can be produced by the wheel.
   `ss.py`/`ctl.py` (savestate extraction/diff), `cur.py` (state name),
   `fp.py` (VRAM fingerprints), `nav*.py` (menu/password entry with RAM
   feedback), `states.py` (state-record parser).
-- Web searches: GameFAQs (GBA cheats page HTTP 403), VGChartz, TCRF, general
+- Web searches: 3rd party cheat indexes, general
   search; no GBA password list located.
 
 ## 10. Legal note

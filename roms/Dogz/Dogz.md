@@ -34,7 +34,7 @@ The image is the retail US single build (`B82E`, 2004 MTO/Ubisoft).
 cheat sequence, no code-driven unlockable, and no reachable debug menu. The only
 "unlockable" in the published lists, **Always Together Mode**, is an ending
 reward stored as a save flag, not a code; **Puppy Visiting Mode** is the GBA
-Link mode. The published lists (GameFAQs, ChapterCheats, SuperCheats) contain
+Link mode. The published lists (3rd party cheat indexes) contain
 those two modes and no passwords.
 
 What was proven, and how:
@@ -113,9 +113,9 @@ Exact path used:
    `ENDING 000`) and A is the select input.
 
 **Codes tested:** there are none to test. The published lists were checked:
-GameFAQs `Dogz (GBA) → Cheats` has a single Unlockables entry (`Always Together
-Mode: get the best ending`); ChapterCheats, SuperCheats and Cyberly repeat the
-same; SuperCheats' full FAQ lists no codes and says `Settings` only changes the
+3rd party cheat indexes `Dogz (GBA) → Cheats` has a single Unlockables entry (`Always Together
+Mode: get the best ending`); 3rd party cheat indexes repeat the
+same; 3rd party cheat indexes' full FAQ lists no codes and says `Settings` only changes the
 movement type. The literal `Always Together` is not a code string anywhere in
 the image (0 hits in every encoding checked).
 

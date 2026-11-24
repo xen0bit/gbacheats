@@ -408,8 +408,7 @@ flEEfBbb9AdIV--------m01
 Decoded payload `a6 f3 8e a4 b9 65 24 a9 d2 7f ff ff ff ff ff ff`,
 shift 0, checksum 0x01. It is JUSTIN BAILEY’s item payload with the start-area
 nibble changed 1 → 2 (Norfair → Kraid’s Lair). No fetched published list
-contains it (searches included StrategyWiki, Metroid Fandom, Metroid Database,
-GameFAQs’ password-format guide, retrogameindex and archived cheat pages).
+contains it (searches included 3rd party cheat indexes, Metroid 3rd party cheat indexes’ password-format guide, retrogameindex and archived cheat pages).
 
 Observed state after starting from this code:
 

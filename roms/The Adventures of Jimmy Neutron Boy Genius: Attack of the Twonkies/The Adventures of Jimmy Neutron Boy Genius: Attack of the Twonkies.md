@@ -13,7 +13,7 @@
 | Maker code | `78` |
 | Fixed byte 0xB2 | `0x96` (valid) |
 | Version / complement / checksum | `0x00` / `0x12` / `0x0000` (checksum 0 is a common rebuilt-header artifact; entry word `0xEA00002E` is the stock branch to `0x080000C0`, so this is **not** a scene-cracktro image) |
-| Developer / publisher | Tantalus Interactive / THQ (confirmed by in-credits text at `0x0804C6AA` and TCRF) |
+| Developer / publisher | Tantalus Interactive / THQ (confirmed by in-credits text at `0x0804C6AA` and 3rd party cheat indexes) |
 | MD5 | `2c2e9b38c21fd511b4f1871b12183416` |
 | SHA-1 | `16ba112f07d02484febd554f902bb18776144186` |
 | SHA-256 | `18d516cf91a90d182c27e0d8d1378e06083041275b80fbb703844d3241d36f2c` |
@@ -51,7 +51,7 @@ The negative is **bounded**, not "not looked for":
   routine at `0x08030EE8`) — i.e. no press-history/sequence comparator exists.
 * Ghidra auto-analysis produced **1,508** functions; the menu and input code
   that were decompiled contain only screen dispatch and option toggles.
-* TCRF's archived GBA page documents only leftover *text* (developer credits,
+* a 3rd party cheat index's archived GBA page documents only leftover *text* (developer credits,
   splash-screen asset names, GAX error strings, an `EXCEPTION. PROGRAM HALT.`
   fragment) — no debug menu or cheat, consistent with our static result. Its
   "debugging functions" category is explained by those leftover strings, not
@@ -182,7 +182,7 @@ of the engine's 32-bit key word. Each has exactly two literal-pool references
 
 **Unlockables (in scope, but save-gated, not codes):** bonus challenges unlock
 after *Retroland After Dark*; bonus jetpack-race level unlocks after finishing
-the game (GameFAQs/supercheats/neoseeker, consistent across SKUs); 12 invention
+the game (3rd party cheat indexes, consistent across SKUs); 12 invention
 names at `0x0804441A`-`0x08044532`; collectible Neutronium / invention pieces
 (dialogue at `0x080447F8`, `0x080480B4`); `HINTS` option string at `0x0804ACD3`
 (0 direct pointers — reached through an offset-addressed UI string bank).
@@ -238,12 +238,12 @@ the 10 reachable screens or in the UI string bank.
   directly from `0x0814DA18`.
 * **Inferred** — that the `EXCEPTION. PROGRAM HALT.` / `Use U/D/LTRIG/RTRIG`
   strings are leftover developer text rather than a reachable debug overlay
-  (supported by 0 pointers for `EXCEPTION` and by TCRF's archived page, but
+  (supported by 0 pointers for `EXCEPTION` and by a 3rd party cheat index's archived page, but
   no live breakpoint was available to prove the single xref of the other note
   never fires). Unlock conditions for bonus content are from published sources
   plus ROM strings, not from a full playthrough.
 
-**Prompt-injection / page-as-data note:** TCRF was fetched only through the
+**Prompt-injection / page-as-data note:** 3rd party cheat indexes were fetched only through the
 Internet Archive snapshot (direct fetch returned 403 / CAPTCHA). Its content
 was treated strictly as data; no instruction found in a fetched page or ROM
 string was executed.
@@ -275,8 +275,8 @@ string was executed.
 * REA MCP / Ghidra 12.1.4: raw ARM import at base `0x08000000`, default
   auto-analysis (42 s), 1,508 procedures, decompiled `0x0803AEA4`.
 * mGBA 0.10.5 (`-3`), Xvfb `:317`, openbox, xdotool, scrot.
-* Web: websearch plus web.archive.org snapshot of the TCRF GBA page
-  (direct TCRF/GameFAQs fetches were blocked).
+* Web: websearch plus web.archive.org snapshot of the 3rd party cheat indexes GBA page
+  (direct 3rd party cheat indexes fetches were blocked).
 
 No ROM bytes or copyrighted assets are redistributed in this report; only
 hashes, offsets, algorithms and our own observations are published.

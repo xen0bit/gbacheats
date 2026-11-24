@@ -46,7 +46,7 @@ menu) exists in this build.** This is a *bounded negative*, not an absence of se
   screen and a lowercase set used **only** to render initials/name text (no comparison).
 * No unlockable table: all four table icons are selectable from the start; the fourth (`?`) is
   a random-table selector (verified by starting a game with it — the Kermit table loaded).
-* Published-code research was attempted (GameFAQs, TCRF, Wayback Machine, Bing, DuckDuckGo,
+* Published-code research was attempted (3rd party cheat indexes, Wayback Machine, Bing, DuckDuckGo,
   Google, r.jina.ai). Direct fetches returned 403/404/bot-challenge and no search integration
   returned any published code for this title. Literal searches for `PASSWORD`, `CHEAT`, `DEBUG`,
   `SECRET`, `UNLOCK`, `CODE` in the ROM all returned zero (the only `cheat` hit is the dead
@@ -233,15 +233,15 @@ visible labels were read from screenshots and the banks decoded as follows:
 
 ### Web research attempts (recorded, no code obtained)
 * `websearch`: four queries (`Muppet Pinball Mayhem GBA cheat codes debug menu password`,
-  `"Muppet Pinball Mayhem" cheat codes GameFAQs`, `… unlock tables passwords guide`, plus a
+  `"Muppet Pinball Mayhem" cheat codes`, `… unlock tables passwords guide`, plus a
   debug/password variant) — no results returned.
-* `https://gamefaqs.gamespot.com/gba/561433-muppet-pinball-mayhem/cheats` → 403.
-* `https://tcrf.net/Muppet_Pinball_Mayhem` → 403 (Cloudflare challenge).
+* 3rd party cheat indexes → 403.
+* 3rd party cheat indexes → 403 (Cloudflare challenge).
 * `https://web.archive.org/web/2020/…gamefaqs…/cheats` → 404; Wayback availability API →
   no snapshots; CDX query timed out.
-* Bing `… "cheats" OR "password" OR "code" Gameboy Advance` and `site:gamefaqs…` → only generic
+* Bing `… "cheats" OR "password" OR "code" Gameboy Advance` and site-restricted queries → only generic
   Muppets results; DuckDuckGo → bot challenge; Google → access-help page.
-* `r.jina.ai` proxies of GameFAQs/TCRF/Wayback → 400/403/bot-block.
+* `r.jina.ai` proxies of 3rd party cheat indexes/Wayback → 400/403/bot-block.
 * No fetched page produced a code or instruction text; nothing from fetched content was acted on.
 
 ## 8. Unknowns

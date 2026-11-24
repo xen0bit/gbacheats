@@ -15,7 +15,7 @@
 | Entry word | `0xEA00002E` (`b 0x080000C0`, stock crt0 branch) |
 | Complement | `0x9F` (valid: `-(sum 0xA0..0xBC + 0x19) & 0xFF`) |
 | Header checksum | `0x0000` (rebuilt-header artefact; complement still valid) |
-| CRC32 | `EA5ED4C0` — matches the No-Intro `Disney's The Lion King 1.5 (U) [!]` dump |
+| CRC32 | `EA5ED4C0` — matches the 3rd party cheat indexes `Disney's The Lion King 1.5 (U) [!]` dump |
 | MD5 | `6a987dc5a8f0e87e1e055ee65f7e99c9` |
 | SHA-1 | `382de6da61c5dc5c2844f5ffa28a1827d15319b1` |
 | SHA-256 | `42fda2c2ee0048ab926b929de99176a5f47b740c8d68f03c59a9128b325aed7e` |
@@ -244,16 +244,16 @@ In the two SNES rows and the A+B row the credits reel started because the first
 `options` item is `credits` and A activates it; no secret menu was created. The
 GBA `options` screen has only `credits`, `quit game`, `done`.
 
-Published GBA lists (GameHacking.org, CodeTwink) contain only memory codes
+Published GBA lists (3rd party cheat indexes) contain only memory codes
 (Action Replay MAX, GameShark/CodeBreaker, Xploder). They are deliberately not
-used or reproduced here. The 16-bit codes above come from GameFAQs' Genesis,
+used or reproduced here. The 16-bit codes above come from 3rd party cheat indexes' Genesis,
 SNES and GB cheat pages; the GBA `options` screen is a different, three-item
 menu, so the 16-bit codes are not expected to map literally, but were tested
 anyway to close the "code from another version" question.
 
-Sources consulted: GameHacking.org `game/5136` (memory codes only), CodeTwink
-`view-cheats-1270`, GameFAQs Genesis/SNES/GB *Lion King* cheat pages, and the
-TCRF mirror page for *Batman Begins* GBA (same VV engine; documents the
+Sources consulted: 3rd party cheat indexes `game/5136` (memory codes only), 3rd party cheat indexes
+`view-cheats-1270`, 3rd party cheat indexes Genesis/SNES/GB *Lion King* cheat pages, and the
+3rd party cheat index mirror page for *Batman Begins* GBA (same VV engine; documents the
 `baisoku!` watermark and the `Defeat Level`/`Slow Motion` debug leftovers).
 
 ## 6b. Enumeration
@@ -301,7 +301,7 @@ TCRF mirror page for *Batman Begins* GBA (same VV engine; documents the
 (`0x02024D84 = 4`), and its array holds exactly resume/sleep/restart/quit. The
 strings `defeat level` and `slow motion` are in the text bank (IDs 26/27) but
 not in any built list. `defeat level`/`slow motion` are the same unused debug
-leftovers TCRF documents in *Batman Begins* GBA (another VV/Team Baisoku
+leftovers 3rd party cheat indexes document in *Batman Begins* GBA (another VV/Team Baisoku
 title), where the debug display is enabled by an external memory poke, not by
 game input. No in-game path was found here.
 

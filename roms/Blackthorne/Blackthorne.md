@@ -76,9 +76,9 @@ in the ROM, but the player cannot type them. The port has:
    so the cheat is dead in this port.
 
 5. The **EU-only developer-photo code** (Left,Right,Up,Down,Left,Right,Select,
-   Select) does nothing in this US ROM, as expected from TCRF.
+   Select) does nothing in this US ROM, as expected from 3rd party cheat indexes.
 
-The hidden level select itself is documented (TCRF, GameFAQs). What is new in
+The hidden level select itself is documented (3rd party cheat indexes). What is new in
 this report is the complete internal model: the mask table address, the two
 flags, the exact screen/row gating, the full index → level → save-code
 mapping, and proof that the SNES password strings are live save data.
@@ -130,9 +130,9 @@ Codes tested (see §7 for results):
 | `L,R,D,U,B,B,D` (published "infinite health") | MAIN MENU | no effect; only moves cursor |
 | any 4-char code | — | no entry UI exists (§6b.3) |
 
-Published code lists consulted: TCRF *Blackthorne (GBA)* (level select,
-developer photo, "unused text"); GameFAQs cheat pages for GBA/SNES/32X;
-StrategyWiki `Blackthorne/Passwords`. All are matched against the ROM in §6.
+Published code lists consulted: 3rd party cheat indexes *Blackthorne (GBA)* (level select,
+developer photo, "unused text"); 3rd party cheat index cheat pages for GBA/SNES/32X;
+3rd party cheat indexes `Blackthorne/Passwords`. All are matched against the ROM in §6.
 
 Reconnaissance summary (Phase 1):
 
@@ -142,9 +142,9 @@ Reconnaissance summary (Phase 1):
   `0x27E34`); `CONTINUE` = 1 (`0x282A9`, in-game prompt); `OPTION` = 1
   (`0x25D91`). So there is no English password/cheat UI text to find; the
   feature is entirely button-driven.
-* Literal verification of every published code: all 16 StrategyWiki level
+* Literal verification of every published code: all 16 3rd party cheat indexes level
   passwords are present byte-for-byte in the 17-entry table at `0x44600`;
-  `FMWY` is present only in the master table at `0x22D08`. The GameFAQs PC
+  `FMWY` is present only in the master table at `0x22D08`. The 3rd party cheat indexes PC
   password list contains one typo — `Y4OJ` where the ROM has `Y4DJ` — which
   the ROM table settles. No other published code is wrong for this ROM.
 * Key-mask search: an exhaustive scan of 16-bit windows over the whole ROM for
@@ -344,7 +344,7 @@ it starts that level and writes that name/code into the slot.
 | 15 | 16 | `CASTLE 90%` | `MJXG` | `0xC5` |
 | 16 | 17 | `CASTLE 96%` | `K3CH` | `0x89` |
 
-These 17 codes are the level-2 … level-17 passwords published on StrategyWiki
+These 17 codes are the level-2 … level-17 passwords published on 3rd party cheat indexes
 for the original game, plus `DBQ7` for level 1 (the PC password list gives
 `DBQ7` as "level 1 without intro"); `FMWY` ("ending") exists only in the
 master table, not in the 17-entry selector table. The hidden level select is
@@ -432,7 +432,7 @@ Slot-6 record lives at image offset `0xB8`. After selecting `SAND   66%`
 | `Right`×8 | 8 | `SAND   48%` | starts level 9 (Wastelands) — `screenshots/15_level9_sand48.png` |
 
 * **Novel/unpublished composite code** (not documented in any list we found —
-  GameFAQs, TCRF, VGChartz or StrategyWiki): the selector index enumeration is
+  3rd party cheat indexes): the selector index enumeration is
   not published anywhere, and neither is the save write. Execute
   **`L,L,R,R,U,U,D,Select` → `Right`×11 → `A` → `A`** on the LOAD GAME screen.
   The game starts level 12 **and writes `Y4DJ` into the sixth EEPROM slot**;
@@ -508,7 +508,7 @@ Slot-6 record lives at image offset `0xB8`. After selecting `SAND   66%`
 
 ### Inferred
 
-* The `0xCC` sound is the "explosion" reported by TCRF/GameFAQs (audio was
+* The `0xCC` sound is the "explosion" reported by 3rd party cheat indexes (audio was
   run with `SDL_AUDIODRIVER=dummy`; only the request call was observed).
 * `0x030022DD` is a god-mode toggle from the original engine (health refill
   each frame) whose enabling path was removed/disabled during the conversion.
@@ -528,7 +528,7 @@ Slot-6 record lives at image offset `0xB8`. After selecting `SAND   66%`
   `FMWY`, `L2RP`) are reachable in any other GBA build/mode. In this US ROM
   the decoder table has 17 entries and the selector clamps to 16, so they are
   not reachable.
-* The EU developer-photo asset is absent/unreferenced in this US ROM (TCRF
+* The EU developer-photo asset is absent/unreferenced in this US ROM (3rd party cheat indexes
   says EU-only); the exact EU code path was not analysed here.
 
 ## 9. Tooling

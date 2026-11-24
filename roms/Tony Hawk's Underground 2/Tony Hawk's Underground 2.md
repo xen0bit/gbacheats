@@ -24,7 +24,7 @@ land in the ROM folder; the ROM folder contains only the `.gba`.
 
 **There is no typed password / code-entry surface in this GBA SKU.** The
 widely published word codes (`straightedge`, `oldskool`, `likepaulie`,
-`sellout`, `d3struct`, `boxoffice`, …) are console/PC codes that GameFAQs and
+`sellout`, `d3struct`, `boxoffice`, …) are console/PC codes that 3rd party cheat indexes and
 mirrors also attach to the GBA page; **none of them occurs anywhere in this
 8 MiB image** in ASCII, upper case, UTF-16LE/BE, or ±0x20-shifted form. The
 complete UI text bank (`0x080E0000`–`0x080E2000`, fully dumped) contains only
@@ -112,7 +112,7 @@ indices 10–13 are never emitted. The row renderer formats `name(i)` with
 
 ### 6.1 Cheat slots (complete, 10 reachable + 4 unreachable)
 
-| Bit | Menu label | ROM string | Published GBA unlock (GameFAQs) |
+| Bit | Menu label | ROM string | Published GBA unlock (3rd party cheat indexes) |
 |---:|---|---|---|
 | 0 | STUD MODE | `stud mode` @`0x080599F8` | Stylin' Lv01 or 100% Arcade w/ Tony Hawk or created skater |
 | 1 | RAIL BALANCE | `rail balance` @`0x08059A04` | Stylin' Lv02 or 100% Arcade w/ Bob Burnquist ("Perfect Rail") |
@@ -130,9 +130,9 @@ indices 10–13 are never emitted. The row renderer formats `name(i)` with
 
 | Claim | Where published | ROM evidence |
 |---|---|---|
-| `straightedge`, `likepaulie`, `oldskool`, `sellout`, `4-wheeler`, `aprilsman`, `costars!` | GameFAQs **PC/console** "Codes for the Cheat menu" (mis-tagged on GBA pages) | 0 hits in 8 MiB, all encodings |
-| `d3struct`, `boxoffice`, `urown3d`, `wakpak`, `accesspass`, `frontrowseat` | GameFAQs console passwords | 0 hits in 8 MiB, all encodings |
-| "Unlocking Cheats GBA" table (10 cheats) | GameFAQs GBA section | **confirmed** — exact 1:1 match with the in-game Cheats menu and name table |
+| `straightedge`, `likepaulie`, `oldskool`, `sellout`, `4-wheeler`, `aprilsman`, `costars!` | 3rd party cheat indexes **PC/console** "Codes for the Cheat menu" (mis-tagged on GBA pages) | 0 hits in 8 MiB, all encodings |
+| `d3struct`, `boxoffice`, `urown3d`, `wakpak`, `accesspass`, `frontrowseat` | 3rd party cheat indexes console passwords | 0 hits in 8 MiB, all encodings |
+| "Unlocking Cheats GBA" table (10 cheats) | 3rd party cheat indexes GBA section | **confirmed** — exact 1:1 match with the in-game Cheats menu and name table |
 
 ## 6b. Enumeration
 

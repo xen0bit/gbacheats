@@ -43,10 +43,10 @@ confirmation) — **11 screens total**, all observed. The word immediately after
 the 8-entry table (`0x0826847C = 0x20503820`) is not a pointer, so no 9th
 screen exists in that table.
 
-Web recon found **no published in-game code** for this SKU: GameFAQs lists only
-collectible "Unlockables"; Cheat Happens / ROMSFUN / libretro list Action
+Web recon found **no published in-game code** for this SKU: 3rd party cheat index lists only
+collectible "Unlockables"; 3rd party cheat indexes / libretro list Action
 Replay/CodeBreaker **memory patches** (out of scope and not in-game codes);
-GameFAQs's walkthrough documents only pickups and story events. TCRF has pages
+a 3rd party cheat index's walkthrough documents only pickups and story events. 3rd party cheat indexes have pages
 for *Master of Spirits 2* and the PS2 *Funbari Spirits* (cheat-device debug
 menus) but not for this GBA title — per guide §16.11 those are different SKUs
 and their cheats do not apply. Literal searches for any published code string
@@ -185,7 +185,7 @@ tile-index-encoded text bank for menus to decode: an xref search finds direct
 32-bit pointers from code to these ASCII bytes (e.g. `0x080227A4` →
 `0x0805F994`). Keyword searches covered ASCII, lowercase, and UTF-16LE.
 
-**Published collectible unlockables** (GameFAQs / Cheating Dome, cross-checked
+**Published collectible unlockables** (3rd party cheat indexes, cross-checked
 against the ROM's item/spirit-name bank and in-game descriptions). These are
 progression pickups/story events, **not codes**:
 
@@ -295,8 +295,8 @@ both decoded with `ss.py`.
 - `key.py` — XTEST key driver for reproducible menu navigation on `:315`.
 - mGBA 0.10.5, Xvfb `:315`, openbox, xdotool, scrot (all launched and torn down
   by PID for this job only).
-- Web sources consulted as data only: GameFAQs cheats/FAQ/release data,
-  Cheating Dome, ROMSFUN/libretro cheat list, MobyGames, TCRF (different SKUs).
+- Web sources consulted as data only: 3rd party cheat index cheats/FAQ/release data,
+  3rd party cheat indexes/libretro cheat list, 3rd party cheat indexes.
   No fetched page contained instructions that were followed.
 
 **Legal note:** no ROM bytes, graphics or audio are redistributed here — only

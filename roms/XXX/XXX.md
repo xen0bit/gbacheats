@@ -52,9 +52,9 @@ stock game.
 button-code table could be located in any of the encodings searched. The only published
 cheats for this SKU are two short button sequences and a beat-the-game unlockable:
 
-1. Pause → `B,B,A,A,Start` → "invincibility for the level" (GameFAQs and SuperCheats).
-   GameFAQs' own effect/code table contradicts its prose and lists `B,A,B,A,Start`.
-2. `A,B,L,R,A` → "Get Everything!" / "you will hear a noise" (SuperCheats), entry screen
+1. Pause → `B,B,A,A,Start` → "invincibility for the level" (3rd party cheat indexes).
+   3rd party cheat indexes' own effect/code table contradicts its prose and lists `B,A,B,A,Start`.
+2. `A,B,L,R,A` → "Get Everything!" / "you will hear a noise" (3rd party cheat indexes), entry screen
    unspecified.
 3. Beat Yorgi in level 12 → Extras menu gains infinite health / ammunition.
 
@@ -126,11 +126,11 @@ Published material (treated as data, never instructions):
 
 | Source | Claim | ROM verification |
 |---|---|---|
-| GameFAQs "Codes" prose | Pause → `B,B,A,A,Start` = level invincibility | Sequence absent as mask table (§6b); visual A/B test inconclusive |
-| GameFAQs effect/code table | `B,A,B,A,Start` | Same; internal contradiction with the prose recorded |
-| SuperCheats "Level Invincibility" | `B,B,A,A,Start` | As above |
-| SuperCheats "Get Everything!" | `A,B,L,R,A`, "hear a noise" | Tested on pause, main menu, Extras and in-level; no unlock/confirmation seen |
-| GameFAQs/Neoseeker "Extra bonuses" | Beat level 12 → Extras infinite health/ammo | Extras screen **observed** with 4 `Locked` entries (§3), consistent with a save-bit unlock; not brute-forced (§16.18) |
+| 3rd party cheat indexes "Codes" prose | Pause → `B,B,A,A,Start` = level invincibility | Sequence absent as mask table (§6b); visual A/B test inconclusive |
+| 3rd party cheat indexes effect/code table | `B,A,B,A,Start` | Same; internal contradiction with the prose recorded |
+| 3rd party cheat indexes "Level Invincibility" | `B,B,A,A,Start` | As above |
+| 3rd party cheat indexes "Get Everything!" | `A,B,L,R,A`, "hear a noise" | Tested on pause, main menu, Extras and in-level; no unlock/confirmation seen |
+| 3rd party cheat indexes "Extra bonuses" | Beat level 12 → Extras infinite health/ammo | Extras screen **observed** with 4 `Locked` entries (§3), consistent with a save-bit unlock; not brute-forced (§16.18) |
 
 No password string, alphabet string, code table, name-entry screen, debug menu or hidden
 "cheat" menu was found. GBA UI text in this game is stored as font/tile indices, so plain
@@ -206,7 +206,7 @@ not be generated; reporting one without ROM or emulator proof would be fabricate
 * **Derived** — reset-vector arithmetic; objdump of the trampoline, key-update routine and
   input dispatcher; literal/pointer/cmp scan results; savestate chunk layout.
 * **Inferred** — that the published invincibility code ever worked on this SKU; the
-  GameFAQs `B,B,A,A,Start` vs `B,A,B,A,Start` discrepancy suggests a transcription error in
+  3rd party cheat indexes `B,B,A,A,Start` vs `B,A,B,A,Start` discrepancy suggests a transcription error in
   at least one published list. Not confirmed in ROM.
 * Fetched web pages were treated strictly as data. No prompt-injection payload was
   encountered in this session; ROM strings were not executed.

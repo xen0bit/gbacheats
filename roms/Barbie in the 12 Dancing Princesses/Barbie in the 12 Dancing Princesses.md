@@ -39,7 +39,7 @@ variants**. Records whose fourth byte is `9` are unreachable padding (the
 entry ring only exposes 0–7), leaving **184 enterable codes**. All 13 publicly
 documented level passwords are present and were confirmed in the emulator.
 The other **171 enterable codes are absent from the verified published list**
-(the only other list found, mariogba.nl, is mislabeled and partially overlaps).
+(the only other list found, 3rd party cheat indexes, is mislabeled and partially overlaps).
 
 Each level's 32 variants also carry a **5-bit flag field** (the record's column
 index). The flags are written to game RAM at `0x030000B4`, `0x03000990` and
@@ -219,7 +219,7 @@ table's own "empty" marker, not a wildcard.
 
 ### 6.1 Icon ring (observed, then confirmed against every published code)
 
-| Index | Icon | Published name (gamegenie/supercheats) |
+| Index | Icon | Published name (gamegenie/3rd party cheat indexes) |
 |---:|---|---|
 | 0 | Blonde girl, pink dress, blonde bun | Blonde Girl |
 | 1 | Pink ballet slippers | Slippers / Ballet Shoes |
@@ -274,12 +274,12 @@ representable inputs. The lookup table contains 416 records (13 × 32). Exactly
 **184** records use only symbols 0–7 and are therefore enterable; the other 232
 end in the unreachable `9`. Of the 184, **13** are in the verified published
 list and **171** are not; the examples below also avoid the mislabeled
-mariogba.nl variants. All 184 are distinct (no duplicate code maps to two
+3rd party cheat indexes variants. All 184 are distinct (no duplicate code maps to two
 levels).
 
-**Published list.** Recovered from GameGenie, SuperCheats and ChapterCheats;
-all three agree on the 13 codes above. GameFAQs and Neoseeker returned HTTP
-403; an `archive.org` replay returned HTTP 400. The `mariogba.nl` list uses
+**Published list.** Recovered from 3rd party cheat indexes;
+all three agree on the 13 codes above. 3rd party cheat indexes returned HTTP
+403; an `archive.org` replay returned HTTP 400. The 3rd party cheat indexes list uses
 character names and does **not** agree with the ROM table (e.g. its "Level 3"
 code `Rowena, Felix, Ballet Shoes, Brutus` = `2,3,1,7` is record 194, i.e. the
 **level-7** row, not level 3). It is recorded as **unverified/unreliable** for

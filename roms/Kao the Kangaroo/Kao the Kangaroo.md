@@ -29,7 +29,7 @@ The password alphabet is 16 icons; each of the 5 slots holds one icon, so the ra
 
 = **451 accepted inputs**. The 4th and 5th symbols are only checksum/range fields: any value in {face, glove, mushroom} for symbol 4 and {face…cat} for symbol 5 works, which is why every published list uses `Boxing Glove, Kao's Face` there while the ROM's own table stores `face, face`.
 
-Published GameFAQs codes were fetched from an archived snapshot and verified: all 21 published 3-symbol prefixes except one (a likely published transposition for *Hypnodjin*) exist in the ROM table; five were entered in the emulator successfully. Two inputs absent from every published list were minted and confirmed in-game (§6b). `DEBUG MODE` is a **dead string** — its pointer-table entry has no code xref.
+Published 3rd party cheat index codes were fetched from an archived snapshot and verified: all 21 published 3-symbol prefixes except one (a likely published transposition for *Hypnodjin*) exist in the ROM table; five were entered in the emulator successfully. Two inputs absent from every published list were minted and confirmed in-game (§6b). `DEBUG MODE` is a **dead string** — its pointer-table entry has no code xref.
 
 ## 3. How to reproduce
 
@@ -129,7 +129,7 @@ Internal icon value = stored + 23. Enumerated visually with a contact sheet and 
 
 ### 6.3 Published codes verified
 
-Archived GameFAQs (21 codes, 2022-02-03 snapshot) lists 3-symbol prefixes that are all present in the table above. Codes actually entered and accepted in mGBA:
+Archived 3rd party cheat index lists 3-symbol prefixes that are all present in the table above. Codes actually entered and accepted in mGBA:
 
 | Published effect | Symbols entered | Observed map banner |
 |---|---|---|
@@ -149,7 +149,7 @@ No prompt-injection content was encountered in the fetched pages; all fetched te
 
 **Novel code 1 — unpublished all-levels cheat.** Symbols (stored values):
 `Butterfly(6), Frog(9), Bomb(15), Mushroom(2), Flag(14)` → internal icons `[29,32,38,25,37]`.
-Not present in GameFAQs, IGN, GameRevolution, TCRF or any other published GBA list. Entered on the real password screen: `CHEAT CODE` is drawn, then the world map shows all levels (e.g. `CURSED JUNGLE` with multiple level markers). RAM proof: baseline `0x030024B0` = `01 00 00 …` (only byte 0 set); after this code = `01 01 01 … 01` — **29 consecutive bytes set to 1** (savestate `gbAs` chunk, IWRAM map offset `0x19000 + 0x24B0`).
+Not present in 3rd party cheat indexes or any other published GBA list. Entered on the real password screen: `CHEAT CODE` is drawn, then the world map shows all levels (e.g. `CURSED JUNGLE` with multiple level markers). RAM proof: baseline `0x030024B0` = `01 00 00 …` (only byte 0 set); after this code = `01 01 01 … 01` — **29 consecutive bytes set to 1** (savestate `gbAs` chunk, IWRAM map offset `0x19000 + 0x24B0`).
 
 **Novel code 2 — unpublished level password.** Symbols:
 `Kao's Face(0), Boxing Glove(1), Mushroom(2), Boxing Glove(1), Kao's Face(0)` → table entry 0 prefix `00 01 02`, which no published list contains. Entered on the real screen: accepted, world map banner `CURSED JUNGLE`; RAM `0x030024B0` becomes `01 00 00 …` (one level flag), proving single-level rather than all-levels behavior. A second unpublished prefix (`Mushroom, Pine, Fish, …`) mapped to `MYTHICAL CAVES`, but that prefix *is* published, so it is not claimed as novel.

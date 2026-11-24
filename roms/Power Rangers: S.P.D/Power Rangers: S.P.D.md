@@ -28,7 +28,7 @@ The validator decodes the 3 symbols into three fields:
 * **B** — 2-bit difficulty field: `0 = Easy`, `1 = Normal`, `2 = Hard`, `3 = reject marker`;
 * **C** — 8-bit checksum scattered across the packed bytes, `C = (-( (0x69 & b0) + (0x29 & b1) + 205 )) & 0xFF`.
 
-The whole space is `32^3 = 32,768` inputs; exactly **60** are accepted — one per `(A,B)` with `A∈[0,19]`, `B∈{0,1,2}` (`B=3` is unconditionally rejected). The published GameFAQs/SuperCheats lists cover only the 40 codes for Easy and Hard. **The entire 20-code Normal (`B=1`) tier is absent from the published lists**; this report enumerates it and confirms two of its codes in the emulator.
+The whole space is `32^3 = 32,768` inputs; exactly **60** are accepted — one per `(A,B)` with `A∈[0,19]`, `B∈{0,1,2}` (`B=3` is unconditionally rejected). The published 3rd party cheat index lists cover only the 40 codes for Easy and Hard. **The entire 20-code Normal (`B=1`) tier is absent from the published lists**; this report enumerates it and confirms two of its codes in the emulator.
 
 All 39 published codes were verified against the recovered validator: all 39 are in the accepted set, and no published literal appears in the ROM as ASCII (the codes live only as the algorithm).
 
@@ -103,8 +103,8 @@ Complete accepted set, one code per `(A,B)` (all 60):
 
 Published sources and verification:
 
-* GameFAQs (Wayback `20181126054133`) lists 20 Easy/Megazord codes, 19 Hard level codes, and `9CK`; SuperCheats lists 20 Easy codes; mariogba.nl lists 7 "level" codes. All literals were checked against the recovered validator (not against plaintext ROM bytes): **all are valid**; the conflicting `R4G`-as-level-7 label is resolved by the decoded field (`R4G` = A=14 Easy, i.e. the published "Episode 7a" pairing).
-* A GameFAQs search snippet exposed five Normal-tier codes (`RNS, MST, 0GL, 0BM, SGL`) that were absent from the fetched page body; the other 15 Normal codes are in no list found.
+* 3rd party cheat indexes (Wayback `20181126054133`) lists 20 Easy/Megazord codes, 19 Hard level codes, and `9CK`; 3rd party cheat index lists 20 Easy codes; 3rd party cheat index lists 7 "level" codes. All literals were checked against the recovered validator (not against plaintext ROM bytes): **all are valid**; the conflicting `R4G`-as-level-7 label is resolved by the decoded field (`R4G` = A=14 Easy, i.e. the published "Episode 7a" pairing).
+* A 3rd party cheat index search snippet exposed five Normal-tier codes (`RNS, MST, 0GL, 0BM, SGL`) that were absent from the fetched page body; the other 15 Normal codes are in no list found.
 * No password string, cheat string, "debug" string, or hidden menu label exists in ASCII or UTF-16 in the ROM; UI text is font/tile-indexed. The menu enumeration below is therefore by screen walk, not by strings.
 
 ## 6b. Enumeration

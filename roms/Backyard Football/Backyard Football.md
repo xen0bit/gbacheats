@@ -293,21 +293,21 @@ profiling overlay from the developer build (`Host: scameron`, Torus Games).
 
 | Source | Platform | Code | Present in GBA ROM? |
 |---|---|---|---|
-| GameFAQs GBA page | PC | `sharpeye`, `whatatackle`, `MRCLANKY`, `moreplays`, `superspeed` | **no** (0 hits) |
-| GameFAQs GBA page | Mac | `superkid`, `sharpeye`, `whatatackle`, `superspeed`, `moreplays`, `MRCLANKY` | **no** (0 hits) |
-| GameFAQs GBA page | GameCube | `GHOST` | **no** (0 hits) |
-| GameFAQs GBA page | unlockable | Walter Payton as coach name | **no** (0 hits) |
-| SuperCheats / GameHacking / Almar's | GBA | GameShark/CodeBreaker (P1/P2 score, quarter, time, first down, etc.) | memory-patch codes, out of scope |
+| 3rd party cheat indexes GBA page | PC | `sharpeye`, `whatatackle`, `MRCLANKY`, `moreplays`, `superspeed` | **no** (0 hits) |
+| 3rd party cheat indexes GBA page | Mac | `superkid`, `sharpeye`, `whatatackle`, `superspeed`, `moreplays`, `MRCLANKY` | **no** (0 hits) |
+| 3rd party cheat indexes GBA page | GameCube | `GHOST` | **no** (0 hits) |
+| 3rd party cheat indexes GBA page | unlockable | Walter Payton as coach name | **no** (0 hits) |
+| 3rd party cheat indexes | GBA | GameShark/CodeBreaker (P1/P2 score, quarter, time, first down, etc.) | memory-patch codes, out of scope |
 
 No published list contains a GBA in-game password, button combination or
 debug-menu code. The GBA "Cheats" page defers entirely to PC/Mac/GameCube
 entries.
 
-Sources checked (2026-10): GameFAQs GBA cheats page (PC/Mac/GameCube entries
-shown above), SuperCheats *Backyard Football* GBA codes (GameShark only),
-GameHacking.org `game/3898` and Almar's CodeBreaker page (GameBreaker/
-CodeBreaker only), the SuperCheats FAQ (controls/menu walkthrough), and the TCRF
-mirror `tcrf.tiago.zip` page for *Backyard Football (GBA)*, which documents the
+Sources checked (2026-10): 3rd party cheat indexes GBA cheats page (PC/Mac/GameCube entries
+shown above), 3rd party cheat indexes *Backyard Football* GBA codes (GameShark only),
+3rd party cheat indexes `game/3898` and a 3rd party cheat index's CodeBreaker page (GameBreaker/
+CodeBreaker only), the 3rd party cheat index FAQ (controls/menu walkthrough), and the 3rd party cheat index
+mirror page for *Backyard Football (GBA)*, which documents the
 same debug text at `0x7D520` with no reachability claim. No GBA password list,
 button-code list or debug-menu code exists on any of them.
 
@@ -371,7 +371,7 @@ edges** (BL 0, BLX 0, `u32` pointer 0, Ghidra callers 0), so no sequence of
 inputs can reach it, and the GDB run confirms no hit while every reachable
 screen is exercised.
 
-**What *is* novel in this report (not on GameFAQs/TCRF).** TCRF documents the
+**What *is* novel in this report (not on 3rd party cheat indexes).** 3rd party cheat indexes document the
 debug *text* at `0x7D520`; this report adds the module's address map
 (`0x080055F0` root, `0x080056F4` dispatcher, `0x08005854`/`0x08005978` pages,
 `0x0803F9E58` label array), the exact entry list and effects, and the proof

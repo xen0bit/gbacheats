@@ -157,7 +157,7 @@ validator (`r5` starts at 1).
 `_` `B` `C` `D` `F` `G` `H` `J` `K` `L` `M` `N` `P` `Q` `R` `S` `T` `V` `W` `X` `Y` `Z`
 (vowels `E I O U` are skipped; `'_'` is the blank slot).
 
-**Published codes:** web searches (GameFAQs, TCRF, VGChartz-style queries, and
+**Published codes:** web searches (3rd party cheat index-style queries, and
 literal searches for `BKFSZW`/`DFFSKZ`/`XKFSJZ`) returned **no published code
 list** for this title. The nine codes above were recovered from the ROM, not
 from a public source; no published literal could be cross-checked. Fetched

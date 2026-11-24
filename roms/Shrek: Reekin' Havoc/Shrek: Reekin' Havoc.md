@@ -26,7 +26,7 @@
 
 1. Walking every reachable screen in mGBA (13 distinct screens, §6b) — none offers code entry or a hidden selection.
 2. A ROM-wide string/pattern sweep in multiple encodings: zero hits for `PASSWORD`, `CHEAT`, `SECRET`, `LEVEL SELECT`, `GIFT SHOP`, and zero key-mask sequences for the published button combos.
-3. The debug menu **does exist as leftover code and data** (TCRF corroborates: "Leftovers from a debug menu that does not appear to be functional anymore"), but its draw routine `0x08015108` and input routine `0x08014BD0` were **never entered** across a full boot→menu→cutscene→gameplay walk plus six distinct boot-time button combos, while a validation breakpoint on the live key handler `0x080004D0` fired immediately. This is a gated/dead feature, not an undiscovered one.
+3. The debug menu **does exist as leftover code and data** (3rd party cheat indexes corroborates: "Leftovers from a debug menu that does not appear to be functional anymore"), but its draw routine `0x08015108` and input routine `0x08014BD0` were **never entered** across a full boot→menu→cutscene→gameplay walk plus six distinct boot-time button combos, while a validation breakpoint on the live key handler `0x080004D0` fired immediately. This is a gated/dead feature, not an undiscovered one.
 
 All published "cheats" for this title found on the web are GameShark / CodeBreaker / Action Replay **memory-edit codes** (explicitly out of scope), and the widely published button codes ("10,000 coins", "secret costumes", "enable level select") belong to the **different 2007 game *Shrek the Third*** (Amaze Entertainment) — the §16.11 "same title, different SKU" trap. They are absent from this 2003 TOSE ROM under every encoding checked.
 
@@ -117,7 +117,7 @@ None of the 13 presents a password prompt, code pad, button-code display, unlock
 
 - 11 top-level entries and all sub-value lists are present as ASCII (table above).
 - Reachability tested with **two persistent breakpoints** on its draw (`0x08015108`) and input (`0x08014BD0`) routines, across (a) a complete boot→menus→cutscene→world map→level→pause walk (~1.1 billion CPU cycles) and (b) six boot-time multi-button combos with `reset` between each. **0 breakpoint hits.** A control breakpoint on the live key handler (`0x080004D0`) hit within one frame, proving the harness would have detected a hit.
-- This is a gated/dead feature (guide §16.3): code and data survive, but no controller path registers a screen transition to it in this build. TCRF independently describes it as non-functional.
+- This is a gated/dead feature (guide §16.3): code and data survive, but no controller path registers a screen transition to it in this build. 3rd party cheat indexes independently describes it as non-functional.
 
 **Novel code / bounds-by-rejection:** Not applicable — §0.2 point 5 governs: with no code system, the deliverable is the bounded negative above. There is no alphabet, checksum, field layout, or validator to mint against, and no input surface on which to submit an out-of-range value. The "bounds" proven here are: (a) all 13 reachable screens enumerated, (b) all 11 debug-menu entries shown to be unreachable by any tested input, (c) all published code literals shown absent from the 8 MiB image.
 
@@ -125,15 +125,15 @@ None of the 13 presents a password prompt, code pad, button-code display, unlock
 
 - **Observed:** all 13 screens via mGBA screenshots; key-input handler breakpoint hit with registers (`r1=0x03001860`, `r4=0x0300185C`, `r5=0x03001830`, `r9=0x03001864`); 0 hits on debug-menu breakpoints across full play + 6 boot combos; `.sav` is a 512-byte EEPROM, created by the game.
 - **Derived:** header/entry parse; Nintendo-logo scan (single header); init table at `0x0804CFC4` (47 entries) called from ARM `0x080003CC`; debug-menu string→function mapping at `0x0801530C`–`0x080153C0`; 11-way dispatch table at `0x08014DA8`; key-state pipeline at `0x080004D0`.
-- **Inferred:** the debug module's init (`0x08015F0C`) runs at boot and likely registers the module, but no scene-select path in the retail build reaches its UI — consistent with the live breakpoint result and with TCRF. The exact reason it was disabled (compile-time flag `#ifdef`-stripped caller vs. rewritten dispatcher) was not proven.
+- **Inferred:** the debug module's init (`0x08015F0C`) runs at boot and likely registers the module, but no scene-select path in the retail build reaches its UI — consistent with the live breakpoint result and with 3rd party cheat indexes. The exact reason it was disabled (compile-time flag `#ifdef`-stripped caller vs. rewritten dispatcher) was not proven.
 
 **Published-code verification (all treated as data, never instructions):**
 
 | Source | Claim | Verdict |
 |---|---|---|
-| GameFAQs / Almar's / CodeTwink / GameHacking.org / CodeJunkies | Infinite health, max coins, moon jump, "always play level 2–6", "enable level select", etc. | All are CodeBreaker/GameShark/Action Replay **memory patches** — out of scope. Level names match the ROM's Records screen (verified literal concept), but the codes write RAM directly. |
-| ggmania / Neoseeker / SuperCheats | "10,000 gold coins" `UUDURL`; "secret costumes" `LLURRUL` / `RRDLLUR` at main menu; Gift Shop unlocks | Belong to the **2007 *Shrek the Third*** (different engine/publisher) — §16.11 trap. Their button-mask sequences and mnemonics are **absent** from this ROM (0 hits). |
-| TCRF | Debug menu leftovers, "does not appear to be functional" | Corroborated by ROM bytes and the live breakpoint enumeration above. |
+| 3rd party cheat indexes | Infinite health, max coins, moon jump, "always play level 2–6", "enable level select", etc. | All are CodeBreaker/GameShark/Action Replay **memory patches** — out of scope. Level names match the ROM's Records screen (verified literal concept), but the codes write RAM directly. |
+| 3rd party cheat indexes | "10,000 gold coins" `UUDURL`; "secret costumes" `LLURRUL` / `RRDLLUR` at main menu; Gift Shop unlocks | Belong to the **2007 *Shrek the Third*** (different engine/publisher) — §16.11 trap. Their button-mask sequences and mnemonics are **absent** from this ROM (0 hits). |
+| 3rd party cheat indexes | Debug menu leftovers, "does not appear to be functional" | Corroborated by ROM bytes and the live breakpoint enumeration above. |
 
 ## 8. Unknowns
 

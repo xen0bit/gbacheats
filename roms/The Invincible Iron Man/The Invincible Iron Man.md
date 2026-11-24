@@ -32,7 +32,7 @@ engine installs an invisible "cheat menu" listener from `TitleScreenState`'s
 init; it records button presses in a 32-entry ring buffer and, on every new
 press, compares the recent history against six mask sequences in a ROM table.
 
-Four codes are published (Cheat Happens); **two are not**, and one published
+Four codes are published (3rd party cheat indexes); **two are not**, and one published
 code has the wrong length. The six codes and observed effects:
 
 | # | Table addr | Buttons (chronological) | Length | Effect | Published? |
@@ -145,7 +145,7 @@ variants exist. This was proven by enumerating the pointer table (6 entries at
 `0x08011854`–`0x08011868`) and by exercising every entry at the action
 breakpoint: `r1 = 0, 1, 2, 3, 4, 5` observed for the six sequences above.
 
-**Novel codes (absent from Cheat Happens and every other published list):**
+**Novel codes (absent from 3rd party cheat indexes and every other published list):**
 1. `B, A, B, A, Right` (index 3, `0x0804E288`) — accepted on the title screen;
    breakpoint hit with `r1=3`, `r3=0x0804E28A`.
 2. `Up, Up, Down, Down, Left, Right, Left, Right, B, A, Select, Start`

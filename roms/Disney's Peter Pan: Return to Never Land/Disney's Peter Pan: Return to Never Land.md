@@ -44,7 +44,7 @@ parameter position is 0 the corresponding field is forced to zero.
 
 **Space: 21 symbols, length 6, 22 records → exactly 1,385 distinct accepted codes** out of 85,766,121
 representable strings (17 records × 16 masks × 5 counts + 5 records × 1 × 5 counts). The six published
-GameFAQs codes all decode and are a small subset (their masks are 0 or 1, so they unlock at most one
+3rd party cheat index codes all decode and are a small subset (their masks are 0 or 1, so they unlock at most one
 movie). Three codes that appear in no published list were generated and accepted in-game, and the
 bounds were proven by four in-game rejections (mask 16, count 5, a 5-character string, and the
 position-0 quirk). Details in §6b.
@@ -220,7 +220,7 @@ Checkpoint id table (`0x08669E74`):
 | movie mask | `rec[6]` | 4 bits (symbol delta 0..15) | 0..15 | `0x02005440[0..3]` | bit0=MOVIE 1 … bit3=MOVIE 4 |
 | continues | `rec[7]` | 3 bits (symbol delta 0..4) | 0..4 | `0x02004FFC` | OPTIONS → CONTINUES |
 
-### 6.3 Published codes (GameFAQs GBA cheats page, fetched via web.archive.org snapshot
+### 6.3 Published codes (3rd party cheat indexes GBA cheats page, fetched via web.archive.org snapshot
 `20251112195504`; the live page returns 403)
 
 | Published label | Code | Decodes to |
@@ -256,7 +256,7 @@ reimplemented validator, gives exactly 1,385 distinct codes, with 0 aliases and 
 (`model2.py`). So 1,385 of the 85,766,121 representable strings are valid; the other 85,764,736 are
 rejected by the format itself.
 
-**Novel codes (absent from GameFAQs/VGChartz/TCRF and from any wiki page checked).**
+**Novel codes (absent from 3rd party cheat indexes and from any wiki page checked).**
 
 | Code | Record | Checkpoint | Mask | Continues | In-game result |
 |---|---|---|---|---|---|

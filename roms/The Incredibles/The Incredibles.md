@@ -200,7 +200,7 @@ distinct 2-byte payloads: 32768
 rejection rate          : 31/32
 ```
 
-Every published code from GameFAQs, Neoseeker, CheatingDome, SuperCheats, ChapterCheats, GameRevolution and the Kaas walkthrough was decoded; 56 matched the checksum algorithm and 2 (`M!K3`, `J3FF`) matched the fallback table. The remaining few published variants that decode to out-of-range level bytes (`FXTV` → `75 00`, a likely transcription error) are recorded as unverified.
+Every published code from 3rd party cheat indexes and the Kaas walkthrough was decoded; 56 matched the checksum algorithm and 2 (`M!K3`, `J3FF`) matched the fallback table. The remaining few published variants that decode to out-of-range level bytes (`FXTV` → `75 00`, a likely transcription error) are recorded as unverified.
 
 ### Novel codes generated and accepted in-game
 

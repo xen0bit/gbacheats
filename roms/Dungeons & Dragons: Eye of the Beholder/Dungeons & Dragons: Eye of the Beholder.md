@@ -75,8 +75,7 @@ IWRAM begins at state offset `0x19000`):
 - menu ID `0x03004DA0`: `0x00` → `0x04` when the chord is accepted.
 - sound index `0x03004D64`: 0 → 1 → 2 → 3 (R), → 2 (L), → 0 (B), → 100 after 105× R, → 0 after 110× L.
 
-**Published codes:** none found. Web search returned no results; direct fetches of GameFAQs
-(403), TCRF (403), Google/DuckDuckGo (blocked/captcha), and web.archive.org (404) all failed.
+**Published codes:** none found. Web search returned no results; direct fetches of 3rd party cheat indexes, Google/DuckDuckGo (blocked/captcha), and web.archive.org (404) all failed.
 No literal code strings were present in the ROM to verify. Recorded as a bounded negative.
 
 ## 4. Address map

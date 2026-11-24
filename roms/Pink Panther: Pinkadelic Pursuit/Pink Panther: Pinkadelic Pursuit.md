@@ -33,7 +33,7 @@ Exhaustive behavioural enumeration (all 256 codes typed on the real screen) show
 
 No button-code sequence, hidden debug menu, or level-select screen was found; the menus are title → main (New Game / Password / Options) → difficulty, password, options, and the in-game pause menu (Continue / New Game / Password / Options).
 
-Published codes could **not** be retrieved: the web search integration returned no results for every query; GameFAQs and TCRF returned HTTP 403; Wayback CDX returned empty sets; DuckDuckGo served a bot challenge; Bing via a reader proxy returned unrelated results. No published code literal was available to verify against the ROM (§3.4 / §16.7).
+Published codes could **not** be retrieved: the web search integration returned no results for every query; 3rd party cheat indexes returned HTTP 403; Wayback CDX returned empty sets; DuckDuckGo served a bot challenge; Bing via a reader proxy returned unrelated results. No published code literal was available to verify against the ROM (§3.4 / §16.7).
 
 ## 3. How to reproduce
 

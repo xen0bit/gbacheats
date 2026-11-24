@@ -96,7 +96,7 @@ verified 0x030008B0). The working procedure is: select the Nitro Kart page, then
 hold **L, R (or both)** while pressing A/Start. That confirm-while-holding
 procedure is not in any published list. The gate's OR semantics also settle a
 contradiction between published lists: most say "press L and R together", one
-GameFAQs line says "hold L or R" — the ROM proves the OR reading, and `L` alone
+3rd party cheat indexes line says "hold L or R" — the ROM proves the OR reading, and `L` alone
 or `R` alone is accepted.
 
 ## 3. How to reproduce
@@ -391,7 +391,7 @@ Text-id table check: `u32[0x081D5C04 + 4*id]` → id 89 = `0x081D4430`
 ### 6b.4 Published-list verification
 
 * Nitro Kart GBA "Crash Party USA – Hold L+R when turning on the game"
-  (GameFAQs / Nintendo Wiki / cheatingdome): the gate exists in the ROM at
+  (3rd party cheat indexes / Nintendo Wiki / 3rd party cheat indexes): the gate exists in the ROM at
   `0x0881B76C`, but the *procedure* fails in this cartridge because the launcher
   runs first. The working equivalent is documented in §3, and the OR semantics
   make the published L+R a proper subset of the accepted inputs.

@@ -301,7 +301,7 @@ rejected).
 | 14–18 | record+0x18 | 0–31, clamp 29 (Normal) / 19 (Novice) | area/level index |
 | 19–22 | `0x03001A84` | 0–15, clamp 5 (Normal) / 10 (Novice) | unknown |
 
-### 6.2 Published GBA passwords (StrategyWiki) decoded with the model
+### 6.2 Published GBA passwords (3rd party cheat indexes) decoded with the model
 
 Payloads are `v1`, `v2-111111` (always equal), `v3`; then the decoded fields.
 “Diff” is `0x03001A82` (0 Normal / 1 Novice).

@@ -22,7 +22,7 @@ Developer/publisher (from external metadata, recorded as data): Digital Eclipse 
 
 ## 2. Executive summary
 
-**No in-game/developer-intended cheat code system exists in this image.** There is no password entry screen, no documented or hidden button sequence that changes state, no debug/cheat menu, and no validator or code generator anywhere in the ROM. Every "cheat" published for this game (GameFAQs, ROMSFun, Cheat Happens, GameGenie, the libretro DB) is a **GameShark / CodeBreaker / Action Replay device code** — explicitly out of scope for this engagement.
+**No in-game/developer-intended cheat code system exists in this image.** There is no password entry screen, no documented or hidden button sequence that changes state, no debug/cheat menu, and no validator or code generator anywhere in the ROM. Every "cheat" published for this game (3rd party cheat indexes, the libretro DB) is a **GameShark / CodeBreaker / Action Replay device code** — explicitly out of scope for this engagement.
 
 The only unlockable content is **progress-gated**: the Sgt. Byrd *Byrd Rescue* multiplayer/single-player modes and their level list are reached from the title screen; published guides say they unlock after game completion/100%. A fresh save in this build already allowed entering the second level ("Cold Crypts"), so the guide's gate claim is not exact, but nothing observed is a controller code.
 
@@ -87,7 +87,7 @@ Reachable menu inventory (**complete for a fresh save**):
 | Byrd Rescue | Select Game, Head To Head, Cooperative, Single Player | none |
 | Byrd Rescue → Select Level | Honeydew Downs, Cold Crypts, Dragonfly Den, Tik Tok Troubles, Menacing Marble, Bonus Levels | none found; `Bonus Levels` not fully exercised (§8) |
 
-Published "cheats" (recorded, not used): 8 CodeBreaker codes (ROMSFun/libretro), 4 Action Replay codes (Cheat Happens), 10+ GameShark codes (GameFAQs dark52 FAQ). **All require an external device; none is an in-game code.**
+Published "cheats" (recorded, not used): 8 CodeBreaker codes (3rd party cheat indexes/libretro), 4 Action Replay codes (3rd party cheat indexes), 10+ GameShark codes (3rd party cheat indexes dark52 FAQ). **All require an external device; none is an in-game code.**
 
 ## 6b. Enumeration
 
@@ -113,7 +113,7 @@ Bounds proven by rejection: the three `unused` slots are rejections of empty-sav
 
 * **Observed** — title/menu/pause screens and all text listed in §6 captured as PNGs under `/tmp/spyrorhynocs/` (`w*.png`, `g*.png`, `nav_*.png`, `combo_*.png`, `menu_step*.png`). RAM values read from decompressed `.ss1` snapshots (`raw1.bin`/`raw2.bin` and `c00_base.ss1`…`c10_abc.ss1`). `.sav` inspected (8 KiB Flash, three slots).
 * **Derived** — crt0/main/scene-helper addresses and all literal/xref counts from `arm-none-eabi-objdump` and Python byte scans over the exact SHA-256. Text-bank format from `0xFF`-terminated byte records.
-* **Inferred (labelled)** — that the "Byrd Rescue" gate is 100% completion (from published walkthrough and TV Tropes, **not** confirmed in-game; a fresh save already reached level 2). That the glyph substitution is a font-tile index map (structure proven, individual glyph values not solved).
+* **Inferred (labelled)** — that the "Byrd Rescue" gate is 100% completion (from published walkthrough and 3rd party cheat indexes, **not** confirmed in-game; a fresh save already reached level 2). That the glyph substitution is a font-tile index map (structure proven, individual glyph values not solved).
 
 ## 8. Unknowns
 

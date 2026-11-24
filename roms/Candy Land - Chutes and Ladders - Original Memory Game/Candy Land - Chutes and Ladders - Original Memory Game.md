@@ -79,8 +79,8 @@ The negative is bounded, not assumed:
   blob or a sprite/size/palette table (e.g. `0x0801458C`, read as a u16 size
   table at `0x0800A9CA` in an entity routine), never to an input comparison.
 * Published material: no in-game passwords/button codes exist for this SKU on
-  GameFAQs/TCRF/fan sources. Only a GameShark/Action Replay `.cht` exists
-  (gbatemp file 2402) — those are memory-edit codes and are **out of scope** by
+  3rd party cheat indexes/fan sources. Only a GameShark/Action Replay `.cht` exists
+  (3rd party cheat indexes file 2402) — those are memory-edit codes and are **out of scope** by
   the brief.
 * Nothing is saved: `game.sav` stays **0 bytes** after complete playthroughs of
   all three games, and there are no SRAM/EEPROM device literals in code

@@ -22,7 +22,7 @@
 
 **There is no developer-intended cheat system in this GBA build.** No password screen, no typed-word cheat, no button-code detector, no hidden/debug menu, and no unlockable character/level exists. The four-item main menu and four-item Options menu were walked exhaustively with RAM evidence; every reachable screen was enumerated. The only "secrets" in the image are **leftover Amiga hint strings** ("HAVE YOU TRIED THE B KEY…", "S KEY TO ALTER SHADOW COLOR", "ASTERISK KEY FOR DIFFERENT RIPPLES", "T KEY WHEN MEN ARE INACTIVE", "PRESS SPACE BAR WHILST FIGHTING…"). These are data inherited from the 1987 original and are not wired to any GBA input: Select does nothing, L/R only change game speed, Start only toggles PAUSED.
 
-A GameFAQs FAQ for this game ID describes a **Password** menu and "Invert Y Axis" — those belong to a different SKU/port and do not exist in this ROM (details in §6/§8). The Amiga/Atari typed cheats `FREZ`, `PAC`, `FISH`, `BIRD`, `PERI`, `FUCK`, `CUNT` are all absent from the image. The only on-screen alphabet (`0x08018D98`) is a **Hall of Fame name-entry** field: its consumer copies three characters into a name buffer and performs no comparison.
+A 3rd party cheat index FAQ for this game ID describes a **Password** menu and "Invert Y Axis" — those belong to a different SKU/port and do not exist in this ROM (details in §6/§8). The Amiga/Atari typed cheats `FREZ`, `PAC`, `FISH`, `BIRD`, `PERI`, `FUCK`, `CUNT` are all absent from the image. The only on-screen alphabet (`0x08018D98`) is a **Hall of Fame name-entry** field: its consumer copies three characters into a name buffer and performs no comparison.
 
 Because no code system exists, the guide's §0.2 enumeration deliverables are satisfied as a **bounded negative**: §6b states the searched spaces and counts, proves the menu/text/button spaces closed, and records every published-code literal that was tested and rejected by absence.
 
@@ -126,10 +126,10 @@ No validator, checksum, code table or generator exists, so there is no algorithm
 
 | Source | Claim | Result |
 |---|---|---|
-| GameFAQs FAQ 28683 (GBA, Devis0r) | "Password — Enter a password for some special things to happen"; Options include "Invert Y Axis", "View Credits", "Music Volume", "Sound Volume" | **Wrong SKU**: direct fetch returned HTTP 403; recovered via search snippets. This ROM's Options are DIFFICULTY/MUSIC/SOUND FX/CREDITS and there is no Password menu or Invert Y Axis. Treated as data. |
-| Amiga/Atari-ST cheats (KTH list, Amiga Reviews, Wikipedia/Giant Bomb) | Type `FREZ`, `PAC`, `FISH`, `BIRD`, `PERI`, rude words during play | All literals absent from the ROM; no typed-input handler exists. |
+| 3rd party cheat index FAQ 28683 (GBA, Devis0r) | "Password — Enter a password for some special things to happen"; Options include "Invert Y Axis", "View Credits", "Music Volume", "Sound Volume" | **Wrong SKU**: direct fetch returned HTTP 403; recovered via search snippets. This ROM's Options are DIFFICULTY/MUSIC/SOUND FX/CREDITS and there is no Password menu or Invert Y Axis. Treated as data. |
+| Amiga/Atari-ST cheats (KTH list, Amiga Reviews, 3rd party cheat indexes) | Type `FREZ`, `PAC`, `FISH`, `BIRD`, `PERI`, rude words during play | All literals absent from the ROM; no typed-input handler exists. |
 | Attract text (in-ROM) | Select → practise; S/ASTERISK/T keys | Select binds to nothing in this build; keyboard-letter hints are Amiga leftovers. |
-| `gbaemulator.net` "cheats" page | Claims a 323 KB / 2013 ROM with cheat codes | Auto-generated/unreliable metadata (this ROM is 4 MiB); treated as data, no literals used. |
+| 3rd party cheat indexes "cheats" page | Claims a 323 KB / 2013 ROM with cheat codes | Auto-generated/unreliable metadata (this ROM is 4 MiB); treated as data, no literals used. |
 
 **Novel code minted:** not applicable — with a code space of zero there is no unpublished code to generate. The §0.2 deliverable is met by proving the *absence* of the space across the counts above rather than by minting a fake code.
 
@@ -146,7 +146,7 @@ No validator, checksum, code table or generator exists, so there is no algorithm
 * The Hall of Fame **name-entry** screen was reached only statically (alphabet + consumer at `0x08007588`); a natural high-score qualification was not produced in the emulator, so its on-screen appearance is inferred, not observed.
 * Bonus rounds (ball/bomb) were not entered naturally; they are ordinary gameplay, not cheat surfaces. Attract/demo footage shows the fight and Hall of Fame scoreboard only.
 * Header complement `0xD1` does not match the standard GBA formula while the checksum is `0x0000`; this looks like a rebuilt header, but the rebuilding tool is unidentified. No functional patch was found.
-* The exact identity of the port described by GameFAQs FAQ 28683 is unresolved (it is not this GBA image).
+* The exact identity of the port described by 3rd party cheat index FAQ 28683 is unresolved (it is not this GBA image).
 
 ## 9. Tooling
 

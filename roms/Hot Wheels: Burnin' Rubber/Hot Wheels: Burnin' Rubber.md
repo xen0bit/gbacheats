@@ -138,10 +138,10 @@ Public material lists 25 cars; the table has 28 slots including one placeholder.
 
 | Source | Claim | Result in this ROM |
 |---|---|---|
-| Cheat Happens / Action Replay | `(M) 9f6d2eaa aa3d2232 …`, `Max Cash d8e0fb0e fabd159c` | External AR hardware only; no in-game entry surface. Out of scope. |
-| GameFAQs *Hot Wheels: Velocity X* | `496-93-993`, `723-83-462`, level codes `143-24-813`… | Different SKU; literals absent (0 hits ASCII/lower). §16.11 |
-| GameFAQs Car List FAQ / RetroAchievements | 25 cars, unlock by cups and time trials | Consistent with 28 ROM records and save-gated unlocks |
-| IGN / THQ press release (2001) | battery save replaces the password feature of *GT Advance* | Confirmed: EEPROM_V121, 512-byte `.sav`, no password screen |
+| 3rd party cheat indexes / Action Replay | `(M) 9f6d2eaa aa3d2232 …`, `Max Cash d8e0fb0e fabd159c` | External AR hardware only; no in-game entry surface. Out of scope. |
+| 3rd party cheat indexes *Hot Wheels: Velocity X* | `496-93-993`, `723-83-462`, level codes `143-24-813`… | Different SKU; literals absent (0 hits ASCII/lower). §16.11 |
+| 3rd party cheat indexes Car List FAQ / 3rd party cheat indexes | 25 cars, unlock by cups and time trials | Consistent with 28 ROM records and save-gated unlocks |
+| 3rd party cheat indexes / THQ press release (2001) | battery save replaces the password feature of *GT Advance* | Confirmed: EEPROM_V121, 512-byte `.sav`, no password screen |
 
 ## 6b. Enumeration
 

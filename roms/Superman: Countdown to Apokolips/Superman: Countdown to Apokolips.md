@@ -135,7 +135,7 @@ The two rejected codes are absent from the ROM under this codec. One-character c
 
 **Validator model agreement.** The Python model `pwmodel.py` agrees with the ROM on every tested input: the three accepted published codes produced the exact payloads the ROM stored at `0x03003704`; the two rejected published codes were rejected by both model and ROM; all novel and negative tests below matched.
 
-**Novel codes (not in GameFAQs, ChapterCheats, PlanetCheats, GameGenie, IGN, TCRF).**
+**Novel codes (not in 3rd party cheat indexes).**
 
 | Code | Payload | Emulator result | RAM evidence |
 |---|---|---|---|

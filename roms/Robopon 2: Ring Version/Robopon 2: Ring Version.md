@@ -26,7 +26,7 @@
 
 Both have the stock entry word `0xEA00002E`; they are in-image multiboot payloads, not a 2-in-1 pack patch. No scene cracktro/trainer strings, no appended code beyond these payloads, no patched entry word.
 
-**Dump-quality finding (important).** This 4 MiB file appears to be a **truncated/bad dump** of an 8 MiB game. Independent corroboration: mGBA issue [#2052](https://github.com/mgba-emu/mgba/issues/2052) and BizHawk [#2635](https://github.com/TASEmulators/BizHawk/issues/2635) report that Ring/Cross 4 MiB images freeze/corrupt while the expected No-Intro size is 8 MiB. Our image reproduces the failure exactly (§7). Padding a working copy to 8 MiB with `0xFF` (`padded8.gba`, SHA-256 of the first 4 MiB unchanged) removes the crash and lets the intro run to completion, confirming missing high-half data. **All analysis below is of the exact hash above; the padding was only a diagnostic copy in `/tmp/robopon2`.**
+**Dump-quality finding (important).** This 4 MiB file appears to be a **truncated/bad dump** of an 8 MiB game. Independent corroboration: mGBA issue [#2052](https://github.com/mgba-emu/mgba/issues/2052) and BizHawk [#2635](https://github.com/TASEmulators/BizHawk/issues/2635) report that Ring/Cross 4 MiB images freeze/corrupt while the expected 3rd party cheat indexes size is 8 MiB. Our image reproduces the failure exactly (§7). Padding a working copy to 8 MiB with `0xFF` (`padded8.gba`, SHA-256 of the first 4 MiB unchanged) removes the crash and lets the intro run to completion, confirming missing high-half data. **All analysis below is of the exact hash above; the padding was only a diagnostic copy in `/tmp/robopon2`.**
 
 ## 2. Executive summary
 
@@ -34,7 +34,7 @@ The game has exactly **one** developer-intended cheat surface: the **Jasper Pass
 
 The table lives at file `0x164EA6`–`0x164EED` (ROM `0x08164EA6`–`0x08164EED`) inside the Jasper event script. Because the accepted set is a fixed 10-element lookup, §0.2's "mint a novel code" requirement is **not applicable**: there is no representable space beyond the ten entries, and §7 proves the count by enumerating the entire table and the rejection text. This is a closed-set result, not a "not tested" result.
 
-A widely copied GameFAQs "Jasper Passwords" list (`NegaPon 9`, `Sherry R`, `Under L`, `X-Dog La`, `B-Cell H`, …) is **wrong** for this ROM: those short strings do not occur anywhere in the image. The correct ten passwords are documented in GameFAQs guide 78543 ("Jasper's Robopon") and match the ROM bytes at the addresses above.
+A widely copied 3rd party cheat indexes "Jasper Passwords" list (`NegaPon 9`, `Sherry R`, `Under L`, `X-Dog La`, `B-Cell H`, …) is **wrong** for this ROM: those short strings do not occur anywhere in the image. The correct ten passwords are documented in 3rd party cheat index guide 78543 ("Jasper's Robopon") and match the ROM bytes at the addresses above.
 
 Dynamic in-game entry could not be completed on the supplied 4 MiB dump: the game crashes/stalls in its own opening script (§7). This is a property of the dump, not of the cheat system, and is documented with RAM/screenshot evidence.
 
@@ -109,8 +109,8 @@ The script uses byte `0x00` as a no-op/pause and `0x07` as a line marker; `0x10 
 Because three script blocks each hold two passwords (rows 5/6, 7/8, 9/10 share a block via `0x10 XX` glyph controls), the seven visible blocks decode to exactly ten accepted strings.
 
 **Published-list verification:**
-- GameFAQs Guide 78543, "Jasper's Robopon": all ten match the ROM bank above (observed).
-- GameFAQs "Cheats" page / Planet Cheats / ChapterCheats short list (`H`, `Rvnge`, `P`, `S`, `J`, `D`, `9`, `R`, `L`, `La`): **only `Rvnge` is real** and only as part of row 6; the other nine short strings are not present as password literals. `Rvnge`, `NegaPon`, `Sherry`, `Fencer`, `Flicker`, `Gundarn`, `Icarun`, `B-Cell` were each searched with `grep -abo`; only the guide-78543 forms occur. These lists are OCR/transcription corruptions (§16.7).
+- 3rd party cheat indexes Guide 78543, "Jasper's Robopon": all ten match the ROM bank above (observed).
+- 3rd party cheat indexes "Cheats" page / 3rd party cheat indexes short list (`H`, `Rvnge`, `P`, `S`, `J`, `D`, `9`, `R`, `L`, `La`): **only `Rvnge` is real** and only as part of row 6; the other nine short strings are not present as password literals. `Rvnge`, `NegaPon`, `Sherry`, `Fencer`, `Flicker`, `Gundarn`, `Icarun`, `B-Cell` were each searched with `grep -abo`; only the guide-78543 forms occur. These lists are OCR/transcription corruptions (§16.7).
 - No GameShark/CodeBreaker/Action Replay codes were analyzed or reported (out of scope).
 
 ### 6.2 Flag bits / field layouts

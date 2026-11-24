@@ -42,8 +42,8 @@ Matching is **suffix-based**: extra presses *before* a code are ignored, which e
 published lists include a harmless leading button on several codes.
 
 All 7 published codes are present in the table and were verified in the emulator with RAM
-proofs. **9 of the 16 sequences are absent from every published list** (GameFAQs, IGN,
-world-of-nintendo, TCRF); two of them were entered in-game and observed to warp to distinct
+proofs. **9 of the 16 sequences are absent from every published list** (3rd party cheat indexes,
+world-of-nintendo, 3rd party cheat indexes); two of them were entered in-game and observed to warp to distinct
 levels. Bounds were proven by rejection of a wrong-button and a truncated sequence.
 
 ## 3. How to reproduce
@@ -131,7 +131,7 @@ are **d-pad RIGHT/LEFT**, not shoulder R/L: `RIGHT LEFT R L A R` set `0x152C=0x2
 `R L R L A R` (all-shoulder) was **rejected** (no RAM change). This resolves an ambiguous
 published label (§16.7).
 
-Published-code coverage: GameFAQs (7 codes), IGN (6), world-of-nintendo (7) — all verified;
+Published-code coverage: 3rd party cheat indexes, world-of-nintendo (7) — all verified;
 the superset is 7 distinct codes, all of which map to ROM sequences 6, 8–13. The remaining
 9 sequences have no published counterpart.
 

@@ -55,7 +55,7 @@ pause screen, and RAM-verified. Bounds were proven by rejection at four independ
   on-screen HUD): bars `0x0300778A`, lives `0x030077E5`, health `0x030077E4`,
   invincibility `0x030077F8`, stage access `0x03007788`, abilities `0x03007790`.
 
-Published codes tested in the ROM and in the emulator: all eight from GameFAQs/Supercheats
+Published codes tested in the ROM and in the emulator: all eight from 3rd party cheat indexes
 (including the 2012 "unknown effect" blog's polar-bear alias) are present as exact byte records.
 
 ## 4. Address map
@@ -137,7 +137,7 @@ All 11 raw records (.decoded button names, ROM `0x080767AC` blob):
 
 | # | seq_ptr | len | Sequence | Published? | Observed effect |
 |---|---|---|---|---|---|
-| 0 | `080767AC` | 5 | `Down,Up,Down,B,A` | GameFAQs easter egg (and +A alias on 2012 blog) | polar bear skin (visual, not RAM-proven) |
+| 0 | `080767AC` | 5 | `Down,Up,Down,B,A` | 3rd party cheat indexes easter egg (and +A alias on 2012 blog) | polar bear skin (visual, not RAM-proven) |
 | 1 | `080767B1` | 5 | `A,Left,Up,Right,A` | blog lists the shifted alias `Left,Up,Right,A,B`, not this form | **rejected** (dead predicate) |
 | 2 | `080767B6` | 6 | `B,Left,Right,Right,Left,B` | blog lists the 5-press alias `Left,Right,Right,Left,B` | level-gated, not accepted in hub |
 | 3 | `080767BC` | 11 | `Up,Up,Down,Down,Left,Right,Left,Right,B,A,Start` | yes | lives 12 → 15 (RAM) |
@@ -149,7 +149,7 @@ All 11 raw records (.decoded button names, ROM `0x080767AC` blob):
 | 9 | `080767E2` | 5 | `Start,Select,B,A,Right` | yes (Skip Beaver Land) | level-gated |
 | 10 | `080767E7` | 5 | `Start,Select,B,A,Left` | yes (Skip Duck Land) | level-gated |
 
-Published GameFAQs/Supercheats codes were checked literally against the blob; all are present.
+Published 3rd party cheat index codes were checked literally against the blob; all are present.
 CodeBreaker/GameShark raw-address codes (e.g. `3300778A 0063`) are external memory edits, out of
 scope, but their addresses were reused as RAM probes.
 
@@ -165,7 +165,7 @@ concatenation exploit codes limited only by the 11-press cap.
 **Novel codes generated from the validator model and accepted on the real pause screen:**
 
 1. `A,B,A,B,Up,Start,Select,B,A,Up` (10 presses) — record 5 bytes followed by record 6 bytes.
-   Enumerated nowhere: GameFAQs, Supercheats, Neoseeker, TCRF, the 2012 blog and the CodeBreaker
+   Enumerated nowhere: 3rd party cheat indexes, the 2012 blog and the CodeBreaker
    lists contain neither this sequence nor any 10-press code.
    **RAM proof:** `0x030077F8` 0 → **32** (invincibility). Same effect as record 5, proving the
    packed-blob over-read model.

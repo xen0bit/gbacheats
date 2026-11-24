@@ -115,7 +115,7 @@ All share the prefix Left,Right,Left,Right and end in B:
 | `0x0805A690` | Down,Down,Down,B | SS4 Goku |
 | `0x0805A6A0` | Down,Down,Up,B | Super Baby Vegeta |
 
-GamesRadar's note that SS Vegeta uses "only one up" is wrong for this image: the ROM stores `Up,Down,Down,B` exactly.
+a 3rd party cheat index's note that SS Vegeta uses "only one up" is wrong for this image: the ROM stores `Up,Down,Down,B` exactly.
 
 ### 6.3 SECRETS unlockables (21 items, observed in-game)
 
@@ -138,7 +138,7 @@ Total 59,000 Zenie. The final Game Mode price is **3000** in this ROM; several p
 
 * In-game space: **8 codes**, lengths 8–14, total 83 stored masks (166 bytes incl. terminator).
 * Menu space: **5 codes**, fixed length 8, total 40 masks (80 bytes).
-* Undocumented space: **7 further stored sequences**, lengths 3, 3, 3, 8, 11, 17, 17 (124 bytes), all at `0x085A6B0`–`0x085A72A`, absent from GameFAQs, IGN, TCRF, VGChartz, CheatingDome, CheatCC and SuperCheats.
+* Undocumented space: **7 further stored sequences**, lengths 3, 3, 3, 8, 11, 17, 17 (124 bytes), all at `0x085A6B0`–`0x085A72A`, absent from 3rd party cheat indexes.
 
 Because the matcher is a suffix matcher, the *effective* input space is unbounded above: any string ending in a table entry is accepted. This was demonstrated with a **novel 15-press code not in any published list** (§6b.1).
 
@@ -190,7 +190,7 @@ The four Max Out Stats trials use the same savestate and the same observable, so
 
 **Inferred:** the seven extra sequences in §6b.2 are button inputs intended for some game or debug path; their consumer was not found. The precise validator function address and the internal action-dispatch branches were not isolated — the table plus the suffix behaviour fully determines acceptance, so they are not needed to reproduce any result here.
 
-**Web-derived (verified against the ROM):** public code/price lists from GameFAQs (cheats + PsyHacker script), IGN, CheatingDome, CheatCC, Cheathappens, SuperCheats, GamesRadar. Every published button sequence was checked literally against the ROM; the three discrepancies noted in §6 are corrections, not unverified additions. GameShark/Action Replay/raw-memory codes from those pages were explicitly **not** tested or reported — they are outside the in-game/developer-intended scope.
+**Web-derived (verified against the ROM):** public code/price lists from 3rd party cheat indexes. Every published button sequence was checked literally against the ROM; the three discrepancies noted in §6 are corrections, not unverified additions. GameShark/Action Replay/raw-memory codes from those pages were explicitly **not** tested or reported — they are outside the in-game/developer-intended scope.
 
 ## 8. Unknowns
 

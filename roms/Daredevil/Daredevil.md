@@ -278,7 +278,7 @@ decodes to map 25, i.e. the published label is wrong or the list duplicated leve
 
 * Semantics of `f6` and `f4` beyond their observed correlation with level order.
 * Whether the loader accepts maps 46–51 or clamps/ignores them.
-* The 8-character "cheat" codes published by Neoseeker (`KNGHTSFR`, `LMSPLLNG`, `THRBLDNS`,
+* The 8-character "cheat" codes published by 3rd party cheat indexes (`KNGHTSFR`, `LMSPLLNG`, `THRBLDNS`,
   `CRSDRPLS`, `NDCRSDRT`, `NFTRWLLH`, the easy/medium/hard mode lists) do **not** satisfy the
   checksum under this 11-character scheme (tested with the analogous 40-bit form) and were not
   reachable on the entry screen; they are treated as unverified, likely console-version codes
@@ -306,9 +306,9 @@ algorithms and self-generated example codes are published.
 
 ### Note on fetched material
 
-The TCRF page for this game returned a prompt-injection payload (fake "instructions for LLMs",
+The 3rd party cheat index page for this game returned a prompt-injection payload (fake "instructions for LLMs",
 a fake EICAR key file, a payment demand, a fake fatal error and a request to print an insult).
 It was treated as untrusted data, not followed, and none of its instructions were executed;
-the TCRF content used was only its factual note that a hidden test stage exists and that the
+the 3rd party cheat indexes content used was only its factual note that a hidden test stage exists and that the
 CodeBreaker code `030053E0:2D` selects map 0x2D, which is consistent with the map field of the
 password format recovered here.

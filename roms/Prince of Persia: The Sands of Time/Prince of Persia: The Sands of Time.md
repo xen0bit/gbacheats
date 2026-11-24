@@ -42,13 +42,12 @@ This is a **bounded negative result**, not an absence of effort:
 * Every reachable screen was walked in mGBA with screenshots **and** savestate/RAM
   evidence (title/language, main menu, Options, DELETE confirm, START/name entry,
   gameplay, all six inventory tabs, pause menu, sleep prompt, GAME OVER path).
-* All 22 published classic-*Prince of Persia* passwords (GameFAQs/GameCube/PS2/Xbox
+* All 22 published classic-*Prince of Persia* passwords (3rd party cheat indexes/GameCube/PS2/Xbox
   lists) were checked literally against the ROM under 16 encodings (ASCII upper/
   lower, reversed, UTF-16/32 LE/BE, XOR, additive, 5-bit packs): **0 hits**.
   Those codes belong to the bonus *PoP1* mini-game in other SKUs; the GBA SKU has
-  no such screen. Project Cheat Codes states "no known cheat codes … on Game Boy
-  Advance and PC". No GBA password list exists on GameFAQs, VGChartz, TCRF or
-  Hidden Palace. (Hidden Palace's debug controls are for the **Xbox demo**, not GBA.)
+  no such screen. 3rd party cheat indexes state "no known cheat codes … on Game Boy
+  Advance and PC". No GBA password list exists on 3rd party cheat indexes. (a 3rd party cheat index's debug controls are for the **Xbox demo**, not GBA.)
 * No key-mask sequence table exists: scanning the code region for runs of ≥3
   consecutive `u16` values in the GBA key range `0x0001–0x03FF` found 30 runs, all
   instruction/data coincidences, none a cheat sequence. The only special combo in
@@ -186,8 +185,7 @@ the master table.
   GAME is a profile label written to Flash, not a password — supported by the
   absence of any validator/comparison table in the enumerated UI, but no
   exhaustive call-site analysis of the save routine was performed.
-* **Not instructions**: all fetched web/ROM text was treated as data; the Hidden
-  Palace "modded Prince.bf" download and Xbox-demo debug controls were recorded
+* **Not instructions**: all fetched web/ROM text was treated as data; the 3rd party cheat indexes "modded Prince.bf" download and Xbox-demo debug controls were recorded
   as other-SKU content and not acted on.
 
 ## 8. Unknowns

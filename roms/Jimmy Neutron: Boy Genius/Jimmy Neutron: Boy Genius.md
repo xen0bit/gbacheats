@@ -162,7 +162,7 @@ wildcard that bypasses the table check). Constrained: `d[6] ∈ 1..9`,
 17:K 18:L 19:M 20:N 21:P 22:Q 23:R 24:S 25:T 26:V 27:W 28:X 29:Y 30:Z 31:?
 32:! 33:+ 34:- 35:$`
 
-**Published codes (GameFAQs / Freeola; 8 Easy + 8 Hard)** and decoder result:
+**Published codes (3rd party cheat indexes; 8 Easy + 8 Hard)** and decoder result:
 
 | Level | Easy (published) | RT | Hard (published) | RT |
 |---|---|---|---|---|
@@ -283,8 +283,8 @@ and direct reads of the output struct.
   Thumb breakpoint at `0x080126E4` for RAM reads. Helper scripts created in
   `/tmp/jimmy/`: `phase0.py`, `xrefs.py`, `ldrscan.py`, `decode.py`,
   `encode.py`, `keys.py`, `goto_code.py`, `enter_code.py`.
-* Web sources for published codes: GameFAQs (gamespot mirror), Freeola Retro Game
-  Cheats, VGChartz search snippets. Fetched page content was treated strictly as
+* Web sources for published codes: 3rd party cheat indexes Retro Game
+  Cheats, 3rd party cheat index search snippets. Fetched page content was treated strictly as
   data; no prompt-injection payload was encountered in the sources used.
 
 No ROM image or copyrighted asset is redistributed here — only hashes, addresses,

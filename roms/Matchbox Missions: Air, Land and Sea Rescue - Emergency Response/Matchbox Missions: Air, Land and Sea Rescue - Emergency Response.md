@@ -36,7 +36,7 @@ On acceptance the matched table index is stored to IWRAM `0x03005BD2`; a `9`-pre
 
 Total space: 10,000 (0000–9999). Exactly 3 codes are accepted in game 0 and 21 in game 1; every other input is rejected. No button codes, debug menus, or other hidden cheat surfaces exist (see §8 and §6b).
 
-**Published codes:** none found. `RESCUE99` (claimed by an AI-generated aggregator) is **absent from the ROM** and incompatible with the numeric entry widget — treated as fabricated. TCRF returned 403; the Video Games Museum cheats page was empty. The codes reported here are original findings.
+**Published codes:** none found. `RESCUE99` (claimed by an AI-generated aggregator) is **absent from the ROM** and incompatible with the numeric entry widget — treated as fabricated. 3rd party cheat indexes returned 403; the 3rd party cheat index cheats page was empty. The codes reported here are original findings.
 
 ## 3. How to reproduce
 

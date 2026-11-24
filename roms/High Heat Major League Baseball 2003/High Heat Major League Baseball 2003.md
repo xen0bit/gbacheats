@@ -30,7 +30,7 @@ Save hardware marker `EEPROM_V122` at file `0x62B20` (an EEPROM save image is cr
 * Every menu, submenu, in-game HUD and pause screen was walked with RAM-state evidence (digests in §7). All 8 top-level menu items, OPTIONS (6 items), the pause menu (9 items), team/lineup selection, Season, Playoffs, Home Run Derby, Practice, Credits and Link Game were visited. No hidden entry appears, and scrolling each list reaches its end and wraps.
 * Button-code investigation: only **3** direct references to `KEYINPUT` (`0x04000130`) exist in the whole 4 MiB image, all inside the generic input routine. Its three test helpers have **36** BL call sites total; the only four-call cluster (`0x0800A96C`–`0x0800A99C`) is an ordinary menu D-pad handler (masks `0x20,0x10,0x40,0x80`). No sequence matcher, ring-buffer comparison, or action dispatcher for a cheat sequence exists. Four common combos (`L+R+Start`, `Start+Select`, `A+B+Select+Start`, Konami order) were pressed on the title screen and produced no hidden screen.
 * The one plausible "hidden" item, a **31st team "Mobius Mercenaries"**, is provably unreachable by controller input: the team cycler at `0x080074B4` wraps at index 29, and the entry's filter byte `0x10` lies outside the complete reachable filter-key set `{2,3,4,5,6,7,8,9,10,11}` produced by the league/division selector tables. It is dead/leftover developer content, not an unlockable.
-* Published codes: the archived GameFAQs GBA page (game id **557704**) states verbatim **"No cheats - Be the first to submit one!"** and **"We Have No FAQs/Guides/Maps"**. CDX queries for archived cheat pages on cheatcc, cheatsguy, gamewinners and TCRF returned no relevant URLs. Codes advertised for the GameCube/PS2/PC versions are console SKUs and are out of scope for this GBA image (and are memory-edit/GameShark style, excluded by the brief).
+* Published codes: the archived 3rd party cheat indexes GBA page (game id **557704**) states verbatim **"No cheats - Be the first to submit one!"** and **"We Have No FAQs/Guides/Maps"**. CDX queries for archived cheat pages on 3rd party cheat indexes, cheatsguy, gamewinners and 3rd party cheat indexes returned no relevant URLs. Codes advertised for the GameCube/PS2/PC versions are console SKUs and are out of scope for this GBA image (and are memory-edit/GameShark style, excluded by the brief).
 * §16.19's "call the validator as an oracle" technique is inapplicable: no validator function or code-accept path exists in this ROM to call.
 
 **Result: empty enumerable code space (0 codes).** Sibling comparison: the concurrently analysed *High Heat MLB 2002* image is a distinct ROM (MD5 `62b5ee4401a0eec948817a69011e71d7`, game code `ASSE`, "Mobius Mercenaries" at `0x11E7C`, `EEPROM_V122` at `0x1540C`). It shares only the developer-team string and save-type marker (same Mobius engine); **nothing about cheats is shared — neither image has any**.
@@ -111,7 +111,7 @@ The text pipeline is: ASCII string from the bank → per-character glyph tile co
 | `KEYINPUT` literal references | 3 | only generic input routine |
 | Input-helper call sites | 15 + 20 + 1 = 36 | 4-call cluster is a D-pad menu handler; no matcher |
 | Button combos on title screen | 4 | no hidden screen |
-| Archived cheat pages on 4 aggregators + GameFAQs | 1 GameFAQs page found | explicitly "No cheats"; no cheat pages archived elsewhere |
+| Archived cheat pages on 4 aggregators + 3rd party cheat indexes | 1 3rd party cheat index page found | explicitly "No cheats"; no cheat pages archived elsewhere |
 
 **Novel code:** impossible by construction — no code system exists to mint from. This is a proven absence, not an untested feature; §0.2's "generate one unpublished code" deliverable is satisfied by a closed enumeration proving the space has cardinality zero, with every candidate surface counted above.
 
@@ -137,7 +137,7 @@ The text pipeline is: ASCII string from the bank → per-character glyph tile co
 | PRACTICE | `9e96b014f22ede68` | `100ed7878a52045a` |
 | OPTIONS (live GDB RAM dump) | — | `c6b111fb27bba3a1` |
 
-Also Observed: "No Connection..." in LINK GAME; 30-team-only cycling in the UI; `EEPROM_V122` save file created; GameFAQs "No cheats" page text.
+Also Observed: "No Connection..." in LINK GAME; 30-team-only cycling in the UI; `EEPROM_V122` save file created; 3rd party cheat indexes "No cheats" page text.
 
 **Derived:** the wrap-at-29 and filter-byte exclusion proving team 30 unreachable; the ASCII→tile font pipeline; the three input helpers' semantics; the text-bank bounds.
 
@@ -147,7 +147,7 @@ Also Observed: "No Connection..." in LINK GAME; 30-team-only cycling in the UI; 
 
 * No functional unknowns relevant to cheats. The purpose of the unused 31st team and of the `128`-entry key-history ring buffer (used by the generic input layer) was not attributed to a gameplay feature; neither is a code surface.
 * Non-cheat gameplay behavior (pitching, season simulation) was not reverse engineered — out of scope.
-* Some cheat-aggregator sites could not be reached (403 / CAPTCHA / Wayback 429); however the GameFAQs GBA page, which normally carries a `/cheats` tab when codes exist, explicitly reports none, and CDX searches found no archived cheat pages for this title on the other four sites.
+* Some cheat-aggregator sites could not be reached (403 / CAPTCHA / Wayback 429); however the 3rd party cheat indexes GBA page, which normally carries a `/cheats` tab when codes exist, explicitly reports none, and CDX searches found no archived cheat pages for this title on the other four sites.
 
 ## 9. Tooling
 
@@ -155,7 +155,7 @@ Also Observed: "No Connection..." in LINK GAME; 30-team-only cycling in the UI; 
 * Python 3 with `capstone` 5.0.7 and Pillow 13.0.1: custom scripts `xref.py` (direct/Thumb-literal pointer scan), `blscan.py` (Thumb BL scanner), `parse_state.py` (`gbAs` zlib state parser), `render_tiles.py` / `tilemap.py` (8bpp VRAM font and tilemap decoding), plus inline scanners for encodings, text runs and key masks. Scripts were in `/tmp/highheat03/`.
 * `arm-none-eabi-objdump -M force-thumb` for the team cycler and input helpers.
 * `mgba -3` (GDB stub `-g` used early for live RAM/VRAM dumps), `Xvfb :316`, `openbox`, `xdotool`, `scrot`, `convert`, `tesseract` for Phase 2 screen walking.
-* `curl` + Python HTML-to-text for archived GameFAQs and Wayback CDX queries.
+* `curl` + Python HTML-to-text for archived 3rd party cheat indexes and Wayback CDX queries.
 * No ROM or copyrighted assets are redistributed; only hashes, addresses, algorithms and observations are published.
 
 ### Legal / cleanup note

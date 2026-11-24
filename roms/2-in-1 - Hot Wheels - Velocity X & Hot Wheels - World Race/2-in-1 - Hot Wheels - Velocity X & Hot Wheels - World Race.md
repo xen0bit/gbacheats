@@ -97,7 +97,7 @@ for the same code.
 **Other developer content.** Velocity X's `OPTIONS` screen exposes `SOUND TEST` and `MUSIC TEST` (numeric
 sound-bank selectors, 0-based, adjustable in place) next to `SOUND`, `MUSIC` and `CONTROL`; this is the only
 developer/debug surface besides the passwords. A developer text Easter egg, `I LIKE MONKEYS …`, sits at file
-`0x8885A0` in the Velocity X half (ROM `0x088885A0`), matching the GameFAQs note about an offset near
+`0x8885A0` in the Velocity X half (ROM `0x088885A0`), matching the 3rd party cheat index note about an offset near
 `0x885D0`. No button-sequence (Konami-style) cheat tables were found in either half.
 
 ---

@@ -49,7 +49,7 @@ The sibling **Golden Sun: The Lost Age** shares the same five combinations and t
 4. **Enable debug (research only, not an in-game code).** Save an mGBA state at a clean field moment, then patch the `gbAs` PNG chunk. The state layout is stable (guide §16.13): IWRAM starts at raw offset `0x19000`, so `0x03001F54` is raw offset `0x1AF54`. Write `01` there, recompress, load the state. Helper used: `/tmp/goldensun/rstate.py`.
 5. **Verify the gate:** read `0x03001F54` from a fresh state (`00`) and from the patched state (`01`).
 6. **Enter a combo:** hold both keys ~0.4–0.6 s with a small (~0.06 s) stagger, then wait ~2 s for the menu to draw. Read the held mask at `0x03001AE8` to confirm the game saw the intended combination (`0x00A`, `0x006`, `0x208`, `0x00C`, `0x300`).
-7. **Published codes tested.** TCRF's GameShark/Action-Replay entries are memory writes, e.g. `32000400 00C7` / `32000408 00C7` (debug room 199), `00009B1A 000A` (master). Their targets were checked in RAM: `0x02000400` and `0x02000408` held `0x0008` (current/target room) at the prologue. These are **not** reported as cheats — they are out of scope — but the addresses corroborate the map/warp subsystem.
+7. **Published codes tested.** a 3rd party cheat index's GameShark/Action-Replay entries are memory writes, e.g. `32000400 00C7` / `32000408 00C7` (debug room 199), `00009B1A 000A` (master). Their targets were checked in RAM: `0x02000400` and `0x02000408` held `0x0008` (current/target room) at the prologue. These are **not** reported as cheats — they are out of scope — but the addresses corroborate the map/warp subsystem.
 
 ## 4. Address map
 
@@ -125,22 +125,22 @@ The flag never becomes 1 from controller input; no in-game setter exists. Combin
 | Held mask | Keys | Effect | Evidence |
 |---|---|---|---|
 | `0x00A` | B+Start | Warp menu | Observed (menu drawn, map name `PLDCI00`, `Vale : 3`); RAM `0x03001AE8=000A`, `0x03000DF8` populated |
-| `0x006` | B+Select | Flag menu | Observed RAM `0x03001AE8=0006`; effect derived from `0x0808C4F8` battle gate + TCRF |
-| `0x208` | L+Start | Palette menu | Observed RAM `0x03001AE8=0208`; effect derived + TCRF |
-| `0x00C` | Start+Select | Pause / frame-step | Observed RAM `0x03001AE8=000C`; effect derived + TCRF |
+| `0x006` | B+Select | Flag menu | Observed RAM `0x03001AE8=0006`; effect derived from `0x0808C4F8` battle gate + 3rd party cheat indexes |
+| `0x208` | L+Start | Palette menu | Observed RAM `0x03001AE8=0208`; effect derived + 3rd party cheat indexes |
+| `0x00C` | Start+Select | Pause / frame-step | Observed RAM `0x03001AE8=000C`; effect derived + 3rd party cheat indexes |
 | `0x300` | L+R | Cutscene dialogue skip | Observed RAM `0x03001AE8=0300`; only active in cutscenes (derived) |
 | `0x200` | L (hold) | Noclip | Derived (`0x0800EBEC`: `debug != 0 && held & 0x200`) |
-| `0x100` | R (hold) | Battle instakill when flag `0x16D` is set | Derived (`0x0808C4F8`, `0x080BE378`) + TCRF |
+| `0x100` | R (hold) | Battle instakill when flag `0x16D` is set | Derived (`0x0808C4F8`, `0x080BE378`) + 3rd party cheat indexes |
 
 **Name-entry alphabet (the only text-entry space; observed on the naming screen):** uppercase `A–Z`, lowercase `a–z`, digits `0–9`, and symbols `! ? ( ) > - % @ / : , . ; ' " & * # + = < > [ ]`, plus `DEL` and `END`. Count of printable glyph cells: 62 (26+26+10) plus 22 symbol/control cells. This is a profile-name field and is **not** a password validator (§16.2b).
 
-**Published memory-edit codes, recorded for completeness and explicitly out of scope:** TCRF lists debug enable `0301F54:01`, rooms `32000400 00C7` / `32000408 00C7` (199) and `00C8` (200), and `82000558 0xxx` (unused Psynergy). These are GameShark/CodeBreaker writes, not in-game cheats, and are not counted as findings.
+**Published memory-edit codes, recorded for completeness and explicitly out of scope:** 3rd party cheat index lists debug enable `0301F54:01`, rooms `32000400 00C7` / `32000408 00C7` (199) and `00C8` (200), and `82000558 0xxx` (unused Psynergy). These are GameShark/CodeBreaker writes, not in-game cheats, and are not counted as findings.
 
 ## 6b. Enumeration
 
 **Space definition.** The controllable input space is the 10-bit held-key mask: 2¹⁰ = **1,024** possible held states (plus the 2¹⁰ pressed-edge states and context-dependent sequences). The published action set occupies 5 two-button masks, 1 two-button cutscene-scoped mask, and 2 single-button holds. Additional state comes from the flag editor's pages (flag indices, including `0x16D`) and the warp menu's (map, destination) pairs.
 
-**Full enumeration of the documented action set:** all 5 two-button debug menus/actions were entered in mGBA with the gate set and produced the expected distinct held-mask values and distinct state changes (IWRAM/VRAM diffs, plus a direct visual confirmation of the warp menu). Screenshots of each state were retained on disk under `/tmp/goldensun/` (`cln_warp.png`, `cln_flag.png`, `cln_palette.png`, `cln_pause.png`, `cln_lr.png`; the warp menu is `19_BStart_free.png`). No debug-menu entry with no published description was identified: the warp, flag and palette menus were checked against TCRF's item-by-item description and no extra entry was found in the reachable field state.
+**Full enumeration of the documented action set:** all 5 two-button debug menus/actions were entered in mGBA with the gate set and produced the expected distinct held-mask values and distinct state changes (IWRAM/VRAM diffs, plus a direct visual confirmation of the warp menu). Screenshots of each state were retained on disk under `/tmp/goldensun/` (`cln_warp.png`, `cln_flag.png`, `cln_palette.png`, `cln_pause.png`, `cln_lr.png`; the warp menu is `19_BStart_free.png`). No debug-menu entry with no published description was identified: the warp, flag and palette menus were checked against a 3rd party cheat index's item-by-item description and no extra entry was found in the reachable field state.
 
 **Undocumented-combination search (bounded negative).** From a clean free-control field state with the gate set, I drove **41 combinations exhaustively** — all 6 single buttons, all 15 unordered pairs, all 20 unordered triples of `{A, B, L, R, Start, Select}` — plus four targeted supersets (`A+L+R`, `A+B+Start`, `R+Start`, `R+Select`) with careful timing (1.5 s settle, 0.5 s hold, 2 s post-wait, state captured). No combination outside the published list produced a distinct debug menu or action; in particular the equality test `A+B+Start` did not alias `B+Start`. The capture loop and per-combo states were in `/tmp/goldensun/brute.py` and `br_*.ss` / `target_*.ss`. This is a **negative result bounded to the free-field context and to sequences of length ≤3**; context-dependent combinations inside battle, inside the flag editor or across a cutscene were not exhaustively enumerated.
 
@@ -152,7 +152,7 @@ The flag never becomes 1 from controller input; no in-game setter exists. Combin
 
 * **Observed** — ROM header/hashes/logo count; all `strings` results; exact key masks read from `0x03001AE8`; gate byte `00`/`01` read from savestates; B+Start warp menu drawn on screen and its work area populated in IWRAM; Start menu opening in free control; distinct IWRAM/VRAM state signatures for all five combos.
 * **Derived** — input task algorithm at `0x08003650`; debug-flag gate readers (11 procedures) and sole writer at `0x08002E40`; `held = 0x3FF ^ KEYINPUT` from the `EOR` in the decompiled task; equality-based (not bit-containment) combo matching from the `A+B+Start` superset test; key-to-mask table.
-* **Inferred** — the exact on-screen contents of the flag/palette/pause menus beyond their held-mask signatures were not re-read visually after the screenshot budget was exhausted; they are taken from TCRF's item-by-item description and are labelled as such. The specific debug-roomNPC effects (rooms 191–200) were not triggered; only the warp subsystem itself was exercised.
+* **Inferred** — the exact on-screen contents of the flag/palette/pause menus beyond their held-mask signatures were not re-read visually after the screenshot budget was exhausted; they are taken from a 3rd party cheat index's item-by-item description and are labelled as such. The specific debug-roomNPC effects (rooms 191–200) were not triggered; only the warp subsystem itself was exercised.
 
 ## 8. Unknowns
 
@@ -169,7 +169,7 @@ The flag never becomes 1 from controller input; no in-game setter exists. Combin
 * mGBA SDL under Xvfb `:315` with `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST key events; `scrot`; ImageMagick.
 * `/tmp/goldensun/rstate.py` — read/write arbitrary EWRAM/IWRAM addresses in mGBA `.ssN` savestates via the `gbAs` zlib chunk.
 * `/tmp/goldensun/brute.py` — exhaustive 1–3 button combination driver.
-* Web: TCRF `Golden_Sun` (Wayback snapshot `20240617033419`) and `Golden_Sun:_The_Lost_Age` (snapshot `20241220021633`) for published debug-menu documentation. Both pages were treated as data; no prompt-injection or instruction-like payload was encountered. Direct live fetches returned 403 and were not relied upon.
+* Web: 3rd party cheat indexes `Golden_Sun` (Wayback snapshot `20240617033419`) and `Golden_Sun:_The_Lost_Age` (snapshot `20241220021633`) for published debug-menu documentation. Both pages were treated as data; no prompt-injection or instruction-like payload was encountered. Direct live fetches returned 403 and were not relied upon.
 
 **Legal note:** no ROM bytes, graphics, music or game text are redistributed here; only hashes, addresses, masks and reproducible procedures are published.
 

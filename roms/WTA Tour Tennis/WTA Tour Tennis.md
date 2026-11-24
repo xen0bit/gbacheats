@@ -32,7 +32,7 @@ The ROM **does** contain a substantial developer debug-menu residue: an ASCII st
 * the game's only input consumer is a conventional 4-slot joypad reader (`0x08002D40–0x08002F..`, controller array `0x0300306C`, stride `0x24`, active-high `held` at `+2`) with hold counters — there is no sequence/history matcher;
 * a 4 MiB scan for button-mask tables found 2,218 contiguous-u16 candidates, all of which are graphics/text/AI data, not button codes.
 
-No published in-game code exists for the GBA SKU either: GameFAQs' GBA cheats page, TCRF, and ChapterCheats list none; every code found on the web is a GameShark/CodeBreaker/Action-Replay/GameGenie device code and is deliberately out of scope here.
+No published in-game code exists for the GBA SKU either: 3rd party cheat indexes' GBA cheats page, 3rd party cheat index list none; every code found on the web is a GameShark/CodeBreaker/Action-Replay/GameGenie device code and is deliberately out of scope here.
 
 ## 3. How to reproduce
 
@@ -108,7 +108,7 @@ No encoder, decoder, checksum, alphabet, or mask sequence exists to reimplement.
 | Search space | Count / result |
 |---|---|
 | ASCII strings ≥5 chars in the 4 MiB image | 13,074; only ~30 are meaningful ASCII (26 in the debug bank `0x449D0–0x44B10`, plus the staff roll at `0x44BF3+`). All visible in-game UI labels are **font/tile-index rendered** — confirmed by screenshots (Main Menu, Player Select, Status, Link Mode all render text as pixel glyphs with no corresponding `strings` hit). Text-bank status: decoded by rendering, not by `strings`; a "no string hit" was therefore never treated as "no UI". |
-| Published in-game codes (GameFAQs GBA, TCRF, ChapterCheats, web searches incl. JP/EU titles) | 0. Every code returned is a cheat-device (GameShark/CodeBreaker/AR/GameGenie) code → out of scope. |
+| Published in-game codes (3rd party cheat indexes GBA, 3rd party cheat indexes, web searches incl. JP/EU titles) | 0. Every code returned is a cheat-device (GameShark/CodeBreaker/AR/GameGenie) code → out of scope. |
 | Literal `u32` pointers into the debug string bank | 26, all in the single table `0x0830CC98–0x0830CDD4`; 2 additional error-string xrefs at `0x0801C720` / `0x0801C86C`. |
 | Code refs (`LDR` literal) into the debug table region `0x0830CC80–0x0830CE20` | 14, at `0x0801AD5E`, `0x0801B0EE`, `0x0801B332`, `0x0801B4C2`, `0x0801B876`, `0x0801B8BE`, `0x0801BD9E`, `0x0801BDE6`, `0x0801C58C`, `0x0801CD2C`, `0x0801CD50`, `0x0801D516`, `0x0801ED32`, `0x0802262E`, `0x08027002`. **None** references the GO-label sub-table base `0x0830CD60`. |
 | Direct BL calls to the candidate handlers `0x0801AD7D`, `0x0801AF6A`, `0x0801C96D`, `0x0801AD5D` | 0 each — they are reached only through the table dispatcher. |

@@ -61,9 +61,9 @@ The only text input in the game is the high-score name entry (`-enter name-`,
 `0x083BE256`), which cycles the single buffer byte through `a`–`z` (`0x61`–`0x7A`) and
 writes a glyph; the byte is never compared with any code table.
 
-There are no published in-game cheats for this SKU to verify (see §6b): Cheat Happens
-lists none, GameFAQs' cheat page has no entries, ChapterCheats lists none. The only
-circulating "codes" are Action Replay memory patches (GBAtemp cheat-file #2411), which
+There are no published in-game cheats for this SKU to verify (see §6b): 3rd party cheat index
+lists none, 3rd party cheat indexes' cheat page has no entries, 3rd party cheat index lists none. The only
+circulating "codes" are Action Replay memory patches (3rd party cheat index cheat-file #2411), which
 are explicitly out of scope for this engagement.
 
 ## 3. How to reproduce
@@ -263,11 +263,11 @@ ROM's text bank was decoded in full (lower-case ASCII, `+0x00` mapping; see
 game-over/stats/name label or credits block, and the remaining one (`0x00014AF4`) is a
 coincidental pointer into a graphics run. None points to a code-like string.
 
-**Published codes: none to verify.** Cheat Happens' Chicken Shoot 2 GBA page states
-"There are no Chicken Shoot 2 cheats or cheat codes"; GameFAQs' cheat page for the GBA
-SKU has no entries; ChapterCheats lists no codes/passwords/unlockables;
+**Published codes: none to verify.** 3rd party cheat indexes' Chicken Shoot 2 GBA page states
+"There are no Chicken Shoot 2 cheats or cheat codes"; 3rd party cheat indexes' cheat page for the GBA
+SKU has no entries; 3rd party cheat index lists no codes/passwords/unlockables;
 `web.archive.org` has no snapshot of a Chicken Shoot 2 cheat page (404). The only thing
-indexed is a GBAtemp Action Replay `.CHT` (memory edits), excluded by scope. A literal
+indexed is a 3rd party cheat index Action Replay `.CHT` (memory edits), excluded by scope. A literal
 search for the only candidate strings (`test arcade`, `test classic`) found 5 language
 copies each and zero code references, so no published code could have been correct.
 

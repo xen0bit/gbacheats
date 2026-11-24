@@ -198,8 +198,8 @@ codes were tested live; see below.
 2. **`44729197`** — table arg 1149, internal card ID 6386. Entered in the emulator:
    accepted ("Are you sure?" confirmation reached). Evidence: `novel2res_c.png`.
 
-Web-based recon of published lists was blocked by bot challenges/403s from GameFAQs, Bing,
-Google, DuckDuckGo, Brave, Mojeek and TCRF in this environment. "Novel" here means absent
+Web-based recon of published lists was blocked by bot challenges/403s from 3rd party cheat indexes, Bing,
+Google, DuckDuckGo, Brave, Mojeek and 3rd party cheat indexes in this environment. "Novel" here means absent
 from the famous card-password examples verified above and derived from high table indices
 that such lists do not advertise; no complete published list could be fetched for a strict
 set difference, which is recorded as an unknown in §8.
@@ -235,7 +235,7 @@ set difference, which is recorded as an unknown in §8.
 
 * A complete published password list could not be retrieved (all engines/sites blocked), so
   "novel" is established against the well-known examples and by derivation from the ROM's
-  table rather than by a literal set difference with a GameFAQs/TCRF list.
+  table rather than by a literal set difference with a 3rd party cheat index list.
 * The price is card-dependent (1000 DP for ID 6447 was observed; a different card/flow
   appeared to charge 460 DP in an earlier run). The price lookup routine was not fully
   reversed.

@@ -24,7 +24,7 @@
 
 **A developer debug menu does exist in the ROM** (state 9 of the game's 30-state screen machine) with at least eight entries, including `Toggle Invincibility`, `Cheat To Book 1/2/Books`, and `Map Select Replay`. Its screen was rendered and its labels observed by invoking the state-9 init handler directly from mGBA's command-line debugger (savestate + RAM proof). **No in-game path reaches it in this retail ROM**: state 9's handlers are registered in the dispatch table, but none of the 11 static writers of the "next-state" variable ever writes 9, 24 button combinations were tested at the title with RAM verification (none produced state 9), and no published source documents an unlock. This is the "dead/gated feature" case of guide §16.3 — dev code present but unreachable by controller input, **not** a usable cheat.
 
-Published GBA "cheats" are exclusively Action Replay / GameShark memory-edit codes (out of scope). The only GameFAQs GBA cheats-page entry is an *Unlimited Photos* glitch, not a code. PS2/GC console commands and puzzle-piece unlockables belong to a different SKU (§16.11) and do not apply here.
+Published GBA "cheats" are exclusively Action Replay / GameShark memory-edit codes (out of scope). The only 3rd party cheat indexes GBA cheats-page entry is an *Unlimited Photos* glitch, not a code. PS2/GC console commands and puzzle-piece unlockables belong to a different SKU (§16.11) and do not apply here.
 
 Fetched web pages were treated as data (§16.8); no prompt-injection payload was observed.
 
@@ -112,7 +112,7 @@ The handler table has 10 slots; two further entries are not labelled on the sing
 
 * **Code space:** none exists. There is no password alphabet, no fixed-length input buffer, no comparison table against user-entered text, and no button-sequence table. The 62-byte table at `0x0805C084` is a **font glyph permutation**, not a password alphabet (it is a rearrangement of ASCII `0x20`–`0x7E`, and the normal ordered charset appears decompressed in EWRAM at savestate offset `0x22258`). Therefore space size = 0, and no "novel code" can be minted — this is a proven negative (§0.2 negative-result clause), not an untested gap.
 * **Debug-menu space enumerated:** 10 handler slots at `0x0805C0F0`; 8 labels observed; the invincibility toggle handler and its target byte `0x03006874` identified. Bounds of reachability proven by the 11-writer static enumeration plus the 24-combo RAM-verified fuzz.
-* **Rejection/bounds proof:** out-of-range/undocumented inputs were tested by the combo fuzz and rejected (state never became 9). Published AR codes are memory-edit codes and are out of scope; no in-game code list exists to test for literal presence. The GameFAQs *Unlimited Photos* glitch is an in-game repetition exploit, not a code, and was not treated as a cheat code.
+* **Rejection/bounds proof:** out-of-range/undocumented inputs were tested by the combo fuzz and rejected (state never became 9). Published AR codes are memory-edit codes and are out of scope; no in-game code list exists to test for literal presence. The 3rd party cheat indexes *Unlimited Photos* glitch is an in-game repetition exploit, not a code, and was not treated as a cheat code.
 
 ## 7. Validation evidence
 

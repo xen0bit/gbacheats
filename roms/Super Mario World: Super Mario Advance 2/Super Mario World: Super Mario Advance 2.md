@@ -16,7 +16,7 @@
 | SHA-1 | `5101ddf223d1d918928fe1f306b63a42ada14a5e` |
 | SHA-256 | `63d9fff04c635990a5c205a99ea64bfa698aa5cb9ec1333360063bbee949a4f3` |
 
-Revision check: the build-date string at file `0x12EE7C` is `01-12-06 09:33:10`, which TCRF lists for the **US/Australia** build — consistent with game code `AA2E`. All addresses below are for this exact image.
+Revision check: the build-date string at file `0x12EE7C` is `01-12-06 09:33:10`, which 3rd party cheat index lists for the **US/Australia** build — consistent with game code `AA2E`. All addresses below are for this exact image.
 
 ## 2. Executive summary
 
@@ -24,9 +24,9 @@ This game has **one** developer-intended button code: on the intro screen (the b
 
 > **Right, Select, Left, L, R, Select**
 
-to reveal a build-date banner: `VER. 01-12-06 09:33` (the ROM string carries seconds, `09:33:10`, but the display stops at minutes). The code was found from TCRF recon, located as a literal `u16` mask table at file `0xD45D0` / ROM `0x080D45D0`, and reversed to a single progressive exact-match validator at ROM `0x08002E30`.
+to reveal a build-date banner: `VER. 01-12-06 09:33` (the ROM string carries seconds, `09:33:10`, but the display stops at minutes). The code was found from 3rd party cheat indexes recon, located as a literal `u16` mask table at file `0xD45D0` / ROM `0x080D45D0`, and reversed to a single progressive exact-match validator at ROM `0x08002E30`.
 
-There is **no password system, no on-screen alphabet/keyboard, and no hidden debug menu** in this SKU. The GBA-specific entries on GameFAQs/TCRF are progression-gated unlockables (96-exit warp, coloured Yoshi, EXTRA world, stars) and glitches, not codes. The one CodeBreaker-style "Press Start+L+R" hint found on a fan wiki is a cheat-device activation condition, not an in-game trigger, and is out of scope.
+There is **no password system, no on-screen alphabet/keyboard, and no hidden debug menu** in this SKU. The GBA-specific entries on 3rd party cheat indexes are progression-gated unlockables (96-exit warp, coloured Yoshi, EXTRA world, stars) and glitches, not codes. The one CodeBreaker-style "Press Start+L+R" hint found on a fan wiki is a cheat-device activation condition, not an in-game trigger, and is out of scope.
 
 The validator, its RAM flag, and its rejection boundaries were confirmed in mGBA with savestate RAM diffs. A novel 6-press combination (published code with the final `Select` replaced by `B`) was generated, entered, and rejected with RAM evidence; the complete press space was enumerated offline (1,000,000 possible 6-press sequences, exactly 1 accepted).
 
@@ -112,7 +112,7 @@ Code table at `0x080D45D0` — the single entry:
 | 4 | `0x100` | R |
 | 5 | `0x004` | Select |
 
-Build-date strings in this image (only the first is present): `0x12EE7C` = `01-12-06 09:33:10` (US/AU). Other regional strings from TCRF (`0x12C8A8` JP, `0x12DD64` CN, `0x13E91C` EU) are **not** in this ROM at those offsets — this is the US build.
+Build-date strings in this image (only the first is present): `0x12EE7C` = `01-12-06 09:33:10` (US/AU). Other regional strings from 3rd party cheat indexes (`0x12C8A8` JP, `0x12DD64` CN, `0x13E91C` EU) are **not** in this ROM at those offsets — this is the US build.
 
 Other notable data: `0x080D6220`–`0x080D623E` is a generic descending list of all ten button masks (`L,R,Down,Up,Left,Right,Select,Start,B,A`), used by UI/input display code, **not** a code table (no validator references it).
 
@@ -123,7 +123,7 @@ Other notable data: `0x080D6220`–`0x080D623E` is a generic descending list of 
 **Validator model.** Reimplemented in Python from `0x08002E30`: accept iff `seq[i] == table[i]` for all `i∈[0,6)`, evaluated as exact active-high masks. Exhaustive run over all `10^6` sequences: **1 accepted**, the published sequence; lengths 1–5 and 7–8 yield 0 (the trigger requires `index == 6`). This is a closed set, not a sample.
 
 **Novel combination generated, entered, and RAM-verified (rejected).**
-Generated sequence: **Right, Select, Left, L, R, B** — differs from the published code only in the last press, and appears in no published list (TCRF/GameFAQs/chaptercheats list no GBA code at all beyond the build-date sequence). Entered on the real intro screen after reloading `Shift+F1` state.
+Generated sequence: **Right, Select, Left, L, R, B** — differs from the published code only in the last press, and appears in no published list (3rd party cheat indexes/3rd party cheat index list no GBA code at all beyond the build-date sequence). Entered on the real intro screen after reloading `Shift+F1` state.
 
 | State | `state+0x1D7` flag | `state+0x1D8` index | Visible build-date banner |
 |---|---:|---:|---|
@@ -144,7 +144,7 @@ The index reaching 5 proves the first five presses were accepted; the reset to 0
 * An exhaustive pointer scan found **13** 4-byte-aligned pointers to runs of ≥3 consecutive valid `u16` button masks. Twelve are coincidental byte patterns inside unrelated instruction streams (spot-disassembled at `0x08013028`, `0x0806DE90`, `0x0807AB78`, `0x0805D570` — none is a real table reference). The only true code reference is `0x2EB8 → 0x080D45D0`. Therefore exactly one button-code validator exists in the image.
 * The validator's table holds exactly 6 entries; there is no action-dispatch branch after the prefix — the sole effect is the flag write at `0x08002EA0`. There are no undocumented action branches to enumerate.
 * Screen walk: intro, title, game select, story, and first gameplay screen contain no password/keyboard/cheat entry UI; the build-date banner is the only code-driven screen change.
-* Published-source review: TCRF lists only the build-date sequence (plus progression glitches/unused stages); GameFAQs' 55 entries for this SKU are glitches, unlockables and secrets, with its "Codes" section entries tagged SNES; chaptercheats lists the same unlockables. No other GBA button code is documented.
+* Published-source review: 3rd party cheat index lists only the build-date sequence (plus progression glitches/unused stages); 3rd party cheat indexes' 55 entries for this SKU are glitches, unlockables and secrets, with its "Codes" section entries tagged SNES; 3rd party cheat index lists the same unlockables. No other GBA button code is documented.
 
 ## 7. Validation evidence
 
@@ -165,6 +165,6 @@ The index reaching 5 proves the first five presses were accepted; the reset to 0
 * Python 3 + `struct`/`zlib` for pointer/BL scans, button-mask run enumeration, exhaustive space check, and savestate `gbAs` extraction/diff.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for disassembly.
 * Capstone 5.0.7 (available; literal-load scanning cross-checked against objdump).
-* Web recon: TCRF (via Wayback Machine) and GameFAQs cheats (via Wayback Machine), chaptercheats. Fetched pages were treated strictly as data.
+* Web recon: 3rd party cheat index cheats (via Wayback Machine), 3rd party cheat indexes. Fetched pages were treated strictly as data.
 * mGBA 0.10.5 under Xvfb `:319` + openbox, `SDL_AUDIODRIVER=dummy`; xdotool XTEST input; scrot screenshots.
 * Work artifacts in `/tmp/sma2/` (`code1.png`, `s_after.png`, `novel_rejected.png`, `state_*.ss*`, `novel*.ss*`, `walk_*.png`). No ROM or copyrighted assets are redistributed in this report.

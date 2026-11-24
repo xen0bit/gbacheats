@@ -21,7 +21,7 @@
 | SHA-1 | `ecee20b629a38bab7edbc972c70b2c968f50c23c` |
 | SHA-256 | `9f3d1c31958c19a8af0730d47b03086a30974a57297ba6246cbd5421ec2535d3` |
 
-The title screen carries `© 2001 Disney`, `© 2001 KONAMI`, and `PRODUCED BY Konami Computer Entertainment Osaka, Inc.`. The archived TCRF page attributes development to Konami Computer Entertainment Nagoya and the US release to 28 Aug 2001; the on-screen Osaka credit is what this exact ROM displays.
+The title screen carries `© 2001 Disney`, `© 2001 KONAMI`, and `PRODUCED BY Konami Computer Entertainment Osaka, Inc.`. The archived 3rd party cheat index page attributes development to Konami Computer Entertainment Nagoya and the US release to 28 Aug 2001; the on-screen Osaka credit is what this exact ROM displays.
 
 ## 2. Executive summary
 
@@ -33,7 +33,7 @@ The one genuine developer-intended hidden feature is a **9-entry debug menu**. I
 debug menu is active  <=>  word at 0x03002528 == 0x1F
 ```
 
-This was proven by direct RAM injection in mGBA (write `0x1F`, read back `0x1F`, menu appears — `shot_inject.png`, `dbg_menu.png`). The gate is a literal `cmp r0,#0x1F` at ROM `0x08001A8A`; the scene dispatch table at `0x080001F8` maps mode `0x1F` (31) to handler `0x08001A6C`. A code path that *can* write `0x1F` exists at `0x0800F5D2` inside the title-screen state machine, but a live breakpoint there never fired during title/menu navigation, the Konami code, L+R+Start, or L+R+A+B — and no published in-game method of reaching it exists. The only published access method is the GameShark write `03002528:1F` (TCRF), i.e. an external memory edit.
+This was proven by direct RAM injection in mGBA (write `0x1F`, read back `0x1F`, menu appears — `shot_inject.png`, `dbg_menu.png`). The gate is a literal `cmp r0,#0x1F` at ROM `0x08001A8A`; the scene dispatch table at `0x080001F8` maps mode `0x1F` (31) to handler `0x08001A6C`. A code path that *can* write `0x1F` exists at `0x0800F5D2` inside the title-screen state machine, but a live breakpoint there never fired during title/menu navigation, the Konami code, L+R+Start, or L+R+A+B — and no published in-game method of reaching it exists. The only published access method is the GameShark write `03002528:1F` (3rd party cheat indexes), i.e. an external memory edit.
 
 Course/golfer unlocks are **save-data progression flags** (prize money and VS-mode wins), not codes. A hidden profanity string `Fuck Off` is present at file `0x5B455A` (ROM `0x085B455A`) — developer message only, no gameplay effect.
 
@@ -70,10 +70,10 @@ The in-game Select menu (BGM/SE, Score, Ranking, Give Up, Retire, Reset, Exit) i
 ### Published codes verified against this ROM
 | Source | Claim | ROM verification |
 |---|---|---|
-| TCRF (archived 2023-12-08) | GameShark `030025281F` (US) enters debug menu | **Confirmed as a RAM gate** by injection above. The literal `0x03002528` does **not** occur anywhere in ROM (literal scan count 0) — it is an IWRAM address written by the external device, not a ROM constant. |
-| GameFAQs / cheatcc / supercheats / cheathappens | Seaside $600k or win Pacific CC; Northern Hill $900k; Evergreen $1.7M; Royal Mirage via World Championship | Progression unlocks (save-flag). `NEW COURSE UNLOCKED!` string at `0x20D4C8`; STATUS screen lists 5 courses. Not codes. |
-| gamegenie.53lu (EU) / etherealgames (US) | Encrypted Action Replay V3 codes (Max money, Unlock all levels, debug menu) | External memory edits; out of scope. Encrypted AR payloads carry no literal to verify. |
-| GameFAQs FAQ 11341 (archived) | Beating tour players in VS unlocks them elsewhere; save/reload "Save Cheat" | Matches observed STATUS/player-select structure. Save/reload is not a code. |
+| 3rd party cheat indexes | GameShark `030025281F` (US) enters debug menu | **Confirmed as a RAM gate** by injection above. The literal `0x03002528` does **not** occur anywhere in ROM (literal scan count 0) — it is an IWRAM address written by the external device, not a ROM constant. |
+| 3rd party cheat indexes | Seaside $600k or win Pacific CC; Northern Hill $900k; Evergreen $1.7M; Royal Mirage via World Championship | Progression unlocks (save-flag). `NEW COURSE UNLOCKED!` string at `0x20D4C8`; STATUS screen lists 5 courses. Not codes. |
+| 3rd party cheat indexes | Encrypted Action Replay V3 codes (Max money, Unlock all levels, debug menu) | External memory edits; out of scope. Encrypted AR payloads carry no literal to verify. |
+| 3rd party cheat index FAQ 11341 (archived) | Beating tour players in VS unlocks them elsewhere; save/reload "Save Cheat" | Matches observed STATUS/player-select structure. Save/reload is not a code. |
 
 ## 4. Address map
 
@@ -134,7 +134,7 @@ The active-high key mask is `A=0x01, B=0x02, Select=0x04, Start=0x08, Right=0x10
 ## 6. Tables
 
 ### 6.1 Debug-menu entries (ROM `0x09FD6AC`, file `0x1FD6AC`)
-| # | Label | Effect (TCRF, archived) |
+| # | Label | Effect (3rd party cheat indexes, archived) |
 |---|---|---|
 | 0 | HIROSE | Starts Course 1 |
 | 1 | KUNIHARU | Starts Course 1 |
@@ -159,7 +159,7 @@ mode 0x20 -> 0x080002F2   mode 0x21 -> 0x080001DC
 ```
 
 ### 6.3 Unlockable content (not codes — save/progression flags)
-- Courses (US): Pacific CC (default), Seaside GC, North Hill GC, Evergreen CC, Desert Valley. Unlock by prize money / tournament wins (GameFAQs).
+- Courses (US): Pacific CC (default), Seaside GC, North Hill GC, Evergreen CC, Desert Valley. Unlock by prize money / tournament wins (3rd party cheat indexes).
 - Golfers: 14 selectable portraits; names in ROM at `0x09FD2D0`: `WILLE, CALLY, JOHN, JEAN, BAJIO, JASON, SHAWN, HENRY, CAIN, STING, YAKEXI, MARTIN, JACK, WILLIE`. Tour golfers unlock by beating them in VS mode.
 - Weather labels: `MISTY, SNOWY, FINE2, CLEAR, EVENING3, RAINING, EVENING2, EVENING1, CLOUDY, FINE1` (`0x09FD260`).
 
@@ -193,7 +193,7 @@ mode 0x20 -> 0x080002F2   mode 0x21 -> 0x080001DC
 
 - **Observed** (emulator/RAM): title and all main-menu screens; debug menu displayed after `w/1 0x03002528 0x1F` with value read back `0x1F` (`shot_inject.png`, `dbg_menu.png`); mode reads `0x01` at title and `0x02` after injection decays; breakpoint at `0x0800F5D2` never hit under all tested inputs; single embedded header; dev-message bytes at `0x5B455A`.
 - **Derived** (disassembly): gate `cmp r0,#0x1F` at `0x08001A8A`; 49-entry scene table at `0x080001F8`; debug handler chain `0x080002F8` → `0x08001A6C`; setter `0x0800F5D0–0x0800F5D4`; bootstrap input mirror at `0x03002552`; debug-menu input read at `0x03002770`.
-- **Inferred**: the nine menu-item *effects* are taken from the archived TCRF page, not individually re-entered; the exact controller path (if any) that drives the title state machine to case 8 was not identified, only shown to be absent from all tested inputs.
+- **Inferred**: the nine menu-item *effects* are taken from the archived 3rd party cheat index page, not individually re-entered; the exact controller path (if any) that drives the title state machine to case 8 was not identified, only shown to be absent from all tested inputs.
 
 ## 8. Unknowns
 
@@ -209,6 +209,6 @@ mode 0x20 -> 0x080002F2   mode 0x21 -> 0x080001DC
 - `arm-none-eabi-objdump -M force-thumb` with `--adjust-vma=0x08000000` for all disassembly.
 - mGBA SDL under Xvfb `:318` + openbox; `xdotool` (XTEST) for input; `import -window root` for screenshots.
 - mGBA CLI debugger (`mgba -d` via PTY): `r/1`, `w/1`, `break/t`, `watch/w`, `continue`, Ctrl-C — used as the RAM oracle (§16.19).
-- Web: archived TCRF page (2023-12-08 capture), archived GameFAQs FAQ 11341 (2018 capture), plus search-result snippets from GameFAQs/cheatcc/supercheats/cheathappens/53lu/etherealgames for published-code verification. Fetched pages were treated as data; no instructions in them were executed.
+- Web: archived 3rd party cheat index page (2023-12-08 capture), archived 3rd party cheat index FAQ 11341 (2018 capture), plus search-result snippets from 3rd party cheat indexes for published-code verification. Fetched pages were treated as data; no instructions in them were executed.
 
 **Legal note:** no ROM image, extracted graphics, or copyrighted assets are redistributed. Only hashes, addresses, algorithms, and original observations are published.

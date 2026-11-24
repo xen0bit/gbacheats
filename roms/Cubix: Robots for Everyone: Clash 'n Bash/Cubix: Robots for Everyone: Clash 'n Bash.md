@@ -16,7 +16,7 @@
 | MD5 | `4a5a274a7c2514b21ebb43b2ceade091` |
 | SHA-1 | `9e5aed84668e5838cb58a3c33e8d6db7a85fd536` |
 | SHA-256 | `fb5a1df23b68730d7fe40ab3e70368a4c0aee108cb4c221328a029cbf4179660` |
-| CRC32 | `4171C811` (matches the known USA Redump/No-Intro entry) |
+| CRC32 | `4171C811` (matches the known USA Redump/3rd party cheat index entry) |
 
 No patch/trainer: the entry branch is the stock one, the first 4 KiB is the stock
 crt0, and none of the known cracktro banners (Mode7, SUNHORS, CRC BANDIT)

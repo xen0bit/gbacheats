@@ -16,8 +16,7 @@
 | SHA-1 | `3e61732fb0d19912b76c16e7fe1407e14ba38447` |
 | SHA-256 | `52c2a27f914de65d008259e2c1786e05374d0393df1181c37d43a590359917a5` |
 
-Developer Gorilla Systems, publisher Activision (2006). Recon: GameFAQs, Giant Bomb,
-Barbie Wiki, RetroAchievements and the official manual contain **no published
+Developer Gorilla Systems, publisher Activision (2006). Recon: 3rd party cheat indexes and the official manual contain **no published
 password/cheat list** for this GBA title. Manual describes only the intended
 in-game investigation tools (Picture Descrambler, MP3 decoder, Word Finder,
 Infrared Viewer) and two mini-games.
@@ -161,7 +160,7 @@ is bounded below by exhaustive counts:
 
 | Search | Space checked | Result |
 |---|---|---|
-| Published-code recon | GameFAQs, Giant Bomb, Barbie Wiki, RetroAchievements, official manual | 0 password/cheat codes published |
+| Published-code recon | 3rd party cheat indexes, official manual | 0 password/cheat codes published |
 | Full-string scan | 82,927 `strings -t x -n 4` lines | keyword regex `debug\|cheat\|password\|passcode\|godmode\|invincible\|level select\|master code` → **0 hits** |
 | Case/shift/reversed keyword scan | all 8 MiB for 14 keywords × 4 encodings | only `warp`, `special` in ordinary dialogue/credits |
 | Code-like token scan | short `A-Z0-9!?` tokens | all hits compressed-data noise (e.g. `WFNFEF`, `OFFF`) |

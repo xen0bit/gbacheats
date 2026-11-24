@@ -73,7 +73,7 @@ What was established:
    `Peter`/`Peter Pan` does not exist anywhere in the ROM, and the skater-name
    table contains exactly seven names. All seven are selectable on a
    zero-progress save, so there is no eighth/hidden slot for a code to unlock.
-   The entry is cross-posted on the PS2 and Xbox GameFAQs pages (tagged "GBA"),
+   The entry is cross-posted on the PS2 and Xbox 3rd party cheat index pages (tagged "GBA"),
    which is the classic cross-SKU artefact described in guide §16.11.
 
 3. **There is no button-sequence validator to enumerate.** The engine's input

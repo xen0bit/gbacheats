@@ -26,9 +26,9 @@ Shining Soul has a genuine, developer-intended **name-entry code system**, not a
 
 The special names are stored as **NUL-terminated u16 strings** in a contiguous table at ROM `0x52F224`–`0x52F2EA` (replicated in five localisation banks at `0x53AAxx`, `0x545Cxx`, `0x5510xx`, `0x55C0xx`). The exact on-screen encoding was recovered by typing marker characters and diffing savestate RAM: each character is stored as a little-endian u16 equal to `ASCII + 0x70` (`A`=`0x00B1`, `B`=`0x00B2`, `c`=`0x00D3`). The live name buffer is EWRAM `0x02002864`, and its length byte is IWRAM `0x030005F4` (observed 0 → 1 → 11 as letters were typed).
 
-The table contains **15 special names**. Eleven match the published GameFAQs list exactly (7 item-bonus names and 4 stat-bonus names). **Four names in the ROM table appear in no published list**: `Mr?Desire`, `Yoshi`, `Isson`, `SRyota` — these are the novel codes delivered by this report (§6b).
+The table contains **15 special names**. Eleven match the published 3rd party cheat index list exactly (7 item-bonus names and 4 stat-bonus names). **Four names in the ROM table appear in no published list**: `Mr?Desire`, `Yoshi`, `Isson`, `SRyota` — these are the novel codes delivered by this report (§6b).
 
-The GameFAQs page also documents two non-name cheats: an **Advance Mode** unlock (finish the game once) and a **button code** (in Advance Mode, on the map at Dark Castle, hold L+R while selecting the level to enter a Secret Dungeon), plus two gameplay glitches (Easy Money, Item Duplication). The L+R sequence is a game-state gate, not a keypad-style code; no standalone cheat keypad, debug menu, or password validator was found anywhere in the reachable screens.
+The 3rd party cheat index page also documents two non-name cheats: an **Advance Mode** unlock (finish the game once) and a **button code** (in Advance Mode, on the map at Dark Castle, hold L+R while selecting the level to enter a Secret Dungeon), plus two gameplay glitches (Easy Money, Item Duplication). The L+R sequence is a game-state gate, not a keypad-style code; no standalone cheat keypad, debug menu, or password validator was found anywhere in the reachable screens.
 
 ## 3. How to reproduce
 
@@ -102,7 +102,7 @@ No checksum, permutation, XOR, or PRNG is involved: the space is exactly the 15 
 
 ## 6. Tables
 
-All values are the decoded names as the game stores them (u16 = ASCII+0x70, NUL-terminated). Length is in characters; "Published" is the GameFAQs `Shining Soul` cheats page (archived 2025-10-01).
+All values are the decoded names as the game stores them (u16 = ASCII+0x70, NUL-terminated). Length is in characters; "Published" is the 3rd party cheat indexes `Shining Soul` cheats page (archived 2025-10-01).
 
 | ROM offset | Name | Len | Published effect | Published? |
 |---|---|---:|---|---|
@@ -130,7 +130,7 @@ Other published cheats verified as *claims in the ROM-era documentation* (not pa
 
 **Closure method.** (1) The whole contiguous region `0x52F200`–`0x52F300` was decoded as u16 strings (§9, `findtable.py`), yielding exactly the 15 names above and no others. (2) A literal search for every published name under the recovered encoding hit this same table in all five banks; no additional table with different records was found. (3) Every reachable screen was walked with RAM/screenshot evidence (title → mode menu → intro → name entry → file confirm → gameplay/dialogue; no debug or password screen was reached).
 
-**Novel codes (absent from GameFAQs, VGChartz, and TCRF).** `MR?DESIRE`, `YOSHI`, `ISSON`, `SRYOTA` are stored in the game's own special-name table yet appear in no published list. They are the unpublished members of the space. Their literal presence in the same NUL-terminated table as the 11 working codes — with the identical u16 encoding — is a ROM-level proof that the game recognises them; the *specific bonus* each grants was not isolated in RAM (see §8). The cheapest novel code to exercise an unadvertised combination is `YOSHI` (5 chars, a length not used by any published item name except `FORCE`/`SOUL`), demonstrating that the table extends beyond the public list.
+**Novel codes (absent from 3rd party cheat indexes).** `MR?DESIRE`, `YOSHI`, `ISSON`, `SRYOTA` are stored in the game's own special-name table yet appear in no published list. They are the unpublished members of the space. Their literal presence in the same NUL-terminated table as the 11 working codes — with the identical u16 encoding — is a ROM-level proof that the game recognises them; the *specific bonus* each grants was not isolated in RAM (see §8). The cheapest novel code to exercise an unadvertised combination is `YOSHI` (5 chars, a length not used by any published item name except `FORCE`/`SOUL`), demonstrating that the table extends beyond the public list.
 
 **Bounds proven by rejection.** Out-of-space names are simply not in the table: any string with a different u16 sequence or a length that does not match a table record cannot be accepted by the lookup (there is no checksum to satisfy, so there is no "valid-looking but out-of-range" class to brute-force). This is a *derived* bound from the closed 15-entry table. The keyboard's own bound was observed directly: the name-length byte reached `0x0B` (11) with 11 typed characters and the buffer held exactly 11 u16 values; no 12th cell is writable.
 
@@ -138,7 +138,7 @@ Other published cheats verified as *claims in the ROM-era documentation* (not pa
 
 - **Observed** (emulator/state): title/mode/intro/name-entry/file-confirm/gameplay screens walked; the 70-key keyboard; `A`=`x`,`B`=`z`,`L`=`a`,`R`=`s`,`Start`=`BackSpace` measured via `KEYINPUT`; name buffer `0x02002864` receiving u16 values (`B`=`0x00B2`, `C`=`0x00B3`, `c`=`0x00D3`) and length byte `0x030005F4` counting 0→1→11; savestate `gbAs` layout; `SHINING` typed on the real keyboard and accepted into FILE 1 (screenshot `name_start.png`).
 - **Derived** (disassembly/binary): the 15-entry u16 string table and its localised copies; the `ASCII+0x70` encoding; the name-input handler at `0x080463F0` with xrefs to `0x030005F4`; the 12×12 tile-index block table at `0x54A20`; single Nintendo logo / stock entry word (no trainer).
-- **Inferred**: the exact per-name bonus values are taken from the published GameFAQs list and are consistent with the ROM table, but the resulting inventory/stat deltas were not isolated in RAM; the four novel names' effects are inferred from their membership in the same table.
+- **Inferred**: the exact per-name bonus values are taken from the published 3rd party cheat index list and are consistent with the ROM table, but the resulting inventory/stat deltas were not isolated in RAM; the four novel names' effects are inferred from their membership in the same table.
 
 ## 8. Unknowns
 
@@ -149,6 +149,6 @@ Other published cheats verified as *claims in the ROM-era documentation* (not pa
 
 ## 9. Tooling
 
-Scripts written in `/tmp/shiningsoul1/`: `header.py` (header/logo scan), `search_enc.py`/`enc_brute.py`/`textfind.py`/`findtable.py` (encoding and table recovery), `ssparse.py` (mGBA `gbAs` savestate parser), `ui.py`/`drive.py`/`typer.py`/`typer2.py` (xdotool input), `dbgdaemon.py`/`dbgcli.py` (persistent mGBA `-d` CLI-debugger driver over a PTY/FIFO). Static disassembly with `arm-none-eabi-objdump -M force-thumb`. Web evidence: GameFAQs Shining Soul cheats page via `web.archive.org` (403 direct).
+Scripts written in `/tmp/shiningsoul1/`: `header.py` (header/logo scan), `search_enc.py`/`enc_brute.py`/`textfind.py`/`findtable.py` (encoding and table recovery), `ssparse.py` (mGBA `gbAs` savestate parser), `ui.py`/`drive.py`/`typer.py`/`typer2.py` (xdotool input), `dbgdaemon.py`/`dbgcli.py` (persistent mGBA `-d` CLI-debugger driver over a PTY/FIFO). Static disassembly with `arm-none-eabi-objdump -M force-thumb`. Web evidence: 3rd party cheat indexes Shining Soul cheats page via `web.archive.org` (403 direct).
 
 No ROM or copyrighted assets are redistributed; only hashes, addresses, and the authors' own tools are published.

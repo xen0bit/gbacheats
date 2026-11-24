@@ -135,7 +135,7 @@ Undocumented hardcoded strings (not on any published list):
 
 **Closed-set proof.** `work/brute.c` runs the exact recovered validator over all 33,554,432 five-symbol strings: 4,096 algorithmic + 2 special = **4,098 accepted**. This is derived from the ROM disassembly, not inferred from the published list. The Python model agrees with all 11 known codes, all 6 minted/novel inputs tested, and every rejection tested.
 
-**Novel codes generated and confirmed in-game** (none appear on GameFAQs, Neoseeker, Cheathappens, cheatingdome, games-cheats.org, or absolutcheats):
+**Novel codes generated and confirmed in-game** (none appear on 3rd party cheat indexes):
 
 | Code | Fields | In-game proof | RAM evidence |
 |---|---|---|---|

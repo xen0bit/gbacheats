@@ -187,9 +187,9 @@ consumer. No hard-coded button sequence table exists.
 - **Inferred:** the two no-op rows in the cheat dispatcher are unfinished debug features
   (the strings say "unlock" but the jump target is the bare epilogue). This is read from the
   jump table, not exercised in-game, because the menu itself is unreachable.
-- **Web recon (treated as data):** GameFAQs lists no cheats for this SKU (the 4-character
+- **Web recon (treated as data):** 3rd party cheat index lists no cheats for this SKU (the 4-character
   stage passwords found by search belong to *The Wild Thornberrys Movie*, a different game);
-  VGChartz reports "Total cheats available: 0"; a CodeBreaker-code page exists but device
+  3rd party cheat indexes report "Total cheats available: 0"; a CodeBreaker-code page exists but device
   codes are out of scope per the brief.
 
 ## 8. Unknowns

@@ -18,7 +18,7 @@
 ## 2. Executive summary
 
 The GBA SKU has **no password-entry screen and no working text passwords**. The
-"Secret Codes" passwords published by GameFAQs are tagged PC/GBC for this title;
+"Secret Codes" passwords published by 3rd party cheat indexes are tagged PC/GBC for this title;
 none of their literals appear anywhere in this ROM (§6). The N64 button combo is
 not applicable (C-Up/Z do not exist on GBA).
 
@@ -34,7 +34,7 @@ Both were confirmed in emulation with screenshots **and** a byte-level RAM diff.
 The system is screen-gated (no effect on SEASON RULES) and the entire reachable
 L/R prefix family was enumerated: **16 sequences tested, exactly 2 accepted**.
 
-TCRF additionally documents three hidden teams (Players, Inc.; EA Sports;
+3rd party cheat indexes additionally documents three hidden teams (Players, Inc.; EA Sports;
 Budcat) at RAM `0x0200050E`/`0x02000510` values `0x21`–`0x23`, explicitly
 stating that **no in-game code is known** for them (CodeBreaker-only). Within the
 enumerated in-game code space no sequence sets those addresses; memory-edit
@@ -117,11 +117,11 @@ is **Derived**, the effect is **Observed**.
 
 | Source | Literal / sequence | Platform tag | Verification |
 |---|---|---|---|
-| GameFAQs, 15 Second Quarters | `L,L,R,R,Select` | GBA page | **ACCEPTED** |
-| GameFAQs, View Super Bowl Win Screen | `L,R,L,R,Select` | GBA page | **ACCEPTED** |
-| GameFAQs, Bonus Teams N64 | `C-Up,Start,Start,Start,R,L,Z,A,A,B` | N64 | N/A on GBA |
-| GameFAQs, Cheat Codes! PC | `WILDCARD`, `PICKEDOFF`, `LACESOUT`, `NEVERMORE`, `GOLDENGOD`, `GORMENGHAST`, `HYSTERIA` | PC | 0 literal hits each |
-| TCRF, Hidden Teams | ids `0x21`/`0x22`/`0x23` @ `0x0200050E`/`0x02000510` | GBA | TCRF says no in-game code known; out of scope (CodeBreaker) |
+| 3rd party cheat indexes, 15 Second Quarters | `L,L,R,R,Select` | GBA page | **ACCEPTED** |
+| 3rd party cheat indexes, View Super Bowl Win Screen | `L,R,L,R,Select` | GBA page | **ACCEPTED** |
+| 3rd party cheat indexes, Bonus Teams N64 | `C-Up,Start,Start,Start,R,L,Z,A,A,B` | N64 | N/A on GBA |
+| 3rd party cheat indexes, Cheat Codes! PC | `WILDCARD`, `PICKEDOFF`, `LACESOUT`, `NEVERMORE`, `GOLDENGOD`, `GORMENGHAST`, `HYSTERIA` | PC | 0 literal hits each |
+| 3rd party cheat indexes, Hidden Teams | ids `0x21`/`0x22`/`0x23` @ `0x0200050E`/`0x02000510` | GBA | 3rd party cheat indexes say no in-game code known; out of scope (CodeBreaker) |
 
 ### Text bank (decoded per guide §11 "Strings and tables" / §16.11)
 
@@ -161,12 +161,12 @@ there is no password UI.
 | Published password literals in ROM | 7 | 0 | zero hits (wrong SKU) |
 
 **Novel code:** none exists in the enumerated space. Both accepted values are
-already published (GameFAQs). This is a *bounded negative*, not an omission:
+already published (3rd party cheat indexes). This is a *bounded negative*, not an omission:
 every one of the 16 representable values of the accepted family was entered and
 its state read, and the neighboring terminators/lengths/screens were tested.
 Per guide §0.2, a novel code is reported only when it exists; inventing a
 non-working "code" would contradict the evidence. The three hidden teams
-documented by TCRF have **no in-game unlock code** in this space (nor a published
+documented by 3rd party cheat indexes have **no in-game unlock code** in this space (nor a published
 one); they are reachable only by CodeBreaker memory writes, which are explicitly
 out of scope here.
 
@@ -198,7 +198,7 @@ out of scope here.
 ## 8. Unknowns
 
 - No hidden debug menu was reached on any walked screen; none is documented by
-  TCRF for this SKU.
+  3rd party cheat indexes for this SKU.
 - Whether an unpublished button code of length ≥6 exists was not exhaustively
   testable; the accepted format observed is 5 presses with an 8-byte history
   window, and all 16 four-position L/R values were tested.
@@ -214,7 +214,7 @@ out of scope here.
   crashed the core, so savestate diffing replaced them per §16.13).
 - `gba.py` (xdotool input), `keymap.py`, `sweep.py`/`sweep2.py`/`sweep3.py`/
   `sweep4.py`/`sweep5.py` (bounded enumeration), screenshot crops and montages.
-- GameFAQs (via web.archive.org 20230330215227) and TCRF (via
+- 3rd party cheat indexes (via web.archive.org 20230330215227) and 3rd party cheat indexes (via
   web.archive.org 20240409133444). Live sites returned 403.
 
 ## 10. Legal note

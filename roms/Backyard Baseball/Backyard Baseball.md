@@ -53,7 +53,7 @@ Backyard Baseball (GBA, 2003) has **no in-game code system**:
   10-character coach-name field, but none of the 2006 title's nine code words
   is present in this ROM, there is no unlock message string, and no string
   comparison table for the name was found. The 2006 system was not reused.
-* **The published GBA cheat is false for this ROM.** A GameFAQs/GamesRadar
+* **The published GBA cheat is false for this ROM.** A 3rd party cheat index
   hint says: *Options → press Select, R, L → you hear a noise → Cards →
   create a player with unlimited stats*. The Options screen handler at
   `0x08013950` reads the pressed-key word and tests only `A` (0x001),
@@ -113,12 +113,12 @@ L=0x200`, with the active-high pressed copy at `0x03001832` / `0x0300164C`.
 
 | Source | Claim | Result here |
 |---|---|---|
-| GameFAQs `gba/560785-backyard-baseball/cheats` (403 to fetch; content recovered via search snippets) and GamesRadar user hint (GBA, "ryan fajdetich") | Options → press Select, R, L → noise → Cards → create player with unlimited stats | **Rejected**: no noise-driven state change, no flag, stat cap still 8 |
+| 3rd party cheat indexes `gba/560785-backyard-baseball/cheats` (403 to fetch; content recovered via search snippets) and 3rd party cheat indexes user hint (GBA, "ryan fajdetich") | Options → press Select, R, L → noise → Cards → create player with unlimited stats | **Rejected**: no noise-driven state change, no flag, stat cap still 8 |
 
-The GameFAQs page itself returns HTTP 403 to automated fetches; the snippet
+The 3rd party cheat index page itself returns HTTP 403 to automated fetches; the snippet
 text (`Create a Charater with Stats All the Way ... Go to options and press
 select, r, l buttons you will hear a noise ...`) was recovered from search
-results and from the GamesRadar mirror. The only other GBA results on those
+results and from the 3rd party cheat index mirror. The only other GBA results on those
 pages are CodeBreaker/memory-edit codes, which are out of scope.
 
 ### 3.3 Effect test (ground truth)
@@ -396,7 +396,7 @@ effect does not occur.
   of ASCII UI strings at `0x4xxxx`; no unreferenced menu launcher found.
 * **Button codes:** the only in-game cheat hint found is the published
   Select/R/L one, and it is disproven above. No other published GBA button
-  code exists on GameFAQs/VGChartz/TCRF/SuperCheats/Vizzed/CheatingDome for
+  code exists on 3rd party cheat indexes for
   this title.
 
 ## 7. Validation evidence

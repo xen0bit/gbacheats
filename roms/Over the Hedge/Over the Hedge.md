@@ -26,7 +26,7 @@ Phase 0 checks: single Nintendo-logo hit at file offset 0x0 (`0x08000000`) — *
 
 The game boots to a legal screen; any button advances to an animated attract/title scene (a scrolling hedgerow in which the `OVER THE HEDGE` logo and a portal marker appear, with a running RJ). The attract scene accepts D-pad camera motion but no documented or discovered button code changes state. To reach the remaining real screens for enumeration I forced stage loads on **copies** of the ROM (see §3) — these produced the save-slot/hub screen and level 1 with a dialogue box. No menu on any of those screens exposes cheats.
 
-Published-code research was attempted against GameFAQs, TCRF, the Wayback Machine, Google, DuckDuckGo and a Jina proxy; all were blocked (403 / 404 / CAPTCHA / no results). Consequently no published GBA password literal could be obtained or tested against the ROM. The negative result below therefore rests on (a) exhaustive in-ROM literal/encoding searches, (b) full input-space and button-mask searches, and (c) direct screen enumeration.
+Published-code research was attempted against 3rd party cheat indexes, the Wayback Machine, Google, DuckDuckGo and a Jina proxy; all were blocked (403 / 404 / CAPTCHA / no results). Consequently no published GBA password literal could be obtained or tested against the ROM. The negative result below therefore rests on (a) exhaustive in-ROM literal/encoding searches, (b) full input-space and button-mask searches, and (c) direct screen enumeration.
 
 ## 3. How to reproduce
 
@@ -92,7 +92,7 @@ Because no code system exists, enumeration is of the **search spaces and screens
 | On-screen password/keyboard alphabet | Screen enumeration + text-bank search | **None present** |
 | Button-code tables: runs of ≥6 `u16` single-button masks | Python scan over entire 8 MiB | 153 runs, all in graphics/animation/level data (repetitive `0x1`/`0x2`/`0x20` patterns), none a discriminator table; no validator references any |
 | Button sequences pressed in emulator | All singles, all 2- and 3-button combos, held 0.15–4 s, plus repeated Start ×40 | **0 state changes** on title/attract, hub, or level screens |
-| Published codes | GameFAQs / TCRF / VGChartz / Wayback / Google / DDG / Jina | All sources blocked (403/404/CAPTCHA/no results). No published GBA in-game password could be recovered; no literal to verify in ROM. Recorded as unverified, not "confirmed working". |
+| Published codes | 3rd party cheat indexes / Wayback / Google / DDG / Jina | All sources blocked (403/404/CAPTCHA/no results). No published GBA in-game password could be recovered; no literal to verify in ROM. Recorded as unverified, not "confirmed working". |
 | Screens | Legal (Observed), attract/title with logo+portal (Observed), hub/slot-select (Observed via patched boot), level 1 with dialogue (Observed via patched boot) | No menu with a cheat/level-select entry found on any |
 
 **Novel code / bounds by rejection:** not applicable — there is no validator to mint a novel code for, and no input surface that rejects a code. The negative is closed by the counts above rather than by an accepted/rejected code pair. The absence of any comparison table, alphabet, key-mask sequence, or cheat vocabulary in an 8 MiB ROM, together with four enumerated screens that contain no cheat UI, is a bounded statement about this exact ROM image (SHA-256 above).

@@ -34,7 +34,7 @@ bitmasks, which are ORed into EWRAM `0x02011714+`.
 The complete accepted set is: `cactus, momo, dice, back, saturn, motox, eight, spokes,
 finale, code`. All ten were entered in mGBA and verified by savestate RAM diffs; each
 produces a progressive, distinct unlock-mask change, and the master code `CODE` sets every
-flag. The published GameFAQs/Neoseeker code **`MOTOK` is wrong**: the ROM literal is
+flag. The published 3rd party cheat index code **`MOTOK` is wrong**: the ROM literal is
 `motox`, `MOTOK` is *rejected* in-game (zero RAM change), and `MOTOX` is *accepted*
 (16 EWRAM bytes changed). `MOTOX` therefore qualifies as a generated code absent from
 every published list. The console/PS2-only `FREAKY` (and `LOKSMITH`, `TRAKMEET`, etc.) is
@@ -151,7 +151,7 @@ the observed number of EWRAM flag bytes that differ from baseline after entry).
 - **Validator model.** Reimplemented offline as `accepted = {'cactus','momo','dice','back',
   'saturn','motox','eight','spokes','finale','code'}` with the length/alphabet filter above.
   It agrees with the ROM on every accepted and rejected input tested below.
-- **Novel code (absent from every published list): `MOTOX`.** GameFAQs, Neoseeker, ggmania
+- **Novel code (absent from every published list): `MOTOX`.** 3rd party cheat indexes
   and superdicasetruques all publish `MOTOK`. The ROM literal at `0x0807374D8` is `motox`;
   the on-screen VIEW CODES glyph is the same word (stylised `x`). Entered on the real
   ENTER CODE screen: **accepted**, 16 EWRAM flag bytes changed from baseline (e.g.
@@ -160,7 +160,7 @@ the observed number of EWRAM flag bytes that differ from baseline after entry).
 - **Bounds proven by rejection.**
   - `MOTOK` (the published spelling): **rejected**, 0 EWRAM flag changes.
   - `ZZZZZZ` (novel in-alphabet, max length): **rejected**, 0 EWRAM flag changes.
-  - `FREAKY` (PS2/GameCube code from GameFAQs): **rejected**, 0 EWRAM flag changes — confirms
+  - `FREAKY` (PS2/GameCube code from 3rd party cheat indexes): **rejected**, 0 EWRAM flag changes — confirms
     console codes do not apply to this GBA SKU.
   - Length cap: the handler refuses to append a 7th character (`cmp r5,#5 ; bgt`), so the
     longest published console code `LOKSMITH` (8) is not even representable on this screen.

@@ -34,9 +34,8 @@ This is a defensible negative, not an absence of searching:
   tile-indexed) and every string was classified. It contains only title/menu,
   language, options, pause, high-score and attract labels — no `PASSWORD`,
   `CHEAT`, `CODE`, `DEBUG`, `SECRET`, `UNLOCK`, `LEVEL SELECT` or similar.
-* No published GBA codes exist for this title. GameFAQs (`gba/929037`), VGChartz,
-  CheatHappens, CheatingDome, Gbafun and The Video Games Museum all report zero
-  cheats. There is no TCRF page. The only web hits are the manual, which documents
+* No published GBA codes exist for this title. 3rd party cheat indexes (`gba/929037`), 3rd party cheat indexes and The 3rd party cheat indexes all report zero
+  cheats. There is no 3rd party cheat index page. The only web hits are the manual, which documents
   ordinary configuration (starting score, ball count/game type, fuel, missions) and
   one Super Breakout Game Boy (not GBA) hint.
 * Exhaustive button-space probing (every single key and every ordered 2-key pair
@@ -153,9 +152,7 @@ graphics/audio byte noise (tile-indexed sprite art), not text. Localized pointer
 table records: 0x0803E7EC–0x0803F4A8 (step 0xC), 6 languages per item.
 
 **Published-code verification**: zero codes exist to verify. Search coverage:
-GameFAQs GBA 929037 (main page, no cheats page), VGChartz (0 cheats),
-CheatHappens (none), CheatingDome (none), Gbafun (none), Video Games Museum
-(none), TCRF (no article). Fetched pages were treated strictly as data; no
+3rd party cheat indexes GBA 929037 (main page, no cheats page), 3rd party cheat indexes. Fetched pages were treated strictly as data; no
 prompt-injection content was encountered in this session.
 
 ## 6b. Enumeration
@@ -240,7 +237,6 @@ Per §0.2, the "code space" is the empty set, and the enumeration is of the
   `rd.py` — GBA-address reads from saved states; `dbgserver.py`/`dbgcli.py` —
   pty-backed mGBA CLI debugger bridge (used early, superseded by savestate diff
   because the CLI stops processing commands while the core runs).
-* Web sources: GameFAQs, VGChartz, CheatHappens, CheatingDome, Gbafun, The Video
-  Games Museum, TCRF, and the DSI/Gravity-i manual PDF (gamegear.net).
+* Web sources: 3rd party cheat indexes, The 3rd party cheat indexes, and the DSI/Gravity-i manual PDF (3rd party cheat indexes).
 * No ROM or copyrighted asset is redistributed; only hashes, addresses and
   derived findings are published.

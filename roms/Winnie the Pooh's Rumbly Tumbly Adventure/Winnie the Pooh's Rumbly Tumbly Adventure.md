@@ -22,7 +22,7 @@ logos observed in mGBA. No cracktro/trainer signs; entry word is the stock branc
 ## 2. Executive summary
 
 The game has a **7-digit decimal password system** used as its battery-free save/progress system.
-The published list (GameFAQs, GameGenie; 21 codes) was recovered and **all 21 were verified against
+The published list (3rd party cheat indexes; 21 codes) was recovered and **all 21 were verified against
 the ROM's own validator**. The codes are not stored in the image: they are computed.
 
 The algorithm (validator `0x0802A058`) is:
@@ -129,7 +129,7 @@ Field meanings (from the mask table and published labels): `c` selects the chara
 
 ## 6. Tables
 
-Published codes (GameFAQs / GameGenie, all 21 verified by `validate()`):
+Published codes (3rd party cheat indexes, all 21 verified by `validate()`):
 
 | Effect | Code | a / b / c / r / y |
 |---|---|---|
@@ -153,7 +153,7 @@ These are bitmasks of collectable honey pots per area (e.g. Eeyore area 1 has 7 
 1 code each for the 4 completed states plus state 0, and the single End code).
 States `a=4,9,19` have a zero mask and **zero** accepted spellings; `a>24` is rejected by `c>4`.
 
-**Novel codes generated and accepted (absent from GameFAQs, GameGenie, TCRF and every other
+**Novel codes generated and accepted (absent from 3rd party cheat indexes and every other
 published list checked):**
 
 | Code | Payload | Where novel | Oracle result |

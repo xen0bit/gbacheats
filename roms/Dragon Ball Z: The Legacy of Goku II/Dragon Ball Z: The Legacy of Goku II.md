@@ -27,7 +27,7 @@ The only hidden feature is a **developer debug screen** (Music Test / Sample Tes
 with Zone/Area/Variation) that lives in the retail image but is **gated**: its state value is
 `2`, and the title-screen input code can only produce `0`, `1`, or `3`. The published way to
 reach it is an *external* CodeBreaker RAM write (`0202B32D:02`) plus Start at the title screen
-(TCRF) — a memory-edit code, explicitly **out of scope** here. I verified the feature itself
+(3rd party cheat indexes) — a memory-edit code, explicitly **out of scope** here. I verified the feature itself
 by making a temporary 2-byte analysis patch on a `/tmp` copy that redirects the title
 dispatcher to the debug constructor; pressing Start then opens the DEBUG screen, and pressing
 A on Map Test teleports into the game with the six-character roster (Piccolo observed at
@@ -35,7 +35,7 @@ Lv 40, HP 1012/1012). That patch is an analysis aid, **not** a code and is not s
 
 Everything that *looks* like an unlockable (Hercule, five level-50 trophies, Cooler boss,
 alternate ending) is ordinary story/progress save data, not a code — the same pattern as the
-sibling *Buu's Fury*. The two button codes published on the combined GameFAQs "LoG I & II"
+sibling *Buu's Fury*. The two button codes published on the combined 3rd party cheat indexes "LoG I & II"
 page belong to **The Legacy of Goku I** (the other game in that compilation); neither works
 in this ROM, and the published key sequence does not exist as bytes in the image.
 
@@ -64,7 +64,7 @@ developer debug screen left in the shipping build.
     title; **no debug menu**.
   * LoG I "Up, Down, Left, Right, B, A" during intro → no confirmation sound, no observable
     flag/state change; literal mask sequence absent from ROM (see §6).
-  * TCRF CodeBreaker `0202B32D:02` (applied continuously with mGBA's cheat file as an
+  * 3rd party cheat indexes CodeBreaker `0202B32D:02` (applied continuously with mGBA's cheat file as an
     analysis probe) → title still routes to `SELECT GAME`, because the title code overwrites
     byte `+9` with the 0/1 selection in the same frame; this confirms the gate is an external
     RAM write, not an input path.
@@ -88,7 +88,7 @@ developer debug screen left in the shipping build.
 | `0x08409368` | Map-location table: 56-byte records `{u8 zone, u8 area, u8 variation_count, ...}` |
 | `0x0E2C5B`… | UI text bank (`Start`, `Options`, `Text Speed`, `Credits`, `Exit`, `Switch Characters`, six character names, item/quest names) |
 | `0x083C9CA2`, `0x083D2C80`, `0x083D674C`, `0x083E2736`, `0x083EC6E2` | five copies of `Hercule is now an available character!` (script text bank, no direct pointer — referenced by text ID) |
-| RAM `0x0202B32D` | Gate byte = title state object `+9`; TCRF's CodeBreaker address. Values observed/derivable: `0`,`1`,`3` from gameplay; `2` = debug screen |
+| RAM `0x0202B32D` | Gate byte = title state object `+9`; a 3rd party cheat index's CodeBreaker address. Values observed/derivable: `0`,`1`,`3` from gameplay; `2` = debug screen |
 
 Note: all seven debug strings are addressed with Thumb `ADR` (`add Rd, PC, #imm`), which is
 why no 32-bit literal pointer to them exists in the ROM (a direct `struct.pack` pointer scan
@@ -134,7 +134,7 @@ No checksum, alphabet, code length, or password validator exists anywhere in thi
 | 4 | `AREA` (green sub-cursor) | table-driven; Right×5 changed 1 → **6** | value display confirmed |
 | 5 | `VARIATION` | displayed `0 / 1` for the default record; count from record byte 2 | confirmed |
 
-TCRF additionally documents an unused track at index 27 and names all 44 tracks; this report
+3rd party cheat indexes additionally documents an unused track at index 27 and names all 44 tracks; this report
 does not reproduce the copyrighted track list.
 
 **Map table `0x08409368`:** records of 56 bytes; first three bytes are `{zone, area,
@@ -144,7 +144,7 @@ were dumped (zones 1–7+); the debug menu treats this as its level-select space
 
 **Character roster (UI bank `0x0E2DF4`…):** Gohan, Piccolo, Vegeta, Trunks, Goku, Hercule.
 Debug teleport gave Piccolo at Lv 40, HP 1012/1012, EP 140/140, STR 51/100, POW 48/100,
-END 60/100, EXP 2721115 — matching TCRF's "all six characters, upgraded to a certain degree".
+END 60/100, EXP 2721115 — matching a 3rd party cheat index's "all six characters, upgraded to a certain degree".
 
 **String-space counts (`strings -t x -n 4`, 114,271 lines):** `password` 0, `cheat` 0,
 `gameshark` 0, `codebreaker` 0, `enter code` 0, `level select` 0, `sound test` 0,
@@ -194,9 +194,9 @@ exists on the title/menu path.
   correspond to the five trophy/story events (text bank has no direct pointers, so the exact
   event IDs were not resolved). That the debug menu's remaining map records behave like the
   one tested — the table was dumped but not all ~180 records were individually teleported to.
-* **Published sources checked:** TCRF (debug menu + CodeBreaker gate + track list) via
-  web.archive.org; GameFAQs "LoG I & II" cheats (the two button codes belong to LoG I;
-  LoG II entries are only glitches/unlockables); GameHacking/almarsguides/SuperCheats listings
+* **Published sources checked:** 3rd party cheat indexes (debug menu + CodeBreaker gate + track list) via
+  web.archive.org; 3rd party cheat indexes "LoG I & II" cheats (the two button codes belong to LoG I;
+  LoG II entries are only glitches/unlockables); 3rd party cheat indexes/3rd party cheat index listings
   are GameShark/CodeBreaker memory edits and are out of scope. No prompt-injection content was
   encountered.
 
@@ -207,8 +207,8 @@ exists on the title/menu path.
 * Not every one of the ~180 map-table records was teleported to individually; bounds and two
   distinct destinations were verified instead.
 * Whether the 44-track music player's track 27 is truly unused was not re-verified in-game
-  (reported by TCRF).
-* The anti-piracy behavior noted by TCRF (check at first world-map transition) was not tested;
+  (reported by 3rd party cheat indexes).
+* The anti-piracy behavior noted by 3rd party cheat indexes (check at first world-map transition) was not tested;
   it is not a cheat/code surface.
 
 ## 9. Tooling

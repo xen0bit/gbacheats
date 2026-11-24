@@ -42,9 +42,9 @@ published strings.
   forms. In this ROM `SKATIN` occurs only as the ordinary English word
   `Skatin` inside dialogue (`0x18A615`); the others do not occur at all.
 * Those codes belong to the **console/PC Bratz line** (Forever Diamondz and the
-  Rock Angelz "cheat computer"), not to the GBA SKU. GameFAQs' GBA cheats page
+  Rock Angelz "cheat computer"), not to the GBA SKU. 3rd party cheat indexes' GBA cheats page
   (archived 2025-11-13) lists only PS2/PC/GC cheat-computer passwords;
-  VGChartz lists **0** cheats for the GBA release. The IGN walkthrough itself
+  3rd party cheat index lists **0** cheats for the GBA release. The 3rd party cheat index walkthrough itself
   records that the end-credit code `SIZZLN` "will not work" in the cheat
   computer.
 * The GBA game is by **Altron** (maker `78`) and is a different engine from the

@@ -25,7 +25,7 @@ The game has a genuine developer-intended cheat-code system, reached by holding 
 
 The validator at **`0x080284BC`** is a straight-line chain of **exactly ten `strcmp` calls** (to `0x0803BD98`) against **ten 8-byte NUL-padded strings** at `0x0805F0B8`. There is **no checksum, no algorithm, no generator and no second format**. On a match it applies one of ten effects; every other input falls through to one shared `Invalid Code!` path. Two gem codes are additionally gated by a once-per-save-slot byte.
 
-All ten ROM strings match the ten codes published by GameFAQs (dark52 guide §8) exactly. **The accepted set is therefore provably closed at ten codes, all of which are published — no novel accepted code exists.** This is a bounded negative proved by counting the validator's comparisons and the table's entries, and by entering all ten (accepted) plus four out-of-set strings (rejected) in the emulator (§6b).
+All ten ROM strings match the ten codes published by 3rd party cheat indexes exactly. **The accepted set is therefore provably closed at ten codes, all of which are published — no novel accepted code exists.** This is a bounded negative proved by counting the validator's comparisons and the table's entries, and by entering all ten (accepted) plus four out-of-set strings (rejected) in the emulator (§6b).
 
 A separate dead leftover, `Prototype Build`, exists in the text bank but the mode menu is a four-item ring and never displays or reaches it. A published "hold L+R at power-on → Crash Party" boot combo was **not reproduced** in this PAL build under mGBA.
 
@@ -114,7 +114,7 @@ Entry alphabet (on-screen keyboard, read from the rendered screen and decoded ag
 
 **Space definition.** Input surface = 31 symbols × up to 10 positions. The validator itself imposes no alphabet or length restriction: it is plain `strcmp` against a fixed table. The complete accepted set is therefore the ten 8-byte records above — **10 accepted values**, lengths 4 (`G3MZ`), 5 (`SH33P`, `SP4RX`, `SPYR0`), 6 (`P0RT4L`) and 7 (`V1S10NS`, `T4P10C4`, `S0YB34N`, `V4N1LL4`, `B41S0KV`). There are no unused payload bits, reserved bits, aliases or alternate spellings: equality is byte-exact up to the first NUL.
 
-**Novel codes generated and entered.** There are none to generate: every literal the validator can accept is one of the ten ROM strings, and all ten appear verbatim in the published GameFAQs list. A deliberately constructed *unpublished* input cannot be accepted by construction. This is not an untested assumption:
+**Novel codes generated and entered.** There are none to generate: every literal the validator can accept is one of the ten ROM strings, and all ten appear verbatim in the published 3rd party cheat index list. A deliberately constructed *unpublished* input cannot be accepted by construction. This is not an untested assumption:
 
 1. **Static count** — the validator contains exactly ten `BL strcmp` instructions (addresses listed in §4), each loading one of the ten table pointers from its own literal pool (`0x08028580`…`0x080287C0`), followed by one shared failure branch. No loop, table walk, checksum or second comparison path exists.
 2. **Table count** — the record run at `0x0805F0B8` is exactly `0x50` bytes = 10 × 8, bounded by unrelated u32 data at `0x0805F0B4` and `0x0805F108`. Both stub headers were scanned and contain no code strings.
@@ -140,7 +140,7 @@ Entry alphabet (on-screen keyboard, read from the rendered screen and decoded ag
 * **Observed (RAM / GDB stub)**: entry buffer `0x0200FB24` changing from `----------` to entered glyphs; breakpoint at `PC=0x08028546` with `r1=0x0805F0B8` (`SH33P`) and `r0=0x03007D30`; injected strings accepted/rejected by the game's own `strcmp`.
 * **Derived (disassembly)**: ten-`strcmp` validator, string table and stride, message ID mapping, once-only flag offsets, gem/card effect calls, shared failure path, dead `Prototype Build` string.
 * **Inferred (not fully exercised)**: the four cosmetic modes are thought to revert on reset (published guide; no save write observed in their branches); card indices 80/52 were passed to the card routine but the resulting card artwork was not opened; the Crash Party boot combo remains unverified.
-* **Web lead**: GameFAQs dark52 guide §8 supplied the ten published codes and the L+R gate; every literal was verified against the ROM before use. Fetched pages were treated as data only.
+* **Web lead**: 3rd party cheat indexes dark52 guide §8 supplied the ten published codes and the L+R gate; every literal was verified against the ROM before use. Fetched pages were treated as data only.
 
 ## 8. Unknowns
 

@@ -25,7 +25,7 @@ code are intact, and the image boots and plays normally. The 156-byte Nintendo
 logo was scanned across the whole file: it occurs once, at file offset 0x04,
 so this is a single-header image (no embedded second GBA image or multi-game
 shell). No cracktro, trainer, or appended payload was found. Treat it as a
-rebuilt-header USA image, not a No-Intro-verified dump.
+rebuilt-header USA image, not a 3rd party cheat index-verified dump.
 
 ## 2. Executive summary
 
@@ -37,7 +37,7 @@ and shown in the save/load slot. It is not a validator and not a password.
 What *does* exist is developer leftover script data: an unused **boss/room test
 menu** (`BOSS SKIP`, `BOSS CHEK`, `dummy`, `DRAGON`, `FAREI`, `FALKEN`, `SOMA`,
 `ZENOX`, `ELVIA`, `PIKE`, `P01`–`P04`) embedded in the dialogue/script bank.
-TCRF independently documents it as a test-menu leftover, says the text "can be
+3rd party cheat indexes independently documents it as a test-menu leftover, says the text "can be
 re-enabled in-game", and states that any remaining functionality is unknown.
 No normal input path reaches it in this image.
 
@@ -281,15 +281,15 @@ English and unused-German copies exist):
 Earlier pages in the same chapter contain `NEXT / INI ON / INI OFF`
 (`0x208518`) and `DUNG / BOSSbattle TEST` (`0x2086D9`).
 
-TCRF independently documents the same block as "Test Menu Leftovers", says the
+3rd party cheat indexes independently documents the same block as "Test Menu Leftovers", says the
 text "can be re-enabled in-game", and notes that any remaining functionality is
 unknown.
 
 ### 6.4 Published GBA codes (context only, not in-game)
 
-The GameFAQs/Neoseeker walkthroughs contain no password or button code; their
+The 3rd party cheat index walkthroughs contain no password or button code; their
 "secrets" are gameplay hints (hidden items and boss tips). The cheat-device
-lists (Almar's Guides, 53lu, JeuxMangas, gbadamud) contain CodeBreaker codes,
+lists (3rd party cheat indexes) contain CodeBreaker codes,
 e.g.:
 
 ```
@@ -350,7 +350,7 @@ in-game code.
 | `Saving...` | Observed |
 | Load slot screen (`LOAD`) | Observed |
 | Game Over | Not reached; fail-state screen, no code surface (strings present) |
-| Language Selection | Not reached; unused/stubbed per TCRF |
+| Language Selection | Not reached; unused/stubbed per 3rd party cheat indexes |
 | Test menu | Not reached; unused script text |
 
 ### 6b.1 Literal search counts and classification
@@ -394,7 +394,7 @@ This is a bounded negative for the code space, not an untested claim:
   (title, main, name entry, field ring, status/item, system/pause, save,
   overwrite, load).
 * No hidden menu was opened by the standard triggers in §3.
-* The one code-like text block in the ROM is the unused test menu, which TCRF
+* The one code-like text block in the ROM is the unused test menu, which 3rd party cheat indexes
   also classifies as leftover/unreachable. Its entries are enumerated from the
   ROM (§6.3); their effects are not observable in normal play and are reported
   as unknown, not as an untested reachable screen.
@@ -455,12 +455,12 @@ This is a bounded negative for the code space, not an untested claim:
 
 ### External cross-check
 
-TCRF's CIMA page (mirror `tcrf.tiago.zip/wiki/CIMA-3a_The_Enemy`) lists:
+a 3rd party cheat index's CIMA page lists:
 `CIMASAVEU v1.00`, the `Language Selection / English / German / FRENCH`
 leftover, the E3-demo text, and the test-menu pages `BOSS SKIP`, `BOSS CHEK`,
 `dummy`, `DRAGON`, `FAREI`, `FALKEN`, `SOMA`, `ZENOX`, `ELVIA`, `PIKE`,
 `P01`–`P04`. Every test-menu literal listed above, plus `CIMASAVEU v1.00`,
-was found at the addresses in §4/§6.3. TCRF says the test-menu text can be
+was found at the addresses in §4/§6.3. 3rd party cheat indexes say the test-menu text can be
 re-enabled in-game and that its functionality is unknown; this matches our
 failure to find a normal trigger.
 
@@ -472,7 +472,7 @@ failure to find a normal trigger.
   our captures; the cursor clamped on `Text Speed` when we pressed Down, so
   the Sound value was not read visually. Its strings/values are present in the
   table (`ON` = 8, `OFF` = 9). This is a UI clipping quirk, not a hidden menu.
-* The `Language Selection` screen was not reached; TCRF reports it as unused,
+* The `Language Selection` screen was not reached; 3rd party cheat indexes report it as unused,
   and the French text is stubbed. Its exact trigger (if any) is unknown.
 * The save/load module also contains `MESSAGE`, `SOUND`, `SLOW/FAST`, `ON/OFF`
   strings (table `0x0818ED8C`). No page exposing those strings was reached

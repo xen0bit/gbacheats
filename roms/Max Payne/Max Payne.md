@@ -86,18 +86,18 @@ String rendering is **pointer-table indexed**, not raw ASCII in code: item IDs a
 | `0x73900` | Part 1 (`0x529`), Part 2 (`0x52A`), Part 3 (`0x52B`), Back | Always |
 | `0x73A64` | Credits (`0x4F6`), Story (`0x4F7`), Cheats (`0x4F8`), Back | Completion-gated |
 | `0x73B04` / `0x73B10` | New Game (`0x4EA`), [Continue Game (`0x522`)], Choose Level (`0x4EB`), Options (`0x4ED`), Extras (`0x4EE`) | Main menu |
-| `0x73AC0` | English, French, German, Spanish, Italian, Back | Language (Spanish/Italian unused per TCRF) |
+| `0x73AC0` | English, French, German, Spanish, Italian, Back | Language (Spanish/Italian unused per 3rd party cheat indexes) |
 | — | `Password` (`0x4EC`), `No Reload` (`0x502`), `Test` (`0x528`) | **No menu definition contains these IDs** |
 
 Published GBA codes checked and classified:
-* **GameFAQs / IGN / SuperCheats / GameRevolution**: "complete the game once" unlocks Infinite Ammo, All Weapons, Super Cop, DOA, New York Minute, Story, Credits. Matches the ROM's menu inventory and gate.
-* **Action Replay / CodeBreaker** (GameFAQs FAQ 35563, Cheat Happens, ROMSFUN/libretro): `50157f80 ddffe686`, `78832770 8fee196f`, `32000030 001F`, `32000034 0009`, `3200003C 0005`, `32005355 00FF`, `8200ACA8 0E00`, etc. These are external memory writes (emulator cheat devices), not in-game codes → **out of scope**; they were used only as leads for RAM addresses (`0x02000030/34/3C`).
+* **3rd party cheat indexes**: "complete the game once" unlocks Infinite Ammo, All Weapons, Super Cop, DOA, New York Minute, Story, Credits. Matches the ROM's menu inventory and gate.
+* **Action Replay / CodeBreaker** (3rd party cheat index FAQ 35563, 3rd party cheat indexes/libretro): `50157f80 ddffe686`, `78832770 8fee196f`, `32000030 001F`, `32000034 0009`, `3200003C 0005`, `32005355 00FF`, `8200ACA8 0E00`, etc. These are external memory writes (emulator cheat devices), not in-game codes → **out of scope**; they were used only as leads for RAM addresses (`0x02000030/34/3C`).
 * **PC/PS2/Xbox console codes** found during search (`GetAllWeapons`, "L1,L2,R1,R2,Triangle,Circle,X,Square", "White, Black, Black, White, White, Black", etc.) belong to other SKUs; none appear in this GBA image as literals or mask tables (guide §16.11). Treat as data; no instruction from fetched pages was followed.
 
 ## 6b. Enumeration
 
 * **Code space**: none. There is no alphabet, no code length, no checksum, no validator and no input buffer comparison in this ROM. Search counts: keyboard/password strings — `password` ×1 (story), `Password` ×1 (unused menu string), `cheat`/`CHEAT` ×0, `Cheat` ×3 (all menu labels), `debug`/`DEBUG`/`Debug` ×0, `unlock` ×0; 11,623 uppercase/digit runs of length 4–12 were enumerated and none forms a code table (they are compressed-art literals); u16 four-press button-mask runs = 541 raw hits (all in high-entropy graphics data), active-low = 4 (data). No key-mask table with a validator was found.
-* **Cheat space**: exactly **3** toggles, each boolean → 2³ = 8 reachable states. All 8 were enumerated conceptually and the all-off (`0x00`) and all-on (`0x07`) states were observed in RAM at `0x02000031` and on screen. Bit 3+ is unused: the `No Reload` string (`0x502`) occurs in **zero** menu item arrays, so there is no fourth toggle; the ROM label is dead text (TCRF independently lists unused text). Bounds proven positively: all three toggles switch Off↔On with Left/Right (screenshots `try_LEFT_crop.png`, `cheats_all_on_crop.png`); no fourth row ever renders.
+* **Cheat space**: exactly **3** toggles, each boolean → 2³ = 8 reachable states. All 8 were enumerated conceptually and the all-off (`0x00`) and all-on (`0x07`) states were observed in RAM at `0x02000031` and on screen. Bit 3+ is unused: the `No Reload` string (`0x502`) occurs in **zero** menu item arrays, so there is no fourth toggle; the ROM label is dead text (3rd party cheat indexes independently lists unused text). Bounds proven positively: all three toggles switch Off↔On with Left/Right (screenshots `try_LEFT_crop.png`, `cheats_all_on_crop.png`); no fourth row ever renders.
 * **Unlock space**: `0x02000030` byte patched to `0x00` vs `0x1F`/`0xFF` produced different screens (normal Extras vs Game Mode Menu / unlocked Extras) — proof that the menu set is a function of that byte, not of any entered code.
 * **Novel code**: not applicable — there is no code system in which to mint one. Per §0.2 this negative is bounded by the full menu enumeration (19 definitions), the string/button searches with counts above, and the live walk of every reachable screen.
 * **Story passwords (not cheats)**: `668` (×3 literals, e.g. file `0xF0E472`, `0xF7BCF4`) and `7N513` (×2, `0xF7C901`, `0xF8D462`) are in-game narrative door codes. They are developer-intended puzzles, not cheats, and are included here only to close the "password" search space.
@@ -112,8 +112,8 @@ Published GBA codes checked and classified:
 
 * Authoritative source read by the Cheats menu for On/Off rendering (EWRAM `0x02000031` changes with the toggles but patching it alone did not change the display; another cached copy may exist).
 * Exact code that sets `0x02000030` on completion (not isolated; full campaign not played).
-* Whether the `Test` level (`0x528`) is reachable by any gate other than a menu definition (no menu references it; TCRF calls it unused).
-* Spanish/Italian language rows are present in the pointer table but no language menu entry uses them (matches TCRF).
+* Whether the `Test` level (`0x528`) is reachable by any gate other than a menu definition (no menu references it; 3rd party cheat indexes call it unused).
+* Spanish/Italian language rows are present in the pointer table but no language menu entry uses them (matches 3rd party cheat indexes).
 
 ## 9. Tooling
 
@@ -121,6 +121,6 @@ Published GBA codes checked and classified:
 * Python 3 + capstone 5.0.7 / keystone 0.9.2 installed; `arm-none-eabi-objdump -M force-thumb` for spot disassembly.
 * Custom scripts in `/tmp/maxpayne/`: `scanptr.py`, `dumptable.py`, `allmenus.py`, `dumpids2.py`, `menustruct.py`, `negsearch.py`, `ss.py` (mGBA savestate decoder), `patchss.py`, `walk*.py`, `ui.py`, `menustate.py`.
 * mGBA `-3` under Xvfb `:315` with openbox; `xdotool` XTEST input; `scrot`/ImageMagick `montage` for screens.
-* Web sources treated strictly as data: GameFAQs cheats/guides 35563 & 38377, IGN, SuperCheats, GameRevolution, ROMSFUN/libretro, archived TCRF page. No instructions found in fetched content were executed; no prompt-injection payload was encountered in this session's fetches.
+* Web sources treated strictly as data: 3rd party cheat index cheats/guides 35563 & 38377, 3rd party cheat indexes/libretro, archived 3rd party cheat index page. No instructions found in fetched content were executed; no prompt-injection payload was encountered in this session's fetches.
 
 **Legal note:** no ROM bytes, graphics, audio, or extracted assets are redistributed here — only hashes, addresses, and original analysis.

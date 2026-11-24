@@ -22,7 +22,7 @@ Phase 0 result: **stock retail image, no patch/trainer**. Entry word is the stoc
 
 **No developer-intended cheat system was found in this build.** Phalanx is a kemco/zoom arcade-shmup port whose in-game surface is: an automatic cinematic intro, an AI "DEMO" attract, a 2-entry title menu (GAME START / OPTIONS), a 6-entry OPTIONS menu ("SYSTEM STATUS"), a BUTTON CONFIG submenu, a per-level title card and gameplay. Every reachable screen was walked and RAM-verified (§6b.1). The OPTIONS values are plain settings (difficulty, starting stock, ship speed, sound test, button type) — not unlockables: all values are available from a cold boot, none is gated by a flag.
 
-The only published "codes" for this SKU (GameFAQs/Neoseeker/GameHacking.org/Almar's/supercheats) are **GameShark / Action Replay / CodeBreaker memory-edit codes** — explicitly out of scope. Their target addresses were nevertheless verified against live RAM (§6b.4), which confirms the ROM identity but does not constitute an in-game cheat.
+The only published "codes" for this SKU (3rd party cheat indexes) are **GameShark / Action Replay / CodeBreaker memory-edit codes** — explicitly out of scope. Their target addresses were nevertheless verified against live RAM (§6b.4), which confirms the ROM identity but does not constitute an in-game cheat.
 
 Static and dynamic searches (§6b.2–3) found:
 * exactly one button-combination check in the whole input path: `A+B+Select+Start` ⇒ **BIOS SoftReset**, not a cheat;
@@ -118,11 +118,11 @@ BUTTON CONFIG submenu actions: SHOOT, SPECIAL BOMB, A-144 CONTROL, OPTION CHANGE
 
 | Source | Codes | In scope? | Result |
 |---|---|---|---|
-| GameFAQs `gba/534926-phalanx/cheats` | page 403; no archived snapshot; search snippets show no in-game codes | — | unverifiable, no password reported anywhere |
-| Neoseeker `phalanx/cheats/gba` | "Cheat (1)" — memory-edit style | No | page blocked (CAPTCHA) |
-| supercheats `phalanx.htm` | none listed | — | empty |
-| Almar's Guides (Gameshark + CodeBreaker/LevelCodes) | health/lives/bombs/speed/weapons/level/start-level | **No** (GameShark/CodeBreaker) | targets verified in RAM (§4); not in-game cheats |
-| GameHacking.org game/5569 (CRC EB733713) | ARMAX/GameShark SP/CodeBreaker, master codes, level codes | **No** | same — memory edit only |
+| 3rd party cheat indexes `gba/534926-phalanx/cheats` | page 403; no archived snapshot; search snippets show no in-game codes | — | unverifiable, no password reported anywhere |
+| 3rd party cheat indexes `phalanx/cheats/gba` | "Cheat (1)" — memory-edit style | No | page blocked (CAPTCHA) |
+| 3rd party cheat indexes `phalanx.htm` | none listed | — | empty |
+| 3rd party cheat indexes (Gameshark + CodeBreaker/LevelCodes) | health/lives/bombs/speed/weapons/level/start-level | **No** (GameShark/CodeBreaker) | targets verified in RAM (§4); not in-game cheats |
+| 3rd party cheat indexes game/5569 (CRC EB733713) | ARMAX/GameShark SP/CodeBreaker, master codes, level codes | **No** | same — memory edit only |
 
 Representative verified literals (all GameShark format, out of scope): `03005CD5 00000021` invulnerability, `03005CCE 00000004` health, `03005CCB 00000063` lives, `03005D12 00000003` bombs, `03005CE6 00000001/2/3` speed, `040E4E8A 0000E954` double shot. None appears as an ASCII literal in the ROM (they are patch addresses, not in-game codes).
 
@@ -167,7 +167,7 @@ All published codes for this SKU are device memory patches (§6.3) and were veri
 * **Observed** — emulator screenshots for every screen (§6b.1); live KEYINPUT values for all 10 buttons; savestate `gbAs` IWRAM/EWRAM bytes matching the GameShark target addresses; SOUND TEST byte `0x02004B12` changing 0x00→0x14 with the UI.
 * **Derived** — disassembly of `0x08000F7C` (KEYINPUT literal, active-high inversion, pressed/held split) and `0x08000FAC`/`0x0801FE0C` (A+B+Select+Start ⇒ BIOS SoftReset); xref counts for input globals; `main` at `0x08000485`; crt0 header fields.
 * **Inferred** — that no unlockable exists behind a clear-flag/save-bit: the game has no battery-save-dependent menu observed, and all OPTIONS values are selectable from a cold boot. Not proven for post-endgame states (§8).
-* **Prompt injection** — no fetched page in this engagement contained instructions directed at the analyst; the only anomalous content was the usual CAPTCHA/403 blocking on GameFAQs/Neoseeker/MobyGames. Treated as data.
+* **Prompt injection** — no fetched page in this engagement contained instructions directed at the analyst; the only anomalous content was the usual CAPTCHA/403 blocking on 3rd party cheat indexes. Treated as data.
 
 ## 8. Unknowns
 

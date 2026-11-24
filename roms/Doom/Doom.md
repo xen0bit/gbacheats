@@ -19,7 +19,7 @@
 Embedded-header scan (156-byte Nintendo logo at `+4`): **one** header, at file `0x0`. No
 second image, no appended trainer, no cracktro patch. Header checksum `0x0000` is the
 normal rebuilt-header artifact (§16.1); the entry word and first 4 KiB are stock.
-Developer (per TCRF): id Software / David A. Palmer Productions, published by Activision,
+Developer (per 3rd party cheat indexes): id Software / David A. Palmer Productions, published by Activision,
 2001. WAD data is derived from the Jaguar port.
 
 ## 2. Executive summary
@@ -27,7 +27,7 @@ Developer (per TCRF): id Software / David A. Palmer Productions, published by Ac
 This GBA port has a complete, developer-intended **button-code cheat system**, not a
 password or hidden menu. It consists of **nine 8-button sequences** using only A and B,
 validated by a fixed table comparison. Every one of the nine is on the published
-GameFAQs/Doom-Wiki list. Two necessary conditions are **absent from every published
+3rd party cheat indexes/3rd party cheat index list. Two necessary conditions are **absent from every published
 list** and were recovered here:
 
 1. The sequence must be entered on the **in-game PAUSE screen** (the validator runs
@@ -46,7 +46,7 @@ ten levels. RAM proof: god flag at `0x03000544` bit 1, message pointer at `0x030
 
 There is **no password entry, no sound test, no debug/secret menu, and no level-select
 screen**. The `SECRET` string at `0x6AA3F8` is the intermission-secret counter.
-TCRF's "hidden development text" is static debug strings (`OBJA/OBJV/FPS` at
+a 3rd party cheat index's "hidden development text" is static debug strings (`OBJA/OBJV/FPS` at
 `0x6AA304`), an unused 4th-episode title (`0x6AA364`, `THY FLESH CONSUMED`), unused
 graphics/music and one unused pickup message — none is a reachable menu. All screens
 were walked and enumerated (§3, §7).
@@ -171,7 +171,7 @@ only when the result is in `1..24`; this is the source of the observed level bou
 | 7 | `01 00 01 01 00 00 00 01` | ABAABBBA | `0x080114EC` | map `1→2` at `0x03000948`; no message |
 | 8 | `01 00 01 01 00 00 01 01` | ABAABBAA | `0x080114F8` | map `1→11` at `0x03000948`; no message |
 
-All nine byte strings were matched literally against the GameFAQs/Doom-Wiki published
+All nine byte strings were matched literally against the 3rd party cheat indexes published
 list (which omits the L+R + pause-screen gating). No published GBA code was absent from
 the ROM; no PC cheat literal was present.
 
@@ -195,8 +195,7 @@ screen):**
 
 **Novel code (not in any published list).** `A A B A A A A A B` (nine presses: the
 God-mode sequence plus one extra B). Every published GBA Doom code is eight presses,
-so this nine-press input appears in no published list (GameFAQs, Doom Wiki/Fandom,
-TCRF, VGChartz). Entered on the pause screen with L+R held, it was **accepted**:
+so this nine-press input appears in no published list (3rd party cheat indexes). Entered on the pause screen with L+R held, it was **accepted**:
 `[0x03000544] = 0x00000002`, `[0x03000558] = 0x084FF624` ("God mode on"), and the
 on-screen message `GOD MODE ON` was captured. A 10-press variant
 `AABAAAAABB` was accepted identically. This proves the documented eight-press
@@ -228,13 +227,13 @@ from a starting map of 1, so the upper bound remains **Derived**, not observed.
   60-frame idle reset, the prefix-only comparison that admits 9- and 10-press inputs,
   and the `1..24` warp bound. The validator has **no skill check** and **no password
   parser**; the PC `cht_CheckCheat` typed-code scanner is absent.
-* **Inferred**: the two warp codes are intended for single-player only (GameFAQs says
+* **Inferred**: the two warp codes are intended for single-player only (3rd party cheat indexes say
   so, and the handler writes a global map index rather than a per-player field); the
   netgame abort likely disables all nine codes in link play, but no link session was
   available to confirm.
 * **Negative results bounded**: string scan of the full 8 MiB for
   `password|cheat|code|debug|secret|unlock|level|warp|sound test` found only UI text,
-  WAD lump names, engine asserts and the counter labels — classified in §2. TCRF's
+  WAD lump names, engine asserts and the counter labels — classified in §2. a 3rd party cheat index's
   archived article was checked and lists only unused graphics/music/text, no menu.
   Literal searches for all PC cheats returned zero. 256-sequence 8-press space searched
   by table enumeration (9 accepted) plus four representative rejections through the
@@ -250,7 +249,7 @@ from a starting map of 1, so the upper bound remains **Derived**, not observed.
   retested (the handler has no skill branch).
 * The `1..24` upper map bound is derived, not exercised (would need a starting map
   near 24).
-* TCRF's unused graphics/music were not extracted or rendered; they are out of the
+* a 3rd party cheat index's unused graphics/music were not extracted or rendered; they are out of the
   in-game-cheat scope and no menu exposes them.
 
 ## 9. Tooling

@@ -259,8 +259,8 @@ There is **no code space**, so there is no alphabet/length/checksum to state for
 
 ### 6b.2 Published list check
 
-GameFAQs' only entry for this SKU (archived 2025-08-19) is the **Unlock City 2** row:
-"Get a Crazy License ($10,000+) in City 1 on normal rules". CheatCC's page carries the same single
+3rd party cheat indexes' only entry for this SKU (archived 2025-08-19) is the **Unlock City 2** row:
+"Get a Crazy License ($10,000+) in City 1 on normal rules". a 3rd party cheat index's page carries the same single
 unlockable ($10,000+ in normal rules / 3 / 5 / 10 minutes). **No password, button code or debug code
 is published for the GBA SKU**, and none was found, so there was no literal to grep and no published
 code to reproduce.

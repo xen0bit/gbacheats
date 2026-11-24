@@ -35,8 +35,8 @@ cheat that does exist is a **button code**: a four-button reset
 `0x08027264`; it was confirmed in the emulator. Two more intended shortcuts were
 reached on the field: `START` = Team Formation (robot select) and `SELECT` = Save.
 
-Every published "cheat" found on the web (GameFAQs/Autocon patch guide,
-GameHacking.org, Codejunkies, 53lu, Almar's Guides, gbadamud) is a
+Every published "cheat" found on the web (3rd party cheat indexes/Autocon patch guide,
+3rd party cheat indexes) is a
 GameShark/CodeBreaker/Action Replay **memory-edit** code (e.g. `8203EC30 0063`
 → write `0x0063` to EWRAM `0x0203EC30`); these are out of scope and were not
 applied. No code list contains a typed code, and no literal from any password
@@ -230,8 +230,7 @@ by the searches in §7 and the screen walks in §3.
 - `gdb-multiarch` + custom GDB-RSP client (`rsp.py`, `gdbserver.py`) for IWRAM
   reads and read-watchpoints; `keydiff.py`/`diffkeys.py` for RAM diffs.
 - Pillow renderer (`render_tiles.py`) for 4bpp VRAM tiles.
-- Web sources: GameFAQs (Autocon patch/secret/walkthrough FAQs), Neoseeker,
-  GameHacking.org, Codejunkies, 53lu, Almar's Guides, gbadamud; plus the
+- Web sources: 3rd party cheat indexes (Autocon patch/secret/walkthrough FAQs), 3rd party cheat indexes; plus the
   `rommerhacks/medabots-rokusho` decomp (different SKU, hint only). Fetched
   pages were treated as data; no prompt-injection payload was encountered.
 

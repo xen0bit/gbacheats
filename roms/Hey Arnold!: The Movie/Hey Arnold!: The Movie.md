@@ -26,7 +26,7 @@ This game has **two developer-intended systems**, both found and exercised:
 1. **A 9-symbol password save/unlock system** (the main "Password" menu item and the "Password" option in the in-game Pause menu). There is **no plaintext code table**: published codes do not occur anywhere in the ROM in any case/UTF encoding. The system is algorithmic — a 64-symbol on-screen keyboard maps each character to a 6-bit value; the nine values are stored in an IWRAM buffer; a keyed table transform produces a 32-bit payload plus a 6-bit checksum. The full decoder/encoder was reversed, reimplemented in Python, and used to mint an unpublished code which the game accepted and which its own generator later reproduced.
 2. **A button combination on the Area Select (Map) screen** that toggles the hidden playable character Helga. The published sequence was verified with a RAM flag before/after, its toggle routine was located, and several undocumented sequences were tested and rejected.
 
-Published GameFAQs/Cheat-Happens codes were verified against the ROM decoder: 17 of 19 decode cleanly; the two corrupted entries (3-2, 3-3) are transcription errors, and a corrected 3-2 was derived. Area **1-1 is absent from every published list** and was reached with a minted code.
+Published 3rd party cheat indexes/3rd party cheat index codes were verified against the ROM decoder: 17 of 19 decode cleanly; the two corrupted entries (3-2, 3-3) are transcription errors, and a corrected 3-2 was derived. Area **1-1 is absent from every published list** and was reached with a minted code.
 
 ## 3. How to reproduce
 
@@ -94,11 +94,11 @@ Bits 17–24 of `payload32` are **unused** (aliases: 256 spellings per state). T
 45..59  4 5 6 7 8 9 0 ! ? $ % & # + -
 60..63  < > : .
 ```
-(Vowels are omitted; `&` is the "and" glyph noted by GameFAQs.)
+(Vowels are omitted; `&` is the "and" glyph noted by 3rd party cheat indexes.)
 
 **T table (first/last entries):** `T[0]=0, T[1]=6, T[2]=12, … T[62]=255, T[63]=255`; full 64-entry dump is in `dumptable.py` output / `model.py`.
 
-**Published area passwords (GameFAQs + Cheat Happens), decoded:**
+**Published area passwords (3rd party cheat indexes), decoded:**
 
 | Area | Password | level | mask | score | lives |
 |---|---|---|---|---|---|
@@ -122,7 +122,7 @@ Bits 17–24 of `payload32` are **unused** (aliases: 256 spellings per state). T
 | 5-3 | `7D8qYmM6C` | 19 | 0xFBF | 64 | 9 |
 | 5-4 | `fXc-bz1Sl` | 20 | 0xFBF | 5 | 9 |
 
-Published-list defects: GameFAQs 3-2 (`:Ky2zd0t`) and 3-3 (`+Xm`) are truncated; Cheat Happens' 9-char `s:ky2zd0t` and `+xm<qb28l` still fail the checksum. Single-character repair search finds `s:Ky2zd0t` (level 10, key `K=3`, consistent mask `0x1BF`) as the unique plausible 3-2 correction. Area **1-1** is not published.
+Published-list defects: 3rd party cheat indexes 3-2 (`:Ky2zd0t`) and 3-3 (`+Xm`) are truncated; 3rd party cheat indexes' 9-char `s:ky2zd0t` and `+xm<qb28l` still fail the checksum. Single-character repair search finds `s:Ky2zd0t` (level 10, key `K=3`, consistent mask `0x1BF`) as the unique plausible 3-2 correction. Area **1-1** is not published.
 
 **Button code:** at Area Select, `Up,Down,Right,Left,Left,Right,Down,Up,Select` toggles Helga (`0x03001AD2` 0↔1). The sprite changes on the map and in-stage dialogue is attributed to HELGA.
 
@@ -133,7 +133,7 @@ Published-list defects: GameFAQs 3-2 (`:Ky2zd0t`) and 3-3 (`+Xm`) are truncated;
 **Validator model.** `model.py` implements the checksum, transform, payload layout, and all semantic range checks (§5). Cross-checks: it exactly reproduces 17 published codes, rejects the two corrupted published forms, and agrees with the game on accepted *and* rejected minted inputs.
 
 **Novel codes (no published list).**
-- **`c+!5-:Jkb`** — level 1 (1-1; absent from GameFAQs, Cheat Happens, TCRF, VGChartz), lives 7, score 42, key 0. Entered via RAM buffer + O.K. **Accepted.** RAM after acceptance: `0x03001668=0x07` (7 lives), `0x03001669=0x2A` (42 score), `0x0300166C=0x00000001` (level-1 unlocked), `0x03001674=0`. Screens: AREA SELECT "Arnold's Street", STAGE SELECT, stage intro `1-1 Arnold's street. OBJECTIVE You must find all five of Arnold's friends.`, and gameplay. The game's own Pause→Password screen later displayed **`c+!5-:Jkb`**, independently confirming the encoder.
+- **`c+!5-:Jkb`** — level 1 (1-1; absent from 3rd party cheat indexes), lives 7, score 42, key 0. Entered via RAM buffer + O.K. **Accepted.** RAM after acceptance: `0x03001668=0x07` (7 lives), `0x03001669=0x2A` (42 score), `0x0300166C=0x00000001` (level-1 unlocked), `0x03001674=0`. Screens: AREA SELECT "Arnold's Street", STAGE SELECT, stage intro `1-1 Arnold's street. OBJECTIVE You must find all five of Arnold's friends.`, and gameplay. The game's own Pause→Password screen later displayed **`c+!5-:Jkb`**, independently confirming the encoder.
 - `mQJB0WgRg` — published 1-2 payload with lives changed 3→7 (novel stat combination); decoder-valid. Generated and validated offline.
 - `1G%5h4Lrb` — level 10 with a different key (novel keying of a published level); decoder-valid.
 

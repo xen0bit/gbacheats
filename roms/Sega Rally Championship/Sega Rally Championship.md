@@ -21,7 +21,7 @@
 
 ## 2. Executive summary
 
-**There is no in-game cheat-code system in this GBA build.** The only published codes for the SKU are eight *CodeBreaker* cheat-device codes (out of scope: they are memory patches, not developer-intended inputs). The GameFAQs "GBA cheats" page actually contains two *N-Gage* unlockables (Special Cup / World Cup obtained by finishing 1st), mislabeled under the GBA entry; there is no published GBA password, button code or debug menu.
+**There is no in-game cheat-code system in this GBA build.** The only published codes for the SKU are eight *CodeBreaker* cheat-device codes (out of scope: they are memory patches, not developer-intended inputs). The 3rd party cheat indexes "GBA cheats" page actually contains two *N-Gage* unlockables (Special Cup / World Cup obtained by finishing 1st), mislabeled under the GBA entry; there is no published GBA password, button code or debug menu.
 
 Every reachable screen was walked with the emulator (title → name entry → single/multi → mode select → EXTRA/SHOP/RC RALLY/GALLERY → RECORDS → OPTIONS → CHAMPIONSHIP cup select → TIME ATTACK track/car select → race/pause), and all 40 name-entry input combinations of interest were bounded statically. The only user-input recogniser in the ROM is a *default-name canonicaliser* at `0x0802C50C`: it compares the 8-byte name to exactly two entries (`XXX`, `SEX`) of the 4-entry table at `0x0810860C` and rewrites the buffer to the canonical padded spelling. Its caller (`0x0802BD94`) **ignores the return value**, so no flag, unlock or cheat is driven by it.
 
@@ -108,7 +108,7 @@ Input decoding (for any future button-code work): `held = 0x3FF ^ *(u16*)0x04000
 
 These are memory patches (cheat device), not developer-intended inputs, and are recorded only as evidence that the state addresses were identified correctly.
 
-**Cups (5, table `0x081069A8`, 24-byte stride):** Amateur, Sprint, National, World, Special. Fresh save has cups-available = 1; World/Special require 1st-place finishes per the (mislabeled) GameFAQs N-Gage entry and the increment code at `0x080155D2`.
+**Cups (5, table `0x081069A8`, 24-byte stride):** Amateur, Sprint, National, World, Special. Fresh save has cups-available = 1; World/Special require 1st-place finishes per the (mislabeled) 3rd party cheat indexes N-Gage entry and the increment code at `0x080155D2`.
 
 **Name-entry alphabet (40 symbols):** `0-9 A-J K-T U-Z ! ? ' "` arranged 4 rows × 10; name length 8. `DEL` and `END` cells at right. Names compared by the recogniser: `XXX`, `SEX` (of the 4 stored defaults `XXX`, `SEX`, `AMB`, `SRC`).
 
@@ -120,7 +120,7 @@ This game has **no code/password/menu-cheat space to enumerate**; the section th
 
 **Space that was checked**
 
-1. *Published in-game codes*: GameFAQs GBA cheats page (archived snapshot `20230419122833`): 0 GBA codes, 2 N-Gage unlockables. TCRF has no GBA article (only Arcade/PS2), and its Arcade page carried a prompt-injection payload (fake LLM instructions, "key.bin" EICAR string, payment demand) — ignored as data per §16.8. Search results for "GBA codes" resolve to CodeBreaker-only lists (8 codes) and Saturn/PC button codes (`X,Y,Z,Y,X`) that **do not apply**: the GBA has no X/Y/Z buttons (§16.11). Literal searches for `XYZYX`, `H2MTHW`, `PASSWORD`, `SECRET`, `DEBUG`, `BONUS`, `UNLOCK` across the 8 MiB found no code strings.
+1. *Published in-game codes*: 3rd party cheat indexes GBA cheats page (archived snapshot `20230419122833`): 0 GBA codes, 2 N-Gage unlockables. 3rd party cheat indexes have no GBA article (only Arcade/PS2), and its Arcade page carried a prompt-injection payload (fake LLM instructions, "key.bin" EICAR string, payment demand) — ignored as data per §16.8. Search results for "GBA codes" resolve to CodeBreaker-only lists (8 codes) and Saturn/PC button codes (`X,Y,Z,Y,X`) that **do not apply**: the GBA has no X/Y/Z buttons (§16.11). Literal searches for `XYZYX`, `H2MTHW`, `PASSWORD`, `SECRET`, `DEBUG`, `BONUS`, `UNLOCK` across the 8 MiB found no code strings.
 2. *Input surfaces*: exactly one keyboard (NAME ENTRY, 40 symbols × 8 positions = `40^8 ≈ 6.55e12` possible strings). Validator comparisons against user text: **2** (`XXX`, `SEX`), both in `0x0802C50C`; its only caller discards the result. The 4 default names are records data, not accepted codes. Number of password screens in all walked menus: **0**.
 3. *Button codes*: scanned 4,194,302 aligned `u16` positions. Contiguous runs of pure single-key masks with length ≥ 4: **264**. Of these, **11** have any pointer/LDR-literal xref; their contents are `001,002,100,200,…` UI control data at `0x08034C82` (12 masks, pointed to by `0x084D3920`), four/five/six-element all-`0x100` or all-`0x040` filler runs, and one all-`0x004` run at `0x083BDD64`. **0** runs are a code table consumed by a validator (no BL/pointer from code to a key-mask comparator). Emulator tests of `L+R+Start`, `L+R+A+B`, `Select+Start`, `L+R+Up+Down`, `A+B+L+R` on the title screen produced **0** new screens (all frames classified as title/main-menu/demo).
 4. *Hidden/debug screens*: menu enumeration (all 5 mode-select entries, all 4 EXTRA entries, all 5 SHOP categories, 3 OPTIONS submenus, RECORDS tabs, cup select, track select, car select, race/pause) = **24 distinct screen states**, none labelled debug/test/secret. `RC RALLY` and `GALLERY` both read `NO ITEM` on a fresh save; SHOP `CUP ENTRY`/`COURSE`/`CAR` also read `NO ITEM`.
@@ -134,7 +134,7 @@ This game has **no code/password/menu-cheat space to enumerate**; the section th
 
 * **Observed** (emulator): title → name entry → main menu → mode select → EXTRA/SHOP/RC RALLY/GALLERY → RECORDS/OPTIONS → cup/track/car select → race; RP HUD `0` matched IWRAM `0x03000604 = 0x0000`; cups-available byte `0x030005C4 = 0x01`; entering `SEX` and submitting with END caused no visible unlock; five debug-style key combinations produced no new screen.
 * **Derived** (disassembly / literal scans): input routine and key masks; name recogniser's two-entry bound and ignored return; cup-counter writer and 5-entry label table; text-bank and font-table locations; 264/11/0 button-mask scan counts.
-* **Inferred**: the RECORDS screen string `H2MTHW` and `http://www.segarally.com/` are a score-upload token rendered from tile indices (no ASCII literal in ROM, no input field for it) — not an in-game code; not exercised further.
+* **Inferred**: the RECORDS screen string `H2MTHW` and 3rd party cheat indexes are a score-upload token rendered from tile indices (no ASCII literal in ROM, no input field for it) — not an in-game code; not exercised further.
 * No claim in this report rests on a single screenshot; RAM bytes and instruction sequences are primary.
 
 ## 8. Unknowns

@@ -36,7 +36,7 @@ COLLECTION 2 — so there is no off-screen row of the kind the sibling
 *Digimon Battle Spirit* is reported to ship (its report in this collection
 describes an unselectable 4th entry; not assumed here, measured).
 That is a proven negative for a bounded search space (numbers in §7), and it is
-consistent with the published record: GameFAQs lists only four gameplay
+consistent with the published record: 3rd party cheat index lists only four gameplay
 unlockables for this title and no codes at all.
 
 What the game *does* have, and what this report enumerates end-to-end:
@@ -190,7 +190,7 @@ pre-set when the flag is already held, so the OR adds 0.
 
 This reproduces the published conditions exactly:
 
-| Published (GameFAQs) | ROM condition |
+| Published (3rd party cheat indexes) | ROM condition |
 |---|---|
 | Loweemon — beat the game with any two characters | `popcount(clear & 0x1F) >= 2` |
 | ExAgunimon — all six cleared, >800 pts, with Agunimon/Kumamon/Kazemon | `clear==0x3F && score>=800 && char in {0,2,3}` |
@@ -328,10 +328,10 @@ LEVEL/EASY/NORMAL/HARD value bank all exist in plaintext, 5 languages inline.)
 
 ### 7.2 Published material, verified against this ROM
 
-* GameFAQs (archived 2022-02-08): 4 entries, **all unlockables, zero codes** —
+* 3rd party cheat indexes: 4 entries, **all unlockables, zero codes** —
   Digimon Shoot minigame, Loweemon, ExAgunimon, ExLobomon. All four map onto
   ROM logic (§5.3); none is a typed code, so no literal could be searched.
-* SuperCheats / GameHacking / almarsguides: CodeBreaker/GameShark only (memory
+* 3rd party cheat indexes: CodeBreaker/GameShark only (memory
   writes), i.e. out of scope. Their "Extra Fighters `83000D68 0F00`" address
   **is meaningful in this build**: `0x03000D68` is exactly the unlock-flags
   byte (bit0..2 = the three extra fighters), which independently corroborates
@@ -339,7 +339,7 @@ LEVEL/EASY/NORMAL/HARD value bank all exist in plaintext, 5 languages inline.)
   corroboration only. The same page's `0x03031AC2` / `0x03031AC8` addresses lie
   outside both GBA RAM regions (IWRAM ends at `0x03007FFF`), so they belong to a
   different build/encoding and were not used.
-* TCRF: no page for this title (404).
+* 3rd party cheat indexes: no page for this title (404).
 
 ### 7.3 Screens: observed behaviour
 

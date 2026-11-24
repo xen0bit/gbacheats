@@ -20,7 +20,7 @@
 | SHA-256 | `e9ca59436c70e4414ad5d8e486d1e40d1b8bd716dca99d15e58fc51d6fa354aa` |
 
 The image is the retail USA GBA release developed by Mass Media / published by
-Blizzard Classic Arcade (per GameFAQs game detail), not the SNES/Genesis build
+Blizzard Classic Arcade (per 3rd party cheat indexes game detail), not the SNES/Genesis build
 by Silicon & Synapse. This distinction is decisive (§16.11): the widely
 published 12-character passwords are for SNES/Genesis, not for this SKU.
 
@@ -37,7 +37,7 @@ reachable password system in this GBA build.**
    * Hold **L + R + Select** and press **Right** while **NHO** is highlighted
      at the **planet-select** screen (VS MODE → CHANGE PLANETS) → the hidden
      sixth planet **Inferno** is revealed and selected.
-   Both are the two codes published on the GameFAQs GBA cheats page; both were
+   Both are the two codes published on the 3rd party cheat indexes GBA cheats page; both were
    reproduced in the emulator. The actual trigger is broader than the published
    wording: the driver version works from *any* highlighted driver (pressing
    the combo from Snake jumps straight to Olaf), while the planet version is
@@ -149,7 +149,7 @@ other action branch, sequence length, or modifier set produced an effect in
 the tested space (§6b).
 
 **Password algorithm (documented for SNES/Genesis, NOT wired into this ROM):**
-the external JS generator (`barcodebattler.co.uk/SORR/pwGen2up.htm`) shows a
+the external JS generator (3rd party cheat indexes) shows a
 12×5-bit XOR matrix `defaultBits =
 [[1,0,0,1,0],[1,1,1,1,0],[1,0,1,0,0],[1,0,1,0,1],[0,1,1,0,1],[0,1,1,0,0],
 [1,0,1,1,1],[1,0,0,1,0],[1,0,1,0,1],[0,1,1,1,0],[1,1,0,0,1],[0,0,0,0,0]]`
@@ -166,14 +166,14 @@ wholesale leftover from the SNES UI asset set.
 
 ## 6. Tables
 
-**Published GBA codes (GameFAQs GBA cheats page, contrib. eli0918):**
+**Published GBA codes (3rd party cheat indexes GBA cheats page, contrib. eli0918):**
 
 | Effect | Input |
 |---|---|
 | Play as Olaf (Lost Vikings cameo) | Driver select: highlight Tarquinn, L+R+Select, Right |
 | Unlock Inferno in VS mode | Planet select: highlight NHO, L+R+Select, Right |
 
-Both verified in the ROM/build and in the emulator. The remaining GameFAQs
+Both verified in the ROM/build and in the emulator. The remaining 3rd party cheat index
 entries on that page (drive anywhere, infinite bullets, infinite money,
 Inferno/Olaf via 9-press sequences) are explicitly labelled GEN/SNES and do
 not apply to this SKU.
@@ -305,7 +305,6 @@ diff was not re-captured in a later run — the same four flag bytes are
 * Python helpers in `/tmp/rocknroll/`: `gba.py` (input/capture),
   `gdbh.py` (GDB FIFO driver), `dump.py` (RAM dumps), plus inline savestate
   `gbAs`/zlib decoder used for the flag diffs.
-* Web: GameFAQs GBA/SNES cheats pages (via search index), Wikipedia,
-  barcodebattler.co.uk SNES password generator (algorithm reference only).
+* Web: 3rd party cheat indexes GBA/SNES cheats pages (via search index), 3rd party cheat indexes SNES password generator (algorithm reference only).
 * No ROM or extracted assets were redistributed; only hashes, addresses,
   algorithms and original analysis scripts are published.

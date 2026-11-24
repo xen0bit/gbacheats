@@ -14,7 +14,7 @@
 - **Embedded GBA-header scan:** Nintendo-logo byte pattern occurs **exactly once**, at file `0x4` (header `0x0`). Single-image ROM; no multiboot stub, no appended trainer. Last 4 KiB are all zeros; size is a clean power of two.
 
 ## 2. Executive summary
-**The GBA build of Nicktoons: Battle for Volcano Island has no in-game cheat system.** There is no password/code-entry screen, no button-code matcher, no hidden debug menu, and no unlockable-by-input surface. The only "cheats"/"passwords" published for this title belong to the **PS2, GameCube and DS** SKUs (5-digit numeric codes in an "Extras → Cheats → Enter Cheat Code" menu); that menu does not exist in the GBA image. The GBA GameFAQs page lists only **gameplay-gated character unlockables** (finish World 1 → Timmy, finish World 4 → Patrick, collect 5 Gold Hearts in every level → Manuel/Angel/Anne/Jessica), which are save-bit achievements, not codes.
+**The GBA build of Nicktoons: Battle for Volcano Island has no in-game cheat system.** There is no password/code-entry screen, no button-code matcher, no hidden debug menu, and no unlockable-by-input surface. The only "cheats"/"passwords" published for this title belong to the **PS2, GameCube and DS** SKUs (5-digit numeric codes in an "Extras → Cheats → Enter Cheat Code" menu); that menu does not exist in the GBA image. The GBA 3rd party cheat index page lists only **gameplay-gated character unlockables** (finish World 1 → Timmy, finish World 4 → Patrick, collect 5 Gold Hearts in every level → Manuel/Angel/Anne/Jessica), which are save-bit achievements, not codes.
 
 This is a **bounded negative result** (guide §0.2): the complete UI-screen asset set, the complete localization text-ID set, the ASCII string space, and the entire raw-input handling library were enumerated with counts; every reachable menu was walked in mGBA with RAM reads; published cross-platform codes were tested against the ROM and found absent; representative button sequences were entered on the title screen and shown by savestate diff to change no persistent flag.
 
@@ -81,12 +81,12 @@ Followed by generic edge/held/release helpers and a 14-entry key→action jump t
 - **Validator model:** N/A (no validator). The 2-byte RAM diff after exhaustive title-screen button sequences contains only a frame timer (`0x02004B8C`: `0x011F` → `0x014D`, +46 frames) and a transient debounce counter (`0x02006DEC`: `0` → `4`); input state resets to `0xFC00FC00` and **no persistent unlock/cheat flag changes**.
 - **Novel codes:** None possible — a code system does not exist in this SKU. This is the guide's explicit "no system" branch (§0.2 item 5), not an untested system.
 - **Bounds proven by rejection:** Non-existent field values cannot be submitted because there is no entry UI; instead the bound is proven by (a) complete screen/asset/text enumeration showing zero entry surfaces, and (b) dynamic rejection: 40-button sequences (Konami-style Up/Up/Down/Down/Left/Right/Left/Right+B+A, L/R+diagonal variants) entered on the title screen produced **no state change** beyond the frame counter — screenshots `s43_after_codes_title`, states `title_base.ss` / `title_codes.ss`.
-- **Published-list closure:** PS2/GC/DS 5-digit codes and DS character password verified against the ROM and rejected as GBA-applicable; GBA GameFAQs/VGChartz/TCRF list only gameplay unlockables and dev/unused text.
+- **Published-list closure:** PS2/GC/DS 5-digit codes and DS character password verified against the ROM and rejected as GBA-applicable; GBA 3rd party cheat index list only gameplay unlockables and dev/unused text.
 
 ## 7. Validation evidence
 - **Observed:** all screens in §3 captured in mGBA on `:316`; title-screen button sequences leave the title unchanged; save file is 512-byte EEPROM with 3 slots; input state read from decompressed savestate RAM.
 - **Derived:** complete `.dts`/ID/string inventories prove no cheat UI; input-library disassembly and pointer-count prove no button-code matcher; literal searches prove cross-platform codes absent.
-- **Inferred:** the four gameplay-gated characters are stored as save bits (consistent with the 3-slot save layout and GameFAQs); exact bit positions were not isolated because the setters require story completion.
+- **Inferred:** the four gameplay-gated characters are stored as save bits (consistent with the 3-slot save layout and 3rd party cheat indexes); exact bit positions were not isolated because the setters require story completion.
 
 ## 8. Unknowns
 - Exact save-bit indices for the four gameplay-gated characters (require finishing World 1/4 and the 5-Gold-Heart condition; not needed to answer the cheat-system question).
@@ -95,6 +95,6 @@ Followed by generic edge/held/release helpers and a 14-entry key→action jump t
 
 ## 9. Tooling
 - `arm-none-eabi-objdump -M force-thumb` for the input library; Python/Capstone 5.0.7; `strings -t x`, `grep -abo`; Python `zlib` savestate `gbAs` decoder (`stateutil.py`, `ctl.py` in `/tmp/nicktoonsvolcano`); `Xvfb :316` + `openbox` + mGBA SDL + `xdotool` + `scrot`.
-- Web: GameFAQs GBA cheats (archived 2021), TCRF GBA page (archived 2023), VGChartz, GameFAQs GC/PS2/DS pages. Fetched pages were treated as data; no prompt-injection content was encountered.
+- Web: 3rd party cheat indexes GBA cheats (archived 2021), 3rd party cheat indexes GBA page (archived 2023), 3rd party cheat indexes GC/PS2/DS pages. Fetched pages were treated as data; no prompt-injection content was encountered.
 
 No ROM or copyrighted assets are redistributed here — only addresses, hashes, and our own observations.

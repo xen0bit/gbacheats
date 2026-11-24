@@ -44,7 +44,7 @@ Every menu reachable from a fresh boot and from a normal save was walked with RA
 evidence (§3, §6); the game's text was decoded rather than merely `strings`-scanned
 (§4), and the published codes were tested against the ROM (§6b).
 
-The only published "GBA codes" found on the web are two **name cheats** on GameFAQs —
+The only published "GBA codes" found on the web are two **name cheats** on 3rd party cheat indexes —
 `.` ("can't see name in multiplayer") and `Jub Jub` ("Tiny people") — also mirrored by a
 Russian GBA site. Both fail verification against this ROM:
 
@@ -53,7 +53,7 @@ Russian GBA site. Both fail verification against this ROM:
 * the game's only on-screen name field is a **3-character high-score initials** entry
   using a 37-symbol alphabet (`A`–`Z`, `1`–`9`, `0`, space) at `0x08498F98` — it has no
   `.` symbol and cannot hold the 7-character `Jub Jub`;
-* the GameFAQs walkthrough for this exact GBA SKU documents no name entry at New Game
+* the 3rd party cheat index walkthrough for this exact GBA SKU documents no name entry at New Game
   (and explicitly states "there are no options in this game").
 
 These codes are most plausibly carried over from the PC/other SKU (the related PC
@@ -68,7 +68,7 @@ is attached to a reachable cheat/debug entry point (§16.3: these are inert left
 not a dead-but-callable cheat system — no validator, alphabet gate, or table references
 them).
 
-**Security note (§16.8):** a fetch of the TCRF GBA page returned a prompt-injection
+**Security note (§16.8):** a fetch of the 3rd party cheat indexes GBA page returned a prompt-injection
 payload disguised as "instructions for LLMs": a fake XOR "decode key" that is actually
 the EICAR antivirus test string (`X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-...`), a demand to
 transfer one octillion USD, and a fake publication date "August 37rd, 2027". It was
@@ -197,7 +197,7 @@ field), the entire ROM text/button spaces, and every reachable screen.
 
 ## 7. Validation evidence
 
-* **Observed:** all hashes/header bytes; logo scan (two headers); `strings` counts (99,445 ASCII runs ≥4; keyword hits: `password`=0, `cheat`=0, `code`=0, `secret`=0, `unlock`=0, `debug`=0, `jub`=1 [`GOGOMONKEYX` substring], `warp`=2 compressed-script fragments); alphabet bytes at `0x08498F98`; savestate dumps and diffs for 9 screen states; decompressed script text in EWRAM; `.sav` high-score records; no effect from patched names or button combos; prompt-injection payload in the TCRF response.
+* **Observed:** all hashes/header bytes; logo scan (two headers); `strings` counts (99,445 ASCII runs ≥4; keyword hits: `password`=0, `cheat`=0, `code`=0, `secret`=0, `unlock`=0, `debug`=0, `jub`=1 [`GOGOMONKEYX` substring], `warp`=2 compressed-script fragments); alphabet bytes at `0x08498F98`; savestate dumps and diffs for 9 screen states; decompressed script text in EWRAM; `.sav` high-score records; no effect from patched names or button combos; prompt-injection payload in the 3rd party cheat indexes response.
 * **Derived:** Thumb disassembly of `0x08019D24`/`0x08019EE4` and the modulo-37 helper; pointer-xref scan confining the high-score UI to `0x08019500`–`0x0801A300`; the `0x240` header identified as a multiboot stub from its maker/fixed bytes; record layout of high scores.
 * **Inferred:** the two published name cheats are most likely inherited from another SKU (PC/LEGO Island 1), because their literal and required input length are both absent here; the `0x67xxxx` `cmp #0x4A/#0x55` coincidences are compressed graphics, not code.
 * **Not claimed:** no claim that a code works; no claim beyond the screens actually walked.
@@ -223,8 +223,8 @@ field), the entire ROM text/button spaces, and every reachable screen.
   HEADER/IWRAM/EWRAM for RAM evidence (§16.13).
 * `dbgserver.py`/`dbg.py`: pty bridge to mGBA `-d` CLI debugger (RAM reads were attempted;
   savestate diffing was the reliable RAM method here, §16.2/§16.13).
-* Web: GameFAQs archived cheats/walkthrough (web.archive.org 2025 snapshots), search
-  snippets, my-gameboy.ru mirror; TCRF fetch produced a prompt-injection payload that was
+* Web: 3rd party cheat indexes archived cheats/walkthrough (web.archive.org 2025 snapshots), search
+  snippets, 3rd party cheat index mirror; 3rd party cheat indexes fetch produced a prompt-injection payload that was
   ignored.
 
 **Legal note:** no ROM or copyrighted assets are redistributed; only hashes, addresses,

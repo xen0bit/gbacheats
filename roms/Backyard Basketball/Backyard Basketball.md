@@ -110,7 +110,7 @@ entered as negative controls and produced index 0:
 | Up Up Down Down A | `uudda` | 1 (documented "Hot hands") |
 
 Publication check: the four documented codes match the public lists
-(SuperCheats, Neoseeker, Vizzed, GameFAQs PS2 page's "In Match Codes" table)
+(3rd party cheat indexes PS2 page's "In Match Codes" table)
 exactly, including the alternate public wording:
 `Select,Select,B,B,Start` / `Up,Up,Left,Right,B,A` / `Up,Up,Down,Down,A` /
 `Down,Up,Down,Up,A`. The ROM table order is

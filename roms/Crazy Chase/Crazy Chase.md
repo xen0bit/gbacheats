@@ -166,12 +166,12 @@ Dialogue continues with the French branch (`C'EST TOUJOURS MOI QUI ARRIVE`) and 
 
 | Source | Code | Type | In-game? |
 |---|---|---|---|
-| almarsguides (CodeBreaker) | `972EADB17B05` Unlimited Health | memory patch | no |
-| almarsguides (CodeBreaker) | `5EE5681C5640` Unlimited HP | memory patch | no |
-| almarsguides (CodeBreaker) | `803DD1245B51` Max Coins | memory patch | no |
+| 3rd party cheat indexes | `972EADB17B05` Unlimited Health | memory patch | no |
+| 3rd party cheat indexes | `5EE5681C5640` Unlimited HP | memory patch | no |
+| 3rd party cheat indexes | `803DD1245B51` Max Coins | memory patch | no |
 | SNES Kid Klown level select | hold L+R, press level buttons | in-game (SNES) | **not present on GBA** (tested, §3) |
 
-No in-game password, button code or debug-menu code is published for the GBA SKU. GameFAQs' GBA cheats page returns 403 to automated fetches; the archived TCRF page is the usable source and says the special menu is prototype-only.
+No in-game password, button code or debug-menu code is published for the GBA SKU. 3rd party cheat indexes' GBA cheats page returns 403 to automated fetches; the archived 3rd party cheat index page is the usable source and says the special menu is prototype-only.
 
 ## 6b. Enumeration
 
@@ -239,7 +239,7 @@ No code system exists in the retail image, so no novel code can be generated. Th
 
 **Inferred:**
 * The seven-sprite `0x3340` screen is a title-to-game transition, not a selectable menu: no directional input changes it, A is a no-op, and Start blanks the screen and continues to the in-game scene.
-* The Special menu (stage select / invincibility / erase data) is cut content in the retail build. TCRF's prototype page states it appears "upon starting a game" in the US and EU prototypes and that the text remains in the final release. In this image the start-of-game path goes directly from the title to the in-game scene, and no combination tried here presents it.
+* The Special menu (stage select / invincibility / erase data) is cut content in the retail build. a 3rd party cheat index's prototype page states it appears "upon starting a game" in the US and EU prototypes and that the text remains in the final release. In this image the start-of-game path goes directly from the title to the in-game scene, and no combination tried here presents it.
 
 ## 8. Unknowns and scope boundaries
 

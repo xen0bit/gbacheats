@@ -53,7 +53,7 @@ it was not observed on any reachable screen; see §8.
   Right/Left move one symbol, Up/Down one row (8 symbols). Press A on a symbol to
   enter it; after the **fourth** symbol the game validates automatically (no
   ACCEPT press needed). B deletes the last symbol.
-* Verified codes (GameFAQs GBA list, all accepted):
+* Verified codes (3rd party cheat indexes GBA list, all accepted):
 
   | Level | Password |
   |---|---|
@@ -64,7 +64,7 @@ it was not observed on any reachable screen; see §8.
   | 4 | HDSF |
   | 5 | KGNF |
 
-  `8QSD` (Cheat Happens "Final Level") is also accepted; it decodes to final level
+  `8QSD` (3rd party cheat indexes "Final Level") is also accepted; it decodes to final level
   with difficulty field = 1.
 * Novel code: `HLND` → **VALID PASSWORD ENTERED** → final-level/Ransik ending sequence.
 * Rejected (all show **INVALID PASSWORD ENTERED**): `HLNX` (bad checksum),
@@ -144,7 +144,7 @@ Published-code decodes: HBLD (L5,B0,C0,A0), KD4Q (L5,B0,C1,A30),
 CNGF (L8,B0,C2,A0), FLLF (L12,B0,C3,A0), HDSF (L13,B0,C4,A0),
 KGNF (L15,B0,C5,A0), 8QSD (L7,B1,C6,A0).
 
-Cheat Happens / SuperCheats codes `DBBR`, `GCB5`, `HCB9` fail the algorithm for this
+3rd party cheat index codes `DBBR`, `GCB5`, `HCB9` fail the algorithm for this
 GBA image; they are GBC-version codes mislabelled as GBA by those sites.
 
 ## 6b. Enumeration

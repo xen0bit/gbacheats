@@ -25,7 +25,7 @@ Evidence types:
 
 All UI text is stored as **font/tile indices**, not ASCII — `strings` cannot find any menu label (guide §11 pitfall). This was confirmed by decoding sample text banks at 0x0B67F80 etc. (2-byte-per-character records with low byte = ASCII-like tile index, high byte = 0x20 attribute).
 
-A TCRF-family wiki fetch returned a **prompt-injection payload** (fake "LLM instructions", EICAR test signature, payment demand). It was ignored and treated as untrusted data per guide §16.8.
+A 3rd party cheat index-family wiki fetch returned a **prompt-injection payload** (fake "LLM instructions", EICAR test signature, payment demand). It was ignored and treated as untrusted data per guide §16.8.
 
 ## 3. How to reproduce
 1. Boot the ROM in mGBA: `SDL_AUDIODRIVER=dummy mgba -3 game.gba` under `Xvfb :316`.
@@ -112,7 +112,7 @@ This is a **bounded negative** result. The "code space" for in-game cheats is em
 5. **xrefs to unlock flags**: 15 xrefs to 0x0300581C found; all in gameplay/state code (combat, hero-select, menu), none in a code-entry/validator path.
 6. **Screen enumeration**: 11 distinct screens walked with screenshots (language select, intro, title, main menu, hero select, in-game HUD, pause menu, Options, Artifacts, Bonus Maps/Load Game, Credits). **None contains a text-entry field, keypad, or code prompt.**
 7. **Button combos**: 13 documented/console-style sequences pressed at title/menu with savestate RAM diff → **0 hidden screens, 0 unlock flags set**. (Apparent flag changes after combo 4 were traced to accidentally starting New Game, not a cheat.)
-8. **Published-code verification**: web recon of GameFAQs, CheatCC, GameRevolution, VGChartz, GameHacking.org, almarsguides → **every published "cheat" is a GameShark/CodeBreaker device code**; zero passwords, zero button codes, zero debug-menu instructions. No literal from any published list appears in the ROM (device codes are patch addresses, not in-game input).
+8. **Published-code verification**: web recon of 3rd party cheat indexes → **every published "cheat" is a GameShark/CodeBreaker device code**; zero passwords, zero button codes, zero debug-menu instructions. No literal from any published list appears in the ROM (device codes are patch addresses, not in-game input).
 
 **Conclusion**: the in-game cheat code space has **cardinality 0** — there is no alphabet, no length, no checksum, no validator, and no code table to enumerate. The unlockable space consists entirely of save-bit achievements (6 hero-completion bits → derived unlock flags), none reachable by controller input. No novel code can be minted because there is no code system to mint into; the negative is proven by the counts above and by the absence of any input surface across all reachable screens.
 
@@ -121,7 +121,7 @@ This is a **bounded negative** result. The "code space" for in-game cheats is em
 - **Observed**: mGBA screenshots of all 11 screens; savestate RAM snapshots (`cb_base.ss1`, `cb_*.ss1`, `x*.ss1`, `y*.ss1`, `w*.ss1`); 13-combo test with flag diffs.
 - **Derived**: unlock jump table at 0x0801983C decoded from raw bytes; conditions at 0x080198E4/0x080198F4 read from Thumb disassembly; 2-byte tile-index text encoding decoded from banks at 0x0B67F80.
 - **Inferred**: bit→hero mapping (cases 1..6) and bit→unlock mapping (0x8/0x2/0x4000) are consistent with published achievement conditions but were not verified by 6 full playthroughs.
-- **Untrusted**: TCRF-family wiki returned a prompt-injection payload; ignored (guide §16.8).
+- **Untrusted**: 3rd party cheat index-family wiki returned a prompt-injection payload; ignored (guide §16.8).
 
 ## 8. Unknowns
 - Exact mapping of each of the 6 flag bits to a specific hero (requires 6 playthroughs).
@@ -134,7 +134,7 @@ This is a **bounded negative** result. The "code space" for in-game cheats is em
 - Python 3 scripts: `scan.py` (strings/alphabets/LZ77/button-mask scan), `state.py` (savestate `gbAs` zlib diff), `emu.py`/`walk*.py`/`combos*.py` (input & screenshots)
 - REA MCP with Ghidra 12.1.4 (procedure search, xrefs, decompilation) — session closed
 - `Xvfb :316`, `openbox`, `xdotool`, `scrot`, ImageMagick `convert`, mGBA 0.10.5
-- Web recon via search integration (GameFAQs, CheatCC, GameRevolution, VGChartz, GameHacking.org, almarsguides)
+- Web recon via search integration (3rd party cheat indexes)
 
 ## 10. Legal note
 No ROM image, extracted graphics, music, or game text is redistributed. Only hashes, addresses, algorithms, and original analysis scripts are published.

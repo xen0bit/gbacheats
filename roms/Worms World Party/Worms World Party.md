@@ -31,7 +31,7 @@ processed by the joypad handlers.
 
 Two button-code gates were located statically:
 
-1. **All-weapons code** (the one published for GBA on IGN/GameFAQs/Neoseeker):
+1. **All-weapons code** (the one published for GBA on 3rd party cheat indexes):
    the validator at `0x0800CF8C` checks a held-mask `0x282` (L + Down + B),
    a secondary byte condition, and then grants all 58 weapons from a table at
    `0x0802A8AC` to four teams. Fully decoded (§5.1).
@@ -187,8 +187,8 @@ all-weapons gate's mask is `0x282` with the other seven buttons as don't-cares
 → 2^7 = **128** held masks, intersected with the two RAM-byte conditions.
 
 **Novel code (absent from all published lists retrieved).** `A+B+Select+Start`
-held simultaneously. Source lists checked: IGN GBA cheats, GameFAQs GBA cheats,
-Neoseeker GBA, GameRevolution, GameRankings, ChapterCheats, CheatChannel. None
+held simultaneously. Source lists checked: 3rd party cheat indexes GBA cheats, 3rd party cheat indexes GBA cheats,
+3rd party cheat indexes GBA, 3rd party cheat indexes. None
 lists this combination for the GBA SKU (the only GBA entry in those lists is
 the L+Down+B all-weapons code). Entered in mGBA: **Observed** reset to the
 Ubisoft splash/black transition (screenshot `abss_after.png`). The gate's

@@ -27,7 +27,7 @@ Stock retail image: one Nintendo-logo hit at file `0x4` (single game, not a mult
 4. No validator, alphabet table, checksum table, or button-mask code table with code xrefs was found; 12 title-screen and 3 boot-time button combinations produced no hidden screen.
 5. The only developer-intended unlockable surface is the **Extras** menu: three bonuses shown as `????` until the player accumulates **25 / 50 / 100 fire crystals** (observed on screen and in the decoded hint text in four languages). The bonuses remain locked in the unmodified retail state; their names are an explicit unknown.
 
-Published "cheats" for this SKU are exclusively encrypted GameShark / CodeBreaker / Action Replay device codes (GameHacking.org, cheat-gba.blogspot, 53lu, supercheats). GameFAQs, VGChartz, ChapterCheats and Project Cheat Codes all report zero in-game codes/cheats/unlockables. Those device codes are outside this report's scope and were not used.
+Published "cheats" for this SKU are exclusively encrypted GameShark / CodeBreaker / Action Replay device codes (3rd party cheat indexes). 3rd party cheat indexes all report zero in-game codes/cheats/unlockables. Those device codes are outside this report's scope and were not used.
 
 ## 3. How to reproduce
 
@@ -118,6 +118,6 @@ Save-slot rejection was tested empirically (§3) rather than by reversing a chec
 * Xvfb `:317` + openbox; mGBA 0.10.5 (`-3`); `xdotool` XTEST key events with 35–120 ms holds; `scrot`, ImageMagick for crops.
 * Ghidra 12.1.4 through REA MCP (`open_binary` raw-binary/ARM @ `0x08000000`, `binary_overview`, `xrefs`, `resolve_containing_procedure`, `close_binary`).
 * `arm-none-eabi-objdump -M force-thumb` for the keypad readers; custom scripts `/tmp/antbully/decode_text.py`, `dump_text.py`, `combotest.sh`, `bootcombo.sh`.
-* Web recon (treated strictly as data): GameFAQs, VGChartz, Project Cheat Codes, GameHacking.org, GameFAQs cheats, ChapterCheats, cheat-gba.blogspot. One TCRF fetch returned 403; no instructions from any fetched page were followed.
+* Web recon (treated strictly as data): 3rd party cheat index cheats, 3rd party cheat indexes. One 3rd party cheat indexes fetch returned 403; no instructions from any fetched page were followed.
 
 No ROM image or extracted assets are redistributed here; only hashes, addresses, algorithms and observations are published.

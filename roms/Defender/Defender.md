@@ -48,7 +48,7 @@ The page is gated by a **ROM constant**, not by input: the menu-setup call at
 `0x08006F6E` takes its third argument from the immediate of `movs r2,#0` at
 `0x08006F6C`; that value is copied to RAM `0x03007A88`, which marks the menu as
 "debug-capable". In the retail ROM that byte is `0x00`. Patching it to non-zero
-was observed to set `0x03007A88 = 1`, matching the TCRF note. Because the source
+was observed to set `0x03007A88 = 1`, matching the 3rd party cheat index note. Because the source
 is ROM, no controller input can change it.
 
 The page ring size is a separate RAM field, `0x03007A8C` (six in retail).
@@ -84,7 +84,7 @@ Retail path to the carousel (all RAM-verified):
 Analysis-only route to page 6 (does **not** modify the original ROM):
 
 1. Copy the ROM and set the immediate byte at file offset `0x6F6C` to `0x01`
-   (`movs r2,#0` → `movs r2,#1`). This is the exact TCRF patch; it is a static
+   (`movs r2,#0` → `movs r2,#1`). This is the exact 3rd party cheat indexes patch; it is a static
    patch to enable a developer screen for analysis, not a cheat code.
 2. Boot the copy, hold `Start` to reach the carousel. RAM `0x03007A88` reads 1.
 3. In the running build, save a state; patch the savestate's IWRAM so that
@@ -269,8 +269,8 @@ increments mod count. This agrees with every observed transition (retail
 0→5→4→3; patched 6→5 and 5→6, 3→2→1→0→6).
 
 **Unpublished value reached.** Page **6** is absent from every published list
-(GameFAQs has no codes page reachable, VGChartz lists only "Point values", TCRF
-documents the text at `0x811BC` and the flag patch but not the page index, the
+(3rd party cheat indexes have no codes page reachable, 3rd party cheat index lists only "Point values", 3rd party cheat indexes
+document the text at `0x811BC` and the flag patch but not the page index, the
 ring arithmetic, or the VRAM proof). In the patched build the ring was driven to
 `state = 6` and the screen was read back from VRAM as `DEBUG MENU` with all nine
 options (rows above). This is the novel, non-published state.

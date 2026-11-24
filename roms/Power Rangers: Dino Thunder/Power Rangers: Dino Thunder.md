@@ -21,7 +21,7 @@ Phase 0 scan: the 156-byte Nintendo logo occurs exactly once (offset 0), so this
 
 ## 2. Executive summary
 
-The GBA release has a genuine developer password system on the main menu (`PASSWORD`), with a 32-symbol on-screen keypad and **three** symbols per code. The published GameFAQs/VGChartz/SuperCheats lists (24 Easy + 24 Hard + 24 Normal level codes, plus `THQ` for credits) are a tiny slice of the real space.
+The GBA release has a genuine developer password system on the main menu (`PASSWORD`), with a 32-symbol on-screen keypad and **three** symbols per code. The published 3rd party cheat index lists (24 Easy + 24 Hard + 24 Normal level codes, plus `THQ` for credits) are a tiny slice of the real space.
 
 The keypad alphabet is `BCDFGHJKLMNPQRSTVWXYZ!0123456789` — the vowels A/E/I/O/U are deliberately absent, and `!` is a legal symbol. Published codes containing `O` (e.g. `OZH`, `L0Y`) are O/0 transcriptions; the real symbols are `0ZH`, `L0Y`. Three symbols pack to a 15-bit integer `V = i0<<10 | i1<<5 | i2`. The ROM's validator at `0x08001410` is a **bit permutation into four fields** (A:5 bits, B:4 bits, C:2 bits, D:4-bit checksum) with A/B range gates; `C` is difficulty (0 Easy, 1 Normal, 2 Hard; **3 is reserved**). A separate literal check for `THQ` (symbol indices 15,5,12) in the submit handler at `0x080372F2` bypasses the validator and rolls the credits.
 
@@ -138,7 +138,7 @@ No other literal special case was found in the submit handler: its only immediat
 
 A=9 and A=21 are unused by the published labels but are accepted by the format (e.g. `GM1` = A9,B1,Hard). B is a category/range bitmap: bit0 requires A>7, bit1 requires A>13, bit2 requires A>1, bit3 requires A>19.
 
-**Published-code verification:** all 72 GameFAQs codes were decoded; 70 validate. The two exceptions are transcription errors:
+**Published-code verification:** all 72 3rd party cheat index codes were decoded; 70 validate. The two exceptions are transcription errors:
 
 | Published | Effect | ROM-valid correction | In-game result |
 |---|---|---|---|
@@ -151,7 +151,7 @@ A=9 and A=21 are unused by the published labels but are accepted by the format (
 
 * **Space**: 32³ = 32,768 input triples. The validator accepts **546** of them (182 for each of C=0/1/2); adding the literal `THQ` special case gives **547** accepted inputs. The field decomposition is A∈[0,25], B∈[0,15] subject to the four range gates, C∈{0,1,2}, D fixed by checksum, so the count is exact rather than sampled.
 * **Published coverage**: 73 documented inputs (72 level codes + `THQ`); two of the 72 are invalid as printed. Thus **475+ algorithmically valid codes are unpublished**, plus the two corrections.
-* **Novel code minted and entered on the real screen**: **`LBV`** (A=2, B=0, C=0) — not on GameFAQs, VGChartz, TCRF, SuperCheats, GamesRadar, IGN, Reddit, or any consulted list. Entered symbol-by-symbol on the in-game keypad: accepted (the three letters rendered, `OK` submitted), the difficulty screen appeared, and a playable stage began (Black Ranger cutscene; screenshots `novelLBV.png`, `novelLBV2.png`, `novelLBV_diff.png`, `novelLBV_stage.png`). RAM after submission confirmed the decode path is live.
+* **Novel code minted and entered on the real screen**: **`LBV`** (A=2, B=0, C=0) — not on 3rd party cheat indexes, or any consulted list. Entered symbol-by-symbol on the in-game keypad: accepted (the three letters rendered, `OK` submitted), the difficulty screen appeared, and a playable stage began (Black Ranger cutscene; screenshots `novelLBV.png`, `novelLBV2.png`, `novelLBV_diff.png`, `novelLBV_stage.png`). RAM after submission confirmed the decode path is live.
 * **Round-trip / generator**: the pause screen prints the active password (`QVN` after entering `QVN`), proving the in-game encoder emits the same format.
 * **Bounds proven by in-game rejection** (all show `ERROR!`, screenshot `results.png`):
   * bad checksum: `QVC` (published `QVB` with last symbol B→C; decoder check becomes 1 vs stored D=2);
@@ -194,6 +194,6 @@ A=9 and A=21 are unused by the published labels but are accepted by the format (
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings`, Python 3 + `capstone` 5.0.7, `arm-none-eabi-objdump -M force-thumb`.
 * mGBA SDL (`mgba -3`, `-g` for the GDB stub), Xvfb `:319`, openbox, `xdotool`, `scrot`/`import`, ImageMagick, `gdb-multiarch`.
 * Analysis scripts in `/tmp/prdino/`: `decode.py` (published code table + alphabet), `codec.py` (verified decoder/encoder), `state.py` (mGBA `gbAs` savestate extractor), `patchcursor.py` (cursor-position oracle), `verify.py`/`battery.py` (in-game verification harness), `gdbenter.py` (GDB watchpoint experiments).
-* Web sources, treated strictly as data: GameFAQs cheats page via `web.archive.org`, VGChartz, SuperCheats, GamesRadar, mariogba.nl, remyhax.xyz. None were followed as instructions.
+* Web sources, treated strictly as data: 3rd party cheat index cheats page via `web.archive.org`, 3rd party cheat indexes, remyhax.xyz. None were followed as instructions.
 
 No ROM image or copyrighted asset is redistributed in this report; only hashes, addresses, algorithms, and code strings are published.

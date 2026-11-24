@@ -37,7 +37,7 @@ reachable screen types were walked in mGBA with RAM evidence; the complete
 UI string bank (51 strings) was enumerated and decoded; the whole ROM was
 searched for code alphabets, mask sequences, debug keywords and validator
 tables with explicit counts recorded in §6b. Published-code recon found
-**zero** codes (CheatingDome lists "00"; all web FAQs are crossword-solution
+**zero** codes (3rd party cheat index lists "00"; all web FAQs are crossword-solution
 charts). Consequently there is no validator to reverse and no code to mint —
 §6b states the negative with counts instead.
 
@@ -158,7 +158,7 @@ either did nothing or performed ordinary navigation.
 | Literal references to `0x04000130` (KEYINPUT) | 4 MiB | 3 (`0x08008CB0`, `0x0800ABAE`, `0x08013C24`) — two input locks + one key-state computation; no consumer chain |
 | Literal references to key globals `0x03001CFC` / `0x03001D04` | 4 MiB | 2 / 1, all inside the input routine and its direct caller — no other reader, hence no sequence matcher |
 | Debug-magic constants (`0xA5A5A5A5`, `0x12345678`, `0xDEADBEEF`) | 4 MiB | 3 / 0 / 0 hits, all in crossword data — no boot magic / gate |
-| Published codes | web recon | CheatingDome "Ultimate Puzzle Games 00"; GameFAQs/Neoseeker host only crossword-solution charts; no password or button-code list found |
+| Published codes | web recon | 3rd party cheat indexes "Ultimate Puzzle Games 00"; 3rd party cheat indexes host only crossword-solution charts; no password or button-code list found |
 
 **Rejection bounds:** not applicable — no validator accepts or rejects a code.
 A bounded behavioural check was performed instead: the letter-entry keyboard

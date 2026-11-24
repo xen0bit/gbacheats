@@ -107,8 +107,8 @@ All 13 code blobs consist exclusively of bytes whose low nibble is `4` or `5` (v
 ### 6.3 Published codes checked
 | Source | Codes | Verdict |
 |---|---|---|
-| GameHacking.org / CodeTwink / ROMSFUN / almarsguides / etherealgames / 53lu | Enable `95FCA58E 8783 / F991BD33 485F / AADBD261 10B6`; Quick Score `8300375C FFFF`; Max Score `8300375C 967F / 8300375E 0098`; Max Rank `8300376C 00FF` | All are CodeBreaker/GameShark **RAM writes** (`0x0200375C`, `0x0200375E`, `0x0200376C`) — memory editing, explicitly out of scope. None is a literal in the ROM (correctly so). No password/button codes published anywhere. |
-| GameFAQs / VGChartz / TCRF / fan wikis | none found; only gameplay tip "Easy win on Advanced+" | Confirms absence of a published code list for this SKU. |
+| 3rd party cheat indexes | Enable `95FCA58E 8783 / F991BD33 485F / AADBD261 10B6`; Quick Score `8300375C FFFF`; Max Score `8300375C 967F / 8300375E 0098`; Max Rank `8300376C 00FF` | All are CodeBreaker/GameShark **RAM writes** (`0x0200375C`, `0x0200375E`, `0x0200376C`) — memory editing, explicitly out of scope. None is a literal in the ROM (correctly so). No password/button codes published anywhere. |
+| 3rd party cheat indexes / fan wikis | none found; only gameplay tip "Easy win on Advanced+" | Confirms absence of a published code list for this SKU. |
 
 ## 6b. Enumeration
 **Space definition and counts (complete for the search spaces checked):**

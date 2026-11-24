@@ -19,7 +19,7 @@
 | SHA-1 | `e2f4e66fa582303d06f79e572e19e80462a7cc42` |
 | SHA-256 | `91e64ae7a24c2315681276304609707a4621597e6d8b55c6db574626449be96c` |
 
-Phase 0 result: **one** embedded GBA header (Nintendo-logo scan of all 4 MiB found a single logo hit at file offset 0x04 → header base 0x0). This is not a multi-game cart and there is no appended trainer or cracktro: the entry word and the ARM crt0 at 0x080000C0 are the stock values. Development credits in the image read `TIBURON ENTERTAINMENT` (0x377FDD) and `BUDCAT CREATIONS` (0x377FCC); TCRF confirms Budcat Creations as developer, EA Sports as publisher.
+Phase 0 result: **one** embedded GBA header (Nintendo-logo scan of all 4 MiB found a single logo hit at file offset 0x04 → header base 0x0). This is not a multi-game cart and there is no appended trainer or cracktro: the entry word and the ARM crt0 at 0x080000C0 are the stock values. Development credits in the image read `TIBURON ENTERTAINMENT` (0x377FDD) and `BUDCAT CREATIONS` (0x377FCC); 3rd party cheat indexes confirm Budcat Creations as developer, EA Sports as publisher.
 
 ## 2. Executive summary
 
@@ -27,7 +27,7 @@ Phase 0 result: **one** embedded GBA header (Nintendo-logo scan of all 4 MiB fou
 
 Three kinds of *developer-intended* content do exist and are characterised below:
 
-1. **Hidden teams** — IDs `0x21` (Players, Inc.), `0x22` (EA Sports), `0x23` (Budcat), stored in the same team-ID fields as the 32 NFL teams. TCRF states there are no known input codes for them on GBA and asks for button-code research; my exhaustive key-mask and menu scans found no input route. They are reachable only by directly writing RAM, which is out of scope. (§16.18-style save/data state, not a code.)
+1. **Hidden teams** — IDs `0x21` (Players, Inc.), `0x22` (EA Sports), `0x23` (Budcat), stored in the same team-ID fields as the 32 NFL teams. 3rd party cheat indexes state there are no known input codes for them on GBA and asks for button-code research; my exhaustive key-mask and menu scans found no input route. They are reachable only by directly writing RAM, which is out of scope. (§16.18-style save/data state, not a code.)
 2. **Unlockable players** — eight legends unlocked by Gold Ranking specific drills on All-Madden, plus Mike Ditka by having another EA Sports football save present. This is save-bit state, not a code (§16.18).
 3. **Post-touchdown sounds** — a published in-game button trick (press A/B/R/L during the TD celebration for horn/whistle/"Pow!"/grunt). It is a transient input branch in gameplay, not a code-entry system; I did not score a touchdown in the emulator, so it is recorded as a published lead, not an executed observation.
 
@@ -57,7 +57,7 @@ File offset = ROM address − 0x08000000.
 | 0x350E29 | literal ASCII `ABCDEFGHIJKLMNOPQRSTUVWXYZ` inside code — name-entry/font alphabet, **not** a password alphabet | Observed |
 | 0x3740B0–0x374190 | font/tile mapping region: 36-byte identity tables (0x00..0x23) and two permutations of 0x00..0x23 at 0x3740D4 and 0x3740F4 | Observed |
 | 0x375724–0x377FDD | ASCII text bank (commentary, penalties, team slogans, developer credits) | Observed |
-| 0x39CF4F | `SMSG 3.11a Jason Andersen & John Schappert 6/29/1994` sound-engine credit (TCRF; not a cheat) | External + observed |
+| 0x39CF4F | `SMSG 3.11a Jason Andersen & John Schappert 6/29/1994` sound-engine credit (3rd party cheat indexes; not a cheat) | External + observed |
 
 RAM (verified live with GDB unless noted):
 
@@ -69,7 +69,7 @@ RAM (verified live with GDB unless noted):
 | 0x020007D4 | down (u8) | published "Always 1st/4th Down" target |
 | 0x0200208E / 0x020021DE | home / away score (u16) | published score-modifier targets |
 
-Hidden team IDs (from TCRF and the published team modifier): `0x21` = Players, Inc.; `0x22` = EA Sports; `0x23` = Budcat — all above the 32 NFL team IDs `0x00`–`0x20`.
+Hidden team IDs (from 3rd party cheat indexes and the published team modifier): `0x21` = Players, Inc.; `0x22` = EA Sports; `0x23` = Budcat — all above the 32 NFL team IDs `0x00`–`0x20`.
 
 ## 5. Algorithm
 
@@ -124,10 +124,10 @@ Scanning the first 1 MiB of code for aligned runs of ≥4 single-key u16 masks (
 
 | Source | Code(s) | Classification |
 |---|---|---|
-| TCRF / almarsguides / ROMSFUN / libretro | `32000510 00xx`, `32000512 00xx` (xx=21/22/23 hidden teams), score/timeouts/down modifiers | CodeBreaker RAM writes — out of scope; addresses verified against live RAM |
-| Neoseeker / AbsoluteCheats | "after TD press A/B/R/L for sounds", "late hit with L" | In-game button trick — in scope; not a code system |
-| SuperCheats | Gold Rank in 8 drills on All-Madden unlocks Sanders/Sanders/Stenerud/Elway/Young/Butler/Singletary/White; save from another EA football game unlocks Ditka | Save-bit unlocks — in scope as unlockables, not codes |
-| Neoseeker GameShark / Action Replay MAX | encrypted multi-line codes | Memory editing — out of scope |
+| 3rd party cheat indexes / libretro | `32000510 00xx`, `32000512 00xx` (xx=21/22/23 hidden teams), score/timeouts/down modifiers | CodeBreaker RAM writes — out of scope; addresses verified against live RAM |
+| 3rd party cheat indexes | "after TD press A/B/R/L for sounds", "late hit with L" | In-game button trick — in scope; not a code system |
+| 3rd party cheat indexes | Gold Rank in 8 drills on All-Madden unlocks Sanders/Sanders/Stenerud/Elway/Young/Butler/Singletary/White; save from another EA football game unlocks Ditka | Save-bit unlocks — in scope as unlockables, not codes |
+| 3rd party cheat indexes GameShark / Action Replay MAX | encrypted multi-line codes | Memory editing — out of scope |
 
 ## 6b. Enumeration
 
@@ -144,11 +144,11 @@ Scanning the first 1 MiB of code for aligned runs of ≥4 single-key u16 masks (
 
 - **Observed**: all screenshots in `/tmp/madden03/` (legal, quick menu, GAME RULES, TEAM SELECT, CONTROLLER SETUP, play-call grid, field, main menu, SEASON PLAY, RECORDS). GDB reads of 0x02000510 changing `0x00180016` → `0x00180017` → `0x00180018` as teams changed, confirming the published team-modifier addresses are live game state. Savestate `gbAs` chunk decompressed to 397,312 bytes. L+R and Select+Start probes produced no new screen.
 - **Derived**: objdump disassembly of the joypad handlers at 0x08000D20 and 0x08001320 (KEYINPUT literal 0x04000130, active-high XOR 0x03FF, no sequence tracker). The 36-byte font tables at 0x3740D4/0x3740F4 are permutations, confirming a tile-index text scheme.
-- **Inferred / external**: hidden team IDs and the drill-unlock requirements come from TCRF and SuperCheats; I did not execute a drill to Gold Rank or press A/B/R/L after a touchdown. Their RAM addresses exist, but the unlock state changes themselves are not independently observed, so they are labelled accordingly (§16.8: fetched pages treated as data; no prompt-injection payload was found in the fetched pages).
+- **Inferred / external**: hidden team IDs and the drill-unlock requirements come from 3rd party cheat indexes; I did not execute a drill to Gold Rank or press A/B/R/L after a touchdown. Their RAM addresses exist, but the unlock state changes themselves are not independently observed, so they are labelled accordingly (§16.8: fetched pages treated as data; no prompt-injection payload was found in the fetched pages).
 
 ## 8. Unknowns
 
-- The exact in-game trigger (if any) for the three hidden teams remains unproven. TCRF explicitly lists none; no button-code table was found. A save-file or link-transfer gate was not fully excluded, though the title/main/team-select screens were walked.
+- The exact in-game trigger (if any) for the three hidden teams remains unproven. 3rd party cheat indexes explicitly lists none; no button-code table was found. A save-file or link-transfer gate was not fully excluded, though the title/main/team-select screens were walked.
 - Post-TD sounds and drill-based unlocks were not executed in the emulator (a touchdown and Gold-Rank drills would be required); only their published existence and, for teams, the RAM addresses are confirmed.
 - Menu art is pre-rendered/tile-indexed; I did not reconstruct the glyph atlas, so I cannot prove the *visual* absence of a hidden label that shares a screen with visible art. The negative rests on menu-item enumeration and RAM/screen state, not on a complete glyph decode.
 - Header checksum is 0x0000 while the complement byte is 0xB8; this is consistent with a rebuilt header (§16.1) but the original retail checksum value is unknown.

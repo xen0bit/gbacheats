@@ -21,7 +21,7 @@
 | SHA-256 | `24063604312e5f05d2dc2c424aadc882673841b310888d9ab8a6db757937bc7c` |
 
 Release data (web, treated as data): Cosmigo developer, Telegames publisher, 2004,
-also known as *Card Games: The Classics* (EU). No TCRF article exists for this SKU.
+also known as *Card Games: The Classics* (EU). No 3rd party cheat index article exists for this SKU.
 
 **Scope:** in-game / developer-intended cheats only (passwords, button codes,
 hidden/debug menus, unlockables). No GameShark/CodeBreaker/Action Replay codes

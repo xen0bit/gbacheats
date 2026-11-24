@@ -18,7 +18,7 @@
 | MD5 | `cab2a6bb0d3c754ccf75ac3b3dc94cb0` |
 | SHA-1 | `e91e58c62363fb10dd4ffcaeb09c98ca6b9b5a77` |
 | SHA-256 | `d9bf11913c326a05500ca5d3456c86d913d7ca6f295ca09c5d1c1f14e8775bcf` |
-| Developer | Epicenter Interactive (TCRF) |
+| Developer | Epicenter Interactive (3rd party cheat indexes) |
 | Publishers | DSI Games (US), Zoo Digital Publishing (EU) |
 | Release | 2005-08-21 (US), 2005-09-09 (EU) |
 | Sub-images | 1 (single header at file offset 0; no multiboot stubs, no cracktro) |
@@ -27,7 +27,7 @@ The ROM is a **single 4 MiB image**, not a concatenated multi-game cart. The
 Nintendo logo occurs exactly once (file offset 4). The entry word is the stock
 `0xEA00002E`; no scene-release/cracktro signature (`CRC BANDIT`, `SUNHORS`,
 `Mode7`, `TRAINER`) is present. The header complement is valid, so the header
-is a genuine retail header (the SHA-1 differs from the BizHawk/No-Intro entry
+is a genuine retail header (the SHA-1 differs from the BizHawk/3rd party cheat index entry
 because that database entry is a different dump of the same SKU; the header
 title/code and all analysed addresses below are for *this* dump).
 
@@ -80,9 +80,9 @@ The result is not "we did not find it"; it is a bounded negative:
 * The one candidate "single-press cheat helper" (`0x08015F9C`, which does
   `pressed & mask` and calls a handler) has **no caller and no function-pointer
   reference anywhere in the ROM** — it is dead code.
-* The only published "codes" (GameHacking.org, emucheatz, GameFAQs cheat
-  pages) are memory edits. VGChartz lists 0 cheats; TCRF lists only unused
-  link-cable text at `0x327BC`; GameFAQs has no cheat page for this title.
+* The only published "codes" (3rd party cheat indexes, 3rd party cheat index cheat
+  pages) are memory edits. 3rd party cheat index lists 0 cheats; 3rd party cheat index lists only unused
+  link-cable text at `0x327BC`; 3rd party cheat indexes have no cheat page for this title.
 
 Because the acceptance bar requires a *reproducible* negative, the report also
 documents the dynamic walk that was performed (boot → title → compilation menu
@@ -259,10 +259,10 @@ No table contains a debug, cheat, credits, level-select or "secret" entry.
 
 **None.** Verified sources:
 
-* VGChartz cheat page for this title: "Total cheats available: 0".
-* GameFAQs title page: 11 guides, no cheat/FAQ cheat page.
-* TCRF: only unused link-cable text at `0x327BC`; no cheat, no debug menu.
-* GameHacking.org / emucheatz: only CodeBreaker/GameShark memory writes
+* 3rd party cheat index cheat page for this title: "Total cheats available: 0".
+* 3rd party cheat indexes title page: 11 guides, no cheat/FAQ cheat page.
+* 3rd party cheat indexes: only unused link-cable text at `0x327BC`; no cheat, no debug menu.
+* 3rd party cheat indexes: only CodeBreaker/GameShark memory writes
   (out of scope).
 
 ---

@@ -306,7 +306,7 @@ A/Start `0x09`, B `0x02`.
 
 | Published item | Source class | Result |
 |---|---|---|
-| `ZELDA` name → second quest | GameFAQs / Nintendo / fan wikis | **verified** (tile table `$9EEB`, `$062D=1`) |
+| `ZELDA` name → second quest | 3rd party cheat indexes / Nintendo / fan wikis | **verified** (tile table `$9EEB`, `$062D=1`) |
 | `L + R` System Menu | Classic NES Series documentation | **verified** (handler `0x0800156D`) |
 | `Start+Select+A+B` reset | Classic NES Series documentation | **verified** (`held==0x000F`, `$12=0`) |
 | `PASSWORD`, `CHEAT`, `DEBUG`, `SECRET`, `UNLOCK`, `LEVEL SELECT`, `SOUND TEST` | generic keyword lists | absent as ASCII (10,677 `strings -n 4` entries; 2 keyword hits, both header) |
@@ -402,8 +402,8 @@ A/Start `0x09`, B `0x02`.
 * `name_run.py` — deterministic grid navigation, buffer verification, registration and
   quest-byte readback.
 * `py65` (disassembler) for 6502; `arm-none-eabi-objdump -M force-thumb` for the wrapper.
-* Published-code checks: search snippets and a Wayback snapshot of the Data Crystal RAM map
-  (`datacrystal.tcrf.net/wiki/The_Legend_of_Zelda/RAM_map`, 2024-08-23 capture). All fetched
+* Published-code checks: search snippets and a Wayback snapshot of the 3rd party cheat indexes RAM map
+  (3rd party cheat indexes, 2024-08-23 capture). All fetched
   pages were treated as data; no instructions in them were followed.
 
 ## 10. Legal note

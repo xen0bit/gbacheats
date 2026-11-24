@@ -129,10 +129,10 @@ the state, and returns to the main menu with `CONTINUE GAME` selected.
 
 | Code | Source | Result |
 |---|---|---|
-| `QF9B9F59` | GameFAQs / mirrors | accepted, all 12 missions S, score 26150, 10 aircraft |
-| `GFDWGFDN` | GameFAQs / mirrors | accepted, 12 missions available, Mission #3 S, score 7200 |
-| `GFD-GDNN` | GameFAQs / mirrors (`-` is a real symbol) | accepted, Missions #1–#5 only, Mission #3 S, score 5700 |
-| `ZF9W9FN` | GameFAQs / mirrors | 7 chars: cannot be submitted |
+| `QF9B9F59` | 3rd party cheat indexes / mirrors | accepted, all 12 missions S, score 26150, 10 aircraft |
+| `GFDWGFDN` | 3rd party cheat indexes / mirrors | accepted, 12 missions available, Mission #3 S, score 7200 |
+| `GFD-GDNN` | 3rd party cheat indexes / mirrors (`-` is a real symbol) | accepted, Missions #1–#5 only, Mission #3 S, score 5700 |
+| `ZF9W9FN` | 3rd party cheat indexes / mirrors | 7 chars: cannot be submitted |
 | `ZF9W9FN9` | 8-char completion of the above | accepted, all 12 S, score 20100, 10 aircraft |
 | `ZF9W9FNN` | alternative completion | accepted, Missions #3–#12 S, score 20100 |
 | `GFDJZFJL` | **generated, novel** | accepted, Mission #5 S only, score 5000, 7 aircraft |
@@ -401,7 +401,7 @@ This implementation was cross-checked against the ROM by emulating both
 
 ## 6. Tables
 
-### 6.1 Published codes (GameFAQs archive, 2022-01-27; replicated by mirrors)
+### 6.1 Published codes (3rd party cheat indexes archive, 2022-01-27; replicated by mirrors)
 
 | Claim | Published | Decoded state | In-game result |
 |---|---|---|---|
@@ -481,7 +481,7 @@ is a bijection, not a hash.
 `d=12` (all 12 missions), `c=12`, `f=0`.
 
 * Not present in any published list; a web search for the literal string
-  returns no results, and it is not one of the GameFAQs/VGChartz/TCRF/mirror
+  returns no results, and it is not one of the 3rd party cheat indexes/mirror
   codes.
 * Entered in mGBA: `CODE ACCEPTED` observed; the game returned to the main menu.
 * State read back from `0x030014B0`: `B=0x0010`, score `0x1388` (5000),

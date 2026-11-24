@@ -42,8 +42,8 @@ comparison against any constant — a text field, not a validator (§16.2b). All
 (boards, outfits, the special outfit at 1,000,000 cash, medals, events) are career-cash/progress
 save data, not code-gated.
 
-Published GBA cheat databases agree: Cheat Happens states *"We currently don't have any SSX 3
-cheats or cheat codes for Game Boy Advance"*; the GameFAQs GBA cheat page lists only PS2/GC
+Published GBA cheat databases agree: 3rd party cheat indexes state *"We currently don't have any SSX 3
+cheats or cheat codes for Game Boy Advance"*; the 3rd party cheat indexes GBA cheat page lists only PS2/GC
 passwords. This is a **bounded negative** proven by counts in §6b, not an untested absence.
 
 ## 3. How to reproduce

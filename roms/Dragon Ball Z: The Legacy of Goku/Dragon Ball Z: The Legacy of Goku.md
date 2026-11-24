@@ -54,7 +54,7 @@ real screens:
    which this ROM rejects).
 
 3. **In-game reset** — **A+B+R+L+Start+Select** soft-resets to the boot/legal screen
-   (published on CheatingDome; verified here).
+   (published on 3rd party cheat indexes; verified here).
 
 A **third, unpublished hard-coded 4-press sequence** (`Left, Right, A, B`, table
 `0x0800FE42`) exists with a handler at `0x08003B4`, but no BL, branch, or 32-bit pointer to
@@ -270,7 +270,7 @@ on screen:
 | Debug rows 2 & 3 | — | `Play SFX` and `Play Music` are **separate** unpublished entries (published lists collapse them into one "Sound Test") |
 
 The invincibility table's exact ordering (**B before A**) corrects the widely published
-"Up, Down, Left, Right, A, B" variant (CheatingDome / "Unlimited live"), which this ROM
+"Up, Down, Left, Right, A, B" variant (3rd party cheat indexes / "Unlimited live"), which this ROM
 rejects (§6b.3).
 
 ### 6b.3 Bounds proven by rejection
@@ -306,12 +306,12 @@ The handler clamps (`cmp #41 / #30 / #17 / #14`) independently bound all four co
   the longest shows compressed 4bpp tile data, not password strings.
 * **Menu walk:** every reachable screen was visited (§6.3). No password entry, no shop code,
   no character/mode select, no unlockable list, no link/multiplayer screen.
-* **Published codes checked:** GameFAQs "Debug Menu" chord — **correct** (contents undercount
-  rows); GameFAQs/CheatingDome "Invincibility U,D,L,R,B,A" — **correct**; CheatingDome
-  "Unlimited live … U,D,L,R,A,B" — **rejected on this ROM**; CheatingDome "In-game reset
-  A+B+R+L+Start+Select" — **correct**; TCRF "Debug Mode" (highlight Exit, L+R+Up+A) —
-  equivalent and correct; TCRF regional notes (European `language`/CodeBreaker LOG2 details)
-  — not applicable to this US standalone image; RPGClassics encrypted GameShark codes —
+* **Published codes checked:** 3rd party cheat indexes "Debug Menu" chord — **correct** (contents undercount
+  rows); 3rd party cheat indexes "Invincibility U,D,L,R,B,A" — **correct**; 3rd party cheat indexes
+  "Unlimited live … U,D,L,R,A,B" — **rejected on this ROM**; 3rd party cheat indexes "In-game reset
+  A+B+R+L+Start+Select" — **correct**; 3rd party cheat indexes "Debug Mode" (highlight Exit, L+R+Up+A) —
+  equivalent and correct; 3rd party cheat indexes regional notes (European `language`/CodeBreaker LOG2 details)
+  — not applicable to this US standalone image; 3rd party cheat indexes encrypted GameShark codes —
   out of scope (memory-edit codes).
 
 ## 7. Validation evidence

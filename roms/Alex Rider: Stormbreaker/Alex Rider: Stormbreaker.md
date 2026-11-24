@@ -252,11 +252,11 @@ descriptor points into string data; IDs do not resolve).
 All ten ROM strings are present, character-for-character, in published GBA
 lists:
 
-* `https://www.emu-land.net/en/portable/gba/cheats?showid=2378` (all ten,
+* 3rd party cheat indexes (all ten,
   name → code pairs)
-* `https://www.chaptercheats.com/cheat/gameboyadvance/20142/alex-rider-stormbreaker/code/15152`
+* 3rd party cheat indexes
   (all ten)
-* GameFAQs `gba/932399-alex-rider-stormbreaker/cheats` and Neoseeker GBA page
+* 3rd party cheat indexes `gba/932399-alex-rider-stormbreaker/cheats` and 3rd party cheat indexes GBA page
   (403 to automated fetch; indexed snippets agree with the ten)
 
 No published code is missing from the ROM and no ROM code is missing from the

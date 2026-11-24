@@ -56,7 +56,7 @@ are the **SNES** passwords. They are absent from this ROM in ASCII, lower-case,
 `+0x20`, UTF-16LE/BE, spaced glyph, `0x2000/0x2400/0x2800/0x2C00/0x3000`
 glyph encodings, as all 720 four-symbol byte permutations (three row orders),
 and as packed 3-bit/4-bit `u16` tables. There is no input surface on which to
-enter them. This agrees with the contemporary 2004 IGN review: the GBA version
+enter them. This agrees with the contemporary 2004 3rd party cheat indexes review: the GBA version
 "sticking in a save RAM chip so players don't have to fumble with the original
 version's stupid password engine."
 
@@ -281,7 +281,7 @@ drawn. This is a complete negative for this SKU, not an untested guess.
 * The text bank is a direct SNES port: it retains SNES-only labels and
   localized variants (`PASS WORT`, `MOT DE PASSE`, `CLAVES`) that no GBA screen
   uses.
-* The GBA save engine replaces the password engine (matches the 2004 IGN
+* The GBA save engine replaces the password engine (matches the 2004 3rd party cheat indexes
   review's statement about the save RAM chip).
 
 **Inferred**
@@ -319,9 +319,9 @@ Only hashes, addresses, message labels and derived algorithms are published.
 
 ## 10. Sources consulted
 
-* GameFAQs GBA pages for the published password list (the pages are SNES
+* 3rd party cheat indexes GBA pages for the published password list (the pages are SNES
   guides mirrored onto the GBA entry).
-* IGN, "Disney's Aladdin" GBA review, 2004-10-06: the GBA version adds a save
+* 3rd party cheat indexes, "Disney's Aladdin" GBA review, 2004-10-06: the GBA version adds a save
   RAM chip instead of the SNES password engine.
-* Nintendo World Report GBA review, 2004-11-06: "You can now save whenever
+* 3rd party cheat indexes GBA review, 2004-11-06: "You can now save whenever
   you want."

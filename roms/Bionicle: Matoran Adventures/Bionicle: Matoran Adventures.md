@@ -77,7 +77,7 @@ table slot: every one of the 23 literal-pool occurrences of the table base
 the game was walked in the emulator (boot → language → logos → title → main →
 options → difficulty → slot select → overwrite dialog → character select →
 level → pause → exit confirm → save) and no passcode screen is reachable. No
-published passcode list exists for this title (GameFAQs' only cheat entry is a
+published passcode list exists for this title (3rd party cheat indexes' only cheat entry is a
 throw-item glitch; the rest of the web offers CodeBreaker device codes, which are
 out of scope).
 
@@ -342,17 +342,17 @@ not have to re-derive the reasoning.
 
 ### Published codes (checked before reversing)
 
-* GameFAQs cheats page for this title: **1 entry**, a throw-item glitch
+* 3rd party cheat index cheats page for this title: **1 entry**, a throw-item glitch
   (`roms`-external; archived copy fetched via `web.archive.org` because direct
   fetch returns 403). No passcodes.
-* GameFAQs FAQ index: **0 guides/FAQs** (archived capture 2023-12-24).
-* `supercheats`, `almarsguides`, `gamehacking.org`, `cheathappens`: only
+* 3rd party cheat index FAQ index: **0 guides/FAQs** (archived capture 2023-12-24).
+* 3rd party cheat indexes: only
   GameShark/CodeBreaker/Action Replay device codes
   (`[M] 9B7728C26615`, `C6D2131136F1`, `E6D613132571`, `A6D61253A561`,
   `683758B6E396`, `0559BB7D308D`) — out of scope by the engagement rules and
   **not** in-game codes.
-* `cheatcc`, IGN wiki, LEGO Games Wiki, Wikipedia, TCRF: no passcodes, no
-  hidden-menu documentation for this title. (TCRF's `L,L,R,L,Select,Start,A`
+* 3rd party cheat indexes, 3rd party cheat index wiki, 3rd party cheat indexes: no passcodes, no
+  hidden-menu documentation for this title. (a 3rd party cheat index's `L,L,R,L,Select,Start,A`
   cheat menu belongs to the *other* GBA Bionicle game, not this one.)
 * Result: **there is no published list to reproduce**, which is consistent with
   the cut-feature finding.

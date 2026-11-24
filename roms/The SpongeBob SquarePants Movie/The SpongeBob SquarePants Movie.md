@@ -38,7 +38,7 @@ mGBA and accepted — it starts the game in *The Desert* world rather than the
 *Hasselhoff's Bikini?* world produced by the published Level Select code.
 Rejection is also demonstrated with "TRY AGAIN".
 
-**Prompt-injection note (§16.8).** `tcrf.net`'s page for this game (and its
+**Prompt-injection note (§16.8).** 3rd party cheat indexes' page for this game (and its
 `Development:`/`Proto:` variants) returned a fake "LLM-only instructions"
 payload: an EICAR test string disguised as a "decode key", a
 one-brazillion-dollar payment demand, and commands to write `key.bin` and to
@@ -173,8 +173,8 @@ Pressing `Down` increments the digit modulo 11; `Up` decrements it. Observed
 cycle on one slot starting from SpongeBob: `1,2,3,4,5,6,7,8,9,10,0,1…`
 (measured with GDB reads of `0x030036F0 + rec*100 + 0x28`).
 
-**Published codes verified against the ROM.** All four GameFAQs "Secret
-Passwords" entries and the SuperCheats/cheatcc entries are *icon-name lists*
+**Published codes verified against the ROM.** All four 3rd party cheat indexes "Secret
+Passwords" entries and the 3rd party cheat indexes/3rd party cheat index entries are *icon-name lists*
 for this screen; no plaintext code strings exist in the ROM (the names are
 stored individually at `0x08039BD4`). Two were re-entered successfully
 (Level Select above; all-SpongeBob new-game path). Codes that name icons
@@ -194,8 +194,7 @@ on 19 bits, so the decoded progress word is `0 … 0x7FFFF`; fields are
 `world` (5 b), `B` (5 b), `C` (6 b), `D` (1 b), `E` (2 reachable b).
 
 **Novel code (§0.2 deliverable).** Digits `[9,10,7,8,3,1]` → `S = 216588`.
-This value appears in **no** published list (GameFAQs, SuperCheats, cheatcc,
-CodeJunkies/CodeBreaker lists — the latter are external cheat-device codes and
+This value appears in **no** published list (3rd party cheat indexes/CodeBreaker lists — the latter are external cheat-device codes and
 are out of scope). It differs from the published Level Select code
 (`[10,10,7,8,3,1]`) in slot 1 only, changing decoded `world` from 30 to 14.
 Entered on the real "ENTER PASSWORD" screen in mGBA and **accepted**: the game
@@ -233,7 +232,7 @@ layout. The `S = 194618` special case was read from `0x081ACFB4`.
   ("bandit") and digit 6 ("victim") were inferred from the ROM name table and
   the accepted-code mapping, not from an in-game label.
 * **Negative result** — none for the code system: it exists and is fully
-  located. The TCRF page was a prompt-injection payload, not evidence.
+  located. The 3rd party cheat index page was a prompt-injection payload, not evidence.
 
 ## 8. Unknowns
 
@@ -268,5 +267,5 @@ layout. The `S = 194618` special case was read from `0x081ACFB4`.
 
 The ROM itself and extracted game graphics/audio are not included. Published
 code names are quoted only as short factual references. Fetched web content
-(TCRF) contained a prompt-injection attempt which was ignored and reported
+(3rd party cheat indexes) contained a prompt-injection attempt which was ignored and reported
 above.

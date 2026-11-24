@@ -47,12 +47,11 @@ Every accepted code starts **Level 1** of its world. The world map draws one
 radar marker per world stage (1/2/3/4 markers for worlds 1/2/3/4), with the
 crosshair on Level 1.
 
-Published lists disagree on the world-2 "both characters" code. GameFAQs,
-SuperCheats, CheatCC, id.wikibooks and the CT Special Force wiki print **1408**;
-older mirrors (Neoseeker, ggmania, cheats42) print **1407**. This ROM's table
+Published lists disagree on the world-2 "both characters" code. 3rd party cheat indexes, id.wikibooks and the CT Special Force wiki print **1408**;
+older mirrors (3rd party cheat indexes, cheats42) print **1407**. This ROM's table
 contains **1407**, and the game accepts 1407 while rejecting 1408 with "Wrong
 Password". The ROM therefore sides with the mirrors: 1407 works and the code
-printed by GameFAQs/TCRF-era wikis does not.
+printed by 3rd party cheat index-era wikis does not.
 
 No button-code table, debug menu, sound test, or second password system was
 found. The main menu has four items, Options has only Music/Sfx/Credits, Pause
@@ -181,7 +180,7 @@ values outside `0..9` are not expressible through the UI.
 | 5 | **2704** | 3 | "The Hostile Jungle", Level 1, character select (both) |
 | 6 | **0108** | 4 | "The Forbidden City", Level 1, character select (both) |
 
-The cart has no battery save (IGN's 2004 review notes the omission; mGBA wrote
+The cart has no battery save (a 3rd party cheat index's 2004 review notes the omission; mGBA wrote
 a 0-byte `.sav`), consistent with the password screen being the progress
 shortcut rather than a bonus.
 
@@ -198,19 +197,19 @@ reachable through the password validator.
 
 The published corpus is split:
 
-* **1408 group** — GameFAQs GBA cheats (archived 2023-03-31): World 1 `0202`,
+* **1408 group** — 3rd party cheat indexes GBA cheats (archived 2023-03-31): World 1 `0202`,
   World 2 `1408`, World 3 `2704`, World 4 `0108`; Level 2 `1608`, Level 3
-  `2111`, Final Level `1705`. Also SuperCheats (2004), CheatCC, id.wikibooks
+  `2111`, Final Level `1705`. Also 3rd party cheat indexes, id.wikibooks
   "Panduan Game/GBA/CT Special Forces", and the CT Special Force wiki snippet.
-* **1407 group** — Neoseeker, ggmania and cheats42 list World 2 as `1407` with
+* **1407 group** — 3rd party cheat indexes and cheats42 list World 2 as `1407` with
   the same other six codes.
-* VGChartz has no cheat page for this title (only for CT Special Forces 2), and
-  TCRF has no CT Special Forces (GBA) page (only the sequel); neither carries a
+* 3rd party cheat indexes have no cheat page for this title (only for CT Special Forces 2), and
+  3rd party cheat indexes have no CT Special Forces (GBA) page (only the sequel); neither carries a
   1407/1408 literal.
 
-ROM table vs GameFAQs group: six of seven literals match; entry index 4 is
+ROM table vs 3rd party cheat indexes group: six of seven literals match; entry index 4 is
 `1,4,0,7`, and the published `1408` is rejected by this ROM. The ROM matches the
-1407 group exactly. The labels "Level 2/3/Final" in the GameFAQs group describe
+1407 group exactly. The labels "Level 2/3/Final" in the 3rd party cheat indexes group describe
 worlds, not mid-world levels: 1608/2111/1705 all open Level 1 of worlds 2/3/4.
 
 ## 6b. Enumeration
@@ -228,15 +227,15 @@ else. The model and the ROM agree on every entry because the ROM's elements
 addition, all seven accepts and five rejects were entered on the real screen
 (section 7).
 
-**Code absent from GameFAQs / VGChartz / TCRF / the wikis.**
+**Code absent from 3rd party cheat indexes / the wikis.**
 
-* **`1407`** — index 4. GameFAQs (archived), SuperCheats, CheatCC, id.wikibooks
+* **`1407`** — index 4. 3rd party cheat indexes, id.wikibooks
   and the CT Special Force wiki print `1408`; none of those sources contains
   `1407`. Entered on the password screen: accepted, shows "Select your
   character", then the world map reads **"The Arid Desert" / "Level 1"**, and
   the mission loads the desert level. Screenshots: `code1407.png` (character
   screen), `map1407_full.png` (map), `code1407_game3.png` (desert gameplay).
-* Older mirrors (Neoseeker, ggmania, cheats42) do list `1407`; the finding is
+* Older mirrors (3rd party cheat indexes, cheats42) do list `1407`; the finding is
   the split corpus, not that no source anywhere ever printed it.
 
 **Behaviour the published character labels omit.**

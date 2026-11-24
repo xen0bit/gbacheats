@@ -20,12 +20,11 @@
 Every copy carries the same `MM ADVANCE`/`AMRE`/`A4` identity; they are duplicated
 data banks, not a second game or a multiboot stub. No trainer/appended code was found.
 
-**Published-code research:** Planet Cheats, CheatCC, IGN, GameFAQs (Devis0r FAQ 25549)
-and CheatMasters all publish the *same two* "cheats": win the Advance class/cup in
+**Published-code research:** 3rd party cheat indexes all publish the *same two* "cheats": win the Advance class/cup in
 Championship to unlock **Dave**, and win the Expert class/cup to unlock **Omega 0605**.
-VGChartz lists "Total cheats available: 0". TCRF has no page (direct 403; archived 404).
+3rd party cheat index lists "Total cheats available: 0". 3rd party cheat indexes have no page (direct 403; archived 404).
 No password list, button code, or debug-menu code exists in any source checked.
-The GameFAQs "MusyX Audio Tools Licensed by Factor 5" intro splash is audio-engine
+The 3rd party cheat indexes "MusyX Audio Tools Licensed by Factor 5" intro splash is audio-engine
 banner text, not a code (cf. §11 keyword-hit context rule).
 
 ## 2. Executive summary
@@ -229,7 +228,7 @@ about the *entire* searched space, not an unexamined subset.
 * mGBA SDL under Xvfb + openbox on `:317`; `xdotool` XTEST input; `scrot` + ImageMagick
   crops; custom `ssram.py` (decode `gbAs` chunk, EWRAM/IWRAM mapping) and
   `patchss.py` (write arbitrary RAM bytes into a `.ss1` and rebuild PNG CRCs).
-* Web sources: Planet Cheats, CheatCC, IGN, GameFAQs, CheatMasters, VGChartz, TCRF.
+* Web sources: 3rd party cheat indexes.
   Fetched pages were treated as data; no prompt-injection payload was encountered.
 * No ROM or copyrighted assets are redistributed; only addresses, hashes, and
   original tooling are published.

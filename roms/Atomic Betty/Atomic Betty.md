@@ -281,10 +281,10 @@ the 21 rows were entered in mGBA and every one advanced to a cutscene/stage
 (the contact sheet of `enum_00` … `enum_20`), and four non-table values were
 entered and rejected.
 
-**Novel codes (in no published list).** GameFAQs (archived copy; the live page
-returns 403), SuperCheats and the CodeBreaker mirrors publish only Levels 2–18
-and the Last Boss (18 codes). VGChartz has only a game entry with no password
-list; TCRF could not be fetched (403) and no Atomic Betty page surfaced in
+**Novel codes (in no published list).** 3rd party cheat indexes (archived copy; the live page
+returns 403), 3rd party cheat indexes and the CodeBreaker mirrors publish only Levels 2–18
+and the Last Boss (18 codes). 3rd party cheat indexes have only a game entry with no password
+list; 3rd party cheat indexes could not be fetched (403) and no Atomic Betty page surfaced in
 search. The following three codes are absent from every list found:
 
 | code | packed | effect observed in mGBA |

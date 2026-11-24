@@ -27,8 +27,8 @@ dial button launches a gig/practice setup screen, rejects unknown numbers with
 "YOU HAVE CALLED A WRONG NUMBER. PLEASE TRY AGAIN.", or — for recognised but
 progression-gated gigs — answers "YOU ARE NOT QUALIFIED FOR THIS GIG. PLEASE HANG UP."
 
-No in-game codes, passwords or unlockables are published for this SKU (GameFAQs 403,
-VGChartz "Total cheats available: 0", chaptercheats "No Codes/Passwords/Unlockables").
+No in-game codes, passwords or unlockables are published for this SKU (3rd party cheat indexes 403,
+3rd party cheat indexes "Total cheats available: 0", 3rd party cheat indexes "No Codes/Passwords/Unlockables").
 The system is nevertheless present and fully table-driven.
 
 **Bottom line:** the accepted space is **exactly 10 four-digit numbers** — the intersection of

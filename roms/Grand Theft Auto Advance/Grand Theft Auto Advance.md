@@ -23,7 +23,7 @@ No trainer/patch detected: `TRAINER` string hits at `0x361595`, `0x3796b1`, `0x3
 
 ## 2. Executive summary
 
-GTA Advance has **no phone-number or text password system**. Its cheats are a **button-code system**, exactly as published by GameFAQs/GTA Wiki/TCRF-style lists, plus one hidden **"Pick Level (cheat)"** menu unlocked by a button code on the main menu.
+GTA Advance has **no phone-number or text password system**. Its cheats are a **button-code system**, exactly as published by 3rd party cheat indexes/3rd party cheat index-style lists, plus one hidden **"Pick Level (cheat)"** menu unlocked by a button code on the main menu.
 
 * Cheat mode must first be enabled by **holding A+B+Start during gameplay**; the on-screen coordinates and the message "CHEAT MODE ON" confirm it. This writes `1` to RAM `0x02011020`.
 * Once enabled, the game watches a 16-entry ring buffer of the last pressed buttons. There are **9 comparison records** at ROM `0x08CAA264`, each 12 bytes = six active-high 16-bit key masks. All nine begin with the prefix **Left, Right, Up, Down**; the last two masks select the effect.

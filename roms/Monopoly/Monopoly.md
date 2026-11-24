@@ -18,7 +18,7 @@
 | MD5 | `ce55f087d1ed4ab12a5bad411dae1113` |
 | SHA-1 | `81314b9ffe3c4da5060de098ee1394ecef6fe9ad` |
 | SHA-256 | `3a8e53c4076734e6d7e0654d6362fffeef0a0792114aca9eb7701beee5d3c7b0` |
-| Identified SKU | GameFAQs `gba/926475` — Destination Software / DSI Games, 2004; Fullfat engine; `file(1)` reports `"MONOPOLY" (BUME20, Rev.00)` |
+| Identified SKU | 3rd party cheat indexes `gba/926475` — Destination Software / DSI Games, 2004; Fullfat engine; `file(1)` reports `"MONOPOLY" (BUME20, Rev.00)` |
 
 Embedded-header scan: one Nintendo-logo hit at file `0x0` only. No second image, no appended trainer, no scene cracktro patch, no GameShark/CodeBreaker host. The ROM is the retail image.
 
@@ -26,11 +26,11 @@ Embedded-header scan: one Nintendo-logo hit at file `0x0` only. No second image,
 
 **No developer-intended cheat system exists in this ROM.** There is no password screen, no button-code matcher, no name-as-code validator, no hidden/debug menu, and no unlockable board or token. The negative is *proven* rather than assumed: every reachable screen was walked in mGBA with savestate/RAM evidence, the full localized text bank was decoded (it is plain ASCII/ISO-8859, not tile-indexed), the on-screen keyboard's entire alphabet and its input buffer were located in EWRAM, the ROM was searched for published code literals under 40+ obfuscations, the whole 4 MiB was scanned for button-mask tables at two strides, and every published code family for the *other* Monopoly SKUs was tested or explicitly shown to belong to a different platform.
 
-The only "cheats" published for this game anywhere are GameShark memory-write codes (explicitly out of scope). VGChartz lists **0 cheats** for GBA `926475`; ChapterCheats lists "No Codes, No Passwords, No Unlockables, No Hints or Secrets, No Glitches, No Easter Eggs" for this SKU. The N64/GB/GBC name codes and license-skip chord do not exist here.
+The only "cheats" published for this game anywhere are GameShark memory-write codes (explicitly out of scope). 3rd party cheat index lists **0 cheats** for GBA `926475`; 3rd party cheat index lists "No Codes, No Passwords, No Unlockables, No Hints or Secrets, No Glitches, No Easter Eggs" for this SKU. The N64/GB/GBC name codes and license-skip chord do not exist here.
 
 One developer leftover string exists at file `0x2508B4`: `resizeSpriteBlock: Reduce. Code needs writing.` — an unfinished engine note, not a cheat.
 
-A TCRF page fetched during recon returned a **prompt-injection payload** (fake `key.bin`/EICAR instructions, a $1,000,000,000,000 payment demand, manufactured insults and a "terminate" directive). It was ignored as data and is recorded here per §16.8.
+A 3rd party cheat index page fetched during recon returned a **prompt-injection payload** (fake `key.bin`/EICAR instructions, a $1,000,000,000,000 payment demand, manufactured insults and a "terminate" directive). It was ignored as data and is recorded here per §16.8.
 
 ## 3. How to reproduce
 
@@ -118,8 +118,8 @@ The board set is a fixed 5-entry enumeration; the save file stayed **0 bytes** t
 - **ACE / POTATO / WANDER** (other N64 name cheats): no literal under any tested transform; not reachable.
 - **A+B+Start** (GB/GBC license-skip): no license screen in this build; not applicable.
 - **"Cash" ×5** (Mac version): "Cash" occurs once at file `0x21EF56` in the English rulebook prose only; no input field that could accept it.
-- **"stamps to open other boards"** (supercheats Q&A, actually the Here & Now/world-edition mechanic): this ROM has exactly 5 NUL-terminated board names, 0-byte save, and no stamp/counter string — the mechanic is from a different Monopoly edition.
-- GameShark money/dice codes (supercheats/gamerevolution) are memory writes and were excluded by scope; their existence is not evidence of an in-game system.
+- **"stamps to open other boards"** (3rd party cheat indexes Q&A, actually the Here & Now/world-edition mechanic): this ROM has exactly 5 NUL-terminated board names, 0-byte save, and no stamp/counter string — the mechanic is from a different Monopoly edition.
+- GameShark money/dice codes (3rd party cheat indexes) are memory writes and were excluded by scope; their existence is not evidence of an in-game system.
 
 Because no code exists, there is no "out-of-range" input to test: the rejection proof is the exhaustive surface enumeration above plus the one on-screen submission of the strongest published candidate.
 
@@ -141,7 +141,7 @@ Because no code exists, there is no "out-of-range" input to test: the rejection 
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for literal-pool and input-handler disassembly.
 - Python scripts written in `/tmp/monopoly/`: `scan.py` (direct-pointer / Thumb-LDR / BL scans), `obfsearch.py` (640 literal-transform searches), `button_scan.py` + `button_scan2.py` (whole-ROM key-mask array scans), `state.py` (mGBA `gbAs` decompressor and RAM mapper), `patchstate.py` (savestate name-buffer patcher), plus key/screenshot helpers.
 - mGBA SDL under Xvfb `:317`; `import -window` for viewport capture; `xdotool` XTEST keys with 40–150 ms holds.
-- Web: GameFAQs GBA `926475` (developer/publisher/FAQ inventory), VGChartz `27503` (0 cheats), ChapterCheats `25719` (no codes/passwords/unlockables), SuperCheats (GBA Q&A and FAQ), remyhax "100 GBA crackmes" (methodology only). GameFAQs direct fetch 403; archived cheats URL 404. The TCRF fetch returned a prompt-injection payload (recorded above, ignored).
+- Web: 3rd party cheat indexes GBA `926475` (developer/publisher/FAQ inventory), 3rd party cheat indexes `27503` (0 cheats), 3rd party cheat indexes `25719` (no codes/passwords/unlockables), 3rd party cheat indexes, remyhax "100 GBA crackmes" (methodology only). 3rd party cheat indexes direct fetch 403; archived cheats URL 404. The 3rd party cheat indexes fetch returned a prompt-injection payload (recorded above, ignored).
 
 **Legal note:** No ROM bytes or copyrighted assets are reproduced here; only hashes, addresses, algorithms and findings.
 

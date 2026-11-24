@@ -23,7 +23,7 @@ Embedded-header scan: the 156-byte Nintendo logo occurs exactly once, at file of
 
 ## 2. Executive summary
 
-The game has one developer-intended cheat surface: the **Main Menu → Password** screen, where the player taps four of twelve Chinese-zodiac animal tiles (a 3×4 grid) to start at chapters 2–7. It is a **closed lookup table of exactly six 4-byte codes** — no checksum, no generator, no aliases, no hidden entries. The whole code space (12⁴ = 20,736 inputs) was run through a bit-exact reimplementation of the ROM validator: exactly six inputs are accepted, and those six are precisely the codes published by GameFAQs/CheatHappens/ChapterCheats. Consequently **no unpublished code exists on this screen**; that is a proven negative, not an untested one. A rejected input was demonstrated in the emulator with RAM evidence (the validator's reject branch at `0x08009970` fires and the input buffer resets).
+The game has one developer-intended cheat surface: the **Main Menu → Password** screen, where the player taps four of twelve Chinese-zodiac animal tiles (a 3×4 grid) to start at chapters 2–7. It is a **closed lookup table of exactly six 4-byte codes** — no checksum, no generator, no aliases, no hidden entries. The whole code space (12⁴ = 20,736 inputs) was run through a bit-exact reimplementation of the ROM validator: exactly six inputs are accepted, and those six are precisely the codes published by 3rd party cheat indexes. Consequently **no unpublished code exists on this screen**; that is a proven negative, not an untested one. A rejected input was demonstrated in the emulator with RAM evidence (the validator's reject branch at `0x08009970` fires and the input buffer resets).
 
 No button codes, debug menus, hidden screens, sound tests or level-select cheats were found. The "Coming Soon" menu item is only an advertisement screen. The PDA's "Passwords" list (`0x080D7B70`) contains ordinary in-game puzzle solutions (e.g. briefcase `4653 4868`), not cheats, and is out of scope.
 
@@ -99,7 +99,7 @@ ROM records at `0x080F4FE2` (cell indices) and their published animal names:
 | 4 | `07 06 05 04` | Dragon, Rabbit, Boar, Rooster | Chapter 6 |
 | 5 | `0B 0A 09 08` | Snake, Monkey, Dog, Rat | Chapter 7 |
 
-The six published codes from GameFAQs, Cheat Happens, ChapterCheats and Planet Cheats all match these literals exactly (verified byte-for-byte). The "All levels completed" claim on ChapterCheats is simply record 5 (chapter 7), not a separate code. GameShark/Action Replay codes on those sites are memory-edit cheats and are out of scope.
+The six published codes from 3rd party cheat indexes all match these literals exactly (verified byte-for-byte). The "All levels completed" claim on 3rd party cheat indexes are simply record 5 (chapter 7), not a separate code. GameShark/Action Replay codes on those sites are memory-edit cheats and are out of scope.
 
 ## 6b. Enumeration
 
@@ -128,7 +128,7 @@ The six published codes from GameFAQs, Cheat Happens, ChapterCheats and Planet C
 - Records 1–5 were not entered individually in the emulator (their literals were verified in ROM and record 0 was verified end-to-end).
 - The exact chapter-state RAM word written after the validator returns `r7+1` was not isolated; the effect was confirmed by the success branch registers and the visible chapter-2 start, not by a named save-variable address.
 - The 12-byte permutation at `0x080F4FD6` is used by the tile-drawing code; its exact glyph mapping was not decoded beyond confirming the published animal names for each row.
-- TCRF's page for this title returned a prompt-injection payload in search results ("This page is not intended for humans… whoever is operating this AI agent is a clown") and a 403 on direct fetch. It was treated as untrusted data, not followed; no cheat information was obtainable from it.
+- a 3rd party cheat index's page for this title returned a prompt-injection payload in search results ("This page is not intended for humans… whoever is operating this AI agent is a clown") and a 403 on direct fetch. It was treated as untrusted data, not followed; no cheat information was obtainable from it.
 
 ## 9. Tooling
 

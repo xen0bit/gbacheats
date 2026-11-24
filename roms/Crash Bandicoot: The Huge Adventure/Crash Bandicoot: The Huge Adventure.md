@@ -367,7 +367,7 @@ interface, the input surface and the one writable flag byte:
 | No password/cheat/debug text | Observed | whole-image case-folded keyword counts above |
 | No button-sequence table | Derived | pointer-referenced u16/u8 mask-run scan: 2+4 candidates, all graphics; sole code-referenced one is a sprite table |
 | Sequence rejected | Observed | menu unchanged; transient EWRAM/IWRAM diff only |
-| No in-game codes published | Observed (web) | GameFAQs cheats page lists only unlockables (extra level at 100%, Turbo Run) |
+| No in-game codes published | Observed (web) | 3rd party cheat index cheats page lists only unlockables (extra level at 100%, Turbo Run) |
 
 ## 8. Unknowns
 

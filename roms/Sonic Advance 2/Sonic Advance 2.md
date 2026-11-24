@@ -18,7 +18,7 @@
 | SHA-256 | `f2b7a3329401a02706d87560f61da3e6da2ca42f2b9ae98a86d78e0529cb7260` |
 
 The SHA-1 is byte-for-byte the `sa2.sha1` of the public SAT-R SA1/SA2 decompilation
-(`github.com/SAT-R/sa2`, No-Intro USA Rev.00), so the source-level findings below refer to this
+(`github.com/SAT-R/sa2`, 3rd party cheat indexes USA Rev.00), so the source-level findings below refer to this
 exact image. The `0x0000` header checksum is a normal rebuilt-header artifact (guide §16.1); the
 entry word, logo and full hash match confirm a retail image.
 
@@ -152,12 +152,12 @@ Right `0x010`, Left `0x020`, Up `0x040`, Down `0x080`, R `0x100`, L `0x200`.
 
 | Source | Claim | Result |
 |---|---|---|
-| GameFAQs / IGN / GameGenie / Prima | Cream, Tails, Knuckles, Amy, Sound Test, Boss TA, TCG, True Area 53, songs 58-63 | All are **save-flag unlocks**, not codes; bits and UI effects verified as above (True Area 53 endgame not played) |
-| GameGenie / manual | "In-game reset: A+B+Start+Select during gameplay" | **Verified** (canonical chord → title) |
-| IGN | "Hold L for a few seconds and release" (Buddy Attack) | Gameplay technique, not a cheat; no state-changing validator found |
-| GameFAQs (Sonic Advance 1) | 9-press partner code `Up,R,Dn,R,L,R,R,R,A` | **Rejected on this SKU**: literal table absent, no effect at SA2 title or character select (`charselect_sa1seq.png`) |
-| GameFAQs (Sonic Advance 3) | 6-press Secret Stage Mode `Up,R,Dn,L,Rgt,Left` | **Rejected on this SKU**: attract demo started instead, no menu change (`title_sa3_seq.png`) |
-| Cheat Happens / ROMSFUN / gbadrome | 19-20 Action Replay / CodeBreaker pokes | Out of scope; addresses such as `0x02002669`/`0x0200266C` are mirrored EWRAM unlock flags, useful only as address confirmation |
+| 3rd party cheat indexes | Cream, Tails, Knuckles, Amy, Sound Test, Boss TA, TCG, True Area 53, songs 58-63 | All are **save-flag unlocks**, not codes; bits and UI effects verified as above (True Area 53 endgame not played) |
+| 3rd party cheat indexes / manual | "In-game reset: A+B+Start+Select during gameplay" | **Verified** (canonical chord → title) |
+| 3rd party cheat indexes | "Hold L for a few seconds and release" (Buddy Attack) | Gameplay technique, not a cheat; no state-changing validator found |
+| 3rd party cheat indexes | 9-press partner code `Up,R,Dn,R,L,R,R,R,A` | **Rejected on this SKU**: literal table absent, no effect at SA2 title or character select (`charselect_sa1seq.png`) |
+| 3rd party cheat indexes | 6-press Secret Stage Mode `Up,R,Dn,L,Rgt,Left` | **Rejected on this SKU**: attract demo started instead, no menu change (`title_sa3_seq.png`) |
+| 3rd party cheat indexes / gbadrome | 19-20 Action Replay / CodeBreaker pokes | Out of scope; addresses such as `0x02002669`/`0x0200266C` are mirrored EWRAM unlock flags, useful only as address confirmation |
 
 ## 6b. Enumeration
 

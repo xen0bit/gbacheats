@@ -284,7 +284,7 @@ input outside the three families exists in the enumerated length ≤6 space.
 * Exact history-buffer capacity and wrap behaviour beyond six presses; count is
   reset to 0 on success, so subsequent presses overwrite from index 0.
 * Whether any effect word is persisted into the `.sav` record (the 50-lives
-  effect is reported by GameFAQs to persist until power-off; not verified here).
+  effect is reported by 3rd party cheat indexes to persist until power-off; not verified here).
 * The custom (non-stock) Nintendo logo bytes were not investigated; the ROM boots
   normally and the header is otherwise intact.
 
@@ -300,7 +300,7 @@ input outside the three families exists in the enumerated length ≤6 space.
   (`ssread.py`, `ssval.py`, `ssdiff.py`), per guide §16.13. The `-g` GDB stub was
   tried but proved unstable across repeated attaches/savestate loads, so all RAM
   proofs use savestate diffs.
-* Web sources consulted: GameFAQs GBA cheats, IGN GBA cheats, MarioWiki
-  "Donkey Kong Country (GBA)", RareGamer GBA cheat codes. Pages were treated as
+* Web sources consulted: 3rd party cheat indexes GBA cheats, 3rd party cheat indexes GBA cheats, 3rd party cheat indexes
+  "Donkey Kong Country (GBA)", 3rd party cheat indexes GBA cheat codes. Pages were treated as
   data only; no instruction found in them was followed. No ROM or copyrighted
   asset is redistributed here.

@@ -35,7 +35,7 @@ implemented once in the main image (validator `0x08011348`, table `0x0804A354`) 
 called from six per-game handlers, one per component game. Entering
 `↑ ↑ ↓ ↓ ← → ← → B A` sets a single global completion flag in IWRAM
 (`0x03007983`: `0x00 → 0x01`) and queues sound effect `0x9E` — the audible "ring"
-described by GameFAQs. Each game reads that flag to apply its own reward
+described by 3rd party cheat indexes. Each game reads that flag to apply its own reward
 (extra lives / extra level / extra fights / enhanced graphics / autofire).
 
 **Novel / unpublished finding:** the same code also works on the *compilation's global
@@ -63,10 +63,10 @@ by three in-game rejections (wrong final button, reverse code, Select+Start).
   `0x7970` (pointer → `0x03007980`), then byte `+3` of that struct at raw state
   offset `0x20983`. Before `00`, after `01`. Sound queue at state offset
   `0x1D3CC`: `ff ff ff ff` → `9e 00 00 00`.
-* Published codes tested: GameFAQs (all six games + addendum), CheatCC
-  (Rush'n Attack "Up×2, Down×2, Left, Right, Left, Right, B, A, Start"), IGN.
-  Every literal matches the ROM table. GameFAQs/IGN live pages 403; verified via
-  Wayback snapshot `20260202024624` of the GameFAQs cheats page.
+* Published codes tested: 3rd party cheat indexes
+  (Rush'n Attack "Up×2, Down×2, Left, Right, Left, Right, B, A, Start"), 3rd party cheat indexes.
+  Every literal matches the ROM table. 3rd party cheat indexes live pages 403; verified via
+  Wayback snapshot `20260202024624` of the 3rd party cheat index cheats page.
 
 ## 4. Address map
 
@@ -147,14 +147,14 @@ extra fights; `0x080319C4` calls `0x08002460` with `r3 = -0x40` when the flag is
 | 12 | 0x0008 | Start (unreachable tail) |
 | 13 | 0x0000 | terminator |
 
-**Published effects verified against the ROM** (GameFAQs, Wayback 20260202024624):
+**Published effects verified against the ROM** (3rd party cheat indexes, Wayback 20260202024624):
 Frogger — enhanced graphics / bigger frog; Time Pilot — extra level, autofire;
 Yie Ar Kung Fu — extra characters in VS mode, two extra fights at tournament end;
 Rush'n Attack — extra lives, two extra levels at game end; Gyruss — enhanced
 graphics, extra lives, extra level at start, dual gun retained; Scramble —
 enhanced graphics. All six use the identical sequence above.
 
-Unverified/out-of-scope: GameFAQs also lists platform-tagged GameShark-style
+Unverified/out-of-scope: 3rd party cheat indexes also lists platform-tagged GameShark-style
 `POKE` values and an FDS-only Gyruss reverse code (`A B ← → ← → ↓ ↓ ↑ ↑`); the
 latter was **tested on this GBA ROM and rejected** (see §7), and `POKE` codes are
 memory-edit cheats, excluded by scope.
@@ -237,7 +237,7 @@ exactly six callers.
   state (IWRAM at raw `0x19000`, EWRAM at `0x21000`, VRAM at `0x1000`).
 * mGBA under Xvfb `:315` with `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST key helper
   (`/tmp/konamiarcade/key.py`); `scrot` + ImageMagick for screen walks.
-* Web: web.archive.org Wayback snapshot of the GameFAQs cheats page (live pages
+* Web: web.archive.org Wayback snapshot of the 3rd party cheat index cheats page (live pages
   returned 403). Fetched page text was treated strictly as data; no embedded
   instructions were followed.
 

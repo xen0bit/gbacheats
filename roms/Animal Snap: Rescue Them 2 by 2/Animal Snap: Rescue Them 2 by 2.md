@@ -36,7 +36,7 @@ title screen:
 It adds a fourth title-menu entry, **BLOCK BLASTER**, which starts the
 Breakout-style bonus game immediately. The same code is printed verbatim in the
 ROM's own text bank (`0x68DC`–`0x6960`) and is the only code on the archived
-GameFAQs cheat page; the in-emulator test of that published code passed.
+3rd party cheat index cheat page; the in-emulator test of that published code passed.
 
 The validator is small and fully recovered. It is a *subsequence* matcher over
 newly-pressed D-pad edges, gated on the L shoulder button being **held**:
@@ -356,7 +356,7 @@ the button sequence only, not a password format.
    Left, Up`.
    The correct eight edges appear in order; the extra decoy presses are ignored.
    Result: `BLOCK BLASTER` appears (screenshot
-   `Animal Snap - novel decoy superset.png`). This is not the GameFAQs string;
+   `Animal Snap - novel decoy superset.png`). This is not the 3rd party cheat indexes string;
    it is accepted because mismatches do not reset the index.
 2. **Both shoulders held.** Hold L **and** R, then press `UDLRRLDU`. Result:
    `BLOCK BLASTER` appears (`Animal Snap - novel L+R.png`). This proves the gate
@@ -377,7 +377,7 @@ The rejection screenshots are `Animal Snap - reject no L.png`,
 and `Animal Snap - reject prefix 7 of 8.png`; the resumption is
 `Animal Snap - locked menu.png` → `Animal Snap - title unlocked.png`.
 
-**Published-code verification.** The archived GameFAQs cheat page
+**Published-code verification.** The archived 3rd party cheat index cheat page
 (`https://web.archive.org/web/20251114043209/https://gamefaqs.gamespot.com/gba/583060-animal-snap/cheats`)
 lists exactly one unlockable, contributed by Caustickhan:
 
@@ -386,7 +386,7 @@ lists exactly one unlockable, contributed by Caustickhan:
 
 The literal sequence matches the ROM table and the ROM's own hint text; the
 emulator accepted it on the first attempt. No other published code for this
-game was found (GameFAQs, TCRF, VGChartz, Giant Bomb, HonestGamers).
+game was found (3rd party cheat indexes).
 
 **Effect of the hidden entry.** Selecting `BLOCK BLASTER` starts a
 Breakout-style game with a brick field, a paddle, a ball, a lives/ball counter,
@@ -430,7 +430,7 @@ otherwise `LEVEL COMPLETED!` (derived, not exercised).
   reached by normal play in this session; the text itself is shipping data.
 * `BONUS GAME COMPLETED!` is the completion message for the bonus game's final
   round; the branch is visible at `0x08003CD2`, but the screen was not reached.
-* The "eight levels" figure for Block Blaster comes from the HonestGamers
+* The "eight levels" figure for Block Blaster comes from the 3rd party cheat indexes
   review, not from an independent in-game count.
 
 ## 8. Unknowns

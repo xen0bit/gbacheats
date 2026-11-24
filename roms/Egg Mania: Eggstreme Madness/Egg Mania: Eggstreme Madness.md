@@ -50,7 +50,7 @@ validator, alphabet encoding, checksum, and accept flag were therefore **not
 recovered**, and no password code was generated or accepted. This is a proven
 gate/blocker (§8), not a vague "could not find it".
 
-No GameShark/CodeBreaker/memory-edit codes are reported (a ROMSFUN/libretro
+No GameShark/CodeBreaker/memory-edit codes are reported (a 3rd party cheat index/libretro
 CodeBreaker pair exists but is out of scope).
 
 ## 3. How to reproduce
@@ -77,7 +77,7 @@ Hold keys 60–150 ms (short taps are missed).
 9. RAM proof: save an mGBA savestate before and after step 7; the decompressed `gbAs`
    chunk differs at raw offset `0x213FC` (EWRAM `0x020003FC`): `0x00 → 0x01`.
 
-Published codes tested (all from GameFAQs / Cheating Dome GBA lists):
+Published codes tested (all from 3rd party cheat indexes GBA lists):
 
 | Source claim | Result |
 |---|---|
@@ -265,8 +265,7 @@ Static sites in the front-end state writer: `0x08000FBE` (`mov r0,#5; str`),
   but decompile to a 6×14 gameplay grid, not a password buffer.
 * **Inferred:** exact held-vs-edge semantics of the SELECT+L/R gate; the meaning of the
   `EXC!` prefix and the password format.
-* **Prompt-injection check:** fetched web pages (GameFAQs, Cheating Dome, Cheat Happens,
-  Wikipedia, GameRevolution) were treated as data; no instructions from them were
+* **Prompt-injection check:** fetched web pages (3rd party cheat indexes) were treated as data; no instructions from them were
   executed. No injection payload was encountered.
 
 ## 8. Unknowns / proven blocker
@@ -328,8 +327,7 @@ the button-code gate; whether the unlock persists to SRAM across a real power cy
   `convert`/`montage` (ImageMagick) for capture mosaics; GDB stub (`mgba -g`,
   `gdb-multiarch`) for memory dumps and a hardware watchpoint on `0x02000468`.
 * `zlib.decompress` of the mGBA `.ss1` `gbAs` PNG chunk for RAM diffs (§16.13).
-* Web sources consulted: GameFAQs, Cheating Dome, Cheat Happens, Wikipedia,
-  GameRevolution, ROMSFUN (CodeBreaker, out of scope).
+* Web sources consulted: 3rd party cheat indexes.
 * Scripts/artifacts in `/tmp/eggmania2/` (`gba.py`, `parse_ss.py`,
   `explore.py`/`2`/`3`, `title_brute.py`, `cs_brute.py`, `scroll.py`, `longhold.py`,
   `force_screens.py`, `find_writers.py`, `screens/` and `sweep3/` montages,

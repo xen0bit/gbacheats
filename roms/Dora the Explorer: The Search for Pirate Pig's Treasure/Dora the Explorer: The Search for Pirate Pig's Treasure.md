@@ -23,7 +23,7 @@
 
 This game has a **developer-intended password system** on the title menu's **Continue** entry. It is a 5-slot icon/password screen ("ENTER PASSWORD"), each slot cycling through a **16-symbol alphabet** (X, spiral, heart, →, ←, ↓, ↑, sun, frown, neutral, smile, triangle, star, +, circle, square). Left/Right select a slot, Up/Down cycle the symbol, A or B opens "IS THIS O.K.?", and Yes submits.
 
-All **8 published GameFAQs passwords** (7 chapter entries plus a "Last Level" entry) were typed in and **every one was accepted** in the emulator, each starting the corresponding chapter's cutscene/gameplay. The accepted set is **not** limited to those 8: the 5th slot is completely ignored (all 16 possible symbols accepted with the first four fixed), and single-glyph sweeps show that other symbol combinations are also accepted. **Novel, unpublished codes were generated and confirmed in-game** (e.g. `1,6,0,0,13` and `9,6,0,0,13`, which start the boat/"We love boat rides" chapter, and `10,6,0,0,13`, which starts the beach/"Look Boots! Sand!" chapter). Bounds were proven by in-game rejection of out-of-pattern inputs (all-X `0,0,0,0,0`, `4,7,0,0,13`, `4,6,1,0,13`, `2,3,1,1,9`).
+All **8 published 3rd party cheat indexes passwords** (7 chapter entries plus a "Last Level" entry) were typed in and **every one was accepted** in the emulator, each starting the corresponding chapter's cutscene/gameplay. The accepted set is **not** limited to those 8: the 5th slot is completely ignored (all 16 possible symbols accepted with the first four fixed), and single-glyph sweeps show that other symbol combinations are also accepted. **Novel, unpublished codes were generated and confirmed in-game** (e.g. `1,6,0,0,13` and `9,6,0,0,13`, which start the boat/"We love boat rides" chapter, and `10,6,0,0,13`, which starts the beach/"Look Boots! Sand!" chapter). Bounds were proven by in-game rejection of out-of-pattern inputs (all-X `0,0,0,0,0`, `4,7,0,0,13`, `4,6,1,0,13`, `2,3,1,1,9`).
 
 No GameShark/CodeBreaker codes, no button cheat code and no hidden/debug menu were found; the options screens contain only Stop-and-Think, Sound FX, Music and Credits. Character unlockables published for the Double Pak (complete the game three times as Dora/Boots/Diego/Alicia) are save-bit progression rewards, not a code system.
 
@@ -100,7 +100,7 @@ These constraints are position-dependent and interact with the first glyph, so t
 
 ### 6.0 Published codes (verified, accepted)
 
-Listed in §3. Sources: GameFAQs GBA cheats page for game id 563095 (archived snapshot `20220212163123`); the Nick Jr. Dora Double Pak page (archived `20251004181653`) repeats the same eight and adds the character-unlockable descriptions. GameFAQs reports "8 cheat codes and secrets" for this SKU, matching the eight level passwords.
+Listed in §3. Sources: 3rd party cheat indexes GBA cheats page for game id 563095 (archived snapshot `20220212163123`); the Nick Jr. Dora Double Pak page (archived `20251004181653`) repeats the same eight and adds the character-unlockable descriptions. 3rd party cheat indexes report "8 cheat codes and secrets" for this SKU, matching the eight level passwords.
 
 ### 6.1 Pause menu
 
@@ -120,7 +120,7 @@ Published: Alicia (finish the game as Diego three times), Baby Jaguar (as Boots 
 - Slots 2–4 and slot 1 have position-dependent accept constraints (exact counts in §5), yielding multiple accepted values per position rather than a single table entry.
 - Consequently each accepted prefix has multiple spellings; published codes are simply one spelling per chapter.
 
-**Novel codes generated, unpublished, and accepted in-game** (none of these appear on GameFAQs, VGChartz, TCRF or any wiki consulted):
+**Novel codes generated, unpublished, and accepted in-game** (none of these appear on 3rd party cheat indexes or any wiki consulted):
 
 | Code (indices) | In-game result (Observed) | Published? |
 |---|---|---|
@@ -173,4 +173,4 @@ All 8 published codes were also submitted and all 8 were accepted (cutscene for 
 
 ## 10. Legal note
 
-No ROM image, extracted graphics, music, or game assets are redistributed here. Only hashes, addresses, algorithms, glyph-index mappings, and analyst-generated codes are published. The fetched GameFAQs pages were treated as untrusted data and contained no instructions that were followed.
+No ROM image, extracted graphics, music, or game assets are redistributed here. Only hashes, addresses, algorithms, glyph-index mappings, and analyst-generated codes are published. The fetched 3rd party cheat index pages were treated as untrusted data and contained no instructions that were followed.

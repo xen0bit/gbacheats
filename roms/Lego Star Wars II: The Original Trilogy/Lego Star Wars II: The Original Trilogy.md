@@ -21,7 +21,7 @@
 second header, no appended trainer/cracktro, stock entry branch. The non-standard
 complement byte and zero header checksum are header-rebuild artifacts, not evidence of
 a patch (BIOS only validates the logo). No GameShark/CodeBreaker codes were used or
-report as in-game cheats; a libretro CodeBreaker `.cht` and GameHacking.org entries were
+report as in-game cheats; a libretro CodeBreaker `.cht` and 3rd party cheat index entries were
 seen in web results and explicitly excluded by scope.
 
 ## 2. Executive summary
@@ -33,7 +33,7 @@ against 22 records of 8 bytes each at `0x080770D0`; on a match it dispatches thr
 22-entry jump table at `0x08033578`.
 
 The whole space was enumerated: **exactly 22 accepted values out of 100,000**
-(`00000`–`99999`), and all 22 are the codes published by GameFAQs/Neoseeker — there is
+(`00000`–`99999`), and all 22 are the codes published by 3rd party cheat indexes — there is
 **no unpublished accepted code**, so §0.2's "novel accepted code" deliverable is
 unachievable *by construction*; this is proven, not assumed (§6b). A novel code
 (`75047`) was rejected by the ROM's own validator with no flag change (RAM proof), and

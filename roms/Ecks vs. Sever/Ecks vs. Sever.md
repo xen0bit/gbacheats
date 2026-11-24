@@ -22,11 +22,11 @@
 
 The only developer-intended cheat system in this game is a **fixed password table** with **exactly 28 accepted strings**, entered on a 12-slot on-screen keyboard. There is no checksum, no generator, no algorithmic second format, and no button code that unlocks content. Two tables live back-to-back in ROM: 22 single-player level passwords at `0x087A1E16` and 6 multiplayer unlock passwords at `0x087A1F76`. The validator is a literal 12-byte compare against each 16-byte record (§4–5).
 
-Every one of the 28 codes is already published (GameFAQs, Neoseeker, FPS Wiki), and every published literal was verified in the ROM. **Consequently no unpublished password exists to mint** — §0.2's "generate a novel code" deliverable is impossible for this title, and this report proves the closed set instead (§6b): the validator was reimplemented exhaustively, all 28 entries verified accepted, 1,000,000 random in-alphabet inputs rejected, and in-game rejection shown for unknown, near-miss and over-long inputs.
+Every one of the 28 codes is already published (3rd party cheat indexes, FPS Wiki), and every published literal was verified in the ROM. **Consequently no unpublished password exists to mint** — §0.2's "generate a novel code" deliverable is impossible for this title, and this report proves the closed set instead (§6b): the validator was reimplemented exhaustively, all 28 entries verified accepted, 1,000,000 random in-alphabet inputs rejected, and in-game rejection shown for unknown, near-miss and over-long inputs.
 
 A debug text bank for six features (`COLLISION`, `TIMING`, `INVULNERABLE`, `GOTO LEVEL`, `CYCLE CAMERA`, `PRINT`) exists at string IDs 143–148, but no reachable menu draws it and several button-code guesses failed; it is reported as a gated/cut debug overlay, not as a usable cheat (§8). The published "Special Character Views" (L/R rotate the model on the character-select screen) was confirmed in the emulator.
 
-Published-list defects found: Neoseeker prints `EXHONERATE` where the ROM has `EXONERATE`; FPS Wiki prints `SEETH` where the ROM has `SEETHE`. All console-version / sequel codes (`DEATHWISH`, `TOOLEDUP`, `BIGPOCKET`, `OOHSTOPIT`, `ACMEBANGS`, `COLDFEET`, `DOYOUCME`, `SMOKEY`, `BUTTERFLY`, `COVEY`, `TIGER`) are **absent** from this GBA image — they belong to the PS2/Xbox/PC game or to *Ballistic: Ecks vs. Sever II* (§16.11).
+Published-list defects found: 3rd party cheat indexes prints `EXHONERATE` where the ROM has `EXONERATE`; FPS Wiki prints `SEETH` where the ROM has `SEETHE`. All console-version / sequel codes (`DEATHWISH`, `TOOLEDUP`, `BIGPOCKET`, `OOHSTOPIT`, `ACMEBANGS`, `COLDFEET`, `DOYOUCME`, `SMOKEY`, `BUTTERFLY`, `COVEY`, `TIGER`) are **absent** from this GBA image — they belong to the PS2/Xbox/PC game or to *Ballistic: Ecks vs. Sever II* (§16.11).
 
 ## 3. How to reproduce
 
@@ -149,7 +149,7 @@ String IDs 143–148 at `0x087A4B84`–`0x087A4B98`: `COLLISION`, `TIMING`, `INV
 
 **Bounded negative search (§16.9-style).** 1,000,000 random strings of length 1–12 over the full 36-symbol on-screen alphabet were fed to both validators: **0 accepted**. Combined with the static proof (the only accept branches are the two finite loops) this closes the space at exactly 28 values.
 
-**Novel code — none exists; proof.** Every one of the 28 records was checked literally against the published lists (GameFAQs cheats, Neoseeker cheats, FPS Wiki password table, Schlave FAQ): all 28 are documented. Because the accept set is provably the union of two fixed ROM tables with no algorithmic extension, there is **no unpublished password to mint** for this game. This is a closed-set result, not an untested gap: the full space was enumerated (28), all members verified in ROM and on screen, and the negative space bounded as above. (This is the correct outcome for a pure literal-table system; fabricating a "novel" string would be dishonest.)
+**Novel code — none exists; proof.** Every one of the 28 records was checked literally against the published lists (3rd party cheat index cheats, 3rd party cheat index cheats, FPS Wiki password table, Schlave FAQ): all 28 are documented. Because the accept set is provably the union of two fixed ROM tables with no algorithmic extension, there is **no unpublished password to mint** for this game. This is a closed-set result, not an untested gap: the full space was enumerated (28), all members verified in ROM and on screen, and the negative space bounded as above. (This is the correct outcome for a pure literal-table system; fabricating a "novel" string would be dishonest.)
 
 **Bounds proven by in-game rejection (Observed).** From the password screen, pressing OK for:
 * `ZZZZZZ` (in-alphabet but not in table) → returns to submenu, no game start;
@@ -159,7 +159,7 @@ String IDs 143–148 at `0x087A4B84`–`0x087A4B98`: `COLLISION`, `TIMING`, `INV
 
 Accepted controls: `EXCITE`, `SEVERANCE`, `EXPEL` each faded to a `Dateline:` game-start screen. RAM-level effect of acceptance was also observed via savestate diffs: after a valid submit the screen-mode word at `0x0201290C` and the game-state word at `0x0200B7B8` transition, while invalid submissions leave the password buffer intact and stay in the keyboard/submenu loop (the exact flag word was too frame-dependent to attribute a stable bit, so this is reported as Observed-transition only).
 
-**Published-list verification / correction.** All 28 literals were searched with `grep -abo` and found in the ROM exactly once in the table regions. Two published typos: Neoseeker level 11 for Ecks is printed `EXHONERATE` (ROM: `EXONERATE`); FPS Wiki Sever L8 is printed `SEETH` (ROM: `SEETHE`). Console/sequel cheat strings (§2) have **zero** ROM hits.
+**Published-list verification / correction.** All 28 literals were searched with `grep -abo` and found in the ROM exactly once in the table regions. Two published typos: 3rd party cheat indexes level 11 for Ecks is printed `EXHONERATE` (ROM: `EXONERATE`); FPS Wiki Sever L8 is printed `SEETH` (ROM: `SEETHE`). Console/sequel cheat strings (§2) have **zero** ROM hits.
 
 ## 7. Validation evidence
 

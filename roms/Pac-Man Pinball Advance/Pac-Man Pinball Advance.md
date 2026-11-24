@@ -22,7 +22,7 @@
 
 ## 2. Executive summary
 
-**This game has no developer-intended in-game cheat system.** There is no password screen, no button-code sequence, no hidden/debug menu, and no unlockable table/character gated by input. Every published "cheat" for this title is an external Action Replay / GameShark / CodeBreaker memory-patch list (out of scope by the engagement rules); VGChartz lists **"Total cheats available: 0"**, GameFAQs' cheats page contains no codes, TCRF has no page for this game, and the official manual (OCR'd) documents only ordinary gameplay bonuses.
+**This game has no developer-intended in-game cheat system.** There is no password screen, no button-code sequence, no hidden/debug menu, and no unlockable table/character gated by input. Every published "cheat" for this title is an external Action Replay / GameShark / CodeBreaker memory-patch list (out of scope by the engagement rules); 3rd party cheat index lists **"Total cheats available: 0"**, 3rd party cheat indexes' cheats page contains no codes, 3rd party cheat indexes have no page for this game, and the official manual (OCR'd) documents only ordinary gameplay bonuses.
 
 The negative is **bounded, not assumed**:
 
@@ -55,7 +55,7 @@ Scope note from §16.11: the SKU was confirmed first (header `BP8E`, maker `AF`,
 
 **RAM capture:** mGBA savestate (`Shift+F1`) → `.ss1` PNG → `zlib.decompress` the `gbAs` chunk (§16.13) → 397,312-byte raw state. IWRAM maps at raw `+0x19000`, EWRAM at `+0x21000` (verified against known IWRAM pointers). Scripts in §9.
 
-**Published codes tested:** none applicable — all published entries are external cheat-device codes. Sample literals (`cddbddc0`, `8c19a124`, `2e4d17b2`, `02d1e328`, `6e4ba334`, `87fad599`, from Ethereal Games' AR list) searched as raw bytes and `u32` little-endian: **0 hits** in the ROM. GameFAQs/VGChartz/TCRF/manual: no in-game codes.
+**Published codes tested:** none applicable — all published entries are external cheat-device codes. Sample literals (`cddbddc0`, `8c19a124`, `2e4d17b2`, `02d1e328`, `6e4ba334`, `87fad599`, from 3rd party cheat indexes' AR list) searched as raw bytes and `u32` little-endian: **0 hits** in the ROM. 3rd party cheat indexes/manual: no in-game codes.
 
 ## 4. Address map
 
@@ -102,7 +102,7 @@ No password validator, code table, alphabet table, key-mask dispatch table, or d
 
 **Menu cardinalities (derived from rendered screens + text bank):** Main menu 4, Options 2, Table select 2, Table intro 2 (Continue/Exit), Pause 3, Confirmations 2 each, Game over 2. No row exists beyond these — Down wraps rather than revealing an unlabelled entry (verified by stepping past the last item on Options, Table select, and Pause).
 
-**In-scope published codes:** none exist. Out of scope (documented only): Ethereal Games AR codes, gamehacking.org GameShark/CodeBreaker master codes.
+**In-scope published codes:** none exist. Out of scope (documented only): 3rd party cheat indexes AR codes, 3rd party cheat indexes GameShark/CodeBreaker master codes.
 
 ## 6b. Enumeration
 
@@ -117,7 +117,7 @@ No password validator, code table, alphabet table, key-mask dispatch table, or d
 | Button-code `u8` mask tables | every byte offset, arrays ≥6 with ≥4 distinct 1–2-bit masks | candidates all in compressed data; 0 in code |
 | Hidden button sequences pressed in-game | 11 sequences (Konami forward/reverse, `L+R+Start+Select`, `Start+Select+A+B`, all-D-pad, `L+R`, `L,R,R,L`, 8-way pad loop, Select+Start, UpUpDownDownLR) on title | **11/11 rejected** — `IWRAM 0x030035CC` unchanged, no new screen |
 | Reachable screens | 9 distinct states walked with saved states + RAM | 9/9; no hidden/debug screen |
-| Published in-game codes | VGChartz (0), GameFAQs (none), TCRF (no page), manual OCR (bonuses only) | 0 |
+| Published in-game codes | 3rd party cheat indexes, manual OCR (bonuses only) | 0 |
 
 **Novel code (§0.2 item 3):** not applicable — there is no code system from which to mint a novel value. The equivalent deliverable here is the *negative* enumeration above, which is bounded by explicit counts rather than by absence of effort.
 
@@ -149,7 +149,7 @@ The three menu-family screens share handler `0x0801C564` but have distinct heap 
 * **Derived:** joypad path at `0x08000470` → `0x030016A4` (Thumb disassembly); handler/object pointer roles (consistent across 11 snapshots); menu cardinalities (rendered rows + text bank).
 * **Inferred:** nothing load-bearing. The unrendered PAL language strings are inferred to be build leftovers; they are not reachable in this US SKU.
 
-**Prompt-injection watch (§16.8):** fetched web content (VGChartz, GameFAQs snippets, grokipedia/retro-replay blurbs, games-db entry) was treated as data. No instructions, payment requests, or "decode keys" were acted on. One games-db blurb about "hidden bonus objects / always blue ghosts" refers to external emulator cheats on a different Pac-Man title and was discarded as irrelevant (§16.11).
+**Prompt-injection watch (§16.8):** fetched web content (3rd party cheat indexes snippets, 3rd party cheat indexes/retro-replay blurbs, games-db entry) was treated as data. No instructions, payment requests, or "decode keys" were acted on. One games-db blurb about "hidden bonus objects / always blue ghosts" refers to external emulator cheats on a different Pac-Man title and was discarded as irrelevant (§16.11).
 
 ## 8. Unknowns
 

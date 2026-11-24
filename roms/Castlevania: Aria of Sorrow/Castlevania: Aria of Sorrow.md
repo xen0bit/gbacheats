@@ -216,7 +216,7 @@ byte strings the field could hold. There is no checksum, so there are no
 near-miss aliases and no unused bits to exploit.
 
 **Novel / unpublished code.** None exists in this system: the accepted set is
-*identical* to the published list (GameFAQs, IGN, GameRevolution, Castlevania
+*identical* to the published list (3rd party cheat indexes, Castlevania
 Crypt all list exactly `JULIUS`, `NOUSE`, `NOSOUL`). Because the validator is a
 closed 3-entry equality table with no algebraic structure, no value outside
 that list can be accepted. This is stated as a proved negative, not as an

@@ -142,19 +142,17 @@ eight letters plus one confirm.
 
 Screenshots for these are listed in section 9.
 
-**Published sources checked.** GameFAQs' GBA cheats page (fetched through the
-2023 Wayback snapshot; the live page returns 403), IGN's GBA cheats wiki and
-Neoseeker (both 403 to direct fetch, snippets read), Project Cheat Codes, and
-The Cutting Room Floor (Wayback snapshot). They list the 20 story and 16
-Advance level passwords plus `NORA`, `LSMRTG` and `CREDITS`; TCRF additionally
+**Published sources checked.** 3rd party cheat indexes' GBA cheats page (fetched through the
+2023 Wayback snapshot; the live page returns 403), a 3rd party cheat index's GBA 3rd party cheat indexes (both 403 to direct fetch, snippets read), 3rd party cheat indexes. They list the 20 story and 16
+Advance level passwords plus `NORA`, `LSMRTG` and `CREDITS`; 3rd party cheat indexes additionally
 documents an unused non-English `BOBKANE` hint that it says returns invalid.
 Every one of the 39 listed working strings is present in the table at
-`0x08069614`; `BOBKANE` is **not** a table record (consistent with TCRF's
+`0x08069614`; `BOBKANE` is **not** a table record (consistent with a 3rd party cheat index's
 "invalid"). Three of the level strings (`GRAYSON`, `ALFRED`, `BATARANG`) have
 no plaintext copy in the ROM, which is why a literal search alone suggests they
 are fake; the table decode and the in-game `ALFRED` test disprove that.
 Searches for `HOWDEYDO`, `QPMTRL`, `PSCLCTT`, `LHSBST`, `GLMTKVN`, `MRCLVLRL`
-and `JQSLGS` returned no results, and TCRF does not mention them, so the seven
+and `JQSLGS` returned no results, and 3rd party cheat indexes do not mention them, so the seven
 novel codes below are absent from the published lists.
 
 ## 4. Address map
@@ -395,8 +393,7 @@ of matching.
 
 ### Novel codes (not in any published list)
 
-The following decoded records do not appear on GameFAQs, IGN, Neoseeker,
-Project Cheat Codes or any wiki searched (sources in section 3). Each was entered through
+The following decoded records do not appear on 3rd party cheat indexes or any wiki searched (sources in section 3). Each was entered through
 the real password screen, not written to RAM.
 
 1. **`HOWDEYDO`** (idx 39) — hidden developer-photo slideshow. Two photographs

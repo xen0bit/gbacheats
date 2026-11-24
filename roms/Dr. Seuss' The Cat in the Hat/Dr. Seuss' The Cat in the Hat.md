@@ -18,11 +18,11 @@
 | MD5 | `22a0e9f0e8c1c51272a2e29ef2de56e7` |
 | SHA-1 | `921b768682624ada6aa1a7f8bfa4dc07366095af` |
 | SHA-256 | `6259e10489779d8e614003ada46bd48e83de72b99d3bcf71cfa65697d0747262` |
-| SKU (identified) | **2003 VU Games / Digital Eclipse GBA version** — the film-based 2.5D platformer, "Dragon Engine". Confirmed by Universal logo intro, live-action film cutscenes with Sally/Conrad/Cat, the house-area PDA (Living Room/Kitchen/Bathroom/Bedroom/Attic), and the in-game credits naming "Dragon Engine Programmers". It is **not** the 2005 NewKidCo / Game Titan GBA minigame title, which is a different game on the same platform (GameFAQs 919412, TCRF "The Cat in the Hat (Game Boy Advance)"). |
+| SKU (identified) | **2003 VU Games / Digital Eclipse GBA version** — the film-based 2.5D platformer, "Dragon Engine". Confirmed by Universal logo intro, live-action film cutscenes with Sally/Conrad/Cat, the house-area PDA (Living Room/Kitchen/Bathroom/Bedroom/Attic), and the in-game credits naming "Dragon Engine Programmers". It is **not** the 2005 NewKidCo / Game Titan GBA minigame title, which is a different game on the same platform (3rd party cheat indexes 919412, 3rd party cheat indexes "The Cat in the Hat (Game Boy Advance)"). |
 
 **Phase 0 result:** one Nintendo-logo hit, at header file offset `0x0`; the whole-file scan for the 156-byte logo and for the `24 ff ae 51` signature each returned exactly **1** hit. No appended trainer, no cracktro, no multiboot stub, no second GBA header. The entry word is the stock `0xEA00002E`; the first 4 KiB disassembles as normal ARM crt0/IRQ code. `0x0000` header checksum is the usual rebuilt-header artifact; complement `0x7E` is consistent and not evidence of a modified header.
 
-**Web-code provenance (§3.4, §16.11):** the widely published "8-symbol password" list (e.g. `Glove, Thing, Glove, Kite, Watch, Star, Net, Kite` → "Box game finished") is stated by GameFAQs to be entered "at the password screen from the main menu" of the **2005 NewKidCo** GBA title (GameFAQs game 919412). Those effects (Kite/TV/Catching/Cleaning/Box/Net "games finished") belong to that title's six minigames. The other published lists (Square/L2/R1/R2/Circle sequences — "Open all levels", "Secret Level", "Unlimited Health", "10 Magic Pickups", "Open all Gallery items", debug coordinate display, etc.) are **console-version codes** (PS2/Xbox/PC; GameFAQs 915608 and speedrun.com `tcith`). GBA has no Square/Circle/L2/R2. Neither list belongs to this ROM's SKU.
+**Web-code provenance (§3.4, §16.11):** the widely published "8-symbol password" list (e.g. `Glove, Thing, Glove, Kite, Watch, Star, Net, Kite` → "Box game finished") is stated by 3rd party cheat indexes to be entered "at the password screen from the main menu" of the **2005 NewKidCo** GBA title (3rd party cheat indexes game 919412). Those effects (Kite/TV/Catching/Cleaning/Box/Net "games finished") belong to that title's six minigames. The other published lists (Square/L2/R1/R2/Circle sequences — "Open all levels", "Secret Level", "Unlimited Health", "10 Magic Pickups", "Open all Gallery items", debug coordinate display, etc.) are **console-version codes** (PS2/Xbox/PC; 3rd party cheat indexes 915608 and 3rd party cheat indexes `tcith`). GBA has no Square/Circle/L2/R2. Neither list belongs to this ROM's SKU.
 
 ## 2. Executive summary
 
@@ -134,7 +134,7 @@ Guide §0.2 requires the whole space to be characterised, or — when there is n
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` — disassembly of the IRQ input routine and input-global consumers.
 - `gdb-multiarch` against mGBA `-g` (port 2345) — RAM/CPU reads of the input globals and idle PC.
 - `mgba` (SDL), `Xvfb :316`, `openbox`, `xdotool` (XTEST to the focused window), `scrot`/`import`, ImageMagick `montage` — reproducible emulator runs and screenshots.
-- `websearch` / `webfetch` — GameFAQs (GBA 919412 password list; GBA 915604 and PS2 915608 console-code lists), TCRF, Wikipedia, speedrun.com; direct GameFAQs/TCRF fetches returned 403/Cloudflare and were replaced with search-result text (§3.4 / §16.8).
+- `websearch` / `webfetch` — 3rd party cheat indexes (GBA 919412 password list; GBA 915604 and PS2 915608 console-code lists), 3rd party cheat indexes; direct 3rd party cheat indexes fetches returned 403/Cloudflare and were replaced with search-result text (§3.4 / §16.8).
 - Analysis scripts and screenshots: `/tmp/catinthehat/` (`scan_codes.py`, `scan_input.py`, `press2.sh`, `shot_*.png`).
 
 ## 10. Legal note

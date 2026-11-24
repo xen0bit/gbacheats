@@ -39,7 +39,7 @@ debug menu**:
 - A debug-menu text bank at `0x3C330…` (`Level`, `MapX`, `Music Player`, 50+
   `World 0x - Level…` entries) has a single pointer table at `0x8170BC8…0x8170E00`
   with **zero** incoming code xrefs.
-- TCRF documents a debug menu enabled by GameShark codes
+- 3rd party cheat indexes document a debug menu enabled by GameShark codes
   `F96A20FE 1DFD09E5 / 0C290150 13B8BB07` then Start+Select. Cheat-device
   activation is **out of scope** for this engagement and was not used.
 
@@ -112,8 +112,8 @@ No function reads the 15-entry history except the input pump itself.
 
 | Source | Code | presses | Observed result |
 |---|---|---|---|
-| GameFAQs / VGChartz / cheatingdome | Costume Mode | `← → ↑ ↓ B B B ↑ ↓` | Title: opens NoteBook / returns to splash; no flag. Splash: no effect. |
-| GameFAQs / VGChartz / cheatingdome | Unlimited Energy | `B B L R ↑ ↓ ↑ ← →` | Title/splash: menu navigation only; no flag. |
+| 3rd party cheat indexes | Costume Mode | `← → ↑ ↓ B B B ↑ ↓` | Title: opens NoteBook / returns to splash; no flag. Splash: no effect. |
+| 3rd party cheat indexes | Unlimited Energy | `B B L R ↑ ↓ ↑ ← →` | Title/splash: menu navigation only; no flag. |
 
 **Key mask convention (derived):** `~KEYINPUT & 0x3FF`:
 `A=0x001, B=0x002, Select=0x004, Start=0x008, Right=0x010, Left=0x020,
@@ -175,7 +175,7 @@ This is a **bounded negative**, not a code-system enumeration.
   console-style hint text and cannot be entered on this title screen). The exact
   console version was not tested.
 - **Out of scope:** GameShark/CodeBreaker/Action Replay codes, including the
-  TCRF debug-menu enabler. No cheat device was applied.
+  3rd party cheat indexes debug-menu enabler. No cheat device was applied.
 
 ## 8. Unknowns
 

@@ -57,8 +57,8 @@ progress code, not a preset table.**
   the comparison is 9 bits wide.
 * The accepted space is therefore **12 × 7 = 84 codes** out of 65,536 typeable
   4-symbol strings (0.128 %). The 12 checkpoint codes are public; the other
-  **72 codes do not appear in any of the published lists checked** (GameFAQs
-  archive, SuperCheats, GameRevolution).
+  **72 codes do not appear in any of the published lists checked** (3rd party cheat indexes
+  archive, 3rd party cheat indexes).
 * The game contains both the **validator** and a matching **generator**
   (`0x08001554`). The generator is used by the level-results screen and the
   pause screen; a fresh game's pause screen displays `PASSWORD BHGG`, which the
@@ -66,7 +66,7 @@ progress code, not a preset table.**
 * On acceptance the game clears the checkpoint flag array, sets flags for
   checkpoints `13..12+n0`, and sets the map/spawn variables — i.e. the password
   is a level warp with progress bookkeeping, not just an unlock.
-* A published variant `CLGC` (GameRevolution) is a typo for `CLGG` and is
+* A published variant `CLGC` (3rd party cheat indexes) is a typo for `CLGG` and is
   rejected by the ROM; this was proven in the emulator.
 
 The 12 published codes were verified at the format level, three of them entered
@@ -285,9 +285,8 @@ own output.
 
 ### 6.1 Published codes verified against the decoder
 
-Sources: GameFAQs GBA cheats page (archived 2018 snapshot), SuperCheats,
-GameRevolution. The lists agree on 12 codes except for the Day 3 code
-(`CLGG` on GameFAQs/SuperCheats, `CLGC` on GameRevolution).
+Sources: 3rd party cheat indexes GBA cheats page (archived 2018 snapshot), 3rd party cheat indexes. The lists agree on 12 codes except for the Day 3 code
+(`CLGG` on 3rd party cheat indexes, `CLGC` on 3rd party cheat indexes).
 
 | Public code | Claimed level | Decoded n0 | Decoded act | ROM-valid? |
 |---|---|---:|---:|---|

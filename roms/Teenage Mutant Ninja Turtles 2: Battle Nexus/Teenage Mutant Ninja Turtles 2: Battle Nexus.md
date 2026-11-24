@@ -31,7 +31,7 @@ seven NUL-terminated strings in a table at `0x0863B240`. A loop-bound quirk
 (`for r4 = 6 .. 1`) means the first table entry is never tested, so exactly
 **six codes are accepted**, returning dispatch indices `1..6`. They unlock
 Battle courses 16–18 and Race courses 16–18. All six appear in published GBA
-lists (SuperCheats); the seven-string table's unused entry `LSRSDSM` is dead.
+lists (3rd party cheat indexes); the seven-string table's unused entry `LSRSDSM` is dead.
 
 A **novel accepted input that appears in no published list** was minted by
 exploiting a translation-table overread: symbol index `91` aliases `'S'`
@@ -173,7 +173,7 @@ Notes:
 | `LSRSDSM` | — | **dead** (entry 0, skipped by loop) | `0x0863B28C` |
 
 Published-list verification: the six accepted strings match the GBA bonus-course
-list on SuperCheats exactly (including `SRMLDDR`, which the DISPLAY PASSWORD
+list on 3rd party cheat indexes exactly (including `SRMLDDR`, which the DISPLAY PASSWORD
 hint also calls out for the GameCube version). No typo or OCR-correction was
 needed. The 21 console cheat passwords were searched in the ROM as ASCII,
 `+0x20`, 8-bit symbol indices and 16-bit symbol indices: zero genuine hits

@@ -24,7 +24,7 @@ Publisher/engine strings: Disney Interactive; audio engine banner `Shin'en Multi
 This SKU has **no password/code-entry screen**. The only in-game cheat surface is a
 **simultaneous button code**: hold **SELECT + A + B + R + L** (active-high key mask
 `0x307`) during the Juggler or Dragonfly minigame to open a developer **settings
-menu**. GameFAQs lists exactly one cheat for this game (the same secret menu);
+menu**. 3rd party cheat index lists exactly one cheat for this game (the same secret menu);
 direct page fetches returned HTTP 403, so the text was recovered from search
 snippets and treated as data.
 
@@ -208,7 +208,7 @@ family is closed: one mask, two gate implementations, zero undocumented action
 branches after the prefix (both validators call the same `0x0814F4C0` launcher
 and return to the game loop).
 
-**Novel code (not in any published list).** GameFAQs/VGChartz mention only
+**Novel code (not in any published list).** 3rd party cheat indexes mention only
 "hold L/R for 99,999 points". I minted a different, unpublished cheat on the real
 screen: `JUGGLER SETTINGS → INFINITE LIVES : 0 → 1`. This is absent from every
 published description. Evidence:
@@ -249,7 +249,7 @@ editor drives SPRING POINTS `25 → 1711` (`holdRc.png`), and 8 s more reaches
 * **Inferred** — the four orphan descriptors were intended as developer pages
   (their labels and handler fields are intact) but are not reachable from either
   live trigger.
-* **Published-code verification** — GameFAQs lists 1 cheat; direct HTTP fetch
+* **Published-code verification** — 3rd party cheat index lists 1 cheat; direct HTTP fetch
   returned 403, so the wording is from a search snippet (data only). Its core
   claim (SELECT+A+B+R+L → secret menu) was independently confirmed in the ROM
   and emulator.

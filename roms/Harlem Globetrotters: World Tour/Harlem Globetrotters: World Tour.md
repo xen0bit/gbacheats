@@ -218,7 +218,7 @@ none are attached here.
 ## 8. Unknowns
 
 * **Published codes**: web search returned no usable results (search tool empty;
-  DuckDuckGo CAPTCHA; GameFAQs 403; Bing returned unrelated pages). No published
+  DuckDuckGo CAPTCHA; 3rd party cheat indexes 403; Bing returned unrelated pages). No published
   literal could be verified against the ROM. The only code literal reachable
   without a published list is the keyboard's built-in default `X3TB2D`; it is
   valid and is reported as such. Per §16.7 no third-party code is claimed verified.

@@ -28,7 +28,7 @@ The symbols are drawn from a custom font/tile alphabet, so `strings` finds **zer
 
 There is a **second, semantic validation layer**: the payload `s1..s6` must decode to a legal game state. A checksum-valid but semantically invalid code is rejected with "INVALID PASSWORD". This layer is not fully reversed (see §8). Two codes absent from every published list were nonetheless minted, entered on the real screen, and **accepted** (§6b).
 
-Published codes were verified against the ROM: GameFAQs/GameGenie lists were transcribed into the symbol alphabet, and representative codes were entered in the emulator. Codes that GameFAQs itself flags "Confirmed Doesn't Work" (e.g. 5-2, 5-3) were confirmed **rejected** here; others (1-2, 1-3, 4-2, 5-1, 6-3, 7) were accepted.
+Published codes were verified against the ROM: 3rd party cheat indexes/3rd party cheat index lists were transcribed into the symbol alphabet, and representative codes were entered in the emulator. Codes that 3rd party cheat indexes themselves flags "Confirmed Doesn't Work" (e.g. 5-2, 5-3) were confirmed **rejected** here; others (1-2, 1-3, 4-2, 5-1, 6-3, 7) were accepted.
 
 ## 3. How to reproduce
 
@@ -105,10 +105,10 @@ Equivalently `Σ(all seven) ≡ 2·s[0] (mod 16)`.
 | 4-3 | 15 13 9 8 6 10 1 | — |
 | 5-1 (All Gems 2-3) | 13 13 9 8 6 8 1 | ✓ |
 | 5-1 (All Gems 3-2) | 6 4 9 8 6 10 1 | — |
-| 5-2 (All Gems) | 13 4 12 8 6 14 1 | ✗ (GameFAQs marks "Doesn't Work") |
-| 5-3 (All Gems) | 12 4 15 8 2 14 1 | ✗ (GameFAQs marks "Doesn't Work") |
+| 5-2 (All Gems) | 13 4 12 8 6 14 1 | ✗ (3rd party cheat indexes marks "Doesn't Work") |
+| 5-3 (All Gems) | 12 4 15 8 2 14 1 | ✗ (3rd party cheat indexes marks "Doesn't Work") |
 | 6-1 (All Gems) | 15 4 14 8 2 14 5 | — |
-| 6-2 (All Gems) | 12 0 15 2 6 14 7 | — (GameFAQs marks "Doesn't Work") |
+| 6-2 (All Gems) | 12 0 15 2 6 14 7 | — (3rd party cheat indexes marks "Doesn't Work") |
 | 6-3 (All Gems 6-1) | 11 0 14 2 6 14 7 | ✓ |
 | 6-3 (All Gems 6-2) | 13 2 14 2 6 14 7 | — |
 | 7 Tico's Workshop | 14 2 14 2 6 15 7 | ✓ |
@@ -123,7 +123,7 @@ Equivalently `Σ(all seven) ≡ 2·s[0] (mod 16)`.
 - Checksum width: 4 bits at s0 → `16^6 = 16,777,216` spellings pass the checksum (1/16 of all spellings).
 - Semantic layer reduces this further to a set of states the game can decode (level/progress); exact cardinality not established (§8).
 
-**Novel code 1 (not in GameFAQs, GameGenie, VGChartz, TCRF, or any wiki):**
+**Novel code 1 (not in 3rd party cheat indexes, or any wiki):**
 
 ```
 Heart Plus Smile Star Plus Triangle Frown
@@ -154,8 +154,8 @@ Entered on the real screen; **accepted**. Screenshot: `bt_novel2.png`.
 | Out-of-range field (s2) | `[7,13,5,14,13,0,10]`, s2=5 | **REJECTED** |
 | Out-of-range field (s1) | s1 ∈ {0,2,4,8} with 1-2 payload | **REJECTED**; only s1=13 works with that payload |
 | Out-of-range field (s3) | s3=10 with 1-2 payload | **REJECTED**; s3 ∈ {2,8,12,14} accepted with same payload |
-| Published bad code | 5-2 `Plus Left Spiral Neutral Square Star X` | **REJECTED** (matches GameFAQs "Confirmed Doesn't Work") |
-| Published bad code | 5-3 `Spiral Left Sun Neutral Up Star X` | **REJECTED** (matches GameFAQs "Confirmed Doesn't Work") |
+| Published bad code | 5-2 `Plus Left Spiral Neutral Square Star X` | **REJECTED** (matches 3rd party cheat indexes "Confirmed Doesn't Work") |
+| Published bad code | 5-3 `Spiral Left Sun Neutral Up Star X` | **REJECTED** (matches 3rd party cheat indexes "Confirmed Doesn't Work") |
 
 The accepted/rejected boundary on s1/s2/s3 depends on the *combination* of fields (a value rejected with one payload is accepted in a published code with a different payload), so the semantic layer decodes a compound state rather than checking fields independently.
 
@@ -179,7 +179,7 @@ The accepted/rejected boundary on s1/s2/s3 depends on the *combination* of field
 - mGBA SDL under `Xvfb :315` + `openbox`; `xdotool` XTEST key events; `import`/`convert` for screenshots; ImageMagick `mean.r` over the overlay region as an accept/reject detector (>0.75 ⇒ INVALID).
 - Raw GDB remote protocol client over mGBA's `-g` stub (`m`/`M` packets) for RAM reads/writes (the stock `gdb-multiarch` client hit stub-negotiation errors; raw packets worked).
 - mGBA savestates (`gbAs` PNG chunk, zlib-decompressed to a 397,312-byte raw state) for RAM diffing and deterministic test setup (`pw_slot0.ss1`).
-- Web: GameFAQs cheats page, GameGenie.com cheats page, PrinceWatercress playthrough blog, videogamemanual.com scanned manual (OCR via `tesseract`).
+- Web: 3rd party cheat index cheats page, 3rd party cheat index cheats page, PrinceWatercress playthrough blog, 3rd party cheat indexes scanned manual (OCR via `tesseract`).
 
 ## 10. Legal note
 

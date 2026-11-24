@@ -19,7 +19,7 @@
 
 ## 2. Executive summary
 
-**No developer-intended cheat, password, or button-code system was found in this GBA image, and the bounded negative is reported rather than a fabricated code.** The only published "Stuntman" unlock codes (`ChUmP`, `spiDER`, `BindI`, `MeFf`/`fellA`, `FellA`) belong to the **PlayStation 2** version: GameFAQs' GBA cheat page files them under "Cheat Codes PS2", and IGN's *Secrets* page describes entering them on a "New Game" menu with a "YOU ARE A CHEAT!" confirmation — neither that menu label nor that confirmation string exists in this GBA ROM under any of 515 encodings tested per string. The GBA port's only name-like input is the 8-byte **player profile name** on the Create-a-Game screen; the ROM contains no comparison of that field against any constant code, and a read watchpoint on the field fired only inside the save-checksum routine.
+**No developer-intended cheat, password, or button-code system was found in this GBA image, and the bounded negative is reported rather than a fabricated code.** The only published "Stuntman" unlock codes (`ChUmP`, `spiDER`, `BindI`, `MeFf`/`fellA`, `FellA`) belong to the **PlayStation 2** version: 3rd party cheat indexes' GBA cheat page files them under "Cheat Codes PS2", and a 3rd party cheat index's *Secrets* page describes entering them on a "New Game" menu with a "YOU ARE A CHEAT!" confirmation — neither that menu label nor that confirmation string exists in this GBA ROM under any of 515 encodings tested per string. The GBA port's only name-like input is the 8-byte **player profile name** on the Create-a-Game screen; the ROM contains no comparison of that field against any constant code, and a read watchpoint on the field fired only inside the save-checksum routine.
 
 The apparent "debug" strings `AUTO TESTING 1..6` (0x08008EDA..0x08008F90) are **stunt/level names** in the same fixed-width name table as `BARREL CHASE 1..5 LINK`, not a hidden menu; they have no code xrefs. Every reachable screen was walked (language select, create/load game, main menu, career gameplay/attract, intro/credits), the font-backed text bank was decoded before the negative, and the search space is quantified in **§6b**.
 
@@ -65,7 +65,7 @@ The 8-byte name at `slot+4` is included in that sum; this is the only observed r
 
 | Table | Content |
 |---|---|
-| Published codes (PS2, **not** in this ROM) | `ChUmP` — all cars (Stunt Constructor); `spiDER` — all cars (Training); `BindI` — all cars and toys; `MeFf`/`fellA` — all toys / all career stages; `FellA` — all career stages. Source: GameFAQs GBA cheat page (PS2 section) and IGN *Secrets*. Case variants searched too. |
+| Published codes (PS2, **not** in this ROM) | `ChUmP` — all cars (Stunt Constructor); `spiDER` — all cars (Training); `BindI` — all cars and toys; `MeFf`/`fellA` — all toys / all career stages; `FellA` — all career stages. Source: 3rd party cheat indexes GBA cheat page (PS2 section) and 3rd party cheat indexes *Secrets*. Case variants searched too. |
 | Main-menu entries (English) | 3: `STUNTMAN CAREER`, `ARENA`, `INFO. ABOUT ICONS` (text group at 0x0A753D). Other language groups follow with the same 3-entry cardinality. |
 | Save slots | 3 (magic `SAV1`, `SAV2`, `SAV3`), 0xA8 bytes each in EWRAM; SRAM 512 bytes. |
 | Language select | 3 selectable flags on screen (US/ES/FR); additional localized text banks (DE/IT) exist in the ROM but are not exposed by the selector. |
@@ -89,7 +89,7 @@ The 8-byte name at `slot+4` is included in that sum; this is the only observed r
 
 * **Observed:** ROM hashes/header; all screens and transitions listed in §3; savestate `gbAs` dump showing `SAV1A       ` at EWRAM `0x02039230`; read watchpoint hit at `0x08000704`; SRAM name-patch test (no unlock); cleanup with no leftover ROM-folder artifacts.
 * **Derived:** input writers at `0x080C7024/58` and key globals; save magic/checksum routine at `0x08006B8/6EC`; main-menu cardinality from the text group; `AUTO TESTING` classification from its position in the level-name table and zero xrefs.
-* **Inferred:** that the five published strings are PS2-only (based on the GameFAQs section label and IGN's "New Game" wording, corroborated by their total absence from this ROM under 515 encodings).
+* **Inferred:** that the five published strings are PS2-only (based on the 3rd party cheat indexes section label and a 3rd party cheat index's "New Game" wording, corroborated by their total absence from this ROM under 515 encodings).
 * **Not observed:** the `ARENA` and `INFO. ABOUT ICONS` menus were not entered. They are present as text-table entries (3-entry main menu, verified statically), but input during the main-menu screen consistently launched career/attract gameplay; this remains a stated unknown, not a claim of absence.
 
 ## 8. Unknowns

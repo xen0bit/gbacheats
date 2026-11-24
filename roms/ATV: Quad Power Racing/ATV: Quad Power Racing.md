@@ -92,7 +92,7 @@ Exact path:
 Symbol ↔ value mapping (verified from the rendered icons, one value per
 screenshot):
 
-| value | icon | GameFAQs name | other published aliases |
+| value | icon | 3rd party cheat indexes name | other published aliases |
 |---:|---|---|---|
 | 0 | yellow circle, black lightning bolt | Lightning (L) | Frog |
 | 1 | dark wheel with spokes | Wheel (W) | Tire |
@@ -218,11 +218,11 @@ Notes:
   `0x3399`; the widely published “unlock everything” password is therefore
   redundant with Open level 8.
 * The 24 challenge passwords and the unlock code are exactly the published
-  GameFAQs/Danworld list; all 25 are reproduced by the formula, and three were
+  3rd party cheat indexes/3rd party cheat index list; all 25 are reproduced by the formula, and three were
   also entered in the emulator (Stock 1, Open 8, unlock-everything).
 
-### 6.2 Published list (source: GameFAQs via web.archive.org 2018 snapshot,
-plus gamegenie.com/Danworld)
+### 6.2 Published list (source: 3rd party cheat indexes via web.archive.org 2018 snapshot,
+plus 3rd party cheat indexes)
 
 `Lightning=L, ATV/X=X, Wheel=W, Helmet=H, Up Arrow=Up`
 
@@ -235,8 +235,7 @@ Extra : WWLLU  (unlock everything)
 
 Every one of these 25 maps to `r = 1..25` in the table above; the 26th
 (`UAWUU`, `r=0`) is absent from all published lists that were checked
-(GameFAQs, gamegenie/Danworld, neoseeker, vizzed, supercheats, etherealgames,
-cheatbook, solucionesytrucos).
+(3rd party cheat indexes, gamegenie/3rd party cheat indexes, solucionesytrucos).
 
 ### 6.3 Unlock mask evidence
 
@@ -320,7 +319,7 @@ IWRAM words after each code (read from savestates):
 * The nibble semantics in §5 are inferred from the applier and the
   all-unlock entry; the per-level track/ATV mapping was not played through.
 * The ROM header is non-standard (complement mismatch, zero header checksum);
-  whether this copy differs from a pristine No-Intro dump in data outside the
+  whether this copy differs from a pristine 3rd party cheat indexes dump in data outside the
   header was not established. All findings above were verified against this
   file.
 * No `.sav`/EEPROM content was written during the session, so persistence of

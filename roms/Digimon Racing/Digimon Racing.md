@@ -52,8 +52,8 @@ text-only "no password" claim would be weak, and why the negative here rests on
 screen enumeration plus the code-level input audit in §7.
 
 The only published GBA "codes" for this title are GameShark/CodeBreaker memory
-writes (e.g. the neoseeker master code) — those are RAM patches, not in-game
-input, and are out of scope. GameFAQs/VGChartz publish only the three
+writes (e.g. the 3rd party cheat indexes master code) — those are RAM patches, not in-game
+input, and are out of scope. 3rd party cheat indexes publish only the three
 unlockables, and their wording differs from the ROM: the ROM requires **all**
 time trials / **all** quick races / **all** cup races, not a single win.
 
@@ -269,7 +269,7 @@ empty set; the relevant proof is the bounded negative below.
   minted. The §0.2 deliverable is replaced by the full screen/entry
   enumeration and the quantified text/button-space negatives above.
 
-Published-list check: GameFAQs/VGChartz list no passwords or in-game codes,
+Published-list check: 3rd party cheat index list no passwords or in-game codes,
 only the three unlockables and one turbo glitch. Their conditions
 ("Win Cup Mode", "Win Time Trial", "First place Grand Prix") do not match the
 ROM's own text ("win **all** time trials / quick races / cup races"). The ROM
@@ -326,12 +326,12 @@ the published name-to-condition mapping is **unverified**.
   cups/tracks/difficulties is unresolved.
 * **Number of cups.** Only `WESTERN CUP` and its four tracks were reachable on a
   fresh save; whether more cup regions appear after wins is untested.
-* **Padlockmon.** TCRF documents an EU-ROM joker character at RAM `0x0300547C =
+* **Padlockmon.** 3rd party cheat indexes document an EU-ROM joker character at RAM `0x0300547C =
   0x0B`. Writing that index in this US ROM and cycling the cursor rendered the
   locked `SECRET RACER` placeholder, not a named character; the EU behaviour
   was not reproduced.
 * **Text encoding.** The font/tile text system was not decoded; the Digidex /
-  Zukan text bank mentioned by TCRF was not located. This does not affect the
+  Zukan text bank mentioned by 3rd party cheat indexes were not located. This does not affect the
   cheat conclusion because no input surface consumes text.
 
 ## 9. Tooling

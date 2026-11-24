@@ -56,8 +56,8 @@ The three accepted passwords are:
 level-2 Character Select state is derived from the monotonic grant table and
 from the observed level-1/level-3 lock counts (§7).
 
-`192845` and `446218` are published on GameFAQs. `000413` appears in **no
-published list** found (GameFAQs, archived GameFAQs, VGChartz, TCRF, fan
+`192845` and `446218` are published on 3rd party cheat indexes. `000413` appears in **no
+published list** found (3rd party cheat indexes, archived 3rd party cheat indexes, fan
 wikis); it is the ROM's level-1 entry and was confirmed in mGBA. Because the
 system is a three-entry literal table rather than an algorithm, `000413` is
 the only unpublished member the space contains — there is no generator from
@@ -243,7 +243,7 @@ second validator or alternate entry path.
 | 2 | `192845` | 0x4C7D8 | 0x08050290 | level 1 + Atlantis theme + Bubble/Chomp + Atlantis boards |
 | 3 | `446218` | 0x4C7E0 | 0x08050294 | level 2 + Genius difficulty |
 
-Published status: GameFAQs (archived capture 2025-11-13) lists only `192845`
+Published status: 3rd party cheat index lists only `192845`
 and `446218`. No page, archive or wiki found lists `000413`.
 
 ### 6.2 Unlock surface
@@ -303,9 +303,9 @@ was entered on a clean boot in mGBA:
   two `?` boards: the Fantasy set (Glorp/Telem/Fantasy boards) is unlocked,
   Atlantis and Genius are not.
 
-This code is absent from the GameFAQs password table (which lists only
-`192845` and `446218`), from the archived GameFAQs capture, and from the
-TCRF/VGChartz/fan-wiki searches performed. It is a literal, not a generated
+This code is absent from the 3rd party cheat indexes password table (which lists only
+`192845` and `446218`), from the archived 3rd party cheat indexes capture, and from the
+3rd party cheat indexes/fan-wiki searches performed. It is a literal, not a generated
 value: the table has exactly three accepted members and no encoder exists, so
 `000413` is the only unpublished code the space contains. That is stated as a
 property of the system, not as a minting success.
@@ -358,7 +358,7 @@ rejected in-game.
 **Inferred.**
 * Level 2 unlocks Fantasy + Atlantis but not Genius: derived from the
   monotonic level table plus the observed level-1 (Atlantis locked) and
-  level-3 (all unlocked) states, and matching the published GameFAQs entry.
+  level-3 (all unlocked) states, and matching the published 3rd party cheat index entry.
   The level-2 Character Select screen itself was not captured.
 * `progress[0x28]` is the maximum level / message guard; both 0x24 and 0x28
   read 3 in the level-3 savestate.
@@ -396,8 +396,8 @@ rejected in-game.
 * Python 3 + Capstone 5.0.7 for pointer/BL scans; mGBA `.ssN` savestates were
   decompressed (zlib `gbAs` chunk) to read IWRAM and confirm
   `0x03003E18 = "446218"`, `0x03004820 = 3`, `0x0300489C = 0x0804C7E0`.
-* WEB: GameFAQs cheats page via `web.archive.org` (direct fetch is 403);
-  searches for TCRF/VGChartz/fan-wiki pages and for the literal `000413`.
+* WEB: 3rd party cheat index cheats page via `web.archive.org` (direct fetch is 403);
+  searches for 3rd party cheat indexes/fan-wiki pages and for the literal `000413`.
 
 Enumeration model used (also at `/tmp/boardclassics/password_model.py`):
 

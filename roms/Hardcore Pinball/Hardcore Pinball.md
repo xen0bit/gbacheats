@@ -35,8 +35,8 @@ and the table bonuses) are **in-table script events**, not cheats: the strings l
 each table's bytecode script bank (e.g. `Unlock Sinkhole` at `0x080C770E`, `Ball
 Unlocked` at `0x080C8BAD`, `CHEATER` at `0x080496AC`, `0x0808746F`, `0x080C539C`,
 `0x080101B7A`). They are displayed by table events during play; no input path selects
-them. No published GBA password/code list exists for this SKU (GameFAQs cheats page
-returns 403 and has no archived copy; no TCRF page; web searches returned only release
+them. No published GBA password/code list exists for this SKU (3rd party cheat index cheats page
+returns 403 and has no archived copy; no 3rd party cheat index page; web searches returned only release
 data and reviews). Consequently there are no published literals to verify in the ROM.
 
 ## 3. How to reproduce
@@ -158,8 +158,8 @@ Because no code system exists, the space is bounded as a negative result (guide 
   (`0..0x27` per letter, 3 letters = 40³ = 64,000 spellings). It is accepted and saved
   by `FUN_0800D700` without any checksum or range rejection — proving it is a name
   field, not a code. No out-of-range code input exists to reject.
-* **Published-code verification:** none available. GameFAQs cheats page returned HTTP
-  403 and had no Wayback snapshot; TCRF has no page for this title; web searches
+* **Published-code verification:** none available. 3rd party cheat index cheats page returned HTTP
+  403 and had no Wayback snapshot; 3rd party cheat indexes have no page for this title; web searches
   returned release data/reviews only. Therefore zero published literals were found to
   test against the ROM (and none could be absent).
 

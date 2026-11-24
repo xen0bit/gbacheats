@@ -28,7 +28,7 @@ logo is untouched, and the complement check recomputes to the stored value, so
 **no patch, trainer or intro is present**.
 
 `file` identifies the image as `"BALLISTIC EC" (AEEE6L, Rev.00)`. This is the
-2002 US release titled *Ballistic: Ecks vs. Sever* — the sequel that GameFAQs
+2002 US release titled *Ballistic: Ecks vs. Sever* — the sequel that 3rd party cheat indexes
 catalogs as **“Ballistic: Ecks vs. Sever II”** (“Also known as: Ballistic:
 Ecks vs. Sever (US)”). That distinction matters: the widely copied **EX…/S…**
 level-password list belongs to the 2001 game *Ecks vs. Sever* and is rejected
@@ -67,8 +67,8 @@ write in the password path.
   `1…10` / `21…30`, the character word, the 9-character cap, and the fact
   that a level code can be combined with all nine cheats. This report supplies
   that model and the in-game evidence.
-* Published-list verification: the 29 strings match the GameFAQs “Ballistic:
-  Ecks vs. Sever II” cheat/password list (archived 2022-02-04) and the IGN
+* Published-list verification: the 29 strings match the 3rd party cheat indexes “Ballistic:
+  Ecks vs. Sever II” cheat/password list (archived 2022-02-04) and the 3rd party cheat indexes
   page (archived 2017-03-23) **exactly**, including the cheat effects. The
   EX…/S… list for the 2001 game is disproved in-emulator: `EXTREME` and the
   other first-game words are rejected, and `SACROSANCT` cannot even be typed
@@ -140,13 +140,13 @@ attributed to a dropped input edge, not to game logic.
 
 | Source | Content | Used how |
 |---|---|---|
-| GameFAQs 561533, “Ballistic: Ecks vs. Sever II” cheats (archived 2022-02-04) | complete 29-entry list: 9 cheat codes + 20 level codes | every string checked against the ROM tables; all 29 present, no typos |
-| GameFAQs 537159, “Ecks vs. Sever” (2001) cheats (archived 2022-02-09) | 11 Ecks `EX…` + 11 Sever `S…` level words, 6 MP words | literal search in this ROM: 0 hits; `EXTREME` entered and rejected |
-| IGN cheats wiki (archived 2017-03-23) | partial list (Raven, Firefly, covey, tiger + 7 cheat codes) | agrees with GameFAQs; missing `hornblow`/`mybigun` and most level codes |
-| TCRF “Ecks vs. Sever” | only CodeBreaker codes to view early splash screens (memory-edit, out of scope) | no in-game password list |
-| VGChartz / general search | no password list for this title (discussion only) | no additional codes to verify |
+| 3rd party cheat indexes 561533, “Ballistic: Ecks vs. Sever II” cheats (archived 2022-02-04) | complete 29-entry list: 9 cheat codes + 20 level codes | every string checked against the ROM tables; all 29 present, no typos |
+| 3rd party cheat indexes 537159, “Ecks vs. Sever” (2001) cheats (archived 2022-02-09) | 11 Ecks `EX…` + 11 Sever `S…` level words, 6 MP words | literal search in this ROM: 0 hits; `EXTREME` entered and rejected |
+| 3rd party cheat index 3rd party cheat indexes | partial list (Raven, Firefly, covey, tiger + 7 cheat codes) | agrees with 3rd party cheat indexes; missing `hornblow`/`mybigun` and most level codes |
+| 3rd party cheat indexes “Ecks vs. Sever” | only CodeBreaker codes to view early splash screens (memory-edit, out of scope) | no in-game password list |
+| 3rd party cheat indexes / general search | no password list for this title (discussion only) | no additional codes to verify |
 
-GameFAQs and IGN return 403 to direct fetches; the archived snapshots above
+3rd party cheat indexes return 403 to direct fetches; the archived snapshots above
 were fetched through `web.archive.org`.
 
 ## 4. Address map
@@ -339,8 +339,8 @@ the reverse of the table/bit order.
 
 ### Published set vs. this ROM
 
-The 29 strings are exactly the list published for this US release (GameFAQs
-“Ballistic: Ecks vs. Sever II” cheats page, archived 2022-02-04; IGN cheats
+The 29 strings are exactly the list published for this US release (3rd party cheat indexes
+“Ballistic: Ecks vs. Sever II” cheats page, archived 2022-02-04; 3rd party cheat index cheats
 page, archived 2017-03-23). All were checked against the ROM tables
 byte-for-byte; no published typo was found.
 
@@ -410,7 +410,7 @@ neither a prefix, a suffix nor a case variant can match.
   Avoid civilian casualties” (mission 9); `RAVEN` → Sever “Locate the safe
   house / Pick up the location of the inner compound” (Sever mission 2, Sever
   portrait on the objectives screen). The first three mission numbers match
-  the archived GameFAQs walkthrough (file 54234) word-for-word.
+  the archived 3rd party cheat index walkthrough (file 54234) word-for-word.
 * Cheat effects that are visible without audio: `BIGPOCKET` (ammo 100 stays
   100 after firing) and `TOOLEDUP` (three weapons in the HUD instead of one),
   both seen in the all-cheats run; the no-cheat HUD for comparison shows 20

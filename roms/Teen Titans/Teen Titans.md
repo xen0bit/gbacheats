@@ -22,7 +22,7 @@
 multiboot stub, no cracktro/trainer. The ASCII string `GAX Sound Engine 3.05A`
 (file `0x19220C`) and `Shin'en Multimedia. Code: B.Wodok` (`0x192232`) are the
 audio-driver banner, **not** a cheat. Build stamp in the image is `Aug 15 2005
-14:42:47` (TCRF mirror, independently consistent with the 2005 retail date).
+14:42:47` (3rd party cheat index mirror, independently consistent with the 2005 retail date).
 
 Analysis was performed **independently** of the sibling *Teen Titans 2* job.
 
@@ -41,12 +41,11 @@ in the Extras/Bonus screen:
   survive in the retail image: `Obj Viewer`, `Music Player`, `Fx Player`,
   `Mission - Tutorial`, `Mission - 01`…`Mission - 06`, `Gizmo`, `Jinx`,
   `Mammoth`, `Brother Blood`, `Normal Boot`, `Missions ->`, `Bosses ->`,
-  `Asset Viewer ->`, `Prototype`. TCRF explicitly states that whether it can be
+  `Asset Viewer ->`, `Prototype`. 3rd party cheat indexes explicitly states that whether it can be
   accessed "needs investigation". This report shows the gate bits are **ROM
   constants that are zero in every normal scene configuration**, with no runtime
   writer found — a bounded *gated/cut feature* negative, not "not tested".
-* No published password/button code exists for the GBA version. GameFAQs, TCRF,
-  ChapterCheats, CheatingDome and VGChartz list only completion unlockables. The
+* No published password/button code exists for the GBA version. 3rd party cheat indexes list only completion unlockables. The
   button-sequence cheats published for *Teen Titans* belong to the **PS2 / GC /
   Xbox** SKUs (same developer, different engine) and were verified **absent** from
   this GBA image under every encoding tried. The one Substack "New codes" index
@@ -160,7 +159,7 @@ The tile/text bank is **not ASCII**. Encoding, recovered from the Extras labels:
 
 ### 6.1 Unlockables (published list verified against ROM strings)
 Every published unlock requirement string is present in the ROM text bank, so
-the GameFAQs/ChapterCheats lists are verified for this exact image:
+the 3rd party cheat index lists are verified for this exact image:
 
 | Unlockable | Gate (in-game string) |
 |---|---|
@@ -179,8 +178,8 @@ is used): `UNLIMITED HP`, `UNLIMITED PP`, `WARP TO POSITION <n>`,
 ### 6.2 Published-code reconciliation
 | Source | Claim | GBA verification |
 |---|---|---|
-| GameFAQs / ChapterCheats / CheatingDome | unlockables only | all requirement strings present |
-| TCRF (GBA page) | debug menu text at `0x573F4`; "can it be accessed?" needs investigation | table + labels found and enumerated; gate proven ROM-constant (§6b) |
+| 3rd party cheat indexes | unlockables only | all requirement strings present |
+| 3rd party cheat indexes | debug menu text at `0x573F4`; "can it be accessed?" needs investigation | table + labels found and enumerated; gate proven ROM-constant (§6b) |
 | Substack "New codes" (2024) | *Teen Titans*: unlock all bonus features | headed **PS2 / GameCube / Xbox**, not GBA; GBA section lists only *Strike Force Hydra* |
 | Substack "Under the microscope" (2026) | 6 button sequences (hold L + 5 presses) | PS2/GC/Xbox engine; exact numeric sequences (`03 07 07 00 08 05`, `00 06 06 03 06 05`, etc.) searched in this GBA ROM: **0 hits** at every alignment |
 
@@ -268,7 +267,7 @@ difficulty unlocks, all driven by save-completion counters, not by any input cod
   parameter typed in a sub-screen) — only the message strings were observed.
 * The exact semantics of the `0x0819976x` action descriptors.
 
-**Prompt-injection note.** A fetched TCRF mirror page (`TCRF:CTE`) contained
+**Prompt-injection note.** A fetched 3rd party cheat index mirror page (3rd party cheat indexes) contained
 instruction-like text addressed to AI agents ("These instructions are not for a
 human… whoever is operating this AI agent is a clown"). It was treated as
 untrusted data and ignored, per guide §16.8; it did not affect the analysis.

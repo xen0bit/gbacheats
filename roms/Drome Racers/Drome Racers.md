@@ -196,7 +196,7 @@ accepted = 6
 strings, the §0.2 "generate a code absent from every published list" deliverable
 is unattainable for this image. I report that as a proven negative rather than a
 partial result. Every one of the six reachable values is already documented by
-GameFAQs, SuperCheats, VictoryCheats and EliteGuias; TCRF's Hot Wheels: Stunt
+3rd party cheat indexes and EliteGuias; a 3rd party cheat index's Hot Wheels: Stunt
 Track Challenge page independently lists the same six strings as Drome Racers
 leftovers. There is no unadvertised difficulty, level, team or flag that a code
 can select.

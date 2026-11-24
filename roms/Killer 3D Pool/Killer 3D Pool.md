@@ -121,7 +121,7 @@ validator — no procedure in this ROM computes it (§7.4).
 | Tony | TTTTQ | `0xFFFF` | Q (12) | yes |
 | Ulrika | QBSBN | `0xC0E0` | N (10) | yes |
 
-Sources: GameFAQs (archived 2018-11-26), SuperCheats ID 6672, both listing the
+Sources: 3rd party cheat index ID 6672, both listing the
 same twelve spellings.
 
 ### 6.2 Space
@@ -185,7 +185,7 @@ anywhere in the 4 MiB image. The 525-record localization table was fully
 decoded: no `PASSWORD`, `CODE`, `ENTER`, `SECRET`, `UNLOCK` (other than the
 result `PLAYER UNLOCKED!`) or debug-menu label exists. 30,493 `strings` records:
 `password` 0, `code` 0, `cheat` 0, `debug` 0, `secret` 0, `unlock` 1. A real
-player asked SuperCheats in 2023 *"I don't see an entry to type it in?"* — the
+player asked 3rd party cheat indexes in 2023 *"I don't see an entry to type it in?"* — the
 question has no answer on that site.
 
 ### 7.6 Dynamic watchpoint brute force (158 inputs, zero writes)

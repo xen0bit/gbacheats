@@ -35,7 +35,7 @@ OPTIONS, (b) the **OCEAN WORLD** landscape, and (c) the two **secret riders LIL 
 Any other word (e.g. `ZZZZZZZZ`) is stored as the Horse-game word but sets **no** unlock flag.
 There is no checksum, generator, button code, or save-bit unlock in this system: the
 validator is a three-way `strcmp` chain, so the accepted set is provably exactly three
-strings (§6b). Web reconnaissance (four queries, GameFAQs-style terms) found **no published
+strings (§6b). Web reconnaissance (four queries, 3rd party cheat index-style terms) found **no published
 code list for this SKU**, so these words should be treated as the complete native set.
 
 ## 3. How to reproduce

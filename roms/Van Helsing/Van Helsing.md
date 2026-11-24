@@ -140,7 +140,7 @@ Python reimplementation: `/tmp/vanhelsing/vh.py`.
 `H9L9NDS9N` (`0f 08 13 08 15 0b 1a 08 15`) — **accepted**, boots "PARIS, FRANCE".
 `H9L9NDS9*` (`0f 08 13 08 15 0b 1a 08 16`) — rejected. Neither is on a published list.
 
-Cheat Happens lists lowercase codes (`d5x5k2hm1`, `3h9512111`, …) using letters
+3rd party cheat index lists lowercase codes (`d5x5k2hm1`, `3h9512111`, …) using letters
 outside this SKU's 32-symbol keypad; they are unreachable here and are recorded as
 unverified (guide §16.7/§16.11).
 

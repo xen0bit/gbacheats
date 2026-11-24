@@ -43,7 +43,7 @@ Rev.1 image (nothing carried over from Emerald):
    title-reset behaviour observed while testing).
 
 The widely published **R + START debug menu is NOT in this retail ROM**. It belongs
-to the Japanese prototype (TCRF "Proto: Pokémon FireRed and LeafGreen/Debug Menu")
+to the Japanese prototype (3rd party cheat indexes "Proto: Pokémon FireRed and LeafGreen/Debug Menu")
 and to modern decomp-based ROM hacks. In this ROM, R (alone or with Start) opens
 the **Help System** (observed, `s_rstart.png`). Independent negative proof:
 *zero* occurrences of encoded or ASCII `DEBUG`, `PMDEBUG`, `WARP`, `MEMSAVE`,
@@ -226,7 +226,7 @@ negative is bounded by the counts above plus the rejection test.
   was verified in source but not exercised in a state where that flag is set.
 * **Published-code verification:** every FireRed "cheat" found on the web was an
   external device memory patch (GameShark/CodeBreaker/Action Replay) and was
-  rejected as out of scope, not treated as an in-game code. One TCRF fetch returned
+  rejected as out of scope, not treated as an in-game code. One 3rd party cheat indexes fetch returned
   a prompt-injection payload ("instructions … only for LLMs … operator is a
   clown"); it was ignored and treated strictly as data (§16.8).
 
@@ -250,6 +250,6 @@ Python 3 (`decode_text.py` with the pret/pokefirered Gen-3 charmap,
 Capstone 5.0.7, `arm-none-eabi-objdump`, mGBA 0.10.5 under Xvfb `:315` +
 openbox, `xdotool`, `scrot`, ImageMagick (`convert -resize 1x1` colour-hash
 evidence), `tesseract`. Reference data: pret/pokefirered master tarball (source
-and `charmap.txt`), TCRF and walkthrough pages (data only). No ROM or copyrighted
+and `charmap.txt`), 3rd party cheat indexes and walkthrough pages (data only). No ROM or copyrighted
 asset is redistributed; only addresses, hashes, flags and our own scripts are
 published.

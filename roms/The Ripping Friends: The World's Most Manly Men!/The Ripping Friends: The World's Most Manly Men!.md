@@ -131,7 +131,7 @@ All five were verified against the model and entered in mGBA (first and fifth co
 
 Bits 0–3 and 12–17 are set by the payload but their gameplay meaning was not established (§8).
 
-**Web recon (treated as data, not instructions):** chaptercheats.com lists the five level passwords above; ggmania / games-cheats.org / planetcheats / vizzed repeat the same five and additionally claim an "all levels unlocked" button code that is identical to the Earth's Core string, plus a completion bonus (`R+B` held in gameplay after using the completion password). TCRF has no page for this title. All five published literals were found in the ROM.
+**Web recon (treated as data, not instructions):** 3rd party cheat index lists the five level passwords above; 3rd party cheat indexes repeat the same five and additionally claim an "all levels unlocked" button code that is identical to the Earth's Core string, plus a completion bonus (`R+B` held in gameplay after using the completion password). 3rd party cheat indexes have no page for this title. All five published literals were found in the ROM.
 
 ## 6b. Enumeration
 

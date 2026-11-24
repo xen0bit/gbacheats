@@ -46,9 +46,9 @@ condition is a per-UI-object byte (`object+0x18 == 2`, decompiled at
 is game-state logic for Rampart entities (`0x0800D3D6`, `0x0800DCEA`), not a menu
 constructor. It is reported as an **in-renderer / unreachable-by-input leftover**.
 
-Published material was checked early (GameFAQs game 929031 cheats page via
-Wayback 20200211161208, ChapterCheats, Romspedia, TCRF query, DuckDuckGo lite).
-Every source reports **zero cheats/codes** for this GBA SKU; Romspedia states
+Published material was checked early (3rd party cheat indexes game 929031 cheats page via
+Wayback 20200211161208, 3rd party cheat indexes query, DuckDuckGo lite).
+Every source reports **zero cheats/codes** for this GBA SKU; 3rd party cheat indexes state
 "there are no cheats for the selected game." The only "cheats" on the web for
 this title are GameShark/ActionReplay memory-edit codes (out of scope) and codes
 for *other* SKUs (NES *Gauntlet*), which do not apply to this image (guide §16.11).
@@ -206,8 +206,7 @@ for the Konami sequence, its reverse, `L,R,L,R`, `Up,Up,Down,Down`, and
 `R,L,R,L` as `u16` masks gave **0 hits** (except a 3-hit `A,B,A,B` data
 coincidence at `0x37C326/0x37D696/0x37E542`, inside the graphics bank).
 
-**Space 5 — published-code verification.** GameFAQs (archived), ChapterCheats,
-Romspedia and TCRF all list **zero** in-game codes for this SKU. NES-era
+**Space 5 — published-code verification.** 3rd party cheat indexes all list **zero** in-game codes for this SKU. NES-era
 *Gauntlet* Game Genie codes and GameShark/CodeBreaker entries belong to other
 platforms/categories and are rejected as inapplicable (out of scope, guide
 §16.11). There is therefore no published literal to verify against the ROM.

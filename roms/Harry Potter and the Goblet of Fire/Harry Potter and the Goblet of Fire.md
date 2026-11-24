@@ -18,7 +18,7 @@
 | MD5 | `d228b8cfeda28ba875f3c355f04d53e3` |
 | SHA-1 | `951f311d9a99920abdbb9134ac8b9d00dfdb9b0b` |
 | SHA-256 | `ae9d6b9dcdf0f7454137c47eceba7e2affc9508e4460d594d3867937f23f8a88` |
-| Developer / publisher | Magic Pockets / Electronic Arts, 2005 (ROM credit string at 0x12cc960; GameFAQs/IGN) |
+| Developer / publisher | Magic Pockets / Electronic Arts, 2005 (ROM credit string at 0x12cc960; 3rd party cheat indexes) |
 | Save type | 512-byte EEPROM (`.sav` created by mGBA at first boot) |
 
 **Embedded-header scan:** the full 156-byte Nintendo logo occurs exactly **once**, at file offset 0x0 (ROM address 0x08000000). This is a single retail image, not a multi-game cart (§5.4b). No appended trainer or cracktro was found; the first 4 KiB is a normal ARM crt0 (the `0xEA000030` entry is a plain branch, not a scene cracktro patch). The rebuilt header (checksum 0, bad complement) is the only patched-header signal.
@@ -33,13 +33,13 @@ What the game *does* have is a normal collectible/unlockable progression layer, 
 
 - **71 Tri-Wizard Shields** (hidden in levels) → unlocks **Game Cutscenes** bonus (after an autosave).
 - **74 Collector Cards** (found in levels, or bought with jelly beans at Weasleys' Wares) → unlocks **Movie Photo Gallery** bonus.
-- **Yule Ball** rhythm minigame: **Music 1–4** and **Beginner / Intermediate / Advanced** difficulties unlock by achieving B-or-better grades (strings at 0x7762b1 / 0x776318; GameFAQs walkthrough §5.5).
+- **Yule Ball** rhythm minigame: **Music 1–4** and **Beginner / Intermediate / Advanced** difficulties unlock by achieving B-or-better grades (strings at 0x7762b1 / 0x776318; 3rd party cheat index walkthrough §5.5).
 - **Mini-Games**, **House Booster card** and additional bonuses unlock via shield/card thresholds (strings at 0x12cd2ec, 0x12cd364, 0x12cd382).
 - All of these are save-record bits written by **gameplay events** (pickup, grade threshold, shop purchase), not by any controller-input matcher. The save slot screen itself displays `0/71` shields and `4/74` cards, matching the published totals.
 
 The only special button combination in the binary — **L + R + Select** — is the **documented Sleep-mode hotkey**, not a cheat. It is gated behind `flags & 0x10000` and byte `0x03002730 == 0x55`; forcing that gate in a patched savestate produced the on-screen message *"Sleep mode — To wake up the GBA, press L, R and SELECT simultaneously."* (screenshot `g41.png`). The two `"password"` strings in the ROM are story dialogue about the Prefects' Bathroom password, not a code. The many `"CODE"` strings at 0x1f04xxx are Shin'en GAX audio-chunk identifiers (`Sequence`, `CODE`), keyword false positives (§11).
 
-Published GBA "cheats" are **Action Replay / GameShark memory-edit codes** (Cheat Happens: `badf57721b426ca6` infinite health, `b3fe0ce591f41721` infinite beans) — explicitly out of scope. No password or button code is published for the GBA SKU on GameFAQs, IGN, SuperCheats or TCRF.
+Published GBA "cheats" are **Action Replay / GameShark memory-edit codes** (3rd party cheat indexes: `badf57721b426ca6` infinite health, `b3fe0ce591f41721` infinite beans) — explicitly out of scope. No password or button code is published for the GBA SKU on 3rd party cheat indexes.
 
 ## 3. How to reproduce
 
@@ -99,8 +99,8 @@ This is edge-triggered (press all three, then release all). Forcing `flags |= 0x
 - **Unlockable set** (all in-scope unlockables; none input-triggered):
   | Unlockable | Condition | Evidence |
   |---|---|---|
-  | Game Cutscenes | all 71 Shields + autosave | 0x13b399e string; save slot `0/71`; GameFAQs/IGN |
-  | Movie Photo Gallery | all 74 cards | save slot `4/74`; GameFAQs/IGN |
+  | Game Cutscenes | all 71 Shields + autosave | 0x13b399e string; save slot `0/71`; 3rd party cheat indexes |
+  | Movie Photo Gallery | all 74 cards | save slot `4/74`; 3rd party cheat indexes |
   | Music 1–4 / Beginner–Advanced (Yule Ball) | grade thresholds | 0x7762b1, 0x776318, 0x12cc7a0–0x12cc7f0; walkthrough §5.5 |
   | Mini-Games / bonus / House Booster card | shield/card thresholds | 0x12cd2ec, 0x12cd364, 0x12cd382 |
 - **Button masks** (GBA active-high): A=0x001, B=0x002, Sel=0x004, Start=0x008, Right=0x010, Left=0x020, Up=0x040, Down=0x080, R=0x100, L=0x200. The only matched combination is 0x304 = L+R+Select (sleep).
@@ -127,7 +127,7 @@ This is edge-triggered (press all three, then release all). Forcing `flags |= 0x
 
 ## 8. Unknowns
 
-- Full playthrough of the single-player Yule Ball "Choose music / Choose level" difficulty screen was not performed (it requires story progression; the Multiplayer route needs a second console). Its existence and grade-gated unlocks are evidenced by the text-bank strings (0x12cc7a0–0x12cc7f0, 0x7762b1, 0x776318) and the GameFAQs walkthrough, not by a screenshot of that specific screen.
+- Full playthrough of the single-player Yule Ball "Choose music / Choose level" difficulty screen was not performed (it requires story progression; the Multiplayer route needs a second console). Its existence and grade-gated unlocks are evidenced by the text-bank strings (0x12cc7a0–0x12cc7f0, 0x7762b1, 0x776318) and the 3rd party cheat index walkthrough, not by a screenshot of that specific screen.
 - The exact writer of flags bit `0x10000` (the Options "Sleep mode" toggle) was not isolated; the gate was proven by forcing the bit in a patched savestate, which is labelled as a derived/forced test, not normal input.
 - No claim is made that every internal script-level name (e.g. `L08-TEST`) is unreachable under every possible save state — only that none appears in any walked menu.
 
@@ -136,7 +136,7 @@ This is edge-triggered (press all three, then release all). Forcing `flags |= 0x
 - `arm-none-eabi-objdump -M force-thumb` for input-routine disassembly; Python 3 + Capstone 5.0.7 for literal/xref scans; `strings`, `xxd`, Python `struct`/`zlib` for headers and savestate decoding.
 - Custom scripts in `/tmp/hpgof/`: `phase0.py`, `recon.sh`, `dump.py`, `static_scan.py`, `ptrscan.py`, `key.py`, `combo.py`, `savestate.py`, `ssdecode.py`, `ramtool.py`, `patchss.py`.
 - mGBA 0.10.5 SDL under Xvfb :319, xdotool/scrot/ImageMagick for input and screenshots.
-- Web: GameFAQs cheat/walkthrough pages (via `web.archive.org` snapshots), IGN archived cheat page, Cheat Happens, Wikipedia. Fetched pages were treated as data; no prompt-injection payload was observed in this session's fetches.
+- Web: 3rd party cheat index cheat/walkthrough pages (via `web.archive.org` snapshots), 3rd party cheat indexes archived cheat page, 3rd party cheat indexes. Fetched pages were treated as data; no prompt-injection payload was observed in this session's fetches.
 
 ## Legal note
 

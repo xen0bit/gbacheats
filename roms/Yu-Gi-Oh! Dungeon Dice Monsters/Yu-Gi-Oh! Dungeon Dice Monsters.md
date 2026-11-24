@@ -81,7 +81,7 @@ Menu path observed:
 Savestate `game.ss1` (in the work dir, **not** the ROM folder) was taken at the
 main menu; `F1` reloads it, making each submenu walk one keypress.
 
-Web reconnaissance (§3.4) was attempted against GameFAQs, TCRF, Bing, DuckDuckGo,
+Web reconnaissance (§3.4) was attempted against 3rd party cheat indexes, Bing, DuckDuckGo,
 Google and the Wayback Machine; all returned 403/503/captcha or irrelevant generic
 "dungeon" results. **No published code for this SKU was found or verified** — this is
 recorded as a negative result, not silently omitted.

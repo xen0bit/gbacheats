@@ -25,7 +25,7 @@ Embedded GBA-header scan: exactly **one** Nintendo-logo hit, at file offset `0x4
 
 This SKU has a **developer-intended password system** on the main menu (`PASSWORD`). It is a **plaintext lookup table of exactly 256 accepted strings**, not a checksum algorithm. The table lives at ROM `0x085697A4` (256 `u32` pointers → strings `0x08569BA4`–`0x0856A413`). The screen offers a 16-slot keypad (`A`–`Z`, `0`–`9`, a red delete key and a green submit key). The validator at `0x08017FD4` walks all 256 entries and calls a string comparator at `0x08021C10`; on a match the table index dispatches a state change (level/progress flags).
 
-All 11 codes published by GameFAQs / IGN / Cheat Happens are present verbatim in the ROM (one published entry, `APBATO9`, is an OCR typo for the ROM's `APBAT09`). Because the published list covers only 11 of the 256 entries, the remaining 245 are unpublished but valid — e.g. `KONG56`, `SETH46`, `CHONDAR08`. Two such codes were entered on the real screen and confirmed by savestate RAM reads; out-of-table codes were rejected.
+All 11 codes published by 3rd party cheat indexes are present verbatim in the ROM (one published entry, `APBATO9`, is an OCR typo for the ROM's `APBAT09`). Because the published list covers only 11 of the 256 entries, the remaining 245 are unpublished but valid — e.g. `KONG56`, `SETH46`, `CHONDAR08`. Two such codes were entered on the real screen and confirmed by savestate RAM reads; out-of-table codes were rejected.
 
 No button-code sequence, hidden debug menu, or second algorithmic password format was found after walking every reachable screen and searching the alphabet/key-mask spaces (counts below).
 
@@ -123,7 +123,7 @@ input_handler(key):
 
 ### 6.3 Notable unpublished codes
 
-`KONG56`(1), `SETH46`(255), `CHONDAR08`(141), `ERIC39`(127), `VARARNUS46`(251), `SKYBA78`(250) — all present in the ROM table, absent from GameFAQs/IGN/Cheat Happens/VGChartz-style lists.
+`KONG56`(1), `SETH46`(255), `CHONDAR08`(141), `ERIC39`(127), `VARARNUS46`(251), `SKYBA78`(250) — all present in the ROM table, absent from 3rd party cheat index-style lists.
 
 ## 6b. Enumeration
 
@@ -150,7 +150,7 @@ input_handler(key):
 - Which specific level/unlock each table index grants; the in-game effect after submit is a silent return to the main menu, and a following NEW GAME replayed the normal intro. The dispatch writes were seen in RAM but their readers were not traced to a visible screen.
 - Exact mapping of savestate byte offsets to GBA bus addresses.
 
-**Prompt-injection check**: fetched GameFAQs page (via web.archive.org) and search snippets contained only cheat text; no embedded instructions were followed. Web content treated strictly as data (guide §16.8).
+**Prompt-injection check**: fetched 3rd party cheat index page (via web.archive.org) and search snippets contained only cheat text; no embedded instructions were followed. Web content treated strictly as data (guide §16.8).
 
 ## 8. Unknowns
 
@@ -168,6 +168,6 @@ input_handler(key):
 - `closed.py` — cursor-colour closed-loop keypad driver; `key.py` — timed key helper; `typer*.py` — earlier navigation attempts.
 - Savestate parser: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte raw state; byte-range diff script (guide §16.13).
 - `tesseract` for screen-state OCR.
-- Web: GameFAQs cheat page via `web.archive.org` snapshot (direct fetches returned 403), plus search snippets from IGN/Cheat Happens/cheat-database.
+- Web: 3rd party cheat index cheat page via `web.archive.org` snapshot (direct fetches returned 403), plus search snippets from 3rd party cheat indexes/cheat-database.
 
 No ROM bytes or copyrighted assets are reproduced in this report; only addresses, hashes, algorithms and our own observations.

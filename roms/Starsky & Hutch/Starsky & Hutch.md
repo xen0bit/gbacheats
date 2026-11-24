@@ -55,8 +55,8 @@ The seven codes are:
 | 6 | `MBVNM` | `0x0203E0F6` |
 
 **None of these seven strings appears in any published source** (web search
-for all seven literals returned no Starsky & Hutch results; GameFAQs' GBA
-FAQ explicitly says *"Enter Passcode … none I've found worked"*, and TCRF's
+for all seven literals returned no Starsky & Hutch results; 3rd party cheat indexes' GBA
+FAQ explicitly says *"Enter Passcode … none I've found worked"*, and a 3rd party cheat index's
 talk page says the same). The widely published `VADKRAM` "profile name"
 cheat is a **different platform's** feature: the literal `VADKRAM` is absent
 from this GBA image.
@@ -213,7 +213,7 @@ best-effort list.
 **Novel codes (absent from every published list).** All seven were recovered
 from the ROM and none is published: web searches for `L5NVW`, `HKLPQ`,
 `GBBDC`, `MKLJK`, `JGFDT`, `SDLMK`, `MBVNM` produced no Starsky & Hutch
-results, and both GameFAQs and TCRF state that no working GBA passcodes were
+results, and both 3rd party cheat indexes state that no working GBA passcodes were
 known. Three were submitted on the real in-game screen with RAM proof:
 
 | Code | In-game submission | RAM result | Evidence |
@@ -279,8 +279,8 @@ developer-intended cheats.
   `mapcodes.py`, `key.py` in `/tmp/starsky/`).
 - mGBA 0.10.5 under Xvfb `:316` + openbox; `xdotool`, `scrot`, ImageMagick
   `convert`/`montage` for screen evidence.
-- Web recon: GameFAQs GBA FAQ/cheats, GamesRadar, Tips & Tricks #111
-  (2004-05), TCRF talk page (HTTP 403; recovered via search snippets).
+- Web recon: 3rd party cheat indexes GBA FAQ/cheats, 3rd party cheat indexes, Tips & Tricks #111
+  (2004-05), 3rd party cheat indexes talk page (HTTP 403; recovered via search snippets).
 
 **Legal note:** no ROM or copyrighted asset is redistributed here; only
 addresses, hashes, algorithms and the seven recovered code strings

@@ -309,7 +309,7 @@ The vowels A/E/I/O/U are omitted (21 consonants); `!` is the 22nd symbol.
 
 ### 6.3 Published codes, decoded
 
-Primary list (GameFAQs / CheatCC / RetroMaggedon). All 23 unique codes pass the
+Primary list (3rd party cheat indexes). All 23 unique codes pass the
 reconstructed checksum.
 
 | Code | Level | Character | Notes |
@@ -342,10 +342,10 @@ A second published family (world-of-nintendo) uses different filler for the
 same Vicki levels 2–9. All eight pass the checksum; `FSSSMHMB` was entered in
 the emulator and produced level 2.
 
-Source access: GameFAQs' cheat page returned HTTP 403 to direct fetches, so its
-list was recovered from search snippets; CheatCC, RetroMaggedon and
-world-of-nintendo served the lists directly. TCRF's `Talk:Army Men Advance`
-page returned a Cloudflare challenge, and a VGChartz site search returned no
+Source access: 3rd party cheat indexes' cheat page returned HTTP 403 to direct fetches, so its
+list was recovered from search snippets; 3rd party cheat indexes and
+world-of-nintendo served the lists directly. a 3rd party cheat index's `Talk:Army Men Advance`
+page returned a Cloudflare challenge, and a 3rd party cheat index site search returned no
 password page. The 31 codes in this section are the union of the sources that
 did respond.
 

@@ -65,7 +65,7 @@ developer-intended boot selector and a real in-game button code:
    GameShark/CodeBreaker memory codes and Story-Mode unlockables; the menus contain no
    password/code entry. The only text entry in either half is the Sonic Advance VS player
    name keyboard, which is a name field, not a validator.
-4. **No retail debug/level-select menu exists in this Advance image.** The TCRF "debug
+4. **No retail debug/level-select menu exists in this Advance image.** The 3rd party cheat indexes "debug
    save" is the SRAM-failsafe unlock-all behaviour, not a menu. The only button validator
    found is the Tails code.
 5. **Enumeration result for the button system:** the validator is a fixed 9-step
@@ -244,10 +244,10 @@ direction held from power-on; Down is the explicit second-game selector.
 
 | Source | Code / unlock | ROM evidence | Result |
 |---|---|---|---|
-| Sonic Retro / GameFAQs / GameRevolution | Sonic Advance Tails partner: `Up,Right,Down,Right,L,Right,R,Right,A` at char select with Sonic | table at `0x08E885E0` matches exactly | **accepted**, Tails follows (screenshots 77, 92) |
-| GameFAQs / SuperCheats | Pinball: Bingo after beating Amy; Slots after Tails; Samba de Amigo table after Knuckles | Story Mode bracket has these characters/tables | unlockables, not codes; menu path observed |
-| GameFAQs | Pinball Super Sonic stage after Ring Mode in every zone | not a code | unlockable, not tested to completion |
-| GameFAQs | Advance Moon Zone after all Emeralds + beat game; Sound Test 40–42 after Moon Zone | Sound Test wraps at 39 (screenshots `143`, `144`) | base range 1–39 confirmed; 40–42 are post-unlock |
+| 3rd party cheat indexes | Sonic Advance Tails partner: `Up,Right,Down,Right,L,Right,R,Right,A` at char select with Sonic | table at `0x08E885E0` matches exactly | **accepted**, Tails follows (screenshots 77, 92) |
+| 3rd party cheat indexes | Pinball: Bingo after beating Amy; Slots after Tails; Samba de Amigo table after Knuckles | Story Mode bracket has these characters/tables | unlockables, not codes; menu path observed |
+| 3rd party cheat indexes | Pinball Super Sonic stage after Ring Mode in every zone | not a code | unlockable, not tested to completion |
+| 3rd party cheat indexes | Advance Moon Zone after all Emeralds + beat game; Sound Test 40–42 after Moon Zone | Sound Test wraps at 39 (screenshots `143`, `144`) | base range 1–39 confirmed; 40–42 are post-unlock |
 | GameShark/CodeBreaker lists | memory-edit codes for both games | out of scope | excluded by brief |
 
 ### Menus enumerated
@@ -285,8 +285,7 @@ selects, or character unlocks in this validator.
 **Novel code (not in any published list).** Hold **Select** before and throughout the
 sequence, then enter `Up, Right, Down, Right, L, Right, R, Right, A`. Because the
 validator reads only newly pressed keys, the held Select never appears in its key state;
-the code is accepted and Tails follows. This exact input is absent from GameFAQs,
-Sonic Retro, GameRevolution, TCRF, and the archived combo-pack page. Proof: screenshots
+the code is accepted and Tails follows. This exact input is absent from 3rd party cheat indexes, and the archived combo-pack page. Proof: screenshots
 `91_holdsel.png` (level start) and `92_holdsel2.png` (Tails clearly behind Sonic).
 
 **Bounds proven by rejection.**
@@ -349,7 +348,7 @@ name and has no published special name.
 * The exact persistent "partner" global is set during the `0x0885AE15` transition and
   consumed by level init; the effect is observed but the single stored bit was not
   isolated.
-* The SRAM-failsafe "unlock everything" behaviour (documented by TCRF/Sonic Retro) was
+* The SRAM-failsafe "unlock everything" behaviour (documented by 3rd party cheat indexes) was
   not independently reproduced; it is a save-hardware condition, not a button code.
 
 ## 8. Unknowns

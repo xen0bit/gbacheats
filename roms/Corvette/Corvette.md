@@ -30,7 +30,7 @@ No cracktro branch, no appended trainer, no second header. The observed
 Corvette GBA has **no password system**. It has a single, developer-intended
 **button-code screen on the title screen**, gated on `L+R` being held, and it
 implements exactly **two** sequences of **eight D-pad presses**. Both were
-located in ROM, both are published on GameFAQs/CheatHappens, and both were
+located in ROM, both are published on 3rd party cheat indexes, and both were
 re-entered and verified in RAM in mGBA.
 
 * **Mini Cars mode** — hold `L+R`, press
@@ -230,7 +230,7 @@ L+R held:  Up, Right, Down, Left, Right, Left, Right, Left,
 ```
 
 sets **all three** flags at once. No published list documents this combined
-entry; GameFAQs/CheatHappens list the two codes separately only.
+entry; 3rd party cheat index list the two codes separately only.
 
 RAM proof after entering it (title screen, mGBA debugger reads):
 

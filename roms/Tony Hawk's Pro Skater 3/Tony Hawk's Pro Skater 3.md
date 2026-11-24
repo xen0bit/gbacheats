@@ -32,11 +32,11 @@ code entry surface.
 
 The console versions' `WEEATDIRT` / `YOHOMIES` / `backdoor` strings are **not
 present in the GBA image in any encoding** (Guide §16.11 — a title match is
-not an SKU match). GameFAQs' GBA cheat page only lists "complete the game N
+not an SKU match). 3rd party cheat indexes' GBA cheat page only lists "complete the game N
 times" unlocks; the `WEEATDIRT` snippet that search engines surface on that
 page is a cross-platform contribution duplicated from the console pages.
 
-The one candidate "code machine" lead (a SuperCheats Q&A answer claiming you
+The one candidate "code machine" lead (a 3rd party cheat index Q&A answer claiming you
 must type `Backdoor` into a code machine in the options menu) was checked and
 is a console-version claim: no such string or screen exists in the GBA build.
 
@@ -139,13 +139,13 @@ code-like string (Guide §16.2b).
 | 8 | `0x0815F768` | `turbo mode` | all gaps, or 16th (sources differ) |
 | 9 | `0x0815F774` | `- locked -` | locked placeholder |
 
-### 6.2 Published GBA unlock ladder (GameFAQs FAQ 17761 / cheatcc / Neoseeker)
+### 6.2 Published GBA unlock ladder (3rd party cheat index FAQ 17761 / 3rd party cheat indexes)
 
 Completions 1–9 unlock Wolverine, The Zone, Trial Mode, The Zone-Speed,
 Shaun Palmer, The Zone-Rail, Mindy, The Zone-Geo, The Zone-Fan (characters and
 levels, not cheats). 10–17 unlock the cheats above. "Turbo mode" is attributed
-to collecting all gaps in the GameFAQs FAQ, but to the 16th completion by
-cheatcc; the ROM contains no string that resolves the conflict.
+to collecting all gaps in the 3rd party cheat index FAQ, but to the 16th completion by
+3rd party cheat indexes; the ROM contains no string that resolves the conflict.
 
 ### 6.3 Alphabets found (all at `0x08169690`–`0x08169741`)
 
@@ -215,8 +215,8 @@ CHEATS screen should be walked and each of the 9 toggles verified there.
    computed from a skater-record base).
 2. The CHEATS screen on an unlocked save was never displayed; the 9 rows are
    inferred from the pointer table and published lists, not observed in-game.
-3. Turbo / Giant / Moon completion thresholds conflict between cheatcc
-   (16/17/18) and GameFAQs FAQ 17761 (Turbo from all gaps, list ends at 17).
+3. Turbo / Giant / Moon completion thresholds conflict between 3rd party cheat indexes
+   (16/17/18) and 3rd party cheat index FAQ 17761 (Turbo from all gaps, list ends at 17).
 4. Ghidra auto-analysis of the 8 MiB raw image OOM'd at 2 GB heap, so no
    decompilation of the menu handler was obtained; conclusions use objdump,
    Capstone-style literal scans, and the mGBA pty debugger.
@@ -230,8 +230,8 @@ CHEATS screen should be walked and each of the 9 toggles verified there.
 * mGBA 0.10.5: `-3`, savestates (`Shift+F1`..`F5`), `-d` pty debugger (CR
   command terminator), `-g` GDB stub (port override nonfunctional).
 * `scrot` screenshots, ImageMagick crops, Python zlib `gbAs` savestate decoder.
-* Web recon: GameFAQs GBA FAQ 17761, cheatcc GBA page, Neoseeker GBA cheats,
-  SuperCheats Q&A; all fetched content treated as data (Guide §16.8).
+* Web recon: 3rd party cheat indexes GBA FAQ 17761, 3rd party cheat indexes GBA page, 3rd party cheat indexes GBA cheats,
+  3rd party cheat indexes Q&A; all fetched content treated as data (Guide §16.8).
 * Work files: `/tmp/thps3/` (screenshots, `menu_state.bin`, scripts
   `lit.py`, `dbg3.py`, `stateio.py`, `key2.py`).
 

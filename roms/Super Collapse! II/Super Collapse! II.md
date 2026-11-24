@@ -23,7 +23,7 @@ Header oddity (Observed): complement byte is `0x67` while `sum(0xA0..0xBC)=0x80`
 
 The game has a **table-driven 5-character "Continue Code" / "Puzzle Password" system**, not an arithmetic checksum. The ROM contains exactly **220** NUL-terminated 5-character codes at `0x0800DA54` (6-byte stride, ending `0x0800DF7C`). The validator at `0x08000944` compares the 5-byte input buffer at `0x03000108` against the subset of that table selected by the current mode byte at `0x03000322` (0=Classic, 1=Relapse, 2=Strategy, 3=Puzzle). On a match it writes a level index and difficulty flags into the game-state struct at `0x03001764`.
 
-**All 219 codes on the GameFAQs list are present verbatim in the ROM table, and one table entry is not on any published list: `GDHWP` (= Puzzle 1, index 120).** It was entered in the Puzzle Password screen, accepted, and started Puzzle 1 with the expected RAM state (§6b).
+**All 219 codes on the 3rd party cheat index list are present verbatim in the ROM table, and one table entry is not on any published list: `GDHWP` (= Puzzle 1, index 120).** It was entered in the Puzzle Password screen, accepted, and started Puzzle 1 with the expected RAM state (§6b).
 
 A second, entirely separate developer secret exists: the hardcoded 5-letter string **`YAWER`**, compared byte-by-byte *before* the table scan. It plays sound effect 5 and sets a private flag at `0x0300032C` to 1, but it is **not** a table entry, so the UI still reports `INVALID CONTINUE CODE`. No web source mentions it (search negative). Its downstream effect is gated by additional game-state bits and remains unresolved (§8).
 
@@ -163,7 +163,7 @@ Examples (all ROM-verified): index 0 `TJQNL` (Classic Easy L6), index 20 `2W9CH`
 
 ### 6.4 Published-list verification
 
-219 published data rows recovered from an archived GameFAQs cheats page (Wayback snapshot `20181126051549`). **All 219 appear verbatim in the ROM table; no published code is missing from the ROM.** One ROM entry has no published counterpart (§6b).
+219 published data rows recovered from an archived 3rd party cheat index cheats page (Wayback snapshot `20181126051549`). **All 219 appear verbatim in the ROM table; no published code is missing from the ROM.** One ROM entry has no published counterpart (§6b).
 
 ## 6b. Enumeration
 
@@ -176,7 +176,7 @@ Examples (all ROM-verified): index 0 `TJQNL` (Classic Easy L6), index 20 `2W9CH`
 
 ### Novel codes (absent from every published list)
 
-1. **`GDHWP`** — table index 120, Puzzle 1. This is the single ROM-table entry that is not among the 219 GameFAQs codes (verified by set difference: ROM−published = `{GDHWP}`, published−ROM = `{}`). Entered on the **Puzzle Password** screen (mode byte `0x03000322 = 03`, Observed). Result: **accepted**, launched Puzzle mode with `PUZZLE NAME "Collapse!"`, `LEVEL 1`, `ATTEMPTS 1` (screenshot `s15.png`). RAM after entry: mode `03`, `0x0300177E` `0x84 → 0x80` (bits 1 & 2 cleared), input buffer `0x47` (`'G'`), state level field consistent with puzzle 1. Screenshot before submission: `s14.png`.
+1. **`GDHWP`** — table index 120, Puzzle 1. This is the single ROM-table entry that is not among the 219 3rd party cheat index codes (verified by set difference: ROM−published = `{GDHWP}`, published−ROM = `{}`). Entered on the **Puzzle Password** screen (mode byte `0x03000322 = 03`, Observed). Result: **accepted**, launched Puzzle mode with `PUZZLE NAME "Collapse!"`, `LEVEL 1`, `ATTEMPTS 1` (screenshot `s15.png`). RAM after entry: mode `03`, `0x0300177E` `0x84 → 0x80` (bits 1 & 2 cleared), input buffer `0x47` (`'G'`), state level field consistent with puzzle 1. Screenshot before submission: `s14.png`.
 2. **`YAWER`** — hardcoded secret in the validator, not in the table and not found by web search. Entered on the main menu (screenshot `s6.png`): plays sound index 5 and sets `0x0300032C: 00 → 01` (Observed by savestate diff, slot 1 vs slot 3), then the UI shows `INVALID CONTINUE CODE` (screenshot `s7.png`) because it is not a table entry. A pixel-level diff of the main menu before/after (AE = 0) shows **no visible menu change**; the flag's consumer is gated by other state bits (§8). It is a real developer-intended hidden input, but not a usable continue code.
 
 ### Bounds proved by rejection (all Observed in emulator)

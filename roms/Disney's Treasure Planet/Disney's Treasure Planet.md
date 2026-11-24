@@ -51,7 +51,7 @@ The USA build uses **level-name passwords** as its only save/continue system
   `0x08016764` call sites pass ids 0,1,2,3,5,6,7,8). The main Options menu has
   only Music/SFX/Credits.
   Consequently only the **English column** is usable here: 23 codes,
-  all of which are the published GameFAQs/VGChartz list. The other 115
+  all of which are the published 3rd party cheat index list. The other 115
   localized passwords exist in ROM and match the published six-language FAQ
   exactly, but are unreachable in this build (the FAQ states the European
   version selects a language; scene 4 is that selector and is dead here).
@@ -219,7 +219,7 @@ reserved-row bypass below).
 Rows 0, 1 and 25 are `none` in every column and are reserved. Rows 2..24 are
 the 23 stages. Columns: EN, IT, DE, FR, NL, ES — the order matches the
 language-name strings at `0x03D228` and the offsets used by the language
-screen. The published GameFAQs six-language list matches this table
+screen. The published 3rd party cheat indexes six-language list matches this table
 **138/138** (verified literal by literal).
 
 | user lvl | row | stage (published label) | EN | IT | DE | FR | NL | ES |
@@ -293,7 +293,7 @@ payload (row 0) = 24 distinct row results. Rows 1 and 25 cannot be returned.
 The other five language columns (115 words) are present and correct but
 unreachable in this build (scene 4 is never scheduled; `+15` never leaves 0).
 
-**Novel codes (not in GameFAQs, VGChartz, TCRF or the FAQ's six-language
+**Novel codes (not in 3rd party cheat indexes or the FAQ's six-language
 list).** These exercise the reserved row 0, which no published list contains:
 
 | code | typed | observed effect | RAM proof |
@@ -326,15 +326,15 @@ aliases, not distinct codes.
 
 **Published-list verification.** All 138 six-language words were searched as
 literals in the image and all 138 are present at the table addresses above;
-all 23 English words are in both the GameFAQs password list and VGChartz.
+all 23 English words are in both the 3rd party cheat indexes password list and 3rd party cheat indexes.
 The published FAQ's Italian-Docks duplicate is reproduced by the ROM's
-first-match loop. Sources: GameFAQs FAQ 20558 (`Password List` by Shdwrlm3,
-v1.1, 15 Dec 2002, archived 30 Dec 2018) and the GameFAQs GBA cheats page
-(archived 6 May 2023), plus the VGChartz GBA cheats page. TCRF returned only
+first-match loop. Sources: 3rd party cheat index FAQ 20558 (`Password List` by Shdwrlm3,
+v1.1, 15 Dec 2002, archived 30 Dec 2018) and the 3rd party cheat indexes GBA cheats page
+(archived 6 May 2023), plus the 3rd party cheat indexes GBA cheats page. 3rd party cheat indexes returned only
 its PlayStation 2 article for this title (direct GBA fetch 403; the PS2 page
 documents a debug level select on that SKU, consistent with the cut GBA debug
 scene found here). The only other
-published GBA cheats on the GameFAQs page are two GameShark/RAM-write codes
+published GBA cheats on the 3rd party cheat index page are two GameShark/RAM-write codes
 (`0300021063`, `0300021305`), which are memory-edit codes and out of scope for
 this engagement; they are not in-game cheats and are excluded here.
 

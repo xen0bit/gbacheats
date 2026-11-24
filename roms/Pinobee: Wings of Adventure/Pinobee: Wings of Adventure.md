@@ -17,7 +17,7 @@
 | Software version | `0x00` |
 | Complement check | `0xD0` |
 | Header checksum | `0x0000` (rebuilt-header artifact; guide §16.1) |
-| **CRC32** | **`D9385207`** — matches GameHacking.org's USA/Europe `AGB-APBE-USA, AGB-APBP` entry exactly |
+| **CRC32** | **`D9385207`** — matches a 3rd party cheat index's USA/Europe `AGB-APBE-USA, AGB-APBP` entry exactly |
 | MD5 | `211af14ac83a170a0e60fe8d0a48e37e` |
 | SHA-1 | `cb1549b6dd8070770b1a00928eeb7d458309e200` |
 | SHA-256 | `b111c47083f055f1f3f573537b42fd7a9f3c49776b0b39d8ea0f8746cf700da1` |
@@ -34,7 +34,7 @@ no shell menu. The ROM is a single retail USA/Europe image.
 Literal `password` / `cheatcode` / `levelselect` / `debugmenu` count is **0**; no
 alphabet table, no code validator, no comparison table of code strings, and no key-mask
 sequence could be found. The only codes published on the web are encrypted Action
-Replay / GameShark / CodeBreaker memory-edit listings (Cheat Happens, GameHacking.org),
+Replay / GameShark / CodeBreaker memory-edit listings (3rd party cheat indexes),
 which are explicitly **out of scope**; they are not literals and do not appear in the ROM
 as text.
 
@@ -49,7 +49,7 @@ and on the pause screen failed to reach it. It is classified as **dead code** (g
 §16.3, category 2), reachable only by calling its functions from a debugger — a
 memory-edit technique that is out of scope here.
 
-The one in-scope published secret — **Super Pinobee** (GameFAQs: collect all 16 items of
+The one in-scope published secret — **Super Pinobee** (3rd party cheat indexes: collect all 16 items of
 one colour category to make the King and Queen items appear, then collect both) — is
 structurally corroborated by the item/flag tables (§6), but is a **save-driven
 unlockable**, not a code (guide §16.18).
@@ -181,7 +181,7 @@ strings, e.g. bytes at `0x08055270` are `3C B0 53 4C 43 54 20 5B 31 B0 4D 41 58 
 
 ### 6.3 In-scope published secret (save-unlockable, not a code)
 
-GameFAQs "Secrets → Secret Transformation": collect all 16 regular items of one colour
+3rd party cheat indexes "Secrets → Secret Transformation": collect all 16 regular items of one colour
 category (PINK / BLUE / ORANGE — the three categories on the game's ITEM EFFECTS screen)
 to make the **King** and **Queen** items appear in time capsules; collecting both
 transforms Pinobee into **Super Pinobee**. Structurally corroborated: the items UI has a
@@ -191,9 +191,9 @@ a full playthrough).
 
 ### 6.4 Out-of-scope published codes (recorded, not used)
 
-Cheat Happens lists 7 Action Replay codes each for the US and EU builds (Max Energy,
+3rd party cheat index lists 7 Action Replay codes each for the US and EU builds (Max Energy,
 Multi Jumps, Max Flower, Infinite Life Meter, Good Items, AR Button for Slow, master
-code). GameHacking.org lists 27 codes for `AGB-APBE-USA/APBP` and 14 for the Japanese
+code). 3rd party cheat index lists 27 codes for `AGB-APBE-USA/APBP` and 14 for the Japanese
 `AGB-APBJ-JPN`. These are encrypted cheat-device opcodes / RAM patches, contain no
 developer-intended code literals, and were **not** entered or verified — they are outside
 the requested scope.
@@ -238,7 +238,7 @@ behaviour, never the debug screen.
   undiscovered in-game gate cannot be excluded with absolute certainty).
 
 **Prompt-injection check:** fetched web pages contained no instructions directed at the
-analyst. One GameFAQs snippet ("Know Something We Don't?") is site UI, not a target
+analyst. One 3rd party cheat indexes snippet ("Know Something We Don't?") is site UI, not a target
 directive. No fetched content was acted on.
 
 ## 8. Unknowns
@@ -249,7 +249,7 @@ directive. No fetched content was acted on.
    at the indices those bytes imply, so they may be coordinate/attribute records rather
    than text. All 16 functional ASCII labels are fully decoded.
 2. The "Main Menu" (Select Stage / Check Items / View Diary / Trade Items) described in
-   the 2001 GameFAQs walkthrough was not reached; a fresh save shows only Select Diary →
+   the 2001 3rd party cheat index walkthrough was not reached; a fresh save shows only Select Diary →
    gameplay → PAUSED/ITEMS. It is likely gated on story progress or save state.
 3. The post-game STAFF ROLL / multiple endings and the Super Pinobee transformation were
    not triggered (would require a full playthrough).

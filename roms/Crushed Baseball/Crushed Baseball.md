@@ -67,7 +67,7 @@ Evidence:
 * The UI labels themselves are not plaintext; they are decoded into a runtime
   text cache at `0x02001830` and rendered from there. Reading that cache on
   every screen produced the labels quoted in §6.
-* Published lists are empty or fake: GameFAQs has no entries, VGChartz reports
+* Published lists are empty or fake: 3rd party cheat indexes have no entries, 3rd party cheat indexes report
   “Total cheats available: 0”, and the only strings offered by a third-party
   page (`POWERHIT`, `UNLOCKALL`) occur zero times in the ROM and have no entry
   screen.
@@ -373,10 +373,10 @@ not an untested case.
 
 | Source | Result |
 |---|---|
-| GameFAQs cheats page (game 562423) | page exists; indexed content lists no cheat entries (direct fetch 403, search/archive snippet used) |
-| VGChartz cheats page (game 26538) | “Total cheats available: 0” |
+| 3rd party cheat index cheats page (game 562423) | page exists; indexed content lists no cheat entries (direct fetch 403, search/archive snippet used) |
+| 3rd party cheat index cheats page (game 26538) | “Total cheats available: 0” |
 | classicemu listing | `POWERHIT`, `UNLOCKALL`; both absent from the ROM and unreachable |
-| TCRF | only build date / hidden development-text category; no code table |
+| 3rd party cheat indexes | only build date / hidden development-text category; no code table |
 
 ---
 

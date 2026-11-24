@@ -138,7 +138,7 @@ Faithful Python implementation: `/tmp/simpsonsroadrage/validator.py`.
 | `0x03001CED` | u8 | `0` | `4` | `10` |
 | `0x03001CF0` | byte field | `00 01 05 00` | `01 01 05 0A` | unlocked |
 
-**Published codes (recon, treated as data):** GameFAQs, GameRevolution, cheatcc and the GBA walkthrough all list `Maggie, Willy, Bart, Chief Wiggum, Apu, Moe, Krusty, Barney` → unlock all cars/levels/bonuses, and `Bart, Bart, Lisa, Lisa, Marge, Marge, Barney, Barney` → all characters. The GameFAQs walkthrough's CodeBreaker codes (out of scope) use the same flag addresses and corroborate the flag map above. The many L+R button codes on those pages are explicitly GC/PS2/Xbox and are out of scope for this GBA SKU; none were found in this image.
+**Published codes (recon, treated as data):** 3rd party cheat indexes and the GBA walkthrough all list `Maggie, Willy, Bart, Chief Wiggum, Apu, Moe, Krusty, Barney` → unlock all cars/levels/bonuses, and `Bart, Bart, Lisa, Lisa, Marge, Marge, Barney, Barney` → all characters. The 3rd party cheat index walkthrough's CodeBreaker codes (out of scope) use the same flag addresses and corroborate the flag map above. The many L+R button codes on those pages are explicitly GC/PS2/Xbox and are out of scope for this GBA SKU; none were found in this image.
 
 ## 6b. Enumeration
 

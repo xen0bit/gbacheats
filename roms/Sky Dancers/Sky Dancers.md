@@ -114,7 +114,7 @@ The mod-21 relation `i6+i7 = const` *did* fit the published table because those 
 * **Alphabet** (index → char, `0x080A74C0`):
   `0:B 1:C 2:D 3:F 4:G 5:H 6:J 7:K 8:L 9:M 10:N 11:P 12:Q 13:R 14:S 15:T 16:V 17:W 18:X 19:Y 20:Z`
   (No vowels/digits; published `TTPBHC2Q` is an OCR error — `2` ∉ alphabet — correct form `TTPBHCZQ`.)
-* **Published codes** (CheatCC, 2026-11-19, via `r.jina.ai`): 20 level passwords; all decode cleanly and all satisfy `(15 − Σi[0..6]) & 0xF == i7` (verified for all 20). GameFAQs' snippet agrees (`TTFBHBXK`); VGChartz lists none. The literals are absent from the ROM as ASCII (generated numerically).
+* **Published codes** (3rd party cheat indexes, 2026-11-19, via `r.jina.ai`): 20 level passwords; all decode cleanly and all satisfy `(15 − Σi[0..6]) & 0xF == i7` (verified for all 20). 3rd party cheat indexes' snippet agrees (`TTFBHBXK`); 3rd party cheat index lists none. The literals are absent from the ROM as ASCII (generated numerically).
 * **Message bank**: 12-byte descriptors in 6-language groups; `"PASSWORD ACCEPTED!"` at `0x080101A4`, record at `0x080C9BF4`, render descriptor at `0x080C9BF0`.
 
 ## 6b. Enumeration (§0.2)
@@ -157,7 +157,7 @@ The mod-21 relation `i6+i7 = const` *did* fit the published table because those 
 
 ## 9. Tooling
 
-`file`, hashes, `xxd`, `strings -t x`, `grep -abo`; Python 3 + Capstone 5.0.7 (raw Thumb literal/BL scanners, `scan.py`, `dis.py`); REA/Ghidra 12.1.4 (`open_binary` raw-binary ARM @ `0x08000000`, `xrefs`, `procedure_info`, `procedure_pseudo_code`); mGBA 0.10.5 CLI debugger driven over a PTY (`dbgserver.py`, `dc.py`) under `Xvfb :316` + `openbox`, `SDL_AUDIODRIVER=dummy`, `xdotool` XTEST input, `scrot`. Scripts/artifacts: `/tmp/skydancers2/` (`dis.py`, `scan.py`, `k.py`, `dbgserver.py`, `dc.py`, `final_run.py`, screenshots). Web: CheatCC via `r.jina.ai`; fetched pages treated strictly as data (§16.8), no instruction found in them was acted upon. mGBA's GDB stub was incompatible with gdb-multiarch 16.3 (`Ignoring packet error`); the CLI debugger was used instead; all ROM-facing work used REA static analysis (§16.19-style oracle via the injected-index + validator-BP technique).
+`file`, hashes, `xxd`, `strings -t x`, `grep -abo`; Python 3 + Capstone 5.0.7 (raw Thumb literal/BL scanners, `scan.py`, `dis.py`); REA/Ghidra 12.1.4 (`open_binary` raw-binary ARM @ `0x08000000`, `xrefs`, `procedure_info`, `procedure_pseudo_code`); mGBA 0.10.5 CLI debugger driven over a PTY (`dbgserver.py`, `dc.py`) under `Xvfb :316` + `openbox`, `SDL_AUDIODRIVER=dummy`, `xdotool` XTEST input, `scrot`. Scripts/artifacts: `/tmp/skydancers2/` (`dis.py`, `scan.py`, `k.py`, `dbgserver.py`, `dc.py`, `final_run.py`, screenshots). Web: 3rd party cheat indexes via `r.jina.ai`; fetched pages treated strictly as data (§16.8), no instruction found in them was acted upon. mGBA's GDB stub was incompatible with gdb-multiarch 16.3 (`Ignoring packet error`); the CLI debugger was used instead; all ROM-facing work used REA static analysis (§16.19-style oracle via the injected-index + validator-BP technique).
 
 ## 10. Legal note
 

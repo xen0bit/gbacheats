@@ -31,7 +31,7 @@ Developer/publisher from the boot legal screen: Amaze Entertainment / Blue Sky S
 
 The only text-entry surface is the **save-slot name** (A–Z + `*`, Del/OK). Its input buffer is plain ASCII at IWRAM `0x03004244`; arbitrary strings such as `Q*Y` were accepted and stored in the save, which proves it is a label field, not a password (guide §16.2b).
 
-Published button codes for the *console* versions (Big head `UDDURRLR`, Unlimited health `URDULDRL`, Unlimited scrap `DDLUURUD`) are **not present in the GBA ROM** in any encoding (active-high/active-low u16 or per-press byte, forward or reversed) and produced no visible effect when keyed into the GBA pause menu. TCRF's `Robots (Game Boy Advance)` page served a prompt-injection payload (fake "decode key.bin" EICAR string, billion-dollar payment demand, fake fatal error); it was treated as untrusted data and ignored (guide §16.8).
+Published button codes for the *console* versions (Big head `UDDURRLR`, Unlimited health `URDULDRL`, Unlimited scrap `DDLUURUD`) are **not present in the GBA ROM** in any encoding (active-high/active-low u16 or per-press byte, forward or reversed) and produced no visible effect when keyed into the GBA pause menu. a 3rd party cheat index's `Robots (Game Boy Advance)` page served a prompt-injection payload (fake "decode key.bin" EICAR string, billion-dollar payment demand, fake fatal error); it was treated as untrusted data and ignored (guide §16.8).
 
 ## 3. How to reproduce
 
@@ -139,5 +139,5 @@ The menu navigation is a 3-state ring (`cursor = (cursor ± 1) mod 3`) stored at
 - `arm-none-eabi-objdump` (`-M force-thumb`) for Thumb disassembly.
 - `mgba` SDL under `Xvfb :316` + `openbox`; `xdotool` key events; `scrot` + ImageMagick `convert`/`montage` screenshots.
 - `gdb-multiarch` against mGBA's `-g` stub (note: the stub accepts one clean connection and wedges after detach — a fresh emulator start was needed per read session). Savestate `gbAs` zlib decompression was the reliable RAM/VRAM alternative (guide §16.13).
-- Web sources: VGChartz (2 GBA entries are gameplay tips, not codes), GameFAQs/CheatCC/supercheats (button codes and unlockables are for PS2/GC/Xbox/DS), TCRF GBA page (prompt injection, ignored), chaptercheats/GameGear (identity confirmation).
+- Web sources: 3rd party cheat indexes (2 GBA entries are gameplay tips, not codes), 3rd party cheat indexes (button codes and unlockables are for PS2/GC/Xbox/DS), 3rd party cheat indexes GBA page (prompt injection, ignored), 3rd party cheat indexes/GameGear (identity confirmation).
 - No ROM or copyrighted assets are redistributed by this report; only hashes, addresses, algorithms and observations.

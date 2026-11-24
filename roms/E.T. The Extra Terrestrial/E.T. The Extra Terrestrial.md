@@ -136,7 +136,7 @@ button sequence derived via §4; "symbols" = `byte − 0xA8`.
 | 7 | 9 | `A9 AD AD A8 AA AF AF AE` | 1 5 5 0 2 7 7 6 | Right, B, B, Left, Up, R, R, L | `0x08` |
 | 8 | 10 | `A8 A8 AC AE A9 A9 AD AF` | 0 0 4 6 1 1 5 7 | Left, Left, A, L, Right, Right, B, R | `0x09` |
 
-These match the published level passwords (Cheat Happens, 2002) byte-for-byte for all 9.
+These match the published level passwords (3rd party cheat indexes, 2002) byte-for-byte for all 9.
 
 **Accept flag `0x03002D00` (1 byte):** `0xFF` = OPTIONS opened, no code submitted; `0x00` =
 submitted but rejected (Levels 1/default); `0x01..0x09` = accepted, Levels 2..10.
@@ -193,7 +193,7 @@ No input outside the 9 records was accepted.
 
 1. Field-name semantics of nearby IWRAM bytes (e.g. `0x03002D01..0x03002D09`) were not
    isolated; the accept flag and its exact values are fully proven.
-2. Published-list cross-check succeeded for all 9 (Cheat Happens 2002); no regional variants
+2. Published-list cross-check succeeded for all 9 (3rd party cheat indexes 2002); no regional variants
    were found (the EU title is "E.T. The 20th Anniversary", same game code AETE-5L).
 3. The level-intro effect beyond the visible banner (actual gameplay start at that level)
    was not played through; the banner and flag are the proven effect.
@@ -215,7 +215,7 @@ are all resolved.
 * Savestate oracle: `ss.py` (zlib `gbAs` decompress), `diffss.py`/`findflag.py`, and
   `run_tests.py` (load-empty → type → submit → read flag). All scripts in
   `/tmp/et2`.
-* Web: Cheat Happens published level-password list (retrieved 2026-11-17) used only to
+* Web: 3rd party cheat indexes published level-password list (retrieved 2026-11-17) used only to
   cross-check the ROM table, not as a source of truth.
 
 **Legal note.** Only hashes, addresses, algorithms, and the game's own plaintext password

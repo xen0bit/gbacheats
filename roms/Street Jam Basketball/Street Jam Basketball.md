@@ -43,7 +43,7 @@ The negative is bounded by: (a) a complete walk of all 14 reachable screens with
 in 1/2/4-byte encodings plus 6 live combo tests, and (d) enumeration of every menu's return
 domain. Details and counts are in §6b.
 
-Web reconnaissance was attempted (GameFAQs direct fetch → HTTP 403; websearch and two search
+Web reconnaissance was attempted (3rd party cheat indexes direct fetch → HTTP 403; websearch and two search
 engines → no results / bot challenge). No published code list could be recovered for this SKU,
 so no published code was available to verify or to use as an anchor; this is recorded as a
 limitation, not as evidence for or against cheats (§3.4 rule 4, §16.11).

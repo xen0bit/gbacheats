@@ -44,8 +44,7 @@ code and menu descriptor were removed.
 The game's screen system was fully enumerated: 13 menu descriptors, 31 menu
 items, one static PAUSED descriptor with exactly four items, and 36 level/bonus
 records. No descriptor, call site, string reference, or input handler can reach
-a "cheats" screen. The published lists located (Cheat Happens, Codejunkies,
-GameFAQs index) contain Action Replay memory-edit codes only (out of scope);
+a "cheats" screen. The published lists located (3rd party cheat indexes index) contain Action Replay memory-edit codes only (out of scope);
 no published password or button code was found to verify.
 
 ## 3. How to reproduce
@@ -311,7 +310,7 @@ record in the 0x0807Dxxx table whose +4 title pointer is 0x0807C400 and whose
     (A accepted the highlighted item);
   * in-level: R+L+Select held 1.2 s — no effect.
 * The published GBA codes for this game are Action Replay (memory writes), not
-  input codes: Cheat Happens lists 6 EU codes, Codejunkies 2 US codes; all are
+  input codes: 3rd party cheat index lists 6 EU codes, 3rd party cheat indexes 2 US codes; all are
   memory-edit/Master codes and are excluded by the task's scope. An encrypted AR
   payload has no plaintext literal to search in the ROM, and no in-game screen
   accepts it. No published password or button code exists to test.

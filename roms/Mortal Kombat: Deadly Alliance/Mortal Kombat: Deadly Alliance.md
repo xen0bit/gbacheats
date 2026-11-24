@@ -22,7 +22,7 @@
 
 The game contains a **developer-intended cheat system in the profile-name field**: creating a profile with one of **seven hard-coded 8-character names** grants koins or unlocks Krypt tombs. The validator is a single Thumb function at `0x0803DE64–0x0803E282` that compares the eight name bytes against seven strings using interleaved `ldrb`/`cmp` immediates — which is why a plain `grep` for `KWIKKASH` in the ROM finds nothing.
 
-**Published code verified:** `KWIKKASH` → 25,000 koins (GameFAQs).
+**Published code verified:** `KWIKKASH` → 25,000 koins (3rd party cheat indexes).
 
 **Six unpublished codes found and characterised** (§0.2): `SOULNADO`, `COLORAMA`, `DRGNARMY`, `MINIPOWR`, `TRVLLR` and `A PORTAL`. Five were accepted on the real in-game entry screen with visible/RAM proof; `A PORTAL` exists in the validator but is **unreachable through the on-screen keyboard** (it contains a space, and the keyboard has only A–Z, 0–9, backspace, END). `TRVLLR` is a 7-byte comparison whose 7th byte is `0x0A`: entering the six letters and pressing END supplies `0x0A` padding, so it *is* reachable.
 
@@ -86,7 +86,7 @@ The 120 Krypt tombs are indexed `0..119`, labelled `AA..AO, BA..BO, … HA..HO` 
 
 | Name (exact bytes) | Compared bytes | Effect | In-game `UNLOCKED` observed | Published? |
 |---|---|---|---|---|
-| `KWIKKASH` | 8 | `koins = 25000` | 0% | **Yes** (GameFAQs) |
+| `KWIKKASH` | 8 | `koins = 25000` | 0% | **Yes** (3rd party cheat indexes) |
 | `SOULNADO` | 8 | unlock ids 0–127 → all 120 tombs | **100%** | No |
 | `COLORAMA` | 8 | unlock ids 0–95 → tombs `AA`–`GO` | **80%** (96/120) | No |
 | `DRGNARMY` | 8 | ids `GN,GO,HA,HB,HC` | 4% (5/120) | No |
@@ -108,7 +108,7 @@ Normal unlockables (not name codes): Kano/Kitana/Sub-Zero via Arcade-mode clears
 
 * **Space definition:** the input is exactly 8 bytes of profile name. UI alphabet is A–Z and 0–9; short names are right-padded with `0x0A`. The validator is an exact byte comparison (no checksum, no arithmetic), so the representable UI space is `36^8 ≈ 2.82 × 10^12` names and the accepted set is **exactly 7** of them (6 UI-reachable, 1 UI-unreachable because it contains a space). There are no partial matches, aliases, or unused payload bits. The `TRVLLR` branch compares only 7 bytes, but because byte 7 must be the `0x0A` pad, only one UI spelling reaches it.
 * **Full enumeration method:** disassembled `0x0803DE64–0x0803E282` and parsed every `ldrb r1,[r0,#i]` / `cmp r1,#imm` pair into the table above; there are exactly seven `bne` failure chains and no other name comparisons in the function. The function's fall-through at `0x0803E1E8` handles the normal save path.
-* **Novel codes minted and confirmed in-game (absent from GameFAQs, VGChartz, TCRF and the three archived GameFAQs guides checked):**
+* **Novel codes minted and confirmed in-game (absent from 3rd party cheat indexes and the three archived 3rd party cheat index guides checked):**
   * `SOULNADO` — screenshot: profile SOULNADO shows `KOINS: 0`, `UNLOCKED: 100%`. Save-RAM diff (profile 1 base `0x38`) shows sixteen bytes `0x58–0x67` and `0x6A–0x6F` changing from `00` to `FF`, i.e. the eight u16 unlock words the disassembly sets.
   * `TRVLLR` — screenshot: profile TRVLLR shows `UNLOCKED: 4%`. Save-RAM shows name bytes `0a 0a 52 4c 4c 56 52 54` (reversed `TRVLLR\n\n`), proving the `0x0A` pad that satisfies the 7-byte comparison.
   * `COLORAMA` — 80%; `DRGNARMY` — 4%; `MINIPOWR` — 1% (all screens captured).
@@ -135,6 +135,6 @@ Normal unlockables (not name codes): Kano/Kitana/Sub-Zero via Arcade-mode clears
 * Python for hashes/header parse, embedded-logo scan, literal/transformation searches, key-mask scan and save-RAM diffs.
 * mGBA SDL (`-3`) under Xvfb `:315` with openbox; `xdotool` (XTEST) input helpers `key.sh`, `nav2.py`, `create_profile.py`; `scrot` + ImageMagick crop/zoom; up to 20 screenshots retained on disk in `/tmp/mkdeadly`.
 * `gdb-multiarch` attempted (stub failure described above). `capstone 5.0.7` available but not required.
-* Web: archived GameFAQs cheats page and guides 20278 / 26184 / 29005 for game 551910 (fetched as data; no prompt-injection content encountered). All published literals were verified against the ROM: `KWIKKASH` appears only as the interleaved `cmp` immediates at `0x0803E17E+`, not as a contiguous ASCII string.
+* Web: archived 3rd party cheat index cheats page and guides 20278 / 26184 / 29005 for game 551910 (fetched as data; no prompt-injection content encountered). All published literals were verified against the ROM: `KWIKKASH` appears only as the interleaved `cmp` immediates at `0x0803E17E+`, not as a contiguous ASCII string.
 
 No ROM or copyrighted game assets are redistributed by this report.

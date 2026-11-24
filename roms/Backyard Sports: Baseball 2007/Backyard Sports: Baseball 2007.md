@@ -133,8 +133,8 @@ For repeated tests a savestate at the Options screen was used as the clean base
 
 | Published code (source) | Claimed effect | Result in this ROM |
 |---|---|---|
-| `Up, Up, Left, Right, B, Down` (IGN / archived GameFAQs GBA page, entered at the matchup screen) | Unlimited Turbo | No screen change; no such sequence table in ROM (see §6b.4) |
-| Type `Grand Slam` (GameFAQs, "Unlock Paul Konerko") | Paul Konerko | Not implemented: `GRANDSLAM`/`GRAND SLAM` are absent from the ROM and exceed the 8-character cap; `GRANDSLM` rejected. The real Paul Konerko code is `BABYBEAR` (observed) |
+| `Up, Up, Left, Right, B, Down` (3rd party cheat indexes / archived 3rd party cheat indexes GBA page, entered at the matchup screen) | Unlimited Turbo | No screen change; no such sequence table in ROM (see §6b.4) |
+| Type `Grand Slam` (3rd party cheat indexes, "Unlock Paul Konerko") | Paul Konerko | Not implemented: `GRANDSLAM`/`GRAND SLAM` are absent from the ROM and exceed the 8-character cap; `GRANDSLM` rejected. The real Paul Konerko code is `BABYBEAR` (observed) |
 | Season achievements (30 hits / 45 strikeouts / shut-out / World Series) | Derek Lee / Dontrelle Willis / Johan Santana / Area 51 | Normal unlock conditions, not codes; they set the same unlock flags through gameplay |
 
 ### 3.3 Accepted inputs and rejections actually entered
@@ -344,11 +344,11 @@ plain or encoded form, and was rejected in-game as a valid 8-character name.
 
 All eight values were entered through the real on-screen keyboard. At least six
 (the first six below) appear in no external list searched. The web check used
-the archived GameFAQs GBA page (2018-11-26 snapshot: exactly two codes —
+the archived 3rd party cheat indexes GBA page (2018-11-26 snapshot: exactly two codes —
 `Up, Up, Left, Right, B, Down` "Unlimited Turbo" and "Type Grand Slam" for Paul
-Konerko — plus a season-achievement unlock table), IGN's GBA cheats page,
-LoneBullet, ChapterCheats and the Backyard Sports Wiki; no 2007 GBA-specific
-VGChartz or TCRF page was found. The two 2006-published words are marked
+Konerko — plus a season-achievement unlock table), a 3rd party cheat index's GBA cheats page,
+LoneBullet, 3rd party cheat indexes and the Backyard Sports Wiki; no 2007 GBA-specific
+3rd party cheat index page was found. The two 2006-published words are marked
 accordingly.
 
 | Novel code | Bit | Observed effect | Screenshot |

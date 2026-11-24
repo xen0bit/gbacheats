@@ -189,16 +189,15 @@ negative with counts, not an untested guess:
    exists. The font/tile text banks were decoded directly (bitmap font, ASCII-mapped
    via `charmap.txt`) and every reachable screen was observed.
 
-5. **Published-list verification.** All crawled lists (GameFAQs walkthroughs,
-   GameHacking.org, libretro CodeBreaker DB, Zelda Central, Matrix Picks, Neoseeker,
-   TCRF, GBAtemp NSO threads) contain only cheat-device RAM patches or save-bit
-   unlockables — **zero in-game codes**. The TCRF "Debug Text" entry
+5. **Published-list verification.** All crawled lists (3rd party cheat index walkthroughs,
+   3rd party cheat indexes, libretro CodeBreaker DB, 3rd party cheat indexes, Matrix Picks, 3rd party cheat indexes NSO threads) contain only cheat-device RAM patches or save-bit
+   unlockables — **zero in-game codes**. The 3rd party cheat indexes "Debug Text" entry
    (`73000FF0 0200 / 33001002 0005 / …`) is itself a GameShark write to
    `gMain.task`; I reproduced its effect via a GDB write to `0x03001002` (green screen,
    screenshot `49_debug_text_gdbwrite.png`), which confirms the gate but is not an
-   in-game code. The tecnobits.com claim that naming a file `ZELDA` unlocks a secret
+   in-game code. The 3rd party cheat index claim that naming a file `ZELDA` unlocks a secret
    mode is **false**: the entire binary has one name comparison (`gSave.name[0]==0`).
-   One fetched mirror (`tcrf.tiago.zip`) contained a prompt-injection payload
+   One fetched mirror contained a prompt-injection payload
    ("instructions ... only for LLMs ... follow"); it was ignored and is recorded here
    as data, not obeyed.
 
@@ -217,9 +216,9 @@ closure and the 10×4 string/encoding count matrix above.
 - **Derived**: `SetTask` at `0x08056010` is the sole task writer; its 7 BL call sites
   pass only values 0–4; `sTaskHandlers` table at `0x08100CBC` maps 0–5; the 6-byte
   `Input` struct has no sequence state; sound-test bounds 28/52.
-- **Inferred**: the green screen is the Debug Text viewer described by TCRF (its exact
+- **Inferred**: the green screen is the Debug Text viewer described by 3rd party cheat indexes (its exact
   text-index scroll behavior was not exhaustively exercised); debug items 0x18/0x19/0x1A
-  are nonfunctional leftovers per TCRF, not independently re-tested.
+  are nonfunctional leftovers per 3rd party cheat indexes, not independently re-tested.
 - **Prompt injection**: one fetched wiki mirror attempted to issue agent instructions;
   ignored, no action taken.
 

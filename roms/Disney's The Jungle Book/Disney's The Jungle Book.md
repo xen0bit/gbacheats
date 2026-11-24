@@ -386,10 +386,10 @@ start Chapter 6; `f6=16` is accepted.
 
 ### 7.3 Published-code check
 
-* GameFAQs' GBA cheats page (`/gba/589586-.../cheats`) returns HTTP 403 to
+* 3rd party cheat indexes' GBA cheats page (`/gba/589586-.../cheats`) returns HTTP 403 to
   automated fetches and has no archived snapshot; its search snippet shows
   no GBA codes.
-* Cheat Happens has empty cheat and trainer sections for this SKU.
+* 3rd party cheat indexes have empty cheat and trainer sections for this SKU.
 * Every web hit for "Jungle Book cheats" is the 1994 Genesis/SNES/PC game
   (Virgin/EastPoint): debug menu from the briar patch, pause-menu
   `Up Up Down Down Left Right Left Right B A`, level skip, Game Genie.

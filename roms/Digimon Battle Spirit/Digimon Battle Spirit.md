@@ -33,7 +33,7 @@ Phase-0 notes (Observed):
   original one and only the 16-bit checksum field is zeroed. This is the "rebuilt header"
   artifact described in guide §16.1 and is not evidence of a gameplay modification. All
   analysis below was done on the hashed file above, unmodified.
-* Dev banner left in the ROM: `DIMPS Ver0.72` at file 0x1F9D4 (matches the TCRF entry).
+* Dev banner left in the ROM: `DIMPS Ver0.72` at file 0x1F9D4 (matches the 3rd party cheat index entry).
   The game is a port of the WonderSwan Color title by Dimps.
 
 ## 2. Executive summary
@@ -51,10 +51,10 @@ What the ROM *does* contain beyond the visible menus:
 1. **A hidden fourth main-menu entry, `D·ARK`.** It exists in the shipped menu coordinate
    table (`0x08090B54`, five records) with Y = 0xC8 (200), which maps to root row 269+3·200 =
    869 — below the game area, which ends at root row ≈745. Moving the three following rows up
-   (TCRF's patch: 0x90B5E←0x3C, 0x90B62←0x54, 0x90B66←0x6C, applied to a throw-away copy) makes
+   (a 3rd party cheat index's patch: 0x90B5E←0x3C, 0x90B62←0x54, 0x90B66←0x6C, applied to a throw-away copy) makes
    the row labelled `D·ARK` visible; even then the cursor ring is still **three** entries
    (measured), so it can never be selected. It is the D-Ark Digivice link option, documented by
-   TCRF and non-functional here.
+   3rd party cheat indexes and non-functional here.
 2. **A 23-track sound test** (1..23, clamped) — the complete in-game music list.
 3. **A default high-score table** (`KEN 250 / RYO 200 / LEE 150 / BUF 100`) at `0x1F9E8`,
    which the attract-mode `SCORE RANKING` screen renders live (observed: 1ST KEN 0250,
@@ -237,7 +237,7 @@ the row position: `screen_y = 269 + 3·Y` in root pixels. The 720×480 viewport 
 
 Cursor ring (Observed, three measurements per state): rows 1P/2P/OPTIONS highlight at
 377 / 485 / 593 and a fourth Down returns to 377 — the ring bound is 3; the 4th object is never
-in it. This is what TCRF describes as "no longer selectable".
+in it. This is what 3rd party cheat indexes describe as "no longer selectable".
 
 ### 5.3 Text entry is a name, not a password
 
@@ -283,18 +283,18 @@ Seven Down presses return to the starting character every time (period exactly 7
   There is **no arena/stage select** in 1P; it is a fixed ladder.
 * 2P flow: same character reel → a `…ONE MOMENT PLEASE…` link-wait message (no second unit).
 * Sound test = 23 tracks; the three WonderSwan digivolution themes are documented as absent
-  from this list (TCRF), which is consistent with the hard 23 cap.
+  from this list (3rd party cheat indexes), which is consistent with the hard 23 cap.
 
 ### 6.4 Published material, verified against the ROM
 
 | Source | Claim | ROM check |
 |---|---|---|
-| GameFAQs (GBA 583236) | unlockables only (BlackAgumon, Gabumon/Omnimon, Impmon, Lopmon/Kerpymon) via clears | no code string, no code screen; nothing to verify as a literal |
-| GameFAQs / chaptercheats | "beat the game with 300+ D-Spirit" etc. | gameplay conditions, not inputs |
-| gamehacking.org / almarsguides / libretro-database | `33002329 00FF`, `B0080D4B99D1`, `32011776 00FA` | **device** RAM writes; the literals `33002329`, `B0080D4B99D1`, `00FF`, `GameShark`, `Codebreaker` are all absent from the image |
-| TCRF | D-Ark sprite values 0x90B5E/0x90B62/0x90B66 | **confirmed** — these are the low bytes of Y in records 2,3,4 of `0x08090B54`; see §6.5 |
-| TCRF | `DIMPS Ver0.72` at 0x1F9D4 | **confirmed** |
-| TCRF | JP stage-name/option tiles at 0x9E100 / 0x9FCA8 | 0x9E100 region is tile data; not exercised |
+| 3rd party cheat indexes | unlockables only (BlackAgumon, Gabumon/Omnimon, Impmon, Lopmon/Kerpymon) via clears | no code string, no code screen; nothing to verify as a literal |
+| 3rd party cheat indexes | "beat the game with 300+ D-Spirit" etc. | gameplay conditions, not inputs |
+| 3rd party cheat indexes / libretro-database | `33002329 00FF`, `B0080D4B99D1`, `32011776 00FA` | **device** RAM writes; the literals `33002329`, `B0080D4B99D1`, `00FF`, `GameShark`, `Codebreaker` are all absent from the image |
+| 3rd party cheat indexes | D-Ark sprite values 0x90B5E/0x90B62/0x90B66 | **confirmed** — these are the low bytes of Y in records 2,3,4 of `0x08090B54`; see §6.5 |
+| 3rd party cheat indexes | `DIMPS Ver0.72` at 0x1F9D4 | **confirmed** |
+| 3rd party cheat indexes | JP stage-name/option tiles at 0x9E100 / 0x9FCA8 | 0x9E100 region is tile data; not exercised |
 
 ### 6.5 D·ARK row, as shipped and as revealed
 

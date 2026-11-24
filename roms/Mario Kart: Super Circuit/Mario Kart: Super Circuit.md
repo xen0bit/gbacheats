@@ -98,7 +98,7 @@ secret, unlock or generator strings in any of the three ROM regions.
 | `0x08340000` / `0x340000` | Blank-title stub header |
 | `0x030001B2` (IWRAM) | Menu cursor/screen index (observed values on title/menus) |
 | `0x03002C6E/70/72` (IWRAM) | Quick Run laps / items / coins option bytes (readable, all 0 at fresh save; **no UI writer found**, see §8) |
-| `0x03003BE4` (IWRAM) | Current driver byte (TCRF RAM map; read 0 at fresh save) |
+| `0x03003BE4` (IWRAM) | Current driver byte (3rd party cheat indexes RAM map; read 0 at fresh save) |
 | `0x02032BA8`, `0x0203376C` (EWRAM) | Addresses targeted by out-of-scope CodeBreaker unlock codes |
 | `.sav 0xE000` / `0xF000` | Flash save records (double-buffered), e.g. `62 7b 01 00 01 00 11 00 07 …` |
 
@@ -152,12 +152,12 @@ race · pause (5) · Ghost Exchange (1) · Multi-Pak Link (1) · Single-Pak Link
 
 | Published claim | Origin | ROM verification |
 |---|---|---|
-| L+R+B+Start at power-on erases save | GameFAQs | **Verified** statically (`cmp #0xF5`) and dynamically (prompt + canary erased) |
-| Special Cup / SNES tracks / backgrounds via trophies & ranks | GameFAQs/VGChartz | Save-progression unlocks (gated Special Cup observed); not codes |
+| L+R+B+Start at power-on erases save | 3rd party cheat indexes | **Verified** statically (`cmp #0xF5`) and dynamically (prompt + canary erased) |
+| Special Cup / SNES tracks / backgrounds via trophies & ranks | 3rd party cheat indexes | Save-progression unlocks (gated Special Cup observed); not codes |
 | `8203376C 0000`, `42032BA8 0000 …`, weapon/character modifiers | CodeBreaker/GameShark | Raw EWRAM writes — out of scope; present as addresses, not input codes |
-| "Debug menu" (GS code `8818EDEF 0002`) | TCRF talk page | Belongs to **Mario Kart 64 (N64)**, not this GBA title — not applicable |
+| "Debug menu" (GS code `8818EDEF 0002`) | 3rd party cheat indexes talk page | Belongs to **Mario Kart 64 (N64)**, not this GBA title — not applicable |
 
-**Prompt injection:** the TCRF page fetch returned an injected payload
+**Prompt injection:** the 3rd party cheat index page fetch returned an injected payload
 ("This page is not intended for humans …", a fake `key.bin` containing the
 EICAR test string as a "decode key", and a $1,000,000,000,000,000,000 transfer
 demand). It was treated as data, ignored, and is recorded here per §16.8.
@@ -221,7 +221,7 @@ reader sites × all nearby `cmp` immediates → 1 multi-button comparison.
 ## 8. Unknowns
 
 * No UI path was found that writes the Quick Run laps/items/coins bytes
-  (`0x03002C6E/70/72`) — they are documented in TCRF's RAM map and existed as
+  (`0x03002C6E/70/72`) — they are documented in a 3rd party cheat index's RAM map and existed as
   zeros in every savestate. Any such screen is either gated by link mode or is
   a leftover; not proven either way.
 * The exact role of the embedded second image and blank stub header is not

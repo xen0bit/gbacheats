@@ -36,8 +36,7 @@ There are **two distinct code-related surfaces**, and only one is a cheat:
    toggle and **Story Jump** (five scenes). The matcher is a strict state machine with
    reset-on-mismatch; the ninth press selects the action (A/B/Select branches exist in
    code, but A and B are consumed by menu navigation, so only Select is reachable from
-   the retail UI). The code is absent from every published list checked (GameFAQs,
-   Cheat Happens, TCRF, fan wikis — no GBA codes are published for this title).
+   the retail UI). The code is absent from every published list checked (3rd party cheat indexes, fan wikis — no GBA codes are published for this title).
 
 The novel code was typed on the real screen in mGBA and confirmed by screenshot and by
 RAM read (gate byte `0x0200884b` = 1). All Unlocked was observed to raise the Boom Room
@@ -187,7 +186,7 @@ above, not a generated code space.
 
 **Novel code (not in any published list).**
 `L, R, L, L, R, L, R, R, Select` typed on the Options screen. Web reconnaissance
-(GameFAQs FAQ/cheats, Cheat Happens, TCRF, fan wikis, general searches) found **no
+(3rd party cheat index FAQ/cheats, 3rd party cheat indexes, fan wikis, general searches) found **no
 published GBA cheat codes at all** for this title, so this sequence is unpublished.
 Observed in mGBA: the "CHEAT MODE: / Normal / Story Jump / BUILD 5706" screen appears
 (screenshot `cheatseq10_c.png`), and RAM `0x0200884b` reads `0x01` while the progress

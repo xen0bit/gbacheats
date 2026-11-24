@@ -123,10 +123,10 @@ struct MenuItem { u32 type; u32 value; u32 reserved; u32 label_ptr; };
 
 | Source | Code | Result |
 |---|---|---|
-| GameFAQs / Codejunkies GBA | Master `(M) BD86B55A 6B4F2EBE 734499E3 1E4426A9` | Action Replay master patch; not game data |
-| GameFAQs / Codejunkies GBA | Galaxian Lives `EA907865 9F51C018`, Ms Pacman Lives `EE03A379 B803F5BD`, Pole Position Timer `A25437D1 1F86033C`, Dig Dug Lives `5DBE33A0 C2F8F2DC`, Galaga Lives `4CB1B5B4 BCF1DB3E` | Action Replay memory patches; not in-game codes |
-| GameFAQs (other platforms) | Galaga Arrangement timer `Left Right Left Right Up Down Up Down` | Literal not in ROM (searched as u16 and byte masks); pressing it on the live Galaga attract produced no change |
-| GameFAQs (GB/other) | `L+R+Start+Select`, `L+R`, `A+B`, `Start+Select` on title/attract | No hidden screen; `Start+Select` only invokes the normal pause menu |
+| 3rd party cheat indexes GBA | Master `(M) BD86B55A 6B4F2EBE 734499E3 1E4426A9` | Action Replay master patch; not game data |
+| 3rd party cheat indexes GBA | Galaxian Lives `EA907865 9F51C018`, Ms Pacman Lives `EE03A379 B803F5BD`, Pole Position Timer `A25437D1 1F86033C`, Dig Dug Lives `5DBE33A0 C2F8F2DC`, Galaga Lives `4CB1B5B4 BCF1DB3E` | Action Replay memory patches; not in-game codes |
+| 3rd party cheat indexes | Galaga Arrangement timer `Left Right Left Right Up Down Up Down` | Literal not in ROM (searched as u16 and byte masks); pressing it on the live Galaga attract produced no change |
+| 3rd party cheat indexes | `L+R+Start+Select`, `L+R`, `A+B`, `Start+Select` on title/attract | No hidden screen; `Start+Select` only invokes the normal pause menu |
 
 ## 6b. Enumeration
 
@@ -138,7 +138,7 @@ This engagement is a **bounded negative**; §0.2's enum deliverable is therefore
 2. **Text/alphabet space:** 31,380 ASCII strings scanned. Keyword families `password|cheat|code|debug|secret|unlock|initial|high score|bonus|hidden|menu` classified: menu/UI labels, arcade self-test leftovers, and score/initials display text only. Two non-ASCII/custom text banks decoded in full (§6); one 46-symbol font alphabet recovered and its two consumers disassembled. No user-entered code string is compared to any table.
 3. **Button-mask space:** the single input path (`0x080580CC`, one KEYINPUT literal) was located; seven published sequences (Galaga timer `L,R,L,R,U,D,U,D`, Konami `U,U,D,D,L,R,L,R,B,A`, and four shorter prefix variants) were searched as u16 little-endian and one-byte-per-press arrays across all 4 MiB — zero hits. Four live combination tests on title/attract produced no hidden screen.
 4. **Unlock space:** the ROM has no battery save (0-byte `.sav` created by mGBA); no SRAM/Flash unlock flag structure exists. The menu tables contain no gated entry. Dig Dug's self-test render (`0x08013C8C`) is triggered only from a routine at `0x08013BC2` whose gate flags were never observed set by any walked screen or tested input; classified dead/unreachable in the reachable input space.
-5. **Published-code space:** all seven distinct published GBA codes were located and classified as external Action Replay memory patches; zero in-game codes exist for this SKU on the consulted sources (GameFAQs GBA 516671, archived GameFAQs, TCRF, Codejunkies, 53lu, Cheat Happens).
+5. **Published-code space:** all seven distinct published GBA codes were located and classified as external Action Replay memory patches; zero in-game codes exist for this SKU on the consulted sources (3rd party cheat indexes GBA 516671, archived 3rd party cheat indexes).
 
 **Bounds proven by rejection (observed):**
 
@@ -167,7 +167,7 @@ No novel code could be minted because there is no validator/table to invert; the
 * `arm-none-eabi-objdump -M force-thumb` for all disassembly; Capstone 5.0.7 / Keystone for literal and BL scanning.
 * mGBA 0.10.5 under Xvfb :319 + openbox; `xdotool` XTEST input; `scrot` + ImageMagick crops/montages.
 * Savestate RAM reader: Python PNG `gbAs` chunk zlib-decompress (`ss.py`), with verified EWRAM/IWRAM offsets; mGBA `-d` pty debugger used once to validate the mapping.
-* Web: GameFAQs (live and web.archive.org), TCRF, Codejunkies, 53lu, Cheat Happens, Wikipedia, arcade-history — treated strictly as data; no instructions found in fetched content were followed.
+* Web: 3rd party cheat indexes — treated strictly as data; no instructions found in fetched content were followed.
 
 **Legal note:** no ROM bytes, graphics, music, or extracted assets are redistributed here — only hashes, addresses, decoded control text, and analysis artifacts.
 

@@ -31,7 +31,7 @@ image.** The only "cheats" published anywhere for this game are three save/gamep
 *Unlock Dream Gallery* (S-rank every Vision), *Unlock EX Stages* (collect every Sun Fragment
 and beat the game), and an *Easier S-ranks* gameplay trick (leave and re-enter a room to reset
 blocks/enemies without scoring a retry). None is a code that can be typed or input on a
-controller (GameFAQs cheats page, archived snapshot 2024-09-17; Cheatbook; TCRF).
+controller (3rd party cheat index cheats page, archived snapshot 2024-09-17; 3rd party cheat indexes; 3rd party cheat indexes).
 
 Supporting evidence, all from this exact ROM:
 
@@ -56,11 +56,11 @@ Supporting evidence, all from this exact ROM:
 * Button combos tested live in-game and at the title (Konami sequence, `L+R+Start`,
   `L+R+Select`, `A+B+L+R`, `Start+Select+A+B`, D-pad combinations) produced **no** hidden
   screen. The only special result was the standard GBA soft reset.
-* GameFAQs-listed unlockables are save-bit progress gates, not input codes: the game can only
+* 3rd party cheat index-listed unlockables are save-bit progress gates, not input codes: the game can only
   set the relevant state through level results / collection, and no controller path writes
   it. Per guide §16.18 these are reported as unlockables, not as a code system.
 
-The published GameShark/CodeBreaker "Master Code" on GameHacking.org
+The published GameShark/CodeBreaker "Master Code" on 3rd party cheat indexes
 (`982D3DAE5251 927756F822C8 853D417EFFC0`) is a memory-edit device code and is explicitly
 out of scope; it was not tested or reproduced.
 
@@ -114,7 +114,7 @@ typing a code.
 | Main `main()` | 0x470 | 0x08000470 | Thumb disassembly |
 | **Main loop / frame breakpoint** | 0x5B4 | **0x080005B4** | `b.n 0x80005B4` at 0x08000606; used for deterministic frame stepping |
 | Font glyph↔tile mapping tables | 0x154240–0x1543C0 | 0x080154240–0x0801543C0 | byte pattern, rendering |
-| (unused) developer credits | **0x7431C** | 0x0807431C | ASCII; "Klonoa Sleeping Empire / Programmed by …", matches TCRF |
+| (unused) developer credits | **0x7431C** | 0x0807431C | ASCII; "Klonoa Sleeping Empire / Programmed by …", matches 3rd party cheat indexes |
 | `KLONOAG2` marker | 0x1512C8 | 0x0801512C8 | ASCII |
 | SRAM-base-looking pointer table | 0x73D38–0x74230 | 0x08073D38–0x08074230 | 32-bit constants table (data, not code) |
 
@@ -179,11 +179,11 @@ the results/collection path and are all unset in a fresh file.
 
 | Source | Item | Literal present in ROM? | Classification |
 |---|---|---|---|
-| GameFAQs cheats (archived 2024) | Unlock Dream Gallery — S-rank every Vision | no literal | save-bit unlock |
-| GameFAQs cheats / Cheatbook | Unlock EX Stages — all Sun Fragments + clear game | no literal | save-bit unlock |
-| GameFAQs cheats | Easier S-ranks — leave & re-enter room | n/a | gameplay trick |
-| TCRF (archived 2025) | Hidden developer credits at 0x7431C | **yes** (0x7431C) | unused text |
-| GameHacking.org | Master Code `982D3DAE5251 927756F822C8 853D417EFFC0` | no | GameShark (out of scope) |
+| 3rd party cheat index cheats (archived 2024) | Unlock Dream Gallery — S-rank every Vision | no literal | save-bit unlock |
+| 3rd party cheat index cheats / 3rd party cheat indexes | Unlock EX Stages — all Sun Fragments + clear game | no literal | save-bit unlock |
+| 3rd party cheat index cheats | Easier S-ranks — leave & re-enter room | n/a | gameplay trick |
+| 3rd party cheat indexes | Hidden developer credits at 0x7431C | **yes** (0x7431C) | unused text |
+| 3rd party cheat indexes | Master Code `982D3DAE5251 927756F822C8 853D417EFFC0` | no | GameShark (out of scope) |
 
 ## 6b. Enumeration
 
@@ -240,8 +240,7 @@ breakpoint-based RAM reads *were* used as the ground-truth oracle for screen ide
 
 * Exact byte-level semantics of every field in the 512-byte EEPROM record (only the magic,
   flag region, defaults and fillers were catalogued). The S-rank/Sun-Fragment bit positions
-  were not individually isolated; the unlock condition itself is corroborated by GameFAQs and
-  Cheatbook.
+  were not individually isolated; the unlock condition itself is corroborated by 3rd party cheat indexes.
 * Full glyph rendering/derivation of every tile-indexed string: the mapping tables and VRAM
   tiles were located and rendered, but the text bank itself appears compressed/indirectly
   referenced, so individual menu strings were enumerated by walking the screens rather than
@@ -261,8 +260,8 @@ breakpoint-based RAM reads *were* used as the ground-truth oracle for screen ide
 * mGBA savestates (`Shift+F1..F5`) parsed by decompressing the PNG `gbAs` zlib chunk
   (`parse_state.py`, `state_ram.py`, `ram_fingerprint.py`, `render_tiles.py`).
 * `Xvfb :316`, `openbox`, `xdotool`, `scrot`, ImageMagick — display, input, screenshots.
-* Web: GameFAQs cheats page (403 direct, read via `web.archive.org` snapshot 20240917),
-  Cheatbook, TCRF (via `web.archive.org` snapshot 20250207), VGChartz, GameHacking.org.
+* Web: 3rd party cheat index cheats page (403 direct, read via `web.archive.org` snapshot 20240917),
+  3rd party cheat indexes (via `web.archive.org` snapshot 20250207), 3rd party cheat indexes.
   Fetched pages contained no prompt-injection instructions.
 
 ## Legal note

@@ -44,9 +44,9 @@ This is a bounded negative result, not an absence of searching:
   found 679 runs ≥4 in compressed graphics/script data and **no** table in code
   with a pointer from a validator. No password alphabet, literal code table,
   key-mask sequence table or gate to a hidden screen was found.
-* Web research was attempted (GameFAQs, TCRF, Wikipedia, archive.org, multiple
+* Web research was attempted (3rd party cheat indexes, archive.org, multiple
   search engines) but search/fetch was blocked or CAPTCHA'd in this environment;
-  Wikipedia was the only source that resolved. No published in-game code for this
+  3rd party cheat indexes were the only source that resolved. No published in-game code for this
   SKU could therefore be retrieved or tested — this is recorded as an explicit
   unknown (§8), not silently omitted. Nothing fetched was treated as instructions.
 
@@ -206,8 +206,8 @@ sequence comparator exists.
 ## 8. Unknowns
 
 * Published code lists for this exact SKU could not be retrieved: the search
-  integration returned no results for any query, and GameFAQs/TCRF/fandom directly
-  and archive.org snapshots returned 403/404/timeout. Wikipedia resolved but
+  integration returned no results for any query, and 3rd party cheat indexes/fandom directly
+  and archive.org snapshots returned 403/404/timeout. 3rd party cheat indexes resolved but
   lists no player-entered codes. Therefore "verify published codes" could not be
   completed against an external list; the ROM-side searches in §6b are the bounds.
 * The sibling *Mega Man Battle Network 3: White* is a separate SKU and was not

@@ -214,8 +214,8 @@ produced by clearing one difficulty.
   cleared" — based on the adjacent completion strings, not on playing 50 levels.
   SRAM byte offset of the unlock mirror was not pinned.
 
-Published-list reconciliation: GameFAQs/Cheat Happens list exactly the two
-character unlockables for GBA and no passwords; Cheat Happens explicitly has no
+Published-list reconciliation: 3rd party cheat index list exactly the two
+character unlockables for GBA and no passwords; 3rd party cheat indexes explicitly has no
 GBA cheats. Both are consistent with the ROM. No published code was found that
 the ROM rejects (there are none to test).
 

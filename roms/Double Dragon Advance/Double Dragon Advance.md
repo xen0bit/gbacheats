@@ -81,8 +81,7 @@ The standalone reimplementation `validator_model.py` reproduces every oracle
 result (§9).
 
 **Published codes tested:** BGM `R L R L`; Expert `U U D D L R L R`; 10 credits
-`L R D L R D L R Right` — all confirmed. Sources: doubledragon.kontek.net,
-GameFAQs/GameSpot cheat list, GameRevolution, cheathappens (all agree).
+`L R D L R D L R Right` — all confirmed. Sources: 3rd party cheat index cheat list, 3rd party cheat indexes.
 
 ## 4. Address map
 

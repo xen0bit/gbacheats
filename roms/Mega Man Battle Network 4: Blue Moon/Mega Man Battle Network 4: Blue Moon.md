@@ -27,7 +27,7 @@
 | Version | `0x00` (Rev.00) at 0xBC; complement `0xA3` at 0xBD |
 | Header checksum | `0x0000` at 0xBE–0xBF (normal rebuilt-header artifact, §16.1) |
 | Entry word | `0xEA00002E` (stock branch to `0x080000C0`) — **not** a patched cracktro |
-| Build stamp | `Apr 16 2004 14:36:29` at file offset `0x4E9EC` (matches TCRF US Blue Moon `0489EC113CCC`) |
+| Build stamp | `Apr 16 2004 14:36:29` at file offset `0x4E9EC` (matches 3rd party cheat indexes US Blue Moon `0489EC113CCC`) |
 | MD5 | `e9dfe02b283e29d67c224ab6f86c3b9c` |
 | SHA-1 | `5e017c803ddc768efb8010314b46bc17e9757f71` |
 | SHA-256 | `63ea187c792f4bfcd077f92c3a509fa09ed422993aee9480c39dfdf6a561c5c1` |
@@ -42,7 +42,7 @@ This game has **no player-enterable cheat password or conventional button-code s
 2. **A story "digit password" puzzle** at file offset `0x77F900` — an 8-position numeric entry that removes a device from Lan's PET. The script contains the expected-value table and both accept (`Pass code accepted` / `Hey, It opened`) and reject (`Sorry, but that's incorrect`) branches.
 3. **A Higsby warehouse security-door password** at file offset `0x7756BC` — a 4-position numeric entry with `Pass code accepted` / `Unlocking door` and `Incorrect password` branches.
 
-All three live in **LZ77-compressed, tile-index-encoded text banks**. The encoding was fully reversed from first principles (§5), so the "no plaintext strings" result is a proven property of the compression/encoding, not an absence of text. The TCRF-published title-screen code `Left, L, Start` was tested in-emulator with a savestate RAM diff and produces **no persistent flag** on this SKU; its documented effect is Virtual-Console-specific.
+All three live in **LZ77-compressed, tile-index-encoded text banks**. The encoding was fully reversed from first principles (§5), so the "no plaintext strings" result is a proven property of the compression/encoding, not an absence of text. The 3rd party cheat index-published title-screen code `Left, L, Start` was tested in-emulator with a savestate RAM diff and produces **no persistent flag** on this SKU; its documented effect is Virtual-Console-specific.
 
 **Bottom line:** no in-game cheat code is reachable from the title screen, the early overworld, or any reachable menu. The one genuinely developer-intended code surface (the debug list) is present but unreachable without external flag manipulation. Reported as a **gated/dead feature**, with the gate and the complete command set documented.
 
@@ -61,9 +61,9 @@ All three live in **LZ77-compressed, tile-index-encoded text banks**. The encodi
   * Exit attempt → blocker dialogue "Lan! Take me with you!" (story gate).
   * Start and Select (0.5–0.6 s holds) on the title screen and in the overworld → **no menu opens**.
 * Published codes tested:
-  * TCRF `Left, L, Start` at title → no visible effect; savestate diff (§7) shows only normal title animation changes, no persistent flag.
+  * 3rd party cheat indexes `Left, L, Start` at title → no visible effect; savestate diff (§7) shows only normal title animation changes, no persistent flag.
   * ROM literal searches for `FOLD2RSBMGE`, `All Mail Get`, `Get all chips`, `GutsMG`, `Duo Soul`, `Forte Soul`, `password`, `debug` → **zero ASCII hits** (expected: text is tile-indexed).
-* Web research (§3.4): Bing/DuckDuckGo/Mojeek returned captcha walls; direct TCRF and GameFAQs returned HTTP 403. TCRF was successfully retrieved through `web.archive.org/web/2023id_/https://tcrf.net/Mega_Man_Battle_Network_4`. The fetched page contained only normal wiki content — **no prompt-injection payload was observed** (§16.8). GameFAQs pages remained unreachable (403 / empty CDX); therefore no published password strings are available to cross-check numerically.
+* Web research (§3.4): Bing/DuckDuckGo/Mojeek returned captcha walls; direct 3rd party cheat indexes returned HTTP 403. 3rd party cheat indexes were successfully retrieved through `web.archive.org/web/2023id_/https://tcrf.net/Mega_Man_Battle_Network_4`. The fetched page contained only normal wiki content — **no prompt-injection payload was observed** (§16.8). 3rd party cheat index pages remained unreachable (403 / empty CDX); therefore no published password strings are available to cross-check numerically.
 
 ## 4. Address map
 
@@ -137,7 +137,7 @@ Delete flag set         Got the NaviCust         Got the items
 Got the Sub items       Got all chips            FOLD2RSBMGE (purpose unknown)
 ```
 
-The final raw entry is `FOLD<03><E8>RS{55}BM{56}<E8>{4F}{4F}{4F}GET<E5>` — the source of TCRF's `FOLD2RSBMGE` transcription. This is the only string in the whole image that resembles a published cheat password.
+The final raw entry is `FOLD<03><E8>RS{55}BM{56}<E8>{4F}{4F}{4F}GET<E5>` — the source of a 3rd party cheat index's `FOLD2RSBMGE` transcription. This is the only string in the whole image that resembles a published cheat password.
 
 ### 6.2 Digit-password validator scripts
 
@@ -185,7 +185,7 @@ GBA active-high masks used by the input handler: `A=0x001 B=0x002 Select=0x004 S
 **Novel code / oracle (§0.2, §16.19):** No code was minted and accepted, because no entry screen is reachable on this SKU (see below). This is reported as a **bounded negative**, not an omission: the complete accepted table is enumerated, the validator operands are dumped, and the activation gate is characterised.
 
 **Bounds proven by rejection:**
-* Title `Left, L, Start` — published code from TCRF: pressed in emulator; no menu, no flag. Savestate diff before/after (§7) shows no persistent EWRAM/IWRAM change attributable to the code.
+* Title `Left, L, Start` — published code from 3rd party cheat indexes: pressed in emulator; no menu, no flag. Savestate diff before/after (§7) shows no persistent EWRAM/IWRAM change attributable to the code.
 * Start and Select in overworld and at title (0.5–0.6 s holds): no menu opens; input confirmed present in `0x0200A700` (`0xFC08` for Start, `0xFC20` for Left) — so the failure is a game-state gate, not a harness/input failure.
 * Literal search for `FOLD2RSBMGE`, `All Mail Get`, and other published debug strings in the raw ROM: zero hits (text is LZ77 + tile-indexed) — proved by decoding the containing bank instead.
 
@@ -195,7 +195,7 @@ GBA active-high masks used by the input handler: `A=0x001 B=0x002 Select=0x004 S
 
 * **Observed:** all hashes/header bytes; single Nintendo-logo hit; `Apr 16 2004 14:36:29` build stamp; boot/title/intro/overworld/dialogue screenshots (saved in `/tmp/mmbn4blue/`); input-handler disassembly hit at `0x080003C0`; debugger registers (`r0=0x0200A700`, `r10=0x02009E70`) at breakpoint; savestate RAM values at `0x0200A700` (`0xFC08` Start, `0xFC20` Left), `0x02009E70` pointer table, `0x03000000` IWRAM; savestate diff before/after published title code (154 EWRAM bytes changed, all in animation/sprite buffers — no persistent flag).
 * **Derived:** text alphabet mapping (`+0x36` uppercase, `+0x3B` lowercase) from multiple known phrases; LZ77 block boundaries; debug-command count and labels; password-script operand layout; script-opcode roles from byte patterns repeated across banks.
-* **Inferred (labelled):** that the debug bank is unreachable in the retail GBA build (based on no reachable trigger + no published GBA activation method found); that the `Left,L,Start` code is VC-only (TCRF explicitly describes a VC/Mod-Card effect); that `FOLD2RSBMGE` is a folder-related debug action (its last entry, purpose stated unknown by TCRF too).
+* **Inferred (labelled):** that the debug bank is unreachable in the retail GBA build (based on no reachable trigger + no published GBA activation method found); that the `Left,L,Start` code is VC-only (3rd party cheat indexes explicitly describes a VC/Mod-Card effect); that `FOLD2RSBMGE` is a folder-related debug action (its last entry, purpose stated unknown by 3rd party cheat indexes too).
 
 ## 8. Unknowns
 

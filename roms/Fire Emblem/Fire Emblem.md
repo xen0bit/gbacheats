@@ -118,14 +118,14 @@ QBM84 U9WYB SS
 ## 6b. Enumeration
 
 * **Space definition.** The code is 26 base-36 symbols ≈ `36^26 ≈ 2^134` possible spellings, but the *meaningful* space is the 16 extracted battle-history fields (mode 0–2 × difficulty 0–1, ranks, turns, exp, funds, assets, etc.) plus a session clock term. The generator accepts every history record with a valid checksum; there is no whitelist/table of accepted passwords (literal search for the observed password returns **zero** ROM hits in every encoding tried: raw, `±k`, XOR `k`, `+0x20`).
-* **Novel codes.** No published list of FE7 password *strings* exists (only screenshots and "does nothing" descriptions), so every generated value is by construction absent from GameFAQs / VGChartz / TCRF / wikis. Generated and **observed on the real password screen**:
+* **Novel codes.** No published list of FE7 password *strings* exists (only screenshots and "does nothing" descriptions), so every generated value is by construction absent from 3rd party cheat indexes / wikis. Generated and **observed on the real password screen**:
   * synthetic history `(i*7+3)&0xFF` → `5YTY7 D5DBH 39QY QBM84 U9WYB SS` (screenshots `syn_sel12.png`, `pw_zoom.png`).
   * The generator is clock-dependent, so re-triggering with the same history yields further distinct, unpublished values (differential behaviour confirmed by the `GetGameClock()>>3` term at `0x0809DE2E`).
 * **Bounds proven by rejection.**
   * Hold-time: 2.5 s → no prompt; 3.0 s → "Well done" dialogue only; 3.5 s → password box. Threshold ≈3.2 s (measured by pixel-diff over six hold durations, `thr_*.png`).
   * Empty/all-zero history with valid checksum → dialogue only, no password at 3 s.
   * FE6 7-press sequence → no password on any Battle History page (`bh_fe6combo.png`).
-  * "All buttons except B" + d-pad (Neoseeker claim) → no password (`bh_neoseeker_combo.png`).
+  * "All buttons except B" + d-pad (3rd party cheat index claim) → no password (`bh_neoseeker_combo.png`).
   * Prototype "win chapter" combo on the retail prologue battle → no state change (`combo_win.png`, RAM diff = animation noise only).
   * Sweeping every mode/difficulty page by d-pad/L/R confirmed the password is page-dependent but never a fixed published phrase.
 * **Button-code space.** The single input routine at `0x08001BC8` and the menu dispatchers were enumerated for the documented masks above; no hidden debug menu is reachable in the retail ROM. The debug text rows documented for FE7 (*Release Entry*, *Continue Chp.*, *Initialize File*, *Debug*, *Map*, *D.Info*, *G'Night!*, etc.) are present as leftover data but no caller reaches them (dead code, §16.3 case 2) — they were not observed on any walked screen.
@@ -149,7 +149,7 @@ QBM84 U9WYB SS
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb|force-arm` for targeted disassembly; Python + `capstone` 5.0.7 for literal/BL/xref scans; `keystone` available.
 * Python helper `/tmp/fe1/drv.py` (mGBA XTEST keypress helper, screenshot crop `720x480+281+260`, savestate `gbAs` zlib parser + RAM diff at IWRAM `+0x19000` / EWRAM `+0x21000`), `gen_pw.py` (synthetic SRAM injection + boot/navigation).
 * GDB stub (`mgba -g`, `gdb-multiarch` on `:2345`) used for read-only verification; complex `call` sequences were rejected by the minimal stub, so savestate diffing was the primary RAM tool (§16.13).
-* Web sources (treated as **data**; no instructions followed): Fire Emblem Wiki (`FE7` trivia, Sound Room, unused content), Fire Emblem Universe (`Researches on Battle History Password` topic 17219 — function map and pseudocode; `Erase your save data at the start of the game`; prototype offset notes), GameFAQs cheat/walkthrough pages (403; snippets via search), The Cutting Room Floor mirror, Fire Emblem WoD. No prompt-injection payload was encountered in the fetched pages; all fetched text was read as data only.
+* Web sources (treated as **data**; no instructions followed): Fire Emblem Wiki (`FE7` trivia, Sound Room, unused content), Fire Emblem Universe (`Researches on Battle History Password` topic 17219 — function map and pseudocode; `Erase your save data at the start of the game`; prototype offset notes), 3rd party cheat index cheat/walkthrough pages (403; snippets via search), 3rd party cheat index mirror, Fire Emblem WoD. No prompt-injection payload was encountered in the fetched pages; all fetched text was read as data only.
 * Analysis-only patched ROM `fe_test.gba` and synthetic `fe_test.sav` were kept in `/tmp/fe1` and were removed from the deliverable (no ROM or assets redistributed).
 
 ## 10. Legal note

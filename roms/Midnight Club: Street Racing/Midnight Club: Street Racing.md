@@ -29,8 +29,7 @@ The game has a developer-intended **4-letter passcode system** on the
   `0x08106A94`). On a match it executes a short bytecode script that sets
   progress/unlock flag bytes, and returns 1; otherwise 0.
 * All 11 codes in the ROM (`AGEM MPBA CLSB PLCB TMNS LAPC LGKG GTBP NIML
-  NYRA AEHC`) are already present in published GameFAQs / GameGenie /
-  ChapterCheats / A2Z lists. **There is no unpublished accepted code**: the
+  NYRA AEHC`) are already present in published 3rd party cheat indexes / 3rd party cheat index lists. **There is no unpublished accepted code**: the
   space is closed at 11 of 26^4 = 456,976 possible strings (§6b).
 * In emulator: `AGEM` and `NIML` were typed on the real screen, RAM-verified
   (`0x03003B38` buffer, `0x03003B34` count), accepted (game advanced to
@@ -163,8 +162,8 @@ published effect *labels* are secondary evidence; the tables/opcodes above
 are primary.
 
 Published-code verification: all 11 literals are present at both
-`0xEC5C` and `0x4C8F4`; no published code was absent. GameFAQs' shorter
-5-code list is a subset; GameGenie/ChapterCheats/A2Z together cover all 11.
+`0xEC5C` and `0x4C8F4`; no published code was absent. 3rd party cheat indexes' shorter
+5-code list is a subset; 3rd party cheat indexes together cover all 11.
 
 ## 6b. Enumeration
 
@@ -177,7 +176,7 @@ lookup system: representable space 456,976, accepted space 11.
 **Novel code.** §0.2 asks for an accepted code absent from every published
 list. That is **impossible for this system**: the validator has no generator
 or checksum, its entire accepted set is the 11-entry table, and all 11 are
-already published (GameFAQs, GameGenie, ChapterCheats, A2Z, AbsolutCheats).
+already published (3rd party cheat indexes).
 No 12th record, no disabled-but-accepted record, and no alias (the four bytes
 are compared literally after `+0x41`; every record uses uppercase letters)
 exists. The exhaustive enumeration therefore *is* the deliverable, and it is
@@ -217,7 +216,7 @@ gameplay trick, not a developer-intended code, and was not counted as a code.
 * **Inferred**: semantic labels of opcodes 0x0A–0x1C as unlock/progress
   flags, based on which RAM arrays they write and on published effect
   descriptions; individual flag-bit meanings were not exhaustively mapped.
-* No prompt-injection content was followed. The TCRF page returned HTTP 403
+* No prompt-injection content was followed. The 3rd party cheat index page returned HTTP 403
   and was not used; all web pages were treated as data.
 
 ## 8. Unknowns

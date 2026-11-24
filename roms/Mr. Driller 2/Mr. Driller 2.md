@@ -25,7 +25,7 @@ crt0 code (ROM copy loop at `0x08000100` onward). This is the retail image.
 ## 2. Executive summary
 
 There is **one developer-intended, in-game cheat** in this ROM: the **10-lives
-pause-menu button code**. It is genuine, published on GameFAQs/VGChartz-equivalent
+pause-menu button code**. It is genuine, published on 3rd party cheat index-equivalent
 lists and Japanese wikis, and it works — but only with a deliberately slow input
 cadence. It takes the lives byte at `0x03001151` from `0x03` to `0x0A` (10).
 
@@ -150,11 +150,11 @@ Screen index 2 of the menu table is the PG602 test screen. Its setter at
 
 | Source | Code | Platform | Verdict in this ROM |
 |---|---|---|---|
-| GameFAQs, Japanese wikis | Pause → `↓ Sel ↑ ↓ L R ↓ ↑ R L ↑ A` → 10 lives | GBA | **VERIFIED** (slow cadence required) |
+| 3rd party cheat indexes, Japanese wikis | Pause → `↓ Sel ↑ ↓ L R ↓ ↑ R L ↑ A` → 10 lives | GBA | **VERIFIED** (slow cadence required) |
 | Japanese wiki (biglobe, nifty) | L+R held + Select = soft reset | GBA | Not reproduced in gameplay or menus; index unchanged (recorded negative) |
-| GameFAQs | A.D.S. operator-menu "North Pole" unlock (P1/P2 buttons) | **Arcade** | Not applicable — no GBA operator menu or A.D.S. screen exists |
-| VGChartz/NamuWiki | Reverse courses unlocked by clearing all 10 front courses | GBA | Save-bit unlockable, not a code |
-| NamuWiki | North Pole stage unlocked by clearing India/America/Egypt | GBA | Save-bit unlockable, not a code |
+| 3rd party cheat indexes | A.D.S. operator-menu "North Pole" unlock (P1/P2 buttons) | **Arcade** | Not applicable — no GBA operator menu or A.D.S. screen exists |
+| 3rd party cheat indexes | Reverse courses unlocked by clearing all 10 front courses | GBA | Save-bit unlockable, not a code |
+| 3rd party cheat indexes | North Pole stage unlocked by clearing India/America/Egypt | GBA | Save-bit unlockable, not a code |
 | CodeBreaker lists (air/lives/score/depth at `0x0300114E`, `0x03001151`, `0x0300490C`, `0x0300113C`) | memory patches | GBA | Out of scope (GameShark/CodeBreaker); addresses independently confirmed in RAM |
 
 **6.2 Debug text bank (fully decoded, `0x082A35C`)**
@@ -283,7 +283,7 @@ are no tolerated aliases among the probes.
 * The "result not recorded" side effect is published in Japanese sources and is
   consistent with the code path; it was not verified against the records screen.
 
-**Prompt injection:** none encountered. Fetched GameFAQs, NamuWiki, Japanese
+**Prompt injection:** none encountered. Fetched 3rd party cheat indexes, Japanese
 wiki and archive pages contained no instructions directed at the analyst; all
 were treated as data.
 

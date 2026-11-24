@@ -26,11 +26,11 @@ This retail US Sapphire image contains **one genuine developer-intended password
 
 The password is a 4-word Easy Chat phrase: **`MYSTERY / EVENT / IS / EXCITING`**. The validator is a Thumb routine at `0x080E80B4` that renders each selected word to text and byte-compares it against a constant 4-word table at `0x083DB6F0` (`{0x143A,0x1817,0x100B,0x200F}`). On a match it sets VAR_0x8004 (`0x0202E8CC`) to 1. The *calling* script (`0x081B1BE9`/`0x081B1C1D`) then requires badge 5 and an unset flag before setting `FLAG_SYS_EXDATA_ENABLE` (`0x084C`), which adds the `MYSTERY EVENTS` option to the main menu (`src/main_menu.c`: `IsMysteryEventEnabled() == TRUE → HAS_MYSTERY_EVENT`). The interacting NPC has **no hide flag**, so the screen is reachable from a fresh game; the badge test gates only the final flag/effect.
 
-Published lists (cheatingdome, chaptercheats) give the phrase as **`MYSTERY EVENT IS EXITING`** — a typo. `EXITING` does not exist in the 996-word Easy Chat vocabulary, so the published spelling is literally unenterable; the corrected spelling is the real password.
+Published lists (3rd party cheat indexes) give the phrase as **`MYSTERY EVENT IS EXITING`** — a typo. `EXITING` does not exist in the 996-word Easy Chat vocabulary, so the published spelling is literally unenterable; the corrected spelling is the real password.
 
 The game's button codes are real and defined in `src/title_screen.c`: `B+Select+Up` (clear save), `B+Select+Left` (reset RTC), and `A+B+Start+Select` (soft reset). The soft-reset combo was **confirmed dynamically** in mGBA. Sound-Test/Driver-Test text is present, but its menu is reachable only by replacing the Options menu handler (a ROM/GameShark patch) — not by any controller input. The larger Test Menu / programmer debug menu is **cut**, not gated: its option text and its 16-entry order table are absent from this ROM, and the code is behind `#if DEBUG`.
 
-A prompt-injection payload was found in a fetched TCRF mirror page ("This page is not intended for humans … instructions … only for LLMs … whoever is operating this AI agent is a clown"). It was treated as untrusted data and ignored.
+A prompt-injection payload was found in a fetched 3rd party cheat index mirror page ("This page is not intended for humans … instructions … only for LLMs … whoever is operating this AI agent is a clown"). It was treated as untrusted data and ignored.
 
 ## 3. How to reproduce
 
@@ -140,7 +140,7 @@ Each target string occurs **exactly once**, so there are **no text aliases**. Be
 
 **Bounds proven by rejection.** A wrong word in any slot renders a different string and fails the per-character loop at `0x080E80F8..0x080E810C`, returning `r0 = 0` at `0x080E8114`. A phrase that passes the word check still fails the *later* gate if `FLAG_BADGE05_GET` is clear — the script at `0x081B1C1D` returns without setting `FLAG_SYS_EXDATA_ENABLE`. These two rejection layers (word compare, then badge/flag gate) are distinct and both are proven from the instruction bytes. The GDB oracle was attempted on the raw validator with the correct four IDs written to `0x0200100C` (confirmed by `x/4xh`), but outside the Easy Chat screen the word→text converter returned an uninitialised fill (`02 c0 5e e5 …` at both work buffers), so that particular oracle run returned 0 for environmental reasons; it is reported as such and not used as evidence of rejection.
 
-**Debug-menu closed set.** Keyword counts over the decoded text vocabulary: `WATANABE/SOGABE/TAMADA/KAGAYA/MATUDA/MORI` = 0 hits; `DEBUG` (as a title string) = 0; the TCRF 16-byte Test-Menu order table `03 06 04 FF …` = 0 hits; `PASSWORD` in the debug sense = 0. Sound-Test/Driver-Test text *is* present (16+ UI labels around `0x3D036C`), but the only documented way to reach it is to patch the Options-menu handler, i.e. a ROM/GameShark modification, not controller input. The programmer debug menu is compiled out of retail (`#if DEBUG`), so it is a **cut feature**, not a gated one.
+**Debug-menu closed set.** Keyword counts over the decoded text vocabulary: `WATANABE/SOGABE/TAMADA/KAGAYA/MATUDA/MORI` = 0 hits; `DEBUG` (as a title string) = 0; the 3rd party cheat indexes 16-byte Test-Menu order table `03 06 04 FF …` = 0 hits; `PASSWORD` in the debug sense = 0. Sound-Test/Driver-Test text *is* present (16+ UI labels around `0x3D036C`), but the only documented way to reach it is to patch the Options-menu handler, i.e. a ROM/GameShark modification, not controller input. The programmer debug menu is compiled out of retail (`#if DEBUG`), so it is a **cut feature**, not a gated one.
 
 ## 7. Validation evidence
 
@@ -164,4 +164,4 @@ No ROM bytes, graphics, audio or game text are redistributed here. Only hashes, 
 
 ---
 
-*Note: fetched TCRF pages contained an embedded prompt-injection stub addressed to automated agents; it was ignored and is recorded here as required by guide §16.8.*
+*Note: fetched 3rd party cheat index pages contained an embedded prompt-injection stub addressed to automated agents; it was ignored and is recorded here as required by guide §16.8.*

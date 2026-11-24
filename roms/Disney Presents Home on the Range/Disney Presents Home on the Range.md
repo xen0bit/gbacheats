@@ -41,8 +41,7 @@ Audio banner (stock): `GAX Sound Engine 3.05 (Aug 13 2003)` and
   `NEW GAME / PASSWORD / OPTIONS / CREDITS` → **PASSWORD** screen with four
   letter slots, `B Cancel` / `A Select`, and a centred `INCORRECT` message when
   an entered code is rejected (observed).
-- Fourteen 4-letter level passwords are published for this title (GameFAQs,
-  ChapterCheats, GameGenie, VGChartz). None of them exists literally in the ROM
+- Fourteen 4-letter level passwords are published for this title (3rd party cheat indexes). None of them exists literally in the ROM
   in ASCII, in the menu font encoding (`letter-'A'+0x21`), as a byte
   letter-index, as the observed glyph tile index, or as a packed 5-bit word.
   Reason now known: the codes are four 4-bit nibbles over a custom 16-symbol
@@ -230,8 +229,8 @@ the roll.
 
 ### 6.1 Published level passwords (verified)
 
-Sources: GameFAQs `920111` cheats page, ChapterCheats `12873` password page,
-GameGenie GBA page, VGChartz `26744`. All fourteen use only symbols of the
+Sources: 3rd party cheat indexes `920111` cheats page, 3rd party cheat indexes `12873` password page,
+3rd party cheat indexes GBA page, 3rd party cheat indexes `26744`. All fourteen use only symbols of the
 16-letter alphabet. **All fourteen were confirmed accepted** by the ROM:
 
 - in-emulator calls to `0x08003204` (all 14 return a non-zero stage pointer);

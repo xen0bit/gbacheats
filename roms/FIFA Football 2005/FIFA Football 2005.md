@@ -74,7 +74,7 @@ FIFA 06/07, not FIFA 04; no code system is inherited from either.
   (`Resume Match | Team Management | Instant Replay | Match Statistics | Options | Quit Match`).
   Select opens a replay, not the pause menu.
 * Codes tested: **none exist to test.** Console-store "points" unlocks advertised on
-  SuperCheats (Play Online, Football Fusion, Austrian OFB Cup, …) are from the
+  3rd party cheat indexes (Play Online, Football Fusion, Austrian OFB Cup, …) are from the
   PS2/Xbox/PC SKUs and are absent from this ROM. No GBA password or button code is
   published on the 8 sources consulted (§6b).
 
@@ -203,9 +203,8 @@ Per §0.2 item 5, the negative result is bounded as follows:
    Dynamic: 12 combos on the pause menu + 12 on the main menu (each from a fresh savestate)
    + 4 held combos at boot = **28 tested**; none produced a new screen. Full list in
    `/tmp/fifa05/combos.py`.
-4. **Published-code space** — 8 sources consulted: GameFAQs GBA cheats (403), archived
-   GameFAQs (404), SuperCheats, ChapterCheats, Neoseeker (403), Cheatbook, VGChartz,
-   CheatCodes.com (transport error). Every reachable page lists only gameplay hints
+4. **Published-code space** — 8 sources consulted: 3rd party cheat indexes GBA cheats (403), archived
+   3rd party cheat indexes. Every reachable page lists only gameplay hints
    ("Guaranteed Goal", "Super curve ball", "Season objectives") or console-store "points"
    unlocks. **Zero GBA passwords, button codes or unlock codes were found**, so there is
    no published literal to verify or reject. Console-store labels were checked against

@@ -132,28 +132,28 @@ Flag read from IWRAM `0x03007638` after ENTER. `0x0000` = rejected.
 
 | Password | Source | Flag observed | Verdict |
 |---|---|---|---|
-| `C2?6RSD0L` | GameFAQs / FAQ | `0x0FFF` | accepted (all unlock) |
-| `WLJK7SD0S` | GameFAQs | `0x0FFF` | accepted |
-| `W201RSDJ0` | GameFAQs | `0x0FFF` | accepted |
-| `W20WRSD0J` | GameFAQs | `0x0FFF` | accepted |
-| `25R!RSD08` | GameFAQs / MoFunZone | `0x0737` | accepted |
-| `?DNWRSD0J` | GameFAQs | `0x03A3` | accepted |
-| `GGN?RSD00` | GameFAQs | `0x02C3` | accepted |
-| `DGNYRSD0J` | GameFAQs | `0x00C3` | accepted |
-| `DVNYRSD00` | GameFAQs | `0x0183` | accepted |
-| `ZZ7SRSDJ0` | GameFAQs | `0x02C7` | accepted |
-| `XL4GRSD0J` | GameFAQs | `0x0103` | accepted |
-| `C64DRSD0J` | GameFAQs | `0x0043` | accepted |
-| `2GS0RSDJ0` | GameFAQs | `0x06C7` | accepted |
-| `W2NSRSD0J` | GameFAQs | `0x0004` | accepted |
-| `CV1FRSDJ0` | GameFAQs | `0x0080` | accepted |
-| `W2LRRSD0J` | GameFAQs | `0x0002` | accepted |
-| `C2KQRSD0J` | GameFAQs | `0x0001` | accepted |
-| `WLKQRSDJ0` | GameFAQs | `0x0001` | accepted |
-| `CL3RRSD0J` | GameFAQs | `0x0003` | accepted |
-| `WZMRRSDJ0` | GameFAQs | `0x0000` | **rejected** in this EU build |
-| `ZHR!RSDJ0` | GameFAQs | `0x0000` | **rejected** in this EU build |
-| `C2?6RSDO4`, `C2?6RSDOL` | GameFAQs | n/a | contain letter `O`; not in the 33-symbol alphabet — transcription errors (should be `0`) |
+| `C2?6RSD0L` | 3rd party cheat indexes / FAQ | `0x0FFF` | accepted (all unlock) |
+| `WLJK7SD0S` | 3rd party cheat indexes | `0x0FFF` | accepted |
+| `W201RSDJ0` | 3rd party cheat indexes | `0x0FFF` | accepted |
+| `W20WRSD0J` | 3rd party cheat indexes | `0x0FFF` | accepted |
+| `25R!RSD08` | 3rd party cheat indexes | `0x0737` | accepted |
+| `?DNWRSD0J` | 3rd party cheat indexes | `0x03A3` | accepted |
+| `GGN?RSD00` | 3rd party cheat indexes | `0x02C3` | accepted |
+| `DGNYRSD0J` | 3rd party cheat indexes | `0x00C3` | accepted |
+| `DVNYRSD00` | 3rd party cheat indexes | `0x0183` | accepted |
+| `ZZ7SRSDJ0` | 3rd party cheat indexes | `0x02C7` | accepted |
+| `XL4GRSD0J` | 3rd party cheat indexes | `0x0103` | accepted |
+| `C64DRSD0J` | 3rd party cheat indexes | `0x0043` | accepted |
+| `2GS0RSDJ0` | 3rd party cheat indexes | `0x06C7` | accepted |
+| `W2NSRSD0J` | 3rd party cheat indexes | `0x0004` | accepted |
+| `CV1FRSDJ0` | 3rd party cheat indexes | `0x0080` | accepted |
+| `W2LRRSD0J` | 3rd party cheat indexes | `0x0002` | accepted |
+| `C2KQRSD0J` | 3rd party cheat indexes | `0x0001` | accepted |
+| `WLKQRSDJ0` | 3rd party cheat indexes | `0x0001` | accepted |
+| `CL3RRSD0J` | 3rd party cheat indexes | `0x0003` | accepted |
+| `WZMRRSDJ0` | 3rd party cheat indexes | `0x0000` | **rejected** in this EU build |
+| `ZHR!RSDJ0` | 3rd party cheat indexes | `0x0000` | **rejected** in this EU build |
+| `C2?6RSDO4`, `C2?6RSDOL` | 3rd party cheat indexes | n/a | contain letter `O`; not in the 33-symbol alphabet — transcription errors (should be `0`) |
 
 The README/FAQ "unlock everything" code `C2?6RSD0L` is the only one needed; it sets
 `0x0FFF`, makes VERY HARD selectable and exposes all 12 suits (the two whose portrait
@@ -187,7 +187,7 @@ with `low16` irrelevant to the gates because `r6` low-16 equals `flag`):
 * Hi field distribution: hi 0–7 → 1,503 flags each; hi 8 → 1,494;
   hi 9 → 1,382; hi 10 → 1,004; hi 11 → 464.
 
-**Novel codes (absent from GameFAQs, MoFunZone, VGChartz, TCRF and all fetched lists):**
+**Novel codes (absent from 3rd party cheat indexes and all fetched lists):**
 
 | Code | Intended flag | Emulator result (RAM) | Note |
 |---|---|---|---|
@@ -250,6 +250,5 @@ difficulty/clear field that none of the published codes' payloads exercise.
 `arm-none-eabi-objdump -M force-thumb`, Capstone (literal/BL scans), Python 3
 (`val.py`, `gen.py`, `verify.py`, `pwlib.py`, `ssdiff.py`), mGBA SDL with `Shift+F1`
 savestates, Xvfb :318 + openbox, xdotool XTEST input, scrot + ImageMagick.
-Web sources: GameFAQs cheats & FAQ (BoringPolitico/Seth0708), MoFunZone, IGN,
-ROMsfun/libretro list (memory-code addresses used only as leads, not as findings).
+Web sources: 3rd party cheat index cheats & FAQ (BoringPolitico/Seth0708), 3rd party cheat indexes/libretro list (memory-code addresses used only as leads, not as findings).
 No ROM or copyrighted asset is redistributed by this report.

@@ -39,7 +39,7 @@ reachable from any screen walked**: no writer sets the dispatching state variabl
 (0x03004410) to 3, the value that selects the debug-menu handler. It is
 dead/cut developer content (guide §16.3, category 2/3), not a player cheat.
 
-Published-code recon (GameFAQs, TCRF, Wayback Machine, Bing/DuckDuckGo) was
+Published-code recon (3rd party cheat indexes, Wayback Machine, Bing/DuckDuckGo) was
 blocked by 403/CAPTCHA/empty CDX; no published Gradius Galaxies list was
 recovered. The classic Konami code — the only widely published candidate — is
 present in the ROM as code B and verified below. Codes A/C/D are variants that
@@ -251,7 +251,7 @@ the PAUSE overlay hides most of the playfield; RAM writes are the primary proof.
   produce state 3 and open the debug menu; no reachable menu index was found.
 - Published-code list could not be fetched (403/CAPTCHA/empty archive), so
   "unpublished" status of codes A/C/D rests on the ROM's fixed four-entry table,
-  not on a comparison with an actual GameFAQs list.
+  not on a comparison with an actual 3rd party cheat index list.
 
 ## 9. Tooling
 

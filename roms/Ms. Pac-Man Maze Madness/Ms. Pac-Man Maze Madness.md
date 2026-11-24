@@ -140,10 +140,10 @@ result.
 
 | Source | Claim | Verdict |
 |---|---|---|
-| Archived GameFAQs GBA cheats page (`web.archive.org` capture 2026-01-29; direct fetch 403) | `Multiplayer Classic Mode N64`, `Movie Player / Music Player / Sound Test`, `Bonus Multi-Player Map N64` | All rows explicitly labelled **N64**, **DC** or in `Unlockables N64`/`Unlockables DC` sections. **Zero GBA entries.** Not applicable to this SKU. |
+| Archived 3rd party cheat indexes GBA cheats page (`web.archive.org` capture 2026-01-29; direct fetch 403) | `Multiplayer Classic Mode N64`, `Movie Player / Music Player / Sound Test`, `Bonus Multi-Player Map N64` | All rows explicitly labelled **N64**, **DC** or in `Unlockables N64`/`Unlockables DC` sections. **Zero GBA entries.** Not applicable to this SKU. |
 | Pac-Man Wiki / Source Gaming | Sound Test 40 stars or 14 high-score names; Movie Player 70 stars; Music Player 9 clocks; Pac-Jr./Pooka from Time Trial clocks; extra map from 50,000 in Pier Pressure | Console-version description. Disproved for GBA: the ROM contains **0** occurrences of `Sound Test`, `Movie Player`, `Music Player`, `gold star`, `gold clock`; the GBA PAUSE menu has only Resume/Exit. |
-| consoledatabase.com "CodeBreaker codes" (`…/cheats/segadreamcast/…`) | `Unlock All Levels 0423ED38 …`, `Have All Keys …` | Dreamcast memory-patch codes, not in-game developer codes — **out of scope** by task definition; not entered. |
-| TCRF / VGChartz GBA code lists | none found | no GBA password/button-code list exists to verify. |
+| 3rd party cheat indexes "CodeBreaker codes" (`…/cheats/segadreamcast/…`) | `Unlock All Levels 0423ED38 …`, `Have All Keys …` | Dreamcast memory-patch codes, not in-game developer codes — **out of scope** by task definition; not entered. |
+| 3rd party cheat indexes GBA code lists | none found | no GBA password/button-code list exists to verify. |
 
 No prompt-injection payload was encountered in the fetched web content; all fetched pages
 were treated as data.

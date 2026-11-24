@@ -70,9 +70,9 @@ inventory, and the rejection tests recorded in §6b.
 
 | Source | Claim | ROM check | Emulator check |
 |---|---|---|---|
-| classicemu.com (many language mirrors) | `PAINT123` unlocks all paintball colour skins | Literal `PAINT123` occurs **0 times** in 8,388,608 bytes (`PAINT` only at the header title) | Typed into the only text field: `OK` does nothing (screenshot `150/152/153`) |
-| classicemu.com | `BOWLINGX` enables Big Alley Bowling turbo mode | Literal `BOWLINGX` occurs **0 times**; `TURBO` occurs **0 times** | Typed into the only text field: `OK` does nothing (`155/156`) |
-| GBAtemp cheat-file list | `.CHT` files #2345 (EU) / #2553 (US) for this pack | n/a — these are GameShark/CodeBreaker **memory patches** | Out of scope (not in-game codes) |
+| 3rd party cheat indexes | `PAINT123` unlocks all paintball colour skins | Literal `PAINT123` occurs **0 times** in 8,388,608 bytes (`PAINT` only at the header title) | Typed into the only text field: `OK` does nothing (screenshot `150/152/153`) |
+| 3rd party cheat indexes | `BOWLINGX` enables Big Alley Bowling turbo mode | Literal `BOWLINGX` occurs **0 times**; `TURBO` occurs **0 times** | Typed into the only text field: `OK` does nothing (`155/156`) |
+| 3rd party cheat index cheat-file list | `.CHT` files #2345 (EU) / #2553 (US) for this pack | n/a — these are GameShark/CodeBreaker **memory patches** | Out of scope (not in-game codes) |
 
 ## 3. How to reproduce
 

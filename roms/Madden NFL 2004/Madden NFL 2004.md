@@ -32,7 +32,7 @@ and no reachable developer menu. The game's only "cheat-like" content is:
 
 * four *hidden teams* (data only: `All-Madden`, `Players, Inc.`, `EA Sports`, `Budcat`)
   and a *hidden quarter length* (15 seconds), both reachable only by CodeBreaker
-  RAM patches on TCRF — **not** by any controller input; and
+  RAM patches on 3rd party cheat indexes — **not** by any controller input; and
 * gameplay glitches/hints and a GameCube-link Madden Cards feature published on
   cheat sites — not developer-intended unlock codes.
 
@@ -129,9 +129,9 @@ team, Left/Right switches HOME/VISITOR; the value wraps `32 → 1`.
 | 1 | 10 MINUTES |
 | 2 | 15 MINUTES |
 | 3 | 3 MINUTES |
-| 4 | *hidden* — TCRF says 15 seconds at `0x02000524 = 04`; not selectable |
+| 4 | *hidden* — 3rd party cheat indexes say 15 seconds at `0x02000524 = 04`; not selectable |
 
-**Team IDs** (`0x02000520` / `0x02000522`, Observed for 1–32; TCRF for the rest):
+**Team IDs** (`0x02000520` / `0x02000522`, Observed for 1–32; 3rd party cheat indexes for the rest):
 
 | ID | Team |
 |---:|---|
@@ -141,7 +141,7 @@ team, Left/Right switches HOME/VISITOR; the value wraps `32 → 1`.
 | `0x22` | EA Sports (*hidden*) |
 | `0x23` | Budcat (*hidden*) |
 
-TCRF's CodeBreaker notation `00xx` with `xx = 21/22/23` is **hexadecimal**;
+a 3rd party cheat index's CodeBreaker notation `00xx` with `xx = 21/22/23` is **hexadecimal**;
 the working values are `0x21/0x22/0x23` (= 33/34/35 decimal), which is why they
 lie just outside the reachable 1–32 range.
 
@@ -211,9 +211,9 @@ Setup. (4) Hidden value 4 could be forced by debugger RAM write
 `0x080012DC`, remap helper `0x080011E0`, script-VM opcodes in IWRAM, the mask
 convention, and all literal/xref counts in §6b.
 
-**Inferred** (clearly labelled): the quarter value 4 = 15 seconds (TCRF's claim;
+**Inferred** (clearly labelled): the quarter value 4 = 15 seconds (a 3rd party cheat index's claim;
 I proved the field accepts 4 but did not run a full 15-second quarter), and the
-existence/purpose of the four hidden teams (TCRF; I proved they are outside the
+existence/purpose of the four hidden teams (3rd party cheat indexes; I proved they are outside the
 UI cycle). No inference is presented as an observation.
 
 **Font/tile-indexed text check (negative bounded).** `strings` finds only
@@ -227,14 +227,14 @@ script VM from tile indices, so ASCII `strings` absence is not evidence of a
 missing feature — but the complete menu enumeration above is.
 
 **Published-code verification:**
-* GameFAQs GBA page (archived) — "1 cheat", but the body lists mostly GC/PS2/Xbox
+* 3rd party cheat indexes GBA page (archived) — "1 cheat", but the body lists mostly GC/PS2/Xbox
   glitches/unlockables; no GBA password or button code.
-* ChapterCheats — "First down for opposite team: Press A, R repeatedly" (GBA) and
+* 3rd party cheat indexes — "First down for opposite team: Press A, R repeatedly" (GBA) and
   a Washington-Redskins-playbook substitution glitch. The A,R sequence was tested
   (rejected); the substitution item is a gameplay glitch, not a code.
-* TCRF — hidden teams, hidden quarter length, and an explicit *"See if there are
+* 3rd party cheat indexes — hidden teams, hidden quarter length, and an explicit *"See if there are
   button codes for these"* TODO. I closed that TODO negatively for both.
-* CheatBook / Neoseeker / Supercheats / Almar's — GameShark/CodeBreaker or
+* 3rd party cheat indexes — GameShark/CodeBreaker or
   console/PC hints; out of scope (memory-edit codes, different SKUs).
 * Fetched pages were treated as data; no prompt-injection payload was encountered.
 
@@ -245,7 +245,7 @@ missing feature — but the complete menu enumeration above is.
 * The exact label for hidden quarter value 4 was not displayed: writing
   `0x02000524 = 4` with the debugger changed the RAM value (readback `0x0004`)
   but the Game Rules screen kept showing `5 MINUTES`, because the label is drawn
-  from the script VM's cached state. The 15-second semantics remain TCRF-sourced.
+  from the script VM's cached state. The 15-second semantics remain 3rd party cheat index-sourced.
 * The hidden teams' rosters/graphics were not extracted; only their IDs and
   unreachability were established.
 

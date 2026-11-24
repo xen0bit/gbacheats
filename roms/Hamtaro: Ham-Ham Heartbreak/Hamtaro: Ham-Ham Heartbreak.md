@@ -15,7 +15,7 @@
 | SHA-1 | `2525cc23524068dfb3a2b4e0ce7b736f95023e82` |
 | SHA-256 | `06f359a322fdba920c35ee0c794f1520a7f1b52827e372dd69c5fff648e6ae3d` |
 
-**Embedded-header / patch scan (Phase 0):** the full 156-byte Nintendo logo occurs exactly **once**, at file offset `0x4` (header base `0x0`). There is one game image, no multiboot stub, no appended trainer, no cracktro. The first 4 KiB is a clean standard crt0 (`0x080000C0: mov r0,#0x100; ...`). CRC32 `CD48B673`, serial `AGB-AH3E-USA` (GameHacking.org listing) match this image.
+**Embedded-header / patch scan (Phase 0):** the full 156-byte Nintendo logo occurs exactly **once**, at file offset `0x4` (header base `0x0`). There is one game image, no multiboot stub, no appended trainer, no cracktro. The first 4 KiB is a clean standard crt0 (`0x080000C0: mov r0,#0x100; ...`). CRC32 `CD48B673`, serial `AGB-AH3E-USA` (3rd party cheat index listing) match this image.
 
 ## 2. Executive summary
 
@@ -121,7 +121,7 @@ Button bit masks (`1 << n`): A=0, B=1, Select=2, Start=3, Right=4, Left=5, Up=6,
 | Sequences on title | Konami code; `L,L,B,A,R` (the *Hamtaro 4* coloring cheat); Up/Down alternating; Select+A×3; Start+Select+A+B | 5 sequences; only ordinary new-game start / documented reset |
 | Raw key-mask table scan | no contiguous button-code table identified; apparent u16 "runs" in code are Thumb instruction halves, not data | Capstone/objdump cross-check of `0x08009614` |
 
-**Published claims verified:** GameFAQs lists only "Unlockable Songs" and "Watch the Endings Again" (Lookie on Clubhouse TV) for this SKU; the archived GameFAQs/GameHacking/Neoseeker pages confirm. A Japanese hidden-features roundup states *Tottoko Hamtaro 3* has no hidden elements/cheats information, while the `L,L,B,A,R` coloring code is explicitly attributed to *Hamtaro 4*, a different game. All of this was checked against the ROM as described above.
+**Published claims verified:** 3rd party cheat index lists only "Unlockable Songs" and "Watch the Endings Again" (Lookie on Clubhouse TV) for this SKU; the archived 3rd party cheat index pages confirm. A Japanese hidden-features roundup states *Tottoko Hamtaro 3* has no hidden elements/cheats information, while the `L,L,B,A,R` coloring code is explicitly attributed to *Hamtaro 4*, a different game. All of this was checked against the ROM as described above.
 
 ## 7. Validation evidence
 

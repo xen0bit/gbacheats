@@ -26,11 +26,11 @@ implemented as *closed lookup tables* (no checksum/algorithm):
 
 1. **PASSWORD** (main menu) — eight decimal digits. One 176-byte table of **22** eight-byte
    records at ROM `0x080AE0BC`; validator at Thumb `0x0809D780`. All 22 entries are exactly the
-   codes published on GameFAQs/fandom/TCRF (21 level codes + `60861775` level select). There is
+   codes published on 3rd party cheat indexes/fandom/3rd party cheat indexes (21 level codes + `60861775` level select). There is
    no algorithmic generator, so **no unpublished numeric password exists**.
 2. **BONUS CODE** (Options → Bonus Code) — eight characters, on-screen keyboard `A–Z 0–9`.
    A **32-byte table of 4** eight-byte records at ROM `0x080AE240`; validator at Thumb
-   `0x080A082C`. These are the "lost" bonus codes that GameFAQs/TCRF say nobody has ever found.
+   `0x080A082C`. These are the "lost" bonus codes that 3rd party cheat indexes say nobody has ever found.
 
 I recovered both validators, reimplemented their accept tests as debugger-oracle calls, and
 enumerated both closed sets. I then entered **CAKEWALK**, a code that appears in **no published
@@ -169,8 +169,8 @@ strings. Accept set = 4 records at `0x080AE240`. All 4 were called through the g
 validator (`r0=1`); two out-of-table codes (`zzzzzzzz`, `AAAAAAAA`) returned `r0=0`, proving the
 bounds. `00000000` was also rejected on the real screen ("Oops! Try again").
 
-**Novel code (not in any published list):** `CAKEWALK`. GameFAQs states that only the password
-code is known and "no one knows any bonus codes"; TCRF documents only the level select. The
+**Novel code (not in any published list):** `CAKEWALK`. 3rd party cheat indexes state that only the password
+code is known and "no one knows any bonus codes"; 3rd party cheat indexes document only the level select. The
 bonus-code table is not on any of those pages. Entered on the real Bonus Code screen:
 "Correct! Game Level is now set to Easy Mode." (screenshot `q15.png`). RAM proof in §7.
 

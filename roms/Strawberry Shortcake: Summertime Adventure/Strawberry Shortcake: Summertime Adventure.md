@@ -37,7 +37,7 @@ so a one-character change selects a different game area. I generated, entered, a
 two codes that appear in no published list (none exist for this SKU): `00000001` and `12345678`.
 
 Web reconnaissance was attempted and is recorded in §8: `websearch` returned no results for
-six queries and direct fetches were blocked (GameFAQs 403, DuckDuckGo bot challenge), so no
+six queries and direct fetches were blocked (3rd party cheat indexes 403, DuckDuckGo bot challenge), so no
 published code list could be checked. This does not weaken the finding: the decoder contains no
 comparison against any stored string, so no published preset could be authoritative anyway.
 
@@ -228,7 +228,7 @@ multi-field codes) exercised on the real screen.
 ## 8. Unknowns
 
 * Web/published-code reconnaissance was inconclusive: `websearch` returned zero results for six
-  queries; GameFAQs returned HTTP 403 and DuckDuckGo a bot challenge. No published code list
+  queries; 3rd party cheat indexes returned HTTP 403 and DuckDuckGo a bot challenge. No published code list
   was available to cross-check, so "novel" means "minted from the codec, not copied from a list"
   rather than "proved absent from every list on the internet".
 * The 48-bit payload is fully mapped at the bit level, but the semantic meaning of all fields

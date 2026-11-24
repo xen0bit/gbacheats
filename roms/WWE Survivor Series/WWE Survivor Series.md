@@ -61,8 +61,8 @@ title unresponsive, bounding the validated/used region (§6b).
   (`← ↓ L ↑ ↓ R ↑ ↓ R R`), `L+R ↑ L+R ↓`, `Start+Select+A+B`. None opened a hidden
   screen; `L+R+Start` merely starts the game normally (the Start edge is what acts).
 
-Published reconnaissance (CheatCC, Neoseeker, SuperCheats, GameFAQs guide,
-GameHacking.org, European CodeBase) yields **no password strings and no button
+Published reconnaissance (3rd party cheat index guide,
+3rd party cheat indexes, European CodeBase) yields **no password strings and no button
 codes**. Every published "code" is either a GameShark/AR memory patch (out of
 scope) or an in-match input such as "grapple then press Select with a full special
 meter" or "press L near the apron in a hardcore match" — gameplay finisher/weapon

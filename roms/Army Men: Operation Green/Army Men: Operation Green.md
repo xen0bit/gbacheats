@@ -61,7 +61,7 @@ language-independent: one alphabet, one codec, shared by every language.
 * Two published strings are OCR errors: `FFOOWP36` is really **`FF00WP36`**
   (zero, not letter O) and `3SXRLWOJ` is really **`3SXRLW0J`**. Both corrected
   forms were accepted and start the advertised levels in mGBA. The
-  SuperCheats "level 13" code **`GLDJLKHD`** fails the checksum and is
+  3rd party cheat indexes "level 13" code **`GLDJLKHD`** fails the checksum and is
   **rejected** by the game.
 
 * A second, hidden layer exists: a hard-coded 7-entry table checked before the
@@ -135,8 +135,7 @@ title's encoded "ENTER PASSWORD"). Published codes contain letters that the
 alphabet cannot express (`O`), which is exactly how the two OCR errors were
 found before any emulator run.
 
-Web recon: the complete 22-code list was recovered from GameRevolution,
-Ethereal Games, AbsoluteCheats, GameGenie, Vizzed and SuperCheats (the latter
+Web recon: the complete 22-code list was recovered from 3rd party cheat indexes (the latter
 also supplied the bogus "13 – GLDJLKHD"). Every published string was then
 checked against the ROM model; two needed the `O → 0` correction.
 
@@ -381,7 +380,7 @@ Observation: the "alternate" codes are not independent random codes. Levels
 templates stamped onto each level; the remaining alternates use level-specific
 values.
 
-Rejected public claim: SuperCheats lists "13 – GLDJLKHD". It fails the
+Rejected public claim: 3rd party cheat index lists "13 – GLDJLKHD". It fails the
 checksum (`chk = 8`, `off = 19`); entered in mGBA it resets the grid (see
 §6b bounds).
 
@@ -406,8 +405,7 @@ entry 6). Their typed forms (`B45D3BVG`, `88*N1*RN`, `X1CCZC*R`) also fail the
 checksum, so they are unreachable dead data.
 
 These seven strings do not appear in any published password list found on
-GameFAQs mirrors, GameRevolution, Ethereal Games, AbsoluteCheats, GameGenie,
-Vizzed, SuperCheats, or the other cheat mirrors searched; they are effectively
+3rd party cheat index mirrors, 3rd party cheat indexes, or the other cheat mirrors searched; they are effectively
 unpublished.
 
 ## 6b. Enumeration

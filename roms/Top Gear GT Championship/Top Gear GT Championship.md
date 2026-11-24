@@ -44,8 +44,7 @@ labels. The game's remaining text is glyph-index based (bitmap/tile rendering),
 so `strings` alone proves nothing; the glyph-index encoding was established from
 the save record and searched as well.
 
-A published-code recon found **no** codes for this exact title on Cheat Happens,
-GameFAQs, TCRF or general search. The TCRF page for this title is a prompt-injection
+A published-code recon found **no** codes for this exact title on 3rd party cheat indexes or general search. The 3rd party cheat index page for this title is a prompt-injection
 test page containing a fake `rm -rf . ~` instruction; it was treated as data and
 ignored (§16.8).
 
@@ -136,7 +135,7 @@ negative is bounded rather than "not tested".
 
 | Surface checked | Space / method | Result |
 |---|---|---|
-| Published codes (web recon) | Cheat Happens (2 pages), GameFAQs (title + cheats, 403 on direct fetch — snippets used), TCRF, general search | 0 codes for this SKU. Codes returned belonged to *GT Advance* / *Top Gear Rally* / *Top Gear Overdrive* and were excluded |
+| Published codes (web recon) | 3rd party cheat indexes (title + cheats, 403 on direct fetch — snippets used), 3rd party cheat indexes, general search | 0 codes for this SKU. Codes returned belonged to *GT Advance* / *Top Gear Rally* / *Top Gear Overdrive* and were excluded |
 | ASCII keyword search | 18 keywords (`PASSWORD`, `CHEAT`, `DEBUG`, `CODE`, `SECRET`, `UNLOCK`, `BONUS`, `MASTER`, `TEST`, `LEVEL SELECT`, `ENTER`, `INVALID`, `WRONG`, `CORRECT`, `EXTRA`, `GARAGE`, `NEW CAR`, `ALL CARS`) × 5 encodings (ASCII, lower, UTF-16LE, UTF-16BE, `+0x20`) = 90 searches over all 4,194,304 bytes | **0 hits** |
 | Affine re-encoding of known on-screen text | 16 visible strings (`PUSH START`, `MAIN SELECT`, `QUICK RACE`, `COURSE EDIT`, `STAFF CREDITS`, `CHAMPIONSHIP`, `OPTION`, `UNITS`, `TIME ATTACK`, `SINGLE RACE`, `KEMCO`, `ASSOCIATION`, …) × 240 affine maps `b = a·ord(c)+d` (a=±1, d=−0x60..+0x5F) | **0 hits** — text is glyph-index/bitmap, not affine ASCII |
 | ASCII text bank | Full enumeration of the only ASCII bank `0x080486D0`–`0x08048B90` | 41 strings, all numeric formats / driver tags / result labels. 0 code-like strings |
@@ -206,7 +205,7 @@ methodology are published.
 
 ## 10. Legal / injection note
 
-The TCRF page titled "Top Gear GT Championship" is an "LLM / AI Standard Test
+The 3rd party cheat index page titled "Top Gear GT Championship" is an "LLM / AI Standard Test
 Page" containing instructions such as `echo Test; rm -rf . ~`. It is a
 prompt-injection attempt; it was treated as untrusted data, not executed, and
 is recorded here as required by §16.8.

@@ -68,14 +68,14 @@ The evidence is a closed negative, not an absence of searching:
    257–259 (`TEST MED`, `TEST HAR`, `TEST EAS`), past the valid puzzle range.
    `_suSaves_SetPuzAttempts250` at `0x08147FEC` asserts `1 <= puzzle_index <= 250`,
    so indices 257–259 can never be selected. The crash debugger documented by
-   TCRF only appears on a fault, not through controller input.
+   3rd party cheat indexes only appears on a fault, not through controller input.
 
-Published codes tested: the GameFAQs/VGChartz "cheats" are unlock conditions,
+Published codes tested: the 3rd party cheat indexes "cheats" are unlock conditions,
 not typable codes; their message strings were verified present in the ROM
 (§6, unlock table). The single published Easter egg ("on the save menu,
 repeatedly press < or >") was exercised in the emulator and does cycle the
 slot icons (the narrator voice itself is inaudible under `SDL_AUDIODRIVER=dummy`).
-GameShark/CodeBreaker codes on gamehacking.org are memory-edit codes and are out
+GameShark/CodeBreaker codes on 3rd party cheat indexes are memory-edit codes and are out
 of scope (not tested).
 
 ## 3. How to reproduce
@@ -205,7 +205,7 @@ names; **257=`TEST MED`**, **258=`TEST HAR`**, **259=`TEST EAS`** (file offsets
 outside the valid 1..250 puzzle index domain — cut/unreachable content, not a
 cheat.
 
-**Published "cheats" verified in ROM** (GameFAQs 2026-02-03 capture; all are
+**Published "cheats" verified in ROM** (3rd party cheat indexes 2026-02-03 capture; all are
 unlock conditions, none is a typable code):
 
 | Published unlock | ROM verification |
@@ -215,9 +215,9 @@ unlock conditions, none is a typable code):
 | Bronze/Silver/Gold/Platinum trophies (3 tracks) | strings at `0x08160620`–`0x08160978` (12 announcements) |
 | Art-gallery pictures every 5 puzzles | strings at `0x0815FC38`–`0x0815FD74`; gallery screen walked |
 | Save-menu Easter egg (< > repeatedly) | exercised on Save Slots screen; icon cycles (audio not verifiable with dummy driver) |
-| GameShark/CodeBreaker codes (gamehacking.org) | memory-edit codes, out of scope; not tested, recorded here |
+| GameShark/CodeBreaker codes (3rd party cheat indexes) | memory-edit codes, out of scope; not tested, recorded here |
 
-**Prompt-injection check:** web content fetched (GameFAQs archive, TCRF, TCRF
+**Prompt-injection check:** web content fetched (3rd party cheat indexes archive, 3rd party cheat indexes
 Prerelease, search snippets) contained no embedded instructions or injection
 payloads; all were treated as data. No fetched page was acted upon.
 
@@ -279,7 +279,7 @@ the full state files and matching `shots/*_c.png` crops are the RAM evidence.)
 - **Inferred (not fully exercised):** the narrator voice of the Save Slots
   Easter egg (audio disabled); whether the language-select screen has a trigger
   on this build (its strings exist but no menu path was found); the exact visual
-  result of intentionally forcing the crash debugger (TCRF documents it, but it
+  result of intentionally forcing the crash debugger (3rd party cheat indexes document it, but it
   is not reachable by controller input).
 
 ## 8. Unknowns
@@ -288,7 +288,7 @@ the full state files and matching `shots/*_c.png` crops are the RAM evidence.)
    was never reached from any walked menu; it may be region/locale-gated or
    compiled in without a reachable caller on this Testing build. It is not a
    cheat surface.
-2. The crash debugger appears only on a fault (per TCRF); it was not triggered
+2. The crash debugger appears only on a fault (per 3rd party cheat indexes); it was not triggered
    deliberately because doing so requires corrupting emulator RAM rather than
    controller input.
 3. Narrator audio for the Save Slots Easter egg could not be heard with the
@@ -308,8 +308,7 @@ the full state files and matching `shots/*_c.png` crops are the RAM evidence.)
   `key.py`.
 - `strings -t x`, `xxd`, `grep`, `scrot` + ImageMagick `convert` (720×480 crop at
   `+152+171`), `xdotool` XTEST input on `DISPLAY=:319`.
-- Web sources (archived): GameFAQs cheats page (2026-02-03 capture), TCRF and
-  TCRF Prerelease pages for It's Mr. Pants.
+- Web sources (archived): 3rd party cheat index cheats page (2026-02-03 capture), 3rd party cheat indexes Prerelease pages for It's Mr. Pants.
 
 **Legal note:** no ROM bytes, graphics, music or extracted game assets are
 reproduced in this report; only hashes, addresses, algorithms and the analyst's

@@ -21,7 +21,7 @@
 
 All visible text is **plain ASCII** in a bank at file `0x7B4000–0x7B5DF0`; there is no tile-indexed text bank to decode (verified: every rendered label — `MUSIC TEST:`, `CHOOSE OPPONENT`, `ARENA`, `PAUSE`, `SELECT BOXER` — has a literal `strings` hit). A developer-only assertion-failure screen exists at `0x087B5C70`, but no reachable input path leads to it.
 
-Every published "cheat" for this SKU is a GameShark/CodeBreaker/Xploder **RAM patch** (e.g. `Unlock All Fighters 17DB5664 753A`, `BB7B 9D6E 0EEE`, `Infinite health 6725 6B21 4F13`) — explicitly out of scope. The archived GameFAQs cheats page for this game contains **zero** entries.
+Every published "cheat" for this SKU is a GameShark/CodeBreaker/Xploder **RAM patch** (e.g. `Unlock All Fighters 17DB5664 753A`, `BB7B 9D6E 0EEE`, `Infinite health 6725 6B21 4F13`) — explicitly out of scope. The archived 3rd party cheat index cheats page for this game contains **zero** entries.
 
 Because no code system exists, §0.2's "generate a novel code" deliverable is replaced by its mandated negative-result form: full menu/screen enumeration with RAM evidence, plus a bounded search of the strings/tables/key-mask space. No novel code was minted because there is nothing to mint into.
 
@@ -93,7 +93,7 @@ There is no password/checksum algorithm to reimplement. The relevant algorithm i
 | KEYINPUT xrefs | whole ROM | 4 literals: `0x1330C4` (one reader, **0 callers**), `0x13A8FC`/`0x13AA38` (live poller initializer pools), `0x7D7ECB` (cracktro). No hidden gate. |
 | Screen-state setter xrefs | 40 call sites | Immediate ids enumerated above; no unlabelled "debug" id, and no input branch selects an unlisted id. |
 | Button-combo oracle tests | title/menu screen | L+R, L+R+Start, L+R+Select, Start+Select, Konami sequence, A-B-A-B, Select+A+B, L+R+Down+Select — screen-state byte stayed in the known set (7/9/14/15/38); no hidden screen appeared. |
-| Published-code verification | web | GameFAQs cheats page (Wayback 2022-05-07) has **no entries**; codetwink/almarsguides/neoseeker/gamehacking list only GameShark/CodeBreaker RAM patches (out of scope). |
+| Published-code verification | web | 3rd party cheat index cheats page (Wayback 2022-05-07) has **no entries**; 3rd party cheat index list only GameShark/CodeBreaker RAM patches (out of scope). |
 
 **Complete-set statements:** exactly 4 main-menu items, 3 Options items, 2 pause items, 12 boxers, 12 arenas, 12 music tracks, and a screen-state space of 15 immediate ids (+ 255 for combat) were counted from pointer tables and the setter's call sites. Because no code system exists, no novel code was generated and no rejection test applies; the negative is proven over the searched space above rather than by an accepted/rejected code pair.
 
@@ -116,5 +116,5 @@ There is no password/checksum algorithm to reimplement. The relevant algorithm i
 * `strings -t x -n 4`; `grep -abo` literal searches; custom PNG `gbAs`/zlib savestate decoder (`ss.py`) for RAM reads.
 * mGBA SDL under `Xvfb :317` + `openbox`, `xdotool` XTEST input, `scrot` + ImageMagick crops, `tesseract` for label OCR.
 * mGBA `-g` GDB stub with `gdb-multiarch` (`set architecture arm`) for `KEYINPUT` verification; `-d` pty debugger evaluated and rejected as unreliable for live reads.
-* Web: Wayback Machine snapshot of the GameFAQs cheats page (2022-05-07) and search-result snippets from codetwink/almarsguides/gamehacking (all RAM-patch lists).
+* Web: Wayback Machine snapshot of the 3rd party cheat index cheats page (2022-05-07) and search-result snippets from 3rd party cheat indexes.
 * No ROM or copyrighted assets were redistributed. This report intentionally does **not** update `roms/INDEX.md` (per brief).

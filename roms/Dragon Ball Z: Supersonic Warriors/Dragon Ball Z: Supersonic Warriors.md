@@ -15,13 +15,13 @@
 | SHA-1 | `f6f956989773e39cfde407d3763eb7f767ef2033` |
 | SHA-256 | `588fd0bb53541a0c0ac49cc4192226988ab307dc3bee3c8328ee1a952d52091c` |
 
-Header is **rebuilt/patched**: checksum `0x0000` and stored complement `0x25` vs computed `0x3E` (guide §16.1). The entry word is the stock ARM branch, so the cart entry itself is not a cracktro. Single Nintendo-logo header only (logo hits: 1, at file 0x4) — **no embedded second image and no appended trainer header**. The logo bytes are the nonstandard variant `24 ff ae 51 69 9a a2 21 3d 84 82 0a ...` (also present in the concurrently analysed Buu's Fury and GT images — a dumper/tool signature, not a shared game engine). Save is 512-byte EEPROM. Developer/publisher metadata: Cavia/Arc System Works, Atari SA, US release 2004-06-22 (TCRF / GameFAQs).
+Header is **rebuilt/patched**: checksum `0x0000` and stored complement `0x25` vs computed `0x3E` (guide §16.1). The entry word is the stock ARM branch, so the cart entry itself is not a cracktro. Single Nintendo-logo header only (logo hits: 1, at file 0x4) — **no embedded second image and no appended trainer header**. The logo bytes are the nonstandard variant `24 ff ae 51 69 9a a2 21 3d 84 82 0a ...` (also present in the concurrently analysed Buu's Fury and GT images — a dumper/tool signature, not a shared game engine). Save is 512-byte EEPROM. Developer/publisher metadata: Cavia/Arc System Works, Atari SA, US release 2004-06-22 (3rd party cheat indexes).
 
 ## 2. Executive summary
 
-**There is no password system, no button-code system, and no on-screen code-entry field in this image.** The developer-intended "cheat"/unlock surface consists of (a) **save-backed unlockables** (a 15-page Shop bought with Challenge-Mode points, Challenge teams, "Secret Final Battles" after a no-loss story clear) and (b) **one genuine hidden debug menu**, which TCRF documents but leaves "To do: Document this."
+**There is no password system, no button-code system, and no on-screen code-entry field in this image.** The developer-intended "cheat"/unlock surface consists of (a) **save-backed unlockables** (a 15-page Shop bought with Challenge-Mode points, Challenge teams, "Secret Final Battles" after a no-loss story clear) and (b) **one genuine hidden debug menu**, which 3rd party cheat indexes document but leaves "To do: Document this."
 
-The debug menu is real, reachable, and fully enumerated here (§6b). Its gate is the single RAM byte `0x03000891 == 0x0C` (IWRAM), set at the main menu. With the gate set, an otherwise **unlabelled 8th dragon-ball option** appears; selecting it, choosing a character, watching the first story cutscene, and pressing **Start** opens a five-entry debug menu that TCRF does not describe. All five entries were activated in the emulator and their effects recorded (§6b). The exact gate value was proved by rejection: 0x0B and 0x0D leave the normal, labelled menu (§6b).
+The debug menu is real, reachable, and fully enumerated here (§6b). Its gate is the single RAM byte `0x03000891 == 0x0C` (IWRAM), set at the main menu. With the gate set, an otherwise **unlabelled 8th dragon-ball option** appears; selecting it, choosing a character, watching the first story cutscene, and pressing **Start** opens a five-entry debug menu that 3rd party cheat indexes do not describe. All five entries were activated in the emulator and their effects recorded (§6b). The exact gate value was proved by rejection: 0x0B and 0x0D leave the normal, labelled menu (§6b).
 
 Every published code for this SKU was checked (§6). All "codes" on cheat sites are **GameShark/CodeBreaker/Action-Replay memory edits (out of scope)** or **unlockable descriptions**; the four widely copied "Developer cheat codes" belong to *Dragon Ball GT: Transformation* / the PS2-era titles and are absent from this GBA image in every encoding checked (§6). Nothing is shared with the two concurrently analysed DBZ GBA images at code/table level (§7).
 
@@ -45,7 +45,7 @@ Every published code for this SKU was checked (§6). All "codes" on cheat sites 
 |---|---|---|
 | file `0x000..0x1FF` | Rebuilt header (chk 0, complement 0x25); stock entry 0xEA00002E | Observed (bytes) |
 | `0x03000890` | Global game-state struct base (71 Thumb PC-relative literal loads in ROM) | Derived |
-| **`0x03000891`** | **Debug-menu gate byte; 0x0C enables the hidden option** | Observed (savestate patch + emulator path) + Derived (TCRF literal) |
+| **`0x03000891`** | **Debug-menu gate byte; 0x0C enables the hidden option** | Observed (savestate patch + emulator path) + Derived (3rd party cheat indexes literal) |
 | `0x03001890` | Secondary global state (menu mode dispatch, +0x12 switch selectors) | Derived (disasm 0x0802C0A4, 0x0802D80E, 0x0803F190) |
 | `0x03004D50` / `0x03004D58` | Save/unlock flag region; `0x03004D58` is the "everything unlocked" GameShark target and has literal xrefs at `0x08038204`, `0x0803AD48` | Derived (literal scan) + published code |
 | `0x08000BFE` | Earliest literal load of 0x03000890 (mode-dispatch function) | Derived |
@@ -78,14 +78,14 @@ Shop[15 pages] <- buy with points -> unlock flags in 0x03004D5x / EEPROM
 
 | Source / code | Class | Result |
 |---|---|---|
-| GameFAQs cheats page: 7 Challenge-Mode team unlocks | Unlockable description | Real feature, save-backed; not a code (§6b) |
-| GameFAQs: "Secret Final Battles — clear story without losing, wait after credits" | Unlockable description | Real gate; not a code |
-| GameFAQs: "Fast Win — beat Frieza <14 s in story mode" | Gameplay trick | Not a code system |
-| GameFAQs FAQ: "hidden characters besides those you buy/unlock in the Store? **No.**" | Negative statement | Consistent with observed Shop-only unlocks |
-| `43004D58 FFFF / 00000004 0002`, `8300274A 6400`, `74000130 03FB 33002826 0000` (SuperCheats) | GameShark memory edits | Out of scope; useful only as RAM-location evidence (0x03004D58) |
-| CodeBreaker / Action Replay lists (almarsguides, gamehacking.org, Cyberly), e.g. `2EB1D3AADD1B FC73B37934AC` | Memory edits | Out of scope; not verified against ROM |
-| cheatcc "unlock the redemption menu" | Unlockable/other-SKU claim | No redemption/code screen exists in reachable menu tree (Observed) |
-| TCRF `03000891:0C` | Memory-write **research instrument** | Verified: opens the hidden debug path in this exact image |
+| 3rd party cheat index cheats page: 7 Challenge-Mode team unlocks | Unlockable description | Real feature, save-backed; not a code (§6b) |
+| 3rd party cheat indexes: "Secret Final Battles — clear story without losing, wait after credits" | Unlockable description | Real gate; not a code |
+| 3rd party cheat indexes: "Fast Win — beat Frieza <14 s in story mode" | Gameplay trick | Not a code system |
+| 3rd party cheat index FAQ: "hidden characters besides those you buy/unlock in the Store? **No.**" | Negative statement | Consistent with observed Shop-only unlocks |
+| `43004D58 FFFF / 00000004 0002`, `8300274A 6400`, `74000130 03FB 33002826 0000` (3rd party cheat indexes) | GameShark memory edits | Out of scope; useful only as RAM-location evidence (0x03004D58) |
+| CodeBreaker / Action Replay lists (3rd party cheat indexes), e.g. `2EB1D3AADD1B FC73B37934AC` | Memory edits | Out of scope; not verified against ROM |
+| 3rd party cheat indexes "unlock the redemption menu" | Unlockable/other-SKU claim | No redemption/code screen exists in reachable menu tree (Observed) |
+| 3rd party cheat indexes `03000891:0C` | Memory-write **research instrument** | Verified: opens the hidden debug path in this exact image |
 | PS2/console DBZ codes; Buu's Fury / GT "Developer cheat codes" | Other SKU | Absent from this ROM (no literals, no button-mask table); not applicable |
 
 **Text/button search space (negative results bounded):**
@@ -101,7 +101,7 @@ Shop[15 pages] <- buy with points -> unlock flags in 0x03004D5x / EEPROM
 
 ## 6b. Enumeration
 
-**Space definition:** There is no code space to enumerate for passwords/button codes — representable developer-intended codes = **0**. The enumerable hidden content is the debug menu: **exactly 5 entries**, all undocumented by TCRF. Gate space tested: byte values 0x0B, 0x0C, 0x0D at 0x03000891.
+**Space definition:** There is no code space to enumerate for passwords/button codes — representable developer-intended codes = **0**. The enumerable hidden content is the debug menu: **exactly 5 entries**, all undocumented by 3rd party cheat indexes. Gate space tested: byte values 0x0B, 0x0C, 0x0D at 0x03000891.
 
 **Debug-menu entries and effects** (Observed; cursor wraps after the 5th — entry 0 and entry 5 produce the same result). Labels render as garbled glyphs because the debug screen uses a nonstandard font mapping, so entries are identified by effect, not by their unreadable text:
 
@@ -113,18 +113,18 @@ Shop[15 pages] <- buy with points -> unlock flags in 0x03004D5x / EEPROM
 | 4 | Settings toggle: returns to the debug menu; top-left value cycles `YPP` → `YX` (a 3-state ↔ 2-state value, consistent with an ON/OFF-style flag); 0x03000890/0x92/0x94 change | `dbg2_a3_c.png`, savestate diff `dbg_base.ss5` vs `dbg_e1_right.ss6` |
 | 5 | Blank black screen | `dbg2_a4_c.png` |
 
-This is a **story/scene-oriented debug menu**, not a universal "unlock all" panel. The five entries and their effects are **novel** relative to every published list checked (TCRF explicitly leaves the menu undocumented; GameFAQs lists only unlockables).
+This is a **story/scene-oriented debug menu**, not a universal "unlock all" panel. The five entries and their effects are **novel** relative to every published list checked (3rd party cheat indexes explicitly leaves the menu undocumented; 3rd party cheat index lists only unlockables).
 
 **Bounds proven by rejection (Observed):** starting from the same main-menu savestate, patching `0x03000891` to `0x0B` (`gatebound_7_c.png`) or `0x0D` (`gatebound_8_c.png`) leaves the normal labelled "LINK VS MODE" menu; only `0x0C` (`gatebound_9_c.png`) removes the label and admits the hidden option. With no patch (stock 0x05/0x00) the main menu has exactly the 7 labelled entries in the mode ring and no unlabelled option (`gmenu_montage.png`, `menu2_montage.png`, 8+ Down presses). The exact gate value is therefore demonstrated, not assumed.
 
-**Unlockables (save-bit system, not a code):** Challenge-team unlocks (7 teams), Secret Final Battles (no-loss story clear), and the 15-page Shop. These are save/point-gated, consistent with §16.18: no input can set them. GameFAQs' FAQ explicitly states no hidden characters beyond Shop/unlockables, and the full reachable menu tree contains no code-entry surface.
+**Unlockables (save-bit system, not a code):** Challenge-team unlocks (7 teams), Secret Final Battles (no-loss story clear), and the 15-page Shop. These are save/point-gated, consistent with §16.18: no input can set them. 3rd party cheat indexes' FAQ explicitly states no hidden characters beyond Shop/unlockables, and the full reachable menu tree contains no code-entry surface.
 
 ## 7. Validation evidence
 
 * **Observed:** hashes/header; 7-mode main menu ring; Option → Setting/Shop/Ranking; Shop 15 pages/prices; story character-select grid; first cutscene; debug menu reached via the gate; 5 debug entries activated with effects above; gate values 0x0B/0x0C/0x0D compared; savestate IWRAM layout verified against mGBA's serialized struct.
 * **Derived:** gate accessor at 0x0803F1FA and 71 xrefs to state base 0x03000890; `cmp #0xC` sites identified as unrelated switch bounds; unlock flag word 0x03004D58 from published code + ROM literal xrefs; header rebuild from checksum/complement arithmetic.
 * **Inferred:** Shop/unlock flag layout in EEPROM (not dumped/decoded); that blank debug entries are unused cutscene slots; that no controller sequence can set the gate (consistent with exhaustive menu/button-space search, but no formal proof over every possible sequence — see §8).
-* **Prompt-injection watch:** fetched GameFAQs/TCRF pages contained no instruction-like payloads in this run; all page text treated as data (§16.8).
+* **Prompt-injection watch:** fetched 3rd party cheat index pages contained no instruction-like payloads in this run; all page text treated as data (§16.8).
 
 ## 8. Unknowns
 

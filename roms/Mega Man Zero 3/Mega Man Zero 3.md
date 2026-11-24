@@ -31,7 +31,7 @@ Evidence is deliberately bounded (guide §0.2 / §16):
 
 One genuinely interesting negative-adjacent finding: the UI text bank contains a title-menu label **`MINI GAMES`** at file `0x371271` (and its highlighted variant at `0x37127E`) alongside `NEW GAME` (`0x371243`) and `LOAD GAME` (`0x371259`). The shipped title menu draws only **two** rows, and no input tried on the title or menu (D-pad, L/R, Select, A/B, Start; L+R+Start; repeated downs) reveals the third. It is therefore a **gated or cut UI entry in this revision**, not a reachable cheat. This is classified per guide §16.3 as a *gated/cut feature*, with the gate writer not isolated (§8).
 
-Published-code research: GameFAQs, TCRF, VGChartz and general web search were attempted but all were blocked by 403/captcha/bot checks in this environment (§9). No specific published GBA password exists for this title to verify; the ROM-side evidence above is the primary basis for the negative.
+Published-code research: 3rd party cheat indexes and general web search were attempted but all were blocked by 403/captcha/bot checks in this environment (§9). No specific published GBA password exists for this title to verify; the ROM-side evidence above is the primary basis for the negative.
 
 ## 3. How to reproduce
 
@@ -129,7 +129,7 @@ Guide §0.2 requires the *whole space* to be characterised. The characterisation
 * `md5sum`, `sha1sum`, `sha256sum`, `file`, `xxd`, Python 3 (`struct`, `re`, `capstone 5.0.7`).
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` and custom Capstone helpers `dis.py`, `dis2.py` in the work dir.
 * mGBA 0.10.5 with `-d` CLI debugger driven through a pty (`ptyctl.py`, `key.py`) on `DISPLAY=:317`; Xvfb + openbox.
-* Web attempts (all blocked): `websearch` (no results), GameFAQs (403), TCRF (403/CAPTCHA), Google/Bing/DuckDuckGo (captcha or irrelevant results), `r.jina.ai` proxies (blocked). No content from these was treated as instructions; nothing suspicious was followed.
+* Web attempts (all blocked): `websearch` (no results), 3rd party cheat indexes, Google/Bing/DuckDuckGo (captcha or irrelevant results), `r.jina.ai` proxies (blocked). No content from these was treated as instructions; nothing suspicious was followed.
 
 ## 10. Legal note
 

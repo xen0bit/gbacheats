@@ -170,11 +170,11 @@ The only debug-related strings are the hidden debug menu labels; no password/che
 ### Published-source check
 | Source | Claim | Verification |
 |---|---|---|
-| Freeola / CheatCodes.com / AbsoluteCheats (GBA) | "Ollie Grind: press A,B"; X-Rage orb; easier combos | Gameplay tips, not codes. |
-| Freeola / CheatCodes.com (GBA) | Unlock Rollie McNulty / Kaiell Williams at skateboard shop | Save/shop unlockables. Shop screen walked (§3 #9); "NO BUY" and both names in text bank. Not codes. |
-| GameFAQs cheats (GBA page) | Big Head/Hard Mode, 3 Aliens | Explicitly PS2 — wrong SKU. |
-| TCRF | Debug menu | Article is PS2 only; **GBA has its own live debug code** (§4/§6), but no public GBA article. |
-| gamehacking.org / almarsguides / Ethereal Games | Max Skillz / unlock / gold medals | CodeBreaker/Action Replay external RAM patches — out of scope. |
+| 3rd party cheat indexes | "Ollie Grind: press A,B"; X-Rage orb; easier combos | Gameplay tips, not codes. |
+| 3rd party cheat indexes | Unlock Rollie McNulty / Kaiell Williams at skateboard shop | Save/shop unlockables. Shop screen walked (§3 #9); "NO BUY" and both names in text bank. Not codes. |
+| 3rd party cheat index cheats (GBA page) | Big Head/Hard Mode, 3 Aliens | Explicitly PS2 — wrong SKU. |
+| 3rd party cheat indexes | Debug menu | Article is PS2 only; **GBA has its own live debug code** (§4/§6), but no public GBA article. |
+| 3rd party cheat indexes | Max Skillz / unlock / gold medals | CodeBreaker/Action Replay external RAM patches — out of scope. |
 
 Fetched pages were treated as data; no instructions followed.
 

@@ -16,7 +16,7 @@
 | MD5 | `66e896522a91ecd1e45fde5e93920bf7` |
 | SHA-1 | `78f9e56a2f22a08b1597c9c545b0474ba290c298` |
 | SHA-256 | `004d2bf5b7cecb6d3722367410e9ae4208814e777a69c3d82855401122e18cf9` |
-| Developer / publisher | Radius9 / Majesco, 2004-06-07 (per GameFAQs/IGN release data) |
+| Developer / publisher | Radius9 / Majesco, 2004-06-07 (per 3rd party cheat indexes release data) |
 
 **Phase 0 result:** Nintendo-logo scan over the whole image returns exactly **one** header, at file offset `0x0`. The entry word is the stock GBA branch, the fixed byte at `0xB2` is `0x96`, and there is no appended trainer, cracktro, boot selector or second image. The image is the retail ROM, not a patched/trainer build.
 
@@ -32,7 +32,7 @@ This negative is **bounded and proven**, not an absence of searching:
 * The **entire text bank** (68 NUL-terminated ASCII strings, `0x082BD598`–`0x082BE400`) was decoded and enumerated. It contains zero password/cheat/debug/secret/options strings. The visible menu headings ("MIGHTY MENU", "PUZZLE", "BEANZ CASE", "PAUSED", "HINT") are pre-rendered gradient graphics, not font text; the font-rendered strings (e.g. the HINT text) come from that same ASCII bank, so no font/tile-indexed second bank was left undecoded.
 * The **entire button-input space** was characterised statically: 2 direct KEYINPUT reads and 64 calls to the two input helpers, all testing **one button per test**. The only multi-key predicate in the ROM is the standard GBA soft-reset combination (L+R+Start+Select) at `0x0800F25A`–`0x0800F27A`.
 * Multiple common codes (Konami code, L+R+Start, A+B+Start+Select, D-pad roll, ten-A) were entered on the title screen and main menu; savestate diffs against no-input controls show only animation/input-history noise and no persistent state change or hidden screen.
-* Published-code search found **no codes published for this SKU** — Cheat Happens states explicitly that no cheats/codes exist for the GBA game; GameFAQs and TCRF pages returned 403 and their indexed snippets contain no codes. No literal from any published list needed verification because no list exists.
+* Published-code search found **no codes published for this SKU** — 3rd party cheat indexes state explicitly that no cheats/codes exist for the GBA game; 3rd party cheat index pages returned 403 and their indexed snippets contain no codes. No literal from any published list needed verification because no list exists.
 
 Four developer easter eggs *are* present in the text bank (Zork "grue", "This is bat country!", a love letter, and "All powerups maxed out!"), selected by a result/milestone argument through a 5-entry pointer table. They are hidden **messages**, not cheats, and are documented in §6.
 
@@ -108,7 +108,7 @@ No code space exists, so §0.2's "validator model / novel code" deliverable is r
 
 Two `IsHeld` call sites use a computed mask rather than a literal (music/sound handling); inspection shows single-button semantics as well. **No test uses a combined bitmask.** The only sequence of multiple button tests is L→R→Start→Select at `0x0800F25A`–`0x0800F27A`.
 
-**Published codes:** none found. Cheat Happens' GBA page for this title explicitly says "We currently don't have any Mighty Beanz Pocket Puzzles cheats or cheat codes for Game Boy Advance." GameFAQs (game page, release-data page, statistics) and TCRF/IGN/Wiki listings contain no code section for this SKU. Direct fetches of GameFAQs cheats and TCRF returned HTTP 403; archive snapshots returned 404/503. Search-result snippets from those domains contain no codes. No published literal exists to search for in the ROM.
+**Published codes:** none found. 3rd party cheat indexes' GBA page for this title explicitly says "We currently don't have any Mighty Beanz Pocket Puzzles cheats or cheat codes for Game Boy Advance." 3rd party cheat indexes (game page, release-data page, statistics) and 3rd party cheat indexes/Wiki listings contain no code section for this SKU. Direct fetches of 3rd party cheat index cheats and 3rd party cheat indexes returned HTTP 403; archive snapshots returned 404/503. Search-result snippets from those domains contain no codes. No published literal exists to search for in the ROM.
 
 **Fetched-content safety:** all web text was treated as data. No prompt-injection payload was encountered; no instruction found in any fetched page or ROM string was executed.
 

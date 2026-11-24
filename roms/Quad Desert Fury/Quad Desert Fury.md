@@ -51,7 +51,7 @@ only meaningful ASCII is a C++ RTTI / task-name bank at `0x0810BD8–0x0810E10`
 `TRACK TIMES`, plus standard C++ runtime names). No class named Password,
 Cheat, Debug, Secret or Unlock exists.
 
-Published "cheats" for this title are absent: Cheat Happens explicitly lists
+Published "cheats" for this title are absent: 3rd party cheat indexes explicitly lists
 none; the only hits are GameShark/CodeBreaker `.cht` database entries
 ("1197 – Quad Desert Fury (US) Translated Cheats", "2333 – 2 Games in 1 – Quad
 Desert Fury + Monster Trucks (EU)"), which are external memory-edit codes and
@@ -196,7 +196,7 @@ search spaces that were checked for a hidden system:
 
 ## 8. Unknowns
 
-* The Wikipedia claim of a "Time Trial" mode is not borne out by this ROM's
+* The 3rd party cheat index claim of a "Time Trial" mode is not borne out by this ROM's
   UI: only Quick Race and Challenge Mode are selectable, and no Time Trial
   entry appears after selecting a track. Treated as an article error for this
   SKU, not an undiscovered screen.

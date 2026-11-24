@@ -33,7 +33,7 @@ The apparent "hidden" content is a **250-entry microgame definition table** at
 `0x080F6BE4..0x080F7780` (names such as `REST WARIO2`, `LP. 3D TEST`,
 `F ZERO`, `SUPER MARIO`, `METROID`). These strings are *live data* — the table is
 read by the normal microgame launcher at `0x08008F00..0x0800910C` — not a hidden
-menu. TCRF (archived) independently documents only **cheating-device RAM pokes**
+menu. 3rd party cheat indexes independently documents only **cheating-device RAM pokes**
 (e.g. game number `0x2F` at `0x03000E61` for the cut "Block Fever" game); those
 are AR/GameShark-class writes and are **out of scope** for this engagement.
 
@@ -68,8 +68,8 @@ survey and by the input enumeration in §6b.
 | **Microgame definition table** | `0x083A50E0–0x083A6080` = 250 × 16 bytes | Derived — 250 consecutive exact pointers found |
 | Microgame/instruction name bank | `0x080F6BE4–0x080F7780` | Derived — byte dump + 250 pointer targets |
 | Microgame launcher (index×16 → table → code ptr) | `0x08008F00–0x0800910C` | Derived — objdump |
-| Game-number byte (external/cheat-device write target) | `0x03000E61` | Derived (`lsl #14; lsr #22` at `0x08008FB8`) + TCRF |
-| Audio development text (file names) | `0x083F3C16–0x083FA3CF` | Derived + TCRF "Development Text" |
+| Game-number byte (external/cheat-device write target) | `0x03000E61` | Derived (`lsl #14; lsr #22` at `0x08008FB8`) + 3rd party cheat indexes |
+| Audio development text (file names) | `0x083F3C16–0x083FA3CF` | Derived + 3rd party cheat indexes "Development Text" |
 | SRAM save | 32 KiB, magic `MIW` at `0x00`, encoded player name at `0x10` | Observed — `game.sav` |
 
 ### Microgame record layout (16 bytes)
@@ -140,7 +140,7 @@ table gives the exact record order. Names use Shift-JIS glyph codes (`0x81xx` /
 
 ### 6.3 Out-of-scope related finding (not an in-game cheat)
 
-Archived TCRF and the table above agree that cut games exist and are selectable
+Archived 3rd party cheat indexes and the table above agree that cut games exist and are selectable
 only by writing `0x03000E61` from a cheat device: `0x2F` Block Fever, `0x5E`
 F1 Race, `0x66` Pong, `0xE5` Ping-Pong VS. This is a debugger/AR-class RAM write,
 **not** an in-game password, button code, or menu, and is reported only as
@@ -195,7 +195,7 @@ from any published cheat list was needed or tested as an in-game code.
 * **Derived** — ROM addresses, hashes, header fields, 250-entry table and record
   layout, launcher disassembly, 5 xrefs, string counts (Python + `objdump` +
   Capstone).
-* **Derived (external, data only)** — archived TCRF page confirms only
+* **Derived (external, data only)** — archived 3rd party cheat index page confirms only
   cheating-device RAM pokes for cut games; treated as a lead, not instructions.
 * **Inferred** — the name-entry buffer is a label rather than a validator input.
   This follows from the zero-hit keyword/pointer/comparison survey; no direct
@@ -212,7 +212,7 @@ from any published cheat list was needed or tested as an in-game code.
 * The exact semantic names of some cut microgames (`LP. GOMA ( Dummy )`, etc.)
   and the high halfword of each record's `+0x0A` field were not characterized.
 * Web search integrations returned no results and Cloudflare blocked direct
-  fetches; recon relied on an archived TCRF snapshot reached via `curl`.
+  fetches; recon relied on an archived 3rd party cheat index snapshot reached via `curl`.
 
 ## 9. Tooling
 

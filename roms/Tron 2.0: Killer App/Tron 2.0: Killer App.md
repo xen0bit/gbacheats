@@ -110,7 +110,7 @@ Word `0xFFFF` at `0x080D4C8C` follows the table (not part of a code; a separate 
 
 ### 6.3 Published-code reconciliation
 
-SuperCheats, ChapterCheats and GGmania all list the same three sequences. SuperCheats omits the trailing Select for the All-Chips code while GGmania includes it; the disassembly shows why: Select is the validation trigger and is never one of the eight stored halfwords. CodeBreaker/GameShark lists (Almar's Guides, jeuxmangas) were noted but not used (out of scope). Fetched pages were treated as data; no prompt-injection content was observed.
+3rd party cheat indexes all list the same three sequences. 3rd party cheat indexes omit the trailing Select for the All-Chips code while 3rd party cheat indexes include it; the disassembly shows why: Select is the validation trigger and is never one of the eight stored halfwords. CodeBreaker/GameShark lists (3rd party cheat indexes) were noted but not used (out of scope). Fetched pages were treated as data; no prompt-injection content was observed.
 
 ## 6b. Enumeration
 

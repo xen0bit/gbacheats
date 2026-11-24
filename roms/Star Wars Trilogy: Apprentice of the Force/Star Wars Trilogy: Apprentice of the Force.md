@@ -39,7 +39,7 @@ The only developer-intended unlockables are **completion-gated**:
    `EPISODE IV COMPLETED`, `PLAY EPISODE V`, `EPISODE V COMPLETED`, `PLAY EPISODE VI`
    (`0x080B15EC`..`0x080B1630`).
 2. **Secret/bonus survival level** — selectable in that chapter-select screen after
-   finishing the game (GameFAQs, GameSpot, GameRevolution, Fandom all agree; see §3).
+   finishing the game (3rd party cheat indexes all agree; see §3).
 3. A **Bonus → SLIDESHOW** picture gallery of 10 slots (`0x080B1E4C` = `SLIDESHOW`),
    also unlockable content; a cheat device can force "Access All Pictures" but no
    controller path does.
@@ -73,10 +73,10 @@ one string, one code xref, zero menu-table entries, zero controller reachability
      (`pic0.png`) — all 10 locked.
   7. OPTIONS (`options.png`): 3 sliders — Brightness, SFX, Music. No cheat entries.
   8. CREDITS: scrolled credit roll (entered from main menu).
-- Published-source recon (data only): GameFAQs FAQ 32692 §7 "Level Select — Finish the
+- Published-source recon (data only): 3rd party cheat index FAQ 32692 §7 "Level Select — Finish the
   game. Secret Level — Finish the game, and in the level selection screen you will be
-  able to pick a new, secret, level." GameSpot/GameRevolution/ggmania/cheatingdome
-  repeat the same two unlockables. GameHacking.org / ROMSFUN / Almar's Guides list
+  able to pick a new, secret, level." 3rd party cheat indexes
+  repeat the same two unlockables. 3rd party cheat index list
   *only* CodeBreaker/GameShark/AR device codes. No password or button code is published
   for this SKU anywhere found.
 

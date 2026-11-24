@@ -35,7 +35,7 @@ Per §0.2 this is a proven negative, not a "not found" claim: the screen set, th
 * Path: splash → Start → title `NEW GAME` → A → skip dialogue with Start → world select → A → character select → A → gameplay. In gameplay, Start opens PAUSE MENU; `RETURN TO MAIN MENU` → YES → main menu → `OPTIONS` / `SCORE RANKING` / `PHOTO ALBUM`.
 * Codes tested: none exist to type. The ten published unlockables were checked as conditions: at a fresh save the PHOTO ALBUM reads `ALBUM% 00` and `01/07`, and the character select offers only **SpongeBob** and **Otto Rocket** (2 of 7); Danny Fenton, Tommy Pickles, Arnold, Jimmy Neutron and Invader Zim are absent, matching the locked set.
 * Debug-only experiment: calling the SECRET MODE screen-init function `0x08079FC8` from GDB with a synthetic LR produced a black screen (§16.10 — a debugger call is not a screen entry). This is reported as a **failed forced view**, not as a reached screen.
-* Web content used as data only (§16.8): Cheatbook, ChapterCheats, Brave search snippets. No prompt-injection payload was observed in fetched pages.
+* Web content used as data only (§16.8): 3rd party cheat indexes, Brave search snippets. No prompt-injection payload was observed in fetched pages.
 
 ## 4. Address map
 

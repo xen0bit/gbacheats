@@ -32,10 +32,10 @@ It does contain a **hidden developer level-select**, left in the front end:
 * Page `0` at screen `13` is an **uninitialised/fallback page**, and that fallback is a two-stage developer warp menu:
   * first a list of **Level1 … Level6**,
   * then a per-level list of **Part1 … Part5 / EndScene**.
-* Normal code enters screen 13 with page `25`, `27`, `29`, `30` or `31` (endings, options, …). **No code path enters screen 13 with page 0**, so the menu is not reachable through the player-visible menu graph. The only public route is the RAM write published on TCRF (`020011D4 0D`), which this report reproduces.
+* Normal code enters screen 13 with page `25`, `27`, `29`, `30` or `31` (endings, options, …). **No code path enters screen 13 with page 0**, so the menu is not reachable through the player-visible menu graph. The only public route is the RAM write published on 3rd party cheat indexes (`020011D4 0D`), which this report reproduces.
 * The warp menu is real and complete: all 24 entries (4+3+4+4+3+6) were selected in the emulator and every one produced playable content (a map/spawn or a cutscene).
 
-The published lists were checked and are consistent with this: TCRF documents only the RAM code, VGChartz lists **0 cheats**, and the GameShark/CodeBreaker sets on Neoseeker/GameFAQs are memory-edit codes (explicitly out of scope for this engagement).
+The published lists were checked and are consistent with this: 3rd party cheat indexes document only the RAM code, 3rd party cheat index lists **0 cheats**, and the GameShark/CodeBreaker sets on 3rd party cheat indexes are memory-edit codes (explicitly out of scope for this engagement).
 
 An unrelated 16-symbol alphabet exists in the ROM (`BDFGHIKPRSTVWXYZ`) and is used by an in-game message widget that renders a 16-cell symbol picker; it is not reachable from any front-end menu and is not a password system for cheats (see §8).
 
@@ -76,7 +76,7 @@ This is how the evidence below was produced. It is a debugger write, not somethi
 3. The fallback page for screen 13 is the developer warp menu: `Level1 … Level6`.
 4. `Up`/`Down` select a level, `A` (or `Start`) opens that level's part list, `Up`/`Down` choose a part, `A` loads it, `B`/`Select` backs out.
 
-The published TCRF code is the same first write (`write byte 0x0D to 0x020011D4`). On this engine the byte alone does not force an already-loaded screen to re-enter; the phase byte `0x020012D0 = 2` (or an equivalent screen transition) is required. This document reports that dependency rather than hiding it.
+The published 3rd party cheat index code is the same first write (`write byte 0x0D to 0x020011D4`). On this engine the byte alone does not force an already-loaded screen to re-enter; the phase byte `0x020012D0 = 2` (or an equivalent screen transition) is required. This document reports that dependency rather than hiding it.
 
 ### Codes/sequences tested
 
@@ -88,7 +88,7 @@ The published TCRF code is the same first write (`write byte 0x0D to 0x020011D4`
 | `Select,Start,A` | main menu | rejected (`Start` confirms) |
 | `L,L,R,R,L,L` | main menu | rejected (screen id remained `10`) |
 | Konami (`Up,Up,Down,Down,Left,Right,Left,Right,B,A`) | main menu | rejected (`A` confirms `Story Mode`) |
-| TCRF `020011D4 = 0x0D` | main menu | **accepted** (with phase nudge) → developer level select |
+| 3rd party cheat indexes `020011D4 = 0x0D` | main menu | **accepted** (with phase nudge) → developer level select |
 
 The six button sequences were tested at the main menu, the only free-cursor screen where such a code would normally live; none of them produced a new screen or wrote screen id 13. The title, Options, Battle, Tunnel Flight and pause screens were walked normally and expose no extra branch.
 
@@ -203,7 +203,7 @@ The part handler at `0x08038FFC` additionally range-checks the page (`0x020011D8
 
 **Space definition.** The hidden menu is a finite selector, not a text code: 6 levels × the part list of that level = **24 representable entries** (4+3+4+4+3+6). There is no checksum and no input alphabet; the "code" is the ordered pair (level, part). The level list ends at `Level6`; each part list ends at its own last label (Part4, Part3 or EndScene).
 
-**Novel / unpublished entries executed.** TCRF's page only shows the Level list and a `Part1…Part4` page. The following entries do not appear in any published list and were generated and entered in the emulator:
+**Novel / unpublished entries executed.** a 3rd party cheat index's page only shows the Level list and a `Part1…Part4` page. The following entries do not appear in any published list and were generated and entered in the emulator:
 
 | Selection | Effect (observed) | Evidence |
 |---|---|---|

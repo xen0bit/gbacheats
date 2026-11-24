@@ -18,7 +18,7 @@
 | SHA-1 | `df001a60b7ab52e9735906fcd80f6c8b834ed684` |
 | SHA-256 | `ca818f32cba69d4ade8bdea200ae39206747c50d6d4f256eca89b81c357caff4` |
 
-Developer KCEJ / publisher Konami, US release 2004-10-26 (per GameFAQs/VGChartz).
+Developer KCEJ / publisher Konami, US release 2004-10-26 (per 3rd party cheat indexes).
 
 ## 2. Executive summary
 
@@ -26,7 +26,7 @@ The game has **one developer-intended cheat surface**: four **title-screen butto
 
 The four codes are stored as a table of four `u16`-mask arrays at ROM `0x087E98A8`, each 8 presses long, stored **newest-first** and terminated by `0xFFFF`. The validator at `0x08032114` scans a 16-entry ring buffer at EWRAM `0x0201DE60` backwards from the most recent press, comparing against the selected table entry; a full match writes an unlock flag in the byte array at `0x0201D770` (Grandpa = index 9, Yami Yugi = 5, Yami Bakura = 6, Kaibaman = 7). The flags are mirrored into the 32 KiB SRAM save at offsets `0x14` and `0x400C`.
 
-Published lists (GameFAQs, VGChartz, Neoseeker, cheatcc) contain exactly these four codes; all four were verified against the ROM table and in the emulator. Crucially, the validator **tolerates extra presses before the code** (it matches the last 8 presses of a 16-entry ring). A novel 11-press input (three extra prefix presses + Grandpa's 8) was generated, accepted in-game, and verified by both the RAM flag and the Player Select screen. Bounds were proven by four in-game rejections: wrong final key, extra simultaneous key, wrong order, and too few presses.
+Published lists (3rd party cheat indexes) contain exactly these four codes; all four were verified against the ROM table and in the emulator. Crucially, the validator **tolerates extra presses before the code** (it matches the last 8 presses of a 16-entry ring). A novel 11-press input (three extra prefix presses + Grandpa's 8) was generated, accepted in-game, and verified by both the RAM flag and the Player Select screen. Bounds were proven by four in-game rejections: wrong final key, extra simultaneous key, wrong order, and too few presses.
 
 **Observed vs derived:** code acceptance, flag writes and screen changes are **Observed** (mGBA + savestate RAM diffs + screenshots). Table layout, validator algorithm and the `0xFFFF` terminator are **Derived** from disassembly. The SRAM mirror offsets are **Derived** from binary diff of `target.sav`.
 
@@ -139,7 +139,7 @@ Flag array `0x0201D770` base values before any code: `01 01 01 01 01 00 00 00 01
 
 **Completeness proof.** The validator at `0x08032114` is the only compare loop over the ring buffer; `0x08032084` is its only caller and iterates `idx = 0,1,2,3` unconditionally. The four table records are the only mask arrays. Unlike a checksum system, the accepted set is a literal closed set of 4 sequences (plus the tolerated prefix, see below).
 
-**Published-list comparison.** GameFAQs, VGChartz, Neoseeker and cheatcc all list exactly these four codes (modulo transcription variants like "Right + B" vs "B+Right"). All four literals were found in the ROM table at the addresses above and accepted in the emulator. No published list contains any other button code for this SKU.
+**Published-list comparison.** 3rd party cheat indexes all list exactly these four codes (modulo transcription variants like "Right + B" vs "B+Right"). All four literals were found in the ROM table at the addresses above and accepted in the emulator. No published list contains any other button code for this SKU.
 
 **Novel code generated and accepted.** Because the validator scans backward from the newest press and stops at `0xFFFF`, any sequence whose **last 8 presses** equal a table record is accepted regardless of preceding presses (up to the 16-slot ring capacity). Generated novel input (not in any published list):
 
@@ -179,7 +179,7 @@ The trailing-extra rejection is especially informative: it confirms matching is 
   - Unlock setter `0x0801B8B4`, script-var mapper `0x08036654`.
   - Flag indices 5/6/7/9 mapped to Yami Yugi/Yami Bakura/Kaibaman/Grandpa.
 - **Inferred**:
-  - The unlockables described on GameFAQs ("Chicago Map", "Domino Pier", etc.) are **not** button codes: they are save-bit/clear-condition rewards for winning with specific characters, driven by the same flag array's other bits. They were not brute-forced (§16.18: a save-bit unlock is not a code).
+  - The unlockables described on 3rd party cheat indexes ("Chicago Map", "Domino Pier", etc.) are **not** button codes: they are save-bit/clear-condition rewards for winning with specific characters, driven by the same flag array's other bits. They were not brute-forced (§16.18: a save-bit unlock is not a code).
 
 ## 8. Unknowns
 

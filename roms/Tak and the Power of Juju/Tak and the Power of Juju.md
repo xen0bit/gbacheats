@@ -180,7 +180,7 @@ item 5 and §16.3 category 4.
    so it is not counted as proof). The confirmed transitions are title ↔ gameplay,
    gameplay → save-slot, save-slot → gameplay, and gameplay → pause →
    quit-confirmation.
-   Published button cheats (GamesRadar PS2/GBA sequences) and `L+R+Start` were also
+   Published button cheats (3rd party cheat indexes PS2/GBA sequences) and `L+R+Start` were also
    tried and produced no menu change.
 5. **No table to mint from.** No plaintext password table, no custom password
    alphabet, no checksum constant and no level-code record exists in the image
@@ -197,7 +197,7 @@ build or a prototype where the handler exists.
 
 | Search | Space checked | Result |
 |---|---|---|
-| Published codes (web) | 4 searches + GameFAQs GBA cheats page + GamesRadar/NEO walker | **0** GBA password codes; all published cheats are console button sequences |
+| Published codes (web) | 4 searches + 3rd party cheat indexes GBA cheats page + 3rd party cheat indexes/NEO walker | **0** GBA password codes; all published cheats are console button sequences |
 | `strings -t x -n 4` | whole 8,388,608-byte ROM | 76,317 strings; password-related hits: **7** |
 | Custom 26-letter alphabet | every byte of all 8,388,608 bytes | **3** hits, all standard C-library tables at `0x7A0FF`, `0x7B1FF`, `0x7C0E1` |
 | Direct `u32` pointer to any of 5 password strings | whole ROM | **0** hits |
@@ -245,8 +245,8 @@ build or a prototype where the handler exists.
   `trace_text.py`, `ssdecode.py` (zlib `gbAs` savestate decoder), `capture_loop.py`,
   `dcmd.sh`. Screenshots: `contact.png`, `contact_tr.png`, `slots_explore.png`,
   `title_keys.png`, `pm_keys.png`, `states_check2.png`, etc.
-* Web recon via `websearch`/`webfetch` (GameFAQs cheats/walkthrough returned 403;
-  GamesRadar/NEO searches yielded console button sequences only).
+* Web recon via `websearch`/`webfetch` (3rd party cheat index cheats/walkthrough returned 403;
+  3rd party cheat indexes/NEO searches yielded console button sequences only).
 
 ## 10. Legal note
 

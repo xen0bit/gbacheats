@@ -27,18 +27,18 @@ and normal first-4-KiB ARM crt0 confirm a retail image.
 hidden feature found is the **e-Reader Room**, opened by a button code on the title
 screen: **hold Right, then press L, R, L, R, L, R** (each press within 40 frames).
 The game is the USA release, in which no e-Cards were distributed, so this is a
-genuine otherwise-unreachable debug/developer screen. It is published on TCRF and
+genuine otherwise-unreachable debug/developer screen. It is published on 3rd party cheat indexes and
 was independently re-derived here from the key-mask table at ROM `0x086A97AC`.
 
 The ROM also contains a **ball-position debug overlay** (`BALL-MV:`, `BALL-SPD:`,
 `DEBUG1:` at `0x08137DBF`) and a **Bonus Stage Select** mode (`0B`), but both are
 gated: the debug overlay requires flag bits at `0x0200B0CF` that no in-game input
-sets (TCRF documents GS/CB codes to set them), and Bonus Stage Select requires the
+sets (3rd party cheat indexes document GS/CB codes to set them), and Bonus Stage Select requires the
 Japanese e-Card or an external code. Both are out of the requested scope
 (developer-intended in-game cheats only); the gating is proven below.
 
 Two more published codes were checked: **A+B+Start+Select** (soft reset) is real
-and verified in-game; the GameFAQs **"hold L + tap L+R on Pokedex/Hi-Score" erase
+and verified in-game; the 3rd party cheat indexes **"hold L + tap L+R on Pokedex/Hi-Score" erase
 prompt** could not be reproduced on this revision with three button
 interpretations and no matching key-mask construction was found in ROM.
 
@@ -83,7 +83,7 @@ on the real screen and RAM-verified.
 | Debug enable flag | RAM `0x0200B0CF` (bits 4/8/16/32) | Derived; toggle helper `0x08047160` referenced only from table `0x086B0780` |
 | Screen mode | RAM `0x0200B0C2` (u8) | Observed (see table in §6) |
 | Sub-mode | RAM `0x0200B0C3` (u8) | Observed |
-| Spare balls / score | RAM `0x02000030` / `0x02000040` | TCRF notes; consistent with save RAM |
+| Spare balls / score | RAM `0x02000030` / `0x02000040` | 3rd party cheat index notes; consistent with save RAM |
 
 ## 5. Algorithm (button-code validator at `0x0801157C`)
 
@@ -135,10 +135,10 @@ Right `0x010`, Left `0x020`, Up `0x040`, Down `0x080`, R `0x100`, L `0x200`.
 
 | Source | Code | Result |
 |---|---|---|
-| TCRF | Hold Right, alternate L/R 3× (e-Reader Room) | **Confirmed**, reproducible |
-| IGN | A+B+Start+Select reset | **Confirmed** (mode 2 → 0, copyright screen) |
-| GameFAQs | Hold L, tap L+R on Pokedex/Hi-Score → erase prompt | **Not reproduced** (3 interpretations tested; no `0x300` mask construction found in ROM) |
-| TCRF | Debug mode (GS/CB codes) / Bonus Stage Select (e-Card) | Out of scope; gated, see §8 |
+| 3rd party cheat indexes | Hold Right, alternate L/R 3× (e-Reader Room) | **Confirmed**, reproducible |
+| 3rd party cheat indexes | A+B+Start+Select reset | **Confirmed** (mode 2 → 0, copyright screen) |
+| 3rd party cheat indexes | Hold L, tap L+R on Pokedex/Hi-Score → erase prompt | **Not reproduced** (3 interpretations tested; no `0x300` mask construction found in ROM) |
+| 3rd party cheat indexes | Debug mode (GS/CB codes) / Bonus Stage Select (e-Card) | Out of scope; gated, see §8 |
 
 ## 6b. Enumeration
 
@@ -178,11 +178,11 @@ tests bits 8, 16, 32, 4; bit 4 selects the `BALL-MV` screen at `0x0807344`.
 A scan of all `strb rX,[base,#15]` stores near a `0x0200B0C0` base found only
 values 0/1/2/0x20 written by game initialization and one helper (`0x08047160`,
 referenced only by a data table at `0x086B0780`); no normal input path sets bit 4.
-No BL or direct pointer reaches `0x08072E4`/`0x0807344`. This matches TCRF's
+No BL or direct pointer reaches `0x08072E4`/`0x0807344`. This matches a 3rd party cheat index's
 statement that external GameShark/CodeBreaker codes are required.
 
 **Bonus Stage Select bounded.** On FIELD SELECT (mode `0x0A`) tapping L alone
-left mode `0x0A` unchanged (screenshot `s_field_L.png`); TCRF states mode `0x0B`
+left mode `0x0A` unchanged (screenshot `s_field_L.png`); 3rd party cheat indexes state mode `0x0B`
 must first be set by an e-Card/external code. No in-game route to mode `0x0B` was
 found.
 
@@ -194,15 +194,15 @@ found.
 * **Derived:** full Thumb disassembly of `0x080114FC`, `0x0801157C`, `0x08011020`,
   `0x08072E4`, `0x0807344`; literal-pool decoding; whole-ROM table/BL/pointer scans.
 * **Inferred:** debug-mode and Bonus-Select reachability require external devices
-  (supported by TCRF and by the gate analysis, but no physical e-Card/GS was used).
-* Fetched TCRF/GameFAQs/IGN pages were treated strictly as data; no instructions
+  (supported by 3rd party cheat indexes and by the gate analysis, but no physical e-Card/GS was used).
+* Fetched 3rd party cheat index pages were treated strictly as data; no instructions
   found in them were executed.
 
 ## 8. Unknowns
 
 * The exact semantics of the sub-mode values `0x0A`/`0x0B` written by the validator
   (they do not change the visible screen on this build).
-* Why the GameFAQs erase prompt code does not trigger on BPPE01 Rev.00 — possibly
+* Why the 3rd party cheat indexes erase prompt code does not trigger on BPPE01 Rev.00 — possibly
   a different regional revision or an inaccurate published description.
 * The on-screen UI text is stored as font tile indices, not ASCII, UTF, or
   LZ77-compressed ASCII (verified by a 6,095-candidate LZ77 scan and byte-shift
@@ -221,7 +221,7 @@ found.
   `walk.py` (screen walker).
 * mGBA SDL under Xvfb `:318`; `xdotool`, `scrot`, ImageMagick.
 * `gdb-multiarch` attempted but abandoned (stub unstable across connections).
-* Web sources: TCRF *Pokémon Pinball: Ruby & Sapphire* (Wayback snapshot
-  `20241216145503`), GameFAQs cheats page, IGN GBA cheats page.
+* Web sources: 3rd party cheat indexes *Pokémon Pinball: Ruby & Sapphire* (Wayback snapshot
+  `20241216145503`), 3rd party cheat index cheats page, 3rd party cheat indexes GBA cheats page.
 
 *No ROM image, extracted graphics, or copyrighted assets are redistributed in this report.*

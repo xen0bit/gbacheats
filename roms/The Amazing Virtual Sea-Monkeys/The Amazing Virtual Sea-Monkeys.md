@@ -50,8 +50,8 @@ level intro screen ("Level: 43, Maximum time: 04:20, Sea-Monkeys to be saved:
 than unlocking level 70.
 
 Web recon found **no published in-game passwords at all** for this SKU
-(GameFAQs cheats: no codes; Project Cheat Codes: "no known codes"; VGChartz: 0;
-ROMSFUN/libretro and CodeBreaker lists are GameShark-style device codes,
+(3rd party cheat index cheats: no codes; 3rd party cheat indexes: "no known codes"; 3rd party cheat indexes: 0;
+3rd party cheat indexes/libretro and CodeBreaker lists are GameShark-style device codes,
 out of scope). Therefore any generated code is novel by construction.
 
 ## 3. How to reproduce

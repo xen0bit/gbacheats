@@ -28,7 +28,7 @@ Evidence: **Observed** (`file`, `xxd`, `md5sum`/`sha1sum`/`sha256sum` on the exa
 widely republished "codes" for this title (`JAINA`, `XUCPHRA`, `KAIBURR`, `BELSAVIS`, `021282`,
 `NARSHADDAA`, `AAYLASECURA`, `TANTIVEIV`, `ZABRAK`, `COMLINK`, `KORRIBAN`, `SUPERSABER`, `071779`,
 `NATHAN G`, `ATENVU`) belong to the **PS2** (options-screen password list) and **DS** (Settings → Codes)
-SKUs. GameFAQs' GBA cheat page renders those codes under a `PS2` heading, and an independent current
+SKUs. 3rd party cheat indexes' GBA cheat page renders those codes under a `PS2` heading, and an independent current
 source states outright that there are no official cheat codes for the GBA version. All 15 literals are
 absent from the 8 MiB GBA image under six encodings (§6b). Ghidra's 7,039-string inventory contains
 zero occurrences of `PASSWORD`, `CODE`/`CODES`, `DEBUG`, `LEVEL SELECT`, or `ENTER CODE`.
@@ -165,7 +165,7 @@ sets it. No ROM string or code path was found that accepts a typed input to set 
 | `KORRIBAN` | Story missions | PS2 | Absent |
 | `SUPERSABER` | Super Sabre mode | PS2 | Absent |
 | `071779` | Tiny droid mode | PS2 | Absent |
-| `ATENVU` | Invincibility | mislabelled "GBA" by cheatcodes.com; not in ROM | Absent |
+| `ATENVU` | Invincibility | mislabelled "GBA" by 3rd party cheat indexes; not in ROM | Absent |
 
 One third-party page (RadioTimes) states: *"There are no official cheat codes for Star Wars:
 Revenge of the Sith on Game Boy Advance."* Treat all of the above as wrong-SKU, not as typos.
@@ -214,7 +214,7 @@ From the English help bank at `0x080B91A0`–`0x080B9810` (**Derived**, each str
 
 **Scope of the search (this is the bounded negative promised by guide §0.2).**
 
-1. **Published-code space.** 15 distinct literals from GameFAQs (PS2/GBA/DS pages), cheatcodes.com,
+1. **Published-code space.** 15 distinct literals from 3rd party cheat indexes,
    Gaming Wikia / Codex Gamicus, and an Action Replay listing. **15/15 absent** from the 8 MiB image
    under ASCII, lower-case, `+0x20`, `-0x20`, UTF-16LE and UTF-16BE. Count: 15 codes × 6 encodings =
    **90 negative literal checks**.
@@ -262,7 +262,7 @@ ROM in all six encodings, so entering it on any GBA screen cannot be accepted.
 | Claim | Type | Evidence |
 |---|---|---|
 | Stock retail image, hashes as listed | Observed | `file`, `xxd`, hash utilities |
-| All 15 published codes wrong-SKU | Observed / Derived | GameFAQs page archived text (PS2 heading) + 90 negative literal searches in the ROM |
+| All 15 published codes wrong-SKU | Observed / Derived | 3rd party cheat index page archived text (PS2 heading) + 90 negative literal searches in the ROM |
 | No code/debug menu strings | Observed | 67,024 `strings` entries + 7,039 Ghidra strings; keyword counts in §6b |
 | Screens and menu counts | Observed | 14 screenshots; keypad-driven walk |
 | MASTER difficulty gated | Observed | `selchar2.png` greyed; `diff_master.png` wrap 2-selector |
@@ -301,7 +301,7 @@ ROM in all six encodings, so entering it on any GBA screen cannot be accepted.
   `scrot` screenshots; `key.py`/`combo.py` helpers.
 - Savestate `gbAs` zlib-chunk extraction for RAM evidence (`ss1` title, `ss3` gameplay, `ss4/ss5`
   name-entry); state offsets IWRAM `0x19000`, EWRAM `0x21000`.
-- Web recon: archived GameFAQs GBA cheats page (which labels the password list **PS2**), GameFAQs
+- Web recon: archived 3rd party cheat indexes GBA cheats page (which labels the password list **PS2**), 3rd party cheat indexes
   walkthrough FAQ 36856, and a current third-party statement that the GBA SKU has no official codes.
   All fetched pages were treated as data only; no instructions from them were executed.
 

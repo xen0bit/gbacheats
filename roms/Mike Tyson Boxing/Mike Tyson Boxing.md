@@ -28,7 +28,7 @@
 
 ## 2. Executive summary
 
-**No developer-intended password, button code, or reachable hidden/debug menu exists in this retail GBA ROM.** The only codes published for the GBA SKU are Action Replay / GameShark / CodeBreaker memory-patch codes (Cheat Happens, CodeJunkies, GameHacking.org), which are explicitly out of scope for this engagement.
+**No developer-intended password, button code, or reachable hidden/debug menu exists in this retail GBA ROM.** The only codes published for the GBA SKU are Action Replay / GameShark / CodeBreaker memory-patch codes (3rd party cheat indexes), which are explicitly out of scope for this engagement.
 
 The ROM *does* contain a complete localized text bank for a **CHEAT** options screen — entries such as `SHOWCASE MODE / UNLOCKED BOXERS`, `WORLD MODE / UNLOCKED BOXERS`, `ALL MODES / UNLOCKED BOXERS`, brightness levels, and `WORLD MODE BOXER: #` (file 0x47940–0x47C6C, pointers at 0x3FBA94–0x3FBB84) — plus `Enter your name` style hidden-boxer messages (`You have unlocked a hidden boxer: #`, 0x50548). These strings are referenced **only** by the 5-language string-pointer tables (xrefs to `0x08047940` are `0x0803FBA94` and `0x0803FBA9C`), never by a code path that can be reached from any menu in the retail build. This is the **cut/dead-feature** case of §16.3, not a code system.
 
@@ -112,13 +112,13 @@ Strings are drawn through a font tile-index table: the on-screen alphabet letter
 
 | Source | Codes | Scope decision |
 |---|---|---|
-| Cheat Happens (2003-07-16), "Mike Tyson Boxing Action Replay Codes, US" | 27 encrypted AR codes: (M) master `aa99e094 8aafd4d0 c16b590b ce930b7e`; Inf Stamina, 1-Hit KO, Always Round 1–10, Max Cash, Max World Wins, **All Boxers Unlocked** `e58eb9e9 55235cad`, etc. | Excluded: Action Replay encrypted RAM patches |
-| CodeJunkies US / GameHacking.org (AGB-AM6E-USA) | 27 ARMAX/GS codes incl. `Unlock All Boxers`, `Infinite Special`, `Maximum Training` | Excluded: GameShark/Action Replay memory patches |
-| ROMSFUN / libretro | 41 **PlayStation** GameShark codes | Wrong SKU and out of scope |
+| 3rd party cheat indexes, "Mike Tyson Boxing Action Replay Codes, US" | 27 encrypted AR codes: (M) master `aa99e094 8aafd4d0 c16b590b ce930b7e`; Inf Stamina, 1-Hit KO, Always Round 1–10, Max Cash, Max World Wins, **All Boxers Unlocked** `e58eb9e9 55235cad`, etc. | Excluded: Action Replay encrypted RAM patches |
+| 3rd party cheat indexes US / 3rd party cheat indexes | 27 ARMAX/GS codes incl. `Unlock All Boxers`, `Infinite Special`, `Maximum Training` | Excluded: GameShark/Action Replay memory patches |
+| 3rd party cheat indexes / libretro | 41 **PlayStation** GameShark codes | Wrong SKU and out of scope |
 
 **Published PS codes tested against this GBA ROM (all negative):**
 
-| PS code (GameFAQs, PS SKU) | GBA button mapping tried | ROM literal search | Result |
+| PS code (3rd party cheat indexes, PS SKU) | GBA button mapping tried | ROM literal search | Result |
 |---|---|---|---|
 | Unlock Everything: Square, Circle, Up, Down | A,B,Up,Down · B,A,Up,Down · Up,Down,A,B | mask arrays at §6b | No confirmation; OPTIONS unchanged |
 | 2-D Mode: Down, Up, Circle, Square | Down,Up,B,A · Down,Up,A,B | none | No effect |

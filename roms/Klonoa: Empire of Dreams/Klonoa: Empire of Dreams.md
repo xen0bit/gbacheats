@@ -30,7 +30,7 @@ Evidence, in short:
 * Every reachable screen was walked in mGBA with RAM reads: Namco boot logo, title ("PRESS START"), title menu (New Game / Continue), save-file select (3 slots + confirmation), intro cutscenes, world/region map, vision (level) select, in-level gameplay, in-level pause (Continue Game / Retry / Select Vision / Button Configuration), world-map pause (Continue Game / World Map / Return to Title Screen), Button Configuration (Type I / Type II). No screen contains a code-entry widget, password prompt, cheat list, debug menu or "extras" list.
 * The UI is **glyph/tile-index encoded**, not ASCII. `strings` finds only the credit and copyright lines; 14,336 candidate ASCII↔tile transforms of 14 known on-screen strings produced **zero** ROM hits. The text renderer was decoded structurally at the tilemap level (§4), so this is not a "no string hit ⇒ no UI" error (guide §16).
 * The only code that reads the joypad registers is a pair of generic input handlers. They derive active-high `held` (`0x030051E4`) and `pressed` (`0x03004DA0`) masks. The only multi-button comparison in the whole ROM is `held & 0xF == 0xF` (A+B+Select+Start) at `0x080006EA`, which calls the soft-reset routine at `0x08051450`. It is a console-style reset, not a cheat. No sequence matcher, ring buffer, progress index, key table or validator exists.
-* All published "cheats" for this SKU are external Action Replay / CodeBreaker **memory-write** codes (Cheat Happens, Almar's Guides) — out of scope by the brief and not in-game codes. GameFAQs lists only three **unlockables** obtained by beating the game; TCRF lists unused World 6 data and the dev credit, no debug menu.
+* All published "cheats" for this SKU are external Action Replay / CodeBreaker **memory-write** codes (3rd party cheat indexes) — out of scope by the brief and not in-game codes. 3rd party cheat index lists only three **unlockables** obtained by beating the game; 3rd party cheat index lists unused World 6 data and the dev credit, no debug menu.
 * Nothing is shared with the concurrently analysed *Klonoa 2: Dream Champ Tournament*: different game code (`AN6E` vs `AKLE`), different ROM, different addresses. The only commonality is engine lineage (both carry the "Klonoa Sleeping Empire" credit, at different offsets, and near-identical crt0/input-handler structure at shifted addresses). No code, table, flag or password transfers between them.
 
 ## 3. How to reproduce
@@ -57,7 +57,7 @@ Evidence, in short:
 | `0x080006F0` | Thumb | `bl 0x08051450` — soft reset (disable IME at `0x04000208`, stack `0x03007F00`, `svc #1`, `svc #0`) |
 | `0x0800072C` | Thumb | Key handler #2 (duplicate read of `0x04000130`, same mask/shift) |
 | `0x080034F0` / `0x03004DA0` / `0x030051E4` | RAM | Previous-held / edge-pressed / held joypad masks (active-high) |
-| `0x08057B6C` | ROM | ASCII: "Klonoa Sleeping Empire Programmed by ..." (TCRF: ~`0x57B80`) |
+| `0x08057B6C` | ROM | ASCII: "Klonoa Sleeping Empire Programmed by ..." (3rd party cheat indexes: ~`0x57B80`) |
 | `0x08057BC5` | ROM | ASCII: "(c) Copyright 1997 2001 namco LTD., All rights reserved" |
 | `0x08052000`–`0x08052600` | ROM | Glyph/character-set lookup tables (runs of ASCII glyph codes used by the font renderer) |
 | `0x06000000` | VRAM | BG0 4bpp tile data (char base block 0) |
@@ -95,7 +95,7 @@ if ((held & 0x00F) == 0x00F) soft_reset()            @ 0x080006E6–0x080006F0
 
 **Unlockables (published, gameplay-awarded — not codes):**
 
-| Unlockable | Condition (GameFAQs) | Type |
+| Unlockable | Condition (3rd party cheat indexes) | Type |
 |---|---|---|
 | EX 1 Option | Beat the game normally | Save-flag / completion |
 | EX 2 Option | Beat the game with every stage cleared | Save-flag / completion |
@@ -103,9 +103,9 @@ if ((held & 0x00F) == 0x00F) soft_reset()            @ 0x080006E6–0x080006F0
 
 These are earned by play; no entered string or button sequence sets them. No modified-save or memory-edit shortcut was used or is reported as a cheat.
 
-**Hidden content (published, non-code):** unused World 6 world map (8 doors; levels 4–7 unused, repurposed into EX levels) and the static developer credit at `0x08057B6C` (TCRF). Per-level hidden corner tile sets are level-editor artifacts, not player-reachable.
+**Hidden content (published, non-code):** unused World 6 world map (8 doors; levels 4–7 unused, repurposed into EX levels) and the static developer credit at `0x08057B6C` (3rd party cheat indexes). Per-level hidden corner tile sets are level-editor artifacts, not player-reachable.
 
-**Published external codes (out of scope, verified as memory writes):** Cheat Happens lists 5 EU and 5 US Action Replay codes (Inf Health/Hearts, Inf Lives, Inf Dynamite / All Gems-Vis1, "AR Button for Slow", master code) as 8-hex-digit write pairs; Almar's Guides lists CodeBreaker equivalents. None is an input string; none appears as ASCII in the ROM (checked 7 literals: 0 hits each).
+**Published external codes (out of scope, verified as memory writes):** 3rd party cheat index lists 5 EU and 5 US Action Replay codes (Inf Health/Hearts, Inf Lives, Inf Dynamite / All Gems-Vis1, "AR Button for Slow", master code) as 8-hex-digit write pairs; 3rd party cheat index lists CodeBreaker equivalents. None is an input string; none appears as ASCII in the ROM (checked 7 literals: 0 hits each).
 
 ## 6b. Enumeration
 
@@ -114,14 +114,14 @@ This is a **bounded negative**, quantified over the spaces that could have conta
 1. **Screen space — 100% walked.** 13 distinct screens/states enumerated in §3, each with a screenshot and RAM reads. Reachable menu items counted directly: title menu 2 items, save select 3 slots × YES/NO, world-map pause 3 items, in-level pause 4 items, Button Configuration 2 types. No unlabelled cursor slot was found: pressing Down at the bottom of each menu left the cursor on the last item (title, pause). No hidden screen appeared for any tested chord.
 2. **Text/glyph space.** `strings -t x -n 3` produced 96,618 printable runs; keyword counts (case-insensitive) for `password`, `cheat`, `code`, `debug`, `secret`, `unlock`, `level select`, `options`, `continue`, `invalid`, `menu` were **all 0**. Only three meaningful ASCII strings exist (`KLONOA`, the dev credit, the copyright line) plus `K_KLONOA` at `0x080117690`. Because the UI is font/tile-indexed, I additionally: (a) decoded the BG0 tilemap at `0x0600E000` (32×32 entries, tile indices 140–242 for the PAUSE screen) and dumped the 4bpp tile data at `0x06000000`, proving text is rendered from glyph tiles; (b) tested 14 known on-screen strings (`PAUSE`, `PRESS START`, `New Game`, `Continue`, `World Map`, `Button Configuration`, `Continue Game`, `Type 1`, `Retry`, `NO DATA`, `Ghazzaland`, …) against 256 shifts of add, subtract, XOR and 16-bit add = **14,336 candidate encodings, zero ROM matches**; (c) searched ROM for the raw u8 and u16 tile-index sequences of the PAUSE title and menu rows — zero matches, i.e. strings are generated from a glyph conversion, not stored as tile indices. Conclusion: no plaintext or trivially-obfuscated password/debug literal exists in the text space.
 3. **Button-code space.** The ROM contains **2** locations that read `0x04000130` (`0x080006CE`, `0x0800072E`). A pointer/LDR scan found **102** literal-load sites reading the derived `held`/`pressed` RAM words, of which **32** functions contain a multi-bit immediate compare; all 32 were inspected by disassembly and are gameplay state machines. The sole multi-button chord comparison is `held & 0xF == 0xF` → soft reset. No sequence table, progress counter, ring buffer or action dispatcher exists. Emulator-tested chord space: 6 combinations listed in §3, plus the Konami sequence; one effect (reset), zero cheats.
-4. **Published-code verification.** GameFAQs (archived 2023) exposes only 3 unlockables; Cheat Happens and Almar's expose only AR/CodeBreaker memory writes; TCRF (archived) exposes only unused areas + dev credit. No published source lists a password or button code for this SKU, so there is no published in-game code to confirm or refute. The 7 sampled AR hex literals are absent from the ROM as text, consistent with them being external cheat-device writes.
+4. **Published-code verification.** 3rd party cheat indexes exposes only 3 unlockables; 3rd party cheat indexes expose only AR/CodeBreaker memory writes; 3rd party cheat indexes exposes only unused areas + dev credit. No published source lists a password or button code for this SKU, so there is no published in-game code to confirm or refute. The 7 sampled AR hex literals are absent from the ROM as text, consistent with them being external cheat-device writes.
 5. **Novel code / bounds-by-rejection.** Not applicable: §0.2's "mint an unpublished code" deliverable presupposes a code system. A validator, alphabet, checksum and input surface were all searched for and none exists (items 1–4). The negative is instead bounded by the counts above: every screen, every text-encoding candidate, every key-state comparison site and every published source was covered. No input can be accepted because there is no accepting function.
 
 ## 7. Validation evidence
 
 * **Observed** (emulator/RAM): all 13 screens and their menu item counts; RAM signatures at `0x03000030` (`0x08135DF0` title/save-select vs `0x08143F1C` world/pause) and `0x03000800` (`0x87`/`0x91`/`0x00`); VRAM BG0 tilemap at `0x0600E000` with indices 140–242; DISPCNT/BGCNT register values; OAM entries; 512-byte EEPROM contents; soft reset on A+B+Select+Start; no effect from the other 6 chord tests.
 * **Derived** (disassembly): KEYINPUT preprocessing at `0x080006CC`; chord comparison at `0x080006EA`; soft-reset routine at `0x08051450`; absence of any button-sequence validator across the 102 key-state literal-load sites; absence of password table from the 14,336-encoding string search.
-* **Inferred** (published sources, not emulator-proven): the three EX unlock conditions (GameFAQs) are completion-based; the unused World 6 levels (TCRF) are not reachable in normal play. These do not affect the cheat conclusion.
+* **Inferred** (published sources, not emulator-proven): the three EX unlock conditions (3rd party cheat indexes) are completion-based; the unused World 6 levels (3rd party cheat indexes) are not reachable in normal play. These do not affect the cheat conclusion.
 
 ## 8. Unknowns
 
@@ -134,6 +134,6 @@ This is a **bounded negative**, quantified over the spaces that could have conta
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, `xxd`, `strings -t x -n 3`.
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for spot disassembly; Capstone 5.0.7 via `python3` scripts (`dis.py`, `xref_fast.py`, `xref_ram.py`, `scan_keycmp.py`, `decode_text2.py`, `dump_vram.py`, `render_map.py`) kept in `/tmp/klonoa1`.
 * `mgba -3 -d` under `Xvfb :317` + `openbox`, driven through a FIFO; `xdotool` for input, `scrot` + ImageMagick `convert -crop 720x480+154+163` for screenshots; Pillow for VRAM/tilemap rendering.
-* Web: Wayback Machine snapshots of GameFAQs cheats, TCRF and cheatcodes.com; Cheat Happens, Almar's Guides, remyhax 100-ROM study. Fetched pages were treated as data; no instruction found in any fetched page was acted upon.
+* Web: Wayback Machine snapshots of 3rd party cheat index cheats, 3rd party cheat indexes; 3rd party cheat indexes, remyhax 100-ROM study. Fetched pages were treated as data; no instruction found in any fetched page was acted upon.
 
 **Legal note:** no ROM bytes or copyrighted assets are redistributed; only hashes, addresses, algorithms and original tooling are published.

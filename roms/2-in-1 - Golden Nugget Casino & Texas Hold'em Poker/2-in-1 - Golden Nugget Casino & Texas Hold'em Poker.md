@@ -27,7 +27,7 @@ It is disproved twice over: Golden Nugget Casino has a **bankroll password
 entry** (not a display), and Texas Hold'em has a **career/tournament password
 entry** in addition to the tournament-result display. The GBA manual for Golden
 Nugget Casino documents “The Password Entry Screen allows you to enter a
-password and resume play with …” (scanned manual, gamegear.net mirror).
+password and resume play with …” (scanned manual, 3rd party cheat index mirror).
 
 * **Golden Nugget Casino (image A) has a full bankroll password system.** It is
   reachable from the casino lobby: `PASSWORD` (bottom centre). The screen uses a
@@ -37,7 +37,7 @@ password and resume play with …” (scanned manual, gamegear.net mirror).
   bankroll (24 bits), credit (18 bits) and a reserved/debit field (18 bits), plus
   three 6-bit check characters. The generator is at `0x0801B9EC`; the two
   alphabet tables are at `0x0809B7AD` and `0x0809B7D2`.
-* The published money codes on GameFAQs/mariogba were verified: `$500,000`
+* The published money codes on 3rd party cheat indexes were verified: `$500,000`
   (`Bg5cv#dbbbxbY`) gave `Player Money: $500000` on the Blackjack screen, and
   `$8,527,030` (`1XCBv#dbbbxbM`) was accepted and regenerated into the password
   field.
@@ -224,7 +224,7 @@ widths are the bounds.
 
 ### 5.4 Verification against the published list
 
-All seven mariogba/GameFAQs money codes and the default `$2000` code decode to
+All seven 3rd party cheat indexes money codes and the default `$2000` code decode to
 the stated bankroll and pass the check characters:
 
 | Published code | Decoded money | Credit | Reserved | Checks |
@@ -237,7 +237,7 @@ the stated bankroll and pass the check characters:
 | `bRgyv#dbbbxbs` | 5,000,000 | 10,000 | 0 | pass |
 | `!%mJv#dbbbxbp` | 9,999,999 | 10,000 | 0 | pass |
 | `b/mJv#dbbbxbm` | 10,000,000 | 10,000 | 0 | pass |
-| `1XCBv#dbbbxbM` (GameFAQs) | 8,527,030 | 10,000 | 0 | pass |
+| `1XCBv#dbbbxbM` (3rd party cheat indexes) | 8,527,030 | 10,000 | 0 | pass |
 
 Every published GN code is therefore a valid encoding under the reversed
 algorithm; no table lookup is involved, and the credit field is fixed at
@@ -340,7 +340,7 @@ tournament table entry, not from the password.
 
 ### 6.2 Texas Hold'em published codes and decoded state
 
-From the archived GameFAQs FAQ (`brian_sulpher`, 2006; true punctuation with
+From the archived 3rd party cheat index FAQ (`brian_sulpher`, 2006; true punctuation with
 `^` = up arrow/A, `<` = left arrow/U). Every row decodes under §5b:
 
 | Effect | Code | Bankroll | Tour | Name |
@@ -394,8 +394,8 @@ on-screen keyboard and accepted; the table header then showed **ACE** with
   | $9,100,000 | `BPRDv#dbbbxb3` | Blackjack header `Player Money: $9100000` (`screenshots/gn_novel_9100000.png`) |
   | $16,777,215 (max) | `!!!!v#dbbbxb=` | Accepted; triggered the “You're a Multi-Millionaire — Time to retire!” ending |
 
-  `$9,100,000` is absent from the mariogba list, the GameFAQs list and the
-  chaptercheats list; it is a pure algorithm output.
+  `$9,100,000` is absent from the 3rd party cheat index list, the 3rd party cheat index list and the
+  3rd party cheat index list; it is a pure algorithm output.
 * **Bounds proven by rejection:**
   * `BPRDv#dbbbxb4` (same bankroll, last check character incremented by one)
     was rejected; the Blackjack header stayed `Player Money: $2000`.

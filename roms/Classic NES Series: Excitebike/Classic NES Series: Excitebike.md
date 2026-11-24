@@ -330,7 +330,7 @@ The accepted set of selector actions is exactly the four labelled design-menu it
 * `mapd.py` — render the GBA BG tilemap at VRAM `0x2000` as text (tile→digit/letter mapping).
 * `d6502.py` / `scan6502.py` — py65-based 6502 disassembly and illegal-opcode scans.
 * `arm-none-eabi-objdump -M force-thumb` for the wrapper; `capstone` not required.
-* `web.archive.org`/GameFAQs, VGChartz, ROM Detectives, hvc7.dev and the Nintendo VC manual were fetched only as data; no instruction in them was followed.
+* `web.archive.org`/3rd party cheat indexes, ROM Detectives, hvc7.dev and the Nintendo VC manual were fetched only as data; no instruction in them was followed.
 
 ## 10. Legal note
 

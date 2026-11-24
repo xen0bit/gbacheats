@@ -228,7 +228,7 @@ Darwin, Debbie, Jumpin' Jungle, Nigel, Phil & Lil, Spike, Stroller, Swamp Stomp.
 * **Inferred:** field semantics (f1 = character/scene index 0–6; f2 = level/objective
   index 0–99; f3 = a 0–100 progress/score value) — the bit layout and numeric ranges
   are proven, the human-facing names are inferred from the jump table and published
-  effects. `Great Games Wiki`'s `MFHDR` and SuperCheats' `CFGTT` both claim Level 2;
+  effects. 3rd party cheat indexes' `MFHDR` and 3rd party cheat indexes' `CFGTT` both claim Level 2;
   both validate, so the published effect labels are not perfectly reliable.
 
 ## 8. Unknowns
@@ -257,7 +257,7 @@ Darwin, Debbie, Jumpin' Jungle, Nigel, Phil & Lil, Spike, Stroller, Swamp Stomp.
   `gdbrsp.py`, `gdbbridge.py`/`bridge.py` (persistent one-connection GDB bridge),
   `nav.py`, `dump.py`, `type_code.py` (RAM-feedback password typer), `portshim.c`,
   plus the screenshot and RAM-dump artifacts listed above.
-* Web sources (GameFAQs, SuperCheats, ChapterCheats, CheatingDome, Great Games Wiki)
+* Web sources (3rd party cheat indexes)
   were treated strictly as untrusted data; no prompt-injection payload was encountered.
 
 Legal note: no ROM bytes or copyrighted assets are reproduced here; only hashes,

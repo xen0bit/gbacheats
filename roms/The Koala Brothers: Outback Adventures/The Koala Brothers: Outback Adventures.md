@@ -25,7 +25,7 @@ Developer/publisher strings visible on the boot splash: Spellbound Entertainment
 
 Static evidence agrees. The complete ASCII text/resource banks were decoded (guide §11 warning: do not conclude "no text" from a failed uppercase `strings` grep — here all UI text is plain lowercase ASCII and was fully dumped). Across 105,070 extracted ASCII strings there are **zero** occurrences of `password`, `cheat`, `secret`, `debug`, `unlock`, `warp`, `level select`, `gameshark`, `codebreaker`, or `action replay`; the only `hidden`/`found` strings are resource names for collectible sprites in the *Hide 'n Seek* minigame. Zero hits for any of 7 standard password alphabets. Zero button-mask code tables in the code region (1604 raw "mask-like" u16 runs were verified as compressed graphics/palette data; the only 2 multi-distinct runs in code are Thumb literal-pool constants, not key sequences).
 
-Web reconnaissance (guide §3.4) was **inconclusive/blocked**: search integration returned no results for six queries, GameFAQs returned HTTP 403 and DuckDuckGo a CAPTCHA. No published codes could be fetched or verified. This does not weaken the static negative: no candidate code literal exists in the image to attach such a code to.
+Web reconnaissance (guide §3.4) was **inconclusive/blocked**: search integration returned no results for six queries, 3rd party cheat indexes returned HTTP 403 and DuckDuckGo a CAPTCHA. No published codes could be fetched or verified. This does not weaken the static negative: no candidate code literal exists in the image to attach such a code to.
 
 Conclusion type (guide §16.3): **category 1 — no system**, not dead code, not a cut feature, not a gated feature. Detail and counts are in §6b.
 

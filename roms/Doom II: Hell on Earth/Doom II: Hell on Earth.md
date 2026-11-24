@@ -15,7 +15,7 @@
 | MD5 | `efefee9082a83fc6e49f87510746eac0` |
 | SHA-1 | `2feeffc96386cf2cc0b2076928b010f18e9e9748` |
 | SHA-256 | `2a4c00510638659b6b207a7d2aa51cbd17bbad9a63f42bc2dc01c121eb83cf95` |
-| Developer / publisher | Torus Games / Activision (per GameFAQs release data) |
+| Developer / publisher | Torus Games / Activision (per 3rd party cheat indexes release data) |
 
 No scene cracktro or cheat trainer found: entry word is the stock branch and there is no second
 header/resident trainer. The bad complement/checksum is a rebuilt-header artifact (guide §16.1),
@@ -69,8 +69,8 @@ A/B buttons → release → Start to unpause.
 | **`BABABABAAABAAAAA` (16 presses, novel)** | god mode ON (unpublished spelling) | `0x02016338` → `0xF2010000` |
 | `AAAAAAAA` (rejected) | nothing | all monitored words unchanged |
 
-**Published codes consulted**: DoomWiki "Console Doom cheats" (archived 2023 snapshot), GameFAQs
-GBA Doom II cheats page (archived 2023). The text-only PC codes on the same GameFAQs page were
+**Published codes consulted**: DoomWiki "Console Doom cheats" (archived 2023 snapshot), 3rd party cheat indexes
+GBA Doom II cheats page (archived 2023). The text-only PC codes on the same 3rd party cheat index page were
 treated as PC-only and are not in this ROM (literal search for `IDDQD`/`IDKFA`/`IDCLIP`/… returned
 zero hits). The fetched pages contained no prompt-injection payload.
 
@@ -143,10 +143,10 @@ Consequences (all confirmed in emulator):
 Alphabet: two symbols, `A`/`B`; fixed length 8 effective presses; no checksum, no parameters, no
 level/difficulty field. Representable code space = **2^8 = 256**, of which **7** are accepted.
 
-**Published-code verification**: all seven ROM table entries match the GameFAQs Doom II GBA list.
+**Published-code verification**: all seven ROM table entries match the 3rd party cheat indexes Doom II GBA list.
 DoomWiki's GBA list adds `ABAABBBA` (warp next) and `ABAABBAA` (warp 10); both are absent from this
 table and were entered in-game with no visual or RAM effect — they belong to the sibling **Doom**
-SKU, not this Doom II image. DoomWiki's "Disable god mode" and GameFAQs entries are otherwise
+SKU, not this Doom II image. DoomWiki's "Disable god mode" and 3rd party cheat index entries are otherwise
 consistent. No published code was found to be a typo.
 
 ## 6b. Enumeration
@@ -163,7 +163,7 @@ consistent. No published code was found to be a typo.
   match a table entry:
   * `AABBAAAAA` (9 presses; last eight = `ABBAAAAA`) → all-weapons effect, RAM values
     keys=`0xFF00`, armor=`0x00C80000`, weapons=`0x02290000`, cheats=`0xF2100000`; screenshot
-    `novel_code_effect_crop.png`. Not on GameFAQs/VGChartz/TCRF (all published codes are 8 presses).
+    `novel_code_effect_crop.png`. Not on 3rd party cheat indexes (all published codes are 8 presses).
   * `BABABABAAABAAAAA` (16 presses; last eight = `AABAAAAA`) → god flag `0x02016338` =
     `0xF2010000`.
   * `BAABBAAAAA`, `ABAABBAAAAA` (10/11 presses) also accepted with the same all-weapons effect.
@@ -200,7 +200,7 @@ consistent. No published code was found to be a typo.
 
 * `file`, `md5sum`/`sha1sum`/`sha256sum`, Python header/logo scan (`find_codes.py`,
   `packed_table.py`, `lit_scan.py`, `find_lr.py`, `scan_input_funcs.py`).
-* `strings -t x`, `grep -abo`, web archive snapshots of GameFAQs / DoomWiki.
+* `strings -t x`, `grep -abo`, web archive snapshots of 3rd party cheat indexes / DoomWiki.
 * `arm-none-eabi-objdump -M force-thumb` for all disassembly; Capstone 5.0.7 literal/BL scanners.
 * mGBA SDL (`-3`, `-t` savestates, `-d` command-line debugger) on Xvfb `:316`; `xdotool` XTEST
   input; `import -window root` + `convert` crops.

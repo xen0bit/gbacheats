@@ -71,7 +71,7 @@ the ROM's validator and confirmed through the real on-screen password editor
 (§7); it produces a state the published codes do not: RAM-verified `$0569`
 (HMax) = 25, `$056A` (S.level) = 4, `$056B` (EMax) = 15 (the published
 level-1 code gives 20 / 2 / 10; the published level-2 code is rejected). It
-is not on GameFAQs, VGChartz, TCRF, RetroMaggedon, or any wiki.
+is not on 3rd party cheat indexes, or any wiki.
 
 ## 3. How to reproduce
 
@@ -346,7 +346,7 @@ Displayed value / tile (fresh game): `A=0xC0`, `B=0xC1`, `C=0xC2`, …,
 mapping, but the displayed characters are the same; the game's internal
 nibble is the displayed value with `A = 0`.
 
-Published codes (GameFAQs / Nintendo Power / RetroMaggedon):
+Published codes (3rd party cheat indexes):
 
 | level | code | level | code |
 |---:|---|---:|---|
@@ -393,7 +393,7 @@ without brute force.
 |---|---|---|---|
 | `ACIA AAAA AAIC` | character 2 = `C` (nibble 2) and checksum nibbles `I`,`C`; character 1 kept `A` | **ACCEPT** | `$0569` HMax=25, `$056A` S.level=4, `$056B` EMax=15; field bytes `02 80 00 00 00 A4` |
 
-This code is not on GameFAQs, VGChartz, TCRF, RetroMaggedon, or any wiki.
+This code is not on 3rd party cheat indexes, or any wiki.
 It is not an alias: the published level-1 code gives HMax=20 / S.level=2 /
 EMax=10, and the published level-2 code is rejected, so the state
 HMax=25 / S.level=4 / EMax=15 is not produced by any published code.

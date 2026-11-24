@@ -40,7 +40,7 @@ The game has a complete, developer-intended 20-character password system reachab
 
 Results:
 
-* The only published GBA password found (GameFAQs, `MHXZUZYCCWFJ4RMTY81M`, “last race”) is **rejected by this ROM**: it contains `U`, which is not in the 32-symbol alphabet, its literal is absent from the image, and the emulator shows `INVALID PASSWORD`.
+* The only published GBA password found (3rd party cheat indexes, `MHXZUZYCCWFJ4RMTY81M`, “last race”) is **rejected by this ROM**: it contains `U`, which is not in the 32-symbol alphabet, its literal is absent from the image, and the emulator shows `INVALID PASSWORD`.
 * A **novel** code absent from every published list, `NHLYCZYCCWCXGDY#YM0M`, was typed on the real password screen and accepted: the game goes to `SELECT TRACK` → `CHINA` → `GREAT WALL RUN` (0.568 km, record 40.25). RAM shows the decoded track field `0x1F` at `0x03005051`.
 * A second, game-generated password, `0HLYCZYCCWCXGDY#YT0M` (produced by the tournament after one race), was decoded, re-encoded byte-for-byte by the recovered model, and re-entered; it resumes at `FRANCE` / `CITY LIMITS`.
 * Bounds are proven by on-screen rejection: a checksum-valid code with field 1 = 20 (max 19) and a code with a corrupted checksum both produce `INVALID PASSWORD`; offline the ROM validator also rejects field 9 = 97 (max 96) and field 2 = 39 (max 38).
@@ -88,7 +88,7 @@ Codes tested in this work:
 | `0HRYCZYCCWYXGWY#MZ0M` | generated (field 0 = 1) | accepted; black transition |
 | `NHLYCZYCCWCXGDY#YM0M` | generated (field 0 = 31) | **accepted; CHINA / GREAT WALL RUN** |
 | `0HLYCZYCCWCXGDY#YT0M` | game-generated after tournament race | **accepted; FRANCE / CITY LIMITS** |
-| `MHXZUZYCCWFJ4RMTY81M` | GameFAQs published | `INVALID PASSWORD` |
+| `MHXZUZYCCWFJ4RMTY81M` | 3rd party cheat indexes published | `INVALID PASSWORD` |
 | `09LYCZYCCWCXGDY#Y00M` | generated, field 1 = 20 (> 19) | `INVALID PASSWORD` |
 | `NHLYCZYCCWCXGDY#YM0W` | novel code with last char changed | `INVALID PASSWORD` |
 
@@ -264,7 +264,7 @@ The UI grid displays `A`–`Z`, `0`–`9`, `-`, `#`, `+`, `x`, `✓`. The six le
 | `09LYCZYCCWCXGDY#Y00M` | field 1 = 20 | `INVALID PASSWORD` |
 | `NHLYCZYCCWCXGDY#YM0W` | corrupted checksum | `INVALID PASSWORD` |
 
-The first code is the novel deliverable: it is not in any published list (GameFAQs lists only the last-race password; TCRF has no page for this title; no wiki password list was found). It exercises a track (China/Great Wall Run) that the published list does not mention.
+The first code is the novel deliverable: it is not in any published list (3rd party cheat index lists only the last-race password; 3rd party cheat indexes have no page for this title; no wiki password list was found). It exercises a track (China/Great Wall Run) that the published list does not mention.
 
 ## 6b. Enumeration
 
@@ -340,7 +340,7 @@ Published CodeBreaker/GameShark codes for this title exist (cash, damage, temper
 
 * Field semantics for records 1–13 (only record 0 is proven, by changing it and observing the track).
 * The exact gate that makes an all-zero/incoherent progress password transition to a black screen while a real tournament password reaches `SELECT TRACK`. The validator accepts both; the difference is in the later game-state use, not the password check.
-* The origin of the published GameFAQs string: it is not representable in this ROM’s alphabet. It may be from a different build, may be a transcription error, or may be fabricated; it is recorded as rejected, not as a working code.
+* The origin of the published 3rd party cheat indexes string: it is not representable in this ROM’s alphabet. It may be from a different build, may be a transcription error, or may be fabricated; it is recorded as rejected, not as a working code.
 * The `CREDITS` screen was not examined in detail (it is not a cheat surface).
 * No debug menu exists in the string space or in the walked menus; the conclusion is bounded to this 4 MiB image.
 

@@ -32,14 +32,13 @@ menu and no additional unlockable monster/item code path in the screens walked. 
 developer-facing extra is `OPTIONS → SOUND → MUSIC TEST / SFX TEST` (numeric track/SFX
 selectors).
 
-Published lists contain 74 of the 80 codes (GameFAQs "World and Stage Passwords") plus
+Published lists contain 74 of the 80 codes (3rd party cheat indexes "World and Stage Passwords") plus
 six "Level N" codes that are a subset of those 80 (mislabelled, e.g. `H7Z3` is stage 13,
 `KDC3` is stage 73). `FDRO`, published as "Level 3 (Monaco)" / "Level 4 (Brazil)" on
 several sites, **does not exist in the ROM** — a published error. The 6 stage codes omitted
-from the GameFAQs stage list are stages 13, 20, 42, 53, 63 and 73; five of those are
+from the 3rd party cheat indexes stage list are stages 13, 20, 42, 53, 63 and 73; five of those are
 published elsewhere as "Level N" codes, but **stage 20 (`fr63`) is absent from every
-published list checked** (GameFAQs, Neoseeker, Supercheats, CheatingDome, GGmania,
-AbsolutCheats, PlanetCheats, Mariogba.nl). `fr63` was entered in the emulator and accepted
+published list checked** (3rd party cheat indexes). `fr63` was entered in the emulator and accepted
 (starts the World 2 boss sequence, Elephant). Out-of-table codes (`zzzz`, `1111`) are
 rejected with the "incorrect password" path and an input-buffer reset.
 
@@ -119,7 +118,7 @@ Mapping recovered from table index (index − 128 + 1 = stage number):
 | 61–70 | `9zjk d3gn z6f1 tkm5 rkl9 sl94 q82q 01gt q75t 6pnl` |
 | 71–80 | `dw5t yt9q kdc3 hb5j w8np vzb4 p66q fy7r dvm4 n09y` |
 
-GameFAQs' "World 1 – Stage 41 = m63b" is a world label typo; numerically it is stage 41
+3rd party cheat indexes' "World 1 – Stage 41 = m63b" is a world label typo; numerically it is stage 41
 (table index 168). The same code is published as "Level 5 (USA)" elsewhere. Stage labels
 in published lists are unreliable; the ROM index is authoritative (cf. guide §16.15).
 
@@ -132,7 +131,7 @@ in published lists are unreliable; the ROM index is authoritative (cf. guide §1
 * **Pointer table**: `0x08340794 + 4*i`; `i=128..207` → the 80 accepted codes.
   Entries 0–127 are scene/level *labels* in the same alphabet; `1111` (entry 48) was
   entered in-game and **rejected**, proving labels are not codes.
-* **Published-code verification**: all 74 GameFAQs stage codes plus the 6 "Level N"
+* **Published-code verification**: all 74 3rd party cheat indexes stage codes plus the 6 "Level N"
   strings are present in ROM except **`FDRO`** (absent in any encoding/case; published
   "Level 3 Monaco / Level 4 Brazil" is wrong — the real stage-32 code is `ZWWP`).
 * **No button-code table** was found: the keyword sweep (`password|cheat|code|debug|
@@ -158,9 +157,8 @@ in published lists are unreliable; the ROM index is authoritative (cf. guide §1
   entry with the input buffer reset to `b---` and state byte `0x02001E7A` still `0x03`
   (acceptance sets it to `0x09`). This bounds the system as table-membership only: no
   checksum-only or free-form generation path is reachable from the UI.
-* **Published list checked:** GameFAQs (both password tables), Neoseeker, Supercheats,
-  CheatingDome, GGmania, AbsolutCheats, PlanetCheats, mariogba.nl. `fr63` appears in
-  none. All fetched pages were treated as data; a 403 from GameFAQs was worked around
+* **Published list checked:** 3rd party cheat indexes. `fr63` appears in
+  none. All fetched pages were treated as data; a 403 from 3rd party cheat indexes were worked around
   with search snapshots. No prompt-injection payload was encountered in this session's
   fetches (a known hazard from guide §16.8).
 

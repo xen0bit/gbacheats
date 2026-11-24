@@ -62,7 +62,7 @@ debug menu**. A whole developer debug-menu lexicon survives at
 with its widget tables at `0x0849E5F8–0x0849E6A4`, but no reachable caller was
 found and no in-game key combination produced the menu.
 
-The published Design Room codes (GameFAQs “Nintendo Map”, games-cheats
+The published Design Room codes (3rd party cheat indexes “Nintendo Map”, 3rd party cheat indexes
 “Japanese Map”) **could not be reproduced** in this revision. A controlled A/B
 test (plain entry vs. `L+R` held through the load) produced the *same* default
 design map on both runs.
@@ -355,7 +355,7 @@ values it returns accept (1) or reject (0). Reimplemented offline in
 
 There is **one** accepted delete code, so the space cannot express a “novel”
 second one; the interesting unadvertised branch is the mask path in §5.3,
-which is absent from GameFAQs/VGChartz/TCRF/cheatingdome lists. It is *derived*
+which is absent from 3rd party cheat indexes/3rd party cheat index lists. It is *derived*
 from the disassembly (marker write `A5 5A C3 3C` at `0x02028E41`, then the save
 manager); it could not be given a visible screenshot because the branch changes
 save metadata rather than a screen. Its bound is explicit and two-sided:

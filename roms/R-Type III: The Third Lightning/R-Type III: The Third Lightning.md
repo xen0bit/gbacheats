@@ -129,8 +129,8 @@ their exact semantics were not fully resolved (see §8).
 
 ## 6. Tables
 
-Published level passwords (GameFAQs / IGN / Supercheats / ChapterCheats — all agree except
-IGN's `5hhlQ`/`5wdlo`, which are case/O-vs-0 transcriptions of the same 5 symbols):
+Published level passwords (3rd party cheat indexes — all agree except
+a 3rd party cheat index's `5hhlQ`/`5wdlo`, which are case/O-vs-0 transcriptions of the same 5 symbols):
 
 | Level | Password | Decoded fields `[f0..f6]` |
 |---|---|---|
@@ -141,7 +141,7 @@ IGN's `5hhlQ`/`5wdlo`, which are case/O-vs-0 transcriptions of the same 5 symbol
 | 6 | `5wdl0` | `[2,2,3,5,2,0,4]` |
 
 None of these strings appears literally in the ROM (searched ASCII, upper/lower, and
-packed 5/6-bit forms): the game generates them algorithmically. IGN's `5hhlQ` and `5wdlo`
+packed 5/6-bit forms): the game generates them algorithmically. a 3rd party cheat index's `5hhlQ` and `5wdlo`
 decode identically because `Q`=`q` in this case-insensitive alphabet and `o` is not a
 member (final digit `0` is the only valid symbol).
 

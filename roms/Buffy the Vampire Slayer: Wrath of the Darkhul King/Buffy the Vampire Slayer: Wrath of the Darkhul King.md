@@ -208,9 +208,9 @@ uncompressed IWRAM image of savestate `buffy.ss9` (state offset `0x1DB30`).
 
 ### 6.3 Published list verification
 
-Sources compared: GameFAQs cheat page (4 codes, page itself 403 but search
+Sources compared: 3rd party cheat index cheat page (4 codes, page itself 403 but search
 snippet lists the health-meter code), Tips & Tricks May 2004 full-text archive
-(full four-code list), SuperCheats, IGN wiki snippet, NeoSeeker snippet.
+(full four-code list), 3rd party cheat index wiki snippet, 3rd party cheat indexes snippet.
 
 | Published code | Source label | ROM result |
 |---|---|---|
@@ -219,9 +219,9 @@ snippet lists the health-meter code), Tips & Tricks May 2004 full-text archive
 | L, L, L, R, R, R, Right, Right | infinite lives | present, rec 2, flag 0x4 |
 | Up, Right, Up, Left, Down, Right, Down, Left | enemy health meters | present, rec 3, flag 0x8 |
 
-One Fandom snippet mislabels `L,L,L,R,R,R,Right,Right` as “Invincibility”;
+One 3rd party cheat indexes snippet mislabels `L,L,L,R,R,R,Right,Right` as “Invincibility”;
 the ROM mapping (bit 2 = life decrement skip) confirms the Tips & Tricks /
-SuperCheats label “Infinite lives”. All four literals are present and correctly
+3rd party cheat indexes label “Infinite lives”. All four literals are present and correctly
 ordered; no published code was rejected and no typo was found in this list.
 
 ## 6b. Enumeration
@@ -266,8 +266,8 @@ was written **before starting a game**:
 * Starting a game from this input produced the item effect: pause inventory
   shows **9** on every slot (`prefix_inv_gba.png`).
 
-This 11-press input appears in no published list checked (GameFAQs, Tips &
-Tricks, SuperCheats, IGN/NeoSeeker snippets, Fandom); a TCRF search returned no
+This 11-press input appears in no published list checked (3rd party cheat indexes, Tips &
+Tricks, 3rd party cheat indexes snippets, 3rd party cheat indexes); a 3rd party cheat index search returned no
 article for this title.
 
 Because the reachable table is exactly four records and all four effects are

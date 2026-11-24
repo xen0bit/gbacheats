@@ -34,8 +34,7 @@ two-stage gate:
      enqueues scene 22 and clears a 10-byte buffer at `0x020392AB`. This is an
      unadvertised second branch.
 
-Both stages were confirmed with mGBA RAM reads. The published list (GameFAQs,
-A2ZCheats, GameGenie.com) documents only stage 1 + the Up+Select branch; the
+Both stages were confirmed with mGBA RAM reads. The published list (3rd party cheat indexes) documents only stage 1 + the Up+Select branch; the
 scene-22 branch and the mask's "extra buttons allowed" semantics are not in any
 published list I found. GameShark/Action Replay/CodeBreaker codes found during
 recon are cheat-device codes and are **out of scope** (not reported here).
@@ -116,7 +115,7 @@ buttons are tolerated); reader B uses **exact equality** (extra buttons reject).
 | Skip combo | `0x44` (Up,Select) | Occurs once as `cmp r0,#0x44` in input-reading code (`0x080AB2EC`) |
 | Gate flag xrefs | `0x0203E7FA` | **2 readers** (`0x08082F18`, `0x080AB2D4`) + 1 writer (`0x0806D4F4`) — Ghidra xrefs, complete |
 | Held-key xrefs | `0x02038AC0` | 14 total; only 2 are cheat-related (`0x08082F28`, `0x080AB2E8`); the rest are menu/name-entry/input-routine uses |
-| Published web codes | 1 family | GameFAQs/A2Z/GameGenie all describe only stage 1 + Up+Select skip |
+| Published web codes | 1 family | 3rd party cheat indexes all describe only stage 1 + Up+Select skip |
 
 No password alphabet, no code table, no checksum, no validator `strcmp` loop
 exists for this game — the entire in-game cheat surface is the three code sites
@@ -209,7 +208,7 @@ in-game button-code space of this ROM. There is no fourth branch to find.
   `scrot` + ImageMagick crops, mGBA CLI debugger (`-d`) for PC identification,
   and zlib decompression of the `gbAs` chunk of `.ss1`/`.ss2`/`.ss3`/`.ss4`
   savestates for EWRAM reads (state EWRAM base `0x21000`).
-* Web recon: GameFAQs, A2ZCheats, GameGenie.com, GameHacking.org. Fetched pages
+* Web recon: 3rd party cheat indexes. Fetched pages
   were treated as data only; no instructions in them were followed.
 
 Legal note: no ROM bytes or copyrighted assets are reproduced here; only

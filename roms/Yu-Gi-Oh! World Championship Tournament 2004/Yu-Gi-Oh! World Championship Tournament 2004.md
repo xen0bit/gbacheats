@@ -21,7 +21,7 @@ Analysis was on a byte-identical copy at `/tmp/yugiohwct2004/game.gba`; the ROM 
 
 ## 2. Executive summary
 
-This SKU has **no card-password system** (IGN's General FAQ for this exact title: "Passwords are gone!") and no ASCII password/debug strings. Its only in-game cheat surface is a single **10-press button code**: the Konami code `↑ ↑ ↓ ↓ ← → ← → B A`, which replays the staff-credits sequence. It is **gated** on a "credits already viewed" bit (`0x02010015 & 0x04`). On a fresh save that byte is `0x01`, so the code is inert until credits have been seen once — this is a *gated feature*, not a dead one.
+This SKU has **no card-password system** (a 3rd party cheat index's General FAQ for this exact title: "Passwords are gone!") and no ASCII password/debug strings. Its only in-game cheat surface is a single **10-press button code**: the Konami code `↑ ↑ ↓ ↓ ← → ← → B A`, which replays the staff-credits sequence. It is **gated** on a "credits already viewed" bit (`0x02010015 & 0x04`). On a fresh save that byte is `0x01`, so the code is inert until credits have been seen once — this is a *gated feature*, not a dead one.
 
 The validator at `0x08082E00` compares the last ten recorded key presses against ten hard-coded masks (newest first: `01 02 10 20 10 20 80 80 40 40`). There is **no code table and no generator**: every one of the ten comparisons is mandatory, so the accepted space is exactly one sequence out of 10¹⁰. A single-position deviation returns 0.
 
@@ -123,7 +123,7 @@ else                 start_task(/* fallback pointer */);
 
 **Handler table `0x08C501A8`**: index 0 `0x08086275`, 1 `0x0808635D`, 2 `0x08086395`, 3 `0x080865B5` (hidden credits-code wrapper), followed by `0x00000000`.
 
-**Published-code verification**: GameFAQs/IGN/cheatcc list the All Cards sequence and the credits sequence; only the credits sequence exists in this ROM. GameHacking.org/Ethereal/Almars codes are all cheat-device RAM patches (e.g. `12050016 00000303` "Have All Cards"), explicitly out of scope. One fetched IGN FAQ stated "Passwords are gone!" — corroborated by the complete absence of a password UI or table.
+**Published-code verification**: 3rd party cheat indexes/3rd party cheat index list the All Cards sequence and the credits sequence; only the credits sequence exists in this ROM. 3rd party cheat indexes/3rd party cheat index codes are all cheat-device RAM patches (e.g. `12050016 00000303` "Have All Cards"), explicitly out of scope. One fetched 3rd party cheat index FAQ stated "Passwords are gone!" — corroborated by the complete absence of a password UI or table.
 
 ## 6b. Enumeration
 
@@ -174,5 +174,5 @@ Labels per guide §8.4.
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` — all disassembly.
 - mGBA 0.10.5 under Xvfb `:317` + openbox, `SDL_AUDIODRIVER=dummy`, XTEST input helper (`key.py`), `scrot` — screen walk, RAM evidence, credits proof.
 - `gdb-multiarch` with mGBA's `-g` stub — attempted as an oracle (guide §16.19); abandoned due to stub unreliability (recorded in §7).
-- Web recon treated strictly as data: GameFAQs, IGN (cheats + General FAQ "Passwords are gone!"), cheatcc, GameHacking.org, Ethereal Games, Almars Guides. No instructions found in fetched content were followed.
+- Web recon treated strictly as data: 3rd party cheat indexes (cheats + General FAQ "Passwords are gone!"), 3rd party cheat indexes Guides. No instructions found in fetched content were followed.
 - All screenshots, savestates, and scripts were kept in `/tmp/yugiohwct2004/`; none were written into the ROM folder. No ROM or copyrighted assets are reproduced here.

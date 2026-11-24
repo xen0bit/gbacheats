@@ -36,14 +36,14 @@ value. The ROM validator at **`0x08008CE4`** accepts a code when:
 Accepted space: **30,662,400** of 32^6 = 1,073,741,824 possible strings.
 The validator decodes the payload into difficulty, start/area, progress and flag
 fields stored in IWRAM; the difficulty field was RAM-verified by entering a
-minted code. Public GameFAQs codes were verified against the model: 62/64 satisfy
+minted code. Public 3rd party cheat index codes were verified against the model: 62/64 satisfy
 the checksum; the two exceptions are published typos, one of which was disproved
 in the emulator (`M2F9S7` rejected, corrected `M2F9SV` accepted).
 
 No button code, hidden debug menu or level-select cheat exists in this SKU. The
 only global button combination found is `L+R`, which is a **soft reset** (SWI 0/1
 via `FUN_08039A84`) guarded by a one-shot byte at `0x030023CC` — not a cheat
-surface. The GBC-only 4-character `CRDT` credits code published on GameFAQs is
+surface. The GBC-only 4-character `CRDT` credits code published on 3rd party cheat indexes are
 not applicable to this 6-character GBA screen.
 
 No prompt-injection payload was encountered in any fetched page or ROM string.
@@ -162,7 +162,7 @@ OCR errors for `1` and `0` (Guide §16.7). Example: `XRDZBI` ≡ `XRDZB1`,
 | c4 | 5 | progress/flag bits | 5 bits copied reversed; popcount participates in zero-check |
 | c5 | 5 | checksum | (sum(c0..c4)+1) & 31 |
 
-**Published-code verification (GameFAQs GBA list, 64 codes):** 62/64 satisfy the
+**Published-code verification (3rd party cheat indexes GBA list, 64 codes):** 62/64 satisfy the
 checksum. Exceptions: `M2F9S7` (published "easy level 16") and `3RC!94`
 (published "easy level 9"). `M2F9S7` was entered in the emulator and **rejected**;
 its checksum-corrected form `M2F9SV` was **accepted**. All other published codes
@@ -178,7 +178,7 @@ checksum-valid candidates. Applying the validator's range checks
 read directly from ROM rather than guessed, so this count is a derivation from
 the shipped code, corroborated by emulator accept/reject tests.
 
-**Novel codes (absent from GameFAQs, Cheat Happens, TCRF and every other list
+**Novel codes (absent from 3rd party cheat indexes and every other list
 consulted; exact-string web search for `XRKZB6` returned no match):**
 
 1. **`XRKZB6`** — derived from the published `XRDZB1` by changing only the
@@ -226,7 +226,7 @@ Derived, not Observed.
   proven; the validator was read directly, so the bit layout is certain, but the
   downstream gameplay meaning of `n/100`, `n%100`, the c3 bits and the five c4
   bits remains labeled conservatively.
-- The GBC-only 4-symbol credits code `CRDT` published on GameFAQs is a different
+- The GBC-only 4-symbol credits code `CRDT` published on 3rd party cheat indexes are a different
   SKU; it is not accepted by this 6-symbol GBA screen and was not tested on a GBC
   ROM.
 - Text is tile-indexed: `strings`, raw ASCII, UTF-16, ±0x20 shifts and the
@@ -245,8 +245,8 @@ Derived, not Observed.
   boundaries, xrefs and pseudocode cross-check; session closed after analysis.
 - mGBA 0.x SDL under Xvfb :316 + openbox; `xdotool` XTEST input; `scrot` +
   ImageMagick crops; helper `/tmp/monstersinc/enter_code.py`.
-- Web: GameFAQs via `web.archive.org` (direct fetch 403), plus web-search checks
-  of Cheat Happens, TCRF and exact-string searches. Fetched pages were treated
+- Web: 3rd party cheat indexes via `web.archive.org` (direct fetch 403), plus web-search checks
+  of 3rd party cheat indexes and exact-string searches. Fetched pages were treated
   strictly as data.
 
 No ROM or copyrighted assets are redistributed in this report.

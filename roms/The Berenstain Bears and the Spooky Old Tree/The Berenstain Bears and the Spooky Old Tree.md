@@ -89,7 +89,7 @@ The first six entries are exactly the published list. The seventh is an addition
 
 Up cycles 0→1→2→3→0; Down is the exact inverse (`downcycle_montage.png`: Knight→Squirrel→Bug→Drawers→Knight). There are no other icons and no "blank" symbol: the cycle closes after four steps in both directions, and the pixel diff between the 4th and 5th Up-press states is zero.
 
-**Published code list** (SuperCheats ID 7254, 53lu, and GameFAQs search snippet — all three agree):
+**Published code list** (3rd party cheat index ID 7254, 3rd party cheat indexes, and 3rd party cheat index search snippet — all three agree):
 
 | Level | Published password |
 |---:|---|
@@ -124,7 +124,7 @@ All six were individually confirmed accepted in the emulator and are present in 
 | 6 | Squirrel, Bug, Knight, Bug | 3,2,0,2 | 1–7 | Yes (L7) |
 | 7 | **Drawers, Squirrel, Knight, Bug** | **1,3,0,2** | **1–7** | **No — novel** |
 
-**Novel code — generated, entered, in-game proof.** `Drawers, Squirrel, Knight, Bug` appears in none of the three published lists consulted (SuperCheats, 53lu, GameFAQs snippet) and in no other search result. It was entered by hand on the real password screen (`NOVEL_code_entered.png`) and accepted: the level-select map shows all of levels 2,3,4,5,6,7 green/unlocked (`NOVEL_result.png`, `v_1302.png`). This is a genuinely unadvertised combination — an alternate "unlock every level" password distinct from the published level-7 code.
+**Novel code — generated, entered, in-game proof.** `Drawers, Squirrel, Knight, Bug` appears in none of the three published lists consulted (3rd party cheat indexes snippet) and in no other search result. It was entered by hand on the real password screen (`NOVEL_code_entered.png`) and accepted: the level-select map shows all of levels 2,3,4,5,6,7 green/unlocked (`NOVEL_result.png`, `v_1302.png`). This is a genuinely unadvertised combination — an alternate "unlock every level" password distinct from the published level-7 code.
 
 **Bounds proven by rejection.** 249 of 256 inputs were rejected in-game. To show the accept set is not merely "close" to a published code, five single-symbol near-misses of the novel code were entered individually:
 
@@ -167,6 +167,6 @@ Every single-slot perturbation fails, so all four positions are significant. The
 * Python 3 + Pillow for screenshot screen-classification and green-circle level detection; `enumerate.py` drove the 256-code sweep with a validated classifier and state machine.
 * `strings`, `xxd`, `file`, `md5sum`/`sha1sum`/`sha256sum`, `arm-none-eabi-objdump -M force-thumb`, Capstone (validator pattern scan).
 * A direct GDB-RSP client (`rsp.py`/`rsp2.py`) was attempted for RAM inspection; mGBA stub quirks limited it, as documented in §8.
-* Web reconnaissance: SuperCheats, 53lu, GameFAQs (403 — snippet only). Fetched pages were treated strictly as untrusted data; no instructions in them were followed. No prompt-injection payload was encountered.
+* Web reconnaissance: 3rd party cheat indexes. Fetched pages were treated strictly as untrusted data; no instructions in them were followed. No prompt-injection payload was encountered.
 
 No ROM data or copyrighted assets are redistributed in this report — only hashes, addresses, codes, and original observations.

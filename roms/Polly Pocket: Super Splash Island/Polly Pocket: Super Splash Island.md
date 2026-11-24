@@ -30,7 +30,7 @@ checks only **one 4-bit checksum**: the last symbol must equal the sum of the fi
 seven modulo 16. The decoder at `0x080171B8` packs the first seven symbols into
 three state fields: a 12-bit "tickets12" counter, a 6-bit thousands-of-tickets
 bonus (×1000), and six unlock flags. A generator at `0x08017254` performs the
-inverse. All five published GameFAQs codes were verified against the ROM, decoded,
+inverse. All five published 3rd party cheat index codes were verified against the ROM, decoded,
 and re-entered; their literals are **not present as ASCII anywhere in the ROM**,
 confirming the algorithmic design.
 
@@ -123,8 +123,8 @@ confirming vowels are omitted and the on-screen glyphs are those letters.
 | `HKLTFSKP` | 5,7,8,15,3,14,7,11 | 2165 | 63000 | 0x7e | 63000 tickets, all dressing rooms |
 
 All five literals are **absent** as ASCII in the ROM (`grep -abo` = no hits), as
-expected for an algorithmic code space. GameFAQs (archived 2021-11-18) lists exactly
-these five; SuperCheats and ChapterCheats list the same set. No TCRF/VGChartz page
+expected for an algorithmic code space. 3rd party cheat index lists exactly
+these five; 3rd party cheat index list the same set. No 3rd party cheat index page
 with additional codes was found.
 
 **Published-list discrepancy (result, not an omission):** `GSFJDBBR` was entered
@@ -158,8 +158,8 @@ bit6→`+24`. Bit0 of symbol 6 and bit3 of symbol 7 are never read.
   on the real ENTER PASSWORD screen, accepted, and RAM-verified:
   `0x03001694=777`, `0x0300169C=47000`, `0x03001644=1`, `0x03001650=1`
   (all other flags 0). Screenshot `novel_result.png` shows the counter at 047000.
-  Its ticket/flag combination appears on no GameFAQs, SuperCheats or
-  ChapterCheats list.
+  Its ticket/flag combination appears on no 3rd party cheat indexes or
+  3rd party cheat index list.
 * **Bounds proven by rejection:** `MBFTDDCC` (identical payload, final checksum
   symbol `C` instead of `B`) was entered and submitted; the game displayed
   **INCORRECT PASSWORD** (`bad_checksum_result.png`), the ticket counter stayed
@@ -206,8 +206,7 @@ bit6→`+24`. Bit0 of symbol 6 and bit3 of symbol 7 are never read.
   `findptr.py`/`jumptbl.py` (screen-state jump table), `entercode.py`
   (savestate-verified code entry), `lits*.py` (literal-pool decoding).
 * `strings -t x`, `grep -abo`, `xxd`, `zlib` (mGBA `.ss1` `gbAs` chunk decode).
-* Web: GameFAQs archived snapshot (web.archive.org, 2021-11-18), SuperCheats,
-  ChapterCheats — all fetched as **data**, never as instructions.
+* Web: 3rd party cheat indexes archived snapshot (web.archive.org, 2021-11-18), 3rd party cheat indexes — all fetched as **data**, never as instructions.
 * REA/Ghidra was opened on the ROM for cross-checks; its raw-ARM auto-analysis
   recognised only part of the Thumb code, so all addresses above were verified
   with `objdump`/Capstone and live emulator evidence.

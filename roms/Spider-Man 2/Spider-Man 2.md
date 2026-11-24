@@ -29,16 +29,14 @@ so the code is the retail US build (Digital Eclipse / Activision, 2004).
 **There is no in-game password, button sequence, or name code implemented in this GBA image.**
 The two codes published for "Spider-Man 2 GBA" were checked against the ROM and the running game:
 
-1. "Invincibility — at the title screen press Up, Down, Right, A" (GameFAQs, GameRankings,
-   projectcheatcodes). Observed: pressing that sequence at the title screen does **not** consume
+1. "Invincibility — at the title screen press Up, Down, Right, A" (3rd party cheat indexes). Observed: pressing that sequence at the title screen does **not** consume
    the A as a cheat input — A is consumed by the highlighted `NEW` item and a new game starts,
    exactly as a bare A does. An exhaustive raw search of all 16 MiB for the sequence as key masks
    (active-high and active-low, u8/u16LE/u16BE/u32, forward and reversed, strides 1–16 B) found
    **zero** candidates, and a scan of all 91 code references to the pressed-key word found no
    four-step compare state machine. The published code is **unverified and most likely belongs to
    a different SKU/version**.
-2. "After 100% completion, enter your name as FLUWDEAR to access level select" (IGN, GameFAQs,
-   supercheats, cheatmasters). This **cannot be entered on the GBA SKU**: the name field is a
+2. "After 100% completion, enter your name as FLUWDEAR to access level select" (3rd party cheat indexes). This **cannot be entered on the GBA SKU**: the name field is a
    **3-character** field. `FLUWDEAR` (8 chars) is absent from the ROM in ASCII, reverse, lower
    case, ±`0x20`, UTF-16LE/BE and UTF-32. The code is a DS/PC-era instruction misattributed to GBA
    (guide §16.11).
@@ -169,9 +167,9 @@ Right=0x010 Left=0x020 Up=0x040 Down=0x080 R=0x100 L=0x200`.
 
 | Claim | Source | ROM literal? | In-game result |
 |---|---|---|---|
-| Invincibility `Up,Down,Right,A` @ title | GameFAQs / GameRankings / projectcheatcodes | no key-mask table or state machine found in 16 MiB | A consumed by NEW, new game starts; no cheat feedback observed |
-| Level select via name `FLUWDEAR` after 100% | IGN / GameFAQs / supercheats / cheatmasters | absent in 6 encodings | not enterable: name field is 3 characters |
-| "Beat game to unlock all moves and levels" | IGN | strings + renderer present | legitimate unlockable; gated on completion, not a code |
+| Invincibility `Up,Down,Right,A` @ title | 3rd party cheat indexes | no key-mask table or state machine found in 16 MiB | A consumed by NEW, new game starts; no cheat feedback observed |
+| Level select via name `FLUWDEAR` after 100% | 3rd party cheat indexes | absent in 6 encodings | not enterable: name field is 3 characters |
+| "Beat game to unlock all moves and levels" | 3rd party cheat indexes | strings + renderer present | legitimate unlockable; gated on completion, not a code |
 
 ## 6b. Enumeration
 
@@ -231,7 +229,7 @@ initialiser `0x08020600`; 36-byte slot stride.
 after 100% completion; the exact save offset of the completion flag. These are labelled inferred
 and left in §8; no code path from retail input to them was found.
 
-Fetched web pages (GameFAQs/IGN/TCRF/Almar) were treated as data only; no instructions in them
+Fetched web pages (3rd party cheat indexes) were treated as data only; no instructions in them
 or in ROM strings were executed. No prompt-injection payload was encountered.
 
 ## 8. Unknowns

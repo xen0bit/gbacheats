@@ -54,8 +54,7 @@ The ROM contains **no** `JULIUS`, `MAXIM`, `HARD`, `SOUND`, `DEBUG`, `PASSWORD` 
 sound test and no debug menu in this US ROM. The published “Julius mode / Hard mode / sound
 test” material belongs to other Castlevania games or to the PSP/DS port, not to this image.
 
-**§0.2 deliverable status.** The four accepted names are all published (GameFAQs, Cheat Code
-Central, Cheat Happens, IGN, RPGClassics, VGMuseum, mogelpower, and a Japanese guide), so this
+**§0.2 deliverable status.** The four accepted names are all published (3rd party cheat indexes, and a Japanese guide), so this
 is a **proven closed set of 4 published inputs with no novel in-game code**. The validator only
 compares the first 8 bytes, so 9-character strings such as `FIREBALLX` are accepted at the
 validator level, but the on-screen keyboard cannot store a 9th byte (8-byte buffer, length cap
@@ -265,12 +264,12 @@ in-game codes.
 **Published status of the four accepted names.** All four are published, so the accepted set
 is a **proven closed set with no novel in-game code**:
 
-* GameFAQs cheats page — “Play in Magician mode … enter FIREBALL as your name”, “… enter
+* 3rd party cheat index cheats page — “Play in Magician mode … enter FIREBALL as your name”, “… enter
   GRADIUS …”, “… enter CROSSBOW …”, “… enter DAGGER …”.
-* GameFAQs walkthrough by Tarrun — “04.1 Magician … Password: FIREBALL”, “04.2 Fighter …
+* 3rd party cheat index walkthrough by Tarrun — “04.1 Magician … Password: FIREBALL”, “04.2 Fighter …
   Password: GRADIUS”, “04.3 Shooter … Password: CROSSBOW”, “04.4 Thief … Password: DAGGER”.
-* Cheat Code Central, Cheat Happens, IGN, RPGClassics, VGMuseum, mogelpower and the Japanese
-  guide at `cotm.retromeme.nobody.jp` all list the same four names.
+* 3rd party cheat indexes and the Japanese
+  guide at 3rd party cheat indexes all list the same four names.
 
 **Bounds proven by rejection.** `FIREBALX` (8th byte `X` ≠ `L`), `GRADIUSZ` (8th byte `Z` ≠
 NUL), `DAGGERZZ` (7th byte `Z` ≠ NUL), `DAGGERXY` (7th byte `X` ≠ NUL) are all rejected. This
@@ -321,9 +320,8 @@ proves the compare is byte-exact at the 8-byte boundary and that the alphabet is
   (`0x020224C6`). Key presses were confirmed in `KEYINPUT` but the menu selection never
   advanced (see §3 “Real name-entry screen attempt”), so the real name-entry keyboard was
   not reached.
-* Published status of the four names was checked against GameFAQs (cheats page and Tarrun’s
-  walkthrough), Cheat Code Central, Cheat Happens, IGN, RPGClassics, VGMuseum, mogelpower and
-  `cotm.retromeme.nobody.jp`; all four names appear in all of them (Section 6b).
+* Published status of the four names was checked against 3rd party cheat indexes (cheats page and Tarrun’s
+  walkthrough), 3rd party cheat indexes; all four names appear in all of them (Section 6b).
 
 **Derived (disassembly).**
 

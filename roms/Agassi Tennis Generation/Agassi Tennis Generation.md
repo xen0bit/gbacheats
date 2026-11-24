@@ -71,8 +71,8 @@ Evidence, in one page:
   bit 1 (lob/slice) individually. No code keeps a press counter, compares
   against a stored button sequence, or compares the key word to a combo
   constant.
-* **Nothing published to reproduce.** GameFAQs' cheat page returns 403 and has
-  no archived snapshot; Almar's Guides lists only GameShark/CodeBreaker
+* **Nothing published to reproduce.** 3rd party cheat indexes' cheat page returns 403 and has
+  no archived snapshot; 3rd party cheat index lists only GameShark/CodeBreaker
   *memory-write* codes (`33003430 0000` → P1 score, etc.), which are out of
   scope and are not a game feature. No password list exists anywhere for this
   title, which agrees with the ROM.
@@ -156,11 +156,11 @@ alone on the main menu, options, court select and pause does nothing at all.
 
 | Source | Content | Verification |
 |---|---|---|
-| GameFAQs `/gba/571543-.../cheats` | HTTP 403; Wayback has no snapshot | page text not retrievable; no archive |
-| Almar's Guides, GameShark page (USA) | page exists, **no codes listed** | n/a |
-| VGChartz `game/39/agassi-tennis-generation` | page is the PS2 entry; no cheat/password content (only site-nav labels) | fetched in full; no codes |
-| TCRF `Agassi_Tennis_Generation` | Cloudflare challenge / no article | not retrievable; no archived snapshot |
-| Almar's Guides, CodeBreaker page (USA) | enable code `0000786C 000A / 1000BEC8 0007`; `33003430 0000`, `33003430 0004`, `33003431 0000`, `33003431 0004` | these are GameShark/CodeBreaker memory writes to RAM, i.e. exactly the category excluded by this engagement; nothing in-game to test |
+| 3rd party cheat indexes `/gba/571543-.../cheats` | HTTP 403; Wayback has no snapshot | page text not retrievable; no archive |
+| 3rd party cheat indexes, GameShark page (USA) | page exists, **no codes listed** | n/a |
+| 3rd party cheat indexes `game/39/agassi-tennis-generation` | page is the PS2 entry; no cheat/password content (only site-nav labels) | fetched in full; no codes |
+| 3rd party cheat indexes `Agassi_Tennis_Generation` | Cloudflare challenge / no article | not retrievable; no archived snapshot |
+| 3rd party cheat indexes, CodeBreaker page (USA) | enable code `0000786C 000A / 1000BEC8 0007`; `33003430 0000`, `33003430 0004`, `33003431 0000`, `33003431 0004` | these are GameShark/CodeBreaker memory writes to RAM, i.e. exactly the category excluded by this engagement; nothing in-game to test |
 
 **There is no published password/button code for this title to verify against
 the ROM.** That is itself consistent with the static result: no code system.

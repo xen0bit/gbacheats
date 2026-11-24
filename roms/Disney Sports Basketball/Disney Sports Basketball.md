@@ -45,7 +45,7 @@ What *does* exist:
    `L+R+SELECT` memory/DMA debugger **does not activate** at boot, on the title,
    or on the main menu (observed, three timings).
 2. A debug "GAME MODE SELECT" page table that warps to otherwise-unreachable
-   screens, first described publicly by TCRF. Its entry selector is the byte at
+   screens, first described publicly by 3rd party cheat indexes. Its entry selector is the byte at
    `0x02000240`, which this work shows is a *menu-object id*, and forcing it to
    `3` from a savestate does not open the screen in USA Rev.00. The real screen
    dispatcher reads the mode word at `0x0200FA60` (`cmp r0,#3` at
@@ -60,7 +60,7 @@ What *does* exist:
 
 The negative is bounded, not assumed: the menu/screen inventory, the text space,
 the button-mask space and every published code/claim in scope are listed and
-tested in §§6b and 7. Memory-write codes (CodeBreaker/GameShark/TCRF RAM
+tested in §§6b and 7. Memory-write codes (CodeBreaker/GameShark/3rd party cheat indexes RAM
 patches) are out of scope and are not offered as cheats; they are used only as
 address hints and are labelled as such.
 
@@ -267,7 +267,7 @@ the text and button spaces that were searched so the negative is bounded.
    | `0x0800CC14` | 34 (0x22 internal screen) |
 
    plus `0x0800CC28` (`bx lr`), `0x0800CC2C` (frame wait) and `0x0800CC68`
-   (delay/call) as row actions. The TCRF write-up mentions only the Normal and
+   (delay/call) as row actions. The 3rd party cheat indexes write-up mentions only the Normal and
    Minigame pages; the 27/28/34 screen warps are not described anywhere.
 4. **The debug banner print list** at 0x0010A680 is complete and unreferenced by
    any menu path; it is the "AGB SYSTEM Ver3.00 BY KCEK / L+R+START SOFT RESET /
@@ -286,13 +286,13 @@ the text and button spaces that were searched so the negative is bounded.
 |---|---|---|---|
 | `L+R+START` soft reset | in-ROM string 0x10A070 | pressed on title/main menu | **works** (returns to title menu) |
 | `L+R+SELECT` MEM+DMA debug | in-ROM string 0x10A08C | held at boot, title and main menu (3 s) | **inert**; no screen, no RAM change |
-| `02000240:03` opens GAME MODE SELECT | TCRF (memory code, out of scope as a cheat) | savestate byte patch at 0x21240 (EWRAM 0x02000240) at title and at main menu | screen unchanged; byte holds 3 while the menu still renders, so this id alone is not the gate in USA Rev.00 |
-| `02000270:07` opens Minigame | TCRF (memory code) | not used as a cheat; the Minigame screen is reachable normally (verified) | not needed |
-| Unlock Mortimer + Aero Field (Challenge lvl 2) | GameFAQs/Neoseeker/cheatingdome | static: MORTIMER1-3 records exist; Mortimer absent from default ring; Challenge mode present | **consistent**; gameplay clear not replayed (hours) |
+| `02000240:03` opens GAME MODE SELECT | 3rd party cheat indexes (memory code, out of scope as a cheat) | savestate byte patch at 0x21240 (EWRAM 0x02000240) at title and at main menu | screen unchanged; byte holds 3 while the menu still renders, so this id alone is not the gate in USA Rev.00 |
+| `02000270:07` opens Minigame | 3rd party cheat indexes | not used as a cheat; the Minigame screen is reachable normally (verified) | not needed |
+| Unlock Mortimer + Aero Field (Challenge lvl 2) | 3rd party cheat indexes | static: MORTIMER1-3 records exist; Mortimer absent from default ring; Challenge mode present | **consistent**; gameplay clear not replayed (hours) |
 | Unlock Pete + SteamRoller Dome (Challenge lvl 3) | same | PETE1-3 records exist; Pete absent from default ring | **consistent** |
-| All-Star mode after Challenge Cup | GameFAQs | Challenge mode present; no code surface | consistent |
+| All-Star mode after Challenge Cup | 3rd party cheat indexes | Challenge mode present; no code surface | consistent |
 | Tiny Rockets (all items) | 1UP retrospective | 40-bit item field at 0x0200D889 matches 38-name bank | consistent |
-| CodeBreaker `Unlock All Items` | Ethereal/almars | address 0x0200D889 cross-checks the 40-bit field | used as address evidence only; not a deliverable |
+| CodeBreaker `Unlock All Items` | 3rd party cheat indexes/almars | address 0x0200D889 cross-checks the 40-bit field | used as address evidence only; not a deliverable |
 
 ### 6b.4 Bounds proven by rejection
 
@@ -340,7 +340,7 @@ the text and button spaces that were searched so the negative is bounded.
   filtering and published methods are consistent, but a full save-struct map is
   left as future work.
 * The debug GAME MODE SELECT is a development-only screen (mode 3). Its entry
-  path in USA Rev.00 is not via the menu ids we could reach; TCRF's byte patch
+  path in USA Rev.00 is not via the menu ids we could reach; a 3rd party cheat index's byte patch
   did not reproduce here.
 
 ## 8. Unknowns

@@ -93,8 +93,8 @@ Evidence: `0x0800A180`–`0x0800A2E6` and `0x0800A2FC`–`0x0800A3DE`.
 **Key masks used by this engine (active-high `~KEYINPUT & 0x3FF`):** A=0x001, B=0x002, Select=0x004, Start=0x008, Right=0x010, Left=0x020, Up=0x040, Down=0x080, R=0x100, L=0x200. Confirmed from the handler at `0x0800A226`–`0x0800A2E6`.
 
 **Published codes checked:**
-- GameFAQs/Cheat Happens/Codejunkies GBA entries: four Action Replay codes (`Infinite Health`, `All Levels Open`, `All Coins Collected`, master code) — encrypted cheat-device codes, **out of scope**, not developer-intended.
-- GameFAQs "Extras for Shrek 2 XBOX" Scrapbook sequences (`Left,Up,A,B,...` variants for coins/health/level select/bonus games) — console-only; require X button; **not present in this ROM** under any encoding checked.
+- 3rd party cheat indexes GBA entries: four Action Replay codes (`Infinite Health`, `All Levels Open`, `All Coins Collected`, master code) — encrypted cheat-device codes, **out of scope**, not developer-intended.
+- 3rd party cheat indexes "Extras for Shrek 2 XBOX" Scrapbook sequences (`Left,Up,A,B,...` variants for coins/health/level select/bonus games) — console-only; require X button; **not present in this ROM** under any encoding checked.
 - Unlockables: Puss in Boots = finish last chapter of book 2; all mini-games / Bonus Mode = beat game 100% (all 25 chapters). Progress-based, not input codes.
 
 ## 6b. Enumeration
@@ -112,7 +112,7 @@ This section proves the negative result with counts, per §0.2 and §16.9.
 | KEYINPUT (`0x04000130`) literals in ROM | 2 (`0x080000A4` crt0, `0x0801DF48`) | Both are the boot hardware-init and a wait-for-Start loop; no sequence matcher |
 | Hidden debug screen gates | string + xref + screen walk | No `debug` string; no unlabelled menu slot observed on any of the 10 screens walked; no reachable screen with a code entry widget |
 | Dynamic button-code entry on pause menu | 17 presses (`Left,Up,A,B` ×3, `Up` ×5) | No save/unlock flag changed (61 EWRAM bytes changed, cursor/rendering only) |
-| GBA password codes published anywhere | web search of GameFAQs, Cheat Happens, Codejunkies, VGChartz, IGN, TCRF (via search snippets where direct fetch 403'd) | **0**; only Action Replay codes and progress unlockables |
+| GBA password codes published anywhere | web search of 3rd party cheat indexes (via search snippets where direct fetch 403'd) | **0**; only Action Replay codes and progress unlockables |
 
 **Space definition result:** 0 representable codes. The only input field with a non-trivial alphabet is the 3-character initials name (`31^3 = 29,791` possible spellings), but it is a label written verbatim into the save slot, not a validated code — proven by the observed `AAZ → SRAM "ZAA"` round trip and by the absence of any string-compare consumption (the handler's consumer at `0x0800A208` calls a pointer-vectored copy with length 31, not a comparison).
 
@@ -130,7 +130,7 @@ This section proves the negative result with counts, per §0.2 and §16.9.
 
 - The exact SRAM bit/byte and its setter for the 100% / all-25-chapters unlock were not isolated; the condition is corroborated by the walkthrough and by observed gating, not by a traced setter call graph (§16.18 was not fully completed for this save format).
 - Whether `Defeat Level`, `Defeat Level 100%` and `Slow Motion` (UI indices 33–35) are used solely in minigame results or also in an unreferenced debug overlay; they are not reachable as menu selections on any screen walked. No `debug` string exists in the image.
-- TCRF and IGN pages returned HTTP 403 to direct fetch; conclusions there rely on search-result snippets plus primary ROM/emulator evidence.
+- 3rd party cheat index pages returned HTTP 403 to direct fetch; conclusions there rely on search-result snippets plus primary ROM/emulator evidence.
 
 ## 9. Tooling
 

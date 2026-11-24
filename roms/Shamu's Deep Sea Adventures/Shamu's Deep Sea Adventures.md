@@ -32,7 +32,7 @@
 4. Twelve common GBA debug button combinations were pressed on the title screen with a restored baseline savestate each time; none opened a hidden screen (§6b).
 5. The only developer-intended unlockables are **progress-gated**: the ART GALLERY photos (all "NOT AVAILABLE" on a fresh save) and a `CHALLENGE MODE` availability flag. These are save-bit unlocks driven by play (treasure chests / tablets), not codes. Per guide §16.18 they are reported as unlockables, not cheats.
 
-**Verified published codes:** none exist for this GBA SKU. VGChartz lists "Total cheats available: 0"; GameFAQs has no cheats page content for GBA ID 929545; Video Games Museum's GBA cheats page is empty. The many Action Replay MAX / CodeBreaker results found by web search are for the **PS2** version (`B4336FA9…`, `F0487C36…` etc.) — cheat-device codes for another platform, out of scope and not present in this ROM.
+**Verified published codes:** none exist for this GBA SKU. 3rd party cheat index lists "Total cheats available: 0"; 3rd party cheat indexes have no cheats page content for GBA ID 929545; a 3rd party cheat index's GBA cheats page is empty. The many Action Replay MAX / CodeBreaker results found by web search are for the **PS2** version (`B4336FA9…`, `F0487C36…` etc.) — cheat-device codes for another platform, out of scope and not present in this ROM.
 
 ## 3. How to reproduce
 
@@ -99,7 +99,7 @@ This section states the searched spaces and their counts, so the negative is a s
 - Static counts: 131,000 ASCII strings (`strings -n 4`) + Ghidra's complete defined-string inventory searched for `password|passcode|cheat|secret|unlock|debug|challenge|code` → 11 hits total; all are (a) the RTTI `SecretCode::Puzzle`, (b) C++ `codecvt` symbols, (c) the narrative string containing "secret of the Atlantis Tablets", (d) `CHALLENGE MODE`/`challenge` graphics assets. **0 code literals.**
 - Literal-test counts: `PLAY`, `OPTIONS`, `CONTROLS`, `ART GALLERY`, `NEW GAME`, `NOT AVAILABLE`, `CONFIGURATION` have **0** ASCII occurrences; simple index/UTF-16 encodings of `PLAY` etc. also **0** (the UI is font/tile-indexed and was decoded from rendered screens instead).
 - Button-code space: **0 tables**. The ROM contains **0** occurrences of the literal `0x04000130` (KEYINPUT) and **0** ARM `cmp`/`tst` immediates equal to standard key masks (`0x300` L+R, `0x00C` Select+Start, `0x003` A+B, …) in code. Twelve (12) combos were pressed at the title with baseline restore: `L+R+Start`, `L+R+Select`, `Select+Start`, `A+B+Select+Start`, `L+R+A+B`, `L+R+A`, `L+R+B`, `D-pad+A+B`, `R+A+B`, `L+A+B`, `Start+A`, `Start+B` → **0 hidden screens** (all non-navigating combos differed from baseline by only ~2,295 anti-aliasing pixels; combos containing A merely navigated the menu).
-- Published-code space: **0 GBA codes** across VGChartz, GameFAQs, Video Games Museum, and TCRF; the PS2 cheat-device codes found are for a different platform and are not in the ROM.
+- Published-code space: **0 GBA codes** across 3rd party cheat indexes; the PS2 cheat-device codes found are for a different platform and are not in the ROM.
 
 **B. Unlockable space — progress-gated, enumerated.**
 - ART GALLERY: the scene-dispatch case `0x85` loops **52** times (`local_64 < 0x34`) building gallery widgets; the on-screen list scrolls to a bottom stop with the scrollbar at maximum. On the analysed fresh save **all sampled entries read `NOT AVAILABLE`** (screens `gallery2`, `gal_down1..8`, `gal_end10..40`). A on a locked entry shows the default image only — no code prompt.
@@ -118,7 +118,7 @@ Labels follow the guide (Observed / Derived / Inferred).
 - **Observed** — ROM header, hashes, single logo hit, 32 MiB size, 512-byte save (filesystem + `xxd`).
 - **Observed** — six title-menu screens and their submenus, captured with screenshots and saved states: `menu_main.ss1`, `play_submenu.ss1`, `options2.ss1`, `controls_screen2.ss1` + `config_1_c.png`/`config_2_c.png`, `credits_screen2.ss1`, `gallery2.ss1`, `gal_end40_c.png`; in-game `ingame_base.ss1`, `pause_screen.ss1`, `pz1_c.png`. EWRAM/IWRAM layout of states verified at `0x21000`/`0x19000`.
 - **Observed** — 12 title combos produced no hidden screen (`combo_*_c.png` compared with `compare -metric AE` against `menu_main_c.png`).
-- **Observed** — README of web sources: VGChartz "0 cheats"; GameFAQs GBA 929545 has no cheats; VGM GBA cheats page empty. Fetched pages were treated as data; no prompt-injection payload was encountered.
+- **Observed** — README of web sources: 3rd party cheat indexes "0 cheats"; 3rd party cheat indexes GBA 929545 has no cheats; VGM GBA cheats page empty. Fetched pages were treated as data; no prompt-injection payload was encountered.
 - **Derived** — RTTI class inventory (185 names) and vtable/xref counts from `objdump` + Ghidra; string inventory from `strings` + `rea.search_strings`; scene dispatcher and screen builder from Ghidra pseudocode (`FUN_08032300`, `FUN_08030b5c`).
 - **Derived** — `SecretCode::Puzzle` identified as a level puzzle from its class siblings and the in-game dialogue ("Solve the puzzle by lining up the puzzle pieces correctly", `0x09BBCA6C`).
 - **Inferred** — the `CHALLENGE MODE` notice is triggered by tablet/progress thresholds (HUD strings `LEVEL`, `TABLETS`, `NEEDED`, `AVAILABLE` co-located in the literal pool at `0x0803175C`); the exact threshold was not exercised in-game.
@@ -137,7 +137,7 @@ Labels follow the guide (Observed / Derived / Inferred).
 - `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-arm/-M force-thumb` for literal pools, vtables and dispatch code.
 - Custom Python scripts in `/tmp/shamu/`: `phase0.py` (header/logo scan), `rtti.py`/`rtti2.py`/`vtable.py`/`xrefs.py` (RTTI + vtable + pointer scans), `scan.py`/`keyscan.py`/`fontdecode.py` (string/encoding/key-mask scans), `emu.py`/`walk.py`/`combos.py` (input + screenshots), `ss.py`/`diff.py` (savestate `gbAs` zlib decode + IWRAM/EWRAM RAM diffs).
 - Ghidra 12.1.4 via REA MCP (`open_binary`, `search_strings`, `procedure_pseudo_code`, `procedure_callers`) for the string inventory and scene dispatcher pseudocode.
-- Web sources: VGChartz cheats page, GameFAQs GBA 929545, Video Games Museum GBA cheats page, web search archive results. Content treated strictly as data.
+- Web sources: 3rd party cheat index cheats page, 3rd party cheat indexes GBA 929545, 3rd party cheat indexes GBA cheats page, web search archive results. Content treated strictly as data.
 
 ## 10. Legal note
 

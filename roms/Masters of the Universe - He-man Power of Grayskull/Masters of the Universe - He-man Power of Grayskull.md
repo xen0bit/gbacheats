@@ -23,7 +23,7 @@ Header checksum field is `0x0000` and complement `0x63`; no scene-patch strings
 This is a licensed retail image.
 
 **Web recon (§3.4) — negative, bounded:** `websearch` returned no results for
-five queries; direct fetches were blocked (GameFAQs CAPTCHA/403, TCRF 403,
+five queries; direct fetches were blocked (3rd party cheat indexes CAPTCHA/403, 3rd party cheat indexes 403,
 DuckDuckGo bot challenge, Wayback CDX empty/504, r.jina.ai 403). No published
 code list could be retrieved, so every code below was verified against the ROM
 and emulator rather than against a web list. No prompt-injection payload was

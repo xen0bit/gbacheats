@@ -155,10 +155,10 @@ iw = gbas("Backyard Sports: Basketball 2007.ss2")[0x19000:0x21000]
 print(iw[0x3E24])          # cheat index: 0 = rejected, 1..20 = table position
 ```
 
-### 3.3 Published codes tested (GameFAQs GBA 2007)
+### 3.3 Published codes tested (3rd party cheat indexes GBA 2007)
 
 Source: `https://web.archive.org/web/20181126025856/https://gamefaqs.gamespot.com/gba/935651-backyard-sports-basketball-2007/cheats`
-(capture of the GameFAQs GBA cheats page; direct fetch is 403).
+(capture of the 3rd party cheat indexes GBA cheats page; direct fetch is 403).
 
 | Published effect | Published code | Table entry | Index observed |
 |---|---|---|---|
@@ -516,7 +516,7 @@ This model agrees with all 20 table-entry tests and the five control tests in
 §3.4: `uuddd`/`uuuua` → 0, `msm` → 0 (no trigger), `msma` → 20, 35 × B →
 counter 30, `buudda`/`bbuudda` → 1, `bsbbbba` → 5.
 
-### 6b.3 Novel codes (not on GameFAQs/VGChartz/TCRF; table entries or substring variants)
+### 6b.3 Novel codes (not on 3rd party cheat indexes; table entries or substring variants)
 
 | Code | Letters | Buttons | Index | In-game evidence |
 |---|---|---|---|---|

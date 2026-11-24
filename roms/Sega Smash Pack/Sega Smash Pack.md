@@ -64,7 +64,7 @@ All addresses are ROM (`0x08......`) unless noted; file offset = address − `0x
 
 ## 5. Algorithm (Ecco password)
 
-Reimplementation, derived from `0x081CD188` / `0x081CD900` and cross-checked byte-for-byte against the MIT reverse-engineered library `ecco-password-lib.js` from eccoonline.net (Johnny L. de Alba), whose `ECCO1JP_MEGADRIVE` branch uses the same key:
+Reimplementation, derived from `0x081CD188` / `0x081CD900` and cross-checked byte-for-byte against the MIT reverse-engineered library `ecco-password-lib.js` from 3rd party cheat indexes, whose `ECCO1JP_MEGADRIVE` branch uses the same key:
 
 ```
 ALPHA = "BCDFGHJKLMNPQRSTVWXYZ!?-:."   # 26 glyphs, indices 0..25
@@ -118,7 +118,7 @@ The generator's ASCII output uses `code + 0x41` (A–Z); the **screen font** ins
 | 25–26 | stage event (time machine / storm / unused 6) | 2 |
 | 27–31 | special abilities (charge sonar, permanent kill) + death counter | 5 |
 
-**Published Ecco password verification (alphabet-aware):** 19/25 exact strings valid. Six list entries are corrupt: `YNTCXGS`, `RGGFXGY`, `TS-KWGC`, `YC?CXGQ` are 7 characters (the leading/embedded `.` glyph was dropped — GameFAQs variants `.YNTCXGS`, `R.GGFXGY`, `TS-K.WGC`, `YC.?CXGQ` restore them); `RKIVVHCC` and `RTGCXGB` contain `I`/`O`, which are not in this alphabet. Example decoded payloads: `HYNCSRDQ` → `0x380002F1`, stage 1; `DLHSTQPT` → `0xC51C5E14`, stage 29.
+**Published Ecco password verification (alphabet-aware):** 19/25 exact strings valid. Six list entries are corrupt: `YNTCXGS`, `RGGFXGY`, `TS-KWGC`, `YC?CXGQ` are 7 characters (the leading/embedded `.` glyph was dropped — 3rd party cheat indexes variants `.YNTCXGS`, `R.GGFXGY`, `TS-K.WGC`, `YC.?CXGQ` restore them); `RKIVVHCC` and `RTGCXGB` contain `I`/`O`, which are not in this alphabet. Example decoded payloads: `HYNCSRDQ` → `0x380002F1`, stage 1; `DLHSTQPT` → `0xC51C5E14`, stage 29.
 
 **Published button codes collected (all sources agree on the button sets; GBA C-button = R):**
 
@@ -130,7 +130,7 @@ The generator's ASCII output uses `code + 0x41` (A–Z); the **screen font** ins
 | Sonic Spinball | Level select | Options: A, Down, B, Down, R, Down, A, B, Up, A, R, Up, B, R, Up; then hold A/B/R + Start for levels 2/3/4 |
 | Sonic Spinball | Credits | Options: A, Up, R, Up, L, Up, A, R, Down, A, L, Down, R, L, Down |
 
-Sources: Neoseeker, GameGenie, GameFAQs (GBA 551519), ggmania, chaptercheats. GameFAQs' alternative Spinball level-select string (`L, Down, R, Down, A, Down, L, R, Up, L, A, Up, R, A, Up`) disagrees with the other four sources — recorded as an unresolved published-list conflict (§16.7).
+Sources: 3rd party cheat indexes. 3rd party cheat indexes' alternative Spinball level-select string (`L, Down, R, Down, A, Down, L, R, Up, L, A, Up, R, A, Up`) disagrees with the other four sources — recorded as an unresolved published-list conflict (§16.7).
 
 **Main Menu (all entries walked, with screenshots):** Ecco (`mm_ecco`), Golden Axe (`mm_ga`, `ga_mode`, `ga_charsel`), Sonic Spinball (`menu_Right3105`), Options (`menu_Right6104`, `options2`, `opts_config`), Credits (`menu_Right2526`). Golden Axe mode list: ARCADE, BEGINNER, THE DUEL, HEAD TO HEAD, OPTIONS. Options → "Configure which game?" → per-game button rebinding (`opts_config`).
 
@@ -140,7 +140,7 @@ Sources: Neoseeker, GameGenie, GameFAQs (GBA 551519), ggmania, chaptercheats. Ga
 
 **Validator model.** The Python implementation in §5 reproduces the ROM's accept/reject decision exactly; it was cross-checked against the ROM's own key literal and against the independent reverse-engineered JS library, and against live accepted inputs.
 
-**Novel codes (absent from GameFAQs, VGChartz, TCRF, Neoseeker, GameGenie, ggmania and chaptercheats):**
+**Novel codes (absent from 3rd party cheat indexes):**
 
 1. **`ZMKRCMBK`** (on-screen) = `UJHNBJAH` (generator form), stage 1, deaths 2, time 12345 frames. Entered through the retail password screen via the RAM-injection shortcut; Result: **`UNDERCAVES` level banner and the entered glyphs displayed** (`novel1_result.png`), observed in emulator. The published Undercaves code is `HYNCSRDQ`; this string is different and is not on any list.
 2. **`JCJBYGP!`** (on-screen) = `GBGATELV` (generator form), stage 15 with the unadvertised combination unlimited air + green Asterite globe + Home Bay stage event + charge sonar + permanent kill + death counter 3. Accepted and gameplay started (`novel_on_screen.png`, `novel_late.png`).
@@ -183,7 +183,7 @@ Sources: Neoseeker, GameGenie, GameFAQs (GBA 551519), ggmania, chaptercheats. Ga
 - mGBA 0.10.5 under Xvfb `:319` + openbox; `xdotool` XTEST input; `scrot` + ImageMagick crops (≈20 screenshots retained on disk in `/tmp/segasmash`).
 - mGBA CLI debugger (`mgba -d`) driven through a PTY socket (`dbgserver.py`/`dbgcmd.py`) for breakpoints and RAM reads/writes (§16.2/§16.13 alternative to the incompatible GDB stub).
 - Savestate `gbAs` chunk decompression for RAM inspection and password injection (`state.bin`, `state_patched.bin`).
-- Third-party reference: `ecco-password-lib.js` (MIT, eccoonline.net) used only as a cross-check; all claims here are tied to ROM bytes at the addresses above.
+- Third-party reference: `ecco-password-lib.js` (MIT, 3rd party cheat indexes) used only as a cross-check; all claims here are tied to ROM bytes at the addresses above.
 - No ROM or copyrighted assets are redistributed; only findings, addresses and hashes are published.
 
 ## 10. Cleanup

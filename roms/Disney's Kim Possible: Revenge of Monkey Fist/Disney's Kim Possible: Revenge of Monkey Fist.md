@@ -37,7 +37,7 @@ rebuilt header checksum differs from a stock header.
 The game has a **7-slot portrait password screen** on the main menu. Each of the
 seven slots cycles through exactly **8 portraits** (Kim, Monkey Fist, Dr. Drakken,
 Guard, Shego, Ron, Wade, Rufus), so the raw input space is **8^7 = 2,097,152**
-strings. The design is the "level password" system advertised on GameFAQs/IGN.
+strings. The design is the "level password" system advertised on 3rd party cheat indexes.
 
 The validator at `0x08002688` is a **bit-plane packer plus a one's-complement
 3-bit checksum**:

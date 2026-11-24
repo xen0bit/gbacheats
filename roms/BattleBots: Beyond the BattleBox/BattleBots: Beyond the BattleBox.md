@@ -58,7 +58,7 @@ The password system that people remember from this title belongs to the
 removed SRAM and added `ENTER TEAM PASSWORD` / `ENTER BOT PASSWORD`. That ROM
 is a different build; its password strings and its 34-character alphabet probe
 `BCDFGHJKLMNPQRSTVWXYZ-0123456789<>` have **0 hits** in `ABEE`. The
-re-release difference is also documented on The Cutting Room Floor.
+re-release difference is also documented on 3rd party cheat indexes.
 
 What *is* developer-intended here is the unlockable content: a five-arena set
 of which three are selectable on a fresh save (`BATTLEBOX`, `OIL RIG`,
@@ -159,18 +159,17 @@ skips the sequence after its first frame).
 7. Rotated the arena wheel on a fresh SRAM: only 3 arenas appear.
 8. Ran a complete Brawl bout to the `END OF BATTLE` menu.
 
-**Published codes.** The sources checked — GameFAQs cheat page (Wayback
-snapshot 2025-10-30), SuperCheats, ChapterCheats and TCRF — list *no* password
-or button code for `ABEE`: GameFAQs has two unlockables and one money glitch,
-SuperCheats/ChapterCheats repeat the unlockables, TCRF documents only the
+**Published codes.** The sources checked — 3rd party cheat index cheat page (Wayback
+snapshot 2025-10-30), 3rd party cheat indexes — list *no* password
+or button code for `ABEE`: 3rd party cheat indexes have two unlockables and one money glitch,
+3rd party cheat indexes repeat the unlockables, 3rd party cheat indexes document only the
 re-release difference. There was therefore no published code literal to test.
 The only published "codes" for the family are CodeBreaker memory patches
-(`almarsguides`) for `BBDE`, which are memory edits and out of scope. The
+(3rd party cheat indexes) for `BBDE`, which are memory edits and out of scope. The
 `BBDE` password UI and alphabet were used as negative probes instead and have
 0 hits here. Sources:
 `web.archive.org/web/20251030175423/https://gamefaqs.gamespot.com/gba/561454-battlebots-beyond-the-battlebox/cheats`,
-`supercheats.com/gameboyadvance/battlebotsbeyondthebattlebox.htm`,
-`chaptercheats.com/cheats/gameboyadvance/10305/battlebots-beyond-the-battlebox-cheat-codes`,
+3rd party cheat indexes,
 `web.archive.org/web/2026/https://tcrf.net/BattleBots:_Beyond_the_BattleBox`.
 
 ---
@@ -421,7 +420,7 @@ made because none is representable.
 | Boot button combos | `L+R+Start`, `A+B+Select+Start`, `Up+Down+Left+Right` held through reset | normal logo → title → main-menu flow, no extra screen |
 | Menu modifier keys | `L`, `R`, `Select` at main menu | no change to the five-item menu |
 | `BBDE` password material | `PASSWORD`, `ENTER BOT/TEAM PASSWORD`, 34-character alphabet | 0 occurrences; no screen could accept them |
-| Published lists | GameFAQs (archived 2025-10-30), SuperCheats, ChapterCheats, TCRF | lists contain only unlockables/glitches, no codes |
+| Published lists | 3rd party cheat indexes | lists contain only unlockables/glitches, no codes |
 
 ### 6b.4 Search space actually covered
 

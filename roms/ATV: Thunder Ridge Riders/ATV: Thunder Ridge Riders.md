@@ -77,12 +77,12 @@ Codes tested in the emulator (all entered through the on-screen grid unless note
 |---|---|---|
 | `5AAAAAAABG` | grid, 36-key BFS path | accepted → MOD SHOP `$0`, no upgrades → TRACK 1 |
 | `ZPYJGFEDDC` | RAM buffer injection (see §7) then `OK` | accepted → MOD SHOP `$9999`, ENGINE 6 / SHOCKS 5 / TIRES 4 / TURBO 3 → TRACK 7 |
-| `4E2AAAAACF` | grid | accepted → MOD SHOP `$900`, no upgrades → TRACK 2 (matches GameFAQs entry #2) |
-| `0IYBGGGGC0` | RAM injection | accepted → MOD SHOP `$1800`, all upgrades 6 → TRACK 6 (GameFAQs #6) |
-| `1E2AGGGGC0` | RAM injection | accepted → MOD SHOP `$900`, all upgrades 6 → TRACK 5 (corrected GameFAQs #5) |
+| `4E2AAAAACF` | grid | accepted → MOD SHOP `$900`, no upgrades → TRACK 2 (matches 3rd party cheat index entry #2) |
+| `0IYBGGGGC0` | RAM injection | accepted → MOD SHOP `$1800`, all upgrades 6 → TRACK 6 (3rd party cheat indexes #6) |
+| `1E2AGGGGC0` | RAM injection | accepted → MOD SHOP `$900`, all upgrades 6 → TRACK 5 (corrected 3rd party cheat indexes #5) |
 | `1IYBGGGGC1` | RAM injection | accepted → MOD SHOP `$1800`, all upgrades 6 → TRACK 5 |
 | `461AAAAADA` (alias) | RAM injection | accepted → MOD SHOP `$896`, password line shows canonical `4A2AAAAACB` |
-| `7E2AGGGGC0` (GameFAQs #5 as published) | grid | **INVALID PASSWORD** |
+| `7E2AGGGGC0` (3rd party cheat indexes #5 as published) | grid | **INVALID PASSWORD** |
 | `4E2AAAAACG` (last symbol +1 vs #2) | RAM injection | **INVALID PASSWORD** (checksum) |
 | `4E2AHAAACM` (ENGINE = 7, valid checksum) | RAM injection | **INVALID PASSWORD** (level range) |
 | `4ARTAAAACJ` (money = 20000, valid checksum) | RAM injection | **INVALID PASSWORD** (money range) |
@@ -285,7 +285,7 @@ English block starts at `0x08058CAC`; French/German/Spanish/Italian blocks are a
 
 ### 6.4 Published codes
 
-GameFAQs (via search snippets; the page itself returns HTTP 403) lists "New Career Event passwords" for
+3rd party cheat indexes (via search snippets; the page itself returns HTTP 403) lists "New Career Event passwords" for
 events 2..6. Verified against the ROM/emulator:
 
 | Event | Published | Decoder result | Emulator |
@@ -352,7 +352,7 @@ Examples generated with the encoder and confirmed in the emulator: `5AAAAAAABG` 
 
 ## 8. Unknowns
 
-* The commercial GameFAQs page was blocked (403) and only search snippets were available; the "6 cheat codes and
+* The commercial 3rd party cheat index page was blocked (403) and only search snippets were available; the "6 cheat codes and
   secrets" entry count suggests one further entry (possibly a non-password secret) that was not recovered. The
   five event passwords were all accounted for.
 * Whether the game ever *presents* a password after an event (rather than only echoing/normalising an entered one)

@@ -321,17 +321,17 @@ The 61 extracted layouts were scanned for `tweak`, `param`, `test`: 0 hits.
 
 | Published item | Source | Verdict in this ROM |
 |---|---|---|
-| Cheat menu: press L at controller selection | GameFAQs GBA page (GC-labelled block) | Not implemented. No cheat text/state, no menu on L at any select screen. |
-| Alternate uniforms: hold L+R | GameFAQs GBA page | Not implemented. Kit colours unchanged in-game and at team select. |
-| Home runs (LH): R+Left, R+Down | GameFAQs GBA gameplay cheats | Not implemented. No `0x120`/`0x180` compare; entering it changes nothing. |
-| Home runs (RH): R+Right, R+Down | GameFAQs GBA gameplay cheats | Not implemented. Same. |
-| Hit the ball harder: Select in windup | GameFAQs GBA gameplay cheats | Real input, but it toggles the hit cursor display (`0x03002DBD`), not hit power. |
-| Credit / hidden commentary: A during credits | GameFAQs GBA page | No visual/state effect; no “commentary” string or asset. Console-only claim. |
+| Cheat menu: press L at controller selection | 3rd party cheat indexes GBA page (GC-labelled block) | Not implemented. No cheat text/state, no menu on L at any select screen. |
+| Alternate uniforms: hold L+R | 3rd party cheat indexes GBA page | Not implemented. Kit colours unchanged in-game and at team select. |
+| Home runs (LH): R+Left, R+Down | 3rd party cheat indexes GBA gameplay cheats | Not implemented. No `0x120`/`0x180` compare; entering it changes nothing. |
+| Home runs (RH): R+Right, R+Down | 3rd party cheat indexes GBA gameplay cheats | Not implemented. Same. |
+| Hit the ball harder: Select in windup | 3rd party cheat indexes GBA gameplay cheats | Real input, but it toggles the hit cursor display (`0x03002DBD`), not hit power. |
+| Credit / hidden commentary: A during credits | 3rd party cheat indexes GBA page | No visual/state effect; no “commentary” string or asset. Console-only claim. |
 
 The archived GBA cheats page labels the first block **“Cheat Codes GC”**; those
 two lines (cheat menu, alternate uniforms) are GameCube submissions carried on
 the GBA page. The only GBA-specific list on that page is “Gameplay Cheats”.
-Sources: `gamefaqs.gamespot.com/gba/553545-all-star-baseball-2003/cheats`
+Sources: 3rd party cheat indexes
 (Wayback `20251104183447`) and the GameCube FAQ `faqs/18270` (Wayback
 `20190225140436`).
 

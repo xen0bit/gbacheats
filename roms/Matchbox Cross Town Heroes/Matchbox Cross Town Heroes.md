@@ -24,7 +24,7 @@ The game has a **developer-intended 4-character password system** (not a GameSha
 
 The complete space was characterised: `21^4 = 194,481` possible 4-character strings, of which **exactly 152 are accepted** (exhaustive run of the ROM's own validator in Unicorn). Every accepted code begins with the letter `Q`. A novel accepted code, `QZDH`, was generated from the recovered model (it exercises the maximum rank field value 3) and confirmed in the live emulator: the game's validator returned 1 and the game-state word at `0x02017DE0` changed from `0` to `6` (and `+4` from `0` to `3`). Out-of-alphabet input (`AAAA`) was rejected live (`r0 = 0`) and checksum-mismatched inputs were rejected in the exhaustive run.
 
-No published code list could be retrieved: GameFAQs returned HTTP 403, TCRF returned 403, DuckDuckGo served a bot challenge, and web.archive.org had no snapshot for the GameFAQs page/CDX query. This is recorded as a bounded negative on the *web-search* surface — the accepted set below was derived entirely from the ROM itself and is complete, so it cannot omit any code the game accepts.
+No published code list could be retrieved: 3rd party cheat indexes returned HTTP 403, 3rd party cheat indexes returned 403, DuckDuckGo served a bot challenge, and web.archive.org had no snapshot for the 3rd party cheat index page/CDX query. This is recorded as a bounded negative on the *web-search* surface — the accepted set below was derived entirely from the ROM itself and is complete, so it cannot omit any code the game accepts.
 
 ## 3. How to reproduce
 

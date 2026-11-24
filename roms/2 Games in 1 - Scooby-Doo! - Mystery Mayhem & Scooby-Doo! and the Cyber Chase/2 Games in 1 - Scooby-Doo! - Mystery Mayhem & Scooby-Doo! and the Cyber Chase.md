@@ -372,8 +372,8 @@ area is applied.
 | **Arcade (new)** | **`2747#VBB`** | **11** | **0** | **accepted, arcade starts** |
 
 No code typo was found in the published lists; the only text typo is the
-"PERHISTORIC JUNGLE" label in the GameFAQs guide (the game's own intro reads
-"PREHISTORIC JUNGLE", and the code `L4M9@VZS` is correct). The mofunzone page
+"PERHISTORIC JUNGLE" label in the 3rd party cheat index guide (the game's own intro reads
+"PREHISTORIC JUNGLE", and the code `L4M9@VZS` is correct). The 3rd party cheat index page
 truncates its table (`Coliseum: MXP`, `Prehistoric Jungle: 5S`); the
 reconstructed full codes `MXP#2VBL` and `CHBB5VBX` are valid and accepted, so
 that is a page-rendering artifact, not a game typo. The public list contains no

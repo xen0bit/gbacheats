@@ -57,16 +57,16 @@ algorithm.
   = 32 usable codes**. The matched row index also selects the difficulty:
   rows 1–16 write `0` to `0x030000F4` (Easy), rows 18–33 write `1` (Normal).
   Easy games have no health meter; Normal games show three hearts.
-* The 16 Easy codes are exactly the 16 public GameFAQs passwords (the page
+* The 16 Easy codes are exactly the 16 public 3rd party cheat indexes passwords (the page
   itself says "only Easy Mode"). The 16 Normal codes are published on
-  speedrun.com (and four of them on a 2019 blog). **All 32 valid level codes
+  3rd party cheat indexes (and four of them on a 2019 blog). **All 32 valid level codes
   are therefore public** — exhaustive enumeration proves there is no
   unpublished level code to mint. The two padding rows are the only table
   entries absent from every published list; they match the validator but are
   inert and the screen falls back to "Incorrect Password!".
-* A public list also contains one wrong code: speedrun.com's "Palace 2
+* A public list also contains one wrong code: a 3rd party cheat index's "Palace 2
   (Easy)" (`Palace, Ollie, Brietta, Palace`) is rejected by the ROM; the
-  correct GameFAQs code is `Palace, Ollie, Brietta, Ollie`.
+  correct 3rd party cheat index code is `Palace, Ollie, Brietta, Ollie`.
 
 The complete symbol→value mapping, the 34-row table, the level-character map,
 the exact validator and the exhaustive 1296-case result are below.
@@ -338,7 +338,7 @@ ROM and against the UI.
 
 ### 6.2 The 16 levels, Easy and Normal
 
-Fan names follow GameFAQs (Easy list) and speedrun.com (Normal list). Registry
+Fan names follow 3rd party cheat indexes. Registry
 ids are the internal screen names found at `0x0813ED88`/`0x0813F22C`.
 
 | Level | id | Easy code | Normal code |
@@ -440,9 +440,9 @@ content.
 
 ### Publication check
 
-* **Easy:** all 16 GameFAQs codes (`Passwords (only Easy Mode)`) were mapped to
+* **Easy:** all 16 3rd party cheat index codes (`Passwords (only Easy Mode)`) were mapped to
   display indices and are exactly rows 1–16. Every one is accepted by the ROM.
-* **Normal:** all 16 speedrun.com Normal codes are exactly rows 18–33. The 2019
+* **Normal:** all 16 3rd party cheat indexes Normal codes are exactly rows 18–33. The 2019
   PrinceWatercress blog's four codes (`Wenlock,Pegasus,Annika,Ollie`;
   `Castle,Wand,Wenlock,Pegasus`; `Castle,Wand,Annika,Wenlock`;
   `Annika,Pegasus,Annika,Castle`) are the Normal variants of Cloud A, Cloud B,
@@ -455,11 +455,11 @@ The public lists are not error-free:
 
 | Published as | Actual result |
 |---|---|
-| speedrun.com "Palace 2 (Easy)": Palace, Ollie, Brietta, Palace | **rejected** — not in the table (screen id stayed 9; `... - published typo rejected.png`) |
-| speedrun.com "Ice 2 (Easy)" and "Ice 3 (Easy)" are both Wand, Wenlock, Annika, Annika | duplicate; the real Glacier 2 Easy is Palace, Wenlock, Ollie, Ollie |
-| speedrun.com "Final Boss (Easy)": Palace, Annika ×4 (five symbols) | five entries is impossible; the ROM code is Palace, Annika, Annika, Annika |
+| 3rd party cheat indexes "Palace 2 (Easy)": Palace, Ollie, Brietta, Palace | **rejected** — not in the table (screen id stayed 9; `... - published typo rejected.png`) |
+| 3rd party cheat indexes "Ice 2 (Easy)" and "Ice 3 (Easy)" are both Wand, Wenlock, Annika, Annika | duplicate; the real Glacier 2 Easy is Palace, Wenlock, Ollie, Ollie |
+| 3rd party cheat indexes "Final Boss (Easy)": Palace, Annika ×4 (five symbols) | five entries is impossible; the ROM code is Palace, Annika, Annika, Annika |
 
-The GameFAQs Easy list has no errors: 16/16 accepted.
+The 3rd party cheat indexes Easy list has no errors: 16/16 accepted.
 
 ### The only unpublished table entries
 

@@ -51,8 +51,8 @@
   (u16 masks, active-low masks, key indices, 3/4/5-bit packed) found nothing;
   the table uses a **custom key-code order** (see §4) that does not match the
   GBA `KEYINPUT` bit layout, which is why the usual mask search fails.
-- Web sources checked: GameFAQs (Cars GBA cheats page), IGN wiki, Good Wiki
-  (Fandom), SuperCheats, Cheat Happens, mariogba.nl, and a Speedrun.com forum
+- Web sources checked: 3rd party cheat index wiki, Good Wiki
+  (3rd party cheat indexes), 3rd party cheat indexes, and a 3rd party cheat index forum
   thread. All list the same **five** codes and all five are present verbatim
   in the ROM table. No list contains the sixth entry.
 
@@ -259,7 +259,7 @@ screen, while the other bits must be read before that reset.
 | 5 | `0x20` | 6 | `40000 80000 40000 80000 1000 2000` | **Left, Right, Left, Right, A, B** |
 
 All six were dumped from the ROM and all six published entries match the
-public lists exactly (GameFAQs, IGN wiki, mariogba.nl, supercheats, Good Wiki).
+public lists exactly (3rd party cheat index wiki, 3rd party cheat indexes, Good Wiki).
 Entry 5 is absent from every list consulted.
 
 ### 6.2 Flag consumers

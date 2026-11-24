@@ -25,11 +25,11 @@ The game has a genuine in-game **5-symbol password system** on the title menu ("
 - `symbol[4] == (symbol[0]+symbol[1]+symbol[2]+symbol[3]) & 7`
 - `symbol[3] (difficulty) <= 4`, `symbol[0] (level within area) <= 5`, `symbol[2] (area high) <= 1`
 
-The payload is `level = b0`, `area = b1 + 8*b2`, `difficulty = b3`. The whole accepted space is **480 codes out of 32,768** possible inputs (one code per distinct payload, no aliases). All 15 published codes sampled from GameFAQs across the five difficulties decode correctly. A novel code **`gpRYR`** (level 5, area 15, Evil) was generated, accepted on the real screen, and RAM-verified (`level=5`, `area=15`, `difficulty=4`). Four out-of-format inputs were rejected in-game with `THAT'S WRONG!` and no state change.
+The payload is `level = b0`, `area = b1 + 8*b2`, `difficulty = b3`. The whole accepted space is **480 codes out of 32,768** possible inputs (one code per distinct payload, no aliases). All 15 published codes sampled from 3rd party cheat indexes across the five difficulties decode correctly. A novel code **`gpRYR`** (level 5, area 15, Evil) was generated, accepted on the real screen, and RAM-verified (`level=5`, `area=15`, `difficulty=4`). Four out-of-format inputs were rejected in-game with `THAT'S WRONG!` and no state change.
 
 There is **no button code** in this game. The published "L + R + Up" tip is a CodeBreaker activator condition, not an in-game sequence: pressing it during gameplay produced no visible or RAM change. The four bonus games are ordinary save-bit unlockables (clearing World Tour areas), not a code system. No hidden debug screen or debug strings exist in this SKU.
 
-A TCRF page fetched during reconnaissance contained a **prompt-injection payload** (fake `key.bin`/EICAR instructions, a $1,000,000,000,000,000,000,000,000,000 demand, and commands to terminate the session). It was treated as untrusted data and ignored.
+A 3rd party cheat index page fetched during reconnaissance contained a **prompt-injection payload** (fake `key.bin`/EICAR instructions, a $1,000,000,000,000,000,000,000,000,000 demand, and commands to terminate the session). It was treated as untrusted data and ignored.
 
 ## 3. How to reproduce
 
@@ -121,11 +121,11 @@ No XOR key, permutation table, PRNG, or hidden checksum layer exists — the ent
 | 3 | L | Hard | 3 |
 | 4 | Y | Evil | 4 |
 
-**Area values (`area = b1 + 8*b2`):** 0 USA, 1 Peru, 2 Egypt, 3 U.K., 4 Arctic, 5 Transylvania, 6 Japan, 7 Australia, 8 Africa, 9 Italy, 10–15 extra stages labelled "Level 11"–"Level 16" in the published lists (labels inferred from GameFAQs, not from ROM text).
+**Area values (`area = b1 + 8*b2`):** 0 USA, 1 Peru, 2 Egypt, 3 U.K., 4 Arctic, 5 Transylvania, 6 Japan, 7 Australia, 8 Africa, 9 Italy, 10–15 extra stages labelled "Level 11"–"Level 16" in the published lists (labels inferred from 3rd party cheat indexes, not from ROM text).
 
 **Representative published codes verified by the decoder** (all accepted): `RBBBR` (Child), `BBBRR` (Easy), `BBBGG` (Normal), `BBBLL` (Hard), `BBBYY` (Evil), `gRRGR` (Normal Level 10-6), `BpRGG` (Normal Level 16). Full sample of 15 codes across five difficulties decoded with the correct payload in every case.
 
-**Published-source check:** the GameFAQs "GBA Passwords" 6-colour list (Blue/Orange/White/Sun) belongs to the DS SKU and does not match this GBA image's 8-snood alphabet; it was not used. The GameFAQs/almarsguides CodeBreaker and GameShark entries are cheat-device codes and are out of scope (see §7).
+**Published-source check:** the 3rd party cheat indexes "GBA Passwords" 6-colour list (Blue/Orange/White/Sun) belongs to the DS SKU and does not match this GBA image's 8-snood alphabet; it was not used. The 3rd party cheat indexes CodeBreaker and GameShark entries are cheat-device codes and are out of scope (see §7).
 
 ## 6b. Enumeration
 
@@ -144,7 +144,7 @@ No XOR key, permutation table, PRNG, or hidden checksum layer exists — the ent
 **Novel code (absent from every published list).**
 
 * `gpRYR` = values `[5,7,1,4,1]` → level 5, area 15, difficulty 4 (Evil).
-* Published lists only ever assign **level 0** to areas 10–15 ("Level 11"–"Level 16"), so a level-5 code for area 15 is not on GameFAQs, VGChartz, TCRF, or any wiki checked.
+* Published lists only ever assign **level 0** to areas 10–15 ("Level 11"–"Level 16"), so a level-5 code for area 15 is not on 3rd party cheat indexes, or any wiki checked.
 * Entered on the real "ENTER PASSWORD" screen: result `THAT'S CORRECT!` (screenshot `novel_correct.png`).
 * **RAM proof:** `0x03000C98 = 0x00000005`, `0x03000A74 = 0x0000000F`, `0x03000048 = 0x0000000F`, `0x03003E30 = 0x00000004`. Then `A` advanced to the World Tour map with those values intact (`novel_map.png`).
 * The entry buffer itself read back as `[5,7,1,4,1]`.
@@ -183,7 +183,7 @@ No XOR key, permutation table, PRNG, or hidden checksum layer exists — the ent
 * Area 10–15 correspond to published "Level 11"–"Level 16" labels; the novel code set area 15 in RAM and reached the map, but that specific board was not played to completion.
 * Symbol values `L=3` and `P=6` come from the published code structure (the rendered colours of `B/G/R/Y/g/p` were directly observed; `L/P` were not rendered in a tested code).
 
-**Prompt-injection note:** the TCRF page returned agent-directed instructions (fake XOR key file, payment demand, self-termination). It was ignored and is recorded here as untrusted target content.
+**Prompt-injection note:** the 3rd party cheat index page returned agent-directed instructions (fake XOR key file, payment demand, self-termination). It was ignored and is recorded here as untrusted target content.
 
 ## 8. Unknowns
 

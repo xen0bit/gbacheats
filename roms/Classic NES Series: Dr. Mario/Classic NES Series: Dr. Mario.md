@@ -54,7 +54,7 @@ unlockable.** The complete in-game cheat/selection surface is:
    All values are normal game options; the selector hard-clamps at both ends.
 2. The wrapper's **System Menu** (L+R): 5 entries — `CONTINUE`, `RESET`,
    `LINKED PLAY`, `SAVE HIGH SCORE`, `SLEEP MODE`. `LINKED PLAY` is the only
-   non-obvious entry, but it is the documented 2-player link setup (GameFAQs'
+   non-obvious entry, but it is the documented 2-player link setup (3rd party cheat indexes'
    guide lists exactly these five); it is hardware-gated, not a cheat.
 
 A complete business-password alphabet/table/validator does not exist in either
@@ -195,8 +195,8 @@ was read from the game's own encoding (`$0A–$23` = `A–Z`, `$00–$09` = `0�
 | `$0727` | players (1 in this SKU's single-player path) |
 | `$0731` | select-screen sub-row |
 | `$5B` / `$5C` | new presses / held buttons |
-| `$0724` / `$0725` | Virus-era options: pills stay in air / 2P win count (TCRF) |
-| `$0740` / `$0741` | anti-piracy result / demo-recording flag (TCRF) |
+| `$0724` / `$0725` | Virus-era options: pills stay in air / 2P win count (3rd party cheat indexes) |
+| `$0740` / `$0741` | anti-piracy result / demo-recording flag (3rd party cheat indexes) |
 
 ## 5. Algorithm
 
@@ -266,7 +266,7 @@ Observed dispatch:
 |---|---|---|
 | `Select + Start` = Dr. Mario | cah4e3 "mostly unpublished NES cheats" — it is the hidden game on a CoolBoy 198-in-1 multicart | no effect at title, select screen, or pause; not a Dr. Mario code |
 | Game Genie `EAAOUT`, `ENLEUG`, `IXPAGZ`, `GOALOK`, `TELAEI`, `YUPAEY` | community Game Genie lists | **out of scope**: memory-edit codes; the RAM bits they patch (`$724`, `$725`) exist and are unused UI toggles |
-| Classic NES Series system menu (`CONTINUE`, `RESET`, `LINKED PLAY`, `SAVE HIGH SCORE`, `SLEEP MODE`) | GameFAQs guide 41707 | all five reproduced from ROM and by input |
+| Classic NES Series system menu (`CONTINUE`, `RESET`, `LINKED PLAY`, `SAVE HIGH SCORE`, `SLEEP MODE`) | 3rd party cheat index guide 41707 | all five reproduced from ROM and by input |
 
 ## 6b. Enumeration
 

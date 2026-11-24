@@ -23,7 +23,7 @@ Single GBA image; `ROM address = 0x08000000 + file offset`. No cracktro or appen
 
 Both developer-intended cheat surfaces are now fully reversed:
 
-1. **Password Machine — FULLY SOLVED (this pass).** The 1000-DP Card Shop terminal and the 10000-DP postgame terminal accept an eight-decimal-digit card password. The digits are packed into a **4-byte BCD word** (e.g. `46986414` → `0x46986414`), then compared against a **computed password for each of 1000 card IDs**. Each card's password is *not stored as a literal code*: it is `table[card] XOR lcg(card)`, where `table` is a 1000-entry u32 array at `0x08477DF8` and `lcg` is the classic MSVC rand step with multiplier `0x343FD` / increment `0x269EC3`. This explains why an exhaustive raw search for published codes (ASCII, u32 LE/BE, BCD, reversed BCD, XOR, LZ77) found nothing. The validator `0x081172F0` linearly scans cards 1..1000 and returns the card ID (0 = reject). **1000 valid codes exist**; 542 match the 785 published Planet Cheats codes and **458 are novel**. A novel code `49417509` was accepted on-screen (card 49, "Wolf"), a one-digit near-miss `49417508` was rejected on-screen, and the ROM's own validator was called from the GDB debugger as an oracle to confirm all four outcomes.
+1. **Password Machine — FULLY SOLVED (this pass).** The 1000-DP Card Shop terminal and the 10000-DP postgame terminal accept an eight-decimal-digit card password. The digits are packed into a **4-byte BCD word** (e.g. `46986414` → `0x46986414`), then compared against a **computed password for each of 1000 card IDs**. Each card's password is *not stored as a literal code*: it is `table[card] XOR lcg(card)`, where `table` is a 1000-entry u32 array at `0x08477DF8` and `lcg` is the classic MSVC rand step with multiplier `0x343FD` / increment `0x269EC3`. This explains why an exhaustive raw search for published codes (ASCII, u32 LE/BE, BCD, reversed BCD, XOR, LZ77) found nothing. The validator `0x081172F0` linearly scans cards 1..1000 and returns the card ID (0 = reject). **1000 valid codes exist**; 542 match the 785 published 3rd party cheat index codes and **458 are novel**. A novel code `49417509` was accepted on-screen (card 49, "Wolf"), a one-digit near-miss `49417508` was rejected on-screen, and the ROM's own validator was called from the GDB debugger as an oracle to confirm all four outcomes.
 
 2. **Title-screen button code (Konami code) — fully reversed (prior pass, retained).** A 10-press sequence `↑↑↓↓←→←→BA` is matched against a hard-coded u16 mask table at `0x08F2F384` by helper `0x0811AAC4`, wrapped by `0x0811AB08`. Gated on cleared-game bit `0x0200180C & 1`; toggles title colour flag `0x02035EA2 ^= 0x08`.
 
@@ -206,7 +206,7 @@ Sample derived pairs: card 1 → `89631139` (Blue-Eyes White Dragon), card 30 �
 
 ### 6.3 Published codes
 
-Planet Cheats `planetcheats.net/cheat20699.html` yielded 785 distinct 8-digit codes (`pwlist.txt`). Of the 1000 codes this SKU accepts, **542 appear in that list**; the other 243 published codes belong to other card sets/revisions.
+3rd party cheat indexes yielded 785 distinct 8-digit codes (`pwlist.txt`). Of the 1000 codes this SKU accepts, **542 appear in that list**; the other 243 published codes belong to other card sets/revisions.
 
 ## 6b. Enumeration
 

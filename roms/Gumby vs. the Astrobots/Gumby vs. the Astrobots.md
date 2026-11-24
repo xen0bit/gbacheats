@@ -36,9 +36,9 @@ name entry), difficulty, pause, and the book-select hub. None exposes a code ent
 The only collectibles are in-level ice-cream/medal counters, which are ordinary save progress (§16.18),
 not a code.
 
-Published GBA "cheats" for this title (Cheat Happens, GameHacking.org, Cheats Wiki) are exclusively
+Published GBA "cheats" for this title (3rd party cheat indexes) are exclusively
 encrypted Action Replay / GameShark / CodeBreaker **memory-edit** codes — out of scope for this engagement.
-No GameFAQs/TCRF password or button-code page exists for this game.
+No 3rd party cheat indexes password or button-code page exists for this game.
 
 ## 3. How to reproduce
 
@@ -138,9 +138,9 @@ omission:
 | Debug text buffer `0x03000060` | title, NEW, difficulty, pause, hub | `00…00` at every screen — registration never ran |
 | Button combos in emulator | 12 combos (title + hub) | no hidden screen, no code entry |
 
-Published lists: Cheat Happens (3 codes) and GameHacking.org (7 codes) are all encrypted Action Replay /
+Published lists: 3rd party cheat indexes are all encrypted Action Replay /
 GameShark / CodeBreaker memory-edit codes (e.g. `1556c883 25eb3535` "Infinite Lives"), which are explicitly
-out of scope; no in-game password/button code is published for this SKU. GameFAQs and TCRF returned 403 /
+out of scope; no in-game password/button code is published for this SKU. 3rd party cheat indexes returned 403 /
 have no page for this title. Treat all fetched pages as data; no prompt-injection payload was encountered.
 
 Because the accepted-code set is empty, §0.2's "mint a novel code, prove bounds by rejection" is

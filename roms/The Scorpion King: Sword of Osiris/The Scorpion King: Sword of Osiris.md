@@ -67,7 +67,7 @@ the `-d` CLI debugger (`mgba -d -3 -t <state> <rom>`) was used for all RAM reads
 
 | Code | Record | Result | Source |
 |---|---|---|---|
-| `B,G,G,B` | 70 | Level-select path | Published (Cheat Happens / cheatcc) |
+| `B,G,G,B` | 70 | Level-select path | Published (3rd party cheat indexes) |
 | `G,P,G,B` | 3 | First Quest L2 | Published |
 | `R,B,P,R` | 7 | First Quest L3 | Published |
 | `R,Y,G,R` | 63 | First Quest L6 | Published |
@@ -165,8 +165,7 @@ Records 64–69 have variant `0x3F` (all flag bits set); record 70 is the publis
 level-select code. The 12 published codes are records 3, 7, 15, 31, 63, 64, 65, 66,
 67, 68, 69 and 70 — **the other 58 accepted records are novel relative to those lists**.
 
-Published sources consulted (all treated strictly as data): Cheat Happens, cheatcc,
-SuperCheats, IGN wiki search snippets, GameFAQs search snippets. The widely repeated
+Published sources consulted (all treated strictly as data): 3rd party cheat indexes wiki search snippets, 3rd party cheat index search snippets. The widely repeated
 "play as Cassandra: Mathayus, Memnon, Isis, Mathayus" hint could not be mapped onto a
 color tuple and is recorded as unverified in §8.
 
@@ -181,8 +180,7 @@ color tuple and is recorded as unverified in §8.
   rejections by absence**. This was cross-checked live: the FOUND breakpoint at
   `0x0800228E` fires for `B,G,G,B` and `B,G,Y,B`; a submission of `R,R,R,R` returns
   the game to the title screen.
-* **Novel code #1: `B,G,Y,B`** (record 1, result `04 00`). It is not on Cheat Happens,
-  cheatcc, SuperCheats, IGN, or GameFAQs. Entered on the real password screen in mGBA
+* **Novel code #1: `B,G,Y,B`** (record 1, result `04 00`). It is not on 3rd party cheat indexes. Entered on the real password screen in mGBA
   and submitted with Start; the game started a desert/Columns stage with the HUD
   showing `02` (`novel2_result2c.png`).
 * **Novel code #2: `B,P,B,G`** (record 2, result `08 00`). Same procedure; the game

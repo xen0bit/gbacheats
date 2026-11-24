@@ -20,7 +20,7 @@
 
 ## 2. Executive summary
 
-The game has a developer-intended **password system**, exposed as `Password` on the main menu. It is a **closed lookup table of exactly 20 five-letter codes** — four modes (Stripe Adventure, Stripe Time Attack, Gizmo Adventure, Gizmo Time Attack) × five levels (Bank, Police Station, Cinema, Firehouse, Final Encounter). **All 20 entries are published** (GameFAQs, ChapterCheats, VictoryCheats, GGMania); the ROM table contains no 21st password.
+The game has a developer-intended **password system**, exposed as `Password` on the main menu. It is a **closed lookup table of exactly 20 five-letter codes** — four modes (Stripe Adventure, Stripe Time Attack, Gizmo Adventure, Gizmo Time Attack) × five levels (Bank, Police Station, Cinema, Firehouse, Final Encounter). **All 20 entries are published** (3rd party cheat indexes); the ROM table contains no 21st password.
 
 The passwords are **not stored as plaintext in the ROM**: the game keeps a suffix-merged, compressed multilingual text bank in ROM and decompresses it into EWRAM at boot. The plaintext lowercase passwords only exist in RAM (`0x020009FC` … `0x02000B11`). This is why `strings` finds none of them — the sole apparent hit, `MAGIC` at `0x2030EC`, is the substring `MAGICPOCKETS` in the legal splash, not a password.
 
@@ -120,7 +120,7 @@ No checksum, no PRNG, no key table, no bit packing — the 25-bit input space is
 
 **Closed-set proof (structural).** The game's entire UI text is one compressed, suffix-merged bank that is decompressed into EWRAM at boot. Scanning the decompressed bank for every `0x04`-prefixed, NUL-terminated 5-letter lowercase token yields **exactly 20** matches — the table in §4. No 21st token exists in either copy of the bank (English bank and duplicate). A second scan for *any* other 5-letter lowercase word in the bank returns only substrings of longer UI labels (e.g. `nglis` from `English`, `asswo` from `Password`), never a standalone token. Since the validator can only compare against these strings, the accepted set is closed at 20.
 
-**Published-set coverage.** All 20 ROM tokens are present in the GameFAQs/ChapterCheats/VictoryCheats/GGMania lists; the published lists contain no code absent from the ROM. The reverse is also true: no unpublished password exists in the image. **Therefore no novel code can be generated** — §0.2's "mint a novel code" deliverable is satisfied here by *proving the space has no unrepresented state*; this is a bounded, not an untested, negative.
+**Published-set coverage.** All 20 ROM tokens are present in the 3rd party cheat index lists; the published lists contain no code absent from the ROM. The reverse is also true: no unpublished password exists in the image. **Therefore no novel code can be generated** — §0.2's "mint a novel code" deliverable is satisfied here by *proving the space has no unrepresented state*; this is a bounded, not an untested, negative.
 
 **Bounds proven by rejection.** `CLAYX` and `AAAAA` (both inside the 26⁵ spellable space, both outside the 20-entry table) were typed on the real keypad and left the game on the password screen with `Incorrect password` (EWRAM `0x020008ED`). Length is fixed at five by the five slots; there is no shorter/longer form to test. Case is not an alias: the UI emits uppercase and the table stores lowercase, so a single fixed conversion (not a user-selectable variant) is used.
 
@@ -136,7 +136,7 @@ No checksum, no PRNG, no key table, no bit packing — the 25-bit input space is
 * The exact validator function address and its call site were not isolated: the GDB stub port (2345) was contended by another session, and the CLI debugger paused command processing once the core was running. The string table and acceptance behavior are fully characterized; only the instruction-level comparison loop remains unseen (hence "Inferred" in §5).
 * The uppercase→lowercase conversion instruction was not located; it is inferred from the input/table case mismatch.
 * Whether the game awards the same password again on level completion was not separately checked (the words are present in the bank; presentation on the results screen was not screenshotted).
-* Published-list level labels were taken from GameFAQs/ChapterCheats; the ROM's own numeric level byte for each code was not read after entry (visual confirmation only for `CLAWS`).
+* Published-list level labels were taken from 3rd party cheat indexes; the ROM's own numeric level byte for each code was not read after entry (visual confirmation only for `CLAWS`).
 
 ## 9. Tooling
 

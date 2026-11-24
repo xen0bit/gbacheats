@@ -16,7 +16,7 @@
 | MD5 | `c9ce90b98c6cc2f60847d6f39ecf11c5` |
 | SHA-1 | `1cfca926300db1719aa671404386a19b55316054` |
 | SHA-256 | `fd706b370ef5905f0ac225e03d154cc39c9e093d64366bcb419f4f1365cf3cc1` |
-| Region | USA (En,Fr); serial AGB-BZUE-USA; CRC32 `CCACD823` per GameHacking.org |
+| Region | USA (En,Fr); serial AGB-BZUE-USA; CRC32 `CCACD823` per 3rd party cheat indexes |
 
 The header complement/checksum are internally inconsistent with the standard formula
 (sum of `0xA0..0xBD` = `0x66`, expected complement `0x99`, actual `0x81`, checksum `0`),
@@ -30,13 +30,13 @@ There is no password entry screen, no code alphabet, no validator, no button-cod
 matcher and no hidden menu reachable by controller input on any reachable screen.
 The single widely published "password", `7FB36FAC3B31`, is a **CodeBreaker /
 GameShark SP / Xploder cheat-device code** ("Access All Levels", by MadCatz), not an
-in-game code; Neoseeker mislabels it as a "Level Password". Every published code for
+in-game code; 3rd party cheat indexes mislabels it as a "Level Password". Every published code for
 this SKU is a cheat-device code and is out of scope.
 
 The build does contain a substantial **unreached debug facility**: 85 menu entries and
 five debug screens (Obj Viewer, Music Player, FX Player, a level-select menu and a
 generic debug screen) with full ASCII text, handler tables and a global screen-table
-slot. TCRF explicitly records that access to this menu is unknown. Static xrefs and a
+slot. 3rd party cheat indexes explicitly records that access to this menu is unknown. Static xrefs and a
 19-combination controller sweep found no retail path to those screens; the ROM's own
 debug flags are only written by the debug handlers themselves. This is reported as a
 *gated/unreachable development feature*, not as a cheat.
@@ -88,13 +88,13 @@ global screen table. No separate encoder/decoder pair was found.
 
 | Value | Claimed effect | Source | ROM literal search | Verdict |
 |---|---|---|---|---|
-| `7FB36FAC3B31` | "Unlock all levels" / "Access All Levels" | Neoseeker "Passwords", ChapterCheats, GameHacking.org, gbadam | Not present in ROM in ASCII, shifted ASCII, UTF-16LE or packed form | CodeBreaker/GameShark SP/Xploder code, not an in-game password |
-| `820070B0 00FF` / `820070B2 00FF` etc. | Infinite life/power/special/support | GameHacking.org | Direct RAM-write cheat-device codes | Out of scope |
-| `93002FFAB991 C47737A2CF98 C8F6F36756B0` | "Master code" | Neoseeker / GameHacking.org | — | Cheat-device master code; out of scope |
+| `7FB36FAC3B31` | "Unlock all levels" / "Access All Levels" | 3rd party cheat indexes "Passwords", 3rd party cheat indexes, gbadam | Not present in ROM in ASCII, shifted ASCII, UTF-16LE or packed form | CodeBreaker/GameShark SP/Xploder code, not an in-game password |
+| `820070B0 00FF` / `820070B2 00FF` etc. | Infinite life/power/special/support | 3rd party cheat indexes | Direct RAM-write cheat-device codes | Out of scope |
+| `93002FFAB991 C47737A2CF98 C8F6F36756B0` | "Master code" | 3rd party cheat indexes | — | Cheat-device master code; out of scope |
 
 No in-game password, secret code, unlock code or debug activation sequence is
-published for this SKU anywhere found (VGChartz: "Total cheats available: 0";
-CheatHappens: none; TCRF: access to debug menu "needs investigation").
+published for this SKU anywhere found (3rd party cheat indexes: "Total cheats available: 0";
+3rd party cheat indexes: none; 3rd party cheat indexes: access to debug menu "needs investigation").
 
 ### 6.2 Debug menu records (complete, 85 entries)
 
@@ -171,7 +171,7 @@ The debug menu is therefore a **gated/unreachable feature** (§16.3 category 4) 
 
 * **Observed** — emulator screenshots of every screen listed in §6b; the `0x02007754` byte read as `0x01` in both GDB and savestate; 19-combo sweep results; header/strings/hashes.
 * **Derived** — 85-entry debug table and 5 screen descriptors decoded from byte layout; 0 BL callers and 67 self-referential pointers to the debug handlers; debug handler code at `0x08000144`–`0x08000515` disassembled and shown to read `0x0200FE56`.
-* **Inferred** — that the debug screens are genuinely unreachable from retail input. This is strongly supported by the counts and by TCRF's unresolved "can it be accessed" note, but no exhaustive proof over every possible input sequence exists; a device-specific unlock (the cheat-device "Access All Levels" patch) could still force the state.
+* **Inferred** — that the debug screens are genuinely unreachable from retail input. This is strongly supported by the counts and by a 3rd party cheat index's unresolved "can it be accessed" note, but no exhaustive proof over every possible input sequence exists; a device-specific unlock (the cheat-device "Access All Levels" patch) could still force the state.
 
 ## 8. Unknowns
 
@@ -185,7 +185,7 @@ The debug menu is therefore a **gated/unreachable feature** (§16.3 category 4) 
 * `arm-none-eabi-objdump -D -b binary -marm --adjust-vma=0x08000000 -M force-thumb` for Thumb disassembly; Capstone-style Python BL/pointer scanners written ad hoc.
 * mGBA 0.10.5 under Xvfb `:317` with openbox, `SDL_AUDIODRIVER=dummy`; `xdotool` XTEST input; `scrot` screenshots.
 * Savestate RAM reader: PNG `gbAs` chunk → `zlib.decompress` → 397,312-byte state; EWRAM at `0x21000`, IWRAM at `0x19000`. Helper artifacts were under `/tmp/teentitans2/`.
-* Web recon: GameHacking.org, Neoseeker, ChapterCheats, VGChartz, TCRF (live page 403; Wayback snapshot used).
+* Web recon: 3rd party cheat indexes (live page 403; Wayback snapshot used).
 
 ## 10. Legal note
 

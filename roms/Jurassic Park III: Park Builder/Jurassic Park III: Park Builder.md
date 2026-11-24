@@ -26,7 +26,7 @@ This game has a **developer-intended cheat-code system**: specific **park names*
 
 - The name is entered on an on-screen keyboard and stored as **font/tile indices**, not ASCII (which is why `strings` finds none of the published codes). Mapping: `A..Z = 0xBA..0xD3`, `a..z = 0xD4..0xED`, `- = 0x91`, `' = 0xEE`, `0..9 = 0x56..0x5F`, `. = 0xF8`.
 - A validator at `0x080097A8` compares the 0xFF-terminated entered name (copied to EWRAM `0x0201BA50`) byte-for-byte against each of **37** 0xFF-terminated tile-index strings whose pointer table starts at `0x08398074`. It returns the 1-based table index (1–37) on an exact match, else 0. The caller at `0x08003330` stores this index at `0x02005CE0`. Each index selects a different starting effect.
-- **Only 9 of the 37 codes appear in the published GameFAQs list.** The full table is enumerated in §6/§6b. A novel, unpublished code (`Aquarium`, index 36) was entered on the real screen and RAM-verified; bounds/matching semantics were proven by accepted/rejected inputs (§6b).
+- **Only 9 of the 37 codes appear in the published 3rd party cheat index list.** The full table is enumerated in §6/§6b. A novel, unpublished code (`Aquarium`, index 36) was entered on the real screen and RAM-verified; bounds/matching semantics were proven by accepted/rejected inputs (§6b).
 - A developer **TEST MENU** (9 labelled screens: TEST MENU, SOUND TEST, KUDO TEST1/2, YAMANE, OKANO, TSURUMOTO, UEDA, START) is present as data plus two builder functions, but **no caller or function pointer reaches those functions** in this build: it is dead developer code (§16.3), not a reachable hidden menu.
 
 ## 3. How to reproduce
@@ -106,7 +106,7 @@ Caller (`0x080032DC`): copies bytes `0..14` from `0x03000148` to `0x0201BA50` (s
 | empty / blank cell | `0xB8` |
 | string terminator (table) | `0xFF` |
 
-**Complete code table — all 37 entries** (index = return value stored at `0x02005CE0`). "Published" = present in the GameFAQs secrets list (9 codes); all others are absent from GameFAQs, TCRF and VGChartz.
+**Complete code table — all 37 entries** (index = return value stored at `0x02005CE0`). "Published" = present in the 3rd party cheat indexes secrets list (9 codes); all others are absent from 3rd party cheat indexes.
 
 | # | Park name | Tile-index bytes (0xFF-terminated in ROM) | Publication status |
 |---|---|---|---|
@@ -157,7 +157,7 @@ Note: the published "Isla Nublar" and "Isla Sorna" strings do **not** occur in t
 **Novel code (absent from every published list).** `Aquarium` (index 36) was primed into the input buffer on the real NAME ENTRY screen (savestate patch, then OK pressed with xdotool). Ground truth:
 - Validator breakpoint at `0x0800333E`: `r0 = 0x24` (36) — read-watchpoint had caught PC `0x080097BC` with `r1 = 0x08041742`, `r5 = 0x08398074`, `r6 = 0x0201BA50`.
 - RAM after OK: `0x02005CE0 = 0x24` (savestate raw `0x26CE0 = 24`), screenshot `aq_welcome.png` / `aq_screen1.png` shows normal PARK MODE start with that index selected.
-This entry is in no GameFAQs/VGChartz/TCRF list; it exercises a flag the published lists omit.
+This entry is in no 3rd party cheat index list; it exercises a flag the published lists omit.
 
 **Published-code verification.** `Bonus-Park` entered on the real screen → index `0x0B` (11) at `0x02005CE0`, displayed funds changed from `1,000,000G` to **`99,000,000G`** (screenshot `bonus_after_ok_crop.png`). Matches the published effect.
 

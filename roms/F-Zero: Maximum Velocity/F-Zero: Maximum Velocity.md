@@ -32,7 +32,7 @@ Published codes verified from the ROM algorithm (not stored as literals anywhere
 
 | Save name | Password | Source |
 |---|---|---|
-| `T&T` | `V-J4+6V9A-30` | total-cheats/GameFAQs |
+| `T&T` | `V-J4+6V9A-30` | total-cheats/3rd party cheat indexes |
 | `EBERT` | `H-M2XLT8A-30` | total-cheats |
 | `BRYAN` | `3-KLY9V8?-30` | total-cheats |
 | `YAZZO JR` | `6-8+A8T2YQ30` | decoded from the published ` 2-8+o8T2YQ30` (see §8) |
@@ -91,7 +91,7 @@ RAM (verified against mGBA savestate `gbAs` chunk; IWRAM base at state offset `0
 Password alphabet (32 symbols, index = position):
 `0123456789A?CEFHJKLMNPQRTVWXY=-+`
 
-Name input: 8 characters; each stored byte is `name_index + 0x20` (so ordinary uppercase names are plain ASCII). Name-index grid (6-bit, from the TASVideos reference and confirmed by the ROM constants): space at 0x00, `!` 0x01, digits 0x10–0x19, `?` 0x1E, `A`–`O` 0x21–0x2F, `P`–`Z` 0x30–0x3A, `_` 0x3B.
+Name input: 8 characters; each stored byte is `name_index + 0x20` (so ordinary uppercase names are plain ASCII). Name-index grid (6-bit, from the 3rd party cheat indexes reference and confirmed by the ROM constants): space at 0x00, `!` 0x01, digits 0x10–0x19, `?` 0x1E, `A`–`O` 0x21–0x2F, `P`–`Z` 0x30–0x3A, `_` 0x3B.
 
 Validator (`0x08002A2C`), reimplemented bit-for-bit in `/tmp/fzeromax/fzmv_pass.py`:
 
@@ -154,7 +154,7 @@ Matcher semantics (`0x0801C0B8`/`0x0801C108`): exact match advances `progress`; 
 
 * **Space definition:** 12 symbols from a 32-character alphabet = `32^12 ≈ 1.15e18` spellings. Of the 60 payload bits, 48 encode the 8-character name (name alphabet is 6-bit per character, so at most `2^48` names) and 12 bits are unused. Every accepted name therefore has `2^12 = 4096` equivalent passwords. Name characters drawn from the on-screen 6-bit alphabet; the validator requires an exact 8-byte match.
 * **Validator model:** implemented in Python (`fzmv_pass.py`) and cross-checked against every published code. Decoder rejects alphabet-invalid characters (e.g. lowercase `o` in `2-8+o8T2YQ30`) via the 0x0800262C → 0xFF path.
-* **Novel code (absent from GameFAQs, VGChartz, TCRF, F-Zero Wiki, GitHub generators and the TASVideos script):** for save name `O`, `9-7P+7T9A-30`. Entered on the real password screen; the game played the success jingle, returned to machine select and made `JET VERMILION` selectable. SRAM offset `0xBEC` changed `0x00 -> 0x01`; re-entering the button code no longer opened the password screen. Screenshots: `shot_jet_up.png`, `shot_regate.png`.
+* **Novel code (absent from 3rd party cheat indexes, F-Zero Wiki, GitHub generators and the 3rd party cheat indexes script):** for save name `O`, `9-7P+7T9A-30`. Entered on the real password screen; the game played the success jingle, returned to machine select and made `JET VERMILION` selectable. SRAM offset `0xBEC` changed `0x00 -> 0x01`; re-entering the button code no longer opened the password screen. Screenshots: `shot_jet_up.png`, `shot_regate.png`.
 * **Bounds proven by rejection:** `8-7P+7T9A-30` differs from the valid code only in the first symbol and decodes to name `O@  !   ` (wrong name). Submitted on the same screen with the same save: rejected — the game stayed on the password screen and SRAM `0xBEC` remained `0x00`. Screenshot `shot_wrong_result.png`.
 * **Alias proof:** `9-7P+7T9A-31`, `9-7P+7T9A-3+`, `9-7P+7T9A-3A` all decode to `O       ` and are accepted, proving the 12 unused bit positions in §6 (§16.4b of the guide).
 * **Published-code verification:** all four published codes in §2 round-trip through the Python codec derived from the ROM constants. The in-game test of `V-J4+6V9A-30` could not be completed: the validator's name buffer (`0x03002B98`) is repopulated by the game from its internal save state at validation time, so a savestate patch of that buffer is overwritten (see §8). This is a harness limitation of the in-game test, not a failure of the algorithm.

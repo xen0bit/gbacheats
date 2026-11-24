@@ -115,7 +115,7 @@ len   = 6
 
 | # | Sequence | Effect | Published? |
 |---|---|---|---|
-| 1 | B, A, Down, Left, A, Down | Unlock Options → Special | Yes (GameFAQs/Project Cheat Codes) |
+| 1 | B, A, Down, Left, A, Down | Unlock Options → Special | Yes (3rd party cheat indexes) |
 
 **Candidate arrays present in ROM but NOT registered (rejected in emulator):**
 
@@ -146,7 +146,7 @@ Keylands, El Dorado, *"Marklands"/"Barklands" (OCR ambiguous)*, Marshlands, Snow
 * Reachable input space therefore = exactly one 6-press sequence; there is no checksum, no variable length, and no second algorithmic code format.
 * Action branches: the Special menu has exactly 4 entries (3 toggles + Start Level). All 4 were walked and exercised. Level select enumerates 7 worlds × 5 levels = 35 entries.
 
-**Published-code verification.** Played `B,A,Down,Left,A,Down` on the title screen → "PRESS START" flashes green, Options → Special changes from grey to gold, and all three toggle tiles flip from red ✗ to green ✓ when selected. ROM literal search for the six masks is unique at `0x080B60F4`. This matches the GameFAQs GBA entry exactly.
+**Published-code verification.** Played `B,A,Down,Left,A,Down` on the title screen → "PRESS START" flashes green, Options → Special changes from grey to gold, and all three toggle tiles flip from red ✗ to green ✓ when selected. ROM literal search for the six masks is unique at `0x080B60F4`. This matches the 3rd party cheat indexes GBA entry exactly.
 
 **Undocumented combinations pressed (the button-code equivalent of a novel code):**
 
@@ -169,7 +169,7 @@ Because the only accepted value is the published one, no unpublished *accepted* 
 
 **Hidden debug screen — bounded negative.** Strings `Pitfall Debug Screen`, `Built: Nov 18 2003`, `Main Menu`, `Profiling`, `Slow RAM Usage`, `Profile Menu`, `Disable`, `Enable`, `Profile Information`, and `Entity Options:` exist in the image (e.g. `0x080B46A4`, `0x080B46BC`, `0x080B4720`, `0x0807E8864`). The renderer at `0x08069DF8` has **no** Thumb BL caller and **no** 32-bit pointer (any alignment, with or without Thumb bit) anywhere in the 8 MiB; the menu builders at `0x08069E28`/`0x08069E80` show a 3-item root and 6-item submenu but are likewise unreferenced. No menu screen walked (title, main, Options, Special, level select, pause) offers a debug entry, and the only input matcher is the single 6-button code. L+R+Start on the title screen produced the ordinary menu. Conclusion: **dead developer code (guide §16.3, category 2)**, not a reachable hidden menu. This is a bounded statement about BL/pointer xrefs, the registered-code count, and every screen walked.
 
-**Published codes checked for other SKUs.** GC/PS2/Xbox codes (hold L+R then button sequences: Bottomless Canteen, Classic Pitfall, Hyper Punch, Play as Nicole, Pitfall II, etc.) appear on GameFAQs/IGN/TCRF-style lists but belong to the console SKU and are not present as code tables in this GBA image. The GBA-specific published code is the one verified above. The five libretro CodeBreaker codes from ROMSFUN are memory-edit cheats and are out of scope.
+**Published codes checked for other SKUs.** GC/PS2/Xbox codes (hold L+R then button sequences: Bottomless Canteen, Classic Pitfall, Hyper Punch, Play as Nicole, Pitfall II, etc.) appear on 3rd party cheat index-style lists but belong to the console SKU and are not present as code tables in this GBA image. The GBA-specific published code is the one verified above. The five libretro CodeBreaker codes from 3rd party cheat indexes are memory-edit cheats and are out of scope.
 
 ## 8. Unknowns
 

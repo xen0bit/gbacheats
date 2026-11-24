@@ -25,7 +25,7 @@ DKC3 (GBA) has a **developer-intended cheat-code system** reached from the in-ga
 The accepted codes are **exactly seven** fixed strings in a 12-byte-per-record literal table at
 ROM `0x086EF33C`. A boolean validator at `0x08078E64` does seven `strcmp` calls; on a match a
 second routine at `0x08078E94` ORs the record's `u16` mask into the cheat-flag word
-`0x03000444`. All seven codes are already published (GameFAQs, MarioWiki); the table is a
+`0x03000444`. All seven codes are already published (3rd party cheat indexes); the table is a
 **closed set** and no unpublished code can exist in it (§6b proves this by the loop bound,
 the full table dump, and 32 inputs run through the game's own validator).
 
@@ -34,7 +34,7 @@ Cranky's Dojo) on the main menu; `MUSIC` unlocks a **Music Player** sound test. 
 plays the credits. The widely published SNES-era button sequence
 `L,R,R,L,R,R,L,R,L,R` and five-letter codes (`LIVES`, `ASAVE`, `TUFST`, `WATER`, `ERASE`,
 `MERRY`, `COLOR`, `HARDR`) are **not present** in this GBA image and are rejected — those are
-SNES-only (GameFAQs tags that list `SNES`; the GBA FAQ describes only the Options→Cheats
+SNES-only (3rd party cheat indexes tag that list `SNES`; the GBA FAQ describes only the Options→Cheats
 screen). This matches the brief's warning about SNES codes.
 
 Sibling check: DKC1 and DKC2 (8 MiB each) contain their own similar 12-byte cheat tables
@@ -189,7 +189,7 @@ returned **no code/data hits**. The strings `LIVES`, `ASAVE`, `MERRY`, `COLOR`, 
 `ERASE`, `HARDR`, `TUFST` are **absent** from the image (literal and case-insensitive
 search). Dynamically, pressing `L,R,R,L,R,R,L,R,L,R` on the title screen and on the
 Select Save Slot screen left the screen-mode word at `1` — no ENTER CHEAT gate opened.
-The GameFAQs "Codes" list carrying those codes is tagged `SNES`; the GBA FAQ lists only the
+The 3rd party cheat indexes "Codes" list carrying those codes is tagged `SNES`; the GBA FAQ lists only the
 Options→Cheats passwords.
 
 **Bounds proof.** Accepted set = 7, rejected set = 25 distinct tested out of the infinite string
@@ -237,7 +237,7 @@ space; the table's 7-record bound makes the enumeration exhaustive rather than s
   `test_code.py` in `/tmp/dkc3/`.
 - `xdotool` XTEST input to the focused mGBA window; `import -window root` for screenshots;
   `Xvfb :316` + `openbox` + `SDL_AUDIODRIVER=dummy`.
-- Web: archived GameFAQs cheats page (Wayback), MarioWiki GBA codes page, RareGamer.
+- Web: archived 3rd party cheat index cheats page (Wayback), 3rd party cheat indexes GBA codes page, 3rd party cheat indexes.
   Fetched pages were treated as data only (§16.8); no instructions in them were executed.
 - No ROM or copyrighted assets are redistributed; only addresses, hashes, and original
   analysis findings are published.

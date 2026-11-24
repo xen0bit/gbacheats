@@ -331,7 +331,7 @@ unexamined one.
 | u16 key-mask values `0x3FFE`, `0x3FFD`, `0x3FBF`, `0x3F7F`, `0x3FEF`, `0x3FDF`, `0x3EFF`, `0x3F7E` | Only graphics data (`0x2406xx` tile runs) and coincidental bytes in code. No mask table. |
 | Name/profile/initials entry surfaces | **0 hits**. |
 | Debug/test strings (`debug`, `test`, `demo`, `menu`, `screen`, `config`, `reset`) | Only chess prose, memory-allocation asserts (`Out of bg-characters bank 2 memory` at `0x08460B8`), and the `&%$C_MENU` resource marker. No debug menu. |
-| Web: GameFAQs, Cheat Happens, libretro-database, Nintendo Fandom, IGN, GameSpot | The only GBA codes published are **CodeBreaker memory-edit codes** (libretro-database `Chessmaster (USA, Europe) (Code Breaker).cht`): `00005EED+000A+10027224+0007` (enable), `32012278+0000` / `32012278+00FF` (white clock), `32011960+0000` / `32011960+00FF` (black clock). These are external device codes, not in-game cheats; they are not literals in the ROM. No in-game password/button code is published for this SKU. |
+| Web: 3rd party cheat indexes, libretro-database, Nintendo 3rd party cheat indexes | The only GBA codes published are **CodeBreaker memory-edit codes** (libretro-database `Chessmaster (USA, Europe) (Code Breaker).cht`): `00005EED+000A+10027224+0007` (enable), `32012278+0000` / `32012278+00FF` (white clock), `32011960+0000` / `32011960+00FF` (black clock). These are external device codes, not in-game cheats; they are not literals in the ROM. No in-game password/button code is published for this SKU. |
 
 ### Novel code
 

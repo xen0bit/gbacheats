@@ -174,7 +174,7 @@ JWR247Y!   -> stage-1 output CB 91 0C FA (area=1, idx=11, variant=1)
 ```
 
 * Generated with the offline encoder/solver (seed 20261119), not found on
-  GameFAQs, VGChartz, TCRF, SuperCheats, Planet Cheats or GameGenie.
+  3rd party cheat indexes.
 * Entered by writing `46 51 4D 56 58 5B 53 5E` to `0x0203FAB0..B7` at the stage-1
   breakpoint; stage 1 produced `CB 91 0C FA` at `0x0203FB64` (RAM read).
 * Stage-2 **success path** breakpoint `0x08007FF8` hit with `r0 = 1`.

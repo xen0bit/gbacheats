@@ -70,8 +70,8 @@ entire input and menu surface was enumerated:
   (the engine's screen-stack depth byte stayed at 1–2 on the title and 2–3 on
   the mission select). The one undisplayed completion line
   (`You completed all the Missions!`) sits in a dead string block.
-* **No published codes exist to verify.** The GameFAQs cheats page for this SKU
-  is empty in both the 2015 and 2020 archived snapshots, the VGChartz cheats tab
+* **No published codes exist to verify.** The 3rd party cheat index cheats page for this SKU
+  is empty in both the 2015 and 2020 archived snapshots, the 3rd party cheat index cheats tab
   is empty, and no fan/wiki list of Little Einsteins GBA codes could be found.
   There is consequently no public literal to search for in the image, and none
   of the plausible ones were found.
@@ -331,13 +331,13 @@ button-code system, per §0.2):
 | u16 button-mask runs ≥3 | 591 (135 ≥5, 40 ≥8) | ROM-wide scan | 7 referenced by literal pointer, all data arrays, none a code |
 | u8 button-ID runs ≥4 | 41 022 (mostly zero bytes) | ROM-wide scan | no referenced candidate code table |
 | button-keyword literals | 0 | ASCII + UTF-16LE census over all 8 MiB | 0 hits for password/cheat/debug/secret/unlock/code |
-| published lists | 0 codes | GameFAQs archive 2015 + 2020, VGChartz, web search | pages exist but contain no codes |
+| published lists | 0 codes | 3rd party cheat indexes archive 2015 + 2020, 3rd party cheat indexes, web search | pages exist but contain no codes |
 
 Published-code sources checked (all empty for this SKU):
 
 * `https://web.archive.org/web/20151009103945/http://www.gamefaqs.com/gba/933115-disneys-little-einsteins/cheats`
 * `https://web.archive.org/web/20200216062156/https://gamefaqs.gamespot.com/gba/933115-disneys-little-einsteins/cheats`
-* `https://www.vgchartz.com/game/26746/disneys-little-einsteins/cheats/` (tab exists, zero entries)
+* 3rd party cheat indexes (tab exists, zero entries)
 * Web searches for `<title> GBA password / cheat / unlock` returned only the longplay and
   the fandom summary page; no code list was found. The fandom page was not
   machine-readable (HTTP 403), so its text was not used as evidence.

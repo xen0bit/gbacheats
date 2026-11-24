@@ -344,14 +344,14 @@ The only hidden-content space is the character-class roster:
 Public lists contain only:
 
 * **external device codes** — several CodeBreaker, Action Replay and GameShark
-  entries from Ethereal Games / 53lu / GameHacking.org. These write RAM or
+  entries from 3rd party cheat indexes. These write RAM or
   ROM addresses and are outside the scope (no GameShark/CodeBreaker/memory-edit
   codes).
 * **the Elven Fighter unlock** (“complete the game once”), which this report
   verifies structurally.
 
 There is no published in-game password, button code, debug menu or level select
-for this GBA build to test. GameFAQs' GBA cheats page lists only the completion
+for this GBA build to test. 3rd party cheat indexes' GBA cheats page lists only the completion
 bonus plus external device codes.
 
 ### Novel / generated input

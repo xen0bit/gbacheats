@@ -16,9 +16,9 @@
 | MD5 | `4235dbfac776ac1d3c391c740ce28892` |
 | SHA-1 | `4804b2b85f9d5c94bb844c367a4ed3e05cfd3dc5` |
 | SHA-256 | `94acd89a91a9b8a9345e65f60568cf020d84219c2e7ab106279df034641d18eb` |
-| CRC32 | `0x3FC99714` (matches GameHacking.org's `Ice Age (USA) (En,Fr,Es)`, AGB-AIAE-USA) |
+| CRC32 | `0x3FC99714` (matches a 3rd party cheat index's `Ice Age (USA) (En,Fr,Es)`, AGB-AIAE-USA) |
 
-Developer/publisher (from GameFAQs archived page): Artificial Mind and Movement / Ubisoft, release 2002-03-18. No trainer, patch, appended image or second header was present. `strings` finds only audio-engine text (`Shin'en Multimedia. Code: B.Wodok`, GAX warnings, and `level1`…`level10`+`levelok` music-track titles © Manfred Linzner) — those `levelN` hits are **audio track names, not level-select data**. All in-game UI text is font/tile-indexed, so no UI string appears as ASCII; the GUI itself (title, options, password keyboard, level select, pause) was walked visually and the text/data bank was decoded from the game's own tables (below).
+Developer/publisher (from 3rd party cheat indexes archived page): Artificial Mind and Movement / Ubisoft, release 2002-03-18. No trainer, patch, appended image or second header was present. `strings` finds only audio-engine text (`Shin'en Multimedia. Code: B.Wodok`, GAX warnings, and `level1`…`level10`+`levelok` music-track titles © Manfred Linzner) — those `levelN` hits are **audio track names, not level-select data**. All in-game UI text is font/tile-indexed, so no UI string appears as ASCII; the GUI itself (title, options, password keyboard, level select, pause) was walked visually and the text/data bank was decoded from the game's own tables (below).
 
 ## 2. Executive summary
 
@@ -41,9 +41,9 @@ Path: language `English` → title `New Game / Password / Options` → `Password
 
 Codes verified live: `PBBQBB` (L2), `QBCQBB`, `SBFQBB`, `DBKQBB`, `NBTQBB`, `PCTQBB`, `RFTQBB`, `CKTQBB`, `MTTQBB`, `NTTTTT`, `TSLMFD`, `MFKRPH`, `GDQLMD`, `JRCFSM`, `TRJBQG`, plus novel `CCTQCH` and four rejected inputs.
 
-Published sources checked: GameFAQs cheats (via `web.archive.org/web/20230528213419/...`, direct fetch 403), IGN, CheatCodes.com, CheatCC, GameRevolution, neoseeker, TCRF-adjacent pages, and the independent generator/article at `607web.nl/ice-age-passwords` and `607web.nl/game-passwords`. The generator's JavaScript was treated as **data** and re-verified byte-for-byte against the ROM (§5). No prompt-injection payload was encountered in the fetched pages.
+Published sources checked: 3rd party cheat index cheats (via `web.archive.org/web/20230528213419/...`, direct fetch 403), 3rd party cheat indexes, 3rd party cheat index-adjacent pages, and the independent generator/article at `607web.nl/ice-age-passwords` and `607web.nl/game-passwords`. The generator's JavaScript was treated as **data** and re-verified byte-for-byte against the ROM (§5). No prompt-injection payload was encountered in the fetched pages.
 
-**Published-code verification:** all 14 six-letter codes above are accepted. GameFAQs' `Art Gallery: MSW5` is a **typo/bogus** — `W` and `5` do not exist on the on-screen keyboard (alphabet has no W, no digits), and the literal `MSW5` is absent from the ROM; the real art-gallery codes are `MFKRPH`, `GDQLMD`, `JRCFSM`, `TRJBQG`.
+**Published-code verification:** all 14 six-letter codes above are accepted. 3rd party cheat indexes' `Art Gallery: MSW5` is a **typo/bogus** — `W` and `5` do not exist on the on-screen keyboard (alphabet has no W, no digits), and the literal `MSW5` is absent from the ROM; the real art-gallery codes are `MFKRPH`, `GDQLMD`, `JRCFSM`, `TRJBQG`.
 
 ## 4. Address map
 
@@ -148,7 +148,7 @@ A 17th key `V` exists physically but has no nibble in the validator alphabet and
 * **5 hard-coded codes** (which deliberately fail the checksum path);
 * **total 10,245 accepted strings.**
 
-**Novel code (not on GameFAQs, VGChartz, TCRF, 607web or any wiki):** **`CCTQCH`**
+**Novel code (not on 3rd party cheat indexes, 607web or any wiki):** **`CCTQCH`**
 
 * nibble vector `[1,1,15,12,1,5]`; buffer bytes `[1,2,17,3,4,5]`; checksum `(2+17+3+4+5)&0xF = 1 = n0` ✓
 * decodes to `levelmask = 0x07F` (levels 1–7) and `acornmask = 0x015` (acorns 1, 3, 5).

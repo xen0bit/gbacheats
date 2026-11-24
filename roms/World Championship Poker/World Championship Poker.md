@@ -98,7 +98,7 @@ The `T[0][c0]` value is a separate "starting bonus" field (0–100000) and `T[6]
 
 **Card index** = suit×13 + (rank−1), suits ♦0 / ♥1 / ♠2 / ♣3, ranks A0 … K12.
 
-**Published code** (GameFAQs/GameGenie/Cheat Happens/GameRevolution/etc.; all agree):
+**Published code** (3rd party cheat indexes/etc.; all agree):
 
 | Slot | Card | Index | `T[slot][index]` |
 |---:|---|---:|---:|

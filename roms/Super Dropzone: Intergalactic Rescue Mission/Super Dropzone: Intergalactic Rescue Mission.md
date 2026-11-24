@@ -29,7 +29,7 @@ The game has a **developer-intended 8-digit numeric password system** and a hidd
 
 The CHEATS menu contains five toggles stored as bytes at RAM `0x03001898[0..4]`: `1. INFINITE LIVES`, `2. INFINITE WEAPONS`, `3. LEVEL COMPLETER`, `4. SLOW CLOAK`, `5. KILL HUMANOIDS` (strings at `0x08011548`–`0x080115AC`). Selecting a row toggles bit 0 of the corresponding byte (`0x0801047A`–`0x08010490`).
 
-No published code list could be retrieved (GameFAQs/IGN/TCRF return HTTP 403, DuckDuckGo serves a bot challenge, and the web-search integration quota was exhausted). The eight codes printed in the game's own level-select table at `0x08011830` are treated as the "published-style" visible set; 42 of the 50 accepted codes — including the cheat-unlock code — are absent from it and are therefore novel relative to that visible list.
+No published code list could be retrieved (3rd party cheat indexes return HTTP 403, DuckDuckGo serves a bot challenge, and the web-search integration quota was exhausted). The eight codes printed in the game's own level-select table at `0x08011830` are treated as the "published-style" visible set; 42 of the 50 accepted codes — including the cheat-unlock code — are absent from it and are therefore novel relative to that visible list.
 
 ## 3. How to reproduce
 
@@ -196,7 +196,7 @@ These are a sparse subset of the 46 progress codes (levels 0–3 sampled at wave
 - **Derived (disassembly):** validator loop `0x080032F8`–`0x0803322`; table base/size from literal `0x08033C0 = 0x080140BE` and loop bound `49`; special-case stores `0x0803328`–`0x080334E`; buffer clear at `0x0803366`; division helper `0x08010FF0`; CHEATS menu strings/gates/toggle at `0x08010306`/`0x0801037C`/`0x0801047A`.
 - **Observed (emulator + savestate RAM reads):** table of 50 codes (ROM bytes); password displayed on Options screen after savestate injection; `51853435` → `0x03000F54=1`; `88895288` → `0x030012B4=0xFF`; `00247227` → `0x03000FA0=9`; `41693261` → `0x030041E0=1`; `22441687` → level 3 / wave 4; `12345678` and `36104232` rejected with buffer not cleared. Screenshots stored in `/tmp/superdropzone/`.
 - **Inferred (not fully exercised):** the semantic names of `0x030012B4`, `0x03000FA0`, `0x030041E0` beyond their observed values; the in-game visual effect of each of the five cheat toggles (only the menu structure and one action path were traced). The CHEATS overlay itself was not captured on screen — its gate and rendering code were proven statically and the gate flag was RAM-verified, but the overlay screen was not reached through the controller in the available session (labelled as a gap, not a negative claim).
-- **Web recon:** all direct fetches (GameFAQs, IGN, TCRF) returned 403; DuckDuckGo returned a CAPTCHA; the search integration was quota-limited. Published lists were therefore not independently verified. ROM text was treated strictly as data; no fetched content was followed as instructions.
+- **Web recon:** all direct fetches (3rd party cheat indexes) returned 403; DuckDuckGo returned a CAPTCHA; the search integration was quota-limited. Published lists were therefore not independently verified. ROM text was treated strictly as data; no fetched content was followed as instructions.
 
 ## 8. Unknowns
 

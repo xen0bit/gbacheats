@@ -17,7 +17,7 @@
 | SHA-256 | `2dac7cdf9821c7ef672b5700f0114cf8bbe46bd019f85b97478e4c9a937637c5` |
 | CRC32 | `2EB9EEE6` (matches published USA serial `AGB-AFRE-USA`) |
 
-**Phase 0 result:** single embedded GBA header (156-byte Nintendo logo found once at file offset 0x04); stock entry word `0xEA00002E` (branch to 0x080000C0); fixed byte 0xB2 = `0x96`. CRC32 and SHA-1 match the published GameHacking.org / decomp-repo retail image. **No scene cracktro, no appended trainer, no second game image.** Header checksum bytes `0000` and complement byte `0x6F` are as-shipped for this revision (the image is byte-identical to the verified decomp baserom).
+**Phase 0 result:** single embedded GBA header (156-byte Nintendo logo found once at file offset 0x04); stock entry word `0xEA00002E` (branch to 0x080000C0); fixed byte 0xB2 = `0x96`. CRC32 and SHA-1 match the published 3rd party cheat indexes / decomp-repo retail image. **No scene cracktro, no appended trainer, no second game image.** Header checksum bytes `0000` and complement byte `0x6F` are as-shipped for this revision (the image is byte-identical to the verified decomp baserom).
 
 ## 2. Executive summary
 
@@ -124,7 +124,7 @@ ValidateSelection():                # called only when mapped == START (0x40)
 ## 6b. Enumeration
 
 - **Space defined:** accepted set = 1 of 2^96 possible 12-byte histories (practically: one 12-press sequence × one trigger key). Entry surface = 1 screen (router sub-state 6). Timeout and progress cap fully characterised.
-- **Novel / unpublished code:** `↑ ↑ ↓ ↓ ← → ← → B A B A` + START. Verified not listed for this title on GameFAQs-style sites, CheatZILLA, CodeTwink, Neoseeker, GameHacking.org, Ethereal Games, or the Frogger Wiki; the only published input code in the franchise's Konami-Code article is the 10-press version for *other* games. Entered in mGBA; RAM proof: history `01 01 02 02 04 08 04 08 20 10 20 10`, flag `0x03005340 = 1` (screenshot `w_konami2_c.png`, retained in work dir).
+- **Novel / unpublished code:** `↑ ↑ ↓ ↓ ← → ← → B A B A` + START. Verified not listed for this title on 3rd party cheat index-style sites, 3rd party cheat indexes, or the Frogger Wiki; the only published input code in the franchise's Konami-Code article is the 10-press version for *other* games. Entered in mGBA; RAM proof: history `01 01 02 02 04 08 04 08 20 10 20 10`, flag `0x03005340 = 1` (screenshot `w_konami2_c.png`, retained in work dir).
 - **Bounds proven by rejection** (each from a clean title checkpoint, flag read after START):
 
 | Input | history after presses | flag |

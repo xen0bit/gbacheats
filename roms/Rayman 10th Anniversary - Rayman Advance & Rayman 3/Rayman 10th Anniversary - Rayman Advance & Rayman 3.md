@@ -120,14 +120,14 @@ Note the first element of code 0 is **D-pad Left (`0x20`)**, not L-shoulder. Sev
 
 ### 6.2 Rayman Advance — world-map combination
 
-* Published: highlight a level, press **Select+B+R simultaneously, twice** → "all electoons in that level" (GameFAQs).
+* Published: highlight a level, press **Select+B+R simultaneously, twice** → "all electoons in that level" (3rd party cheat indexes).
 * Observed: from `st_map_pre_ss.ss1`, the chord changed EWRAM `0x0200CFA3`, `0x0200CFA6`…`0x0200CFB8`, `0x0200D018`…`0x0200DA85`, `0x0200C5D8` (`0x0F→0xAF`) and `0x0200DDA9`. Watchpoints put the writer at `0x080CBF98`, called from `0x080DBD78` (`BL 0x080CBF98` with `r0=1`). `0x080CBF98` increments a 24-byte array at `0x0200CFA0` and adds `r0` to the 32-bit word at `0x0200C5D8`.
 * Control: holding Select+B only (twice) produced **no** EWRAM or IWRAM difference — the effect is specific to the full chord.
 * Confidence: effect **Derived** (writer chain) + **Observed** (RAM deltas); the mapping of the 24-byte array to "electoons per level" is **Inferred**.
 
 ### 6.3 Rayman 3 — published codes (web-corroborated, not ROM-literal-verified)
 
-Sources: GameFAQs GBA cheat page, RayWiki "List of cheats in Rayman 3 (Game Boy Advance)", VGChartz, chaptercheats. All are entered **on the world map while holding Select**:
+Sources: 3rd party cheat indexes GBA cheat page, 3rd party cheat indexes "List of cheats in Rayman 3 (Game Boy Advance)", 3rd party cheat indexes. All are entered **on the world map while holding Select**:
 
 | Effect | Buttons |
 |---|---|
@@ -183,6 +183,6 @@ ROM verification: literal searches for masks `0x104/0x5/0x5/0x5`, `0x6/0x6/0x6/0
 * mGBA SDL (`-3`, `-d` CLI debugger, `-t` savestate boot). CLI debugger commands used: `watch/w`, `listw`, `dis`, `r/1`, `r/2`, `r/4`, `x/2`, `c`.
 * `Xvfb :318`, `openbox`, `xdotool` XTEST key events, `scrot`, ImageMagick `convert`.
 * Python helpers in `/tmp/rayman10/`: `k.py` (keys/screenshots), `ss.py` (zlib `gbAs` savestate decode + RAM dump/diff), `exp.py` (state→keys→state), `watchcode.py`/`watchcombo.py` (reproducible watchpoint experiments), `dbg.py` (FIFO debugger bridge), `all_strings.txt` (full `strings -t x` dump).
-* Web search: GameFAQs Rayman Advance/Rayman 3/10th Anniversary cheat pages, RayWiki, VGChartz, chaptercheats, archived cheat collections. Fetched pages were treated as data; no instruction found in them was executed.
+* Web search: 3rd party cheat indexes Rayman Advance/Rayman 3/10th Anniversary cheat pages, 3rd party cheat indexes, archived cheat collections. Fetched pages were treated as data; no instruction found in them was executed.
 
 **Legal note:** no ROM or copyrighted asset is redistributed here; only hashes, addresses, algorithms and the analyst's own scripts/screenshots are recorded.

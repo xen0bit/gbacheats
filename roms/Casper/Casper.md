@@ -49,7 +49,7 @@ and accepted by the game, producing `A=0, B=0, C=1` (globals
 (`A=7, C=1`) and a corrupted checksum are both refused by the decoder and by
 the game.
 
-Published list (chaptercheats, "Level Passwords") partially verifies:
+Published list (3rd party cheat indexes, "Level Passwords") partially verifies:
 `193Z5` and `CFM8N` are accepted by this ROM; `RVSV5`, `HEART` and `DHEAR` are
 **not** (they fail the decoder's `u13 != u14` / checksum tests) and are recorded
 as unverified/region-mismatched, not silently dropped.
@@ -229,9 +229,9 @@ raw space). The remaining raw inputs either fail the checksum, fail
 D14BO   (cells 2,21,24,0,11)
 ```
 
-`D14BO` is not in the chaptercheats list (`HEART CS2V`, `D HEART VH2`,
-`193Z5`, `RVSV5`, `CFM8N`), not in the GameFAQs GBA page (403, no list
-recoverable), and not in the TCRF/VGChartz material found. It decodes to
+`D14BO` is not in the 3rd party cheat index list (`HEART CS2V`, `D HEART VH2`,
+`193Z5`, `RVSV5`, `CFM8N`), not in the 3rd party cheat indexes GBA page (403, no list
+recoverable), and not in the 3rd party cheat indexes material found. It decodes to
 `A=0, B=0, C=1`.
 
 In-game proof (mGBA, password screen, `r5` reset, buffer cleared):
@@ -264,7 +264,7 @@ In-game proof (mGBA, password screen, `r5` reset, buffer cleared):
 The three rejections are properties of the published strings under this ROM's
 validator, not harness failures: the same strings are refused by a direct call
 to the ROM's own decoder. They are most likely EU-version codes or transcription
-errors; the chaptercheats page does not state a region. Only 2 of the 5
+errors; the 3rd party cheat index page does not state a region. Only 2 of the 5
 published strings are accepted by this USA image.
 
 ## 7. Validation evidence

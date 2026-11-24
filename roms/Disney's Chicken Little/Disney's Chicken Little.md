@@ -297,10 +297,10 @@ What *does* exist and was fully enumerated:
 
 ### 6b.2 Novel material (in no published list)
 
-The following is not on GameFAQs, VGChartz, TCRF or any wiki, and is the
+The following is not on 3rd party cheat indexes or any wiki, and is the
 durable output of this engagement:
 
-1. The **level-id mapping** of the 71-entry dev table (§6.2). TCRF lists the
+1. The **level-id mapping** of the 71-entry dev table (§6.2). 3rd party cheat index lists the
    labels only; the packed `{4, id}` words, the `0x1Bxx/0x1Cxx/0x1Dxx`
    grouping and the tool pseudo-ids are new.
 2. The proof that the table is **unreferenced**: 78 32-bit pointers target the
@@ -348,7 +348,7 @@ durable output of this engagement:
 
 ### 6b.4 Published codes / unlockables, verified
 
-* GameFAQs GBA "1 cheat" resolves to device codes (CodeBreaker/Action Replay,
+* 3rd party cheat indexes GBA "1 cheat" resolves to device codes (CodeBreaker/Action Replay,
   e.g. `Have All Race Tracks`, `All Statues Collected`, `220 Acorns
   Collected`). These are memory patches, explicitly out of scope, and their
   existence is consistent with the save-flag model derived in §5.2.

@@ -194,7 +194,7 @@ rejection, not an untested case. A truncated 9-character input was also rejected
 (`r0=0`), confirming the length-10 requirement.
 
 **Published-code verification.** Web search was unavailable in this environment
-(`websearch` HTTP 503; GameFAQs 403; DuckDuckGo CAPTCHA; Bing returned unrelated
+(`websearch` HTTP 503; 3rd party cheat indexes 403; DuckDuckGo CAPTCHA; Bing returned unrelated
 results; archive.org 404 for the cheats URL). No published code string was found in the
 ROM, so none could be verified or contradicted. The ROM itself contains no
 NUL-terminated 10-consonant preset password table (a scan of all 4 MiB found no

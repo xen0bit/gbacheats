@@ -43,7 +43,7 @@ reversed and verified in the emulator:
    screen; the generated code **`ZjoHDyGRk5GH3mMH`** was captured, re-entered on the
    real screen, and accepted ("Password Correct!").
 
-The published GameFAQs/Neoseeker/VGChartz password list **does not apply to this
+The published 3rd party cheat indexes password list **does not apply to this
 image**: its codes use symbols (`/ ? % @ > *`) absent from this ROM's 64-character
 keyboard alphabet, and the two published codes composed entirely of legal characters
 (`2QjD+D1Q9Fy25B0C`, `klxQy9dQPT-4bkH3`) were entered and rejected by the game.
@@ -178,7 +178,7 @@ value 1..10 = `0..9`, 11..36 = `A..Z`, 37..62 = `a..z`, 63 = `+`, 64 = `-`.
 
 | Published code | Source | Result on this ROM |
 |---|---|---|
-| `2QjD+D1Q9Fy25B0C` | GameFAQs/Neoseeker/PlanetCheats | **Invalid Password!** |
+| `2QjD+D1Q9Fy25B0C` | 3rd party cheat indexes | **Invalid Password!** |
 | `klxQy9dQPT-4bkH3` | absolute-cheats | **Invalid Password!** |
 | `+vMN?T/6/NRRvMR8`, `S/PD W1/H L8Q8 >VbB`, `/6Kb/xMii rLM+/22`, … | many | **Not enterable** — contain `/ ? % @ > *`, none of which exist in this ROM's 64-symbol alphabet; literal search of the whole ROM also finds no such table |
 
@@ -199,7 +199,7 @@ The published button codes all matched the ROM mask table exactly.
   buffer at `0x03003EEC` after visiting that screen), searched for literally in the
   ROM (absent), re-entered on the real ENTER PASSWORD screen, and accepted —
   screenshot `oracle_zjo_c.png` shows **"Password Correct!"**. It does not appear
-  on GameFAQs, Neoseeker, VGChartz, TCRF, or any other published list.
+  on 3rd party cheat indexes, or any other published list.
 * **Bounds proven by rejection:**
   * `0000000000000000` → "Invalid Password!" (`oracle_zero_c.png`).
   * All **16** single-symbol substitutions of the accepted code → invalid

@@ -370,7 +370,7 @@ enumerated debug affordances, all unreachable:
 This is "dead code" in the §16.3 sense: the strings and handlers exist, but no
 table entry, branch or pointer reaches them.
 
-**Published codes.** GBA lists (Almar's Guides, NeoSeeker) contain only
+**Published codes.** GBA lists (3rd party cheat indexes) contain only
 CodeBreaker memory patches, e.g. master `00000E4F 000A / 1000064C 0007`,
 `83001150 270F` (gold), `83000FB6/8/BA 03E7` (home artillery),
 `83001154/6/8 03E7` (campaign artillery), `33004EBC/4E9C/4F08 0009` (siege
@@ -406,7 +406,7 @@ knights or any other army change.)
 **Novel artefact.** Because there is no accepted-code space, no novel code exists to
 mint. The unpublished result delivered here is the complete enumeration and
 reachability proof of the two developer screens (17 entries/parameters), which does
-not appear on GameFAQs, TCRF, VGChartz or any wiki for this SKU.
+not appear on 3rd party cheat indexes or any wiki for this SKU.
 
 ## 7. Validation evidence
 

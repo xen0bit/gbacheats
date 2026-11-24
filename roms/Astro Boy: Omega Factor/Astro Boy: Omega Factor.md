@@ -42,7 +42,7 @@ A complete **developer debug subsystem** is present in the retail ROM: five edit
 * there is no word-aligned `0x00000377` literal anywhere in the ROM (the only `0x377` byte patterns are unaligned data), and no code compares the key state against it;
 * in the emulator, `Down+START` during gameplay opens the **ordinary pause menu** (`CONTINUE / RETRY / EXIT`), not the debug menu (screenshot `078_pause_try.png`).
 
-The published access method (Sega Retro / TCRF, credited to “Labmaster”) is a CodeBreaker code that *injects* an ARM/Thumb stub into IWRAM: when `KEYINPUT == 0x0377` it writes `0x503` into `[[0x0300287C]+0x1B4]` and then resumes the intercepted indirect jump. That is external code injection, not an in-game cheat, and is out of scope here; it is decoded and mapped in §5 only as evidence for the gate.
+The published access method (3rd party cheat indexes, credited to “Labmaster”) is a CodeBreaker code that *injects* an ARM/Thumb stub into IWRAM: when `KEYINPUT == 0x0377` it writes `0x503` into `[[0x0300287C]+0x1B4]` and then resumes the intercepted indirect jump. That is external code injection, not an in-game cheat, and is out of scope here; it is decoded and mapped in §5 only as evidence for the gate.
 
 ## 3. How to reproduce
 
@@ -84,11 +84,11 @@ Gameplay:
 
 | Published item | Source | Test | Result |
 |---|---|---|---|
-| `Down+START` opens debug menu | Sega Retro / TCRF (with CodeBreaker active) | held `Down+START` 0.8 s in 1-1 | **No debug menu.** Ordinary pause menu opens (`CONTINUE/RETRY/EXIT`); screenshot `078_pause_try.png`. |
-| Debug menu requires CodeBreaker | Sega Retro, TCRF | static decode of the published hook | Confirmed: it is an IWRAM code injection keyed on `0x0377`; not an in-game cheat. |
-| STAGE SELECT from pause menu after finishing NORMAL | GameFAQs (misternull) | pause menu on a 1-1 save | 3 items only; cycling wraps `EXIT → CONTINUE`. Stage-select task exists at `0x080149DC` but is not offered. |
-| Sharaku Hosuke is character #39 | GameFAQs (y3kman) | gallery table | Confirmed: index 39 in the display-name table is `Sharaku`. |
-| Character list locations (Prima/IGN/Vizzed) | guides | gallery table | Names match, but guide “Character 04/24” ordering is a walkthrough order, **not** the in-game NUMBER (in-game NUMBER = table index). |
+| `Down+START` opens debug menu | 3rd party cheat indexes | held `Down+START` 0.8 s in 1-1 | **No debug menu.** Ordinary pause menu opens (`CONTINUE/RETRY/EXIT`); screenshot `078_pause_try.png`. |
+| Debug menu requires CodeBreaker | 3rd party cheat indexes | static decode of the published hook | Confirmed: it is an IWRAM code injection keyed on `0x0377`; not an in-game cheat. |
+| STAGE SELECT from pause menu after finishing NORMAL | 3rd party cheat indexes | pause menu on a 1-1 save | 3 items only; cycling wraps `EXIT → CONTINUE`. Stage-select task exists at `0x080149DC` but is not offered. |
+| Sharaku Hosuke is character #39 | 3rd party cheat indexes | gallery table | Confirmed: index 39 in the display-name table is `Sharaku`. |
+| Character list locations (3rd party cheat indexes) | guides | gallery table | Names match, but guide “Character 04/24” ordering is a walkthrough order, **not** the in-game NUMBER (in-game NUMBER = table index). |
 
 No GameShark/CodeBreaker/memory-edit code was executed; the CodeBreaker list is used only as a static lead for §5.
 

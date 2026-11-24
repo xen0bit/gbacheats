@@ -115,7 +115,7 @@ screen** (published notes say “in-game” only).
 
 ### Published list used for Phase 1
 
-The archived GameFAQs cheats page for this GBA entry
+The archived 3rd party cheat index cheats page for this GBA entry
 (`web.archive.org/web/20250126130918/.../919774-.../cheats`) lists: Continue with
 A+Start, Level Select/World Select with B at the title after completing the game,
 the World 1-2 wall-clip Minus World, and the normal 1-2/4-2 warps. The button
@@ -498,7 +498,7 @@ published L+R menu descriptions.
 
 * mGBA 0.10.5 (SDL) under Xvfb `:254` + openbox; `xdotool` for XTEST key events.
 * `arm-none-eabi-objdump` (`-M force-thumb` / ARM) for wrapper/GBA code.
-* `da65` (cc65) and the doppelganger SMB disassembly (6502disassembly.com) as a
+* `da65` (cc65) and the doppelganger SMB disassembly (3rd party cheat indexes) as a
   cross-reference for the NES PRG; all addresses above were re-checked against the
   runtime PRG bytes.
 * Python 3 + `zlib` savestate parser (`state.py`, `menutext.py`) for RAM/VRAM reads;

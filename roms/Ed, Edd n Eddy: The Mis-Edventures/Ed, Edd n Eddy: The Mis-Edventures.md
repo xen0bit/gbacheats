@@ -214,7 +214,7 @@ counts, and the structural gate proof, not by a single failed string search.
   never selected). Not a player gate: no input or save path reaches it.
 * The per-entry *visual* outcome of each of the 23 tools was not driven in a clean
   context; effects are derived from the table and code. No published code list exists
-  to cross-check against (web: GameFAQs/TCRF 403, Wayback empty, Bing/DDG irrelevant;
+  to cross-check against (web: 3rd party cheat indexes 403, Wayback empty, Bing/DDG irrelevant;
   nothing fetched was executed or followed).
 
 ## 9. Tooling

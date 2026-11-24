@@ -67,7 +67,7 @@ five actions rather than the four that every published list names.
   The second image contains the developer sound/map test (`Music Test: %d`,
   `Sample Test: %d`, `Map Test`, `Zone: %d`, `Area: %d`, `Variation: %d / %d`,
   `Debug` at `0x08805AF4`–`0x08805B68`) and its code (`0x088058E6`, `0x08805B84`,
-  `0x08805C2C`). The only published access (TCRF) is a CodeBreaker RAM write
+  `0x08805C2C`). The only published access (3rd party cheat indexes) is a CodeBreaker RAM write
   `0202B32D:02` followed by holding Start — a memory-edit cheat, out of scope here.
   Writing `0x02` to `0x0202B32D` during startup and holding Start at the title (or at
   Select Game) **did not open the menu in this 2-in-1 build**; no in-game button chord
@@ -410,9 +410,9 @@ a full-screen cutscene illustration. Enumerated in-game:
 
 Strings at `0x08805AF4`–`0x08805B68` (see §4). The sound test's list is a 44-entry
 record table at `0x08C094E0` (56-byte stride); the handler's bound is
-`cmp r0,#43` (`0x0880592C`), i.e. 44 tracks `0…43`. This matches the TCRF-published
+`cmp r0,#43` (`0x0880592C`), i.e. 44 tracks `0…43`. This matches the 3rd party cheat index-published
 track list (00 `Race To The Island` … 43 `World Map`, with **track 27 unused**).
-TCRF's track titles are fan descriptions and are not present as ASCII in the ROM;
+a 3rd party cheat index's track titles are fan descriptions and are not present as ASCII in the ROM;
 only the 44-entry count and the `%d` labels are verifiable from the image.
 
 ## 6b. Enumeration
@@ -504,8 +504,8 @@ four counters, so no input sequence can produce an index outside the tables.
   * Published LOG2 access `0202B32D:02` + hold Start — **not reproducible** in this
     build (RAM write applied during the intro, verified byte = `02`; Start at title →
     Select Game, no debug screen).
-  * VGChartz "Play as Hercule / Control Text Window / Get scouter early" — these are
-    entries in VGChartz's cheat database without any in-game button/password content;
+  * 3rd party cheat indexes "Play as Hercule / Control Text Window / Get scouter early" — these are
+    entries in a 3rd party cheat index's cheat database without any in-game button/password content;
     no corresponding literal or table exists in the ROM (searched), so they are
     recorded as unverified/not applicable to this build.
 
@@ -544,9 +544,9 @@ four counters, so no input sequence can produce an index outside the tables.
    table*, larger than LOG1's story cast.
 3. **LOG2 debug menu access in this rebuild.** The published CodeBreaker address did
    not work here. Because the second image is a later (Dec-2005 pack) rebuild with
-   shifted data (e.g. `CharacterData.cpp` at `0x804336` vs TCRF's `0x42F4`), its
+   shifted data (e.g. `CharacterData.cpp` at `0x804336` vs a 3rd party cheat index's `0x42F4`), its
    EWRAM debug flag may live at a different address. This was not solved; the menu
-   contents are documented from the strings/code and TCRF only.
+   contents are documented from the strings/code and 3rd party cheat indexes only.
 4. **Audible verification of `Play SFX` / `Play Music`.** The emulator ran with
    `SDL_AUDIODRIVER=dummy`, so the screenshots prove the menu action and the table
    lookup, not the sound emitted. (A human with audio can confirm in one press.)

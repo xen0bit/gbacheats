@@ -25,7 +25,7 @@
 
 **Finding: bounded negative.** This SKU has no in-game/developer-intended cheat surface — no
 password, no button code, no hidden/debug menu, and no unlockable gated behind a code. The only
-published "cheats" are cheat-device RAM patches (CodeBreaker/Action Replay) and one GameFAQs
+published "cheats" are cheat-device RAM patches (CodeBreaker/Action Replay) and one 3rd party cheat indexes
 gameplay tip; both are out of scope per the brief. The game is a Mario Party-style board game with
 exactly one code-like surface, the five-icon board toolbar, and every entry in it is documented
 in the game's own tutorial.
@@ -111,10 +111,10 @@ referenced by any of the five handlers in `0x08001B4C`.
 
 | Source | Content | Disposition |
 |---|---|---|
-| GameFAQs cheats | 1 "secret": pulling an Ace or 7 lets you pick a card's item for free | Gameplay tip, not a code |
-| ROMSFUN / libretro | 2 CodeBreaker codes (`0000693E 000A`, `10025E10 0007`; `D0000020 0004`, `33000B04 000A`) | Cheat-device RAM patches — out of scope |
-| Cheat Happens | 8 Action Replay codes (gems, points, "AR Butt For 10 Moves") | Cheat-device patches — out of scope |
-| TCRF | No page exists for this title (403 / no article) | No published debug-menu claim |
+| 3rd party cheat index cheats | 1 "secret": pulling an Ace or 7 lets you pick a card's item for free | Gameplay tip, not a code |
+| 3rd party cheat indexes / libretro | 2 CodeBreaker codes (`0000693E 000A`, `10025E10 0007`; `D0000020 0004`, `33000B04 000A`) | Cheat-device RAM patches — out of scope |
+| 3rd party cheat indexes | 8 Action Replay codes (gems, points, "AR Butt For 10 Moves") | Cheat-device patches — out of scope |
+| 3rd party cheat indexes | No page exists for this title (403 / no article) | No published debug-menu claim |
 
 **In-game enumerations:**
 

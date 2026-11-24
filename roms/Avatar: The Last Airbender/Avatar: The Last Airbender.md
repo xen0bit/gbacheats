@@ -36,7 +36,7 @@ this engagement).
 accessible debug menu.** The widely published five-digit Avatar codes
 (`94677`, `53467`, `23637`, `24463`, `34743`, `54641`, `37437`, `97831`) belong
 to the GameCube / PlayStation 2 / Xbox / Wii versions, not to this cartridge.
-GamesRadar's platform-tagged list attributes them to “Wii” and “GameCube, PS2,
+a 3rd party cheat index's platform-tagged list attributes them to “Wii” and “GameCube, PS2,
 Xbox”; GBA-labelled reprints exist (e.g. miastogier.pl) but no GBA screen,
 string, asset or literal in this ROM supports them.
 
@@ -70,8 +70,8 @@ menus”, but not reachable by input):
   found.
 * A hidden **developer room select** that lists `.ro` room files and loads them.
   It is selected by game-state word `0x02001E50 = 3`, which is a RAM write.
-  This is the screen TCRF documents as reachable only by a memory edit; that
-  route is explicitly out of scope here and is not offered as a cheat. TCRF
+  This is the screen 3rd party cheat indexes document as reachable only by a memory edit; that
+  route is explicitly out of scope here and is not offered as a cheat. 3rd party cheat indexes
   also records that a way to reach the debugging functions is still unknown.
   No in-game input sequence that reaches this state was found (35 button
   combinations tested).
@@ -224,7 +224,7 @@ debug overlay, not a shipped cheat.
 (analysis instrument only) switches the running game to a developer screen that
 prints `.ro` room names in a grid. `Right` scrolls the list horizontally,
 `Down` moves by row, `A` loads the selected room (Observed: `np_000.ro` and
-`fnp_000.ro` loaded). This is the same screen TCRF documents as reachable only
+`fnp_000.ro` loaded). This is the same screen 3rd party cheat indexes document as reachable only
 by a RAM edit. It is not an in-game cheat and no button sequence in this build
 reaches state 3.
 
@@ -245,7 +245,7 @@ reaches state 3.
 
 The GBA password lists found online use a 3×3 character grid (Aang, Zuko,
 Toph, Katara, Sokka, Iroh, Momo) and belong to the **sequel**, *The Burning
-Earth* (VGChartz/GameRevolution list them under that title). No equivalent
+Earth* (3rd party cheat index list them under that title). No equivalent
 screen, text ID or asset exists in this ROM.
 
 ### 6.2 Debug labels: IDs, English text, file offsets
@@ -342,7 +342,7 @@ table, no validator constants**.
 ### 6b.4 Hidden room-select enumeration
 
 * Trigger: state word `0x02001E50 = 0x0003` (RAM write; **not** an in-game code,
-  and not offered as a cheat). TCRF documents the same screen as reachable only
+  and not offered as a cheat). 3rd party cheat indexes document the same screen as reachable only
   by a RAM edit (memory-edit; out of scope for this report).
 * Contents: room `.ro` names grouped by area. Visible first page (Observed):
   `np_000.ro … np_003.ro`, `fnp_000.ro … fnp_003.ro`, `oma_000.ro … oma_003.ro`,
@@ -392,7 +392,7 @@ The in-scope code space of this cartridge is **empty**:
 **Inferred:**
 
 * The five-digit codes are console-version content; the GBA release dropped the
-  Extras/Code Entry screen (supported by GamesRadar's platform tagging and by
+  Extras/Code Entry screen (supported by a 3rd party cheat index's platform tagging and by
   the complete absence of the strings/assets).
 * The 8 KiB `.sav` is EEPROM.
 * The debug text is build residue from the engine's developer menu, compiled
@@ -402,7 +402,7 @@ The in-scope code space of this cartridge is **empty**:
 
 * **Where the debug menu lives.** Its 17 labels are present (English text) in
   all five language banks, but no gate, consumer, pointer or menu asset was
-  found. TCRF also lists “find a way to access the debugging functions” as a
+  found. 3rd party cheat indexes also lists “find a way to access the debugging functions” as a
   to-do for this ROM. It may only exist in a development build of the engine.
 * **Text-layer wiring.** The language banks at `0x681F10` and the symbol table
   at `0x68D4B8` have no direct 32-bit pointer in ROM; the engine presumably
@@ -435,12 +435,12 @@ The in-scope code space of this cartridge is **empty**:
 
 References used for the public-code comparison:
 
-* GamesRadar, “Avatar: The Last Airbender Cheats” (platform-tagged code list):
-  `https://www.gamesradar.com/avatar-the-last-airbender/cheats/`
-* TCRF, “Avatar: The Last Airbender (Game Boy Advance)” (debug text at
+* 3rd party cheat indexes, “Avatar: The Last Airbender Cheats” (platform-tagged code list):
+  3rd party cheat indexes
+* 3rd party cheat indexes, “Avatar: The Last Airbender (Game Boy Advance)” (debug text at
   `0x67F2A4`; room-select RAM-edit note):
-  `https://tcrf.net/Avatar:_The_Last_Airbender_(Game_Boy_Advance)`
-* GameFAQs GBA cheats page returned HTTP 403 to direct fetch; search snippets
+  3rd party cheat indexes
+* 3rd party cheat indexes GBA cheats page returned HTTP 403 to direct fetch; search snippets
   were used only for cross-checking, and every code was verified against the
   ROM rather than trusted from the web.
 

@@ -108,7 +108,7 @@ Three press counters `(B,A,R) = (0x030011B8, 0x030011BC, 0x030011C0)` are increm
 
 ## 6. Tables
 
-**Published GBA codes** (GameFAQs / Cheat Happens / SuperCheats — all verified to have exact ROM effect labels):
+**Published GBA codes** (3rd party cheat indexes — all verified to have exact ROM effect labels):
 
 | Effect | B,A,R,dir | Effect ID / name in RAM |
 |---|---|---|
@@ -175,7 +175,7 @@ Three press counters `(B,A,R) = (0x030011B8, 0x030011BC, 0x030011C0)` are increm
 * mGBA CLI debugger via Python `pty` (`ctl.py`, `dbgtool.py`, `ramprobe.py`, `typectl.py`, `button.py`) — `watch/w`, `watch/r`, `b`, `frame`, `save`, `x/4`, `w/1|2|4`; used as a debugger-as-oracle (§16.19) to discover both validators and both effect flags.
 * mGBA savestates (`ss.py` — `gbAs` zlib chunk extraction) and RAM diffing (`statediff.py`).
 * Python + PIL (`ui.py`) for xdotool keying and screenshots.
-* Web: GameFAQs GBA cheats page and its 2018 Wayback capture; Cheat Happens GBA page; MobyGames.
+* Web: 3rd party cheat indexes GBA cheats page and its 2018 Wayback capture; 3rd party cheat indexes GBA page; 3rd party cheat indexes.
 
 No ROM or copyrighted assets are redistributed in this report; only addresses, hashes, codes and short literal strings are quoted.
 

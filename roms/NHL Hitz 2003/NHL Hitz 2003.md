@@ -45,7 +45,7 @@ This is a *closed negative result* (§0.2), not an unfinished search:
   ("Easy goal" — pass to the opposite winger near the red line for a one-timer; `1-Timers` is a real stat row),
   **not a code**. All unlockables published for this title (Winnipeg Lumberjacks, Rome Gladiators, stadiums,
   jerseys) belong to the **GameCube/PS2/Xbox Franchise mode**, which is a different game (§16.11); no GBA code
-  literal from those lists exists in this 4 MiB image. GameFAQs/TCRF/VGChartz yielded no GBA code list.
+  literal from those lists exists in this 4 MiB image. 3rd party cheat indexes yielded no GBA code list.
 
 ## 3. How to reproduce
 
@@ -181,7 +181,7 @@ features: there is no orphan handler or unused table to gate.
   for OCR screening; Python/PIL image signatures for combo screening.
 * `ssread.py` — PNG `gbAs` zlib savestate decoder (397,312-byte state; IWRAM `0x19000`, EWRAM `0x21000`) used
   for all RAM evidence; `enum_players.py` for player-name buffer reads; `combos2.py`, `combo_test.py`.
-* Web: Brave Search HTML, Absolut Cheats GBA page, GameFAQs/TCRF/VGChartz search results. Fetched pages were
+* Web: Brave Search HTML, Absolut Cheats GBA page, 3rd party cheat index search results. Fetched pages were
   treated strictly as data; no prompt-injection payload was encountered.
 
 **Legal note:** no ROM bytes, graphics, or copyrighted assets are reproduced here; only hashes, addresses, and
