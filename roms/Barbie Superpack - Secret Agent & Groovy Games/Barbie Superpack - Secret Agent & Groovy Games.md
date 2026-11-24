@@ -70,8 +70,6 @@ empty rows), which proves the 16 flag bits are live and that the code space is
 fully controllable, not just a table of 13 presets. Bounds were proven by
 in-game rejection of a bad checksum and of the ROM's dead `HRRDMD` literal.
 
-![password entry](screens/11_sa_password_entry.png)
-
 ## 3. How to reproduce
 
 ### 3.1 Emulator
@@ -238,8 +236,6 @@ enters HEADQUARTERS. The decoded mission byte (`+0x08`) and flag block drive the
 HEADQUARTERS ring, the SECRET VAULT list, and the mission map cursor. The map
 header prints `PASSWORD: <last accepted code>` (observed for `CBBDCK`,
 `GBBPFH`, `QBBBBT`).
-
-![vault with items](screens/17_sa_vault_bttttt_items.png)
 
 ## 6. Tables
 

@@ -1,6 +1,6 @@
 # GBA Cheats: ROM Analysis Index
 
-One row per analyzed game, following the method in [`GBA_REVERSE_ENGINEERING_GUIDE.md`](GBA_REVERSE_ENGINEERING_GUIDE.md). Each report lives next to its ROM at `roms/<Game Folder>/<Game Name>.md` (ROM images themselves are not committed).
+One row per analyzed game, following the method in [`GBA_REVERSE_ENGINEERING_GUIDE.md`](GBA_REVERSE_ENGINEERING_GUIDE.md). Each report lives next to its ROM at `roms/<Game Folder>/<Game Name>.md` (ROM images themselves are not committed). Screenshots captured during the analyses are not included either; screenshot filenames mentioned in a report refer to those original captures.
 
 - **882** completed reports, listed alphabetically under [Completed reports](#completed-reports).
 - **9** ROMs were deliberately skipped, listed under [Skipped ROMs](#skipped-roms).

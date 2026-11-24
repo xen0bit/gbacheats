@@ -32,3 +32,9 @@
 __pycache__/
 *.pyc
 mgba_fifo
+
+# Screenshots are not kept in the repository
+*.png
+*.jpg
+*.jpeg
+*.gif
